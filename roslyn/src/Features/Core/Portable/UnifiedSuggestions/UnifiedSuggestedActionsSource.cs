@@ -183,9 +183,11 @@ namespace Microsoft.CodeAnalysis.UnifiedSuggestions
             {
                 if (action.NestedCodeActions.Length > 0)
                 {
-                    var nestedActions = action.NestedCodeActions.SelectAsArray(
-                        nestedAction => GetUnifiedSuggestedAction(nestedAction, fix)
-                    );
+                    var nestedActions = action
+                        .NestedCodeActions
+                        .SelectAsArray(
+                            nestedAction => GetUnifiedSuggestedAction(nestedAction, fix)
+                        );
 
                     var set = new UnifiedSuggestedActionSet(
                         categoryName: null,
@@ -605,15 +607,18 @@ namespace Microsoft.CodeAnalysis.UnifiedSuggestions
             {
                 if (codeAction.action.NestedCodeActions.Length > 0)
                 {
-                    var nestedActions = codeAction.action.NestedCodeActions.SelectAsArray(
-                        na =>
-                            (IUnifiedSuggestedAction)new UnifiedCodeRefactoringSuggestedAction(
-                                workspace,
-                                na,
-                                na.Priority,
-                                refactoring.Provider
-                            )
-                    );
+                    var nestedActions = codeAction
+                        .action
+                        .NestedCodeActions
+                        .SelectAsArray(
+                            na =>
+                                (IUnifiedSuggestedAction)new UnifiedCodeRefactoringSuggestedAction(
+                                    workspace,
+                                    na,
+                                    na.Priority,
+                                    refactoring.Provider
+                                )
+                        );
 
                     var set = new UnifiedSuggestedActionSet(
                         categoryName: null,

@@ -108,11 +108,9 @@ namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
                         }
                     );
                     var exitCode =
-                        client.RunCompilation(
-                            new[] { "/shared" },
-                            _buildPaths,
-                            pipeName: _pipeName
-                        ).ExitCode;
+                        client
+                            .RunCompilation(new[] { "/shared" }, _buildPaths, pipeName: _pipeName)
+                            .ExitCode;
                     Assert.Equal(0, exitCode);
                     Assert.True(ranLocal);
                 }
@@ -150,11 +148,9 @@ namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
                         }
                     );
                     var exitCode =
-                        client.RunCompilation(
-                            new[] { "/shared" },
-                            _buildPaths,
-                            pipeName: _pipeName
-                        ).ExitCode;
+                        client
+                            .RunCompilation(new[] { "/shared" }, _buildPaths, pipeName: _pipeName)
+                            .ExitCode;
                     Assert.Equal(0, exitCode);
                     Assert.True(ranLocal);
                 }
@@ -224,11 +220,9 @@ namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
                 );
 
                 var exitCode =
-                    client.RunCompilation(
-                        new[] { "/shared" },
-                        _buildPaths,
-                        pipeName: _pipeName
-                    ).ExitCode;
+                    client
+                        .RunCompilation(new[] { "/shared" }, _buildPaths, pipeName: _pipeName)
+                        .ExitCode;
                 Assert.Equal(0, exitCode);
                 Assert.True(ranLocal);
                 Assert.True(ranServer);

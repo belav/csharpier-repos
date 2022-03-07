@@ -42,10 +42,9 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             Contract.ThrowIfNull(context.Solution);
 
             // We specifically don't use context.Document here because we want multiple
-            var documents = context.Solution.GetDocuments(
-                request.TextDocument.Uri,
-                context.ClientName
-            );
+            var documents = context
+                .Solution
+                .GetDocuments(request.TextDocument.Uri, context.ClientName);
 
             if (!documents.Any())
             {
@@ -81,10 +80,11 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             // ID in GetDocumentIdsWithFilePath, but there's really nothing we can do since we don't have contexts for
             // close documents anyways.
             var openDocument = documents.First();
-            var currentContextDocumentId =
-                openDocument.Project.Solution.Workspace.GetDocumentIdInCurrentContext(
-                    openDocument.Id
-                );
+            var currentContextDocumentId = openDocument
+                .Project
+                .Solution
+                .Workspace
+                .GetDocumentIdInCurrentContext(openDocument.Id);
 
             return Task.FromResult<VSProjectContextList?>(
                 new VSProjectContextList

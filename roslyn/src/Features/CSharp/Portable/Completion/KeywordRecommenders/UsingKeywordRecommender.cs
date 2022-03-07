@@ -166,10 +166,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
                 }
                 else if (
                     previousToken.Kind() == SyntaxKind.SemicolonToken
-                    && previousToken.Parent.IsKind(
-                        SyntaxKind.ExternAliasDirective,
-                        SyntaxKind.UsingDirective
-                    )
+                    && previousToken
+                        .Parent
+                        .IsKind(SyntaxKind.ExternAliasDirective, SyntaxKind.UsingDirective)
                 )
                 {
                     if (token.Kind() == SyntaxKind.GlobalKeyword)
@@ -199,9 +198,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
                 var nextToken = originalToken.GetNextToken(includeSkipped: true);
                 if (
                     nextToken.Kind() == SyntaxKind.ExternKeyword
-                    || (
-                        (CompilationUnitSyntax)context.SyntaxTree.GetRoot(cancellationToken)
-                    ).Externs.Count > 0
+                    || ((CompilationUnitSyntax)context.SyntaxTree.GetRoot(cancellationToken))
+                        .Externs
+                        .Count > 0
                 )
                 {
                     return false;

@@ -489,9 +489,9 @@ namespace Microsoft.CodeAnalysis
             {
                 if (namedArg.Key == "MethodCodeType")
                 {
-                    var value = (MethodImplAttributes)namedArg.Value.DecodeValue<int>(
-                        SpecialType.System_Enum
-                    );
+                    var value = (MethodImplAttributes)namedArg
+                        .Value
+                        .DecodeValue<int>(SpecialType.System_Enum);
                     if (value < 0 || value > MethodImplAttributes.Runtime)
                     {
                         Debug.Assert(attribute.AttributeClass is object);
@@ -619,9 +619,9 @@ namespace Microsoft.CodeAnalysis
                         break;
 
                     case "Size":
-                        size = namedArg.Value.DecodeValue<int>(
-                            Microsoft.CodeAnalysis.SpecialType.System_Int32
-                        );
+                        size = namedArg
+                            .Value
+                            .DecodeValue<int>(Microsoft.CodeAnalysis.SpecialType.System_Int32);
                         if (size < 0)
                         {
                             messageProvider.ReportInvalidNamedArgument(

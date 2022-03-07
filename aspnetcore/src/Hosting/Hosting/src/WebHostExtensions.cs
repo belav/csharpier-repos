@@ -95,10 +95,11 @@ public static class WebHostExtensions
         var done = new ManualResetEventSlim(false);
         using (var cts = new CancellationTokenSource())
         {
-            var shutdownMessage =
-                host.Services.GetRequiredService<WebHostOptions>().SuppressStatusMessages
-                    ? string.Empty
-                    : "Application is shutting down...";
+            var shutdownMessage = host.Services
+                .GetRequiredService<WebHostOptions>()
+                .SuppressStatusMessages
+                ? string.Empty
+                : "Application is shutting down...";
             using (var lifetime = new WebHostLifetime(cts, done, shutdownMessage: shutdownMessage))
             {
                 try
@@ -183,14 +184,16 @@ public static class WebHostExtensions
         var waitForStop = new TaskCompletionSource(
             TaskCreationOptions.RunContinuationsAsynchronously
         );
-        applicationLifetime.ApplicationStopping.Register(
-            obj =>
-            {
-                var tcs = (TaskCompletionSource)obj!;
-                tcs.TrySetResult();
-            },
-            waitForStop
-        );
+        applicationLifetime
+            .ApplicationStopping
+            .Register(
+                obj =>
+                {
+                    var tcs = (TaskCompletionSource)obj!;
+                    tcs.TrySetResult();
+                },
+                waitForStop
+            );
 
         await waitForStop.Task;
 

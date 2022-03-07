@@ -425,7 +425,9 @@ namespace System.Globalization
             // Return our calendar
             return CultureInfo
                 .GetCultureInfo(culture)
-                ._cultureData.GetCalendar(calendarId).iCurrentEra;
+                ._cultureData
+                .GetCalendar(calendarId)
+                .iCurrentEra;
         }
 
         private static string CalendarIdToCultureName(CalendarId calendarId)

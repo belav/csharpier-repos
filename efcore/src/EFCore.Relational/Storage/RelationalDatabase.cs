@@ -57,13 +57,14 @@ namespace Microsoft.EntityFrameworkCore.Storage
         /// <param name="entries">Entries representing the changes to be persisted.</param>
         /// <returns>The number of state entries persisted to the database.</returns>
         public override int SaveChanges(IList<IUpdateEntry> entries) =>
-            RelationalDependencies.BatchExecutor.Execute(
-                RelationalDependencies.BatchPreparer.BatchCommands(
-                    entries,
-                    Dependencies.UpdateAdapterFactory.Create()
-                ),
-                RelationalDependencies.Connection
-            );
+            RelationalDependencies
+                .BatchExecutor
+                .Execute(
+                    RelationalDependencies
+                        .BatchPreparer
+                        .BatchCommands(entries, Dependencies.UpdateAdapterFactory.Create()),
+                    RelationalDependencies.Connection
+                );
 
         /// <summary>
         ///     Asynchronously persists changes from the supplied entries to the database.
@@ -79,13 +80,14 @@ namespace Microsoft.EntityFrameworkCore.Storage
             IList<IUpdateEntry> entries,
             CancellationToken cancellationToken = default
         ) =>
-            RelationalDependencies.BatchExecutor.ExecuteAsync(
-                RelationalDependencies.BatchPreparer.BatchCommands(
-                    entries,
-                    Dependencies.UpdateAdapterFactory.Create()
-                ),
-                RelationalDependencies.Connection,
-                cancellationToken
-            );
+            RelationalDependencies
+                .BatchExecutor
+                .ExecuteAsync(
+                    RelationalDependencies
+                        .BatchPreparer
+                        .BatchCommands(entries, Dependencies.UpdateAdapterFactory.Create()),
+                    RelationalDependencies.Connection,
+                    cancellationToken
+                );
     }
 }

@@ -48,13 +48,15 @@ namespace System.Net.Http
                         proxyHelper,
                         $"AutoSettingsUsed, calling {nameof(Interop.WinHttp.WinHttpOpen)}"
                     );
-                sessionHandle = Interop.WinHttp.WinHttpOpen(
-                    IntPtr.Zero,
-                    Interop.WinHttp.WINHTTP_ACCESS_TYPE_NO_PROXY,
-                    Interop.WinHttp.WINHTTP_NO_PROXY_NAME,
-                    Interop.WinHttp.WINHTTP_NO_PROXY_BYPASS,
-                    (int)Interop.WinHttp.WINHTTP_FLAG_ASYNC
-                );
+                sessionHandle = Interop
+                    .WinHttp
+                    .WinHttpOpen(
+                        IntPtr.Zero,
+                        Interop.WinHttp.WINHTTP_ACCESS_TYPE_NO_PROXY,
+                        Interop.WinHttp.WINHTTP_NO_PROXY_NAME,
+                        Interop.WinHttp.WINHTTP_NO_PROXY_BYPASS,
+                        (int)Interop.WinHttp.WINHTTP_FLAG_ASYNC
+                    );
 
                 if (sessionHandle.IsInvalid)
                 {

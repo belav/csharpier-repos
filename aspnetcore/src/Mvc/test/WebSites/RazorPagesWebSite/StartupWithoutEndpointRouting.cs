@@ -26,10 +26,9 @@ public class StartupWithoutEndpointRouting
                     options.Conventions.AuthorizePage("/HelloWorldWithAuth");
                     options.Conventions.AuthorizeFolder("/Pages/Admin");
                     options.Conventions.AllowAnonymousToPage("/Pages/Admin/Login");
-                    options.Conventions.AddPageRoute(
-                        "/HelloWorldWithRoute",
-                        "Different-Route/{text}"
-                    );
+                    options
+                        .Conventions
+                        .AddPageRoute("/HelloWorldWithRoute", "Different-Route/{text}");
                     options.Conventions.AddPageRoute("/Pages/NotTheRoot", string.Empty);
                     options.Conventions.Add(new CustomModelTypeConvention());
                 }

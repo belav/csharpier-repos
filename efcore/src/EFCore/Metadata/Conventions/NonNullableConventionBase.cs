@@ -68,9 +68,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 FieldInfo f
                   => f.CustomAttributes.Any(a => a.AttributeType == typeof(MaybeNullAttribute)),
                 PropertyInfo p
-                  => p.GetMethod?.ReturnParameter?.CustomAttributes?.Any(
-                      a => a.AttributeType == typeof(MaybeNullAttribute)
-                  ) == true,
+                  => p.GetMethod
+                      ?.ReturnParameter
+                      ?.CustomAttributes
+                      ?.Any(a => a.AttributeType == typeof(MaybeNullAttribute)) == true,
                 _ => false
             };
 
@@ -173,10 +174,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         ) =>
             (NonNullabilityConventionState)(
                 modelBuilder.Metadata.FindAnnotation(StateAnnotationName)
-                ?? modelBuilder.Metadata.AddAnnotation(
-                    StateAnnotationName,
-                    new NonNullabilityConventionState()
-                )
+                ?? modelBuilder
+                    .Metadata
+                    .AddAnnotation(StateAnnotationName, new NonNullabilityConventionState())
             ).Value!;
 
         /// <inheritdoc />

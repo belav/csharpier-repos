@@ -62,12 +62,14 @@ namespace Microsoft.CodeAnalysis
 
                 if (!propertyTypes.IsDefault)
                 {
-                    var anonymousType = reader.Compilation.CreateAnonymousTypeSymbol(
-                        propertyTypes.ToImmutable(),
-                        propertyNames.ToImmutable(),
-                        propertyIsReadOnly.ToImmutable(),
-                        propertyLocations
-                    );
+                    var anonymousType = reader
+                        .Compilation
+                        .CreateAnonymousTypeSymbol(
+                            propertyTypes.ToImmutable(),
+                            propertyNames.ToImmutable(),
+                            propertyIsReadOnly.ToImmutable(),
+                            propertyLocations
+                        );
                     failureReason = null;
                     return new SymbolKeyResolution(anonymousType);
                 }

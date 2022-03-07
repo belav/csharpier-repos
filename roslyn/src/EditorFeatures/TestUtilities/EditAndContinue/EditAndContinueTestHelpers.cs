@@ -179,14 +179,16 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
                     expectedResult.ActiveStatements.OldStatementsMap
                 );
                 var result =
-                    Analyzer.AnalyzeDocumentAsync(
-                        oldProject,
-                        lazyOldActiveStatementMap,
-                        newDocument,
-                        newActiveStatementSpans,
-                        lazyCapabilities,
-                        CancellationToken.None
-                    ).Result;
+                    Analyzer
+                        .AnalyzeDocumentAsync(
+                            oldProject,
+                            lazyOldActiveStatementMap,
+                            newDocument,
+                            newActiveStatementSpans,
+                            lazyCapabilities,
+                            CancellationToken.None
+                        )
+                        .Result;
                 var oldText = oldDocument.GetTextSynchronously(default);
                 var newText = newDocument.GetTextSynchronously(default);
 
@@ -257,7 +259,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
                     );
 
                     // check lines of line edits:
-                    _ = expectedResult.LineEdits
+                    _ = expectedResult
+                        .LineEdits
                         .Zip(
                             result.LineEdits,
                             (expected, actual) =>
@@ -375,7 +378,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
                 // Partial types must match:
                 Assert.Equal(
                     expectedSemanticEdit.PartialType?.Invoke(newCompilation),
-                    actualSemanticEdit.PartialType
+                    actualSemanticEdit
+                        .PartialType
                         ?.Resolve(newCompilation, ignoreAssemblyKey: true)
                         .Symbol
                 );
@@ -427,10 +431,9 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
             foreach (var editScript in editScripts)
             {
                 oldProject =
-                    oldProject.AddDocument(
-                        documentIndex.ToString(),
-                        editScript.Match.OldRoot
-                    ).Project;
+                    oldProject
+                        .AddDocument(documentIndex.ToString(), editScript.Match.OldRoot)
+                        .Project;
                 documentIndex++;
             }
 
@@ -522,11 +525,13 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
                         partners =>
                             new MatchingPair
                             {
-                                Old = partners.Key
+                                Old = partners
+                                    .Key
                                     .ToString()
                                     .Replace("\r\n", " ")
                                     .Replace("\n", " "),
-                                New = partners.Value
+                                New = partners
+                                    .Value
                                     .ToString()
                                     .Replace("\r\n", " ")
                                     .Replace("\n", " ")

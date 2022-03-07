@@ -57,10 +57,9 @@ namespace Microsoft.CodeAnalysis.AddImport
             public bool DesiredNameDiffersFromSourceNameOnlyByCase()
             {
                 Debug.Assert(DesiredNameDiffersFromSourceName());
-                return StringComparer.OrdinalIgnoreCase.Equals(
-                    NameNode.GetFirstToken().ValueText,
-                    DesiredName
-                );
+                return StringComparer
+                    .OrdinalIgnoreCase
+                    .Equals(NameNode.GetFirstToken().ValueText, DesiredName);
             }
 
             public bool DesiredNameMatchesSourceName(Document document)

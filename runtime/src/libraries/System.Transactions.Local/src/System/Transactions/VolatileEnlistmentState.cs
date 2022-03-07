@@ -252,9 +252,9 @@ namespace System.Transactions
             try // Don't hold this lock while calling into the application code.
             {
                 Debug.Assert(enlistment.SinglePhaseNotification != null);
-                enlistment.SinglePhaseNotification.SinglePhaseCommit(
-                    enlistment.SinglePhaseEnlistment
-                );
+                enlistment
+                    .SinglePhaseNotification
+                    .SinglePhaseCommit(enlistment.SinglePhaseEnlistment);
                 spcCommitted = true;
             }
             finally

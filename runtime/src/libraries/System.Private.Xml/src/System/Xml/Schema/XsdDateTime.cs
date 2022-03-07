@@ -419,7 +419,8 @@ namespace System.Xml.Schema
             InternalKind switch
             {
                 // set it to UTC
-                XsdDateTimeKind.Zulu => new DateTime(_dt.Ticks, DateTimeKind.Utc),
+                XsdDateTimeKind.Zulu
+                  => new DateTime(_dt.Ticks, DateTimeKind.Utc),
 
                 // Adjust to UTC and then convert to local in the current time zone
                 XsdDateTimeKind.LocalEastOfZulu

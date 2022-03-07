@@ -92,7 +92,8 @@ namespace Internal.TypeSystem.Ecma
                         {
                             MethodDefinitionHandle methodDefinitionHandle =
                                 (MethodDefinitionHandle)handle;
-                            TypeDefinitionHandle typeDefinitionHandle = _module._metadataReader
+                            TypeDefinitionHandle typeDefinitionHandle = _module
+                                ._metadataReader
                                 .GetMethodDefinition(methodDefinitionHandle)
                                 .GetDeclaringType();
                             EcmaType type = (EcmaType)_module.GetObject(
@@ -108,7 +109,8 @@ namespace Internal.TypeSystem.Ecma
                         {
                             FieldDefinitionHandle fieldDefinitionHandle =
                                 (FieldDefinitionHandle)handle;
-                            TypeDefinitionHandle typeDefinitionHandle = _module._metadataReader
+                            TypeDefinitionHandle typeDefinitionHandle = _module
+                                ._metadataReader
                                 .GetFieldDefinition(fieldDefinitionHandle)
                                 .GetDeclaringType();
                             EcmaType type = (EcmaType)_module.GetObject(

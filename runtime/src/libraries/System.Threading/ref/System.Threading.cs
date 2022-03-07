@@ -698,7 +698,11 @@ namespace System.Threading
     {
         public static T EnsureInitialized<
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
-                System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
+                System
+                    .Diagnostics
+                    .CodeAnalysis
+                    .DynamicallyAccessedMemberTypes
+                    .PublicParameterlessConstructor
             )]
                 T
         >([System.Diagnostics.CodeAnalysis.NotNullAttribute] ref T? target) where T : class
@@ -708,7 +712,11 @@ namespace System.Threading
 
         public static T EnsureInitialized<
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
-                System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
+                System
+                    .Diagnostics
+                    .CodeAnalysis
+                    .DynamicallyAccessedMemberTypes
+                    .PublicParameterlessConstructor
             )]
                 T
         >(

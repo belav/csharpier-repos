@@ -758,8 +758,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     )
                 )
                 {
-                    arguments.GetOrCreateData<ParameterEarlyWellKnownAttributeData>().HasCallerLineNumberAttribute =
-                        true;
+                    arguments
+                        .GetOrCreateData<ParameterEarlyWellKnownAttributeData>()
+                        .HasCallerLineNumberAttribute = true;
                 }
                 else if (
                     CSharpAttributeData.IsTargetEarlyAttribute(
@@ -769,8 +770,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     )
                 )
                 {
-                    arguments.GetOrCreateData<ParameterEarlyWellKnownAttributeData>().HasCallerFilePathAttribute =
-                        true;
+                    arguments
+                        .GetOrCreateData<ParameterEarlyWellKnownAttributeData>()
+                        .HasCallerFilePathAttribute = true;
                 }
                 else if (
                     CSharpAttributeData.IsTargetEarlyAttribute(
@@ -780,8 +782,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     )
                 )
                 {
-                    arguments.GetOrCreateData<ParameterEarlyWellKnownAttributeData>().HasCallerMemberNameAttribute =
-                        true;
+                    arguments
+                        .GetOrCreateData<ParameterEarlyWellKnownAttributeData>()
+                        .HasCallerMemberNameAttribute = true;
                 }
                 else if (
                     CSharpAttributeData.IsTargetEarlyAttribute(
@@ -792,11 +795,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 )
                 {
                     var index = -1;
-                    var (attributeData, _) = arguments.Binder.GetAttribute(
-                        arguments.AttributeSyntax,
-                        arguments.AttributeType,
-                        out _
-                    );
+                    var (attributeData, _) = arguments
+                        .Binder
+                        .GetAttribute(arguments.AttributeSyntax, arguments.AttributeType, out _);
                     if (!attributeData.HasErrors)
                     {
                         var constructorArguments = attributeData.CommonConstructorArguments;
@@ -812,10 +813,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                             for (int i = 0; i < parameters.Length; i++)
                             {
                                 if (
-                                    parameters[i].Name.Equals(
-                                        parameterName,
-                                        StringComparison.Ordinal
-                                    )
+                                    parameters[i]
+                                        .Name
+                                        .Equals(parameterName, StringComparison.Ordinal)
                                 )
                                 {
                                     index = i;
@@ -825,8 +825,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         }
                     }
 
-                    arguments.GetOrCreateData<ParameterEarlyWellKnownAttributeData>().CallerArgumentExpressionParameterIndex =
-                        index;
+                    arguments
+                        .GetOrCreateData<ParameterEarlyWellKnownAttributeData>()
+                        .CallerArgumentExpressionParameterIndex = index;
                 }
             }
 
@@ -850,11 +851,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             );
 
             bool hasAnyDiagnostics;
-            var (attributeData, boundAttribute) = arguments.Binder.GetAttribute(
-                arguments.AttributeSyntax,
-                arguments.AttributeType,
-                out hasAnyDiagnostics
-            );
+            var (attributeData, boundAttribute) = arguments
+                .Binder
+                .GetAttribute(
+                    arguments.AttributeSyntax,
+                    arguments.AttributeType,
+                    out hasAnyDiagnostics
+                );
             ConstantValue value;
             if (attributeData.HasErrors)
             {
@@ -977,15 +980,17 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 attribute.IsTargetAttribute(this, AttributeDescription.IDispatchConstantAttribute)
             )
             {
-                arguments.GetOrCreateData<ParameterWellKnownAttributeData>().HasIDispatchConstantAttribute =
-                    true;
+                arguments
+                    .GetOrCreateData<ParameterWellKnownAttributeData>()
+                    .HasIDispatchConstantAttribute = true;
             }
             else if (
                 attribute.IsTargetAttribute(this, AttributeDescription.IUnknownConstantAttribute)
             )
             {
-                arguments.GetOrCreateData<ParameterWellKnownAttributeData>().HasIUnknownConstantAttribute =
-                    true;
+                arguments
+                    .GetOrCreateData<ParameterWellKnownAttributeData>()
+                    .HasIUnknownConstantAttribute = true;
             }
             else if (
                 attribute.IsTargetAttribute(this, AttributeDescription.CallerLineNumberAttribute)
@@ -1037,8 +1042,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             }
             else if (attribute.IsTargetAttribute(this, AttributeDescription.DisallowNullAttribute))
             {
-                arguments.GetOrCreateData<ParameterWellKnownAttributeData>().HasDisallowNullAttribute =
-                    true;
+                arguments
+                    .GetOrCreateData<ParameterWellKnownAttributeData>()
+                    .HasDisallowNullAttribute = true;
             }
             else if (attribute.IsTargetAttribute(this, AttributeDescription.MaybeNullAttribute))
             {
@@ -1047,7 +1053,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             }
             else if (attribute.IsTargetAttribute(this, AttributeDescription.MaybeNullWhenAttribute))
             {
-                arguments.GetOrCreateData<ParameterWellKnownAttributeData>().MaybeNullWhenAttribute =
+                arguments
+                    .GetOrCreateData<ParameterWellKnownAttributeData>()
+                    .MaybeNullWhenAttribute =
                     DecodeMaybeNullWhenOrNotNullWhenOrDoesNotReturnIfAttribute(
                         AttributeDescription.MaybeNullWhenAttribute,
                         attribute
@@ -1070,7 +1078,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 attribute.IsTargetAttribute(this, AttributeDescription.DoesNotReturnIfAttribute)
             )
             {
-                arguments.GetOrCreateData<ParameterWellKnownAttributeData>().DoesNotReturnIfAttribute =
+                arguments
+                    .GetOrCreateData<ParameterWellKnownAttributeData>()
+                    .DoesNotReturnIfAttribute =
                     DecodeMaybeNullWhenOrNotNullWhenOrDoesNotReturnIfAttribute(
                         AttributeDescription.DoesNotReturnIfAttribute,
                         attribute
@@ -1091,8 +1101,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 )
             )
             {
-                arguments.GetOrCreateData<ParameterWellKnownAttributeData>().HasEnumeratorCancellationAttribute =
-                    true;
+                arguments
+                    .GetOrCreateData<ParameterWellKnownAttributeData>()
+                    .HasEnumeratorCancellationAttribute = true;
                 ValidateCancellationTokenAttribute(
                     arguments.AttributeSyntaxOpt,
                     (BindingDiagnosticBag)arguments.Diagnostics
@@ -1291,13 +1302,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 }
             }
             else if (
-                !compilation.Conversions
+                !compilation
+                    .Conversions
                     .ClassifyConversionFromType(
                         (TypeSymbol)arg.TypeInternal,
                         this.Type,
                         ref useSiteInfo
                     )
-                    .Kind.IsImplicitConversion()
+                    .Kind
+                    .IsImplicitConversion()
             )
             {
                 // error CS1908: The type of the argument to the DefaultParameterValue attribute must match the parameter type
@@ -1340,8 +1353,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             var paramList =
                 node // AttributeSyntax
                 .Parent // AttributeListSyntax
-                .Parent // ParameterSyntax
-                .Parent as ParameterListSyntax; // ParameterListSyntax
+                    .Parent // ParameterSyntax
+                    .Parent as ParameterListSyntax; // ParameterListSyntax
             if (paramList == null)
                 return false;
             var methDecl = paramList.Parent as MethodDeclarationSyntax;
@@ -1377,10 +1390,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 );
             }
             else if (
-                !compilation.Conversions.HasCallerLineNumberConversion(
-                    TypeWithAnnotations.Type,
-                    ref useSiteInfo
-                )
+                !compilation
+                    .Conversions
+                    .HasCallerLineNumberConversion(TypeWithAnnotations.Type, ref useSiteInfo)
             )
             {
                 // CS4017: CallerLineNumberAttribute cannot be applied because there are no standard conversions from type '{0}' to type '{1}'
@@ -1428,10 +1440,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 );
             }
             else if (
-                !compilation.Conversions.HasCallerInfoStringConversion(
-                    TypeWithAnnotations.Type,
-                    ref useSiteInfo
-                )
+                !compilation
+                    .Conversions
+                    .HasCallerInfoStringConversion(TypeWithAnnotations.Type, ref useSiteInfo)
             )
             {
                 // CS4018: CallerFilePathAttribute cannot be applied because there are no standard conversions from type '{0}' to type '{1}'
@@ -1488,10 +1499,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 );
             }
             else if (
-                !compilation.Conversions.HasCallerInfoStringConversion(
-                    TypeWithAnnotations.Type,
-                    ref useSiteInfo
-                )
+                !compilation
+                    .Conversions
+                    .HasCallerInfoStringConversion(TypeWithAnnotations.Type, ref useSiteInfo)
             )
             {
                 // CS4019: CallerMemberNameAttribute cannot be applied because there are no standard conversions from type '{0}' to type '{1}'
@@ -1561,10 +1571,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 );
             }
             else if (
-                !compilation.Conversions.HasCallerInfoStringConversion(
-                    TypeWithAnnotations.Type,
-                    ref useSiteInfo
-                )
+                !compilation
+                    .Conversions
+                    .HasCallerInfoStringConversion(TypeWithAnnotations.Type, ref useSiteInfo)
             )
             {
                 // CS8959: CallerArgumentExpressionAttribute cannot be applied because there are no standard conversions from type '{0}' to type '{1}'
@@ -1671,11 +1680,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 else if (
                     this.ContainingSymbol is MethodSymbol method
                     && method.IsAsync
-                    && method.ReturnType.OriginalDefinition.Equals(
-                        this.DeclaringCompilation.GetWellKnownType(
-                            WellKnownType.System_Collections_Generic_IAsyncEnumerable_T
+                    && method
+                        .ReturnType
+                        .OriginalDefinition
+                        .Equals(
+                            this.DeclaringCompilation.GetWellKnownType(
+                                WellKnownType.System_Collections_Generic_IAsyncEnumerable_T
+                            )
                         )
-                    )
                 )
                 {
                     // Note: async methods that return this type must be iterators. This is enforced elsewhere
@@ -1699,10 +1711,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         {
             Debug.Assert(attributeIndex is 0 or 1);
             Debug.Assert(
-                arguments.Attribute.IsTargetAttribute(
-                    this,
-                    AttributeDescription.InterpolatedStringHandlerArgumentAttribute
-                )
+                arguments
+                    .Attribute
+                    .IsTargetAttribute(
+                        this,
+                        AttributeDescription.InterpolatedStringHandlerArgumentAttribute
+                    )
                     && arguments.Attribute.CommonConstructorArguments.Length == 1
             );
             Debug.Assert(arguments.AttributeSyntaxOpt is not null);
@@ -1903,8 +1917,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 > arguments
             )
             {
-                arguments.GetOrCreateData<ParameterWellKnownAttributeData>().InterpolatedStringHandlerArguments =
-                    default;
+                arguments
+                    .GetOrCreateData<ParameterWellKnownAttributeData>()
+                    .InterpolatedStringHandlerArguments = default;
             }
         }
 

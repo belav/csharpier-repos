@@ -358,7 +358,8 @@ namespace Castle.DynamicProxy.Tests
                 holder.Element.GetType().BaseType,
                 holder.Element.GetType().GetMethod("CalculateSumDistanceNow").DeclaringType
             );
-            var options2 = (ProxyGenerationOptions)holder.Element
+            var options2 = (ProxyGenerationOptions)holder
+                .Element
                 .GetType()
                 .GetField("proxyGenerationOptions", BindingFlags.Static | BindingFlags.NonPublic)
                 .GetValue(null);
@@ -394,7 +395,8 @@ namespace Castle.DynamicProxy.Tests
                 otherHolder.Element.GetType().BaseType,
                 otherHolder.Element.GetType().GetMethod("CalculateSumDistanceNow").DeclaringType
             );
-            options2 = (ProxyGenerationOptions)otherHolder.Element
+            options2 = (ProxyGenerationOptions)otherHolder
+                .Element
                 .GetType()
                 .GetField("proxyGenerationOptions", BindingFlags.Static | BindingFlags.NonPublic)
                 .GetValue(null);

@@ -40,14 +40,16 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Peek
         }
 
         public IPeekableItemSource TryCreatePeekableItemSource(ITextBuffer textBuffer) =>
-            textBuffer.Properties.GetOrCreateSingletonProperty(
-                () =>
-                    new PeekableItemSource(
-                        textBuffer,
-                        _peekableItemFactory,
-                        _peekResultFactory,
-                        _uiThreadOperationExecutor
-                    )
-            );
+            textBuffer
+                .Properties
+                .GetOrCreateSingletonProperty(
+                    () =>
+                        new PeekableItemSource(
+                            textBuffer,
+                            _peekableItemFactory,
+                            _peekResultFactory,
+                            _uiThreadOperationExecutor
+                        )
+                );
     }
 }

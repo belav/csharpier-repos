@@ -22,18 +22,18 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
 
         private protected void SetOption<T>(PerLanguageOption2<T> key, T value) =>
             _workspace.TryApplyChanges(
-                _workspace.CurrentSolution.WithOptions(
-                    _workspace.Options.WithChangedOption(key, _languageName, value)
-                )
+                _workspace
+                    .CurrentSolution
+                    .WithOptions(_workspace.Options.WithChangedOption(key, _languageName, value))
             );
 
         private protected T GetOption<T>(Option2<T> key) => _workspace.Options.GetOption(key);
 
         private protected void SetOption<T>(Option2<T> key, T value) =>
             _workspace.TryApplyChanges(
-                _workspace.CurrentSolution.WithOptions(
-                    _workspace.Options.WithChangedOption(key, value)
-                )
+                _workspace
+                    .CurrentSolution
+                    .WithOptions(_workspace.Options.WithChangedOption(key, value))
             );
 
         private protected int GetBooleanOption(PerLanguageOption2<bool?> key) =>

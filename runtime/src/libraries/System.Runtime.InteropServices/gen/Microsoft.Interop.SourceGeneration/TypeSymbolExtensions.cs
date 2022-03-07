@@ -177,10 +177,9 @@ namespace Microsoft.Interop
             foreach (AttributeData attr in type.GetAttributes())
             {
                 if (
-                    SymbolEqualityComparer.Default.Equals(
-                        structLayoutAttributeType,
-                        attr.AttributeClass
-                    )
+                    SymbolEqualityComparer
+                        .Default
+                        .Equals(structLayoutAttributeType, attr.AttributeClass)
                 )
                 {
                     return (LayoutKind)(int)attr.ConstructorArguments[0].Value! == LayoutKind.Auto;

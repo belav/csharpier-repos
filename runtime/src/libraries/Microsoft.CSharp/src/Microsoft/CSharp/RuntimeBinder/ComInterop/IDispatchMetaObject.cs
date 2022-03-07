@@ -318,7 +318,8 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
                 // Drop the event property set.
                 return new DynamicMetaObject(
                     Expression.Constant(null),
-                    value.Restrictions
+                    value
+                        .Restrictions
                         .Merge(IDispatchRestriction())
                         .Merge(
                             BindingRestrictions.GetTypeRestriction(

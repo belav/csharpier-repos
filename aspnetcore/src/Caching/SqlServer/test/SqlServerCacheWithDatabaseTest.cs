@@ -180,9 +180,9 @@ public class SqlServerCacheWithDatabaseTest
         var testClock = new TestClock();
         var expectedValue = Encoding.UTF8.GetBytes("Hello, World!");
         var cacheOptions = GetCacheOptions(testClock);
-        cacheOptions.DefaultSlidingExpiration = cacheOptions.DefaultSlidingExpiration.Add(
-            TimeSpan.FromMinutes(10)
-        );
+        cacheOptions.DefaultSlidingExpiration = cacheOptions
+            .DefaultSlidingExpiration
+            .Add(TimeSpan.FromMinutes(10));
         var cache = GetSqlServerCache(cacheOptions);
         var expectedExpirationTime = testClock.UtcNow.Add(cacheOptions.DefaultSlidingExpiration);
 

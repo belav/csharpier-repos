@@ -74,12 +74,14 @@ namespace System.Data.Odbc
             try { }
             finally
             {
-                retcode = Interop.Odbc.SQLSetConnectAttrW(
-                    this,
-                    ODBC32.SQL_ATTR.AUTOCOMMIT,
-                    ODBC32.SQL_AUTOCOMMIT_OFF,
-                    (int)ODBC32.SQL_IS.UINTEGER
-                );
+                retcode = Interop
+                    .Odbc
+                    .SQLSetConnectAttrW(
+                        this,
+                        ODBC32.SQL_ATTR.AUTOCOMMIT,
+                        ODBC32.SQL_AUTOCOMMIT_OFF,
+                        (int)ODBC32.SQL_IS.UINTEGER
+                    );
                 switch (retcode)
                 {
                     case ODBC32.RetCode.SUCCESS:
@@ -200,12 +202,14 @@ namespace System.Data.Odbc
 
                 if (HandleState.Transacted == _handleState)
                 { // AutoCommitOn
-                    retcode = Interop.Odbc.SQLSetConnectAttrW(
-                        handle,
-                        ODBC32.SQL_ATTR.AUTOCOMMIT,
-                        ODBC32.SQL_AUTOCOMMIT_ON,
-                        (int)ODBC32.SQL_IS.UINTEGER
-                    );
+                    retcode = Interop
+                        .Odbc
+                        .SQLSetConnectAttrW(
+                            handle,
+                            ODBC32.SQL_ATTR.AUTOCOMMIT,
+                            ODBC32.SQL_AUTOCOMMIT_ON,
+                            (int)ODBC32.SQL_IS.UINTEGER
+                        );
                     _handleState = HandleState.Connected;
                 }
             }
@@ -228,16 +232,18 @@ namespace System.Data.Odbc
             finally
             {
                 short cbActualSize;
-                retcode = Interop.Odbc.SQLDriverConnectW(
-                    this,
-                    ADP.PtrZero,
-                    connectionString,
-                    ODBC32.SQL_NTS,
-                    ADP.PtrZero,
-                    0,
-                    out cbActualSize,
-                    (short)ODBC32.SQL_DRIVER.NOPROMPT
-                );
+                retcode = Interop
+                    .Odbc
+                    .SQLDriverConnectW(
+                        this,
+                        ADP.PtrZero,
+                        connectionString,
+                        ODBC32.SQL_NTS,
+                        ADP.PtrZero,
+                        0,
+                        out cbActualSize,
+                        (short)ODBC32.SQL_DRIVER.NOPROMPT
+                    );
                 switch (retcode)
                 {
                     case ODBC32.RetCode.SUCCESS:
@@ -279,13 +285,9 @@ namespace System.Data.Odbc
             out int cbActual
         )
         {
-            ODBC32.RetCode retcode = Interop.Odbc.SQLGetConnectAttrW(
-                this,
-                attribute,
-                buffer,
-                buffer.Length,
-                out cbActual
-            );
+            ODBC32.RetCode retcode = Interop
+                .Odbc
+                .SQLGetConnectAttrW(this, attribute, buffer, buffer.Length, out cbActual);
             return retcode;
         }
 
@@ -298,25 +300,17 @@ namespace System.Data.Odbc
 
         internal ODBC32.RetCode GetInfo2(ODBC32.SQL_INFO info, byte[] buffer, out short cbActual)
         {
-            ODBC32.RetCode retcode = Interop.Odbc.SQLGetInfoW(
-                this,
-                info,
-                buffer,
-                checked((short)buffer.Length),
-                out cbActual
-            );
+            ODBC32.RetCode retcode = Interop
+                .Odbc
+                .SQLGetInfoW(this, info, buffer, checked((short)buffer.Length), out cbActual);
             return retcode;
         }
 
         internal ODBC32.RetCode GetInfo1(ODBC32.SQL_INFO info, byte[] buffer)
         {
-            ODBC32.RetCode retcode = Interop.Odbc.SQLGetInfoW(
-                this,
-                info,
-                buffer,
-                checked((short)buffer.Length),
-                ADP.PtrZero
-            );
+            ODBC32.RetCode retcode = Interop
+                .Odbc
+                .SQLGetInfoW(this, info, buffer, checked((short)buffer.Length), ADP.PtrZero);
             return retcode;
         }
 
@@ -326,12 +320,9 @@ namespace System.Data.Odbc
             int length
         )
         {
-            ODBC32.RetCode retcode = Interop.Odbc.SQLSetConnectAttrW(
-                this,
-                attribute,
-                value,
-                length
-            );
+            ODBC32.RetCode retcode = Interop
+                .Odbc
+                .SQLSetConnectAttrW(this, attribute, value, length);
             ODBC.TraceODBC(3, "SQLSetConnectAttrW", retcode);
             return retcode;
         }
@@ -342,12 +333,9 @@ namespace System.Data.Odbc
             int length
         )
         {
-            ODBC32.RetCode retcode = Interop.Odbc.SQLSetConnectAttrW(
-                this,
-                attribute,
-                buffer,
-                length
-            );
+            ODBC32.RetCode retcode = Interop
+                .Odbc
+                .SQLSetConnectAttrW(this, attribute, buffer, length);
             return retcode;
         }
     }

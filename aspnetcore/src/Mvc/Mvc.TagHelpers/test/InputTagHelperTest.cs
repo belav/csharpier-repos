@@ -1125,9 +1125,10 @@ public class InputTagHelperTest
             expectedEndOfFormContent,
             string.Join(
                 "",
-                viewContext.FormContext.EndOfFormContent.Select(
-                    html => HtmlContentUtilities.HtmlContentToString(html)
-                )
+                viewContext
+                    .FormContext
+                    .EndOfFormContent
+                    .Select(html => HtmlContentUtilities.HtmlContentToString(html))
             )
         );
         Assert.True(

@@ -25,28 +25,29 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Utilities
                 var result = s_isInCommandLineMode;
                 if (result == 0)
                 {
-                    s_isInCommandLineMode = result = ThreadHelper.JoinableTaskFactory.Run(
-                        async () =>
-                        {
-                            await ThreadHelper.JoinableTaskFactory.SwitchToMainThreadAsync();
+                    s_isInCommandLineMode = result = ThreadHelper
+                        .JoinableTaskFactory
+                        .Run(
+                            async () =>
+                            {
+                                await ThreadHelper.JoinableTaskFactory.SwitchToMainThreadAsync();
 
-                            var shell = ServiceProvider.GlobalProvider.GetService<
-                                SVsShell,
-                                IVsShell
-                            >();
-                            return
-                                (shell != null)
-                                && ErrorHandler.Succeeded(
-                                    shell.GetProperty(
-                                        (int)__VSSPROPID.VSSPROPID_IsInCommandLineMode,
-                                        out var result
+                                var shell = ServiceProvider
+                                    .GlobalProvider
+                                    .GetService<SVsShell, IVsShell>();
+                                return
+                                    (shell != null)
+                                    && ErrorHandler.Succeeded(
+                                        shell.GetProperty(
+                                            (int)__VSSPROPID.VSSPROPID_IsInCommandLineMode,
+                                            out var result
+                                        )
                                     )
-                                )
-                                && (bool)result
-                              ? 1
-                              : -1;
-                        }
-                    );
+                                    && (bool)result
+                                  ? 1
+                                  : -1;
+                            }
+                        );
                 }
 
                 return result == 1;

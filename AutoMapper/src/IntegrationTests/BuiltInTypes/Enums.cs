@@ -37,15 +37,17 @@ namespace AutoMapper.IntegrationTests
         {
             protected override void Seed(Context context)
             {
-                context.Customers.Add(
-                    new Customer
-                    {
-                        Id = 1,
-                        FirstName = "Bob",
-                        LastName = "Smith",
-                        ConsoleColor = ConsoleColor.Yellow
-                    }
-                );
+                context
+                    .Customers
+                    .Add(
+                        new Customer
+                        {
+                            Id = 1,
+                            FirstName = "Bob",
+                            LastName = "Smith",
+                            ConsoleColor = ConsoleColor.Yellow
+                        }
+                    );
                 base.Seed(context);
             }
         }
@@ -60,7 +62,8 @@ namespace AutoMapper.IntegrationTests
             {
                 ProjectTo<CustomerViewModel>(context.Customers)
                     .First()
-                    .ConsoleColor.ShouldBe((int)ConsoleColor.Yellow);
+                    .ConsoleColor
+                    .ShouldBe((int)ConsoleColor.Yellow);
             }
         }
     }
@@ -93,15 +96,17 @@ namespace AutoMapper.IntegrationTests
         {
             protected override void Seed(Context context)
             {
-                context.Customers.Add(
-                    new Customer
-                    {
-                        Id = 1,
-                        FirstName = "Bob",
-                        LastName = "Smith",
-                        ConsoleColor = (int)ConsoleColor.Yellow
-                    }
-                );
+                context
+                    .Customers
+                    .Add(
+                        new Customer
+                        {
+                            Id = 1,
+                            FirstName = "Bob",
+                            LastName = "Smith",
+                            ConsoleColor = (int)ConsoleColor.Yellow
+                        }
+                    );
                 base.Seed(context);
             }
         }
@@ -116,7 +121,8 @@ namespace AutoMapper.IntegrationTests
             {
                 ProjectTo<CustomerViewModel>(context.Customers)
                     .First()
-                    .ConsoleColor.ShouldBe(ConsoleColor.Yellow);
+                    .ConsoleColor
+                    .ShouldBe(ConsoleColor.Yellow);
             }
         }
     }
@@ -149,15 +155,17 @@ namespace AutoMapper.IntegrationTests
         {
             protected override void Seed(Context context)
             {
-                context.Customers.Add(
-                    new Customer
-                    {
-                        Id = 1,
-                        FirstName = "Bob",
-                        LastName = "Smith",
-                        ConsoleColor = DayOfWeek.Saturday
-                    }
-                );
+                context
+                    .Customers
+                    .Add(
+                        new Customer
+                        {
+                            Id = 1,
+                            FirstName = "Bob",
+                            LastName = "Smith",
+                            ConsoleColor = DayOfWeek.Saturday
+                        }
+                    );
                 base.Seed(context);
             }
         }
@@ -172,7 +180,8 @@ namespace AutoMapper.IntegrationTests
             {
                 ProjectTo<CustomerViewModel>(context.Customers)
                     .First()
-                    .ConsoleColor.ShouldBe(ConsoleColor.DarkYellow);
+                    .ConsoleColor
+                    .ShouldBe(ConsoleColor.DarkYellow);
             }
         }
     }

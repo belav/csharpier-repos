@@ -468,13 +468,15 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
             var relatedToChunky2 = context.Entry(chunky2).Collection(e => e.Cherries);
 
             var joinEntity =
-                context.ChangeTracker
+                context
+                    .ChangeTracker
                     .Entries<Dictionary<string, object>>()
                     .Single(
                         e =>
                             e.Property<int>("CherryId").CurrentValue == 1
                             && e.Property<int>("ChunkyId").CurrentValue == 2
-                    ).Entity;
+                    )
+                    .Entity;
 
             joinEntity["CherryId"] = 2;
             context.ChangeTracker.DetectChanges();
@@ -551,13 +553,15 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
             var relatedToChunky2 = context.Entry(chunky2).Collection(e => e.Cherries);
 
             var joinEntity =
-                context.ChangeTracker
+                context
+                    .ChangeTracker
                     .Entries<Dictionary<string, object>>()
                     .Single(
                         e =>
                             e.Property<int>("CherryId").CurrentValue == 1
                             && e.Property<int>("ChunkyId").CurrentValue == 2
-                    ).Entity;
+                    )
+                    .Entity;
 
             joinEntity["CherryId"] = 2;
             context.ChangeTracker.DetectChanges();
@@ -594,7 +598,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
             if (context is ExplicitFreezerContext)
             {
                 context.AddRange(cherry1, cherry2, chunky1, chunky2); // So that PKs get generated values
-                context.ChangeTracker
+                context
+                    .ChangeTracker
                     .Entries()
                     .ToList()
                     .ForEach(e => e.State = EntityState.Unchanged);

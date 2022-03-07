@@ -485,11 +485,9 @@ namespace System.Xml.Xsl.Runtime
             else if (UpperFirst)
             {
                 // First compare case-insensitive, then break ties by considering case
-                result = cultinfo.CompareInfo.Compare(
-                    str1,
-                    str2,
-                    this.compops | CompareOptions.IgnoreCase
-                );
+                result = cultinfo
+                    .CompareInfo
+                    .Compare(str1, str2, this.compops | CompareOptions.IgnoreCase);
                 if (result == 0)
                     result = -cultinfo.CompareInfo.Compare(str1, str2, this.compops);
             }

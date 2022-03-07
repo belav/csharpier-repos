@@ -139,7 +139,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             if (DiscriminatorExpression is CaseExpression caseExpression)
             {
                 var entityTypesToSelect = derivedType.GetTptDiscriminatorValues();
-                var whenClauses = caseExpression.WhenClauses
+                var whenClauses = caseExpression
+                    .WhenClauses
                     .Where(
                         wc =>
                             entityTypesToSelect.Contains(

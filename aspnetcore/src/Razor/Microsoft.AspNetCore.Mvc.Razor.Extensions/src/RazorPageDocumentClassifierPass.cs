@@ -155,11 +155,14 @@ public class RazorPageDocumentClassifierPass : DocumentClassifierPassBase
 
         if (pageDirective.DirectiveNode.IsImported())
         {
-            pageDirective.DirectiveNode.Diagnostics.Add(
-                RazorExtensionsDiagnosticFactory.CreatePageDirective_CannotBeImported(
-                    pageDirective.DirectiveNode.Source.Value
-                )
-            );
+            pageDirective
+                .DirectiveNode
+                .Diagnostics
+                .Add(
+                    RazorExtensionsDiagnosticFactory.CreatePageDirective_CannotBeImported(
+                        pageDirective.DirectiveNode.Source.Value
+                    )
+                );
         }
         else
         {
@@ -175,11 +178,14 @@ public class RazorPageDocumentClassifierPass : DocumentClassifierPassBase
             if (!PageDirective.TryGetPageDirective(leadingDirectiveDocumentNode, out var _))
             {
                 // The page directive is not the leading directive. Add an error.
-                pageDirective.DirectiveNode.Diagnostics.Add(
-                    RazorExtensionsDiagnosticFactory.CreatePageDirective_MustExistAtTheTopOfFile(
-                        pageDirective.DirectiveNode.Source.Value
-                    )
-                );
+                pageDirective
+                    .DirectiveNode
+                    .Diagnostics
+                    .Add(
+                        RazorExtensionsDiagnosticFactory.CreatePageDirective_MustExistAtTheTopOfFile(
+                            pageDirective.DirectiveNode.Source.Value
+                        )
+                    );
             }
         }
     }

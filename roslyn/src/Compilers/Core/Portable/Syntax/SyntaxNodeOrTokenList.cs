@@ -323,9 +323,10 @@ namespace Microsoft.CodeAnalysis
             var newGreen = GreenNode.CreateList(items, static n => n.RequiredUnderlyingNode)!;
             if (newGreen.IsToken)
             {
-                newGreen = Syntax.InternalSyntax.SyntaxList.List(
-                    new[] { new ArrayElement<GreenNode> { Value = newGreen } }
-                );
+                newGreen = Syntax
+                    .InternalSyntax
+                    .SyntaxList
+                    .List(new[] { new ArrayElement<GreenNode> { Value = newGreen } });
             }
 
             return new SyntaxNodeOrTokenList(newGreen.CreateRed(), 0);

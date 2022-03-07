@@ -2574,10 +2574,9 @@ namespace System.Xml
                     // n.b. source buffer assumed to be well-formed UTF-16 machine endian
 
                     int cch = dstChars.Length;
-                    ReadOnlySpan<byte> srcBytes = state._data.AsSpan(
-                        state.pos,
-                        checked(cch * sizeof(char))
-                    );
+                    ReadOnlySpan<byte> srcBytes = state
+                        ._data
+                        .AsSpan(state.pos, checked(cch * sizeof(char)));
                     Span<byte> dstBytes = MemoryMarshal.AsBytes(dstChars);
                     srcBytes.CopyTo(dstBytes);
                 }

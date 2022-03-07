@@ -41,7 +41,10 @@ namespace Microsoft.Diagnostics.Tools.Pgo
         )
         {
             foreach (
-                var traceData in traceProcess.TraceProcess.EventsInProcess.ByEventType<ModuleLoadUnloadTraceData>()
+                var traceData in traceProcess
+                    .TraceProcess
+                    .EventsInProcess
+                    .ByEventType<ModuleLoadUnloadTraceData>()
             )
             {
                 if (traceData.ModuleILPath != null)

@@ -115,9 +115,9 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             Debug.Assert(analyzerConfigPath != null);
             Debug.Assert(PathUtilities.IsAbsolute(analyzerConfigPath));
 
-            return project.AnalyzerConfigDocuments.FirstOrDefault(
-                d => d.FilePath == analyzerConfigPath
-            );
+            return project
+                .AnalyzerConfigDocuments
+                .FirstOrDefault(d => d.FilePath == analyzerConfigPath);
         }
 
         public static AnalyzerConfigDocument? GetOrCreateAnalyzerConfigDocument(
@@ -139,9 +139,9 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 ".editorconfig",
                 filePath: analyzerConfigPath
             );
-            var newSolution = project.Solution.AddAnalyzerConfigDocuments(
-                ImmutableArray.Create(documentInfo)
-            );
+            var newSolution = project
+                .Solution
+                .AddAnalyzerConfigDocuments(ImmutableArray.Create(documentInfo));
             return newSolution.GetProject(project.Id)?.GetAnalyzerConfigDocument(id);
         }
 

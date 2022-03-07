@@ -40,9 +40,10 @@ internal static class ValidationHelpers
 
         // Default in the ValidationMessage case is a fallback error message.
         var attemptedValue = containingEntry.AttemptedValue ?? "null";
-        return modelExplorer.Metadata.ModelBindingMessageProvider.ValueIsInvalidAccessor(
-            attemptedValue
-        );
+        return modelExplorer
+            .Metadata
+            .ModelBindingMessageProvider
+            .ValueIsInvalidAccessor(attemptedValue);
     }
 
     // Returns non-null list of model states, which caller will render in order provided.

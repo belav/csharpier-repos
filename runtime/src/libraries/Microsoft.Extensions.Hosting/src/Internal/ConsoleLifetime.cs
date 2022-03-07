@@ -62,20 +62,24 @@ namespace Microsoft.Extensions.Hosting.Internal
         {
             if (!Options.SuppressStatusMessages)
             {
-                _applicationStartedRegistration = ApplicationLifetime.ApplicationStarted.Register(
-                    state =>
-                    {
-                        ((ConsoleLifetime)state).OnApplicationStarted();
-                    },
-                    this
-                );
-                _applicationStoppingRegistration = ApplicationLifetime.ApplicationStopping.Register(
-                    state =>
-                    {
-                        ((ConsoleLifetime)state).OnApplicationStopping();
-                    },
-                    this
-                );
+                _applicationStartedRegistration = ApplicationLifetime
+                    .ApplicationStarted
+                    .Register(
+                        state =>
+                        {
+                            ((ConsoleLifetime)state).OnApplicationStarted();
+                        },
+                        this
+                    );
+                _applicationStoppingRegistration = ApplicationLifetime
+                    .ApplicationStopping
+                    .Register(
+                        state =>
+                        {
+                            ((ConsoleLifetime)state).OnApplicationStopping();
+                        },
+                        this
+                    );
             }
 
             RegisterShutdownHandlers();

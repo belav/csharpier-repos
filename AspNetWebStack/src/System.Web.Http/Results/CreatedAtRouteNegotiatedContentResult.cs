@@ -140,11 +140,9 @@ namespace System.Web.Http.Results
         private HttpResponseMessage Execute()
         {
             // Run content negotiation.
-            ContentNegotiationResult result = _dependencies.ContentNegotiator.Negotiate(
-                typeof(T),
-                _dependencies.Request,
-                _dependencies.Formatters
-            );
+            ContentNegotiationResult result = _dependencies
+                .ContentNegotiator
+                .Negotiate(typeof(T), _dependencies.Request, _dependencies.Formatters);
 
             HttpResponseMessage response = new HttpResponseMessage();
 

@@ -493,9 +493,9 @@ link text";
                 Assert.NotNull(vsCompletionList.Data);
             }
 
-            var serverCompletionItem = completionList.Items.FirstOrDefault(
-                item => item.Label == label
-            );
+            var serverCompletionItem = completionList
+                .Items
+                .FirstOrDefault(item => item.Label == label);
             var clientCompletionItem = ConvertToClientCompletionItem((T)serverCompletionItem);
             return clientCompletionItem;
         }

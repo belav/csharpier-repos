@@ -63,10 +63,9 @@ namespace Microsoft.EntityFrameworkCore.Storage
         [ConditionalFact]
         public void Can_convert_bools_to_empty_strings_or_whitespace()
         {
-            var converter = new BoolToStringConverter(
-                "",
-                " "
-            ).ConvertToProviderExpression.Compile();
+            var converter = new BoolToStringConverter("", " ")
+                .ConvertToProviderExpression
+                .Compile();
 
             Assert.Equal(" ", converter(true));
             Assert.Equal("", converter(false));
@@ -75,10 +74,9 @@ namespace Microsoft.EntityFrameworkCore.Storage
         [ConditionalFact]
         public void Can_convert_empty_strings_or_whitespace_to_bool()
         {
-            var converter = new BoolToStringConverter(
-                "",
-                " "
-            ).ConvertFromProviderExpression.Compile();
+            var converter = new BoolToStringConverter("", " ")
+                .ConvertFromProviderExpression
+                .Compile();
 
             Assert.False(converter(""));
             Assert.True(converter(" "));

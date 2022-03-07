@@ -397,11 +397,17 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             {
                 if (_lazyParameters.IsDefault)
                 {
-                    var parameters = UnderlyingMethod.Parameters.SelectAsArray(
-                        (p, m) =>
-                            (ParameterSymbol)new NativeIntegerParameterSymbol(m._container, m, p),
-                        this
-                    );
+                    var parameters = UnderlyingMethod
+                        .Parameters
+                        .SelectAsArray(
+                            (p, m) =>
+                                (ParameterSymbol)new NativeIntegerParameterSymbol(
+                                    m._container,
+                                    m,
+                                    p
+                                ),
+                            this
+                        );
                     ImmutableInterlocked.InterlockedInitialize(ref _lazyParameters, parameters);
                 }
                 return _lazyParameters;

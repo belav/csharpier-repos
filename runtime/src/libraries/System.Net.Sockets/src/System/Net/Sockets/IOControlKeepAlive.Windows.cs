@@ -120,22 +120,26 @@ namespace System.Net.Sockets
             using (Socket socket = new Socket(addressFamily, SocketType.Stream, ProtocolType.Tcp))
             {
                 int time = MillisecondsToSeconds(WindowsDefaultTimeMs);
-                SocketError timeErrCode = Interop.Winsock.setsockopt(
-                    socket.SafeHandle,
-                    SocketOptionLevel.Tcp,
-                    SocketOptionName.TcpKeepAliveTime,
-                    ref time,
-                    sizeof(int)
-                );
+                SocketError timeErrCode = Interop
+                    .Winsock
+                    .setsockopt(
+                        socket.SafeHandle,
+                        SocketOptionLevel.Tcp,
+                        SocketOptionName.TcpKeepAliveTime,
+                        ref time,
+                        sizeof(int)
+                    );
 
                 int interval = MillisecondsToSeconds(WindowsDefaultIntervalMs);
-                SocketError intervalErrCode = Interop.Winsock.setsockopt(
-                    socket.SafeHandle,
-                    SocketOptionLevel.Tcp,
-                    SocketOptionName.TcpKeepAliveInterval,
-                    ref interval,
-                    sizeof(int)
-                );
+                SocketError intervalErrCode = Interop
+                    .Winsock
+                    .setsockopt(
+                        socket.SafeHandle,
+                        SocketOptionLevel.Tcp,
+                        SocketOptionName.TcpKeepAliveInterval,
+                        ref interval,
+                        sizeof(int)
+                    );
 
                 return timeErrCode == SocketError.Success && intervalErrCode == SocketError.Success;
             }

@@ -12,24 +12,24 @@ namespace System.Runtime.CompilerServices.Tests
         public void CannotCreateForNonDelegate()
         {
             string msg =
-                AssertExtensions.Throws<ArgumentException>(
-                    null,
-                    () => CallSite<Expression>.Create(null)
-                ).Message;
+                AssertExtensions
+                    .Throws<ArgumentException>(null, () => CallSite<Expression>.Create(null))
+                    .Message;
             CallSiteBinder binder = new CallSiteBinderDefaultBehaviourTests.NopCallSiteBinder();
             Assert.Equal(
                 msg,
-                AssertExtensions.Throws<ArgumentException>(
-                    null,
-                    () => CallSite<Expression>.Create(binder)
-                ).Message
+                AssertExtensions
+                    .Throws<ArgumentException>(null, () => CallSite<Expression>.Create(binder))
+                    .Message
             );
             Assert.Equal(
                 msg,
-                AssertExtensions.Throws<ArgumentException>(
-                    null,
-                    () => CallSite.Create(typeof(Expression), binder)
-                ).Message
+                AssertExtensions
+                    .Throws<ArgumentException>(
+                        null,
+                        () => CallSite.Create(typeof(Expression), binder)
+                    )
+                    .Message
             );
         }
 

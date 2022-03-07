@@ -163,7 +163,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TaskList
 
         private DocumentId TryGetDocumentId(string filePath)
         {
-            return _workspace.CurrentSolution
+            return _workspace
+                .CurrentSolution
                 .GetDocumentIdsWithFilePath(filePath)
                 .Where(f => f.ProjectId == _projectId)
                 .FirstOrDefault();

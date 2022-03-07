@@ -767,9 +767,12 @@ namespace Internal.Cryptography
 
                 if (
                     oaepParameters.PSourceFunc.Parameters != null
-                    && !oaepParameters.PSourceFunc.Parameters.Value.Span.SequenceEqual(
-                        pSpecifiedDefaultParameters
-                    )
+                    && !oaepParameters
+                        .PSourceFunc
+                        .Parameters
+                        .Value
+                        .Span
+                        .SequenceEqual(pSpecifiedDefaultParameters)
                 )
                 {
                     exception = new CryptographicException(SR.Cryptography_Der_Invalid_Encoding);

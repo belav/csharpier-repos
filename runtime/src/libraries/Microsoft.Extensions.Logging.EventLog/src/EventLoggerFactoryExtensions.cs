@@ -25,9 +25,11 @@ namespace Microsoft.Extensions.Logging
                 throw new ArgumentNullException(nameof(builder));
             }
 
-            builder.Services.TryAddEnumerable(
-                ServiceDescriptor.Singleton<ILoggerProvider, EventLogLoggerProvider>()
-            );
+            builder
+                .Services
+                .TryAddEnumerable(
+                    ServiceDescriptor.Singleton<ILoggerProvider, EventLogLoggerProvider>()
+                );
 
             return builder;
         }
@@ -53,9 +55,13 @@ namespace Microsoft.Extensions.Logging
                 throw new ArgumentNullException(nameof(settings));
             }
 
-            builder.Services.TryAddEnumerable(
-                ServiceDescriptor.Singleton<ILoggerProvider>(new EventLogLoggerProvider(settings))
-            );
+            builder
+                .Services
+                .TryAddEnumerable(
+                    ServiceDescriptor.Singleton<ILoggerProvider>(
+                        new EventLogLoggerProvider(settings)
+                    )
+                );
 
             return builder;
         }

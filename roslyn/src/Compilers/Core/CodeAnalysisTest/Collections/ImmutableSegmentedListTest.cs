@@ -167,9 +167,9 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
                 Assert.Equal(i * 10, list[i - 1]);
             }
 
-            var bulkList = ImmutableSegmentedList<int>.Empty.AddRange(
-                Enumerable.Range(1, 10).Select(i => i * 10)
-            );
+            var bulkList = ImmutableSegmentedList<int>
+                .Empty
+                .AddRange(Enumerable.Range(1, 10).Select(i => i * 10));
             Assert.Equal<int>(list.ToArray(), bulkList.ToArray());
         }
 
@@ -547,11 +547,15 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
                 Assert.Equal(expectedList.IndexOf(newElement), list.IndexOf(newElement));
                 Assert.Equal(
                     expectedList.IndexOf(newElement),
-                    System.Collections.Immutable.ImmutableList.IndexOf(
-                        list,
-                        newElement.ToUpperInvariant(),
-                        StringComparer.OrdinalIgnoreCase
-                    )
+                    System
+                        .Collections
+                        .Immutable
+                        .ImmutableList
+                        .IndexOf(
+                            list,
+                            newElement.ToUpperInvariant(),
+                            StringComparer.OrdinalIgnoreCase
+                        )
                 );
                 Assert.Equal(-1, list.IndexOf(newElement.ToUpperInvariant()));
 
@@ -564,11 +568,15 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
                     );
                     Assert.Equal(
                         expectedList.IndexOf(existingElement),
-                        System.Collections.Immutable.ImmutableList.IndexOf(
-                            list,
-                            existingElement.ToUpperInvariant(),
-                            StringComparer.OrdinalIgnoreCase
-                        )
+                        System
+                            .Collections
+                            .Immutable
+                            .ImmutableList
+                            .IndexOf(
+                                list,
+                                existingElement.ToUpperInvariant(),
+                                StringComparer.OrdinalIgnoreCase
+                            )
                     );
                     Assert.Equal(-1, list.IndexOf(existingElement.ToUpperInvariant()));
                 }
@@ -646,27 +654,27 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             Assert.Equal<int>(new[] { 3, 5, 9 }, list.Replace(8, 9));
             Assert.Equal<int>(
                 new[] { 4, 5, 8 },
-                System.Collections.Immutable.ImmutableList.Replace(
-                    (System.Collections.Immutable.IImmutableList<int>)list,
-                    3,
-                    4
-                )
+                System
+                    .Collections
+                    .Immutable
+                    .ImmutableList
+                    .Replace((System.Collections.Immutable.IImmutableList<int>)list, 3, 4)
             );
             Assert.Equal<int>(
                 new[] { 3, 6, 8 },
-                System.Collections.Immutable.ImmutableList.Replace(
-                    (System.Collections.Immutable.IImmutableList<int>)list,
-                    5,
-                    6
-                )
+                System
+                    .Collections
+                    .Immutable
+                    .ImmutableList
+                    .Replace((System.Collections.Immutable.IImmutableList<int>)list, 5, 6)
             );
             Assert.Equal<int>(
                 new[] { 3, 5, 9 },
-                System.Collections.Immutable.ImmutableList.Replace(
-                    (System.Collections.Immutable.IImmutableList<int>)list,
-                    8,
-                    9
-                )
+                System
+                    .Collections
+                    .Immutable
+                    .ImmutableList
+                    .Replace((System.Collections.Immutable.IImmutableList<int>)list, 8, 9)
             );
 
             // Verify replacement of first element when there are duplicates.
@@ -675,23 +683,27 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             Assert.Equal<int>(new[] { 4, 4, 5 }, list.Replace(3, 4).Replace(3, 4));
             Assert.Equal<int>(
                 new[] { 4, 3, 5 },
-                System.Collections.Immutable.ImmutableList.Replace(
-                    (System.Collections.Immutable.IImmutableList<int>)list,
-                    3,
-                    4
-                )
+                System
+                    .Collections
+                    .Immutable
+                    .ImmutableList
+                    .Replace((System.Collections.Immutable.IImmutableList<int>)list, 3, 4)
             );
             Assert.Equal<int>(
                 new[] { 4, 4, 5 },
-                System.Collections.Immutable.ImmutableList.Replace(
-                    System.Collections.Immutable.ImmutableList.Replace(
-                        (System.Collections.Immutable.IImmutableList<int>)list,
+                System
+                    .Collections
+                    .Immutable
+                    .ImmutableList
+                    .Replace(
+                        System
+                            .Collections
+                            .Immutable
+                            .ImmutableList
+                            .Replace((System.Collections.Immutable.IImmutableList<int>)list, 3, 4),
                         3,
                         4
-                    ),
-                    3,
-                    4
-                )
+                    )
             );
         }
 
@@ -709,11 +721,11 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
 
             // Finally, try one last time using the interface implementation.
             System.Collections.Immutable.IImmutableList<Person> iface = list;
-            var updatedIface = System.Collections.Immutable.ImmutableList.Replace(
-                iface,
-                list[0],
-                newAge
-            );
+            var updatedIface = System
+                .Collections
+                .Immutable
+                .ImmutableList
+                .Replace(iface, list[0], newAge);
             Assert.NotSame(iface, updatedIface);
         }
 
@@ -735,7 +747,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
                 ImmutableSegmentedList<int>.Empty.Equals(ImmutableSegmentedList<int>.Empty)
             );
             Assert.False(
-                ImmutableSegmentedList<int>.Empty
+                ImmutableSegmentedList<int>
+                    .Empty
                     .Add(3)
                     .Equals(ImmutableSegmentedList<int>.Empty.Add(3))
             );
@@ -823,10 +836,14 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             Assert.Equal(new[] { 2 }, removed13);
             Assert.Equal(
                 new[] { 2 },
-                System.Collections.Immutable.ImmutableList.RemoveRange(
-                    (System.Collections.Immutable.IImmutableList<int>)list,
-                    new[] { 1, 3, 5 }
-                )
+                System
+                    .Collections
+                    .Immutable
+                    .ImmutableList
+                    .RemoveRange(
+                        (System.Collections.Immutable.IImmutableList<int>)list,
+                        new[] { 1, 3, 5 }
+                    )
             );
 
             Assert.True(IsSame(list, list.RemoveRange(new[] { 5 })));
@@ -844,25 +861,33 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             Assert.Throws<ArgumentNullException>(
                 "items",
                 () =>
-                    System.Collections.Immutable.ImmutableList.RemoveRange(
+                    System
+                        .Collections
+                        .Immutable
+                        .ImmutableList
+                        .RemoveRange(
+                            (System.Collections.Immutable.IImmutableList<int>)ImmutableSegmentedList.Create(
+                                1,
+                                2,
+                                3
+                            ),
+                            null!
+                        )
+            );
+            Assert.Equal(
+                new[] { 1, 3 },
+                System
+                    .Collections
+                    .Immutable
+                    .ImmutableList
+                    .RemoveRange(
                         (System.Collections.Immutable.IImmutableList<int>)ImmutableSegmentedList.Create(
                             1,
                             2,
                             3
                         ),
-                        null!
+                        new[] { 2 }
                     )
-            );
-            Assert.Equal(
-                new[] { 1, 3 },
-                System.Collections.Immutable.ImmutableList.RemoveRange(
-                    (System.Collections.Immutable.IImmutableList<int>)ImmutableSegmentedList.Create(
-                        1,
-                        2,
-                        3
-                    ),
-                    new[] { 2 }
-                )
             );
         }
 

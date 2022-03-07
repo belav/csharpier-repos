@@ -108,31 +108,33 @@ internal static partial class Interop
                 );
             }
 
-            SafeEcKeyHandle key = Interop.Crypto.EcKeyCreateByExplicitParameters(
-                curve.CurveType,
-                null,
-                0,
-                null,
-                0,
-                null,
-                0,
-                p,
-                p.Length,
-                curve.A!,
-                curve.A!.Length,
-                curve.B!,
-                curve.B!.Length,
-                curve.G.X!,
-                curve.G.X!.Length,
-                curve.G.Y!,
-                curve.G.Y!.Length,
-                curve.Order!,
-                curve.Order!.Length,
-                curve.Cofactor,
-                curve.Cofactor!.Length,
-                curve.Seed,
-                curve.Seed == null ? 0 : curve.Seed.Length
-            );
+            SafeEcKeyHandle key = Interop
+                .Crypto
+                .EcKeyCreateByExplicitParameters(
+                    curve.CurveType,
+                    null,
+                    0,
+                    null,
+                    0,
+                    null,
+                    0,
+                    p,
+                    p.Length,
+                    curve.A!,
+                    curve.A!.Length,
+                    curve.B!,
+                    curve.B!.Length,
+                    curve.G.X!,
+                    curve.G.X!.Length,
+                    curve.G.Y!,
+                    curve.G.Y!.Length,
+                    curve.Order!,
+                    curve.Order!.Length,
+                    curve.Cofactor,
+                    curve.Cofactor!.Length,
+                    curve.Seed,
+                    curve.Seed == null ? 0 : curve.Seed.Length
+                );
 
             if (key == null || key.IsInvalid)
             {

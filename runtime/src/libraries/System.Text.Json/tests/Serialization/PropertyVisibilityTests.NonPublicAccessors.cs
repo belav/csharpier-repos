@@ -195,16 +195,15 @@ namespace System.Text.Json.Serialization.Tests
 
             string json = @"{""MYSTRING"":""Hello""}";
             Assert.Null(
-                JsonSerializer.Deserialize<MyStruct_WithNonPublicAccessors_WithTypeAttribute>(
-                    json
-                ).MyString
+                JsonSerializer
+                    .Deserialize<MyStruct_WithNonPublicAccessors_WithTypeAttribute>(json)
+                    .MyString
             );
             Assert.Equal(
                 "Hello",
-                JsonSerializer.Deserialize<MyStruct_WithNonPublicAccessors_WithTypeAttribute>(
-                    json,
-                    options
-                ).MyString
+                JsonSerializer
+                    .Deserialize<MyStruct_WithNonPublicAccessors_WithTypeAttribute>(json, options)
+                    .MyString
             );
         }
 
@@ -236,16 +235,15 @@ namespace System.Text.Json.Serialization.Tests
 
             string json = @"{""my_string"":""Hello""}";
             Assert.Null(
-                JsonSerializer.Deserialize<MyStruct_WithNonPublicAccessors_WithTypeAttribute>(
-                    json
-                ).MyString
+                JsonSerializer
+                    .Deserialize<MyStruct_WithNonPublicAccessors_WithTypeAttribute>(json)
+                    .MyString
             );
             Assert.Equal(
                 "Hello",
-                JsonSerializer.Deserialize<MyStruct_WithNonPublicAccessors_WithTypeAttribute>(
-                    json,
-                    options
-                ).MyString
+                JsonSerializer
+                    .Deserialize<MyStruct_WithNonPublicAccessors_WithTypeAttribute>(json, options)
+                    .MyString
             );
         }
 

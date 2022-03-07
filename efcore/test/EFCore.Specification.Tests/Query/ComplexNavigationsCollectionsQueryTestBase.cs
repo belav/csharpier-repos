@@ -53,18 +53,27 @@ namespace Microsoft.EntityFrameworkCore.Query
                     from l4 in ss.Set<Level1>()
                         .SelectMany(
                             l1 =>
-                                l1.OneToOne_Required_FK1.OneToOne_Optional_FK2.OneToMany_Required3.DefaultIfEmpty()
+                                l1.OneToOne_Required_FK1
+                                    .OneToOne_Optional_FK2
+                                    .OneToMany_Required3
+                                    .DefaultIfEmpty()
                         )
                     join l2 in ss.Set<Level4>()
                         .SelectMany(
                             l4 =>
-                                l4.OneToOne_Required_FK_Inverse4.OneToOne_Optional_FK_Inverse3.OneToMany_Required_Self2.DefaultIfEmpty()
+                                l4.OneToOne_Required_FK_Inverse4
+                                    .OneToOne_Optional_FK_Inverse3
+                                    .OneToMany_Required_Self2
+                                    .DefaultIfEmpty()
                         )
                         on l4.Id equals l2.Id
                     join l3 in ss.Set<Level4>()
                         .SelectMany(
                             l4 =>
-                                l4.OneToOne_Required_FK_Inverse4.OneToOne_Required_FK_Inverse3.OneToMany_Required2.DefaultIfEmpty()
+                                l4.OneToOne_Required_FK_Inverse4
+                                    .OneToOne_Required_FK_Inverse3
+                                    .OneToMany_Required2
+                                    .DefaultIfEmpty()
                         )
                         on l2.Id equals l3.Id
                         into grouping
@@ -81,18 +90,27 @@ namespace Microsoft.EntityFrameworkCore.Query
                     from l4 in ss.Set<Level1>()
                         .SelectMany(
                             l1 =>
-                                l1.OneToOne_Required_FK1.OneToOne_Optional_FK2.OneToMany_Required3.DefaultIfEmpty()
+                                l1.OneToOne_Required_FK1
+                                    .OneToOne_Optional_FK2
+                                    .OneToMany_Required3
+                                    .DefaultIfEmpty()
                         )
                     join l2 in ss.Set<Level4>()
                         .SelectMany(
                             l4 =>
-                                l4.OneToOne_Required_FK_Inverse4.OneToOne_Optional_FK_Inverse3.OneToMany_Required_Self2.DefaultIfEmpty()
+                                l4.OneToOne_Required_FK_Inverse4
+                                    .OneToOne_Optional_FK_Inverse3
+                                    .OneToMany_Required_Self2
+                                    .DefaultIfEmpty()
                         )
                         on l4.Id equals l2.Id
                     join l3 in ss.Set<Level4>()
                         .SelectMany(
                             l4 =>
-                                l4.OneToOne_Required_FK_Inverse4.OneToOne_Required_FK_Inverse3.OneToMany_Required2.DefaultIfEmpty()
+                                l4.OneToOne_Required_FK_Inverse4
+                                    .OneToOne_Required_FK_Inverse3
+                                    .OneToMany_Required2
+                                    .DefaultIfEmpty()
                         )
                         on l2.Id equals l3.Id
                         into grouping
@@ -679,18 +697,27 @@ namespace Microsoft.EntityFrameworkCore.Query
                     from l4 in ss.Set<Level1>()
                         .SelectMany(
                             l1 =>
-                                l1.OneToOne_Required_FK1.OneToOne_Optional_FK2.OneToMany_Required3.DefaultIfEmpty()
+                                l1.OneToOne_Required_FK1
+                                    .OneToOne_Optional_FK2
+                                    .OneToMany_Required3
+                                    .DefaultIfEmpty()
                         )
                     join l2 in ss.Set<Level4>()
                         .SelectMany(
                             l4 =>
-                                l4.OneToOne_Required_FK_Inverse4.OneToOne_Optional_FK_Inverse3.OneToMany_Required_Self2.DefaultIfEmpty()
+                                l4.OneToOne_Required_FK_Inverse4
+                                    .OneToOne_Optional_FK_Inverse3
+                                    .OneToMany_Required_Self2
+                                    .DefaultIfEmpty()
                         )
                         on l4.Id equals l2.Id
                     join l3 in ss.Set<Level4>()
                         .SelectMany(
                             l4 =>
-                                l4.OneToOne_Required_FK_Inverse4.OneToOne_Required_FK_Inverse3.OneToMany_Required2.DefaultIfEmpty()
+                                l4.OneToOne_Required_FK_Inverse4
+                                    .OneToOne_Required_FK_Inverse3
+                                    .OneToMany_Required2
+                                    .DefaultIfEmpty()
                         )
                         on l2.Id equals l3.Id
                         into grouping
@@ -707,18 +734,27 @@ namespace Microsoft.EntityFrameworkCore.Query
                     from l4 in ss.Set<Level1>()
                         .SelectMany(
                             l1 =>
-                                l1.OneToOne_Required_FK1.OneToOne_Optional_FK2.OneToMany_Required3.DefaultIfEmpty()
+                                l1.OneToOne_Required_FK1
+                                    .OneToOne_Optional_FK2
+                                    .OneToMany_Required3
+                                    .DefaultIfEmpty()
                         )
                     join l2 in ss.Set<Level4>()
                         .SelectMany(
                             l4 =>
-                                l4.OneToOne_Required_FK_Inverse4.OneToOne_Optional_FK_Inverse3.OneToMany_Required_Self2.DefaultIfEmpty()
+                                l4.OneToOne_Required_FK_Inverse4
+                                    .OneToOne_Optional_FK_Inverse3
+                                    .OneToMany_Required_Self2
+                                    .DefaultIfEmpty()
                         )
                         on l4.Id equals l2.Id
                     join l3 in ss.Set<Level4>()
                         .SelectMany(
                             l4 =>
-                                l4.OneToOne_Required_FK_Inverse4.OneToOne_Required_FK_Inverse3.OneToMany_Required2.DefaultIfEmpty()
+                                l4.OneToOne_Required_FK_Inverse4
+                                    .OneToOne_Required_FK_Inverse3
+                                    .OneToMany_Required2
+                                    .DefaultIfEmpty()
                         )
                         on l2.Id equals l3.Id
                         into grouping
@@ -1794,7 +1830,9 @@ namespace Microsoft.EntityFrameworkCore.Query
                         .SelectMany(l1 => l1.OneToMany_Required1)
                         .Include(
                             l2 =>
-                                l2.OneToOne_Optional_FK2.OneToOne_Required_FK3.OneToMany_Optional_Self4
+                                l2.OneToOne_Optional_FK2
+                                    .OneToOne_Required_FK3
+                                    .OneToMany_Optional_Self4
                         )
                         .Select(l2 => l2.OneToOne_Optional_FK2)
                         .Select(l3 => l3.OneToOne_Required_FK3),
@@ -2409,7 +2447,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                     ss.Set<Level1>()
                         .Include(
                             l1 =>
-                                l1.OneToOne_Optional_FK1.OneToMany_Optional2
+                                l1.OneToOne_Optional_FK1
+                                    .OneToMany_Optional2
                                     .Where(x => x.Name != "Foo")
                                     .OrderBy(x => x.Name)
                                     .Skip(1)
@@ -3525,9 +3564,9 @@ namespace Microsoft.EntityFrameworkCore.Query
                                 .SelectMany(
                                     l2 =>
                                         l2.Id == 1
-                                            ? l2.OneToMany_Required_Inverse2.OneToMany_Optional1.Select(
-                                                  e => e.Id
-                                              )
+                                            ? l2.OneToMany_Required_Inverse2
+                                              .OneToMany_Optional1
+                                              .Select(e => e.Id)
                                             : null
                                 )
                     )
@@ -3547,9 +3586,9 @@ namespace Microsoft.EntityFrameworkCore.Query
                                 .SelectMany(
                                     l2 =>
                                         l2.Id == 1
-                                            ? l2.OneToMany_Required_Inverse2.OneToMany_Optional1.Select(
-                                                  e => e.Id
-                                              )
+                                            ? l2.OneToMany_Required_Inverse2
+                                              .OneToMany_Optional1
+                                              .Select(e => e.Id)
                                             : Enumerable.Empty<int>()
                                 )
                     )
@@ -3606,7 +3645,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                     ss.Set<Level1>()
                         .Include(
                             l1 =>
-                                l1.OneToOne_Optional_FK1.OneToMany_Optional2
+                                l1.OneToOne_Optional_FK1
+                                    .OneToMany_Optional2
                                     .OrderBy(x => x.Id)
                                     .Take(3)
                         )

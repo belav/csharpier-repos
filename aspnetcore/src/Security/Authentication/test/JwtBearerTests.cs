@@ -405,12 +405,16 @@ public class JwtBearerTests : SharedAuthenticationTests<JwtBearerOptions>
             options =>
             {
                 options.SecurityTokenValidators.Clear();
-                options.SecurityTokenValidators.Add(
-                    new InvalidTokenValidator(typeof(SecurityTokenInvalidAudienceException))
-                );
-                options.SecurityTokenValidators.Add(
-                    new InvalidTokenValidator(typeof(SecurityTokenSignatureKeyNotFoundException))
-                );
+                options
+                    .SecurityTokenValidators
+                    .Add(new InvalidTokenValidator(typeof(SecurityTokenInvalidAudienceException)));
+                options
+                    .SecurityTokenValidators
+                    .Add(
+                        new InvalidTokenValidator(
+                            typeof(SecurityTokenSignatureKeyNotFoundException)
+                        )
+                    );
             }
         );
 
@@ -555,9 +559,9 @@ public class JwtBearerTests : SharedAuthenticationTests<JwtBearerOptions>
                     }
                 };
                 options.SecurityTokenValidators.Clear();
-                options.SecurityTokenValidators.Add(
-                    new BlobTokenValidator(JwtBearerDefaults.AuthenticationScheme)
-                );
+                options
+                    .SecurityTokenValidators
+                    .Add(new BlobTokenValidator(JwtBearerDefaults.AuthenticationScheme));
             }
         );
 
@@ -582,15 +586,17 @@ public class JwtBearerTests : SharedAuthenticationTests<JwtBearerOptions>
                     }
                 };
                 options.SecurityTokenValidators.Clear();
-                options.SecurityTokenValidators.Add(
-                    new BlobTokenValidator(
-                        "JWT",
-                        token =>
-                        {
-                            Assert.Equal("CustomToken", token);
-                        }
-                    )
-                );
+                options
+                    .SecurityTokenValidators
+                    .Add(
+                        new BlobTokenValidator(
+                            "JWT",
+                            token =>
+                            {
+                                Assert.Equal("CustomToken", token);
+                            }
+                        )
+                    );
             }
         );
 
@@ -1235,9 +1241,9 @@ public class JwtBearerTests : SharedAuthenticationTests<JwtBearerOptions>
                                                 return;
                                             }
 
-                                            var identifier = context.User.FindFirst(
-                                                ClaimTypes.NameIdentifier
-                                            );
+                                            var identifier = context
+                                                .User
+                                                .FindFirst(ClaimTypes.NameIdentifier);
                                             if (identifier == null)
                                             {
                                                 context.Response.StatusCode = 500;
@@ -1299,13 +1305,19 @@ public class JwtBearerTests : SharedAuthenticationTests<JwtBearerOptions>
                                                 await context.AuthenticateAsync(
                                                     JwtBearerDefaults.AuthenticationScheme
                                                 );
-                                            await context.Response.WriteAsJsonAsync(
-                                                new
-                                                {
-                                                    Expires = authenticationResult.Properties?.ExpiresUtc,
-                                                    Issued = authenticationResult.Properties?.IssuedUtc
-                                                }
-                                            );
+                                            await context
+                                                .Response
+                                                .WriteAsJsonAsync(
+                                                    new
+                                                    {
+                                                        Expires = authenticationResult
+                                                            .Properties
+                                                            ?.ExpiresUtc,
+                                                        Issued = authenticationResult
+                                                            .Properties
+                                                            ?.IssuedUtc
+                                                    }
+                                                );
                                         }
                                         else
                                         {

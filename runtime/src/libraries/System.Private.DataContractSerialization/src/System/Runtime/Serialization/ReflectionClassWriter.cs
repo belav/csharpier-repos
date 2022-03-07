@@ -248,9 +248,9 @@ namespace System.Runtime.Serialization
                 type.IsGenericType && type.GetGenericTypeDefinition() == Globals.TypeOfKeyValuePair
             )
             {
-                obj = classContract.KeyValuePairAdapterConstructorInfo!.Invoke(
-                    new object[] { obj }
-                );
+                obj = classContract
+                    .KeyValuePairAdapterConstructorInfo!
+                    .Invoke(new object[] { obj });
             }
 
             return obj;

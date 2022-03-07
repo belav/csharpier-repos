@@ -144,7 +144,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                     semanticModel = semanticModel.ParentModel;
                 }
 
-                var root = await semanticModel.SyntaxTree
+                var root = await semanticModel
+                    .SyntaxTree
                     .GetRootAsync(cancellationToken)
                     .ConfigureAwait(false);
 
@@ -174,7 +175,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             SyntaxNode root
         )
         {
-            var namespaceUsings = root.FindToken(position).Parent!
+            var namespaceUsings = root.FindToken(position)
+                .Parent!
                 .GetAncestors<BaseNamespaceDeclarationSyntax>()
                 .SelectMany(n => n.Usings);
             var allUsings = root is CompilationUnitSyntax compilationUnit
@@ -201,11 +203,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                 // if GetParameters extension method gets updated to handle records, we need to test EVERY usage
                 // of the extension method and make sure the change is applicable to all these usages.
 
-                primaryConstructor = typeSymbol.InstanceConstructors.FirstOrDefault(
-                    c =>
-                        c.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax()
-                        is RecordDeclarationSyntax
-                );
+                primaryConstructor = typeSymbol
+                    .InstanceConstructors
+                    .FirstOrDefault(
+                        c =>
+                            c.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax()
+                            is RecordDeclarationSyntax
+                    );
                 return primaryConstructor is not null;
             }
 

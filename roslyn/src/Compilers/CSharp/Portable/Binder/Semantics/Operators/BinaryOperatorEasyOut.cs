@@ -5613,9 +5613,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                 return;
             }
 
-            BinaryOperatorSignature signature = this.Compilation.builtInOperators.GetSignature(
-                easyOut
-            );
+            BinaryOperatorSignature signature = this.Compilation
+                .builtInOperators
+                .GetSignature(easyOut);
 
             Conversion leftConversion = Conversions.FastClassifyConversion(
                 leftType,
@@ -5629,9 +5629,15 @@ namespace Microsoft.CodeAnalysis.CSharp
             Debug.Assert(leftConversion.Exists && leftConversion.IsImplicit);
             Debug.Assert(rightConversion.Exists && rightConversion.IsImplicit);
 
-            result.Results.Add(
-                BinaryOperatorAnalysisResult.Applicable(signature, leftConversion, rightConversion)
-            );
+            result
+                .Results
+                .Add(
+                    BinaryOperatorAnalysisResult.Applicable(
+                        signature,
+                        leftConversion,
+                        rightConversion
+                    )
+                );
         }
 
         private static bool PossiblyUnusualConstantOperation(

@@ -30,10 +30,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
         {
             if (s_lazyTestFileContent == null)
             {
-                using var stream =
-                    typeof(ProximityExpressionsGetterTests).Assembly.GetManifestResourceStream(
-                        "Debugging/ProximityExpressionsGetterTestFile.cs"
-                    );
+                using var stream = typeof(ProximityExpressionsGetterTests)
+                    .Assembly
+                    .GetManifestResourceStream("Debugging/ProximityExpressionsGetterTestFile.cs");
                 using var reader = new StreamReader(stream, Encoding.UTF8);
                 s_lazyTestFileContent = reader.ReadToEnd();
             }

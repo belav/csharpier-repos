@@ -47,7 +47,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.InheritanceMarg
         )
         {
             var displayName = member.DisplayTexts.JoinText();
-            var targetsByRelationship = member.TargetItems
+            var targetsByRelationship = member
+                .TargetItems
                 .OrderBy(item => item.DisplayName)
                 .GroupBy(target => target.RelationToMember)
                 .SelectMany(

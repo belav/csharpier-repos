@@ -78,22 +78,24 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Preview
                 // this can't be called twice
                 Contract.ThrowIfFalse(_analyzeTask == null);
 
-                var asyncToken = _owner._listener.BeginAsyncOperation(
-                    nameof(PreviewSolutionCrawlerRegistrationServiceFactory)
-                        + "."
-                        + nameof(Service)
-                        + "."
-                        + nameof(Register)
-                );
+                var asyncToken = _owner
+                    ._listener
+                    .BeginAsyncOperation(
+                        nameof(PreviewSolutionCrawlerRegistrationServiceFactory)
+                            + "."
+                            + nameof(Service)
+                            + "."
+                            + nameof(Register)
+                    );
                 _analyzeTask = AnalyzeAsync().CompletesAsyncOperation(asyncToken);
             }
 
             private async Task AnalyzeAsync()
             {
                 var workerBackOffTimeSpan = InternalSolutionCrawlerOptions.PreviewBackOffTimeSpan;
-                var incrementalAnalyzer = _owner._analyzerService.CreateIncrementalAnalyzer(
-                    _workspace
-                );
+                var incrementalAnalyzer = _owner
+                    ._analyzerService
+                    .CreateIncrementalAnalyzer(_workspace);
 
                 var solution = _workspace.CurrentSolution;
                 var documentIds = _workspace.GetOpenDocumentIds().ToImmutableArray();
@@ -109,7 +111,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Preview
                         }
 
                         // delay analyzing
-                        await _owner._listener
+                        await _owner
+                            ._listener
                             .Delay(workerBackOffTimeSpan, _source.Token)
                             .ConfigureAwait(false);
 

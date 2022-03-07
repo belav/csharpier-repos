@@ -138,12 +138,14 @@ public class OwinWebSocketAcceptAdapter
                 {
                     adapter.UpstreamTask = next(environment);
                     adapter.UpstreamWentAsyncTcs.TrySetResult(0);
-                    adapter.UpstreamTask.ContinueWith(
-                        adapter.EnsureCompleted,
-                        CancellationToken.None,
-                        TaskContinuationOptions.ExecuteSynchronously,
-                        TaskScheduler.Default
-                    );
+                    adapter
+                        .UpstreamTask
+                        .ContinueWith(
+                            adapter.EnsureCompleted,
+                            CancellationToken.None,
+                            TaskContinuationOptions.ExecuteSynchronously,
+                            TaskScheduler.Default
+                        );
                 }
                 catch (Exception ex)
                 {

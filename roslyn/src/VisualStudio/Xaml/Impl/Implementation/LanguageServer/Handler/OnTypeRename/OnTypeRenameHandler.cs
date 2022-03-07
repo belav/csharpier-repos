@@ -76,8 +76,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.LanguageServer.Handler
                 return null;
             }
 
-            var renameService =
-                document.Project.LanguageServices.GetService<IXamlTypeRenameService>();
+            var renameService = document
+                .Project
+                .LanguageServices
+                .GetService<IXamlTypeRenameService>();
             if (renameService == null)
             {
                 return null;
@@ -100,7 +102,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.LanguageServer.Handler
 
             return new LinkedEditingRanges
             {
-                Ranges = result.Ranges
+                Ranges = result
+                    .Ranges
                     .Select(s => ProtocolConversions.TextSpanToRange(s, text))
                     .ToArray(),
                 WordPattern = result.WordPattern

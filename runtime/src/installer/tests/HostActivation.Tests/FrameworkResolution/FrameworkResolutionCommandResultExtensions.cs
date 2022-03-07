@@ -26,7 +26,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
             return result
                 .Should()
                 .Pass()
-                .And.HaveResolvedFramework(resolvedFrameworkName, resolvedFrameworkVersion);
+                .And
+                .HaveResolvedFramework(resolvedFrameworkName, resolvedFrameworkVersion);
         }
 
         /// <summary>
@@ -105,7 +106,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
                 return result
                     .Should()
                     .Fail()
-                    .And.FailedToReconcileFrameworkReference(
+                    .And
+                    .FailedToReconcileFrameworkReference(
                         frameworkName,
                         lowerVersion,
                         higherVersion
@@ -130,7 +132,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
                 return result
                     .Should()
                     .Fail()
-                    .And.FailedToReconcileFrameworkReference(
+                    .And
+                    .FailedToReconcileFrameworkReference(
                         frameworkName,
                         lowerVersion,
                         higherVersion

@@ -71,7 +71,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Retargeting
             ParameterSymbol p2 = modifiers
                 .GetMembers("F2")
                 .OfType<MethodSymbol>()
-                .Single().Parameters[0];
+                .Single()
+                .Parameters[0];
 
             MethodSymbol m5 = modifiers.GetMembers("F5").OfType<MethodSymbol>().Single();
             ParameterSymbol p5 = m5.Parameters[0];
@@ -79,7 +80,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Retargeting
             ParameterSymbol p6 = modifiers
                 .GetMembers("F6")
                 .OfType<MethodSymbol>()
-                .Single().Parameters[0];
+                .Single()
+                .Parameters[0];
 
             MethodSymbol m7 = modifiers.GetMembers("F7").OfType<MethodSymbol>().Single();
 

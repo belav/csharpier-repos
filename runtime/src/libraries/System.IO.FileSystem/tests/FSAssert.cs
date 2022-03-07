@@ -41,7 +41,9 @@ namespace System.IO.Tests
             else
             {
                 // first wait for the task to complete without throwing
-                ((IAsyncResult)task).AsyncWaitHandle.WaitOne();
+                ((IAsyncResult)task)
+                    .AsyncWaitHandle
+                    .WaitOne();
 
                 // now assert, we ignore the result of the task intentionally,
                 // As it previously did not complete synchronously.

@@ -127,11 +127,13 @@ namespace System.Security.Cryptography.Pkcs.Asn1
             if (tag.HasSameClassAndValue(Asn1Tag.Sequence))
             {
                 System.Security.Cryptography.Pkcs.Asn1.IssuerAndSerialNumberAsn tmpIssuerAndSerialNumber;
-                System.Security.Cryptography.Pkcs.Asn1.IssuerAndSerialNumberAsn.Decode(
-                    ref reader,
-                    rebind,
-                    out tmpIssuerAndSerialNumber
-                );
+                System
+                    .Security
+                    .Cryptography
+                    .Pkcs
+                    .Asn1
+                    .IssuerAndSerialNumberAsn
+                    .Decode(ref reader, rebind, out tmpIssuerAndSerialNumber);
                 decoded.IssuerAndSerialNumber = tmpIssuerAndSerialNumber;
             }
             else if (tag.HasSameClassAndValue(new Asn1Tag(TagClass.ContextSpecific, 0)))
@@ -157,12 +159,18 @@ namespace System.Security.Cryptography.Pkcs.Asn1
             else if (tag.HasSameClassAndValue(new Asn1Tag(TagClass.ContextSpecific, 1)))
             {
                 System.Security.Cryptography.Pkcs.Asn1.OriginatorPublicKeyAsn tmpOriginatorKey;
-                System.Security.Cryptography.Pkcs.Asn1.OriginatorPublicKeyAsn.Decode(
-                    ref reader,
-                    new Asn1Tag(TagClass.ContextSpecific, 1),
-                    rebind,
-                    out tmpOriginatorKey
-                );
+                System
+                    .Security
+                    .Cryptography
+                    .Pkcs
+                    .Asn1
+                    .OriginatorPublicKeyAsn
+                    .Decode(
+                        ref reader,
+                        new Asn1Tag(TagClass.ContextSpecific, 1),
+                        rebind,
+                        out tmpOriginatorKey
+                    );
                 decoded.OriginatorKey = tmpOriginatorKey;
             }
             else

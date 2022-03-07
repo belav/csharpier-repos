@@ -45,15 +45,17 @@ namespace System.IO.Pipes
             }
 
             // Let's try to connect first
-            SafePipeHandle handle = Interop.Kernel32.CreateNamedPipeClient(
-                _normalizedPipePath,
-                access, // read and write access
-                0, // sharing: none
-                ref secAttrs, // security attributes
-                FileMode.Open, // open existing
-                _pipeFlags, // impersonation flags
-                IntPtr.Zero
-            ); // template file: null
+            SafePipeHandle handle = Interop
+                .Kernel32
+                .CreateNamedPipeClient(
+                    _normalizedPipePath,
+                    access, // read and write access
+                    0, // sharing: none
+                    ref secAttrs, // security attributes
+                    FileMode.Open, // open existing
+                    _pipeFlags, // impersonation flags
+                    IntPtr.Zero
+                ); // template file: null
 
             if (handle.IsInvalid)
             {
@@ -84,15 +86,17 @@ namespace System.IO.Pipes
                 }
 
                 // Pipe server should be free.  Let's try to connect to it.
-                handle = Interop.Kernel32.CreateNamedPipeClient(
-                    _normalizedPipePath,
-                    access, // read and write access
-                    0, // sharing: none
-                    ref secAttrs, // security attributes
-                    FileMode.Open, // open existing
-                    _pipeFlags, // impersonation flags
-                    IntPtr.Zero
-                ); // template file: null
+                handle = Interop
+                    .Kernel32
+                    .CreateNamedPipeClient(
+                        _normalizedPipePath,
+                        access, // read and write access
+                        0, // sharing: none
+                        ref secAttrs, // security attributes
+                        FileMode.Open, // open existing
+                        _pipeFlags, // impersonation flags
+                        IntPtr.Zero
+                    ); // template file: null
 
                 if (handle.IsInvalid)
                 {
@@ -130,15 +134,17 @@ namespace System.IO.Pipes
                 // this if they are created (on WinXP SP2 at least)]
                 uint numInstances;
                 if (
-                    !Interop.Kernel32.GetNamedPipeHandleStateW(
-                        InternalHandle!,
-                        null,
-                        &numInstances,
-                        null,
-                        null,
-                        null,
-                        0
-                    )
+                    !Interop
+                        .Kernel32
+                        .GetNamedPipeHandleStateW(
+                            InternalHandle!,
+                            null,
+                            &numInstances,
+                            null,
+                            null,
+                            null,
+                            0
+                        )
                 )
                 {
                     throw WinIOError(Marshal.GetLastPInvokeError());

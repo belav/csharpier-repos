@@ -49,7 +49,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertTypeOfToNameOf
             {
                 var typeSymbol = model
                     .GetSymbolInfo(typeOfExpression.Type, cancellationToken)
-                    .Symbol.GetSymbolType();
+                    .Symbol
+                    .GetSymbolType();
                 return typeSymbol?.GenerateExpressionSyntax();
             }
 

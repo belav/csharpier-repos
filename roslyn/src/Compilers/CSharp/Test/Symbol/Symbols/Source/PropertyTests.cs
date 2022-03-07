@@ -519,7 +519,8 @@ class C1
 }
 ";
             var comp = CreateCompilation(Parse(text));
-            NamedTypeSymbol c1 = (NamedTypeSymbol)comp.SourceModule.GlobalNamespace
+            NamedTypeSymbol c1 = (NamedTypeSymbol)comp.SourceModule
+                .GlobalNamespace
                 .GetMembers("C1")
                 .Single();
             PropertySymbol ein = (PropertySymbol)c1.GetMembers("in").Single();
@@ -747,7 +748,8 @@ class Program
                 }
             );
 
-            var type = (PENamedTypeSymbol)compilation.GlobalNamespace
+            var type = (PENamedTypeSymbol)compilation
+                .GlobalNamespace
                 .GetMembers("NoAccessors")
                 .Single();
 
@@ -843,7 +845,9 @@ class Program
 }
 "
             );
-            var type = (PENamedTypeSymbol)verifier.Compilation.GlobalNamespace
+            var type = (PENamedTypeSymbol)verifier
+                .Compilation
+                .GlobalNamespace
                 .GetMembers("Signatures")
                 .Single()
                 .GetSymbol();
@@ -936,7 +940,8 @@ class Program
                 source,
                 TestOptions.ReleaseDll.WithMetadataImportOptions(MetadataImportOptions.Internal)
             );
-            var type = (PENamedTypeSymbol)compilation.GlobalNamespace
+            var type = (PENamedTypeSymbol)compilation
+                .GlobalNamespace
                 .GetMembers("FamilyAssembly")
                 .Single();
 
@@ -3527,9 +3532,9 @@ interface I1
 
             var comp = CreateCompilation(
                 source,
-                parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
-                    LanguageVersion.CSharp5
-                )
+                parseOptions: CSharpParseOptions
+                    .Default
+                    .WithLanguageVersion(LanguageVersion.CSharp5)
             );
             comp.GetDeclarationDiagnostics()
                 .Verify(

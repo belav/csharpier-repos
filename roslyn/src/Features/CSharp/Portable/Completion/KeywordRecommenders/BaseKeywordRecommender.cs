@@ -54,10 +54,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
                 token.Kind() == SyntaxKind.ColonToken
                 && token.Parent is ConstructorInitializerSyntax
                 && token.Parent.IsParentKind(SyntaxKind.ConstructorDeclaration)
-                && token.Parent.Parent.IsParentKind(
-                    SyntaxKind.ClassDeclaration,
-                    SyntaxKind.RecordDeclaration
-                )
+                && token
+                    .Parent
+                    .Parent
+                    .IsParentKind(SyntaxKind.ClassDeclaration, SyntaxKind.RecordDeclaration)
             )
             {
                 var constructor = token.GetAncestor<ConstructorDeclarationSyntax>();

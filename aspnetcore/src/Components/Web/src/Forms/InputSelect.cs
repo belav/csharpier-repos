@@ -53,11 +53,9 @@ public class InputSelect<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTy
             builder.AddAttribute(
                 5,
                 "onchange",
-                EventCallback.Factory.CreateBinder<string?[]?>(
-                    this,
-                    SetCurrentValueAsStringArray,
-                    default
-                )
+                EventCallback
+                    .Factory
+                    .CreateBinder<string?[]?>(this, SetCurrentValueAsStringArray, default)
             );
         }
         else
@@ -66,11 +64,9 @@ public class InputSelect<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTy
             builder.AddAttribute(
                 7,
                 "onchange",
-                EventCallback.Factory.CreateBinder<string?>(
-                    this,
-                    __value => CurrentValueAsString = __value,
-                    default
-                )
+                EventCallback
+                    .Factory
+                    .CreateBinder<string?>(this, __value => CurrentValueAsString = __value, default)
             );
         }
 

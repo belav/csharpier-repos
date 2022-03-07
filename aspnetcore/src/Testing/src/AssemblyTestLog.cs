@@ -426,11 +426,15 @@ public class AssemblyTestLog : IDisposable
             File.Delete(fileName);
         }
 
-        var serilogger = new LoggerConfiguration().Enrich
+        var serilogger = new LoggerConfiguration()
+            .Enrich
             .FromLogContext()
-            .Enrich.With(new AssemblyLogTimestampOffsetEnricher(logStart))
-            .MinimumLevel.Verbose()
-            .WriteTo.File(
+            .Enrich
+            .With(new AssemblyLogTimestampOffsetEnricher(logStart))
+            .MinimumLevel
+            .Verbose()
+            .WriteTo
+            .File(
                 fileName,
                 outputTemplate: "[{TimestampOffset}] [{SourceContext}] [{Level}] {Message:l}{NewLine}{Exception}",
                 flushToDiskInterval: TimeSpan.FromSeconds(1),

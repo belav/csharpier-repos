@@ -146,10 +146,9 @@ namespace System.Web.Http.Validation
 
             if (validators == null)
             {
-                validators = validationContext.ActionContext.GetValidators(
-                    metadata,
-                    validationContext.ValidatorCache
-                );
+                validators = validationContext
+                    .ActionContext
+                    .GetValidators(metadata, validationContext.ValidatorCache);
             }
 
             // We don't need to recursively traverse the graph for null values
@@ -221,10 +220,9 @@ namespace System.Web.Http.Validation
             PropertyScope propertyScope = new PropertyScope();
             validationContext.KeyBuilders.Push(propertyScope);
             foreach (
-                ModelMetadata childMetadata in validationContext.MetadataProvider.GetMetadataForProperties(
-                    metadata.Model,
-                    metadata.RealModelType
-                )
+                ModelMetadata childMetadata in validationContext
+                    .MetadataProvider
+                    .GetMetadataForProperties(metadata.Model, metadata.RealModelType)
             )
             {
                 propertyScope.PropertyName = childMetadata.PropertyName;
@@ -269,17 +267,15 @@ namespace System.Web.Http.Validation
 
             bool isValid = true;
             Type elementType = GetElementType(model.GetType());
-            ModelMetadata elementMetadata = validationContext.MetadataProvider.GetMetadataForType(
-                null,
-                elementType
-            );
+            ModelMetadata elementMetadata = validationContext
+                .MetadataProvider
+                .GetMetadataForType(null, elementType);
 
             ElementScope elementScope = new ElementScope() { Index = 0 };
             validationContext.KeyBuilders.Push(elementScope);
-            IEnumerable<ModelValidator> validators = validationContext.ActionContext.GetValidators(
-                elementMetadata,
-                validationContext.ValidatorCache
-            );
+            IEnumerable<ModelValidator> validators = validationContext
+                .ActionContext
+                .GetValidators(elementMetadata, validationContext.ValidatorCache);
 
             // if there are no validators or the object is null we bail out quickly
             // when there are large arrays of null, this will save a significant amount of processing
@@ -363,7 +359,9 @@ namespace System.Web.Http.Validation
                     {
                         modelKey = validationContext.RootPrefix;
                         foreach (
-                            IBodyModelValidatorKeyBuilder keyBuilder in validationContext.KeyBuilders.Reverse()
+                            IBodyModelValidatorKeyBuilder keyBuilder in validationContext
+                                .KeyBuilders
+                                .Reverse()
                         )
                         {
                             modelKey = keyBuilder.AppendTo(modelKey);

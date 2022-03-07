@@ -93,9 +93,9 @@ namespace System.Net.Http.Headers
             // Encode a string using RFC 5987 encoding.
             // encoding'lang'PercentEncodedSpecials
             StringBuilder builder = StringBuilderCache.Acquire();
-            byte[] utf8bytes = ArrayPool<byte>.Shared.Rent(
-                Encoding.UTF8.GetMaxByteCount(input.Length)
-            );
+            byte[] utf8bytes = ArrayPool<byte>
+                .Shared
+                .Rent(Encoding.UTF8.GetMaxByteCount(input.Length));
             int utf8length = Encoding.UTF8.GetBytes(input, 0, input.Length, utf8bytes, 0);
 
             builder.Append("utf-8\'\'");

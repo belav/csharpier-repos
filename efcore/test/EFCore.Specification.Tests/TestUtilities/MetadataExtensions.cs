@@ -143,15 +143,18 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
         {
             foreach (var foreignKey in sourceEntityType.GetDeclaredForeignKeys())
             {
-                var targetPrincipalEntityType = targetEntityType.Model.FindEntityType(
-                    foreignKey.PrincipalEntityType.Name
-                );
+                var targetPrincipalEntityType = targetEntityType
+                    .Model
+                    .FindEntityType(foreignKey.PrincipalEntityType.Name);
                 var clonedForeignKey = targetEntityType.AddForeignKey(
-                    foreignKey.Properties
+                    foreignKey
+                        .Properties
                         .Select(p => targetEntityType.FindProperty(p.Name))
                         .ToList(),
                     targetPrincipalEntityType.FindKey(
-                        foreignKey.PrincipalKey.Properties
+                        foreignKey
+                            .PrincipalKey
+                            .Properties
                             .Select(p => targetPrincipalEntityType.FindProperty(p.Name))
                             .ToList()
                     ),
@@ -172,18 +175,23 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
         {
             foreach (var navigation in sourceEntityType.GetDeclaredNavigations())
             {
-                var targetDependentEntityType = targetEntityType.Model.FindEntityType(
-                    navigation.ForeignKey.DeclaringEntityType.Name
-                );
-                var targetPrincipalEntityType = targetEntityType.Model.FindEntityType(
-                    navigation.ForeignKey.PrincipalEntityType.Name
-                );
+                var targetDependentEntityType = targetEntityType
+                    .Model
+                    .FindEntityType(navigation.ForeignKey.DeclaringEntityType.Name);
+                var targetPrincipalEntityType = targetEntityType
+                    .Model
+                    .FindEntityType(navigation.ForeignKey.PrincipalEntityType.Name);
                 var targetForeignKey = targetDependentEntityType.FindForeignKey(
-                    navigation.ForeignKey.Properties
+                    navigation
+                        .ForeignKey
+                        .Properties
                         .Select(p => targetDependentEntityType.FindProperty(p.Name))
                         .ToList(),
                     targetPrincipalEntityType.FindKey(
-                        navigation.ForeignKey.PrincipalKey.Properties
+                        navigation
+                            .ForeignKey
+                            .PrincipalKey
+                            .Properties
                             .Select(p => targetPrincipalEntityType.FindProperty(p.Name))
                             .ToList()
                     ),

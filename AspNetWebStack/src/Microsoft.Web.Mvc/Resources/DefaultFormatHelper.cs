@@ -204,10 +204,9 @@ namespace Microsoft.Web.Mvc.Resources
                 // This may be a friendly name (for example, "xml" instead of "text/xml").
                 // if so, try mapping to a content type
                 if (
-                    !FormatManager.Current.TryMapFormatFriendlyName(
-                        contentTypeString,
-                        out contentType
-                    )
+                    !FormatManager
+                        .Current
+                        .TryMapFormatFriendlyName(contentTypeString, out contentType)
                 )
                 {
                     return null;

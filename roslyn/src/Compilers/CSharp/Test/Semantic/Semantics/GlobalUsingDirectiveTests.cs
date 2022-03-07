@@ -3557,7 +3557,8 @@ class C2 {}
                     .WithLocation(3000, 14)
             };
 
-            CompileAndVerify(comp2).Diagnostics
+            CompileAndVerify(comp2)
+                .Diagnostics
                 .Where(d => d.Code != (int)ErrorCode.HDN_UnusedUsingDirective)
                 .Verify(expected1);
 
@@ -3566,7 +3567,8 @@ class C2 {}
                 parseOptions: TestOptions.RegularPreview
             );
 
-            CompileAndVerify(comp3).Diagnostics
+            CompileAndVerify(comp3)
+                .Diagnostics
                 .Where(d => d.Code != (int)ErrorCode.HDN_UnusedUsingDirective)
                 .Verify(
                     // (2000,21): warning CS0105: The using directive for 'C2' appeared previously in this namespace
@@ -3585,7 +3587,8 @@ class C2 {}
                 new[] { source3 + source5, source6 },
                 parseOptions: TestOptions.RegularPreview
             );
-            CompileAndVerify(comp4).Diagnostics
+            CompileAndVerify(comp4)
+                .Diagnostics
                 .Where(d => d.Code != (int)ErrorCode.HDN_UnusedUsingDirective)
                 .Verify(
                     // (3000,14): warning CS0105: The using directive for 'C2' appeared previously in this namespace
@@ -3599,7 +3602,8 @@ class C2 {}
                 new[] { source3 + source4 + source5, source6 },
                 parseOptions: TestOptions.RegularPreview
             );
-            CompileAndVerify(comp5).Diagnostics
+            CompileAndVerify(comp5)
+                .Diagnostics
                 .Where(d => d.Code != (int)ErrorCode.HDN_UnusedUsingDirective)
                 .Verify(
                     // (2000,21): warning CS0105: The using directive for 'C2' appeared previously in this namespace
@@ -3618,7 +3622,8 @@ class C2 {}
                 new[] { source3, source4, source5, source6 },
                 parseOptions: TestOptions.RegularPreview
             );
-            CompileAndVerify(comp6).Diagnostics
+            CompileAndVerify(comp6)
+                .Diagnostics
                 .Where(d => d.Code != (int)ErrorCode.HDN_UnusedUsingDirective)
                 .Verify(
                     // (2000,21): hidden CS8933: The using directive for 'C2' appeared previously as global using
@@ -3637,7 +3642,8 @@ class C2 {}
                 new[] { source3 + source5, source4, source6 },
                 parseOptions: TestOptions.RegularPreview
             );
-            CompileAndVerify(comp7).Diagnostics
+            CompileAndVerify(comp7)
+                .Diagnostics
                 .Where(d => d.Code != (int)ErrorCode.HDN_UnusedUsingDirective)
                 .Verify(
                     // (2000,21): hidden CS8933: The using directive for 'C2' appeared previously as global using
@@ -3656,7 +3662,8 @@ class C2 {}
                 new[] { source5, source3, source6 },
                 parseOptions: TestOptions.RegularPreview
             );
-            CompileAndVerify(comp8).Diagnostics
+            CompileAndVerify(comp8)
+                .Diagnostics
                 .Where(d => d.Code != (int)ErrorCode.HDN_UnusedUsingDirective)
                 .Verify(expected1);
 
@@ -3664,7 +3671,8 @@ class C2 {}
                 new[] { source5, source3, source4, source6 },
                 parseOptions: TestOptions.RegularPreview
             );
-            CompileAndVerify(comp9).Diagnostics
+            CompileAndVerify(comp9)
+                .Diagnostics
                 .Where(d => d.Code != (int)ErrorCode.HDN_UnusedUsingDirective)
                 .Verify(
                     // (2000,21): hidden CS8933: The using directive for 'C2' appeared previously as global using
@@ -3823,7 +3831,8 @@ namespace N2 { class C2 {} }
                     .WithLocation(3000, 7)
             };
 
-            CompileAndVerify(comp2).Diagnostics
+            CompileAndVerify(comp2)
+                .Diagnostics
                 .Where(d => d.Code != (int)ErrorCode.HDN_UnusedUsingDirective)
                 .Verify(expected1);
 
@@ -3832,7 +3841,8 @@ namespace N2 { class C2 {} }
                 parseOptions: TestOptions.RegularPreview
             );
 
-            CompileAndVerify(comp3).Diagnostics
+            CompileAndVerify(comp3)
+                .Diagnostics
                 .Where(d => d.Code != (int)ErrorCode.HDN_UnusedUsingDirective)
                 .Verify(
                     // (2000,14): warning CS0105: The using directive for 'N2' appeared previously in this namespace
@@ -3851,7 +3861,8 @@ namespace N2 { class C2 {} }
                 new[] { source3 + source5, source6 },
                 parseOptions: TestOptions.RegularPreview
             );
-            CompileAndVerify(comp4).Diagnostics
+            CompileAndVerify(comp4)
+                .Diagnostics
                 .Where(d => d.Code != (int)ErrorCode.HDN_UnusedUsingDirective)
                 .Verify(
                     // (3000,7): warning CS0105: The using directive for 'N2' appeared previously in this namespace
@@ -3865,7 +3876,8 @@ namespace N2 { class C2 {} }
                 new[] { source3 + source4 + source5, source6 },
                 parseOptions: TestOptions.RegularPreview
             );
-            CompileAndVerify(comp5).Diagnostics
+            CompileAndVerify(comp5)
+                .Diagnostics
                 .Where(d => d.Code != (int)ErrorCode.HDN_UnusedUsingDirective)
                 .Verify(
                     // (2000,14): warning CS0105: The using directive for 'N2' appeared previously in this namespace
@@ -3884,7 +3896,8 @@ namespace N2 { class C2 {} }
                 new[] { source3, source4, source5, source6 },
                 parseOptions: TestOptions.RegularPreview
             );
-            CompileAndVerify(comp6).Diagnostics
+            CompileAndVerify(comp6)
+                .Diagnostics
                 .Where(d => d.Code != (int)ErrorCode.HDN_UnusedUsingDirective)
                 .Verify(
                     // (2000,14): hidden CS8933: The using directive for 'N2' appeared previously as global using
@@ -3903,7 +3916,8 @@ namespace N2 { class C2 {} }
                 new[] { source3 + source5, source4, source6 },
                 parseOptions: TestOptions.RegularPreview
             );
-            CompileAndVerify(comp7).Diagnostics
+            CompileAndVerify(comp7)
+                .Diagnostics
                 .Where(d => d.Code != (int)ErrorCode.HDN_UnusedUsingDirective)
                 .Verify(
                     // (2000,14): hidden CS8933: The using directive for 'N2' appeared previously as global using
@@ -3922,7 +3936,8 @@ namespace N2 { class C2 {} }
                 new[] { source5, source3, source6 },
                 parseOptions: TestOptions.RegularPreview
             );
-            CompileAndVerify(comp8).Diagnostics
+            CompileAndVerify(comp8)
+                .Diagnostics
                 .Where(d => d.Code != (int)ErrorCode.HDN_UnusedUsingDirective)
                 .Verify(expected1);
 
@@ -3930,7 +3945,8 @@ namespace N2 { class C2 {} }
                 new[] { source5, source3, source4, source6 },
                 parseOptions: TestOptions.RegularPreview
             );
-            CompileAndVerify(comp9).Diagnostics
+            CompileAndVerify(comp9)
+                .Diagnostics
                 .Where(d => d.Code != (int)ErrorCode.HDN_UnusedUsingDirective)
                 .Verify(
                     // (2000,14): hidden CS8933: The using directive for 'N2' appeared previously as global using

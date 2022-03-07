@@ -57,21 +57,21 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
                 SolutionTransforms.Add(
                     (solution, projectId) =>
                     {
-                        var parseOptions = (CSharpParseOptions)solution.GetProject(
-                            projectId
-                        )!.ParseOptions!;
+                        var parseOptions = (CSharpParseOptions)solution
+                            .GetProject(projectId)!
+                            .ParseOptions!;
                         solution = solution.WithProjectParseOptions(
                             projectId,
                             parseOptions.WithLanguageVersion(LanguageVersion)
                         );
 
-                        var compilationOptions = solution.GetProject(
-                            projectId
-                        )!.CompilationOptions!;
+                        var compilationOptions = solution
+                            .GetProject(projectId)!
+                            .CompilationOptions!;
                         compilationOptions = compilationOptions.WithSpecificDiagnosticOptions(
-                            compilationOptions.SpecificDiagnosticOptions.SetItems(
-                                CSharpVerifierHelper.NullableWarnings
-                            )
+                            compilationOptions
+                                .SpecificDiagnosticOptions
+                                .SetItems(CSharpVerifierHelper.NullableWarnings)
                         );
                         solution = solution.WithProjectCompilationOptions(
                             projectId,

@@ -65,17 +65,20 @@ namespace IdeBenchmarks
 
             // Explicitly choose the sqlite db to test.
             _workspace.TryApplyChanges(
-                _workspace.CurrentSolution.WithOptions(
-                    _workspace.Options.WithChangedOption(
-                        StorageOptions.Database,
-                        StorageDatabase.SQLite
+                _workspace
+                    .CurrentSolution
+                    .WithOptions(
+                        _workspace
+                            .Options
+                            .WithChangedOption(StorageOptions.Database, StorageDatabase.SQLite)
                     )
-                )
             );
 
-            var connectionPoolService =
-                _workspace.ExportProvider.GetExportedValue<SQLiteConnectionPoolService>();
-            var asyncListener = _workspace.ExportProvider
+            var connectionPoolService = _workspace
+                .ExportProvider
+                .GetExportedValue<SQLiteConnectionPoolService>();
+            var asyncListener = _workspace
+                .ExportProvider
                 .GetExportedValue<IAsynchronousOperationListenerProvider>()
                 .GetListener(FeatureAttribute.PersistentStorage);
 

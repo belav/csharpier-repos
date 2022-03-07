@@ -110,10 +110,11 @@ namespace Microsoft.CodeAnalysis.Tools.Formatters
                             return (originalSourceText, null);
                         }
 
-                        var analyzerConfigOptions =
-                            document.Project.AnalyzerOptions.AnalyzerConfigOptionsProvider.GetOptions(
-                                syntaxTree
-                            );
+                        var analyzerConfigOptions = document
+                            .Project
+                            .AnalyzerOptions
+                            .AnalyzerConfigOptionsProvider
+                            .GetOptions(syntaxTree);
                         var optionSet = await document
                             .GetOptionsAsync(cancellationToken)
                             .ConfigureAwait(false);
@@ -271,7 +272,8 @@ namespace Microsoft.CodeAnalysis.Tools.Formatters
                 }
 
                 // Escape characters in the text changes so that it can be more easily read.
-                var textChange = change.NewText
+                var textChange = change
+                    .NewText
                     ?.Replace(" ", "\\s")
                     .Replace("\t", "\\t")
                     .Replace("\n", "\\n")

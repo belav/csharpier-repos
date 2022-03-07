@@ -304,9 +304,11 @@ namespace Microsoft.EntityFrameworkCore
                 designTime: false
             );
             var packageVersion =
-                typeof(Context1).Assembly
+                typeof(Context1)
+                    .Assembly
                     .GetCustomAttributes<AssemblyMetadataAttribute>()
-                    .Single(m => m.Key == "PackageVersion").Value;
+                    .Single(m => m.Key == "PackageVersion")
+                    .Value;
 
             var prereleaseIndex = packageVersion.IndexOf("-", StringComparison.Ordinal);
             if (prereleaseIndex != -1)

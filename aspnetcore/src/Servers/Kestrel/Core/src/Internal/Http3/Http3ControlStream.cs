@@ -342,10 +342,10 @@ internal abstract class Http3ControlStream : IHttp3Stream, IThreadPoolWorkItem
         }
 
         _haveReceivedSettingsFrame = true;
-        using var closedRegistration = _context.StreamContext.ConnectionClosed.Register(
-            state => ((Http3ControlStream)state!).OnStreamClosed(),
-            this
-        );
+        using var closedRegistration = _context
+            .StreamContext
+            .ConnectionClosed
+            .Register(state => ((Http3ControlStream)state!).OnStreamClosed(), this);
 
         while (true)
         {
@@ -389,10 +389,9 @@ internal abstract class Http3ControlStream : IHttp3Stream, IThreadPoolWorkItem
             case (long)Http3SettingType.QPackMaxTableCapacity:
             case (long)Http3SettingType.MaxFieldSectionSize:
             case (long)Http3SettingType.QPackBlockedStreams:
-                _context.StreamLifetimeHandler.OnInboundControlStreamSetting(
-                    (Http3SettingType)id,
-                    value
-                );
+                _context
+                    .StreamLifetimeHandler
+                    .OnInboundControlStreamSetting((Http3SettingType)id, value);
                 break;
             default:
                 // Ignore all unknown settings.

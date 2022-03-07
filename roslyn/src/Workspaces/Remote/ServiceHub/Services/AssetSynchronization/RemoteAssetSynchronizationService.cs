@@ -91,8 +91,9 @@ namespace Microsoft.CodeAnalysis.Remote
                         )
                     )
                     {
-                        var serializer =
-                            workspace.Services.GetRequiredService<ISerializerService>();
+                        var serializer = workspace
+                            .Services
+                            .GetRequiredService<ISerializerService>();
 
                         var text = await TryGetSourceTextAsync().ConfigureAwait(false);
                         if (text == null)
@@ -114,7 +115,9 @@ namespace Microsoft.CodeAnalysis.Remote
                         //
                         // also, once the changes are picked up and put into Workspace, normal Workspace
                         // caching logic will take care of the text
-                        WorkspaceManager.SolutionAssetCache.TryAddAsset(newChecksum, newText);
+                        WorkspaceManager
+                            .SolutionAssetCache
+                            .TryAddAsset(newChecksum, newText);
                     }
 
                     async Task<SourceText?> TryGetSourceTextAsync()
@@ -122,10 +125,12 @@ namespace Microsoft.CodeAnalysis.Remote
                         // check the cheap and fast one first.
                         // see if the cache has the source text
                         if (
-                            WorkspaceManager.SolutionAssetCache.TryGetAsset<SerializableSourceText>(
-                                baseTextChecksum,
-                                out var serializableSourceText
-                            )
+                            WorkspaceManager
+                                .SolutionAssetCache
+                                .TryGetAsset<SerializableSourceText>(
+                                    baseTextChecksum,
+                                    out var serializableSourceText
+                                )
                         )
                         {
                             return await serializableSourceText

@@ -117,11 +117,9 @@ public class HttpResponseJsonExtensionsTests
         context.Response.Body = body;
 
         // Act
-        await context.Response.WriteAsJsonAsync(
-            1,
-            options: null,
-            contentType: "application/custom-type"
-        );
+        await context
+            .Response
+            .WriteAsJsonAsync(1, options: null, contentType: "application/custom-type");
 
         // Assert
         Assert.Equal("application/custom-type", context.Response.ContentType);
@@ -403,11 +401,9 @@ public class HttpResponseJsonExtensionsTests
         // Act
         await Assert.ThrowsAnyAsync<OperationCanceledException>(
             () =>
-                context.Response.WriteAsJsonAsync(
-                    AsyncEnumerable(),
-                    typeof(IAsyncEnumerable<int>),
-                    cts.Token
-                )
+                context
+                    .Response
+                    .WriteAsJsonAsync(AsyncEnumerable(), typeof(IAsyncEnumerable<int>), cts.Token)
         );
 
         // Assert

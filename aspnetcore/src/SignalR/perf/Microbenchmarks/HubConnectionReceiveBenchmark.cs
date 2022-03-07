@@ -76,9 +76,9 @@ public class HubConnectionReceiveBenchmark
             hubProtocol = new MessagePackHubProtocol();
         }
 
-        hubConnectionBuilder.Services.TryAddEnumerable(
-            ServiceDescriptor.Singleton(typeof(IHubProtocol), hubProtocol)
-        );
+        hubConnectionBuilder
+            .Services
+            .TryAddEnumerable(ServiceDescriptor.Singleton(typeof(IHubProtocol), hubProtocol));
         hubConnectionBuilder.WithUrl("http://doesntmatter");
 
         _invocationMessageBytes = hubProtocol.GetMessageBytes(
@@ -90,9 +90,11 @@ public class HubConnectionReceiveBenchmark
             {
                 var connection = new DefaultConnectionContext();
                 // prevents keep alive time being activated
-                connection.Features.Set<IConnectionInherentKeepAliveFeature>(
-                    new TestConnectionInherentKeepAliveFeature()
-                );
+                connection
+                    .Features
+                    .Set<IConnectionInherentKeepAliveFeature>(
+                        new TestConnectionInherentKeepAliveFeature()
+                    );
                 connection.Transport = _pipe;
                 return new ValueTask<ConnectionContext>(connection);
             }

@@ -31,7 +31,8 @@ namespace IOperationGenerator
         {
             _tree = tree;
             _location = location;
-            _typeMap = _tree.Types
+            _typeMap = _tree
+                .Types
                 .OfType<AbstractNode>()
                 .ToDictionary(t => t.Name, t => (AbstractNode?)t);
             _typeMap.Add("IOperation", null);
@@ -346,19 +347,20 @@ namespace IOperationGenerator
             );
             WriteLine("None = 0x0,");
 
-            Dictionary<int, IEnumerable<(OperationKindEntry, AbstractNode)>> explicitKinds =
-                _tree.Types
-                    .OfType<AbstractNode>()
-                    .Where(n => n.OperationKind?.Entries is object)
-                    .SelectMany(n => n.OperationKind!.Entries.Select(e => (entry: e, node: n)))
-                    .GroupBy(e => e.entry.Value)
-                    .ToDictionary(g => g.Key, g => g.Select(k => (entryName: k.entry, k.node)));
+            Dictionary<int, IEnumerable<(OperationKindEntry, AbstractNode)>> explicitKinds = _tree
+                .Types
+                .OfType<AbstractNode>()
+                .Where(n => n.OperationKind?.Entries is object)
+                .SelectMany(n => n.OperationKind!.Entries.Select(e => (entry: e, node: n)))
+                .GroupBy(e => e.entry.Value)
+                .ToDictionary(g => g.Key, g => g.Select(k => (entryName: k.entry, k.node)));
 
             // Conditions for inclusion in the OperationKind enum:
             //  1. Concrete Node types that do not have an explicit false include flag OR AbstractNodes that have an explicit true include flag
             //  2. No explicit kind entries: those are handled above.
             //  3. No internal nodes.
-            List<AbstractNode> elementsToKind = _tree.Types
+            List<AbstractNode> elementsToKind = _tree
+                .Types
                 .OfType<AbstractNode>()
                 .Where(
                     n =>
@@ -760,9 +762,11 @@ namespace IOperationGenerator
 
                     if (node.OperationKind?.Entries.Count > 0)
                     {
-                        return node.OperationKind.Entries
+                        return node.OperationKind
+                            .Entries
                             .Where(e => e.EditorBrowsable != false)
-                            .Single().Name;
+                            .Single()
+                            .Name;
                     }
 
                     return GetSubName(node.Name);
@@ -1118,9 +1122,9 @@ namespace IOperationGenerator
                 if (@base is null)
                     break;
                 properties.AddRange(
-                    @base.Properties.Where(
-                        p => !p.SkipGeneration || includeSkipGenerationProperties
-                    )
+                    @base
+                        .Properties
+                        .Where(p => !p.SkipGeneration || includeSkipGenerationProperties)
                 );
             }
 

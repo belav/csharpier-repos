@@ -31,7 +31,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.UnitTests.F1Help
             var caret = workspace.Documents.First().CursorPosition;
 
             var service = Assert.IsType<CSharpHelpContextService>(
-                workspace.Services
+                workspace
+                    .Services
                     .GetLanguageServices(LanguageNames.CSharp)
                     .GetService<IHelpContextService>()
             );

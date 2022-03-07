@@ -111,9 +111,9 @@ namespace System.Net
             {
                 connection._dataSocket = listenSocket.EndAccept(asyncResult);
                 if (
-                    !connection.ServerAddress.Equals(
-                        ((IPEndPoint)connection._dataSocket.RemoteEndPoint!).Address
-                    )
+                    !connection
+                        .ServerAddress
+                        .Equals(((IPEndPoint)connection._dataSocket.RemoteEndPoint!).Address)
                 )
                 {
                     connection._dataSocket.Close();

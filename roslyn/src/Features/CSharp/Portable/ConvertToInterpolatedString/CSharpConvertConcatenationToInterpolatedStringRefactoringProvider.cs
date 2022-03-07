@@ -27,9 +27,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToInterpolatedString
         public CSharpConvertConcatenationToInterpolatedStringRefactoringProvider() { }
 
         protected override bool SupportsConstantInterpolatedStrings(Document document) =>
-            (
-                (CSharpParseOptions)document.Project.ParseOptions!
-            ).LanguageVersion.HasConstantInterpolatedStrings();
+            ((CSharpParseOptions)document.Project.ParseOptions!)
+                .LanguageVersion
+                .HasConstantInterpolatedStrings();
 
         protected override string GetTextWithoutQuotes(
             string text,

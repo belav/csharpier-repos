@@ -114,10 +114,12 @@ namespace Microsoft.CodeAnalysis.CSharp.UseInferredMemberName
         )
         {
             if (
-                !nameEquals.Parent.IsKind(
-                    SyntaxKind.AnonymousObjectMemberDeclarator,
-                    out AnonymousObjectMemberDeclaratorSyntax? anonCtor
-                )
+                !nameEquals
+                    .Parent
+                    .IsKind(
+                        SyntaxKind.AnonymousObjectMemberDeclarator,
+                        out AnonymousObjectMemberDeclaratorSyntax? anonCtor
+                    )
             )
             {
                 return;

@@ -117,10 +117,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
                     initializer.Value
                 );
                 var declaredTypeSymbol =
-                    semanticModel.GetTypeInfo(
-                        variableDeclaration.Type.StripRefIfNeeded(),
-                        cancellationToken
-                    ).Type;
+                    semanticModel
+                        .GetTypeInfo(variableDeclaration.Type.StripRefIfNeeded(), cancellationToken)
+                        .Type;
                 return TypeStyleHelper.IsTypeApparentInAssignmentExpression(
                     stylePreferences,
                     initializerExpression,

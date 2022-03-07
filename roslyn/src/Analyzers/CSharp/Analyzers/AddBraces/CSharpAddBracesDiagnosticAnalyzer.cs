@@ -61,11 +61,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Diagnostics.AddBraces
             var statement = context.Node;
             var cancellationToken = context.CancellationToken;
 
-            var option = context.Options.GetOption(
-                CSharpCodeStyleOptions.PreferBraces,
-                statement.SyntaxTree,
-                cancellationToken
-            );
+            var option = context
+                .Options
+                .GetOption(
+                    CSharpCodeStyleOptions.PreferBraces,
+                    statement.SyntaxTree,
+                    cancellationToken
+                );
             if (option.Value == PreferBracesPreference.None)
             {
                 return;

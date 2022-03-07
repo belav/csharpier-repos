@@ -18,9 +18,9 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
 
             Assert.Equal(
                 CosmosStrings.TransactionsNotSupported,
-                Assert.Throws<NotSupportedException>(
-                    () => transactionManager.BeginTransaction()
-                ).Message
+                Assert
+                    .Throws<NotSupportedException>(() => transactionManager.BeginTransaction())
+                    .Message
             );
 
             Assert.Equal(
@@ -34,9 +34,9 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
 
             Assert.Equal(
                 CosmosStrings.TransactionsNotSupported,
-                Assert.Throws<NotSupportedException>(
-                    () => transactionManager.CommitTransaction()
-                ).Message
+                Assert
+                    .Throws<NotSupportedException>(() => transactionManager.CommitTransaction())
+                    .Message
             );
 
             Assert.Equal(
@@ -50,9 +50,9 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
 
             Assert.Equal(
                 CosmosStrings.TransactionsNotSupported,
-                Assert.Throws<NotSupportedException>(
-                    () => transactionManager.RollbackTransaction()
-                ).Message
+                Assert
+                    .Throws<NotSupportedException>(() => transactionManager.RollbackTransaction())
+                    .Message
             );
 
             Assert.Equal(
@@ -69,9 +69,9 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
 
             Assert.Equal(
                 CosmosStrings.TransactionsNotSupported,
-                Assert.Throws<NotSupportedException>(
-                    () => transactionManager.EnlistTransaction(null)
-                ).Message
+                Assert
+                    .Throws<NotSupportedException>(() => transactionManager.EnlistTransaction(null))
+                    .Message
             );
 
             transactionManager.ResetState();

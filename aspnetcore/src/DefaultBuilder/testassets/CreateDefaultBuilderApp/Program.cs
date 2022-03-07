@@ -50,9 +50,9 @@ public class Program
                         {
                             var hostingEnvironment =
                                 app.ApplicationServices.GetRequiredService<IWebHostEnvironment>();
-                            return context.Response.WriteAsync(
-                                responseMessage ?? hostingEnvironment.ApplicationName
-                            );
+                            return context
+                                .Response
+                                .WriteAsync(responseMessage ?? hostingEnvironment.ApplicationName);
                         }
                     )
             )

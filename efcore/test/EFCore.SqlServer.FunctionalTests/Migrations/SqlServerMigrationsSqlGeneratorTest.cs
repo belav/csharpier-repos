@@ -1344,13 +1344,16 @@ EXEC(N'ALTER TABLE [Customer] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [' + 
             : base(
                 SqlServerTestHelpers.Instance,
                 new ServiceCollection().AddEntityFrameworkSqlServerNetTopologySuite(),
-                SqlServerTestHelpers.Instance.AddProviderOptions(
-                    (
-                        (IRelationalDbContextOptionsBuilderInfrastructure)new SqlServerDbContextOptionsBuilder(
-                            new DbContextOptionsBuilder()
-                        ).UseNetTopologySuite()
-                    ).OptionsBuilder
-                ).Options
+                SqlServerTestHelpers
+                    .Instance
+                    .AddProviderOptions(
+                        (
+                            (IRelationalDbContextOptionsBuilderInfrastructure)new SqlServerDbContextOptionsBuilder(
+                                new DbContextOptionsBuilder()
+                            ).UseNetTopologySuite()
+                        ).OptionsBuilder
+                    )
+                    .Options
             ) { }
     }
 }

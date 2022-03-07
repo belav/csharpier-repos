@@ -260,15 +260,17 @@ namespace System.Runtime.Serialization.Json
 
             if (keyParseMode == KeyParseMode.Fail)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.Format(
-                            SR.KeyTypeCannotBeParsedInSimpleDictionary,
-                            DataContract.GetClrTypeFullName(collectionContract.UnderlyingType),
-                            DataContract.GetClrTypeFullName(keyType)
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.Format(
+                                SR.KeyTypeCannotBeParsedInSimpleDictionary,
+                                DataContract.GetClrTypeFullName(collectionContract.UnderlyingType),
+                                DataContract.GetClrTypeFullName(keyType)
+                            )
                         )
-                    )
-                );
+                    );
             }
 
             while (true)

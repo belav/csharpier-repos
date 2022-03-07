@@ -101,9 +101,9 @@ namespace Microsoft.EntityFrameworkCore.Storage
                         mockExecutionStrategy.GetType().Name,
                         "DbContext.Database.CreateExecutionStrategy()"
                     ),
-                    Assert.Throws<InvalidOperationException>(
-                        () => execute(mockExecutionStrategy)
-                    ).Message
+                    Assert
+                        .Throws<InvalidOperationException>(() => execute(mockExecutionStrategy))
+                        .Message
                 );
             }
         }
@@ -130,9 +130,9 @@ namespace Microsoft.EntityFrameworkCore.Storage
                         mockExecutionStrategy.GetType().Name,
                         "DbContext.Database.CreateExecutionStrategy()"
                     ),
-                    Assert.Throws<InvalidOperationException>(
-                        () => execute(mockExecutionStrategy)
-                    ).Message
+                    Assert
+                        .Throws<InvalidOperationException>(() => execute(mockExecutionStrategy))
+                        .Message
                 );
             }
         }
@@ -160,9 +160,9 @@ namespace Microsoft.EntityFrameworkCore.Storage
                     mockExecutionStrategy.GetType().Name,
                     "DbContext.Database.CreateExecutionStrategy()"
                 ),
-                Assert.Throws<InvalidOperationException>(
-                    () => execute(mockExecutionStrategy)
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(() => execute(mockExecutionStrategy))
+                    .Message
             );
         }
 
@@ -428,22 +428,24 @@ namespace Microsoft.EntityFrameworkCore.Storage
             );
 
             Assert.IsType<ArgumentOutOfRangeException>(
-                Assert.Throws<RetryLimitExceededException>(
-                    () =>
-                        execute(
-                            executionStrategyMock,
-                            () =>
-                            {
-                                if (executionCount++ < 3)
+                Assert
+                    .Throws<RetryLimitExceededException>(
+                        () =>
+                            execute(
+                                executionStrategyMock,
+                                () =>
                                 {
-                                    throw new ArgumentOutOfRangeException();
-                                }
+                                    if (executionCount++ < 3)
+                                    {
+                                        throw new ArgumentOutOfRangeException();
+                                    }
 
-                                Assert.True(false);
-                                return 0;
-                            }
-                        )
-                ).InnerException
+                                    Assert.True(false);
+                                    return 0;
+                                }
+                            )
+                    )
+                    .InnerException
             );
 
             Assert.Equal(3, executionCount);
@@ -853,8 +855,7 @@ namespace Microsoft.EntityFrameworkCore.Storage
             );
 
             // ReSharper disable once PossibleNullReferenceException
-            Assert.IsType<ArgumentOutOfRangeException>(
-                (
+            Assert.IsType<ArgumentOutOfRangeException>((
                     await Assert.ThrowsAsync<RetryLimitExceededException>(
                         () =>
                             executeAsync(
@@ -874,8 +875,7 @@ namespace Microsoft.EntityFrameworkCore.Storage
                                 }
                             )
                     )
-                ).InnerException.InnerException
-            );
+                ).InnerException.InnerException);
 
             Assert.Equal(3, executionCount);
         }
@@ -909,15 +909,19 @@ namespace Microsoft.EntityFrameworkCore.Storage
         }
 
         protected DbContext CreateContext() =>
-            InMemoryTestHelpers.Instance.CreateContext(
-                InMemoryTestHelpers.Instance.CreateServiceProvider(
-                    new ServiceCollection().AddScoped<
-                        IDbContextTransactionManager,
-                        TestInMemoryTransactionManager
-                    >()
-                ),
-                InMemoryTestHelpers.Instance.CreateOptions()
-            );
+            InMemoryTestHelpers
+                .Instance
+                .CreateContext(
+                    InMemoryTestHelpers
+                        .Instance
+                        .CreateServiceProvider(
+                            new ServiceCollection().AddScoped<
+                                IDbContextTransactionManager,
+                                TestInMemoryTransactionManager
+                            >()
+                        ),
+                    InMemoryTestHelpers.Instance.CreateOptions()
+                );
 
         public class TestExecutionStrategy : ExecutionStrategy
         {

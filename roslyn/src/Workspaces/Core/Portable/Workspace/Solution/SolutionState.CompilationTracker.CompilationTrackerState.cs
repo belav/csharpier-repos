@@ -166,9 +166,11 @@ namespace Microsoft.CodeAnalysis
                         foreach (var generatedDocument in generatorInfo.Documents.States.Values)
                         {
                             Contract.ThrowIfTrue(
-                                compilation.SyntaxTrees.Contains(
-                                    generatedDocument.GetSyntaxTree(CancellationToken.None)
-                                )
+                                compilation
+                                    .SyntaxTrees
+                                    .Contains(
+                                        generatedDocument.GetSyntaxTree(CancellationToken.None)
+                                    )
                             );
                         }
                     }
@@ -211,9 +213,12 @@ namespace Microsoft.CodeAnalysis
                 {
                     return
                         services.SupportsCachingRecoverableObjects
-                        && !services.Workspace.Options.GetOption(
-                            WorkspaceConfigurationOptions.DisableCompilationTrackerWeakCompilationReferences
-                        )
+                        && !services
+                            .Workspace
+                            .Options
+                            .GetOption(
+                                WorkspaceConfigurationOptions.DisableCompilationTrackerWeakCompilationReferences
+                            )
                       ? new WeakValueSource<Compilation>(compilation)
                       : new ConstantValueSource<Optional<Compilation>>(compilation);
                 }

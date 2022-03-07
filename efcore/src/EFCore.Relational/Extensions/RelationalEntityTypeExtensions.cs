@@ -86,10 +86,9 @@ namespace Microsoft.EntityFrameworkCore
                 && ownership != null
 #pragma warning disable EF1001 // Internal EF Core API usage.
                 && entityType.Name
-                    == ownership.PrincipalEntityType.GetOwnedName(
-                        name,
-                        ownership.PrincipalToDependent!.Name
-                    )
+                    == ownership
+                        .PrincipalEntityType
+                        .GetOwnedName(name, ownership.PrincipalToDependent!.Name)
             )
 #pragma warning restore EF1001 // Internal EF Core API usage.
             {
@@ -185,7 +184,8 @@ namespace Microsoft.EntityFrameworkCore
                 .GetForeignKeys()
                 .SelectMany(fk => fk.GetReferencingSkipNavigations())
                 .FirstOrDefault(n => !n.IsOnDependent)
-                ?.DeclaringEntityType.GetSchema();
+                ?.DeclaringEntityType
+                .GetSchema();
             if (
                 skipNavigationSchema != null
                 && entityType
@@ -938,10 +938,9 @@ namespace Microsoft.EntityFrameworkCore
                     || principalEntityType == foreignKey.DeclaringEntityType
                     || !foreignKey.IsUnique
 #pragma warning disable EF1001 // Internal EF Core API usage.
-                    || !PropertyListComparer.Instance.Equals(
-                        foreignKey.Properties,
-                        primaryKey.Properties
-                    )
+                    || !PropertyListComparer
+                        .Instance
+                        .Equals(foreignKey.Properties, primaryKey.Properties)
                 )
 #pragma warning restore EF1001 // Internal EF Core API usage.
                 {

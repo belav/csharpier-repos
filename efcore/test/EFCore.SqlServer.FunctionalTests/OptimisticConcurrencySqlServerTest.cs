@@ -82,7 +82,8 @@ namespace Microsoft.EntityFrameworkCore
                         var secondVersion =
                             innerContext
                                 .Entry(driver)
-                                .Property<TRowVersion>("Version").CurrentValue;
+                                .Property<TRowVersion>("Version")
+                                .CurrentValue;
                         innerContext.Entry(driver).Property<TRowVersion>("Version").CurrentValue =
                             firstVersion;
                         await innerContext.SaveChangesAsync();
@@ -93,7 +94,8 @@ namespace Microsoft.EntityFrameworkCore
                             secondVersion,
                             validationContext
                                 .Entry(driver)
-                                .Property<TRowVersion>("Version").CurrentValue
+                                .Property<TRowVersion>("Version")
+                                .CurrentValue
                         );
                         Assert.Equal(StorePodiums, driver.Podiums);
                     }
@@ -120,9 +122,9 @@ namespace Microsoft.EntityFrameworkCore
                             detailsEntry.Property<TRowVersion>("Version").CurrentValue;
 
                         Assert.Null(
-                            sponsorEntry.Property<int?>(
-                                Sponsor.ClientTokenPropertyName
-                            ).CurrentValue
+                            sponsorEntry
+                                .Property<int?>(Sponsor.ClientTokenPropertyName)
+                                .CurrentValue
                         );
                         sponsorEntry.Property<int?>(Sponsor.ClientTokenPropertyName).CurrentValue =
                             1;
@@ -143,15 +145,15 @@ namespace Microsoft.EntityFrameworkCore
 
                         Assert.Equal(
                             1,
-                            sponsorEntry.Property<int?>(
-                                Sponsor.ClientTokenPropertyName
-                            ).CurrentValue
+                            sponsorEntry
+                                .Property<int?>(Sponsor.ClientTokenPropertyName)
+                                .CurrentValue
                         );
                         Assert.Equal(
                             1,
-                            detailsEntry.Property<int?>(
-                                Sponsor.ClientTokenPropertyName
-                            ).CurrentValue
+                            detailsEntry
+                                .Property<int?>(Sponsor.ClientTokenPropertyName)
+                                .CurrentValue
                         );
                     }
                 );
@@ -174,9 +176,9 @@ namespace Microsoft.EntityFrameworkCore
                             sponsorEntry.Property<TRowVersion>("Version").CurrentValue;
 
                         Assert.Null(
-                            sponsorEntry.Property<int?>(
-                                Sponsor.ClientTokenPropertyName
-                            ).CurrentValue
+                            sponsorEntry
+                                .Property<int?>(Sponsor.ClientTokenPropertyName)
+                                .CurrentValue
                         );
                         sponsorEntry.Property<int?>(Sponsor.ClientTokenPropertyName).CurrentValue =
                             1;
@@ -201,15 +203,15 @@ namespace Microsoft.EntityFrameworkCore
 
                         Assert.Equal(
                             1,
-                            sponsorEntry.Property<int?>(
-                                Sponsor.ClientTokenPropertyName
-                            ).CurrentValue
+                            sponsorEntry
+                                .Property<int?>(Sponsor.ClientTokenPropertyName)
+                                .CurrentValue
                         );
                         Assert.Equal(
                             1,
-                            detailsEntry.Property<int?>(
-                                Sponsor.ClientTokenPropertyName
-                            ).CurrentValue
+                            detailsEntry
+                                .Property<int?>(Sponsor.ClientTokenPropertyName)
+                                .CurrentValue
                         );
                     }
                 );

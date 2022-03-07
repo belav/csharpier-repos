@@ -66,9 +66,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
                 return;
             }
 
-            var selectedSpans = args.TextView.Selection.GetSnapshotSpansOnBuffer(
-                args.SubjectBuffer
-            );
+            var selectedSpans = args.TextView
+                .Selection
+                .GetSnapshotSpansOnBuffer(args.SubjectBuffer);
 
             if (selectedSpans.Count > 1)
             {
@@ -80,10 +80,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
 
             var singleSpan = selectedSpans.Single();
             if (
-                _renameService.ActiveSession.TryGetContainingEditableSpan(
-                    singleSpan.Start,
-                    out var containingSpan
-                ) && containingSpan.Contains(singleSpan)
+                _renameService
+                    .ActiveSession
+                    .TryGetContainingEditableSpan(singleSpan.Start, out var containingSpan)
+                && containingSpan.Contains(singleSpan)
             )
             {
                 actionIfInsideActiveSpan(_renameService.ActiveSession, containingSpan);

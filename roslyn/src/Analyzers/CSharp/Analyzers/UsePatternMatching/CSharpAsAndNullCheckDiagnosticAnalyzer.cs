@@ -318,10 +318,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
                     var assignment = (AssignmentExpressionSyntax)operand;
                     if (
                         !assignment.Right.IsKind(SyntaxKind.AsExpression, out asExpression)
-                        || !assignment.Left.IsKind(
-                            SyntaxKind.IdentifierName,
-                            out IdentifierNameSyntax? identifier
-                        )
+                        || !assignment
+                            .Left
+                            .IsKind(SyntaxKind.IdentifierName, out IdentifierNameSyntax? identifier)
                     )
                     {
                         break;

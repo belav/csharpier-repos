@@ -78,8 +78,9 @@ namespace System.Net
                 if (remoteCertificateStore != null)
                 {
                     using (
-                        SafeSharedX509StackHandle chainStack =
-                            Interop.OpenSsl.GetPeerCertificateChain(
+                        SafeSharedX509StackHandle chainStack = Interop
+                            .OpenSsl
+                            .GetPeerCertificateChain(
                                 ((SafeDeleteSslContext)securityContext).SslContext
                             )
                     )
@@ -132,9 +133,9 @@ namespace System.Net
         internal static string[] GetRequestCertificateAuthorities(SafeDeleteContext securityContext)
         {
             using (
-                SafeSharedX509NameStackHandle names = Interop.Ssl.SslGetClientCAList(
-                    ((SafeDeleteSslContext)securityContext).SslContext
-                )
+                SafeSharedX509NameStackHandle names = Interop
+                    .Ssl
+                    .SslGetClientCAList(((SafeDeleteSslContext)securityContext).SslContext)
             )
             {
                 if (names.IsInvalid)
@@ -154,10 +155,9 @@ namespace System.Net
                 for (int i = 0; i < nameCount; i++)
                 {
                     using (
-                        SafeSharedX509NameHandle nameHandle = Interop.Crypto.GetX509NameStackField(
-                            names,
-                            i
-                        )
+                        SafeSharedX509NameHandle nameHandle = Interop
+                            .Crypto
+                            .GetX509NameStackField(names, i)
                     )
                     {
                         X500DistinguishedName dn = Interop.Crypto.LoadX500Name(nameHandle);
@@ -197,9 +197,9 @@ namespace System.Net
             remoteCertContext = null;
             try
             {
-                SafeX509Handle remoteCertificate = Interop.OpenSsl.GetPeerCertificate(
-                    ((SafeDeleteSslContext)securityContext).SslContext
-                );
+                SafeX509Handle remoteCertificate = Interop
+                    .OpenSsl
+                    .GetPeerCertificate(((SafeDeleteSslContext)securityContext).SslContext);
                 // Note that cert ownership is transferred to SafeFreeCertContext
                 remoteCertContext = new SafeFreeCertContext(remoteCertificate);
                 return 0;

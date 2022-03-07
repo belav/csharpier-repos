@@ -43,14 +43,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
             if (node.IsKind(SyntaxKind.QualifiedCref, out QualifiedCrefSyntax crefSyntax))
             {
                 if (
-                    !QualifiedCrefSimplifier.Instance.TrySimplify(
-                        crefSyntax,
-                        semanticModel,
-                        optionSet,
-                        out var crefReplacement,
-                        out _,
-                        cancellationToken
-                    )
+                    !QualifiedCrefSimplifier
+                        .Instance
+                        .TrySimplify(
+                            crefSyntax,
+                            semanticModel,
+                            optionSet,
+                            out var crefReplacement,
+                            out _,
+                            cancellationToken
+                        )
                 )
                 {
                     return node;
@@ -62,14 +64,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
             {
                 var expressionSyntax = (ExpressionSyntax)node;
                 if (
-                    !ExpressionSimplifier.Instance.TrySimplify(
-                        expressionSyntax,
-                        semanticModel,
-                        optionSet,
-                        out var expressionReplacement,
-                        out _,
-                        cancellationToken
-                    )
+                    !ExpressionSimplifier
+                        .Instance
+                        .TrySimplify(
+                            expressionSyntax,
+                            semanticModel,
+                            optionSet,
+                            out var expressionReplacement,
+                            out _,
+                            cancellationToken
+                        )
                 )
                 {
                     return node;

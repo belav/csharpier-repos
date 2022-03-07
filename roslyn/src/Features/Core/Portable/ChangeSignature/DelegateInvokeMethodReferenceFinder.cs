@@ -42,7 +42,8 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
         {
             using var _ = ArrayBuilder<ISymbol>.GetInstance(out var result);
 
-            var beginInvoke = symbol.ContainingType
+            var beginInvoke = symbol
+                .ContainingType
                 .GetMembers(WellKnownMemberNames.DelegateBeginInvokeName)
                 .FirstOrDefault();
             if (beginInvoke != null)
@@ -108,10 +109,9 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
                 if (!syntaxFactsService.IsAnonymousFunctionExpression(node))
                     continue;
 
-                var convertedType = (ISymbol?)semanticModel.GetTypeInfo(
-                    node,
-                    cancellationToken
-                ).ConvertedType;
+                var convertedType = (ISymbol?)semanticModel
+                    .GetTypeInfo(node, cancellationToken)
+                    .ConvertedType;
                 if (convertedType != null)
                 {
                     convertedType =

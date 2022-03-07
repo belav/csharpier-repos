@@ -58,9 +58,11 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact]
         public void Local_calls_DetectChanges()
         {
-            var provider = InMemoryTestHelpers.Instance.CreateServiceProvider(
-                new ServiceCollection().AddScoped<IChangeDetector, ChangeDetectorProxy>()
-            );
+            var provider = InMemoryTestHelpers
+                .Instance
+                .CreateServiceProvider(
+                    new ServiceCollection().AddScoped<IChangeDetector, ChangeDetectorProxy>()
+                );
 
             using var context = new ButTheHedgehogContext(provider);
             var changeDetector = (ChangeDetectorProxy)context.GetService<IChangeDetector>();
@@ -82,9 +84,11 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact]
         public void Local_does_not_call_DetectChanges_when_disabled()
         {
-            var provider = InMemoryTestHelpers.Instance.CreateServiceProvider(
-                new ServiceCollection().AddScoped<IChangeDetector, ChangeDetectorProxy>()
-            );
+            var provider = InMemoryTestHelpers
+                .Instance
+                .CreateServiceProvider(
+                    new ServiceCollection().AddScoped<IChangeDetector, ChangeDetectorProxy>()
+                );
 
             using var context = new ButTheHedgehogContext(provider);
             var changeDetector = (ChangeDetectorProxy)context.GetService<IChangeDetector>();
@@ -145,7 +149,8 @@ namespace Microsoft.EntityFrameworkCore
                 new DbContextOptionsBuilder()
                     .UseInternalServiceProvider(serviceProvider)
                     .UseInMemoryDatabase(Guid.NewGuid().ToString())
-                    .UseModel(modelBuilder.FinalizeModel()).Options
+                    .UseModel(modelBuilder.FinalizeModel())
+                    .Options
             );
             var changeDetector = (FakeChangeDetector)context.GetService<IChangeDetector>();
 
@@ -643,9 +648,11 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact]
         public async Task Add_Attach_Remove_Update_do_not_call_DetectChanges()
         {
-            var provider = InMemoryTestHelpers.Instance.CreateServiceProvider(
-                new ServiceCollection().AddScoped<IChangeDetector, ChangeDetectorProxy>()
-            );
+            var provider = InMemoryTestHelpers
+                .Instance
+                .CreateServiceProvider(
+                    new ServiceCollection().AddScoped<IChangeDetector, ChangeDetectorProxy>()
+                );
             using var context = new ButTheHedgehogContext(provider);
             var changeDetector = (ChangeDetectorProxy)context.GetService<IChangeDetector>();
 
@@ -789,9 +796,9 @@ namespace Microsoft.EntityFrameworkCore
 
             Assert.StartsWith(
                 CoreStrings.ContextDisposed,
-                Assert.Throws<ObjectDisposedException>(
-                    () => context.Find(typeof(Random), 77)
-                ).Message
+                Assert
+                    .Throws<ObjectDisposedException>(() => context.Find(typeof(Random), 77))
+                    .Message
             );
 
             Assert.StartsWith(
@@ -864,9 +871,11 @@ namespace Microsoft.EntityFrameworkCore
 
             Assert.StartsWith(
                 CoreStrings.ContextDisposed,
-                Assert.Throws<ObjectDisposedException>(
-                    () => context.GetService<IDesignTimeModel>().Model
-                ).Message
+                Assert
+                    .Throws<ObjectDisposedException>(
+                        () => context.GetService<IDesignTimeModel>().Model
+                    )
+                    .Message
             );
 
             var expectedProperties = new List<string>
@@ -887,9 +896,11 @@ namespace Microsoft.EntityFrameworkCore
 
             Assert.StartsWith(
                 CoreStrings.ContextDisposed,
-                Assert.Throws<ObjectDisposedException>(
-                    () => ((IInfrastructure<IServiceProvider>)context).Instance
-                ).Message
+                Assert
+                    .Throws<ObjectDisposedException>(
+                        () => ((IInfrastructure<IServiceProvider>)context).Instance
+                    )
+                    .Message
             );
         }
 

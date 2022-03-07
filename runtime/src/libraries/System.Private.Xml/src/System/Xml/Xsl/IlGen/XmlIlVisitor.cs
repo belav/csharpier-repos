@@ -136,9 +136,11 @@ namespace System.Xml.Xsl.IlGen
                 QilParameter? param = iter as QilParameter;
 
                 // Get MethodInfo for method that computes the value of this global
-                methGlobal = XmlILAnnotation.Write(
-                    iter
-                ).CachedIteratorDescriptor!.Storage.GlobalLocation!;
+                methGlobal = XmlILAnnotation
+                    .Write(iter)
+                    .CachedIteratorDescriptor!
+                    .Storage
+                    .GlobalLocation!;
                 isCached = !iter.XmlType!.IsSingleton;
 
                 // Notify the StaticDataManager of the new global value
@@ -1830,9 +1832,9 @@ namespace System.Xml.Xsl.IlGen
                     );
                 else
                     _helper.LoadInteger(
-                        _helper.StaticData.DeclarePrefixMappings(
-                            new QilNode[] { ndParsedTagName.Right }
-                        )
+                        _helper
+                            .StaticData
+                            .DeclarePrefixMappings(new QilNode[] { ndParsedTagName.Right })
                     );
 
                 // If QName prefix should be preserved, then don't create an XmlQualifiedName, which discards the prefix
@@ -4320,10 +4322,9 @@ namespace System.Xml.Xsl.IlGen
                     _helper.LoadXsltLibrary();
                 else
                     _helper.CallGetEarlyBoundObject(
-                        _helper.StaticData.DeclareEarlyBound(
-                            ndName.NamespaceUri,
-                            extFunc.Method.DeclaringType!
-                        ),
+                        _helper
+                            .StaticData
+                            .DeclareEarlyBound(ndName.NamespaceUri, extFunc.Method.DeclaringType!),
                         extFunc.Method.DeclaringType!
                     );
             }

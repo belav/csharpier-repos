@@ -158,7 +158,8 @@ namespace Microsoft.EntityFrameworkCore.Update
         {
             var name = command.TableName;
             var schema = command.Schema;
-            var conditionOperations = command.ColumnModifications
+            var conditionOperations = command
+                .ColumnModifications
                 .Where(o => o.IsCondition)
                 .ToList();
 

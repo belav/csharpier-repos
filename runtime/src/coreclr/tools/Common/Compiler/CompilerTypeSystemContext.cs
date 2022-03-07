@@ -309,9 +309,9 @@ namespace ILCompiler
         protected void InheritOpenModules(CompilerTypeSystemContext oldTypeSystemContext)
         {
             foreach (
-                ModuleData oldModuleData in ModuleHashtable.Enumerator.Get(
-                    oldTypeSystemContext._moduleHashtable
-                )
+                ModuleData oldModuleData in ModuleHashtable
+                    .Enumerator
+                    .Get(oldTypeSystemContext._moduleHashtable)
             )
             {
                 AddModule(null, null, true, oldModuleData);

@@ -242,12 +242,9 @@ namespace System.Tests
         {
             Assert.Equal(
                 expectedLength,
-                typeof(TypeTests).FindMembers(
-                    memberType,
-                    bindingAttr,
-                    filter,
-                    filterCriteria
-                ).Length
+                typeof(TypeTests)
+                    .FindMembers(memberType, bindingAttr, filter, filterCriteria)
+                    .Length
             );
         }
 

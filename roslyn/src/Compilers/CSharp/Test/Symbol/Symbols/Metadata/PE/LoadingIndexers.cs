@@ -864,8 +864,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
                     Assert.True(parameterModoptIndexer.IsIndexer);
                     Assert.False(parameterModoptIndexer.MustCallMethodsDirectly); //NB: we allow this amount of variation (modopt is on, rather than in parameter type)
                     Assert.NotEqual(
-                        parameterModoptIndexer.Parameters.Last().TypeWithAnnotations.CustomModifiers.Length,
-                        parameterModoptIndexer.GetMethod.Parameters.Last().TypeWithAnnotations.CustomModifiers.Length
+                        parameterModoptIndexer
+                            .Parameters
+                            .Last()
+                            .TypeWithAnnotations
+                            .CustomModifiers
+                            .Length,
+                        parameterModoptIndexer
+                            .GetMethod
+                            .Parameters
+                            .Last()
+                            .TypeWithAnnotations
+                            .CustomModifiers
+                            .Length
                     );
 
                     var returnTypeModoptIndexer = @class.GetIndexer<PEPropertySymbol>(
@@ -875,7 +886,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
                     Assert.False(returnTypeModoptIndexer.MustCallMethodsDirectly); //NB: we allow this amount of variation (modopt is on, rather than in return type)
                     Assert.NotEqual(
                         returnTypeModoptIndexer.TypeWithAnnotations.CustomModifiers.Length,
-                        returnTypeModoptIndexer.GetMethod.ReturnTypeWithAnnotations.CustomModifiers.Length
+                        returnTypeModoptIndexer
+                            .GetMethod
+                            .ReturnTypeWithAnnotations
+                            .CustomModifiers
+                            .Length
                     );
                 }
             );

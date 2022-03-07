@@ -154,7 +154,8 @@ namespace Microsoft.CodeAnalysis.Editing
         {
             if (_assemblyNameToProjectIdMap == null)
             {
-                _assemblyNameToProjectIdMap = _originalSolution.Projects
+                _assemblyNameToProjectIdMap = _originalSolution
+                    .Projects
                     .ToLookup(p => p.AssemblyName, p => p.Id)
                     .ToImmutableDictionary(g => g.Key, g => ImmutableArray.CreateRange(g));
             }
@@ -227,7 +228,8 @@ namespace Microsoft.CodeAnalysis.Editing
         /// </summary>
         private IEnumerable<SyntaxNode> GetDeclarations(ISymbol symbol)
         {
-            return symbol.DeclaringSyntaxReferences
+            return symbol
+                .DeclaringSyntaxReferences
                 .Select(sr => sr.GetSyntax())
                 .Select(
                     n =>
@@ -358,7 +360,8 @@ namespace Microsoft.CodeAnalysis.Editing
 
             // try to find new symbol by looking up via original declaration
             var model = await newDoc.GetSemanticModelAsync(cancellationToken).ConfigureAwait(false);
-            var newDeclaration = model.SyntaxTree
+            var newDeclaration = model
+                .SyntaxTree
                 .GetRoot(cancellationToken)
                 .GetCurrentNode(declaration);
             if (newDeclaration != null)
@@ -612,7 +615,8 @@ namespace Microsoft.CodeAnalysis.Editing
 
                 foreach (var decl in declGroup)
                 {
-                    var newDeclaration = model.SyntaxTree
+                    var newDeclaration = model
+                        .SyntaxTree
                         .GetRoot(cancellationToken)
                         .GetCurrentNode(decl);
                     if (newDeclaration != null)

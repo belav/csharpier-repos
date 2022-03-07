@@ -219,7 +219,9 @@ public sealed class WebApplicationBuilder
                 {
                     // Something removed the _hostBuilder's TrackingChainedConfigurationSource pointing back to the ConfigurationManager.
                     // This is likely a test using WebApplicationFactory. Replicate the effect by clearing the ConfingurationManager sources.
-                    ((IConfigurationBuilder)Configuration).Sources.Clear();
+                    ((IConfigurationBuilder)Configuration)
+                        .Sources
+                        .Clear();
                 }
 
                 // Make the ConfigurationManager match the final _hostBuilder's configuration. To do that, we add the additional providers
@@ -282,10 +284,9 @@ public sealed class WebApplicationBuilder
         {
             // If this is set, someone called UseRouting() when a global route builder was already set
             if (
-                !_builtApplication.Properties.TryGetValue(
-                    EndpointRouteBuilderKey,
-                    out var localRouteBuilder
-                )
+                !_builtApplication
+                    .Properties
+                    .TryGetValue(EndpointRouteBuilderKey, out var localRouteBuilder)
             )
             {
                 app.UseRouting();

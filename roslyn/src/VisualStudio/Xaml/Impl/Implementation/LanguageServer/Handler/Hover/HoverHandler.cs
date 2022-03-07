@@ -58,8 +58,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.LanguageServer.Handler
                 )
                 .ConfigureAwait(false);
 
-            var quickInfoService =
-                document.Project.LanguageServices.GetService<IXamlQuickInfoService>();
+            var quickInfoService = document
+                .Project
+                .LanguageServices
+                .GetService<IXamlQuickInfoService>();
             if (quickInfoService == null)
             {
                 return null;

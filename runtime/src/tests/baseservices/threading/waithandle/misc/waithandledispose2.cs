@@ -56,10 +56,9 @@ public class WaitHandleDispose2
             handle.WaitOne(c_DEFAULT_WAIT_TIME);
 
             // if we get here, it wasn't disposed of, error
-            TestLibrary.TestFramework.LogError(
-                "001",
-                "handle.Dispose() did not dispose of the handle"
-            );
+            TestLibrary
+                .TestFramework
+                .LogError("001", "handle.Dispose() did not dispose of the handle");
             retVal = false;
         }
         catch (ObjectDisposedException)

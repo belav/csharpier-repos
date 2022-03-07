@@ -28,8 +28,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
     {
         private class TestWithDialog : VerifyCS.Test
         {
-            private static readonly TestComposition s_composition =
-                FeaturesTestCompositions.Features.AddParts(typeof(TestPickMembersService));
+            private static readonly TestComposition s_composition = FeaturesTestCompositions
+                .Features
+                .AddParts(typeof(TestPickMembersService));
 
             public ImmutableArray<string> MemberNames;
             public Action<ImmutableArray<PickMembersOption>> OptionsCallback;
@@ -39,8 +40,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
                 // If we're a dialog test, then mixin our mock and initialize its values to the ones the test asked for.
                 var workspace = new AdhocWorkspace(s_composition.GetHostServices());
 
-                var service =
-                    (TestPickMembersService)workspace.Services.GetService<IPickMembersService>();
+                var service = (TestPickMembersService)workspace
+                    .Services
+                    .GetService<IPickMembersService>();
                 service.MemberNames = MemberNames;
                 service.OptionsCallback = OptionsCallback;
 
@@ -3033,9 +3035,9 @@ class Program : {|CS0535:System.IEquatable<Program>|}
                             ),
                     },
                 },
-                ReferenceAssemblies = ReferenceAssemblies.Default.WithAssemblies(
-                    ImmutableArray<string>.Empty
-                ),
+                ReferenceAssemblies = ReferenceAssemblies
+                    .Default
+                    .WithAssemblies(ImmutableArray<string>.Empty),
             }.RunAsync();
         }
 

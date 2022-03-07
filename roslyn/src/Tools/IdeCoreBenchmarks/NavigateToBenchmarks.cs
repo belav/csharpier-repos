@@ -80,7 +80,8 @@ namespace IdeCoreBenchmarks
                 throw new ArgumentException("Couldn't find Roslyn.sln");
 
             Console.Write("Found Roslyn.sln: " + Process.GetCurrentProcess().Id);
-            var assemblies = MSBuildMefHostServices.DefaultAssemblies
+            var assemblies = MSBuildMefHostServices
+                .DefaultAssemblies
                 .Add(typeof(AnalyzerRunnerHelper).Assembly)
                 .Add(typeof(FindReferencesBenchmarks).Assembly);
             var services = MefHostServices.Create(assemblies);
@@ -98,30 +99,29 @@ namespace IdeCoreBenchmarks
                 throw new ArgumentException("Couldn't create workspace");
 
             _workspace.TryApplyChanges(
-                _workspace.CurrentSolution.WithOptions(
-                    _workspace.Options.WithChangedOption(
-                        StorageOptions.Database,
-                        StorageDatabase.SQLite
+                _workspace
+                    .CurrentSolution
+                    .WithOptions(
+                        _workspace
+                            .Options
+                            .WithChangedOption(StorageOptions.Database, StorageDatabase.SQLite)
                     )
-                )
             );
 
             Console.WriteLine("Opening roslyn.  Attach to: " + Process.GetCurrentProcess().Id);
 
             var start = DateTime.Now;
             var solution =
-                _workspace.OpenSolutionAsync(
-                    _solutionPath,
-                    progress: null,
-                    CancellationToken.None
-                ).Result;
+                _workspace
+                    .OpenSolutionAsync(_solutionPath, progress: null, CancellationToken.None)
+                    .Result;
             Console.WriteLine("Finished opening roslyn: " + (DateTime.Now - start));
 
             // Force a storage instance to be created.  This makes it simple to go examine it prior to any operations we
             // perform, including seeing how big the initial string table is.
-            var storageService = _workspace.Services.GetPersistentStorageService(
-                _workspace.CurrentSolution.Options
-            );
+            var storageService = _workspace
+                .Services
+                .GetPersistentStorageService(_workspace.CurrentSolution.Options);
             if (storageService == null)
                 throw new ArgumentException("Couldn't get storage service");
 
@@ -150,7 +150,9 @@ namespace IdeCoreBenchmarks
 
             var start = DateTime.Now;
             // Search each project with an independent threadpool task.
-            var searchTasks = _workspace.CurrentSolution.Projects
+            var searchTasks = _workspace
+                .CurrentSolution
+                .Projects
                 .Select(
                     p =>
                         Task.Run(

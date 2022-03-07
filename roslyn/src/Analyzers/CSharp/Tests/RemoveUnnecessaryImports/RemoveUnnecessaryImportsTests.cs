@@ -2067,9 +2067,9 @@ class Program
                 {
                     (solution, projectId) =>
                     {
-                        var compilationOptions = (CSharpCompilationOptions)solution.GetProject(
-                            projectId
-                        ).CompilationOptions;
+                        var compilationOptions = (CSharpCompilationOptions)solution
+                            .GetProject(projectId)
+                            .CompilationOptions;
                         return solution.WithProjectCompilationOptions(
                             projectId,
                             compilationOptions.WithWarningLevel(warningLevel)

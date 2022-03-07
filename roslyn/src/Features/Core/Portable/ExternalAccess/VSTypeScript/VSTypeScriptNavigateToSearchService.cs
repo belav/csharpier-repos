@@ -190,9 +190,9 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript
             public ImmutableArray<INavigableItem> ChildItems =>
                 _navigableItem.ChildItems.IsDefault
                     ? default
-                    : _navigableItem.ChildItems.SelectAsArray(
-                          i => (INavigableItem)new WrappedNavigableItem(i)
-                      );
+                    : _navigableItem
+                      .ChildItems
+                      .SelectAsArray(i => (INavigableItem)new WrappedNavigableItem(i));
         }
     }
 }

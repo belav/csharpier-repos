@@ -71,8 +71,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Peek
                 project = originatingProject ?? project;
             }
 
-            var symbolNavigationService =
-                solution.Workspace.Services.GetService<ISymbolNavigationService>();
+            var symbolNavigationService = solution
+                .Workspace
+                .Services
+                .GetService<ISymbolNavigationService>();
             var definitionItem = symbol.ToNonClassifiedDefinitionItem(
                 solution,
                 includeHiddenLocations: true

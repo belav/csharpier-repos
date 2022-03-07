@@ -956,11 +956,9 @@ namespace System.Web.Mvc.Html.Test
 
             // Arrange
             HtmlHelper htmlHelper = MvcHelper.GetHtmlHelper();
-            htmlHelper.RouteCollection.MapRoute(
-                "MyRouteName",
-                "any/url",
-                new { controller = "Charlie" }
-            );
+            htmlHelper
+                .RouteCollection
+                .MapRoute("MyRouteName", "any/url", new { controller = "Charlie" });
 
             // Act
             MvcHtmlString html = htmlHelper.RouteLink(
@@ -1057,11 +1055,9 @@ namespace System.Web.Mvc.Html.Test
         {
             // Arrange
             HtmlHelper htmlHelper = MvcHelper.GetHtmlHelper();
-            htmlHelper.RouteCollection.MapRoute(
-                "MyRouteName",
-                "any/url",
-                new { controller = "Charlie" }
-            );
+            htmlHelper
+                .RouteCollection
+                .MapRoute("MyRouteName", "any/url", new { controller = "Charlie" });
 
             // Act
             MvcHtmlString html = htmlHelper.RouteLink("linktext", "MyRouteName");

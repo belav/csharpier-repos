@@ -95,12 +95,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             var inverseNavigationPropertyInfo =
                 targetEntityType
                     .GetRuntimeProperties()
-                    .Values.FirstOrDefault(
-                        p => string.Equals(p.GetSimpleMemberName(), attribute.Property)
-                    )
+                    .Values
+                    .FirstOrDefault(p => string.Equals(p.GetSimpleMemberName(), attribute.Property))
                 ?? targetEntityType
                     .GetRuntimeProperties()
-                    .Values.FirstOrDefault(
+                    .Values
+                    .FirstOrDefault(
                         p =>
                             string.Equals(
                                 p.GetSimpleMemberName(),
@@ -113,7 +113,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 inverseNavigationPropertyInfo == null
                 || !Dependencies.MemberClassifier.GetNavigationCandidates(targetEntityType)[
                     inverseNavigationPropertyInfo
-                ].Type.IsAssignableFrom(entityType.ClrType)
+                ]
+                    .Type
+                    .IsAssignableFrom(entityType.ClrType)
             )
             {
                 throw new InvalidOperationException(
@@ -188,13 +190,15 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                     != inverseNavigationPropertyInfo
             )
             {
-                Dependencies.Logger.NonOwnershipInverseNavigationWarning(
-                    entityType,
-                    navigationMemberInfo,
-                    targetEntityType,
-                    inverseNavigationPropertyInfo,
-                    ownership.PrincipalToDependent?.GetIdentifyingMemberInfo()!
-                );
+                Dependencies
+                    .Logger
+                    .NonOwnershipInverseNavigationWarning(
+                        entityType,
+                        navigationMemberInfo,
+                        targetEntityType,
+                        inverseNavigationPropertyInfo,
+                        ownership.PrincipalToDependent?.GetIdentifyingMemberInfo()!
+                    );
 
                 return null;
             }
@@ -207,13 +211,15 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                     != navigationMemberInfo
             )
             {
-                Dependencies.Logger.NonOwnershipInverseNavigationWarning(
-                    entityType,
-                    navigationMemberInfo,
-                    targetEntityType,
-                    inverseNavigationPropertyInfo,
-                    targetOwnership.PrincipalToDependent?.GetIdentifyingMemberInfo()!
-                );
+                Dependencies
+                    .Logger
+                    .NonOwnershipInverseNavigationWarning(
+                        entityType,
+                        navigationMemberInfo,
+                        targetEntityType,
+                        inverseNavigationPropertyInfo,
+                        targetOwnership.PrincipalToDependent?.GetIdentifyingMemberInfo()!
+                    );
 
                 return null;
             }
@@ -290,8 +296,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             )
             {
                 var navigationTargetType = navigationPropertyInfo.PropertyType.TryGetSequenceType();
-                var inverseNavigationTargetType =
-                    inverseNavigationPropertyInfo.PropertyType.TryGetSequenceType();
+                var inverseNavigationTargetType = inverseNavigationPropertyInfo
+                    .PropertyType
+                    .TryGetSequenceType();
                 if (
                     navigationTargetType != null
                     && inverseNavigationTargetType != null
@@ -372,30 +379,32 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                         )
                     )
                     {
-                        existingInverse.DeclaringEntityType.Builder.HasNoSkipNavigation(
-                            existingInverse,
-                            fromDataAnnotation: true
-                        );
-                        inverseSkipNavigation!.DeclaringEntityType.Builder.HasNoSkipNavigation(
-                            inverseSkipNavigation,
-                            fromDataAnnotation: true
-                        );
+                        existingInverse
+                            .DeclaringEntityType
+                            .Builder
+                            .HasNoSkipNavigation(existingInverse, fromDataAnnotation: true);
+                        inverseSkipNavigation!
+                            .DeclaringEntityType
+                            .Builder
+                            .HasNoSkipNavigation(inverseSkipNavigation, fromDataAnnotation: true);
                     }
 
                     if (existingSkipNavigation.IsInModel)
                     {
-                        entityType.Builder.HasNoSkipNavigation(
-                            existingSkipNavigation,
-                            fromDataAnnotation: true
-                        );
+                        entityType
+                            .Builder
+                            .HasNoSkipNavigation(existingSkipNavigation, fromDataAnnotation: true);
                     }
 
                     if (existingSkipNavigationInverse?.IsInModel == true)
                     {
-                        existingSkipNavigationInverse.DeclaringEntityType.Builder.HasNoSkipNavigation(
-                            existingSkipNavigationInverse,
-                            fromDataAnnotation: true
-                        );
+                        existingSkipNavigationInverse
+                            .DeclaringEntityType
+                            .Builder
+                            .HasNoSkipNavigation(
+                                existingSkipNavigationInverse,
+                                fromDataAnnotation: true
+                            );
                     }
 
                     var existingAmbiguousNavigation = FindActualEntityType(
@@ -404,15 +413,19 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                         .FindSkipNavigation(ambiguousInverse.Value.Item1);
                     if (existingAmbiguousNavigation != null)
                     {
-                        existingAmbiguousNavigation.DeclaringEntityType.Builder.HasNoSkipNavigation(
-                            existingAmbiguousNavigation,
-                            fromDataAnnotation: true
-                        );
+                        existingAmbiguousNavigation
+                            .DeclaringEntityType
+                            .Builder
+                            .HasNoSkipNavigation(
+                                existingAmbiguousNavigation,
+                                fromDataAnnotation: true
+                            );
                     }
 
                     remainingInverseNavigation = entityType
                         .FindSkipNavigation(navigationMemberInfo)
-                        ?.ForeignKey!.Builder;
+                        ?.ForeignKey!
+                        .Builder;
                     return true;
                 }
                 else
@@ -449,7 +462,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
                     remainingInverseNavigation = entityType
                         .FindNavigation(navigationMemberInfo)
-                        ?.ForeignKey.Builder;
+                        ?.ForeignKey
+                        .Builder;
                     return true;
                 }
             }
@@ -465,43 +479,48 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             {
                 if (navigation.IsOnDependent)
                 {
-                    foreignKey.Builder.HasNavigation(
+                    foreignKey
+                        .Builder
+                        .HasNavigation(
+                            (string?)null,
+                            navigation.IsOnDependent,
+                            fromDataAnnotation: true
+                        );
+                }
+                else if (
+                    ConfigurationSource
+                        .DataAnnotation
+                        .Overrides(foreignKey.DeclaringEntityType.GetConfigurationSource())
+                )
+                {
+                    navigation
+                        .DeclaringEntityType
+                        .Model
+                        .Builder
+                        .HasNoEntityType(foreignKey.DeclaringEntityType, fromDataAnnotation: true);
+                }
+                else
+                {
+                    foreignKey
+                        .DeclaringEntityType
+                        .Builder
+                        .HasNoRelationship(foreignKey, fromDataAnnotation: true);
+                }
+            }
+            else if (
+                foreignKey
+                    .DeclaringEntityType
+                    .Builder
+                    .HasNoRelationship(foreignKey, fromDataAnnotation: true) == null
+            )
+            {
+                foreignKey
+                    .Builder
+                    .HasNavigation(
                         (string?)null,
                         navigation.IsOnDependent,
                         fromDataAnnotation: true
                     );
-                }
-                else if (
-                    ConfigurationSource.DataAnnotation.Overrides(
-                        foreignKey.DeclaringEntityType.GetConfigurationSource()
-                    )
-                )
-                {
-                    navigation.DeclaringEntityType.Model.Builder.HasNoEntityType(
-                        foreignKey.DeclaringEntityType,
-                        fromDataAnnotation: true
-                    );
-                }
-                else
-                {
-                    foreignKey.DeclaringEntityType.Builder.HasNoRelationship(
-                        foreignKey,
-                        fromDataAnnotation: true
-                    );
-                }
-            }
-            else if (
-                foreignKey.DeclaringEntityType.Builder.HasNoRelationship(
-                    foreignKey,
-                    fromDataAnnotation: true
-                ) == null
-            )
-            {
-                foreignKey.Builder.HasNavigation(
-                    (string?)null,
-                    navigation.IsOnDependent,
-                    fromDataAnnotation: true
-                );
             }
         }
 
@@ -538,17 +557,18 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             }
 
             var navigationName = navigationMemberInfo.GetSimpleMemberName();
-            var leastDerivedEntityTypes = modelBuilder.Metadata.FindLeastDerivedEntityTypes(
-                declaringType,
-                t => !t.HasSharedClrType && !t.IsOwned()
-            );
+            var leastDerivedEntityTypes = modelBuilder
+                .Metadata
+                .FindLeastDerivedEntityTypes(
+                    declaringType,
+                    t => !t.HasSharedClrType && !t.IsOwned()
+                );
             foreach (var leastDerivedEntityType in leastDerivedEntityTypes)
             {
                 if (
-                    leastDerivedEntityType.Builder.IsIgnored(
-                        navigationName,
-                        fromDataAnnotation: true
-                    )
+                    leastDerivedEntityType
+                        .Builder
+                        .IsIgnored(navigationName, fromDataAnnotation: true)
                 )
                 {
                     continue;
@@ -783,21 +803,23 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
                         if (ambiguousInverse != null)
                         {
-                            Dependencies.Logger.MultipleInversePropertiesSameTargetWarning(
-                                new[]
-                                {
-                                    Tuple.Create<MemberInfo?, Type>(
-                                        referencingNavigationWithAttribute.Item1,
-                                        referencingNavigationWithAttribute.Item2.ClrType
-                                    ),
-                                    Tuple.Create<MemberInfo?, Type>(
-                                        ambiguousInverse.Value.Item1,
-                                        ambiguousInverse.Value.Item2.ClrType
-                                    )
-                                },
-                                inverseNavigation.Navigation,
-                                entityType.ClrType
-                            );
+                            Dependencies
+                                .Logger
+                                .MultipleInversePropertiesSameTargetWarning(
+                                    new[]
+                                    {
+                                        Tuple.Create<MemberInfo?, Type>(
+                                            referencingNavigationWithAttribute.Item1,
+                                            referencingNavigationWithAttribute.Item2.ClrType
+                                        ),
+                                        Tuple.Create<MemberInfo?, Type>(
+                                            ambiguousInverse.Value.Item1,
+                                            ambiguousInverse.Value.Item2.ClrType
+                                        )
+                                    },
+                                    inverseNavigation.Navigation,
+                                    entityType.ClrType
+                                );
                             break;
                         }
                     }
@@ -840,7 +862,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                     foreach (var inverseNavigationTuple in navigationMap.Values)
                     {
                         if (
-                            inverseNavigationTuple.Navigation
+                            inverseNavigationTuple
+                                .Navigation
                                 .GetMemberType()
                                 .IsAssignableFrom(entityType.ClrType)
                             && IsAmbiguousInverse(
@@ -881,10 +904,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 var inverseEntityType = FindActualEntityType(referencingTuple.InverseEntityType);
                 if (
                     inverseEntityType is null
-                    || inverseEntityType.Builder.IsIgnored(
-                        referencingTuple.Inverse.GetSimpleMemberName(),
-                        fromDataAnnotation: true
-                    )
+                    || inverseEntityType
+                        .Builder
+                        .IsIgnored(
+                            referencingTuple.Inverse.GetSimpleMemberName(),
+                            fromDataAnnotation: true
+                        )
                 )
                 {
                     continue;
@@ -1002,11 +1027,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
                         if (existingInverses.Count == 0)
                         {
-                            otherEntityType.Builder.HasRelationship(
-                                targetEntityType,
-                                referencingTuple.Item1,
-                                null
-                            );
+                            otherEntityType
+                                .Builder
+                                .HasRelationship(targetEntityType, referencingTuple.Item1, null);
                         }
                         else if (existingInverses.Count == 1)
                         {
@@ -1015,20 +1038,24 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                             {
                                 // TODO: Rely on layering instead of using DataAnnotation configuration source
                                 // to override the null navigation configuration #15898
-                                otherEntityType.Builder.HasRelationship(
-                                    targetEntityType,
-                                    referencingTuple.Item1,
-                                    existingInverse.PropertyInfo,
-                                    fromDataAnnotation: true
-                                );
+                                otherEntityType
+                                    .Builder
+                                    .HasRelationship(
+                                        targetEntityType,
+                                        referencingTuple.Item1,
+                                        existingInverse.PropertyInfo,
+                                        fromDataAnnotation: true
+                                    );
                             }
                             else
                             {
-                                otherEntityType.Builder.HasRelationship(
-                                    targetEntityType,
-                                    referencingTuple.Item1,
-                                    null
-                                );
+                                otherEntityType
+                                    .Builder
+                                    .HasRelationship(
+                                        targetEntityType,
+                                        referencingTuple.Item1,
+                                        null
+                                    );
                             }
                         }
                     }
@@ -1063,12 +1090,14 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 );
                 if (otherEntityType != null)
                 {
-                    targetEntityType.Builder.HasRelationship(
-                        otherEntityType,
-                        inverseNavigation,
-                        referencingNavigationsWithAttribute[0].Item1,
-                        fromDataAnnotation: true
-                    );
+                    targetEntityType
+                        .Builder
+                        .HasRelationship(
+                            otherEntityType,
+                            inverseNavigation,
+                            referencingNavigationsWithAttribute[0].Item1,
+                            fromDataAnnotation: true
+                        );
                 }
             }
         }

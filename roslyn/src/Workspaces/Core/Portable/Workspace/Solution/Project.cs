@@ -137,9 +137,9 @@ namespace Microsoft.CodeAnalysis
         /// The list of all other projects within the same solution that this project references.
         /// </summary>
         public IEnumerable<ProjectReference> ProjectReferences =>
-            _projectState.ProjectReferences.Where(
-                pr => this.Solution.ContainsProject(pr.ProjectId)
-            );
+            _projectState
+                .ProjectReferences
+                .Where(pr => this.Solution.ContainsProject(pr.ProjectId));
 
         /// <summary>
         /// The list of all other projects that this project references, including projects that
@@ -324,20 +324,24 @@ namespace Microsoft.CodeAnalysis
             IEnumerable<SourceGeneratedDocument>
         > GetSourceGeneratedDocumentsAsync(CancellationToken cancellationToken = default)
         {
-            var generatedDocumentStates = await _solution.State
+            var generatedDocumentStates = await _solution
+                .State
                 .GetSourceGeneratedDocumentStatesAsync(this.State, cancellationToken)
                 .ConfigureAwait(false);
 
             // return an iterator to avoid eagerly allocating all the document instances
-            return generatedDocumentStates.States.Values.Select(
-                state =>
-                    ImmutableHashMapExtensions.GetOrAdd(
-                        ref _idToSourceGeneratedDocumentMap,
-                        state.Id,
-                        s_createSourceGeneratedDocumentFunction,
-                        (state, this)
-                    )
-            )!;
+            return generatedDocumentStates
+                .States
+                .Values
+                .Select(
+                    state =>
+                        ImmutableHashMapExtensions.GetOrAdd(
+                            ref _idToSourceGeneratedDocumentMap,
+                            state.Id,
+                            s_createSourceGeneratedDocumentFunction,
+                            (state, this)
+                        )
+                )!;
         }
 
         internal async ValueTask<
@@ -368,7 +372,8 @@ namespace Microsoft.CodeAnalysis
             }
 
             // We'll have to run generators if we haven't already and now try to find it.
-            var generatedDocumentStates = await _solution.State
+            var generatedDocumentStates = await _solution
+                .State
                 .GetSourceGeneratedDocumentStatesAsync(State, cancellationToken)
                 .ConfigureAwait(false);
             var generatedDocumentState = generatedDocumentStates.GetState(documentId);
@@ -410,8 +415,9 @@ namespace Microsoft.CodeAnalysis
 
             // Trickier case now: it's possible we generated this, but we don't actually have the SourceGeneratedDocument for it, so let's go
             // try to fetch the state.
-            var documentState =
-                _solution.State.TryGetSourceGeneratedDocumentStateForAlreadyGeneratedId(documentId);
+            var documentState = _solution
+                .State
+                .TryGetSourceGeneratedDocumentStateForAlreadyGeneratedId(documentId);
 
             if (documentState == null)
             {
@@ -534,10 +540,10 @@ namespace Microsoft.CodeAnalysis
             Project,
             AnalyzerConfigDocument?
         > s_tryCreateAnalyzerConfigDocumentFunction = (documentId, project) =>
-            project._projectState.AnalyzerConfigDocumentStates.TryGetState(
-                documentId,
-                out var state
-            )
+            project
+                ._projectState
+                .AnalyzerConfigDocumentStates
+                .TryGetState(documentId, out var state)
               ? new AnalyzerConfigDocument(project, state)
               : null;
 

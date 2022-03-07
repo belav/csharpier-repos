@@ -124,7 +124,8 @@ namespace Microsoft.CodeAnalysis.ImplementAbstractClass
             CancellationToken cancellationToken
         )
         {
-            var compilation = await _document.Project
+            var compilation = await _document
+                .Project
                 .GetRequiredCompilationAsync(cancellationToken)
                 .ConfigureAwait(false);
 

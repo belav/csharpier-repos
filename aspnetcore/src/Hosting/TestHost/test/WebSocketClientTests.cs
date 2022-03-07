@@ -91,7 +91,11 @@ public class WebSocketClientTests
                                             default
                                         );
                                         await websocket.CloseAsync(
-                                            System.Net.WebSockets.WebSocketCloseStatus.NormalClosure,
+                                            System
+                                                .Net
+                                                .WebSockets
+                                                .WebSocketCloseStatus
+                                                .NormalClosure,
                                             null,
                                             default
                                         );

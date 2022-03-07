@@ -293,9 +293,9 @@ namespace R2RDump
 
                 if (
                     _r2r.Machine == Machine.Amd64
-                    && (
-                        (ILCompiler.Reflection.ReadyToRun.Amd64.UnwindInfo)rtf.UnwindInfo
-                    ).CodeOffsetToUnwindCodeIndex.TryGetValue(codeOffset, out int unwindCodeIndex)
+                    && ((ILCompiler.Reflection.ReadyToRun.Amd64.UnwindInfo)rtf.UnwindInfo)
+                        .CodeOffsetToUnwindCodeIndex
+                        .TryGetValue(codeOffset, out int unwindCodeIndex)
                 )
                 {
                     ILCompiler.Reflection.ReadyToRun.Amd64.UnwindCode code = (
@@ -312,10 +312,9 @@ namespace R2RDump
                 if (
                     gcInfo != null
                     && gcInfo.Transitions != null
-                    && gcInfo.Transitions.TryGetValue(
-                        codeOffset,
-                        out List<BaseGcTransition> transitionsForOffset
-                    )
+                    && gcInfo
+                        .Transitions
+                        .TryGetValue(codeOffset, out List<BaseGcTransition> transitionsForOffset)
                 )
                 {
                     string[] formattedTransitions = new string[transitionsForOffset.Count];
@@ -626,11 +625,9 @@ namespace R2RDump
                     {
                         R2RDump.WriteWarning("String is not zero-terminated");
                     }
-                    string ownerCompositeExecutable = Encoding.UTF8.GetString(
-                        _r2r.Image,
-                        oceOffset,
-                        section.Size - 1
-                    ); // exclude the zero terminator
+                    string ownerCompositeExecutable = Encoding
+                        .UTF8
+                        .GetString(_r2r.Image, oceOffset, section.Size - 1); // exclude the zero terminator
                     _writer.WriteLine(
                         "Composite executable: {0}",
                         ownerCompositeExecutable.ToEscapedString()

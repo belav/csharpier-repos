@@ -62,10 +62,9 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnnecessaryDiscardDesignation
 
             foreach (var diagnostic in diagnostics)
             {
-                var discard = diagnostic.Location.FindNode(
-                    getInnermostNodeForTie: true,
-                    cancellationToken
-                );
+                var discard = diagnostic
+                    .Location
+                    .FindNode(getInnermostNodeForTie: true, cancellationToken);
                 switch (discard.Parent)
                 {
                     case DeclarationPatternSyntax declarationPattern:

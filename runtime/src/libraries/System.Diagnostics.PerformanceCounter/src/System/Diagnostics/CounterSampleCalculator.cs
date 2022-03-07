@@ -81,7 +81,10 @@ namespace System.Diagnostics
                     )
                     && (
                         newCounterType
-                        != Interop.Kernel32.PerformanceCounterOptions.PERF_COUNTER_LARGE_RAWCOUNT_HEX
+                        != Interop
+                            .Kernel32
+                            .PerformanceCounterOptions
+                            .PERF_COUNTER_LARGE_RAWCOUNT_HEX
                     )
                     && (
                         newCounterType
@@ -110,16 +113,18 @@ namespace System.Diagnostics
             Interop.Kernel32.PerformanceCounterOptions.PDH_FMT_COUNTERVALUE pdhFormattedValue =
                 default;
             long timeBase = newSample.SystemFrequency;
-            int result = Interop.Pdh.PdhFormatFromRawValue(
-                (uint)newCounterType,
-                Interop.Kernel32.PerformanceCounterOptions.PDH_FMT_DOUBLE
-                    | Interop.Kernel32.PerformanceCounterOptions.PDH_FMT_NOSCALE
-                    | Interop.Kernel32.PerformanceCounterOptions.PDH_FMT_NOCAP100,
-                ref timeBase,
-                ref newPdhValue,
-                ref oldPdhValue,
-                ref pdhFormattedValue
-            );
+            int result = Interop
+                .Pdh
+                .PdhFormatFromRawValue(
+                    (uint)newCounterType,
+                    Interop.Kernel32.PerformanceCounterOptions.PDH_FMT_DOUBLE
+                        | Interop.Kernel32.PerformanceCounterOptions.PDH_FMT_NOSCALE
+                        | Interop.Kernel32.PerformanceCounterOptions.PDH_FMT_NOCAP100,
+                    ref timeBase,
+                    ref newPdhValue,
+                    ref oldPdhValue,
+                    ref pdhFormattedValue
+                );
 
             if (result != Interop.Errors.ERROR_SUCCESS)
             {
@@ -192,7 +197,10 @@ namespace System.Diagnostics
                         newCounterType
                             == Interop.Kernel32.PerformanceCounterOptions.PERF_COUNTER_MULTI_TIMER
                         || newCounterType
-                            == Interop.Kernel32.PerformanceCounterOptions.PERF_COUNTER_MULTI_TIMER_INV
+                            == Interop
+                                .Kernel32
+                                .PerformanceCounterOptions
+                                .PERF_COUNTER_MULTI_TIMER_INV
                     )
                     {
                         //  this is to make PDH work like PERFMON for

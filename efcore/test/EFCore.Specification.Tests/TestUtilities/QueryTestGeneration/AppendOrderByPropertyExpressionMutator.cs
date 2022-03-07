@@ -34,14 +34,12 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities.QueryTestGeneration
 
             var isDescending = random.Next(3) == 0;
             var orderBy = isDescending
-                ? QueryableMethods.OrderByDescending.MakeGenericMethod(
-                      typeArgument,
-                      properties[i].PropertyType
-                  )
-                : QueryableMethods.OrderBy.MakeGenericMethod(
-                      typeArgument,
-                      properties[i].PropertyType
-                  );
+                ? QueryableMethods
+                  .OrderByDescending
+                  .MakeGenericMethod(typeArgument, properties[i].PropertyType)
+                : QueryableMethods
+                  .OrderBy
+                  .MakeGenericMethod(typeArgument, properties[i].PropertyType);
 
             var prm = Expression.Parameter(typeArgument, "prm");
 
@@ -60,14 +58,12 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities.QueryTestGeneration
                 );
 
                 orderBy = isDescending
-                    ? QueryableMethods.OrderByDescending.MakeGenericMethod(
-                          typeArgument,
-                          nullablePropertyType
-                      )
-                    : QueryableMethods.OrderBy.MakeGenericMethod(
-                          typeArgument,
-                          nullablePropertyType
-                      );
+                    ? QueryableMethods
+                      .OrderByDescending
+                      .MakeGenericMethod(typeArgument, nullablePropertyType)
+                    : QueryableMethods
+                      .OrderBy
+                      .MakeGenericMethod(typeArgument, nullablePropertyType);
 
                 lambdaBody = Expression.Convert(lambdaBody, nullablePropertyType);
             }

@@ -78,7 +78,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                             )
                     )
                     {
-                        entityType.Builder
+                        entityType
+                            .Builder
                             .HasRelationship(entityType.BaseType, pk.Properties, pk)
                             ?.IsUnique(true);
                     }

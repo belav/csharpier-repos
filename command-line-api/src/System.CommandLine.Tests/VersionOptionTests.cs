@@ -16,9 +16,9 @@ namespace System.CommandLine.Tests
     public class VersionOptionTests
     {
         private static readonly string version =
-            (
-                Assembly.GetEntryAssembly() ?? Assembly.GetExecutingAssembly()
-            ).GetCustomAttribute<AssemblyInformationalVersionAttribute>().InformationalVersion;
+            (Assembly.GetEntryAssembly() ?? Assembly.GetExecutingAssembly())
+                .GetCustomAttribute<AssemblyInformationalVersionAttribute>()
+                .InformationalVersion;
 
         [Fact]
         public async Task When_the_version_option_is_specified_then_the_version_is_written_to_standard_out()
@@ -113,7 +113,8 @@ namespace System.CommandLine.Tests
 
             console.Out.ToString().Should().NotContain(version);
 
-            console.Error
+            console
+                .Error
                 .ToString()
                 .Should()
                 .Contain("--version option cannot be combined with other arguments.");
@@ -132,10 +133,14 @@ namespace System.CommandLine.Tests
 
             var parser = new CommandLineBuilder(rootCommand).UseVersionOption().Build();
 
-            parser.Configuration.RootCommand.Children
+            parser
+                .Configuration
+                .RootCommand
+                .Children
                 .GetByAlias("subcommand")
                 .As<Command>()
-                .Options.Should()
+                .Options
+                .Should()
                 .BeEmpty();
         }
 
@@ -186,7 +191,8 @@ namespace System.CommandLine.Tests
 
             console.Out.ToString().Should().NotContain(version);
 
-            console.Error
+            console
+                .Error
                 .ToString()
                 .Should()
                 .Contain("-v option cannot be combined with other arguments.");

@@ -25,11 +25,13 @@ namespace Roslyn.VisualStudio.IntegrationTests.VisualBasic
             await base.InitializeAsync().ConfigureAwait(true);
             VisualStudio.SolutionExplorer.CreateSolution(nameof(BasicBuild));
             var testProj = new ProjectUtils.Project("TestProj");
-            VisualStudio.SolutionExplorer.AddProject(
-                testProj,
-                WellKnownProjectTemplates.ConsoleApplication,
-                LanguageNames.VisualBasic
-            );
+            VisualStudio
+                .SolutionExplorer
+                .AddProject(
+                    testProj,
+                    WellKnownProjectTemplates.ConsoleApplication,
+                    LanguageNames.VisualBasic
+                );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.Build)]

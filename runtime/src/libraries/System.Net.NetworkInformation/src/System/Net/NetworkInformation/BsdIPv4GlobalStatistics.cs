@@ -74,12 +74,14 @@ namespace System.Net.NetworkInformation
             context._numIPAddresses = 0;
             context._interfaceSet = new HashSet<string>();
 
-            Interop.Sys.EnumerateInterfaceAddresses(
-                Unsafe.AsPointer(ref context),
-                &ProcessIpv4Address,
-                null,
-                null
-            );
+            Interop
+                .Sys
+                .EnumerateInterfaceAddresses(
+                    Unsafe.AsPointer(ref context),
+                    &ProcessIpv4Address,
+                    null,
+                    null
+                );
 
             _numInterfaces = context._interfaceSet.Count;
             _numIPAddresses = context._numIPAddresses;

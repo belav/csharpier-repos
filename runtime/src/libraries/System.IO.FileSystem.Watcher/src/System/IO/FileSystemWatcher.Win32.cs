@@ -29,14 +29,16 @@ namespace System.IO
                 return;
 
             // Create handle to directory being monitored
-            _directoryHandle = Interop.Kernel32.CreateFile(
-                lpFileName: _directory,
-                dwDesiredAccess: Interop.Kernel32.FileOperations.FILE_LIST_DIRECTORY,
-                dwShareMode: FileShare.Read | FileShare.Delete | FileShare.Write,
-                dwCreationDisposition: FileMode.Open,
-                dwFlagsAndAttributes: Interop.Kernel32.FileOperations.FILE_FLAG_BACKUP_SEMANTICS
-                    | Interop.Kernel32.FileOperations.FILE_FLAG_OVERLAPPED
-            );
+            _directoryHandle = Interop
+                .Kernel32
+                .CreateFile(
+                    lpFileName: _directory,
+                    dwDesiredAccess: Interop.Kernel32.FileOperations.FILE_LIST_DIRECTORY,
+                    dwShareMode: FileShare.Read | FileShare.Delete | FileShare.Write,
+                    dwCreationDisposition: FileMode.Open,
+                    dwFlagsAndAttributes: Interop.Kernel32.FileOperations.FILE_FLAG_BACKUP_SEMANTICS
+                        | Interop.Kernel32.FileOperations.FILE_FLAG_OVERLAPPED
+                );
 
             if (IsHandleInvalid(_directoryHandle))
             {
@@ -169,19 +171,21 @@ namespace System.IO
                     return;
 
                 // Get the overlapped pointer to use for this iteration.
-                overlappedPointer = state.ThreadPoolBinding.AllocateNativeOverlapped(
-                    state.PreAllocatedOverlapped
-                );
-                continueExecuting = Interop.Kernel32.ReadDirectoryChangesW(
-                    state.DirectoryHandle,
-                    state.Buffer, // the buffer is kept pinned for the duration of the sync and async operation by the PreAllocatedOverlapped
-                    _internalBufferSize,
-                    _includeSubdirectories,
-                    (uint)_notifyFilters,
-                    null,
-                    overlappedPointer,
-                    null
-                );
+                overlappedPointer = state
+                    .ThreadPoolBinding
+                    .AllocateNativeOverlapped(state.PreAllocatedOverlapped);
+                continueExecuting = Interop
+                    .Kernel32
+                    .ReadDirectoryChangesW(
+                        state.DirectoryHandle,
+                        state.Buffer, // the buffer is kept pinned for the duration of the sync and async operation by the PreAllocatedOverlapped
+                        _internalBufferSize,
+                        _includeSubdirectories,
+                        (uint)_notifyFilters,
+                        null,
+                        overlappedPointer,
+                        null
+                    );
             }
             catch (ObjectDisposedException)
             {

@@ -40,12 +40,14 @@ namespace System.Diagnostics.PerformanceData
 
             Debug.Assert(sizeof(Interop.PerfCounter.PerfCounterSetInstanceStruct) == 32);
 
-            _nativeInst = Interop.PerfCounter.PerfCreateInstance(
-                _counterSet._provider._hProvider,
-                ref _counterSet._counterSet,
-                _instName,
-                0
-            );
+            _nativeInst = Interop
+                .PerfCounter
+                .PerfCreateInstance(
+                    _counterSet._provider._hProvider,
+                    ref _counterSet._counterSet,
+                    _instName,
+                    0
+                );
             int Status = (int)(
                 (_nativeInst != null) ? Interop.Errors.ERROR_SUCCESS : Marshal.GetLastWin32Error()
             );
@@ -133,10 +135,9 @@ namespace System.Diagnostics.PerformanceData
                     {
                         if (_counterSet._provider != null)
                         {
-                            Interop.PerfCounter.PerfDeleteInstance(
-                                _counterSet._provider._hProvider,
-                                _nativeInst
-                            );
+                            Interop
+                                .PerfCounter
+                                .PerfDeleteInstance(_counterSet._provider._hProvider, _nativeInst);
                         }
                         _nativeInst = null;
                     }

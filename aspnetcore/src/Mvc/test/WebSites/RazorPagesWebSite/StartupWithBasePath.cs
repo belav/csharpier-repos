@@ -33,10 +33,9 @@ public class StartupWithBasePath
                     options.Conventions.AuthorizePage("/Conventions/Auth");
                     options.Conventions.AuthorizeFolder("/Conventions/AuthFolder");
                     options.Conventions.AuthorizeAreaFolder("Accounts", "/RequiresAuth");
-                    options.Conventions.AllowAnonymousToAreaPage(
-                        "Accounts",
-                        "/RequiresAuth/AllowAnonymous"
-                    );
+                    options
+                        .Conventions
+                        .AllowAnonymousToAreaPage("Accounts", "/RequiresAuth/AllowAnonymous");
                     options.Conventions.Add(new CustomModelTypeConvention());
                 }
             );

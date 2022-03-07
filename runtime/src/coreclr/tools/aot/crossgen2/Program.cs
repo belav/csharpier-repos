@@ -222,10 +222,9 @@ namespace ILCompiler
             if (_commandLineOptions.TargetOS != null)
             {
                 if (
-                    _commandLineOptions.TargetOS.Equals(
-                        "windows",
-                        StringComparison.OrdinalIgnoreCase
-                    )
+                    _commandLineOptions
+                        .TargetOS
+                        .Equals("windows", StringComparison.OrdinalIgnoreCase)
                 )
                     _targetOS = TargetOS.Windows;
                 else if (
@@ -237,10 +236,9 @@ namespace ILCompiler
                 )
                     _targetOS = TargetOS.OSX;
                 else if (
-                    _commandLineOptions.TargetOS.Equals(
-                        "freebsd",
-                        StringComparison.OrdinalIgnoreCase
-                    )
+                    _commandLineOptions
+                        .TargetOS
+                        .Equals("freebsd", StringComparison.OrdinalIgnoreCase)
                 )
                     _targetOS = TargetOS.FreeBSD;
                 else

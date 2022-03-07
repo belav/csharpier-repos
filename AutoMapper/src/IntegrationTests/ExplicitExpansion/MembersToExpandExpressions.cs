@@ -92,17 +92,21 @@ namespace AutoMapper.UnitTests.Projection
             {
                 ProjectTo<Dto>(context.Sources, null, _ => _.Name)
                     .First()
-                    .Name.ShouldBe(_source.Name);
+                    .Name
+                    .ShouldBe(_source.Name);
                 ProjectTo<Dto>(context.Sources, null, _ => _.Desc)
                     .First()
-                    .Desc.ShouldBe(_source.Desc);
+                    .Desc
+                    .ShouldBe(_source.Desc);
                 ProjectTo<Dto>(context.Sources, null, _ => _.Name, _ => _.Desc);
                 ProjectTo<Dto>(context.Sources, null, _ => _.InnerDescFlattened)
                     .First()
-                    .InnerDescFlattened.ShouldBe(_source.Inner.Desc);
+                    .InnerDescFlattened
+                    .ShouldBe(_source.Inner.Desc);
                 ProjectTo<Dto>(context.Sources, null, _ => _.DeepFlattened)
                     .First()
-                    .DeepFlattened.ShouldBe(_source.Inner.Deep.Desc);
+                    .DeepFlattened
+                    .ShouldBe(_source.Inner.Deep.Desc);
             }
         }
     }

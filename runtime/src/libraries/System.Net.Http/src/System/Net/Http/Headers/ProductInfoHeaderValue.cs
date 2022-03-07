@@ -89,11 +89,9 @@ namespace System.Net.Http.Headers
         public static ProductInfoHeaderValue Parse(string input)
         {
             int index = 0;
-            object result = ProductInfoHeaderParser.SingleValueParser.ParseValue(
-                input,
-                null,
-                ref index
-            );
+            object result = ProductInfoHeaderParser
+                .SingleValueParser
+                .ParseValue(input, null, ref index);
             if (index < input.Length)
             {
                 // There is some invalid leftover data. Normally BaseHeaderParser.TryParseValue would
@@ -118,12 +116,9 @@ namespace System.Net.Http.Headers
             parsedValue = null;
 
             if (
-                ProductInfoHeaderParser.SingleValueParser.TryParseValue(
-                    input,
-                    null,
-                    ref index,
-                    out object? output
-                )
+                ProductInfoHeaderParser
+                    .SingleValueParser
+                    .TryParseValue(input, null, ref index, out object? output)
             )
             {
                 if (index < input.Length)

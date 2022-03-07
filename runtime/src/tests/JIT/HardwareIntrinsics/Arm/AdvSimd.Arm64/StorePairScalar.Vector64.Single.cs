@@ -216,11 +216,9 @@ namespace JIT.HardwareIntrinsics.Arm
                 StoreBinaryOpTest__StorePairScalar_Vector64_Single testClass
             )
             {
-                AdvSimd.Arm64.StorePairScalar(
-                    (Single*)testClass._dataTable.outArrayPtr,
-                    _fld1,
-                    _fld2
-                );
+                AdvSimd
+                    .Arm64
+                    .StorePairScalar((Single*)testClass._dataTable.outArrayPtr, _fld1, _fld2);
 
                 testClass.ValidateResult(_fld1, _fld2, testClass._dataTable.outArrayPtr);
             }
@@ -232,11 +230,13 @@ namespace JIT.HardwareIntrinsics.Arm
                 fixed (Vector64<Single>* pFld1 = &_fld1)
                 fixed (Vector64<Single>* pFld2 = &_fld2)
                 {
-                    AdvSimd.Arm64.StorePairScalar(
-                        (Single*)testClass._dataTable.outArrayPtr,
-                        AdvSimd.LoadVector64((Single*)(pFld1)),
-                        AdvSimd.LoadVector64((Single*)(pFld2))
-                    );
+                    AdvSimd
+                        .Arm64
+                        .StorePairScalar(
+                            (Single*)testClass._dataTable.outArrayPtr,
+                            AdvSimd.LoadVector64((Single*)(pFld1)),
+                            AdvSimd.LoadVector64((Single*)(pFld2))
+                        );
 
                     testClass.ValidateResult(_fld1, _fld2, testClass._dataTable.outArrayPtr);
                 }
@@ -327,11 +327,13 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunBasicScenario_UnsafeRead));
 
-            AdvSimd.Arm64.StorePairScalar(
-                (Single*)_dataTable.outArrayPtr,
-                Unsafe.Read<Vector64<Single>>(_dataTable.inArray1Ptr),
-                Unsafe.Read<Vector64<Single>>(_dataTable.inArray2Ptr)
-            );
+            AdvSimd
+                .Arm64
+                .StorePairScalar(
+                    (Single*)_dataTable.outArrayPtr,
+                    Unsafe.Read<Vector64<Single>>(_dataTable.inArray1Ptr),
+                    Unsafe.Read<Vector64<Single>>(_dataTable.inArray2Ptr)
+                );
 
             ValidateResult(_dataTable.inArray1Ptr, _dataTable.inArray2Ptr, _dataTable.outArrayPtr);
         }
@@ -340,11 +342,13 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunBasicScenario_Load));
 
-            AdvSimd.Arm64.StorePairScalar(
-                (Single*)_dataTable.outArrayPtr,
-                AdvSimd.LoadVector64((Single*)(_dataTable.inArray1Ptr)),
-                AdvSimd.LoadVector64((Single*)(_dataTable.inArray2Ptr))
-            );
+            AdvSimd
+                .Arm64
+                .StorePairScalar(
+                    (Single*)_dataTable.outArrayPtr,
+                    AdvSimd.LoadVector64((Single*)(_dataTable.inArray1Ptr)),
+                    AdvSimd.LoadVector64((Single*)(_dataTable.inArray2Ptr))
+                );
 
             ValidateResult(_dataTable.inArray1Ptr, _dataTable.inArray2Ptr, _dataTable.outArrayPtr);
         }
@@ -419,11 +423,13 @@ namespace JIT.HardwareIntrinsics.Arm
             fixed (Vector64<Single>* pClsVar1 = &_clsVar1)
             fixed (Vector64<Single>* pClsVar2 = &_clsVar2)
             {
-                AdvSimd.Arm64.StorePairScalar(
-                    (Single*)_dataTable.outArrayPtr,
-                    AdvSimd.LoadVector64((Single*)(pClsVar1)),
-                    AdvSimd.LoadVector64((Single*)(pClsVar2))
-                );
+                AdvSimd
+                    .Arm64
+                    .StorePairScalar(
+                        (Single*)_dataTable.outArrayPtr,
+                        AdvSimd.LoadVector64((Single*)(pClsVar1)),
+                        AdvSimd.LoadVector64((Single*)(pClsVar2))
+                    );
 
                 ValidateResult(_clsVar1, _clsVar2, _dataTable.outArrayPtr);
             }
@@ -470,11 +476,13 @@ namespace JIT.HardwareIntrinsics.Arm
             fixed (Vector64<Single>* pFld1 = &test._fld1)
             fixed (Vector64<Single>* pFld2 = &test._fld2)
             {
-                AdvSimd.Arm64.StorePairScalar(
-                    (Single*)_dataTable.outArrayPtr,
-                    AdvSimd.LoadVector64((Single*)(pFld1)),
-                    AdvSimd.LoadVector64((Single*)(pFld2))
-                );
+                AdvSimd
+                    .Arm64
+                    .StorePairScalar(
+                        (Single*)_dataTable.outArrayPtr,
+                        AdvSimd.LoadVector64((Single*)(pFld1)),
+                        AdvSimd.LoadVector64((Single*)(pFld2))
+                    );
 
                 ValidateResult(test._fld1, test._fld2, _dataTable.outArrayPtr);
             }
@@ -496,11 +504,13 @@ namespace JIT.HardwareIntrinsics.Arm
             fixed (Vector64<Single>* pFld1 = &_fld1)
             fixed (Vector64<Single>* pFld2 = &_fld2)
             {
-                AdvSimd.Arm64.StorePairScalar(
-                    (Single*)_dataTable.outArrayPtr,
-                    AdvSimd.LoadVector64((Single*)(pFld1)),
-                    AdvSimd.LoadVector64((Single*)(pFld2))
-                );
+                AdvSimd
+                    .Arm64
+                    .StorePairScalar(
+                        (Single*)_dataTable.outArrayPtr,
+                        AdvSimd.LoadVector64((Single*)(pFld1)),
+                        AdvSimd.LoadVector64((Single*)(pFld2))
+                    );
 
                 ValidateResult(_fld1, _fld2, _dataTable.outArrayPtr);
             }
@@ -521,11 +531,13 @@ namespace JIT.HardwareIntrinsics.Arm
             TestLibrary.TestFramework.BeginScenario(nameof(RunStructLclFldScenario_Load));
 
             var test = TestStruct.Create();
-            AdvSimd.Arm64.StorePairScalar(
-                (Single*)_dataTable.outArrayPtr,
-                AdvSimd.LoadVector64((Single*)(&test._fld1)),
-                AdvSimd.LoadVector64((Single*)(&test._fld2))
-            );
+            AdvSimd
+                .Arm64
+                .StorePairScalar(
+                    (Single*)_dataTable.outArrayPtr,
+                    AdvSimd.LoadVector64((Single*)(&test._fld1)),
+                    AdvSimd.LoadVector64((Single*)(&test._fld2))
+                );
 
             ValidateResult(test._fld1, test._fld2, _dataTable.outArrayPtr);
         }
@@ -642,18 +654,20 @@ namespace JIT.HardwareIntrinsics.Arm
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation(
-                    $"{nameof(AdvSimd.Arm64)}.{nameof(AdvSimd.Arm64.StorePairScalar)}<Single>(Vector64<Single>, Vector64<Single>): {method} failed:"
-                );
-                TestLibrary.TestFramework.LogInformation(
-                    $" firstOp: ({string.Join(", ", firstOp)})"
-                );
-                TestLibrary.TestFramework.LogInformation(
-                    $"secondOp: ({string.Join(", ", secondOp)})"
-                );
-                TestLibrary.TestFramework.LogInformation(
-                    $"  result: ({string.Join(", ", result)})"
-                );
+                TestLibrary
+                    .TestFramework
+                    .LogInformation(
+                        $"{nameof(AdvSimd.Arm64)}.{nameof(AdvSimd.Arm64.StorePairScalar)}<Single>(Vector64<Single>, Vector64<Single>): {method} failed:"
+                    );
+                TestLibrary
+                    .TestFramework
+                    .LogInformation($" firstOp: ({string.Join(", ", firstOp)})");
+                TestLibrary
+                    .TestFramework
+                    .LogInformation($"secondOp: ({string.Join(", ", secondOp)})");
+                TestLibrary
+                    .TestFramework
+                    .LogInformation($"  result: ({string.Join(", ", result)})");
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;

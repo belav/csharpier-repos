@@ -30,7 +30,8 @@ namespace System.Net.Http
         public static ConstructorInfo GetConstructor(this Type type, Type[] types)
         {
             return type.GetTypeInfo()
-                .DeclaredConstructors.Where(c => c.IsPublic)
+                .DeclaredConstructors
+                .Where(c => c.IsPublic)
                 .SingleOrDefault(
                     c => c.GetParameters().Select(p => p.ParameterType).ToArray().EqualTo(types)
                 );

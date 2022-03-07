@@ -42,13 +42,9 @@ namespace System.Net.Sockets
                 Internals.SocketAddress remoteSocketAddress = IPEndPointExtensions.Serialize(
                     _listenSocket._rightEndPoint
                 );
-                System.Buffer.BlockCopy(
-                    socketAddress,
-                    0,
-                    remoteSocketAddress.Buffer,
-                    0,
-                    socketAddressLen
-                );
+                System
+                    .Buffer
+                    .BlockCopy(socketAddress, 0, remoteSocketAddress.Buffer, 0, socketAddressLen);
 
                 _acceptedSocket = _listenSocket.CreateAcceptSocket(
                     SocketPal.CreateSocket(acceptedFileDescriptor),

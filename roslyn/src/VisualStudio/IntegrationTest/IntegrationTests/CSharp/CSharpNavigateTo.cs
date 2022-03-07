@@ -29,24 +29,28 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
             using var telemetry = VisualStudio.EnableTestTelemetryChannel();
 
             var project = new ProjectUtils.Project(ProjectName);
-            VisualStudio.SolutionExplorer.AddFile(
-                project,
-                "test1.cs",
-                open: false,
-                contents: @"
+            VisualStudio
+                .SolutionExplorer
+                .AddFile(
+                    project,
+                    "test1.cs",
+                    open: false,
+                    contents: @"
 class FirstClass
 {
     void FirstMethod() { }
 }"
-            );
+                );
 
-            VisualStudio.SolutionExplorer.AddFile(
-                project,
-                "test2.cs",
-                open: true,
-                contents: @"
+            VisualStudio
+                .SolutionExplorer
+                .AddFile(
+                    project,
+                    "test2.cs",
+                    open: true,
+                    contents: @"
 "
-            );
+                );
 
             VisualStudio.Editor.InvokeNavigateTo("FirstMethod", VirtualKey.Enter);
             VisualStudio.Editor.WaitForActiveView("test1.cs");
@@ -54,11 +58,13 @@ class FirstClass
 
             // Add a VB project and verify that VB files are found when searching from C#
             var vbProject = new ProjectUtils.Project("VBProject");
-            VisualStudio.SolutionExplorer.AddProject(
-                vbProject,
-                WellKnownProjectTemplates.ClassLibrary,
-                LanguageNames.VisualBasic
-            );
+            VisualStudio
+                .SolutionExplorer
+                .AddProject(
+                    vbProject,
+                    WellKnownProjectTemplates.ClassLibrary,
+                    LanguageNames.VisualBasic
+                );
             VisualStudio.SolutionExplorer.AddFile(vbProject, "vbfile.vb", open: true);
 
             VisualStudio.Editor.InvokeNavigateTo("FirstClass", VirtualKey.Enter);

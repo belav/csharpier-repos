@@ -216,9 +216,9 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Tests
 
             Assert.Equal(0, logger.TotalErrorsLogged);
 
-            var logMessage = logger.Messages.Single(
-                m => m.Message == "An internal pipe was opened unexpectedly."
-            );
+            var logMessage = logger
+                .Messages
+                .Single(m => m.Message == "An internal pipe was opened unexpectedly.");
             Assert.Equal(LogLevel.Debug, logMessage.LogLevel);
         }
 

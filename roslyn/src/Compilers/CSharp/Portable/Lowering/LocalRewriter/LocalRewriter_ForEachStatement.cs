@@ -394,11 +394,13 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                 CompoundUseSiteInfo<AssemblySymbol> useSiteInfo = GetNewCompoundUseSiteInfo();
                 isImplicit =
-                    conversions.ClassifyImplicitConversionFromType(
-                        enumeratorType,
-                        idisposableTypeSymbol,
-                        ref useSiteInfo
-                    ).IsImplicit;
+                    conversions
+                        .ClassifyImplicitConversionFromType(
+                            enumeratorType,
+                            idisposableTypeSymbol,
+                            ref useSiteInfo
+                        )
+                        .IsImplicit;
                 _diagnostics.Add(forEachSyntax, useSiteInfo);
             }
 

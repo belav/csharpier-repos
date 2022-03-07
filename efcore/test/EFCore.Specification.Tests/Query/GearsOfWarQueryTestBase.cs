@@ -398,7 +398,8 @@ namespace Microsoft.EntityFrameworkCore.Query
 
             var tags = context.Tags.Select(t => (Guid?)t.Id).ToList();
 
-            var query = context.Gears
+            var query = context
+                .Gears
                 .Include(g => g.Tag)
                 .Where(g => g.Tag != null && tags.Contains(g.Tag.Id));
 
@@ -418,7 +419,8 @@ namespace Microsoft.EntityFrameworkCore.Query
 
             var tags = context.Tags.Select(t => (Guid?)t.Id).ToList();
 
-            var query = context.Gears
+            var query = context
+                .Gears
                 .Include(g => g.Tag)
                 .Where(g => g.CityOfBirth.Location != null && tags.Contains(g.Tag.Id));
 
@@ -838,13 +840,15 @@ namespace Microsoft.EntityFrameworkCore.Query
                     ss.Set<Gear>()
                         .Where(
                             g =>
-                                MilitaryRank.Corporal.HasFlag(
-                                    ss.Set<Gear>()
-                                        .OrderBy(x => x.Nickname)
-                                        .ThenBy(x => x.SquadId)
-                                        .Select(x => x.Rank)
-                                        .FirstOrDefault()
-                                )
+                                MilitaryRank
+                                    .Corporal
+                                    .HasFlag(
+                                        ss.Set<Gear>()
+                                            .OrderBy(x => x.Nickname)
+                                            .ThenBy(x => x.SquadId)
+                                            .Select(x => x.Rank)
+                                            .FirstOrDefault()
+                                    )
                         )
             );
         }
@@ -863,7 +867,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                                     ss.Set<Gear>()
                                         .OrderBy(x => x.Nickname)
                                         .ThenBy(x => x.SquadId)
-                                        .FirstOrDefault().Rank
+                                        .FirstOrDefault()
+                                        .Rank
                                 )
                         )
             );
@@ -874,12 +879,15 @@ namespace Microsoft.EntityFrameworkCore.Query
                     ss.Set<Gear>()
                         .Where(
                             g =>
-                                MilitaryRank.Corporal.HasFlag(
-                                    ss.Set<Gear>()
-                                        .OrderBy(x => x.Nickname)
-                                        .ThenBy(x => x.SquadId)
-                                        .FirstOrDefault().Rank
-                                )
+                                MilitaryRank
+                                    .Corporal
+                                    .HasFlag(
+                                        ss.Set<Gear>()
+                                            .OrderBy(x => x.Nickname)
+                                            .ThenBy(x => x.SquadId)
+                                            .FirstOrDefault()
+                                            .Rank
+                                    )
                         )
             );
         }
@@ -898,7 +906,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                                     ss.Set<Gear>()
                                         .OrderBy(x => x.Nickname)
                                         .ThenBy(x => x.SquadId)
-                                        .First().Rank
+                                        .First()
+                                        .Rank
                                 )
                         )
             );
@@ -1781,7 +1790,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                                 && g.Weapons
                                     .Distinct()
                                     .OrderBy(w => w.Id)
-                                    .FirstOrDefault().IsAutomatic
+                                    .FirstOrDefault()
+                                    .IsAutomatic
                         )
             );
         }
@@ -1865,7 +1875,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                                 && g.Weapons
                                     .Where(w => w.Name.Contains("Lancer"))
                                     .Distinct()
-                                    .SingleOrDefault().IsAutomatic
+                                    .SingleOrDefault()
+                                    .IsAutomatic
                         ),
                 assertOrder: true
             );
@@ -1942,7 +1953,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                                 && g.Weapons
                                     .Distinct()
                                     .OrderBy(w => w.Id)
-                                    .FirstOrDefault().IsAutomatic
+                                    .FirstOrDefault()
+                                    .IsAutomatic
                         )
             );
         }
@@ -1961,7 +1973,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                                 && g.Weapons
                                     .Union(g.Weapons)
                                     .OrderBy(w => w.Id)
-                                    .FirstOrDefault().IsAutomatic
+                                    .FirstOrDefault()
+                                    .IsAutomatic
                         )
             );
         }
@@ -1980,7 +1993,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                                 && g.Weapons
                                     .Join(g.Weapons, e => e.Id, e => e.Id, (e1, e2) => e1)
                                     .OrderBy(w => w.Id)
-                                    .FirstOrDefault().IsAutomatic
+                                    .FirstOrDefault()
+                                    .IsAutomatic
                         )
             );
         }
@@ -2003,7 +2017,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                                     select o
                                 )
                                     .OrderBy(w => w.Id)
-                                    .FirstOrDefault().IsAutomatic
+                                    .FirstOrDefault()
+                                    .IsAutomatic
                         )
             );
         }
@@ -2022,7 +2037,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                                 && g.Weapons
                                     .Concat(g.Weapons)
                                     .OrderBy(w => w.Id)
-                                    .FirstOrDefault().IsAutomatic
+                                    .FirstOrDefault()
+                                    .IsAutomatic
                         )
             );
         }
@@ -5299,10 +5315,13 @@ namespace Microsoft.EntityFrameworkCore.Query
                                     select new
                                     {
                                         w.Id,
-                                        InnerFirst = w.Owner.Weapons
+                                        InnerFirst = w.Owner
+                                            .Weapons
                                             .Select(ww => new { ww.Name, ww.IsAutomatic })
                                             .ToList(),
-                                        InnerSecond = w.Owner.Squad.Members
+                                        InnerSecond = w.Owner
+                                            .Squad
+                                            .Members
                                             .OrderBy(mm => mm.Nickname)
                                             .Select(mm => new { mm.Nickname, mm.HasSoulPatch })
                                             .ToList()
@@ -5701,7 +5720,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                     join g in ss.Set<Gear>() on t.GearNickName equals g.Nickname into grouping
                     from g in grouping.DefaultIfEmpty()
                     orderby t.Note ,g.Nickname descending
-                    select g.Squad.Members
+                    select g.Squad
+                        .Members
                         .Where(m => m.HasSoulPatch)
                         .Select(
                             m =>
@@ -5718,7 +5738,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                     from g in grouping.DefaultIfEmpty()
                     orderby t.Note ,g.Nickname descending
                     select g != null
-                        ? g.Squad.Members
+                        ? g.Squad
+                          .Members
                           .Where(m => m.HasSoulPatch)
                           .OrderBy(m => m.Nickname)
                           .Select(
@@ -5771,7 +5792,9 @@ namespace Microsoft.EntityFrameworkCore.Query
                         .OrderBy(w => w.Name)
                         .Select(
                             w =>
-                                w.Owner.Squad.Members
+                                w.Owner
+                                    .Squad
+                                    .Members
                                     .OrderByDescending(m => m.FullName)
                                     .Select(
                                         m =>
@@ -5792,7 +5815,9 @@ namespace Microsoft.EntityFrameworkCore.Query
                         .Select(
                             w =>
                                 w.Owner != null
-                                    ? w.Owner.Squad.Members
+                                    ? w.Owner
+                                      .Squad
+                                      .Members
                                       .OrderByDescending(m => m.FullName)
                                       .Select(
                                           m =>
@@ -5848,7 +5873,9 @@ namespace Microsoft.EntityFrameworkCore.Query
                             select new
                             {
                                 w.Id,
-                                InnerCollection = w.Owner.Squad.Members
+                                InnerCollection = w.Owner
+                                    .Squad
+                                    .Members
                                     .OrderBy(mm => mm.Nickname)
                                     .Select(mm => new { mm.Nickname, mm.HasSoulPatch })
                                     .ToList()
@@ -5898,7 +5925,9 @@ namespace Microsoft.EntityFrameworkCore.Query
                                     select new
                                     {
                                         w.Id,
-                                        InnerSecond = w.Owner.Squad.Members
+                                        InnerSecond = w.Owner
+                                            .Squad
+                                            .Members
                                             .OrderBy(mm => mm.Nickname)
                                             .Select(mm => new { mm.Nickname, mm.HasSoulPatch })
                                             .ToList()
@@ -5955,7 +5984,9 @@ namespace Microsoft.EntityFrameworkCore.Query
                             select new
                             {
                                 w.Id,
-                                InnerCollection = w.Owner.Squad.Members
+                                InnerCollection = w.Owner
+                                    .Squad
+                                    .Members
                                     .OrderBy(mm => mm.Nickname)
                                     .Select(mm => new { mm.Nickname, mm.HasSoulPatch })
                                     .ToList()
@@ -6008,7 +6039,9 @@ namespace Microsoft.EntityFrameworkCore.Query
                                     select new
                                     {
                                         w.Id,
-                                        InnerSecond = w.Owner.Squad.Members
+                                        InnerSecond = w.Owner
+                                            .Squad
+                                            .Members
                                             .OrderBy(mm => mm.Nickname)
                                             .Select(mm => new { mm.Nickname, mm.HasSoulPatch })
                                             .ToList()
@@ -7185,7 +7218,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                                 (bool?)g.Weapons
                                     .Where(w => w.Name == "BFG")
                                     .OrderBy(w => w.Id)
-                                    .FirstOrDefault().IsAutomatic
+                                    .FirstOrDefault()
+                                    .IsAutomatic
                         ),
                 ss => ss.Set<Gear>().Select(g => (bool?)null)
             );
@@ -7249,7 +7283,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                                 g.Weapons
                                     .Where(w => w.Name.Contains("Lancer"))
                                     .Distinct()
-                                    .SingleOrDefault().IsAutomatic
+                                    .SingleOrDefault()
+                                    .IsAutomatic
                         ),
                 assertOrder: true
             );
@@ -7311,7 +7346,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                                 (bool?)g.Weapons
                                     .Where(w => w.Name == "BFG")
                                     .Distinct()
-                                    .SingleOrDefault().IsAutomatic
+                                    .SingleOrDefault()
+                                    .IsAutomatic
                         ),
                 ss => ss.Set<Gear>().Where(g => g.HasSoulPatch).Select(g => (bool?)null),
                 assertOrder: true
@@ -8254,7 +8290,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                                 ss.Set<Gear>()
                                     .OrderBy(g => g.Nickname)
                                     .ThenBy(g => g.SquadId)
-                                    .FirstOrDefault().HasSoulPatch
+                                    .FirstOrDefault()
+                                    .HasSoulPatch
                         )
             );
         }
@@ -8657,7 +8694,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                                 new
                                 {
                                     Items = t.Gear != null
-                                        ? t.Gear.Weapons
+                                        ? t.Gear
+                                          .Weapons
                                           .Select(w => new { w.Owner.Nickname })
                                           .ToList()
                                         : null
@@ -9213,7 +9251,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                                 f.Capital
                                 == ss.Set<Gear>()
                                     .OrderBy(s => s.Nickname)
-                                    .FirstOrDefault().CityOfBirth
+                                    .FirstOrDefault()
+                                    .CityOfBirth
                         )
             );
         }
@@ -12058,9 +12097,9 @@ namespace Microsoft.EntityFrameworkCore.Query
                                     DefeatedBy = (l as LocustCommander).DefeatedBy,
                                     IsNull = (l as LocustCommander).DefeatedBy == null,
                                     Property = (l as LocustCommander).DefeatedByNickname,
-                                    PropertyAfterNavigation = (bool?)(
-                                        l as LocustCommander
-                                    ).DefeatedBy.HasSoulPatch,
+                                    PropertyAfterNavigation = (bool?)(l as LocustCommander)
+                                        .DefeatedBy
+                                        .HasSoulPatch,
                                     NestedOuter = new
                                     {
                                         CommandingFaction = (
@@ -12068,17 +12107,17 @@ namespace Microsoft.EntityFrameworkCore.Query
                                         ).CommandingFaction,
                                         IsNull = (l as LocustCommander).CommandingFaction == null,
                                         Property = (int?)(l as LocustCommander).HighCommandId,
-                                        PropertyAfterNavigation = (
-                                            l as LocustCommander
-                                        ).CommandingFaction.Eradicated,
+                                        PropertyAfterNavigation = (l as LocustCommander)
+                                            .CommandingFaction
+                                            .Eradicated,
                                         NestedInner = new
                                         {
                                             HighCommand = (l as LocustCommander).HighCommand,
                                             IsNull = (l as LocustCommander).HighCommand == null,
                                             Property = (l as LocustCommander).DefeatedBySquadId,
-                                            PropertyAfterNavigation = (
-                                                l as LocustCommander
-                                            ).HighCommand.Name
+                                            PropertyAfterNavigation = (l as LocustCommander)
+                                                .HighCommand
+                                                .Name
                                         }
                                     }
                                 }
@@ -12093,9 +12132,9 @@ namespace Microsoft.EntityFrameworkCore.Query
                                     DefeatedBy = (l as LocustCommander).DefeatedBy,
                                     IsNull = (l as LocustCommander).DefeatedBy == null,
                                     Property = (l as LocustCommander).DefeatedByNickname,
-                                    PropertyAfterNavigation = (bool?)(
-                                        l as LocustCommander
-                                    ).DefeatedBy.HasSoulPatch,
+                                    PropertyAfterNavigation = (bool?)(l as LocustCommander)
+                                        .DefeatedBy
+                                        .HasSoulPatch,
                                     NestedOuter = new
                                     {
                                         CommandingFaction = (
@@ -12103,9 +12142,9 @@ namespace Microsoft.EntityFrameworkCore.Query
                                         ).CommandingFaction,
                                         IsNull = (l as LocustCommander).CommandingFaction == null,
                                         Property = (int?)(l as LocustCommander).HighCommandId,
-                                        PropertyAfterNavigation = (
-                                            l as LocustCommander
-                                        ).CommandingFaction.MaybeScalar(x => x.Eradicated),
+                                        PropertyAfterNavigation = (l as LocustCommander)
+                                            .CommandingFaction
+                                            .MaybeScalar(x => x.Eradicated),
                                         NestedInner = new
                                         {
                                             HighCommand = (l as LocustCommander).HighCommand,
@@ -12113,9 +12152,9 @@ namespace Microsoft.EntityFrameworkCore.Query
                                             Property = (l as LocustCommander).MaybeScalar(
                                                 x => x.DefeatedBySquadId
                                             ),
-                                            PropertyAfterNavigation = (
-                                                l as LocustCommander
-                                            ).HighCommand.Name
+                                            PropertyAfterNavigation = (l as LocustCommander)
+                                                .HighCommand
+                                                .Name
                                         }
                                     }
                                 }

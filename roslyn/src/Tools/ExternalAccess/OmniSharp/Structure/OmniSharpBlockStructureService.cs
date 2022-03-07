@@ -25,18 +25,20 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.OmniSharp.Structure
             if (blockStructure != null)
             {
                 return new OmniSharpBlockStructure(
-                    blockStructure.Spans.SelectAsArray(
-                        x =>
-                            new OmniSharpBlockSpan(
-                                x.Type,
-                                x.IsCollapsible,
-                                x.TextSpan,
-                                x.HintSpan,
-                                x.BannerText,
-                                x.AutoCollapse,
-                                x.IsDefaultCollapsed
-                            )
-                    )
+                    blockStructure
+                        .Spans
+                        .SelectAsArray(
+                            x =>
+                                new OmniSharpBlockSpan(
+                                    x.Type,
+                                    x.IsCollapsible,
+                                    x.TextSpan,
+                                    x.HintSpan,
+                                    x.BannerText,
+                                    x.AutoCollapse,
+                                    x.IsDefaultCollapsed
+                                )
+                        )
                 );
             }
             else

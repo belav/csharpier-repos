@@ -55,7 +55,8 @@ namespace Microsoft.CodeAnalysis.CSharp.BraceCompletion
             CancellationToken cancellationToken
         )
         {
-            var documentOptions = await braceCompletionContext.Document
+            var documentOptions = await braceCompletionContext
+                .Document
                 .GetOptionsAsync(cancellationToken)
                 .ConfigureAwait(false);
 
@@ -82,7 +83,8 @@ namespace Microsoft.CodeAnalysis.CSharp.BraceCompletion
             }
 
             // The caret location should be at the start of the closing brace character.
-            var originalText = await braceCompletionContext.Document
+            var originalText = await braceCompletionContext
+                .Document
                 .GetTextAsync(cancellationToken)
                 .ConfigureAwait(false);
             var formattedText = originalText.WithChanges(formattingChanges);
@@ -319,10 +321,14 @@ namespace Microsoft.CodeAnalysis.CSharp.BraceCompletion
             CancellationToken cancellationToken
         )
         {
-            var option = document.Project.Solution.Options.GetOption(
-                BraceCompletionOptions.AutoFormattingOnCloseBrace,
-                document.Project.Language
-            );
+            var option = document
+                .Project
+                .Solution
+                .Options
+                .GetOption(
+                    BraceCompletionOptions.AutoFormattingOnCloseBrace,
+                    document.Project.Language
+                );
             if (!option && shouldHonorAutoFormattingOnCloseBraceOption)
             {
                 return (ImmutableArray<TextChange>.Empty, closingPoint);
@@ -502,12 +508,14 @@ namespace Microsoft.CodeAnalysis.CSharp.BraceCompletion
                 //           = new int[] {
                 if (
                     currentToken.IsKind(SyntaxKind.OpenBraceToken)
-                    && currentToken.Parent.IsKind(
-                        SyntaxKind.ObjectInitializerExpression,
-                        SyntaxKind.CollectionInitializerExpression,
-                        SyntaxKind.ArrayInitializerExpression,
-                        SyntaxKind.ImplicitArrayCreationExpression
-                    )
+                    && currentToken
+                        .Parent
+                        .IsKind(
+                            SyntaxKind.ObjectInitializerExpression,
+                            SyntaxKind.CollectionInitializerExpression,
+                            SyntaxKind.ArrayInitializerExpression,
+                            SyntaxKind.ImplicitArrayCreationExpression
+                        )
                 )
                 {
                     if (_options.NewLinesForBracesInObjectCollectionArrayInitializers)

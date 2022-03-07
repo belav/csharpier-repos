@@ -65,10 +65,9 @@ namespace Microsoft.CodeAnalysis.BuildTasks
         protected sealed override string GenerateFullPathToTool()
         {
             return IsManagedTool
-              ? RuntimeHostInfo.GetProcessInfo(
-                    PathToManagedToolWithoutExtension,
-                    string.Empty
-                ).processFilePath
+              ? RuntimeHostInfo
+                .GetProcessInfo(PathToManagedToolWithoutExtension, string.Empty)
+                .processFilePath
               : PathToNativeTool;
         }
 

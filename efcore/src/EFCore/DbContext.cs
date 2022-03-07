@@ -124,7 +124,8 @@ namespace Microsoft.EntityFrameworkCore
             // DbSet instances, and this code becomes a no-op. However, if this set initializer is then saved and used later
             // for the Set method, then it makes the problem bigger because now an app is using the non-replaced services
             // even when it doesn't need to.
-            ServiceProviderCache.Instance
+            ServiceProviderCache
+                .Instance
                 .GetOrAdd(options, providerRequired: false)
                 .GetRequiredService<IDbSetInitializer>()
                 .InitializeSets(this);
@@ -421,7 +422,8 @@ namespace Microsoft.EntityFrameworkCore
 
                     var options = optionsBuilder.Options;
 
-                    _serviceScope = ServiceProviderCache.Instance
+                    _serviceScope = ServiceProviderCache
+                        .Instance
                         .GetOrAdd(options, providerRequired: true)
                         .GetRequiredService<IServiceScopeFactory>()
                         .CreateScope();
@@ -616,10 +618,9 @@ namespace Microsoft.EntityFrameworkCore
                     ? interceptionResult.Result
                     : DbContextDependencies.StateManager.SaveChanges(acceptAllChangesOnSuccess);
 
-                var result = DbContextDependencies.UpdateLogger.SaveChangesCompleted(
-                    this,
-                    entitiesSaved
-                );
+                var result = DbContextDependencies
+                    .UpdateLogger
+                    .SaveChangesCompleted(this, entitiesSaved);
 
                 SavedChanges?.Invoke(
                     this,
@@ -752,7 +753,8 @@ namespace Microsoft.EntityFrameworkCore
 
             SavingChanges?.Invoke(this, new SavingChangesEventArgs(acceptAllChangesOnSuccess));
 
-            var interceptionResult = await DbContextDependencies.UpdateLogger
+            var interceptionResult = await DbContextDependencies
+                .UpdateLogger
                 .SaveChangesStartingAsync(this, cancellationToken)
                 .ConfigureAwait(acceptAllChangesOnSuccess);
 
@@ -762,11 +764,13 @@ namespace Microsoft.EntityFrameworkCore
             {
                 var entitiesSaved = interceptionResult.HasResult
                     ? interceptionResult.Result
-                    : await DbContextDependencies.StateManager
+                    : await DbContextDependencies
+                          .StateManager
                           .SaveChangesAsync(acceptAllChangesOnSuccess, cancellationToken)
                           .ConfigureAwait(false);
 
-                var result = await DbContextDependencies.UpdateLogger
+                var result = await DbContextDependencies
+                    .UpdateLogger
                     .SaveChangesCompletedAsync(this, entitiesSaved, cancellationToken)
                     .ConfigureAwait(false);
 
@@ -781,7 +785,8 @@ namespace Microsoft.EntityFrameworkCore
             {
                 EntityFrameworkEventSource.Log.OptimisticConcurrencyFailure();
 
-                await DbContextDependencies.UpdateLogger
+                await DbContextDependencies
+                    .UpdateLogger
                     .OptimisticConcurrencyExceptionAsync(this, exception, cancellationToken)
                     .ConfigureAwait(false);
 
@@ -794,7 +799,8 @@ namespace Microsoft.EntityFrameworkCore
             }
             catch (Exception exception)
             {
-                await DbContextDependencies.UpdateLogger
+                await DbContextDependencies
+                    .UpdateLogger
                     .SaveChangesFailedAsync(this, exception, cancellationToken)
                     .ConfigureAwait(false);
 
@@ -966,9 +972,9 @@ namespace Microsoft.EntityFrameworkCore
 
             var resettableServices = new List<IResettableService>();
 
-            var services = _contextServices?.InternalServiceProvider.GetService<
-                IEnumerable<IResettableService>
-            >();
+            var services = _contextServices
+                ?.InternalServiceProvider
+                .GetService<IEnumerable<IResettableService>>();
             if (services is not null)
             {
                 resettableServices.AddRange(services);
@@ -1131,12 +1137,9 @@ namespace Microsoft.EntityFrameworkCore
         {
             if (entry.EntityState == EntityState.Detached)
             {
-                DbContextDependencies.EntityGraphAttacher.AttachGraph(
-                    entry,
-                    entityState,
-                    entityState,
-                    forceStateWhenUnknownKey: true
-                );
+                DbContextDependencies
+                    .EntityGraphAttacher
+                    .AttachGraph(entry, entityState, entityState, forceStateWhenUnknownKey: true);
             }
             else
             {
@@ -1155,7 +1158,9 @@ namespace Microsoft.EntityFrameworkCore
         )
         {
             return entry.EntityState == EntityState.Detached
-              ? DbContextDependencies.EntityGraphAttacher.AttachGraphAsync(
+              ? DbContextDependencies
+                .EntityGraphAttacher
+                .AttachGraphAsync(
                     entry,
                     entityState,
                     entityState,

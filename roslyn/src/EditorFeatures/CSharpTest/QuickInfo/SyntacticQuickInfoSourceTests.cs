@@ -652,10 +652,12 @@ if (true)
 
             var trackingSpan = new Mock<ITrackingSpan>(MockBehavior.Strict);
             var threadingContext = workspace.ExportProvider.GetExportedValue<IThreadingContext>();
-            var operationExecutor =
-                workspace.ExportProvider.GetExportedValue<IUIThreadOperationExecutor>();
-            var streamingPresenter =
-                workspace.ExportProvider.GetExport<IStreamingFindUsagesPresenter>();
+            var operationExecutor = workspace
+                .ExportProvider
+                .GetExportedValue<IUIThreadOperationExecutor>();
+            var streamingPresenter = workspace
+                .ExportProvider
+                .GetExport<IStreamingFindUsagesPresenter>();
             var quickInfoItem = await IntellisenseQuickInfoBuilder.BuildItemAsync(
                 trackingSpan.Object,
                 info,

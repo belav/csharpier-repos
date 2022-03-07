@@ -86,9 +86,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             {
                 // preserve the exact type of the constant for primitive types,
                 // e.g. it should be Int16 for [DefaultParameterValue((short)1)]int x
-                type = AdaptedParameterSymbol.ContainingAssembly.GetSpecialType(
-                    constant.SpecialType
-                );
+                type = AdaptedParameterSymbol
+                    .ContainingAssembly
+                    .GetSpecialType(constant.SpecialType);
             }
             else
             {

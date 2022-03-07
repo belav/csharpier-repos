@@ -293,7 +293,8 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
                 parameters.MainBuilder.Append(parameters.TargetName).Append('.');
             }
 
-            parameters.MainBuilder
+            parameters
+                .MainBuilder
                 .Append(parameters.IsRuntime ? "AddRuntimeAnnotation(" : "AddAnnotation(")
                 .Append(Dependencies.CSharpHelper.Literal(annotationName))
                 .Append(", ")

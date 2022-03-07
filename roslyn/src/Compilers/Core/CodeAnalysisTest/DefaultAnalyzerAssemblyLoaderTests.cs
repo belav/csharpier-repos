@@ -707,9 +707,9 @@ Delta: Epsilon: Test E
             }
 
             if (
-                !DefaultAnalyzerAssemblyLoader.CompilerAssemblySimpleNames.SetEquals(
-                    allReferenceSimpleNames
-                )
+                !DefaultAnalyzerAssemblyLoader
+                    .CompilerAssemblySimpleNames
+                    .SetEquals(allReferenceSimpleNames)
             )
             {
                 allReferenceSimpleNames.Sort();
@@ -796,9 +796,12 @@ Delta: Epsilon: Test E
             // Load the V2 of Delta to default ALC, then create a separate ALC for compiler and load compiler assembly.
             // Next use compiler context to load and run `AssemblyLoadingInNonDefaultContextHelper2` below. We expect the analyzer running in
             // its own `DirectoryLoadContext` would load and use Delta V1 located in its directory instead of V2 already loaded in the default context.
-            _ = System.Runtime.Loader.AssemblyLoadContext.Default.LoadFromAssemblyPath(
-                _testFixture.Delta2.Path
-            );
+            _ = System
+                .Runtime
+                .Loader
+                .AssemblyLoadContext
+                .Default
+                .LoadFromAssemblyPath(_testFixture.Delta2.Path);
             var compilerContext = new System.Runtime.Loader.AssemblyLoadContext("compilerContext");
             _ = compilerContext.LoadFromAssemblyPath(
                 typeof(DefaultAnalyzerAssemblyLoader).GetTypeInfo().Assembly.Location

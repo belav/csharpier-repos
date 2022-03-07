@@ -616,7 +616,9 @@ namespace System.Xml.Schema
                     }
 
                     foreach (
-                        XmlSchemaAttributeGroup? attributeGroup in includedSchema.AttributeGroups.Values
+                        XmlSchemaAttributeGroup? attributeGroup in includedSchema
+                            .AttributeGroups
+                            .Values
                     )
                     {
                         AddToTable(
@@ -750,10 +752,9 @@ namespace System.Xml.Schema
                             attributeGroup.QualifiedName,
                             attributeGroup
                         );
-                        attributeGroup.Redefined =
-                            (XmlSchemaAttributeGroup?)redefine.Schema!.AttributeGroups[
-                                attributeGroup.QualifiedName
-                            ];
+                        attributeGroup.Redefined = (XmlSchemaAttributeGroup?)redefine
+                            .Schema!
+                            .AttributeGroups[attributeGroup.QualifiedName];
                         if (attributeGroup.Redefined != null)
                         {
                             CheckRefinedAttributeGroup(attributeGroup);
@@ -835,26 +836,26 @@ namespace System.Xml.Schema
 
             foreach (DictionaryEntry entry in redefine.Groups)
             {
-                redefine.Schema!.Groups.Insert(
-                    (XmlQualifiedName)entry.Key!,
-                    (XmlSchemaObject)entry.Value!
-                );
+                redefine
+                    .Schema!
+                    .Groups
+                    .Insert((XmlQualifiedName)entry.Key!, (XmlSchemaObject)entry.Value!);
             }
 
             foreach (DictionaryEntry entry in redefine.AttributeGroups)
             {
-                redefine.Schema!.AttributeGroups.Insert(
-                    (XmlQualifiedName)entry.Key!,
-                    (XmlSchemaObject)entry.Value!
-                );
+                redefine
+                    .Schema!
+                    .AttributeGroups
+                    .Insert((XmlQualifiedName)entry.Key!, (XmlSchemaObject)entry.Value!);
             }
 
             foreach (DictionaryEntry entry in redefine.SchemaTypes)
             {
-                redefine.Schema!.SchemaTypes.Insert(
-                    (XmlQualifiedName)entry.Key!,
-                    (XmlSchemaObject)entry.Value!
-                );
+                redefine
+                    .Schema!
+                    .SchemaTypes
+                    .Insert((XmlQualifiedName)entry.Key!, (XmlSchemaObject)entry.Value!);
             }
         }
 

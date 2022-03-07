@@ -422,8 +422,12 @@ namespace Microsoft.CodeAnalysis.CodeFixes
                 return document;
             }
 
-            var fixAllService =
-                document.Project.Solution.Workspace.Services.GetRequiredService<IFixAllGetFixesService>();
+            var fixAllService = document
+                .Project
+                .Solution
+                .Workspace
+                .Services
+                .GetRequiredService<IFixAllGetFixesService>();
 
             var solution = await fixAllService
                 .GetFixAllChangedSolutionAsync(
@@ -498,8 +502,9 @@ namespace Microsoft.CodeAnalysis.CodeFixes
                 // Log exception and show info bar, if needed.
                 if (logExceptionWithInfoBar)
                 {
-                    var errorReportingService =
-                        workspace.Services.GetRequiredService<IErrorReportingService>();
+                    var errorReportingService = workspace
+                        .Services
+                        .GetRequiredService<IErrorReportingService>();
                     var message =
                         lazyFixer.Metadata.Name != null
                             ? string.Format(
@@ -590,8 +595,12 @@ namespace Microsoft.CodeAnalysis.CodeFixes
                 }
             }
 
-            var extensionManager =
-                document.Project.Solution.Workspace.Services.GetService<IExtensionManager>();
+            var extensionManager = document
+                .Project
+                .Solution
+                .Workspace
+                .Services
+                .GetService<IExtensionManager>();
 
             // Run each CodeFixProvider to gather individual CodeFixes for reported diagnostics.
             // Ensure that no diagnostic has registered code actions from different code fix providers with same equivalance key.
@@ -891,8 +900,12 @@ namespace Microsoft.CodeAnalysis.CodeFixes
                 return;
             }
 
-            var extensionManager =
-                document.Project.Solution.Workspace.Services.GetRequiredService<IExtensionManager>();
+            var extensionManager = document
+                .Project
+                .Solution
+                .Workspace
+                .Services
+                .GetRequiredService<IExtensionManager>();
             var fixes = await extensionManager
                 .PerformFunctionAsync(
                     fixer,
@@ -1004,7 +1017,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes
             }
 
             // Explicitly looks for an AbstractSuppressionCodeFixProvider
-            var fixer = lazyConfigurationProviders.Value
+            var fixer = lazyConfigurationProviders
+                .Value
                 .OfType<AbstractSuppressionCodeFixProvider>()
                 .FirstOrDefault();
             if (fixer == null)
@@ -1163,8 +1177,12 @@ namespace Microsoft.CodeAnalysis.CodeFixes
                 cancellationToken: cancellationToken
             );
 
-            var extensionManager =
-                document.Project.Solution.Workspace.Services.GetRequiredService<IExtensionManager>();
+            var extensionManager = document
+                .Project
+                .Solution
+                .Workspace
+                .Services
+                .GetRequiredService<IExtensionManager>();
 
             // we do have fixer. now let's see whether it actually can fix it
             foreach (var fixer in allFixers)
@@ -1443,8 +1461,11 @@ namespace Microsoft.CodeAnalysis.CodeFixes
             Project project
         )
         {
-            var extensionManager =
-                project.Solution.Workspace.Services.GetService<IExtensionManager>();
+            var extensionManager = project
+                .Solution
+                .Workspace
+                .Services
+                .GetService<IExtensionManager>();
             ImmutableDictionary<DiagnosticId, List<CodeFixProvider>>.Builder? builder = null;
             foreach (var reference in project.AnalyzerReferences)
             {

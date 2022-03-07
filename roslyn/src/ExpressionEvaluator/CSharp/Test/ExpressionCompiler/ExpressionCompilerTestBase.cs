@@ -586,9 +586,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
                     : candidates.FirstOrDefault(
                           c =>
                               parameterTypeNames.SequenceEqual(
-                                  ((MethodSymbol)c).Parameters.Select(
-                                      p => p.TypeWithAnnotations.Type.Name
-                                  )
+                                  ((MethodSymbol)c)
+                                      .Parameters
+                                      .Select(p => p.TypeWithAnnotations.Type.Name)
                               )
                       );
 
@@ -691,18 +691,20 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
             int ilOffset = 0
         )
         {
-            var peCompilation = runtime.Modules
+            var peCompilation = runtime
+                .Modules
                 .SelectAsArray(m => m.MetadataBlock)
                 .ToCompilation(default(Guid), MakeAssemblyReferencesKind.AllAssemblies);
-            var peMethod = peCompilation.GlobalNamespace.GetMember<PEMethodSymbol>(
-                qualifiedMethodName
-            );
+            var peMethod = peCompilation
+                .GlobalNamespace
+                .GetMember<PEMethodSymbol>(qualifiedMethodName);
             var peModule = (PEModuleSymbol)peMethod.ContainingModule;
 
             var symReader =
-                runtime.Modules.Single(
-                    mi => mi.ModuleVersionId == peModule.Module.GetModuleVersionIdOrThrow()
-                ).SymReader;
+                runtime
+                    .Modules
+                    .Single(mi => mi.ModuleVersionId == peModule.Module.GetModuleVersionIdOrThrow())
+                    .SymReader;
             var symbolProvider = new CSharpEESymbolProvider(
                 peCompilation.SourceAssembly,
                 peModule,
@@ -729,9 +731,10 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
             var module = AssemblyMetadata.CreateFromImage(assembly).GetModules().Single().Module;
 
             var typeName = method.ContainingType.Name;
-            var typeHandle = module.MetadataReader.TypeDefinitions.Single(
-                handle => module.GetTypeDefNameOrThrow(handle) == typeName
-            );
+            var typeHandle = module
+                .MetadataReader
+                .TypeDefinitions
+                .Single(handle => module.GetTypeDefNameOrThrow(handle) == typeName);
 
             var methodName = method.Name;
             var methodHandle = module

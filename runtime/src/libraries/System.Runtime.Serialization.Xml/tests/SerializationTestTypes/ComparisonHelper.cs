@@ -73,8 +73,8 @@ namespace SerializationTestTypes
                 //CollectionDataContract is handled as part of DataContract containerTypeAttribute
                 if (
                     data.GetType()
-                        .GetCustomAttributes(typeof(CollectionDataContractAttribute), false).Length
-                    > 0
+                        .GetCustomAttributes(typeof(CollectionDataContractAttribute), false)
+                        .Length > 0
                 )
                 {
                     hasDataContractAttribute = true;
@@ -127,7 +127,8 @@ namespace SerializationTestTypes
             if (
                 originalData
                     .GetType()
-                    .Name.Equals(typeof(System.Runtime.Serialization.ExtensionDataObject).Name)
+                    .Name
+                    .Equals(typeof(System.Runtime.Serialization.ExtensionDataObject).Name)
             )
             {
                 return;
@@ -571,16 +572,14 @@ namespace SerializationTestTypes
                     {
                         if (
                             (
-                                property.GetCustomAttributes(
-                                    typeof(DataMemberAttribute),
-                                    false
-                                ).Length > 0
+                                property
+                                    .GetCustomAttributes(typeof(DataMemberAttribute), false)
+                                    .Length > 0
                             )
                             || (
-                                property.GetCustomAttributes(
-                                    typeof(EnumMemberAttribute),
-                                    false
-                                ).Length > 0
+                                property
+                                    .GetCustomAttributes(typeof(EnumMemberAttribute), false)
+                                    .Length > 0
                             )
                         )
                         {
@@ -610,10 +609,9 @@ namespace SerializationTestTypes
                     )
                     {
                         if (
-                            property.GetCustomAttributes(
-                                typeof(NonSerializedAttribute),
-                                false
-                            ).Length == 0
+                            property
+                                .GetCustomAttributes(typeof(NonSerializedAttribute), false)
+                                .Length == 0
                         )
                         {
                             //Pass attribute of the complex type for furthur evaluation
@@ -642,10 +640,9 @@ namespace SerializationTestTypes
                 {
                     //Ignore member with [IgnoreDataMember] attribute on a POCO type
                     if (
-                        property.GetCustomAttributes(
-                            typeof(IgnoreDataMemberAttribute),
-                            false
-                        ).Length == 0
+                        property
+                            .GetCustomAttributes(typeof(IgnoreDataMemberAttribute), false)
+                            .Length == 0
                     )
                     {
                         //On POCO types, Properties which have both getter and setter will be serialized otherwise ignored
@@ -810,10 +807,9 @@ namespace SerializationTestTypes
                     if (
                         (!field.IsInitOnly)
                         && (
-                            field.GetCustomAttributes(
-                                typeof(IgnoreDataMemberAttribute),
-                                false
-                            ).Length == 0
+                            field
+                                .GetCustomAttributes(typeof(IgnoreDataMemberAttribute), false)
+                                .Length == 0
                         )
                     )
                     {

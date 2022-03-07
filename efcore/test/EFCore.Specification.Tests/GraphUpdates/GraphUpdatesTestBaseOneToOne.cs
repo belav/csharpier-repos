@@ -2037,29 +2037,31 @@ namespace Microsoft.EntityFrameworkCore
 
                     Assert.Equal(
                         CoreStrings.KeyReadOnly("Id", typeof(RequiredSingle1).Name),
-                        Assert.Throws<InvalidOperationException>(
-                            () =>
-                            {
-                                if ((changeMechanism & ChangeMechanism.Principal) != 0)
+                        Assert
+                            .Throws<InvalidOperationException>(
+                                () =>
                                 {
+                                    if ((changeMechanism & ChangeMechanism.Principal) != 0)
+                                    {
+                                        newRoot.RequiredSingle = root.RequiredSingle;
+                                    }
+
+                                    if ((changeMechanism & ChangeMechanism.Dependent) != 0)
+                                    {
+                                        root.RequiredSingle.Root = newRoot;
+                                    }
+
+                                    if ((changeMechanism & ChangeMechanism.Fk) != 0)
+                                    {
+                                        root.RequiredSingle.Id = newRoot.Id;
+                                    }
+
                                     newRoot.RequiredSingle = root.RequiredSingle;
+
+                                    context.SaveChanges();
                                 }
-
-                                if ((changeMechanism & ChangeMechanism.Dependent) != 0)
-                                {
-                                    root.RequiredSingle.Root = newRoot;
-                                }
-
-                                if ((changeMechanism & ChangeMechanism.Fk) != 0)
-                                {
-                                    root.RequiredSingle.Id = newRoot.Id;
-                                }
-
-                                newRoot.RequiredSingle = root.RequiredSingle;
-
-                                context.SaveChanges();
-                            }
-                        ).Message
+                            )
+                            .Message
                     );
                 }
             );

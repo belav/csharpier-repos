@@ -96,7 +96,8 @@ namespace Microsoft.CodeAnalysis.Rebuild
                     ? ImmutableArray<string>.Empty
                     : define.Split(',').ToImmutableArray();
 
-            var parseOptions = CSharpParseOptions.Default
+            var parseOptions = CSharpParseOptions
+                .Default
                 .WithLanguageVersion(langVersion)
                 .WithPreprocessorSymbols(preprocessorSymbols);
 

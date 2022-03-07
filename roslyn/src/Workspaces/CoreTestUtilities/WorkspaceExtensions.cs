@@ -27,7 +27,9 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 oldSolution
                     .AddDocument(id, name, initialText, folders)
                     .GetDocument(id)!
-                    .WithSourceCodeKind(sourceCodeKind).Project.Solution;
+                    .WithSourceCodeKind(sourceCodeKind)
+                    .Project
+                    .Solution;
             workspace.TryApplyChanges(newSolution);
             return id;
         }
@@ -71,9 +73,9 @@ namespace Microsoft.CodeAnalysis.UnitTests
         }
 
         public static IEnumerable<Project> GetProjectsByName(this Solution solution, string name) =>
-            solution.Projects.Where(
-                p => string.Compare(p.Name, name, StringComparison.OrdinalIgnoreCase) == 0
-            );
+            solution
+                .Projects
+                .Where(p => string.Compare(p.Name, name, StringComparison.OrdinalIgnoreCase) == 0);
 
         internal static EventWaiter VerifyWorkspaceChangedEvent(
             this Workspace workspace,

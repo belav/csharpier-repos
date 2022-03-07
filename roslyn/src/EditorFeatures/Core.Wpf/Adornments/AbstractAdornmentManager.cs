@@ -189,7 +189,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Adornments
                 if (needToScheduleUpdate)
                 {
                     // schedule an update
-                    _threadingContext.JoinableTaskFactory
+                    _threadingContext
+                        .JoinableTaskFactory
                         .WithPriority(TextView.VisualElement.Dispatcher, DispatcherPriority.Render)
                         .RunAsync(
                             async () =>
@@ -200,9 +201,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Adornments
                                     )
                                 )
                                 {
-                                    await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
-                                        alwaysYield: true
-                                    );
+                                    await _threadingContext
+                                        .JoinableTaskFactory
+                                        .SwitchToMainThreadAsync(alwaysYield: true);
                                     UpdateInvalidSpans();
                                 }
                             }
@@ -321,21 +322,23 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Adornments
             IMappingTagSpan<GraphicsTag> mappingTagSpan
         )
         {
-            var point = mappingTagSpan.Span.Start.GetPoint(
-                snapshotSpan.Snapshot,
-                PositionAffinity.Predecessor
-            );
+            var point = mappingTagSpan
+                .Span
+                .Start
+                .GetPoint(snapshotSpan.Snapshot, PositionAffinity.Predecessor);
             if (point == null)
             {
                 return null;
             }
 
-            var mappedPoint = TextView.BufferGraph.MapUpToSnapshot(
-                point.Value,
-                PointTrackingMode.Negative,
-                PositionAffinity.Predecessor,
-                TextView.VisualSnapshot
-            );
+            var mappedPoint = TextView
+                .BufferGraph
+                .MapUpToSnapshot(
+                    point.Value,
+                    PointTrackingMode.Negative,
+                    PositionAffinity.Predecessor,
+                    TextView.VisualSnapshot
+                );
             if (mappedPoint == null)
             {
                 return null;

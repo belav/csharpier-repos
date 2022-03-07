@@ -51,7 +51,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
                 result
                     .Should()
                     .Pass()
-                    .And.ExecuteFunctionPointer(sharedState.FunctionPointerEntryPoint1, 1, 1);
+                    .And
+                    .ExecuteFunctionPointer(sharedState.FunctionPointerEntryPoint1, 1, 1);
             }
             else
             {
@@ -106,8 +107,10 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
             result
                 .Should()
                 .InitializeContextForApp(appProject.AppDll)
-                .And.Pass()
-                .And.ExecuteFunctionPointer(sharedState.FunctionPointerEntryPoint1, 1, 1);
+                .And
+                .Pass()
+                .And
+                .ExecuteFunctionPointer(sharedState.FunctionPointerEntryPoint1, 1, 1);
         }
 
         [Theory]
@@ -158,7 +161,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
                 result
                     .Should()
                     .ExecuteFunctionPointer(functionPointer1Name, i * 2 - 1, i)
-                    .And.ExecuteFunctionPointer(sharedState.FunctionPointerEntryPoint2, i * 2, i);
+                    .And
+                    .ExecuteFunctionPointer(sharedState.FunctionPointerEntryPoint2, i * 2, i);
             }
         }
 
@@ -200,7 +204,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
                 result
                     .Should()
                     .ExecuteFunctionPointer(sharedState.FunctionPointerEntryPoint1, i * 2 - 1, i)
-                    .And.ExecuteFunctionPointer(sharedState.FunctionPointerEntryPoint2, i * 2, i);
+                    .And
+                    .ExecuteFunctionPointer(sharedState.FunctionPointerEntryPoint2, i * 2, i);
             }
         }
 
@@ -223,8 +228,10 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
                 .Execute()
                 .Should()
                 .Fail()
-                .And.InitializeContextForApp(appProject.AppDll)
-                .And.ExecuteFunctionPointerWithException(entryPoint, 1);
+                .And
+                .InitializeContextForApp(appProject.AppDll)
+                .And
+                .ExecuteFunctionPointerWithException(entryPoint, 1);
         }
 
         public class SharedTestState : SharedTestStateBase
@@ -300,7 +307,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
         {
             return assertion
                 .ExecuteFunctionPointer(methodName, functionPointerCallCount)
-                .And.HaveStdOutContaining(
+                .And
+                .HaveStdOutContaining(
                     $"{methodName} delegate result: 0x{returnValue.ToString("x")}"
                 );
         }
@@ -314,16 +322,20 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
             var constraint = assertion.ExecuteFunctionPointer(methodName, functionPointerCallCount);
             if (OperatingSystem.IsWindows())
             {
-                return constraint.And.HaveStdOutContaining(
-                    $"{methodName} delegate threw exception: 0x{Constants.ErrorCode.COMPlusException.ToString("x")}"
-                );
+                return constraint
+                    .And
+                    .HaveStdOutContaining(
+                        $"{methodName} delegate threw exception: 0x{Constants.ErrorCode.COMPlusException.ToString("x")}"
+                    );
             }
             else
             {
                 // Exception is unhandled by native host on non-Windows systems
-                return constraint.And
+                return constraint
+                    .And
                     .ExitWith(Constants.ErrorCode.SIGABRT)
-                    .And.HaveStdErrContaining(
+                    .And
+                    .HaveStdErrContaining(
                         $"Unhandled exception. System.InvalidOperationException: {methodName}"
                     );
             }

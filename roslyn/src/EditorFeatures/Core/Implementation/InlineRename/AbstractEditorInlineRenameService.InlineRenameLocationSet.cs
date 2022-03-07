@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
             {
                 _renameInfo = renameInfo;
                 _renameLocationSet = renameLocationSet;
-                this.Locations = renameLocationSet.Locations
+                this.Locations = renameLocationSet
+                    .Locations
                     .Where(RenameLocation.ShouldRename)
                     .Select(ConvertLocation)
                     .ToImmutableArray();

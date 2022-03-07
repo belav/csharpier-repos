@@ -373,7 +373,8 @@ public class ControllerActionDescriptorProviderTests
                     ignoreCase: true
                 );
 
-                var lastHttpMethodMetadata = descriptor.EndpointMetadata
+                var lastHttpMethodMetadata = descriptor
+                    .EndpointMetadata
                     .OfType<IHttpMethodMetadata>()
                     .Last();
                 Assert.Equal(
@@ -616,7 +617,8 @@ public class ControllerActionDescriptorProviderTests
                 a.ActionConstraints
                     .OfType<HttpMethodActionConstraint>()
                     .Single()
-                    .HttpMethods.Single() == "PUT"
+                    .HttpMethods
+                    .Single() == "PUT"
         );
         Assert.Equal(2, putActions.Count());
         Assert.Single(putActions, a => a.AttributeRouteInfo.Template.Equals("v1/All"));
@@ -628,7 +630,8 @@ public class ControllerActionDescriptorProviderTests
                 a.ActionConstraints
                     .OfType<HttpMethodActionConstraint>()
                     .Single()
-                    .HttpMethods.Single() == "POST"
+                    .HttpMethods
+                    .Single() == "POST"
         );
         Assert.Equal(2, routeActions.Count());
         Assert.Single(routeActions, a => a.AttributeRouteInfo.Template.Equals("v1/List"));
@@ -667,7 +670,8 @@ public class ControllerActionDescriptorProviderTests
                 a.ActionConstraints
                     .OfType<HttpMethodActionConstraint>()
                     .Single()
-                    .HttpMethods.Single() == "POST"
+                    .HttpMethods
+                    .Single() == "POST"
         );
         Assert.Equal(2, postActions.Count());
         Assert.Single(postActions, a => a.AttributeRouteInfo.Template.Equals("v1"));
@@ -679,7 +683,8 @@ public class ControllerActionDescriptorProviderTests
                 a.ActionConstraints
                     .OfType<HttpMethodActionConstraint>()
                     .Single()
-                    .HttpMethods.Single() == "PUT"
+                    .HttpMethods
+                    .Single() == "PUT"
         );
         Assert.Equal(2, putActions.Count());
         Assert.Single(putActions, a => a.AttributeRouteInfo.Template.Equals("v1/All"));
@@ -1564,22 +1569,26 @@ public class ControllerActionDescriptorProviderTests
     {
         // Arrange
         var context = new ActionDescriptorProviderContext();
-        context.Results.Add(
-            new ActionDescriptor()
-            {
-                RouteValues = new Dictionary<string, string>()
+        context
+            .Results
+            .Add(
+                new ActionDescriptor()
                 {
-                    { "controller", "Home" },
-                    { "action", "Index" },
+                    RouteValues = new Dictionary<string, string>()
+                    {
+                        { "controller", "Home" },
+                        { "action", "Index" },
+                    }
                 }
-            }
-        );
-        context.Results.Add(
-            new ActionDescriptor()
-            {
-                RouteValues = new Dictionary<string, string>() { { "page", "/Some/Page" } }
-            }
-        );
+            );
+        context
+            .Results
+            .Add(
+                new ActionDescriptor()
+                {
+                    RouteValues = new Dictionary<string, string>() { { "page", "/Some/Page" } }
+                }
+            );
 
         var provider = GetProvider();
 
@@ -2224,12 +2233,14 @@ public class ControllerActionDescriptorProviderTests
     {
         public void Apply(ActionModel action)
         {
-            action.Selectors.Add(
-                new SelectorModel()
-                {
-                    AttributeRouteModel = new AttributeRouteModel() { Template = "/!!!", }
-                }
-            );
+            action
+                .Selectors
+                .Add(
+                    new SelectorModel()
+                    {
+                        AttributeRouteModel = new AttributeRouteModel() { Template = "/!!!", }
+                    }
+                );
         }
     }
 

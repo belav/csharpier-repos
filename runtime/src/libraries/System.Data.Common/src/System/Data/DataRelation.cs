@@ -90,14 +90,16 @@ namespace System.Data
             bool createConstraints
         )
         {
-            DataCommonEventSource.Log.Trace(
-                "<ds.DataRelation.DataRelation|API> {0}, relationName='{1}', parentColumn={2}, childColumn={3}, createConstraints={4}",
-                ObjectID,
-                relationName,
-                (parentColumn != null) ? parentColumn.ObjectID : 0,
-                (childColumn != null) ? childColumn.ObjectID : 0,
-                createConstraints
-            );
+            DataCommonEventSource
+                .Log
+                .Trace(
+                    "<ds.DataRelation.DataRelation|API> {0}, relationName='{1}', parentColumn={2}, childColumn={3}, createConstraints={4}",
+                    ObjectID,
+                    relationName,
+                    (parentColumn != null) ? parentColumn.ObjectID : 0,
+                    (childColumn != null) ? childColumn.ObjectID : 0,
+                    createConstraints
+                );
 
             DataColumn[] parentColumns = new DataColumn[1];
             parentColumns[0] = parentColumn!;
@@ -355,27 +357,21 @@ namespace System.Data
             object[] parentKeyValues = parentRow.GetKeyValues(ParentKey);
             if (childRow._tempRecord != -1)
             {
-                ChildTable._recordManager.SetKeyValues(
-                    childRow._tempRecord,
-                    ChildKey,
-                    parentKeyValues
-                );
+                ChildTable
+                    ._recordManager
+                    .SetKeyValues(childRow._tempRecord, ChildKey, parentKeyValues);
             }
             if (childRow._newRecord != -1)
             {
-                ChildTable._recordManager.SetKeyValues(
-                    childRow._newRecord,
-                    ChildKey,
-                    parentKeyValues
-                );
+                ChildTable
+                    ._recordManager
+                    .SetKeyValues(childRow._newRecord, ChildKey, parentKeyValues);
             }
             if (childRow._oldRecord != -1)
             {
-                ChildTable._recordManager.SetKeyValues(
-                    childRow._oldRecord,
-                    ChildKey,
-                    parentKeyValues
-                );
+                ChildTable
+                    ._recordManager
+                    .SetKeyValues(childRow._oldRecord, ChildKey, parentKeyValues);
             }
         }
 
@@ -432,11 +428,13 @@ namespace System.Data
             }
             set
             {
-                long logScopeId = DataCommonEventSource.Log.EnterScope(
-                    "<ds.DataRelation.set_RelationName|API> {0}, '{1}'",
-                    ObjectID,
-                    value
-                );
+                long logScopeId = DataCommonEventSource
+                    .Log
+                    .EnterScope(
+                        "<ds.DataRelation.set_RelationName|API> {0}, '{1}'",
+                        ObjectID,
+                        value
+                    );
                 try
                 {
                     if (value == null)
@@ -520,10 +518,9 @@ namespace System.Data
 
         internal void CheckNestedRelations()
         {
-            DataCommonEventSource.Log.Trace(
-                "<ds.DataRelation.CheckNestedRelations|INFO> {0}",
-                ObjectID
-            );
+            DataCommonEventSource
+                .Log
+                .Trace("<ds.DataRelation.CheckNestedRelations|INFO> {0}", ObjectID);
 
             Debug.Assert(
                 DataSet == null || !_nested,
@@ -592,11 +589,9 @@ namespace System.Data
             }
             set
             {
-                long logScopeId = DataCommonEventSource.Log.EnterScope(
-                    "<ds.DataRelation.set_Nested|API> {0}, {1}",
-                    ObjectID,
-                    value
-                );
+                long logScopeId = DataCommonEventSource
+                    .Log
+                    .EnterScope("<ds.DataRelation.set_Nested|API> {0}, {1}", ObjectID, value);
                 try
                 {
                     if (_nested != value)
@@ -613,8 +608,9 @@ namespace System.Data
                                     ChildTable != null,
                                     "On a DataSet, but not on Table. Bad state"
                                 );
-                                ForeignKeyConstraint? constraint =
-                                    ChildTable.Constraints.FindForeignKeyConstraint(
+                                ForeignKeyConstraint? constraint = ChildTable
+                                    .Constraints
+                                    .FindForeignKeyConstraint(
                                         ChildKey.ColumnsReference,
                                         ParentKey.ColumnsReference
                                     );
@@ -880,12 +876,14 @@ namespace System.Data
             bool createConstraints
         )
         {
-            long logScopeId = DataCommonEventSource.Log.EnterScope(
-                "<ds.DataRelation.Create|INFO> {0}, relationName='{1}', createConstraints={2}",
-                ObjectID,
-                relationName,
-                createConstraints
-            );
+            long logScopeId = DataCommonEventSource
+                .Log
+                .EnterScope(
+                    "<ds.DataRelation.Create|INFO> {0}, relationName='{1}', createConstraints={2}",
+                    ObjectID,
+                    relationName,
+                    createConstraints
+                );
             try
             {
                 _parentKey = new DataKey(parentColumns, true);
@@ -920,11 +918,13 @@ namespace System.Data
 
         internal DataRelation Clone(DataSet destination)
         {
-            DataCommonEventSource.Log.Trace(
-                "<ds.DataRelation.Clone|INFO> {0}, destination={1}",
-                ObjectID,
-                (destination != null) ? destination.ObjectID : 0
-            );
+            DataCommonEventSource
+                .Log
+                .Trace(
+                    "<ds.DataRelation.Clone|INFO> {0}, destination={1}",
+                    ObjectID,
+                    (destination != null) ? destination.ObjectID : 0
+                );
             Debug.Assert(destination != null);
 
             DataTable parent = destination.Tables[ParentTable.TableName, ParentTable.Namespace]!;
@@ -966,10 +966,9 @@ namespace System.Data
         {
             if (PropertyChanging != null)
             {
-                DataCommonEventSource.Log.Trace(
-                    "<ds.DataRelation.OnPropertyChanging|INFO> {0}",
-                    ObjectID
-                );
+                DataCommonEventSource
+                    .Log
+                    .Trace("<ds.DataRelation.OnPropertyChanging|INFO> {0}", ObjectID);
                 PropertyChanging(this, pcevent);
             }
         }

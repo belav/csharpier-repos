@@ -86,10 +86,16 @@ namespace System.Net.Http
             CookieHeaderValue[] matches = cookieHeaderValues
                 .Where(
                     header =>
-                        header.Cookies.Any(
-                            state =>
-                                String.Equals(state.Name, name, StringComparison.OrdinalIgnoreCase)
-                        )
+                        header
+                            .Cookies
+                            .Any(
+                                state =>
+                                    String.Equals(
+                                        state.Name,
+                                        name,
+                                        StringComparison.OrdinalIgnoreCase
+                                    )
+                            )
                 )
                 .ToArray();
             return new Collection<CookieHeaderValue>(matches);

@@ -56,7 +56,8 @@ class B
         public void TestAccessPrivateMemberOfInternalType()
         {
             var semanticModel = GetSemanticModelWithIgnoreAccessibility();
-            var invocation = semanticModel.SyntaxTree
+            var invocation = semanticModel
+                .SyntaxTree
                 .GetRoot()
                 .DescendantNodes()
                 .OfType<InvocationExpressionSyntax>()
@@ -84,7 +85,8 @@ class B
         public void TestAccessChecksInSpeculativeExpression()
         {
             var semanticModel = GetSemanticModelWithIgnoreAccessibility();
-            var invocation = semanticModel.SyntaxTree
+            var invocation = semanticModel
+                .SyntaxTree
                 .GetRoot()
                 .DescendantNodes()
                 .OfType<InvocationExpressionSyntax>()
@@ -94,20 +96,26 @@ class B
             var exp = SyntaxFactory.ParseExpression("new A().M()._num");
             Assert.Equal(
                 "Int32",
-                semanticModel.GetSpeculativeTypeInfo(
-                    position,
-                    exp,
-                    SpeculativeBindingOption.BindAsExpression
-                ).Type.Name
+                semanticModel
+                    .GetSpeculativeTypeInfo(
+                        position,
+                        exp,
+                        SpeculativeBindingOption.BindAsExpression
+                    )
+                    .Type
+                    .Name
             );
 
             Assert.Equal(
                 "_num",
-                semanticModel.GetSpeculativeSymbolInfo(
-                    position,
-                    exp,
-                    SpeculativeBindingOption.BindAsExpression
-                ).Symbol.Name
+                semanticModel
+                    .GetSpeculativeSymbolInfo(
+                        position,
+                        exp,
+                        SpeculativeBindingOption.BindAsExpression
+                    )
+                    .Symbol
+                    .Name
             );
         }
 
@@ -115,7 +123,8 @@ class B
         public void TestAccessChecksInSpeculativeSemanticModel()
         {
             var semanticModel = GetSemanticModelWithIgnoreAccessibility();
-            var invocation = semanticModel.SyntaxTree
+            var invocation = semanticModel
+                .SyntaxTree
                 .GetRoot()
                 .DescendantNodes()
                 .OfType<InvocationExpressionSyntax>()
@@ -163,7 +172,8 @@ class C
             var expr = (ExpressionSyntax)tree.GetCompilationUnitRoot()
                 .DescendantNodes()
                 .OfType<SimpleLambdaExpressionSyntax>()
-                .Single().Body;
+                .Single()
+                .Body;
 
             var symbolInfo = model.GetSpeculativeSymbolInfo(
                 expr.FullSpan.Start,
@@ -236,19 +246,25 @@ class B
 
             Assert.Equal(
                 "Int32",
-                semanticModel.GetSpeculativeTypeInfo(
-                    position,
-                    speculativeInvocation,
-                    SpeculativeBindingOption.BindAsExpression
-                ).Type.Name
+                semanticModel
+                    .GetSpeculativeTypeInfo(
+                        position,
+                        speculativeInvocation,
+                        SpeculativeBindingOption.BindAsExpression
+                    )
+                    .Type
+                    .Name
             );
             Assert.Equal(
                 "InternalExtension",
-                semanticModel.GetSpeculativeSymbolInfo(
-                    position,
-                    speculativeInvocation,
-                    SpeculativeBindingOption.BindAsExpression
-                ).Symbol.Name
+                semanticModel
+                    .GetSpeculativeSymbolInfo(
+                        position,
+                        speculativeInvocation,
+                        SpeculativeBindingOption.BindAsExpression
+                    )
+                    .Symbol
+                    .Name
             );
         }
 
@@ -306,7 +322,8 @@ class C : R
             Assert.True(success);
             Assert.NotNull(speculativeModel);
 
-            var p = speculativeModel.SyntaxTree
+            var p = speculativeModel
+                .SyntaxTree
                 .GetRoot()
                 .DescendantNodes()
                 .OfType<IdentifierNameSyntax>()

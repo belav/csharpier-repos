@@ -165,24 +165,30 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
             switch (builder)
             {
                 case IInfrastructure<EntityTypeBuilder<TEntity>> genericBuilder:
-                    genericBuilder.Instance.ToTable(
-                        name,
-                        b =>
-                            buildAction(
-                                new RelationalModelBuilderTest.GenericTestTableBuilder<TEntity>(b)
-                            )
-                    );
+                    genericBuilder
+                        .Instance
+                        .ToTable(
+                            name,
+                            b =>
+                                buildAction(
+                                    new RelationalModelBuilderTest.GenericTestTableBuilder<TEntity>(
+                                        b
+                                    )
+                                )
+                        );
                     break;
                 case IInfrastructure<EntityTypeBuilder> nongenericBuilder:
-                    nongenericBuilder.Instance.ToTable(
-                        name,
-                        b =>
-                            buildAction(
-                                new RelationalModelBuilderTest.NonGenericTestTableBuilder<TEntity>(
-                                    b
+                    nongenericBuilder
+                        .Instance
+                        .ToTable(
+                            name,
+                            b =>
+                                buildAction(
+                                    new RelationalModelBuilderTest.NonGenericTestTableBuilder<TEntity>(
+                                        b
+                                    )
                                 )
-                            )
-                    );
+                        );
                     break;
             }
 
@@ -199,26 +205,32 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
             switch (builder)
             {
                 case IInfrastructure<EntityTypeBuilder<TEntity>> genericBuilder:
-                    genericBuilder.Instance.ToTable(
-                        name,
-                        schema,
-                        b =>
-                            buildAction(
-                                new RelationalModelBuilderTest.GenericTestTableBuilder<TEntity>(b)
-                            )
-                    );
+                    genericBuilder
+                        .Instance
+                        .ToTable(
+                            name,
+                            schema,
+                            b =>
+                                buildAction(
+                                    new RelationalModelBuilderTest.GenericTestTableBuilder<TEntity>(
+                                        b
+                                    )
+                                )
+                        );
                     break;
                 case IInfrastructure<EntityTypeBuilder> nongenericBuilder:
-                    nongenericBuilder.Instance.ToTable(
-                        name,
-                        schema,
-                        b =>
-                            buildAction(
-                                new RelationalModelBuilderTest.NonGenericTestTableBuilder<TEntity>(
-                                    b
+                    nongenericBuilder
+                        .Instance
+                        .ToTable(
+                            name,
+                            schema,
+                            b =>
+                                buildAction(
+                                    new RelationalModelBuilderTest.NonGenericTestTableBuilder<TEntity>(
+                                        b
+                                    )
                                 )
-                            )
-                    );
+                        );
                     break;
             }
 
@@ -292,26 +304,30 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                 case IInfrastructure<
                     OwnedNavigationBuilder<TOwnerEntity, TRelatedEntity>
                 > genericBuilder:
-                    genericBuilder.Instance.ToTable(
-                        name,
-                        b =>
-                            buildAction(
-                                new RelationalModelBuilderTest.GenericTestTableBuilder<TRelatedEntity>(
-                                    b
+                    genericBuilder
+                        .Instance
+                        .ToTable(
+                            name,
+                            b =>
+                                buildAction(
+                                    new RelationalModelBuilderTest.GenericTestTableBuilder<TRelatedEntity>(
+                                        b
+                                    )
                                 )
-                            )
-                    );
+                        );
                     break;
                 case IInfrastructure<OwnedNavigationBuilder> nongenericBuilder:
-                    nongenericBuilder.Instance.ToTable(
-                        name,
-                        b =>
-                            buildAction(
-                                new RelationalModelBuilderTest.NonGenericTestTableBuilder<TRelatedEntity>(
-                                    b
+                    nongenericBuilder
+                        .Instance
+                        .ToTable(
+                            name,
+                            b =>
+                                buildAction(
+                                    new RelationalModelBuilderTest.NonGenericTestTableBuilder<TRelatedEntity>(
+                                        b
+                                    )
                                 )
-                            )
-                    );
+                        );
                     break;
             }
 
@@ -335,28 +351,32 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                 case IInfrastructure<
                     OwnedNavigationBuilder<TOwnerEntity, TRelatedEntity>
                 > genericBuilder:
-                    genericBuilder.Instance.ToTable(
-                        name,
-                        schema,
-                        b =>
-                            buildAction(
-                                new RelationalModelBuilderTest.GenericTestTableBuilder<TRelatedEntity>(
-                                    b
+                    genericBuilder
+                        .Instance
+                        .ToTable(
+                            name,
+                            schema,
+                            b =>
+                                buildAction(
+                                    new RelationalModelBuilderTest.GenericTestTableBuilder<TRelatedEntity>(
+                                        b
+                                    )
                                 )
-                            )
-                    );
+                        );
                     break;
                 case IInfrastructure<OwnedNavigationBuilder> nongenericBuilder:
-                    nongenericBuilder.Instance.ToTable(
-                        name,
-                        schema,
-                        b =>
-                            buildAction(
-                                new RelationalModelBuilderTest.NonGenericTestTableBuilder<TRelatedEntity>(
-                                    b
+                    nongenericBuilder
+                        .Instance
+                        .ToTable(
+                            name,
+                            schema,
+                            b =>
+                                buildAction(
+                                    new RelationalModelBuilderTest.NonGenericTestTableBuilder<TRelatedEntity>(
+                                        b
+                                    )
                                 )
-                            )
-                    );
+                        );
                     break;
             }
 
@@ -392,28 +412,32 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
             switch (builder)
             {
                 case IInfrastructure<EntityTypeBuilder<TEntity>> genericBuilder:
-                    genericBuilder.Instance.HasCheckConstraint(
-                        name,
-                        sql,
-                        b =>
-                            buildAction(
-                                new RelationalModelBuilderTest.NonGenericTestCheckConstraintBuilder(
-                                    b
+                    genericBuilder
+                        .Instance
+                        .HasCheckConstraint(
+                            name,
+                            sql,
+                            b =>
+                                buildAction(
+                                    new RelationalModelBuilderTest.NonGenericTestCheckConstraintBuilder(
+                                        b
+                                    )
                                 )
-                            )
-                    );
+                        );
                     break;
                 case IInfrastructure<EntityTypeBuilder> nongenericBuilder:
-                    nongenericBuilder.Instance.HasCheckConstraint(
-                        name,
-                        sql,
-                        b =>
-                            buildAction(
-                                new RelationalModelBuilderTest.NonGenericTestCheckConstraintBuilder(
-                                    b
+                    nongenericBuilder
+                        .Instance
+                        .HasCheckConstraint(
+                            name,
+                            sql,
+                            b =>
+                                buildAction(
+                                    new RelationalModelBuilderTest.NonGenericTestCheckConstraintBuilder(
+                                        b
+                                    )
                                 )
-                            )
-                    );
+                        );
                     break;
             }
 
@@ -463,28 +487,32 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                 case IInfrastructure<
                     OwnedNavigationBuilder<TOwnerEntity, TRelatedEntity>
                 > genericBuilder:
-                    genericBuilder.Instance.HasCheckConstraint(
-                        name,
-                        sql,
-                        b =>
-                            buildAction(
-                                new RelationalModelBuilderTest.NonGenericTestCheckConstraintBuilder(
-                                    b
+                    genericBuilder
+                        .Instance
+                        .HasCheckConstraint(
+                            name,
+                            sql,
+                            b =>
+                                buildAction(
+                                    new RelationalModelBuilderTest.NonGenericTestCheckConstraintBuilder(
+                                        b
+                                    )
                                 )
-                            )
-                    );
+                        );
                     break;
                 case IInfrastructure<OwnedNavigationBuilder> nongenericBuilder:
-                    nongenericBuilder.Instance.HasCheckConstraint(
-                        name,
-                        sql,
-                        b =>
-                            buildAction(
-                                new RelationalModelBuilderTest.NonGenericTestCheckConstraintBuilder(
-                                    b
+                    nongenericBuilder
+                        .Instance
+                        .HasCheckConstraint(
+                            name,
+                            sql,
+                            b =>
+                                buildAction(
+                                    new RelationalModelBuilderTest.NonGenericTestCheckConstraintBuilder(
+                                        b
+                                    )
                                 )
-                            )
-                    );
+                        );
                     break;
             }
 

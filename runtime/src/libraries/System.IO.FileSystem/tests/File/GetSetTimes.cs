@@ -58,9 +58,10 @@ namespace System.IO.Tests
 
             // Set the creation time to a value in the past that is between ctime and now.
             await Task.Delay(600);
-            DateTime newCreationTimeUTC = System.DateTime.UtcNow.Subtract(
-                TimeSpan.FromMilliseconds(300)
-            );
+            DateTime newCreationTimeUTC = System
+                .DateTime
+                .UtcNow
+                .Subtract(TimeSpan.FromMilliseconds(300));
             File.SetCreationTimeUtc(path, newCreationTimeUTC);
 
             Assert.Equal(newCreationTimeUTC, File.GetLastWriteTimeUtc(path));

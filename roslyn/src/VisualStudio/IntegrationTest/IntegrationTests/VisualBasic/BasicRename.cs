@@ -52,8 +52,11 @@ End Module";
             AssertEx.SetEqual(renameSpans, tags);
 
             VisualStudio.Editor.SendKeys(VirtualKey.Y, VirtualKey.Enter);
-            VisualStudio.Editor.Verify.TextContains(
-                @"
+            VisualStudio
+                .Editor
+                .Verify
+                .TextContains(
+                    @"
 Imports System
 Imports System.Collections.Generic
 Imports System.Linq
@@ -68,7 +71,7 @@ Module Program
 
     End Sub
 End Module"
-            );
+                );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.Rename)]
@@ -103,8 +106,11 @@ End Module";
             AssertEx.SetEqual(renameSpans, tags);
 
             VisualStudio.Editor.SendKeys(VirtualKey.Y, VirtualKey.Enter);
-            VisualStudio.Editor.Verify.TextContains(
-                @"
+            VisualStudio
+                .Editor
+                .Verify
+                .TextContains(
+                    @"
 Imports System
 Imports System.Collections.Generic
 Imports System.Linq
@@ -120,7 +126,7 @@ Module Program
         y = 5
         TestMethod(y)
 End Module"
-            );
+                );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.Rename)]
@@ -149,8 +155,11 @@ End Module";
             AssertEx.SetEqual(renameSpans, tags);
 
             VisualStudio.Editor.SendKeys(VirtualKey.Y, VirtualKey.Enter);
-            VisualStudio.Editor.Verify.TextContains(
-                @"
+            VisualStudio
+                .Editor
+                .Verify
+                .TextContains(
+                    @"
 Imports System
 Imports System.Collections.Generic
 Imports System.Linq
@@ -162,7 +171,7 @@ Module Program
         Dim s = ""y xx y""
     End Sub
 End Module"
-            );
+                );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.Rename)]
@@ -190,8 +199,11 @@ End Class";
             AssertEx.SetEqual(renameSpans, tags);
 
             VisualStudio.Editor.SendKeys(VirtualKey.Y, VirtualKey.Enter);
-            VisualStudio.Editor.Verify.TextContains(
-                @"
+            VisualStudio
+                .Editor
+                .Verify
+                .TextContains(
+                    @"
 Interface I
     Sub y(y As Integer)
     Sub y(y As String)
@@ -202,7 +214,7 @@ Public MustInherit Class A
     Public MustOverride Sub y(y As Integer) Implements I.y
     Public MustOverride Sub y(y As String) Implements I.y
 End Class"
-            );
+                );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.Rename)]
@@ -224,14 +236,17 @@ End Class";
             AssertEx.SetEqual(renameSpans, tags);
 
             VisualStudio.Editor.SendKeys("Custom", VirtualKey.Enter);
-            VisualStudio.Editor.Verify.TextContains(
-                @"
+            VisualStudio
+                .Editor
+                .Verify
+                .TextContains(
+                    @"
 Import System;
 
 Public Class CustomAttribute
     Inherits Attribute
 End Class"
-            );
+                );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.Rename)]
@@ -254,15 +269,18 @@ End Class";
             AssertEx.SetEqual(renameSpans, tags);
 
             VisualStudio.Editor.SendKeys("Custom");
-            VisualStudio.Editor.Verify.TextContains(
-                @"
+            VisualStudio
+                .Editor
+                .Verify
+                .TextContains(
+                    @"
 Import System;
 
 Public Class Custom$$Attribute 
         Inherits Attribute
 End Class",
-                true
-            );
+                    true
+                );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.Rename)]
@@ -287,8 +305,11 @@ End Class";
             _ = VisualStudio.Editor.GetTagSpans(InlineRenameDialog.ValidRenameTag);
 
             VisualStudio.Editor.SendKeys("Custom");
-            VisualStudio.Editor.Verify.TextContains(
-                @"
+            VisualStudio
+                .Editor
+                .Verify
+                .TextContains(
+                    @"
 Import System;
 
 <Custom$$>
@@ -298,8 +319,8 @@ End Class
 Public Class CustomAttribute 
         Inherits Attribute
 End Class",
-                true
-            );
+                    true
+                );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.Rename)]
@@ -324,8 +345,11 @@ End Class";
             _ = VisualStudio.Editor.GetTagSpans(InlineRenameDialog.ValidRenameTag);
 
             VisualStudio.Editor.SendKeys("Custom");
-            VisualStudio.Editor.Verify.TextContains(
-                @"
+            VisualStudio
+                .Editor
+                .Verify
+                .TextContains(
+                    @"
 Import System;
 
 <Custom>
@@ -335,8 +359,8 @@ End Class
 Public Class Custom$$Attribute 
         Inherits Attribute
 End Class",
-                true
-            );
+                    true
+                );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.Rename)]
@@ -358,14 +382,17 @@ End Class";
             AssertEx.SetEqual(renameSpans, tags);
 
             VisualStudio.Editor.SendKeys("Custom", VirtualKey.Enter);
-            VisualStudio.Editor.Verify.TextContains(
-                @"
+            VisualStudio
+                .Editor
+                .Verify
+                .TextContains(
+                    @"
 Import System;
 
 Public Class CustomAttribute
     Inherits Attribute
 End Class"
-            );
+                );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.Rename)]
@@ -387,14 +414,17 @@ End Class";
             AssertEx.SetEqual(renameSpans, tags);
 
             VisualStudio.Editor.SendKeys("Custom", VirtualKey.Enter);
-            VisualStudio.Editor.Verify.TextContains(
-                @"
+            VisualStudio
+                .Editor
+                .Verify
+                .TextContains(
+                    @"
 Import System;
 
 Public Class CustomAttribute
     Inherits Attribute
 End Class"
-            );
+                );
         }
     }
 }

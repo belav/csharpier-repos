@@ -24,20 +24,26 @@ public class ControllerActionDescriptorBuilderTest
         );
 
         var propertyInfo = controller.ControllerType.AsType().GetProperty("BoundProperty");
-        controller.ControllerProperties.Add(
-            new PropertyModel(propertyInfo, new List<object>() { })
-            {
-                BindingInfo = BindingInfo.GetBindingInfo(new object[] { new FromQueryAttribute() }),
-                PropertyName = "BoundProperty"
-            }
-        );
+        controller
+            .ControllerProperties
+            .Add(
+                new PropertyModel(propertyInfo, new List<object>() { })
+                {
+                    BindingInfo = BindingInfo.GetBindingInfo(
+                        new object[] { new FromQueryAttribute() }
+                    ),
+                    PropertyName = "BoundProperty"
+                }
+            );
 
-        controller.ControllerProperties.Add(
-            new PropertyModel(
-                controller.ControllerType.AsType().GetProperty("UnboundProperty"),
-                new List<object>() { }
-            )
-        );
+        controller
+            .ControllerProperties
+            .Add(
+                new PropertyModel(
+                    controller.ControllerType.AsType().GetProperty("UnboundProperty"),
+                    new List<object>() { }
+                )
+            );
 
         controller.Application = applicationModel;
         applicationModel.Controllers.Add(controller);

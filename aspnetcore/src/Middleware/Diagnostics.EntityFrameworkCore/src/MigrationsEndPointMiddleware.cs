@@ -124,7 +124,8 @@ public class MigrationsEndPointMiddleware
         }
 
         // Look for DbContext classes registered in the service provider
-        var registeredContexts = context.RequestServices
+        var registeredContexts = context
+            .RequestServices
             .GetServices<DbContextOptions>()
             .Select(o => o.ContextType);
 

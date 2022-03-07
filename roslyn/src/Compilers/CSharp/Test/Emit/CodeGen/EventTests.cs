@@ -779,7 +779,8 @@ class C
 
             compilation2
                 .Emit(new System.IO.MemoryStream())
-                .Diagnostics.Verify(
+                .Diagnostics
+                .Verify(
                     // (7,21): error CS0656: Missing compiler required member 'System.Delegate.Combine'
                     //     public event E1 e;
                     Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "e")

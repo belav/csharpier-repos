@@ -359,7 +359,8 @@ namespace Microsoft.CodeAnalysis.Interactive
         {
             try
             {
-                return await remoteService.JsonRpc
+                return await remoteService
+                    .JsonRpc
                     .InvokeAsync<TResult>(targetName, arguments)
                     .ConfigureAwait(false);
             }

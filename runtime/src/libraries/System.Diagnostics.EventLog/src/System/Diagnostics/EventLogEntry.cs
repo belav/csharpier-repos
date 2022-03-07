@@ -294,15 +294,17 @@ namespace System.Diagnostics
                     fixed (char* bufDomainName = new char[domainNameLen])
                     {
                         if (
-                            Interop.Advapi32.LookupAccountSid(
-                                MachineName,
-                                sid,
-                                bufUserName,
-                                ref userNameLen,
-                                bufDomainName,
-                                ref domainNameLen,
-                                out int sidNameUse
-                            ) != 0
+                            Interop
+                                .Advapi32
+                                .LookupAccountSid(
+                                    MachineName,
+                                    sid,
+                                    bufUserName,
+                                    ref userNameLen,
+                                    bufDomainName,
+                                    ref domainNameLen,
+                                    out int sidNameUse
+                                ) != 0
                         )
                         {
                             return new string(bufDomainName) + "\\" + new string(bufUserName);

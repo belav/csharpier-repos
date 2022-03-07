@@ -167,9 +167,9 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             DbContextOptions options
         ) =>
             new(
-                new DbContextOptionsBuilder(options).UseInternalServiceProvider(
-                    serviceProvider
-                ).Options
+                new DbContextOptionsBuilder(options)
+                    .UseInternalServiceProvider(serviceProvider)
+                    .Options
             );
 
         public DbContext CreateContext(IServiceProvider serviceProvider) =>
@@ -180,9 +180,9 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
 
         public DbContext CreateContext(DbContextOptions options) =>
             new(
-                new DbContextOptionsBuilder(options).UseInternalServiceProvider(
-                    CreateServiceProvider()
-                ).Options
+                new DbContextOptionsBuilder(options)
+                    .UseInternalServiceProvider(CreateServiceProvider())
+                    .Options
             );
 
         public DbContext CreateContext() => new(CreateOptions(CreateServiceProvider()));
@@ -195,9 +195,9 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             DbContextOptions options
         ) =>
             new(
-                new DbContextOptionsBuilder(options).UseInternalServiceProvider(
-                    CreateServiceProvider(customServices)
-                ).Options
+                new DbContextOptionsBuilder(options)
+                    .UseInternalServiceProvider(CreateServiceProvider(customServices))
+                    .Options
             );
 
         public DbContext CreateContext(IServiceCollection customServices) =>

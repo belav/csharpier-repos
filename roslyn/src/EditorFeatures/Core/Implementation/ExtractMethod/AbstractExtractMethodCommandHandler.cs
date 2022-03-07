@@ -82,10 +82,12 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.ExtractMethod
             }
 
             using (
-                context.OperationContext.AddScope(
-                    allowCancellation: true,
-                    EditorFeaturesResources.Applying_Extract_Method_refactoring
-                )
+                context
+                    .OperationContext
+                    .AddScope(
+                        allowCancellation: true,
+                        EditorFeaturesResources.Applying_Extract_Method_refactoring
+                    )
             )
             {
                 return Execute(args.SubjectBuffer, args.TextView, context.OperationContext);
@@ -106,8 +108,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.ExtractMethod
                 return false;
             }
 
-            var document =
-                textBuffer.CurrentSnapshot.GetFullyLoadedOpenDocumentInCurrentContextWithChanges(
+            var document = textBuffer
+                .CurrentSnapshot
+                .GetFullyLoadedOpenDocumentInCurrentContextWithChanges(
                     waitContext,
                     _threadingContext
                 );
@@ -137,8 +140,12 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.ExtractMethod
                 );
                 if (newResult != null)
                 {
-                    var notificationService =
-                        document.Project.Solution.Workspace.Services.GetService<INotificationService>();
+                    var notificationService = document
+                        .Project
+                        .Solution
+                        .Workspace
+                        .Services
+                        .GetService<INotificationService>();
                     if (notificationService != null)
                     {
                         // We are about to show a modal UI dialog so we should take over the command execution
@@ -215,8 +222,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.ExtractMethod
             waitContext.TakeOwnership();
             var project = document.Project;
             var solution = project.Solution;
-            var notificationService =
-                solution.Workspace.Services.GetService<INotificationService>();
+            var notificationService = solution
+                .Workspace
+                .Services
+                .GetService<INotificationService>();
 
             // see whether we will allow best effort extraction and if it is possible.
             if (
@@ -288,18 +297,16 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.ExtractMethod
             }
 
             var reason = result.Reasons.FirstOrDefault();
-            var length =
-                FeaturesResources.Asynchronous_method_cannot_have_ref_out_parameters_colon_bracket_0_bracket.IndexOf(
-                    ':'
-                );
+            var length = FeaturesResources
+                .Asynchronous_method_cannot_have_ref_out_parameters_colon_bracket_0_bracket
+                .IndexOf(':');
             if (
                 reason != null
                 && length > 0
                 && reason.IndexOf(
-                    FeaturesResources.Asynchronous_method_cannot_have_ref_out_parameters_colon_bracket_0_bracket.Substring(
-                        0,
-                        length
-                    ),
+                    FeaturesResources
+                        .Asynchronous_method_cannot_have_ref_out_parameters_colon_bracket_0_bracket
+                        .Substring(0, length),
                     0,
                     length,
                     StringComparison.Ordinal
@@ -342,7 +349,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.ExtractMethod
         {
             using var undoTransaction = _undoManager
                 .GetTextBufferUndoManager(subjectBuffer)
-                .TextBufferUndoHistory.CreateTransaction("Extract Method");
+                .TextBufferUndoHistory
+                .CreateTransaction("Extract Method");
 
             // apply extract method code to buffer
             var document = extractMethodResult.Document;

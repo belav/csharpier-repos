@@ -36,7 +36,8 @@ namespace DispatchProxyTests
             Assert.NotNull(proxy);
             Type[] implementedInterfaces = typeof(TestType_IHelloAndGoodbyeService)
                 .GetTypeInfo()
-                .ImplementedInterfaces.ToArray();
+                .ImplementedInterfaces
+                .ToArray();
             foreach (Type t in implementedInterfaces)
             {
                 Assert.IsAssignableFrom(t, proxy);
@@ -65,7 +66,8 @@ namespace DispatchProxyTests
             // ensure we emit a valid attribute definition
             Type iactAttributeType = proxy
                 .GetType()
-                .Assembly.GetType("System.Runtime.CompilerServices.IgnoresAccessChecksToAttribute");
+                .Assembly
+                .GetType("System.Runtime.CompilerServices.IgnoresAccessChecksToAttribute");
             Assert.NotNull(iactAttributeType);
             ConstructorInfo constructor = iactAttributeType.GetConstructor(
                 new[] { typeof(string) }

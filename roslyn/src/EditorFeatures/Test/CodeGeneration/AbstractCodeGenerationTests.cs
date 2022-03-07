@@ -31,7 +31,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeGeneration
         {
             var projectId = ProjectId.CreateNewId();
 
-            var project = workspace.CurrentSolution
+            var project = workspace
+                .CurrentSolution
                 .AddProject(projectId, languageName, $"{languageName}.dll", languageName)
                 .GetProject(projectId);
 
@@ -43,7 +44,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeGeneration
             var annotatedDocument = document.WithSyntaxRoot(
                 document
                     .GetSyntaxRootAsync()
-                    .Result.WithAdditionalAnnotations(Simplification.Simplifier.Annotation)
+                    .Result
+                    .WithAdditionalAnnotations(Simplification.Simplifier.Annotation)
             );
 
             var simplifiedDocument =
@@ -95,7 +97,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeGeneration
 
             if (cs != null || csSimple != null)
             {
-                var codeDefFactory = workspace.Services
+                var codeDefFactory = workspace
+                    .Services
                     .GetLanguageServices(LanguageNames.CSharp)
                     .GetService<SyntaxGenerator>();
 
@@ -118,7 +121,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeGeneration
                         simplifiedRootNode
                             .DescendantNodes()
                             .OfType<EqualsValueClauseSyntax>()
-                            .First().Value;
+                            .First()
+                            .Value;
 
                     TokenUtilities.AssertTokensEqual(
                         csSimple,
@@ -130,7 +134,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeGeneration
 
             if (vb != null || vbSimple != null)
             {
-                var codeDefFactory = workspace.Services
+                var codeDefFactory = workspace
+                    .Services
                     .GetLanguageServices(LanguageNames.VisualBasic)
                     .GetService<SyntaxGenerator>();
 
@@ -157,7 +162,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeGeneration
                         simplifiedRootNode
                             .DescendantNodes()
                             .OfType<EqualsValueSyntax>()
-                            .First().Value;
+                            .First()
+                            .Value;
 
                     TokenUtilities.AssertTokensEqual(
                         vbSimple,

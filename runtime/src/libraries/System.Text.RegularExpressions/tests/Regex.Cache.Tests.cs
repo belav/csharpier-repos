@@ -109,9 +109,9 @@ namespace System.Text.RegularExpressions.Tests
                         Assert.True(Regex.IsMatch("1", "1", RegexOptions.Multiline));
                         Assert.True(GetCachedItemsNum() == 2);
                         // Force to set a different culture than the current culture!
-                        CultureInfo.CurrentCulture = CultureInfo.CurrentCulture.Equals(
-                            CultureInfo.GetCultureInfo("de-DE")
-                        )
+                        CultureInfo.CurrentCulture = CultureInfo
+                            .CurrentCulture
+                            .Equals(CultureInfo.GetCultureInfo("de-DE"))
                           ? CultureInfo.InvariantCulture
                           : CultureInfo.GetCultureInfo("de-DE");
                         Assert.True(Regex.IsMatch("1", "1", RegexOptions.Multiline));
@@ -164,7 +164,8 @@ namespace System.Text.RegularExpressions.Tests
         private int GetCachedItemsNum()
         {
             return (
-                (ICollection)typeof(Regex).Assembly
+                (ICollection)typeof(Regex)
+                    .Assembly
                     .GetType("System.Text.RegularExpressions.RegexCache")
                     .GetField("s_cacheList", BindingFlags.NonPublic | BindingFlags.Static)
                     .GetValue(null)

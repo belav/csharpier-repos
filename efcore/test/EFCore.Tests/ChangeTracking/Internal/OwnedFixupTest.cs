@@ -190,9 +190,11 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                         ),
                     "CoreEventId.DuplicateDependentEntityTypeInstanceWarning"
                 ),
-                Assert.Throws<InvalidOperationException>(
-                    () => context.Entry(principal).Reference(p => p.Child2).TargetEntry
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(
+                        () => context.Entry(principal).Reference(p => p.Child2).TargetEntry
+                    )
+                    .Message
             );
         }
 
@@ -579,25 +581,27 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             }
             else if (useTrackGraph == true)
             {
-                context.ChangeTracker.TrackGraph(
-                    principal,
-                    e =>
-                    {
-                        if (entityState != EntityState.Added)
+                context
+                    .ChangeTracker
+                    .TrackGraph(
+                        principal,
+                        e =>
                         {
-                            if (ReferenceEquals(e.Entry.Entity, dependent))
+                            if (entityState != EntityState.Added)
                             {
-                                e.Entry.Property("Id").CurrentValue = 10;
+                                if (ReferenceEquals(e.Entry.Entity, dependent))
+                                {
+                                    e.Entry.Property("Id").CurrentValue = 10;
+                                }
+                                else if (ReferenceEquals(e.Entry.Entity, subDependent))
+                                {
+                                    e.Entry.Property("Id").CurrentValue = 100;
+                                }
                             }
-                            else if (ReferenceEquals(e.Entry.Entity, subDependent))
-                            {
-                                e.Entry.Property("Id").CurrentValue = 100;
-                            }
-                        }
 
-                        e.Entry.State = entityState;
-                    }
-                );
+                            e.Entry.State = entityState;
+                        }
+                    );
             }
             else
             {
@@ -751,25 +755,27 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             }
             else if (useTrackGraph == true)
             {
-                context.ChangeTracker.TrackGraph(
-                    principal,
-                    e =>
-                    {
-                        if (entityState != EntityState.Added)
+                context
+                    .ChangeTracker
+                    .TrackGraph(
+                        principal,
+                        e =>
                         {
-                            if (ReferenceEquals(e.Entry.Entity, dependent))
+                            if (entityState != EntityState.Added)
                             {
-                                e.Entry.Property("Id").CurrentValue = 10;
+                                if (ReferenceEquals(e.Entry.Entity, dependent))
+                                {
+                                    e.Entry.Property("Id").CurrentValue = 10;
+                                }
+                                else if (ReferenceEquals(e.Entry.Entity, subDependent))
+                                {
+                                    e.Entry.Property("Id").CurrentValue = 100;
+                                }
                             }
-                            else if (ReferenceEquals(e.Entry.Entity, subDependent))
-                            {
-                                e.Entry.Property("Id").CurrentValue = 100;
-                            }
-                        }
 
-                        e.Entry.State = entityState;
-                    }
-                );
+                            e.Entry.State = entityState;
+                        }
+                    );
             }
             else
             {
@@ -918,25 +924,27 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             }
             else if (useTrackGraph == true)
             {
-                context.ChangeTracker.TrackGraph(
-                    principal,
-                    e =>
-                    {
-                        if (entityState != EntityState.Added)
+                context
+                    .ChangeTracker
+                    .TrackGraph(
+                        principal,
+                        e =>
                         {
-                            if (ReferenceEquals(e.Entry.Entity, dependent))
+                            if (entityState != EntityState.Added)
                             {
-                                e.Entry.Property("Id").CurrentValue = 10;
+                                if (ReferenceEquals(e.Entry.Entity, dependent))
+                                {
+                                    e.Entry.Property("Id").CurrentValue = 10;
+                                }
+                                else if (ReferenceEquals(e.Entry.Entity, subDependent))
+                                {
+                                    e.Entry.Property("Id").CurrentValue = 100;
+                                }
                             }
-                            else if (ReferenceEquals(e.Entry.Entity, subDependent))
-                            {
-                                e.Entry.Property("Id").CurrentValue = 100;
-                            }
-                        }
 
-                        e.Entry.State = entityState;
-                    }
-                );
+                            e.Entry.State = entityState;
+                        }
+                    );
             }
             else
             {
@@ -2603,9 +2611,11 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             {
                 Assert.Equal(
                     CoreStrings.KeyReadOnly("ParentId", dependentEntry1.Metadata.DisplayName()),
-                    Assert.Throws<InvalidOperationException>(
-                        () => context.ChangeTracker.DetectChanges()
-                    ).Message
+                    Assert
+                        .Throws<InvalidOperationException>(
+                            () => context.ChangeTracker.DetectChanges()
+                        )
+                        .Message
                 );
             }
             else
@@ -2706,9 +2716,11 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             {
                 Assert.Equal(
                     CoreStrings.KeyReadOnly("ParentId", dependentEntry1.Metadata.DisplayName()),
-                    Assert.Throws<InvalidOperationException>(
-                        () => context.ChangeTracker.DetectChanges()
-                    ).Message
+                    Assert
+                        .Throws<InvalidOperationException>(
+                            () => context.ChangeTracker.DetectChanges()
+                        )
+                        .Message
                 );
             }
             else
@@ -2843,9 +2855,11 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             {
                 Assert.Equal(
                     CoreStrings.KeyReadOnly("ParentId", dependentEntry1.Metadata.DisplayName()),
-                    Assert.Throws<InvalidOperationException>(
-                        () => context.ChangeTracker.DetectChanges()
-                    ).Message
+                    Assert
+                        .Throws<InvalidOperationException>(
+                            () => context.ChangeTracker.DetectChanges()
+                        )
+                        .Message
                 );
             }
             else
@@ -2988,9 +3002,11 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             {
                 Assert.Equal(
                     CoreStrings.KeyReadOnly("ParentId", dependentEntry1.Metadata.DisplayName()),
-                    Assert.Throws<InvalidOperationException>(
-                        () => context.ChangeTracker.DetectChanges()
-                    ).Message
+                    Assert
+                        .Throws<InvalidOperationException>(
+                            () => context.ChangeTracker.DetectChanges()
+                        )
+                        .Message
                 );
             }
             else
@@ -3108,9 +3124,11 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             {
                 Assert.Equal(
                     CoreStrings.KeyReadOnly("ParentId", "ParentPN.Child1#ChildPN"),
-                    Assert.Throws<InvalidOperationException>(
-                        () => context.ChangeTracker.DetectChanges()
-                    ).Message
+                    Assert
+                        .Throws<InvalidOperationException>(
+                            () => context.ChangeTracker.DetectChanges()
+                        )
+                        .Message
                 );
             }
             else
@@ -3251,9 +3269,11 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             {
                 Assert.Equal(
                     CoreStrings.KeyReadOnly("ParentId", "Parent.Child1#Child"),
-                    Assert.Throws<InvalidOperationException>(
-                        () => context.ChangeTracker.DetectChanges()
-                    ).Message
+                    Assert
+                        .Throws<InvalidOperationException>(
+                            () => context.ChangeTracker.DetectChanges()
+                        )
+                        .Message
                 );
             }
             else
@@ -3435,9 +3455,11 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             {
                 Assert.Equal(
                     CoreStrings.KeyReadOnly("ParentId", "ParentPN.ChildCollection1#ChildPN"),
-                    Assert.Throws<InvalidOperationException>(
-                        () => context.ChangeTracker.DetectChanges()
-                    ).Message
+                    Assert
+                        .Throws<InvalidOperationException>(
+                            () => context.ChangeTracker.DetectChanges()
+                        )
+                        .Message
                 );
             }
             else
@@ -3639,9 +3661,11 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             {
                 Assert.Equal(
                     CoreStrings.KeyReadOnly("ParentId", "Parent.ChildCollection1#Child"),
-                    Assert.Throws<InvalidOperationException>(
-                        () => context.ChangeTracker.DetectChanges()
-                    ).Message
+                    Assert
+                        .Throws<InvalidOperationException>(
+                            () => context.ChangeTracker.DetectChanges()
+                        )
+                        .Message
                 );
             }
             else
@@ -3906,9 +3930,11 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             {
                 Assert.Equal(
                     CoreStrings.KeyReadOnly("ParentId", "Parent.Child2#Child"),
-                    Assert.Throws<InvalidOperationException>(
-                        () => context.ChangeTracker.DetectChanges()
-                    ).Message
+                    Assert
+                        .Throws<InvalidOperationException>(
+                            () => context.ChangeTracker.DetectChanges()
+                        )
+                        .Message
                 );
                 return;
             }
@@ -4186,9 +4212,11 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             {
                 Assert.Equal(
                     CoreStrings.KeyReadOnly("ParentId", "Parent.ChildCollection2#Child"),
-                    Assert.Throws<InvalidOperationException>(
-                        () => context.ChangeTracker.DetectChanges()
-                    ).Message
+                    Assert
+                        .Throws<InvalidOperationException>(
+                            () => context.ChangeTracker.DetectChanges()
+                        )
+                        .Message
                 );
                 return;
             }
@@ -4850,9 +4878,11 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             {
                 Assert.Equal(
                     CoreStrings.KeyReadOnly("ParentId", "Parent.ChildCollection2#Child"),
-                    Assert.Throws<InvalidOperationException>(
-                        () => context.ChangeTracker.DetectChanges()
-                    ).Message
+                    Assert
+                        .Throws<InvalidOperationException>(
+                            () => context.ChangeTracker.DetectChanges()
+                        )
+                        .Message
                 );
                 return;
             }
@@ -5370,15 +5400,21 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             Assert.Equal(2, order.TestOrderItems.Count);
             Assert.Equal(
                 "EUR",
-                order.TestOrderItems.Single(
-                    e => e.ProductName == "Test Product 1"
-                ).Price.Currency.Code
+                order
+                    .TestOrderItems
+                    .Single(e => e.ProductName == "Test Product 1")
+                    .Price
+                    .Currency
+                    .Code
             );
             Assert.Equal(
                 "USD",
-                order.TestOrderItems.Single(
-                    e => e.ProductName == "Test Product 3"
-                ).Price.Currency.Code
+                order
+                    .TestOrderItems
+                    .Single(e => e.ProductName == "Test Product 3")
+                    .Price
+                    .Currency
+                    .Code
             );
 
             context.TestOrders.Add(order);
@@ -5388,15 +5424,21 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             Assert.Equal(2, order.TestOrderItems.Count);
             Assert.Equal(
                 "EUR",
-                order.TestOrderItems.Single(
-                    e => e.ProductName == "Test Product 1"
-                ).Price.Currency.Code
+                order
+                    .TestOrderItems
+                    .Single(e => e.ProductName == "Test Product 1")
+                    .Price
+                    .Currency
+                    .Code
             );
             Assert.Equal(
                 "USD",
-                order.TestOrderItems.Single(
-                    e => e.ProductName == "Test Product 3"
-                ).Price.Currency.Code
+                order
+                    .TestOrderItems
+                    .Single(e => e.ProductName == "Test Product 3")
+                    .Price
+                    .Currency
+                    .Code
             );
 
             context.SaveChanges();
@@ -5406,15 +5448,21 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             Assert.Equal(2, order.TestOrderItems.Count);
             Assert.Equal(
                 "EUR",
-                order.TestOrderItems.Single(
-                    e => e.ProductName == "Test Product 1"
-                ).Price.Currency.Code
+                order
+                    .TestOrderItems
+                    .Single(e => e.ProductName == "Test Product 1")
+                    .Price
+                    .Currency
+                    .Code
             );
             Assert.Equal(
                 "USD",
-                order.TestOrderItems.Single(
-                    e => e.ProductName == "Test Product 3"
-                ).Price.Currency.Code
+                order
+                    .TestOrderItems
+                    .Single(e => e.ProductName == "Test Product 3")
+                    .Price
+                    .Currency
+                    .Code
             );
         }
 
@@ -5546,27 +5594,39 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             Assert.Equal(4, order.TestOrderItems.Count);
             Assert.Equal(
                 "EUR",
-                order.TestOrderItems.Single(
-                    e => e.ProductName == "Test Product 1"
-                ).Price.Currency.Code
+                order
+                    .TestOrderItems
+                    .Single(e => e.ProductName == "Test Product 1")
+                    .Price
+                    .Currency
+                    .Code
             );
             Assert.Equal(
                 "EUR",
-                order.TestOrderItems.Single(
-                    e => e.ProductName == "Test Product 2"
-                ).Price.Currency.Code
+                order
+                    .TestOrderItems
+                    .Single(e => e.ProductName == "Test Product 2")
+                    .Price
+                    .Currency
+                    .Code
             );
             Assert.Equal(
                 "USD",
-                order.TestOrderItems.Single(
-                    e => e.ProductName == "Test Product 3"
-                ).Price.Currency.Code
+                order
+                    .TestOrderItems
+                    .Single(e => e.ProductName == "Test Product 3")
+                    .Price
+                    .Currency
+                    .Code
             );
             Assert.Equal(
                 "USD",
-                order.TestOrderItems.Single(
-                    e => e.ProductName == "Test Product 4"
-                ).Price.Currency.Code
+                order
+                    .TestOrderItems
+                    .Single(e => e.ProductName == "Test Product 4")
+                    .Price
+                    .Currency
+                    .Code
             );
 
             context.Add(order);
@@ -5576,27 +5636,39 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             Assert.Equal(4, order.TestOrderItems.Count);
             Assert.Equal(
                 "EUR",
-                order.TestOrderItems.Single(
-                    e => e.ProductName == "Test Product 1"
-                ).Price.Currency.Code
+                order
+                    .TestOrderItems
+                    .Single(e => e.ProductName == "Test Product 1")
+                    .Price
+                    .Currency
+                    .Code
             );
             Assert.Equal(
                 "EUR",
-                order.TestOrderItems.Single(
-                    e => e.ProductName == "Test Product 2"
-                ).Price.Currency.Code
+                order
+                    .TestOrderItems
+                    .Single(e => e.ProductName == "Test Product 2")
+                    .Price
+                    .Currency
+                    .Code
             );
             Assert.Equal(
                 "USD",
-                order.TestOrderItems.Single(
-                    e => e.ProductName == "Test Product 3"
-                ).Price.Currency.Code
+                order
+                    .TestOrderItems
+                    .Single(e => e.ProductName == "Test Product 3")
+                    .Price
+                    .Currency
+                    .Code
             );
             Assert.Equal(
                 "USD",
-                order.TestOrderItems.Single(
-                    e => e.ProductName == "Test Product 4"
-                ).Price.Currency.Code
+                order
+                    .TestOrderItems
+                    .Single(e => e.ProductName == "Test Product 4")
+                    .Price
+                    .Currency
+                    .Code
             );
 
             context.SaveChanges();
@@ -5606,27 +5678,39 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             Assert.Equal(4, order.TestOrderItems.Count);
             Assert.Equal(
                 "EUR",
-                order.TestOrderItems.Single(
-                    e => e.ProductName == "Test Product 1"
-                ).Price.Currency.Code
+                order
+                    .TestOrderItems
+                    .Single(e => e.ProductName == "Test Product 1")
+                    .Price
+                    .Currency
+                    .Code
             );
             Assert.Equal(
                 "EUR",
-                order.TestOrderItems.Single(
-                    e => e.ProductName == "Test Product 2"
-                ).Price.Currency.Code
+                order
+                    .TestOrderItems
+                    .Single(e => e.ProductName == "Test Product 2")
+                    .Price
+                    .Currency
+                    .Code
             );
             Assert.Equal(
                 "USD",
-                order.TestOrderItems.Single(
-                    e => e.ProductName == "Test Product 3"
-                ).Price.Currency.Code
+                order
+                    .TestOrderItems
+                    .Single(e => e.ProductName == "Test Product 3")
+                    .Price
+                    .Currency
+                    .Code
             );
             Assert.Equal(
                 "USD",
-                order.TestOrderItems.Single(
-                    e => e.ProductName == "Test Product 4"
-                ).Price.Currency.Code
+                order
+                    .TestOrderItems
+                    .Single(e => e.ProductName == "Test Product 4")
+                    .Price
+                    .Currency
+                    .Code
             );
         }
 
@@ -5675,11 +5759,11 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         {
             EntityState GetEntryState<TEntity>(EquatableEntitiesContext context, string role = null)
                 where TEntity : class =>
-                context.ChangeTracker
+                context
+                    .ChangeTracker
                     .Entries<TEntity>()
-                    .Single(
-                        e => role == null || e.Property("Value").CurrentValue.Equals(role)
-                    ).State;
+                    .Single(e => role == null || e.Property("Value").CurrentValue.Equals(role))
+                    .State;
 
             using (var context = new EquatableEntitiesContext("EquatableEntities"))
             {

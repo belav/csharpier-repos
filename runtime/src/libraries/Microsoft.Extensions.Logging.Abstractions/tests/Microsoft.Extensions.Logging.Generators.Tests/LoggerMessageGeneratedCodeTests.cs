@@ -445,9 +445,10 @@ namespace Microsoft.Extensions.Logging.Generators.Tests
             Assert.Equal(1, logger.CallCount);
 
             logger.Reset();
-            NonStaticNestedClassTestsExtensions<ABC>.NonStaticNestedMiddleParentClass.NestedClass.M9(
-                logger
-            );
+            NonStaticNestedClassTestsExtensions<ABC>
+                .NonStaticNestedMiddleParentClass
+                .NestedClass
+                .M9(logger);
             Assert.Null(logger.LastException);
             Assert.Equal("M9", logger.LastFormattedString);
             Assert.Equal(LogLevel.Debug, logger.LastLogLevel);

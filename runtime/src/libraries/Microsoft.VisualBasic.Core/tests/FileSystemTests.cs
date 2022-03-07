@@ -112,10 +112,13 @@ namespace Microsoft.VisualBasic.Tests
 
             for (int i = 0; i < n; i++)
             {
-                System.IO.File.WriteAllText(
-                    System.IO.Path.Combine(TestDirectory, fileNames[i]),
-                    i.ToString()
-                );
+                System
+                    .IO
+                    .File
+                    .WriteAllText(
+                        System.IO.Path.Combine(TestDirectory, fileNames[i]),
+                        i.ToString()
+                    );
             }
 
             // Get all files.
@@ -634,12 +637,15 @@ namespace Microsoft.VisualBasic.Tests
                         (fileName, text) =>
                         {
                             using (
-                                var stream = System.IO.File.Open(
-                                    fileName,
-                                    System.IO.FileMode.Append,
-                                    System.IO.FileAccess.Write,
-                                    System.IO.FileShare.ReadWrite
-                                )
+                                var stream = System
+                                    .IO
+                                    .File
+                                    .Open(
+                                        fileName,
+                                        System.IO.FileMode.Append,
+                                        System.IO.FileAccess.Write,
+                                        System.IO.FileShare.ReadWrite
+                                    )
                             )
                             {
                                 try

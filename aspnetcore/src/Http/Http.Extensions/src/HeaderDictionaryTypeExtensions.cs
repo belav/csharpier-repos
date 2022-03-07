@@ -432,9 +432,9 @@ public static class HeaderDictionaryTypeExtensions
                         return methodParams.Length == 2
                             && methodParams[0].ParameterType.Equals(typeof(IList<string>))
                             && methodParams[1].IsOut
-                            && methodParams[1].ParameterType.Equals(
-                                typeof(IList<T>).MakeByRefType()
-                            );
+                            && methodParams[1]
+                                .ParameterType
+                                .Equals(typeof(IList<T>).MakeByRefType());
                     }
                     return false;
                 }

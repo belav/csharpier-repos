@@ -163,18 +163,18 @@ public class CorsAuthorizationFilterTest
         var httpContext = new DefaultHttpContext();
         if (headers != null)
         {
-            httpContext.Request.Headers.Add(
-                CorsConstants.AccessControlRequestHeaders,
-                headers.Headers.Split(',')
-            );
-            httpContext.Request.Headers.Add(
-                CorsConstants.AccessControlRequestMethod,
-                new[] { headers.Method }
-            );
-            httpContext.Request.Headers.Add(
-                CorsConstants.AccessControlExposeHeaders,
-                headers.ExposedHeaders.Split(',')
-            );
+            httpContext
+                .Request
+                .Headers
+                .Add(CorsConstants.AccessControlRequestHeaders, headers.Headers.Split(','));
+            httpContext
+                .Request
+                .Headers
+                .Add(CorsConstants.AccessControlRequestMethod, new[] { headers.Method });
+            httpContext
+                .Request
+                .Headers
+                .Add(CorsConstants.AccessControlExposeHeaders, headers.ExposedHeaders.Split(','));
             httpContext.Request.Headers.Add(CorsConstants.Origin, new[] { headers.Origin });
         }
 
@@ -233,10 +233,11 @@ public class CorsAuthorizationFilterTest
                 (result1, response1) =>
                 {
                     var headers = response1.Headers;
-                    headers[CorsConstants.AccessControlMaxAge] =
-                        result1.PreflightMaxAge.Value.TotalSeconds.ToString(
-                            CultureInfo.InvariantCulture
-                        );
+                    headers[CorsConstants.AccessControlMaxAge] = result1
+                        .PreflightMaxAge
+                        .Value
+                        .TotalSeconds
+                        .ToString(CultureInfo.InvariantCulture);
                     headers[CorsConstants.AccessControlAllowOrigin] = result1.AllowedOrigin;
                     if (result1.SupportsCredentials)
                     {

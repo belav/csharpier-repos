@@ -59,7 +59,12 @@ public class TransportsServerStartup : ServerStartup
                             configureOptions: options =>
                             {
                                 options.Transports =
-                                    Microsoft.AspNetCore.Http.Connections.HttpTransportType.LongPolling;
+                                    Microsoft
+                                        .AspNetCore
+                                        .Http
+                                        .Connections
+                                        .HttpTransportType
+                                        .LongPolling;
                             }
                         );
                         endpoints.MapFallbackToPage("/_ServerHost");
@@ -82,7 +87,12 @@ public class TransportsServerStartup : ServerStartup
                             configureOptions: options =>
                             {
                                 options.Transports =
-                                    Microsoft.AspNetCore.Http.Connections.HttpTransportType.WebSockets;
+                                    Microsoft
+                                        .AspNetCore
+                                        .Http
+                                        .Connections
+                                        .HttpTransportType
+                                        .WebSockets;
                             }
                         );
                         endpoints.MapFallbackToPage("/_ServerHost");

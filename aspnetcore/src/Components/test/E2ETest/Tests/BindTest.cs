@@ -1165,10 +1165,9 @@ public class BindTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>
         );
         Assert.Equal(
             expected.DateTime,
-            DateTimeOffset.Parse(
-                mirrorValue.GetAttribute("value"),
-                CultureInfo.InvariantCulture
-            ).DateTime
+            DateTimeOffset
+                .Parse(mirrorValue.GetAttribute("value"), CultureInfo.InvariantCulture)
+                .DateTime
         );
     }
 
@@ -1204,10 +1203,9 @@ public class BindTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>
         );
         Assert.Equal(
             expected.DateTime,
-            DateTimeOffset.Parse(
-                mirrorValue.GetAttribute("value"),
-                CultureInfo.InvariantCulture
-            ).DateTime
+            DateTimeOffset
+                .Parse(mirrorValue.GetAttribute("value"), CultureInfo.InvariantCulture)
+                .DateTime
         );
 
         // Modify target; verify value is updated and that textboxes linked to the same data are updated
@@ -1454,10 +1452,9 @@ public class BindTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>
         );
         Assert.Equal(
             expected.DateTime,
-            DateTimeOffset.Parse(
-                mirrorValue.GetAttribute("value"),
-                CultureInfo.InvariantCulture
-            ).DateTime
+            DateTimeOffset
+                .Parse(mirrorValue.GetAttribute("value"), CultureInfo.InvariantCulture)
+                .DateTime
         );
 
         // Modify target to something invalid - the invalid change is reverted
@@ -1469,10 +1466,9 @@ public class BindTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>
         Browser.Equal(
             expected.DateTime,
             () =>
-                DateTimeOffset.Parse(
-                    target.GetAttribute("value"),
-                    CultureInfo.InvariantCulture
-                ).DateTime
+                DateTimeOffset
+                    .Parse(target.GetAttribute("value"), CultureInfo.InvariantCulture)
+                    .DateTime
         );
         Assert.Equal(
             expected.DateTime,
@@ -1480,10 +1476,9 @@ public class BindTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>
         );
         Assert.Equal(
             expected.DateTime,
-            DateTimeOffset.Parse(
-                mirrorValue.GetAttribute("value"),
-                CultureInfo.InvariantCulture
-            ).DateTime
+            DateTimeOffset
+                .Parse(mirrorValue.GetAttribute("value"), CultureInfo.InvariantCulture)
+                .DateTime
         );
 
         // Now change it to something valid
@@ -1496,10 +1491,9 @@ public class BindTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>
         );
         Assert.Equal(
             expected.DateTime,
-            DateTimeOffset.Parse(
-                mirrorValue.GetAttribute("value"),
-                CultureInfo.InvariantCulture
-            ).DateTime
+            DateTimeOffset
+                .Parse(mirrorValue.GetAttribute("value"), CultureInfo.InvariantCulture)
+                .DateTime
         );
     }
 
@@ -1572,10 +1566,9 @@ public class BindTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>
         );
         Assert.Equal(
             expected.DateTime,
-            DateTimeOffset.Parse(
-                mirrorValue.GetAttribute("value"),
-                CultureInfo.InvariantCulture
-            ).DateTime
+            DateTimeOffset
+                .Parse(mirrorValue.GetAttribute("value"), CultureInfo.InvariantCulture)
+                .DateTime
         );
 
         // Modify target to something invalid - the invalid change is reverted
@@ -1587,10 +1580,9 @@ public class BindTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>
         Browser.Equal(
             expected.DateTime,
             () =>
-                DateTimeOffset.Parse(
-                    target.GetAttribute("value"),
-                    CultureInfo.InvariantCulture
-                ).DateTime
+                DateTimeOffset
+                    .Parse(target.GetAttribute("value"), CultureInfo.InvariantCulture)
+                    .DateTime
         );
         Assert.Equal(
             expected.DateTime,
@@ -1598,10 +1590,9 @@ public class BindTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>
         );
         Assert.Equal(
             expected.DateTime,
-            DateTimeOffset.Parse(
-                mirrorValue.GetAttribute("value"),
-                CultureInfo.InvariantCulture
-            ).DateTime
+            DateTimeOffset
+                .Parse(mirrorValue.GetAttribute("value"), CultureInfo.InvariantCulture)
+                .DateTime
         );
 
         // Now change it to something valid
@@ -1614,10 +1605,9 @@ public class BindTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>
         );
         Assert.Equal(
             expected.DateTime,
-            DateTimeOffset.Parse(
-                mirrorValue.GetAttribute("value"),
-                CultureInfo.InvariantCulture
-            ).DateTime
+            DateTimeOffset
+                .Parse(mirrorValue.GetAttribute("value"), CultureInfo.InvariantCulture)
+                .DateTime
         );
     }
 

@@ -160,10 +160,9 @@ public class ProcessRunner : IDisposable
         };
 
         foreach (
-            KeyValuePair<
-                string,
-                string
-            > environmentOverride in _processInfo.Parameters.EnvironmentOverrides
+            KeyValuePair<string, string> environmentOverride in _processInfo
+                .Parameters
+                .EnvironmentOverrides
         )
         {
             psi.EnvironmentVariables[environmentOverride.Key] = environmentOverride.Value;

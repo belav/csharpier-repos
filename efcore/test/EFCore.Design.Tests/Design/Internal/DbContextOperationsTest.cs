@@ -142,7 +142,8 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
                             new TestContext(
                                 new DbContextOptionsBuilder<TestContext>()
                                     .UseInMemoryDatabase("In-memory test database")
-                                    .EnableServiceProviderCaching(false).Options
+                                    .EnableServiceProviderCaching(false)
+                                    .Options
                             )
                         )
                         .BuildServiceProvider(validateScopes: true)

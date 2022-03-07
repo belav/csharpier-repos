@@ -46,8 +46,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             }
             else
             {
-                FunctionPointerParameterSyntax? returnTypeParameter =
-                    syntax.ParameterList.Parameters[^1];
+                FunctionPointerParameterSyntax? returnTypeParameter = syntax
+                    .ParameterList
+                    .Parameters[^1];
                 SyntaxTokenList modifiers = returnTypeParameter.Modifiers;
                 for (int i = 0; i < modifiers.Count; i++)
                 {
@@ -305,10 +306,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         forcedArity: 0
                     );
                     NamedTypeSymbol specifierType;
-                    specifierType = compilation.Assembly.CorLibrary.LookupTopLevelMetadataType(
-                        ref metadataName,
-                        digThroughForwardedTypes: false
-                    );
+                    specifierType = compilation
+                        .Assembly
+                        .CorLibrary
+                        .LookupTopLevelMetadataType(
+                            ref metadataName,
+                            digThroughForwardedTypes: false
+                        );
 
                     if (specifierType is MissingMetadataTypeSymbol)
                     {
@@ -509,10 +513,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         _ => VarianceKind.None,
                     };
 
-                    var mergedParameterType = thisParam.TypeWithAnnotations.MergeEquivalentTypes(
-                        otherParam.TypeWithAnnotations,
-                        paramVariance
-                    );
+                    var mergedParameterType = thisParam
+                        .TypeWithAnnotations
+                        .MergeEquivalentTypes(otherParam.TypeWithAnnotations, paramVariance);
                     paramMergedTypesBuilder.Add(mergedParameterType);
                     if (!mergedParameterType.IsSameAs(thisParam.TypeWithAnnotations))
                     {
@@ -837,12 +840,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 bool madeParamChanges = false;
                 foreach (var param in Parameters)
                 {
-                    madeParamChanges |= param.TypeWithAnnotations.ApplyNullableTransforms(
-                        defaultTransformFlag,
-                        transforms,
-                        ref position,
-                        out var newParamType
-                    );
+                    madeParamChanges |= param
+                        .TypeWithAnnotations
+                        .ApplyNullableTransforms(
+                            defaultTransformFlag,
+                            transforms,
+                            ref position,
+                            out var newParamType
+                        );
                     paramTypesBuilder.Add(newParamType);
                 }
 

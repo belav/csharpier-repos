@@ -84,32 +84,32 @@ public class HeaderPropagationMessageHandler : DelegatingHandler
                     {
                         var value = stringValues.ToString();
                         if (
-                            !request.Headers.TryAddWithoutValidation(
-                                entry.OutboundHeaderName,
-                                value
-                            ) && hasContent
+                            !request
+                                .Headers
+                                .TryAddWithoutValidation(entry.OutboundHeaderName, value)
+                            && hasContent
                         )
                         {
-                            request.Content!.Headers.TryAddWithoutValidation(
-                                entry.OutboundHeaderName,
-                                value
-                            );
+                            request
+                                .Content!
+                                .Headers
+                                .TryAddWithoutValidation(entry.OutboundHeaderName, value);
                         }
                     }
                     else
                     {
                         var values = stringValues.ToArray();
                         if (
-                            !request.Headers.TryAddWithoutValidation(
-                                entry.OutboundHeaderName,
-                                values
-                            ) && hasContent
+                            !request
+                                .Headers
+                                .TryAddWithoutValidation(entry.OutboundHeaderName, values)
+                            && hasContent
                         )
                         {
-                            request.Content!.Headers.TryAddWithoutValidation(
-                                entry.OutboundHeaderName,
-                                values
-                            );
+                            request
+                                .Content!
+                                .Headers
+                                .TryAddWithoutValidation(entry.OutboundHeaderName, values);
                         }
                     }
                 }

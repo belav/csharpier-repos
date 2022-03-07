@@ -298,7 +298,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     && constraints[0] is (BoundDagNonNullTest _, true)
                     && evaluations[0] is BoundDagTypeEvaluation { Type: var evaluationType } te
                     && input.Type.IsNullableType()
-                    && input.Type
+                    && input
+                        .Type
                         .GetNullableUnderlyingType()
                         .Equals(evaluationType, TypeCompareKind.AllIgnoreOptions)
                 )

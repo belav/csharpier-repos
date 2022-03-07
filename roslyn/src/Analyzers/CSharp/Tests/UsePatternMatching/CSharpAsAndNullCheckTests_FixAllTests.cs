@@ -65,9 +65,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
         return o is string e ? 1 : 0;
     }
 }",
-                parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
-                    LanguageVersion.CSharp8
-                )
+                parseOptions: CSharpParseOptions
+                    .Default
+                    .WithLanguageVersion(LanguageVersion.CSharp8)
             );
         }
 
@@ -122,9 +122,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
         return o is string e ? 1 : 0;
     }
 }",
-                parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
-                    LanguageVersion.CSharp9
-                )
+                parseOptions: CSharpParseOptions
+                    .Default
+                    .WithLanguageVersion(LanguageVersion.CSharp9)
             );
         }
 

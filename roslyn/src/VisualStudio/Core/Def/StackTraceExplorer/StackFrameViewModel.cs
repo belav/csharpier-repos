@@ -142,7 +142,8 @@ namespace Microsoft.VisualStudio.LanguageServices.StackTraceExplorer
                 if (document is not null)
                 {
                     // While navigating do not activate the tab, which will change focus from the tool window
-                    var options = _workspace.Options
+                    var options = _workspace
+                        .Options
                         .WithChangedOption(
                             new OptionKey(NavigationOptions.PreferProvisionalTab),
                             true
@@ -159,16 +160,17 @@ namespace Microsoft.VisualStudio.LanguageServices.StackTraceExplorer
                     // version of the file.
                     lineNumber = Math.Min(sourceText.Lines.Count, lineNumber);
 
-                    var navigationService =
-                        _workspace.Services.GetService<IDocumentNavigationService>();
+                    var navigationService = _workspace
+                        .Services
+                        .GetService<IDocumentNavigationService>();
                     if (navigationService is null)
                     {
                         return;
                     }
 
-                    await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
-                        cancellationToken
-                    );
+                    await _threadingContext
+                        .JoinableTaskFactory
+                        .SwitchToMainThreadAsync(cancellationToken);
                     navigationService.TryNavigateToLineAndOffset(
                         _workspace,
                         document.Id,
@@ -190,17 +192,22 @@ namespace Microsoft.VisualStudio.LanguageServices.StackTraceExplorer
             );
 
             var classLink = new Hyperlink();
-            classLink.Inlines.Add(
-                MakeClassifiedRun(ClassificationTypeNames.ClassName, _frame.GetQualifiedTypeText())
-            );
+            classLink
+                .Inlines
+                .Add(
+                    MakeClassifiedRun(
+                        ClassificationTypeNames.ClassName,
+                        _frame.GetQualifiedTypeText()
+                    )
+                );
             classLink.Click += (s, a) => NavigateToClass();
             classLink.RequestNavigate += (s, a) => NavigateToClass();
             yield return classLink;
 
             var methodLink = new Hyperlink();
-            methodLink.Inlines.Add(
-                MakeClassifiedRun(ClassificationTypeNames.MethodName, _frame.GetMethodText())
-            );
+            methodLink
+                .Inlines
+                .Add(MakeClassifiedRun(ClassificationTypeNames.MethodName, _frame.GetMethodText()));
             methodLink.Click += (s, a) => NavigateToSymbol();
             methodLink.RequestNavigate += (s, a) => NavigateToSymbol();
             yield return methodLink;
@@ -217,9 +224,9 @@ namespace Microsoft.VisualStudio.LanguageServices.StackTraceExplorer
                 RoslynDebug.AssertNotNull(fileText);
 
                 var fileHyperlink = new Hyperlink();
-                fileHyperlink.Inlines.Add(
-                    MakeClassifiedRun(ClassificationTypeNames.Text, fileText)
-                );
+                fileHyperlink
+                    .Inlines
+                    .Add(MakeClassifiedRun(ClassificationTypeNames.Text, fileText));
                 fileHyperlink.RequestNavigate += (s, e) => NavigateToFile();
                 fileHyperlink.Click += (s, e) => NavigateToFile();
                 yield return fileHyperlink;

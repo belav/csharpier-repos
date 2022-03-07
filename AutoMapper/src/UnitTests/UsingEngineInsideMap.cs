@@ -33,12 +33,9 @@
                             opt =>
                                 opt.MapFrom(
                                     (src, dest, destMember, context) =>
-                                        context.Mapper.Map(
-                                            src,
-                                            destMember,
-                                            typeof(Source),
-                                            typeof(ChildDest)
-                                        )
+                                        context
+                                            .Mapper
+                                            .Map(src, destMember, typeof(Source), typeof(ChildDest))
                                 )
                         );
                     cfg.CreateMap<Source, ChildDest>();

@@ -265,14 +265,14 @@ namespace System.CodeDom.Compiler.Tests
             member.Comments.Add(new CodeCommentStatement("Comment"));
             member.StartDirectives.Add(new CodeDirective());
             member.StartDirectives.Add(new CodeChecksumPragma());
-            member.StartDirectives.Add(
-                new CodeChecksumPragma("fileName", Guid.NewGuid(), new byte[0])
-            );
+            member
+                .StartDirectives
+                .Add(new CodeChecksumPragma("fileName", Guid.NewGuid(), new byte[0]));
             member.EndDirectives.Add(new CodeDirective());
             member.EndDirectives.Add(new CodeChecksumPragma());
-            member.EndDirectives.Add(
-                new CodeChecksumPragma("fileName", Guid.NewGuid(), new byte[0])
-            );
+            member
+                .EndDirectives
+                .Add(new CodeChecksumPragma("fileName", Guid.NewGuid(), new byte[0]));
 
             var writer = new StringWriter();
             int generateCommentStatementsCallCount = 0;

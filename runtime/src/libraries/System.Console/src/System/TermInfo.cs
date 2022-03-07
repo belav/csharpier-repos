@@ -251,11 +251,13 @@ namespace System
             /// <returns>true if the file was successfully opened; otherwise, false.</returns>
             private static bool TryOpen(string filePath, [NotNullWhen(true)] out SafeFileHandle? fd)
             {
-                fd = Interop.Sys.Open(
-                    filePath,
-                    Interop.Sys.OpenFlags.O_RDONLY | Interop.Sys.OpenFlags.O_CLOEXEC,
-                    0
-                );
+                fd = Interop
+                    .Sys
+                    .Open(
+                        filePath,
+                        Interop.Sys.OpenFlags.O_RDONLY | Interop.Sys.OpenFlags.O_CLOEXEC,
+                        0
+                    );
                 if (fd.IsInvalid)
                 {
                     // Don't throw in this case, as we'll be polling multiple locations looking for the file.

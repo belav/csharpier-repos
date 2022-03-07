@@ -30,10 +30,9 @@ namespace System.Runtime.InteropServices
             }
 
             // Unlike the C standard and POSIX, Windows does not requires size to be a multiple of alignment. However, we do want an "empty" allocation for zero
-            void* result = Interop.Ucrtbase._aligned_malloc(
-                (byteCount != 0) ? byteCount : 1,
-                alignment
-            );
+            void* result = Interop
+                .Ucrtbase
+                ._aligned_malloc((byteCount != 0) ? byteCount : 1, alignment);
 
             if (result == null)
             {
@@ -81,11 +80,9 @@ namespace System.Runtime.InteropServices
             }
 
             // Unlike the C standard and POSIX, Windows does not requires size to be a multiple of alignment. However, we do want an "empty" allocation for zero
-            void* result = Interop.Ucrtbase._aligned_realloc(
-                ptr,
-                (byteCount != 0) ? byteCount : 1,
-                alignment
-            );
+            void* result = Interop
+                .Ucrtbase
+                ._aligned_realloc(ptr, (byteCount != 0) ? byteCount : 1, alignment);
 
             if (result == null)
             {

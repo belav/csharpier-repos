@@ -100,7 +100,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Setup
             object sender,
             ResolveEventArgs args
         ) =>
-            AppDomain.CurrentDomain
+            AppDomain
+                .CurrentDomain
                 .GetAssemblies()
                 .SingleOrDefault(assembly => assembly.FullName == args.Name);
 

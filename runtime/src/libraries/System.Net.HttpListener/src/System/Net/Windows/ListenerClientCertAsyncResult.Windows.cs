@@ -102,15 +102,17 @@ namespace System.Net
                     asyncResult.Reset(numBytes + pClientCertInfo->CertEncodedSize);
 
                     uint bytesReceived = 0;
-                    errorCode = Interop.HttpApi.HttpReceiveClientCertificate(
-                        httpListenerRequest.HttpListenerContext.RequestQueueHandle,
-                        httpListenerRequest._connectionId,
-                        (uint)Interop.HttpApi.HTTP_FLAGS.NONE,
-                        asyncResult._memoryBlob,
-                        asyncResult._size,
-                        &bytesReceived,
-                        asyncResult._pOverlapped
-                    );
+                    errorCode = Interop
+                        .HttpApi
+                        .HttpReceiveClientCertificate(
+                            httpListenerRequest.HttpListenerContext.RequestQueueHandle,
+                            httpListenerRequest._connectionId,
+                            (uint)Interop.HttpApi.HTTP_FLAGS.NONE,
+                            asyncResult._memoryBlob,
+                            asyncResult._size,
+                            &bytesReceived,
+                            asyncResult._pOverlapped
+                        );
 
                     if (
                         errorCode == Interop.HttpApi.ERROR_IO_PENDING

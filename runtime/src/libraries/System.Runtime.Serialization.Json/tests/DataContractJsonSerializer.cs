@@ -144,9 +144,10 @@ public static partial class DataContractJsonSerializerTests
     {
         // Assume that UTC offset doesn't change more often than once in the day 2013-01-02
         // DO NOT USE TimeZoneInfo.Local.BaseUtcOffset !
-        var offsetMinutes = (int)TimeZoneInfo.Local.GetUtcOffset(
-            new DateTime(2013, 1, 2)
-        ).TotalMinutes;
+        var offsetMinutes = (int)TimeZoneInfo
+            .Local
+            .GetUtcOffset(new DateTime(2013, 1, 2))
+            .TotalMinutes;
         var timeZoneString = string.Format(
             "{0:+;-}{1}",
             offsetMinutes,
@@ -1569,9 +1570,10 @@ public static partial class DataContractJsonSerializerTests
         Assert.Equal(jaggedStringArray[1], actualJaggedStringArray[1]);
         Assert.Equal(jaggedStringArray[2], actualJaggedStringArray[2]);
 
-        var offsetMinutes = (int)TimeZoneInfo.Local.GetUtcOffset(
-            new DateTime(2013, 1, 2)
-        ).TotalMinutes;
+        var offsetMinutes = (int)TimeZoneInfo
+            .Local
+            .GetUtcOffset(new DateTime(2013, 1, 2))
+            .TotalMinutes;
         var timeZoneString = string.Format(
             "{0:+;-}{1}",
             offsetMinutes,

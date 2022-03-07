@@ -52,7 +52,9 @@ namespace System.Web.WebPages.Razor
             context.GeneratedClass.Members.Remove(context.TargetMethod);
 
             // Make ApplicationInstance static
-            CodeMemberProperty appInstanceProperty = context.GeneratedClass.Members
+            CodeMemberProperty appInstanceProperty = context
+                .GeneratedClass
+                .Members
                 .OfType<CodeMemberProperty>()
                 .Where(p => ApplicationInstancePropertyName.Equals(p.Name))
                 .SingleOrDefault();

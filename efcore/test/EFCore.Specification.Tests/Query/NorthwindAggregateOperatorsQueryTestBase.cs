@@ -1051,7 +1051,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                                 c.CustomerID == "ALFKI"
                                 && c.Orders
                                     .Where(o => o.CustomerID == "ALFKI")
-                                    .FirstOrDefault().CustomerID == "ALFKI"
+                                    .FirstOrDefault()
+                                    .CustomerID == "ALFKI"
                         ),
                 entryCount: 1
             );
@@ -1072,7 +1073,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                                 c.Orders
                                     .OrderBy(o => o.OrderID)
                                     .FirstOrDefault()
-                                    .OrderDetails.OrderBy(od => od.ProductID)
+                                    .OrderDetails
+                                    .OrderBy(od => od.ProductID)
                                     .FirstOrDefault()
                         ),
                 ss =>
@@ -1108,8 +1110,10 @@ namespace Microsoft.EntityFrameworkCore.Query
                                 (int?)c.Orders
                                     .OrderBy(o => o.OrderID)
                                     .FirstOrDefault()
-                                    .OrderDetails.OrderBy(od => od.ProductID)
-                                    .FirstOrDefault().ProductID
+                                    .OrderDetails
+                                    .OrderBy(od => od.ProductID)
+                                    .FirstOrDefault()
+                                    .ProductID
                         ),
                 ss =>
                     ss.Set<Customer>()
@@ -2379,7 +2383,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                             c =>
                                 c.Orders
                                     .OrderByDescending(o => o.OrderID)
-                                    .LastOrDefault().CustomerID == c.CustomerID
+                                    .LastOrDefault()
+                                    .CustomerID == c.CustomerID
                         ),
                 ss =>
                     ss.Set<Customer>()

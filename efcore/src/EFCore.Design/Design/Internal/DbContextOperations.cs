@@ -446,7 +446,8 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
             var factoryInterface = typeof(IDesignTimeDbContextFactory<>).MakeGenericType(
                 contextType
             );
-            var factory = contextType.Assembly
+            var factory = contextType
+                .Assembly
                 .GetConstructibleTypes()
                 .FirstOrDefault(t => factoryInterface.IsAssignableFrom(t));
             return factory == null

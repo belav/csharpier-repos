@@ -53,23 +53,25 @@ namespace System.Runtime.Loader
                 );
 
                 IntPtr errorWriterPtr = Marshal.GetFunctionPointerForDelegate(errorWriter);
-                IntPtr previousErrorWriterPtr = Interop.HostPolicy.corehost_set_error_writer(
-                    errorWriterPtr
-                );
+                IntPtr previousErrorWriterPtr = Interop
+                    .HostPolicy
+                    .corehost_set_error_writer(errorWriterPtr);
 
                 try
                 {
                     // Call hostpolicy to do the actual work of finding .deps.json, parsing it and extracting
                     // information from it.
-                    returnCode = Interop.HostPolicy.corehost_resolve_component_dependencies(
-                        componentAssemblyPath,
-                        (assemblyPaths, nativeSearchPaths, resourceSearchPaths) =>
-                        {
-                            assemblyPathsList = assemblyPaths;
-                            nativeSearchPathsList = nativeSearchPaths;
-                            resourceSearchPathsList = resourceSearchPaths;
-                        }
-                    );
+                    returnCode = Interop
+                        .HostPolicy
+                        .corehost_resolve_component_dependencies(
+                            componentAssemblyPath,
+                            (assemblyPaths, nativeSearchPaths, resourceSearchPaths) =>
+                            {
+                                assemblyPathsList = assemblyPaths;
+                                nativeSearchPathsList = nativeSearchPaths;
+                                resourceSearchPathsList = resourceSearchPaths;
+                            }
+                        );
                 }
                 finally
                 {

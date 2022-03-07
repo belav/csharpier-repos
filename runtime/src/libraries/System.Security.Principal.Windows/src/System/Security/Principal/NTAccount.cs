@@ -322,14 +322,16 @@ namespace System.Security.Principal
                 someFailed = false;
                 uint ReturnCode;
 
-                ReturnCode = Interop.Advapi32.LsaLookupNames2(
-                    LsaHandle,
-                    0,
-                    sourceAccounts.Count,
-                    Names,
-                    out ReferencedDomainsPtr,
-                    out SidsPtr
-                );
+                ReturnCode = Interop
+                    .Advapi32
+                    .LsaLookupNames2(
+                        LsaHandle,
+                        0,
+                        sourceAccounts.Count,
+                        Names,
+                        out ReferencedDomainsPtr,
+                        out SidsPtr
+                    );
 
                 //
                 // Make a decision regarding whether it makes sense to proceed

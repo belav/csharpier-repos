@@ -23,33 +23,39 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
         public override async Task InitializeAsync()
         {
             await base.InitializeAsync().ConfigureAwait(true);
-            VisualStudio.InteractiveWindow.SubmitText(
-                @"#r ""System.Windows.Forms""
+            VisualStudio
+                .InteractiveWindow
+                .SubmitText(
+                    @"#r ""System.Windows.Forms""
 #r ""WindowsBase""
 #r ""PresentationCore""
 #r ""PresentationFramework""
 #r ""System.Xaml"""
-            );
+                );
 
-            VisualStudio.InteractiveWindow.SubmitText(
-                @"using System.Windows;
+            VisualStudio
+                .InteractiveWindow
+                .SubmitText(
+                    @"using System.Windows;
 using System.Windows.Forms;
 using Wpf = System.Windows.Controls;"
-            );
+                );
         }
 
         [WpfFact]
         public async Task InteractiveWithDisplayFormAndWpfWindow()
         {
             // 1) Create and display form and WPF window
-            VisualStudio.InteractiveWindow.SubmitText(
-                @"Form form = new Form();
+            VisualStudio
+                .InteractiveWindow
+                .SubmitText(
+                    @"Form form = new Form();
 form.Text = ""win form text"";
 form.Show();
 Window wind = new Window();
 wind.Title = ""wpf window text"";
 wind.Show();"
-            );
+                );
 
             using var cancellationTokenSource = new CancellationTokenSource(
                 Helper.HangMitigatingTimeout
@@ -62,8 +68,10 @@ wind.Show();"
                 .WithCancellation(cancellationTokenSource.Token);
 
             // 3) Add UI elements to windows and verify
-            VisualStudio.InteractiveWindow.SubmitText(
-                @"// add a label to the form
+            VisualStudio
+                .InteractiveWindow
+                .SubmitText(
+                    @"// add a label to the form
 Label l = new Label();
 l.Text = ""forms label text"";
 form.Controls.Add(l);
@@ -71,7 +79,7 @@ form.Controls.Add(l);
 Wpf.TextBlock t = new Wpf.TextBlock();
 t.Text = ""wpf body text"";
 wind.Content = t;"
-            );
+                );
 
             var formLabel = form.FindDescendantByPath("text");
             Assert.Equal("forms label text", formLabel.CurrentName);
@@ -80,10 +88,12 @@ wind.Content = t;"
             Assert.Equal("wpf body text", wpfContent.CurrentName);
 
             // 4) Close windows
-            VisualStudio.InteractiveWindow.SubmitText(
-                @"form.Close();
+            VisualStudio
+                .InteractiveWindow
+                .SubmitText(
+                    @"form.Close();
 wind.Close();"
-            );
+                );
         }
     }
 }

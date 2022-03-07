@@ -41,12 +41,14 @@ public static class RazorExtensions
         builder.Features.Add(new PagesPropertyInjectionPass());
         builder.Features.Add(new ViewComponentTagHelperPass());
 
-        builder.Features.Add(
-            new RazorPageDocumentClassifierPass(builder.Configuration.UseConsolidatedMvcViews)
-        );
-        builder.Features.Add(
-            new MvcViewDocumentClassifierPass(builder.Configuration.UseConsolidatedMvcViews)
-        );
+        builder
+            .Features
+            .Add(
+                new RazorPageDocumentClassifierPass(builder.Configuration.UseConsolidatedMvcViews)
+            );
+        builder
+            .Features
+            .Add(new MvcViewDocumentClassifierPass(builder.Configuration.UseConsolidatedMvcViews));
 
         builder.Features.Add(new MvcImportProjectFeature());
 

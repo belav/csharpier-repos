@@ -51,8 +51,10 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             var document = context.Document;
             Contract.ThrowIfNull(document);
 
-            var completionService =
-                document.Project.LanguageServices.GetRequiredService<CompletionService>();
+            var completionService = document
+                .Project
+                .LanguageServices
+                .GetRequiredService<CompletionService>();
             var cacheEntry = GetCompletionListCacheEntry(completionItem);
             if (cacheEntry == null)
             {
@@ -88,23 +90,34 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
                 .ConfigureAwait(false)!;
             if (description != null)
             {
-                var supportsVSExtensions =
-                    context.ClientCapabilities.HasVisualStudioLspCapability();
+                var supportsVSExtensions = context
+                    .ClientCapabilities
+                    .HasVisualStudioLspCapability();
                 if (supportsVSExtensions)
                 {
                     var vsCompletionItem = (LSP.VSInternalCompletionItem)completionItem;
                     vsCompletionItem.Description = new ClassifiedTextElement(
-                        description.TaggedParts.Select(
-                            tp => new ClassifiedTextRun(tp.Tag.ToClassificationTypeName(), tp.Text)
-                        )
+                        description
+                            .TaggedParts
+                            .Select(
+                                tp =>
+                                    new ClassifiedTextRun(
+                                        tp.Tag.ToClassificationTypeName(),
+                                        tp.Text
+                                    )
+                            )
                     );
                 }
                 else
                 {
                     var clientSupportsMarkdown =
-                        context.ClientCapabilities.TextDocument?.Completion?.CompletionItem?.DocumentationFormat.Contains(
-                            LSP.MarkupKind.Markdown
-                        ) == true;
+                        context
+                            .ClientCapabilities
+                            .TextDocument
+                            ?.Completion
+                            ?.CompletionItem
+                            ?.DocumentationFormat
+                            .Contains(LSP.MarkupKind.Markdown) == true;
                     completionItem.Documentation =
                         ProtocolConversions.GetDocumentationMarkupContent(
                             description.TaggedParts,
@@ -125,8 +138,12 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
                 Contract.ThrowIfTrue(completionItem.TextEdit != null);
 
                 var snippetsSupported =
-                    context.ClientCapabilities.TextDocument?.Completion?.CompletionItem?.SnippetSupport
-                    ?? false;
+                    context
+                        .ClientCapabilities
+                        .TextDocument
+                        ?.Completion
+                        ?.CompletionItem
+                        ?.SnippetSupport ?? false;
 
                 completionItem.TextEdit = await GenerateTextEditAsync(
                         document,
@@ -147,20 +164,21 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
         )
         {
             if (
-                !lspCompletionItem.Label.StartsWith(
-                    completionItem.DisplayTextPrefix,
-                    StringComparison.Ordinal
-                )
+                !lspCompletionItem
+                    .Label
+                    .StartsWith(completionItem.DisplayTextPrefix, StringComparison.Ordinal)
             )
             {
                 return false;
             }
 
             // The prefix matches, consume the matching prefix from the lsp completion item label.
-            var displayTextWithSuffix = lspCompletionItem.Label.Substring(
-                completionItem.DisplayTextPrefix.Length,
-                lspCompletionItem.Label.Length - completionItem.DisplayTextPrefix.Length
-            );
+            var displayTextWithSuffix = lspCompletionItem
+                .Label
+                .Substring(
+                    completionItem.DisplayTextPrefix.Length,
+                    lspCompletionItem.Label.Length - completionItem.DisplayTextPrefix.Length
+                );
             if (
                 !displayTextWithSuffix.EndsWith(
                     completionItem.DisplayTextSuffix,

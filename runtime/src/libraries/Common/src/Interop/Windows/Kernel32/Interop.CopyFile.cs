@@ -15,14 +15,9 @@ internal static partial class Interop
                 : 0;
             int cancel = 0;
             if (
-                !Interop.Kernel32.CopyFileEx(
-                    src,
-                    dst,
-                    IntPtr.Zero,
-                    IntPtr.Zero,
-                    ref cancel,
-                    copyFlags
-                )
+                !Interop
+                    .Kernel32
+                    .CopyFileEx(src, dst, IntPtr.Zero, IntPtr.Zero, ref cancel, copyFlags)
             )
             {
                 return Marshal.GetLastWin32Error();

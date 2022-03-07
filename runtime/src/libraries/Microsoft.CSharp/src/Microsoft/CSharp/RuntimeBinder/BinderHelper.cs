@@ -421,7 +421,8 @@ namespace Microsoft.CSharp.RuntimeBinder
             p switch
             {
                 // Binary Operators
-                ExpressionType.Add => SpecialNames.CLR_Add,
+                ExpressionType.Add
+                  => SpecialNames.CLR_Add,
                 ExpressionType.Subtract => SpecialNames.CLR_Subtract,
                 ExpressionType.Multiply => SpecialNames.CLR_Multiply,
                 ExpressionType.Divide => SpecialNames.CLR_Division,
@@ -439,7 +440,8 @@ namespace Microsoft.CSharp.RuntimeBinder
                 ExpressionType.Or => SpecialNames.CLR_BitwiseOr,
 
                 // "op_LogicalNot";
-                ExpressionType.AddAssign => SpecialNames.CLR_InPlaceAdd,
+                ExpressionType.AddAssign
+                  => SpecialNames.CLR_InPlaceAdd,
                 ExpressionType.SubtractAssign => SpecialNames.CLR_InPlaceSubtract,
                 ExpressionType.MultiplyAssign => SpecialNames.CLR_InPlaceMultiply,
                 ExpressionType.DivideAssign => SpecialNames.CLR_InPlaceDivide,
@@ -451,7 +453,8 @@ namespace Microsoft.CSharp.RuntimeBinder
                 ExpressionType.RightShiftAssign => SpecialNames.CLR_InPlaceRShift,
 
                 // Unary Operators
-                ExpressionType.Negate => SpecialNames.CLR_UnaryNegation,
+                ExpressionType.Negate
+                  => SpecialNames.CLR_UnaryNegation,
                 ExpressionType.UnaryPlus => SpecialNames.CLR_UnaryPlus,
                 ExpressionType.Not => SpecialNames.CLR_LogicalNot,
                 ExpressionType.OnesComplement => SpecialNames.CLR_OnesComplement,

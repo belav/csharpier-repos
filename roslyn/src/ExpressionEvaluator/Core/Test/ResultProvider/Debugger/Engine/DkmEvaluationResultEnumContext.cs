@@ -48,15 +48,17 @@ namespace Microsoft.VisualStudio.Debugger.Evaluation
             DkmCompletionRoutine<DkmEvaluationEnumAsyncResult> completionRoutine
         )
         {
-            InspectionContext.InspectionSession.InvokeResultProvider(
-                this,
-                MethodId.GetItems,
-                r =>
-                {
-                    r.GetItems(this, workList, startIndex, count, completionRoutine);
-                    return (object)null;
-                }
-            );
+            InspectionContext
+                .InspectionSession
+                .InvokeResultProvider(
+                    this,
+                    MethodId.GetItems,
+                    r =>
+                    {
+                        r.GetItems(this, workList, startIndex, count, completionRoutine);
+                        return (object)null;
+                    }
+                );
         }
     }
 }

@@ -51,12 +51,17 @@ namespace Internal.Cryptography.Pal
         public void Add(ICertificatePal certificate)
         {
             if (
-                !Interop.Crypt32.CertAddCertificateContextToStore(
-                    _certStore,
-                    ((CertificatePal)certificate).CertContext,
-                    Interop.Crypt32.CertStoreAddDisposition.CERT_STORE_ADD_REPLACE_EXISTING_INHERIT_PROPERTIES,
-                    IntPtr.Zero
-                )
+                !Interop
+                    .Crypt32
+                    .CertAddCertificateContextToStore(
+                        _certStore,
+                        ((CertificatePal)certificate).CertContext,
+                        Interop
+                            .Crypt32
+                            .CertStoreAddDisposition
+                            .CERT_STORE_ADD_REPLACE_EXISTING_INHERIT_PROPERTIES,
+                        IntPtr.Zero
+                    )
             )
                 throw Marshal.GetLastWin32Error().ToCryptographicException();
         }
@@ -70,12 +75,14 @@ namespace Internal.Cryptography.Pal
                 SafeCertContextHandle? enumCertContext = null;
                 Interop.Crypt32.CERT_CONTEXT* pCertContext = existingCertContext.CertContext;
                 if (
-                    !Interop.crypt32.CertFindCertificateInStore(
-                        _certStore,
-                        CertFindType.CERT_FIND_EXISTING,
-                        pCertContext,
-                        ref enumCertContext
-                    )
+                    !Interop
+                        .crypt32
+                        .CertFindCertificateInStore(
+                            _certStore,
+                            CertFindType.CERT_FIND_EXISTING,
+                            pCertContext,
+                            ref enumCertContext
+                        )
                 )
                     return; // The certificate is not present in the store, simply return.
 

@@ -399,9 +399,9 @@ namespace HttpStress
                                     case "Http2StreamException":
                                         if (
                                             (
-                                                e.InnerException?.Message?.Contains(
-                                                    "INTERNAL_ERROR"
-                                                ) ?? false
+                                                e.InnerException
+                                                    ?.Message
+                                                    ?.Contains("INTERNAL_ERROR") ?? false
                                             )
                                             || // UseKestrel (https://github.com/dotnet/aspnetcore/issues/12256)
                                             (e.InnerException?.Message?.Contains("CANCEL") ?? false)
@@ -431,9 +431,10 @@ namespace HttpStress
                                     {
                                         case "QuicStreamAbortedException":
                                             if (
-                                                e.InnerException?.Message?.Equals(
-                                                    "Stream aborted by peer (258)."
-                                                ) ?? false
+                                                e.InnerException
+                                                    ?.Message
+                                                    ?.Equals("Stream aborted by peer (258).")
+                                                ?? false
                                             ) // 258 = H3_INTERNAL_ERROR (0x102)
                                             {
                                                 return;

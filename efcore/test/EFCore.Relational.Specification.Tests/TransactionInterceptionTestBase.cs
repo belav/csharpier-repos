@@ -90,9 +90,9 @@ namespace Microsoft.EntityFrameworkCore
                 using var listener = Fixture.SubscribeToDiagnosticListener(context.ContextId);
                 using (
                     var _ = async
-                        ? await context.Database.BeginTransactionAsync(
-                              IsolationLevel.ReadUncommitted
-                          )
+                        ? await context
+                              .Database
+                              .BeginTransactionAsync(IsolationLevel.ReadUncommitted)
                         : context.Database.BeginTransaction(IsolationLevel.ReadUncommitted)
                 )
                 {

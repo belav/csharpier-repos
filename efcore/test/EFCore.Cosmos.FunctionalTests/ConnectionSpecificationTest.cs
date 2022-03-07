@@ -53,9 +53,9 @@ namespace Microsoft.EntityFrameworkCore.Cosmos
 
             Assert.Equal(
                 CosmosStrings.ConnectionStringConflictingConfiguration,
-                Assert.Throws<InvalidOperationException>(
-                    () => context.GetService<IDatabaseCreator>()
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(() => context.GetService<IDatabaseCreator>())
+                    .Message
             );
         }
 

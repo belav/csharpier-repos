@@ -309,10 +309,9 @@ namespace System.Web.WebPages.Test
             var response = new Mock<HttpResponseBase>();
             response.SetupGet(r => r.Output).Returns(textWriter);
 
-            return Utils.CreateTestContext(
-                request: request.Object,
-                response: response.Object
-            ).Object;
+            return Utils
+                .CreateTestContext(request: request.Object, response: response.Object)
+                .Object;
         }
 
         private sealed class DummyPage : WebPage

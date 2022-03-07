@@ -107,10 +107,12 @@ internal class DynamicControllerEndpointMatcherPolicy : MatcherPolicy, IEndpoint
 
             // We don't expect both of these to be provided, and they are internal so there's
             // no realistic way this could happen.
-            var dynamicControllerMetadata =
-                endpoint.Metadata.GetMetadata<DynamicControllerMetadata>();
-            var transformerMetadata =
-                endpoint.Metadata.GetMetadata<DynamicControllerRouteValueTransformerMetadata>();
+            var dynamicControllerMetadata = endpoint
+                .Metadata
+                .GetMetadata<DynamicControllerMetadata>();
+            var transformerMetadata = endpoint
+                .Metadata
+                .GetMetadata<DynamicControllerRouteValueTransformerMetadata>();
 
             DynamicRouteValueTransformer? transformer = null;
             if (dynamicControllerMetadata != null)
@@ -119,10 +121,9 @@ internal class DynamicControllerEndpointMatcherPolicy : MatcherPolicy, IEndpoint
             }
             else if (transformerMetadata != null)
             {
-                transformer =
-                    (DynamicRouteValueTransformer)httpContext.RequestServices.GetRequiredService(
-                        transformerMetadata.SelectorType
-                    );
+                transformer = (DynamicRouteValueTransformer)httpContext
+                    .RequestServices
+                    .GetRequiredService(transformerMetadata.SelectorType);
                 if (transformer.State != null)
                 {
                     throw new InvalidOperationException(

@@ -182,7 +182,9 @@ namespace System.Data.Tests
             // First, we fix our test DataSet to only have a single table
             // with no relations.  Then, we go about comparing the XML.
             // Get XML for DataSet writes.
-            ds.Tables[1].Constraints.Remove(ds.Tables[1].Constraints[0]);
+            ds.Tables[1]
+                .Constraints
+                .Remove(ds.Tables[1].Constraints[0]);
             ds.Tables[0].Constraints.Remove(ds.Tables[0].Constraints[0]);
             ds.Tables[0].ChildRelations.Remove("MainToChild");
             ds.Tables.Remove("Child");

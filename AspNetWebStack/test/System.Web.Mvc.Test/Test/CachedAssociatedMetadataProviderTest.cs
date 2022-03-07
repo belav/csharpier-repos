@@ -93,15 +93,18 @@ namespace System.Web.Mvc.Test
                         "Length" /* propertyName */
                     )
             );
-            provider.Object.Cache.Verify(
-                c =>
-                    c.Add(
-                        provider.Object.GetCacheKey(typeof(string), "Length"),
-                        provider.Object.PrototypeMetadata,
-                        provider.Object.CacheItemPolicy,
-                        null
-                    )
-            );
+            provider
+                .Object
+                .Cache
+                .Verify(
+                    c =>
+                        c.Add(
+                            provider.Object.GetCacheKey(typeof(string), "Length"),
+                            provider.Object.PrototypeMetadata,
+                            provider.Object.CacheItemPolicy,
+                            null
+                        )
+                );
         }
 
         [Fact]
@@ -169,16 +172,19 @@ namespace System.Web.Mvc.Test
                 Times.Exactly(2)
             );
 
-            provider.Object.Cache.Verify(
-                c =>
-                    c.Add(
-                        provider.Object.GetCacheKey(typeof(string), "Length"),
-                        provider.Object.PrototypeMetadata,
-                        provider.Object.CacheItemPolicy,
-                        null
-                    ),
-                Times.Once()
-            );
+            provider
+                .Object
+                .Cache
+                .Verify(
+                    c =>
+                        c.Add(
+                            provider.Object.GetCacheKey(typeof(string), "Length"),
+                            provider.Object.PrototypeMetadata,
+                            provider.Object.CacheItemPolicy,
+                            null
+                        ),
+                    Times.Once()
+                );
         }
 
         // GetMetadataForType
@@ -204,15 +210,18 @@ namespace System.Web.Mvc.Test
                         null /* propertyName */
                     )
             );
-            provider.Object.Cache.Verify(
-                c =>
-                    c.Add(
-                        provider.Object.GetCacheKey(typeof(string), null),
-                        provider.Object.PrototypeMetadata,
-                        provider.Object.CacheItemPolicy,
-                        null
-                    )
-            );
+            provider
+                .Object
+                .Cache
+                .Verify(
+                    c =>
+                        c.Add(
+                            provider.Object.GetCacheKey(typeof(string), null),
+                            provider.Object.PrototypeMetadata,
+                            provider.Object.CacheItemPolicy,
+                            null
+                        )
+                );
         }
 
         [Fact]
@@ -279,16 +288,19 @@ namespace System.Web.Mvc.Test
                 Times.Exactly(2)
             );
 
-            provider.Object.Cache.Verify(
-                c =>
-                    c.Add(
-                        provider.Object.GetCacheKey(typeof(string), null),
-                        provider.Object.PrototypeMetadata,
-                        provider.Object.CacheItemPolicy,
-                        null
-                    ),
-                Times.Once()
-            );
+            provider
+                .Object
+                .Cache
+                .Verify(
+                    c =>
+                        c.Add(
+                            provider.Object.GetCacheKey(typeof(string), null),
+                            provider.Object.PrototypeMetadata,
+                            provider.Object.CacheItemPolicy,
+                            null
+                        ),
+                    Times.Once()
+                );
         }
 
         // Helpers

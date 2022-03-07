@@ -37,7 +37,8 @@ class C
 
             compilation.VerifyDiagnostics();
 
-            var method = (SourceMemberMethodSymbol)compilation.GlobalNamespace
+            var method = (SourceMemberMethodSymbol)compilation
+                .GlobalNamespace
                 .GetTypeMembers("C")
                 .Single()
                 .GetMembers("F")

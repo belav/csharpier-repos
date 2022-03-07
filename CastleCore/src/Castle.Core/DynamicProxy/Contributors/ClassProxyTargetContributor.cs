@@ -138,15 +138,17 @@ namespace Castle.DynamicProxy.Contributors
 
             // invocation on base class
 
-            callBackMethod.CodeBuilder.AddStatement(
-                new ReturnStatement(
-                    new MethodInvocationExpression(
-                        SelfReference.Self,
-                        targetMethod,
-                        callBackMethod.Arguments
+            callBackMethod
+                .CodeBuilder
+                .AddStatement(
+                    new ReturnStatement(
+                        new MethodInvocationExpression(
+                            SelfReference.Self,
+                            targetMethod,
+                            callBackMethod.Arguments
+                        )
                     )
-                )
-            );
+                );
 
             return callBackMethod.MethodBuilder;
         }
@@ -212,13 +214,15 @@ namespace Castle.DynamicProxy.Contributors
                 null
             );
 
-            return scope.TypeCache.GetOrAddWithoutTakingLock(
-                key,
-                _ =>
-                    new DelegateTypeGenerator(method, targetType)
-                        .Generate(@class, namingScope)
-                        .BuildType()
-            );
+            return scope
+                .TypeCache
+                .GetOrAddWithoutTakingLock(
+                    key,
+                    _ =>
+                        new DelegateTypeGenerator(method, targetType)
+                            .Generate(@class, namingScope)
+                            .BuildType()
+                );
         }
 
         private Type GetInvocationType(MetaMethod method, ClassEmitter @class)

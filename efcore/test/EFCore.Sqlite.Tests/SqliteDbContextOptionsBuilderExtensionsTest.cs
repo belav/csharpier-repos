@@ -18,7 +18,9 @@ namespace Microsoft.EntityFrameworkCore
             var optionsBuilder = new DbContextOptionsBuilder();
             optionsBuilder.UseSqlite("Database=Crunchie", b => b.MaxBatchSize(123));
 
-            var extension = optionsBuilder.Options.Extensions
+            var extension = optionsBuilder
+                .Options
+                .Extensions
                 .OfType<SqliteOptionsExtension>()
                 .Single();
 
@@ -31,7 +33,9 @@ namespace Microsoft.EntityFrameworkCore
             var optionsBuilder = new DbContextOptionsBuilder();
             optionsBuilder.UseSqlite("Database=Crunchie", b => b.CommandTimeout(30));
 
-            var extension = optionsBuilder.Options.Extensions
+            var extension = optionsBuilder
+                .Options
+                .Extensions
                 .OfType<SqliteOptionsExtension>()
                 .Single();
 
@@ -44,7 +48,9 @@ namespace Microsoft.EntityFrameworkCore
             var optionsBuilder = new DbContextOptionsBuilder();
             optionsBuilder.UseSqlite("Database=Crunchie");
 
-            var extension = optionsBuilder.Options.Extensions
+            var extension = optionsBuilder
+                .Options
+                .Extensions
                 .OfType<SqliteOptionsExtension>()
                 .Single();
 
@@ -58,7 +64,9 @@ namespace Microsoft.EntityFrameworkCore
             var optionsBuilder = new DbContextOptionsBuilder<DbContext>();
             optionsBuilder.UseSqlite("Database=Whisper");
 
-            var extension = optionsBuilder.Options.Extensions
+            var extension = optionsBuilder
+                .Options
+                .Extensions
                 .OfType<SqliteOptionsExtension>()
                 .Single();
 
@@ -74,7 +82,9 @@ namespace Microsoft.EntityFrameworkCore
 
             optionsBuilder.UseSqlite(connection);
 
-            var extension = optionsBuilder.Options.Extensions
+            var extension = optionsBuilder
+                .Options
+                .Extensions
                 .OfType<SqliteOptionsExtension>()
                 .Single();
 
@@ -89,7 +99,9 @@ namespace Microsoft.EntityFrameworkCore
 
             optionsBuilder.UseSqlite();
 
-            var extension = optionsBuilder.Options.Extensions
+            var extension = optionsBuilder
+                .Options
+                .Extensions
                 .OfType<SqliteOptionsExtension>()
                 .Single();
 
@@ -105,7 +117,9 @@ namespace Microsoft.EntityFrameworkCore
 
             optionsBuilder.UseSqlite(connection);
 
-            var extension = optionsBuilder.Options.Extensions
+            var extension = optionsBuilder
+                .Options
+                .Extensions
                 .OfType<SqliteOptionsExtension>()
                 .Single();
 
@@ -136,13 +150,15 @@ namespace Microsoft.EntityFrameworkCore
                 var serviceScope = services.GetRequiredService<IServiceScopeFactory>().CreateScope()
             )
             {
-                var coreOptions = serviceScope.ServiceProvider
+                var coreOptions = serviceScope
+                    .ServiceProvider
                     .GetRequiredService<DbContextOptions<ApplicationDbContext>>()
                     .GetExtension<CoreOptionsExtension>();
 
                 Assert.True(coreOptions.DetailedErrorsEnabled);
 
-                var sqliteOptions = serviceScope.ServiceProvider
+                var sqliteOptions = serviceScope
+                    .ServiceProvider
                     .GetRequiredService<DbContextOptions<ApplicationDbContext>>()
                     .GetExtension<SqliteOptionsExtension>();
 

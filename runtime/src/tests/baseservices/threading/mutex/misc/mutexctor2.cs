@@ -50,10 +50,9 @@ public class MutexCtor2
                 {
                     if (null == m_Mutex)
                     {
-                        TestLibrary.TestFramework.LogError(
-                            "001",
-                            "Can not construct a new Mutex intance"
-                        );
+                        TestLibrary
+                            .TestFramework
+                            .LogError("001", "Can not construct a new Mutex intance");
                         retVal = false;
 
                         break;

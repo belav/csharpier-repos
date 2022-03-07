@@ -26,14 +26,14 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
     public abstract partial class AbstractUserDiagnosticTest
     {
         // TODO: IInlineRenameService requires WPF (https://github.com/dotnet/roslyn/issues/46153)
-        private static readonly TestComposition s_composition =
-            EditorTestCompositions.EditorFeaturesWpf
-                .AddExcludedPartTypes(typeof(IDiagnosticUpdateSourceRegistrationService))
-                .AddParts(
-                    typeof(MockDiagnosticUpdateSourceRegistrationService),
-                    typeof(TestGenerateTypeOptionsService),
-                    typeof(TestProjectManagementService)
-                );
+        private static readonly TestComposition s_composition = EditorTestCompositions
+            .EditorFeaturesWpf
+            .AddExcludedPartTypes(typeof(IDiagnosticUpdateSourceRegistrationService))
+            .AddParts(
+                typeof(MockDiagnosticUpdateSourceRegistrationService),
+                typeof(TestGenerateTypeOptionsService),
+                typeof(TestProjectManagementService)
+            );
 
         internal async Task TestWithMockedGenerateTypeDialog(
             string initial,
@@ -81,23 +81,25 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
             );
 
             // Initialize the viewModel values
-            testState.TestGenerateTypeOptionsService.SetGenerateTypeOptions(
-                accessibility: accessibility,
-                typeKind: typeKind,
-                typeName: testState.TypeName,
-                project: testState.ProjectToBeModified,
-                isNewFile: isNewFile,
-                newFileName: newFileName,
-                folders: newFileFolderContainers,
-                fullFilePath: fullFilePath,
-                existingDocument: testState.ExistingDocument,
-                areFoldersValidIdentifiers: areFoldersValidIdentifiers,
-                isCancelled: isCancelled
-            );
+            testState
+                .TestGenerateTypeOptionsService
+                .SetGenerateTypeOptions(
+                    accessibility: accessibility,
+                    typeKind: typeKind,
+                    typeName: testState.TypeName,
+                    project: testState.ProjectToBeModified,
+                    isNewFile: isNewFile,
+                    newFileName: newFileName,
+                    folders: newFileFolderContainers,
+                    fullFilePath: fullFilePath,
+                    existingDocument: testState.ExistingDocument,
+                    areFoldersValidIdentifiers: areFoldersValidIdentifiers,
+                    isCancelled: isCancelled
+                );
 
-            testState.TestProjectManagementService.SetDefaultNamespace(
-                defaultNamespace: defaultNamespace
-            );
+            testState
+                .TestProjectManagementService
+                .SetDefaultNamespace(defaultNamespace: defaultNamespace);
 
             var generateTypeDiagFixes = diagnostics.SingleOrDefault(
                 df => GenerateTypeTestState.FixIds.Contains(df.Id)
@@ -185,9 +187,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
 
                 // Make sure the Project reference is present
                 Assert.True(
-                    triggeredProject.ProjectReferences.Any(
-                        pr => pr.ProjectId == testState.ProjectToBeModified.Id
-                    )
+                    triggeredProject
+                        .ProjectReferences
+                        .Any(pr => pr.ProjectId == testState.ProjectToBeModified.Id)
                 );
             }
 

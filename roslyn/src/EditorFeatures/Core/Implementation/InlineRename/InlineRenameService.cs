@@ -124,20 +124,22 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
                 )
                 {
                     var workspace = document.Project.Solution.Workspace;
-                    var navigationService =
-                        workspace.Services.GetRequiredService<IDocumentNavigationService>();
+                    var navigationService = workspace
+                        .Services
+                        .GetRequiredService<IDocumentNavigationService>();
 
                     foreach (var documentSpan in inlineRenameInfo.DefinitionLocations)
                     {
-                        var sourceText = documentSpan.Document.GetTextSynchronously(
-                            cancellationToken
-                        );
+                        var sourceText = documentSpan
+                            .Document
+                            .GetTextSynchronously(cancellationToken);
                         var textSnapshot = sourceText.FindCorrespondingEditorTextSnapshot();
 
                         if (textSnapshot != null)
                         {
                             var buffer = textSnapshot.TextBuffer;
-                            var originalSpan = documentSpan.SourceSpan
+                            var originalSpan = documentSpan
+                                .SourceSpan
                                 .ToSnapshotSpan(textSnapshot)
                                 .TranslateTo(
                                     buffer.CurrentSnapshot,

@@ -115,7 +115,8 @@ namespace Microsoft.EntityFrameworkCore
                                 connectionString1,
                                 DummyConnectionString
                             )
-                        ).Options
+                        )
+                        .Options
                 )
             )
             {

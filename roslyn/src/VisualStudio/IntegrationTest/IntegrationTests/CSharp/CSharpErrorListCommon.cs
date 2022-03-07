@@ -25,8 +25,10 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
 
         public virtual void ErrorList()
         {
-            VisualStudio.Editor.SetText(
-                @"
+            VisualStudio
+                .Editor
+                .SetText(
+                    @"
 class C
 {
     void M(P p)
@@ -39,7 +41,7 @@ class C
     }
 }
 "
-            );
+                );
             VisualStudio.ErrorList.ShowErrorList();
             var expectedContents = new[]
             {
@@ -80,8 +82,10 @@ class C
 
         public virtual void ErrorLevelWarning()
         {
-            VisualStudio.Editor.SetText(
-                @"
+            VisualStudio
+                .Editor
+                .SetText(
+                    @"
 class C
 {
     static void Main(string[] args)
@@ -90,7 +94,7 @@ class C
     }
 }
 "
-            );
+                );
             VisualStudio.ErrorList.ShowErrorList();
             var expectedContents = new[]
             {
@@ -112,8 +116,10 @@ class C
 
         public virtual void ErrorsDuringMethodBodyEditing()
         {
-            VisualStudio.Editor.SetText(
-                @"
+            VisualStudio
+                .Editor
+                .SetText(
+                    @"
 class Program2
 {
     static void Main(string[] args)
@@ -123,7 +129,7 @@ class Program2
     }
 }
 "
-            );
+                );
             VisualStudio.ErrorList.ShowErrorList();
             var expectedContents = new ErrorListItem[] { };
             var actualContents = VisualStudio.ErrorList.GetErrorListContents();
@@ -167,8 +173,10 @@ class Program2
 
         public virtual void ErrorsAfterClosingFile()
         {
-            VisualStudio.Editor.SetText(
-                @"
+            VisualStudio
+                .Editor
+                .SetText(
+                    @"
 class Program2
 {
     static void Main(string[] args)
@@ -178,7 +186,7 @@ class Program2
     }
 }
 "
-            );
+                );
             VisualStudio.ErrorList.ShowErrorList();
             var expectedContents = new ErrorListItem[] { };
             var actualContents = VisualStudio.ErrorList.GetErrorListContents();

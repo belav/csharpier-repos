@@ -289,8 +289,9 @@ namespace T
             int position
         )
         {
-            var diagnosticAnalyzerService =
-                workspace.ExportProvider.GetExportedValue<IDiagnosticAnalyzerService>();
+            var diagnosticAnalyzerService = workspace
+                .ExportProvider
+                .GetExportedValue<IDiagnosticAnalyzerService>();
             var provider = new CSharpDiagnosticAnalyzerQuickInfoProvider(diagnosticAnalyzerService);
             var options = SymbolDescriptionOptions.From(document.Project);
             var info = await provider.GetQuickInfoAsync(

@@ -36,10 +36,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             IValueSet IValueSetFactory.Random(int expectedSize, Random random)
             {
                 return new NuintValueSet(
-                    values: (IValueSet<uint>)NumericValueSetFactory<uint, UIntTC>.Instance.Random(
-                        expectedSize,
-                        random
-                    ),
+                    values: (IValueSet<uint>)NumericValueSetFactory<uint, UIntTC>
+                        .Instance
+                        .Random(expectedSize, random),
                     hasLarge: random.NextDouble() < 0.25
                 );
             }

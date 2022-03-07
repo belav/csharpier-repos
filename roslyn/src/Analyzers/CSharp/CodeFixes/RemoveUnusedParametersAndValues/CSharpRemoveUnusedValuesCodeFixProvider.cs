@@ -116,12 +116,13 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnusedParametersAndValues
                     SyntaxKind.DeclarationPattern,
                     out DeclarationPatternSyntax declarationPattern
                 )
-                && (
-                    (CSharpParseOptions)parent.SyntaxTree.Options
-                ).LanguageVersion.IsCSharp9OrAbove()
+                && ((CSharpParseOptions)parent.SyntaxTree.Options)
+                    .LanguageVersion
+                    .IsCSharp9OrAbove()
             )
             {
-                var trailingTrivia = declarationPattern.Type
+                var trailingTrivia = declarationPattern
+                    .Type
                     .GetTrailingTrivia()
                     .AddRange(newNameNode.GetLeadingTrivia())
                     .AddRange(newNameNode.GetTrailingTrivia());
@@ -190,24 +191,25 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnusedParametersAndValues
                 if (!originalCompoundAssignment.IsKind(SyntaxKind.CoalesceAssignmentExpression))
                 {
                     // Case 1. Simple compound assignment parented by an expression statement.
-                    return editor.Generator.AssignmentStatement(
-                        newAssignmentTarget,
-                        rightOfAssignment
-                    );
+                    return editor
+                        .Generator
+                        .AssignmentStatement(newAssignmentTarget, rightOfAssignment);
                 }
                 else
                 {
                     // Case 2. Null coalescing compound assignment parented by an expression statement.
                     // Remove leading trivia from 'leftOfAssignment' as it should have been moved to 'newAssignmentTarget'.
                     leftOfAssignment = leftOfAssignment.WithoutLeadingTrivia();
-                    return editor.Generator.AssignmentStatement(
-                        newAssignmentTarget,
-                        SyntaxFactory.BinaryExpression(
-                            SyntaxKind.CoalesceExpression,
-                            leftOfAssignment,
-                            rightOfAssignment
-                        )
-                    );
+                    return editor
+                        .Generator
+                        .AssignmentStatement(
+                            newAssignmentTarget,
+                            SyntaxFactory.BinaryExpression(
+                                SyntaxKind.CoalesceExpression,
+                                leftOfAssignment,
+                                rightOfAssignment
+                            )
+                        );
                 }
             }
             else

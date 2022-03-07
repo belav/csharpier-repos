@@ -139,7 +139,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
             var rightSideOfComparison = comparison is BinaryExpressionSyntax binaryExpression
                 ? (SyntaxNode)binaryExpression.Right
                 : ((IsPatternExpressionSyntax)comparison).Pattern;
-            var newIdentifier = declarator.Identifier
+            var newIdentifier = declarator
+                .Identifier
                 .WithoutTrivia()
                 .WithTrailingTrivia(rightSideOfComparison.GetTrailingTrivia());
 

@@ -17,12 +17,14 @@ namespace System.Drawing
             };
             fixed (void* m = &metrics)
             {
-                return Interop.User32.SystemParametersInfoW(
-                    Interop.User32.SystemParametersAction.SPI_GETNONCLIENTMETRICS,
-                    metrics.cbSize,
-                    m,
-                    0
-                );
+                return Interop
+                    .User32
+                    .SystemParametersInfoW(
+                        Interop.User32.SystemParametersAction.SPI_GETNONCLIENTMETRICS,
+                        metrics.cbSize,
+                        m,
+                        0
+                    );
             }
         }
 
@@ -128,12 +130,14 @@ namespace System.Drawing
 
                 Interop.User32.LOGFONT itfont = default;
                 if (
-                    Interop.User32.SystemParametersInfoW(
-                        Interop.User32.SystemParametersAction.SPI_GETICONTITLELOGFONT,
-                        (uint)sizeof(Interop.User32.LOGFONT),
-                        &itfont,
-                        0
-                    )
+                    Interop
+                        .User32
+                        .SystemParametersInfoW(
+                            Interop.User32.SystemParametersAction.SPI_GETICONTITLELOGFONT,
+                            (uint)sizeof(Interop.User32.LOGFONT),
+                            &itfont,
+                            0
+                        )
                 )
                 {
                     iconTitleFont = GetFontFromData(itfont);
@@ -163,9 +167,9 @@ namespace System.Drawing
                 // First try DEFAULT_GUI.
                 if (defaultFont == null)
                 {
-                    IntPtr handle = Interop.Gdi32.GetStockObject(
-                        Interop.Gdi32.StockObject.DEFAULT_GUI_FONT
-                    );
+                    IntPtr handle = Interop
+                        .Gdi32
+                        .GetStockObject(Interop.Gdi32.StockObject.DEFAULT_GUI_FONT);
                     try
                     {
                         using (Font fontInWorldUnits = Font.FromHfont(handle))

@@ -69,9 +69,8 @@ public static class FunctionalTestsServiceCollectionExtensions
     public static IServiceCollection SetupTestThirdPartyLogin(this IServiceCollection services) =>
         services
             .AddAuthentication()
-            .AddContosoAuthentication(
-                o => o.SignInScheme = IdentityConstants.ExternalScheme
-            ).Services;
+            .AddContosoAuthentication(o => o.SignInScheme = IdentityConstants.ExternalScheme)
+            .Services;
 
     public static IServiceCollection SetupTestEmailSender(
         this IServiceCollection services,
@@ -97,13 +96,17 @@ public static class FunctionalTestsServiceCollectionExtensions
         services.Configure<IdentityOptions>(o => o.SignIn.RequireConfirmedEmail = true);
 
     public static IServiceCollection SetupGlobalAuthorizeFilter(this IServiceCollection services) =>
-        services.AddMvc(
-            config =>
-            {
-                var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
-                config.Filters.Add(new AuthorizeFilter(policy));
-            }
-        ).Services;
+        services
+            .AddMvc(
+                config =>
+                {
+                    var policy = new AuthorizationPolicyBuilder()
+                        .RequireAuthenticatedUser()
+                        .Build();
+                    config.Filters.Add(new AuthorizeFilter(policy));
+                }
+            )
+            .Services;
 
     public static IServiceCollection SetupMaxFailedAccessAttempts(
         this IServiceCollection services

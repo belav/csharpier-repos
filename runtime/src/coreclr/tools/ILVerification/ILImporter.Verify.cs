@@ -2796,9 +2796,9 @@ namespace Internal.IL
             Check(_currentBasicBlock.FilterIndex.HasValue, VerifierError.Endfilter);
             Check(
                 _currentOffset
-                    == _exceptionRegions[
-                        _currentBasicBlock.FilterIndex.Value
-                    ].ILRegion.HandlerOffset,
+                    == _exceptionRegions[_currentBasicBlock.FilterIndex.Value]
+                        .ILRegion
+                        .HandlerOffset,
                 VerifierError.Endfilter
             );
 

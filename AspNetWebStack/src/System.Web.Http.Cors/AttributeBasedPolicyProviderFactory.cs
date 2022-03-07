@@ -141,7 +141,8 @@ namespace System.Web.Http.Cors
 
             routeData.RemoveOptionalRoutingParameters();
 
-            HttpControllerDescriptor controllerDescriptor = config.Services
+            HttpControllerDescriptor controllerDescriptor = config
+                .Services
                 .GetHttpControllerSelector()
                 .SelectController(request);
 

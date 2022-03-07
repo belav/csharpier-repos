@@ -46,9 +46,11 @@ namespace Microsoft.EntityFrameworkCore
 
             Assert.Equal(
                 KarlQuote,
-                Assert.Throws<NotSupportedException>(
-                    () => serviceProvider.GetRequiredService<IPilkington>()
-                ).Message
+                Assert
+                    .Throws<NotSupportedException>(
+                        () => serviceProvider.GetRequiredService<IPilkington>()
+                    )
+                    .Message
             );
         }
 
@@ -65,9 +67,11 @@ namespace Microsoft.EntityFrameworkCore
 
             Assert.Equal(
                 KarlQuote,
-                Assert.Throws<NotSupportedException>(
-                    () => serviceProvider.GetRequiredService(typeof(IPilkington))
-                ).Message
+                Assert
+                    .Throws<NotSupportedException>(
+                        () => serviceProvider.GetRequiredService(typeof(IPilkington))
+                    )
+                    .Message
             );
         }
 
@@ -103,9 +107,9 @@ namespace Microsoft.EntityFrameworkCore
 
             Assert.Equal(
                 KarlQuote,
-                Assert.Throws<NotSupportedException>(
-                    () => serviceProvider.GetService<IPilkington>()
-                ).Message
+                Assert
+                    .Throws<NotSupportedException>(() => serviceProvider.GetService<IPilkington>())
+                    .Message
             );
         }
 
@@ -122,9 +126,11 @@ namespace Microsoft.EntityFrameworkCore
 
             Assert.Equal(
                 KarlQuote,
-                Assert.Throws<NotSupportedException>(
-                    () => serviceProvider.GetService(typeof(IPilkington))
-                ).Message
+                Assert
+                    .Throws<NotSupportedException>(
+                        () => serviceProvider.GetService(typeof(IPilkington))
+                    )
+                    .Message
             );
         }
 

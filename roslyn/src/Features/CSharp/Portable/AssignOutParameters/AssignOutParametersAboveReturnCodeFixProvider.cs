@@ -114,9 +114,9 @@ namespace Microsoft.CodeAnalysis.CSharp.AssignOutParameters
             else
             {
                 var lambda = (LambdaExpressionSyntax)parent;
-                var newBody = editor.Generator.ScopeBlock(
-                    statements.Add(generator.ReturnStatement(exprOrStatement))
-                );
+                var newBody = editor
+                    .Generator
+                    .ScopeBlock(statements.Add(generator.ReturnStatement(exprOrStatement)));
                 editor.ReplaceNode(
                     lambda,
                     lambda

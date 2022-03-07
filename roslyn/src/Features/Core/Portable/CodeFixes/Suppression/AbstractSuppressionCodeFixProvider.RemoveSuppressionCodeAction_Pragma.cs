@@ -351,9 +351,10 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
                     var tree = model.SyntaxTree;
 
                     // get the warning state of this diagnostic ID at the start of the pragma
-                    var trivia = _suppressionTargetInfo.StartToken.LeadingTrivia.ElementAt(
-                        indexOfPragma
-                    );
+                    var trivia = _suppressionTargetInfo
+                        .StartToken
+                        .LeadingTrivia
+                        .ElementAt(indexOfPragma);
                     var spanToCheck = new TextSpan(
                         start: Math.Max(0, trivia.Span.Start - 1),
                         length: 1

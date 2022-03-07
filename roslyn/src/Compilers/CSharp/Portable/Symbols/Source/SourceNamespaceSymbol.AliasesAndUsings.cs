@@ -127,7 +127,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 #if DEBUG
                         Debug.Assert(
                             GetAliasesAndUsingsForAsserts(declarationSyntax)
-                                .GetExternAliases(this, declarationSyntax).IsEmpty
+                                .GetExternAliases(this, declarationSyntax)
+                                .IsEmpty
                         );
 #endif
                         return ImmutableArray<AliasAndExternAliasDirective>.Empty;
@@ -140,7 +141,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 #if DEBUG
                         Debug.Assert(
                             GetAliasesAndUsingsForAsserts(declarationSyntax)
-                                .GetExternAliases(this, declarationSyntax).IsEmpty
+                                .GetExternAliases(this, declarationSyntax)
+                                .IsEmpty
                         );
 #endif
                         return ImmutableArray<AliasAndExternAliasDirective>.Empty;
@@ -167,11 +169,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 #if DEBUG
                         Debug.Assert(
                             GetAliasesAndUsingsForAsserts(declarationSyntax)
-                                .GetUsingAliases(
-                                    this,
-                                    declarationSyntax,
-                                    basesBeingResolved
-                                ).IsEmpty
+                                .GetUsingAliases(this, declarationSyntax, basesBeingResolved)
+                                .IsEmpty
                         );
 #endif
                         return ImmutableArray<AliasAndUsingDirective>.Empty;
@@ -184,11 +183,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 #if DEBUG
                         Debug.Assert(
                             GetAliasesAndUsingsForAsserts(declarationSyntax)
-                                .GetUsingAliases(
-                                    this,
-                                    declarationSyntax,
-                                    basesBeingResolved
-                                ).IsEmpty
+                                .GetUsingAliases(this, declarationSyntax, basesBeingResolved)
+                                .IsEmpty
                         );
 #endif
                         return ImmutableArray<AliasAndUsingDirective>.Empty;
@@ -232,11 +228,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 #if DEBUG
                         Debug.Assert(
                             GetAliasesAndUsingsForAsserts(declarationSyntax)
-                                .GetUsingAliasesMap(
-                                    this,
-                                    declarationSyntax,
-                                    basesBeingResolved
-                                ).IsEmpty
+                                .GetUsingAliasesMap(this, declarationSyntax, basesBeingResolved)
+                                .IsEmpty
                         );
 #endif
                         return ImmutableDictionary<string, AliasAndUsingDirective>.Empty;
@@ -288,7 +281,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                                     this,
                                     declarationSyntax,
                                     basesBeingResolved
-                                ).IsEmpty
+                                )
+                                .IsEmpty
                         );
 #endif
                         return ImmutableArray<NamespaceOrTypeAndUsingDirective>.Empty;
@@ -877,9 +871,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                                 )
                             );
                             Debug.Assert(
-                                calculated.UsingNamespacesOrTypes.SequenceEqual(
-                                    result.UsingNamespacesOrTypes
-                                )
+                                calculated
+                                    .UsingNamespacesOrTypes
+                                    .SequenceEqual(result.UsingNamespacesOrTypes)
                             );
                             Debug.Assert(calculated.Diagnostics?.IsEmptyWithoutResolution ?? true);
 #endif
@@ -1064,11 +1058,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                                 .GetBinder(usingDirective.Name)
                                 .WithAdditionalFlags(BinderFlags.SuppressConstraintChecks);
                             var imported =
-                                declarationBinder.BindNamespaceOrTypeSymbol(
-                                    usingDirective.Name,
-                                    directiveDiagnostics,
-                                    basesBeingResolved
-                                ).NamespaceOrTypeSymbol;
+                                declarationBinder
+                                    .BindNamespaceOrTypeSymbol(
+                                        usingDirective.Name,
+                                        directiveDiagnostics,
+                                        basesBeingResolved
+                                    )
+                                    .NamespaceOrTypeSymbol;
 
                             if (imported.Kind == SymbolKind.Namespace)
                             {
@@ -1171,7 +1167,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                                                 new NamespaceOrTypeAndUsingDirective(
                                                     importedType,
                                                     usingDirective,
-                                                    directiveDiagnostics.DependenciesBag.ToImmutableArray()
+                                                    directiveDiagnostics
+                                                        .DependenciesBag
+                                                        .ToImmutableArray()
                                                 )
                                             );
                                     }
@@ -1411,9 +1409,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                             continue;
                         }
 
-                        NamespaceOrTypeSymbol target = alias.Alias.GetAliasTarget(
-                            basesBeingResolved: null
-                        );
+                        NamespaceOrTypeSymbol target = alias
+                            .Alias
+                            .GetAliasTarget(basesBeingResolved: null);
 
                         diagnostics.Clear();
                         if (alias.Alias is AliasSymbolFromSyntax aliasFromSyntax)

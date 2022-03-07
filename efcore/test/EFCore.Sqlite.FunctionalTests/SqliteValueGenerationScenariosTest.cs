@@ -534,7 +534,8 @@ namespace Microsoft.EntityFrameworkCore
                     .Entity<Blog>()
                     .Property(e => e.CreatedOn)
                     .HasDefaultValueSql("CURRENT_TIMESTAMP")
-                    .Metadata.SetBeforeSaveBehavior(PropertySaveBehavior.Throw);
+                    .Metadata
+                    .SetBeforeSaveBehavior(PropertySaveBehavior.Throw);
             }
         }
 

@@ -110,8 +110,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.AutomaticCompletion
                 return;
             }
 
-            var document =
-                args.SubjectBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
+            var document = args.SubjectBuffer
+                .CurrentSnapshot
+                .GetOpenDocumentInCurrentContextWithChanges();
             if (document == null)
             {
                 NextAction(operations, nextHandler);
@@ -126,10 +127,12 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.AutomaticCompletion
             }
 
             using (
-                context.OperationContext.AddScope(
-                    allowCancellation: true,
-                    EditorFeaturesResources.Automatically_completing
-                )
+                context
+                    .OperationContext
+                    .AddScope(
+                        allowCancellation: true,
+                        EditorFeaturesResources.Automatically_completing
+                    )
             )
             {
                 var cancellationToken = context.OperationContext.UserCancellationToken;

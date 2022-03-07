@@ -139,7 +139,8 @@ internal class DatabaseOperations : IDatabaseOperations
         using (var connection = new SqlConnection(ConnectionString))
         using (var upsertCommand = new SqlCommand(SqlQueries.SetCacheItem, connection))
         {
-            upsertCommand.Parameters
+            upsertCommand
+                .Parameters
                 .AddCacheItemId(key)
                 .AddCacheItemValue(value)
                 .AddSlidingExpirationInSeconds(options.SlidingExpiration)
@@ -184,7 +185,8 @@ internal class DatabaseOperations : IDatabaseOperations
         using (var connection = new SqlConnection(ConnectionString))
         using (var upsertCommand = new SqlCommand(SqlQueries.SetCacheItem, connection))
         {
-            upsertCommand.Parameters
+            upsertCommand
+                .Parameters
                 .AddCacheItemId(key)
                 .AddCacheItemValue(value)
                 .AddSlidingExpirationInSeconds(options.SlidingExpiration)
@@ -230,7 +232,8 @@ internal class DatabaseOperations : IDatabaseOperations
         using (var connection = new SqlConnection(ConnectionString))
         using (var command = new SqlCommand(query, connection))
         {
-            command.Parameters
+            command
+                .Parameters
                 .AddCacheItemId(key)
                 .AddWithValue("UtcNow", SqlDbType.DateTimeOffset, utcNow);
 
@@ -285,7 +288,8 @@ internal class DatabaseOperations : IDatabaseOperations
         using (var connection = new SqlConnection(ConnectionString))
         using (var command = new SqlCommand(query, connection))
         {
-            command.Parameters
+            command
+                .Parameters
                 .AddCacheItemId(key)
                 .AddWithValue("UtcNow", SqlDbType.DateTimeOffset, utcNow);
 

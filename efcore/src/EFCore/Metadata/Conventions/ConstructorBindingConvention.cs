@@ -45,25 +45,28 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             {
                 if (
                     !entityType.ClrType.IsAbstract
-                    && ConfigurationSource.Convention.Overrides(
-                        entityType.GetConstructorBindingConfigurationSource()
-                    )
+                    && ConfigurationSource
+                        .Convention
+                        .Overrides(entityType.GetConstructorBindingConfigurationSource())
                 )
                 {
-                    Dependencies.ConstructorBindingFactory.GetBindings(
-                        (IMutableEntityType)entityType,
-                        out var constructorBinding,
-                        out var serviceOnlyBinding
-                    );
+                    Dependencies
+                        .ConstructorBindingFactory
+                        .GetBindings(
+                            (IMutableEntityType)entityType,
+                            out var constructorBinding,
+                            out var serviceOnlyBinding
+                        );
 
-                    entityType.Builder.HasConstructorBinding(
-                        constructorBinding,
-                        ConfigurationSource.Convention
-                    );
-                    entityType.Builder.HasServiceOnlyConstructorBinding(
-                        serviceOnlyBinding,
-                        ConfigurationSource.Convention
-                    );
+                    entityType
+                        .Builder
+                        .HasConstructorBinding(constructorBinding, ConfigurationSource.Convention);
+                    entityType
+                        .Builder
+                        .HasServiceOnlyConstructorBinding(
+                            serviceOnlyBinding,
+                            ConfigurationSource.Convention
+                        );
                 }
             }
         }

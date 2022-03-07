@@ -181,7 +181,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Debugging
                     nextStatement != null
                         && _syntaxTree
                             .GetText(cancellationToken)
-                            .Lines.IndexOf(nextStatement.SpanStart) == line;
+                            .Lines
+                            .IndexOf(nextStatement.SpanStart) == line;
                     nextStatement = nextStatement.GetNextStatement()
                 )
                 {

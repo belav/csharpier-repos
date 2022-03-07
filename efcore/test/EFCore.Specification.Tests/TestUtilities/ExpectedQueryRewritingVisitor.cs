@@ -370,7 +370,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
                         );
                     }
                     else if (
-                        caller.Type
+                        caller
+                            .Type
                             .GetMembers()
                             .Where(m => m.Name == propertyName)
                             .SingleOrDefault()

@@ -31,23 +31,26 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
             )
                 .Build("Microsoft.EntityFrameworkCore.SqlServer")
                 .CreateScope()
-                .ServiceProvider.GetRequiredService<IReverseEngineerScaffolder>();
+                .ServiceProvider
+                .GetRequiredService<IReverseEngineerScaffolder>();
 
             Assert.Equal(
                 DesignStrings.ContextClassNotValidCSharpIdentifier(contextName),
-                Assert.Throws<ArgumentException>(
-                    () =>
-                        reverseEngineer.ScaffoldModel(
-                            "connectionstring",
-                            new DatabaseModelFactoryOptions(),
-                            new ModelReverseEngineerOptions(),
-                            new ModelCodeGenerationOptions
-                            {
-                                ModelNamespace = "FakeNamespace",
-                                ContextName = contextName
-                            }
-                        )
-                ).Message
+                Assert
+                    .Throws<ArgumentException>(
+                        () =>
+                            reverseEngineer.ScaffoldModel(
+                                "connectionstring",
+                                new DatabaseModelFactoryOptions(),
+                                new ModelReverseEngineerOptions(),
+                                new ModelCodeGenerationOptions
+                                {
+                                    ModelNamespace = "FakeNamespace",
+                                    ContextName = contextName
+                                }
+                            )
+                    )
+                    .Message
             );
         }
     }

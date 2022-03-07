@@ -247,10 +247,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UseLocalFunction
                 anonymousFunction.IsParentKind(SyntaxKind.EqualsValueClause)
                 && anonymousFunction.Parent.IsParentKind(SyntaxKind.VariableDeclarator)
                 && anonymousFunction.Parent.Parent.IsParentKind(SyntaxKind.VariableDeclaration)
-                && anonymousFunction.Parent.Parent.Parent.IsParentKind(
-                    SyntaxKind.LocalDeclarationStatement,
-                    out localDeclaration
-                )
+                && anonymousFunction
+                    .Parent
+                    .Parent
+                    .Parent
+                    .IsParentKind(SyntaxKind.LocalDeclarationStatement, out localDeclaration)
             )
             {
                 if (!localDeclaration.Declaration.Type.IsVar)
@@ -447,11 +448,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UseLocalFunction
                             var variableDeclarator = localDeclaration.Declaration.Variables[0];
                             if (
                                 variableDeclarator.Initializer == null
-                                || variableDeclarator.Initializer.Value.IsKind(
-                                    SyntaxKind.NullLiteralExpression,
-                                    SyntaxKind.DefaultLiteralExpression,
-                                    SyntaxKind.DefaultExpression
-                                )
+                                || variableDeclarator
+                                    .Initializer
+                                    .Value
+                                    .IsKind(
+                                        SyntaxKind.NullLiteralExpression,
+                                        SyntaxKind.DefaultLiteralExpression,
+                                        SyntaxKind.DefaultExpression
+                                    )
                             )
                             {
                                 var identifierName = (IdentifierNameSyntax)assignment.Left;

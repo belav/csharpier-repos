@@ -332,10 +332,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertSwitchStatementToExpression
 
                 if (
                     expressionConvertedType != null
-                    && !SymbolEqualityComparer.Default.Equals(
-                        expressionConvertedType,
-                        expressionType
-                    )
+                    && !SymbolEqualityComparer
+                        .Default
+                        .Equals(expressionConvertedType, expressionType)
                 )
                 {
                     return node.Update(

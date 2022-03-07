@@ -36,10 +36,9 @@ internal class W3CLoggerProcessor : FileLoggerProcessor
 
         await WriteMessageAsync(
             "#Start-Date: "
-                + DateTimeOffset.UtcNow.ToString(
-                    "yyyy-MM-dd HH:mm:ss",
-                    CultureInfo.InvariantCulture
-                ),
+                + DateTimeOffset
+                    .UtcNow
+                    .ToString("yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture),
             streamWriter,
             cancellationToken
         );

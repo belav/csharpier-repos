@@ -2465,9 +2465,9 @@ class C
 }",
                         expectedGeneric: true
                     );
-                    var method = (MethodSymbol)testData.GetMethodData(
-                        "<>x<T, U, V>.<>m0<W>"
-                    ).Method;
+                    var method = (MethodSymbol)testData
+                        .GetMethodData("<>x<T, U, V>.<>m0<W>")
+                        .Method;
                     var containingType = method.ContainingType;
                     var returnType = (NamedTypeSymbol)method.ReturnType;
                     Assert.Equal(containingType.TypeParameters[1], returnType.TypeArguments()[0]);
@@ -3925,9 +3925,9 @@ static class C
                     );
                     Assert.Equal(
                         SpecialType.System_Int32,
-                        (
-                            (MethodSymbol)testData.GetMethodData(typeName + ".<>m0").Method
-                        ).ReturnType.SpecialType
+                        ((MethodSymbol)testData.GetMethodData(typeName + ".<>m0").Method)
+                            .ReturnType
+                            .SpecialType
                     );
                     locals.Free();
 

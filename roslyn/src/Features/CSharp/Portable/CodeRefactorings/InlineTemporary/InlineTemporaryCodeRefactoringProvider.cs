@@ -79,9 +79,10 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.InlineTemporary
             if (
                 variableDeclarator.Initializer == null
                 || variableDeclarator.Initializer.Value.IsMissing
-                || variableDeclarator.Initializer.Value.IsKind(
-                    SyntaxKind.StackAllocArrayCreationExpression
-                )
+                || variableDeclarator
+                    .Initializer
+                    .Value
+                    .IsKind(SyntaxKind.StackAllocArrayCreationExpression)
             )
             {
                 return;
@@ -142,13 +143,15 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.InlineTemporary
                     return true;
             }
             else if (
-                identifierNode.Parent.IsKind(
-                    SyntaxKind.PreDecrementExpression,
-                    SyntaxKind.PreIncrementExpression,
-                    SyntaxKind.PostDecrementExpression,
-                    SyntaxKind.PostIncrementExpression,
-                    SyntaxKind.AddressOfExpression
-                )
+                identifierNode
+                    .Parent
+                    .IsKind(
+                        SyntaxKind.PreDecrementExpression,
+                        SyntaxKind.PreIncrementExpression,
+                        SyntaxKind.PostDecrementExpression,
+                        SyntaxKind.PostIncrementExpression,
+                        SyntaxKind.AddressOfExpression
+                    )
             )
             {
                 return true;
@@ -488,9 +491,9 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.InlineTemporary
 
             var newScope = scope.ReplaceToken(nextToken, newNextToken);
 
-            var newLocalDeclaration = (LocalDeclarationStatementSyntax)FindDeclarator(
-                newScope
-            ).Parent.Parent;
+            var newLocalDeclaration = (LocalDeclarationStatementSyntax)FindDeclarator(newScope)
+                .Parent
+                .Parent;
 
             // If the local is parented by a label statement, we can't remove this statement. Instead,
             // we'll replace the local declaration with an empty expression statement.

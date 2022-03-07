@@ -54,7 +54,8 @@ namespace Microsoft.CodeAnalysis.Remote
                     var listenerProvider =
                         exportProvider
                             .GetExports<AsynchronousOperationListenerProvider>()
-                            .Single().Value;
+                            .Single()
+                            .Value;
 
                     return new ValueTask<bool>(
                         !listenerProvider.HasPendingWaiter(featureNames.ToArray())
@@ -77,7 +78,8 @@ namespace Microsoft.CodeAnalysis.Remote
                     var listenerProvider =
                         exportProvider
                             .GetExports<AsynchronousOperationListenerProvider>()
-                            .Single().Value;
+                            .Single()
+                            .Value;
 
                     await listenerProvider
                         .WaitAllAsync(workspace, featureNames.ToArray())

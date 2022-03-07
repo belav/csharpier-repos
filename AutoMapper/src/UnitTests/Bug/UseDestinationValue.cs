@@ -211,10 +211,12 @@ namespace AutoMapper.UnitTests.Bug
                 () => Mapper.Map<Organization>(orgDto)
             ).ShouldThrowException<AutoMapperMappingException>(
                 ex =>
-                    ex.InnerException.Message.ShouldStartWith(
-                        typeof(CollectionController<Branch, short, EventArgs>)
-                            + " needs to have a constructor with 0 args or only optional args"
-                    )
+                    ex.InnerException
+                        .Message
+                        .ShouldStartWith(
+                            typeof(CollectionController<Branch, short, EventArgs>)
+                                + " needs to have a constructor with 0 args or only optional args"
+                        )
             );
         }
     }

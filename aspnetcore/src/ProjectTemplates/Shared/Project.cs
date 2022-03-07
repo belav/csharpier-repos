@@ -29,7 +29,8 @@ public class Project : IDisposable
     {
         get
         {
-            var testLogFolder = typeof(Project).Assembly
+            var testLogFolder = typeof(Project)
+                .Assembly
                 .GetCustomAttribute<TestFrameworkFileLoggerAttribute>()
                 ?.BaseDirectory;
             if (!string.IsNullOrEmpty(testLogFolder))
@@ -48,9 +49,11 @@ public class Project : IDisposable
 
     public static string DotNetEfFullPath =>
         (string.IsNullOrEmpty(Environment.GetEnvironmentVariable("DotNetEfFullPath")))
-            ? typeof(ProjectFactoryFixture).Assembly
-                  .GetCustomAttributes<AssemblyMetadataAttribute>()
-                  .First(attribute => attribute.Key == "DotNetEfFullPath").Value
+            ? typeof(ProjectFactoryFixture)
+              .Assembly
+              .GetCustomAttributes<AssemblyMetadataAttribute>()
+              .First(attribute => attribute.Key == "DotNetEfFullPath")
+              .Value
             : Environment.GetEnvironmentVariable("DotNetEfFullPath");
 
     public string ProjectName { get; set; }
@@ -544,7 +547,8 @@ public class Project : IDisposable
 
     private static string GetAssemblyMetadata(string key)
     {
-        var attribute = typeof(Project).Assembly
+        var attribute = typeof(Project)
+            .Assembly
             .GetCustomAttributes<AssemblyMetadataAttribute>()
             .FirstOrDefault(a => a.Key == key);
 

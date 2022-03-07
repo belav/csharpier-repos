@@ -277,9 +277,9 @@ namespace System.DirectoryServices.ActiveDirectory
                     try
                     {
                         if (
-                            _crossRefEntry.Properties.Contains(
-                                PropertyManager.MsDSNCReplicaLocations
-                            )
+                            _crossRefEntry
+                                .Properties
+                                .Contains(PropertyManager.MsDSNCReplicaLocations)
                         )
                         {
                             _crossRefEntry.Properties[

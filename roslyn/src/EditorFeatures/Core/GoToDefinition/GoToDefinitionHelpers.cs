@@ -102,8 +102,10 @@ namespace Microsoft.CodeAnalysis.Editor.GoToDefinition
 
             if (thirdPartyNavigationAllowed)
             {
-                var factory =
-                    solution.Workspace.Services.GetService<IDefinitionsAndReferencesFactory>();
+                var factory = solution
+                    .Workspace
+                    .Services
+                    .GetService<IDefinitionsAndReferencesFactory>();
                 if (factory != null)
                 {
                     var thirdPartyItem = await factory
@@ -130,17 +132,19 @@ namespace Microsoft.CodeAnalysis.Editor.GoToDefinition
             bool thirdPartyNavigationAllowed = true
         )
         {
-            return threadingContext.JoinableTaskFactory.Run(
-                () =>
-                    TryGoToDefinitionAsync(
-                        symbol,
-                        solution,
-                        threadingContext,
-                        streamingPresenter,
-                        cancellationToken,
-                        thirdPartyNavigationAllowed
-                    )
-            );
+            return threadingContext
+                .JoinableTaskFactory
+                .Run(
+                    () =>
+                        TryGoToDefinitionAsync(
+                            symbol,
+                            solution,
+                            threadingContext,
+                            streamingPresenter,
+                            cancellationToken,
+                            thirdPartyNavigationAllowed
+                        )
+                );
         }
 
         public static async Task<bool> TryGoToDefinitionAsync(

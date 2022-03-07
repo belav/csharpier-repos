@@ -30,12 +30,15 @@ namespace Microsoft.EntityFrameworkCore
             using (SqlServerTestStore.GetNorthwindStore())
             {
                 using var scope = serviceProvider.CreateScope();
-                var context =
-                    scope.ServiceProvider.GetRequiredService<NoneInOnConfiguringContext>();
+                var context = scope
+                    .ServiceProvider
+                    .GetRequiredService<NoneInOnConfiguringContext>();
 
-                context.Database.SetConnectionString(
-                    SqlServerNorthwindTestStoreFactory.NorthwindConnectionString
-                );
+                context
+                    .Database
+                    .SetConnectionString(
+                        SqlServerNorthwindTestStoreFactory.NorthwindConnectionString
+                    );
 
                 Assert.True(context.Customers.Any());
             }
@@ -48,9 +51,11 @@ namespace Microsoft.EntityFrameworkCore
             {
                 using var context = new NoneInOnConfiguringContext();
 
-                context.Database.SetConnectionString(
-                    SqlServerNorthwindTestStoreFactory.NorthwindConnectionString
-                );
+                context
+                    .Database
+                    .SetConnectionString(
+                        SqlServerNorthwindTestStoreFactory.NorthwindConnectionString
+                    );
 
                 Assert.True(context.Customers.Any());
             }
@@ -88,8 +93,9 @@ namespace Microsoft.EntityFrameworkCore
             using (SqlServerTestStore.GetNorthwindStore())
             {
                 using var scope = serviceProvider.CreateScope();
-                var context =
-                    scope.ServiceProvider.GetRequiredService<StringInOnConfiguringContext>();
+                var context = scope
+                    .ServiceProvider
+                    .GetRequiredService<StringInOnConfiguringContext>();
                 Assert.True(context.Customers.Any());
             }
         }
@@ -131,8 +137,9 @@ namespace Microsoft.EntityFrameworkCore
             using (SqlServerTestStore.GetNorthwindStore())
             {
                 using var scope = serviceProvider.CreateScope();
-                var context =
-                    scope.ServiceProvider.GetRequiredService<NoneInOnConfiguringContext>();
+                var context = scope
+                    .ServiceProvider
+                    .GetRequiredService<NoneInOnConfiguringContext>();
 
                 using var connection = new SqlConnection(
                     SqlServerNorthwindTestStoreFactory.NorthwindConnectionString
@@ -175,8 +182,9 @@ namespace Microsoft.EntityFrameworkCore
             using (SqlServerTestStore.GetNorthwindStore())
             {
                 using var scope = serviceProvider.CreateScope();
-                var context =
-                    scope.ServiceProvider.GetRequiredService<ConnectionInOnConfiguringContext>();
+                var context = scope
+                    .ServiceProvider
+                    .GetRequiredService<ConnectionInOnConfiguringContext>();
                 Assert.True(context.Customers.Any());
             }
         }
@@ -210,8 +218,9 @@ namespace Microsoft.EntityFrameworkCore
             using (SqlServerTestStore.GetNorthwindStore())
             {
                 using var scope = serviceProvider.CreateScope();
-                var context =
-                    scope.ServiceProvider.GetRequiredService<ConnectionInOnConfiguringContext>();
+                var context = scope
+                    .ServiceProvider
+                    .GetRequiredService<ConnectionInOnConfiguringContext>();
 
                 Assert.Same(connection, context.Database.GetDbConnection());
                 Assert.True(context.Customers.Any());
@@ -241,8 +250,9 @@ namespace Microsoft.EntityFrameworkCore
             using (SqlServerTestStore.GetNorthwindStore())
             {
                 using var scope = serviceProvider.CreateScope();
-                var context =
-                    scope.ServiceProvider.GetRequiredService<ConnectionInOnConfiguringContext>();
+                var context = scope
+                    .ServiceProvider
+                    .GetRequiredService<ConnectionInOnConfiguringContext>();
 
                 context.Database.OpenConnection();
                 Assert.Same(connection, context.Database.GetDbConnection());
@@ -254,9 +264,11 @@ namespace Microsoft.EntityFrameworkCore
 
                 Assert.Equal(
                     RelationalStrings.CannotChangeWhenOpen,
-                    Assert.Throws<InvalidOperationException>(
-                        () => context.Database.SetDbConnection(newConnection)
-                    ).Message
+                    Assert
+                        .Throws<InvalidOperationException>(
+                            () => context.Database.SetDbConnection(newConnection)
+                        )
+                        .Message
                 );
             }
         }
@@ -479,8 +491,9 @@ namespace Microsoft.EntityFrameworkCore
                 using var serviceScope = serviceProvider
                     .GetRequiredService<IServiceScopeFactory>()
                     .CreateScope();
-                using var context =
-                    serviceScope.ServiceProvider.GetRequiredService<UseConfigurationContext>();
+                using var context = serviceScope
+                    .ServiceProvider
+                    .GetRequiredService<UseConfigurationContext>();
                 Assert.True(context.Customers.Any());
             }
         }

@@ -2228,10 +2228,13 @@ public class Program
             var tuple = GetBindingNodeAndModel<ExpressionSyntax>(comp);
             Assert.Equal(
                 ConversionKind.Identity,
-                tuple.Item2.ClassifyConversion(
-                    tuple.Item1,
-                    comp.GetSpecialType(SpecialType.System_Boolean)
-                ).Kind
+                tuple
+                    .Item2
+                    .ClassifyConversion(
+                        tuple.Item1,
+                        comp.GetSpecialType(SpecialType.System_Boolean)
+                    )
+                    .Kind
             );
         }
 
@@ -2278,7 +2281,8 @@ class Program
 
             // Get VariableDeclaratorSyntax corresponding to variable 'ii' above.
             var variableDeclarator = (VariableDeclaratorSyntax)tree.GetCompilationUnitRoot()
-                .FindToken(source.IndexOf("ii", StringComparison.Ordinal)).Parent;
+                .FindToken(source.IndexOf("ii", StringComparison.Ordinal))
+                .Parent;
 
             // Get TypeSymbol corresponding to above VariableDeclaratorSyntax.
             ITypeSymbol targetType =
@@ -2286,13 +2290,15 @@ class Program
 
             // Perform ClassifyConversion for expressions from within the above SyntaxTree.
             var sourceExpression1 = (ExpressionSyntax)tree.GetCompilationUnitRoot()
-                .FindToken(source.IndexOf("jj)", StringComparison.Ordinal)).Parent;
+                .FindToken(source.IndexOf("jj)", StringComparison.Ordinal))
+                .Parent;
             Conversion conversion = model.ClassifyConversion(sourceExpression1, targetType);
             Assert.True(conversion.IsImplicit);
             Assert.True(conversion.IsNumeric);
 
             var sourceExpression2 = (ExpressionSyntax)tree.GetCompilationUnitRoot()
-                .FindToken(source.IndexOf("ss)", StringComparison.Ordinal)).Parent;
+                .FindToken(source.IndexOf("ss)", StringComparison.Ordinal))
+                .Parent;
             conversion = model.ClassifyConversion(sourceExpression2, targetType);
             Assert.False(conversion.Exists);
 

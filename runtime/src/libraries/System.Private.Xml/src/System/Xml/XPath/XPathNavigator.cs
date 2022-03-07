@@ -93,11 +93,9 @@ namespace System.Xml.XPath
                             datatype = schemaType.Datatype;
                             if (datatype != null)
                             {
-                                return schemaType.ValueConverter.ChangeType(
-                                    Value,
-                                    datatype.ValueType,
-                                    this
-                                );
+                                return schemaType
+                                    .ValueConverter
+                                    .ChangeType(Value, datatype.ValueType, this);
                             }
                         }
                     }
@@ -109,11 +107,13 @@ namespace System.Xml.XPath
                             datatype = schemaType.Datatype;
                             if (datatype != null)
                             {
-                                return schemaType.ValueConverter.ChangeType(
-                                    datatype.ParseValue(Value, NameTable, this),
-                                    datatype.ValueType,
-                                    this
-                                );
+                                return schemaType
+                                    .ValueConverter
+                                    .ChangeType(
+                                        datatype.ParseValue(Value, NameTable, this),
+                                        datatype.ValueType,
+                                        this
+                                    );
                             }
                         }
                     }
@@ -229,9 +229,9 @@ namespace System.Xml.XPath
                             datatype = schemaType.Datatype;
                             if (datatype != null)
                             {
-                                return schemaType.ValueConverter.ToBoolean(
-                                    datatype.ParseValue(Value, NameTable, this)
-                                );
+                                return schemaType
+                                    .ValueConverter
+                                    .ToBoolean(datatype.ParseValue(Value, NameTable, this));
                             }
                         }
                     }
@@ -269,9 +269,9 @@ namespace System.Xml.XPath
                             datatype = schemaType.Datatype;
                             if (datatype != null)
                             {
-                                return schemaType.ValueConverter.ToDateTime(
-                                    datatype.ParseValue(Value, NameTable, this)
-                                );
+                                return schemaType
+                                    .ValueConverter
+                                    .ToDateTime(datatype.ParseValue(Value, NameTable, this));
                             }
                         }
                     }
@@ -309,9 +309,9 @@ namespace System.Xml.XPath
                             datatype = schemaType.Datatype;
                             if (datatype != null)
                             {
-                                return schemaType.ValueConverter.ToDouble(
-                                    datatype.ParseValue(Value, NameTable, this)
-                                );
+                                return schemaType
+                                    .ValueConverter
+                                    .ToDouble(datatype.ParseValue(Value, NameTable, this));
                             }
                         }
                     }
@@ -349,9 +349,9 @@ namespace System.Xml.XPath
                             datatype = schemaType.Datatype;
                             if (datatype != null)
                             {
-                                return schemaType.ValueConverter.ToInt32(
-                                    datatype.ParseValue(Value, NameTable, this)
-                                );
+                                return schemaType
+                                    .ValueConverter
+                                    .ToInt32(datatype.ParseValue(Value, NameTable, this));
                             }
                         }
                     }
@@ -389,9 +389,9 @@ namespace System.Xml.XPath
                             datatype = schemaType.Datatype;
                             if (datatype != null)
                             {
-                                return schemaType.ValueConverter.ToInt64(
-                                    datatype.ParseValue(Value, NameTable, this)
-                                );
+                                return schemaType
+                                    .ValueConverter
+                                    .ToInt64(datatype.ParseValue(Value, NameTable, this));
                             }
                         }
                     }
@@ -431,11 +431,13 @@ namespace System.Xml.XPath
                         datatype = schemaType.Datatype;
                         if (datatype != null)
                         {
-                            return schemaType.ValueConverter.ChangeType(
-                                datatype.ParseValue(Value, NameTable, nsResolver),
-                                returnType,
-                                nsResolver
-                            );
+                            return schemaType
+                                .ValueConverter
+                                .ChangeType(
+                                    datatype.ParseValue(Value, NameTable, nsResolver),
+                                    returnType,
+                                    nsResolver
+                                );
                         }
                     }
                 }

@@ -57,11 +57,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 ConfigurationSource.Convention
             );
             var fkProperty =
-                dependentTypeBuilder.Property(
-                    typeof(int),
-                    "No!No!",
-                    ConfigurationSource.Convention
-                ).Metadata;
+                dependentTypeBuilder
+                    .Property(typeof(int), "No!No!", ConfigurationSource.Convention)
+                    .Metadata;
 
             var relationshipBuilder = dependentTypeBuilder
                 .HasRelationship(PrincipalType, "SomeNav", null, ConfigurationSource.Explicit)
@@ -147,12 +145,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         [ConditionalFact]
         public void Returns_same_builder_if_no_matching_clr_properties_found()
         {
-            var relationshipBuilder = DependentType.Builder.HasRelationship(
-                PrincipalType,
-                "SomeNav",
-                null,
-                ConfigurationSource.Convention
-            );
+            var relationshipBuilder = DependentType
+                .Builder
+                .HasRelationship(PrincipalType, "SomeNav", null, ConfigurationSource.Convention);
 
             var newRelationshipBuilder = RunConvention(relationshipBuilder);
             Assert.Same(relationshipBuilder, newRelationshipBuilder);
@@ -171,10 +166,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         {
             var dependentTypeBuilder = DependentType.Builder;
             var fkProperty =
-                dependentTypeBuilder.Property(
-                    DependentEntity.SomeNavPeEKaYProperty,
-                    ConfigurationSource.Convention
-                ).Metadata;
+                dependentTypeBuilder
+                    .Property(DependentEntity.SomeNavPeEKaYProperty, ConfigurationSource.Convention)
+                    .Metadata;
             dependentTypeBuilder.Property(
                 DependentEntity.SomeNavIDProperty,
                 ConfigurationSource.Convention
@@ -268,10 +262,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         {
             var dependentTypeBuilder = DependentType.Builder;
             var fkProperty =
-                dependentTypeBuilder.Property(
-                    DependentEntity.SomeNavIDProperty,
-                    ConfigurationSource.Convention
-                ).Metadata;
+                dependentTypeBuilder
+                    .Property(DependentEntity.SomeNavIDProperty, ConfigurationSource.Convention)
+                    .Metadata;
             dependentTypeBuilder.Property(
                 DependentEntity.PrincipalEntityIDProperty,
                 ConfigurationSource.Convention
@@ -310,10 +303,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         {
             var dependentTypeBuilder = DependentType.Builder;
             var fkProperty =
-                dependentTypeBuilder.Property(
-                    DependentEntity.PrincipalEntityPeEKaYProperty,
-                    ConfigurationSource.Convention
-                ).Metadata;
+                dependentTypeBuilder
+                    .Property(
+                        DependentEntity.PrincipalEntityPeEKaYProperty,
+                        ConfigurationSource.Convention
+                    )
+                    .Metadata;
             dependentTypeBuilder.Property(
                 DependentEntity.PrincipalEntityIDProperty,
                 ConfigurationSource.Convention
@@ -346,10 +341,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         {
             var dependentTypeBuilder = DependentType.Builder;
             var fkProperty =
-                dependentTypeBuilder.Property(
-                    DependentEntity.PrincipalEntityIDProperty,
-                    ConfigurationSource.Convention
-                ).Metadata;
+                dependentTypeBuilder
+                    .Property(
+                        DependentEntity.PrincipalEntityIDProperty,
+                        ConfigurationSource.Convention
+                    )
+                    .Metadata;
             dependentTypeBuilder.Property(
                 DependentEntity.PeEKaYProperty,
                 ConfigurationSource.Convention
@@ -451,7 +448,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             var dependentTypeBuilder = DependentType.Builder;
             var fkProperty = dependentTypeBuilder
                 .PrimaryKey(new[] { DependentEntity.IDProperty }, ConfigurationSource.Explicit)
-                .Metadata.Properties.Single();
+                .Metadata
+                .Properties
+                .Single();
 
             var relationshipBuilder = dependentTypeBuilder
                 .HasRelationship(PrincipalType, "SomeNav", null, ConfigurationSource.Convention)
@@ -473,7 +472,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         [ConditionalFact]
         public void Does_not_match_non_key_Id_property()
         {
-            var relationshipBuilder = DependentType.Builder
+            var relationshipBuilder = DependentType
+                .Builder
                 .HasRelationship(PrincipalType, "SomeNav", null, ConfigurationSource.Convention)
                 .IsUnique(true, ConfigurationSource.DataAnnotation);
 
@@ -532,22 +532,27 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         {
             var dependentTypeBuilder = DependentTypeWithCompositeKey.Builder;
             var pkProperty1 =
-                dependentTypeBuilder.Property(
-                    DependentEntityWithCompositeKey.IdProperty,
-                    ConfigurationSource.Convention
-                ).Metadata;
+                dependentTypeBuilder
+                    .Property(
+                        DependentEntityWithCompositeKey.IdProperty,
+                        ConfigurationSource.Convention
+                    )
+                    .Metadata;
             var pkProperty2 =
                 dependentTypeBuilder
                     .Property(
                         DependentEntityWithCompositeKey.NameProperty,
                         ConfigurationSource.Convention
                     )
-                    .IsRequired(true, ConfigurationSource.Convention).Metadata;
+                    .IsRequired(true, ConfigurationSource.Convention)
+                    .Metadata;
             var pkProperty3 =
-                dependentTypeBuilder.Property(
-                    DependentEntityWithCompositeKey.NavPropIdProperty,
-                    ConfigurationSource.Convention
-                ).Metadata;
+                dependentTypeBuilder
+                    .Property(
+                        DependentEntityWithCompositeKey.NavPropIdProperty,
+                        ConfigurationSource.Convention
+                    )
+                    .Metadata;
 
             dependentTypeBuilder.PrimaryKey(
                 new[] { pkProperty1, pkProperty2, pkProperty3 },
@@ -580,12 +585,15 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             var pkProperty =
                 dependentTypeBuilder
                     .Property(DependentEntity.IDProperty, ConfigurationSource.Convention)
-                    .IsRequired(true, ConfigurationSource.Convention).Metadata;
+                    .IsRequired(true, ConfigurationSource.Convention)
+                    .Metadata;
             var fkProperty =
-                dependentTypeBuilder.Property(
-                    DependentEntity.PrincipalEntityPeEKaYProperty,
-                    ConfigurationSource.Convention
-                ).Metadata;
+                dependentTypeBuilder
+                    .Property(
+                        DependentEntity.PrincipalEntityPeEKaYProperty,
+                        ConfigurationSource.Convention
+                    )
+                    .Metadata;
 
             dependentTypeBuilder.PrimaryKey(
                 new[] { pkProperty, fkProperty },
@@ -642,11 +650,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         {
             var dependentTypeBuilder = DependentType.Builder;
             var fkProperty =
-                dependentTypeBuilder.Property(
-                    typeof(string),
-                    "PrincipalEntityPeeKay",
-                    ConfigurationSource.Explicit
-                ).Metadata;
+                dependentTypeBuilder
+                    .Property(typeof(string), "PrincipalEntityPeeKay", ConfigurationSource.Explicit)
+                    .Metadata;
             dependentTypeBuilder.Property(
                 DependentEntity.IDProperty,
                 ConfigurationSource.Convention
@@ -717,7 +723,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         {
             var fkProperty = DependentType.FindPrimaryKey().Properties.Single();
 
-            var relationshipBuilder = DependentType.Builder
+            var relationshipBuilder = DependentType
+                .Builder
                 .HasRelationship(PrincipalType, ConfigurationSource.Convention)
                 .IsUnique(true, ConfigurationSource.DataAnnotation)
                 .IsRequired(false, ConfigurationSource.DataAnnotation);
@@ -738,7 +745,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         [ConditionalFact]
         public void Does_not_match_dependent_PK_for_self_ref()
         {
-            var relationshipBuilder = PrincipalType.Builder
+            var relationshipBuilder = PrincipalType
+                .Builder
                 .HasRelationship(PrincipalType, ConfigurationSource.Convention)
                 .IsUnique(true, ConfigurationSource.DataAnnotation);
 
@@ -760,17 +768,19 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         [ConditionalFact]
         public void Does_not_match_for_convention_identifying_FK()
         {
-            var derivedType = PrincipalType.Builder.ModelBuilder.Entity(
-                typeof(DerivedPrincipalEntity),
-                ConfigurationSource.Convention
-            );
+            var derivedType = PrincipalType
+                .Builder
+                .ModelBuilder
+                .Entity(typeof(DerivedPrincipalEntity), ConfigurationSource.Convention);
             derivedType.HasBaseType(PrincipalType, ConfigurationSource.Convention);
 
-            PrincipalType.Builder.Property(
-                typeof(int),
-                nameof(PrincipalEntity.PrincipalEntityId),
-                ConfigurationSource.Convention
-            );
+            PrincipalType
+                .Builder
+                .Property(
+                    typeof(int),
+                    nameof(PrincipalEntity.PrincipalEntityId),
+                    ConfigurationSource.Convention
+                );
             var relationshipBuilder = derivedType
                 .HasRelationship(
                     PrincipalType,
@@ -907,16 +917,19 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         [ConditionalFact]
         public void Does_not_match_composite_dependent_PK_for_non_unique_FK()
         {
-            DependentTypeWithCompositeKey.Builder.PrimaryKey(
-                new[]
-                {
-                    DependentEntityWithCompositeKey.NavPropIdProperty,
-                    DependentEntityWithCompositeKey.NavPropNameProperty
-                },
-                ConfigurationSource.Explicit
-            );
+            DependentTypeWithCompositeKey
+                .Builder
+                .PrimaryKey(
+                    new[]
+                    {
+                        DependentEntityWithCompositeKey.NavPropIdProperty,
+                        DependentEntityWithCompositeKey.NavPropNameProperty
+                    },
+                    ConfigurationSource.Explicit
+                );
 
-            var relationshipBuilder = DependentTypeWithCompositeKey.Builder
+            var relationshipBuilder = DependentTypeWithCompositeKey
+                .Builder
                 .HasRelationship(
                     PrincipalTypeWithCompositeKey,
                     "NavProp",
@@ -945,12 +958,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         public void Does_not_match_composite_dependent_PK_for_unique_FK_if_count_mismatched()
         {
             var fkProperty1 = DependentTypeWithCompositeKey.FindPrimaryKey().Properties[0];
-            DependentTypeWithCompositeKey.Builder.PrimaryKey(
-                new[] { fkProperty1.Name },
-                ConfigurationSource.Explicit
-            );
+            DependentTypeWithCompositeKey
+                .Builder
+                .PrimaryKey(new[] { fkProperty1.Name }, ConfigurationSource.Explicit);
 
-            var relationshipBuilder = DependentTypeWithCompositeKey.Builder
+            var relationshipBuilder = DependentTypeWithCompositeKey
+                .Builder
                 .HasRelationship(PrincipalTypeWithCompositeKey, ConfigurationSource.Convention)
                 .HasPrincipalKey(
                     PrincipalTypeWithCompositeKey.FindPrimaryKey().Properties,
@@ -979,12 +992,15 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         {
             var fkProperty1 = DependentTypeWithCompositeKey.FindPrimaryKey().Properties[0];
             var fkProperty2 = DependentTypeWithCompositeKey.FindPrimaryKey().Properties[1];
-            DependentTypeWithCompositeKey.Builder.PrimaryKey(
-                new[] { fkProperty2.Name, fkProperty1.Name },
-                ConfigurationSource.Explicit
-            );
+            DependentTypeWithCompositeKey
+                .Builder
+                .PrimaryKey(
+                    new[] { fkProperty2.Name, fkProperty1.Name },
+                    ConfigurationSource.Explicit
+                );
 
-            var relationshipBuilder = DependentTypeWithCompositeKey.Builder
+            var relationshipBuilder = DependentTypeWithCompositeKey
+                .Builder
                 .HasRelationship(
                     PrincipalTypeWithCompositeKey,
                     "NavProp",
@@ -1057,10 +1073,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         {
             var dependentTypeBuilder = DependentType.Builder;
             var fkProperty =
-                dependentTypeBuilder.Property(
-                    DependentEntity.SomeNavPeEKaYProperty,
-                    ConfigurationSource.Convention
-                ).Metadata;
+                dependentTypeBuilder
+                    .Property(DependentEntity.SomeNavPeEKaYProperty, ConfigurationSource.Convention)
+                    .Metadata;
             dependentTypeBuilder.Property(
                 DependentEntity.PrincipalEntityIDProperty,
                 ConfigurationSource.Convention
@@ -1097,7 +1112,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             var relationshipBuilder = DependentType
                 .GetForeignKeys()
                 .Single(foreignKey => foreignKey != newRelationshipBuilder.Metadata)
-                .Builder.HasForeignKey(new[] { fkProperty }, ConfigurationSource.Convention);
+                .Builder
+                .HasForeignKey(new[] { fkProperty }, ConfigurationSource.Convention);
 
             var fk = (IReadOnlyForeignKey)relationshipBuilder.Metadata;
             Assert.Same(fkProperty, fk.Properties.Single());
@@ -1126,19 +1142,13 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         [ConditionalFact]
         public void Logs_warning_if_foreign_key_property_names_are_order_dependent()
         {
-            var relationshipBuilder = DependentType.Builder.HasRelationship(
-                PrincipalType,
-                (string)null,
-                null,
-                ConfigurationSource.Convention
-            );
+            var relationshipBuilder = DependentType
+                .Builder
+                .HasRelationship(PrincipalType, (string)null, null, ConfigurationSource.Convention);
 
-            var otherRelationshipBuilder = DependentType.Builder.HasRelationship(
-                PrincipalType,
-                (string)null,
-                null,
-                ConfigurationSource.Convention
-            );
+            var otherRelationshipBuilder = DependentType
+                .Builder
+                .HasRelationship(PrincipalType, (string)null, null, ConfigurationSource.Convention);
 
             Assert.Equal(
                 nameof(PrincipalEntity) + nameof(PrincipalEntity.PeeKay),
@@ -1174,12 +1184,16 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         public void Inverts_if_principal_entity_type_can_have_non_pk_fk_property()
         {
             var fkProperty =
-                DependentType.Builder.Property(
-                    DependentEntity.PrincipalEntityPeEKaYProperty,
-                    ConfigurationSource.Convention
-                ).Metadata;
+                DependentType
+                    .Builder
+                    .Property(
+                        DependentEntity.PrincipalEntityPeEKaYProperty,
+                        ConfigurationSource.Convention
+                    )
+                    .Metadata;
 
-            var relationshipBuilder = PrincipalType.Builder
+            var relationshipBuilder = PrincipalType
+                .Builder
                 .HasRelationship(DependentType, ConfigurationSource.Convention)
                 .IsUnique(true, ConfigurationSource.Convention);
 
@@ -1203,12 +1217,16 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         public void Does_not_invert_if_weak_entity_type_can_have_non_pk_fk_property()
         {
             var fkProperty =
-                DependentType.Builder.Property(
-                    DependentEntity.PrincipalEntityPeEKaYProperty,
-                    ConfigurationSource.Convention
-                ).Metadata;
+                DependentType
+                    .Builder
+                    .Property(
+                        DependentEntity.PrincipalEntityPeEKaYProperty,
+                        ConfigurationSource.Convention
+                    )
+                    .Metadata;
 
-            var relationshipBuilder = DependentType.Builder
+            var relationshipBuilder = DependentType
+                .Builder
                 .HasRelationship(PrincipalType, ConfigurationSource.Convention)
                 .IsUnique(true, ConfigurationSource.Convention);
 
@@ -1237,10 +1255,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 DependentEntity.PrincipalEntityPeEKaYProperty,
                 ConfigurationSource.Convention
             );
-            PrincipalType.Builder.Property(
-                PrincipalEntity.DependentEntityKayPeeProperty,
-                ConfigurationSource.Convention
-            );
+            PrincipalType
+                .Builder
+                .Property(
+                    PrincipalEntity.DependentEntityKayPeeProperty,
+                    ConfigurationSource.Convention
+                );
 
             var relationshipBuilder = dependentTypeBuilder
                 .HasRelationship(PrincipalType, ConfigurationSource.Convention)
@@ -1261,16 +1281,20 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         [ConditionalFact]
         public void Does_not_invert_if_principal_entity_type_owns_the_weak_entity_type()
         {
-            PrincipalType.Builder.Property(
-                nameof(PrincipalEntity.DependentEntityKayPee),
-                ConfigurationSource.Convention
-            );
+            PrincipalType
+                .Builder
+                .Property(
+                    nameof(PrincipalEntity.DependentEntityKayPee),
+                    ConfigurationSource.Convention
+                );
             PrincipalType.Model.RemoveEntityType(typeof(DependentEntity));
-            var relationshipBuilder = PrincipalType.Builder.HasOwnership(
-                typeof(DependentEntity),
-                nameof(PrincipalEntity.InverseReferenceNav),
-                ConfigurationSource.Convention
-            );
+            var relationshipBuilder = PrincipalType
+                .Builder
+                .HasOwnership(
+                    typeof(DependentEntity),
+                    nameof(PrincipalEntity.InverseReferenceNav),
+                    ConfigurationSource.Convention
+                );
             var dependentTypeBuilder = relationshipBuilder.Metadata.DeclaringEntityType.Builder;
             dependentTypeBuilder.PrimaryKey(
                 new[] { nameof(DependentEntity.KayPee) },
@@ -1298,12 +1322,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         [ConditionalFact]
         public void Does_nothing_if_matching_shadow_property_added()
         {
-            var relationshipBuilder = DependentType.Builder.HasRelationship(
-                PrincipalType,
-                "SomeNav",
-                null,
-                ConfigurationSource.Convention
-            );
+            var relationshipBuilder = DependentType
+                .Builder
+                .HasRelationship(PrincipalType, "SomeNav", null, ConfigurationSource.Convention);
 
             var newRelationshipBuilder = RunConvention(relationshipBuilder);
             Assert.Same(relationshipBuilder, newRelationshipBuilder);
@@ -1314,11 +1335,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             Assert.Equal("SomeNav" + PrimaryKey.Name, fk.Properties.Single().Name);
             Assert.False(fk.IsUnique);
 
-            var property = DependentType.Builder.Property(
-                typeof(int?),
-                "SomeNavId",
-                ConfigurationSource.Convention
-            );
+            var property = DependentType
+                .Builder
+                .Property(typeof(int?), "SomeNavId", ConfigurationSource.Convention);
 
             Assert.Same(property, RunConvention(property));
 
@@ -1332,12 +1351,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         [ConditionalFact]
         public void Sets_foreign_key_if_matching_non_shadow_property_added()
         {
-            var relationshipBuilder = DependentType.Builder.HasRelationship(
-                PrincipalType,
-                "SomeNav",
-                null,
-                ConfigurationSource.Convention
-            );
+            var relationshipBuilder = DependentType
+                .Builder
+                .HasRelationship(PrincipalType, "SomeNav", null, ConfigurationSource.Convention);
 
             var newRelationshipBuilder = RunConvention(relationshipBuilder);
             Assert.Same(relationshipBuilder, newRelationshipBuilder);
@@ -1349,10 +1365,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             Assert.True(fk.Properties.Single().IsShadowProperty());
             Assert.False(fk.IsUnique);
 
-            var property = DependentType.Builder.Property(
-                DependentEntity.SomeNavIDProperty,
-                ConfigurationSource.Convention
-            );
+            var property = DependentType
+                .Builder
+                .Property(DependentEntity.SomeNavIDProperty, ConfigurationSource.Convention);
 
             Assert.Same(property, RunConvention(property));
 
@@ -1366,7 +1381,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         [ConditionalFact]
         public void Inverts_and_sets_foreign_key_if_matching_non_shadow_property_added_on_principal_type()
         {
-            var relationshipBuilder = PrincipalType.Builder
+            var relationshipBuilder = PrincipalType
+                .Builder
                 .HasRelationship(
                     DependentType,
                     "InverseReferenceNav",
@@ -1383,10 +1399,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             Assert.Same(fk.PrincipalEntityType, DependentType);
             Assert.True(fk.IsUnique);
 
-            var property = DependentType.Builder.Property(
-                DependentEntity.SomeNavIDProperty,
-                ConfigurationSource.Convention
-            );
+            var property = DependentType
+                .Builder
+                .Property(DependentEntity.SomeNavIDProperty, ConfigurationSource.Convention);
 
             Assert.Same(property, RunConvention(property));
             Assert.Same(property, RunConvention(property));
@@ -1449,9 +1464,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 Assert.Throws<InvalidOperationException>(() => ValidateModel()).Message
             );
 
-            newRelationshipBuilder.Metadata.UpdatePropertiesConfigurationSource(
-                ConfigurationSource.Explicit
-            );
+            newRelationshipBuilder
+                .Metadata
+                .UpdatePropertiesConfigurationSource(ConfigurationSource.Explicit);
 
             ValidateModel();
         }
@@ -1565,7 +1580,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         }
 
         private ProviderConventionSetBuilderDependencies CreateDependencies() =>
-            InMemoryTestHelpers.Instance
+            InMemoryTestHelpers
+                .Instance
                 .CreateContextServices()
                 .GetRequiredService<ProviderConventionSetBuilderDependencies>() with
             {
@@ -1604,16 +1620,14 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             PrincipalTypeWithCompositeKey.FindPrimaryKey().Properties;
 
         private EntityType PrincipalTypeWithCompositeKey =>
-            _model.Entity(
-                typeof(PrincipalEntityWithCompositeKey),
-                ConfigurationSource.Convention
-            ).Metadata;
+            _model
+                .Entity(typeof(PrincipalEntityWithCompositeKey), ConfigurationSource.Convention)
+                .Metadata;
 
         private EntityType DependentTypeWithCompositeKey =>
-            _model.Entity(
-                typeof(DependentEntityWithCompositeKey),
-                ConfigurationSource.Convention
-            ).Metadata;
+            _model
+                .Entity(typeof(DependentEntityWithCompositeKey), ConfigurationSource.Convention)
+                .Metadata;
 
         private class PrincipalEntity
         {

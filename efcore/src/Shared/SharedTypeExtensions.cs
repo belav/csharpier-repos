@@ -398,7 +398,8 @@ namespace System
             types ??= Array.Empty<Type>();
 
             return type.GetTypeInfo()
-                .DeclaredConstructors.SingleOrDefault(
+                .DeclaredConstructors
+                .SingleOrDefault(
                     c =>
                         !c.IsStatic
                         && c.GetParameters().Select(p => p.ParameterType).SequenceEqual(types)

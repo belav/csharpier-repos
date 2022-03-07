@@ -16,7 +16,8 @@ public class Program
     {
         var builder = WebAssemblyHostBuilder.CreateDefault(args);
 
-        builder.Services
+        builder
+            .Services
             .AddApiAuthorization<RemoteAppState, OidcAccount>()
             .AddAccountClaimsPrincipalFactory<
                 RemoteAppState,
@@ -24,7 +25,8 @@ public class Program
                 PreferencesUserFactory
             >();
 
-        builder.Services
+        builder
+            .Services
             .AddHttpClient<WeatherForecastClient>(
                 client => client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress)
             )

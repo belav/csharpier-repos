@@ -2635,10 +2635,9 @@ namespace System.Text.RegularExpressions
                                   // With surrogate pairs, doing a ToLower on the entire string is more correct linguistically, but
                                   // Regex doesn't support surrogates, and not doing this character-by-character then causes differences
                                   // from matching where characters are lowercased individually.
-                                  ReadOnlySpan<char> src = state._pattern.AsSpan(
-                                      state.pos,
-                                      state.cch
-                                  );
+                                  ReadOnlySpan<char> src = state
+                                      ._pattern
+                                      .AsSpan(state.pos, state.cch);
                                   TextInfo ti = state._culture.TextInfo;
                                   for (int i = 0; i < dest.Length; i++)
                                   {

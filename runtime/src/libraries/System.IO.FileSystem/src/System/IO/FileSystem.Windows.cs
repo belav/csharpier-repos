@@ -30,13 +30,15 @@ namespace System.IO
                     // For a number of error codes (sharing violation, path not found, etc) we don't know if the problem was with
                     // the source or dest file.  Try reading the source file.
                     using (
-                        SafeFileHandle handle = Interop.Kernel32.CreateFile(
-                            sourceFullPath,
-                            Interop.Kernel32.GenericOperations.GENERIC_READ,
-                            FileShare.Read,
-                            FileMode.Open,
-                            0
-                        )
+                        SafeFileHandle handle = Interop
+                            .Kernel32
+                            .CreateFile(
+                                sourceFullPath,
+                                Interop.Kernel32.GenericOperations.GENERIC_READ,
+                                FileShare.Read,
+                                FileMode.Open,
+                                0
+                            )
                     )
                     {
                         if (handle.IsInvalid)
@@ -67,14 +69,16 @@ namespace System.IO
             int flags = ignoreMetadataErrors ? Interop.Kernel32.REPLACEFILE_IGNORE_MERGE_ERRORS : 0;
 
             if (
-                !Interop.Kernel32.ReplaceFile(
-                    destFullPath,
-                    sourceFullPath,
-                    destBackupFullPath,
-                    flags,
-                    IntPtr.Zero,
-                    IntPtr.Zero
-                )
+                !Interop
+                    .Kernel32
+                    .ReplaceFile(
+                        destFullPath,
+                        sourceFullPath,
+                        destBackupFullPath,
+                        flags,
+                        IntPtr.Zero,
+                        IntPtr.Zero
+                    )
             )
             {
                 throw Win32Marshal.GetExceptionForWin32Error(Marshal.GetLastWin32Error());
@@ -187,13 +191,15 @@ namespace System.IO
                 throw new ArgumentException(SR.Arg_PathIsVolume, "path");
             }
 
-            SafeFileHandle handle = Interop.Kernel32.CreateFile(
-                fullPath,
-                Interop.Kernel32.GenericOperations.GENERIC_WRITE,
-                FileShare.ReadWrite | FileShare.Delete,
-                FileMode.Open,
-                asDirectory ? Interop.Kernel32.FileOperations.FILE_FLAG_BACKUP_SEMANTICS : 0
-            );
+            SafeFileHandle handle = Interop
+                .Kernel32
+                .CreateFile(
+                    fullPath,
+                    Interop.Kernel32.GenericOperations.GENERIC_WRITE,
+                    FileShare.ReadWrite | FileShare.Delete,
+                    FileMode.Open,
+                    asDirectory ? Interop.Kernel32.FileOperations.FILE_FLAG_BACKUP_SEMANTICS : 0
+                );
 
             if (handle.IsInvalid)
             {
@@ -244,10 +250,9 @@ namespace System.IO
         )
         {
             using (
-                SafeFindHandle handle = Interop.Kernel32.FindFirstFile(
-                    Path.TrimEndingDirectorySeparator(fullPath),
-                    ref findData
-                )
+                SafeFindHandle handle = Interop
+                    .Kernel32
+                    .FindFirstFile(Path.TrimEndingDirectorySeparator(fullPath), ref findData)
             )
             {
                 if (handle.IsInvalid)
@@ -287,10 +292,9 @@ namespace System.IO
             Exception? exception = null;
 
             using (
-                SafeFindHandle handle = Interop.Kernel32.FindFirstFile(
-                    Path.Join(fullPath, "*"),
-                    ref findData
-                )
+                SafeFindHandle handle = Interop
+                    .Kernel32
+                    .FindFirstFile(Path.Join(fullPath, "*"), ref findData)
             )
             {
                 if (handle.IsInvalid)
@@ -492,12 +496,14 @@ namespace System.IO
                 };
 
                 if (
-                    !Interop.Kernel32.SetFileInformationByHandle(
-                        handle,
-                        Interop.Kernel32.FileBasicInfo,
-                        &basicInfo,
-                        (uint)sizeof(Interop.Kernel32.FILE_BASIC_INFO)
-                    )
+                    !Interop
+                        .Kernel32
+                        .SetFileInformationByHandle(
+                            handle,
+                            Interop.Kernel32.FileBasicInfo,
+                            &basicInfo,
+                            (uint)sizeof(Interop.Kernel32.FILE_BASIC_INFO)
+                        )
                 )
                 {
                     throw Win32Marshal.GetExceptionForLastWin32Error(fullPath);

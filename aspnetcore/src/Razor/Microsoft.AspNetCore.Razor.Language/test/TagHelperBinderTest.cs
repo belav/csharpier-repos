@@ -157,7 +157,9 @@ public class TagHelperBinderTest
                                     attribute
                                         .Name("nodashprefix")
                                         .NameComparisonMode(
-                                            RequiredAttributeDescriptor.NameComparisonMode.PrefixMatch
+                                            RequiredAttributeDescriptor
+                                                .NameComparisonMode
+                                                .PrefixMatch
                                         )
                             )
                 )
@@ -189,7 +191,9 @@ public class TagHelperBinderTest
                                     attribute
                                         .Name("prefix-")
                                         .NameComparisonMode(
-                                            RequiredAttributeDescriptor.NameComparisonMode.PrefixMatch
+                                            RequiredAttributeDescriptor
+                                                .NameComparisonMode
+                                                .PrefixMatch
                                         )
                             )
                 )

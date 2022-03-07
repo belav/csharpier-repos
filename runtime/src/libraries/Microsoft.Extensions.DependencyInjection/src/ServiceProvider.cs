@@ -156,9 +156,10 @@ namespace Microsoft.Extensions.DependencyInjection
             OnResolve(serviceType, serviceProviderEngineScope);
             DependencyInjectionEventSource.Log.ServiceResolved(this, serviceType);
             var result = realizedService.Invoke(serviceProviderEngineScope);
-            System.Diagnostics.Debug.Assert(
-                result is null || CallSiteFactory.IsService(serviceType)
-            );
+            System
+                .Diagnostics
+                .Debug
+                .Assert(result is null || CallSiteFactory.IsService(serviceType));
             return result;
         }
 

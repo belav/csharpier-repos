@@ -170,39 +170,48 @@ namespace System.Runtime.Tests
             long t1_afterCompiledILBytes = 0;
             long t1_afterCompiledMethodCount = 0;
 
-            TimeSpan t2_beforeCompilationTime = System.Runtime.JitInfo.GetCompilationTime(
-                currentThread: true
-            );
-            long t2_beforeCompiledILBytes = System.Runtime.JitInfo.GetCompiledILBytes(
-                currentThread: true
-            );
-            long t2_beforeCompiledMethodCount = System.Runtime.JitInfo.GetCompiledMethodCount(
-                currentThread: true
-            );
+            TimeSpan t2_beforeCompilationTime = System
+                .Runtime
+                .JitInfo
+                .GetCompilationTime(currentThread: true);
+            long t2_beforeCompiledILBytes = System
+                .Runtime
+                .JitInfo
+                .GetCompiledILBytes(currentThread: true);
+            long t2_beforeCompiledMethodCount = System
+                .Runtime
+                .JitInfo
+                .GetCompiledMethodCount(currentThread: true);
 
             var t1 = new Thread(
                 () =>
                 {
-                    t1_beforeCompilationTime = System.Runtime.JitInfo.GetCompilationTime(
-                        currentThread: true
-                    );
-                    t1_beforeCompiledILBytes = System.Runtime.JitInfo.GetCompiledILBytes(
-                        currentThread: true
-                    );
-                    t1_beforeCompiledMethodCount = System.Runtime.JitInfo.GetCompiledMethodCount(
-                        currentThread: true
-                    );
+                    t1_beforeCompilationTime = System
+                        .Runtime
+                        .JitInfo
+                        .GetCompilationTime(currentThread: true);
+                    t1_beforeCompiledILBytes = System
+                        .Runtime
+                        .JitInfo
+                        .GetCompiledILBytes(currentThread: true);
+                    t1_beforeCompiledMethodCount = System
+                        .Runtime
+                        .JitInfo
+                        .GetCompiledMethodCount(currentThread: true);
                     long square = MakeAndInvokeDynamicSquareMethod(100);
                     Assert.True(square == 10000);
-                    t1_afterCompilationTime = System.Runtime.JitInfo.GetCompilationTime(
-                        currentThread: true
-                    );
-                    t1_afterCompiledILBytes = System.Runtime.JitInfo.GetCompiledILBytes(
-                        currentThread: true
-                    );
-                    t1_afterCompiledMethodCount = System.Runtime.JitInfo.GetCompiledMethodCount(
-                        currentThread: true
-                    );
+                    t1_afterCompilationTime = System
+                        .Runtime
+                        .JitInfo
+                        .GetCompilationTime(currentThread: true);
+                    t1_afterCompiledILBytes = System
+                        .Runtime
+                        .JitInfo
+                        .GetCompiledILBytes(currentThread: true);
+                    t1_afterCompiledMethodCount = System
+                        .Runtime
+                        .JitInfo
+                        .GetCompiledMethodCount(currentThread: true);
                 }
             );
 
@@ -212,15 +221,18 @@ namespace System.Runtime.Tests
             long square = MakeAndInvokeDynamicSquareMethod(100);
             Assert.True(square == 10000);
 
-            TimeSpan t2_afterCompilationTime = System.Runtime.JitInfo.GetCompilationTime(
-                currentThread: true
-            );
-            long t2_afterCompiledILBytes = System.Runtime.JitInfo.GetCompiledILBytes(
-                currentThread: true
-            );
-            long t2_afterCompiledMethodCount = System.Runtime.JitInfo.GetCompiledMethodCount(
-                currentThread: true
-            );
+            TimeSpan t2_afterCompilationTime = System
+                .Runtime
+                .JitInfo
+                .GetCompilationTime(currentThread: true);
+            long t2_afterCompiledILBytes = System
+                .Runtime
+                .JitInfo
+                .GetCompiledILBytes(currentThread: true);
+            long t2_afterCompiledMethodCount = System
+                .Runtime
+                .JitInfo
+                .GetCompiledMethodCount(currentThread: true);
 
             Assert.True(
                 t2_beforeCompilationTime > TimeSpan.Zero,
@@ -298,9 +310,10 @@ namespace System.Runtime.Tests
 
             compilationTime = System.Runtime.JitInfo.GetCompilationTime(currentThread: true);
             compiledILBytes = System.Runtime.JitInfo.GetCompiledILBytes(currentThread: true);
-            compiledMethodCount = System.Runtime.JitInfo.GetCompiledMethodCount(
-                currentThread: true
-            );
+            compiledMethodCount = System
+                .Runtime
+                .JitInfo
+                .GetCompiledMethodCount(currentThread: true);
 
             Assert.True(
                 compilationTime == TimeSpan.Zero,

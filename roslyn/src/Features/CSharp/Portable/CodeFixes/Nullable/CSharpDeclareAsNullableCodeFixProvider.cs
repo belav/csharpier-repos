@@ -64,7 +64,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.DeclareAsNullable
         public override async Task RegisterCodeFixesAsync(CodeFixContext context)
         {
             var diagnostic = context.Diagnostics.First();
-            var root = await context.Document
+            var root = await context
+                .Document
                 .GetSyntaxRootAsync(context.CancellationToken)
                 .ConfigureAwait(false);
             if (root == null)
@@ -72,7 +73,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.DeclareAsNullable
                 return;
             }
 
-            var model = await context.Document
+            var model = await context
+                .Document
                 .GetSemanticModelAsync(context.CancellationToken)
                 .ConfigureAwait(false);
             if (model == null)
@@ -149,10 +151,9 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.DeclareAsNullable
             {
                 foreach (var diagnostic in diagnostics)
                 {
-                    var node = diagnostic.Location.FindNode(
-                        getInnermostNodeForTie: true,
-                        cancellationToken
-                    );
+                    var node = diagnostic
+                        .Location
+                        .FindNode(getInnermostNodeForTie: true, cancellationToken);
                     MakeDeclarationNullable(editor, model, node, alreadyHandled);
                 }
             }
@@ -166,10 +167,9 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.DeclareAsNullable
             CancellationToken cancellationToken
         )
         {
-            var node = diagnostic.Location.FindNode(
-                getInnermostNodeForTie: true,
-                cancellationToken
-            );
+            var node = diagnostic
+                .Location
+                .FindNode(getInnermostNodeForTie: true, cancellationToken);
             return equivalenceKey == GetEquivalenceKey(node, model);
         }
 
@@ -347,7 +347,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.DeclareAsNullable
 
                 if (argument.NameColon?.Name is IdentifierNameSyntax { Identifier: var identifier })
                 {
-                    var parameter = method.Parameters
+                    var parameter = method
+                        .Parameters
                         .Where(p => p.Name == identifier.Text)
                         .FirstOrDefault();
                     return TryGetParameterTypeSyntax(parameter);

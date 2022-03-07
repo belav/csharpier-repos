@@ -504,8 +504,9 @@ public class OpenIdConnectConfigurationTests
                                 app.Run(
                                     async context =>
                                     {
-                                        var resolver =
-                                            context.RequestServices.GetRequiredService<IAuthenticationHandlerProvider>();
+                                        var resolver = context
+                                            .RequestServices
+                                            .GetRequiredService<IAuthenticationHandlerProvider>();
                                         var handler =
                                             await resolver.GetHandlerAsync(
                                                 context,

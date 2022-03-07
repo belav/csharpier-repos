@@ -25,9 +25,9 @@ namespace Microsoft.DotNet.CoreSetup.Test
         private static readonly Lazy<string> _testArtifactsPath = new Lazy<string>(
             () =>
             {
-                return _repoDirectoriesProvider.Value.GetTestContextVariable(
-                        TestArtifactDirectoryEnvironmentVariable
-                    )
+                return _repoDirectoriesProvider
+                        .Value
+                        .GetTestContextVariable(TestArtifactDirectoryEnvironmentVariable)
                     ?? Path.Combine(
                         AppContext.BaseDirectory,
                         TestArtifactDirectoryEnvironmentVariable

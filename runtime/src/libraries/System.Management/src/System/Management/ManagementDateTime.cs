@@ -133,9 +133,9 @@ namespace System.Management
                 throw new ArgumentOutOfRangeException(nameof(dmtfDate));
             }
 
-            IFormatProvider frmInt32 = (IFormatProvider)CultureInfo.InvariantCulture.GetFormat(
-                typeof(int)
-            );
+            IFormatProvider frmInt32 = (IFormatProvider)CultureInfo
+                .InvariantCulture
+                .GetFormat(typeof(int));
             long ticks = 0;
             int utcOffset = 0;
             try
@@ -177,9 +177,9 @@ namespace System.Management
                         (
                             long.Parse(
                                 tempString,
-                                (IFormatProvider)CultureInfo.InvariantCulture.GetFormat(
-                                    typeof(long)
-                                )
+                                (IFormatProvider)CultureInfo
+                                    .InvariantCulture
+                                    .GetFormat(typeof(long))
                             )
                         ) * (TimeSpan.TicksPerMillisecond / 1000);
                 }
@@ -269,9 +269,9 @@ namespace System.Management
                     ? TimeSpan.Zero
                     : TimeZoneInfo.Local.GetUtcOffset(date);
             long OffsetMins = (tickOffset.Ticks / System.TimeSpan.TicksPerMinute);
-            IFormatProvider frmInt32 = (IFormatProvider)CultureInfo.InvariantCulture.GetFormat(
-                typeof(int)
-            );
+            IFormatProvider frmInt32 = (IFormatProvider)CultureInfo
+                .InvariantCulture
+                .GetFormat(typeof(int));
 
             // If the offset is more than that what can be specified in DMTF format, then
             // convert the date to UniversalTime
@@ -361,9 +361,9 @@ namespace System.Management
             int hours = 0;
             int minutes = 0;
             int seconds = 0;
-            IFormatProvider frmInt32 = (IFormatProvider)CultureInfo.InvariantCulture.GetFormat(
-                typeof(int)
-            );
+            IFormatProvider frmInt32 = (IFormatProvider)CultureInfo
+                .InvariantCulture
+                .GetFormat(typeof(int));
 
             string dmtfts = dmtfTimespan;
             TimeSpan timespan = TimeSpan.MinValue;
@@ -460,12 +460,13 @@ namespace System.Management
         /// </example>
         public static string ToDmtfTimeInterval(TimeSpan timespan)
         {
-            string dmtftimespan = timespan.Days
+            string dmtftimespan = timespan
+                .Days
                 .ToString((IFormatProvider)CultureInfo.InvariantCulture.GetFormat(typeof(int)))
                 .PadLeft(8, '0');
-            IFormatProvider frmInt32 = (IFormatProvider)CultureInfo.InvariantCulture.GetFormat(
-                typeof(int)
-            );
+            IFormatProvider frmInt32 = (IFormatProvider)CultureInfo
+                .InvariantCulture
+                .GetFormat(typeof(int));
 
             // Days that can be represented is more than what can be represented
             // then throw an exception

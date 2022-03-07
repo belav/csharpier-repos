@@ -92,30 +92,33 @@ namespace Microsoft.VisualStudio.LanguageServices.SymbolSearch
                 return;
             }
 
-            var listenerProvider =
-                Workspace.Services.GetRequiredService<IWorkspaceAsynchronousOperationListenerProvider>();
+            var listenerProvider = Workspace
+                .Services
+                .GetRequiredService<IWorkspaceAsynchronousOperationListenerProvider>();
             var asyncToken = listenerProvider
                 .GetListener()
                 .BeginAsyncOperation(
                     nameof(AbstractDelayStartedService.EnableServiceAsync),
                     tag: GetType()
                 );
-            var enableAsync = ThreadingContext.JoinableTaskFactory.RunAsync(
-                async () =>
-                {
-                    // The first time we see that we're registered for a language, enable the
-                    // service.
-                    if (!_enabled)
+            var enableAsync = ThreadingContext
+                .JoinableTaskFactory
+                .RunAsync(
+                    async () =>
                     {
-                        _enabled = true;
-                        await EnableServiceAsync(ThreadingContext.DisposalToken)
-                            .ConfigureAwait(true);
-                    }
+                        // The first time we see that we're registered for a language, enable the
+                        // service.
+                        if (!_enabled)
+                        {
+                            _enabled = true;
+                            await EnableServiceAsync(ThreadingContext.DisposalToken)
+                                .ConfigureAwait(true);
+                        }
 
-                    // Then tell it to start work.
-                    StartWorking();
-                }
-            );
+                        // Then tell it to start work.
+                        StartWorking();
+                    }
+                );
 
             enableAsync.Task.CompletesAsyncOperation(asyncToken);
         }

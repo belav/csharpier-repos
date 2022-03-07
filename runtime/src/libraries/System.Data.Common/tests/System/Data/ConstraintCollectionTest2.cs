@@ -55,7 +55,9 @@ namespace System.Data.Tests
         {
             DataSet ds = DataProvider.CreateForeignConstraint();
             //remove the forigen and ask about the unique
-            ds.Tables["child"].Constraints.Remove(ds.Tables["child"].Constraints[0]);
+            ds.Tables["child"]
+                .Constraints
+                .Remove(ds.Tables["child"].Constraints[0]);
             Assert.True(
                 ds.Tables["parent"].Constraints.CanRemove(ds.Tables["parent"].Constraints[0])
             );

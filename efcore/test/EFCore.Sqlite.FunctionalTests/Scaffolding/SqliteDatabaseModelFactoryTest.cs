@@ -1036,9 +1036,11 @@ DROP TABLE PrincipalTable;"
                     );
 
                     Assert.Equal(
-                        SqliteResources.LogUsingSchemaSelectionsWarning(
-                            new TestLogger<SqliteLoggingDefinitions>()
-                        ).EventId,
+                        SqliteResources
+                            .LogUsingSchemaSelectionsWarning(
+                                new TestLogger<SqliteLoggingDefinitions>()
+                            )
+                            .EventId,
                         Id
                     );
                     Assert.Equal(
@@ -1070,9 +1072,9 @@ DROP TABLE PrincipalTable;"
                     );
 
                     Assert.Equal(
-                        SqliteResources.LogMissingTable(
-                            new TestLogger<SqliteLoggingDefinitions>()
-                        ).EventId,
+                        SqliteResources
+                            .LogMissingTable(new TestLogger<SqliteLoggingDefinitions>())
+                            .EventId,
                         Id
                     );
                     Assert.Equal(
@@ -1109,9 +1111,11 @@ CREATE TABLE DependentTable (
                     );
 
                     Assert.Equal(
-                        SqliteResources.LogForeignKeyScaffoldErrorPrincipalTableNotFound(
-                            new TestLogger<SqliteLoggingDefinitions>()
-                        ).EventId,
+                        SqliteResources
+                            .LogForeignKeyScaffoldErrorPrincipalTableNotFound(
+                                new TestLogger<SqliteLoggingDefinitions>()
+                            )
+                            .EventId,
                         Id
                     );
                     Assert.Equal(
@@ -1152,9 +1156,9 @@ CREATE TABLE DependentTable (
                     );
 
                     Assert.Equal(
-                        SqliteResources.LogPrincipalColumnNotFound(
-                            new TestLogger<SqliteLoggingDefinitions>()
-                        ).EventId,
+                        SqliteResources
+                            .LogPrincipalColumnNotFound(new TestLogger<SqliteLoggingDefinitions>())
+                            .EventId,
                         Id
                     );
                     Assert.Equal(

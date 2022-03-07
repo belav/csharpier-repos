@@ -32,7 +32,8 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.RegularExpressions
         private const string DescriptionKey = nameof(DescriptionKey);
 
         // Always soft-select these completion items.  Also, never filter down.
-        private static readonly CompletionItemRules s_rules = CompletionItemRules.Default
+        private static readonly CompletionItemRules s_rules = CompletionItemRules
+            .Default
             .WithSelectionBehavior(CompletionItemSelectionBehavior.SoftSelection)
             .WithFilterCharacterRule(
                 CharacterSetModificationRule.Create(
@@ -185,9 +186,10 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.RegularExpressions
 
             // We added no items, but the user explicitly asked for completion.  Add all the
             // items we can to help them out.
-            var virtualChar = context.Tree.Text.FirstOrNull(
-                vc => vc.Span.Contains(context.Position)
-            );
+            var virtualChar = context
+                .Tree
+                .Text
+                .FirstOrNull(vc => vc.Span.Contains(context.Position));
             var inCharacterClass =
                 virtualChar != null && IsInCharacterClass(context.Tree.Root, virtualChar.Value);
 
@@ -205,9 +207,10 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.RegularExpressions
             EmbeddedCompletionContext context
         )
         {
-            var previousVirtualCharOpt = context.Tree.Text.FirstOrNull(
-                vc => vc.Span.Contains(context.Position - 1)
-            );
+            var previousVirtualCharOpt = context
+                .Tree
+                .Text
+                .FirstOrNull(vc => vc.Span.Contains(context.Position - 1));
             if (previousVirtualCharOpt == null)
             {
                 // We didn't have a previous character.  Can't determine the set of

@@ -159,7 +159,8 @@ namespace Microsoft.EntityFrameworkCore
                 },
                 async context =>
                 {
-                    var userClaim = await context.UserClaims
+                    var userClaim = await context
+                        .UserClaims
                         .OrderBy(e => e.ClaimType)
                         .ThenBy(e => e.ClaimValue)
                         .FirstAsync();
@@ -181,7 +182,8 @@ namespace Microsoft.EntityFrameworkCore
                 },
                 async context =>
                 {
-                    var userLogin = await context.UserLogins
+                    var userLogin = await context
+                        .UserLogins
                         .OrderBy(e => e.LoginProvider)
                         .FirstAsync();
                     Assert.NotNull(userLogin.User);

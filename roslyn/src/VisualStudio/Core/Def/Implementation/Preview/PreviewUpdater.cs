@@ -64,9 +64,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Preview
                     _previewWorkspace,
                     "We shouldn't have a current document if we don't have a workspace."
                 );
-                var existingDocument = _previewWorkspace.CurrentSolution.GetRequiredTextDocument(
-                    _currentDocumentId
-                );
+                var existingDocument = _previewWorkspace
+                    .CurrentSolution
+                    .GetRequiredTextDocument(_currentDocumentId);
                 if (
                     existingDocument
                         .GetTextSynchronously(CancellationToken.None)
@@ -84,9 +84,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Preview
                     _previewWorkspace,
                     "We shouldn't have a current document if we don't have a workspace."
                 );
-                var currentDocument = _previewWorkspace.CurrentSolution.GetRequiredTextDocument(
-                    _currentDocumentId
-                );
+                var currentDocument = _previewWorkspace
+                    .CurrentSolution
+                    .GetRequiredTextDocument(_currentDocumentId);
                 var currentDocumentText = currentDocument.GetTextSynchronously(
                     CancellationToken.None
                 );
@@ -105,8 +105,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Preview
 
         private void ApplyDocumentToBuffer(TextDocument document, out SourceTextContainer container)
         {
-            var contentTypeService =
-                document.Project.LanguageServices.GetRequiredService<IContentTypeLanguageService>();
+            var contentTypeService = document
+                .Project
+                .LanguageServices
+                .GetRequiredService<IContentTypeLanguageService>();
             var contentType = contentTypeService.GetDefaultContentType();
 
             _textView.TextBuffer.ChangeContentType(contentType, null);

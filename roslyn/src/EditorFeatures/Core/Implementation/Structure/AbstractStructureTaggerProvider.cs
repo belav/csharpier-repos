@@ -141,11 +141,15 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Structure
                 ),
                 TaggerEventSources.OnOptionChanged(
                     subjectBuffer,
-                    BlockStructureOptions.Metadata.ShowBlockStructureGuidesForDeclarationLevelConstructs
+                    BlockStructureOptions
+                        .Metadata
+                        .ShowBlockStructureGuidesForDeclarationLevelConstructs
                 ),
                 TaggerEventSources.OnOptionChanged(
                     subjectBuffer,
-                    BlockStructureOptions.Metadata.ShowBlockStructureGuidesForCommentsAndPreprocessorRegions
+                    BlockStructureOptions
+                        .Metadata
+                        .ShowBlockStructureGuidesForCommentsAndPreprocessorRegions
                 ),
                 TaggerEventSources.OnOptionChanged(
                     subjectBuffer,
@@ -324,10 +328,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Structure
 
             var sourceSpans = new List<object>()
             {
-                elisionSpan.Snapshot.CreateTrackingSpan(
-                    elisionSpan,
-                    SpanTrackingMode.EdgeExclusive
-                ),
+                elisionSpan
+                    .Snapshot
+                    .CreateTrackingSpan(elisionSpan, SpanTrackingMode.EdgeExclusive),
                 "..."
             };
 

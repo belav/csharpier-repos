@@ -222,32 +222,38 @@ public abstract class RazorProjectEngine
         // Default configuration
         var configurationFeature = new DefaultDocumentClassifierPassFeature();
         features.Add(configurationFeature);
-        configurationFeature.ConfigureClass.Add(
-            (document, @class) =>
-            {
-                @class.ClassName = "Template";
-                @class.Modifiers.Add("public");
-            }
-        );
+        configurationFeature
+            .ConfigureClass
+            .Add(
+                (document, @class) =>
+                {
+                    @class.ClassName = "Template";
+                    @class.Modifiers.Add("public");
+                }
+            );
 
-        configurationFeature.ConfigureNamespace.Add(
-            (document, @namespace) =>
-            {
-                @namespace.Content = "Razor";
-            }
-        );
+        configurationFeature
+            .ConfigureNamespace
+            .Add(
+                (document, @namespace) =>
+                {
+                    @namespace.Content = "Razor";
+                }
+            );
 
-        configurationFeature.ConfigureMethod.Add(
-            (document, method) =>
-            {
-                method.MethodName = "ExecuteAsync";
-                method.ReturnType = $"global::{typeof(Task).FullName}";
+        configurationFeature
+            .ConfigureMethod
+            .Add(
+                (document, method) =>
+                {
+                    method.MethodName = "ExecuteAsync";
+                    method.ReturnType = $"global::{typeof(Task).FullName}";
 
-                method.Modifiers.Add("public");
-                method.Modifiers.Add("async");
-                method.Modifiers.Add("override");
-            }
-        );
+                    method.Modifiers.Add("public");
+                    method.Modifiers.Add("async");
+                    method.Modifiers.Add("override");
+                }
+            );
     }
 
     private static void AddComponentFeatures(

@@ -249,14 +249,16 @@ public class AuthenticationTests
                     Assert.NotNull(httpContext.User);
                     Assert.NotNull(httpContext.User.Identity);
                     Assert.True(httpContext.User.Identity.IsAuthenticated);
-                    httpContext.Response.OnCompleted(
-                        () =>
-                        {
-                            userName = httpContext.User.Identity.Name;
-                            completed.SetResult(0);
-                            return Task.FromResult(0);
-                        }
-                    );
+                    httpContext
+                        .Response
+                        .OnCompleted(
+                            () =>
+                            {
+                                userName = httpContext.User.Identity.Name;
+                                completed.SetResult(0);
+                                return Task.FromResult(0);
+                            }
+                        );
                     return Task.FromResult(0);
                 }
             )

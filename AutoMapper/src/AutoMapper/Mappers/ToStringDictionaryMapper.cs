@@ -29,6 +29,7 @@ namespace AutoMapper.Internal.Mappers
         ) =>
             profileMap
                 .CreateTypeDetails(source.GetType())
-                .ReadAccessors.ToDictionary(p => p.Name, p => p.GetMemberValue(source));
+                .ReadAccessors
+                .ToDictionary(p => p.Name, p => p.GetMemberValue(source));
     }
 }

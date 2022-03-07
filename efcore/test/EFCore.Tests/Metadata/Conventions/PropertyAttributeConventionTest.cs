@@ -266,10 +266,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         {
             var derivedEntityTypeBuilder = CreateInternalEntityTypeBuilder<DerivedEntity>();
             var baseEntityType =
-                derivedEntityTypeBuilder.ModelBuilder.Entity(
-                    typeof(BaseEntity),
-                    ConfigurationSource.Explicit
-                ).Metadata;
+                derivedEntityTypeBuilder
+                    .ModelBuilder
+                    .Entity(typeof(BaseEntity), ConfigurationSource.Explicit)
+                    .Metadata;
             derivedEntityTypeBuilder.HasBaseType(baseEntityType, ConfigurationSource.Explicit);
 
             var propertyBuilder = derivedEntityTypeBuilder.Property(
@@ -284,9 +284,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                     propertyBuilder.Metadata.Name,
                     baseEntityType.DisplayName()
                 ),
-                Assert.Throws<InvalidOperationException>(
-                    () => Validate(derivedEntityTypeBuilder)
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(() => Validate(derivedEntityTypeBuilder))
+                    .Message
             );
         }
 
@@ -295,10 +295,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         {
             var derivedEntityTypeBuilder =
                 CreateInternalEntityTypeBuilder<CompositeKeyDerivedEntity>();
-            var baseEntityTypeBuilder = derivedEntityTypeBuilder.ModelBuilder.Entity(
-                typeof(BaseEntity),
-                ConfigurationSource.Explicit
-            );
+            var baseEntityTypeBuilder = derivedEntityTypeBuilder
+                .ModelBuilder
+                .Entity(typeof(BaseEntity), ConfigurationSource.Explicit);
             derivedEntityTypeBuilder.HasBaseType(
                 baseEntityTypeBuilder.Metadata,
                 ConfigurationSource.Explicit
@@ -389,7 +388,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 10,
                 entityTypeBuilder
                     .Property<string>(nameof(F.MaxLengthProperty))
-                    .Metadata.GetMaxLength()
+                    .Metadata
+                    .GetMaxLength()
             );
         }
 
@@ -597,7 +597,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 20,
                 entityTypeBuilder
                     .Property<string>(nameof(F.StringLengthProperty))
-                    .Metadata.GetMaxLength()
+                    .Metadata
+                    .GetMaxLength()
             );
         }
 
@@ -864,9 +865,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         private InternalEntityTypeBuilder CreateInternalEntityTypeBuilder<T>()
         {
             var conventionSet = new ConventionSet();
-            conventionSet.EntityTypeAddedConventions.Add(
-                new PropertyDiscoveryConvention(CreateDependencies())
-            );
+            conventionSet
+                .EntityTypeAddedConventions
+                .Add(new PropertyDiscoveryConvention(CreateDependencies()));
 
             var modelBuilder = new Model(conventionSet).Builder;
 
@@ -955,7 +956,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         }
 
         private static ProviderConventionSetBuilderDependencies CreateDependencies() =>
-            InMemoryTestHelpers.Instance
+            InMemoryTestHelpers
+                .Instance
                 .CreateContextServices()
                 .GetRequiredService<ProviderConventionSetBuilderDependencies>();
 

@@ -203,6 +203,7 @@ namespace Microsoft.EntityFrameworkCore.Storage
                         .AddEntityFrameworkSqlite()
                         .BuildServiceProvider(validateScopes: true)
                 )
-                .UseSqlite("Filename=dummy.db").Options;
+                .UseSqlite("Filename=dummy.db")
+                .Options;
     }
 }

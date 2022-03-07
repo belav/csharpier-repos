@@ -24,7 +24,7 @@ namespace System.CommandLine.Generator.Invocations
             StringBuilder builder = new();
             builder.Append(
                 $@"
-                var model = new {Constructor.ContainingType.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat)}("
+                var model = new {Constructor .ContainingType .ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat)}("
             );
             builder.Append(
                 string.Join(

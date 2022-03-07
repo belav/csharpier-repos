@@ -69,10 +69,12 @@ namespace System.Net.Http
         private static bool ProxySupportsConnectionAuth(HttpResponseMessage response)
         {
             if (
-                !response.Headers.TryGetValues(
-                    KnownHeaders.ProxySupport.Descriptor,
-                    out IEnumerable<string>? values
-                )
+                !response
+                    .Headers
+                    .TryGetValues(
+                        KnownHeaders.ProxySupport.Descriptor,
+                        out IEnumerable<string>? values
+                    )
             )
             {
                 return false;
@@ -226,10 +228,9 @@ namespace System.Net.Http
                             );
                         }
 
-                        ChannelBinding? channelBinding =
-                            connection.TransportContext?.GetChannelBinding(
-                                ChannelBindingKind.Endpoint
-                            );
+                        ChannelBinding? channelBinding = connection
+                            .TransportContext
+                            ?.GetChannelBinding(ChannelBindingKind.Endpoint);
                         NTAuthentication authContext = new NTAuthentication(
                             isServer: false,
                             challenge.SchemeName,

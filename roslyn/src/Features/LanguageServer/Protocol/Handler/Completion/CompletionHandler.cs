@@ -93,8 +93,10 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
                 .ConfigureAwait(false);
             var completionOptions = await GetCompletionOptionsAsync(document, cancellationToken)
                 .ConfigureAwait(false);
-            var completionService =
-                document.Project.LanguageServices.GetRequiredService<CompletionService>();
+            var completionService = document
+                .Project
+                .LanguageServices
+                .GetRequiredService<CompletionService>();
 
             // TO-DO: More LSP.CompletionTriggerKind mappings are required to properly map to Roslyn CompletionTriggerKinds.
             // https://dev.azure.com/devdiv/DevDiv/_workitems/edit/1178726
@@ -139,8 +141,11 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             // Flag is defined in VisualStudio\Core\Def\PackageRegistration.pkgdef.
             // We also check against the CompletionOption for test purposes only.
             Contract.ThrowIfNull(context.Solution);
-            var featureFlagService =
-                context.Solution.Workspace.Services.GetRequiredService<IExperimentationService>();
+            var featureFlagService = context
+                .Solution
+                .Workspace
+                .Services
+                .GetRequiredService<IExperimentationService>();
             var returnTextEdits =
                 featureFlagService.IsExperimentEnabled(WellKnownExperimentNames.LSPCompletion)
                 || completionOptions.GetOption(
@@ -498,10 +503,9 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             foreach (var tag in tags)
             {
                 if (
-                    ProtocolConversions.RoslynTagToCompletionItemKind.TryGetValue(
-                        tag,
-                        out var completionItemKind
-                    )
+                    ProtocolConversions
+                        .RoslynTagToCompletionItemKind
+                        .TryGetValue(tag, out var completionItemKind)
                 )
                 {
                     return completionItemKind;

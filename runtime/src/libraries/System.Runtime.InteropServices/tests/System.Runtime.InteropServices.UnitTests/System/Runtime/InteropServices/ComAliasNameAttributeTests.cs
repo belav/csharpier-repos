@@ -19,7 +19,8 @@ namespace System.Runtime.InteropServices.Tests
         {
             FieldInfo field = typeof(ComAliasNameAttributeTests)
                 .GetTypeInfo()
-                .DeclaredFields.Single(f => f.Name == "_foo");
+                .DeclaredFields
+                .Single(f => f.Name == "_foo");
             ComAliasNameAttribute attribute = Assert.Single(
                 field.GetCustomAttributes<ComAliasNameAttribute>(inherit: false)
             );

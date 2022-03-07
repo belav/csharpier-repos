@@ -30,14 +30,16 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
             Assert.Equal(
                 CoreStrings.ConventionsInfiniteLoop,
-                Assert.Throws<InvalidOperationException>(
-                    () =>
-                        entityBuilder.Property(
-                            typeof(int),
-                            shadowPropertyName,
-                            ConfigurationSource.Convention
-                        )
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(
+                        () =>
+                            entityBuilder.Property(
+                                typeof(int),
+                                shadowPropertyName,
+                                ConfigurationSource.Convention
+                            )
+                    )
+                    .Message
             );
         }
 
@@ -50,10 +52,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 IConventionContext<IConventionPropertyBuilder> context
             )
             {
-                propertyBuilder.Metadata.DeclaringEntityType.AddProperty(
-                    "TempProperty" + _count++,
-                    typeof(int)
-                );
+                propertyBuilder
+                    .Metadata
+                    .DeclaringEntityType
+                    .AddProperty("TempProperty" + _count++, typeof(int));
             }
         }
 
@@ -297,11 +299,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             }
             else
             {
-                var result = builder.Metadata.AddEntityType(
-                    typeof(Order),
-                    owned: false,
-                    ConfigurationSource.Convention
-                );
+                var result = builder
+                    .Metadata
+                    .AddEntityType(typeof(Order), owned: false, ConfigurationSource.Convention);
 
                 Assert.Equal(!useScope, result == null);
             }
@@ -342,9 +342,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
                 if (_terminate)
                 {
-                    entityTypeBuilder.Metadata.Model.RemoveEntityType(
-                        entityTypeBuilder.Metadata.Name
-                    );
+                    entityTypeBuilder
+                        .Metadata
+                        .Model
+                        .RemoveEntityType(entityTypeBuilder.Metadata.Name);
                     context.StopProcessing();
                 }
             }
@@ -580,14 +581,19 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             }
             else
             {
-                builder.Metadata.SetBaseType(
-                    builder.Metadata.Model.AddEntityType(
-                        typeof(Order),
-                        owned: false,
-                        ConfigurationSource.Explicit
-                    ),
-                    ConfigurationSource.Convention
-                );
+                builder
+                    .Metadata
+                    .SetBaseType(
+                        builder
+                            .Metadata
+                            .Model
+                            .AddEntityType(
+                                typeof(Order),
+                                owned: false,
+                                ConfigurationSource.Explicit
+                            ),
+                        ConfigurationSource.Convention
+                    );
             }
 
             if (useScope)
@@ -608,10 +614,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             }
             else
             {
-                builder.Metadata.SetBaseType(
-                    builder.Metadata.Model.FindEntityType(typeof(Order)),
-                    ConfigurationSource.Convention
-                );
+                builder
+                    .Metadata
+                    .SetBaseType(
+                        builder.Metadata.Model.FindEntityType(typeof(Order)),
+                        ConfigurationSource.Convention
+                    );
             }
 
             Assert.Equal(new[] { typeof(Order) }, convention1.Calls);
@@ -692,10 +700,14 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             else
             {
                 Assert.NotNull(
-                    entityBuilder.Metadata.SetPrimaryKey(
-                        entityBuilder.Property("OrderId", ConfigurationSource.Convention).Metadata,
-                        ConfigurationSource.Convention
-                    )
+                    entityBuilder
+                        .Metadata
+                        .SetPrimaryKey(
+                            entityBuilder
+                                .Property("OrderId", ConfigurationSource.Convention)
+                                .Metadata,
+                            ConfigurationSource.Convention
+                        )
                 );
             }
 
@@ -720,10 +732,14 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             else
             {
                 Assert.NotNull(
-                    entityBuilder.Metadata.SetPrimaryKey(
-                        entityBuilder.Property("OrderId", ConfigurationSource.Convention).Metadata,
-                        ConfigurationSource.Convention
-                    )
+                    entityBuilder
+                        .Metadata
+                        .SetPrimaryKey(
+                            entityBuilder
+                                .Property("OrderId", ConfigurationSource.Convention)
+                                .Metadata,
+                            ConfigurationSource.Convention
+                        )
                 );
             }
 
@@ -743,10 +759,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             else
             {
                 Assert.Null(
-                    entityBuilder.Metadata.SetPrimaryKey(
-                        (Property)null,
-                        ConfigurationSource.Convention
-                    )
+                    entityBuilder
+                        .Metadata
+                        .SetPrimaryKey((Property)null, ConfigurationSource.Convention)
                 );
             }
 
@@ -928,17 +943,17 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             }
             else
             {
-                var result = entityBuilder.Metadata.AddForeignKey(
-                    entityBuilder.Property(
-                        typeof(int),
-                        "OrderId1",
+                var result = entityBuilder
+                    .Metadata
+                    .AddForeignKey(
+                        entityBuilder
+                            .Property(typeof(int), "OrderId1", ConfigurationSource.Convention)
+                            .Metadata,
+                        entityBuilder.Metadata.FindPrimaryKey(),
+                        entityBuilder.Metadata,
+                        ConfigurationSource.Convention,
                         ConfigurationSource.Convention
-                    ).Metadata,
-                    entityBuilder.Metadata.FindPrimaryKey(),
-                    entityBuilder.Metadata,
-                    ConfigurationSource.Convention,
-                    ConfigurationSource.Convention
-                );
+                    );
 
                 Assert.Equal(!useScope, result == null);
             }
@@ -1003,28 +1018,32 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
             var builder = new InternalModelBuilder(new Model(conventions));
             var entityBuilder = builder.Entity(typeof(Order), ConfigurationSource.Convention);
-            var foreignKey = entityBuilder.Metadata.AddForeignKey(
-                new[]
-                {
-                    entityBuilder.Property(
-                        typeof(int),
-                        "FK",
-                        ConfigurationSource.Convention
-                    ).Metadata
-                },
-                entityBuilder.HasKey(new[] { "OrderId" }, ConfigurationSource.Convention).Metadata,
-                entityBuilder.Metadata,
-                ConfigurationSource.Explicit,
-                ConfigurationSource.Explicit
-            );
+            var foreignKey = entityBuilder
+                .Metadata
+                .AddForeignKey(
+                    new[]
+                    {
+                        entityBuilder
+                            .Property(typeof(int), "FK", ConfigurationSource.Convention)
+                            .Metadata
+                    },
+                    entityBuilder
+                        .HasKey(new[] { "OrderId" }, ConfigurationSource.Convention)
+                        .Metadata,
+                    entityBuilder.Metadata,
+                    ConfigurationSource.Explicit,
+                    ConfigurationSource.Explicit
+                );
 
             var scope = useScope ? builder.Metadata.ConventionDispatcher.DelayConventions() : null;
 
-            var result = entityBuilder.Metadata.RemoveForeignKey(
-                foreignKey.Properties,
-                foreignKey.PrincipalKey,
-                foreignKey.PrincipalEntityType
-            );
+            var result = entityBuilder
+                .Metadata
+                .RemoveForeignKey(
+                    foreignKey.Properties,
+                    foreignKey.PrincipalKey,
+                    foreignKey.PrincipalEntityType
+                );
 
             if (useScope)
             {
@@ -1265,31 +1284,31 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
             var builder = new InternalModelBuilder(new Model(conventions));
             var entityBuilder = builder.Entity(typeof(Order), ConfigurationSource.Convention);
-            var foreignKey = entityBuilder.Metadata.AddForeignKey(
-                new[]
-                {
-                    entityBuilder.Property(
-                        typeof(int),
-                        "FK",
-                        ConfigurationSource.Convention
-                    ).Metadata
-                },
-                entityBuilder.HasKey(new[] { "OrderId" }, ConfigurationSource.Convention).Metadata,
-                entityBuilder.Metadata,
-                ConfigurationSource.Explicit,
-                ConfigurationSource.Explicit
-            );
+            var foreignKey = entityBuilder
+                .Metadata
+                .AddForeignKey(
+                    new[]
+                    {
+                        entityBuilder
+                            .Property(typeof(int), "FK", ConfigurationSource.Convention)
+                            .Metadata
+                    },
+                    entityBuilder
+                        .HasKey(new[] { "OrderId" }, ConfigurationSource.Convention)
+                        .Metadata,
+                    entityBuilder.Metadata,
+                    ConfigurationSource.Explicit,
+                    ConfigurationSource.Explicit
+                );
 
             var scope = useScope ? builder.Metadata.ConventionDispatcher.DelayConventions() : null;
 
             foreignKey.SetProperties(
                 new[]
                 {
-                    entityBuilder.Property(
-                        typeof(int),
-                        "FK2",
-                        ConfigurationSource.Convention
-                    ).Metadata
+                    entityBuilder
+                        .Property(typeof(int), "FK2", ConfigurationSource.Convention)
+                        .Metadata
                 },
                 foreignKey.PrincipalKey,
                 ConfigurationSource.Convention
@@ -1338,16 +1357,20 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
                 if (relationshipBuilder.Metadata.Properties.First().Name == "FK2")
                 {
-                    relationshipBuilder.Metadata.SetProperties(
-                        new[]
-                        {
-                            relationshipBuilder.Metadata.DeclaringEntityType.Builder.Property(
-                                typeof(int),
-                                "FK3"
-                            ).Metadata
-                        },
-                        relationshipBuilder.Metadata.PrincipalKey
-                    );
+                    relationshipBuilder
+                        .Metadata
+                        .SetProperties(
+                            new[]
+                            {
+                                relationshipBuilder
+                                    .Metadata
+                                    .DeclaringEntityType
+                                    .Builder
+                                    .Property(typeof(int), "FK3")
+                                    .Metadata
+                            },
+                            relationshipBuilder.Metadata.PrincipalKey
+                        );
                     context.StopProcessingIfChanged(relationshipBuilder.Metadata.Properties);
                 }
 
@@ -1387,10 +1410,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 ConfigurationSource.Convention
             );
             var foreignKey =
-                dependentEntityBuilder.HasRelationship(
-                    principalEntityBuilder.Metadata,
-                    ConfigurationSource.Convention
-                ).Metadata;
+                dependentEntityBuilder
+                    .HasRelationship(
+                        principalEntityBuilder.Metadata,
+                        ConfigurationSource.Convention
+                    )
+                    .Metadata;
 
             var scope = useScope ? builder.Metadata.ConventionDispatcher.DelayConventions() : null;
 
@@ -1442,11 +1467,13 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
             Assert.Same(
                 foreignKey,
-                dependentEntityBuilder.Metadata.RemoveForeignKey(
-                    foreignKey.Properties,
-                    foreignKey.PrincipalKey,
-                    foreignKey.PrincipalEntityType
-                )
+                dependentEntityBuilder
+                    .Metadata
+                    .RemoveForeignKey(
+                        foreignKey.Properties,
+                        foreignKey.PrincipalKey,
+                        foreignKey.PrincipalEntityType
+                    )
             );
         }
 
@@ -1505,10 +1532,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 ConfigurationSource.Convention
             );
             var foreignKey =
-                dependentEntityBuilder.HasRelationship(
-                    principalEntityBuilder.Metadata,
-                    ConfigurationSource.Convention
-                ).Metadata;
+                dependentEntityBuilder
+                    .HasRelationship(
+                        principalEntityBuilder.Metadata,
+                        ConfigurationSource.Convention
+                    )
+                    .Metadata;
 
             var scope = useScope ? builder.Metadata.ConventionDispatcher.DelayConventions() : null;
 
@@ -1560,11 +1589,13 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
             Assert.Same(
                 foreignKey,
-                dependentEntityBuilder.Metadata.RemoveForeignKey(
-                    foreignKey.Properties,
-                    foreignKey.PrincipalKey,
-                    foreignKey.PrincipalEntityType
-                )
+                dependentEntityBuilder
+                    .Metadata
+                    .RemoveForeignKey(
+                        foreignKey.Properties,
+                        foreignKey.PrincipalKey,
+                        foreignKey.PrincipalEntityType
+                    )
             );
         }
 
@@ -1638,7 +1669,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                         principalEntityBuilder.Metadata,
                         dependentEntityBuilder.Metadata,
                         ConfigurationSource.Convention
-                    ).Metadata;
+                    )
+                    .Metadata;
 
             var scope = useScope ? builder.Metadata.ConventionDispatcher.DelayConventions() : null;
 
@@ -1690,11 +1722,13 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
             Assert.Same(
                 foreignKey,
-                dependentEntityBuilder.Metadata.RemoveForeignKey(
-                    foreignKey.Properties,
-                    foreignKey.PrincipalKey,
-                    foreignKey.PrincipalEntityType
-                )
+                dependentEntityBuilder
+                    .Metadata
+                    .RemoveForeignKey(
+                        foreignKey.Properties,
+                        foreignKey.PrincipalKey,
+                        foreignKey.PrincipalEntityType
+                    )
             );
         }
 
@@ -1755,12 +1789,14 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 shouldBeOwned: true
             );
             var foreignKey =
-                dependentEntityBuilder.HasRelationship(
-                    principalEntityBuilder.Metadata,
-                    null,
-                    nameof(Order.OrderDetails),
-                    ConfigurationSource.Convention
-                ).Metadata;
+                dependentEntityBuilder
+                    .HasRelationship(
+                        principalEntityBuilder.Metadata,
+                        null,
+                        nameof(Order.OrderDetails),
+                        ConfigurationSource.Convention
+                    )
+                    .Metadata;
 
             var scope = useScope ? builder.Metadata.ConventionDispatcher.DelayConventions() : null;
 
@@ -1813,11 +1849,13 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
             Assert.Same(
                 foreignKey,
-                dependentEntityBuilder.Metadata.RemoveForeignKey(
-                    foreignKey.Properties,
-                    foreignKey.PrincipalKey,
-                    foreignKey.PrincipalEntityType
-                )
+                dependentEntityBuilder
+                    .Metadata
+                    .RemoveForeignKey(
+                        foreignKey.Properties,
+                        foreignKey.PrincipalKey,
+                        foreignKey.PrincipalEntityType
+                    )
             );
         }
 
@@ -1876,10 +1914,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 ConfigurationSource.Convention
             );
             var foreignKey =
-                dependentEntityBuilder.HasRelationship(
-                    principalEntityBuilder.Metadata,
-                    ConfigurationSource.Convention
-                ).Metadata;
+                dependentEntityBuilder
+                    .HasRelationship(
+                        principalEntityBuilder.Metadata,
+                        ConfigurationSource.Convention
+                    )
+                    .Metadata;
 
             var scope = useScope ? builder.Metadata.ConventionDispatcher.DelayConventions() : null;
 
@@ -2027,7 +2067,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                             principalEntityBuilder.Metadata,
                             ConfigurationSource.Convention
                         )
-                        .IsUnique(true, ConfigurationSource.Convention).Metadata;
+                        .IsUnique(true, ConfigurationSource.Convention)
+                        .Metadata;
                 var result = fk.SetDependentToPrincipal(
                     (MemberInfo)null,
                     ConfigurationSource.Explicit
@@ -2126,7 +2167,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                             principalEntityBuilder.Metadata,
                             ConfigurationSource.Convention
                         )
-                        .IsUnique(true, ConfigurationSource.Convention).Metadata;
+                        .IsUnique(true, ConfigurationSource.Convention)
+                        .Metadata;
                 var result = fk.SetDependentToPrincipal(
                     OrderDetails.OrderProperty,
                     ConfigurationSource.Explicit
@@ -2227,11 +2269,14 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 ConfigurationSource.Convention
             );
             var navigation =
-                dependentEntityBuilder.HasRelationship(
-                    principalEntityBuilder.Metadata,
-                    OrderDetails.OrderProperty,
-                    ConfigurationSource.Convention
-                ).Metadata.DependentToPrincipal;
+                dependentEntityBuilder
+                    .HasRelationship(
+                        principalEntityBuilder.Metadata,
+                        OrderDetails.OrderProperty,
+                        ConfigurationSource.Convention
+                    )
+                    .Metadata
+                    .DependentToPrincipal;
 
             var scope = useScope ? builder.Metadata.ConventionDispatcher.DelayConventions() : null;
 
@@ -2368,10 +2413,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             }
             else
             {
-                var result = relationshipBuilder.Metadata.SetDependentToPrincipal(
-                    (string)null,
-                    ConfigurationSource.Convention
-                );
+                var result = relationshipBuilder
+                    .Metadata
+                    .SetDependentToPrincipal((string)null, ConfigurationSource.Convention);
 
                 Assert.Equal(!useScope, result == null);
             }
@@ -2400,10 +2444,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             else
             {
                 Assert.Null(
-                    relationshipBuilder.Metadata.SetDependentToPrincipal(
-                        (string)null,
-                        ConfigurationSource.Convention
-                    )
+                    relationshipBuilder
+                        .Metadata
+                        .SetDependentToPrincipal((string)null, ConfigurationSource.Convention)
                 );
             }
 
@@ -2476,14 +2519,16 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             }
             else
             {
-                var result = firstEntityBuilder.Metadata.AddSkipNavigation(
-                    nameof(Order.Products),
-                    null,
-                    secondEntityBuilder.Metadata,
-                    true,
-                    false,
-                    ConfigurationSource.Convention
-                );
+                var result = firstEntityBuilder
+                    .Metadata
+                    .AddSkipNavigation(
+                        nameof(Order.Products),
+                        null,
+                        secondEntityBuilder.Metadata,
+                        true,
+                        false,
+                        ConfigurationSource.Convention
+                    );
 
                 Assert.Equal(!useScope, result == null);
             }
@@ -2521,9 +2566,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
                 if (_terminate)
                 {
-                    skipNavigationBuilder.Metadata.DeclaringEntityType.RemoveSkipNavigation(
-                        skipNavigationBuilder.Metadata
-                    );
+                    skipNavigationBuilder
+                        .Metadata
+                        .DeclaringEntityType
+                        .RemoveSkipNavigation(skipNavigationBuilder.Metadata);
 
                     context.StopProcessing();
                 }
@@ -2556,14 +2602,16 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 ConfigurationSource.Convention
             );
 
-            var navigation = firstEntityBuilder.Metadata.AddSkipNavigation(
-                nameof(Order.Products),
-                null,
-                secondEntityBuilder.Metadata,
-                true,
-                false,
-                ConfigurationSource.Convention
-            );
+            var navigation = firstEntityBuilder
+                .Metadata
+                .AddSkipNavigation(
+                    nameof(Order.Products),
+                    null,
+                    secondEntityBuilder.Metadata,
+                    true,
+                    false,
+                    ConfigurationSource.Convention
+                );
 
             var scope = useScope ? builder.Metadata.ConventionDispatcher.DelayConventions() : null;
 
@@ -2691,15 +2739,18 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                         new[] { OrderProduct.OrderIdProperty },
                         ConfigurationSource.Convention
                     )
-                    .IsUnique(false, ConfigurationSource.Convention).Metadata;
-            var navigation = firstEntityBuilder.Metadata.AddSkipNavigation(
-                nameof(Order.Products),
-                null,
-                secondEntityBuilder.Metadata,
-                true,
-                false,
-                ConfigurationSource.Convention
-            );
+                    .IsUnique(false, ConfigurationSource.Convention)
+                    .Metadata;
+            var navigation = firstEntityBuilder
+                .Metadata
+                .AddSkipNavigation(
+                    nameof(Order.Products),
+                    null,
+                    secondEntityBuilder.Metadata,
+                    true,
+                    false,
+                    ConfigurationSource.Convention
+                );
 
             var scope = useScope ? builder.Metadata.ConventionDispatcher.DelayConventions() : null;
 
@@ -2797,22 +2848,26 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 ConfigurationSource.Convention
             );
 
-            var navigation = firstEntityBuilder.Metadata.AddSkipNavigation(
-                nameof(Order.Products),
-                null,
-                secondEntityBuilder.Metadata,
-                true,
-                false,
-                ConfigurationSource.Convention
-            );
-            var inverse = secondEntityBuilder.Metadata.AddSkipNavigation(
-                nameof(Product.Orders),
-                null,
-                firstEntityBuilder.Metadata,
-                true,
-                false,
-                ConfigurationSource.Convention
-            );
+            var navigation = firstEntityBuilder
+                .Metadata
+                .AddSkipNavigation(
+                    nameof(Order.Products),
+                    null,
+                    secondEntityBuilder.Metadata,
+                    true,
+                    false,
+                    ConfigurationSource.Convention
+                );
+            var inverse = secondEntityBuilder
+                .Metadata
+                .AddSkipNavigation(
+                    nameof(Product.Orders),
+                    null,
+                    firstEntityBuilder.Metadata,
+                    true,
+                    false,
+                    ConfigurationSource.Convention
+                );
 
             var scope = useScope ? builder.Metadata.ConventionDispatcher.DelayConventions() : null;
 
@@ -2911,14 +2966,16 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 ConfigurationSource.Convention
             );
 
-            var navigation = firstEntityBuilder.Metadata.AddSkipNavigation(
-                nameof(Order.Products),
-                null,
-                secondEntityBuilder.Metadata,
-                true,
-                false,
-                ConfigurationSource.Convention
-            );
+            var navigation = firstEntityBuilder
+                .Metadata
+                .AddSkipNavigation(
+                    nameof(Order.Products),
+                    null,
+                    secondEntityBuilder.Metadata,
+                    true,
+                    false,
+                    ConfigurationSource.Convention
+                );
 
             var scope = useScope ? builder.Metadata.ConventionDispatcher.DelayConventions() : null;
 
@@ -3006,10 +3063,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             else
             {
                 var property =
-                    entityBuilder.Property(
-                        keyPropertyName,
-                        ConfigurationSource.Convention
-                    ).Metadata;
+                    entityBuilder
+                        .Property(keyPropertyName, ConfigurationSource.Convention)
+                        .Metadata;
                 property.IsNullable = false;
                 var result = ((IMutableEntityType)entityBuilder.Metadata).AddKey(property);
 
@@ -3049,9 +3105,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
                 if (_terminate)
                 {
-                    keyBuilder.Metadata.DeclaringEntityType.RemoveKey(
-                        keyBuilder.Metadata.Properties
-                    );
+                    keyBuilder
+                        .Metadata
+                        .DeclaringEntityType
+                        .RemoveKey(keyBuilder.Metadata.Properties);
                     context.StopProcessing();
                 }
             }
@@ -3075,10 +3132,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
             var entityBuilder = builder.Entity(typeof(Order), ConfigurationSource.Convention);
             var key =
-                entityBuilder.HasKey(
-                    new List<string> { "OrderId" },
-                    ConfigurationSource.Convention
-                ).Metadata;
+                entityBuilder
+                    .HasKey(new List<string> { "OrderId" }, ConfigurationSource.Convention)
+                    .Metadata;
 
             var scope = useScope ? builder.Metadata.ConventionDispatcher.DelayConventions() : null;
 
@@ -3148,10 +3204,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             var builder = new InternalModelBuilder(new Model(conventions));
             var entityBuilder = builder.Entity(typeof(Order), ConfigurationSource.Convention);
             var key =
-                entityBuilder.HasKey(
-                    new List<string> { "OrderId" },
-                    ConfigurationSource.Convention
-                ).Metadata;
+                entityBuilder
+                    .HasKey(new List<string> { "OrderId" }, ConfigurationSource.Convention)
+                    .Metadata;
 
             var scope = useScope ? builder.Metadata.ConventionDispatcher.DelayConventions() : null;
 
@@ -3314,9 +3369,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
                 if (_terminate)
                 {
-                    indexBuilder.Metadata.DeclaringEntityType.RemoveIndex(
-                        indexBuilder.Metadata.Properties
-                    );
+                    indexBuilder
+                        .Metadata
+                        .DeclaringEntityType
+                        .RemoveIndex(indexBuilder.Metadata.Properties);
                     context.StopProcessing();
                 }
             }
@@ -3339,10 +3395,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             var builder = new InternalModelBuilder(new Model(conventions));
             var entityBuilder = builder.Entity(typeof(Order), ConfigurationSource.Convention);
             var index =
-                entityBuilder.HasIndex(
-                    new List<string> { "OrderId" },
-                    ConfigurationSource.Convention
-                ).Metadata;
+                entityBuilder
+                    .HasIndex(new List<string> { "OrderId" }, ConfigurationSource.Convention)
+                    .Metadata;
 
             var scope = useScope ? builder.Metadata.ConventionDispatcher.DelayConventions() : null;
 
@@ -3418,10 +3473,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             var builder = new InternalModelBuilder(new Model(conventions));
             var entityBuilder = builder.Entity(typeof(Order), ConfigurationSource.Convention);
             var index =
-                entityBuilder.HasIndex(
-                    new List<string> { "OrderId" },
-                    ConfigurationSource.Convention
-                ).Metadata;
+                entityBuilder
+                    .HasIndex(new List<string> { "OrderId" }, ConfigurationSource.Convention)
+                    .Metadata;
 
             var scope = useScope ? builder.Metadata.ConventionDispatcher.DelayConventions() : null;
 
@@ -3646,12 +3700,14 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             }
             else
             {
-                var result = entityBuilder.Metadata.AddProperty(
-                    shadowPropertyName,
-                    typeof(int),
-                    ConfigurationSource.Convention,
-                    ConfigurationSource.Convention
-                );
+                var result = entityBuilder
+                    .Metadata
+                    .AddProperty(
+                        shadowPropertyName,
+                        typeof(int),
+                        ConfigurationSource.Convention,
+                        ConfigurationSource.Convention
+                    );
 
                 Assert.Equal(!useScope, result == null);
             }
@@ -3722,9 +3778,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
                 if (_terminate)
                 {
-                    propertyBuilder.Metadata.DeclaringEntityType.RemoveProperty(
-                        propertyBuilder.Metadata.Name
-                    );
+                    propertyBuilder
+                        .Metadata
+                        .DeclaringEntityType
+                        .RemoveProperty(propertyBuilder.Metadata.Name);
                     context.StopProcessing();
                 }
             }
@@ -3753,7 +3810,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
             var scope = useScope ? model.DelayConventions() : null;
 
-            var propertyBuilder = model.Builder
+            var propertyBuilder = model
+                .Builder
                 .Entity(typeof(Order), ConfigurationSource.Convention)
                 .Property(typeof(string), "Name", ConfigurationSource.Convention);
             if (useBuilder)
@@ -3907,10 +3965,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             }
             else
             {
-                propertyBuilder.Metadata.SetField(
-                    nameof(Order.IntField),
-                    ConfigurationSource.Convention
-                );
+                propertyBuilder
+                    .Metadata
+                    .SetField(nameof(Order.IntField), ConfigurationSource.Convention);
             }
 
             if (useScope)
@@ -3932,10 +3989,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             }
             else
             {
-                propertyBuilder.Metadata.SetField(
-                    nameof(Order.IntField),
-                    ConfigurationSource.Convention
-                );
+                propertyBuilder
+                    .Metadata
+                    .SetField(nameof(Order.IntField), ConfigurationSource.Convention);
             }
 
             Assert.Equal(new string[] { null }, convention1.Calls);
@@ -4116,12 +4172,14 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             var builder = new InternalModelBuilder(new Model(conventions));
             var entityBuilder = builder.Entity(typeof(Order), ConfigurationSource.Convention);
             var shadowPropertyName = "ShadowProperty";
-            var property = entityBuilder.Metadata.AddProperty(
-                shadowPropertyName,
-                typeof(int),
-                ConfigurationSource.Convention,
-                ConfigurationSource.Convention
-            );
+            var property = entityBuilder
+                .Metadata
+                .AddProperty(
+                    shadowPropertyName,
+                    typeof(int),
+                    ConfigurationSource.Convention,
+                    ConfigurationSource.Convention
+                );
 
             var scope = useScope ? builder.Metadata.ConventionDispatcher.DelayConventions() : null;
 

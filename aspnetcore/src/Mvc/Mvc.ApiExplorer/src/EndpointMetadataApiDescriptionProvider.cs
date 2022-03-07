@@ -62,9 +62,9 @@ internal class EndpointMetadataApiDescriptionProvider : IApiDescriptionProvider
                 // In practice, the Delegate will be called for any HTTP method if there is no IHttpMethodMetadata.
                 foreach (var httpMethod in httpMethodMetadata.HttpMethods)
                 {
-                    context.Results.Add(
-                        CreateApiDescription(routeEndpoint, httpMethod, methodInfo)
-                    );
+                    context
+                        .Results
+                        .Add(CreateApiDescription(routeEndpoint, httpMethod, methodInfo));
                 }
             }
         }
@@ -99,7 +99,8 @@ internal class EndpointMetadataApiDescriptionProvider : IApiDescriptionProvider
         var apiDescription = new ApiDescription
         {
             HttpMethod = httpMethod,
-            GroupName = routeEndpoint.Metadata
+            GroupName = routeEndpoint
+                .Metadata
                 .GetMetadata<IEndpointGroupNameMetadata>()
                 ?.EndpointGroupName,
             RelativePath = routeEndpoint.RoutePattern.RawText?.TrimStart('/'),
@@ -299,9 +300,9 @@ internal class EndpointMetadataApiDescriptionProvider : IApiDescriptionProvider
             );
         }
         else if (
-            parameter.CustomAttributes.Any(
-                a => typeof(IFromServiceMetadata).IsAssignableFrom(a.AttributeType)
-            )
+            parameter
+                .CustomAttributes
+                .Any(a => typeof(IFromServiceMetadata).IsAssignableFrom(a.AttributeType))
             || parameter.ParameterType == typeof(HttpContext)
             || parameter.ParameterType == typeof(HttpRequest)
             || parameter.ParameterType == typeof(HttpResponse)
@@ -392,9 +393,9 @@ internal class EndpointMetadataApiDescriptionProvider : IApiDescriptionProvider
 
         // We favor types added via the extension methods (which implements IProducesResponseTypeMetadata)
         // over those that are added via attributes.
-        var responseMetadataTypes = producesResponseMetadataTypes.Values.Concat(
-            responseProviderMetadataTypes
-        );
+        var responseMetadataTypes = producesResponseMetadataTypes
+            .Values
+            .Concat(responseProviderMetadataTypes);
 
         if (responseMetadataTypes.Any())
         {

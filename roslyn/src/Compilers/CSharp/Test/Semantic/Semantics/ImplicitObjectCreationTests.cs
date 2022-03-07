@@ -5281,9 +5281,9 @@ class D
         [Fact]
         public void UseSiteWarning()
         {
-            var signedDll = TestOptions.ReleaseDll.WithCryptoPublicKey(
-                TestResources.TestKeys.PublicKey_ce65828c82a341f2
-            );
+            var signedDll = TestOptions
+                .ReleaseDll
+                .WithCryptoPublicKey(TestResources.TestKeys.PublicKey_ce65828c82a341f2);
 
             var libBTemplate =
                 @"
@@ -5494,7 +5494,9 @@ class X : List<int>
                     from node in tree.GetRoot().DescendantNodes()
                     where node.IsKind(SyntaxKind.CollectionInitializerExpression)
                     select (InitializerExpressionSyntax)node
-                ).Single().Expressions;
+                )
+                    .Single()
+                    .Expressions;
 
             SymbolInfo symbolInfo;
 

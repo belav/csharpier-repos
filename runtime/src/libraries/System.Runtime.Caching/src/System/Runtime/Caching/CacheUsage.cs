@@ -714,15 +714,15 @@ namespace System.Runtime.Caching
                     {
                         if ((_lastRefHead).IsRef1)
                         {
-                            (_pages[((_lastRefHead).PageIndex)]._entries)[
-                                (_lastRefHead).Ref1Index
-                            ]._ref1._prev = (freeRef1);
+                            (_pages[((_lastRefHead).PageIndex)]._entries)[(_lastRefHead).Ref1Index]
+                                ._ref1
+                                ._prev = (freeRef1);
                         }
                         else if ((_lastRefHead).IsRef2)
                         {
-                            (_pages[((_lastRefHead).PageIndex)]._entries)[
-                                (_lastRefHead).Ref2Index
-                            ]._ref2._prev = (freeRef1);
+                            (_pages[((_lastRefHead).PageIndex)]._entries)[(_lastRefHead).Ref2Index]
+                                ._ref2
+                                ._prev = (freeRef1);
                         }
                         else
                         {
@@ -741,9 +741,9 @@ namespace System.Runtime.Caching
                     else
                     {
                         prev =
-                            (_pages[(_addRef2Head.PageIndex)]._entries)[
-                                _addRef2Head.Ref2Index
-                            ]._ref2._prev;
+                            (_pages[(_addRef2Head.PageIndex)]._entries)[_addRef2Head.Ref2Index]
+                                ._ref2
+                                ._prev;
                         next = _addRef2Head;
                     }
 
@@ -1021,15 +1021,15 @@ namespace System.Runtime.Caching
                 {
                     if ((_lastRefHead).IsRef1)
                     {
-                        (_pages[((_lastRefHead).PageIndex)]._entries)[
-                            (_lastRefHead).Ref1Index
-                        ]._ref1._prev = (entryRef);
+                        (_pages[((_lastRefHead).PageIndex)]._entries)[(_lastRefHead).Ref1Index]
+                            ._ref1
+                            ._prev = (entryRef);
                     }
                     else if ((_lastRefHead).IsRef2)
                     {
-                        (_pages[((_lastRefHead).PageIndex)]._entries)[
-                            (_lastRefHead).Ref2Index
-                        ]._ref2._prev = (entryRef);
+                        (_pages[((_lastRefHead).PageIndex)]._entries)[(_lastRefHead).Ref2Index]
+                            ._ref2
+                            ._prev = (entryRef);
                     }
                     else
                     {
@@ -1089,9 +1089,9 @@ namespace System.Runtime.Caching
                         while (prevNext.IsRef1)
                         {
                             prevNext =
-                                (_pages[(prevNext.PageIndex)]._entries)[
-                                    prevNext.Ref1Index
-                                ]._ref1._prev;
+                                (_pages[(prevNext.PageIndex)]._entries)[prevNext.Ref1Index]
+                                    ._ref1
+                                    ._prev;
                         }
 
                         entries = (_pages[(prev.PageIndex)]._entries);

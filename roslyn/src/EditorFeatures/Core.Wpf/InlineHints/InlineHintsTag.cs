@@ -112,10 +112,10 @@ namespace Microsoft.CodeAnalysis.Editor.InlineHints
                         _taggerProvider.AsynchronousOperationListener,
                         _taggerProvider.StreamingFindUsagesPresenter
                     );
-                    return Implementation.IntelliSense.Helpers.BuildInteractiveTextElements(
-                        taggedText,
-                        context
-                    );
+                    return Implementation
+                        .IntelliSense
+                        .Helpers
+                        .BuildInteractiveTextElements(taggedText, context);
                 }
             }
 
@@ -279,10 +279,12 @@ namespace Microsoft.CodeAnalysis.Editor.InlineHints
                 );
             }
 
-            var toolTipPresenter = _taggerProvider.ToolTipService.CreatePresenter(
-                _textView,
-                new ToolTipParameters(trackMouse: true, ignoreBufferChange: false, KeepOpen)
-            );
+            var toolTipPresenter = _taggerProvider
+                .ToolTipService
+                .CreatePresenter(
+                    _textView,
+                    new ToolTipParameters(trackMouse: true, ignoreBufferChange: false, KeepOpen)
+                );
             _ = StartToolTipServiceAsync(toolTipPresenter);
         }
 
@@ -296,16 +298,14 @@ namespace Microsoft.CodeAnalysis.Editor.InlineHints
                     () => CreateDescriptionAsync(threadingContext.DisposalToken)
                 )
                 .ConfigureAwait(false);
-            await threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
-                threadingContext.DisposalToken
-            );
+            await threadingContext
+                .JoinableTaskFactory
+                .SwitchToMainThreadAsync(threadingContext.DisposalToken);
 
             toolTipPresenter.StartOrUpdate(
-                _textView.TextSnapshot.CreateTrackingSpan(
-                    _span.Start,
-                    _span.Length,
-                    SpanTrackingMode.EdgeInclusive
-                ),
+                _textView
+                    .TextSnapshot
+                    .CreateTrackingSpan(_span.Start, _span.Length, SpanTrackingMode.EdgeInclusive),
                 uiList
             );
         }

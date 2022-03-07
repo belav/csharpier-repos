@@ -61,11 +61,13 @@ namespace System.Xml
 
             try
             {
-                return XmlUntypedConverter.Untyped.ChangeType(
-                    strContentValue,
-                    returnType,
-                    namespaceResolver ?? this as IXmlNamespaceResolver
-                );
+                return XmlUntypedConverter
+                    .Untyped
+                    .ChangeType(
+                        strContentValue,
+                        returnType,
+                        namespaceResolver ?? this as IXmlNamespaceResolver
+                    );
             }
             catch (FormatException e)
             {

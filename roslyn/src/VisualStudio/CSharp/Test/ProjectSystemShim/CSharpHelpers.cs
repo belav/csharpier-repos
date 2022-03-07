@@ -142,8 +142,9 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.ProjectSystemShim
                 projectRefPath: null,
                 "CSharp"
             );
-            var cpsProjectFactory =
-                environment.ExportProvider.GetExportedValue<IWorkspaceProjectContextFactory>();
+            var cpsProjectFactory = environment
+                .ExportProvider
+                .GetExportedValue<IWorkspaceProjectContextFactory>();
             var cpsProject = (CPSProject)await cpsProjectFactory.CreateProjectContextAsync(
                 LanguageNames.CSharp,
                 projectName,
@@ -172,8 +173,9 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.ProjectSystemShim
                 projectRefPath: null,
                 ""
             );
-            var cpsProjectFactory =
-                environment.ExportProvider.GetExportedValue<IWorkspaceProjectContextFactory>();
+            var cpsProjectFactory = environment
+                .ExportProvider
+                .GetExportedValue<IWorkspaceProjectContextFactory>();
 
             return (CPSProject)await cpsProjectFactory.CreateProjectContextAsync(
                 NoCompilationConstants.LanguageName,
@@ -217,11 +219,9 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.ProjectSystemShim
                     baseDirectory = Path.GetTempPath();
                 }
 
-                return CSharpCommandLineParser.Default.Parse(
-                    arguments,
-                    baseDirectory,
-                    sdkDirectory
-                );
+                return CSharpCommandLineParser
+                    .Default
+                    .Parse(arguments, baseDirectory, sdkDirectory);
             }
         }
 

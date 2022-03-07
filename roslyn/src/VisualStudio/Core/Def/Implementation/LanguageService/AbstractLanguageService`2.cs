@@ -138,12 +138,15 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
             // or service providers.  Anything else which is more complicated should go in Initialize
             // instead.
             this.Workspace = this.Package.ComponentModel.GetService<VisualStudioWorkspaceImpl>();
-            this.EditorAdaptersFactoryService =
-                this.Package.ComponentModel.GetService<IVsEditorAdaptersFactoryService>();
-            this.HostDiagnosticUpdateSource =
-                this.Package.ComponentModel.GetService<HostDiagnosticUpdateSource>();
-            this.AnalyzerFileWatcherService =
-                this.Package.ComponentModel.GetService<AnalyzerFileWatcherService>();
+            this.EditorAdaptersFactoryService = this.Package
+                .ComponentModel
+                .GetService<IVsEditorAdaptersFactoryService>();
+            this.HostDiagnosticUpdateSource = this.Package
+                .ComponentModel
+                .GetService<HostDiagnosticUpdateSource>();
+            this.AnalyzerFileWatcherService = this.Package
+                .ComponentModel
+                .GetService<AnalyzerFileWatcherService>();
         }
 
         protected virtual void RemoveServices()
@@ -171,7 +174,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
 
         private void PrimeLanguageServiceComponentsOnBackground()
         {
-            var formatter = this.Workspace.Services
+            var formatter = this.Workspace
+                .Services
                 .GetLanguageServices(RoslynLanguageName)
                 .GetService<ISyntaxFormattingService>();
             if (formatter != null)
@@ -202,7 +206,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
                 v => new StandaloneCommandFilter(v, Package.ComponentModel).AttachToVsTextView()
             );
 
-            var openDocument = wpfTextView.TextBuffer
+            var openDocument = wpfTextView
+                .TextBuffer
                 .AsTextContainer()
                 .GetRelatedDocuments()
                 .FirstOrDefault();
@@ -252,8 +257,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
             bool isOpenMetadataAsSource
         )
         {
-            var outliningManagerService =
-                this.Package.ComponentModel.GetService<IOutliningManagerService>();
+            var outliningManagerService = this.Package
+                .ComponentModel
+                .GetService<IOutliningManagerService>();
             var outliningManager = outliningManagerService.GetOutliningManager(wpfTextView);
             if (outliningManager == null)
                 return;

@@ -56,9 +56,11 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
 
             Assert.Equal(
                 CoreStrings.ValueCannotBeNull("Id", "SomeSimpleEntityBase", "int"),
-                Assert.Throws<InvalidOperationException>(
-                    () => entry.SetStoreGeneratedValue(keyProperty, null)
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(
+                        () => entry.SetStoreGeneratedValue(keyProperty, null)
+                    )
+                    .Message
             );
         }
 
@@ -188,9 +190,9 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
 
             Assert.Equal(
                 CoreStrings.KeyReadOnly("Id", "SomeEntity"),
-                Assert.Throws<InvalidOperationException>(
-                    () => entry.SetPropertyModified(keyProperty)
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(() => entry.SetPropertyModified(keyProperty))
+                    .Message
             );
 
             Assert.Equal(EntityState.Unchanged, entry.EntityState);
@@ -285,9 +287,9 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
 
             Assert.Equal(
                 CoreStrings.TempValuePersists("Id", "SomeEntity", targetState.ToString()),
-                Assert.Throws<InvalidOperationException>(
-                    () => entry.SetEntityState(targetState)
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(() => entry.SetEntityState(targetState))
+                    .Message
             );
         }
 

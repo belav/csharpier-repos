@@ -11,11 +11,14 @@ namespace System.CommandLine.Help
         /// <inheritdoc />
         public void Apply(InvocationContext context)
         {
-            context.BindingContext.HelpBuilder.Write(
-                context.ParseResult.CommandResult.Command,
-                StandardStreamWriter.Create(context.Console.Out),
-                context.ParseResult
-            );
+            context
+                .BindingContext
+                .HelpBuilder
+                .Write(
+                    context.ParseResult.CommandResult.Command,
+                    StandardStreamWriter.Create(context.Console.Out),
+                    context.ParseResult
+                );
         }
     }
 }

@@ -61,28 +61,32 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var project = CreateProject();
 
             var projectWithUserConfiguredGeneratedCodeTrue =
-                project.AddAnalyzerConfigDocument(
-                    ".editorconfig",
-                    SourceText.From(
-                        @"
+                project
+                    .AddAnalyzerConfigDocument(
+                        ".editorconfig",
+                        SourceText.From(
+                            @"
 [*.{cs,vb}]
 generated_code = true
 "
-                    ),
-                    filePath: @"z:\.editorconfig"
-                ).Project;
+                        ),
+                        filePath: @"z:\.editorconfig"
+                    )
+                    .Project;
 
             var projectWithUserConfiguredGeneratedCodeFalse =
-                project.AddAnalyzerConfigDocument(
-                    ".editorconfig",
-                    SourceText.From(
-                        @"
+                project
+                    .AddAnalyzerConfigDocument(
+                        ".editorconfig",
+                        SourceText.From(
+                            @"
 [*.{cs,vb}]
 generated_code = false
 "
-                    ),
-                    filePath: @"z:\.editorconfig"
-                ).Project;
+                        ),
+                        filePath: @"z:\.editorconfig"
+                    )
+                    .Project;
 
             foreach (var fileName in fileNames)
             {
@@ -134,7 +138,8 @@ generated_code = false
         {
             var projectName = "TestProject";
             var projectId = ProjectId.CreateNewId(projectName);
-            return new AdhocWorkspace().CurrentSolution
+            return new AdhocWorkspace()
+                .CurrentSolution
                 .AddProject(projectId, projectName, projectName, LanguageNames.CSharp)
                 .GetProject(projectId);
         }

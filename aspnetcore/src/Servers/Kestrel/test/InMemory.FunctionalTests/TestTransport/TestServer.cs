@@ -91,9 +91,10 @@ internal class TestServer : IAsyncDisposable, IStartup
                     webHostBuilder
                         .UseSetting(
                             WebHostDefaults.ShutdownTimeoutKey,
-                            TestConstants.DefaultTimeout.TotalSeconds.ToString(
-                                CultureInfo.InvariantCulture
-                            )
+                            TestConstants
+                                .DefaultTimeout
+                                .TotalSeconds
+                                .ToString(CultureInfo.InvariantCulture)
                         )
                         .Configure(
                             app =>

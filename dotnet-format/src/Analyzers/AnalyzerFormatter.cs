@@ -74,7 +74,8 @@ namespace Microsoft.CodeAnalysis.Tools.Analyzers
                 return solution;
             }
 
-            var allFixers = projectAnalyzersAndFixers.Values
+            var allFixers = projectAnalyzersAndFixers
+                .Values
                 .SelectMany(analyzersAndFixers => analyzersAndFixers.Fixers)
                 .ToImmutableArray();
 
@@ -82,9 +83,9 @@ namespace Microsoft.CodeAnalysis.Tools.Analyzers
             var fixableCompilerDiagnostics = allFixers
                 .SelectMany(
                     codefix =>
-                        codefix.FixableDiagnosticIds.Where(
-                            id => id.StartsWith("CS") || id.StartsWith("BC")
-                        )
+                        codefix
+                            .FixableDiagnosticIds
+                            .Where(id => id.StartsWith("CS") || id.StartsWith("BC"))
                 )
                 .ToImmutableHashSet();
 
@@ -183,9 +184,9 @@ namespace Microsoft.CodeAnalysis.Tools.Analyzers
             var projects =
                 options.WorkspaceType == WorkspaceType.Solution
                     ? solution.Projects
-                    : solution.Projects.Where(
-                          project => project.FilePath == options.WorkspaceFilePath
-                      );
+                    : solution
+                      .Projects
+                      .Where(project => project.FilePath == options.WorkspaceFilePath);
             foreach (var project in projects)
             {
                 var analyzers = projectAnalyzers[project.Id];
@@ -219,10 +220,12 @@ namespace Microsoft.CodeAnalysis.Tools.Analyzers
                 formattedFiles
             );
 
-            return result.Diagnostics.ToImmutableDictionary(
-                kvp => kvp.Key.Id,
-                kvp => kvp.Value.Select(diagnostic => diagnostic.Id).ToImmutableHashSet()
-            );
+            return result
+                .Diagnostics
+                .ToImmutableDictionary(
+                    kvp => kvp.Key.Id,
+                    kvp => kvp.Value.Select(diagnostic => diagnostic.Id).ToImmutableHashSet()
+                );
 
             static void LogDiagnosticLocations(
                 Solution solution,
@@ -325,9 +328,9 @@ namespace Microsoft.CodeAnalysis.Tools.Analyzers
                     var analyzers = projectAnalyzers[project.Id]
                         .Where(
                             analyzer =>
-                                analyzer.SupportedDiagnostics.Any(
-                                    descriptor => descriptor.Id == diagnosticId
-                                )
+                                analyzer
+                                    .SupportedDiagnostics
+                                    .Any(descriptor => descriptor.Id == diagnosticId)
                         )
                         .ToImmutableArray();
                     await _runner
@@ -412,17 +415,17 @@ namespace Microsoft.CodeAnalysis.Tools.Analyzers
                 var analyzers = ImmutableArray.CreateBuilder<DiagnosticAnalyzer>();
 
                 // Filter analyzers by project's language
-                var filteredAnalyzer = projectAnalyzersAndFixers[projectId].Analyzers.Where(
-                    analyzer => DoesAnalyzerSupportLanguage(analyzer, project.Language)
-                );
+                var filteredAnalyzer = projectAnalyzersAndFixers[projectId]
+                    .Analyzers
+                    .Where(analyzer => DoesAnalyzerSupportLanguage(analyzer, project.Language));
                 foreach (var analyzer in filteredAnalyzer)
                 {
                     // Filter by diagnostics
                     if (
                         !diagnostics.IsEmpty
-                        && !analyzer.SupportedDiagnostics.Any(
-                            descriptor => diagnostics.Contains(descriptor.Id)
-                        )
+                        && !analyzer
+                            .SupportedDiagnostics
+                            .Any(descriptor => diagnostics.Contains(descriptor.Id))
                     )
                     {
                         continue;

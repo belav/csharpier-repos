@@ -169,15 +169,17 @@ public class ServerFactory<TStartup, TContext> : WebApplicationFactory<TStartup>
                         foreach (var part in partsToAdd)
                         {
                             if (
-                                !manager.ApplicationParts.Any(
-                                    p =>
-                                        p.GetType() == part.GetType()
-                                        && string.Equals(
-                                            p.Name,
-                                            part.Name,
-                                            StringComparison.OrdinalIgnoreCase
-                                        )
-                                )
+                                !manager
+                                    .ApplicationParts
+                                    .Any(
+                                        p =>
+                                            p.GetType() == part.GetType()
+                                            && string.Equals(
+                                                p.Name,
+                                                part.Name,
+                                                StringComparison.OrdinalIgnoreCase
+                                            )
+                                    )
                             )
                             {
                                 manager.ApplicationParts.Add(part);

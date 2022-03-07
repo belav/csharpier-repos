@@ -150,9 +150,9 @@ public class TestServerTests
             )
             .ConfigureTestContainer<ThirdPartyContainer>(
                 container =>
-                    container.Services.AddSingleton(
-                        new TestService { Message = "OverridesConfigureContainer" }
-                    )
+                    container
+                        .Services
+                        .AddSingleton(new TestService { Message = "OverridesConfigureContainer" })
             );
 
         var host = new TestServer(builder);
@@ -236,9 +236,9 @@ public class TestServerTests
                 app.Run(
                     context =>
                     {
-                        return context.Response.WriteAsync(
-                            "RequestServices:" + (context.RequestServices != null)
-                        );
+                        return context
+                            .Response
+                            .WriteAsync("RequestServices:" + (context.RequestServices != null));
                     }
                 );
             }
@@ -292,9 +292,11 @@ public class TestServerTests
             app.Run(
                 async context =>
                 {
-                    await context.Response.WriteAsync(
-                        "ApplicationServicesEqual:" + (applicationServices == Services)
-                    );
+                    await context
+                        .Response
+                        .WriteAsync(
+                            "ApplicationServicesEqual:" + (applicationServices == Services)
+                        );
                 }
             );
         }
@@ -319,8 +321,9 @@ public class TestServerTests
             .Configure(
                 applicationBuilder =>
                 {
-                    var serverAddressesFeature =
-                        applicationBuilder.ServerFeatures.Get<IServerAddressesFeature>();
+                    var serverAddressesFeature = applicationBuilder
+                        .ServerFeatures
+                        .Get<IServerAddressesFeature>();
                     Assert.Contains(
                         serverAddressesFeature.Addresses,
                         s => string.Equals(s, url, StringComparison.Ordinal)
@@ -670,9 +673,9 @@ public class TestServerTests
                         {
                             var accessor =
                                 app.ApplicationServices.GetRequiredService<IHttpContextAccessor>();
-                            return context.Response.WriteAsync(
-                                "HasContext:" + (accessor.HttpContext != null)
-                            );
+                            return context
+                                .Response
+                                .WriteAsync("HasContext:" + (accessor.HttpContext != null));
                         }
                     );
                 }
@@ -711,9 +714,11 @@ public class TestServerTests
                         {
                             var accessor =
                                 app.ApplicationServices.GetRequiredService<ContextHolder>();
-                            return context.Response.WriteAsync(
-                                "HasContext:" + (accessor.Accessor.HttpContext != null)
-                            );
+                            return context
+                                .Response
+                                .WriteAsync(
+                                    "HasContext:" + (accessor.Accessor.HttpContext != null)
+                                );
                         }
                     );
                 }

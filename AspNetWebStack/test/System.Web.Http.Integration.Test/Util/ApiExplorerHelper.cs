@@ -70,11 +70,13 @@ namespace System.Web.Http.ApiExplorer
                 new Dictionary<string, HttpControllerDescriptor>();
             foreach (Type controllerType in controllerTypes)
             {
-                string controllerName = controllerType.Name.Substring(
-                    0,
-                    controllerType.Name.Length
-                        - DefaultHttpControllerSelector.ControllerSuffix.Length
-                );
+                string controllerName = controllerType
+                    .Name
+                    .Substring(
+                        0,
+                        controllerType.Name.Length
+                            - DefaultHttpControllerSelector.ControllerSuffix.Length
+                    );
                 var controllerDescriptor = new HttpControllerDescriptor(
                     config,
                     controllerName,

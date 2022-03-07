@@ -69,17 +69,19 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.RenameTracking
 
         public ITagger<T> CreateTagger<T>(ITextBuffer buffer) where T : ITag
         {
-            var stateMachine = buffer.Properties.GetOrCreateSingletonProperty(
-                () =>
-                    new StateMachine(
-                        _threadingContext,
-                        buffer,
-                        _inlineRenameService,
-                        _diagnosticAnalyzerService,
-                        _globalOptions,
-                        _asyncListener
-                    )
-            );
+            var stateMachine = buffer
+                .Properties
+                .GetOrCreateSingletonProperty(
+                    () =>
+                        new StateMachine(
+                            _threadingContext,
+                            buffer,
+                            _inlineRenameService,
+                            _diagnosticAnalyzerService,
+                            _globalOptions,
+                            _asyncListener
+                        )
+                );
             return new Tagger(stateMachine) as ITagger<T>;
         }
 
@@ -117,10 +119,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.RenameTracking
                     }
 
                     if (
-                        textBuffer.Properties.TryGetProperty(
-                            typeof(StateMachine),
-                            out StateMachine stateMachine
-                        )
+                        textBuffer
+                            .Properties
+                            .TryGetProperty(typeof(StateMachine), out StateMachine stateMachine)
                     )
                     {
                         if (visible)
@@ -153,10 +154,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.RenameTracking
                     var textBuffer = text.Container.TryGetTextBuffer();
                     if (
                         textBuffer != null
-                        && textBuffer.Properties.TryGetProperty(
-                            typeof(StateMachine),
-                            out StateMachine stateMachine
-                        )
+                        && textBuffer
+                            .Properties
+                            .TryGetProperty(typeof(StateMachine), out StateMachine stateMachine)
                         && stateMachine.CanInvokeRename(out _, cancellationToken: cancellationToken)
                     )
                     {

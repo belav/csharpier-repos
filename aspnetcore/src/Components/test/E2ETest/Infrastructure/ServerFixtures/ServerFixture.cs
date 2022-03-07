@@ -49,7 +49,8 @@ public abstract class ServerFixture : IDisposable
 
     private static Dictionary<string, string> FindProjects()
     {
-        return typeof(ServerFixture).Assembly
+        return typeof(ServerFixture)
+            .Assembly
             .GetCustomAttributes<AssemblyMetadataAttribute>()
             .Where(m => m.Key.StartsWith("TestAssemblyApplication[", StringComparison.Ordinal))
             .ToDictionary(

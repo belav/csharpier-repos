@@ -55,7 +55,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertSwitchStatementToExpression
                         shouldRemoveNextStatement
                         && semanticModel
                             .AnalyzeDataFlow(node.GetNextStatement())
-                            .DataFlowsIn.Contains(symbol)
+                            .DataFlowsIn
+                            .Contains(symbol)
                     )
                     {
                         // Bail out if data flows into the next statement that we want to move
@@ -210,9 +211,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertSwitchStatementToExpression
             {
                 // Check if we have a catch-all label anywhere.  If so we don't need to pull in the next statements.
                 if (
-                    switchStatement.Sections.Any(
-                        section => section.Labels.Any(label => IsDefaultSwitchLabel(label))
-                    )
+                    switchStatement
+                        .Sections
+                        .Any(section => section.Labels.Any(label => IsDefaultSwitchLabel(label)))
                 )
                 {
                     // Throw can be overridden by other section bodies, therefore it has no effect on the result.

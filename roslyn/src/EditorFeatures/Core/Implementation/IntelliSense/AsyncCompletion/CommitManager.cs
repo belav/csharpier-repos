@@ -42,10 +42,12 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
             get
             {
                 if (
-                    _textView.Properties.TryGetProperty(
-                        CompletionSource.PotentialCommitCharacters,
-                        out ImmutableArray<char> potentialCommitCharacters
-                    )
+                    _textView
+                        .Properties
+                        .TryGetProperty(
+                            CompletionSource.PotentialCommitCharacters,
+                            out ImmutableArray<char> potentialCommitCharacters
+                        )
                 )
                 {
                     return potentialCommitCharacters;
@@ -88,10 +90,12 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
             }
 
             return !(
-                session.Properties.TryGetProperty(
-                    CompletionSource.ExcludedCommitCharacters,
-                    out ImmutableArray<char> excludedCommitCharacter
-                ) && excludedCommitCharacter.Contains(typedChar)
+                session
+                    .Properties
+                    .TryGetProperty(
+                        CompletionSource.ExcludedCommitCharacters,
+                        out ImmutableArray<char> excludedCommitCharacter
+                    ) && excludedCommitCharacter.Contains(typedChar)
             );
         }
 
@@ -106,8 +110,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
             // We can make changes to buffers. We would like to be sure nobody can change them at the same time.
             AssertIsForeground();
 
-            var document =
-                subjectBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
+            var document = subjectBuffer
+                .CurrentSnapshot
+                .GetOpenDocumentInCurrentContextWithChanges();
             if (document == null)
             {
                 return CommitResultUnhandled;
@@ -131,9 +136,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
             }
 
             var filterText =
-                session.ApplicableToSpan.GetText(
-                    session.ApplicableToSpan.TextBuffer.CurrentSnapshot
-                ) + typeChar;
+                session
+                    .ApplicableToSpan
+                    .GetText(session.ApplicableToSpan.TextBuffer.CurrentSnapshot) + typeChar;
             if (Helpers.IsFilterCharacter(roslynItem, typeChar, filterText))
             {
                 // Returning Cancel means we keep the current session and consider the character for further filtering.
@@ -176,17 +181,20 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
             }
 
             if (
-                !session.Properties.TryGetProperty(
-                    CompletionSource.CompletionListSpan,
-                    out TextSpan completionListSpan
-                )
+                !session
+                    .Properties
+                    .TryGetProperty(
+                        CompletionSource.CompletionListSpan,
+                        out TextSpan completionListSpan
+                    )
             )
             {
                 return CommitResultUnhandled;
             }
 
-            var triggerDocument =
-                triggerLocation.Snapshot.GetOpenDocumentInCurrentContextWithChanges();
+            var triggerDocument = triggerLocation
+                .Snapshot
+                .GetOpenDocumentInCurrentContextWithChanges();
             if (triggerDocument == null)
             {
                 return CommitResultUnhandled;
@@ -194,20 +202,26 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
 
             // Telemetry
             if (
-                session.TextView.Properties.TryGetProperty(
-                    CompletionSource.TypeImportCompletionEnabled,
-                    out bool isTyperImportCompletionEnabled
-                ) && isTyperImportCompletionEnabled
+                session
+                    .TextView
+                    .Properties
+                    .TryGetProperty(
+                        CompletionSource.TypeImportCompletionEnabled,
+                        out bool isTyperImportCompletionEnabled
+                    ) && isTyperImportCompletionEnabled
             )
             {
                 AsyncCompletionLogger.LogCommitWithTypeImportCompletionEnabled();
             }
 
             if (
-                session.TextView.Properties.TryGetProperty(
-                    CompletionSource.TargetTypeFilterExperimentEnabled,
-                    out bool isExperimentEnabled
-                ) && isExperimentEnabled
+                session
+                    .TextView
+                    .Properties
+                    .TryGetProperty(
+                        CompletionSource.TargetTypeFilterExperimentEnabled,
+                        out bool isExperimentEnabled
+                    ) && isExperimentEnabled
             )
             {
                 // Capture the % of committed completion items that would have appeared in the "Target type matches" filter
@@ -383,8 +397,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
                 {
                     // The edit updates the snapshot however other extensions may make changes there.
                     // Therefore, it is required to use subjectBuffer.CurrentSnapshot for further calculations rather than the updated current snapsot defined above.
-                    var currentDocument =
-                        subjectBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
+                    var currentDocument = subjectBuffer
+                        .CurrentSnapshot
+                        .GetOpenDocumentInCurrentContextWithChanges();
                     var formattingService =
                         currentDocument?.GetRequiredLanguageService<IFormattingInteractionService>();
 
@@ -402,11 +417,11 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
                                 CancellationToken.None
                             )
                             .WaitAndGetResult(CancellationToken.None);
-                        currentDocument.Project.Solution.Workspace.ApplyTextChanges(
-                            currentDocument.Id,
-                            changes,
-                            CancellationToken.None
-                        );
+                        currentDocument
+                            .Project
+                            .Solution
+                            .Workspace
+                            .ApplyTextChanges(currentDocument.Id, changes, CancellationToken.None);
                     }
                 }
             }
@@ -415,21 +430,23 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
 
             if (provider is INotifyCommittingItemCompletionProvider notifyProvider)
             {
-                _ = ThreadingContext.JoinableTaskFactory.RunAsync(
-                    async () =>
-                    {
-                        // Make sure the notification isn't sent on UI thread.
-                        await TaskScheduler.Default;
-                        _ = notifyProvider
-                            .NotifyCommittingItemAsync(
-                                document,
-                                roslynItem,
-                                commitCharacter,
-                                cancellationToken
-                            )
-                            .ReportNonFatalErrorAsync();
-                    }
-                );
+                _ = ThreadingContext
+                    .JoinableTaskFactory
+                    .RunAsync(
+                        async () =>
+                        {
+                            // Make sure the notification isn't sent on UI thread.
+                            await TaskScheduler.Default;
+                            _ = notifyProvider
+                                .NotifyCommittingItemAsync(
+                                    document,
+                                    roslynItem,
+                                    commitCharacter,
+                                    cancellationToken
+                                )
+                                .ReportNonFatalErrorAsync();
+                        }
+                    );
             }
 
             if (includesCommitCharacter)

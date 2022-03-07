@@ -44,8 +44,10 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
                 return locations.ToArrayAndFree();
             }
 
-            var findUsagesService =
-                document.Project.LanguageServices.GetRequiredService<IFindUsagesService>();
+            var findUsagesService = document
+                .Project
+                .LanguageServices
+                .GetRequiredService<IFindUsagesService>();
             var position = await document
                 .GetPositionFromLinePositionAsync(
                     ProtocolConversions.PositionToLinePosition(request.Position),

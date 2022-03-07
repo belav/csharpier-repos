@@ -12,8 +12,9 @@ namespace Microsoft.EntityFrameworkCore.Migrations
 {
     public class SqliteMigrationAnnotationProviderTest
     {
-        private readonly TestHelpers.TestModelBuilder _modelBuilder =
-            SqliteTestHelpers.Instance.CreateConventionBuilder();
+        private readonly TestHelpers.TestModelBuilder _modelBuilder = SqliteTestHelpers
+            .Instance
+            .CreateConventionBuilder();
         private readonly SqliteAnnotationProvider _provider = new SqliteAnnotationProvider(
             new RelationalAnnotationProviderDependencies()
         );
@@ -25,7 +26,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             var property = (IProperty)_modelBuilder
                 .Entity<Entity>()
                 .Property(e => e.IntProp)
-                .ValueGeneratedOnAdd().Metadata;
+                .ValueGeneratedOnAdd()
+                .Metadata;
             FinalizeModel();
 
             Assert.DoesNotContain(
@@ -40,7 +42,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             var property = (IProperty)_modelBuilder
                 .Entity<Entity>()
                 .Property(e => e.IntProp)
-                .ValueGeneratedOnAdd().Metadata;
+                .ValueGeneratedOnAdd()
+                .Metadata;
             _modelBuilder.Entity<Entity>().HasKey(e => e.IntProp);
             FinalizeModel();
 
@@ -56,7 +59,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             var property = (IProperty)_modelBuilder
                 .Entity<Entity>()
                 .Property(e => e.IntProp)
-                .ValueGeneratedOnAddOrUpdate().Metadata;
+                .ValueGeneratedOnAddOrUpdate()
+                .Metadata;
             FinalizeModel();
 
             Assert.DoesNotContain(
@@ -71,7 +75,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             var property = (IProperty)_modelBuilder
                 .Entity<Entity>()
                 .Property(e => e.IntProp)
-                .ValueGeneratedOnUpdate().Metadata;
+                .ValueGeneratedOnUpdate()
+                .Metadata;
             FinalizeModel();
 
             Assert.DoesNotContain(
@@ -86,7 +91,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             var property = (IProperty)_modelBuilder
                 .Entity<Entity>()
                 .Property(e => e.IntProp)
-                .ValueGeneratedNever().Metadata;
+                .ValueGeneratedNever()
+                .Metadata;
             FinalizeModel();
 
             Assert.DoesNotContain(
@@ -100,7 +106,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
         {
             var property = (IProperty)_modelBuilder
                 .Entity<Entity>()
-                .Property(e => e.IntProp).Metadata;
+                .Property(e => e.IntProp)
+                .Metadata;
             FinalizeModel();
 
             Assert.DoesNotContain(
@@ -115,7 +122,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             var property = (IProperty)_modelBuilder
                 .Entity<Entity>()
                 .Property(e => e.StringProp)
-                .ValueGeneratedOnAdd().Metadata;
+                .ValueGeneratedOnAdd()
+                .Metadata;
             FinalizeModel();
 
             Assert.DoesNotContain(

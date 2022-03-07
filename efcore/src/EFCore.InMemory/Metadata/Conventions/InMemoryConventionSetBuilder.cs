@@ -39,9 +39,9 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Metadata.Conventions
         {
             var conventionSet = base.CreateConventionSet();
 
-            conventionSet.ModelFinalizingConventions.Add(
-                new DefiningQueryRewritingConvention(Dependencies)
-            );
+            conventionSet
+                .ModelFinalizingConventions
+                .Add(new DefiningQueryRewritingConvention(Dependencies));
 
             return conventionSet;
         }

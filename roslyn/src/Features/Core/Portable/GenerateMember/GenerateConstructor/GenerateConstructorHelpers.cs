@@ -29,16 +29,16 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateConstructor
             // 3. Are compatible with the parameters we're generating for this constructor.  Compatible means there
             //    exists an implicit conversion from the new constructor's parameter types to the existing
             //    constructor's parameter types.
-            var semanticFacts =
-                document.Document.GetRequiredLanguageService<ISemanticFactsService>();
+            var semanticFacts = document
+                .Document
+                .GetRequiredLanguageService<ISemanticFactsService>();
             var semanticModel = document.SemanticModel;
             var compilation = semanticModel.Compilation;
 
             return constructor.Parameters.Length == parameters.Length
-                && constructor.Parameters.SequenceEqual(
-                    parameters,
-                    (p1, p2) => p1.RefKind == p2.RefKind
-                )
+                && constructor
+                    .Parameters
+                    .SequenceEqual(parameters, (p1, p2) => p1.RefKind == p2.RefKind)
                 && IsSymbolAccessible(compilation, constructor)
                 && IsCompatible(semanticFacts, semanticModel, constructor, expressions);
         }
@@ -68,9 +68,9 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateConstructor
                     return true;
                 case Accessibility.ProtectedAndInternal:
                 case Accessibility.Internal:
-                    return compilation.Assembly.IsSameAssemblyOrHasFriendAccessTo(
-                        symbol.ContainingAssembly
-                    );
+                    return compilation
+                        .Assembly
+                        .IsSameAssemblyOrHasFriendAccessTo(symbol.ContainingAssembly);
 
                 default:
                     return false;
@@ -90,7 +90,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateConstructor
             // another project with a different language.
             var constructorInCompilation = (IMethodSymbol?)SymbolKey
                 .Create(constructor)
-                .Resolve(semanticModel.Compilation).Symbol;
+                .Resolve(semanticModel.Compilation)
+                .Symbol;
 
             if (constructorInCompilation == null)
             {

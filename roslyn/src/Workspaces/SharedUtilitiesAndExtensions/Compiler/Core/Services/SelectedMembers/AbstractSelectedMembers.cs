@@ -156,9 +156,9 @@ namespace Microsoft.CodeAnalysis.LanguageServices
                                 foreach (var varDecl in GetAllDeclarators(field))
                                 {
                                     if (
-                                        GetVariableIdentifier(varDecl).FullSpan.IntersectsWith(
-                                            position
-                                        )
+                                        GetVariableIdentifier(varDecl)
+                                            .FullSpan
+                                            .IntersectsWith(position)
                                     )
                                         selectedMembers.Add(varDecl);
                                 }
@@ -166,9 +166,9 @@ namespace Microsoft.CodeAnalysis.LanguageServices
                                 return;
                             case TPropertyDeclarationSyntax property:
                                 if (
-                                    GetPropertyIdentifier(property).FullSpan.IntersectsWith(
-                                        position
-                                    )
+                                    GetPropertyIdentifier(property)
+                                        .FullSpan
+                                        .IntersectsWith(position)
                                 )
                                     selectedMembers.Add(property);
 

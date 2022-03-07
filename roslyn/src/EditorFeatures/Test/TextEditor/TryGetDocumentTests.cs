@@ -26,9 +26,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.TextEditor
 ";
             using var workspace = TestWorkspace.CreateCSharp(code);
             var hostDocument = workspace.Documents.First();
-            var document = workspace.CurrentSolution.GetDocument(
-                workspace.GetDocumentId(hostDocument)
-            );
+            var document = workspace
+                .CurrentSolution
+                .GetDocument(workspace.GetDocumentId(hostDocument));
 
             var buffer = hostDocument.GetTextBuffer();
             var container = buffer.AsTextContainer();
@@ -38,7 +38,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.TextEditor
             buffer.Insert(startPosition + 1, " ");
             buffer.Insert(startPosition + 2, "}");
 
-            var newDocument = buffer.CurrentSnapshot
+            var newDocument = buffer
+                .CurrentSnapshot
                 .GetRelatedDocumentsWithChanges()
                 .FirstOrDefault();
             Assert.NotNull(newDocument);
@@ -59,9 +60,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.TextEditor
             var code = @"class C";
             using var workspace = TestWorkspace.CreateCSharp(code);
             var hostDocument = workspace.Documents.First();
-            var document = workspace.CurrentSolution.GetDocument(
-                workspace.GetDocumentId(hostDocument)
-            );
+            var document = workspace
+                .CurrentSolution
+                .GetDocument(workspace.GetDocumentId(hostDocument));
 
             var buffer = hostDocument.GetTextBuffer();
             var startingSnapshotVersion = buffer.CurrentSnapshot.Version;

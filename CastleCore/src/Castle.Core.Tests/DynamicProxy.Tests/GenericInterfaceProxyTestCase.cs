@@ -578,10 +578,12 @@ namespace Castle.DynamicProxy.Tests
             ProxyWithGenInterfaceWithBase();
             Assert.AreEqual(
                 4,
-                MethodFinder.GetAllInstanceMethods(
-                    typeof(IGenInterfaceHierarchyBase<int>),
-                    BindingFlags.Public | BindingFlags.Instance
-                ).Length
+                MethodFinder
+                    .GetAllInstanceMethods(
+                        typeof(IGenInterfaceHierarchyBase<int>),
+                        BindingFlags.Public | BindingFlags.Instance
+                    )
+                    .Length
             );
         }
 

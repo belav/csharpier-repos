@@ -73,10 +73,9 @@ namespace System.Drawing.Printing
             IntPtr modePointer = Interop.Kernel32.GlobalLock(new HandleRef(this, _modeHandle));
             try
             {
-                IntPtr result = Interop.Gdi32.ResetDC(
-                    new HandleRef(_dc, _dc.Hdc),
-                    new HandleRef(null, modePointer)
-                );
+                IntPtr result = Interop
+                    .Gdi32
+                    .ResetDC(new HandleRef(_dc, _dc.Hdc), new HandleRef(null, modePointer));
                 Debug.Assert(result == _dc.Hdc, "ResetDC didn't return the same handle I gave it");
             }
             finally
@@ -91,22 +90,30 @@ namespace System.Drawing.Printing
                 // Adjust the origin of the graphics object to be at the
                 // user-specified margin location
                 //
-                int dpiX = Interop.Gdi32.GetDeviceCaps(
-                    new HandleRef(_dc, _dc.Hdc),
-                    Interop.Gdi32.DeviceCapability.LOGPIXELSX
-                );
-                int dpiY = Interop.Gdi32.GetDeviceCaps(
-                    new HandleRef(_dc, _dc.Hdc),
-                    Interop.Gdi32.DeviceCapability.LOGPIXELSY
-                );
-                int hardMarginX_DU = Interop.Gdi32.GetDeviceCaps(
-                    new HandleRef(_dc, _dc.Hdc),
-                    Interop.Gdi32.DeviceCapability.PHYSICALOFFSETX
-                );
-                int hardMarginY_DU = Interop.Gdi32.GetDeviceCaps(
-                    new HandleRef(_dc, _dc.Hdc),
-                    Interop.Gdi32.DeviceCapability.PHYSICALOFFSETY
-                );
+                int dpiX = Interop
+                    .Gdi32
+                    .GetDeviceCaps(
+                        new HandleRef(_dc, _dc.Hdc),
+                        Interop.Gdi32.DeviceCapability.LOGPIXELSX
+                    );
+                int dpiY = Interop
+                    .Gdi32
+                    .GetDeviceCaps(
+                        new HandleRef(_dc, _dc.Hdc),
+                        Interop.Gdi32.DeviceCapability.LOGPIXELSY
+                    );
+                int hardMarginX_DU = Interop
+                    .Gdi32
+                    .GetDeviceCaps(
+                        new HandleRef(_dc, _dc.Hdc),
+                        Interop.Gdi32.DeviceCapability.PHYSICALOFFSETX
+                    );
+                int hardMarginY_DU = Interop
+                    .Gdi32
+                    .GetDeviceCaps(
+                        new HandleRef(_dc, _dc.Hdc),
+                        Interop.Gdi32.DeviceCapability.PHYSICALOFFSETY
+                    );
                 float hardMarginX = hardMarginX_DU * 100 / dpiX;
                 float hardMarginY = hardMarginY_DU * 100 / dpiY;
 

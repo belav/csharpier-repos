@@ -45,7 +45,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeRefactoringService
             var refactoringService = workspace.GetService<ICodeRefactoringService>();
 
             var reference = new StubAnalyzerReference();
-            var project = workspace.CurrentSolution.Projects
+            var project = workspace
+                .CurrentSolution
+                .Projects
                 .Single()
                 .AddAnalyzerReference(reference);
             var document = project.Documents.Single();
@@ -71,22 +73,28 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeRefactoringService
                 composition: EditorTestCompositions.EditorFeatures.AddParts(typeof(T))
             );
 
-            var errorReportingService =
-                (TestErrorReportingService)workspace.Services.GetRequiredService<IErrorReportingService>();
+            var errorReportingService = (TestErrorReportingService)workspace
+                .Services
+                .GetRequiredService<IErrorReportingService>();
 
             var errorReported = false;
             errorReportingService.OnError = message => errorReported = true;
 
             var refactoringService = workspace.GetService<ICodeRefactoringService>();
-            var codeRefactoring = workspace.ExportProvider
+            var codeRefactoring = workspace
+                .ExportProvider
                 .GetExportedValues<CodeRefactoringProvider>()
                 .OfType<T>()
                 .Single();
 
             var project = workspace.CurrentSolution.Projects.Single();
             var document = project.Documents.Single();
-            var extensionManager =
-                (EditorLayerExtensionManager.ExtensionManager)document.Project.Solution.Workspace.Services.GetRequiredService<IExtensionManager>();
+            var extensionManager = (EditorLayerExtensionManager.ExtensionManager)document
+                .Project
+                .Solution
+                .Workspace
+                .Services
+                .GetRequiredService<IExtensionManager>();
             var result = await refactoringService.GetRefactoringsAsync(
                 document,
                 TextSpan.FromBounds(0, 0),

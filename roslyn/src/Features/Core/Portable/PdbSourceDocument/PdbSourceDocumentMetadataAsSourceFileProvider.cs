@@ -61,7 +61,8 @@ namespace Microsoft.CodeAnalysis.PdbSourceDocument
 
             // If this is a reference assembly then we won't have the right information available, so bail out
             // TODO: find the implementation assembly for the reference assembly, and keep going: https://github.com/dotnet/roslyn/issues/55834
-            var isReferenceAssembly = symbol.ContainingAssembly
+            var isReferenceAssembly = symbol
+                .ContainingAssembly
                 .GetAttributes()
                 .Any(
                     attribute =>
@@ -160,9 +161,13 @@ namespace Microsoft.CodeAnalysis.PdbSourceDocument
             }
 
             var documentPath = filePathsAndTextLoaders[0].FilePath;
-            var document = navigateProject.Documents.FirstOrDefault(
-                d => d.FilePath?.Equals(documentPath, StringComparison.OrdinalIgnoreCase) ?? false
-            );
+            var document = navigateProject
+                .Documents
+                .FirstOrDefault(
+                    d =>
+                        d.FilePath?.Equals(documentPath, StringComparison.OrdinalIgnoreCase)
+                        ?? false
+                );
 
             // TODO: Can we avoid writing a temp file, and convince Visual Studio to open a file that doesn't exist on disk? https://github.com/dotnet/roslyn/issues/55834
             var tempFilePath = Path.Combine(
@@ -281,13 +286,15 @@ namespace Microsoft.CodeAnalysis.PdbSourceDocument
             {
                 // If a document has multiple symbols then we would already know about it
                 if (
-                    project.Documents.Contains(
-                        d =>
-                            d.FilePath?.Equals(
-                                sourceDocument.FilePath,
-                                StringComparison.OrdinalIgnoreCase
-                            ) ?? false
-                    )
+                    project
+                        .Documents
+                        .Contains(
+                            d =>
+                                d.FilePath?.Equals(
+                                    sourceDocument.FilePath,
+                                    StringComparison.OrdinalIgnoreCase
+                                ) ?? false
+                        )
                 )
                     continue;
 

@@ -36,11 +36,13 @@ Class C
         {|writtenReference:Goo|} = 4
     End Function
 End Class";
-            Test.Utilities.MarkupTestFile.GetSpans(
-                markup,
-                out var text,
-                out IDictionary<string, ImmutableArray<TextSpan>> spans
-            );
+            Test.Utilities
+                .MarkupTestFile
+                .GetSpans(
+                    markup,
+                    out var text,
+                    out IDictionary<string, ImmutableArray<TextSpan>> spans
+                );
             VisualStudio.Editor.SetText(text);
             Verify("Goo", spans);
 
@@ -51,14 +53,16 @@ End Class";
         private void Verify(string marker, IDictionary<string, ImmutableArray<TextSpan>> spans)
         {
             VisualStudio.Editor.PlaceCaret(marker, charsOffset: -1);
-            VisualStudio.Workspace.WaitForAllAsyncOperations(
-                Helper.HangMitigatingTimeout,
-                FeatureAttribute.Workspace,
-                FeatureAttribute.SolutionCrawler,
-                FeatureAttribute.DiagnosticService,
-                FeatureAttribute.Classification,
-                FeatureAttribute.ReferenceHighlighting
-            );
+            VisualStudio
+                .Workspace
+                .WaitForAllAsyncOperations(
+                    Helper.HangMitigatingTimeout,
+                    FeatureAttribute.Workspace,
+                    FeatureAttribute.SolutionCrawler,
+                    FeatureAttribute.DiagnosticService,
+                    FeatureAttribute.Classification,
+                    FeatureAttribute.ReferenceHighlighting
+                );
 
             AssertEx.SetEqual(
                 spans["reference"],
@@ -80,14 +84,16 @@ End Class";
         private void VerifyNone(string marker)
         {
             VisualStudio.Editor.PlaceCaret(marker, charsOffset: -1);
-            VisualStudio.Workspace.WaitForAllAsyncOperations(
-                Helper.HangMitigatingTimeout,
-                FeatureAttribute.Workspace,
-                FeatureAttribute.SolutionCrawler,
-                FeatureAttribute.DiagnosticService,
-                FeatureAttribute.Classification,
-                FeatureAttribute.ReferenceHighlighting
-            );
+            VisualStudio
+                .Workspace
+                .WaitForAllAsyncOperations(
+                    Helper.HangMitigatingTimeout,
+                    FeatureAttribute.Workspace,
+                    FeatureAttribute.SolutionCrawler,
+                    FeatureAttribute.DiagnosticService,
+                    FeatureAttribute.Classification,
+                    FeatureAttribute.ReferenceHighlighting
+                );
 
             Assert.Empty(VisualStudio.Editor.GetTagSpans(ReferenceHighlightTag.TagId));
             Assert.Empty(VisualStudio.Editor.GetTagSpans(WrittenReferenceHighlightTag.TagId));

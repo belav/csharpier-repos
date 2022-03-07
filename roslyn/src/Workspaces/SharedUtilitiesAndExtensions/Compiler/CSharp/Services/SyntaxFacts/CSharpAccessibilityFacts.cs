@@ -50,9 +50,9 @@ namespace Microsoft.CodeAnalysis.CSharp.LanguageServices
 
                 case SyntaxKind.ConstructorDeclaration:
                     // Static constructor can't have accessibility
-                    return !((ConstructorDeclarationSyntax)declaration).Modifiers.Any(
-                        SyntaxKind.StaticKeyword
-                    );
+                    return !((ConstructorDeclarationSyntax)declaration)
+                        .Modifiers
+                        .Any(SyntaxKind.StaticKeyword);
 
                 case SyntaxKind.PropertyDeclaration:
                     return ((PropertyDeclarationSyntax)declaration).ExplicitInterfaceSpecifier

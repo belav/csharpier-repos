@@ -330,7 +330,8 @@ public class BlazorWasmTemplateTest : BlazorTemplateTest
             .GetProperty("IdentityServer")
             .EnumerateObject()
             .Single()
-            .Value.EnumerateObject()
+            .Value
+            .EnumerateObject()
             .Single();
         var replacedSection = element
             .GetRawText()

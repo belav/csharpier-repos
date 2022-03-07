@@ -1292,15 +1292,17 @@ public class ReliabilityFramework
 
                             try
                             {
-                                daTest.EntryPointMethod.Invoke(
-                                    null,
-                                    new object[]
-                                    {
-                                        (daTest.Arguments == null)
-                                            ? new string[0]
-                                            : daTest.GetSplitArguments()
-                                    }
-                                );
+                                daTest
+                                    .EntryPointMethod
+                                    .Invoke(
+                                        null,
+                                        new object[]
+                                        {
+                                            (daTest.Arguments == null)
+                                                ? new string[0]
+                                                : daTest.GetSplitArguments()
+                                        }
+                                    );
                             }
                             catch (Exception e)
                             {
@@ -2371,8 +2373,8 @@ Thanks for contributing to CLR Stress!
                                 (int)(
                                     thisTime
                                         .Subtract(baseTime)
-                                        .Subtract(DateTime.Now.Subtract(startTime)).Ticks
-                                    / TimeSpan.TicksPerMillisecond
+                                        .Subtract(DateTime.Now.Subtract(startTime))
+                                        .Ticks / TimeSpan.TicksPerMillisecond
                                 )
                             );
                         }

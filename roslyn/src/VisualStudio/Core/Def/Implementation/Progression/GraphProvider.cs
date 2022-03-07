@@ -460,9 +460,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
                 // Has to have at least a symbolid, or source location to navigate to.
                 if (
                     graphNode.GetValue<SymbolKey?>(RoslynGraphProperties.SymbolId) == null
-                    && graphNode.GetValue<SourceLocation>(
-                        CodeNodeProperties.SourceLocation
-                    ).FileName == null
+                    && graphNode
+                        .GetValue<SourceLocation>(CodeNodeProperties.SourceLocation)
+                        .FileName == null
                 )
                 {
                     return null;

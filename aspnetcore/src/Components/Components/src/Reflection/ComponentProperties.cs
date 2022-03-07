@@ -380,9 +380,9 @@ internal static class ComponentProperties
 
                     // It must be able to hold a Dictionary<string, object> since that's what we create.
                     if (
-                        !propertyInfo.PropertyType.IsAssignableFrom(
-                            typeof(Dictionary<string, object>)
-                        )
+                        !propertyInfo
+                            .PropertyType
+                            .IsAssignableFrom(typeof(Dictionary<string, object>))
                     )
                     {
                         ThrowForInvalidCaptureUnmatchedValuesParameterType(

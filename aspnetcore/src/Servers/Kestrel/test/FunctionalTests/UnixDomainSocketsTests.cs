@@ -50,16 +50,18 @@ public class UnixDomainSocketsTest : TestApplicationErrorLoggerLoggedTest
             async Task EchoServer(ConnectionContext connection)
             {
                 // For graceful shutdown
-                var notificationFeature =
-                    connection.Features.Get<IConnectionLifetimeNotificationFeature>();
+                var notificationFeature = connection
+                    .Features
+                    .Get<IConnectionLifetimeNotificationFeature>();
 
                 try
                 {
                     while (true)
                     {
-                        var result = await connection.Transport.Input.ReadAsync(
-                            notificationFeature.ConnectionClosedRequested
-                        );
+                        var result = await connection
+                            .Transport
+                            .Input
+                            .ReadAsync(notificationFeature.ConnectionClosedRequested);
 
                         if (result.IsCompleted)
                         {
@@ -211,9 +213,9 @@ public class UnixDomainSocketsTest : TestApplicationErrorLoggerLoggedTest
                 {
                     await socket.ConnectAsync(new UnixDomainSocketEndPoint(path)).DefaultTimeout();
 
-                    var httpRequest = Encoding.ASCII.GetBytes(
-                        "GET / HTTP/1.1\r\nHost:\r\nConnection: close\r\n\r\n"
-                    );
+                    var httpRequest = Encoding
+                        .ASCII
+                        .GetBytes("GET / HTTP/1.1\r\nHost:\r\nConnection: close\r\n\r\n");
                     await socket.SendAsync(httpRequest, SocketFlags.None).DefaultTimeout();
 
                     var readBuffer = new byte[512];

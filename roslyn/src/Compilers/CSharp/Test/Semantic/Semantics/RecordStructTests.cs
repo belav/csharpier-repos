@@ -575,9 +575,9 @@ record struct Point(int x, int y);
                     Assert.Equal(
                         "record struct Point",
                         point.ToDisplayString(
-                            SymbolDisplayFormat.TestFormat.AddKindOptions(
-                                SymbolDisplayKindOptions.IncludeTypeKeyword
-                            )
+                            SymbolDisplayFormat
+                                .TestFormat
+                                .AddKindOptions(SymbolDisplayKindOptions.IncludeTypeKeyword)
                         )
                     );
                 }
@@ -589,9 +589,9 @@ record struct Point(int x, int y);
                     Assert.Equal(
                         "struct Point",
                         point.ToDisplayString(
-                            SymbolDisplayFormat.TestFormat.AddKindOptions(
-                                SymbolDisplayKindOptions.IncludeTypeKeyword
-                            )
+                            SymbolDisplayFormat
+                                .TestFormat
+                                .AddKindOptions(SymbolDisplayKindOptions.IncludeTypeKeyword)
                         )
                     );
                 }
@@ -2796,7 +2796,8 @@ record struct C(bool X)
                     tree.GetRoot()
                         .DescendantNodes()
                         .OfType<ReturnStatementSyntax>()
-                        .Single().Expression;
+                        .Single()
+                        .Expression;
                 Assert.Equal(
                     "System.Boolean System.ValueType.X { get; set; }",
                     model.GetSymbolInfo(x!).Symbol.ToTestDisplayString()
@@ -2834,7 +2835,8 @@ readonly record struct C(bool X)
                     tree.GetRoot()
                         .DescendantNodes()
                         .OfType<ReturnStatementSyntax>()
-                        .Single().Expression;
+                        .Single()
+                        .Expression;
                 Assert.Equal(
                     "System.Boolean System.ValueType.X { get; set; }",
                     model.GetSymbolInfo(x!).Symbol.ToTestDisplayString()
@@ -3320,7 +3322,8 @@ record struct R(in int P1);
             var verifier = CompileAndVerify(comp, expectedOutput: "(42, 43)");
 
             var actualMembers = comp.GetMember<NamedTypeSymbol>("R")
-                .Constructors.ToTestDisplayStrings();
+                .Constructors
+                .ToTestDisplayStrings();
             var expectedMembers = new[] { "R..ctor(in System.Int32 P1)", "R..ctor()" };
             AssertEx.Equal(expectedMembers, actualMembers);
         }
@@ -3342,7 +3345,8 @@ record struct R(params int[] Array);
             CompileAndVerify(comp, expectedOutput: "(42, 43, 44, 45)");
 
             var actualMembers = comp.GetMember<NamedTypeSymbol>("R")
-                .Constructors.ToTestDisplayStrings();
+                .Constructors
+                .ToTestDisplayStrings();
             var expectedMembers = new[] { "R..ctor(params System.Int32[] Array)", "R..ctor()" };
             AssertEx.Equal(expectedMembers, actualMembers);
         }
@@ -4009,7 +4013,8 @@ record struct B(int X)
 
             Assert.Equal(
                 "readonly void B.Deconstruct(out System.Int32 X)",
-                verifier.Compilation
+                verifier
+                    .Compilation
                     .GetMember("B.Deconstruct")
                     .ToTestDisplayString(includeNonNullable: false)
             );
@@ -4122,7 +4127,8 @@ record struct B(int X, int Y)
 
             Assert.Equal(
                 "void B.Deconstruct(out System.Int32 X, out System.Int32 Y)",
-                verifier.Compilation
+                verifier
+                    .Compilation
                     .GetMember("B.Deconstruct")
                     .ToTestDisplayString(includeNonNullable: false)
             );
@@ -11903,7 +11909,8 @@ public readonly record struct Test(
                     .GetMembers(".ctor")
                     .OfType<MethodSymbol>()
                     .Where(m => m.Parameters.AsSingleton()?.Name == "P1")
-                    .Single().Parameters[0];
+                    .Single()
+                    .Parameters[0];
                 AssertEx.SetEqual(new[] { "C", "D" }, getAttributeStrings(param1));
             };
 
@@ -12225,9 +12232,9 @@ record struct R3(int X) : Error3
             Assert.Equal("Error1(0, 1)", baseWithargs.ToString());
 
             var speculativeBase = baseWithargs.WithArgumentList(
-                baseWithargs.ArgumentList.WithArguments(
-                    baseWithargs.ArgumentList.Arguments.RemoveAt(1)
-                )
+                baseWithargs
+                    .ArgumentList
+                    .WithArguments(baseWithargs.ArgumentList.Arguments.RemoveAt(1))
             );
             Assert.Equal("Error1(0)", speculativeBase.ToString());
 

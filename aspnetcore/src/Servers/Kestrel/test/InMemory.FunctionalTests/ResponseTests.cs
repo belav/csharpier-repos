@@ -44,15 +44,17 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
                 context =>
                 {
                     context.Response.OnStarting(() => Task.Run(() => onStartingCalled = true));
-                    context.Response.OnCompleted(
-                        () =>
-                            Task.Run(
-                                () =>
-                                {
-                                    onCompletedTcs.SetResult();
-                                }
-                            )
-                    );
+                    context
+                        .Response
+                        .OnCompleted(
+                            () =>
+                                Task.Run(
+                                    () =>
+                                    {
+                                        onCompletedTcs.SetResult();
+                                    }
+                                )
+                        );
 
                     // Prevent OnStarting call (see HttpProtocol.ProcessRequestsAsync()).
                     throw new Exception();
@@ -177,7 +179,9 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
                         var data = new byte[1024 * 1024 * 10];
 
                         var timerTask = Task.Delay(TimeSpan.FromSeconds(1));
-                        var writeTask = context.Response.BodyWriter
+                        var writeTask = context
+                            .Response
+                            .BodyWriter
                             .WriteAsync(new Memory<byte>(data, 0, data.Length), cts.Token)
                             .AsTask()
                             .DefaultTimeout();
@@ -187,7 +191,9 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
                         {
                             await writeTask;
                             timerTask = Task.Delay(TimeSpan.FromSeconds(1));
-                            writeTask = context.Response.BodyWriter
+                            writeTask = context
+                                .Response
+                                .BodyWriter
                                 .WriteAsync(new Memory<byte>(data, 0, data.Length), cts.Token)
                                 .AsTask()
                                 .DefaultTimeout();
@@ -377,12 +383,14 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
             var server = new TestServer(
                 async context =>
                 {
-                    context.Response.OnCompleted(
-                        async () =>
-                        {
-                            await delayTcs.Task;
-                        }
-                    );
+                    context
+                        .Response
+                        .OnCompleted(
+                            async () =>
+                            {
+                                await delayTcs.Task;
+                            }
+                        );
                     await context.Response.WriteAsync("hello, world");
                 },
                 new TestServiceContext(LoggerFactory)
@@ -421,15 +429,17 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
             var server = new TestServer(
                 httpContext =>
                 {
-                    httpContext.Response.OnCompleted(
-                        () =>
-                            Task.Run(
-                                () =>
-                                {
-                                    onCompletedTcs.SetResult();
-                                }
-                            )
-                    );
+                    httpContext
+                        .Response
+                        .OnCompleted(
+                            () =>
+                                Task.Run(
+                                    () =>
+                                    {
+                                        onCompletedTcs.SetResult();
+                                    }
+                                )
+                        );
                     return Task.CompletedTask;
                 },
                 new TestServiceContext(LoggerFactory)
@@ -801,12 +811,14 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
                 async httpContext =>
                 {
                     httpContext.Response.ContentLength = 11;
-                    await httpContext.Response.BodyWriter.WriteAsync(
-                        new Memory<byte>(Encoding.ASCII.GetBytes("hello,"), 0, 6)
-                    );
-                    await httpContext.Response.BodyWriter.WriteAsync(
-                        new Memory<byte>(Encoding.ASCII.GetBytes(" world"), 0, 6)
-                    );
+                    await httpContext
+                        .Response
+                        .BodyWriter
+                        .WriteAsync(new Memory<byte>(Encoding.ASCII.GetBytes("hello,"), 0, 6));
+                    await httpContext
+                        .Response
+                        .BodyWriter
+                        .WriteAsync(new Memory<byte>(Encoding.ASCII.GetBytes(" world"), 0, 6));
                 },
                 serviceContext
             )
@@ -886,9 +898,10 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
                 {
                     var response = Encoding.ASCII.GetBytes("hello, world");
                     httpContext.Response.ContentLength = 5;
-                    await httpContext.Response.BodyWriter.WriteAsync(
-                        new Memory<byte>(response, 0, response.Length)
-                    );
+                    await httpContext
+                        .Response
+                        .BodyWriter
+                        .WriteAsync(new Memory<byte>(response, 0, response.Length));
                 },
                 serviceContext
             )
@@ -926,9 +939,10 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
                 {
                     var response = Encoding.ASCII.GetBytes("hello, world");
                     httpContext.Response.ContentLength = 5;
-                    await httpContext.Response.BodyWriter.WriteAsync(
-                        new Memory<byte>(response, 0, response.Length)
-                    );
+                    await httpContext
+                        .Response
+                        .BodyWriter
+                        .WriteAsync(new Memory<byte>(response, 0, response.Length));
                 },
                 serviceContext
             )
@@ -1094,12 +1108,14 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
             var server = new TestServer(
                 async httpContext =>
                 {
-                    httpContext.RequestAborted.Register(
-                        () =>
-                        {
-                            requestAborted.SetResult();
-                        }
-                    );
+                    httpContext
+                        .RequestAborted
+                        .Register(
+                            () =>
+                            {
+                                requestAborted.SetResult();
+                            }
+                        );
 
                     httpContext.Response.ContentLength = 12;
                     await httpContext.Response.WriteAsync("hello,");
@@ -1377,9 +1393,12 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
                 async httpContext =>
                 {
                     httpContext.Response.ContentLength = 12;
-                    await httpContext.Response.BodyWriter.WriteAsync(
-                        new Memory<byte>(Encoding.ASCII.GetBytes("hello, world"), 0, 12)
-                    );
+                    await httpContext
+                        .Response
+                        .BodyWriter
+                        .WriteAsync(
+                            new Memory<byte>(Encoding.ASCII.GetBytes("hello, world"), 0, 12)
+                        );
                     await flushed.Task;
                 },
                 serviceContext
@@ -1637,22 +1656,25 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
             var server = new TestServer(
                 async httpContext =>
                 {
-                    httpContext.Response.OnStarting(
-                        () =>
-                        {
-                            // Change response to chunked
-                            httpContext.Response.ContentLength = null;
-                            return Task.CompletedTask;
-                        }
-                    );
+                    httpContext
+                        .Response
+                        .OnStarting(
+                            () =>
+                            {
+                                // Change response to chunked
+                                httpContext.Response.ContentLength = null;
+                                return Task.CompletedTask;
+                            }
+                        );
 
                     var response = Encoding.ASCII.GetBytes("hello, world");
                     httpContext.Response.ContentLength = response.Length - 1;
 
                     // If OnStarting is not run before verifying writes, an error response will be sent.
-                    await httpContext.Response.BodyWriter.WriteAsync(
-                        new Memory<byte>(response, 0, response.Length)
-                    );
+                    await httpContext
+                        .Response
+                        .BodyWriter
+                        .WriteAsync(new Memory<byte>(response, 0, response.Length));
                 },
                 serviceContext
             )
@@ -1688,22 +1710,25 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
             var server = new TestServer(
                 async httpContext =>
                 {
-                    httpContext.Response.OnStarting(
-                        () =>
-                        {
-                            // Change response to chunked
-                            httpContext.Response.ContentLength = null;
-                            return Task.CompletedTask;
-                        }
-                    );
+                    httpContext
+                        .Response
+                        .OnStarting(
+                            () =>
+                            {
+                                // Change response to chunked
+                                httpContext.Response.ContentLength = null;
+                                return Task.CompletedTask;
+                            }
+                        );
 
                     var response = Encoding.ASCII.GetBytes("hello, world");
                     httpContext.Response.ContentLength = response.Length - 1;
 
                     // If OnStarting is not run before verifying writes, an error response will be sent.
-                    await httpContext.Response.Body.WriteAsync(
-                        new Memory<byte>(response, 0, response.Length)
-                    );
+                    await httpContext
+                        .Response
+                        .Body
+                        .WriteAsync(new Memory<byte>(response, 0, response.Length));
                 },
                 serviceContext
             )
@@ -1739,29 +1764,35 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
             var server = new TestServer(
                 async httpContext =>
                 {
-                    httpContext.Response.OnStarting(
-                        () =>
-                        {
-                            // Change response to chunked
-                            httpContext.Response.ContentLength = null;
-                            return Task.CompletedTask;
-                        }
-                    );
+                    httpContext
+                        .Response
+                        .OnStarting(
+                            () =>
+                            {
+                                // Change response to chunked
+                                httpContext.Response.ContentLength = null;
+                                return Task.CompletedTask;
+                            }
+                        );
 
                     var response = Encoding.ASCII.GetBytes("hello, world");
                     httpContext.Response.ContentLength = response.Length - 1;
 
                     // If OnStarting is not run before verifying writes, an error response will be sent.
-                    await httpContext.Response.BodyWriter.WriteAsync(
-                        new Memory<byte>(response, 0, response.Length / 2)
-                    );
-                    await httpContext.Response.BodyWriter.WriteAsync(
-                        new Memory<byte>(
-                            response,
-                            response.Length / 2,
-                            response.Length - response.Length / 2
-                        )
-                    );
+                    await httpContext
+                        .Response
+                        .BodyWriter
+                        .WriteAsync(new Memory<byte>(response, 0, response.Length / 2));
+                    await httpContext
+                        .Response
+                        .BodyWriter
+                        .WriteAsync(
+                            new Memory<byte>(
+                                response,
+                                response.Length / 2,
+                                response.Length - response.Length / 2
+                            )
+                        );
                 },
                 serviceContext
             )
@@ -1799,29 +1830,35 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
             var server = new TestServer(
                 async httpContext =>
                 {
-                    httpContext.Response.OnStarting(
-                        () =>
-                        {
-                            // Change response to chunked
-                            httpContext.Response.ContentLength = null;
-                            return Task.CompletedTask;
-                        }
-                    );
+                    httpContext
+                        .Response
+                        .OnStarting(
+                            () =>
+                            {
+                                // Change response to chunked
+                                httpContext.Response.ContentLength = null;
+                                return Task.CompletedTask;
+                            }
+                        );
 
                     var response = Encoding.ASCII.GetBytes("hello, world");
                     httpContext.Response.ContentLength = response.Length - 1;
 
                     // If OnStarting is not run before verifying writes, an error response will be sent.
-                    await httpContext.Response.Body.WriteAsync(
-                        new Memory<byte>(response, 0, response.Length / 2)
-                    );
-                    await httpContext.Response.Body.WriteAsync(
-                        new Memory<byte>(
-                            response,
-                            response.Length / 2,
-                            response.Length - response.Length / 2
-                        )
-                    );
+                    await httpContext
+                        .Response
+                        .Body
+                        .WriteAsync(new Memory<byte>(response, 0, response.Length / 2));
+                    await httpContext
+                        .Response
+                        .Body
+                        .WriteAsync(
+                            new Memory<byte>(
+                                response,
+                                response.Length / 2,
+                                response.Length - response.Length / 2
+                            )
+                        );
                 },
                 serviceContext
             )
@@ -1854,20 +1891,24 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
             var server = new TestServer(
                 httpContext =>
                 {
-                    httpContext.Response.OnStarting(
-                        () =>
-                        {
-                            // Change response to chunked
-                            httpContext.Response.ContentLength = null;
-                            return Task.CompletedTask;
-                        }
-                    );
+                    httpContext
+                        .Response
+                        .OnStarting(
+                            () =>
+                            {
+                                // Change response to chunked
+                                httpContext.Response.ContentLength = null;
+                                return Task.CompletedTask;
+                            }
+                        );
 
                     var response = Encoding.ASCII.GetBytes("hello, world");
                     httpContext.Response.ContentLength = response.Length - 1;
 
                     // If OnStarting is not run before verifying writes, an error response will be sent.
-                    return httpContext.Response.BodyWriter
+                    return httpContext
+                        .Response
+                        .BodyWriter
                         .WriteAsync(new Memory<byte>(response, 0, response.Length))
                         .AsTask();
                 },
@@ -1900,29 +1941,35 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
             var server = new TestServer(
                 async httpContext =>
                 {
-                    httpContext.Response.OnStarting(
-                        () =>
-                        {
-                            // Change response to chunked
-                            httpContext.Response.ContentLength = null;
-                            return Task.CompletedTask;
-                        }
-                    );
+                    httpContext
+                        .Response
+                        .OnStarting(
+                            () =>
+                            {
+                                // Change response to chunked
+                                httpContext.Response.ContentLength = null;
+                                return Task.CompletedTask;
+                            }
+                        );
 
                     var response = Encoding.ASCII.GetBytes("hello, world");
                     httpContext.Response.ContentLength = response.Length - 1;
 
                     // If OnStarting is not run before verifying writes, an error response will be sent.
-                    await httpContext.Response.BodyWriter.WriteAsync(
-                        new Memory<byte>(response, 0, response.Length / 2)
-                    );
-                    await httpContext.Response.BodyWriter.WriteAsync(
-                        new Memory<byte>(
-                            response,
-                            response.Length / 2,
-                            response.Length - response.Length / 2
-                        )
-                    );
+                    await httpContext
+                        .Response
+                        .BodyWriter
+                        .WriteAsync(new Memory<byte>(response, 0, response.Length / 2));
+                    await httpContext
+                        .Response
+                        .BodyWriter
+                        .WriteAsync(
+                            new Memory<byte>(
+                                response,
+                                response.Length / 2,
+                                response.Length - response.Length / 2
+                            )
+                        );
                 },
                 new TestServiceContext(LoggerFactory)
             )
@@ -2395,7 +2442,8 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
                 async httpContext =>
                 {
                     var request = httpContext.Request;
-                    var stream = await httpContext.Features
+                    var stream = await httpContext
+                        .Features
                         .Get<IHttpUpgradeFeature>()
                         .UpgradeAsync();
                     var response = Encoding.ASCII.GetBytes("hello, world");
@@ -2594,9 +2642,11 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
 
                     response.Headers["Content-Length"] = new[] { "11" };
 
-                    await response.BodyWriter.WriteAsync(
-                        new Memory<byte>(Encoding.ASCII.GetBytes("Hello World"), 0, 11)
-                    );
+                    await response
+                        .BodyWriter
+                        .WriteAsync(
+                            new Memory<byte>(Encoding.ASCII.GetBytes("Hello World"), 0, 11)
+                        );
                 },
                 testContext
             )
@@ -2648,9 +2698,11 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
 
                     response.Headers["Content-Length"] = new[] { "11" };
 
-                    await response.BodyWriter.WriteAsync(
-                        new Memory<byte>(Encoding.ASCII.GetBytes("Hello World"), 0, 11)
-                    );
+                    await response
+                        .BodyWriter
+                        .WriteAsync(
+                            new Memory<byte>(Encoding.ASCII.GetBytes("Hello World"), 0, 11)
+                        );
                 },
                 testContext
             )
@@ -2703,9 +2755,11 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
 
                     response.Headers["Content-Length"] = new[] { "11" };
 
-                    await response.BodyWriter.WriteAsync(
-                        new Memory<byte>(Encoding.ASCII.GetBytes("Hello World"), 0, 11)
-                    );
+                    await response
+                        .BodyWriter
+                        .WriteAsync(
+                            new Memory<byte>(Encoding.ASCII.GetBytes("Hello World"), 0, 11)
+                        );
                 },
                 testContext
             )
@@ -2752,9 +2806,11 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
                     );
 
                     response.Headers["Content-Length"] = new[] { "11" };
-                    await response.BodyWriter.WriteAsync(
-                        new Memory<byte>(Encoding.ASCII.GetBytes("Hello World"), 0, 11)
-                    );
+                    await response
+                        .BodyWriter
+                        .WriteAsync(
+                            new Memory<byte>(Encoding.ASCII.GetBytes("Hello World"), 0, 11)
+                        );
                     throw new Exception();
                 },
                 testContext
@@ -2800,9 +2856,9 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
                     );
 
                     response.Headers["Content-Length"] = new[] { "11" };
-                    await response.BodyWriter.WriteAsync(
-                        new Memory<byte>(Encoding.ASCII.GetBytes("Hello"), 0, 5)
-                    );
+                    await response
+                        .BodyWriter
+                        .WriteAsync(new Memory<byte>(Encoding.ASCII.GetBytes("Hello"), 0, 5));
                     throw new Exception();
                 },
                 testContext
@@ -2837,9 +2893,11 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
                 {
                     var response = httpContext.Response;
                     response.Headers["Content-Length"] = new[] { "11" };
-                    await response.BodyWriter.WriteAsync(
-                        new Memory<byte>(Encoding.ASCII.GetBytes("Hello World"), 0, 11)
-                    );
+                    await response
+                        .BodyWriter
+                        .WriteAsync(
+                            new Memory<byte>(Encoding.ASCII.GetBytes("Hello World"), 0, 11)
+                        );
                 },
                 testContext
             )
@@ -3445,23 +3503,27 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
             var server = new TestServer(
                 async context =>
                 {
-                    context.Response.OnStarting(
-                        _ =>
-                        {
-                            callOrder.Push(1);
-                            onStartingTcs.SetResult();
-                            return Task.CompletedTask;
-                        },
-                        null
-                    );
-                    context.Response.OnStarting(
-                        _ =>
-                        {
-                            callOrder.Push(2);
-                            return Task.CompletedTask;
-                        },
-                        null
-                    );
+                    context
+                        .Response
+                        .OnStarting(
+                            _ =>
+                            {
+                                callOrder.Push(1);
+                                onStartingTcs.SetResult();
+                                return Task.CompletedTask;
+                            },
+                            null
+                        );
+                    context
+                        .Response
+                        .OnStarting(
+                            _ =>
+                            {
+                                callOrder.Push(2);
+                                return Task.CompletedTask;
+                            },
+                            null
+                        );
 
                     context.Response.ContentLength = response.Length;
                     await context.Response.WriteAsync(response);
@@ -3506,23 +3568,27 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
             var server = new TestServer(
                 async context =>
                 {
-                    context.Response.OnCompleted(
-                        _ =>
-                        {
-                            callOrder.Push(1);
-                            onCompletedTcs.SetResult();
-                            return Task.CompletedTask;
-                        },
-                        null
-                    );
-                    context.Response.OnCompleted(
-                        _ =>
-                        {
-                            callOrder.Push(2);
-                            return Task.CompletedTask;
-                        },
-                        null
-                    );
+                    context
+                        .Response
+                        .OnCompleted(
+                            _ =>
+                            {
+                                callOrder.Push(1);
+                                onCompletedTcs.SetResult();
+                                return Task.CompletedTask;
+                            },
+                            null
+                        );
+                    context
+                        .Response
+                        .OnCompleted(
+                            _ =>
+                            {
+                                callOrder.Push(2);
+                                return Task.CompletedTask;
+                            },
+                            null
+                        );
 
                     context.Response.ContentLength = response.Length;
                     await context.Response.WriteAsync(response);
@@ -3680,7 +3746,9 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
                     );
                     Assert.Equal(CoreStrings.SynchronousWritesDisallowed, ioEx.Message);
 
-                    return context.Response.BodyWriter
+                    return context
+                        .Response
+                        .BodyWriter
                         .WriteAsync(new Memory<byte>(Encoding.ASCII.GetBytes("Hello!"), 0, 6))
                         .AsTask();
                 },
@@ -3927,9 +3995,10 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
                 async httpContext =>
                 {
                     httpContext.Response.ContentLength = 12;
-                    await httpContext.Response.Body.WriteAsync(
-                        Encoding.ASCII.GetBytes("hello, world")
-                    );
+                    await httpContext
+                        .Response
+                        .Body
+                        .WriteAsync(Encoding.ASCII.GetBytes("hello, world"));
                 },
                 new TestServiceContext(LoggerFactory)
             )
@@ -3968,9 +4037,9 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
                     response.BodyWriter.Advance(8);
 
                     await response.Body.WriteAsync(Encoding.ASCII.GetBytes("hello, world\r\n"));
-                    await response.BodyWriter.WriteAsync(
-                        Encoding.ASCII.GetBytes("hello, world\r\n")
-                    );
+                    await response
+                        .BodyWriter
+                        .WriteAsync(Encoding.ASCII.GetBytes("hello, world\r\n"));
                     await response.WriteAsync("hello, world");
                 },
                 new TestServiceContext(LoggerFactory)
@@ -4587,12 +4656,14 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
                 new TestServiceContext(LoggerFactory),
                 options =>
                 {
-                    options.CodeBackedListenOptions.Add(
-                        new ListenOptions(new IPEndPoint(IPAddress.Loopback, 0))
-                        {
-                            Protocols = HttpProtocols.Http1AndHttp2AndHttp3
-                        }
-                    );
+                    options
+                        .CodeBackedListenOptions
+                        .Add(
+                            new ListenOptions(new IPEndPoint(IPAddress.Loopback, 0))
+                            {
+                                Protocols = HttpProtocols.Http1AndHttp2AndHttp3
+                            }
+                        );
                 },
                 services => { }
             )
@@ -4622,13 +4693,15 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
                 new TestServiceContext(LoggerFactory),
                 options =>
                 {
-                    options.CodeBackedListenOptions.Add(
-                        new ListenOptions(new IPEndPoint(IPAddress.Loopback, 0))
-                        {
-                            Protocols = HttpProtocols.Http1AndHttp2AndHttp3,
-                            IsTls = true
-                        }
-                    );
+                    options
+                        .CodeBackedListenOptions
+                        .Add(
+                            new ListenOptions(new IPEndPoint(IPAddress.Loopback, 0))
+                            {
+                                Protocols = HttpProtocols.Http1AndHttp2AndHttp3,
+                                IsTls = true
+                            }
+                        );
                 },
                 services =>
                 {
@@ -4663,13 +4736,15 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
                 new TestServiceContext(LoggerFactory),
                 options =>
                 {
-                    options.CodeBackedListenOptions.Add(
-                        new ListenOptions(new IPEndPoint(IPAddress.Loopback, 0))
-                        {
-                            Protocols = HttpProtocols.Http1AndHttp2AndHttp3,
-                            IsTls = true
-                        }
-                    );
+                    options
+                        .CodeBackedListenOptions
+                        .Add(
+                            new ListenOptions(new IPEndPoint(IPAddress.Loopback, 0))
+                            {
+                                Protocols = HttpProtocols.Http1AndHttp2AndHttp3,
+                                IsTls = true
+                            }
+                        );
                 },
                 services => { }
             )
@@ -4726,19 +4801,23 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
                 new TestServiceContext(LoggerFactory),
                 options =>
                 {
-                    options.CodeBackedListenOptions.Add(
-                        new ListenOptions(new IPEndPoint(IPAddress.Loopback, 0))
-                        {
-                            Protocols = HttpProtocols.Http1
-                        }
-                    );
-                    options.CodeBackedListenOptions.Add(
-                        new ListenOptions(new IPEndPoint(IPAddress.Loopback, 1))
-                        {
-                            Protocols = HttpProtocols.Http3,
-                            IsTls = true
-                        }
-                    );
+                    options
+                        .CodeBackedListenOptions
+                        .Add(
+                            new ListenOptions(new IPEndPoint(IPAddress.Loopback, 0))
+                            {
+                                Protocols = HttpProtocols.Http1
+                            }
+                        );
+                    options
+                        .CodeBackedListenOptions
+                        .Add(
+                            new ListenOptions(new IPEndPoint(IPAddress.Loopback, 1))
+                            {
+                                Protocols = HttpProtocols.Http3,
+                                IsTls = true
+                            }
+                        );
                 },
                 services =>
                 {
@@ -4772,13 +4851,15 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
                 new TestServiceContext(LoggerFactory),
                 options =>
                 {
-                    options.CodeBackedListenOptions.Add(
-                        new ListenOptions(new IPEndPoint(IPAddress.Loopback, 0))
-                        {
-                            Protocols = HttpProtocols.Http1AndHttp2AndHttp3,
-                            DisableAltSvcHeader = true
-                        }
-                    );
+                    options
+                        .CodeBackedListenOptions
+                        .Add(
+                            new ListenOptions(new IPEndPoint(IPAddress.Loopback, 0))
+                            {
+                                Protocols = HttpProtocols.Http1AndHttp2AndHttp3,
+                                DisableAltSvcHeader = true
+                            }
+                        );
                 },
                 services => { }
             )
@@ -4829,9 +4910,9 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
                 handler,
                 new TestServiceContext(loggerFactory),
                 options =>
-                    options.CodeBackedListenOptions.Add(
-                        new ListenOptions(new IPEndPoint(IPAddress.Loopback, 0))
-                    ),
+                    options
+                        .CodeBackedListenOptions
+                        .Add(new ListenOptions(new IPEndPoint(IPAddress.Loopback, 0))),
                 services => services.AddSingleton(mockHttpContextFactory.Object)
             )
         )

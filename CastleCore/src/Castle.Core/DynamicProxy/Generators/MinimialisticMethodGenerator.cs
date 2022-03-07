@@ -41,9 +41,11 @@ namespace Castle.DynamicProxy.Generators
             }
             else
             {
-                emitter.CodeBuilder.AddStatement(
-                    new ReturnStatement(new DefaultValueExpression(emitter.ReturnType))
-                );
+                emitter
+                    .CodeBuilder
+                    .AddStatement(
+                        new ReturnStatement(new DefaultValueExpression(emitter.ReturnType))
+                    );
             }
 
             return emitter;
@@ -56,12 +58,14 @@ namespace Castle.DynamicProxy.Generators
                 var parameter = parameters[index];
                 if (parameter.IsOut)
                 {
-                    emitter.CodeBuilder.AddStatement(
-                        new AssignArgumentStatement(
-                            new ArgumentReference(parameter.ParameterType, index + 1),
-                            new DefaultValueExpression(parameter.ParameterType)
-                        )
-                    );
+                    emitter
+                        .CodeBuilder
+                        .AddStatement(
+                            new AssignArgumentStatement(
+                                new ArgumentReference(parameter.ParameterType, index + 1),
+                                new DefaultValueExpression(parameter.ParameterType)
+                            )
+                        );
                 }
             }
         }

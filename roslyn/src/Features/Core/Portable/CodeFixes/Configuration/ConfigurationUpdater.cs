@@ -369,8 +369,11 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Configuration
             // Add the newly added analyzer config document as a solution item.
             // The analyzer config document is not yet created, so we just mark the file
             // path for tracking and add it as a solution item whenever the file gets created by the code fix application.
-            var service =
-                _project.Solution.Workspace.Services.GetService<IAddSolutionItemService>();
+            var service = _project
+                .Solution
+                .Workspace
+                .Services
+                .GetService<IAddSolutionItemService>();
             service?.TrackFilePathAndAddSolutionItemWhenFileCreated(editorConfigDocument.FilePath);
 
             return solution.WithAnalyzerConfigDocumentText(editorConfigDocument.Id, newText);
@@ -523,7 +526,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Configuration
 
                 foreach (var option in options.OrderBy(option => option.Name))
                 {
-                    var editorConfigLocation = option.StorageLocations
+                    var editorConfigLocation = option
+                        .StorageLocations
                         .OfType<IEditorConfigStorageLocation2>()
                         .FirstOrDefault();
                     if (editorConfigLocation != null)

@@ -92,9 +92,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
             {
                 if (
                     typeDecl.TypeParameterList != null
-                    && typeDecl.BaseList.Types.Any(
-                        t => token == t.GetLastToken(includeSkipped: true)
-                    )
+                    && typeDecl
+                        .BaseList
+                        .Types
+                        .Any(t => token == t.GetLastToken(includeSkipped: true))
                 )
                 {
                     // token is IdentifierName "where"
@@ -129,9 +130,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
             if (constraintClause != null)
             {
                 if (
-                    constraintClause.Constraints.Any(
-                        c => token == c.GetLastToken(includeSkipped: true)
-                    )
+                    constraintClause
+                        .Constraints
+                        .Any(c => token == c.GetLastToken(includeSkipped: true))
                 )
                 {
                     return true;

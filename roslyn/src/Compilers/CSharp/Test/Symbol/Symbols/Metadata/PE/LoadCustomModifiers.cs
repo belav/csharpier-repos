@@ -46,12 +46,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
             ParameterSymbol p2 = modifiers
                 .GetMembers("F2")
                 .OfType<MethodSymbol>()
-                .Single().Parameters[0];
+                .Single()
+                .Parameters[0];
 
             ParameterSymbol p4 = modifiers
                 .GetMembers("F4")
                 .OfType<MethodSymbol>()
-                .Single().Parameters[0];
+                .Single()
+                .Parameters[0];
 
             MethodSymbol m5 = modifiers.GetMembers("F5").OfType<MethodSymbol>().Single();
             ParameterSymbol p5 = m5.Parameters[0];
@@ -59,7 +61,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
             ParameterSymbol p6 = modifiers
                 .GetMembers("F6")
                 .OfType<MethodSymbol>()
-                .Single().Parameters[0];
+                .Single()
+                .Parameters[0];
 
             MethodSymbol m7 = modifiers.GetMembers("F7").OfType<MethodSymbol>().Single();
 
@@ -174,10 +177,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
                     {
                         //use a comparer that checks both return type and custom modifiers
                         Assert.False(
-                            MemberSignatureComparer.RuntimeImplicitImplementationComparer.Equals(
-                                method1,
-                                method2
-                            )
+                            MemberSignatureComparer
+                                .RuntimeImplicitImplementationComparer
+                                .Equals(method1, method2)
                         );
                     }
                 }
@@ -209,8 +211,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
             Assert.Equal(TypeKind.Array, propertyType.TypeKind);
 
             var arrayPropertyType = (ArrayTypeSymbol)propertyType;
-            var arrayPropertyTypeCustomModifiers =
-                arrayPropertyType.ElementTypeWithAnnotations.CustomModifiers.Single();
+            var arrayPropertyTypeCustomModifiers = arrayPropertyType
+                .ElementTypeWithAnnotations
+                .CustomModifiers
+                .Single();
             Assert.Equal(
                 "System.Runtime.CompilerServices.IsConst",
                 arrayPropertyTypeCustomModifiers.Modifier.ToTestDisplayString()

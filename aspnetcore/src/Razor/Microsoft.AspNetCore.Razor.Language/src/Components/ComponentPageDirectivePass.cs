@@ -46,11 +46,14 @@ internal class ComponentPageDirectivePass : IntermediateNodePassBase, IRazorDire
                 || directive.Node.IsImported()
             )
             {
-                directive.Node.Diagnostics.Add(
-                    ComponentDiagnosticFactory.CreatePageDirective_CannotBeImported(
-                        directive.Node.Source.Value
-                    )
-                );
+                directive
+                    .Node
+                    .Diagnostics
+                    .Add(
+                        ComponentDiagnosticFactory.CreatePageDirective_CannotBeImported(
+                            directive.Node.Source.Value
+                        )
+                    );
             }
         }
 
@@ -88,11 +91,13 @@ internal class ComponentPageDirectivePass : IntermediateNodePassBase, IRazorDire
             }
             else
             {
-                pageDirective.Diagnostics.Add(
-                    ComponentDiagnosticFactory.CreatePageDirective_MustSpecifyRoute(
-                        pageDirective.Source
-                    )
-                );
+                pageDirective
+                    .Diagnostics
+                    .Add(
+                        ComponentDiagnosticFactory.CreatePageDirective_MustSpecifyRoute(
+                            pageDirective.Source
+                        )
+                    );
             }
         }
     }

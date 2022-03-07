@@ -90,13 +90,15 @@ namespace System.Net.Sockets
                 if (addressFamily == AddressFamily.InterNetworkV6 && socketType != SocketType.Raw)
                 {
                     int on = 1;
-                    error = Interop.Sys.SetSockOpt(
-                        fd,
-                        SocketOptionLevel.IPv6,
-                        SocketOptionName.IPv6Only,
-                        (byte*)&on,
-                        sizeof(int)
-                    );
+                    error = Interop
+                        .Sys
+                        .SetSockOpt(
+                            fd,
+                            SocketOptionLevel.IPv6,
+                            SocketOptionName.IPv6Only,
+                            (byte*)&on,
+                            sizeof(int)
+                        );
                     if (error != Interop.Error.SUCCESS)
                     {
                         Interop.Sys.Close(fd);
@@ -563,10 +565,9 @@ namespace System.Net.Sockets
             Debug.Assert(socket.IsSocket);
             Debug.Assert(socketAddress != null, "Expected non-null socketAddress");
 
-            int cmsgBufferLen = Interop.Sys.GetControlMessageBufferSize(
-                Convert.ToInt32(isIPv4),
-                Convert.ToInt32(isIPv6)
-            );
+            int cmsgBufferLen = Interop
+                .Sys
+                .GetControlMessageBufferSize(Convert.ToInt32(isIPv4), Convert.ToInt32(isIPv6));
             byte* cmsgBuffer = stackalloc byte[cmsgBufferLen];
 
             int sockAddrLen = socketAddressLen;
@@ -649,10 +650,12 @@ namespace System.Net.Sockets
                 fixed (byte* sockAddr = socketAddress)
                 fixed (Interop.Sys.IOVector* iov = iovecs)
                 {
-                    int cmsgBufferLen = Interop.Sys.GetControlMessageBufferSize(
-                        Convert.ToInt32(isIPv4),
-                        Convert.ToInt32(isIPv6)
-                    );
+                    int cmsgBufferLen = Interop
+                        .Sys
+                        .GetControlMessageBufferSize(
+                            Convert.ToInt32(isIPv4),
+                            Convert.ToInt32(isIPv6)
+                        );
                     byte* cmsgBuffer = stackalloc byte[cmsgBufferLen];
 
                     var messageHeader = new Interop.Sys.MessageHeader
@@ -800,12 +803,9 @@ namespace System.Net.Sockets
                 // To filter out these false events, we check whether the socket is writable, before
                 // reading the socket option.
                 Interop.PollEvents outEvents;
-                err = Interop.Sys.Poll(
-                    socket,
-                    Interop.PollEvents.POLLOUT,
-                    timeout: 0,
-                    out outEvents
-                );
+                err = Interop
+                    .Sys
+                    .Poll(socket, Interop.PollEvents.POLLOUT, timeout: 0, out outEvents);
                 if (err == Interop.Error.SUCCESS)
                 {
                     if (outEvents == Interop.PollEvents.POLLNONE)
@@ -1491,11 +1491,9 @@ namespace System.Net.Sockets
             SocketError errorCode;
             if (!listenSocket.IsNonBlocking)
             {
-                errorCode = listenSocket.AsyncContext.Accept(
-                    socketAddress,
-                    ref socketAddressLen,
-                    out acceptedFd
-                );
+                errorCode = listenSocket
+                    .AsyncContext
+                    .Accept(socketAddress, ref socketAddressLen, out acceptedFd);
             }
             else
             {
@@ -1558,12 +1556,9 @@ namespace System.Net.Sockets
             var bufferList = buffers;
             if (!handle.IsNonBlocking)
             {
-                return handle.AsyncContext.Send(
-                    bufferList,
-                    socketFlags,
-                    handle.SendTimeout,
-                    out bytesTransferred
-                );
+                return handle
+                    .AsyncContext
+                    .Send(bufferList, socketFlags, handle.SendTimeout, out bytesTransferred);
             }
 
             bytesTransferred = 0;
@@ -1595,14 +1590,16 @@ namespace System.Net.Sockets
         {
             if (!handle.IsNonBlocking)
             {
-                return handle.AsyncContext.Send(
-                    buffer,
-                    offset,
-                    count,
-                    socketFlags,
-                    handle.SendTimeout,
-                    out bytesTransferred
-                );
+                return handle
+                    .AsyncContext
+                    .Send(
+                        buffer,
+                        offset,
+                        count,
+                        socketFlags,
+                        handle.SendTimeout,
+                        out bytesTransferred
+                    );
             }
 
             bytesTransferred = 0;
@@ -1630,12 +1627,9 @@ namespace System.Net.Sockets
         {
             if (!handle.IsNonBlocking)
             {
-                return handle.AsyncContext.Send(
-                    buffer,
-                    socketFlags,
-                    handle.SendTimeout,
-                    out bytesTransferred
-                );
+                return handle
+                    .AsyncContext
+                    .Send(buffer, socketFlags, handle.SendTimeout, out bytesTransferred);
             }
 
             bytesTransferred = 0;
@@ -1660,13 +1654,9 @@ namespace System.Net.Sockets
 
             if (!handle.IsNonBlocking)
             {
-                return handle.AsyncContext.SendFile(
-                    fileHandle,
-                    offset,
-                    length,
-                    handle.SendTimeout,
-                    out bytesTransferred
-                );
+                return handle
+                    .AsyncContext
+                    .SendFile(fileHandle, offset, length, handle.SendTimeout, out bytesTransferred);
             }
 
             SocketError errorCode;
@@ -1694,16 +1684,18 @@ namespace System.Net.Sockets
         {
             if (!handle.IsNonBlocking)
             {
-                return handle.AsyncContext.SendTo(
-                    buffer,
-                    offset,
-                    count,
-                    socketFlags,
-                    socketAddress,
-                    socketAddressLen,
-                    handle.SendTimeout,
-                    out bytesTransferred
-                );
+                return handle
+                    .AsyncContext
+                    .SendTo(
+                        buffer,
+                        offset,
+                        count,
+                        socketFlags,
+                        socketAddress,
+                        socketAddressLen,
+                        handle.SendTimeout,
+                        out bytesTransferred
+                    );
             }
 
             bytesTransferred = 0;
@@ -1733,14 +1725,16 @@ namespace System.Net.Sockets
         {
             if (!handle.IsNonBlocking)
             {
-                return handle.AsyncContext.SendTo(
-                    buffer,
-                    socketFlags,
-                    socketAddress,
-                    socketAddressLen,
-                    handle.SendTimeout,
-                    out bytesTransferred
-                );
+                return handle
+                    .AsyncContext
+                    .SendTo(
+                        buffer,
+                        socketFlags,
+                        socketAddress,
+                        socketAddressLen,
+                        handle.SendTimeout,
+                        out bytesTransferred
+                    );
             }
 
             bytesTransferred = 0;
@@ -1767,12 +1761,9 @@ namespace System.Net.Sockets
             SocketError errorCode;
             if (!handle.IsNonBlocking)
             {
-                errorCode = handle.AsyncContext.Receive(
-                    buffers,
-                    socketFlags,
-                    handle.ReceiveTimeout,
-                    out bytesTransferred
-                );
+                errorCode = handle
+                    .AsyncContext
+                    .Receive(buffers, socketFlags, handle.ReceiveTimeout, out bytesTransferred);
             }
             else
             {
@@ -1808,12 +1799,14 @@ namespace System.Net.Sockets
         {
             if (!handle.IsNonBlocking)
             {
-                return handle.AsyncContext.Receive(
-                    new Memory<byte>(buffer, offset, count),
-                    socketFlags,
-                    handle.ReceiveTimeout,
-                    out bytesTransferred
-                );
+                return handle
+                    .AsyncContext
+                    .Receive(
+                        new Memory<byte>(buffer, offset, count),
+                        socketFlags,
+                        handle.ReceiveTimeout,
+                        out bytesTransferred
+                    );
             }
 
             SocketError errorCode;
@@ -1836,12 +1829,9 @@ namespace System.Net.Sockets
         {
             if (!handle.IsNonBlocking)
             {
-                return handle.AsyncContext.Receive(
-                    buffer,
-                    socketFlags,
-                    handle.ReceiveTimeout,
-                    out bytesTransferred
-                );
+                return handle
+                    .AsyncContext
+                    .Receive(buffer, socketFlags, handle.ReceiveTimeout, out bytesTransferred);
             }
 
             SocketError errorCode;
@@ -1883,17 +1873,19 @@ namespace System.Net.Sockets
             SocketError errorCode;
             if (!handle.IsNonBlocking)
             {
-                errorCode = handle.AsyncContext.ReceiveMessageFrom(
-                    new Memory<byte>(buffer, offset, count),
-                    ref socketFlags,
-                    socketAddressBuffer,
-                    ref socketAddressLen,
-                    isIPv4,
-                    isIPv6,
-                    handle.ReceiveTimeout,
-                    out ipPacketInformation,
-                    out bytesTransferred
-                );
+                errorCode = handle
+                    .AsyncContext
+                    .ReceiveMessageFrom(
+                        new Memory<byte>(buffer, offset, count),
+                        ref socketFlags,
+                        socketAddressBuffer,
+                        ref socketAddressLen,
+                        isIPv4,
+                        isIPv6,
+                        handle.ReceiveTimeout,
+                        out ipPacketInformation,
+                        out bytesTransferred
+                    );
             }
             else
             {
@@ -1949,17 +1941,19 @@ namespace System.Net.Sockets
             SocketError errorCode;
             if (!handle.IsNonBlocking)
             {
-                errorCode = handle.AsyncContext.ReceiveMessageFrom(
-                    buffer,
-                    ref socketFlags,
-                    socketAddressBuffer,
-                    ref socketAddressLen,
-                    isIPv4,
-                    isIPv6,
-                    handle.ReceiveTimeout,
-                    out ipPacketInformation,
-                    out bytesTransferred
-                );
+                errorCode = handle
+                    .AsyncContext
+                    .ReceiveMessageFrom(
+                        buffer,
+                        ref socketFlags,
+                        socketAddressBuffer,
+                        ref socketAddressLen,
+                        isIPv4,
+                        isIPv6,
+                        handle.ReceiveTimeout,
+                        out ipPacketInformation,
+                        out bytesTransferred
+                    );
             }
             else
             {
@@ -2002,14 +1996,16 @@ namespace System.Net.Sockets
         {
             if (!handle.IsNonBlocking)
             {
-                return handle.AsyncContext.ReceiveFrom(
-                    new Memory<byte>(buffer, offset, count),
-                    ref socketFlags,
-                    socketAddress,
-                    ref socketAddressLen,
-                    handle.ReceiveTimeout,
-                    out bytesTransferred
-                );
+                return handle
+                    .AsyncContext
+                    .ReceiveFrom(
+                        new Memory<byte>(buffer, offset, count),
+                        ref socketFlags,
+                        socketAddress,
+                        ref socketAddressLen,
+                        handle.ReceiveTimeout,
+                        out bytesTransferred
+                    );
             }
 
             SocketError errorCode;
@@ -2037,14 +2033,16 @@ namespace System.Net.Sockets
         {
             if (!handle.IsNonBlocking)
             {
-                return handle.AsyncContext.ReceiveFrom(
-                    buffer,
-                    ref socketFlags,
-                    socketAddress,
-                    ref socketAddressLen,
-                    handle.ReceiveTimeout,
-                    out bytesTransferred
-                );
+                return handle
+                    .AsyncContext
+                    .ReceiveFrom(
+                        buffer,
+                        ref socketFlags,
+                        socketAddress,
+                        ref socketAddressLen,
+                        handle.ReceiveTimeout,
+                        out bytesTransferred
+                    );
             }
 
             SocketError errorCode;
@@ -2165,23 +2163,21 @@ namespace System.Net.Sockets
                             InterfaceIndex = interfaceIndex
                         };
 
-                        err = Interop.Sys.SetIPv4MulticastOption(
-                            handle,
-                            Interop.Sys.MulticastOption.MULTICAST_IF,
-                            &opt
-                        );
+                        err = Interop
+                            .Sys
+                            .SetIPv4MulticastOption(
+                                handle,
+                                Interop.Sys.MulticastOption.MULTICAST_IF,
+                                &opt
+                            );
                         return GetErrorAndTrackSetting(handle, optionLevel, optionName, err);
                     }
                 }
             }
 
-            err = Interop.Sys.SetSockOpt(
-                handle,
-                optionLevel,
-                optionName,
-                (byte*)&optionValue,
-                sizeof(int)
-            );
+            err = Interop
+                .Sys
+                .SetSockOpt(handle, optionLevel, optionName, (byte*)&optionValue, sizeof(int));
 
             if (err == Interop.Error.SUCCESS)
             {
@@ -2210,13 +2206,15 @@ namespace System.Net.Sockets
         {
             fixed (byte* pinnedValue = optionValue)
             {
-                Interop.Error err = Interop.Sys.SetSockOpt(
-                    handle,
-                    optionLevel,
-                    optionName,
-                    pinnedValue,
-                    optionValue != null ? optionValue.Length : 0
-                );
+                Interop.Error err = Interop
+                    .Sys
+                    .SetSockOpt(
+                        handle,
+                        optionLevel,
+                        optionName,
+                        pinnedValue,
+                        optionValue != null ? optionValue.Length : 0
+                    );
                 return GetErrorAndTrackSetting(handle, optionLevel, optionName, err);
             }
         }
@@ -2230,13 +2228,15 @@ namespace System.Net.Sockets
         {
             fixed (byte* optionValuePtr = optionValue)
             {
-                Interop.Error err = Interop.Sys.SetRawSockOpt(
-                    handle,
-                    optionLevel,
-                    optionName,
-                    optionValuePtr,
-                    optionValue.Length
-                );
+                Interop.Error err = Interop
+                    .Sys
+                    .SetRawSockOpt(
+                        handle,
+                        optionLevel,
+                        optionName,
+                        optionValuePtr,
+                        optionValue.Length
+                    );
 
                 if (err == Interop.Error.SUCCESS)
                 {
@@ -2379,10 +2379,9 @@ namespace System.Net.Sockets
             if (optionName == SocketOptionName.Error)
             {
                 Interop.Error socketError = default(Interop.Error);
-                Interop.Error getErrorError = Interop.Sys.GetSocketErrorOption(
-                    handle,
-                    &socketError
-                );
+                Interop.Error getErrorError = Interop
+                    .Sys
+                    .GetSocketErrorOption(handle, &socketError);
                 optionValue = (int)GetSocketErrorForErrorCode(socketError);
                 return getErrorError == Interop.Error.SUCCESS
                   ? SocketError.Success
@@ -2391,13 +2390,9 @@ namespace System.Net.Sockets
 
             int value = 0;
             int optLen = sizeof(int);
-            Interop.Error err = Interop.Sys.GetSockOpt(
-                handle,
-                optionLevel,
-                optionName,
-                (byte*)&value,
-                &optLen
-            );
+            Interop.Error err = Interop
+                .Sys
+                .GetSockOpt(handle, optionLevel, optionName, (byte*)&value, &optLen);
 
             optionValue = value;
             return err == Interop.Error.SUCCESS
@@ -2439,13 +2434,9 @@ namespace System.Net.Sockets
             {
                 fixed (byte* pinnedValue = &optionValue[0])
                 {
-                    err = Interop.Sys.GetSockOpt(
-                        handle,
-                        optionLevel,
-                        optionName,
-                        pinnedValue,
-                        &optLen
-                    );
+                    err = Interop
+                        .Sys
+                        .GetSockOpt(handle, optionLevel, optionName, pinnedValue, &optLen);
                 }
             }
 
@@ -2471,13 +2462,9 @@ namespace System.Net.Sockets
             int optLen = optionLength;
             fixed (byte* pinnedValue = optionValue)
             {
-                Interop.Error err = Interop.Sys.GetRawSockOpt(
-                    handle,
-                    optionLevel,
-                    optionName,
-                    pinnedValue,
-                    &optLen
-                );
+                Interop.Error err = Interop
+                    .Sys
+                    .GetRawSockOpt(handle, optionLevel, optionName, pinnedValue, &optLen);
 
                 if (err == Interop.Error.SUCCESS)
                 {
@@ -2739,12 +2726,9 @@ namespace System.Net.Sockets
                 // Do the poll
                 uint triggered = 0;
                 int milliseconds = microseconds == -1 ? -1 : microseconds / 1000;
-                Interop.Error err = Interop.Sys.Poll(
-                    events,
-                    (uint)eventsLength,
-                    milliseconds,
-                    &triggered
-                );
+                Interop.Error err = Interop
+                    .Sys
+                    .Poll(events, (uint)eventsLength, milliseconds, &triggered);
                 if (err != Interop.Error.SUCCESS)
                 {
                     return GetSocketErrorForErrorCode(err);
@@ -2921,14 +2905,16 @@ namespace System.Net.Sockets
         )
         {
             long bytesSent;
-            SocketError socketError = handle.AsyncContext.SendFileAsync(
-                fileHandle,
-                offset,
-                count,
-                out bytesSent,
-                callback,
-                cancellationToken
-            );
+            SocketError socketError = handle
+                .AsyncContext
+                .SendFileAsync(
+                    fileHandle,
+                    offset,
+                    count,
+                    out bytesSent,
+                    callback,
+                    cancellationToken
+                );
             if (socketError == SocketError.Success)
             {
                 callback(bytesSent, SocketError.Success);
@@ -3065,12 +3051,14 @@ namespace System.Net.Sockets
             out bool success
         )
         {
-            Interop.Error err = Interop.Sys.Poll(
-                handle,
-                Interop.PollEvents.POLLOUT,
-                timeout: 0,
-                out Interop.PollEvents outEvents
-            );
+            Interop.Error err = Interop
+                .Sys
+                .Poll(
+                    handle,
+                    Interop.PollEvents.POLLOUT,
+                    timeout: 0,
+                    out Interop.PollEvents outEvents
+                );
             if (err != Interop.Error.SUCCESS)
             {
                 throw new SocketException((int)GetSocketErrorForErrorCode(err));

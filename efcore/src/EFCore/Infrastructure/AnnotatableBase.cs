@@ -401,7 +401,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                     static (n, t) =>
                         t.Annotatable.CreateRuntimeAnnotation(n, t.CreateValue(t.Argument)),
                     (CreateValue: valueFactory, Argument: factoryArgument, Annotatable: this)
-                ).Value!;
+                )
+                .Value!;
 
         /// <summary>
         ///     Gets the runtime annotation with the given name, returning <see langword="null" /> if it does not exist.

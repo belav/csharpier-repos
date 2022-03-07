@@ -90,10 +90,9 @@ public class PageInformation : IDisposable
         try
         {
             var message = e.Message;
-            var messageText = message.Text.Replace(
-                Environment.NewLine,
-                $"{Environment.NewLine}      "
-            );
+            var messageText = message
+                .Text
+                .Replace(Environment.NewLine, $"{Environment.NewLine}      ");
             var location = message.Location;
 
             var logMessage =

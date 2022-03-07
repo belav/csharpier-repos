@@ -35,7 +35,8 @@ namespace Microsoft.CodeAnalysis
             Options options
         )
         {
-            return workspace.Options
+            return workspace
+                .Options
                 .WithChangedOption(
                     InternalRuntimeDiagnosticOptions.Syntax,
                     (options & Options.Syntax) == Options.Syntax

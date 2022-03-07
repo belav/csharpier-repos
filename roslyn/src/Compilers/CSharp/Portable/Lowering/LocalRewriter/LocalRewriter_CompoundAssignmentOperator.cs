@@ -879,9 +879,10 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                 case BoundKind.FunctionPointerInvocation:
                     Debug.Assert(
-                        (
-                            (BoundFunctionPointerInvocation)originalLHS
-                        ).FunctionPointer.Signature.RefKind != RefKind.None
+                        ((BoundFunctionPointerInvocation)originalLHS)
+                            .FunctionPointer
+                            .Signature
+                            .RefKind != RefKind.None
                     );
                     break;
 

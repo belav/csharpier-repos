@@ -28,15 +28,19 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.OutOfProcess
             );
 
         protected void WaitForCompletionSet() =>
-            VisualStudioInstance.Workspace.WaitForAsyncOperations(
-                Helper.HangMitigatingTimeout,
-                FeatureAttribute.CompletionSet
-            );
+            VisualStudioInstance
+                .Workspace
+                .WaitForAsyncOperations(
+                    Helper.HangMitigatingTimeout,
+                    FeatureAttribute.CompletionSet
+                );
 
         protected void WaitForSignatureHelp() =>
-            VisualStudioInstance.Workspace.WaitForAsyncOperations(
-                Helper.HangMitigatingTimeout,
-                FeatureAttribute.SignatureHelp
-            );
+            VisualStudioInstance
+                .Workspace
+                .WaitForAsyncOperations(
+                    Helper.HangMitigatingTimeout,
+                    FeatureAttribute.SignatureHelp
+                );
     }
 }

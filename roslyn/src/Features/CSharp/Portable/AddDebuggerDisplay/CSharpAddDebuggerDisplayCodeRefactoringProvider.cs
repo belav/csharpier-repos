@@ -32,8 +32,8 @@ namespace Microsoft.CodeAnalysis.CSharp.AddDebuggerDisplay
         protected override bool CanNameofAccessNonPublicMembersFromAttributeArgument => true;
 
         protected override bool SupportsConstantInterpolatedStrings(Document document) =>
-            (
-                (CSharpParseOptions)document.Project.ParseOptions!
-            ).LanguageVersion.HasConstantInterpolatedStrings();
+            ((CSharpParseOptions)document.Project.ParseOptions!)
+                .LanguageVersion
+                .HasConstantInterpolatedStrings();
     }
 }

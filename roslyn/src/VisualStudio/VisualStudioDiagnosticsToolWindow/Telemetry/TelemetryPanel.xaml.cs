@@ -31,24 +31,26 @@ namespace Roslyn.VisualStudio.DiagnosticsWindow.Telemetry
 
         private void OnDump(object sender, RoutedEventArgs e)
         {
-            ThreadHelper.JoinableTaskFactory.RunAsync(
-                async () =>
-                {
-                    using (Disable(DumpButton))
-                    using (Disable(CopyButton))
+            ThreadHelper
+                .JoinableTaskFactory
+                .RunAsync(
+                    async () =>
                     {
-                        GenerationProgresBar.IsIndeterminate = true;
+                        using (Disable(DumpButton))
+                        using (Disable(CopyButton))
+                        {
+                            GenerationProgresBar.IsIndeterminate = true;
 
-                        await TaskScheduler.Default;
-                        var text = GetTelemetryString();
+                            await TaskScheduler.Default;
+                            var text = GetTelemetryString();
 
-                        await ThreadHelper.JoinableTaskFactory.SwitchToMainThreadAsync();
-                        this.Result.Text = text;
+                            await ThreadHelper.JoinableTaskFactory.SwitchToMainThreadAsync();
+                            this.Result.Text = text;
 
-                        GenerationProgresBar.IsIndeterminate = false;
+                            GenerationProgresBar.IsIndeterminate = false;
+                        }
                     }
-                }
-            );
+                );
         }
 
         private void OnCopy(object sender, RoutedEventArgs e)

@@ -52,9 +52,10 @@ public class PriorityOrderer : ITestCaseOrderer
             int priority = 0;
 
             foreach (
-                IAttributeInfo attr in testCase.TestMethod.Method.GetCustomAttributes(
-                    (typeof(TestPriorityAttribute)).AssemblyQualifiedName
-                )
+                IAttributeInfo attr in testCase
+                    .TestMethod
+                    .Method
+                    .GetCustomAttributes((typeof(TestPriorityAttribute)).AssemblyQualifiedName)
             )
                 priority = attr.GetNamedArgument<int>("Priority");
 
@@ -65,10 +66,9 @@ public class PriorityOrderer : ITestCaseOrderer
         {
             list.Sort(
                 (x, y) =>
-                    StringComparer.OrdinalIgnoreCase.Compare(
-                        x.TestMethod.Method.Name,
-                        y.TestMethod.Method.Name
-                    )
+                    StringComparer
+                        .OrdinalIgnoreCase
+                        .Compare(x.TestMethod.Method.Name, y.TestMethod.Method.Name)
             );
             foreach (XunitTestCase testCase in list)
                 yield return testCase;

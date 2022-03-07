@@ -23,23 +23,27 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
             Assert.Equal(
                 CoreStrings.ModelReadOnly,
-                Assert.Throws<InvalidOperationException>(
-                    () => entityType.AddIndex(new[] { property })
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(
+                        () => entityType.AddIndex(new[] { property })
+                    )
+                    .Message
             );
 
             Assert.Equal(
                 CoreStrings.ModelReadOnly,
-                Assert.Throws<InvalidOperationException>(
-                    () => entityType.AddIndex(new[] { property }, "Name")
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(
+                        () => entityType.AddIndex(new[] { property }, "Name")
+                    )
+                    .Message
             );
 
             Assert.Equal(
                 CoreStrings.ModelReadOnly,
-                Assert.Throws<InvalidOperationException>(
-                    () => entityType.RemoveIndex(index)
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(() => entityType.RemoveIndex(index))
+                    .Message
             );
 
             Assert.Equal(

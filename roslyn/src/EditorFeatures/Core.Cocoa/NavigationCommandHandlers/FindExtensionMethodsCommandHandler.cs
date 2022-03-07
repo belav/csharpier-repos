@@ -112,9 +112,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigationCommandHandlers
                             return;
 
                         foreach (
-                            var type in compilation.Assembly.GlobalNamespace.GetAllTypes(
-                                cancellationToken
-                            )
+                            var type in compilation
+                                .Assembly
+                                .GlobalNamespace
+                                .GetAllTypes(cancellationToken)
                         )
                         {
                             if (!type.MightContainExtensionMethods)

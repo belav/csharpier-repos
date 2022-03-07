@@ -22,7 +22,8 @@ namespace System.CommandLine.Benchmarks
 #pragma warning restore CA1801 // Review unused parameters
 #pragma warning disable CA1062 // Validate arguments of public methods
             =>
-            DefaultConfig.Instance
+            DefaultConfig
+                .Instance
                 .With(
                     Job.Default
                         .WithWarmupCount(1)

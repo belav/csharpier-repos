@@ -366,15 +366,17 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                 );
 
                 const string PrecertificatePoisonExtensionOid = "1.3.6.1.4.1.11129.2.4.3";
-                certReq.CertificateExtensions.Add(
-                    new X509Extension(
-                        new AsnEncodedData(
-                            new Oid(PrecertificatePoisonExtensionOid),
-                            new byte[] { 5, 0 }
-                        ),
-                        critical: true
-                    )
-                );
+                certReq
+                    .CertificateExtensions
+                    .Add(
+                        new X509Extension(
+                            new AsnEncodedData(
+                                new Oid(PrecertificatePoisonExtensionOid),
+                                new byte[] { 5, 0 }
+                            ),
+                            critical: true
+                        )
+                    );
 
                 DateTimeOffset notBefore = DateTimeOffset.UtcNow.AddDays(-1);
                 DateTimeOffset notAfter = notBefore.AddDays(30);
@@ -432,9 +434,9 @@ namespace System.Security.Cryptography.X509Certificates.Tests
 
                 certReq.CertificateExtensions.Add(BasicConstraintsEndEntity);
 
-                certReq.CertificateExtensions.Add(
-                    new X509Extension("1.3.6.1.5.5.7.1.1", new byte[] { 5 }, critical: false)
-                );
+                certReq
+                    .CertificateExtensions
+                    .Add(new X509Extension("1.3.6.1.5.5.7.1.1", new byte[] { 5 }, critical: false));
 
                 DateTimeOffset notBefore = DateTimeOffset.UtcNow.AddDays(-1);
                 DateTimeOffset notAfter = notBefore.AddDays(30);

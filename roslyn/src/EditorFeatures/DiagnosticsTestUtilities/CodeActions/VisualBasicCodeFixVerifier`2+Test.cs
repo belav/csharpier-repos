@@ -54,9 +54,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
                 SolutionTransforms.Add(
                     (solution, projectId) =>
                     {
-                        var parseOptions = (VisualBasicParseOptions)solution.GetProject(
-                            projectId
-                        )!.ParseOptions!;
+                        var parseOptions = (VisualBasicParseOptions)solution
+                            .GetProject(projectId)!
+                            .ParseOptions!;
                         solution = solution.WithProjectParseOptions(
                             projectId,
                             parseOptions.WithLanguageVersion(LanguageVersion)

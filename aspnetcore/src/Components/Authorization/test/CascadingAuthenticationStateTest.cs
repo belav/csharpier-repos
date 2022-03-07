@@ -153,10 +153,12 @@ public class CascadingAuthenticationStateTest
         renderer.AssignRootComponentId(component);
         component.TriggerRender();
         var receiveAuthStateId =
-            renderer.Batches
+            renderer
+                .Batches
                 .Single()
                 .GetComponentFrames<ReceiveAuthStateComponent>()
-                .Single().ComponentId;
+                .Single()
+                .ComponentId;
 
         // Act 2: AuthenticationStateProvider issues notification
         authStateProvider.TriggerAuthenticationStateChanged(

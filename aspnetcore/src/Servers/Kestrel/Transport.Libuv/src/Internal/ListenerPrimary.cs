@@ -258,10 +258,9 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal
                 int suggestedSize
             )
             {
-                return dispatchPipe.Libuv.buf_init(
-                    _bufPtr + _bytesRead,
-                    _bufferLength - _bytesRead
-                );
+                return dispatchPipe
+                    .Libuv
+                    .buf_init(_bufPtr + _bytesRead, _bufferLength - _bytesRead);
             }
 
             public void ReadCallback(UvStreamHandle dispatchPipe, int status)

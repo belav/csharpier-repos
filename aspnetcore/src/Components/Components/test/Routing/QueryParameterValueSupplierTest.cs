@@ -706,7 +706,8 @@ public class QueryParameterValueSupplierTest
         builder.CloseComponent();
 
         var frames = builder.GetFrames();
-        return frames.Array
+        return frames
+            .Array
             .Take(frames.Count)
             .Where(frame => frame.FrameType == RenderTree.RenderTreeFrameType.Attribute)
             .Select(frame => (frame.AttributeName, frame.AttributeValue))

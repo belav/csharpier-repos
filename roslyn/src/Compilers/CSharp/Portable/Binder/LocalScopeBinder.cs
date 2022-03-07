@@ -235,28 +235,33 @@ namespace Microsoft.CodeAnalysis.CSharp
                             enclosingBinder.GetBinder(innerStatement) ?? enclosingBinder;
                         var decl = (LocalDeclarationStatementSyntax)innerStatement;
 
-                        decl.Declaration.Type.VisitRankSpecifiers(
-                            (rankSpecifier, args) =>
-                            {
-                                foreach (var expression in rankSpecifier.Sizes)
+                        decl.Declaration
+                            .Type
+                            .VisitRankSpecifiers(
+                                (rankSpecifier, args) =>
                                 {
-                                    if (expression.Kind() != SyntaxKind.OmittedArraySizeExpression)
+                                    foreach (var expression in rankSpecifier.Sizes)
                                     {
-                                        ExpressionVariableFinder.FindExpressionVariables(
-                                            args.localScopeBinder,
-                                            args.locals,
-                                            expression,
-                                            args.localDeclarationBinder
-                                        );
+                                        if (
+                                            expression.Kind()
+                                            != SyntaxKind.OmittedArraySizeExpression
+                                        )
+                                        {
+                                            ExpressionVariableFinder.FindExpressionVariables(
+                                                args.localScopeBinder,
+                                                args.locals,
+                                                expression,
+                                                args.localDeclarationBinder
+                                            );
+                                        }
                                     }
-                                }
-                            },
-                            (
-                                localScopeBinder: this,
-                                locals: locals,
-                                localDeclarationBinder: localDeclarationBinder
-                            )
-                        );
+                                },
+                                (
+                                    localScopeBinder: this,
+                                    locals: locals,
+                                    localDeclarationBinder: localDeclarationBinder
+                                )
+                            );
 
                         LocalDeclarationKind kind;
                         if (decl.IsConst)

@@ -73,7 +73,8 @@ namespace Microsoft.EntityFrameworkCore
             using var context = new BloggingContext(testDatabase);
             var creator = GetDatabaseCreator(context);
 
-            await context.Database
+            await context
+                .Database
                 .CreateExecutionStrategy()
                 .ExecuteAsync(
                     async () =>
@@ -151,7 +152,8 @@ namespace Microsoft.EntityFrameworkCore
             using var context = new BloggingContext(testDatabase);
             var creator = GetDatabaseCreator(context);
 
-            await context.Database
+            await context
+                .Database
                 .CreateExecutionStrategy()
                 .ExecuteAsync(
                     async () =>
@@ -499,7 +501,8 @@ namespace Microsoft.EntityFrameworkCore
         {
             using var testDatabase = SqlServerTestStore.GetOrCreate("NonExisting");
             var databaseCreator = GetDatabaseCreator(testDatabase);
-            await databaseCreator.ExecutionStrategyFactory
+            await databaseCreator
+                .ExecutionStrategyFactory
                 .Create()
                 .ExecuteAsync(
                     databaseCreator,

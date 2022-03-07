@@ -258,10 +258,9 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
             ) =>
                 new GenericTypeTestEntityTypeBuilder<TJoinEntity>(
                     new(
-                        CollectionCollectionBuilder.UsingEntity(
-                            joinEntityName,
-                            typeof(TJoinEntity)
-                        ).Metadata
+                        CollectionCollectionBuilder
+                            .UsingEntity(joinEntityName, typeof(TJoinEntity))
+                            .Metadata
                     )
                 );
 
@@ -304,31 +303,33 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
             ) =>
                 new GenericTypeTestEntityTypeBuilder<TJoinEntity>(
                     new(
-                        CollectionCollectionBuilder.UsingEntity(
-                            typeof(TJoinEntity),
-                            l =>
-                                (
-                                    (GenericTestReferenceCollectionBuilder<
-                                        TLeftEntity,
-                                        TJoinEntity
-                                    >)configureRight(
-                                        new GenericTypeTestEntityTypeBuilder<TJoinEntity>(
-                                            new(l.Metadata)
+                        CollectionCollectionBuilder
+                            .UsingEntity(
+                                typeof(TJoinEntity),
+                                l =>
+                                    (
+                                        (GenericTestReferenceCollectionBuilder<
+                                            TLeftEntity,
+                                            TJoinEntity
+                                        >)configureRight(
+                                            new GenericTypeTestEntityTypeBuilder<TJoinEntity>(
+                                                new(l.Metadata)
+                                            )
                                         )
-                                    )
-                                ).ReferenceCollectionBuilder,
-                            r =>
-                                (
-                                    (GenericTestReferenceCollectionBuilder<
-                                        TRightEntity,
-                                        TJoinEntity
-                                    >)configureLeft(
-                                        new GenericTypeTestEntityTypeBuilder<TJoinEntity>(
-                                            new(r.Metadata)
+                                    ).ReferenceCollectionBuilder,
+                                r =>
+                                    (
+                                        (GenericTestReferenceCollectionBuilder<
+                                            TRightEntity,
+                                            TJoinEntity
+                                        >)configureLeft(
+                                            new GenericTypeTestEntityTypeBuilder<TJoinEntity>(
+                                                new(r.Metadata)
+                                            )
                                         )
-                                    )
-                                ).ReferenceCollectionBuilder
-                        ).Metadata
+                                    ).ReferenceCollectionBuilder
+                            )
+                            .Metadata
                     )
                 );
 
@@ -345,32 +346,34 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
             ) =>
                 new GenericTypeTestEntityTypeBuilder<TJoinEntity>(
                     new(
-                        CollectionCollectionBuilder.UsingEntity(
-                            joinEntityName,
-                            typeof(TJoinEntity),
-                            l =>
-                                (
-                                    (GenericTestReferenceCollectionBuilder<
-                                        TLeftEntity,
-                                        TJoinEntity
-                                    >)configureRight(
-                                        new GenericTypeTestEntityTypeBuilder<TJoinEntity>(
-                                            new(l.Metadata)
+                        CollectionCollectionBuilder
+                            .UsingEntity(
+                                joinEntityName,
+                                typeof(TJoinEntity),
+                                l =>
+                                    (
+                                        (GenericTestReferenceCollectionBuilder<
+                                            TLeftEntity,
+                                            TJoinEntity
+                                        >)configureRight(
+                                            new GenericTypeTestEntityTypeBuilder<TJoinEntity>(
+                                                new(l.Metadata)
+                                            )
                                         )
-                                    )
-                                ).ReferenceCollectionBuilder,
-                            r =>
-                                (
-                                    (GenericTestReferenceCollectionBuilder<
-                                        TRightEntity,
-                                        TJoinEntity
-                                    >)configureLeft(
-                                        new GenericTypeTestEntityTypeBuilder<TJoinEntity>(
-                                            new(r.Metadata)
+                                    ).ReferenceCollectionBuilder,
+                                r =>
+                                    (
+                                        (GenericTestReferenceCollectionBuilder<
+                                            TRightEntity,
+                                            TJoinEntity
+                                        >)configureLeft(
+                                            new GenericTypeTestEntityTypeBuilder<TJoinEntity>(
+                                                new(r.Metadata)
+                                            )
                                         )
-                                    )
-                                ).ReferenceCollectionBuilder
-                        ).Metadata
+                                    ).ReferenceCollectionBuilder
+                            )
+                            .Metadata
                     )
                 );
 

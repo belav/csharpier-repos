@@ -159,7 +159,8 @@ WHERE changes() = 1 AND ""rowid"" = last_insert_rowid();"
             using var context = CreateContext();
             Assert.Equal(
                 10,
-                context.Model
+                context
+                    .Model
                     .FindEntityType(typeof(One))
                     .FindProperty("MaxLengthProperty")
                     .GetMaxLength()
@@ -181,9 +182,11 @@ WHERE changes() = 1 AND ""rowid"" = last_insert_rowid();"
         {
             using var context = CreateContext();
             Assert.True(
-                context.Model
+                context
+                    .Model
                     .FindEntityType(typeof(Two))
-                    .FindProperty("Timestamp").IsConcurrencyToken
+                    .FindProperty("Timestamp")
+                    .IsConcurrencyToken
             );
         }
 

@@ -43,8 +43,9 @@ namespace System.Text.Json.Serialization.Converters
             if (typeInfo.AddMethodDelegate == null)
             {
                 // We verified this exists when we created the converter in the enumerable converter factory.
-                typeInfo.AddMethodDelegate =
-                    options.MemberAccessorStrategy.CreateAddMethodDelegate<TCollection>();
+                typeInfo.AddMethodDelegate = options
+                    .MemberAccessorStrategy
+                    .CreateAddMethodDelegate<TCollection>();
             }
         }
 

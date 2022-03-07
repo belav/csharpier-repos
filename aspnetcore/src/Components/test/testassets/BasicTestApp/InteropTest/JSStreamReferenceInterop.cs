@@ -34,8 +34,9 @@ public class JSStreamReferenceInterop
         }
         else
         {
-            using var dataWrapperReferenceStream =
-                await jsStreamReferenceWrapper.JSStreamReferenceVal.OpenReadStreamAsync();
+            using var dataWrapperReferenceStream = await jsStreamReferenceWrapper
+                .JSStreamReferenceVal
+                .OpenReadStreamAsync();
             return await ValidateStreamValuesAsync(dataWrapperReferenceStream);
         }
     }

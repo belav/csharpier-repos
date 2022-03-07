@@ -130,9 +130,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 foreach (var checkConstraintToBeDetached in checkConstraintsToBeDetached)
                 {
                     detachedCheckConstraints.Add(
-                        checkConstraintToBeDetached.EntityType.RemoveCheckConstraint(
-                            checkConstraintToBeDetached.ModelName
-                        )!
+                        checkConstraintToBeDetached
+                            .EntityType
+                            .RemoveCheckConstraint(checkConstraintToBeDetached.ModelName)!
                     );
                 }
             }

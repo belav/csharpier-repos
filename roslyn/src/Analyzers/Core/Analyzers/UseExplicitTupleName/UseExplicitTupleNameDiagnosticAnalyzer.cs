@@ -80,10 +80,9 @@ namespace Microsoft.CodeAnalysis.UseExplicitTupleName
                             .AsNode();
                         if (nameNode != null)
                         {
-                            var properties = ImmutableDictionary<string, string?>.Empty.Add(
-                                nameof(ElementName),
-                                namedField.Name
-                            );
+                            var properties = ImmutableDictionary<string, string?>
+                                .Empty
+                                .Add(nameof(ElementName), namedField.Name);
                             context.ReportDiagnostic(
                                 DiagnosticHelper.Create(
                                     Descriptor,

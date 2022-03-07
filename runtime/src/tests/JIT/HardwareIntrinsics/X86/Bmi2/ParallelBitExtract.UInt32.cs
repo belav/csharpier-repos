@@ -259,9 +259,11 @@ namespace JIT.HardwareIntrinsics.X86
 
             if (isUnexpectedResult)
             {
-                TestLibrary.TestFramework.LogInformation(
-                    $"{nameof(Bmi2)}.{nameof(Bmi2.ParallelBitExtract)}<UInt32>(UInt32, UInt32): ParallelBitExtract failed:"
-                );
+                TestLibrary
+                    .TestFramework
+                    .LogInformation(
+                        $"{nameof(Bmi2)}.{nameof(Bmi2.ParallelBitExtract)}<UInt32>(UInt32, UInt32): ParallelBitExtract failed:"
+                    );
                 TestLibrary.TestFramework.LogInformation($"    left: {left}");
                 TestLibrary.TestFramework.LogInformation($"   right: {right}");
                 TestLibrary.TestFramework.LogInformation($"  result: {result}");

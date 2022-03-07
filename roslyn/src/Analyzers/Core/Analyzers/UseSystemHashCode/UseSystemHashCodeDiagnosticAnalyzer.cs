@@ -82,12 +82,14 @@ namespace Microsoft.CodeAnalysis.UseSystemHashCode
             var syntaxTree = operation.Syntax.SyntaxTree;
             var cancellationToken = context.CancellationToken;
 
-            var option = context.Options.GetOption(
-                CodeStyleOptions2.PreferSystemHashCode,
-                operation.Language,
-                syntaxTree,
-                cancellationToken
-            );
+            var option = context
+                .Options
+                .GetOption(
+                    CodeStyleOptions2.PreferSystemHashCode,
+                    operation.Language,
+                    syntaxTree,
+                    cancellationToken
+                );
             if (option?.Value != true)
                 return;
 

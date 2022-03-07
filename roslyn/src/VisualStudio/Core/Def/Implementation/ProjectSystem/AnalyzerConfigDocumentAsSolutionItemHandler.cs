@@ -127,8 +127,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                     if (!_infoBarShownForCurrentSolution)
                     {
                         _infoBarShownForCurrentSolution = true;
-                        var infoBarService =
-                            _workspace.Services.GetRequiredService<IInfoBarService>();
+                        var infoBarService = _workspace
+                            .Services
+                            .GetRequiredService<IInfoBarService>();
                         infoBarService.ShowInfoBar(
                             ServicesVSResources.A_new_editorconfig_file_was_detected_at_the_root_of_your_solution_Would_you_like_to_make_it_a_solution_item,
                             GetInfoBarUIItems().ToArray()
@@ -164,9 +165,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                     kind: InfoBarUI.UIKind.Button,
                     action: () =>
                         _workspace.TryApplyChanges(
-                            _workspace.CurrentSolution.WithOptions(
-                                _workspace.Options.WithChangedOption(NeverShowAgain, true)
-                            )
+                            _workspace
+                                .CurrentSolution
+                                .WithOptions(
+                                    _workspace.Options.WithChangedOption(NeverShowAgain, true)
+                                )
                         ),
                     closeAfterAction: true
                 );
@@ -174,8 +177,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
 
             void AddEditorconfigSolutionItem()
             {
-                var addSolutionItemService =
-                    _workspace.Services.GetRequiredService<IAddSolutionItemService>();
+                var addSolutionItemService = _workspace
+                    .Services
+                    .GetRequiredService<IAddSolutionItemService>();
                 addSolutionItemService
                     .AddSolutionItemAsync(analyzerConfigDocumentFilePath, CancellationToken.None)
                     .Wait();

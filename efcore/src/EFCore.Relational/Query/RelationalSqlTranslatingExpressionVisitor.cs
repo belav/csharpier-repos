@@ -567,7 +567,9 @@ namespace Microsoft.EntityFrameworkCore.Query
                         out var sqlInnerExpression
                     )
                       ? QueryCompilationContext.NotTranslatedExpression
-                      : Dependencies.MemberTranslatorProvider.Translate(
+                      : Dependencies
+                        .MemberTranslatorProvider
+                        .Translate(
                             sqlInnerExpression,
                             memberExpression.Member,
                             memberExpression.Type,
@@ -787,13 +789,15 @@ namespace Microsoft.EntityFrameworkCore.Query
                 }
             }
 
-            var translation = Dependencies.MethodCallTranslatorProvider.Translate(
-                _model,
-                sqlObject,
-                methodCallExpression.Method,
-                arguments,
-                _queryCompilationContext.Logger
-            );
+            var translation = Dependencies
+                .MethodCallTranslatorProvider
+                .Translate(
+                    _model,
+                    sqlObject,
+                    methodCallExpression.Method,
+                    arguments,
+                    _queryCompilationContext.Logger
+                );
 
             if (translation == null)
             {
@@ -830,10 +834,10 @@ namespace Microsoft.EntityFrameworkCore.Query
 
         /// <inheritdoc />
         protected override Expression VisitParameter(ParameterExpression parameterExpression) =>
-            parameterExpression.Name?.StartsWith(
-                QueryCompilationContext.QueryParameterPrefix,
-                StringComparison.Ordinal
-            ) == true
+            parameterExpression
+                .Name
+                ?.StartsWith(QueryCompilationContext.QueryParameterPrefix, StringComparison.Ordinal)
+            == true
                 ? new SqlParameterExpression(parameterExpression, null)
                 : throw new InvalidOperationException(
                       CoreStrings.TranslationFailed(parameterExpression.Print())
@@ -871,13 +875,15 @@ namespace Microsoft.EntityFrameworkCore.Query
                         var discriminatorValues = derivedType.GetTptDiscriminatorValues();
                         if (entityReferenceExpression.SubqueryEntity != null)
                         {
-                            var entityShaper =
-                                (EntityShaperExpression)entityReferenceExpression.SubqueryEntity.ShaperExpression;
+                            var entityShaper = (EntityShaperExpression)entityReferenceExpression
+                                .SubqueryEntity
+                                .ShaperExpression;
                             var entityProjection = (EntityProjectionExpression)Visit(
                                 entityShaper.ValueBufferExpression
                             );
-                            var subSelectExpression =
-                                (SelectExpression)entityReferenceExpression.SubqueryEntity.QueryExpression;
+                            var subSelectExpression = (SelectExpression)entityReferenceExpression
+                                .SubqueryEntity
+                                .QueryExpression;
 
                             var predicate = GeneratePredicateTPT(entityProjection);
 
@@ -914,7 +920,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                                 is CaseExpression caseExpression
                             )
                             {
-                                var matchingCaseWhenClauses = caseExpression.WhenClauses
+                                var matchingCaseWhenClauses = caseExpression
+                                    .WhenClauses
                                     .Where(
                                         wc =>
                                             discriminatorValues.Contains(
@@ -1041,10 +1048,9 @@ namespace Microsoft.EntityFrameworkCore.Query
                     // Introduce explicit cast only if the target type is mapped else we need to client eval
                     if (
                         unaryExpression.Type == typeof(object)
-                        || Dependencies.TypeMappingSource.FindMapping(
-                            unaryExpression.Type,
-                            Dependencies.Model
-                        ) != null
+                        || Dependencies
+                            .TypeMappingSource
+                            .FindMapping(unaryExpression.Type, Dependencies.Model) != null
                     )
                     {
                         sqlOperand = _sqlExpressionFactory.ApplyDefaultTypeMapping(sqlOperand);
@@ -1187,10 +1193,12 @@ namespace Microsoft.EntityFrameworkCore.Query
 
             if (entityReferenceExpression.SubqueryEntity != null)
             {
-                var entityShaper =
-                    (EntityShaperExpression)entityReferenceExpression.SubqueryEntity.ShaperExpression;
-                var subSelectExpression =
-                    (SelectExpression)entityReferenceExpression.SubqueryEntity.QueryExpression;
+                var entityShaper = (EntityShaperExpression)entityReferenceExpression
+                    .SubqueryEntity
+                    .ShaperExpression;
+                var subSelectExpression = (SelectExpression)entityReferenceExpression
+                    .SubqueryEntity
+                    .QueryExpression;
 
                 SqlExpression innerProjection;
                 var projectionBindingExpression =
@@ -1342,10 +1350,12 @@ namespace Microsoft.EntityFrameworkCore.Query
                     break;
 
                 case SqlParameterExpression sqlParameterExpression
-                      when sqlParameterExpression.Name.StartsWith(
-                          QueryCompilationContext.QueryParameterPrefix,
-                          StringComparison.Ordinal
-                      ):
+                      when sqlParameterExpression
+                          .Name
+                          .StartsWith(
+                              QueryCompilationContext.QueryParameterPrefix,
+                              StringComparison.Ordinal
+                          ):
                     var lambda = Expression.Lambda(
                         Expression.Call(
                             _parameterListValueExtractor.MakeGenericMethod(
@@ -1668,10 +1678,12 @@ namespace Microsoft.EntityFrameworkCore.Query
                     );
 
                 case SqlParameterExpression sqlParameterExpression
-                      when sqlParameterExpression.Name.StartsWith(
-                          QueryCompilationContext.QueryParameterPrefix,
-                          StringComparison.Ordinal
-                      ):
+                      when sqlParameterExpression
+                          .Name
+                          .StartsWith(
+                              QueryCompilationContext.QueryParameterPrefix,
+                              StringComparison.Ordinal
+                          ):
                     var lambda = Expression.Lambda(
                         Expression.Call(
                             _parameterValueExtractor.MakeGenericMethod(
@@ -1694,9 +1706,9 @@ namespace Microsoft.EntityFrameworkCore.Query
                     );
 
                 case MemberInitExpression memberInitExpression
-                      when memberInitExpression.Bindings.SingleOrDefault(
-                          mb => mb.Member.Name == property.Name
-                      )
+                      when memberInitExpression
+                          .Bindings
+                          .SingleOrDefault(mb => mb.Member.Name == property.Name)
                           is MemberAssignment memberAssignment:
                     return memberAssignment.Expression;
 
@@ -1755,11 +1767,13 @@ namespace Microsoft.EntityFrameworkCore.Query
 
                 case MemberInitExpression memberInitExpression:
                     return CanEvaluate(memberInitExpression.NewExpression)
-                        && memberInitExpression.Bindings.All(
-                            mb =>
-                                mb is MemberAssignment memberAssignment
-                                && CanEvaluate(memberAssignment.Expression)
-                        );
+                        && memberInitExpression
+                            .Bindings
+                            .All(
+                                mb =>
+                                    mb is MemberAssignment memberAssignment
+                                    && CanEvaluate(memberAssignment.Expression)
+                            );
 
                 default:
                     return false;

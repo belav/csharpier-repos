@@ -49,8 +49,9 @@ namespace Microsoft.CodeAnalysis.Editor.CommandHandlers
         public CommandState GetCommandState(TCommandArgs args)
         {
             // Because this is expensive to compute, we just always say yes as long as the language allows it.
-            var document =
-                args.SubjectBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
+            var document = args.SubjectBuffer
+                .CurrentSnapshot
+                .GetOpenDocumentInCurrentContextWithChanges();
             var findUsagesService = GetService(document);
             return findUsagesService != null ? CommandState.Available : CommandState.Unspecified;
         }
@@ -66,8 +67,9 @@ namespace Microsoft.CodeAnalysis.Editor.CommandHandlers
                 if (!caret.HasValue)
                     return false;
 
-                var document =
-                    subjectBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
+                var document = subjectBuffer
+                    .CurrentSnapshot
+                    .GetOpenDocumentInCurrentContextWithChanges();
                 if (document == null)
                     return false;
 
@@ -75,8 +77,9 @@ namespace Microsoft.CodeAnalysis.Editor.CommandHandlers
                 if (service == null)
                     return false;
 
-                document =
-                    subjectBuffer.CurrentSnapshot.GetFullyLoadedOpenDocumentInCurrentContextWithChanges(
+                document = subjectBuffer
+                    .CurrentSnapshot
+                    .GetFullyLoadedOpenDocumentInCurrentContextWithChanges(
                         context.OperationContext,
                         _threadingContext
                     );
@@ -109,15 +112,17 @@ namespace Microsoft.CodeAnalysis.Editor.CommandHandlers
                     )
                 )
                 {
-                    messageToShow = _threadingContext.JoinableTaskFactory.Run(
-                        () =>
-                            NavigateToOrPresentResultsAsync(
-                                document,
-                                caretPosition,
-                                service,
-                                userCancellationToken
-                            )
-                    );
+                    messageToShow = _threadingContext
+                        .JoinableTaskFactory
+                        .Run(
+                            () =>
+                                NavigateToOrPresentResultsAsync(
+                                    document,
+                                    caretPosition,
+                                    service,
+                                    userCancellationToken
+                                )
+                        );
                 }
 
                 if (messageToShow != null)
@@ -126,8 +131,12 @@ namespace Microsoft.CodeAnalysis.Editor.CommandHandlers
                     // wait context. That means the command system won't attempt to show its own wait dialog
                     // and also will take it into consideration when measuring command handling duration.
                     context.OperationContext.TakeOwnership();
-                    var notificationService =
-                        document.Project.Solution.Workspace.Services.GetRequiredService<INotificationService>();
+                    var notificationService = document
+                        .Project
+                        .Solution
+                        .Workspace
+                        .Services
+                        .GetRequiredService<INotificationService>();
                     notificationService.SendNotification(
                         message: messageToShow,
                         title: DisplayName,

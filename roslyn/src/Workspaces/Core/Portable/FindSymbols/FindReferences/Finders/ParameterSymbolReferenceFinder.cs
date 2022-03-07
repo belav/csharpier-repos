@@ -160,7 +160,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
         {
             if (parameter.ContainingSymbol.IsAnonymousFunction())
             {
-                var parameterNode = parameter.DeclaringSyntaxReferences
+                var parameterNode = parameter
+                    .DeclaringSyntaxReferences
                     .Select(r => r.GetSyntax(cancellationToken))
                     .FirstOrDefault();
                 if (parameterNode != null)
@@ -176,14 +177,15 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
                                 .GetRequiredSemanticModelAsync(cancellationToken)
                                 .ConfigureAwait(false);
 
-                            var lambdaNode = parameter.ContainingSymbol.DeclaringSyntaxReferences
+                            var lambdaNode = parameter
+                                .ContainingSymbol
+                                .DeclaringSyntaxReferences
                                 .Select(r => r.GetSyntax(cancellationToken))
                                 .First();
                             var convertedType =
-                                semanticModel.GetTypeInfo(
-                                    lambdaNode,
-                                    cancellationToken
-                                ).ConvertedType;
+                                semanticModel
+                                    .GetTypeInfo(lambdaNode, cancellationToken)
+                                    .ConvertedType;
 
                             if (convertedType != null)
                             {
@@ -235,11 +237,13 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
                     if (
                         symbol is IParameterSymbol
                         && symbol.ContainingSymbol.IsAnonymousFunction()
-                        && SignatureComparer.Instance.HaveSameSignatureAndConstraintsAndReturnTypeAndAccessors(
-                            parameter.ContainingSymbol,
-                            symbol.ContainingSymbol,
-                            syntaxFacts.IsCaseSensitive
-                        )
+                        && SignatureComparer
+                            .Instance
+                            .HaveSameSignatureAndConstraintsAndReturnTypeAndAccessors(
+                                parameter.ContainingSymbol,
+                                symbol.ContainingSymbol,
+                                syntaxFacts.IsCaseSensitive
+                            )
                         && ParameterNamesMatch(
                             syntaxFacts,
                             (IMethodSymbol)parameter.ContainingSymbol,
@@ -247,7 +251,9 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
                         )
                     )
                     {
-                        var lambdaNode = symbol.ContainingSymbol.DeclaringSyntaxReferences
+                        var lambdaNode = symbol
+                            .ContainingSymbol
+                            .DeclaringSyntaxReferences
                             .Select(r => r.GetSyntax(cancellationToken))
                             .First();
                         var convertedType2 =

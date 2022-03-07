@@ -70,9 +70,11 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
             );
             Func<CallSite, object, object, object, object> target = callsite.Target;
             string message =
-                Assert.Throws<RuntimeBinderException>(
-                    () => target(callsite, new TypeWithMethods(), 9, 14)
-                ).Message;
+                Assert
+                    .Throws<RuntimeBinderException>(
+                        () => target(callsite, new TypeWithMethods(), 9, 14)
+                    )
+                    .Message;
 
             // All but the (string, int) method should have been excluded from consideration, leaving the binder to
             // complain about it not matching types.
@@ -127,9 +129,11 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
             );
             Func<CallSite, object, object, object, object> target = callsite.Target;
             string message =
-                Assert.Throws<RuntimeBinderException>(
-                    () => target(callsite, new TypeWithMethods(), 9, 14)
-                ).Message;
+                Assert
+                    .Throws<RuntimeBinderException>(
+                        () => target(callsite, new TypeWithMethods(), 9, 14)
+                    )
+                    .Message;
 
             //  The best overload for 'DoStuff' does not have a parameter named 'nada'
             Assert.Contains("'DoStuff'", message);
@@ -157,9 +161,11 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
             );
             Func<CallSite, object, object, object, object> target = callsite.Target;
             string message =
-                Assert.Throws<RuntimeBinderException>(
-                    () => target(callsite, new TypeWithMethods(), 9, 14)
-                ).Message;
+                Assert
+                    .Throws<RuntimeBinderException>(
+                        () => target(callsite, new TypeWithMethods(), 9, 14)
+                    )
+                    .Message;
 
             //  Named argument 'y' is used out-of-position but is followed by an unnamed argument
             Assert.Contains("'y'", message);
@@ -187,9 +193,11 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
             );
             Func<CallSite, object, object, object, object, object> target = callsite.Target;
             string message =
-                Assert.Throws<RuntimeBinderException>(
-                    () => target(callsite, new TypeWithMethods(), 9, 14, 13)
-                ).Message;
+                Assert
+                    .Throws<RuntimeBinderException>(
+                        () => target(callsite, new TypeWithMethods(), 9, 14, 13)
+                    )
+                    .Message;
 
             //  Named argument 'z' is used out-of-position but is followed by an unnamed argument
             Assert.Contains("'z'", message);
@@ -217,9 +225,11 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
             );
             Func<CallSite, object, object, object, object, object> target = callsite.Target;
             string message =
-                Assert.Throws<RuntimeBinderException>(
-                    () => target(callsite, new TypeWithMethods(), 9, 14, 12)
-                ).Message;
+                Assert
+                    .Throws<RuntimeBinderException>(
+                        () => target(callsite, new TypeWithMethods(), 9, 14, 12)
+                    )
+                    .Message;
 
             //  The best overload for 'DoMoreStuff' does not have a parameter named 'nada'
             Assert.Contains("'DoOtherStuff'", message);
@@ -248,9 +258,11 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
             );
             Func<CallSite, object, object, object, object, object> target = callsite.Target;
             string message =
-                Assert.Throws<RuntimeBinderException>(
-                    () => target(callsite, new TypeWithMethods(), 9, 14, 13)
-                ).Message;
+                Assert
+                    .Throws<RuntimeBinderException>(
+                        () => target(callsite, new TypeWithMethods(), 9, 14, 13)
+                    )
+                    .Message;
 
             //  Named argument 'z' is used out-of-position but is followed by an unnamed argument
             Assert.Contains("'z'", message);
@@ -278,9 +290,11 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
             );
             Func<CallSite, object, object, object, object, object> target = callsite.Target;
             string message =
-                Assert.Throws<RuntimeBinderException>(
-                    () => target(callsite, new TypeWithMethods(), 9, 14, 12)
-                ).Message;
+                Assert
+                    .Throws<RuntimeBinderException>(
+                        () => target(callsite, new TypeWithMethods(), 9, 14, 12)
+                    )
+                    .Message;
 
             //  The best overload for 'DoMoreStuff' does not have a parameter named 'nada'
             Assert.Contains("'DoOtherStuff'", message);
@@ -348,18 +362,22 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
                 )
             );
             string message =
-                Assert.Throws<RuntimeBinderException>(
-                    () => callSite.Target(callSite, new Derived(), 4, 5)
-                ).Message;
+                Assert
+                    .Throws<RuntimeBinderException>(
+                        () => callSite.Target(callSite, new Derived(), 4, 5)
+                    )
+                    .Message;
 
             //  The best overload for 'Adder' does not have a parameter named 'a'
             Assert.Contains("'Adder'", message);
             Assert.Contains("'a'", message);
             Assert.Equal(
                 message,
-                Assert.Throws<RuntimeBinderException>(
-                    () => callSite.Target(callSite, new BaseClass(), 4, 5)
-                ).Message
+                Assert
+                    .Throws<RuntimeBinderException>(
+                        () => callSite.Target(callSite, new BaseClass(), 4, 5)
+                    )
+                    .Message
             );
 
             // Defined in terms of Derived, using "a"
@@ -405,9 +423,11 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
                 )
             );
             message =
-                Assert.Throws<RuntimeBinderException>(
-                    () => callSiteDerived.Target(callSiteDerived, new Derived(), 4, 5)
-                ).Message;
+                Assert
+                    .Throws<RuntimeBinderException>(
+                        () => callSiteDerived.Target(callSiteDerived, new Derived(), 4, 5)
+                    )
+                    .Message;
 
             //  The best overload for 'Adder' does not have a parameter named 'x'
             Assert.Contains("'Adder'", message);
@@ -433,9 +453,11 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
 
             Assert.Equal(9, callSiteRuntime.Target(callSiteRuntime, new Derived(), 4, 5));
             message =
-                Assert.Throws<RuntimeBinderException>(
-                    () => callSiteRuntime.Target(callSiteRuntime, new BaseClass(), 4, 5)
-                ).Message;
+                Assert
+                    .Throws<RuntimeBinderException>(
+                        () => callSiteRuntime.Target(callSiteRuntime, new BaseClass(), 4, 5)
+                    )
+                    .Message;
 
             //  The best overload for 'Adder' does not have a parameter named 'a'
             Assert.Contains("'Adder'", message);
@@ -459,9 +481,11 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
 
             Assert.Equal(9, callSiteRuntime.Target(callSiteRuntime, new BaseClass(), 4, 5));
             message =
-                Assert.Throws<RuntimeBinderException>(
-                    () => callSiteRuntime.Target(callSiteRuntime, new Derived(), 4, 5)
-                ).Message;
+                Assert
+                    .Throws<RuntimeBinderException>(
+                        () => callSiteRuntime.Target(callSiteRuntime, new Derived(), 4, 5)
+                    )
+                    .Message;
 
             //  The best overload for 'Adder' does not have a parameter named 'x'
             Assert.Contains("'Adder'", message);
@@ -798,9 +822,11 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
                 )
             );
             string message =
-                Assert.Throws<RuntimeBinderException>(
-                    () => ctorCallsite.Target(ctorCallsite, typeof(C5), 1, 2)
-                ).Message;
+                Assert
+                    .Throws<RuntimeBinderException>(
+                        () => ctorCallsite.Target(ctorCallsite, typeof(C5), 1, 2)
+                    )
+                    .Message;
 
             // Named argument 'b' is used out-of-position but is followed by an unnamed argument
             Assert.Contains("'b'", message);
@@ -823,9 +849,11 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
                 )
             );
             message =
-                Assert.Throws<RuntimeBinderException>(
-                    () => getCallSite.Target(getCallSite, new C5(), 1, 2)
-                ).Message;
+                Assert
+                    .Throws<RuntimeBinderException>(
+                        () => getCallSite.Target(getCallSite, new C5(), 1, 2)
+                    )
+                    .Message;
             Assert.Contains("'b'", message);
             CallSite<Func<CallSite, object, int, int>> invokeCallSite = CallSite<
                 Func<CallSite, object, int, int>
@@ -844,9 +872,11 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
                 )
             );
             message =
-                Assert.Throws<RuntimeBinderException>(
-                    () => getCallSite.Target(invokeCallSite, new C5(), 1, 2)
-                ).Message;
+                Assert
+                    .Throws<RuntimeBinderException>(
+                        () => getCallSite.Target(invokeCallSite, new C5(), 1, 2)
+                    )
+                    .Message;
             Assert.Contains("'b'", message);
         }
 
@@ -886,9 +916,11 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
                 )
             );
             string message =
-                Assert.Throws<RuntimeBinderException>(
-                    () => invokeCallSite.Target(invokeCallSite, typeof(C6), 1, 2)
-                ).Message;
+                Assert
+                    .Throws<RuntimeBinderException>(
+                        () => invokeCallSite.Target(invokeCallSite, typeof(C6), 1, 2)
+                    )
+                    .Message;
 
             // Named argument 'first' specifies a parameter for which a positional argument has already been given
             Assert.Contains("'first'", message);
@@ -1037,9 +1069,11 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
                 )
             );
             string message =
-                Assert.Throws<RuntimeBinderException>(
-                    () => callSite.Target(callSite, typeof(C8), 1, 2)
-                ).Message;
+                Assert
+                    .Throws<RuntimeBinderException>(
+                        () => callSite.Target(callSite, typeof(C8), 1, 2)
+                    )
+                    .Message;
 
             //  Named argument 'c' is used out-of-position but is followed by an unnamed argument
             Assert.Contains("'c'", message);
@@ -1079,9 +1113,11 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
             );
 
             string message =
-                Assert.Throws<RuntimeBinderException>(
-                    () => callSite.Target(callSite, typeof(C9), 1, 2)
-                ).Message;
+                Assert
+                    .Throws<RuntimeBinderException>(
+                        () => callSite.Target(callSite, typeof(C9), 1, 2)
+                    )
+                    .Message;
 
             // No overload for method 'M' takes 2 arguments
             Assert.Contains("'M'", message);
@@ -1117,9 +1153,11 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
             );
 
             string message =
-                Assert.Throws<RuntimeBinderException>(
-                    () => callSite.Target(callSite, typeof(C9), 1, 2)
-                ).Message;
+                Assert
+                    .Throws<RuntimeBinderException>(
+                        () => callSite.Target(callSite, typeof(C9), 1, 2)
+                    )
+                    .Message;
 
             // Named argument 'x' specifies a parameter for which a positional argument has already been given
             Assert.Contains("'x'", message);
@@ -1397,9 +1435,11 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
             );
 
             string message =
-                Assert.Throws<RuntimeBinderException>(
-                    () => callSite.Target(callSite, typeof(C9), 1, 2)
-                ).Message;
+                Assert
+                    .Throws<RuntimeBinderException>(
+                        () => callSite.Target(callSite, typeof(C9), 1, 2)
+                    )
+                    .Message;
 
             // Named argument 'x' cannot be specified multiple times
             Assert.Contains("'x'", message);
@@ -1439,9 +1479,11 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
             );
 
             string message =
-                Assert.Throws<RuntimeBinderException>(
-                    () => callSite.Target(callSite, typeof(C11), 1, 2)
-                ).Message;
+                Assert
+                    .Throws<RuntimeBinderException>(
+                        () => callSite.Target(callSite, typeof(C11), 1, 2)
+                    )
+                    .Message;
 
             // Named argument 'y' is used out-of-position but is followed by an unnamed argument
             Assert.Contains("'y'", message);
@@ -1481,9 +1523,11 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
             );
 
             string message =
-                Assert.Throws<RuntimeBinderException>(
-                    () => callSite.Target(callSite, typeof(C11), 1, 2, 3)
-                ).Message;
+                Assert
+                    .Throws<RuntimeBinderException>(
+                        () => callSite.Target(callSite, typeof(C11), 1, 2, 3)
+                    )
+                    .Message;
 
             // No overload for method 'M' takes 3 arguments
             Assert.Contains("'M'", message);
@@ -1572,9 +1616,11 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
                 )
             );
             string message =
-                Assert.Throws<RuntimeBinderException>(
-                    () => callSite.Target(callSite, typeof(C13), 3, 2)
-                ).Message;
+                Assert
+                    .Throws<RuntimeBinderException>(
+                        () => callSite.Target(callSite, typeof(C13), 3, 2)
+                    )
+                    .Message;
             //Named argument 'c' is used out-of-position but is followed by an unnamed argument
             Assert.Contains(" 'c' ", message);
         }
@@ -1865,9 +1911,11 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
                 )
             );
             string message =
-                Assert.Throws<RuntimeBinderException>(
-                    () => callSite.Target(callSite, typeof(C17), 2, 3, 4)
-                ).Message;
+                Assert
+                    .Throws<RuntimeBinderException>(
+                        () => callSite.Target(callSite, typeof(C17), 2, 3, 4)
+                    )
+                    .Message;
             // Named argument 'b' is used out-of-position but is followed by an unnamed argument
             Assert.Contains(" 'b' ", message);
         }
@@ -1893,9 +1941,11 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
                 )
             );
             string message =
-                Assert.Throws<RuntimeBinderException>(
-                    () => callSite.Target(callSite, typeof(C17), 2, 3, 4)
-                ).Message;
+                Assert
+                    .Throws<RuntimeBinderException>(
+                        () => callSite.Target(callSite, typeof(C17), 2, 3, 4)
+                    )
+                    .Message;
 
             // Named argument 'b' is used out-of-position but is followed by an unnamed argument
             Assert.Contains(" 'b' ", message);

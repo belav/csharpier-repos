@@ -165,10 +165,12 @@ internal class ResponseCachingPolicyProvider : IResponseCachingPolicyProvider
                 && context.ResponseTime!.Value >= context.ResponseExpires
             )
             {
-                context.Logger.ExpirationExpiresExceeded(
-                    context.ResponseTime.Value,
-                    context.ResponseExpires.Value
-                );
+                context
+                    .Logger
+                    .ExpirationExpiresExceeded(
+                        context.ResponseTime.Value,
+                        context.ResponseExpires.Value
+                    );
                 return false;
             }
         }
@@ -179,10 +181,9 @@ internal class ResponseCachingPolicyProvider : IResponseCachingPolicyProvider
             // Validate shared max age
             if (age >= context.ResponseSharedMaxAge)
             {
-                context.Logger.ExpirationSharedMaxAgeExceeded(
-                    age,
-                    context.ResponseSharedMaxAge.Value
-                );
+                context
+                    .Logger
+                    .ExpirationSharedMaxAgeExceeded(age, context.ResponseSharedMaxAge.Value);
                 return false;
             }
             else if (!context.ResponseSharedMaxAge.HasValue)
@@ -198,10 +199,12 @@ internal class ResponseCachingPolicyProvider : IResponseCachingPolicyProvider
                     // Validate expiration
                     if (context.ResponseTime.Value >= context.ResponseExpires)
                     {
-                        context.Logger.ExpirationExpiresExceeded(
-                            context.ResponseTime.Value,
-                            context.ResponseExpires.Value
-                        );
+                        context
+                            .Logger
+                            .ExpirationExpiresExceeded(
+                                context.ResponseTime.Value,
+                                context.ResponseExpires.Value
+                            );
                         return false;
                     }
                 }
@@ -302,11 +305,13 @@ internal class ResponseCachingPolicyProvider : IResponseCachingPolicyProvider
                 // Request allows stale values with age limit
                 if (requestMaxStale.HasValue && age - lowestMaxAge < requestMaxStale)
                 {
-                    context.Logger.ExpirationMaxStaleSatisfied(
-                        age,
-                        lowestMaxAge.Value,
-                        requestMaxStale.Value
-                    );
+                    context
+                        .Logger
+                        .ExpirationMaxStaleSatisfied(
+                            age,
+                            lowestMaxAge.Value,
+                            requestMaxStale.Value
+                        );
                     return true;
                 }
 

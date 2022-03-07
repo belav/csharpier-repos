@@ -277,17 +277,19 @@ namespace System.Net.NetworkInformation
                                 true
                             );
 
-                            SocketError errorCode = Interop.Winsock.WSAIoctl_Blocking(
-                                s_ipv4Socket!.SafeHandle,
-                                (int)IOControlCode.AddressListChange,
-                                null,
-                                0,
-                                null,
-                                0,
-                                out int length,
-                                IntPtr.Zero,
-                                IntPtr.Zero
-                            );
+                            SocketError errorCode = Interop
+                                .Winsock
+                                .WSAIoctl_Blocking(
+                                    s_ipv4Socket!.SafeHandle,
+                                    (int)IOControlCode.AddressListChange,
+                                    null,
+                                    0,
+                                    null,
+                                    0,
+                                    out int length,
+                                    IntPtr.Zero,
+                                    IntPtr.Zero
+                                );
 
                             if (errorCode != SocketError.Success)
                             {
@@ -299,11 +301,13 @@ namespace System.Net.NetworkInformation
                                 }
                             }
 
-                            errorCode = Interop.Winsock.WSAEventSelect(
-                                s_ipv4Socket.SafeHandle,
-                                s_ipv4WaitHandle!.GetSafeWaitHandle(),
-                                Interop.Winsock.AsyncEventBits.FdAddressListChange
-                            );
+                            errorCode = Interop
+                                .Winsock
+                                .WSAEventSelect(
+                                    s_ipv4Socket.SafeHandle,
+                                    s_ipv4WaitHandle!.GetSafeWaitHandle(),
+                                    Interop.Winsock.AsyncEventBits.FdAddressListChange
+                                );
 
                             if (errorCode != SocketError.Success)
                             {
@@ -324,17 +328,19 @@ namespace System.Net.NetworkInformation
                                 true
                             );
 
-                            SocketError errorCode = Interop.Winsock.WSAIoctl_Blocking(
-                                s_ipv6Socket!.SafeHandle,
-                                (int)IOControlCode.AddressListChange,
-                                null,
-                                0,
-                                null,
-                                0,
-                                out int length,
-                                IntPtr.Zero,
-                                IntPtr.Zero
-                            );
+                            SocketError errorCode = Interop
+                                .Winsock
+                                .WSAIoctl_Blocking(
+                                    s_ipv6Socket!.SafeHandle,
+                                    (int)IOControlCode.AddressListChange,
+                                    null,
+                                    0,
+                                    null,
+                                    0,
+                                    out int length,
+                                    IntPtr.Zero,
+                                    IntPtr.Zero
+                                );
 
                             if (errorCode != SocketError.Success)
                             {
@@ -346,11 +352,13 @@ namespace System.Net.NetworkInformation
                                 }
                             }
 
-                            errorCode = Interop.Winsock.WSAEventSelect(
-                                s_ipv6Socket.SafeHandle,
-                                s_ipv6WaitHandle!.GetSafeWaitHandle(),
-                                Interop.Winsock.AsyncEventBits.FdAddressListChange
-                            );
+                            errorCode = Interop
+                                .Winsock
+                                .WSAEventSelect(
+                                    s_ipv6Socket.SafeHandle,
+                                    s_ipv6WaitHandle!.GetSafeWaitHandle(),
+                                    Interop.Winsock.AsyncEventBits.FdAddressListChange
+                                );
 
                             if (errorCode != SocketError.Success)
                             {

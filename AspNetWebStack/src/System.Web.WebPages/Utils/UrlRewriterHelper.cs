@@ -39,17 +39,15 @@ namespace System.Web.WebPages
 
                 if (requestWasRewritten)
                 {
-                    httpContext.Items.Add(
-                        UrlWasRewrittenServerVar,
-                        UrlWasRequestRewrittenTrueValue
-                    );
+                    httpContext
+                        .Items
+                        .Add(UrlWasRewrittenServerVar, UrlWasRequestRewrittenTrueValue);
                 }
                 else
                 {
-                    httpContext.Items.Add(
-                        UrlWasRewrittenServerVar,
-                        UrlWasRequestRewrittenFalseValue
-                    );
+                    httpContext
+                        .Items
+                        .Add(UrlWasRewrittenServerVar, UrlWasRequestRewrittenFalseValue);
                 }
 
                 return requestWasRewritten;

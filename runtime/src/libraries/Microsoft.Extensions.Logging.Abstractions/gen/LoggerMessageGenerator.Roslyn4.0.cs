@@ -18,13 +18,13 @@ namespace Microsoft.Extensions.Logging.Generators
     {
         public void Initialize(IncrementalGeneratorInitializationContext context)
         {
-            IncrementalValuesProvider<ClassDeclarationSyntax> classDeclarations =
-                context.SyntaxProvider
-                    .CreateSyntaxProvider(
-                        static (s, _) => Parser.IsSyntaxTargetForGeneration(s),
-                        static (ctx, _) => Parser.GetSemanticTargetForGeneration(ctx)
-                    )
-                    .Where(static m => m is not null);
+            IncrementalValuesProvider<ClassDeclarationSyntax> classDeclarations = context
+                .SyntaxProvider
+                .CreateSyntaxProvider(
+                    static (s, _) => Parser.IsSyntaxTargetForGeneration(s),
+                    static (ctx, _) => Parser.GetSemanticTargetForGeneration(ctx)
+                )
+                .Where(static m => m is not null);
 
             IncrementalValueProvider<(Compilation, ImmutableArray<ClassDeclarationSyntax>)> compilationAndClasses =
                 context.CompilationProvider.Combine(classDeclarations.Collect());

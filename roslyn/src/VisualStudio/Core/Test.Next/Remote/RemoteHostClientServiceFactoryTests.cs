@@ -26,8 +26,9 @@ namespace Microsoft.CodeAnalysis.Remote.UnitTests
     [Trait(Traits.Feature, Traits.Features.RemoteHost)]
     public class RemoteHostClientServiceFactoryTests
     {
-        private static readonly TestComposition s_composition =
-            FeaturesTestCompositions.Features.WithTestHostParts(TestHost.OutOfProcess);
+        private static readonly TestComposition s_composition = FeaturesTestCompositions
+            .Features
+            .WithTestHostParts(TestHost.OutOfProcess);
 
         private static AdhocWorkspace CreateWorkspace() => new(s_composition.GetHostServices());
 

@@ -139,8 +139,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             {
                 if (obsoleteData != null)
                 {
-                    arguments.GetOrCreateData<CommonFieldEarlyWellKnownAttributeData>().ObsoleteAttributeData =
-                        obsoleteData;
+                    arguments
+                        .GetOrCreateData<CommonFieldEarlyWellKnownAttributeData>()
+                        .ObsoleteAttributeData = obsoleteData;
                 }
 
                 return (attributeData, boundAttribute);

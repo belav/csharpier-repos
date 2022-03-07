@@ -52,14 +52,12 @@ internal sealed class TagHelperDescriptorComparer : IEqualityComparer<TagHelperD
 
         if (
             !Enumerable.SequenceEqual(
-                descriptorX.BoundAttributes.OrderBy(
-                    attribute => attribute.Name,
-                    StringComparer.Ordinal
-                ),
-                descriptorY.BoundAttributes.OrderBy(
-                    attribute => attribute.Name,
-                    StringComparer.Ordinal
-                ),
+                descriptorX
+                    .BoundAttributes
+                    .OrderBy(attribute => attribute.Name, StringComparer.Ordinal),
+                descriptorY
+                    .BoundAttributes
+                    .OrderBy(attribute => attribute.Name, StringComparer.Ordinal),
                 BoundAttributeDescriptorComparer.Default
             )
         )
@@ -85,14 +83,12 @@ internal sealed class TagHelperDescriptorComparer : IEqualityComparer<TagHelperD
                     descriptorX.AllowedChildTags != null
                     && descriptorY.AllowedChildTags != null
                     && Enumerable.SequenceEqual(
-                        descriptorX.AllowedChildTags.OrderBy(
-                            childTag => childTag.Name,
-                            StringComparer.Ordinal
-                        ),
-                        descriptorY.AllowedChildTags.OrderBy(
-                            childTag => childTag.Name,
-                            StringComparer.Ordinal
-                        ),
+                        descriptorX
+                            .AllowedChildTags
+                            .OrderBy(childTag => childTag.Name, StringComparer.Ordinal),
+                        descriptorY
+                            .AllowedChildTags
+                            .OrderBy(childTag => childTag.Name, StringComparer.Ordinal),
                         AllowedChildTagDescriptorComparer.Default
                     )
                 )

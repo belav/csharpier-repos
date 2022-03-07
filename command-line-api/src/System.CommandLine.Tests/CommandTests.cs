@@ -60,9 +60,12 @@ namespace System.CommandLine.Tests
         {
             var result = _parser.Parse("outer inner --option argument1");
 
-            result.CommandResult.Children
+            result
+                .CommandResult
+                .Children
                 .ElementAt(0)
-                .Tokens.Select(t => t.Value)
+                .Tokens
+                .Select(t => t.Value)
                 .Should()
                 .BeEquivalentTo("argument1");
         }
@@ -81,7 +84,9 @@ namespace System.CommandLine.Tests
 
             result.CommandResult.Parent.Tokens.Select(t => t.Value).Should().BeEquivalentTo("arg1");
 
-            result.CommandResult.Tokens
+            result
+                .CommandResult
+                .Tokens
                 .Select(t => t.Value)
                 .Should()
                 .BeEquivalentTo("arg2", "arg3");
@@ -111,7 +116,9 @@ namespace System.CommandLine.Tests
             create
                 .Should()
                 .Throw<ArgumentException>()
-                .Which.Message.Should()
+                .Which
+                .Message
+                .Should()
                 .Contain($"Command alias cannot contain whitespace: \"{alias}\"");
         }
 
@@ -130,7 +137,9 @@ namespace System.CommandLine.Tests
             addAlias
                 .Should()
                 .Throw<ArgumentException>()
-                .Which.Message.Should()
+                .Which
+                .Message
+                .Should()
                 .Contain($"Command alias cannot contain whitespace: \"{alias}\"");
         }
 
@@ -223,7 +232,9 @@ namespace System.CommandLine.Tests
                 .Invoking(c => c.Add(new Argument<string> { Name = "same" }))
                 .Should()
                 .Throw<ArgumentException>()
-                .And.Message.Should()
+                .And
+                .Message
+                .Should()
                 .Be("Alias 'same' is already in use.");
         }
 
@@ -236,7 +247,9 @@ namespace System.CommandLine.Tests
                 .Invoking(c => c.Add(new Option("--same")))
                 .Should()
                 .Throw<ArgumentException>()
-                .And.Message.Should()
+                .And
+                .Message
+                .Should()
                 .Be("Alias '--same' is already in use.");
         }
 

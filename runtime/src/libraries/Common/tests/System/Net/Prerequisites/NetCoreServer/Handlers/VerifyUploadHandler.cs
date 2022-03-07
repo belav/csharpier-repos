@@ -26,10 +26,10 @@ namespace NetCoreServer
             string transferEncoding = context.Request.Headers["Transfer-Encoding"];
             if (!string.IsNullOrEmpty(transferEncoding))
             {
-                context.Response.Headers.Add(
-                    "X-HttpRequest-Headers-TransferEncoding",
-                    transferEncoding
-                );
+                context
+                    .Response
+                    .Headers
+                    .Add("X-HttpRequest-Headers-TransferEncoding", transferEncoding);
             }
 
             // Get request body.

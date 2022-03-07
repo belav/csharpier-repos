@@ -750,27 +750,27 @@ namespace System.Web.Helpers
                             var yValuesArray = yValues as IEnumerable[];
                             if ((yValuesArray != null) && !(yValues is string[]))
                             {
-                                series.Points.DataBindXY(
-                                    seriesData.DataSource.XDataSource,
-                                    yValuesArray
-                                );
+                                series
+                                    .Points
+                                    .DataBindXY(seriesData.DataSource.XDataSource, yValuesArray);
                             }
                             else
                             {
-                                series.Points.DataBindXY(
-                                    seriesData.DataSource.XDataSource,
-                                    yValues
-                                );
+                                series
+                                    .Points
+                                    .DataBindXY(seriesData.DataSource.XDataSource, yValues);
                             }
                         }
                         else
                         {
-                            series.Points.DataBindXY(
-                                seriesData.DataSource.XDataSource,
-                                seriesData.DataSource.XField,
-                                seriesData.DataSource.DataSource,
-                                seriesData.DataSource.YFields
-                            );
+                            series
+                                .Points
+                                .DataBindXY(
+                                    seriesData.DataSource.XDataSource,
+                                    seriesData.DataSource.XField,
+                                    seriesData.DataSource.DataSource,
+                                    seriesData.DataSource.YFields
+                                );
                         }
                     }
                 }

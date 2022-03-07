@@ -747,7 +747,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
                 originalConstraintTypesMap ??= toDictionary(
                     originalConstraintTypes,
-                    TypeWithAnnotations.EqualsComparer.IgnoreNullableModifiersForReferenceTypesComparer
+                    TypeWithAnnotations
+                        .EqualsComparer
+                        .IgnoreNullableModifiersForReferenceTypesComparer
                 );
                 SmallDictionary<TypeWithAnnotations, int> clauseConstraintTypesMap = toDictionary(
                     clause.ConstraintTypes,
@@ -1203,15 +1205,18 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 )
             )
             {
-                (attributeData, boundAttribute) = arguments.Binder.GetAttribute(
-                    arguments.AttributeSyntax,
-                    arguments.AttributeType,
-                    out hasAnyDiagnostics
-                );
+                (attributeData, boundAttribute) = arguments
+                    .Binder
+                    .GetAttribute(
+                        arguments.AttributeSyntax,
+                        arguments.AttributeType,
+                        out hasAnyDiagnostics
+                    );
                 if (!attributeData.HasErrors)
                 {
-                    arguments.GetOrCreateData<TypeEarlyWellKnownAttributeData>().HasComImportAttribute =
-                        true;
+                    arguments
+                        .GetOrCreateData<TypeEarlyWellKnownAttributeData>()
+                        .HasComImportAttribute = true;
                     if (!hasAnyDiagnostics)
                     {
                         return (attributeData, boundAttribute);
@@ -1229,15 +1234,18 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 )
             )
             {
-                (attributeData, boundAttribute) = arguments.Binder.GetAttribute(
-                    arguments.AttributeSyntax,
-                    arguments.AttributeType,
-                    out hasAnyDiagnostics
-                );
+                (attributeData, boundAttribute) = arguments
+                    .Binder
+                    .GetAttribute(
+                        arguments.AttributeSyntax,
+                        arguments.AttributeType,
+                        out hasAnyDiagnostics
+                    );
                 if (!attributeData.HasErrors)
                 {
-                    arguments.GetOrCreateData<TypeEarlyWellKnownAttributeData>().HasCodeAnalysisEmbeddedAttribute =
-                        true;
+                    arguments
+                        .GetOrCreateData<TypeEarlyWellKnownAttributeData>()
+                        .HasCodeAnalysisEmbeddedAttribute = true;
                     if (!hasAnyDiagnostics)
                     {
                         return (attributeData, boundAttribute);
@@ -1255,11 +1263,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 )
             )
             {
-                (attributeData, boundAttribute) = arguments.Binder.GetAttribute(
-                    arguments.AttributeSyntax,
-                    arguments.AttributeType,
-                    out hasAnyDiagnostics
-                );
+                (attributeData, boundAttribute) = arguments
+                    .Binder
+                    .GetAttribute(
+                        arguments.AttributeSyntax,
+                        arguments.AttributeType,
+                        out hasAnyDiagnostics
+                    );
                 if (!attributeData.HasErrors)
                 {
                     string? name = attributeData.GetConstructorArgument<string>(
@@ -1290,8 +1300,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             {
                 if (obsoleteData != null)
                 {
-                    arguments.GetOrCreateData<TypeEarlyWellKnownAttributeData>().ObsoleteAttributeData =
-                        obsoleteData;
+                    arguments
+                        .GetOrCreateData<TypeEarlyWellKnownAttributeData>()
+                        .ObsoleteAttributeData = obsoleteData;
                 }
 
                 return (attributeData, boundAttribute);
@@ -1305,11 +1316,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 )
             )
             {
-                (attributeData, boundAttribute) = arguments.Binder.GetAttribute(
-                    arguments.AttributeSyntax,
-                    arguments.AttributeType,
-                    out hasAnyDiagnostics
-                );
+                (attributeData, boundAttribute) = arguments
+                    .Binder
+                    .GetAttribute(
+                        arguments.AttributeSyntax,
+                        arguments.AttributeType,
+                        out hasAnyDiagnostics
+                    );
                 if (!attributeData.HasErrors)
                 {
                     AttributeUsageInfo info = this.DecodeAttributeUsageAttribute(
@@ -1351,15 +1364,18 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 )
             )
             {
-                (attributeData, boundAttribute) = arguments.Binder.GetAttribute(
-                    arguments.AttributeSyntax,
-                    arguments.AttributeType,
-                    out hasAnyDiagnostics
-                );
+                (attributeData, boundAttribute) = arguments
+                    .Binder
+                    .GetAttribute(
+                        arguments.AttributeSyntax,
+                        arguments.AttributeType,
+                        out hasAnyDiagnostics
+                    );
                 if (!attributeData.HasErrors)
                 {
-                    arguments.GetOrCreateData<TypeEarlyWellKnownAttributeData>().HasInterpolatedStringHandlerAttribute =
-                        true;
+                    arguments
+                        .GetOrCreateData<TypeEarlyWellKnownAttributeData>()
+                        .HasInterpolatedStringHandlerAttribute = true;
                     if (!hasAnyDiagnostics)
                     {
                         return (attributeData, boundAttribute);
@@ -1482,8 +1498,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 )
             )
             {
-                arguments.GetOrCreateData<TypeWellKnownAttributeData>().HasExcludeFromCodeCoverageAttribute =
-                    true;
+                arguments
+                    .GetOrCreateData<TypeWellKnownAttributeData>()
+                    .HasExcludeFromCodeCoverageAttribute = true;
             }
             else if (attribute.IsTargetAttribute(this, AttributeDescription.StructLayoutAttribute))
             {
@@ -1506,8 +1523,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 )
             )
             {
-                arguments.GetOrCreateData<TypeWellKnownAttributeData>().HasSuppressUnmanagedCodeSecurityAttribute =
-                    true;
+                arguments
+                    .GetOrCreateData<TypeWellKnownAttributeData>()
+                    .HasSuppressUnmanagedCodeSecurityAttribute = true;
             }
             else if (
                 attribute.IsTargetAttribute(this, AttributeDescription.ClassInterfaceAttribute)
@@ -1526,8 +1544,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 )
             )
             {
-                arguments.GetOrCreateData<TypeWellKnownAttributeData>().HasWindowsRuntimeImportAttribute =
-                    true;
+                arguments
+                    .GetOrCreateData<TypeWellKnownAttributeData>()
+                    .HasWindowsRuntimeImportAttribute = true;
             }
             else if (
                 attribute.IsTargetAttribute(this, AttributeDescription.RequiredAttributeAttribute)
@@ -1561,8 +1580,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 )
             )
             {
-                arguments.GetOrCreateData<TypeWellKnownAttributeData>().HasSecurityCriticalAttributes =
-                    true;
+                arguments
+                    .GetOrCreateData<TypeWellKnownAttributeData>()
+                    .HasSecurityCriticalAttributes = true;
             }
             else if (
                 attribute.IsTargetAttribute(this, AttributeDescription.SkipLocalsInitAttribute)
@@ -1633,7 +1653,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 QuickAttributeChecker checker =
                     this.DeclaringCompilation
                         .GetBinderFactory(list.Node.SyntaxTree)
-                        .GetBinder(list.Node).QuickAttributeChecker;
+                        .GetBinder(list.Node)
+                        .QuickAttributeChecker;
 
                 foreach (AttributeListSyntax attrList in list)
                 {

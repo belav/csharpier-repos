@@ -370,7 +370,11 @@ namespace System.Linq.Parallel
             private void ThrowIfInTearDown()
             {
                 if (
-                    _mergeHelper._taskGroupState.CancellationState.MergedCancellationToken.IsCancellationRequested
+                    _mergeHelper
+                        ._taskGroupState
+                        .CancellationState
+                        .MergedCancellationToken
+                        .IsCancellationRequested
                 )
                 {
                     try

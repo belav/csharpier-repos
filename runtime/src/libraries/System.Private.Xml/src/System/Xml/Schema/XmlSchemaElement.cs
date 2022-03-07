@@ -284,9 +284,12 @@ namespace System.Xml.Schema
 
         internal override XmlSchemaObject Clone()
         {
-            System.Diagnostics.Debug.Fail(
-                "Should never call Clone() on XmlSchemaElement. Call Clone(XmlSchema) instead."
-            );
+            System
+                .Diagnostics
+                .Debug
+                .Fail(
+                    "Should never call Clone() on XmlSchemaElement. Call Clone(XmlSchema) instead."
+                );
             return Clone(null);
         }
 

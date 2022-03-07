@@ -28,13 +28,15 @@ namespace Microsoft.CodeAnalysis.CodeStyle
         /// <inheritdoc cref="CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInDeclaration"/>
         public static readonly PerLanguageOption<
             CodeStyleOption<bool>
-        > PreferIntrinsicPredefinedTypeKeywordInDeclaration =
-            CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInDeclaration.ToPublicOption();
+        > PreferIntrinsicPredefinedTypeKeywordInDeclaration = CodeStyleOptions2
+            .PreferIntrinsicPredefinedTypeKeywordInDeclaration
+            .ToPublicOption();
 
         /// <inheritdoc cref="CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInMemberAccess"/>
         public static readonly PerLanguageOption<
             CodeStyleOption<bool>
-        > PreferIntrinsicPredefinedTypeKeywordInMemberAccess =
-            CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInMemberAccess.ToPublicOption();
+        > PreferIntrinsicPredefinedTypeKeywordInMemberAccess = CodeStyleOptions2
+            .PreferIntrinsicPredefinedTypeKeywordInMemberAccess
+            .ToPublicOption();
     }
 }

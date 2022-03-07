@@ -65,30 +65,34 @@ namespace System.Security.Cryptography
                         ulVersion = 0,
                     };
 
-                    errorCode = Interop.NCrypt.NCryptImportKey(
+                    errorCode = Interop
+                        .NCrypt
+                        .NCryptImportKey(
+                            s_microsoftSoftwareProviderHandle,
+                            IntPtr.Zero,
+                            blobType,
+                            ref desc,
+                            out keyHandle,
+                            ref MemoryMarshal.GetReference(keyBlob),
+                            keyBlob.Length,
+                            0
+                        );
+                }
+            }
+            else
+            {
+                errorCode = Interop
+                    .NCrypt
+                    .NCryptImportKey(
                         s_microsoftSoftwareProviderHandle,
                         IntPtr.Zero,
                         blobType,
-                        ref desc,
+                        IntPtr.Zero,
                         out keyHandle,
                         ref MemoryMarshal.GetReference(keyBlob),
                         keyBlob.Length,
                         0
                     );
-                }
-            }
-            else
-            {
-                errorCode = Interop.NCrypt.NCryptImportKey(
-                    s_microsoftSoftwareProviderHandle,
-                    IntPtr.Zero,
-                    blobType,
-                    IntPtr.Zero,
-                    out keyHandle,
-                    ref MemoryMarshal.GetReference(keyBlob),
-                    keyBlob.Length,
-                    0
-                );
             }
 
             if (errorCode != ErrorCode.ERROR_SUCCESS)
@@ -129,16 +133,18 @@ namespace System.Security.Cryptography
 
             int numBytesNeeded;
 
-            ErrorCode errorCode = Interop.NCrypt.NCryptExportKey(
-                keyHandle,
-                IntPtr.Zero,
-                blobType,
-                IntPtr.Zero,
-                null,
-                0,
-                out numBytesNeeded,
-                0
-            );
+            ErrorCode errorCode = Interop
+                .NCrypt
+                .NCryptExportKey(
+                    keyHandle,
+                    IntPtr.Zero,
+                    blobType,
+                    IntPtr.Zero,
+                    null,
+                    0,
+                    out numBytesNeeded,
+                    0
+                );
 
             if (errorCode != ErrorCode.ERROR_SUCCESS)
             {
@@ -153,16 +159,18 @@ namespace System.Security.Cryptography
 
             byte[] buffer = new byte[numBytesNeeded];
 
-            errorCode = Interop.NCrypt.NCryptExportKey(
-                keyHandle,
-                IntPtr.Zero,
-                blobType,
-                IntPtr.Zero,
-                ref buffer[0],
-                buffer.Length,
-                out numBytesNeeded,
-                0
-            );
+            errorCode = Interop
+                .NCrypt
+                .NCryptExportKey(
+                    keyHandle,
+                    IntPtr.Zero,
+                    blobType,
+                    IntPtr.Zero,
+                    ref buffer[0],
+                    buffer.Length,
+                    out numBytesNeeded,
+                    0
+                );
 
             if (errorCode != ErrorCode.ERROR_SUCCESS)
             {
@@ -196,16 +204,18 @@ namespace System.Security.Cryptography
             // Sanity check the current bounds
             Span<byte> empty = default;
 
-            ErrorCode errorCode = Interop.NCrypt.NCryptExportKey(
-                keyHandle,
-                IntPtr.Zero,
-                blobType,
-                IntPtr.Zero,
-                ref MemoryMarshal.GetReference(empty),
-                empty.Length,
-                out int written,
-                0
-            );
+            ErrorCode errorCode = Interop
+                .NCrypt
+                .NCryptExportKey(
+                    keyHandle,
+                    IntPtr.Zero,
+                    blobType,
+                    IntPtr.Zero,
+                    ref MemoryMarshal.GetReference(empty),
+                    empty.Length,
+                    out int written,
+                    0
+                );
 
             if (errorCode != ErrorCode.ERROR_SUCCESS)
             {
@@ -224,16 +234,18 @@ namespace System.Security.Cryptography
                 return true;
             }
 
-            errorCode = Interop.NCrypt.NCryptExportKey(
-                keyHandle,
-                IntPtr.Zero,
-                blobType,
-                IntPtr.Zero,
-                ref MemoryMarshal.GetReference(destination),
-                destination.Length,
-                out written,
-                0
-            );
+            errorCode = Interop
+                .NCrypt
+                .NCryptExportKey(
+                    keyHandle,
+                    IntPtr.Zero,
+                    blobType,
+                    IntPtr.Zero,
+                    ref MemoryMarshal.GetReference(destination),
+                    destination.Length,
+                    out written,
+                    0
+                );
 
             if (errorCode != ErrorCode.ERROR_SUCCESS)
             {
@@ -284,8 +296,11 @@ namespace System.Security.Cryptography
         }
 
         // The Windows APIs for OID strings are ASCII-only
-        private static readonly byte[] s_pkcs12TripleDesOidBytes =
-            System.Text.Encoding.ASCII.GetBytes("1.2.840.113549.1.12.1.3\0");
+        private static readonly byte[] s_pkcs12TripleDesOidBytes = System
+            .Text
+            .Encoding
+            .ASCII
+            .GetBytes("1.2.840.113549.1.12.1.3\0");
 
         internal static unsafe bool ExportPkcs8KeyBlob(
             bool allocate,
@@ -348,16 +363,18 @@ namespace System.Security.Cryptography
 
                     Span<byte> empty = default;
 
-                    ErrorCode errorCode = Interop.NCrypt.NCryptExportKey(
-                        keyHandle,
-                        IntPtr.Zero,
-                        Interop.NCrypt.NCRYPT_PKCS8_PRIVATE_KEY_BLOB,
-                        ref desc,
-                        ref MemoryMarshal.GetReference(empty),
-                        0,
-                        out int numBytesNeeded,
-                        0
-                    );
+                    ErrorCode errorCode = Interop
+                        .NCrypt
+                        .NCryptExportKey(
+                            keyHandle,
+                            IntPtr.Zero,
+                            Interop.NCrypt.NCRYPT_PKCS8_PRIVATE_KEY_BLOB,
+                            ref desc,
+                            ref MemoryMarshal.GetReference(empty),
+                            0,
+                            out int numBytesNeeded,
+                            0
+                        );
 
                     if (errorCode != ErrorCode.ERROR_SUCCESS)
                     {
@@ -377,16 +394,18 @@ namespace System.Security.Cryptography
                         return false;
                     }
 
-                    errorCode = Interop.NCrypt.NCryptExportKey(
-                        keyHandle,
-                        IntPtr.Zero,
-                        Interop.NCrypt.NCRYPT_PKCS8_PRIVATE_KEY_BLOB,
-                        ref desc,
-                        ref MemoryMarshal.GetReference(destination),
-                        destination.Length,
-                        out numBytesNeeded,
-                        0
-                    );
+                    errorCode = Interop
+                        .NCrypt
+                        .NCryptExportKey(
+                            keyHandle,
+                            IntPtr.Zero,
+                            Interop.NCrypt.NCRYPT_PKCS8_PRIVATE_KEY_BLOB,
+                            ref desc,
+                            ref MemoryMarshal.GetReference(destination),
+                            destination.Length,
+                            out numBytesNeeded,
+                            0
+                        );
 
                     if (errorCode != ErrorCode.ERROR_SUCCESS)
                     {
@@ -412,14 +431,16 @@ namespace System.Security.Cryptography
             // Despite the function being create "persisted" key, since we pass a null name it's
             // actually ephemeral.
             SafeNCryptKeyHandle keyHandle;
-            ErrorCode errorCode = Interop.NCrypt.NCryptCreatePersistedKey(
-                s_microsoftSoftwareProviderHandle,
-                out keyHandle,
-                algorithm,
-                null,
-                0,
-                CngKeyCreationOptions.None
-            );
+            ErrorCode errorCode = Interop
+                .NCrypt
+                .NCryptCreatePersistedKey(
+                    s_microsoftSoftwareProviderHandle,
+                    out keyHandle,
+                    algorithm,
+                    null,
+                    0,
+                    CngKeyCreationOptions.None
+                );
 
             if (errorCode != ErrorCode.ERROR_SUCCESS)
             {
@@ -449,14 +470,16 @@ namespace System.Security.Cryptography
             // Despite the function being create "persisted" key, since we pass a null name it's
             // actually ephemeral.
             SafeNCryptKeyHandle keyHandle;
-            ErrorCode errorCode = Interop.NCrypt.NCryptCreatePersistedKey(
-                s_microsoftSoftwareProviderHandle,
-                out keyHandle,
-                algorithm,
-                null,
-                0,
-                CngKeyCreationOptions.None
-            );
+            ErrorCode errorCode = Interop
+                .NCrypt
+                .NCryptCreatePersistedKey(
+                    s_microsoftSoftwareProviderHandle,
+                    out keyHandle,
+                    algorithm,
+                    null,
+                    0,
+                    CngKeyCreationOptions.None
+                );
 
             if (errorCode != ErrorCode.ERROR_SUCCESS)
             {
@@ -486,14 +509,16 @@ namespace System.Security.Cryptography
             // Despite the function being create "persisted" key, since we pass a null name it's
             // actually ephemeral.
             SafeNCryptKeyHandle keyHandle;
-            ErrorCode errorCode = Interop.NCrypt.NCryptCreatePersistedKey(
-                s_microsoftSoftwareProviderHandle,
-                out keyHandle,
-                algorithm,
-                null,
-                0,
-                CngKeyCreationOptions.None
-            );
+            ErrorCode errorCode = Interop
+                .NCrypt
+                .NCryptCreatePersistedKey(
+                    s_microsoftSoftwareProviderHandle,
+                    out keyHandle,
+                    algorithm,
+                    null,
+                    0,
+                    CngKeyCreationOptions.None
+                );
 
             if (errorCode != ErrorCode.ERROR_SUCCESS)
             {
@@ -522,13 +547,15 @@ namespace System.Security.Cryptography
             CngExportPolicies exportPolicy = CngExportPolicies.AllowPlaintextExport;
             unsafe
             {
-                ErrorCode errorCode = Interop.NCrypt.NCryptSetProperty(
-                    keyHandle,
-                    KeyPropertyName.ExportPolicy,
-                    &exportPolicy,
-                    sizeof(CngExportPolicies),
-                    CngPropertyOptions.Persist
-                );
+                ErrorCode errorCode = Interop
+                    .NCrypt
+                    .NCryptSetProperty(
+                        keyHandle,
+                        KeyPropertyName.ExportPolicy,
+                        &exportPolicy,
+                        sizeof(CngExportPolicies),
+                        CngPropertyOptions.Persist
+                    );
 
                 if (errorCode != ErrorCode.ERROR_SUCCESS)
                 {
@@ -542,13 +569,15 @@ namespace System.Security.Cryptography
             Debug.Assert(!keyHandle.IsInvalid);
             unsafe
             {
-                ErrorCode errorCode = Interop.NCrypt.NCryptSetProperty(
-                    keyHandle,
-                    KeyPropertyName.Length,
-                    &keySize,
-                    sizeof(int),
-                    CngPropertyOptions.Persist
-                );
+                ErrorCode errorCode = Interop
+                    .NCrypt
+                    .NCryptSetProperty(
+                        keyHandle,
+                        KeyPropertyName.Length,
+                        &keySize,
+                        sizeof(int),
+                        CngPropertyOptions.Persist
+                    );
 
                 if (errorCode != ErrorCode.ERROR_SUCCESS)
                 {
@@ -563,20 +592,16 @@ namespace System.Security.Cryptography
             int keySize = 0;
 
             // Attempt to use PublicKeyLength first as it returns the correct value for ECC keys
-            ErrorCode errorCode = Interop.NCrypt.NCryptGetIntProperty(
-                keyHandle,
-                KeyPropertyName.PublicKeyLength,
-                ref keySize
-            );
+            ErrorCode errorCode = Interop
+                .NCrypt
+                .NCryptGetIntProperty(keyHandle, KeyPropertyName.PublicKeyLength, ref keySize);
 
             if (errorCode != ErrorCode.ERROR_SUCCESS)
             {
                 // Fall back to Length (< Windows 10)
-                errorCode = Interop.NCrypt.NCryptGetIntProperty(
-                    keyHandle,
-                    KeyPropertyName.Length,
-                    ref keySize
-                );
+                errorCode = Interop
+                    .NCrypt
+                    .NCryptGetIntProperty(keyHandle, KeyPropertyName.Length, ref keySize);
             }
 
             if (errorCode != ErrorCode.ERROR_SUCCESS)
@@ -590,11 +615,9 @@ namespace System.Security.Cryptography
         private static SafeNCryptProviderHandle OpenNCryptProvider(string providerName)
         {
             SafeNCryptProviderHandle providerHandle;
-            ErrorCode errorCode = Interop.NCrypt.NCryptOpenStorageProvider(
-                out providerHandle,
-                providerName,
-                0
-            );
+            ErrorCode errorCode = Interop
+                .NCrypt
+                .NCryptOpenStorageProvider(out providerHandle, providerName, 0);
 
             if (errorCode != ErrorCode.ERROR_SUCCESS)
             {
@@ -622,14 +645,16 @@ namespace System.Security.Cryptography
             unsafe
             {
                 int numBytesNeeded;
-                ErrorCode errorCode = Interop.NCrypt.NCryptGetProperty(
-                    ncryptHandle,
-                    propertyName,
-                    null,
-                    0,
-                    out numBytesNeeded,
-                    options
-                );
+                ErrorCode errorCode = Interop
+                    .NCrypt
+                    .NCryptGetProperty(
+                        ncryptHandle,
+                        propertyName,
+                        null,
+                        0,
+                        out numBytesNeeded,
+                        options
+                    );
                 if (errorCode == ErrorCode.NTE_NOT_FOUND)
                     return null;
                 if (errorCode != ErrorCode.ERROR_SUCCESS)
@@ -638,14 +663,16 @@ namespace System.Security.Cryptography
                 byte[] propertyValue = new byte[numBytesNeeded];
                 fixed (byte* pPropertyValue = propertyValue)
                 {
-                    errorCode = Interop.NCrypt.NCryptGetProperty(
-                        ncryptHandle,
-                        propertyName,
-                        pPropertyValue,
-                        propertyValue.Length,
-                        out numBytesNeeded,
-                        options
-                    );
+                    errorCode = Interop
+                        .NCrypt
+                        .NCryptGetProperty(
+                            ncryptHandle,
+                            propertyName,
+                            pPropertyValue,
+                            propertyValue.Length,
+                            out numBytesNeeded,
+                            options
+                        );
                 }
                 if (errorCode == ErrorCode.NTE_NOT_FOUND)
                     return null;
@@ -698,13 +725,11 @@ namespace System.Security.Cryptography
             unsafe
             {
                 byte[] curveNameBytes = new byte[(curveName.Length + 1) * sizeof(char)]; // +1 to add trailing null
-                System.Text.Encoding.Unicode.GetBytes(
-                    curveName,
-                    0,
-                    curveName.Length,
-                    curveNameBytes,
-                    0
-                );
+                System
+                    .Text
+                    .Encoding
+                    .Unicode
+                    .GetBytes(curveName, 0, curveName.Length, curveNameBytes, 0);
                 SetProperty(keyHandle, KeyPropertyName.ECCCurveName, curveNameBytes);
             }
         }
@@ -720,13 +745,15 @@ namespace System.Security.Cryptography
             {
                 fixed (byte* pBlob = value)
                 {
-                    ErrorCode errorCode = Interop.NCrypt.NCryptSetProperty(
-                        ncryptHandle,
-                        propertyName,
-                        pBlob,
-                        value.Length,
-                        CngPropertyOptions.None
-                    );
+                    ErrorCode errorCode = Interop
+                        .NCrypt
+                        .NCryptSetProperty(
+                            ncryptHandle,
+                            propertyName,
+                            pBlob,
+                            value.Length,
+                            CngPropertyOptions.None
+                        );
 
                     if (errorCode != ErrorCode.ERROR_SUCCESS)
                     {

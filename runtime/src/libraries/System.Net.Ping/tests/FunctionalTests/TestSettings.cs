@@ -15,13 +15,13 @@ namespace System.Net.NetworkInformation.Tests
 
         public const string PayloadAsString =
             "'Post hoc ergo propter hoc'. 'After it, therefore because of it'. It means one thing follows the other, therefore it was caused by the other. But it's not always true. In fact it's hardly ever true.";
-        public static readonly byte[] PayloadAsBytes = Encoding.UTF8.GetBytes(
-            TestSettings.PayloadAsString
-        );
+        public static readonly byte[] PayloadAsBytes = Encoding
+            .UTF8
+            .GetBytes(TestSettings.PayloadAsString);
 
-        public static readonly byte[] PayloadAsBytesShort = Encoding.UTF8.GetBytes(
-            "ABCDEF0123456789"
-        );
+        public static readonly byte[] PayloadAsBytesShort = Encoding
+            .UTF8
+            .GetBytes("ABCDEF0123456789");
 
         public static IPAddress[] GetLocalIPAddresses()
         {

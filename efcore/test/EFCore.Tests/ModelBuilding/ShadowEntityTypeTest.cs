@@ -87,7 +87,8 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                     .Entity("Order")
                     .HasOne("OrderDetails", "OrderDetails")
                     .WithOne("Order")
-                    .HasForeignKey("OrderDetails", "OrderId").Metadata;
+                    .HasForeignKey("OrderDetails", "OrderId")
+                    .Metadata;
 
             Assert.Equal(
                 "OrderDetails",
@@ -113,7 +114,8 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                 modelBuilder
                     .Entity("Order")
                     .HasOne("Customer", "Customer")
-                    .WithMany("Orders").Metadata;
+                    .WithMany("Orders")
+                    .Metadata;
 
             Assert.Equal(
                 "Customer",
@@ -144,9 +146,11 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                     "Customer",
                     "Dictionary<string, object>"
                 ),
-                Assert.Throws<InvalidOperationException>(
-                    () => orderEntityType.HasOne("Customer", "Customer")
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(
+                        () => orderEntityType.HasOne("Customer", "Customer")
+                    )
+                    .Message
             );
         }
 
@@ -158,9 +162,11 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
 
             Assert.Equal(
                 CoreStrings.NoClrNavigation("CustomerNavigation", typeof(Order).ShortDisplayName()),
-                Assert.Throws<InvalidOperationException>(
-                    () => orderEntityType.HasOne(typeof(Customer), "CustomerNavigation")
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(
+                        () => orderEntityType.HasOne(typeof(Customer), "CustomerNavigation")
+                    )
+                    .Message
             );
         }
 

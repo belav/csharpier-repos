@@ -216,10 +216,12 @@ namespace System.Xml.Tests
                     "res",
                     BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.IgnoreCase
                 )
-                ?? exceptionType.BaseType.GetField(
-                    "res",
-                    BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.IgnoreCase
-                );
+                ?? exceptionType
+                    .BaseType
+                    .GetField(
+                        "res",
+                        BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.IgnoreCase
+                    );
 
             if (fInfo == null)
                 throw new VerifyException("Cannot obtain Resource ID from Exception.");

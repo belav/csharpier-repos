@@ -102,7 +102,8 @@ namespace System.Linq.Parallel.Tests
                 var barrier = new Barrier(degree);
                 Assert.Equal(
                     Functions.SumRange(0, count),
-                    labeled.Item
+                    labeled
+                        .Item
                         .WithDegreeOfParallelism(degree)
                         .Sum(
                             x =>
@@ -134,7 +135,8 @@ namespace System.Linq.Parallel.Tests
             {
                 int expected = 1 - count;
                 foreach (
-                    int result in labeled.Item
+                    int result in labeled
+                        .Item
                         .WithDegreeOfParallelism(degree)
                         .Select(x => -x)
                         .OrderBy(x => x)
@@ -164,7 +166,8 @@ namespace System.Linq.Parallel.Tests
             using (ThreadPoolHelpers.EnsureMinThreadsAtLeast(degree))
             {
                 Assert.True(
-                    labeled.Item
+                    labeled
+                        .Item
                         .WithDegreeOfParallelism(degree)
                         .Select(
                             x =>

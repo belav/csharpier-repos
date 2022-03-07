@@ -43,8 +43,10 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             if (document == null)
                 return null;
 
-            var documentHighlightService =
-                document.Project.LanguageServices.GetRequiredService<IDocumentHighlightsService>();
+            var documentHighlightService = document
+                .Project
+                .LanguageServices
+                .GetRequiredService<IDocumentHighlightsService>();
             var position = await document
                 .GetPositionFromLinePositionAsync(
                     ProtocolConversions.PositionToLinePosition(request.Position),
@@ -71,7 +73,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
                 );
                 var text = await document.GetTextAsync(cancellationToken).ConfigureAwait(false);
 
-                return highlightsForDocument.HighlightSpans
+                return highlightsForDocument
+                    .HighlightSpans
                     .Select(
                         h =>
                             new DocumentHighlight

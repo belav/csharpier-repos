@@ -287,12 +287,17 @@ ERR:
                         );
                         if (string.IsNullOrWhiteSpace(debuggableProcessNames))
                         {
-                            context.Console.Error.WriteLine(
-                                context.LocalizationResources.DebugDirectiveExecutableNotSpecified(
-                                    environmentVariableName,
-                                    process.ProcessName
-                                )
-                            );
+                            context
+                                .Console
+                                .Error
+                                .WriteLine(
+                                    context
+                                        .LocalizationResources
+                                        .DebugDirectiveExecutableNotSpecified(
+                                            environmentVariableName,
+                                            process.ProcessName
+                                        )
+                                );
                             context.ExitCode = 1;
                             return;
                         }
@@ -302,12 +307,17 @@ ERR:
                             if (processNames.Contains(process.ProcessName, StringComparer.Ordinal))
                             {
                                 var processId = process.Id;
-                                context.Console.Out.WriteLine(
-                                    context.LocalizationResources.DebugDirectiveAttachToProcess(
-                                        processId,
-                                        process.ProcessName
-                                    )
-                                );
+                                context
+                                    .Console
+                                    .Out
+                                    .WriteLine(
+                                        context
+                                            .LocalizationResources
+                                            .DebugDirectiveAttachToProcess(
+                                                processId,
+                                                process.ProcessName
+                                            )
+                                    );
                                 while (!Debugger.IsAttached)
                                 {
                                     await Task.Delay(500);
@@ -315,13 +325,18 @@ ERR:
                             }
                             else
                             {
-                                context.Console.Error.WriteLine(
-                                    context.LocalizationResources.DebugDirectiveProcessNotIncludedInEnvironmentVariable(
-                                        process.ProcessName,
-                                        environmentVariableName,
-                                        debuggableProcessNames
-                                    )
-                                );
+                                context
+                                    .Console
+                                    .Error
+                                    .WriteLine(
+                                        context
+                                            .LocalizationResources
+                                            .DebugDirectiveProcessNotIncludedInEnvironmentVariable(
+                                                process.ProcessName,
+                                                environmentVariableName,
+                                                debuggableProcessNames
+                                            )
+                                    );
                                 context.ExitCode = 1;
                                 return;
                             }
@@ -448,9 +463,10 @@ ERR:
                     context.Console.ResetTerminalForegroundColor();
                     context.Console.SetTerminalForegroundRed();
 
-                    context.Console.Error.Write(
-                        context.LocalizationResources.ExceptionHandlerHeader()
-                    );
+                    context
+                        .Console
+                        .Error
+                        .Write(context.LocalizationResources.ExceptionHandlerHeader());
                     context.Console.Error.WriteLine(exception.ToString());
 
                     context.Console.ResetTerminalForegroundColor();
@@ -778,9 +794,10 @@ ERR:
                     if (context.ParseResult.FindResultFor(versionOption) is { })
                     {
                         if (
-                            context.ParseResult.Errors.Any(
-                                e => e.SymbolResult?.Symbol is VersionOption
-                            )
+                            context
+                                .ParseResult
+                                .Errors
+                                .Any(e => e.SymbolResult?.Symbol is VersionOption)
                         )
                         {
                             context.InvocationResult = new ParseErrorResult(null);
@@ -827,9 +844,10 @@ ERR:
                     if (context.ParseResult.FindResultFor(versionOption) is { })
                     {
                         if (
-                            context.ParseResult.Errors.Any(
-                                e => e.SymbolResult?.Symbol is VersionOption
-                            )
+                            context
+                                .ParseResult
+                                .Errors
+                                .Any(e => e.SymbolResult?.Symbol is VersionOption)
                         )
                         {
                             context.InvocationResult = new ParseErrorResult(null);

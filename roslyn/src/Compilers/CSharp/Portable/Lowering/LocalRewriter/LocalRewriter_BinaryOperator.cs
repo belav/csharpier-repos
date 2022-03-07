@@ -1156,11 +1156,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             // If not the type has to implement IsTrue/IsFalse operator - we checked it during binding.
 
             CompoundUseSiteInfo<AssemblySymbol> useSiteInfo = GetNewCompoundUseSiteInfo();
-            var conversion = _compilation.Conversions.ClassifyConversionFromExpression(
-                loweredLeft,
-                boolean,
-                ref useSiteInfo
-            );
+            var conversion = _compilation
+                .Conversions
+                .ClassifyConversionFromExpression(loweredLeft, boolean, ref useSiteInfo);
             _diagnostics.Add(loweredLeft.Syntax, useSiteInfo);
             if (conversion.IsImplicit)
             {

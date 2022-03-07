@@ -91,9 +91,9 @@ WHERE (c[""Discriminator""] = ""Customer"")"
             using var context = CreateContext();
             context
                 .GetInfrastructure()
-                .GetRequiredService<
-                    IDiagnosticsLogger<DbLoggerCategory.Query>
-                >().Options.IsSensitiveDataLoggingWarned = false;
+                .GetRequiredService<IDiagnosticsLogger<DbLoggerCategory.Query>>()
+                .Options
+                .IsSensitiveDataLoggingWarned = false;
             // ReSharper disable once ConvertToConstant.Local
             var city = "Redmond";
 

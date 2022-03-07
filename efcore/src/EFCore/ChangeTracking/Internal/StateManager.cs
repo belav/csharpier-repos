@@ -722,7 +722,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                     {
                         _referencedUntrackedEntities.Remove(keyValuePair.Key);
 
-                        var newList = keyValuePair.Value
+                        var newList = keyValuePair
+                            .Value
                             .Where(tuple => tuple.Item2 != entry)
                             .ToList();
 
@@ -1328,7 +1329,9 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         public virtual int SaveChanges(bool acceptAllChangesOnSuccess) =>
             !Context.Database.AutoTransactionsEnabled
                 ? SaveChanges(this, acceptAllChangesOnSuccess)
-                : Dependencies.ExecutionStrategy.Execute(
+                : Dependencies
+                  .ExecutionStrategy
+                  .Execute(
                       (StateManager: this, AcceptAllChangesOnSuccess: acceptAllChangesOnSuccess),
                       static (_, t) => SaveChanges(t.StateManager, t.AcceptAllChangesOnSuccess),
                       null
@@ -1386,7 +1389,9 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         ) =>
             !Context.Database.AutoTransactionsEnabled
                 ? SaveChangesAsync(this, acceptAllChangesOnSuccess, cancellationToken)
-                : Dependencies.ExecutionStrategy.ExecuteAsync(
+                : Dependencies
+                  .ExecutionStrategy
+                  .ExecuteAsync(
                       (StateManager: this, AcceptAllChangesOnSuccess: acceptAllChangesOnSuccess),
                       static (_, t, cancellationToken) =>
                           SaveChangesAsync(

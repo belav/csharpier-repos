@@ -24,10 +24,9 @@ namespace Roslyn.VisualStudio.IntegrationTests
             // Save the project file.
             VisualStudio.SolutionExplorer.SaveAll();
 
-            var projectFileContent = VisualStudio.SolutionExplorer.GetFileContents(
-                project,
-                Path.GetFileName(project.RelativePath)
-            );
+            var projectFileContent = VisualStudio
+                .SolutionExplorer
+                .GetFileContents(project, Path.GetFileName(project.RelativePath));
             return XElement.Parse(projectFileContent);
         }
 

@@ -43,10 +43,10 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
         {
             int[] offsets = new int[_methodNode.FrameInfos.Length];
             if (
-                !factory.RuntimeFunctionsGCInfo.Deduplicator.TryGetValue(
-                    this,
-                    out var deduplicatedResult
-                )
+                !factory
+                    .RuntimeFunctionsGCInfo
+                    .Deduplicator
+                    .TryGetValue(this, out var deduplicatedResult)
             )
             {
                 throw new Exception("Did not properly initialize deduplicator");
@@ -225,10 +225,10 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                 return;
             }
 
-            bool isFound = factory.RuntimeFunctionsGCInfo.Deduplicator.TryGetValue(
-                this,
-                out var found
-            );
+            bool isFound = factory
+                .RuntimeFunctionsGCInfo
+                .Deduplicator
+                .TryGetValue(this, out var found);
 
             if (isFound && (found != this))
             {

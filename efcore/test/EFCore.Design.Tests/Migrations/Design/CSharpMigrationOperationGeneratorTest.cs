@@ -29,7 +29,9 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
                     new CSharpHelper(
                         new SqlServerTypeMappingSource(
                             TestServiceFactory.Instance.Create<TypeMappingSourceDependencies>(),
-                            TestServiceFactory.Instance.Create<RelationalTypeMappingSourceDependencies>()
+                            TestServiceFactory
+                                .Instance
+                                .Create<RelationalTypeMappingSourceDependencies>()
                         )
                     )
                 )

@@ -76,10 +76,9 @@ public partial class StartupAnalyzer : DiagnosticAnalyzer
                         }
 
                         // In the future we can consider looking at more methods, but for now limit to Main, implicit Main, and Configure* methods
-                        var isMain = SymbolEqualityComparer.Default.Equals(
-                            entryPoint,
-                            context.OwningSymbol
-                        );
+                        var isMain = SymbolEqualityComparer
+                            .Default
+                            .Equals(entryPoint, context.OwningSymbol);
 
                         if (isConfigureServices || isMain)
                         {

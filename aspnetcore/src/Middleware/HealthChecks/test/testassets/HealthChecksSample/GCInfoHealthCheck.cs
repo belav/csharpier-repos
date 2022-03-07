@@ -33,13 +33,15 @@ public static class GCInfoHealthCheckBuilderExtensions
         // Configure named options to pass the threshold into the check.
         if (thresholdInBytes.HasValue)
         {
-            builder.Services.Configure<GCInfoOptions>(
-                name,
-                options =>
-                {
-                    options.Threshold = thresholdInBytes.Value;
-                }
-            );
+            builder
+                .Services
+                .Configure<GCInfoOptions>(
+                    name,
+                    options =>
+                    {
+                        options.Threshold = thresholdInBytes.Value;
+                    }
+                );
         }
 
         return builder;

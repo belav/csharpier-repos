@@ -135,9 +135,9 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 .ToArray();
             Assert.True(names.Length > 100, "There are at least 100 assemblies in the GAC");
 
-            var gacLocationsUpper = GlobalAssemblyCacheLocation.RootLocations.Select(
-                location => location.ToUpper()
-            );
+            var gacLocationsUpper = GlobalAssemblyCacheLocation
+                .RootLocations
+                .Select(location => location.ToUpper());
             foreach (var name in names)
             {
                 string location = ClrGlobalAssemblyCache.GetAssemblyLocation(name);

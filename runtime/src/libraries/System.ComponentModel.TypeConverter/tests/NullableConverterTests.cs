@@ -111,11 +111,9 @@ namespace System.ComponentModel.Tests
                 NullableConverterTests.s_intNullableConverter
             );
 
-            var actualInstanceDescriptor =
-                (InstanceDescriptor)NullableConverterTests.s_intNullableConverter.ConvertTo(
-                    NullableConverterTests.s_nullableThree,
-                    typeof(InstanceDescriptor)
-                );
+            var actualInstanceDescriptor = (InstanceDescriptor)NullableConverterTests
+                .s_intNullableConverter
+                .ConvertTo(NullableConverterTests.s_nullableThree, typeof(InstanceDescriptor));
             var expectedMemberInfo = typeof(int?).GetConstructor(new Type[] { typeof(int) });
             Assert.Equal(expectedMemberInfo, actualInstanceDescriptor.MemberInfo);
             Assert.Equal(
@@ -125,11 +123,9 @@ namespace System.ComponentModel.Tests
             Assert.True(actualInstanceDescriptor.IsComplete);
             Assert.Equal(NullableConverterTests.s_nullableThree, actualInstanceDescriptor.Invoke());
 
-            var actualUnInitInstanceDescriptor =
-                (InstanceDescriptor)NullableConverterTests.s_intNullableConverter.ConvertTo(
-                    NullableConverterTests.s_uninitializedInt,
-                    typeof(InstanceDescriptor)
-                );
+            var actualUnInitInstanceDescriptor = (InstanceDescriptor)NullableConverterTests
+                .s_intNullableConverter
+                .ConvertTo(NullableConverterTests.s_uninitializedInt, typeof(InstanceDescriptor));
             Assert.Equal(expectedMemberInfo, actualUnInitInstanceDescriptor.MemberInfo);
             Assert.Equal(
                 new[] { NullableConverterTests.s_uninitializedInt },

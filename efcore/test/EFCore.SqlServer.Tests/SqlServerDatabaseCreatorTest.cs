@@ -94,9 +94,9 @@ namespace Microsoft.EntityFrameworkCore
                 .AddScoped<IRelationalCommandBuilderFactory, FakeRelationalCommandBuilderFactory>()
                 .AddScoped<IExecutionStrategyFactory, ExecutionStrategyFactory>();
 
-            var contextServices = SqlServerTestHelpers.Instance.CreateContextServices(
-                customServices
-            );
+            var contextServices = SqlServerTestHelpers
+                .Instance
+                .CreateContextServices(customServices);
 
             var connection =
                 (FakeSqlServerConnection)contextServices.GetRequiredService<ISqlServerConnection>();
@@ -143,9 +143,9 @@ namespace Microsoft.EntityFrameworkCore
                 .AddScoped<IRelationalCommandBuilderFactory, FakeRelationalCommandBuilderFactory>()
                 .AddScoped<IExecutionStrategyFactory, ExecutionStrategyFactory>();
 
-            var contextServices = SqlServerTestHelpers.Instance.CreateContextServices(
-                customServices
-            );
+            var contextServices = SqlServerTestHelpers
+                .Instance
+                .CreateContextServices(customServices);
 
             var connection =
                 (FakeSqlServerConnection)contextServices.GetRequiredService<ISqlServerConnection>();

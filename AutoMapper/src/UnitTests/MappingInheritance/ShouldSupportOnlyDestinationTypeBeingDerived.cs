@@ -28,7 +28,8 @@ namespace AutoMapper.UnitTests.MappingInheritance
         public void Should_report_missing_map() =>
             new Action(() => Configuration.CompileMappings())
                 .ShouldThrow<InvalidOperationException>()
-                .Message.ShouldBe(
+                .Message
+                .ShouldBe(
                     "Missing map from AutoMapper.UnitTests.MappingInheritance.AsWithMissingMap+TModel to AutoMapper.UnitTests.MappingInheritance.AsWithMissingMap+TConcrete. Create using CreateMap<TModel, TConcrete>."
                 );
     }

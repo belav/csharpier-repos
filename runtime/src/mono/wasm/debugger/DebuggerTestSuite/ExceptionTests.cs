@@ -486,7 +486,8 @@ namespace DebuggerTests
                     // return in case of a managed exception, and ignore JS ones
                     if (
                         pause_location["data"]
-                            ?["objectId"]?.Value<string>()
+                            ?["objectId"]
+                            ?.Value<string>()
                             ?.StartsWith("dotnet:object:") == true
                     )
                     {

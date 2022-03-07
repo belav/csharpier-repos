@@ -101,13 +101,15 @@ namespace System.Security.Cryptography.Pkcs
                 _decryptorPal.Dispose();
                 _decryptorPal = null;
             }
-            _encodedMessage = PkcsPal.Instance.Encrypt(
-                recipients,
-                ContentInfo,
-                ContentEncryptionAlgorithm,
-                Certificates,
-                UnprotectedAttributes
-            );
+            _encodedMessage = PkcsPal
+                .Instance
+                .Encrypt(
+                    recipients,
+                    ContentInfo,
+                    ContentEncryptionAlgorithm,
+                    Certificates,
+                    UnprotectedAttributes
+                );
             _lastCall = LastCall.Encrypt;
         }
 
@@ -155,14 +157,16 @@ namespace System.Security.Cryptography.Pkcs
             AlgorithmIdentifier contentEncryptionAlgorithm;
             X509Certificate2Collection originatorCerts;
             CryptographicAttributeObjectCollection unprotectedAttributes;
-            _decryptorPal = PkcsPal.Instance.Decode(
-                encodedMessage,
-                out version,
-                out contentInfo,
-                out contentEncryptionAlgorithm,
-                out originatorCerts,
-                out unprotectedAttributes
-            );
+            _decryptorPal = PkcsPal
+                .Instance
+                .Decode(
+                    encodedMessage,
+                    out version,
+                    out contentInfo,
+                    out contentEncryptionAlgorithm,
+                    out originatorCerts,
+                    out unprotectedAttributes
+                );
             Version = version;
             ContentInfo = contentInfo;
             ContentEncryptionAlgorithm = contentEncryptionAlgorithm;

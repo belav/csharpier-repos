@@ -63,10 +63,9 @@ namespace System.Reflection.Runtime.BindingFlagSupport
         {
             MethodInfo? baseAccessor = GetAccessorMethod(baseMember!);
             MethodInfo? derivedAccessor = GetAccessorMethod(derivedMember!);
-            return MemberPolicies<MethodInfo>.Default.ImplicitlyOverrides(
-                baseAccessor,
-                derivedAccessor
-            );
+            return MemberPolicies<MethodInfo>
+                .Default
+                .ImplicitlyOverrides(baseAccessor, derivedAccessor);
         }
 
         //

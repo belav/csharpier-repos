@@ -116,12 +116,14 @@ namespace System.Data
             IFilter? rowFilter
         )
         {
-            DataCommonEventSource.Log.Trace(
-                "<ds.Index.Index|API> {0}, table={1}, recordStates={2}",
-                ObjectID,
-                (table != null) ? table.ObjectID : 0,
-                recordStates
-            );
+            DataCommonEventSource
+                .Log
+                .Trace(
+                    "<ds.Index.Index|API> {0}, table={1}, recordStates={2}",
+                    ObjectID,
+                    (table != null) ? table.ObjectID : 0,
+                    recordStates
+                );
             Debug.Assert(indexFields != null);
             Debug.Assert(null != table, "null table");
             if (
@@ -207,11 +209,9 @@ namespace System.Data
 
         private bool AcceptRecord(int record, IFilter? filter)
         {
-            DataCommonEventSource.Log.Trace(
-                "<ds.Index.AcceptRecord|API> {0}, record={1}",
-                ObjectID,
-                record
-            );
+            DataCommonEventSource
+                .Log
+                .Trace("<ds.Index.AcceptRecord|API> {0}, record={1}", ObjectID, record);
             if (filter == null)
             {
                 return true;
@@ -443,12 +443,14 @@ namespace System.Data
 
         private void DeleteRecord(int recordIndex, bool fireEvent)
         {
-            DataCommonEventSource.Log.Trace(
-                "<ds.Index.DeleteRecord|INFO> {0}, recordIndex={1}, fireEvent={2}",
-                ObjectID,
-                recordIndex,
-                fireEvent
-            );
+            DataCommonEventSource
+                .Log
+                .Trace(
+                    "<ds.Index.DeleteRecord|INFO> {0}, recordIndex={1}, fireEvent={2}",
+                    ObjectID,
+                    recordIndex,
+                    fireEvent
+                );
 
             if (recordIndex >= 0)
             {
@@ -887,12 +889,14 @@ namespace System.Data
         // existing functionality, it calls the overlaod with fireEvent== true, so it still fires the event
         private int InsertRecord(int record, bool fireEvent)
         {
-            DataCommonEventSource.Log.Trace(
-                "<ds.Index.InsertRecord|INFO> {0}, record={1}, fireEvent={2}",
-                ObjectID,
-                record,
-                fireEvent
-            );
+            DataCommonEventSource
+                .Log
+                .Trace(
+                    "<ds.Index.InsertRecord|INFO> {0}, record={1}, fireEvent={2}",
+                    ObjectID,
+                    record,
+                    fireEvent
+                );
 
             // this improves performance when the is no filter, like with the default view (creating before rows added)
             // we know can append when the new record is the last row in table, normal insertion pattern
@@ -1004,11 +1008,9 @@ namespace System.Data
 
         public void RecordChanged(int record)
         {
-            DataCommonEventSource.Log.Trace(
-                "<ds.Index.RecordChanged|API> {0}, record={1}",
-                ObjectID,
-                record
-            );
+            DataCommonEventSource
+                .Log
+                .Trace("<ds.Index.RecordChanged|API> {0}, record={1}", ObjectID, record);
             if (DoListChanged)
             {
                 int index = GetIndex(record);
@@ -1022,12 +1024,14 @@ namespace System.Data
         // new RecordChanged which takes oldIndex and newIndex and fires _onListChanged
         public void RecordChanged(int oldIndex, int newIndex)
         {
-            DataCommonEventSource.Log.Trace(
-                "<ds.Index.RecordChanged|API> {0}, oldIndex={1}, newIndex={2}",
-                ObjectID,
-                oldIndex,
-                newIndex
-            );
+            DataCommonEventSource
+                .Log
+                .Trace(
+                    "<ds.Index.RecordChanged|API> {0}, oldIndex={1}, newIndex={2}",
+                    ObjectID,
+                    oldIndex,
+                    newIndex
+                );
 
             if (oldIndex > -1 || newIndex > -1)
             {
@@ -1058,13 +1062,15 @@ namespace System.Data
             DataViewRowState newState
         )
         {
-            DataCommonEventSource.Log.Trace(
-                "<ds.Index.RecordStateChanged|API> {0}, record={1}, oldState={2}, newState={3}",
-                ObjectID,
-                record,
-                oldState,
-                newState
-            );
+            DataCommonEventSource
+                .Log
+                .Trace(
+                    "<ds.Index.RecordStateChanged|API> {0}, record={1}, oldState={2}, newState={3}",
+                    ObjectID,
+                    record,
+                    oldState,
+                    newState
+                );
 
             int action = GetChangeAction(oldState, newState);
             ApplyChangeAction(record, action, GetReplaceAction(oldState));
@@ -1079,16 +1085,18 @@ namespace System.Data
             DataViewRowState newNewState
         )
         {
-            DataCommonEventSource.Log.Trace(
-                "<ds.Index.RecordStateChanged|API> {0}, oldRecord={1}, oldOldState={2}, oldNewState={3}, newRecord={4}, newOldState={5}, newNewState={6}",
-                ObjectID,
-                oldRecord,
-                oldOldState,
-                oldNewState,
-                newRecord,
-                newOldState,
-                newNewState
-            );
+            DataCommonEventSource
+                .Log
+                .Trace(
+                    "<ds.Index.RecordStateChanged|API> {0}, oldRecord={1}, oldOldState={2}, oldNewState={3}, newRecord={4}, newOldState={5}, newNewState={6}",
+                    ObjectID,
+                    oldRecord,
+                    oldOldState,
+                    oldNewState,
+                    newRecord,
+                    newOldState,
+                    newNewState
+                );
 
             Debug.Assert(
                 (-1 == oldRecord)

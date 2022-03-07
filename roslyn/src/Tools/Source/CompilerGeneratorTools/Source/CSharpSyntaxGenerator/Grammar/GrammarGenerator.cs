@@ -65,7 +65,8 @@ namespace CSharpSyntaxGenerator.Grammar
             }
 
             // The grammar will bottom out with certain lexical productions. Create rules for these.
-            var lexicalRules = rules.Values
+            var lexicalRules = rules
+                .Values
                 .SelectMany(ps => ps)
                 .SelectMany(p => p.ReferencedRules)
                 .Where(r => !rules.TryGetValue(r, out var productions) || productions.Count == 0)

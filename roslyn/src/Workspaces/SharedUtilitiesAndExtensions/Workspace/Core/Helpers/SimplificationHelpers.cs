@@ -131,30 +131,32 @@ namespace Microsoft.CodeAnalysis.Simplification
             if (
                 (
                     symbol.IsKind(SymbolKind.Field)
-                        && optionSet.GetOption(
-                            CodeStyleOptions2.QualifyFieldAccess,
-                            semanticModel.Language
-                        ).Value
+                        && optionSet
+                            .GetOption(CodeStyleOptions2.QualifyFieldAccess, semanticModel.Language)
+                            .Value
                     || (
                         symbol.IsKind(SymbolKind.Property)
-                        && optionSet.GetOption(
-                            CodeStyleOptions2.QualifyPropertyAccess,
-                            semanticModel.Language
-                        ).Value
+                        && optionSet
+                            .GetOption(
+                                CodeStyleOptions2.QualifyPropertyAccess,
+                                semanticModel.Language
+                            )
+                            .Value
                     )
                     || (
                         symbol.IsKind(SymbolKind.Method)
-                        && optionSet.GetOption(
-                            CodeStyleOptions2.QualifyMethodAccess,
-                            semanticModel.Language
-                        ).Value
+                        && optionSet
+                            .GetOption(
+                                CodeStyleOptions2.QualifyMethodAccess,
+                                semanticModel.Language
+                            )
+                            .Value
                     )
                     || (
                         symbol.IsKind(SymbolKind.Event)
-                        && optionSet.GetOption(
-                            CodeStyleOptions2.QualifyEventAccess,
-                            semanticModel.Language
-                        ).Value
+                        && optionSet
+                            .GetOption(CodeStyleOptions2.QualifyEventAccess, semanticModel.Language)
+                            .Value
                     )
                 )
             )
@@ -169,18 +171,22 @@ namespace Microsoft.CodeAnalysis.Simplification
             OptionSet optionSet,
             string language
         ) =>
-            optionSet.GetOption(
-                CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInDeclaration,
-                language
-            ).Value;
+            optionSet
+                .GetOption(
+                    CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInDeclaration,
+                    language
+                )
+                .Value;
 
         internal static bool PreferPredefinedTypeKeywordInMemberAccess(
             OptionSet optionSet,
             string language
         ) =>
-            optionSet.GetOption(
-                CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInMemberAccess,
-                language
-            ).Value;
+            optionSet
+                .GetOption(
+                    CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInMemberAccess,
+                    language
+                )
+                .Value;
     }
 }

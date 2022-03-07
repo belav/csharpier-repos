@@ -220,14 +220,16 @@ namespace System.Diagnostics.Tracing
                             (int)instanceData.PayloadLength
                         );
                         DateTime dateTimeStamp = TimeStampToDateTime(instanceData.TimeStamp);
-                        NativeRuntimeEventSource.Log.ProcessEvent(
-                            instanceData.EventID,
-                            instanceData.ThreadID,
-                            dateTimeStamp,
-                            instanceData.ActivityId,
-                            instanceData.ChildActivityId,
-                            payload
-                        );
+                        NativeRuntimeEventSource
+                            .Log
+                            .ProcessEvent(
+                                instanceData.EventID,
+                                instanceData.ThreadID,
+                                dateTimeStamp,
+                                instanceData.ActivityId,
+                                instanceData.ChildActivityId,
+                                payload
+                            );
                     }
                 }
 

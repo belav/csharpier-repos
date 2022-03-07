@@ -101,10 +101,9 @@ namespace Microsoft.CodeAnalysis.UnitTests.Diagnostics
 
             // Even though the analyzer registers a symbol action, it should never be invoked because all of its rules are disabled.
             var analyzerTelemetry =
-                compWithAnalyzers.GetAnalyzerTelemetryInfoAsync(
-                    analyzer,
-                    CancellationToken.None
-                ).Result;
+                compWithAnalyzers
+                    .GetAnalyzerTelemetryInfoAsync(analyzer, CancellationToken.None)
+                    .Result;
             Assert.Equal(0, analyzerTelemetry.SymbolActionsCount);
         }
 

@@ -454,10 +454,9 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                     new List<string> { "Foo" },
                     ConfigurationSource.Convention
                 ),
-                principalEntityBuilder.HasKey(
-                    new[] { "ReferencedFoo" },
-                    ConfigurationSource.Convention
-                ).Metadata,
+                principalEntityBuilder
+                    .HasKey(new[] { "ReferencedFoo" }, ConfigurationSource.Convention)
+                    .Metadata,
                 ConfigurationSource.Convention
             );
 
@@ -1060,13 +1059,16 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                 ConfigurationSource.Convention
             );
 
-            ownedTypeBuilder.HasRelationship(
-                entityTypeBuilder.Metadata,
-                null,
-                nameof(SampleEntity.AnotherReferencedEntity),
-                ConfigurationSource.Convention,
-                setTargetAsPrincipal: true
-            ).Metadata.IsOwnership = true;
+            ownedTypeBuilder
+                .HasRelationship(
+                    entityTypeBuilder.Metadata,
+                    null,
+                    nameof(SampleEntity.AnotherReferencedEntity),
+                    ConfigurationSource.Convention,
+                    setTargetAsPrincipal: true
+                )
+                .Metadata
+                .IsOwnership = true;
 
             ownedTypeBuilder.Ignore(nameof(ReferencedEntity.Id), ConfigurationSource.Explicit);
             ownedTypeBuilder.Ignore(
@@ -1529,9 +1531,11 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
 
             Assert.Equal(
                 CoreStrings.SeedDatumDerivedType(nameof(A), nameof(D)),
-                Assert.Throws<InvalidOperationException>(
-                    () => modelBuilder.Entity<A>().HasData(new D { Id = 2, P0 = 3 })
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(
+                        () => modelBuilder.Entity<A>().HasData(new D { Id = 2, P0 = 3 })
+                    )
+                    .Message
             );
         }
 
@@ -1542,13 +1546,15 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
 
             Assert.Equal(
                 CoreStrings.SeedDatumDerivedType(nameof(A), nameof(D)),
-                Assert.Throws<InvalidOperationException>(
-                    () =>
-                        modelBuilder
-                            .Entity<B>()
-                            .OwnsOne(b => b.A, a => a.HasData(new D { Id = 2, P0 = 3 }))
-                            .OwnsOne(b => b.AnotherA)
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(
+                        () =>
+                            modelBuilder
+                                .Entity<B>()
+                                .OwnsOne(b => b.A, a => a.HasData(new D { Id = 2, P0 = 3 }))
+                                .OwnsOne(b => b.AnotherA)
+                    )
+                    .Message
             );
         }
 
@@ -1591,9 +1597,11 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
 
             Assert.Equal(
                 ValueGenerated.OnAdd,
-                modelBuilder.Model
+                modelBuilder
+                    .Model
                     .FindEntityType(typeof(NonSignedIntegerKeyEntity))
-                    .FindProperty(nameof(NonSignedIntegerKeyEntity.Id)).ValueGenerated
+                    .FindProperty(nameof(NonSignedIntegerKeyEntity.Id))
+                    .ValueGenerated
             );
             VerifyError(
                 CoreStrings.SeedDatumDefaultValue(

@@ -86,10 +86,12 @@ namespace Microsoft.CodeAnalysis.MSBuild
                 );
 
                 if (
-                    !_loadedProject.GlobalProperties.TryGetValue(
-                        PropertyNames.TargetFramework,
-                        out var initialGlobalTargetFrameworkValue
-                    )
+                    !_loadedProject
+                        .GlobalProperties
+                        .TryGetValue(
+                            PropertyNames.TargetFramework,
+                            out var initialGlobalTargetFrameworkValue
+                        )
                 )
                     initialGlobalTargetFrameworkValue = null;
 
@@ -450,9 +452,9 @@ namespace Microsoft.CodeAnalysis.MSBuild
 
         private static bool IsInGAC(string filePath)
         {
-            return GlobalAssemblyCacheLocation.RootLocations.Any(
-                gloc => PathUtilities.IsChildPath(gloc, filePath)
-            );
+            return GlobalAssemblyCacheLocation
+                .RootLocations
+                .Any(gloc => PathUtilities.IsChildPath(gloc, filePath));
         }
 
         private static string? s_frameworkRoot;
@@ -462,8 +464,11 @@ namespace Microsoft.CodeAnalysis.MSBuild
             {
                 if (RoslynString.IsNullOrEmpty(s_frameworkRoot))
                 {
-                    var runtimeDir =
-                        System.Runtime.InteropServices.RuntimeEnvironment.GetRuntimeDirectory();
+                    var runtimeDir = System
+                        .Runtime
+                        .InteropServices
+                        .RuntimeEnvironment
+                        .GetRuntimeDirectory();
                     s_frameworkRoot = Path.GetDirectoryName(runtimeDir); // back out one directory level to be root path of all framework versions
                 }
 

@@ -208,8 +208,9 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         )
         {
             var workspace = document.Project.Solution.Workspace;
-            var formattingRuleFactory =
-                workspace.Services.GetRequiredService<IHostDependentFormattingRuleFactoryService>();
+            var formattingRuleFactory = workspace
+                .Services
+                .GetRequiredService<IHostDependentFormattingRuleFactoryService>();
             // Not sure why this is being done... there aren't any docs on CreateRule either.
             var position = (span.Start + span.End) / 2;
 

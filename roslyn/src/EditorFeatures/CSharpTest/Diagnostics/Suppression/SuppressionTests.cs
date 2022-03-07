@@ -478,13 +478,15 @@ class Class
                         )
                     );
                     workspace.TryApplyChanges(
-                        workspace.CurrentSolution.WithAnalyzerReferences(
-                            new[] { analyzerReference }
-                        )
+                        workspace
+                            .CurrentSolution
+                            .WithAnalyzerReferences(new[] { analyzerReference })
                     );
 
                     Assert.IsType<MockDiagnosticUpdateSourceRegistrationService>(
-                        workspace.ExportProvider.GetExportedValue<IDiagnosticUpdateSourceRegistrationService>()
+                        workspace
+                            .ExportProvider
+                            .GetExportedValue<IDiagnosticUpdateSourceRegistrationService>()
                     );
                     var diagnosticService = Assert.IsType<DiagnosticAnalyzerService>(
                         workspace.ExportProvider.GetExportedValue<IDiagnosticAnalyzerService>()
@@ -1110,11 +1112,11 @@ using System;
 }|]
 ",
                     $@"
-#pragma warning disable {UserDiagnosticAnalyzer.Decsciptor.Id} // {UserDiagnosticAnalyzer.Decsciptor.Title}
+#pragma warning disable {UserDiagnosticAnalyzer .Decsciptor .Id} // {UserDiagnosticAnalyzer.Decsciptor.Title}
 class Class
 {{
 }}
-#pragma warning restore {UserDiagnosticAnalyzer.Decsciptor.Id} // {UserDiagnosticAnalyzer.Decsciptor.Title}
+#pragma warning restore {UserDiagnosticAnalyzer .Decsciptor .Id} // {UserDiagnosticAnalyzer.Decsciptor.Title}
 "
                 );
             }
@@ -1338,7 +1340,8 @@ class Class
                             case SyntaxKind.EnumDeclaration:
                                 // Report diagnostic on each descendant comment trivia
                                 foreach (
-                                    var trivia in context.Node
+                                    var trivia in context
+                                        .Node
                                         .DescendantTrivia()
                                         .Where(
                                             t =>

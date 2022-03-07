@@ -60,7 +60,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
             _optionService = optionService;
 
             // TODO: make this configurable
-            _languageMap = BidirectionalMap<string, Tuple<Guid>>.Empty
+            _languageMap = BidirectionalMap<string, Tuple<Guid>>
+                .Empty
                 .Add(LanguageNames.CSharp, Tuple.Create(Guids.CSharpLanguageServiceId))
                 .Add(LanguageNames.VisualBasic, Tuple.Create(Guids.VisualBasicLanguageServiceId))
                 .Add(

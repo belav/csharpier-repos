@@ -24,10 +24,12 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.OutOfProcess
         public bool CloseWindow() => _inProc.CloseWindow();
 
         public void Invoke() =>
-            VisualStudioInstance.Editor.SendKeys(
-                new KeyPress(VirtualKey.R, ShiftState.Ctrl),
-                new KeyPress(VirtualKey.V, ShiftState.Ctrl)
-            );
+            VisualStudioInstance
+                .Editor
+                .SendKeys(
+                    new KeyPress(VirtualKey.R, ShiftState.Ctrl),
+                    new KeyPress(VirtualKey.V, ShiftState.Ctrl)
+                );
 
         public void ClickOK() => _inProc.ClickOK();
 

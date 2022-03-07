@@ -88,11 +88,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 var diagnostics = BindingDiagnosticBag.GetInstance();
                 var acyclicInterfaces = MakeAcyclicInterfaces(basesBeingResolved, diagnostics);
                 if (
-                    ImmutableInterlocked.InterlockedCompareExchange(
-                        ref _lazyInterfaces,
-                        acyclicInterfaces,
-                        default(ImmutableArray<NamedTypeSymbol>)
-                    ).IsDefault
+                    ImmutableInterlocked
+                        .InterlockedCompareExchange(
+                            ref _lazyInterfaces,
+                            acyclicInterfaces,
+                            default(ImmutableArray<NamedTypeSymbol>)
+                        )
+                        .IsDefault
                 )
                 {
                     AddDeclarationDiagnostics(diagnostics);
@@ -131,11 +133,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 && this.DeclaringCompilation.IsAttributeType(localBase)
             )
             {
-                MessageID.IDS_FeatureGenericAttributes.CheckFeatureAvailability(
-                    diagnostics,
-                    this.DeclaringCompilation,
-                    baseLocation
-                );
+                MessageID
+                    .IDS_FeatureGenericAttributes
+                    .CheckFeatureAvailability(diagnostics, this.DeclaringCompilation, baseLocation);
             }
 
             // Check constraints on the first declaration with explicit bases.

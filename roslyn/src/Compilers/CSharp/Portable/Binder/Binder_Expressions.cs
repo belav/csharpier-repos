@@ -1339,8 +1339,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                     ImmutableArray<bool> inferredPositions = tupleNames.IsDefault
                         ? default
                         : tupleNames.SelectAsArray(n => n != null);
-                    bool disallowInferredNames =
-                        this.Compilation.LanguageVersion.DisallowInferredTupleElementNames();
+                    bool disallowInferredNames = this.Compilation
+                        .LanguageVersion
+                        .DisallowInferredTupleElementNames();
 
                     // We will not check constraints at this point as this code path
                     // is failure-only and the caller is expected to produce a diagnostic.
@@ -1454,8 +1455,9 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             if (hasNaturalType)
             {
-                bool disallowInferredNames =
-                    this.Compilation.LanguageVersion.DisallowInferredTupleElementNames();
+                bool disallowInferredNames = this.Compilation
+                    .LanguageVersion
+                    .DisallowInferredTupleElementNames();
 
                 tupleTypeOpt = NamedTypeSymbol.CreateTuple(
                     node.Location,
@@ -2055,9 +2057,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                     diagnostics.Add(ErrorCode.ERR_ManagedAddr, location, type);
                     return true;
                 case ManagedKind.UnmanagedWithGenerics
-                      when MessageID.IDS_FeatureUnmanagedConstructedTypes.GetFeatureAvailabilityDiagnosticInfo(
-                          compilation
-                      )
+                      when MessageID
+                          .IDS_FeatureUnmanagedConstructedTypes
+                          .GetFeatureAvailabilityDiagnosticInfo(compilation)
                           is CSDiagnosticInfo diagnosticInfo:
                     diagnostics.Add(diagnosticInfo, location);
                     return true;
@@ -3763,8 +3765,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             // Section 6.2.3 of the spec only applies when the non-null version of the types involved have a
             // built in conversion.
             var discardedUseSiteInfo = CompoundUseSiteInfo<AssemblySymbol>.Discarded;
-            TypeWithAnnotations underlyingTargetTypeWithAnnotations =
-                targetTypeWithAnnotations.Type.GetNullableUnderlyingTypeWithAnnotations();
+            TypeWithAnnotations underlyingTargetTypeWithAnnotations = targetTypeWithAnnotations
+                .Type
+                .GetNullableUnderlyingTypeWithAnnotations();
             var underlyingConversion = Conversions.ClassifyBuiltInConversion(
                 operand.Type,
                 underlyingTargetTypeWithAnnotations.Type,
@@ -4143,10 +4146,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                     out alias
                 );
 
-                localSymbol.ScopeBinder.ValidateDeclarationNameConflictsInScope(
-                    localSymbol,
-                    diagnostics
-                );
+                localSymbol
+                    .ScopeBinder
+                    .ValidateDeclarationNameConflictsInScope(localSymbol, diagnostics);
 
                 if (isVar)
                 {
@@ -5371,8 +5373,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             bool inLegalPosition = true;
 
             // If we are using a language version that does not restrict the position of a stackalloc expression, skip that test.
-            LanguageVersion requiredVersion =
-                MessageID.IDS_FeatureNestedStackalloc.RequiredVersion();
+            LanguageVersion requiredVersion = MessageID
+                .IDS_FeatureNestedStackalloc
+                .RequiredVersion();
             if (requiredVersion > Compilation.LanguageVersion)
             {
                 inLegalPosition =
@@ -5380,11 +5383,13 @@ namespace Microsoft.CodeAnalysis.CSharp
                     && node.IsLegalCSharp73SpanStackAllocPosition();
                 if (!inLegalPosition)
                 {
-                    MessageID.IDS_FeatureNestedStackalloc.CheckFeatureAvailability(
-                        diagnostics,
-                        node,
-                        node.GetFirstToken().GetLocation()
-                    );
+                    MessageID
+                        .IDS_FeatureNestedStackalloc
+                        .CheckFeatureAvailability(
+                            diagnostics,
+                            node,
+                            node.GetFirstToken().GetLocation()
+                        );
                 }
             }
 
@@ -6171,9 +6176,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                 var argSyntax = analyzedArguments.Arguments[0].Syntax;
                 var start = argSyntax.SpanStart;
                 var end =
-                    analyzedArguments.Arguments[
-                        analyzedArguments.Arguments.Count - 1
-                    ].Syntax.Span.End;
+                    analyzedArguments.Arguments[analyzedArguments.Arguments.Count - 1]
+                        .Syntax
+                        .Span
+                        .End;
                 var errorSpan = new TextSpan(start, end - start);
 
                 var loc = new SourceLocation(argSyntax.SyntaxTree, errorSpan);
@@ -7348,11 +7354,13 @@ namespace Microsoft.CodeAnalysis.CSharp
                     diagnostics
                 );
                 var result =
-                    Conversions.ClassifyImplicitConversionFromType(
-                        initializerType,
-                        collectionsIEnumerableType,
-                        ref useSiteInfo
-                    ).IsValid;
+                    Conversions
+                        .ClassifyImplicitConversionFromType(
+                            initializerType,
+                            collectionsIEnumerableType,
+                            ref useSiteInfo
+                        )
+                        .IsValid;
                 diagnostics.Add(node, useSiteInfo);
                 return result;
             }
@@ -7502,9 +7510,9 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             Debug.Assert(collectionInitializerAddMethodBinder != null);
             Debug.Assert(
-                collectionInitializerAddMethodBinder.Flags.Includes(
-                    BinderFlags.CollectionInitializerAddMethod
-                )
+                collectionInitializerAddMethodBinder
+                    .Flags
+                    .Includes(BinderFlags.CollectionInitializerAddMethod)
             );
             Debug.Assert(implicitReceiver != null);
             Debug.Assert((object)implicitReceiver.Type != null);
@@ -11569,8 +11577,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
 
             ImmutableArray<string> argumentNames = analyzedArguments.GetNames();
-            ImmutableArray<RefKind> argumentRefKinds =
-                analyzedArguments.RefKinds.ToImmutableOrNull();
+            ImmutableArray<RefKind> argumentRefKinds = analyzedArguments
+                .RefKinds
+                .ToImmutableOrNull();
             if (!overloadResolutionResult.Succeeded)
             {
                 // If the arguments had an error reported about them then suppress further error

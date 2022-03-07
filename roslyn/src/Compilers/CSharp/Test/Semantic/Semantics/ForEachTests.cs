@@ -1404,10 +1404,9 @@ class C
 
             Assert.Equal(
                 ConversionKind.Identity,
-                BoundNode.GetConversion(
-                    boundNode.ElementConversion,
-                    boundNode.ElementPlaceholder
-                ).Kind
+                BoundNode
+                    .GetConversion(boundNode.ElementConversion, boundNode.ElementPlaceholder)
+                    .Kind
             );
             Assert.Equal(
                 "System.Int32 x",
@@ -1470,10 +1469,9 @@ class C
 
             Assert.Equal(
                 ConversionKind.Identity,
-                BoundNode.GetConversion(
-                    boundNode.ElementConversion,
-                    boundNode.ElementPlaceholder
-                ).Kind
+                BoundNode
+                    .GetConversion(boundNode.ElementConversion, boundNode.ElementPlaceholder)
+                    .Kind
             );
             Assert.Equal(
                 "System.Char c",
@@ -1539,10 +1537,9 @@ class Enumerator
 
             Assert.Equal(
                 ConversionKind.ImplicitNumeric,
-                BoundNode.GetConversion(
-                    boundNode.ElementConversion,
-                    boundNode.ElementPlaceholder
-                ).Kind
+                BoundNode
+                    .GetConversion(boundNode.ElementConversion, boundNode.ElementPlaceholder)
+                    .Kind
             );
             Assert.Equal(
                 "System.Int64 x",
@@ -1608,10 +1605,9 @@ struct Enumerator
 
             Assert.Equal(
                 ConversionKind.ImplicitNumeric,
-                BoundNode.GetConversion(
-                    boundNode.ElementConversion,
-                    boundNode.ElementPlaceholder
-                ).Kind
+                BoundNode
+                    .GetConversion(boundNode.ElementConversion, boundNode.ElementPlaceholder)
+                    .Kind
             );
             Assert.Equal(
                 "System.Int64 x",
@@ -1669,10 +1665,9 @@ class C
 
             Assert.Equal(
                 ConversionKind.Unboxing,
-                BoundNode.GetConversion(
-                    boundNode.ElementConversion,
-                    boundNode.ElementPlaceholder
-                ).Kind
+                BoundNode
+                    .GetConversion(boundNode.ElementConversion, boundNode.ElementPlaceholder)
+                    .Kind
             );
             Assert.Equal(
                 "System.Int64 x",
@@ -1740,10 +1735,9 @@ class Enumerable : System.Collections.Generic.IEnumerable<int>
 
             Assert.Equal(
                 ConversionKind.ImplicitNumeric,
-                BoundNode.GetConversion(
-                    boundNode.ElementConversion,
-                    boundNode.ElementPlaceholder
-                ).Kind
+                BoundNode
+                    .GetConversion(boundNode.ElementConversion, boundNode.ElementPlaceholder)
+                    .Kind
             );
             Assert.Equal(
                 "System.Int64 x",
@@ -1813,10 +1807,9 @@ class Enumerable : System.Collections.Generic.IEnumerable<Enumerable.Hidden>
 
             Assert.Equal(
                 ConversionKind.Identity,
-                BoundNode.GetConversion(
-                    boundNode.ElementConversion,
-                    boundNode.ElementPlaceholder
-                ).Kind
+                BoundNode
+                    .GetConversion(boundNode.ElementConversion, boundNode.ElementPlaceholder)
+                    .Kind
             );
             Assert.Equal(
                 "System.Object x",
@@ -1883,10 +1876,9 @@ class Enumerable : System.Collections.IEnumerable
 
             Assert.Equal(
                 ConversionKind.Unboxing,
-                BoundNode.GetConversion(
-                    boundNode.ElementConversion,
-                    boundNode.ElementPlaceholder
-                ).Kind
+                BoundNode
+                    .GetConversion(boundNode.ElementConversion, boundNode.ElementPlaceholder)
+                    .Kind
             );
             Assert.Equal(
                 "System.Int64 x",
@@ -1947,10 +1939,9 @@ class C
 
             Assert.Equal(
                 ConversionKind.Identity,
-                BoundNode.GetConversion(
-                    boundNode.ElementConversion,
-                    boundNode.ElementPlaceholder
-                ).Kind
+                BoundNode
+                    .GetConversion(boundNode.ElementConversion, boundNode.ElementPlaceholder)
+                    .Kind
             );
             Assert.Equal(
                 SpecialType.System_Int32,
@@ -2000,10 +1991,9 @@ class C
 
             Assert.Equal(
                 ConversionKind.Identity,
-                BoundNode.GetConversion(
-                    boundNode.ElementConversion,
-                    boundNode.ElementPlaceholder
-                ).Kind
+                BoundNode
+                    .GetConversion(boundNode.ElementConversion, boundNode.ElementPlaceholder)
+                    .Kind
             );
             Assert.Equal(
                 SpecialType.System_Char,
@@ -2039,10 +2029,9 @@ class Enumerator
             Assert.NotNull(boundNode.EnumeratorInfoOpt);
             Assert.Equal(
                 ConversionKind.Identity,
-                BoundNode.GetConversion(
-                    boundNode.ElementConversion,
-                    boundNode.ElementPlaceholder
-                ).Kind
+                BoundNode
+                    .GetConversion(boundNode.ElementConversion, boundNode.ElementPlaceholder)
+                    .Kind
             );
             Assert.Equal(
                 SpecialType.System_Int32,
@@ -2073,10 +2062,9 @@ class Enumerable : System.Collections.IEnumerable
             Assert.NotNull(boundNode.EnumeratorInfoOpt);
             Assert.Equal(
                 ConversionKind.Identity,
-                BoundNode.GetConversion(
-                    boundNode.ElementConversion,
-                    boundNode.ElementPlaceholder
-                ).Kind
+                BoundNode
+                    .GetConversion(boundNode.ElementConversion, boundNode.ElementPlaceholder)
+                    .Kind
             );
             Assert.Equal(
                 SpecialType.System_Object,
@@ -2131,10 +2119,9 @@ class C
 
             Assert.Equal(
                 ConversionKind.Identity,
-                BoundNode.GetConversion(
-                    boundNode.ElementConversion,
-                    boundNode.ElementPlaceholder
-                ).Kind
+                BoundNode
+                    .GetConversion(boundNode.ElementConversion, boundNode.ElementPlaceholder)
+                    .Kind
             );
             Assert.Equal(
                 "C.var",
@@ -2187,10 +2174,9 @@ class C
 
             Assert.Equal(
                 ConversionKind.ExplicitDynamic,
-                BoundNode.GetConversion(
-                    boundNode.ElementConversion,
-                    boundNode.ElementPlaceholder
-                ).Kind
+                BoundNode
+                    .GetConversion(boundNode.ElementConversion, boundNode.ElementPlaceholder)
+                    .Kind
             );
             Assert.Equal(
                 "System.Int32 x",
@@ -2251,10 +2237,9 @@ class C
 
             Assert.Equal(
                 ConversionKind.Identity,
-                BoundNode.GetConversion(
-                    boundNode.ElementConversion,
-                    boundNode.ElementPlaceholder
-                ).Kind
+                BoundNode
+                    .GetConversion(boundNode.ElementConversion, boundNode.ElementPlaceholder)
+                    .Kind
             ); //NB: differs from explicit case
             Assert.Equal("dynamic x", boundNode.IterationVariables.Single().ToTestDisplayString());
             Assert.Equal(
@@ -2317,10 +2302,9 @@ public class Enumerable<T>
 
             Assert.Equal(
                 ConversionKind.Identity,
-                BoundNode.GetConversion(
-                    boundNode.ElementConversion,
-                    boundNode.ElementPlaceholder
-                ).Kind
+                BoundNode
+                    .GetConversion(boundNode.ElementConversion, boundNode.ElementPlaceholder)
+                    .Kind
             );
             Assert.Equal(
                 "System.Object x",
@@ -2426,10 +2410,9 @@ interface MyEnumerator
 
             Assert.Equal(
                 ConversionKind.Identity,
-                BoundNode.GetConversion(
-                    boundNode.ElementConversion,
-                    boundNode.ElementPlaceholder
-                ).Kind
+                BoundNode
+                    .GetConversion(boundNode.ElementConversion, boundNode.ElementPlaceholder)
+                    .Kind
             );
             Assert.Equal(
                 "System.Object x",
@@ -2498,10 +2481,9 @@ struct Enumerator
 
             Assert.Equal(
                 ConversionKind.ImplicitNumeric,
-                BoundNode.GetConversion(
-                    boundNode.ElementConversion,
-                    boundNode.ElementPlaceholder
-                ).Kind
+                BoundNode
+                    .GetConversion(boundNode.ElementConversion, boundNode.ElementPlaceholder)
+                    .Kind
             );
             Assert.Equal(
                 "System.Int64 x",
@@ -3939,10 +3921,9 @@ namespace System.Collections
 
             Assert.Equal(
                 ConversionKind.Identity,
-                BoundNode.GetConversion(
-                    boundNode.ElementConversion,
-                    boundNode.ElementPlaceholder
-                ).Kind
+                BoundNode
+                    .GetConversion(boundNode.ElementConversion, boundNode.ElementPlaceholder)
+                    .Kind
             );
             Assert.Equal(
                 SpecialType.System_Char,
@@ -4079,10 +4060,9 @@ public static class Extensions
 
             Assert.Equal(
                 ConversionKind.Identity,
-                BoundNode.GetConversion(
-                    boundNode.ElementConversion,
-                    boundNode.ElementPlaceholder
-                ).Kind
+                BoundNode
+                    .GetConversion(boundNode.ElementConversion, boundNode.ElementPlaceholder)
+                    .Kind
             );
             Assert.Equal(
                 "System.Int32 i",

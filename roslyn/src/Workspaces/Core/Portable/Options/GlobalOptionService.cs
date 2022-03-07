@@ -291,10 +291,9 @@ namespace Microsoft.CodeAnalysis.Options
                             continue;
 
                         if (
-                            !AnalyzerConfigOptions.KeyComparer.Equals(
-                                key,
-                                editorConfigStorage.KeyName
-                            )
+                            !AnalyzerConfigOptions
+                                .KeyComparer
+                                .Equals(key, editorConfigStorage.KeyName)
                         )
                             continue;
 

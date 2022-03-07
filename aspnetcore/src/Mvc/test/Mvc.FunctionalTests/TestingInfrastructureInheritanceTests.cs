@@ -85,15 +85,17 @@ public class TestingInfrastructureInheritanceTests
         using var factory = new CustomizedFactory<GenericHostWebSite.Startup>();
         var callbackCalled = false;
 
-        var lifetimeService = (IHostApplicationLifetime)factory.Services.GetService(
-            typeof(IHostApplicationLifetime)
-        );
-        lifetimeService.ApplicationStopped.Register(
-            () =>
-            {
-                callbackCalled = true;
-            }
-        );
+        var lifetimeService = (IHostApplicationLifetime)factory
+            .Services
+            .GetService(typeof(IHostApplicationLifetime));
+        lifetimeService
+            .ApplicationStopped
+            .Register(
+                () =>
+                {
+                    callbackCalled = true;
+                }
+            );
         factory.Dispose();
 
         // Assert

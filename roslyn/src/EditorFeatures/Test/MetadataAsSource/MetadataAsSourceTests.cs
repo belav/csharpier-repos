@@ -1154,15 +1154,20 @@ namespace N
                 languageVersion: "10"
             );
 
-            context.Workspace.SetOptions(
-                context.Workspace.Options.WithChangedOption(
-                    CSharpCodeStyleOptions.NamespaceDeclarations,
-                    new CodeStyleOption2<NamespaceDeclarationPreference>(
-                        NamespaceDeclarationPreference.FileScoped,
-                        NotificationOption2.Silent
-                    )
-                )
-            );
+            context
+                .Workspace
+                .SetOptions(
+                    context
+                        .Workspace
+                        .Options
+                        .WithChangedOption(
+                            CSharpCodeStyleOptions.NamespaceDeclarations,
+                            new CodeStyleOption2<NamespaceDeclarationPreference>(
+                                NamespaceDeclarationPreference.FileScoped,
+                                NotificationOption2.Silent
+                            )
+                        )
+                );
 
             await context.GenerateAndVerifySourceAsync(
                 "N.C",
@@ -1191,15 +1196,20 @@ public class [|C|]
                 languageVersion: "9"
             );
 
-            context.Workspace.SetOptions(
-                context.Workspace.Options.WithChangedOption(
-                    CSharpCodeStyleOptions.NamespaceDeclarations,
-                    new CodeStyleOption2<NamespaceDeclarationPreference>(
-                        NamespaceDeclarationPreference.FileScoped,
-                        NotificationOption2.Silent
-                    )
-                )
-            );
+            context
+                .Workspace
+                .SetOptions(
+                    context
+                        .Workspace
+                        .Options
+                        .WithChangedOption(
+                            CSharpCodeStyleOptions.NamespaceDeclarations,
+                            new CodeStyleOption2<NamespaceDeclarationPreference>(
+                                NamespaceDeclarationPreference.FileScoped,
+                                NotificationOption2.Silent
+                            )
+                        )
+                );
 
             await context.GenerateAndVerifySourceAsync(
                 "N.C",
@@ -1229,15 +1239,20 @@ namespace N
                 languageVersion: "10"
             );
 
-            context.Workspace.SetOptions(
-                context.Workspace.Options.WithChangedOption(
-                    CSharpCodeStyleOptions.NamespaceDeclarations,
-                    new CodeStyleOption2<NamespaceDeclarationPreference>(
-                        NamespaceDeclarationPreference.BlockScoped,
-                        NotificationOption2.Silent
-                    )
-                )
-            );
+            context
+                .Workspace
+                .SetOptions(
+                    context
+                        .Workspace
+                        .Options
+                        .WithChangedOption(
+                            CSharpCodeStyleOptions.NamespaceDeclarations,
+                            new CodeStyleOption2<NamespaceDeclarationPreference>(
+                                NamespaceDeclarationPreference.BlockScoped,
+                                NotificationOption2.Silent
+                            )
+                        )
+                );
 
             await context.GenerateAndVerifySourceAsync(
                 "N.C",
@@ -2075,7 +2090,8 @@ public class [|C|]
         {
             using var context = TestContext.Create();
             var projectId = ProjectId.CreateNewId();
-            var project = context.CurrentSolution
+            var project = context
+                .CurrentSolution
                 .AddProject(projectId, "ProjectB", "ProjectB", LanguageNames.CSharp)
                 .GetProject(projectId)
                 .WithMetadataReferences(context.DefaultProject.MetadataReferences)
@@ -2093,7 +2109,8 @@ public class [|C|]
         {
             using var context = TestContext.Create(LanguageNames.CSharp);
             var projectId = ProjectId.CreateNewId();
-            var project = context.CurrentSolution
+            var project = context
+                .CurrentSolution
                 .AddProject(projectId, "ProjectB", "ProjectB", LanguageNames.VisualBasic)
                 .GetProject(projectId)
                 .WithMetadataReferences(context.DefaultProject.MetadataReferences)

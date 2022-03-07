@@ -99,9 +99,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Setup
         {
             if (_lazyInstance is null)
             {
-                await threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
-                    cancellationToken
-                );
+                await threadingContext
+                    .JoinableTaskFactory
+                    .SwitchToMainThreadAsync(cancellationToken);
 
                 var shell = (IVsShell7?)await serviceProvider
                     .GetServiceAsync(typeof(SVsShell))
@@ -178,8 +178,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Setup
             // the background thread then we will experience hangs like we see in this bug:
             // https://devdiv.visualstudio.com/DefaultCollection/DevDiv/_workitems?_a=edit&id=190808 or
             // https://devdiv.visualstudio.com/DevDiv/_workitems?id=296981&_a=edit
-            var telemetryService =
-                (VisualStudioWorkspaceTelemetryService)_workspace.Services.GetRequiredService<IWorkspaceTelemetryService>();
+            var telemetryService = (VisualStudioWorkspaceTelemetryService)_workspace
+                .Services
+                .GetRequiredService<IWorkspaceTelemetryService>();
             telemetryService.InitializeTelemetrySession(TelemetryService.DefaultSession);
 
             Logger.Log(
@@ -187,9 +188,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Setup
                 KeyValueLogMessage.Create(
                     m =>
                         m["Version"] =
-                            FileVersionInfo.GetVersionInfo(
-                                typeof(VisualStudioWorkspace).Assembly.Location
-                            ).FileVersion
+                            FileVersionInfo
+                                .GetVersionInfo(typeof(VisualStudioWorkspace).Assembly.Location)
+                                .FileVersion
                 )
             );
 
@@ -312,7 +313,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Setup
             await LoadCallstackExplorerMenusAsync(cancellationToken).ConfigureAwait(true);
 
             // Initialize keybinding reset detector
-            await ComponentModel.DefaultExportProvider
+            await ComponentModel
+                .DefaultExportProvider
                 .GetExportedValue<KeybindingReset.KeybindingResetDetector>()
                 .InitializeAsync()
                 .ConfigureAwait(true);
@@ -405,7 +407,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Setup
         {
             if (_workspace != null)
             {
-                _workspace.Services
+                _workspace
+                    .Services
                     .GetRequiredService<VisualStudioMetadataReferenceManager>()
                     .DisconnectFromVisualStudioNativeServices();
             }
@@ -444,8 +447,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Setup
             //
             // this should give all resources to BulkFileOperation. we do same for things like build,
             // debugging, wait dialog and etc. BulkFileOperation is used for things like git branch switching and etc.
-            var globalNotificationService =
-                _workspace.Services.GetRequiredService<IGlobalOperationNotificationService>();
+            var globalNotificationService = _workspace
+                .Services
+                .GetRequiredService<IGlobalOperationNotificationService>();
 
             // BulkFileOperation can't have nested events. there will be ever only 1 events (Begin/End)
             // so we only need simple tracking.

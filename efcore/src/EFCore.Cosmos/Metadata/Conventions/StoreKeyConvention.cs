@@ -108,9 +108,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                         }
                         else
                         {
-                            idProperty.Builder.HasValueGeneratorFactory(
-                                typeof(IdValueGeneratorFactory)
-                            );
+                            idProperty
+                                .Builder
+                                .HasValueGeneratorFactory(typeof(IdValueGeneratorFactory));
                         }
                     }
 
@@ -256,15 +256,15 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             if (
                 (
                     newPrimaryKey != null
-                    && newPrimaryKey.Properties.Any(
-                        p => p.GetJsonPropertyName() == IdPropertyJsonName
-                    )
+                    && newPrimaryKey
+                        .Properties
+                        .Any(p => p.GetJsonPropertyName() == IdPropertyJsonName)
                 )
                 || (
                     previousPrimaryKey != null
-                    && previousPrimaryKey.Properties.Any(
-                        p => p.GetJsonPropertyName() == IdPropertyJsonName
-                    )
+                    && previousPrimaryKey
+                        .Properties
+                        .Any(p => p.GetJsonPropertyName() == IdPropertyJsonName)
                 )
             )
             {

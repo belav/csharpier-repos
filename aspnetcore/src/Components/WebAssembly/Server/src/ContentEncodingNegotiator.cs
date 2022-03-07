@@ -140,7 +140,8 @@ internal class ContentEncodingNegotiator
     }
 
     private bool ResourceExists(HttpContext context, string extension) =>
-        _webHostEnvironment.WebRootFileProvider.GetFileInfo(
-            context.Request.Path + extension
-        ).Exists;
+        _webHostEnvironment
+            .WebRootFileProvider
+            .GetFileInfo(context.Request.Path + extension)
+            .Exists;
 }

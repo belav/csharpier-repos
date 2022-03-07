@@ -45,17 +45,27 @@ namespace System.Net.Quic.Implementations.MsQuic.Internal
                 switch (endpoint.Address.AddressFamily)
                 {
                     case AddressFamily.InterNetwork:
-                        endpoint.Address.TryWriteBytes(
-                            MemoryMarshal.CreateSpan<byte>(ref socketAddress.Ipv4.sin_addr[0], 4),
-                            out _
-                        );
+                        endpoint
+                            .Address
+                            .TryWriteBytes(
+                                MemoryMarshal.CreateSpan<byte>(
+                                    ref socketAddress.Ipv4.sin_addr[0],
+                                    4
+                                ),
+                                out _
+                            );
                         socketAddress.Ipv4.sin_family = QUIC_ADDRESS_FAMILY.INET;
                         break;
                     case AddressFamily.InterNetworkV6:
-                        endpoint.Address.TryWriteBytes(
-                            MemoryMarshal.CreateSpan<byte>(ref socketAddress.Ipv6.sin6_addr[0], 16),
-                            out _
-                        );
+                        endpoint
+                            .Address
+                            .TryWriteBytes(
+                                MemoryMarshal.CreateSpan<byte>(
+                                    ref socketAddress.Ipv6.sin6_addr[0],
+                                    16
+                                ),
+                                out _
+                            );
                         socketAddress.Ipv6.sin6_family = QUIC_ADDRESS_FAMILY.INET6;
                         break;
                     default:

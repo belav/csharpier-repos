@@ -101,9 +101,9 @@ public class InitCommand : ICommand
             // Only set the UserSecretsId if the user specified an explicit value
             if (string.IsNullOrWhiteSpace(OverrideId))
             {
-                context.Reporter.Output(
-                    Resources.FormatMessage_ProjectAlreadyInitialized(projectPath)
-                );
+                context
+                    .Reporter
+                    .Output(Resources.FormatMessage_ProjectAlreadyInitialized(projectPath));
                 return;
             }
 
@@ -113,7 +113,8 @@ public class InitCommand : ICommand
         {
             // Find the first non-conditional PropertyGroup
             var propertyGroup =
-                projectDocument.Root
+                projectDocument
+                    .Root
                     .DescendantNodes()
                     .FirstOrDefault(
                         node =>
@@ -140,9 +141,9 @@ public class InitCommand : ICommand
         using var xw = XmlWriter.Create(projectPath, settings);
         projectDocument.Save(xw);
 
-        context.Reporter.Output(
-            Resources.FormatMessage_SetUserSecretsIdForProject(newSecretsId, projectPath)
-        );
+        context
+            .Reporter
+            .Output(Resources.FormatMessage_SetUserSecretsIdForProject(newSecretsId, projectPath));
     }
 
     private static string ResolveProjectPath(string name, string path)

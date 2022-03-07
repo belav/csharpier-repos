@@ -1474,8 +1474,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             {
                 if (obsoleteData != null)
                 {
-                    arguments.GetOrCreateData<PropertyEarlyWellKnownAttributeData>().ObsoleteAttributeData =
-                        obsoleteData;
+                    arguments
+                        .GetOrCreateData<PropertyEarlyWellKnownAttributeData>()
+                        .ObsoleteAttributeData = obsoleteData;
                 }
 
                 return (attributeData, boundAttribute);
@@ -1490,11 +1491,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             )
             {
                 bool hasAnyDiagnostics;
-                (attributeData, boundAttribute) = arguments.Binder.GetAttribute(
-                    arguments.AttributeSyntax,
-                    arguments.AttributeType,
-                    out hasAnyDiagnostics
-                );
+                (attributeData, boundAttribute) = arguments
+                    .Binder
+                    .GetAttribute(
+                        arguments.AttributeSyntax,
+                        arguments.AttributeType,
+                        out hasAnyDiagnostics
+                    );
                 if (!attributeData.HasErrors)
                 {
                     string? indexerName = attributeData.CommonConstructorArguments[
@@ -1502,8 +1505,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     ].DecodeValue<string>(SpecialType.System_String);
                     if (indexerName != null)
                     {
-                        arguments.GetOrCreateData<PropertyEarlyWellKnownAttributeData>().IndexerName =
-                            indexerName;
+                        arguments
+                            .GetOrCreateData<PropertyEarlyWellKnownAttributeData>()
+                            .IndexerName = indexerName;
                     }
 
                     if (!hasAnyDiagnostics)
@@ -1572,8 +1576,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             }
             else if (attribute.IsTargetAttribute(this, AttributeDescription.SpecialNameAttribute))
             {
-                arguments.GetOrCreateData<PropertyWellKnownAttributeData>().HasSpecialNameAttribute =
-                    true;
+                arguments
+                    .GetOrCreateData<PropertyWellKnownAttributeData>()
+                    .HasSpecialNameAttribute = true;
             }
             else if (
                 attribute.IsTargetAttribute(
@@ -1582,8 +1587,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 )
             )
             {
-                arguments.GetOrCreateData<PropertyWellKnownAttributeData>().HasExcludeFromCodeCoverageAttribute =
-                    true;
+                arguments
+                    .GetOrCreateData<PropertyWellKnownAttributeData>()
+                    .HasExcludeFromCodeCoverageAttribute = true;
             }
             else if (
                 attribute.IsTargetAttribute(this, AttributeDescription.SkipLocalsInitAttribute)
@@ -1616,8 +1622,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             ) { }
             else if (attribute.IsTargetAttribute(this, AttributeDescription.DisallowNullAttribute))
             {
-                arguments.GetOrCreateData<PropertyWellKnownAttributeData>().HasDisallowNullAttribute =
-                    true;
+                arguments
+                    .GetOrCreateData<PropertyWellKnownAttributeData>()
+                    .HasDisallowNullAttribute = true;
             }
             else if (attribute.IsTargetAttribute(this, AttributeDescription.AllowNullAttribute))
             {
@@ -1636,10 +1643,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             }
             else if (attribute.IsTargetAttribute(this, AttributeDescription.MemberNotNullAttribute))
             {
-                MessageID.IDS_FeatureMemberNotNull.CheckFeatureAvailability(
-                    diagnostics,
-                    arguments.AttributeSyntaxOpt
-                );
+                MessageID
+                    .IDS_FeatureMemberNotNull
+                    .CheckFeatureAvailability(diagnostics, arguments.AttributeSyntaxOpt);
                 CSharpAttributeData.DecodeMemberNotNullAttribute<PropertyWellKnownAttributeData>(
                     ContainingType,
                     ref arguments
@@ -1649,10 +1655,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 attribute.IsTargetAttribute(this, AttributeDescription.MemberNotNullWhenAttribute)
             )
             {
-                MessageID.IDS_FeatureMemberNotNull.CheckFeatureAvailability(
-                    diagnostics,
-                    arguments.AttributeSyntaxOpt
-                );
+                MessageID
+                    .IDS_FeatureMemberNotNull
+                    .CheckFeatureAvailability(diagnostics, arguments.AttributeSyntaxOpt);
                 CSharpAttributeData.DecodeMemberNotNullWhenAttribute<PropertyWellKnownAttributeData>(
                     ContainingType,
                     ref arguments
@@ -1833,12 +1838,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                                     foreach (var parameter in this.Parameters)
                                     {
                                         parameter.ForceComplete(locationOpt, cancellationToken);
-                                        parameter.Type.CheckAllConstraints(
-                                            DeclaringCompilation,
-                                            conversions,
-                                            parameter.Locations[0],
-                                            diagnostics
-                                        );
+                                        parameter
+                                            .Type
+                                            .CheckAllConstraints(
+                                                DeclaringCompilation,
+                                                conversions,
+                                                parameter.Locations[0],
+                                                diagnostics
+                                            );
                                     }
 
                                     this.AddDeclarationDiagnostics(diagnostics);

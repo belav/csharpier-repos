@@ -293,9 +293,9 @@ namespace System.Security.Claims
                 .Invoke(
                     () =>
                     {
-                        AppDomain.CurrentDomain.SetPrincipalPolicy(
-                            PrincipalPolicy.UnauthenticatedPrincipal
-                        );
+                        AppDomain
+                            .CurrentDomain
+                            .SetPrincipalPolicy(PrincipalPolicy.UnauthenticatedPrincipal);
                         Thread.CurrentPrincipal = null;
                         Assert.IsType<GenericPrincipal>(ClaimsPrincipal.Current);
                     }

@@ -73,7 +73,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.InheritanceMarg
             );
 
             var cancellationToken = context.UserCancellationToken;
-            var rehydrated = await viewModel.DefinitionItem
+            var rehydrated = await viewModel
+                .DefinitionItem
                 .TryRehydrateAsync(cancellationToken)
                 .ConfigureAwait(false);
             if (rehydrated == null)

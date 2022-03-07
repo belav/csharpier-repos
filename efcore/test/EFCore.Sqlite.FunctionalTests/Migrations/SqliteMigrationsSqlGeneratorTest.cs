@@ -1182,13 +1182,16 @@ PRAGMA foreign_keys = 1;
             : base(
                 SqliteTestHelpers.Instance,
                 new ServiceCollection().AddEntityFrameworkSqliteNetTopologySuite(),
-                SqliteTestHelpers.Instance.AddProviderOptions(
-                    (
-                        (IRelationalDbContextOptionsBuilderInfrastructure)new SqliteDbContextOptionsBuilder(
-                            new DbContextOptionsBuilder()
-                        ).UseNetTopologySuite()
-                    ).OptionsBuilder
-                ).Options
+                SqliteTestHelpers
+                    .Instance
+                    .AddProviderOptions(
+                        (
+                            (IRelationalDbContextOptionsBuilderInfrastructure)new SqliteDbContextOptionsBuilder(
+                                new DbContextOptionsBuilder()
+                            ).UseNetTopologySuite()
+                        ).OptionsBuilder
+                    )
+                    .Options
             ) { }
     }
 }

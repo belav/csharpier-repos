@@ -36,9 +36,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             var fk = keylessType.AddForeignKey(fkProperty, key, entityType);
             Assert.Equal(
                 CoreStrings.NavigationToKeylessType(nameof(B.ManyAs), nameof(A)),
-                Assert.Throws<InvalidOperationException>(
-                    () => fk.SetPrincipalToDependent(nameof(B.ManyAs))
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(
+                        () => fk.SetPrincipalToDependent(nameof(B.ManyAs))
+                    )
+                    .Message
             );
         }
 

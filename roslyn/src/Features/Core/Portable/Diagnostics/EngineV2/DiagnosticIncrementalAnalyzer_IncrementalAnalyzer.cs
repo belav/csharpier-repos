@@ -394,10 +394,14 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                 return;
             }
 
-            var removeDiagnosticsOnDocumentClose = document.Project.Solution.Options.GetOption(
-                ServiceFeatureOnOffOptions.RemoveDocumentDiagnosticsOnDocumentClose,
-                document.Project.Language
-            );
+            var removeDiagnosticsOnDocumentClose = document
+                .Project
+                .Solution
+                .Options
+                .GetOption(
+                    ServiceFeatureOnOffOptions.RemoveDocumentDiagnosticsOnDocumentClose,
+                    document.Project.Language
+                );
 
             if (!removeDiagnosticsOnDocumentClose)
             {
@@ -580,9 +584,11 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
 
             // include all analyzers if option is on
             if (
-                project.Solution.Workspace.Options.GetOption(
-                    InternalDiagnosticsOptions.ProcessHiddenDiagnostics
-                )
+                project
+                    .Solution
+                    .Workspace
+                    .Options
+                    .GetOption(InternalDiagnosticsOptions.ProcessHiddenDiagnostics)
             )
             {
                 return stateSets.ToList();
@@ -736,9 +742,9 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                         RoslynDebug.Assert(newAnalysisResult.DocumentIds != null);
 
                         // first remove ones no longer needed.
-                        var documentsToRemove = oldAnalysisResult.DocumentIds.Except(
-                            newAnalysisResult.DocumentIds
-                        );
+                        var documentsToRemove = oldAnalysisResult
+                            .DocumentIds
+                            .Except(newAnalysisResult.DocumentIds);
                         RaiseProjectDiagnosticsRemoved(
                             stateSet,
                             oldAnalysisResult.ProjectId,

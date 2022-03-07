@@ -195,10 +195,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                     // or that was explicitly written in code (so that GetSemanticInfo can find the syntax in the bound tree).
                     if (
                         !isCast
-                        && source.Type.Equals(
-                            destination,
-                            TypeCompareKind.IgnoreNullableModifiersForReferenceTypes
-                        )
+                        && source
+                            .Type
+                            .Equals(
+                                destination,
+                                TypeCompareKind.IgnoreNullableModifiersForReferenceTypes
+                            )
                     )
                     {
                         return source;
@@ -921,8 +923,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                 diagnostics: diagnostics
             );
 
-            TypeSymbol conversionParameterType =
-                conversion.BestUserDefinedConversionAnalysis.Operator.GetParameterType(0);
+            TypeSymbol conversionParameterType = conversion
+                .BestUserDefinedConversionAnalysis
+                .Operator
+                .GetParameterType(0);
             CompoundUseSiteInfo<AssemblySymbol> useSiteInfo = GetNewCompoundUseSiteInfo(
                 diagnostics
             );
@@ -1886,11 +1890,13 @@ namespace Microsoft.CodeAnalysis.CSharp
             Debug.Assert(
                 !isExtensionMethod
                     || (
-                        Conversions.ConvertExtensionMethodThisArg(
-                            methodParameters[0].Type,
-                            receiverOpt!.Type,
-                            ref useSiteInfo
-                        ).Exists && useSiteInfo.Diagnostics.IsNullOrEmpty()
+                        Conversions
+                            .ConvertExtensionMethodThisArg(
+                                methodParameters[0].Type,
+                                receiverOpt!.Type,
+                                ref useSiteInfo
+                            )
+                            .Exists && useSiteInfo.Diagnostics.IsNullOrEmpty()
                     )
             );
 

@@ -117,13 +117,15 @@ namespace Microsoft.Extensions.Caching.Memory
                 throw new ArgumentNullException(nameof(callback));
             }
 
-            entry.PostEvictionCallbacks.Add(
-                new PostEvictionCallbackRegistration()
-                {
-                    EvictionCallback = callback,
-                    State = state
-                }
-            );
+            entry
+                .PostEvictionCallbacks
+                .Add(
+                    new PostEvictionCallbackRegistration()
+                    {
+                        EvictionCallback = callback,
+                        State = state
+                    }
+                );
             return entry;
         }
 

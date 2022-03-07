@@ -108,14 +108,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
                 var currentPragmaDirective = (PragmaWarningDirectiveTriviaSyntax)currentDirective;
 
                 // Compute the directive state
-                PragmaWarningState directiveState =
-                    currentPragmaDirective.DisableOrRestoreKeyword.Kind() switch
-                    {
-                        SyntaxKind.DisableKeyword => PragmaWarningState.Disabled,
-                        SyntaxKind.RestoreKeyword => PragmaWarningState.Default,
-                        SyntaxKind.EnableKeyword => PragmaWarningState.Enabled,
-                        var kind => throw ExceptionUtilities.UnexpectedValue(kind)
-                    };
+                PragmaWarningState directiveState = currentPragmaDirective
+                    .DisableOrRestoreKeyword
+                    .Kind() switch
+                {
+                    SyntaxKind.DisableKeyword => PragmaWarningState.Disabled,
+                    SyntaxKind.RestoreKeyword => PragmaWarningState.Default,
+                    SyntaxKind.EnableKeyword => PragmaWarningState.Enabled,
+                    var kind => throw ExceptionUtilities.UnexpectedValue(kind)
+                };
 
                 // Check if this directive applies for all (e.g., #pragma warning disable)
                 if (currentPragmaDirective.ErrorCodes.Count == 0)

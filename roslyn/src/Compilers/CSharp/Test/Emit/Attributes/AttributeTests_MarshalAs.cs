@@ -34,13 +34,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 var compilation = CreateEmptyCompilation(
                     new SyntaxTree[0],
                     new[] { assembly.GetReference() },
-                    options: TestOptions.DebugDll.WithMetadataImportOptions(
-                        MetadataImportOptions.All
-                    )
+                    options: TestOptions
+                        .DebugDll
+                        .WithMetadataImportOptions(MetadataImportOptions.All)
                 );
 
                 foreach (
-                    NamedTypeSymbol type in compilation.GlobalNamespace
+                    NamedTypeSymbol type in compilation
+                        .GlobalNamespace
                         .GetMembers()
                         .Where(s => s.Kind == SymbolKind.NamedType)
                 )
@@ -78,13 +79,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 var compilation = CreateEmptyCompilation(
                     new SyntaxTree[0],
                     new[] { assembly.GetReference() },
-                    options: TestOptions.ReleaseDll.WithMetadataImportOptions(
-                        MetadataImportOptions.All
-                    )
+                    options: TestOptions
+                        .ReleaseDll
+                        .WithMetadataImportOptions(MetadataImportOptions.All)
                 );
 
                 foreach (
-                    NamedTypeSymbol type in compilation.GlobalNamespace
+                    NamedTypeSymbol type in compilation
+                        .GlobalNamespace
                         .GetMembers()
                         .Where(s => s.Kind == SymbolKind.NamedType)
                 )
@@ -808,12 +810,16 @@ public class X
     public int SafeArray10;
 }
 ";
-            var arrayAqn = Encoding.ASCII.GetBytes(
-                "System.Int32*[][], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
-            );
-            var openGenericAqn = Encoding.ASCII.GetBytes(
-                "System.Nullable`1, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
-            );
+            var arrayAqn = Encoding
+                .ASCII
+                .GetBytes(
+                    "System.Int32*[][], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                );
+            var openGenericAqn = Encoding
+                .ASCII
+                .GetBytes(
+                    "System.Nullable`1, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                );
 
             var blobs = new Dictionary<string, byte[]>
             {
@@ -857,9 +863,11 @@ public class X
     public int SafeArray11;
 }
 ";
-            var nestedAqn = Encoding.ASCII.GetBytes(
-                "C`1+D`1+E[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089],[System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]"
-            );
+            var nestedAqn = Encoding
+                .ASCII
+                .GetBytes(
+                    "C`1+D`1+E[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089],[System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]"
+                );
 
             var blobs = new Dictionary<string, byte[]>
             {
@@ -1192,18 +1200,22 @@ public class X
                 {
                     "CustomMarshaler6",
                     new byte[] { 0x2c, 0x00, 0x00, 0x60 }.Append(
-                        Encoding.UTF8.GetBytes(
-                            "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\0"
-                        )
+                        Encoding
+                            .UTF8
+                            .GetBytes(
+                                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\0"
+                            )
                     )
                 },
                 { "CustomMarshaler7", new byte[] { 0x2c, 0x00, 0x00, 0x00, 0x00 } },
                 {
                     "CustomMarshaler8",
                     new byte[] { 0x2c, 0x00, 0x00, 0x59 }.Append(
-                        Encoding.UTF8.GetBytes(
-                            "System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089\0"
-                        )
+                        Encoding
+                            .UTF8
+                            .GetBytes(
+                                "System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089\0"
+                            )
                     )
                 },
                 {

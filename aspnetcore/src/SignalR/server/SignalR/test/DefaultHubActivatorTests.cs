@@ -55,9 +55,11 @@ public class DefaultHubActivatorTests
     {
         Assert.Equal(
             "hub",
-            Assert.Throws<ArgumentNullException>(
-                () => new DefaultHubActivator<Hub>(Mock.Of<IServiceProvider>()).Release(null)
-            ).ParamName
+            Assert
+                .Throws<ArgumentNullException>(
+                    () => new DefaultHubActivator<Hub>(Mock.Of<IServiceProvider>()).Release(null)
+                )
+                .ParamName
         );
     }
 }

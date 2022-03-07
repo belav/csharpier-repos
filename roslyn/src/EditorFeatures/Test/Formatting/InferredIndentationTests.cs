@@ -21,9 +21,12 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Formatting
         public async Task BlankFileMatchesWorkspaceSettings()
         {
             using var testWorkspace = CreateWithLines("");
-            var options = await testWorkspace.CurrentSolution.Projects
+            var options = await testWorkspace
+                .CurrentSolution
+                .Projects
                 .Single()
-                .Documents.Single()
+                .Documents
+                .Single()
                 .GetOptionsAsync();
 
             Assert.Equal(
@@ -36,9 +39,12 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Formatting
         public async Task SingleLineWithTab()
         {
             using var testWorkspace = CreateWithLines("class C", "{", "\tvoid M() { }", "}");
-            var options = await testWorkspace.CurrentSolution.Projects
+            var options = await testWorkspace
+                .CurrentSolution
+                .Projects
                 .Single()
-                .Documents.Single()
+                .Documents
+                .Single()
                 .GetOptionsAsync();
 
             Assert.True(options.GetOption(FormattingOptions.UseTabs));
@@ -48,9 +54,12 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Formatting
         public async Task SingleLineWithFourSpaces()
         {
             using var testWorkspace = CreateWithLines("class C", "{", "    void M() { }", "}");
-            var options = await testWorkspace.CurrentSolution.Projects
+            var options = await testWorkspace
+                .CurrentSolution
+                .Projects
                 .Single()
-                .Documents.Single()
+                .Documents
+                .Single()
                 .GetOptionsAsync();
 
             Assert.False(options.GetOption(FormattingOptions.UseTabs));
@@ -63,13 +72,13 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Formatting
                 string.Join("\r\n", lines),
                 openDocuments: true
             );
-            var editorOptionsFactoryService =
-                workspace.ExportProvider.GetExportedValue<IEditorOptionsFactoryService>();
+            var editorOptionsFactoryService = workspace
+                .ExportProvider
+                .GetExportedValue<IEditorOptionsFactoryService>();
 
-            editorOptionsFactoryService.GlobalOptions.SetOptionValue(
-                DefaultOptions.AdaptiveFormattingOptionId,
-                true
-            );
+            editorOptionsFactoryService
+                .GlobalOptions
+                .SetOptionValue(DefaultOptions.AdaptiveFormattingOptionId, true);
 
             return workspace;
         }

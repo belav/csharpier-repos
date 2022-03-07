@@ -19,9 +19,9 @@ namespace Internal.Cryptography.Pal
             if (chainContext == IntPtr.Zero)
                 throw new ArgumentNullException(nameof(chainContext));
 
-            SafeX509ChainHandle certChainHandle = Interop.Crypt32.CertDuplicateCertificateChain(
-                chainContext
-            );
+            SafeX509ChainHandle certChainHandle = Interop
+                .Crypt32
+                .CertDuplicateCertificateChain(chainContext);
             if (certChainHandle == null || certChainHandle.IsInvalid)
                 throw new CryptographicException(
                     SR.Cryptography_InvalidContextHandle,
@@ -48,12 +48,14 @@ namespace Internal.Cryptography.Pal
                 status.cbSize = sizeof(CERT_CHAIN_POLICY_STATUS);
 
                 if (
-                    !Interop.crypt32.CertVerifyCertificateChainPolicy(
-                        ChainPolicy.CERT_CHAIN_POLICY_BASE,
-                        _chain,
-                        ref para,
-                        ref status
-                    )
+                    !Interop
+                        .crypt32
+                        .CertVerifyCertificateChainPolicy(
+                            ChainPolicy.CERT_CHAIN_POLICY_BASE,
+                            _chain,
+                            ref para,
+                            ref status
+                        )
                 )
                 {
                     int errorCode = Marshal.GetLastWin32Error();

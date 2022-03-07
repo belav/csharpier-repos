@@ -357,7 +357,8 @@ WHERE ((((((((((((([c].[CustomerID] = @__s1) OR ([c].[CustomerID] = @__s2)) OR (
                     .Throws<InvalidOperationException>(
                         () => base.MakeBinary_does_not_throw_for_unsupported_operator()
                     )
-                    .Message.Replace("\r", "")
+                    .Message
+                    .Replace("\r", "")
                     .Replace("\n", "")
             );
         }
@@ -379,7 +380,8 @@ WHERE ((((((((((((([c].[CustomerID] = @__s1) OR ([c].[CustomerID] = @__s2)) OR (
                         .Throws<InvalidOperationException>(
                             () => query(context, new[] { "ALFKI" }).First().CustomerID
                         )
-                        .Message.Replace("\r", "")
+                        .Message
+                        .Replace("\r", "")
                         .Replace("\n", "")
                 );
             }
@@ -394,7 +396,8 @@ WHERE ((((((((((((([c].[CustomerID] = @__s1) OR ([c].[CustomerID] = @__s2)) OR (
                         .Throws<InvalidOperationException>(
                             () => query(context, new[] { "ANATR" }).First().CustomerID
                         )
-                        .Message.Replace("\r", "")
+                        .Message
+                        .Replace("\r", "")
                         .Replace("\n", "")
                 );
             }
@@ -417,7 +420,8 @@ WHERE ((((((((((((([c].[CustomerID] = @__s1) OR ([c].[CustomerID] = @__s2)) OR (
                         await Assert.ThrowsAsync<InvalidOperationException>(
                             () => Enumerate(query(context, new[] { "ALFKI" }))
                         )
-                    ).Message
+                    )
+                        .Message
                         .Replace("\r", "")
                         .Replace("\n", "")
                 );
@@ -433,7 +437,8 @@ WHERE ((((((((((((([c].[CustomerID] = @__s1) OR ([c].[CustomerID] = @__s2)) OR (
                         await Assert.ThrowsAsync<InvalidOperationException>(
                             () => Enumerate(query(context, new[] { "ANATR" }))
                         )
-                    ).Message
+                    )
+                        .Message
                         .Replace("\r", "")
                         .Replace("\n", "")
                 );

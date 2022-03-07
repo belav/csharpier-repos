@@ -58,20 +58,24 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
             // === Preview View ===
             // This is the actual view, that shows the diff
             view.TranslatesAutoresizingMaskIntoConstraints = false;
-            NSLayoutConstraint.Create(
-                view,
-                NSLayoutAttribute.Width,
-                NSLayoutRelation.GreaterThanOrEqual,
-                1,
-                originalSize.Width
-            ).Active = true;
-            NSLayoutConstraint.Create(
-                view,
-                NSLayoutAttribute.Height,
-                NSLayoutRelation.GreaterThanOrEqual,
-                1,
-                originalSize.Height
-            ).Active = true;
+            NSLayoutConstraint
+                .Create(
+                    view,
+                    NSLayoutAttribute.Width,
+                    NSLayoutRelation.GreaterThanOrEqual,
+                    1,
+                    originalSize.Width
+                )
+                .Active = true;
+            NSLayoutConstraint
+                .Create(
+                    view,
+                    NSLayoutAttribute.Height,
+                    NSLayoutRelation.GreaterThanOrEqual,
+                    1,
+                    originalSize.Height
+                )
+                .Active = true;
             view.Subviews[0].TranslatesAutoresizingMaskIntoConstraints = false;
             view.WantsLayer = true;
 
@@ -183,37 +187,44 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
                 this.titleField.AttributedStringValue = attributedStringTitle;
                 // We do this separately, because the title sometimes isn't there (i.e. no diagnostics ID)
                 // and we want the preview to stretch to the top
-                NSLayoutConstraint.Create(
-                    view,
-                    NSLayoutAttribute.Top,
-                    NSLayoutRelation.Equal,
-                    titlePlaceholder,
-                    NSLayoutAttribute.Bottom,
-                    1,
-                    0
-                ).Active = true;
+                NSLayoutConstraint
+                    .Create(
+                        view,
+                        NSLayoutAttribute.Top,
+                        NSLayoutRelation.Equal,
+                        titlePlaceholder,
+                        NSLayoutAttribute.Bottom,
+                        1,
+                        0
+                    )
+                    .Active = true;
             }
             else
             {
-                NSLayoutConstraint.Create(
-                    view,
-                    NSLayoutAttribute.Top,
-                    NSLayoutRelation.Equal,
-                    this,
-                    NSLayoutAttribute.Top,
-                    1,
-                    0
-                ).Active = true;
+                NSLayoutConstraint
+                    .Create(
+                        view,
+                        NSLayoutAttribute.Top,
+                        NSLayoutRelation.Equal,
+                        this,
+                        NSLayoutAttribute.Top,
+                        1,
+                        0
+                    )
+                    .Active = true;
             }
 
             NSLayoutConstraint.ActivateConstraints(constraints);
 
-            _differenceViewerPreview.Viewer.InlineView.TryMoveCaretToAndEnsureVisible(
-                new Microsoft.VisualStudio.Text.SnapshotPoint(
-                    _differenceViewerPreview.Viewer.InlineView.TextSnapshot,
-                    0
-                )
-            );
+            _differenceViewerPreview
+                .Viewer
+                .InlineView
+                .TryMoveCaretToAndEnsureVisible(
+                    new Microsoft.VisualStudio.Text.SnapshotPoint(
+                        _differenceViewerPreview.Viewer.InlineView.TextSnapshot,
+                        0
+                    )
+                );
         }
 
         public PreviewPane(IntPtr ptr) : base(ptr) { }

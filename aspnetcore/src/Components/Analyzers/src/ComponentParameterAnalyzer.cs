@@ -121,10 +121,12 @@ public class ComponentParameterAnalyzer : DiagnosticAnalyzer
                                         captureUnmatchedValuesParameters.Add(property);
 
                                         // Check the type, we need to be able to assign a Dictionary<string, object>
-                                        var conversion = context.Compilation.ClassifyConversion(
-                                            symbols.ParameterCaptureUnmatchedValuesRuntimeType,
-                                            property.Type
-                                        );
+                                        var conversion = context
+                                            .Compilation
+                                            .ClassifyConversion(
+                                                symbols.ParameterCaptureUnmatchedValuesRuntimeType,
+                                                property.Type
+                                            );
                                         if (!conversion.Exists || conversion.IsExplicit)
                                         {
                                             context.ReportDiagnostic(
@@ -134,12 +136,16 @@ public class ComponentParameterAnalyzer : DiagnosticAnalyzer
                                                     property.ToDisplayString(
                                                         SymbolDisplayFormat.CSharpErrorMessageFormat
                                                     ),
-                                                    property.Type.ToDisplayString(
-                                                        SymbolDisplayFormat.CSharpErrorMessageFormat
-                                                    ),
-                                                    symbols.ParameterCaptureUnmatchedValuesRuntimeType.ToDisplayString(
-                                                        SymbolDisplayFormat.CSharpErrorMessageFormat
-                                                    )
+                                                    property
+                                                        .Type
+                                                        .ToDisplayString(
+                                                            SymbolDisplayFormat.CSharpErrorMessageFormat
+                                                        ),
+                                                    symbols
+                                                        .ParameterCaptureUnmatchedValuesRuntimeType
+                                                        .ToDisplayString(
+                                                            SymbolDisplayFormat.CSharpErrorMessageFormat
+                                                        )
                                                 )
                                             );
                                         }

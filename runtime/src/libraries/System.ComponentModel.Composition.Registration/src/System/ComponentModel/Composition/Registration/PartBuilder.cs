@@ -526,10 +526,9 @@ namespace System.ComponentModel.Composition.Registration
                 foreach (PropertyInfo pi in type.GetProperties())
                 {
                     List<Attribute> attributes = null;
-                    PropertyInfo declaredPi = pi.DeclaringType.UnderlyingSystemType.GetProperty(
-                        pi.Name,
-                        pi.PropertyType
-                    );
+                    PropertyInfo declaredPi = pi.DeclaringType
+                        .UnderlyingSystemType
+                        .GetProperty(pi.Name, pi.PropertyType);
                     int importsBuilt = 0;
                     bool checkedIfConfigured = false;
                     bool isConfigured = false;

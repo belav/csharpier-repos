@@ -2101,7 +2101,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 QuickAttributeChecker checker =
                     this.DeclaringCompilation
                         .GetBinderFactory(node.SyntaxTree)
-                        .GetBinder(node).QuickAttributeChecker;
+                        .GetBinder(node)
+                        .QuickAttributeChecker;
                 return checker.IsPossibleMatch(node, QuickAttributes.AssemblySignatureKey);
             }
 
@@ -2110,7 +2111,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 QuickAttributeChecker checker =
                     this.DeclaringCompilation
                         .GetBinderFactory(node.SyntaxTree)
-                        .GetBinder(node).QuickAttributeChecker;
+                        .GetBinder(node)
+                        .QuickAttributeChecker;
                 return checker.IsPossibleMatch(node, QuickAttributes.AssemblyKeyName);
             }
 
@@ -2119,7 +2121,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 QuickAttributeChecker checker =
                     this.DeclaringCompilation
                         .GetBinderFactory(node.SyntaxTree)
-                        .GetBinder(node).QuickAttributeChecker;
+                        .GetBinder(node)
+                        .QuickAttributeChecker;
                 return checker.IsPossibleMatch(node, QuickAttributes.AssemblyKeyFile);
             }
         }
@@ -2157,7 +2160,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             QuickAttributeChecker checker =
                 this.DeclaringCompilation
                     .GetBinderFactory(node.SyntaxTree)
-                    .GetBinder(node).QuickAttributeChecker;
+                    .GetBinder(node)
+                    .QuickAttributeChecker;
 
             return checker.IsPossibleMatch(node, QuickAttributes.TypeForwardedTo);
         }
@@ -2995,8 +2999,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             )
             {
                 var signatureKey = (string)attribute.CommonConstructorArguments[0].ValueInternal;
-                arguments.GetOrCreateData<CommonAssemblyWellKnownAttributeData>().AssemblySignatureKeyAttributeSetting =
-                    signatureKey;
+                arguments
+                    .GetOrCreateData<CommonAssemblyWellKnownAttributeData>()
+                    .AssemblySignatureKeyAttributeSetting = signatureKey;
 
                 if (!StrongNameKeys.IsValidPublicKeyString(signatureKey))
                 {
@@ -3013,24 +3018,32 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 attribute.IsTargetAttribute(this, AttributeDescription.AssemblyKeyFileAttribute)
             )
             {
-                arguments.GetOrCreateData<CommonAssemblyWellKnownAttributeData>().AssemblyKeyFileAttributeSetting =
-                    (string)attribute.CommonConstructorArguments[0].ValueInternal;
+                arguments
+                    .GetOrCreateData<CommonAssemblyWellKnownAttributeData>()
+                    .AssemblyKeyFileAttributeSetting = (string)attribute.CommonConstructorArguments[
+                    0
+                ].ValueInternal;
             }
             else if (
                 attribute.IsTargetAttribute(this, AttributeDescription.AssemblyKeyNameAttribute)
             )
             {
-                arguments.GetOrCreateData<CommonAssemblyWellKnownAttributeData>().AssemblyKeyContainerAttributeSetting =
+                arguments
+                    .GetOrCreateData<CommonAssemblyWellKnownAttributeData>()
+                    .AssemblyKeyContainerAttributeSetting =
                     (string)attribute.CommonConstructorArguments[0].ValueInternal;
             }
             else if (
                 attribute.IsTargetAttribute(this, AttributeDescription.AssemblyDelaySignAttribute)
             )
             {
-                arguments.GetOrCreateData<CommonAssemblyWellKnownAttributeData>().AssemblyDelaySignAttributeSetting =
-                    (bool)attribute.CommonConstructorArguments[0].ValueInternal
-                        ? ThreeState.True
-                        : ThreeState.False;
+                arguments
+                    .GetOrCreateData<CommonAssemblyWellKnownAttributeData>()
+                    .AssemblyDelaySignAttributeSetting = (bool)attribute.CommonConstructorArguments[
+                    0
+                ].ValueInternal
+                    ? ThreeState.True
+                    : ThreeState.False;
             }
             else if (
                 attribute.IsTargetAttribute(this, AttributeDescription.AssemblyVersionAttribute)
@@ -3061,8 +3074,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     );
                 }
 
-                arguments.GetOrCreateData<CommonAssemblyWellKnownAttributeData>().AssemblyVersionAttributeSetting =
-                    version;
+                arguments
+                    .GetOrCreateData<CommonAssemblyWellKnownAttributeData>()
+                    .AssemblyVersionAttributeSetting = version;
             }
             else if (
                 attribute.IsTargetAttribute(this, AttributeDescription.AssemblyFileVersionAttribute)
@@ -3083,19 +3097,25 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     );
                 }
 
-                arguments.GetOrCreateData<CommonAssemblyWellKnownAttributeData>().AssemblyFileVersionAttributeSetting =
-                    verString;
+                arguments
+                    .GetOrCreateData<CommonAssemblyWellKnownAttributeData>()
+                    .AssemblyFileVersionAttributeSetting = verString;
             }
             else if (attribute.IsTargetAttribute(this, AttributeDescription.AssemblyTitleAttribute))
             {
-                arguments.GetOrCreateData<CommonAssemblyWellKnownAttributeData>().AssemblyTitleAttributeSetting =
-                    (string)attribute.CommonConstructorArguments[0].ValueInternal;
+                arguments
+                    .GetOrCreateData<CommonAssemblyWellKnownAttributeData>()
+                    .AssemblyTitleAttributeSetting = (string)attribute.CommonConstructorArguments[
+                    0
+                ].ValueInternal;
             }
             else if (
                 attribute.IsTargetAttribute(this, AttributeDescription.AssemblyDescriptionAttribute)
             )
             {
-                arguments.GetOrCreateData<CommonAssemblyWellKnownAttributeData>().AssemblyDescriptionAttributeSetting =
+                arguments
+                    .GetOrCreateData<CommonAssemblyWellKnownAttributeData>()
+                    .AssemblyDescriptionAttributeSetting =
                     (string)attribute.CommonConstructorArguments[0].ValueInternal;
             }
             else if (
@@ -3128,22 +3148,29 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     }
                 }
 
-                arguments.GetOrCreateData<CommonAssemblyWellKnownAttributeData>().AssemblyCultureAttributeSetting =
-                    cultureString;
+                arguments
+                    .GetOrCreateData<CommonAssemblyWellKnownAttributeData>()
+                    .AssemblyCultureAttributeSetting = cultureString;
             }
             else if (
                 attribute.IsTargetAttribute(this, AttributeDescription.AssemblyCompanyAttribute)
             )
             {
-                arguments.GetOrCreateData<CommonAssemblyWellKnownAttributeData>().AssemblyCompanyAttributeSetting =
-                    (string)attribute.CommonConstructorArguments[0].ValueInternal;
+                arguments
+                    .GetOrCreateData<CommonAssemblyWellKnownAttributeData>()
+                    .AssemblyCompanyAttributeSetting = (string)attribute.CommonConstructorArguments[
+                    0
+                ].ValueInternal;
             }
             else if (
                 attribute.IsTargetAttribute(this, AttributeDescription.AssemblyProductAttribute)
             )
             {
-                arguments.GetOrCreateData<CommonAssemblyWellKnownAttributeData>().AssemblyProductAttributeSetting =
-                    (string)attribute.CommonConstructorArguments[0].ValueInternal;
+                arguments
+                    .GetOrCreateData<CommonAssemblyWellKnownAttributeData>()
+                    .AssemblyProductAttributeSetting = (string)attribute.CommonConstructorArguments[
+                    0
+                ].ValueInternal;
             }
             else if (
                 attribute.IsTargetAttribute(
@@ -3152,7 +3179,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 )
             )
             {
-                arguments.GetOrCreateData<CommonAssemblyWellKnownAttributeData>().AssemblyInformationalVersionAttributeSetting =
+                arguments
+                    .GetOrCreateData<CommonAssemblyWellKnownAttributeData>()
+                    .AssemblyInformationalVersionAttributeSetting =
                     (string)attribute.CommonConstructorArguments[0].ValueInternal;
             }
             else if (
@@ -3189,14 +3218,18 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 attribute.IsTargetAttribute(this, AttributeDescription.AssemblyCopyrightAttribute)
             )
             {
-                arguments.GetOrCreateData<CommonAssemblyWellKnownAttributeData>().AssemblyCopyrightAttributeSetting =
+                arguments
+                    .GetOrCreateData<CommonAssemblyWellKnownAttributeData>()
+                    .AssemblyCopyrightAttributeSetting =
                     (string)attribute.CommonConstructorArguments[0].ValueInternal;
             }
             else if (
                 attribute.IsTargetAttribute(this, AttributeDescription.AssemblyTrademarkAttribute)
             )
             {
-                arguments.GetOrCreateData<CommonAssemblyWellKnownAttributeData>().AssemblyTrademarkAttributeSetting =
+                arguments
+                    .GetOrCreateData<CommonAssemblyWellKnownAttributeData>()
+                    .AssemblyTrademarkAttributeSetting =
                     (string)attribute.CommonConstructorArguments[0].ValueInternal;
             }
             else if (
@@ -3220,8 +3253,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     nameFlags = (AssemblyFlags)(uint)value;
                 }
 
-                arguments.GetOrCreateData<CommonAssemblyWellKnownAttributeData>().AssemblyFlagsAttributeSetting =
-                    nameFlags;
+                arguments
+                    .GetOrCreateData<CommonAssemblyWellKnownAttributeData>()
+                    .AssemblyFlagsAttributeSetting = nameFlags;
             }
             else if (attribute.IsSecurityAttribute(_compilation))
             {
@@ -3271,15 +3305,17 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 )
             )
             {
-                arguments.GetOrCreateData<CommonAssemblyWellKnownAttributeData>().HasCompilationRelaxationsAttribute =
-                    true;
+                arguments
+                    .GetOrCreateData<CommonAssemblyWellKnownAttributeData>()
+                    .HasCompilationRelaxationsAttribute = true;
             }
             else if (
                 attribute.IsTargetAttribute(this, AttributeDescription.ReferenceAssemblyAttribute)
             )
             {
-                arguments.GetOrCreateData<CommonAssemblyWellKnownAttributeData>().HasReferenceAssemblyAttribute =
-                    true;
+                arguments
+                    .GetOrCreateData<CommonAssemblyWellKnownAttributeData>()
+                    .HasReferenceAssemblyAttribute = true;
             }
             else if (
                 attribute.IsTargetAttribute(
@@ -3295,20 +3331,22 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     switch (namedArg.Key)
                     {
                         case "WrapNonExceptionThrows":
-                            wrapNonExceptionThrows = namedArg.Value.DecodeValue<bool>(
-                                SpecialType.System_Boolean
-                            );
+                            wrapNonExceptionThrows = namedArg
+                                .Value
+                                .DecodeValue<bool>(SpecialType.System_Boolean);
                             break;
                     }
                 }
 
-                arguments.GetOrCreateData<CommonAssemblyWellKnownAttributeData>().RuntimeCompatibilityWrapNonExceptionThrows =
-                    wrapNonExceptionThrows;
+                arguments
+                    .GetOrCreateData<CommonAssemblyWellKnownAttributeData>()
+                    .RuntimeCompatibilityWrapNonExceptionThrows = wrapNonExceptionThrows;
             }
             else if (attribute.IsTargetAttribute(this, AttributeDescription.DebuggableAttribute))
             {
-                arguments.GetOrCreateData<CommonAssemblyWellKnownAttributeData>().HasDebuggableAttribute =
-                    true;
+                arguments
+                    .GetOrCreateData<CommonAssemblyWellKnownAttributeData>()
+                    .HasDebuggableAttribute = true;
             }
             else if (
                 !isFromNetModule
@@ -3354,8 +3392,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     algorithmId = (AssemblyHashAlgorithm)(uint)value;
                 }
 
-                arguments.GetOrCreateData<CommonAssemblyWellKnownAttributeData>().AssemblyAlgorithmIdAttributeSetting =
-                    algorithmId;
+                arguments
+                    .GetOrCreateData<CommonAssemblyWellKnownAttributeData>()
+                    .AssemblyAlgorithmIdAttributeSetting = algorithmId;
             }
         }
 
@@ -3657,9 +3696,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         );
 
                         string fullEmittedName = MetadataHelpers.BuildQualifiedName(
-                            originalDefinition.ContainingSymbol.ToDisplayString(
-                                SymbolDisplayFormat.QualifiedNameOnlyFormat
-                            ),
+                            originalDefinition
+                                .ContainingSymbol
+                                .ToDisplayString(SymbolDisplayFormat.QualifiedNameOnlyFormat),
                             originalDefinition.MetadataName
                         );
                         // Since we need to allow multiple constructions of the same generic type at the source

@@ -54,10 +54,9 @@ namespace Microsoft.CodeAnalysis.CodeFixes
                         var documentDiagnostics = await fixAllContext
                             .GetDocumentDiagnosticsAsync(document)
                             .ConfigureAwait(false);
-                        return ImmutableDictionary<
-                            Document,
-                            ImmutableArray<Diagnostic>
-                        >.Empty.SetItem(document, documentDiagnostics);
+                        return ImmutableDictionary<Document, ImmutableArray<Diagnostic>>
+                            .Empty
+                            .SetItem(document, documentDiagnostics);
                     }
 
                     break;
@@ -69,7 +68,9 @@ namespace Microsoft.CodeAnalysis.CodeFixes
                     break;
 
                 case FixAllScope.Solution:
-                    var projectsToFix = project.Solution.Projects
+                    var projectsToFix = project
+                        .Solution
+                        .Projects
                         .Where(p => p.Language == project.Language)
                         .ToImmutableArray();
 

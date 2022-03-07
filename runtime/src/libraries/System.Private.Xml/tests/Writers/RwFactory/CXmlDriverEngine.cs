@@ -867,9 +867,11 @@ namespace System.Xml.Tests
                 )
                 {
                     moduleName =
-                        ((CXmlDriverParam)_testModuleParams[0]).RawNodes.TestModule.Attribute(
-                            "Name"
-                        ).Value;
+                        ((CXmlDriverParam)_testModuleParams[0])
+                            .RawNodes
+                            .TestModule
+                            .Attribute("Name")
+                            .Value;
                 }
                 return moduleName;
             }
@@ -884,15 +886,18 @@ namespace System.Xml.Tests
                     return null;
                 string moduleDesc = "";
                 if (
-                    ((CXmlDriverParam)_testModuleParams[0]).RawNodes.TestModule.Attribute(
-                        "Description"
-                    ) != null
+                    ((CXmlDriverParam)_testModuleParams[0])
+                        .RawNodes
+                        .TestModule
+                        .Attribute("Description") != null
                 )
                 {
                     moduleDesc =
-                        ((CXmlDriverParam)_testModuleParams[0]).RawNodes.TestModule.Attribute(
-                            "Description"
-                        ).Value;
+                        ((CXmlDriverParam)_testModuleParams[0])
+                            .RawNodes
+                            .TestModule
+                            .Attribute("Description")
+                            .Value;
                 }
                 return moduleDesc;
             }

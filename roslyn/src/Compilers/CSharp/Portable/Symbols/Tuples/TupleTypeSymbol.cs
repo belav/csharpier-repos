@@ -83,11 +83,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             )
             {
                 // Complain about unembeddable types from linked assemblies.
-                Emit.NoPia.EmbeddedTypesManager.IsValidEmbeddableType(
-                    underlyingType,
-                    syntax,
-                    diagnostics.DiagnosticBag
-                );
+                Emit.NoPia
+                    .EmbeddedTypesManager
+                    .IsValidEmbeddableType(underlyingType, syntax, diagnostics.DiagnosticBag);
             }
 
             var locations = locationOpt is null
@@ -1346,7 +1344,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         var extensionTupleElementTypes =
                             tuple.TypeArgumentsWithAnnotationsNoUseSiteDiagnostics[
                                 ValueTupleRestPosition - 1
-                            ].Type.TupleElementTypesWithAnnotations;
+                            ]
+                                .Type
+                                .TupleElementTypesWithAnnotations;
                         var typesBuilder = ArrayBuilder<TypeWithAnnotations>.GetInstance(
                             ValueTupleRestPosition - 1 + extensionTupleElementTypes.Length
                         );

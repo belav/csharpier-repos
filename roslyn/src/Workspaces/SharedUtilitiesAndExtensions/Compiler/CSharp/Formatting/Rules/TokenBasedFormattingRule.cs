@@ -486,16 +486,18 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             if (currentToken.IsKind(SyntaxKind.ColonToken))
             {
                 if (
-                    currentToken.Parent.IsKind(
-                        SyntaxKind.CaseSwitchLabel,
-                        SyntaxKind.CasePatternSwitchLabel,
-                        SyntaxKind.DefaultSwitchLabel,
-                        SyntaxKind.LabeledStatement,
-                        SyntaxKind.AttributeTargetSpecifier,
-                        SyntaxKind.NameColon,
-                        SyntaxKind.ExpressionColon,
-                        SyntaxKind.SwitchExpressionArm
-                    )
+                    currentToken
+                        .Parent
+                        .IsKind(
+                            SyntaxKind.CaseSwitchLabel,
+                            SyntaxKind.CasePatternSwitchLabel,
+                            SyntaxKind.DefaultSwitchLabel,
+                            SyntaxKind.LabeledStatement,
+                            SyntaxKind.AttributeTargetSpecifier,
+                            SyntaxKind.NameColon,
+                            SyntaxKind.ExpressionColon,
+                            SyntaxKind.SwitchExpressionArm
+                        )
                 )
                 {
                     return CreateAdjustSpacesOperation(
@@ -516,11 +518,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
 
             // generic name
             if (
-                previousToken.Parent.IsKind(
-                    SyntaxKind.TypeArgumentList,
-                    SyntaxKind.TypeParameterList,
-                    SyntaxKind.FunctionPointerType
-                )
+                previousToken
+                    .Parent
+                    .IsKind(
+                        SyntaxKind.TypeArgumentList,
+                        SyntaxKind.TypeParameterList,
+                        SyntaxKind.FunctionPointerType
+                    )
             )
             {
                 // generic name < *
@@ -551,10 +555,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                     currentToken.Kind() == SyntaxKind.LessThanToken
                     || currentToken.Kind() == SyntaxKind.GreaterThanToken
                 )
-                && currentToken.Parent.IsKind(
-                    SyntaxKind.TypeArgumentList,
-                    SyntaxKind.TypeParameterList
-                )
+                && currentToken
+                    .Parent
+                    .IsKind(SyntaxKind.TypeArgumentList, SyntaxKind.TypeParameterList)
             )
             {
                 return CreateAdjustSpacesOperation(0, AdjustSpacesOption.ForceSpacesIfOnSingleLine);

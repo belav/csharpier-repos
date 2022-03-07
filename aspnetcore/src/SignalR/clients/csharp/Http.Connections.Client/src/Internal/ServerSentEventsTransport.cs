@@ -209,10 +209,9 @@ internal partial class ServerSentEventsTransport : ITransport
 
                                     // When cancellationToken is canceled the next line will cancel pending flushes on the pipe unblocking the await.
                                     // Avoid passing the passed in context.
-                                    flushResult = await _application.Output.WriteAsync(
-                                        message,
-                                        default
-                                    );
+                                    flushResult = await _application
+                                        .Output
+                                        .WriteAsync(message, default);
 
                                     _parser.Reset();
                                     break;

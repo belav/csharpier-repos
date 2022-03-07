@@ -541,9 +541,9 @@ class C : B
         System.Console.WriteLine(c[10]);
     }
 }",
-                options: TestOptions.ReleaseExe.WithMetadataImportOptions(
-                    MetadataImportOptions.Internal
-                )
+                options: TestOptions
+                    .ReleaseExe
+                    .WithMetadataImportOptions(MetadataImportOptions.Internal)
             );
             var verifier = CompileAndVerify(
                 comp,

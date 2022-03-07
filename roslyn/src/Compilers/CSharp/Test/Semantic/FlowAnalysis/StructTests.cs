@@ -301,9 +301,9 @@ public struct StructWithValue
                 );
             CreateCompilation(
                     source2,
-                    options: TestOptions.ReleaseDll.WithWarningLevel(
-                        CodeAnalysis.Diagnostic.DefaultWarningLevel
-                    ),
+                    options: TestOptions
+                        .ReleaseDll
+                        .WithWarningLevel(CodeAnalysis.Diagnostic.DefaultWarningLevel),
                     references: new MetadataReference[] { sourceReference }
                 )
                 .VerifyDiagnostics(
@@ -315,9 +315,9 @@ public struct StructWithValue
                 );
             CreateCompilation(
                     source2,
-                    options: TestOptions.ReleaseDll.WithWarningLevel(
-                        CodeAnalysis.Diagnostic.DefaultWarningLevel
-                    ),
+                    options: TestOptions
+                        .ReleaseDll
+                        .WithWarningLevel(CodeAnalysis.Diagnostic.DefaultWarningLevel),
                     references: new MetadataReference[] { metadataReference }
                 )
                 .VerifyDiagnostics(
@@ -394,17 +394,17 @@ public struct StructWithValue
             CreateCompilation(
                     source2,
                     references: new MetadataReference[] { sourceReference },
-                    options: TestOptions.ReleaseDll.WithWarningLevel(
-                        CodeAnalysis.Diagnostic.DefaultWarningLevel
-                    )
+                    options: TestOptions
+                        .ReleaseDll
+                        .WithWarningLevel(CodeAnalysis.Diagnostic.DefaultWarningLevel)
                 )
                 .VerifyDiagnostics();
             CreateCompilation(
                     source2,
                     references: new MetadataReference[] { metadataReference },
-                    options: TestOptions.ReleaseDll.WithWarningLevel(
-                        CodeAnalysis.Diagnostic.DefaultWarningLevel
-                    )
+                    options: TestOptions
+                        .ReleaseDll
+                        .WithWarningLevel(CodeAnalysis.Diagnostic.DefaultWarningLevel)
                 )
                 .VerifyDiagnostics();
             CreateCompilation(
@@ -466,17 +466,17 @@ public struct Struct
             CreateCompilation(
                     source2,
                     references: new MetadataReference[] { sourceReference },
-                    options: TestOptions.ReleaseDll.WithWarningLevel(
-                        CodeAnalysis.Diagnostic.DefaultWarningLevel
-                    )
+                    options: TestOptions
+                        .ReleaseDll
+                        .WithWarningLevel(CodeAnalysis.Diagnostic.DefaultWarningLevel)
                 )
                 .VerifyDiagnostics();
             CreateCompilation(
                     source2,
                     references: new MetadataReference[] { metadataReference },
-                    options: TestOptions.ReleaseDll.WithWarningLevel(
-                        CodeAnalysis.Diagnostic.DefaultWarningLevel
-                    )
+                    options: TestOptions
+                        .ReleaseDll
+                        .WithWarningLevel(CodeAnalysis.Diagnostic.DefaultWarningLevel)
                 )
                 .VerifyDiagnostics();
             CreateCompilation(
@@ -642,9 +642,9 @@ public struct Struct
             CreateCompilation(
                     source2,
                     references: new MetadataReference[] { moduleReference },
-                    options: TestOptions.ReleaseDll.WithWarningLevel(
-                        CodeAnalysis.Diagnostic.DefaultWarningLevel
-                    )
+                    options: TestOptions
+                        .ReleaseDll
+                        .WithWarningLevel(CodeAnalysis.Diagnostic.DefaultWarningLevel)
                 )
                 .VerifyDiagnostics();
             CreateCompilation(

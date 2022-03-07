@@ -1885,10 +1885,9 @@ namespace System
         {
             Debug.Assert(AdvSimd.Arm64.IsSupported);
 
-            Vector128<byte> pairwiseSelectedLane = AdvSimd.Arm64.AddPairwise(
-                compareResult.AsByte(),
-                compareResult.AsByte()
-            );
+            Vector128<byte> pairwiseSelectedLane = AdvSimd
+                .Arm64
+                .AddPairwise(compareResult.AsByte(), compareResult.AsByte());
             ulong selectedLanes = pairwiseSelectedLane.AsUInt64().ToScalar();
             if (selectedLanes == 0)
             {

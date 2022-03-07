@@ -45,9 +45,9 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.LambdaSimplifier
                         memberAccess.Expression,
                         _cancellationToken
                     );
-                    var anySideEffects = symbolMap.AllReferencedSymbols.Any(
-                        s => s.Kind is SymbolKind.Method or SymbolKind.Property
-                    );
+                    var anySideEffects = symbolMap
+                        .AllReferencedSymbols
+                        .Any(s => s.Kind is SymbolKind.Method or SymbolKind.Property);
 
                     if (anySideEffects)
                     {

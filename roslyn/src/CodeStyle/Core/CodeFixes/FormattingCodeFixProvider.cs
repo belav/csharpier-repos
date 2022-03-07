@@ -53,15 +53,16 @@ namespace Microsoft.CodeAnalysis.CodeStyle
         {
             var options = await GetOptionsAsync(context.Document, cancellationToken)
                 .ConfigureAwait(false);
-            var tree = await context.Document
+            var tree = await context
+                .Document
                 .GetSyntaxTreeAsync(cancellationToken)
                 .ConfigureAwait(false);
             var updatedTree = await FormattingCodeFixHelper
                 .FixOneAsync(tree, SyntaxFormattingService, options, diagnostic, cancellationToken)
                 .ConfigureAwait(false);
-            return context.Document.WithText(
-                await updatedTree.GetTextAsync(cancellationToken).ConfigureAwait(false)
-            );
+            return context
+                .Document
+                .WithText(await updatedTree.GetTextAsync(cancellationToken).ConfigureAwait(false));
         }
 
         private static async Task<OptionSet> GetOptionsAsync(
@@ -70,8 +71,11 @@ namespace Microsoft.CodeAnalysis.CodeStyle
         )
         {
             var tree = await document.GetSyntaxTreeAsync(cancellationToken).ConfigureAwait(false);
-            var analyzerConfigOptions =
-                document.Project.AnalyzerOptions.AnalyzerConfigOptionsProvider.GetOptions(tree);
+            var analyzerConfigOptions = document
+                .Project
+                .AnalyzerOptions
+                .AnalyzerConfigOptionsProvider
+                .GetOptions(tree);
 
             return analyzerConfigOptions;
         }

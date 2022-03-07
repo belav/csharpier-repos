@@ -29,9 +29,10 @@ namespace System.Data.Common
         private DataTableMappingCollection? _tableMappings;
 
         private static int s_objectTypeCount; // Bid counter
-        internal readonly int _objectID = System.Threading.Interlocked.Increment(
-            ref s_objectTypeCount
-        );
+        internal readonly int _objectID = System
+            .Threading
+            .Interlocked
+            .Increment(ref s_objectTypeCount);
 
         [Conditional("DEBUG")]
         private void AssertReaderHandleFieldCount(DataReaderContainer readerHandler)
@@ -236,10 +237,9 @@ namespace System.Data.Common
 
         protected virtual DataTableMappingCollection CreateTableMappings()
         {
-            DataCommonEventSource.Log.Trace(
-                "<comm.DataAdapter.CreateTableMappings|API> {0}",
-                ObjectID
-            );
+            DataCommonEventSource
+                .Log
+                .Trace("<comm.DataAdapter.CreateTableMappings|API> {0}", ObjectID);
             return new DataTableMappingCollection();
         }
 
@@ -271,11 +271,13 @@ namespace System.Data.Common
             IDataReader dataReader
         )
         {
-            long logScopeId = DataCommonEventSource.Log.EnterScope(
-                "<comm.DataAdapter.FillSchema|API> {0}, dataSet, schemaType={1}, srcTable, dataReader",
-                ObjectID,
-                schemaType
-            );
+            long logScopeId = DataCommonEventSource
+                .Log
+                .EnterScope(
+                    "<comm.DataAdapter.FillSchema|API> {0}, dataSet, schemaType={1}, srcTable, dataReader",
+                    ObjectID,
+                    schemaType
+                );
             try
             {
                 if (null == dataSet)
@@ -318,10 +320,12 @@ namespace System.Data.Common
             IDataReader dataReader
         )
         {
-            long logScopeId = DataCommonEventSource.Log.EnterScope(
-                "<comm.DataAdapter.FillSchema|API> {0}, dataTable, schemaType, dataReader",
-                ObjectID
-            );
+            long logScopeId = DataCommonEventSource
+                .Log
+                .EnterScope(
+                    "<comm.DataAdapter.FillSchema|API> {0}, dataTable, schemaType, dataReader",
+                    ObjectID
+                );
             try
             {
                 if (null == dataTable)
@@ -429,10 +433,12 @@ namespace System.Data.Common
             int maxRecords
         )
         {
-            long logScopeId = DataCommonEventSource.Log.EnterScope(
-                "<comm.DataAdapter.Fill|API> {0}, dataSet, srcTable, dataReader, startRecord, maxRecords",
-                ObjectID
-            );
+            long logScopeId = DataCommonEventSource
+                .Log
+                .EnterScope(
+                    "<comm.DataAdapter.Fill|API> {0}, dataSet, srcTable, dataReader, startRecord, maxRecords",
+                    ObjectID
+                );
             try
             {
                 if (null == dataSet)
@@ -492,10 +498,12 @@ namespace System.Data.Common
             int maxRecords
         )
         {
-            long logScopeId = DataCommonEventSource.Log.EnterScope(
-                "<comm.DataAdapter.Fill|API> {0}, dataTables[], dataReader, startRecord, maxRecords",
-                ObjectID
-            );
+            long logScopeId = DataCommonEventSource
+                .Log
+                .EnterScope(
+                    "<comm.DataAdapter.Fill|API> {0}, dataTables[], dataReader, startRecord, maxRecords",
+                    ObjectID
+                );
             try
             {
                 ADP.CheckArgumentLength(dataTables, nameof(dataTables));

@@ -228,13 +228,15 @@ namespace System.Web.Http.Dispatcher
             HttpMessageHandler routeHandler
         )
         {
-            var route = config.Routes.CreateRoute(
-                "api/{controller}/{id}",
-                defaults: new Dictionary<string, object> { { "id", RouteParameter.Optional } },
-                constraints: null,
-                dataTokens: null,
-                handler: routeHandler
-            );
+            var route = config
+                .Routes
+                .CreateRoute(
+                    "api/{controller}/{id}",
+                    defaults: new Dictionary<string, object> { { "id", RouteParameter.Optional } },
+                    constraints: null,
+                    dataTokens: null,
+                    handler: routeHandler
+                );
             config.Routes.Add("default", route);
 
             var request = new HttpRequestMessage(HttpMethod.Get, requestUri);

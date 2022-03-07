@@ -29,9 +29,9 @@ namespace System.Transactions
         )
         {
             if (
-                (
-                    (IDatabaseFacadeDependenciesAccessor)databaseFacade
-                ).Dependencies.TransactionManager
+                ((IDatabaseFacadeDependenciesAccessor)databaseFacade)
+                    .Dependencies
+                    .TransactionManager
                 is ITransactionEnlistmentManager transactionManager
             )
             {
@@ -54,9 +54,9 @@ namespace System.Transactions
         public static Transaction? GetEnlistedTransaction(this DatabaseFacade databaseFacade)
         {
             if (
-                (
-                    (IDatabaseFacadeDependenciesAccessor)databaseFacade
-                ).Dependencies.TransactionManager
+                ((IDatabaseFacadeDependenciesAccessor)databaseFacade)
+                    .Dependencies
+                    .TransactionManager
                 is ITransactionEnlistmentManager transactionManager
             )
             {

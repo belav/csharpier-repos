@@ -1058,10 +1058,10 @@ namespace System
                     }
 
                     // All the methods have the exact same name and sig so return the most derived one.
-                    return System.DefaultBinder.FindMostDerivedNewSlotMeth(
-                            candidates.ToArray(),
-                            candidates.Count
-                        ) as MethodInfo;
+                    return System
+                            .DefaultBinder
+                            .FindMostDerivedNewSlotMeth(candidates.ToArray(), candidates.Count)
+                        as MethodInfo;
                 }
             }
 
@@ -1167,12 +1167,9 @@ namespace System
             }
 
             if ((bindingAttr & BindingFlags.ExactBinding) != 0)
-                return System.DefaultBinder.ExactPropertyBinding(
-                    candidates.ToArray(),
-                    returnType,
-                    types,
-                    modifiers
-                );
+                return System
+                    .DefaultBinder
+                    .ExactPropertyBinding(candidates.ToArray(), returnType, types, modifiers);
 
             if (binder == null)
                 binder = DefaultBinder;
@@ -1750,10 +1747,11 @@ namespace System
                     instantiation = instantiationCopy;
                     if (!RuntimeFeature.IsDynamicCodeSupported)
                         throw new PlatformNotSupportedException();
-                    return System.Reflection.Emit.TypeBuilderInstantiation.MakeGenericType(
-                        this,
-                        instantiation
-                    );
+                    return System
+                        .Reflection
+                        .Emit
+                        .TypeBuilderInstantiation
+                        .MakeGenericType(this, instantiation);
                 }
 
                 instantiationRuntimeType[i] = rtInstantiationElem;

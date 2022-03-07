@@ -168,7 +168,9 @@ namespace System.Reflection.Metadata
                 case AssemblyReferenceHandle.VirtualIndex.System_Runtime:
                     return StringHandle.VirtualIndex.System_Runtime;
 
-                case AssemblyReferenceHandle.VirtualIndex.System_Runtime_InteropServices_WindowsRuntime:
+                case AssemblyReferenceHandle
+                    .VirtualIndex
+                    .System_Runtime_InteropServices_WindowsRuntime:
                     return StringHandle.VirtualIndex.System_Runtime_InteropServices_WindowsRuntime;
 
                 case AssemblyReferenceHandle.VirtualIndex.System_Runtime_WindowsRuntime:

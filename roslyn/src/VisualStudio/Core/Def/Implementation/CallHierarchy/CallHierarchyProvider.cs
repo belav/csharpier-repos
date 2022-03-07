@@ -186,10 +186,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CallHierarchy
                 .WaitAndGetResult(cancellationToken);
             var resolution = id.Resolve(compilation, cancellationToken: cancellationToken);
             var workspace = project.Solution.Workspace;
-            var options = project.Solution.Options.WithChangedOption(
-                NavigationOptions.PreferProvisionalTab,
-                true
-            );
+            var options = project
+                .Solution
+                .Options
+                .WithChangedOption(NavigationOptions.PreferProvisionalTab, true);
             var symbolNavigationService = workspace.Services.GetService<ISymbolNavigationService>();
 
             symbolNavigationService.TryNavigateToSymbol(

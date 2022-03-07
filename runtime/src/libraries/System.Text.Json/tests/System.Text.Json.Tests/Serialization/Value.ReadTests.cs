@@ -381,16 +381,20 @@ namespace System.Text.Json.Serialization.Tests
             AssertFloatingPointBehavior(
                 netcoreExpectedValue: float.NegativeInfinity,
                 () =>
-                    JsonSerializer.Deserialize<float?>(
-                        float.MinValue.ToString(CultureInfo.InvariantCulture) + "0"
-                    ).Value
+                    JsonSerializer
+                        .Deserialize<float?>(
+                            float.MinValue.ToString(CultureInfo.InvariantCulture) + "0"
+                        )
+                        .Value
             );
             AssertFloatingPointBehavior(
                 netcoreExpectedValue: float.PositiveInfinity,
                 () =>
-                    JsonSerializer.Deserialize<float?>(
-                        float.MaxValue.ToString(CultureInfo.InvariantCulture) + "0"
-                    ).Value
+                    JsonSerializer
+                        .Deserialize<float?>(
+                            float.MaxValue.ToString(CultureInfo.InvariantCulture) + "0"
+                        )
+                        .Value
             );
 
             AssertFloatingPointBehavior(
@@ -410,16 +414,20 @@ namespace System.Text.Json.Serialization.Tests
             AssertFloatingPointBehavior(
                 netcoreExpectedValue: double.NegativeInfinity,
                 () =>
-                    JsonSerializer.Deserialize<double?>(
-                        double.MinValue.ToString(CultureInfo.InvariantCulture) + "0"
-                    ).Value
+                    JsonSerializer
+                        .Deserialize<double?>(
+                            double.MinValue.ToString(CultureInfo.InvariantCulture) + "0"
+                        )
+                        .Value
             );
             AssertFloatingPointBehavior(
                 netcoreExpectedValue: double.PositiveInfinity,
                 () =>
-                    JsonSerializer.Deserialize<double?>(
-                        double.MaxValue.ToString(CultureInfo.InvariantCulture) + "0"
-                    ).Value
+                    JsonSerializer
+                        .Deserialize<double?>(
+                            double.MaxValue.ToString(CultureInfo.InvariantCulture) + "0"
+                        )
+                        .Value
             );
 
             // Verify sign is correct.

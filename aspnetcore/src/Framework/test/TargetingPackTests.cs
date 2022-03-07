@@ -99,10 +99,9 @@ public class TargetingPackTests
                 var reader = peReader.GetMetadataReader(MetadataReaderOptions.Default);
                 var assemblyDefinition = reader.GetAssemblyDefinition();
 
-                TestData.ListedTargetingPackAssemblies.TryGetValue(
-                    fileName,
-                    out var expectedVersion
-                );
+                TestData
+                    .ListedTargetingPackAssemblies
+                    .TryGetValue(fileName, out var expectedVersion);
                 Assert.Equal(expectedVersion, assemblyDefinition.Version.ToString());
             }
         );
@@ -272,14 +271,15 @@ public class TargetingPackTests
                             var attributeType = reader.GetTypeReference(
                                 (TypeReferenceHandle)attributeConstructor.Parent
                             );
-                            return reader.StringComparer.Equals(
-                                    attributeType.Namespace,
-                                    typeof(ReferenceAssemblyAttribute).Namespace
-                                )
-                                && reader.StringComparer.Equals(
-                                    attributeType.Name,
-                                    nameof(ReferenceAssemblyAttribute)
-                                );
+                            return reader
+                                    .StringComparer
+                                    .Equals(
+                                        attributeType.Namespace,
+                                        typeof(ReferenceAssemblyAttribute).Namespace
+                                    )
+                                && reader
+                                    .StringComparer
+                                    .Equals(attributeType.Name, nameof(ReferenceAssemblyAttribute));
                         }
                     );
 
@@ -499,7 +499,8 @@ public class TargetingPackTests
 
         ZipArchive archive = ZipFile.OpenRead(targetingPackPath);
 
-        var actualPaths = archive.Entries
+        var actualPaths = archive
+            .Entries
             .Where(
                 i =>
                     i.FullName.EndsWith(".dll", StringComparison.Ordinal)

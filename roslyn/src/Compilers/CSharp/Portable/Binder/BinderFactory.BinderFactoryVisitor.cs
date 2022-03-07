@@ -1037,9 +1037,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                 if (node is BaseNamespaceDeclarationSyntax namespaceDecl)
                 {
                     outer = AddInImportsBinders(
-                        (SourceNamespaceSymbol)outer.Compilation.SourceModule.GetModuleNamespace(
-                            ns
-                        ),
+                        (SourceNamespaceSymbol)outer
+                            .Compilation
+                            .SourceModule
+                            .GetModuleNamespace(ns),
                         namespaceDecl,
                         outer,
                         inUsing

@@ -79,9 +79,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.M
             // TODO: set this to watch the NuGet directory as well; there's some concern that watching the entire directory
             // might make restores take longer because we'll be watching changes that may not impact your project.
 
-            _fileReferenceChangeContext = fileChangeWatcherProvider.Watcher.CreateContext(
-                referenceAssemblies
-            );
+            _fileReferenceChangeContext = fileChangeWatcherProvider
+                .Watcher
+                .CreateContext(referenceAssemblies);
             _fileReferenceChangeContext.FileChanged += FileReferenceChangeContext_FileChanged;
         }
 
@@ -94,10 +94,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.M
         {
             lock (_gate)
             {
-                var reference = _visualStudioWorkspace.Value.CreatePortableExecutableReference(
-                    fullFilePath,
-                    properties
-                );
+                var reference = _visualStudioWorkspace
+                    .Value
+                    .CreatePortableExecutableReference(fullFilePath, properties);
                 var fileWatchingToken = _fileReferenceChangeContext.EnqueueWatchingFile(
                     fullFilePath
                 );

@@ -70,20 +70,25 @@ public class ModelBinderFactoryTest
 
         // There isn't a provider that can handle WidgetId.
         var options = Options.Create(new MvcOptions());
-        options.Value.ModelBinderProviders.Add(
-            new TestModelBinderProvider(
-                c =>
-                {
-                    if (c.Metadata.ModelType == typeof(Widget))
+        options
+            .Value
+            .ModelBinderProviders
+            .Add(
+                new TestModelBinderProvider(
+                    c =>
                     {
-                        Assert.NotNull(c.CreateBinder(c.Metadata.Properties[nameof(Widget.Id)]));
-                        return Mock.Of<IModelBinder>();
-                    }
+                        if (c.Metadata.ModelType == typeof(Widget))
+                        {
+                            Assert.NotNull(
+                                c.CreateBinder(c.Metadata.Properties[nameof(Widget.Id)])
+                            );
+                            return Mock.Of<IModelBinder>();
+                        }
 
-                    return null;
-                }
-            )
-        );
+                        return null;
+                    }
+                )
+            );
 
         var factory = new ModelBinderFactory(metadataProvider, options, GetServices());
 
@@ -111,19 +116,22 @@ public class ModelBinderFactoryTest
         var modelBinder = new ByteArrayModelBinder(NullLoggerFactory.Instance);
 
         var options = Options.Create(new MvcOptions());
-        options.Value.ModelBinderProviders.Add(
-            new TestModelBinderProvider(
-                c =>
-                {
-                    if (c.Metadata.ModelType == typeof(WidgetId))
+        options
+            .Value
+            .ModelBinderProviders
+            .Add(
+                new TestModelBinderProvider(
+                    c =>
                     {
-                        return modelBinder;
-                    }
+                        if (c.Metadata.ModelType == typeof(WidgetId))
+                        {
+                            return modelBinder;
+                        }
 
-                    return null;
-                }
-            )
-        );
+                        return null;
+                    }
+                )
+            );
 
         var factory = new ModelBinderFactory(metadataProvider, options, GetServices());
 
@@ -147,24 +155,29 @@ public class ModelBinderFactoryTest
         var metadataProvider = new TestModelMetadataProvider();
 
         var options = Options.Create(new MvcOptions());
-        options.Value.ModelBinderProviders.Add(
-            new TestModelBinderProvider(
-                c =>
-                {
-                    if (c.Metadata.ModelType == typeof(Widget))
+        options
+            .Value
+            .ModelBinderProviders
+            .Add(
+                new TestModelBinderProvider(
+                    c =>
                     {
-                        Assert.NotNull(c.CreateBinder(c.Metadata.Properties[nameof(Widget.Id)]));
-                        return Mock.Of<IModelBinder>();
-                    }
-                    else if (c.Metadata.ModelType == typeof(WidgetId))
-                    {
-                        return Mock.Of<IModelBinder>();
-                    }
+                        if (c.Metadata.ModelType == typeof(Widget))
+                        {
+                            Assert.NotNull(
+                                c.CreateBinder(c.Metadata.Properties[nameof(Widget.Id)])
+                            );
+                            return Mock.Of<IModelBinder>();
+                        }
+                        else if (c.Metadata.ModelType == typeof(WidgetId))
+                        {
+                            return Mock.Of<IModelBinder>();
+                        }
 
-                    return null;
-                }
-            )
-        );
+                        return null;
+                    }
+                )
+            );
 
         var factory = new ModelBinderFactory(metadataProvider, options, GetServices());
 
@@ -189,23 +202,28 @@ public class ModelBinderFactoryTest
         var callCount = 0;
 
         var options = Options.Create(new MvcOptions());
-        options.Value.ModelBinderProviders.Add(
-            new TestModelBinderProvider(
-                c =>
-                {
-                    var currentCallCount = ++callCount;
-                    Assert.Equal(typeof(Employee), c.Metadata.ModelType);
-                    var binder = c.CreateBinder(c.Metadata.Properties[nameof(Employee.Manager)]);
-
-                    if (currentCallCount == 2)
+        options
+            .Value
+            .ModelBinderProviders
+            .Add(
+                new TestModelBinderProvider(
+                    c =>
                     {
-                        Assert.IsType<PlaceholderBinder>(binder);
-                    }
+                        var currentCallCount = ++callCount;
+                        Assert.Equal(typeof(Employee), c.Metadata.ModelType);
+                        var binder = c.CreateBinder(
+                            c.Metadata.Properties[nameof(Employee.Manager)]
+                        );
 
-                    return Mock.Of<IModelBinder>();
-                }
-            )
-        );
+                        if (currentCallCount == 2)
+                        {
+                            Assert.IsType<PlaceholderBinder>(binder);
+                        }
+
+                        return Mock.Of<IModelBinder>();
+                    }
+                )
+            );
 
         var factory = new ModelBinderFactory(metadataProvider, options, GetServices());
 
@@ -228,15 +246,18 @@ public class ModelBinderFactoryTest
         var metadataProvider = new TestModelMetadataProvider();
 
         var options = Options.Create(new MvcOptions());
-        options.Value.ModelBinderProviders.Add(
-            new TestModelBinderProvider(
-                c =>
-                {
-                    Assert.Equal(typeof(Employee), c.Metadata.ModelType);
-                    return Mock.Of<IModelBinder>();
-                }
-            )
-        );
+        options
+            .Value
+            .ModelBinderProviders
+            .Add(
+                new TestModelBinderProvider(
+                    c =>
+                    {
+                        Assert.Equal(typeof(Employee), c.Metadata.ModelType);
+                        return Mock.Of<IModelBinder>();
+                    }
+                )
+            );
 
         var factory = new ModelBinderFactory(metadataProvider, options, GetServices());
 
@@ -260,15 +281,18 @@ public class ModelBinderFactoryTest
         var metadataProvider = new TestModelMetadataProvider();
 
         var options = Options.Create(new MvcOptions());
-        options.Value.ModelBinderProviders.Add(
-            new TestModelBinderProvider(
-                c =>
-                {
-                    Assert.Equal(typeof(Employee), c.Metadata.ModelType);
-                    return Mock.Of<IModelBinder>();
-                }
-            )
-        );
+        options
+            .Value
+            .ModelBinderProviders
+            .Add(
+                new TestModelBinderProvider(
+                    c =>
+                    {
+                        Assert.Equal(typeof(Employee), c.Metadata.ModelType);
+                        return Mock.Of<IModelBinder>();
+                    }
+                )
+            );
 
         var factory = new ModelBinderFactory(metadataProvider, options, GetServices());
 

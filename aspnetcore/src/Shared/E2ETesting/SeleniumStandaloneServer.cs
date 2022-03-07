@@ -83,7 +83,8 @@ public class SeleniumStandaloneServer : IDisposable
         var port = FindAvailablePort();
         var uri = new UriBuilder("http", "localhost", port, "/wd/hub").Uri;
 
-        var seleniumConfigPath = typeof(SeleniumStandaloneServer).Assembly
+        var seleniumConfigPath = typeof(SeleniumStandaloneServer)
+            .Assembly
             .GetCustomAttributes<AssemblyMetadataAttribute>()
             .FirstOrDefault(k => k.Key == "Microsoft.AspNetCore.Testing.SeleniumConfigPath")
             ?.Value;
@@ -317,9 +318,11 @@ Captured output lines:
     }
 
     private static string GetProcessTrackingFolder() =>
-        typeof(SeleniumStandaloneServer).Assembly
+        typeof(SeleniumStandaloneServer)
+            .Assembly
             .GetCustomAttributes<AssemblyMetadataAttribute>()
-            .Single(a => a.Key == "Microsoft.AspNetCore.Testing.Selenium.ProcessTracking").Value;
+            .Single(a => a.Key == "Microsoft.AspNetCore.Testing.Selenium.ProcessTracking")
+            .Value;
 
     public void Dispose()
     {

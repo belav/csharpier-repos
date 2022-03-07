@@ -1129,9 +1129,10 @@ namespace System.Speech.Internal.SrgsParser
                 return semanticTag;
             }
 
-            System.Diagnostics.Debug.Assert(
-                _parser.Grammar.TagFormat == SrgsTagFormat.KeyValuePairs
-            );
+            System
+                .Diagnostics
+                .Debug
+                .Assert(_parser.Grammar.TagFormat == SrgsTagFormat.KeyValuePairs);
 
             IPropertyTag propertyTag = _parser.CreatePropertyTag(parent);
             string name;

@@ -106,9 +106,9 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                                 IVariableDeclarationGroupOperation declaration =
                                     (IVariableDeclarationGroupOperation)operationContext.Operation;
                                 foreach (
-                                    IVariableDeclaratorOperation variable in declaration.Declarations.SelectMany(
-                                        decl => decl.Declarators
-                                    )
+                                    IVariableDeclaratorOperation variable in declaration
+                                        .Declarations
+                                        .SelectMany(decl => decl.Declarators)
                                 )
                                 {
                                     ILocalSymbol local = variable.Symbol;

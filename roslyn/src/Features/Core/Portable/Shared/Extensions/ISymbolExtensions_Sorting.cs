@@ -102,11 +102,10 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                     return xParam.IsParams ? 1 : -1;
                 }
 
-                diff = CultureInfo.CurrentUICulture.CompareInfo.Compare(
-                    xTypeNames[i],
-                    yTypeNames[i],
-                    CompareOptions.StringSort
-                );
+                diff = CultureInfo
+                    .CurrentUICulture
+                    .CompareInfo
+                    .Compare(xTypeNames[i], yTypeNames[i], CompareOptions.StringSort);
                 if (diff != 0)
                 {
                     return diff;

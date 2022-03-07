@@ -412,9 +412,11 @@ public partial class HubConnectionTests : VerifiableLoggedTest
         using (StartVerifiableLog())
         {
             var testConnection = new TestConnection();
-            testConnection.Features.Set<IConnectionInherentKeepAliveFeature>(
-                new TestKeepAliveFeature() { HasInherentKeepAlive = true }
-            );
+            testConnection
+                .Features
+                .Set<IConnectionInherentKeepAliveFeature>(
+                    new TestKeepAliveFeature() { HasInherentKeepAlive = true }
+                );
             var hubConnection = CreateHubConnection(testConnection, loggerFactory: LoggerFactory);
             hubConnection.ServerTimeout = TimeSpan.FromMilliseconds(1);
 

@@ -81,16 +81,18 @@ namespace Microsoft.EntityFrameworkCore.Query
             {
                 if (dbFunction.Translation != null)
                 {
-                    return dbFunction.Translation.Invoke(
-                        arguments
-                            .Select(e => _sqlExpressionFactory.ApplyDefaultTypeMapping(e))
-                            .ToList()
-                    );
+                    return dbFunction
+                        .Translation
+                        .Invoke(
+                            arguments
+                                .Select(e => _sqlExpressionFactory.ApplyDefaultTypeMapping(e))
+                                .ToList()
+                        );
                 }
 
-                var argumentsPropagateNullability = dbFunction.Parameters.Select(
-                    p => p.PropagatesNullability
-                );
+                var argumentsPropagateNullability = dbFunction
+                    .Parameters
+                    .Select(p => p.PropagatesNullability);
 
                 return dbFunction.IsBuiltIn
                   ? _sqlExpressionFactory.Function(

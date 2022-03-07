@@ -513,11 +513,17 @@ public class ComplexObjectModelBinderTest
         );
         var originalModel = bindingContext.Model;
 
-        var binders = bindingContext.ModelMetadata.Properties.ToDictionary(
-            keySelector: item => item,
-            elementSelector: item =>
-                (IModelBinder)new TestModelBinderProvider(item, ModelBindingResult.Success("Test"))
-        );
+        var binders = bindingContext
+            .ModelMetadata
+            .Properties
+            .ToDictionary(
+                keySelector: item => item,
+                elementSelector: item =>
+                    (IModelBinder)new TestModelBinderProvider(
+                        item,
+                        ModelBindingResult.Success("Test")
+                    )
+            );
 
         var binder = new ComplexObjectModelBinder(binders, Array.Empty<IModelBinder>(), _logger);
 
@@ -941,19 +947,26 @@ public class ComplexObjectModelBinderTest
             options =>
             {
                 var firstNameProperty = containerMetadata.Properties[nameof(model.FirstName)];
-                options.ModelBinderProviders.Insert(
-                    0,
-                    new TestModelBinderProvider(
-                        firstNameProperty,
-                        ModelBindingResult.Success("John")
-                    )
-                );
+                options
+                    .ModelBinderProviders
+                    .Insert(
+                        0,
+                        new TestModelBinderProvider(
+                            firstNameProperty,
+                            ModelBindingResult.Success("John")
+                        )
+                    );
 
                 var lastNameProperty = containerMetadata.Properties[nameof(model.LastName)];
-                options.ModelBinderProviders.Insert(
-                    0,
-                    new TestModelBinderProvider(lastNameProperty, ModelBindingResult.Success("Doe"))
-                );
+                options
+                    .ModelBinderProviders
+                    .Insert(
+                        0,
+                        new TestModelBinderProvider(
+                            lastNameProperty,
+                            ModelBindingResult.Success("Doe")
+                        )
+                    );
             }
         );
 

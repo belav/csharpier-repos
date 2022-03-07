@@ -365,13 +365,15 @@ namespace System.Threading.Tasks.Dataflow.Tests
             for (int i = 0; i < transforms.Length - 1; i++)
             {
                 transforms[i].LinkTo(transforms[i + 1]);
-                transforms[i].Completion.ContinueWith(
-                    delegate
-                    {
-                        transforms[i].Complete();
-                    },
-                    TaskScheduler.Default
-                );
+                transforms[i]
+                    .Completion
+                    .ContinueWith(
+                        delegate
+                        {
+                            transforms[i].Complete();
+                        },
+                        TaskScheduler.Default
+                    );
             }
             return DataflowBlock.Encapsulate(transforms[0], transforms[transforms.Length - 1]);
         }

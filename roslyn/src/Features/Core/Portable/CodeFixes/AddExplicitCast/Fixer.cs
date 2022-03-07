@@ -186,11 +186,13 @@ namespace Microsoft.CodeAnalysis.CodeFixes.AddExplicitCast
                     if (
                         parameters[parameterIndex].IsParams
                         && parameterType is IArrayTypeSymbol paramsType
-                        && _provider.ClassifyConversion(
-                            semanticModel,
-                            argumentExpression,
-                            paramsType.ElementType
-                        ).Exists
+                        && _provider
+                            .ClassifyConversion(
+                                semanticModel,
+                                argumentExpression,
+                                paramsType.ElementType
+                            )
+                            .Exists
                     )
                     {
                         newArguments.Add(GenerateNewArgument(arguments[i], paramsType.ElementType));
@@ -198,11 +200,9 @@ namespace Microsoft.CodeAnalysis.CodeFixes.AddExplicitCast
                             targetArgumentConversionType = paramsType.ElementType;
                     }
                     else if (
-                        _provider.ClassifyConversion(
-                            semanticModel,
-                            argumentExpression,
-                            parameterType
-                        ).Exists
+                        _provider
+                            .ClassifyConversion(semanticModel, argumentExpression, parameterType)
+                            .Exists
                     )
                     {
                         newArguments.Add(GenerateNewArgument(arguments[i], parameterType));
@@ -213,10 +213,10 @@ namespace Microsoft.CodeAnalysis.CodeFixes.AddExplicitCast
                         syntaxFacts.IsDeclarationExpression(argumentExpression)
                         && semanticModel.GetTypeInfo(argumentExpression, cancellationToken).Type
                             is ITypeSymbol argumentType
-                        && semanticModel.Compilation.ClassifyCommonConversion(
-                            argumentType,
-                            parameterType
-                        ).IsIdentity
+                        && semanticModel
+                            .Compilation
+                            .ClassifyCommonConversion(argumentType, parameterType)
+                            .IsIdentity
                     )
                     {
                         // Direct conversion from a declaration expression to a type is unspecified, thus we classify the

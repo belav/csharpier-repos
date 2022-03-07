@@ -720,11 +720,11 @@ namespace Microsoft.CodeAnalysis.CSharp
                 _bound.Compilation.Assembly
             );
             var kind =
-                _bound.Compilation.Conversions.ClassifyConversionFromType(
-                    oldType,
-                    newType,
-                    ref useSiteInfo
-                ).Kind;
+                _bound
+                    .Compilation
+                    .Conversions
+                    .ClassifyConversionFromType(oldType, newType, ref useSiteInfo)
+                    .Kind;
             Debug.Assert(useSiteInfo.Diagnostics.IsNullOrEmpty());
             Diagnostics.AddDependencies(useSiteInfo);
 

@@ -234,10 +234,12 @@ namespace Microsoft.EntityFrameworkCore
 
             Assert.Equal(
                 64,
-                scope.ServiceProvider
+                scope
+                    .ServiceProvider
                     .GetRequiredService<PooledContext>()
                     .GetService<IDbContextOptions>()
-                    .FindExtension<CoreOptionsExtension>()!.MaxPoolSize
+                    .FindExtension<CoreOptionsExtension>()!
+                    .MaxPoolSize
             );
         }
 
@@ -252,7 +254,8 @@ namespace Microsoft.EntityFrameworkCore
                 64,
                 ((DbContext)scope.ServiceProvider.GetRequiredService<IPooledContext>())
                     .GetService<IDbContextOptions>()
-                    .FindExtension<CoreOptionsExtension>()!.MaxPoolSize
+                    .FindExtension<CoreOptionsExtension>()!
+                    .MaxPoolSize
             );
         }
 
@@ -269,7 +272,8 @@ namespace Microsoft.EntityFrameworkCore
                 64,
                 context
                     .GetService<IDbContextOptions>()
-                    .FindExtension<CoreOptionsExtension>()!.MaxPoolSize
+                    .FindExtension<CoreOptionsExtension>()!
+                    .MaxPoolSize
             );
         }
 
@@ -299,10 +303,12 @@ namespace Microsoft.EntityFrameworkCore
 
             Assert.Equal(
                 1024,
-                scope.ServiceProvider
+                scope
+                    .ServiceProvider
                     .GetRequiredService<PooledContext>()
                     .GetService<IDbContextOptions>()
-                    .FindExtension<CoreOptionsExtension>()!.MaxPoolSize
+                    .FindExtension<CoreOptionsExtension>()!
+                    .MaxPoolSize
             );
         }
 
@@ -317,7 +323,8 @@ namespace Microsoft.EntityFrameworkCore
                 1024,
                 ((DbContext)scope.ServiceProvider.GetRequiredService<IPooledContext>())
                     .GetService<IDbContextOptions>()
-                    .FindExtension<CoreOptionsExtension>()!.MaxPoolSize
+                    .FindExtension<CoreOptionsExtension>()!
+                    .MaxPoolSize
             );
         }
 
@@ -347,7 +354,8 @@ namespace Microsoft.EntityFrameworkCore
                 1024,
                 context
                     .GetService<IDbContextOptions>()
-                    .FindExtension<CoreOptionsExtension>()!.MaxPoolSize
+                    .FindExtension<CoreOptionsExtension>()!
+                    .MaxPoolSize
             );
         }
 
@@ -407,24 +415,32 @@ namespace Microsoft.EntityFrameworkCore
 
             Assert.Equal(
                 CoreStrings.DbContextMissingConstructor(nameof(BadCtorContext)),
-                Assert.Throws<ArgumentException>(
-                    () => serviceCollection.AddDbContextPool<BadCtorContext>(_ => { })
-                ).Message
+                Assert
+                    .Throws<ArgumentException>(
+                        () => serviceCollection.AddDbContextPool<BadCtorContext>(_ => { })
+                    )
+                    .Message
             );
 
             Assert.Equal(
                 CoreStrings.DbContextMissingConstructor(nameof(BadCtorContext)),
-                Assert.Throws<ArgumentException>(
-                    () => serviceCollection.AddDbContextPool<BadCtorContext>((_, __) => { })
-                ).Message
+                Assert
+                    .Throws<ArgumentException>(
+                        () => serviceCollection.AddDbContextPool<BadCtorContext>((_, __) => { })
+                    )
+                    .Message
             );
 
             Assert.Equal(
                 CoreStrings.DbContextMissingConstructor(nameof(BadCtorContext)),
-                Assert.Throws<ArgumentException>(
-                    () =>
-                        serviceCollection.AddPooledDbContextFactory<BadCtorContext>((_, __) => { })
-                ).Message
+                Assert
+                    .Throws<ArgumentException>(
+                        () =>
+                            serviceCollection.AddPooledDbContextFactory<BadCtorContext>(
+                                (_, __) => { }
+                            )
+                    )
+                    .Message
             );
         }
 
@@ -439,9 +455,11 @@ namespace Microsoft.EntityFrameworkCore
 
             Assert.Equal(
                 CoreStrings.PoolingContextCtorError(nameof(TwoParameterConstructorContext)),
-                Assert.Throws<InvalidOperationException>(
-                    () => scope.ServiceProvider.GetService<TwoParameterConstructorContext>()
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(
+                        () => scope.ServiceProvider.GetService<TwoParameterConstructorContext>()
+                    )
+                    .Message
             );
         }
 
@@ -462,9 +480,11 @@ namespace Microsoft.EntityFrameworkCore
 
             Assert.Equal(
                 CoreStrings.PoolingContextCtorError(nameof(WrongParameterConstructorContext)),
-                Assert.Throws<InvalidOperationException>(
-                    () => scope.ServiceProvider.GetService<WrongParameterConstructorContext>()
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(
+                        () => scope.ServiceProvider.GetService<WrongParameterConstructorContext>()
+                    )
+                    .Message
             );
         }
 
@@ -548,10 +568,12 @@ namespace Microsoft.EntityFrameworkCore
             async Task<DbContext> GetContextAsync(IServiceScope serviceScope) =>
                 useFactory
                     ? async
-                        ? await serviceScope.ServiceProvider
+                        ? await serviceScope
+                              .ServiceProvider
                               .GetService<IDbContextFactory<DbContext>>()!
                               .CreateDbContextAsync()
-                        : serviceScope.ServiceProvider
+                        : serviceScope
+                          .ServiceProvider
                           .GetService<IDbContextFactory<DbContext>>()!
                           .CreateDbContext()
                     : serviceScope.ServiceProvider.GetService<DbContext>();
@@ -885,9 +907,9 @@ namespace Microsoft.EntityFrameworkCore
         public void Change_tracker_can_be_cleared_without_resetting_context_config()
         {
             var context = new PooledContext(
-                new DbContextOptionsBuilder().UseSqlServer(
-                    SqlServerNorthwindTestStoreFactory.NorthwindConnectionString
-                ).Options
+                new DbContextOptionsBuilder()
+                    .UseSqlServer(SqlServerNorthwindTestStoreFactory.NorthwindConnectionString)
+                    .Options
             );
 
             Assert.Null(GetContextEventField(context, nameof(DbContext.SavingChanges)));
@@ -1217,9 +1239,9 @@ namespace Microsoft.EntityFrameworkCore
                 : BuildServiceProvider<PooledContext>();
 
             var scope = serviceProvider.CreateScope();
-            var lease = scope.ServiceProvider.GetRequiredService<
-                IScopedDbContextLease<PooledContext>
-            >();
+            var lease = scope
+                .ServiceProvider
+                .GetRequiredService<IScopedDbContextLease<PooledContext>>();
             var context = lease.Context;
 
             await Dispose(scope, async);
@@ -1227,14 +1249,14 @@ namespace Microsoft.EntityFrameworkCore
             await Dispose(scope, async);
 
             using var scope1 = serviceProvider.CreateScope();
-            var lease1 = scope1.ServiceProvider.GetRequiredService<
-                IScopedDbContextLease<PooledContext>
-            >();
+            var lease1 = scope1
+                .ServiceProvider
+                .GetRequiredService<IScopedDbContextLease<PooledContext>>();
 
             using var scope2 = serviceProvider.CreateScope();
-            var lease2 = scope2.ServiceProvider.GetRequiredService<
-                IScopedDbContextLease<PooledContext>
-            >();
+            var lease2 = scope2
+                .ServiceProvider
+                .GetRequiredService<IScopedDbContextLease<PooledContext>>();
 
             Assert.Same(context, lease1.Context);
             Assert.NotSame(lease1.Context, lease2.Context);
@@ -1435,7 +1457,8 @@ namespace Microsoft.EntityFrameworkCore
                         ? (PooledContext)scopedProvider.GetService<IPooledContext>()
                         : scopedProvider.GetService<PooledContext>();
 
-                    await context!.Customers
+                    await context!
+                        .Customers
                         .AsNoTracking()
                         .FirstAsync(c => c.CustomerId == "ALFKI");
 

@@ -140,9 +140,9 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             Debug.Assert(type.IsValid());
 
-            bool ignoreCorLibraryDuplicatedTypes = this.Options.TopLevelBinderFlags.Includes(
-                BinderFlags.IgnoreCorLibraryDuplicatedTypes
-            );
+            bool ignoreCorLibraryDuplicatedTypes = this.Options
+                .TopLevelBinderFlags
+                .Includes(BinderFlags.IgnoreCorLibraryDuplicatedTypes);
 
             int index = (int)type - (int)WellKnownType.First;
             if (_lazyWellKnownTypes == null || _lazyWellKnownTypes[index] is null)
@@ -952,10 +952,12 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
 
             int constantVal =
-                ignoreSymbolStoreDebuggingMode.GetConstantValue(
-                    ConstantFieldsInProgress.Empty,
-                    earlyDecodingWellKnownAttributes: false
-                ).Int32Value;
+                ignoreSymbolStoreDebuggingMode
+                    .GetConstantValue(
+                        ConstantFieldsInProgress.Empty,
+                        earlyDecodingWellKnownAttributes: false
+                    )
+                    .Int32Value;
 
             // Since .NET 2.0 the combinations of None, Default and DisableOptimizations have the following effect:
             //
@@ -985,15 +987,19 @@ namespace Microsoft.CodeAnalysis.CSharp
                 }
 
                 constantVal |=
-                    defaultDebuggingMode.GetConstantValue(
-                        ConstantFieldsInProgress.Empty,
-                        earlyDecodingWellKnownAttributes: false
-                    ).Int32Value;
+                    defaultDebuggingMode
+                        .GetConstantValue(
+                            ConstantFieldsInProgress.Empty,
+                            earlyDecodingWellKnownAttributes: false
+                        )
+                        .Int32Value;
                 constantVal |=
-                    disableOptimizationsDebuggingMode.GetConstantValue(
-                        ConstantFieldsInProgress.Empty,
-                        earlyDecodingWellKnownAttributes: false
-                    ).Int32Value;
+                    disableOptimizationsDebuggingMode
+                        .GetConstantValue(
+                            ConstantFieldsInProgress.Empty,
+                            earlyDecodingWellKnownAttributes: false
+                        )
+                        .Int32Value;
             }
 
             if (_options.EnableEditAndContinue)
@@ -1007,10 +1013,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                 }
 
                 constantVal |=
-                    enableEncDebuggingMode.GetConstantValue(
-                        ConstantFieldsInProgress.Empty,
-                        earlyDecodingWellKnownAttributes: false
-                    ).Int32Value;
+                    enableEncDebuggingMode
+                        .GetConstantValue(
+                            ConstantFieldsInProgress.Empty,
+                            earlyDecodingWellKnownAttributes: false
+                        )
+                        .Int32Value;
             }
 
             var typedConstantDebugMode = new TypedConstant(
@@ -1291,9 +1299,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                         if (addCustomModifierFlags)
                         {
                             HandleCustomModifiers(
-                                (
-                                    (ArrayTypeSymbol)type
-                                ).ElementTypeWithAnnotations.CustomModifiers.Length,
+                                ((ArrayTypeSymbol)type)
+                                    .ElementTypeWithAnnotations
+                                    .CustomModifiers
+                                    .Length,
                                 transformFlagsBuilder
                             );
                         }
@@ -1305,9 +1314,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                         if (addCustomModifierFlags)
                         {
                             HandleCustomModifiers(
-                                (
-                                    (PointerTypeSymbol)type
-                                ).PointedAtTypeWithAnnotations.CustomModifiers.Length,
+                                ((PointerTypeSymbol)type)
+                                    .PointedAtTypeWithAnnotations
+                                    .CustomModifiers
+                                    .Length,
                                 transformFlagsBuilder
                             );
                         }

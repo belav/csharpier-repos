@@ -77,19 +77,23 @@ public static class AzureADB2CAuthenticationBuilderExtensions
 
         builder.Services.Configure(TryAddJwtBearerSchemeMapping(scheme, jwtBearerScheme));
 
-        builder.Services.TryAddEnumerable(
-            ServiceDescriptor.Singleton<
-                IConfigureOptions<AzureADB2COptions>,
-                AzureADB2COptionsConfiguration
-            >()
-        );
+        builder
+            .Services
+            .TryAddEnumerable(
+                ServiceDescriptor.Singleton<
+                    IConfigureOptions<AzureADB2COptions>,
+                    AzureADB2COptionsConfiguration
+                >()
+            );
 
-        builder.Services.TryAddEnumerable(
-            ServiceDescriptor.Singleton<
-                IConfigureOptions<JwtBearerOptions>,
-                AzureADB2CJwtBearerOptionsConfiguration
-            >()
-        );
+        builder
+            .Services
+            .TryAddEnumerable(
+                ServiceDescriptor.Singleton<
+                    IConfigureOptions<JwtBearerOptions>,
+                    AzureADB2CJwtBearerOptionsConfiguration
+                >()
+            );
 
         builder.Services.Configure(scheme, configureOptions);
         builder.AddJwtBearer(jwtBearerScheme, o => { });
@@ -155,30 +159,36 @@ public static class AzureADB2CAuthenticationBuilderExtensions
             }
         );
 
-        builder.Services.Configure(
-            TryAddOpenIDCookieSchemeMappings(scheme, openIdConnectScheme, cookieScheme)
-        );
+        builder
+            .Services
+            .Configure(TryAddOpenIDCookieSchemeMappings(scheme, openIdConnectScheme, cookieScheme));
 
-        builder.Services.TryAddEnumerable(
-            ServiceDescriptor.Singleton<
-                IConfigureOptions<AzureADB2COptions>,
-                AzureADB2COptionsConfiguration
-            >()
-        );
+        builder
+            .Services
+            .TryAddEnumerable(
+                ServiceDescriptor.Singleton<
+                    IConfigureOptions<AzureADB2COptions>,
+                    AzureADB2COptionsConfiguration
+                >()
+            );
 
-        builder.Services.TryAddEnumerable(
-            ServiceDescriptor.Singleton<
-                IConfigureOptions<OpenIdConnectOptions>,
-                AzureADB2COpenIdConnectOptionsConfiguration
-            >()
-        );
+        builder
+            .Services
+            .TryAddEnumerable(
+                ServiceDescriptor.Singleton<
+                    IConfigureOptions<OpenIdConnectOptions>,
+                    AzureADB2COpenIdConnectOptionsConfiguration
+                >()
+            );
 
-        builder.Services.TryAddEnumerable(
-            ServiceDescriptor.Singleton<
-                IConfigureOptions<CookieAuthenticationOptions>,
-                AzureADB2CCookieOptionsConfiguration
-            >()
-        );
+        builder
+            .Services
+            .TryAddEnumerable(
+                ServiceDescriptor.Singleton<
+                    IConfigureOptions<CookieAuthenticationOptions>,
+                    AzureADB2CCookieOptionsConfiguration
+                >()
+            );
 
         builder.Services.Configure(scheme, configureOptions);
 

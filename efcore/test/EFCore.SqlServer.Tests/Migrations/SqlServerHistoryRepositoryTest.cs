@@ -183,7 +183,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
                     .UseSqlServer(
                         new SqlConnection("Database=DummyDatabase"),
                         b => b.MigrationsHistoryTable(HistoryRepository.DefaultTableName, schema)
-                    ).Options
+                    )
+                    .Options
             ).GetService<IHistoryRepository>();
 
         private class TestDbContext : DbContext

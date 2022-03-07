@@ -69,11 +69,13 @@ namespace Microsoft.EntityFrameworkCore.Proxies.Internal
             ProxiesOptionsExtension options,
             IReadOnlyEntityType entityType
         ) =>
-            _generator.ProxyBuilder.CreateClassProxyType(
-                entityType.ClrType,
-                GetInterfacesToProxy(options, entityType.ClrType),
-                ProxyGenerationOptions.Default
-            );
+            _generator
+                .ProxyBuilder
+                .CreateClassProxyType(
+                    entityType.ClrType,
+                    GetInterfacesToProxy(options, entityType.ClrType),
+                    ProxyGenerationOptions.Default
+                );
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

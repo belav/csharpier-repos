@@ -128,9 +128,11 @@ namespace System.Threading
                             && NativeRuntimeEventSource.Log.IsEnabled()
                         )
                         {
-                            NativeRuntimeEventSource.Log.ThreadPoolWorkingThreadCount(
-                                (uint)threadPoolInstance.GetAndResetHighWatermarkCountOfThreadsProcessingUserCallbacks()
-                            );
+                            NativeRuntimeEventSource
+                                .Log
+                                .ThreadPoolWorkingThreadCount(
+                                    (uint)threadPoolInstance.GetAndResetHighWatermarkCountOfThreadsProcessingUserCallbacks()
+                                );
                         }
 
                         int cpuUtilization = cpuUtilizationReader.CurrentUtilization;
@@ -175,17 +177,18 @@ namespace System.Threading
                                     short newNumThreadsGoal = (short)(counts.NumProcessingWork + 1);
                                     newCounts.NumThreadsGoal = newNumThreadsGoal;
 
-                                    ThreadCounts countsBeforeUpdate =
-                                        threadPoolInstance._separated.counts.InterlockedCompareExchange(
-                                            newCounts,
-                                            counts
-                                        );
+                                    ThreadCounts countsBeforeUpdate = threadPoolInstance
+                                        ._separated
+                                        .counts
+                                        .InterlockedCompareExchange(newCounts, counts);
                                     if (countsBeforeUpdate == counts)
                                     {
-                                        HillClimbing.ThreadPoolHillClimber.ForceChange(
-                                            newNumThreadsGoal,
-                                            HillClimbing.StateOrTransition.Starvation
-                                        );
+                                        HillClimbing
+                                            .ThreadPoolHillClimber
+                                            .ForceChange(
+                                                newNumThreadsGoal,
+                                                HillClimbing.StateOrTransition.Starvation
+                                            );
                                         addWorker = true;
                                         break;
                                     }

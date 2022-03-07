@@ -599,19 +599,23 @@ namespace System.Reflection.Emit
                     Debug.Assert(masmi != null);
 
                     methDef = masmi.GetGenericMethodDefinition()!;
-                    methDef = methDef.Module.ResolveMethod(
-                        methodBase.MetadataToken,
-                        methDef.DeclaringType?.GetGenericArguments(),
-                        methDef.GetGenericArguments()
-                    )!;
+                    methDef = methDef
+                        .Module
+                        .ResolveMethod(
+                            methodBase.MetadataToken,
+                            methDef.DeclaringType?.GetGenericArguments(),
+                            methDef.GetGenericArguments()
+                        )!;
                 }
                 else
                 {
-                    methDef = methodBase.Module.ResolveMethod(
-                        methodBase.MetadataToken,
-                        methodBase.DeclaringType?.GetGenericArguments(),
-                        null
-                    )!;
+                    methDef = methodBase
+                        .Module
+                        .ResolveMethod(
+                            methodBase.MetadataToken,
+                            methodBase.DeclaringType?.GetGenericArguments(),
+                            null
+                        )!;
                 }
             }
 
@@ -1247,17 +1251,19 @@ namespace System.Reflection.Emit
                 AssemblyBuilder.CheckContext(returnType);
                 AssemblyBuilder.CheckContext(parameterTypes);
 
-                return _moduleData._globalTypeBuilder.DefinePInvokeMethod(
-                    name,
-                    dllName,
-                    entryName,
-                    attributes,
-                    callingConvention,
-                    returnType,
-                    parameterTypes,
-                    nativeCallConv,
-                    nativeCharSet
-                );
+                return _moduleData
+                    ._globalTypeBuilder
+                    .DefinePInvokeMethod(
+                        name,
+                        dllName,
+                        entryName,
+                        attributes,
+                        callingConvention,
+                        returnType,
+                        parameterTypes,
+                        nativeCallConv,
+                        nativeCharSet
+                    );
             }
         }
 
@@ -1364,17 +1370,19 @@ namespace System.Reflection.Emit
             AssemblyBuilder.CheckContext(requiredParameterTypeCustomModifiers);
             AssemblyBuilder.CheckContext(optionalParameterTypeCustomModifiers);
 
-            return _moduleData._globalTypeBuilder.DefineMethod(
-                name,
-                attributes,
-                callingConvention,
-                returnType,
-                requiredReturnTypeCustomModifiers,
-                optionalReturnTypeCustomModifiers,
-                parameterTypes,
-                requiredParameterTypeCustomModifiers,
-                optionalParameterTypeCustomModifiers
-            );
+            return _moduleData
+                ._globalTypeBuilder
+                .DefineMethod(
+                    name,
+                    attributes,
+                    callingConvention,
+                    returnType,
+                    requiredReturnTypeCustomModifiers,
+                    optionalReturnTypeCustomModifiers,
+                    parameterTypes,
+                    requiredParameterTypeCustomModifiers,
+                    optionalParameterTypeCustomModifiers
+                );
         }
 
         public void CreateGlobalFunctions()

@@ -28,10 +28,11 @@ namespace Microsoft.CodeAnalysis.Host
         )
         {
             this.LanguageServices = languageServices;
-            this.MinimumLengthForRecoverableTree =
-                languageServices.WorkspaceServices.Workspace.Options.GetOption(
-                    CacheOptions.RecoverableTreeLengthThreshold
-                );
+            this.MinimumLengthForRecoverableTree = languageServices
+                .WorkspaceServices
+                .Workspace
+                .Options
+                .GetOption(CacheOptions.RecoverableTreeLengthThreshold);
             _canCreateRecoverableTrees =
                 languageServices.WorkspaceServices.GetService<IProjectCacheHostService>() != null
                 && !optionService.GetOption(WorkspaceConfigurationOptions.DisableRecoverableTrees);

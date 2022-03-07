@@ -27,45 +27,42 @@ namespace System.Text.RegularExpressions.Generator
         {
             // Contains one entry per regex method, either the generated code for that regex method,
             // a diagnostic to fail with, or null if no action should be taken for that regex.
-            IncrementalValueProvider<ImmutableArray<object?>> codeOrDiagnostics =
-                context.SyntaxProvider
-                    // Find all MethodDeclarationSyntax nodes attributed with RegexGenerator
-                    .CreateSyntaxProvider(
-                        static (s, _) => IsSyntaxTargetForGeneration(s),
-                        static (ctx, _) => GetSemanticTargetForGeneration(ctx)
+            IncrementalValueProvider<ImmutableArray<object?>> codeOrDiagnostics = context
+                .SyntaxProvider
+                // Find all MethodDeclarationSyntax nodes attributed with RegexGenerator
+                .CreateSyntaxProvider(
+                    static (s, _) => IsSyntaxTargetForGeneration(s),
+                    static (ctx, _) => GetSemanticTargetForGeneration(ctx)
+                )
+                .Where(static m => m is not null)
+                // Pair each with the compilation
+                .Combine(context.CompilationProvider)
+                // Use a custom comparer that ignores the compilation. We want to avoid regenerating for regex methods
+                // that haven't been changed, but any change to a regex method will change the Compilation, so we ignore
+                // the Compilation for purposes of caching.
+                .WithComparer(
+                    new LambdaComparer<(MethodDeclarationSyntax?, Compilation)>(
+                        static (left, right) =>
+                            EqualityComparer<MethodDeclarationSyntax>
+                                .Default
+                                .Equals(left.Item1, right.Item1),
+                        static o => o.Item1?.GetHashCode() ?? 0
                     )
-                    .Where(static m => m is not null)
-                    // Pair each with the compilation
-                    .Combine(context.CompilationProvider)
-                    // Use a custom comparer that ignores the compilation. We want to avoid regenerating for regex methods
-                    // that haven't been changed, but any change to a regex method will change the Compilation, so we ignore
-                    // the Compilation for purposes of caching.
-                    .WithComparer(
-                        new LambdaComparer<(MethodDeclarationSyntax?, Compilation)>(
-                            static (left, right) =>
-                                EqualityComparer<MethodDeclarationSyntax>.Default.Equals(
-                                    left.Item1,
-                                    right.Item1
-                                ),
-                            static o => o.Item1?.GetHashCode() ?? 0
-                        )
-                    )
-                    // Get the resulting code string or error Diagnostic for each MethodDeclarationSyntax/Compilation pair
-                    .Select(
-                        (state, cancellationToken) =>
-                        {
-                            Debug.Assert(state.Item1 is not null);
-                            object? result = GetRegexTypeToEmit(
-                                state.Item2,
-                                state.Item1,
-                                cancellationToken
-                            );
-                            return result is RegexType regexType
-                              ? EmitRegexType(regexType)
-                              : result;
-                        }
-                    )
-                    .Collect();
+                )
+                // Get the resulting code string or error Diagnostic for each MethodDeclarationSyntax/Compilation pair
+                .Select(
+                    (state, cancellationToken) =>
+                    {
+                        Debug.Assert(state.Item1 is not null);
+                        object? result = GetRegexTypeToEmit(
+                            state.Item2,
+                            state.Item1,
+                            cancellationToken
+                        );
+                        return result is RegexType regexType ? EmitRegexType(regexType) : result;
+                    }
+                )
+                .Collect();
 
             // When there something to output, take all the generated strings and concatenate them to output,
             // and raise all of the created diagnostics.

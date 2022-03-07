@@ -724,11 +724,13 @@ namespace System.Runtime.CompilerServices
         {
             options =
                 options
-                ?? TestOptions.ReleaseDll.WithOutputKind(
-                    (expectedOutput != null)
-                      ? OutputKind.ConsoleApplication
-                      : OutputKind.DynamicallyLinkedLibrary
-                );
+                ?? TestOptions
+                    .ReleaseDll
+                    .WithOutputKind(
+                        (expectedOutput != null)
+                          ? OutputKind.ConsoleApplication
+                          : OutputKind.DynamicallyLinkedLibrary
+                    );
             var compilation = CreateExperimentalCompilationWithMscorlib45(
                 source,
                 feature,
@@ -1536,7 +1538,8 @@ namespace System.Runtime.CompilerServices
             var builder = ArrayBuilder<Symbol>.GetInstance();
             UsesIsNullableVisitor.GetUses(builder, symbol);
 
-            var format = SymbolDisplayFormat.TestFormat
+            var format = SymbolDisplayFormat
+                .TestFormat
                 .AddMiscellaneousOptions(
                     SymbolDisplayMiscellaneousOptions.IncludeNullableReferenceTypeModifier
                         | SymbolDisplayMiscellaneousOptions.IncludeNotNullableReferenceTypeModifier
@@ -2168,9 +2171,11 @@ namespace System.Runtime.CompilerServices
             if (!bodyBlock.LocalSignature.IsNil)
             {
                 var signature =
-                    peModule.Module.MetadataReader.GetStandaloneSignature(
-                        bodyBlock.LocalSignature
-                    ).Signature;
+                    peModule
+                        .Module
+                        .MetadataReader
+                        .GetStandaloneSignature(bodyBlock.LocalSignature)
+                        .Signature;
                 var signatureReader = peModule.Module.GetMemoryReaderOrThrow(signature);
                 var localInfos = methodDecoder.DecodeLocalSignatureOrThrow(ref signatureReader);
                 localDefinitions = ToLocalDefinitions(localInfos, methodData.ILBuilder);

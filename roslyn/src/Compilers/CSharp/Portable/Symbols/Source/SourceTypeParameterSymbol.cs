@@ -199,10 +199,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 }
                 else
                 {
-                    var typeParameter =
-                        (SourceTypeParameterSymbolBase)sourceMethod.SourcePartialDefinition.TypeParameters[
-                            _ordinal
-                        ];
+                    var typeParameter = (SourceTypeParameterSymbolBase)sourceMethod
+                        .SourcePartialDefinition
+                        .TypeParameters[_ordinal];
                     CustomAttributesBag<CSharpAttributeData> attributesBag =
                         typeParameter.GetAttributesBag();
 

@@ -479,10 +479,10 @@ namespace System.Web.Http
                 routeUrl,
                 routeDefault
             );
-            context.Configuration.Services.Add(
-                typeof(ValueProviderFactory),
-                new HeaderValueProviderFactory()
-            );
+            context
+                .Configuration
+                .Services
+                .Add(typeof(ValueProviderFactory), new HeaderValueProviderFactory());
             context.ControllerDescriptor = new HttpControllerDescriptor(
                 context.Configuration,
                 "test",

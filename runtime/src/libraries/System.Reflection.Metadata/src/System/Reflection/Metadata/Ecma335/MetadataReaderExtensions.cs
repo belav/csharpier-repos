@@ -93,7 +93,8 @@ namespace System.Reflection.Metadata.Ecma335
                 TableIndex.GenericParamConstraint => reader.GenericParamConstraintTable.RowSize,
 
                 // debug tables
-                TableIndex.Document => reader.DocumentTable.RowSize,
+                TableIndex.Document
+                  => reader.DocumentTable.RowSize,
                 TableIndex.MethodDebugInformation => reader.MethodDebugInformationTable.RowSize,
                 TableIndex.LocalScope => reader.LocalScopeTable.RowSize,
                 TableIndex.LocalVariable => reader.LocalVariableTable.RowSize,
@@ -180,7 +181,8 @@ namespace System.Reflection.Metadata.Ecma335
                 TableIndex.GenericParamConstraint => reader.GenericParamConstraintTable.Block,
 
                 // debug tables
-                TableIndex.Document => reader.DocumentTable.Block,
+                TableIndex.Document
+                  => reader.DocumentTable.Block,
                 TableIndex.MethodDebugInformation => reader.MethodDebugInformationTable.Block,
                 TableIndex.LocalScope => reader.LocalScopeTable.Block,
                 TableIndex.LocalVariable => reader.LocalVariableTable.Block,

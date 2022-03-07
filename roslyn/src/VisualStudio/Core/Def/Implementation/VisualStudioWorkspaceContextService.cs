@@ -32,9 +32,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
         }
 
         public bool IsCloudEnvironmentClient() =>
-            UIContext.FromUIContextGuid(
-                VSConstants.UICONTEXT.CloudEnvironmentConnected_guid
-            ).IsActive;
+            UIContext
+                .FromUIContextGuid(VSConstants.UICONTEXT.CloudEnvironmentConnected_guid)
+                .IsActive;
 
         public bool IsInLspEditorContext() =>
             IsLiveShareGuest()

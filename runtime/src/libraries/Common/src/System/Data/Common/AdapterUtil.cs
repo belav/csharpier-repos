@@ -659,11 +659,10 @@ namespace System.Data.Common
 
         internal static bool CompareInsensitiveInvariant(string? strvalue, string? strconst) =>
             0
-            == CultureInfo.InvariantCulture.CompareInfo.Compare(
-                strvalue,
-                strconst,
-                CompareOptions.IgnoreCase
-            );
+            == CultureInfo
+                .InvariantCulture
+                .CompareInfo
+                .Compare(strvalue, strconst, CompareOptions.IgnoreCase);
 
         internal static int DstCompare(string strA, string strB) =>
             CultureInfo.CurrentCulture.CompareInfo.Compare(strA, strB, ADP.DefaultCompareOptions);

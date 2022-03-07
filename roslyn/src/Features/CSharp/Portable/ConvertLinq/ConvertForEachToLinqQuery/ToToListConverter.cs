@@ -33,10 +33,10 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq.ConvertForEachToLinqQuery
             CancellationToken cancellationToken
         ) =>
             expression is ObjectCreationExpressionSyntax objectCreationExpression
-            && ForEachInfo.SemanticModel.GetSymbolInfo(
-                objectCreationExpression.Type,
-                cancellationToken
-            ).Symbol
+            && ForEachInfo
+                .SemanticModel
+                .GetSymbolInfo(objectCreationExpression.Type, cancellationToken)
+                .Symbol
                 is ITypeSymbol typeSymbol
             && CSharpConvertForEachToLinqQueryProvider.TypeSymbolOptIsList(
                 typeSymbol,

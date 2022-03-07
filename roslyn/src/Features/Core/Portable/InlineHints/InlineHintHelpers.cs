@@ -41,10 +41,9 @@ namespace Microsoft.CodeAnalysis.InlineHints
                 .ConfigureAwait(false);
 
             var symbol =
-                symbolKey.Resolve(
-                    semanticModel.Compilation,
-                    cancellationToken: cancellationToken
-                ).Symbol;
+                symbolKey
+                    .Resolve(semanticModel.Compilation, cancellationToken: cancellationToken)
+                    .Symbol;
             if (symbol != null)
             {
                 var symbolDisplayService =

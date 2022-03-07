@@ -122,9 +122,9 @@ namespace Microsoft.CodeAnalysis.NavigationBar
                 // reasonable location to navigate them to.  First try to find a narrow location to navigate to.
                 // And, if we can't, just go to the first reference we can find.
                 var navigationLocation =
-                    symbol.Locations.FirstOrDefault(
-                        loc => loc.SourceTree != null && loc.SourceTree != tree
-                    )
+                    symbol
+                        .Locations
+                        .FirstOrDefault(loc => loc.SourceTree != null && loc.SourceTree != tree)
                     ?? Location.Create(
                         allReferences.First().SyntaxTree,
                         allReferences.First().Span

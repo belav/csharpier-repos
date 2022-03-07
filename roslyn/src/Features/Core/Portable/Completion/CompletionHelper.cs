@@ -29,7 +29,11 @@ namespace Microsoft.CodeAnalysis.Completion
 
         public static CompletionHelper GetHelper(Document document)
         {
-            return document.Project.Solution.Workspace.Services
+            return document
+                .Project
+                .Solution
+                .Workspace
+                .Services
                 .GetRequiredService<ICompletionHelperService>()
                 .GetCompletionHelper(document);
         }
@@ -87,9 +91,9 @@ namespace Microsoft.CodeAnalysis.Completion
             value.MatchedSpans.IsDefaultOrEmpty
                 ? value
                 : value.WithMatchedSpans(
-                      value.MatchedSpans.SelectAsArray(
-                          s => new TextSpan(s.Start + offset, s.Length)
-                      )
+                      value
+                          .MatchedSpans
+                          .SelectAsArray(s => new TextSpan(s.Start + offset, s.Length))
                   );
 
         private PatternMatch? GetMatchWorker(
@@ -107,9 +111,9 @@ namespace Microsoft.CodeAnalysis.Completion
             // Now we escaping from the second check for English languages.
             // Maybe we can escape as well for more similar languages in case if we meet performance issues.
             if (
-                culture.ThreeLetterWindowsLanguageName.Equals(
-                    EnUSCultureInfo.ThreeLetterWindowsLanguageName
-                )
+                culture
+                    .ThreeLetterWindowsLanguageName
+                    .Equals(EnUSCultureInfo.ThreeLetterWindowsLanguageName)
             )
             {
                 return match;

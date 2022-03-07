@@ -91,24 +91,24 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Infrastructure.Internal
                     (
                         (
                             columnTypeConfigurationSource == null
-                            && ConfigurationSource.Convention.Overrides(
-                                property.GetTypeMappingConfigurationSource()
-                            )
+                            && ConfigurationSource
+                                .Convention
+                                .Overrides(property.GetTypeMappingConfigurationSource())
                         )
                         || (
                             columnTypeConfigurationSource != null
-                            && ConfigurationSource.Convention.Overrides(
-                                columnTypeConfigurationSource
-                            )
+                            && ConfigurationSource
+                                .Convention
+                                .Overrides(columnTypeConfigurationSource)
                         )
                     )
                     && (
-                        ConfigurationSource.Convention.Overrides(
-                            property.GetPrecisionConfigurationSource()
-                        )
-                        || ConfigurationSource.Convention.Overrides(
-                            property.GetScaleConfigurationSource()
-                        )
+                        ConfigurationSource
+                            .Convention
+                            .Overrides(property.GetPrecisionConfigurationSource())
+                        || ConfigurationSource
+                            .Convention
+                            .Overrides(property.GetScaleConfigurationSource())
                     )
                 )
                 {
@@ -184,9 +184,9 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Infrastructure.Internal
                                         )
                                         is IConventionAnnotation strategy
                                     )
-                                    || !ConfigurationSource.Convention.Overrides(
-                                        strategy.GetConfigurationSource()
-                                    )
+                                    || !ConfigurationSource
+                                        .Convention
+                                        .Overrides(strategy.GetConfigurationSource())
                                 )
                         )
                 )
@@ -519,9 +519,9 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Infrastructure.Internal
             if (identityColumns.Count > 1)
             {
                 var sb = new StringBuilder().AppendJoin(
-                    identityColumns.Values.Select(
-                        p => "'" + p.DeclaringEntityType.DisplayName() + "." + p.Name + "'"
-                    )
+                    identityColumns
+                        .Values
+                        .Select(p => "'" + p.DeclaringEntityType.DisplayName() + "." + p.Name + "'")
                 );
                 throw new InvalidOperationException(
                     SqlServerStrings.MultipleIdentityColumns(sb, storeObject.DisplayName())

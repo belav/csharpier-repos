@@ -173,7 +173,9 @@ namespace System.Reflection.Metadata
                 var systemRuntimeWindowsUiXaml =
                     AssemblyReferenceHandle.VirtualIndex.System_Runtime_WindowsRuntime_UI_Xaml;
                 var systemRuntimeInterop =
-                    AssemblyReferenceHandle.VirtualIndex.System_Runtime_InteropServices_WindowsRuntime;
+                    AssemblyReferenceHandle
+                        .VirtualIndex
+                        .System_Runtime_InteropServices_WindowsRuntime;
                 var systemNumericsVectors =
                     AssemblyReferenceHandle.VirtualIndex.System_Numerics_Vectors;
 

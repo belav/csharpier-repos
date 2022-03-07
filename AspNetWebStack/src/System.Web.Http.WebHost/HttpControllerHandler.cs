@@ -126,8 +126,9 @@ namespace System.Web.Http.WebHost
 
             // Add route data
             request.SetRouteData(_routeData);
-            CancellationToken cancellationToken =
-                contextBase.Response.GetClientDisconnectedTokenWhenFixed();
+            CancellationToken cancellationToken = contextBase
+                .Response
+                .GetClientDisconnectedTokenWhenFixed();
             HttpResponseMessage response = null;
 
             try
@@ -188,10 +189,10 @@ namespace System.Web.Http.WebHost
 
             if (!httpRequestMessage.Headers.TryAddWithoutValidation(headerName, headerValues))
             {
-                httpRequestMessage.Content.Headers.TryAddWithoutValidation(
-                    headerName,
-                    headerValues
-                );
+                httpRequestMessage
+                    .Content
+                    .Headers
+                    .TryAddWithoutValidation(headerName, headerValues);
             }
         }
 
@@ -308,32 +309,34 @@ namespace System.Web.Http.WebHost
                 httpContextItems != null && httpContextItems.Contains(OwinEnvironmentHttpContextKey)
             )
             {
-                request.Properties.Add(
-                    OwinEnvironmentKey,
-                    httpContextItems[OwinEnvironmentHttpContextKey]
-                );
+                request
+                    .Properties
+                    .Add(OwinEnvironmentKey, httpContextItems[OwinEnvironmentHttpContextKey]);
             }
 
             // The following three properties are set for backwards compatibility only. The request context controls
             // the behavior for all cases except when accessing the property directly by key.
 
             // Add the retrieve client certificate delegate to the property bag to enable lookup later on
-            request.Properties.Add(
-                HttpPropertyKeys.RetrieveClientCertificateDelegateKey,
-                _retrieveClientCertificate
-            );
+            request
+                .Properties
+                .Add(
+                    HttpPropertyKeys.RetrieveClientCertificateDelegateKey,
+                    _retrieveClientCertificate
+                );
 
             // Add information about whether the request is local or not
-            request.Properties.Add(
-                HttpPropertyKeys.IsLocalKey,
-                new Lazy<bool>(() => requestBase.IsLocal)
-            );
+            request
+                .Properties
+                .Add(HttpPropertyKeys.IsLocalKey, new Lazy<bool>(() => requestBase.IsLocal));
 
             // Add information about whether custom errors are enabled for this request or not
-            request.Properties.Add(
-                HttpPropertyKeys.IncludeErrorDetailKey,
-                new Lazy<bool>(() => !httpContextBase.IsCustomErrorEnabled)
-            );
+            request
+                .Properties
+                .Add(
+                    HttpPropertyKeys.IncludeErrorDetailKey,
+                    new Lazy<bool>(() => !httpContextBase.IsCustomErrorEnabled)
+                );
 
             return request;
         }

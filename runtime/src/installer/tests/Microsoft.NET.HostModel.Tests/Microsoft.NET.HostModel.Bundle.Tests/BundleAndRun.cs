@@ -29,7 +29,8 @@ namespace Microsoft.NET.HostModel.Tests
                 .Execute()
                 .Should()
                 .Pass()
-                .And.HaveStdOutContaining("Wow! We now say hello to the big world and you.");
+                .And
+                .HaveStdOutContaining("Wow! We now say hello to the big world and you.");
         }
 
         private void CheckFileSigned(string path)

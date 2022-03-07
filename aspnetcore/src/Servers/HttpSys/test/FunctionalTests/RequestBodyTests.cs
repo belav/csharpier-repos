@@ -77,13 +77,17 @@ public class RequestBodyTests
                 httpContext =>
                 {
                     byte[] input = new byte[100];
-                    int read = httpContext.Request.Body.EndRead(
-                        httpContext.Request.Body.BeginRead(input, 0, input.Length, null, null)
-                    );
+                    int read = httpContext
+                        .Request
+                        .Body
+                        .EndRead(
+                            httpContext.Request.Body.BeginRead(input, 0, input.Length, null, null)
+                        );
                     httpContext.Response.ContentLength = read;
-                    httpContext.Response.Body.EndWrite(
-                        httpContext.Response.Body.BeginWrite(input, 0, read, null, null)
-                    );
+                    httpContext
+                        .Response
+                        .Body
+                        .EndWrite(httpContext.Response.Body.BeginWrite(input, 0, read, null, null));
                     return Task.FromResult(0);
                 }
             )

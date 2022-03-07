@@ -126,7 +126,8 @@ namespace Microsoft.EntityFrameworkCore
             _options =
                 new DbContextOptionsBuilder()
                     .UseSqlServer(connStrBuilder.ConnectionString, b => b.ApplyConfiguration())
-                    .UseInternalServiceProvider(serviceProvider).Options;
+                    .UseInternalServiceProvider(serviceProvider)
+                    .Options;
         }
 
         public virtual GoTContext CreateContext() => new(_options);

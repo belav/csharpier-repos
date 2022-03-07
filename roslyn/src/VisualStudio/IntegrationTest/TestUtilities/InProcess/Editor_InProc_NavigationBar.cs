@@ -32,7 +32,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
         public string[] GetNavBarItems(int comboBoxIndex) =>
             ExecuteOnActiveView(
                 v =>
-                    GetNavigationBarComboBoxes(v)[comboBoxIndex].Items
+                    GetNavigationBarComboBoxes(v)[comboBoxIndex]
+                        .Items
                         .OfType<object>()
                         .Select(i => i?.ToString() ?? "")
                         .ToArray()

@@ -139,7 +139,9 @@ namespace Roslyn.Test.Utilities
 
                     var uixaml = AssemblyMetadata
                         .CreateFromImage(
-                            ProprietaryTestResources.v4_0_30319_17929.System_Runtime_WindowsRuntime_UI_Xaml
+                            ProprietaryTestResources
+                                .v4_0_30319_17929
+                                .System_Runtime_WindowsRuntime_UI_Xaml
                         )
                         .GetReference(display: "System.Runtime.WindowsRuntime.UI.Xaml.dll");
 
@@ -276,9 +278,11 @@ namespace Roslyn.Test.Utilities
             () =>
             {
                 var source = TestResources.NetFX.aacorlib_v15_0_3928.aacorlib_v15_0_3928_cs;
-                var syntaxTree = Microsoft.CodeAnalysis.CSharp.SyntaxFactory.ParseSyntaxTree(
-                    source
-                );
+                var syntaxTree = Microsoft
+                    .CodeAnalysis
+                    .CSharp
+                    .SyntaxFactory
+                    .ParseSyntaxTree(source);
 
                 var compilationOptions = new CSharpCompilationOptions(
                     OutputKind.DynamicallyLinkedLibrary
@@ -332,7 +336,9 @@ namespace Roslyn.Test.Utilities
                 () =>
                     AssemblyMetadata
                         .CreateFromImage(
-                            ProprietaryTestResources.silverlight_v5_0_5_0.mscorlib_v5_0_5_0_silverlight
+                            ProprietaryTestResources
+                                .silverlight_v5_0_5_0
+                                .mscorlib_v5_0_5_0_silverlight
                         )
                         .GetReference(display: "mscorlib.v5.0.5.0_silverlight.dll"),
                 LazyThreadSafetyMode.PublicationOnly
@@ -502,7 +508,9 @@ namespace Roslyn.Test.Utilities
                 () =>
                     AssemblyMetadata
                         .CreateFromImage(
-                            ProprietaryTestResources.ReferenceAssemblies_PortableProfile7.System_Runtime
+                            ProprietaryTestResources
+                                .ReferenceAssemblies_PortableProfile7
+                                .System_Runtime
                         )
                         .GetReference(display: "System.Runtime.dll"),
                 LazyThreadSafetyMode.PublicationOnly

@@ -348,9 +348,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 {
                     if (
                         NullableAnnotation.IsAnnotated()
-                        && format.MiscellaneousOptions.IncludesOption(
-                            SymbolDisplayMiscellaneousOptions.IncludeNullableReferenceTypeModifier
-                        )
+                        && format
+                            .MiscellaneousOptions
+                            .IncludesOption(
+                                SymbolDisplayMiscellaneousOptions.IncludeNullableReferenceTypeModifier
+                            )
                     )
                     {
                         return DefaultType.ToDisplayString(format) + "?";
@@ -365,9 +367,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             {
                 if (
                     NullableAnnotation.IsAnnotated()
-                    && format.MiscellaneousOptions.IncludesOption(
-                        SymbolDisplayMiscellaneousOptions.IncludeNullableReferenceTypeModifier
-                    )
+                    && format
+                        .MiscellaneousOptions
+                        .IncludesOption(
+                            SymbolDisplayMiscellaneousOptions.IncludeNullableReferenceTypeModifier
+                        )
                     && (!HasType || (!IsNullableType() && !Type.IsValueType))
                 )
                 {
@@ -375,9 +379,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 }
                 else if (
                     NullableAnnotation.IsNotAnnotated()
-                    && format.MiscellaneousOptions.IncludesOption(
-                        SymbolDisplayMiscellaneousOptions.IncludeNotNullableReferenceTypeModifier
-                    )
+                    && format
+                        .MiscellaneousOptions
+                        .IncludesOption(
+                            SymbolDisplayMiscellaneousOptions.IncludeNotNullableReferenceTypeModifier
+                        )
                     && (
                         !HasType
                         || (
@@ -1330,10 +1336,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 if (!newUnderlying.IsSameAs(this._underlying))
                 {
                     if (
-                        newUnderlying.Type.Equals(
-                            this._underlying.Type,
-                            TypeCompareKind.ConsiderEverything
-                        ) && newUnderlying.CustomModifiers.IsEmpty
+                        newUnderlying
+                            .Type
+                            .Equals(this._underlying.Type, TypeCompareKind.ConsiderEverything)
+                        && newUnderlying.CustomModifiers.IsEmpty
                     )
                     {
                         return CreateLazyNullableType(_compilation, newUnderlying);

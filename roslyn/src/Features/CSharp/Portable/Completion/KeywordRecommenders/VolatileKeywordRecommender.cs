@@ -35,11 +35,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
         )
         {
             return (context.IsGlobalStatementContext && context.SyntaxTree.IsScript())
-                || context.SyntaxTree.IsGlobalMemberDeclarationContext(
-                    context.Position,
-                    SyntaxKindSet.AllGlobalMemberModifiers,
-                    cancellationToken
-                )
+                || context
+                    .SyntaxTree
+                    .IsGlobalMemberDeclarationContext(
+                        context.Position,
+                        SyntaxKindSet.AllGlobalMemberModifiers,
+                        cancellationToken
+                    )
                 || context.IsMemberDeclarationContext(
                     validModifiers: s_validMemberModifiers,
                     validTypeDeclarations: SyntaxKindSet.ClassInterfaceStructRecordTypeDeclarations,

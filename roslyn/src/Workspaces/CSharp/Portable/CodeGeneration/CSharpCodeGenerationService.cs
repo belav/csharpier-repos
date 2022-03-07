@@ -78,13 +78,15 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             {
                 // This is a VB event that declares its own type.  i.e. "Public Event E(x As Object)"
                 // We also have to generate "public void delegate EEventHandler(object x)"
-                var compilation = await newDocument.Project
+                var compilation = await newDocument
+                    .Project
                     .GetCompilationAsync(cancellationToken)
                     .ConfigureAwait(false);
                 var newDestinationSymbol =
                     destination
                         .GetSymbolKey(cancellationToken)
-                        .Resolve(compilation, cancellationToken: cancellationToken).Symbol;
+                        .Resolve(compilation, cancellationToken: cancellationToken)
+                        .Symbol;
 
                 if (newDestinationSymbol?.ContainingType != null)
                 {
@@ -501,10 +503,9 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
                 newParams.Add(parameterSyntax);
             }
 
-            var finalMember = CSharpSyntaxGenerator.Instance.AddParameters(
-                destination,
-                newParams.ToImmutableAndFree()
-            );
+            var finalMember = CSharpSyntaxGenerator
+                .Instance
+                .AddParameters(destination, newParams.ToImmutableAndFree());
 
             return Cast<TDeclarationNode>(finalMember);
         }
@@ -597,9 +598,9 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
                 throw new ArgumentException("attributeToRemove");
             }
 
-            var attributeSyntaxToRemove = attributeToRemove.ApplicationSyntaxReference.GetSyntax(
-                cancellationToken
-            );
+            var attributeSyntaxToRemove = attributeToRemove
+                .ApplicationSyntaxReference
+                .GetSyntax(cancellationToken);
             return RemoveAttribute(
                 destination,
                 attributeSyntaxToRemove,
@@ -819,9 +820,12 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
                 // Insert the new global statement(s) at the end of any current global statements.
                 // This code relies on 'LastIndexOf' returning -1 when no matching element is found.
                 var insertionIndex =
-                    compilationUnit.Members.LastIndexOf(
-                        memberDeclaration => memberDeclaration.IsKind(SyntaxKind.GlobalStatement)
-                    ) + 1;
+                    compilationUnit
+                        .Members
+                        .LastIndexOf(
+                            memberDeclaration =>
+                                memberDeclaration.IsKind(SyntaxKind.GlobalStatement)
+                        ) + 1;
                 var wrappedStatements = StatementGenerator
                     .GenerateStatements(statements)
                     .Select(generated => SyntaxFactory.GlobalStatement(generated))

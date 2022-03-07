@@ -40,10 +40,10 @@ public sealed class TagHelperBinding
             foreach (var descriptor in Mappings.Keys)
             {
                 if (
-                    !descriptor.Metadata.TryGetValue(
-                        TagHelperMetadata.Common.ClassifyAttributesOnly,
-                        out var value
-                    ) || !string.Equals(value, bool.TrueString, StringComparison.OrdinalIgnoreCase)
+                    !descriptor
+                        .Metadata
+                        .TryGetValue(TagHelperMetadata.Common.ClassifyAttributesOnly, out var value)
+                    || !string.Equals(value, bool.TrueString, StringComparison.OrdinalIgnoreCase)
                 )
                 {
                     return false;

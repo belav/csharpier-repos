@@ -71,14 +71,16 @@ namespace Microsoft.EntityFrameworkCore.Proxies.Internal
                 typeof(DbSetFindingConvention)
             );
 
-            conventionSet.ModelFinalizingConventions.Add(
-                new ProxyBindingRewriter(
-                    _proxyFactory,
-                    extension,
-                    LazyLoaderParameterBindingFactoryDependencies,
-                    ConventionSetBuilderDependencies
-                )
-            );
+            conventionSet
+                .ModelFinalizingConventions
+                .Add(
+                    new ProxyBindingRewriter(
+                        _proxyFactory,
+                        extension,
+                        LazyLoaderParameterBindingFactoryDependencies,
+                        ConventionSetBuilderDependencies
+                    )
+                );
 
             return conventionSet;
         }

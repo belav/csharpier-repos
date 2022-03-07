@@ -54,13 +54,15 @@ public class UseEndpointRoutingStartup
                     "/",
                     (httpContext) =>
                     {
-                        var dataSource =
-                            httpContext.RequestServices.GetRequiredService<EndpointDataSource>();
+                        var dataSource = httpContext
+                            .RequestServices
+                            .GetRequiredService<EndpointDataSource>();
 
                         var sb = new StringBuilder();
                         sb.AppendLine("Endpoints:");
                         foreach (
-                            var endpoint in dataSource.Endpoints
+                            var endpoint in dataSource
+                                .Endpoints
                                 .OfType<RouteEndpoint>()
                                 .OrderBy(
                                     e => e.RoutePattern.RawText,
@@ -97,11 +99,13 @@ public class UseEndpointRoutingStartup
                         (httpContext) =>
                         {
                             var endpoint = httpContext.GetEndpoint();
-                            return httpContext.Response.WriteAsync(
-                                (endpoint.Metadata.GetMetadata<CustomMetadata>() != null)
-                                  ? "Has metadata"
-                                  : "No metadata"
-                            );
+                            return httpContext
+                                .Response
+                                .WriteAsync(
+                                    (endpoint.Metadata.GetMetadata<CustomMetadata>() != null)
+                                      ? "Has metadata"
+                                      : "No metadata"
+                                );
                         }
                     )
                     .Add(
@@ -135,8 +139,9 @@ public class UseEndpointRoutingStartup
                         "/WithSingleAsteriskCatchAll/{*path}",
                         (httpContext) =>
                         {
-                            var linkGenerator =
-                                httpContext.RequestServices.GetRequiredService<LinkGenerator>();
+                            var linkGenerator = httpContext
+                                .RequestServices
+                                .GetRequiredService<LinkGenerator>();
 
                             var response = httpContext.Response;
                             response.StatusCode = 200;
@@ -157,8 +162,9 @@ public class UseEndpointRoutingStartup
                         "/WithDoubleAsteriskCatchAll/{**path}",
                         (httpContext) =>
                         {
-                            var linkGenerator =
-                                httpContext.RequestServices.GetRequiredService<LinkGenerator>();
+                            var linkGenerator = httpContext
+                                .RequestServices
+                                .GetRequiredService<LinkGenerator>();
 
                             var response = httpContext.Response;
                             response.StatusCode = 200;
@@ -227,9 +233,9 @@ public class UseEndpointRoutingStartup
                 endpoints.MapGet(
                     "api/get/{id}",
                     (context) =>
-                        context.Response.WriteAsync(
-                            $"{name} - API Get {context.Request.RouteValues["id"]}"
-                        )
+                        context
+                            .Response
+                            .WriteAsync($"{name} - API Get {context.Request.RouteValues["id"]}")
                 );
             }
         );

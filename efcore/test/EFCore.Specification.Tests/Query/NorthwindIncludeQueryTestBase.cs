@@ -128,7 +128,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                             c =>
                                 c.Orders
                                     .OrderByDescending(oo => oo.OrderDate)
-                                    .FirstOrDefault().OrderDate
+                                    .FirstOrDefault()
+                                    .OrderDate
                         ),
                 asserter: (e, a) =>
                     AssertInclude(
@@ -596,7 +597,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                             c =>
                                 c.Orders
                                     .OrderByDescending(oo => oo.OrderDate)
-                                    .FirstOrDefault().OrderDate
+                                    .FirstOrDefault()
+                                    .OrderDate
                         ),
                 asserter: (e, a) =>
                     AssertInclude(e, a, new ExpectedInclude<Customer>(c => c.Orders)),
@@ -958,7 +960,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                                     ss.Set<Customer>().Include(c => c.Orders).Where(c => c.IsLondon)
                             )
                     )
-                ).Message
+                )
+                    .Message
                     .Replace("\r", "")
                     .Replace("\n", "")
             );

@@ -34,9 +34,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
                     Net40.mscorlib,
                     TestReferences.SymbolsTests.Methods.ByRefReturn
                 },
-                options: TestOptions.ReleaseDll.WithMetadataImportOptions(
-                    MetadataImportOptions.Internal
-                )
+                options: TestOptions
+                    .ReleaseDll
+                    .WithMetadataImportOptions(MetadataImportOptions.Internal)
             );
 
             var module1 = assemblies[0].Modules[0];
@@ -186,7 +186,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
             var basicC2_M1 = (MethodSymbol)basicC2.GetMembers("M1").Single();
             Assert.Equal("void C2<T4>.M1<T5>(T5 x, T4 y)", basicC2_M1.ToTestDisplayString());
 
-            var console = module5.GlobalNamespace
+            var console = module5
+                .GlobalNamespace
                 .GetMembers("System")
                 .OfType<NamespaceSymbol>()
                 .Single()
@@ -201,7 +202,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
                 console
                     .GetMembers("WriteLine")
                     .OfType<MethodSymbol>()
-                    .Single(m => m.IsVararg).IsStatic
+                    .Single(m => m.IsVararg)
+                    .IsStatic
             );
 
             var basicModifiers1 = module4.GlobalNamespace.GetTypeMembers("Modifiers1").Single();
@@ -397,7 +399,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
             Assert.False(csharpModifiers3_M4.HidesBaseMethodsByName);
             Assert.False(csharpModifiers3_M4.IsOverride);
 
-            var byrefReturnMethod = byrefReturn.GlobalNamespace
+            var byrefReturnMethod = byrefReturn
+                .GlobalNamespace
                 .GetTypeMembers("ByRefReturn")
                 .Single()
                 .GetMembers("M")
@@ -834,8 +837,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
             Assert.Equal(@interface, innerClass.Interfaces().Single().ConstructedFrom);
 
             var innerClassMethod = (MethodSymbol)innerClass.GetMembers(methodName).Single();
-            var innerClassImplementingMethod =
-                innerClassMethod.ExplicitInterfaceImplementations.Single();
+            var innerClassImplementingMethod = innerClassMethod
+                .ExplicitInterfaceImplementations
+                .Single();
             Assert.Equal(interfaceMethod, innerClassImplementingMethod.OriginalDefinition);
             Assert.Equal(@interface, innerClassImplementingMethod.ContainingType.ConstructedFrom);
         }
@@ -1221,9 +1225,9 @@ class Override : MetadataModifiers
                 string.Format(ilTemplate, modifiers, explicitOverride, body),
                 compilation =>
                 {
-                    var derivedClass = compilation.GlobalNamespace.GetMember<PENamedTypeSymbol>(
-                        "Derived"
-                    );
+                    var derivedClass = compilation
+                        .GlobalNamespace
+                        .GetMember<PENamedTypeSymbol>("Derived");
                     var method = derivedClass.GetMember<MethodSymbol>("M");
 
                     switch (expectedVirtualness)

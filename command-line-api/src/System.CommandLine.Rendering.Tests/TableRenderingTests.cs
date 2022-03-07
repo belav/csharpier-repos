@@ -76,7 +76,8 @@ namespace System.CommandLine.Rendering.Tests
                 new Region(0, 0, 30, 3)
             );
 
-            _terminal.Out
+            _terminal
+                .Out
                 .ToString()
                 .Should()
                 .Be(

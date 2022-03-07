@@ -27,10 +27,9 @@ namespace Internal.TypeSystem
             params TypeDesc[] genericParameters
         )
         {
-            return typeDef.Context.GetInstantiatedType(
-                typeDef,
-                new Instantiation(genericParameters)
-            );
+            return typeDef
+                .Context
+                .GetInstantiatedType(typeDef, new Instantiation(genericParameters));
         }
 
         public static InstantiatedMethod MakeInstantiatedMethod(
@@ -46,10 +45,9 @@ namespace Internal.TypeSystem
             params TypeDesc[] genericParameters
         )
         {
-            return methodDef.Context.GetInstantiatedMethod(
-                methodDef,
-                new Instantiation(genericParameters)
-            );
+            return methodDef
+                .Context
+                .GetInstantiatedMethod(methodDef, new Instantiation(genericParameters));
         }
 
         public static ArrayType MakeArrayType(this TypeDesc type)
@@ -132,10 +130,9 @@ namespace Internal.TypeSystem
                 Debug.Assert(
                     instantiatedType.GetTypeDefinition() == methodTypicalDefinition.OwningType
                 );
-                return method.Context.GetMethodForInstantiatedType(
-                    methodTypicalDefinition,
-                    instantiatedType
-                );
+                return method
+                    .Context
+                    .GetMethodForInstantiatedType(methodTypicalDefinition, instantiatedType);
             }
             else if (type.IsArray)
             {
@@ -332,10 +329,9 @@ namespace Internal.TypeSystem
             if (owner.HasInstantiation)
             {
                 MetadataType instantiatedOwner = (MetadataType)owner.InstantiateAsOpen();
-                return method.Context.GetMethodForInstantiatedType(
-                    method,
-                    (InstantiatedType)instantiatedOwner
-                );
+                return method
+                    .Context
+                    .GetMethodForInstantiatedType(method, (InstantiatedType)instantiatedOwner);
             }
 
             return method;
@@ -400,9 +396,9 @@ namespace Internal.TypeSystem
                 case TypeFlags.SzArray:
                 case TypeFlags.ByRef:
                 case TypeFlags.Pointer:
-                    return ((ParameterizedType)thisType).ParameterType.ContainsSignatureVariables(
-                        treatGenericParameterLikeSignatureVariable
-                    );
+                    return ((ParameterizedType)thisType)
+                        .ParameterType
+                        .ContainsSignatureVariables(treatGenericParameterLikeSignatureVariable);
 
                 case TypeFlags.FunctionPointer:
                     MethodSignature pointerSignature = ((FunctionPointerType)thisType).Signature;
@@ -415,9 +411,9 @@ namespace Internal.TypeSystem
                         )
                             return true;
 
-                    return pointerSignature.ReturnType.ContainsSignatureVariables(
-                        treatGenericParameterLikeSignatureVariable
-                    );
+                    return pointerSignature
+                        .ReturnType
+                        .ContainsSignatureVariables(treatGenericParameterLikeSignatureVariable);
 
                 case TypeFlags.SignatureMethodVariable:
                 case TypeFlags.SignatureTypeVariable:

@@ -189,10 +189,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
             Assert.Same(
                 entityType,
-                modelBuilder.Entity(
-                    typeof(Customer).FullName,
-                    ConfigurationSource.Convention
-                ).Metadata
+                modelBuilder
+                    .Entity(typeof(Customer).FullName, ConfigurationSource.Convention)
+                    .Metadata
             );
             Assert.Null(
                 modelBuilder.Ignore(typeof(Customer).FullName, ConfigurationSource.DataAnnotation)
@@ -393,9 +392,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             );
             Assert.Equal(
                 typeof(Product),
-                orderEntityTypeBuilder.Metadata
+                orderEntityTypeBuilder
+                    .Metadata
                     .GetForeignKeys()
-                    .Single().PrincipalEntityType.ClrType
+                    .Single()
+                    .PrincipalEntityType
+                    .ClrType
             );
         }
 
@@ -433,9 +435,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             );
             Assert.Equal(
                 typeof(Product),
-                orderEntityTypeBuilder.Metadata
+                orderEntityTypeBuilder
+                    .Metadata
                     .GetForeignKeys()
-                    .Single().PrincipalEntityType.ClrType
+                    .Single()
+                    .PrincipalEntityType
+                    .ClrType
             );
         }
 
@@ -521,21 +526,25 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
             Assert.Equal(
                 CoreStrings.ClashingSharedType(typeof(Details).Name),
-                Assert.Throws<InvalidOperationException>(
-                    () => modelBuilder.Entity(typeof(Details), ConfigurationSource.Explicit)
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(
+                        () => modelBuilder.Entity(typeof(Details), ConfigurationSource.Explicit)
+                    )
+                    .Message
             );
 
             Assert.Equal(
                 CoreStrings.ClashingOwnedEntityType(typeof(Details).Name),
-                Assert.Throws<InvalidOperationException>(
-                    () =>
-                        modelBuilder.SharedTypeEntity(
-                            nameof(Details),
-                            typeof(Details),
-                            ConfigurationSource.Explicit
-                        )
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(
+                        () =>
+                            modelBuilder.SharedTypeEntity(
+                                nameof(Details),
+                                typeof(Details),
+                                ConfigurationSource.Explicit
+                            )
+                    )
+                    .Message
             );
 
             Assert.NotNull(modelBuilder.Ignore(typeof(Details), ConfigurationSource.Explicit));
@@ -556,9 +565,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
             Assert.Equal(
                 CoreStrings.ClashingNonOwnedEntityType("Details (Details)"),
-                Assert.Throws<InvalidOperationException>(
-                    () => modelBuilder.Owned(typeof(Details), ConfigurationSource.Explicit)
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(
+                        () => modelBuilder.Owned(typeof(Details), ConfigurationSource.Explicit)
+                    )
+                    .Message
             );
         }
 
@@ -602,12 +613,14 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             skipNavOnLeft.HasInverse(skipNavOnRight.Metadata, ConfigurationSource.Convention);
 
             var joinEntityTypeBuilder =
-                model.AddEntityType(
-                    "JoinEntity",
-                    typeof(Dictionary<string, object>),
-                    owned: false,
-                    ConfigurationSource.Convention
-                ).Builder;
+                model
+                    .AddEntityType(
+                        "JoinEntity",
+                        typeof(Dictionary<string, object>),
+                        owned: false,
+                        ConfigurationSource.Convention
+                    )
+                    .Builder;
             var leftFK =
                 joinEntityTypeBuilder
                     .HasRelationship(
@@ -616,7 +629,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                         manyToManyLeftPK.Metadata,
                         ConfigurationSource.Convention
                     )
-                    .IsUnique(false, ConfigurationSource.Convention).Metadata;
+                    .IsUnique(false, ConfigurationSource.Convention)
+                    .Metadata;
             var rightFK =
                 joinEntityTypeBuilder
                     .HasRelationship(
@@ -625,7 +639,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                         manyToManyRightPK.Metadata,
                         ConfigurationSource.Convention
                     )
-                    .IsUnique(false, ConfigurationSource.Convention).Metadata;
+                    .IsUnique(false, ConfigurationSource.Convention)
+                    .Metadata;
             skipNavOnLeft.HasForeignKey(leftFK, ConfigurationSource.Convention);
             skipNavOnRight.HasForeignKey(rightFK, ConfigurationSource.Convention);
             joinEntityTypeBuilder.PrimaryKey(
@@ -640,12 +655,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
             Assert.Empty(model.GetEntityTypes().Where(e => e.IsImplicitlyCreatedJoinEntityType));
 
-            var leftSkipNav = manyToManyLeft.Metadata.FindDeclaredSkipNavigation(
-                nameof(ManyToManyLeft.Rights)
-            );
-            var rightSkipNav = manyToManyRight.Metadata.FindDeclaredSkipNavigation(
-                nameof(ManyToManyRight.Lefts)
-            );
+            var leftSkipNav = manyToManyLeft
+                .Metadata
+                .FindDeclaredSkipNavigation(nameof(ManyToManyLeft.Rights));
+            var rightSkipNav = manyToManyRight
+                .Metadata
+                .FindDeclaredSkipNavigation(nameof(ManyToManyRight.Lefts));
 
             Assert.NotNull(leftSkipNav);
             Assert.NotNull(rightSkipNav);
@@ -720,12 +735,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
             Assert.Null(modelBuilder.RemoveImplicitJoinEntity(joinEntityType));
 
-            var leftSkipNav = manyToManyLeft.Metadata.FindDeclaredSkipNavigation(
-                nameof(ManyToManyLeft.Rights)
-            );
-            var rightSkipNav = manyToManyRight.Metadata.FindDeclaredSkipNavigation(
-                nameof(ManyToManyRight.Lefts)
-            );
+            var leftSkipNav = manyToManyLeft
+                .Metadata
+                .FindDeclaredSkipNavigation(nameof(ManyToManyLeft.Rights));
+            var rightSkipNav = manyToManyRight
+                .Metadata
+                .FindDeclaredSkipNavigation(nameof(ManyToManyRight.Lefts));
             Assert.NotNull(leftSkipNav);
             Assert.NotNull(rightSkipNav);
 
@@ -783,14 +798,16 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
             Assert.Equal(
                 CoreStrings.ClashingMismatchedSharedType("SpecialDetails", nameof(Product)),
-                Assert.Throws<InvalidOperationException>(
-                    () =>
-                        modelBuilder.SharedTypeEntity(
-                            sharedTypeName,
-                            typeof(Details),
-                            ConfigurationSource.Explicit
-                        )
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(
+                        () =>
+                            modelBuilder.SharedTypeEntity(
+                                sharedTypeName,
+                                typeof(Details),
+                                ConfigurationSource.Explicit
+                            )
+                    )
+                    .Message
             );
 
             Assert.NotNull(modelBuilder.Entity(typeof(Customer), ConfigurationSource.Explicit));
@@ -800,14 +817,16 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     typeof(Customer).DisplayName(),
                     typeof(Customer).ShortDisplayName()
                 ),
-                Assert.Throws<InvalidOperationException>(
-                    () =>
-                        modelBuilder.SharedTypeEntity(
-                            typeof(Customer).DisplayName(),
-                            typeof(Customer),
-                            ConfigurationSource.Explicit
-                        )
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(
+                        () =>
+                            modelBuilder.SharedTypeEntity(
+                                typeof(Customer).DisplayName(),
+                                typeof(Customer),
+                                ConfigurationSource.Explicit
+                            )
+                    )
+                    .Message
             );
         }
 
@@ -822,7 +841,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         }
 
         private static ProviderConventionSetBuilderDependencies CreateDependencies() =>
-            InMemoryTestHelpers.Instance
+            InMemoryTestHelpers
+                .Instance
                 .CreateContextServices()
                 .GetRequiredService<ProviderConventionSetBuilderDependencies>();
 

@@ -75,13 +75,15 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 )
             )
             {
-                return EncodedStringText.TestAccessor.Create(
-                    stream,
-                    new Lazy<Encoding>(getEncoding),
-                    readEncodingOpt,
-                    algorithm,
-                    canBeEmbedded: false
-                );
+                return EncodedStringText
+                    .TestAccessor
+                    .Create(
+                        stream,
+                        new Lazy<Encoding>(getEncoding),
+                        readEncodingOpt,
+                        algorithm,
+                        canBeEmbedded: false
+                    );
             }
         }
 
@@ -273,13 +275,15 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 Assert.Throws<DecoderFallbackException>(
                     () =>
                     {
-                        EncodedStringText.TestAccessor.Decode(
-                            stream,
-                            utf8,
-                            SourceHashAlgorithm.Sha1,
-                            throwIfBinaryDetected: false,
-                            canBeEmbedded: false
-                        );
+                        EncodedStringText
+                            .TestAccessor
+                            .Decode(
+                                stream,
+                                utf8,
+                                SourceHashAlgorithm.Sha1,
+                                throwIfBinaryDetected: false,
+                                canBeEmbedded: false
+                            );
                     }
                 );
 

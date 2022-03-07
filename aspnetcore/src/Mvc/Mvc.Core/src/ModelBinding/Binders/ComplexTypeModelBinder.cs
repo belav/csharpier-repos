@@ -262,8 +262,10 @@ public class ComplexTypeModelBinder : IModelBinder
         ModelMetadata propertyMetadata
     )
     {
-        var metadataProviderFilter =
-            bindingContext.ModelMetadata.PropertyFilterProvider?.PropertyFilter;
+        var metadataProviderFilter = bindingContext
+            .ModelMetadata
+            .PropertyFilterProvider
+            ?.PropertyFilter;
         if (metadataProviderFilter?.Invoke(propertyMetadata) == false)
         {
             return false;
@@ -326,9 +328,9 @@ public class ComplexTypeModelBinder : IModelBinder
         }
         else if (property.IsBindingRequired)
         {
-            var message = property.ModelBindingMessageProvider.MissingBindRequiredValueAccessor(
-                fieldName
-            );
+            var message = property
+                .ModelBindingMessageProvider
+                .MissingBindRequiredValueAccessor(fieldName);
             bindingContext.ModelState.TryAddModelError(modelName, message);
         }
 

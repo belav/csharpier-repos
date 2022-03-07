@@ -229,9 +229,9 @@ namespace System.Text.Json.Serialization.Tests
     {
         public TestClassWithNestedObjectInner MyData { get; set; }
 
-        public static readonly byte[] s_data = Encoding.UTF8.GetBytes(
-            @"{" + @"""MyData"":" + TestClassWithNestedObjectInner.s_json + @"}"
-        );
+        public static readonly byte[] s_data = Encoding
+            .UTF8
+            .GetBytes(@"{" + @"""MyData"":" + TestClassWithNestedObjectInner.s_json + @"}");
 
         public void Initialize()
         {
@@ -250,16 +250,18 @@ namespace System.Text.Json.Serialization.Tests
     {
         public List<SimpleTestClass> MyData { get; set; }
 
-        public static readonly byte[] s_data = Encoding.UTF8.GetBytes(
-            @"{"
-                + @"""MyData"":["
-                + SimpleTestClass.s_json
-                + ","
-                + "null,"
-                + SimpleTestClass.s_json
-                + @"]"
-                + @"}"
-        );
+        public static readonly byte[] s_data = Encoding
+            .UTF8
+            .GetBytes(
+                @"{"
+                    + @"""MyData"":["
+                    + SimpleTestClass.s_json
+                    + ","
+                    + "null,"
+                    + SimpleTestClass.s_json
+                    + @"]"
+                    + @"}"
+            );
 
         public void Initialize()
         {
@@ -293,15 +295,17 @@ namespace System.Text.Json.Serialization.Tests
     {
         public SimpleTestClass[] MyData { get; set; }
 
-        public static readonly byte[] s_data = Encoding.UTF8.GetBytes(
-            @"{"
-                + @"""MyData"":["
-                + SimpleTestClass.s_json
-                + ","
-                + SimpleTestClass.s_json
-                + @"]"
-                + @"}"
-        );
+        public static readonly byte[] s_data = Encoding
+            .UTF8
+            .GetBytes(
+                @"{"
+                    + @"""MyData"":["
+                    + SimpleTestClass.s_json
+                    + ","
+                    + SimpleTestClass.s_json
+                    + @"]"
+                    + @"}"
+            );
 
         public void Initialize()
         {
@@ -326,15 +330,17 @@ namespace System.Text.Json.Serialization.Tests
     {
         public IEnumerable<SimpleTestClass> MyData { get; set; }
 
-        public static readonly byte[] s_data = Encoding.UTF8.GetBytes(
-            @"{"
-                + @"""MyData"":["
-                + SimpleTestClass.s_json
-                + ","
-                + SimpleTestClass.s_json
-                + @"]"
-                + @"}"
-        );
+        public static readonly byte[] s_data = Encoding
+            .UTF8
+            .GetBytes(
+                @"{"
+                    + @"""MyData"":["
+                    + SimpleTestClass.s_json
+                    + ","
+                    + SimpleTestClass.s_json
+                    + @"]"
+                    + @"}"
+            );
 
         public void Initialize()
         {
@@ -365,15 +371,17 @@ namespace System.Text.Json.Serialization.Tests
     {
         public IList<SimpleTestClass> MyData { get; set; }
 
-        public static readonly byte[] s_data = Encoding.UTF8.GetBytes(
-            @"{"
-                + @"""MyData"":["
-                + SimpleTestClass.s_json
-                + ","
-                + SimpleTestClass.s_json
-                + @"]"
-                + @"}"
-        );
+        public static readonly byte[] s_data = Encoding
+            .UTF8
+            .GetBytes(
+                @"{"
+                    + @"""MyData"":["
+                    + SimpleTestClass.s_json
+                    + ","
+                    + SimpleTestClass.s_json
+                    + @"]"
+                    + @"}"
+            );
 
         public void Initialize()
         {
@@ -404,15 +412,17 @@ namespace System.Text.Json.Serialization.Tests
     {
         public ICollection<SimpleTestClass> MyData { get; set; }
 
-        public static readonly byte[] s_data = Encoding.UTF8.GetBytes(
-            @"{"
-                + @"""MyData"":["
-                + SimpleTestClass.s_json
-                + ","
-                + SimpleTestClass.s_json
-                + @"]"
-                + @"}"
-        );
+        public static readonly byte[] s_data = Encoding
+            .UTF8
+            .GetBytes(
+                @"{"
+                    + @"""MyData"":["
+                    + SimpleTestClass.s_json
+                    + ","
+                    + SimpleTestClass.s_json
+                    + @"]"
+                    + @"}"
+            );
 
         public void Initialize()
         {
@@ -446,15 +456,17 @@ namespace System.Text.Json.Serialization.Tests
     {
         public IEnumerable MyData { get; set; }
 
-        public static readonly byte[] s_data = Encoding.UTF8.GetBytes(
-            @"{"
-                + @"""MyData"":["
-                + SimpleTestClass.s_json
-                + ","
-                + SimpleTestClass.s_json
-                + @"]"
-                + @"}"
-        );
+        public static readonly byte[] s_data = Encoding
+            .UTF8
+            .GetBytes(
+                @"{"
+                    + @"""MyData"":["
+                    + SimpleTestClass.s_json
+                    + ","
+                    + SimpleTestClass.s_json
+                    + @"]"
+                    + @"}"
+            );
 
         public void Initialize()
         {
@@ -493,15 +505,17 @@ namespace System.Text.Json.Serialization.Tests
     {
         public IList MyData { get; set; }
 
-        public static readonly byte[] s_data = Encoding.UTF8.GetBytes(
-            @"{"
-                + @"""MyData"":["
-                + SimpleTestClass.s_json
-                + ","
-                + SimpleTestClass.s_json
-                + @"]"
-                + @"}"
-        );
+        public static readonly byte[] s_data = Encoding
+            .UTF8
+            .GetBytes(
+                @"{"
+                    + @"""MyData"":["
+                    + SimpleTestClass.s_json
+                    + ","
+                    + SimpleTestClass.s_json
+                    + @"]"
+                    + @"}"
+            );
 
         public void Initialize()
         {
@@ -546,15 +560,17 @@ namespace System.Text.Json.Serialization.Tests
     {
         public ICollection MyData { get; set; }
 
-        public static readonly byte[] s_data = Encoding.UTF8.GetBytes(
-            @"{"
-                + @"""MyData"":["
-                + SimpleTestClass.s_json
-                + ","
-                + SimpleTestClass.s_json
-                + @"]"
-                + @"}"
-        );
+        public static readonly byte[] s_data = Encoding
+            .UTF8
+            .GetBytes(
+                @"{"
+                    + @"""MyData"":["
+                    + SimpleTestClass.s_json
+                    + ","
+                    + SimpleTestClass.s_json
+                    + @"]"
+                    + @"}"
+            );
 
         public void Initialize()
         {
@@ -601,15 +617,17 @@ namespace System.Text.Json.Serialization.Tests
     {
         public IReadOnlyCollection<SimpleTestClass> MyData { get; set; }
 
-        public static readonly byte[] s_data = Encoding.UTF8.GetBytes(
-            @"{"
-                + @"""MyData"":["
-                + SimpleTestClass.s_json
-                + ","
-                + SimpleTestClass.s_json
-                + @"]"
-                + @"}"
-        );
+        public static readonly byte[] s_data = Encoding
+            .UTF8
+            .GetBytes(
+                @"{"
+                    + @"""MyData"":["
+                    + SimpleTestClass.s_json
+                    + ","
+                    + SimpleTestClass.s_json
+                    + @"]"
+                    + @"}"
+            );
 
         public void Initialize()
         {
@@ -637,15 +655,17 @@ namespace System.Text.Json.Serialization.Tests
     {
         public IReadOnlyList<SimpleTestClass> MyData { get; set; }
 
-        public static readonly byte[] s_data = Encoding.UTF8.GetBytes(
-            @"{"
-                + @"""MyData"":["
-                + SimpleTestClass.s_json
-                + ","
-                + SimpleTestClass.s_json
-                + @"]"
-                + @"}"
-        );
+        public static readonly byte[] s_data = Encoding
+            .UTF8
+            .GetBytes(
+                @"{"
+                    + @"""MyData"":["
+                    + SimpleTestClass.s_json
+                    + ","
+                    + SimpleTestClass.s_json
+                    + @"]"
+                    + @"}"
+            );
 
         public void Initialize()
         {
@@ -670,15 +690,17 @@ namespace System.Text.Json.Serialization.Tests
     {
         public ISet<SimpleTestClass> MyData { get; set; }
 
-        public static readonly byte[] s_data = Encoding.UTF8.GetBytes(
-            @"{"
-                + @"""MyData"":["
-                + SimpleTestClass.s_json
-                + ","
-                + SimpleTestClass.s_json
-                + @"]"
-                + @"}"
-        );
+        public static readonly byte[] s_data = Encoding
+            .UTF8
+            .GetBytes(
+                @"{"
+                    + @"""MyData"":["
+                    + SimpleTestClass.s_json
+                    + ","
+                    + SimpleTestClass.s_json
+                    + @"]"
+                    + @"}"
+            );
 
         public void Initialize()
         {
@@ -732,9 +754,9 @@ namespace System.Text.Json.Serialization.Tests
     {
         public string[] MyData { get; set; }
 
-        public static readonly byte[] s_data = Encoding.UTF8.GetBytes(
-            @"{" + @"""MyData"":[" + @"""Hello""," + @"""World""" + @"]" + @"}"
-        );
+        public static readonly byte[] s_data = Encoding
+            .UTF8
+            .GetBytes(@"{" + @"""MyData"":[" + @"""Hello""," + @"""World""" + @"]" + @"}");
 
         public void Initialize()
         {
@@ -753,9 +775,9 @@ namespace System.Text.Json.Serialization.Tests
     {
         public List<string> MyData { get; set; }
 
-        public static readonly byte[] s_data = Encoding.UTF8.GetBytes(
-            @"{" + @"""MyData"":[" + @"""Hello""," + @"""World""" + @"]" + @"}"
-        );
+        public static readonly byte[] s_data = Encoding
+            .UTF8
+            .GetBytes(@"{" + @"""MyData"":[" + @"""Hello""," + @"""World""" + @"]" + @"}");
 
         public void Initialize()
         {
@@ -775,9 +797,9 @@ namespace System.Text.Json.Serialization.Tests
     {
         public IEnumerable MyData { get; set; }
 
-        public static readonly byte[] s_data = Encoding.UTF8.GetBytes(
-            @"{" + @"""MyData"":[" + @"""Hello""," + @"""World""" + @"]" + @"}"
-        );
+        public static readonly byte[] s_data = Encoding
+            .UTF8
+            .GetBytes(@"{" + @"""MyData"":[" + @"""Hello""," + @"""World""" + @"]" + @"}");
 
         public void Initialize()
         {
@@ -815,9 +837,9 @@ namespace System.Text.Json.Serialization.Tests
     {
         public IList MyData { get; set; }
 
-        public static readonly byte[] s_data = Encoding.UTF8.GetBytes(
-            @"{" + @"""MyData"":[" + @"""Hello""," + @"""World""" + @"]" + @"}"
-        );
+        public static readonly byte[] s_data = Encoding
+            .UTF8
+            .GetBytes(@"{" + @"""MyData"":[" + @"""Hello""," + @"""World""" + @"]" + @"}");
 
         public void Initialize()
         {
@@ -849,9 +871,9 @@ namespace System.Text.Json.Serialization.Tests
     {
         public ICollection MyData { get; set; }
 
-        public static readonly byte[] s_data = Encoding.UTF8.GetBytes(
-            @"{" + @"""MyData"":[" + @"""Hello""," + @"""World""" + @"]" + @"}"
-        );
+        public static readonly byte[] s_data = Encoding
+            .UTF8
+            .GetBytes(@"{" + @"""MyData"":[" + @"""Hello""," + @"""World""" + @"]" + @"}");
 
         public void Initialize()
         {
@@ -883,9 +905,9 @@ namespace System.Text.Json.Serialization.Tests
     {
         public IEnumerable<string> MyData { get; set; }
 
-        public static readonly byte[] s_data = Encoding.UTF8.GetBytes(
-            @"{" + @"""MyData"":[" + @"""Hello""," + @"""World""" + @"]" + @"}"
-        );
+        public static readonly byte[] s_data = Encoding
+            .UTF8
+            .GetBytes(@"{" + @"""MyData"":[" + @"""Hello""," + @"""World""" + @"]" + @"}");
 
         public void Initialize()
         {
@@ -918,9 +940,9 @@ namespace System.Text.Json.Serialization.Tests
     {
         public IList<string> MyData { get; set; }
 
-        public static readonly byte[] s_data = Encoding.UTF8.GetBytes(
-            @"{" + @"""MyData"":[" + @"""Hello""," + @"""World""" + @"]" + @"}"
-        );
+        public static readonly byte[] s_data = Encoding
+            .UTF8
+            .GetBytes(@"{" + @"""MyData"":[" + @"""Hello""," + @"""World""" + @"]" + @"}");
 
         public void Initialize()
         {
@@ -940,9 +962,9 @@ namespace System.Text.Json.Serialization.Tests
     {
         public ICollection<string> MyData { get; set; }
 
-        public static readonly byte[] s_data = Encoding.UTF8.GetBytes(
-            @"{" + @"""MyData"":[" + @"""Hello""," + @"""World""" + @"]" + @"}"
-        );
+        public static readonly byte[] s_data = Encoding
+            .UTF8
+            .GetBytes(@"{" + @"""MyData"":[" + @"""Hello""," + @"""World""" + @"]" + @"}");
 
         public void Initialize()
         {
@@ -968,9 +990,9 @@ namespace System.Text.Json.Serialization.Tests
     {
         public IReadOnlyCollection<string> MyData { get; set; }
 
-        public static readonly byte[] s_data = Encoding.UTF8.GetBytes(
-            @"{" + @"""MyData"":[" + @"""Hello""," + @"""World""" + @"]" + @"}"
-        );
+        public static readonly byte[] s_data = Encoding
+            .UTF8
+            .GetBytes(@"{" + @"""MyData"":[" + @"""Hello""," + @"""World""" + @"]" + @"}");
 
         public void Initialize()
         {
@@ -996,9 +1018,9 @@ namespace System.Text.Json.Serialization.Tests
     {
         public IReadOnlyList<string> MyData { get; set; }
 
-        public static readonly byte[] s_data = Encoding.UTF8.GetBytes(
-            @"{" + @"""MyData"":[" + @"""Hello""," + @"""World""" + @"]" + @"}"
-        );
+        public static readonly byte[] s_data = Encoding
+            .UTF8
+            .GetBytes(@"{" + @"""MyData"":[" + @"""Hello""," + @"""World""" + @"]" + @"}");
 
         public void Initialize()
         {
@@ -1018,9 +1040,9 @@ namespace System.Text.Json.Serialization.Tests
     {
         public ISet<string> MyData { get; set; }
 
-        public static readonly byte[] s_data = Encoding.UTF8.GetBytes(
-            @"{" + @"""MyData"":[" + @"""Hello""," + @"""World""" + @"]" + @"}"
-        );
+        public static readonly byte[] s_data = Encoding
+            .UTF8
+            .GetBytes(@"{" + @"""MyData"":[" + @"""Hello""," + @"""World""" + @"]" + @"}");
 
         public void Initialize()
         {
@@ -1069,70 +1091,72 @@ namespace System.Text.Json.Serialization.Tests
         public IReadOnlyDictionary<string, double> MyDoubleIReadOnlyDict { get; set; }
         public IReadOnlyDictionary<string, DateTime> MyDateTimeIReadOnlyDict { get; set; }
 
-        public static readonly byte[] s_data = Encoding.UTF8.GetBytes(
-            @"{"
-                + @"""MyInt32Dict"":{"
-                + @"""key1"": 1,"
-                + @"""key2"": 2"
-                + @"},"
-                + @"""MyBooleanDict"":{"
-                + @"""key1"": true,"
-                + @"""key2"": false"
-                + @"},"
-                + @"""MySingleDict"":{"
-                + @"""key1"": 1.1,"
-                + @"""key2"": 2.2"
-                + @"},"
-                + @"""MyDoubleDict"":{"
-                + @"""key1"": 3.3,"
-                + @"""key2"": 4.4"
-                + @"},"
-                + @"""MyDateTimeDict"":{"
-                + @"""key1"": ""2019-01-30T12:01:02.0000000"","
-                + @"""key2"": ""2019-01-30T12:01:02.0000000Z"""
-                + @"},"
-                + @"""MyInt32IDict"":{"
-                + @"""key1"": 1,"
-                + @"""key2"": 2"
-                + @"},"
-                + @"""MyBooleanIDict"":{"
-                + @"""key1"": true,"
-                + @"""key2"": false"
-                + @"},"
-                + @"""MySingleIDict"":{"
-                + @"""key1"": 1.1,"
-                + @"""key2"": 2.2"
-                + @"},"
-                + @"""MyDoubleIDict"":{"
-                + @"""key1"": 3.3,"
-                + @"""key2"": 4.4"
-                + @"},"
-                + @"""MyDateTimeIDict"":{"
-                + @"""key1"": ""2019-01-30T12:01:02.0000000"","
-                + @"""key2"": ""2019-01-30T12:01:02.0000000Z"""
-                + @"},"
-                + @"""MyInt32IReadOnlyDict"":{"
-                + @"""key1"": 1,"
-                + @"""key2"": 2"
-                + @"},"
-                + @"""MyBooleanIReadOnlyDict"":{"
-                + @"""key1"": true,"
-                + @"""key2"": false"
-                + @"},"
-                + @"""MySingleIReadOnlyDict"":{"
-                + @"""key1"": 1.1,"
-                + @"""key2"": 2.2"
-                + @"},"
-                + @"""MyDoubleIReadOnlyDict"":{"
-                + @"""key1"": 3.3,"
-                + @"""key2"": 4.4"
-                + @"},"
-                + @"""MyDateTimeIReadOnlyDict"":{"
-                + @"""key1"": ""2019-01-30T12:01:02.0000000"","
-                + @"""key2"": ""2019-01-30T12:01:02.0000000Z"""
-                + @"}"
-                + @"}"
-        );
+        public static readonly byte[] s_data = Encoding
+            .UTF8
+            .GetBytes(
+                @"{"
+                    + @"""MyInt32Dict"":{"
+                    + @"""key1"": 1,"
+                    + @"""key2"": 2"
+                    + @"},"
+                    + @"""MyBooleanDict"":{"
+                    + @"""key1"": true,"
+                    + @"""key2"": false"
+                    + @"},"
+                    + @"""MySingleDict"":{"
+                    + @"""key1"": 1.1,"
+                    + @"""key2"": 2.2"
+                    + @"},"
+                    + @"""MyDoubleDict"":{"
+                    + @"""key1"": 3.3,"
+                    + @"""key2"": 4.4"
+                    + @"},"
+                    + @"""MyDateTimeDict"":{"
+                    + @"""key1"": ""2019-01-30T12:01:02.0000000"","
+                    + @"""key2"": ""2019-01-30T12:01:02.0000000Z"""
+                    + @"},"
+                    + @"""MyInt32IDict"":{"
+                    + @"""key1"": 1,"
+                    + @"""key2"": 2"
+                    + @"},"
+                    + @"""MyBooleanIDict"":{"
+                    + @"""key1"": true,"
+                    + @"""key2"": false"
+                    + @"},"
+                    + @"""MySingleIDict"":{"
+                    + @"""key1"": 1.1,"
+                    + @"""key2"": 2.2"
+                    + @"},"
+                    + @"""MyDoubleIDict"":{"
+                    + @"""key1"": 3.3,"
+                    + @"""key2"": 4.4"
+                    + @"},"
+                    + @"""MyDateTimeIDict"":{"
+                    + @"""key1"": ""2019-01-30T12:01:02.0000000"","
+                    + @"""key2"": ""2019-01-30T12:01:02.0000000Z"""
+                    + @"},"
+                    + @"""MyInt32IReadOnlyDict"":{"
+                    + @"""key1"": 1,"
+                    + @"""key2"": 2"
+                    + @"},"
+                    + @"""MyBooleanIReadOnlyDict"":{"
+                    + @"""key1"": true,"
+                    + @"""key2"": false"
+                    + @"},"
+                    + @"""MySingleIReadOnlyDict"":{"
+                    + @"""key1"": 1.1,"
+                    + @"""key2"": 2.2"
+                    + @"},"
+                    + @"""MyDoubleIReadOnlyDict"":{"
+                    + @"""key1"": 3.3,"
+                    + @"""key2"": 4.4"
+                    + @"},"
+                    + @"""MyDateTimeIReadOnlyDict"":{"
+                    + @"""key1"": ""2019-01-30T12:01:02.0000000"","
+                    + @"""key2"": ""2019-01-30T12:01:02.0000000Z"""
+                    + @"}"
+                    + @"}"
+            );
 
         public void Initialize()
         {
@@ -1259,30 +1283,32 @@ namespace System.Text.Json.Serialization.Tests
         public HashSet<SimpleTestClass> MyHashSet { get; set; }
         public LinkedList<SimpleTestClass> MyLinkedList { get; set; }
 
-        public static readonly byte[] s_data = Encoding.UTF8.GetBytes(
-            @"{"
-                + @"""MyStack"":["
-                + SimpleTestClass.s_json
-                + ","
-                + SimpleTestClass.s_json
-                + @"],"
-                + @"""MyQueue"":["
-                + SimpleTestClass.s_json
-                + ","
-                + SimpleTestClass.s_json
-                + @"],"
-                + @"""MyHashSet"":["
-                + SimpleTestClass.s_json
-                + ","
-                + SimpleTestClass.s_json
-                + @"],"
-                + @"""MyLinkedList"":["
-                + SimpleTestClass.s_json
-                + ","
-                + SimpleTestClass.s_json
-                + @"]"
-                + @"}"
-        );
+        public static readonly byte[] s_data = Encoding
+            .UTF8
+            .GetBytes(
+                @"{"
+                    + @"""MyStack"":["
+                    + SimpleTestClass.s_json
+                    + ","
+                    + SimpleTestClass.s_json
+                    + @"],"
+                    + @"""MyQueue"":["
+                    + SimpleTestClass.s_json
+                    + ","
+                    + SimpleTestClass.s_json
+                    + @"],"
+                    + @"""MyHashSet"":["
+                    + SimpleTestClass.s_json
+                    + ","
+                    + SimpleTestClass.s_json
+                    + @"],"
+                    + @"""MyLinkedList"":["
+                    + SimpleTestClass.s_json
+                    + ","
+                    + SimpleTestClass.s_json
+                    + @"]"
+                    + @"}"
+            );
 
         public void Initialize()
         {
@@ -1375,55 +1401,57 @@ namespace System.Text.Json.Serialization.Tests
         public ImmutableStack<SimpleTestClass> MyImmutableStack { get; set; }
         public ImmutableQueue<SimpleTestClass> MyImmutableQueue { get; set; }
 
-        public static readonly byte[] s_data = Encoding.UTF8.GetBytes(
-            @"{"
-                + @"""MyImmutableArray"":["
-                + SimpleTestClass.s_json
-                + ","
-                + SimpleTestClass.s_json
-                + @"],"
-                + @"""MyIImmutableList"":["
-                + SimpleTestClass.s_json
-                + ","
-                + SimpleTestClass.s_json
-                + @"],"
-                + @"""MyIImmutableStack"":["
-                + SimpleTestClass.s_json
-                + ","
-                + SimpleTestClass.s_json
-                + @"],"
-                + @"""MyIImmutableQueue"":["
-                + SimpleTestClass.s_json
-                + ","
-                + SimpleTestClass.s_json
-                + @"],"
-                + @"""MyIImmutableSet"":["
-                + SimpleTestClass.s_json
-                + ","
-                + SimpleTestClass.s_json
-                + @"],"
-                + @"""MyImmutableHashSet"":["
-                + SimpleTestClass.s_json
-                + ","
-                + SimpleTestClass.s_json
-                + @"],"
-                + @"""MyImmutableList"":["
-                + SimpleTestClass.s_json
-                + ","
-                + SimpleTestClass.s_json
-                + @"],"
-                + @"""MyImmutableStack"":["
-                + SimpleTestClass.s_json
-                + ","
-                + SimpleTestClass.s_json
-                + @"],"
-                + @"""MyImmutableQueue"":["
-                + SimpleTestClass.s_json
-                + ","
-                + SimpleTestClass.s_json
-                + @"]"
-                + @"}"
-        );
+        public static readonly byte[] s_data = Encoding
+            .UTF8
+            .GetBytes(
+                @"{"
+                    + @"""MyImmutableArray"":["
+                    + SimpleTestClass.s_json
+                    + ","
+                    + SimpleTestClass.s_json
+                    + @"],"
+                    + @"""MyIImmutableList"":["
+                    + SimpleTestClass.s_json
+                    + ","
+                    + SimpleTestClass.s_json
+                    + @"],"
+                    + @"""MyIImmutableStack"":["
+                    + SimpleTestClass.s_json
+                    + ","
+                    + SimpleTestClass.s_json
+                    + @"],"
+                    + @"""MyIImmutableQueue"":["
+                    + SimpleTestClass.s_json
+                    + ","
+                    + SimpleTestClass.s_json
+                    + @"],"
+                    + @"""MyIImmutableSet"":["
+                    + SimpleTestClass.s_json
+                    + ","
+                    + SimpleTestClass.s_json
+                    + @"],"
+                    + @"""MyImmutableHashSet"":["
+                    + SimpleTestClass.s_json
+                    + ","
+                    + SimpleTestClass.s_json
+                    + @"],"
+                    + @"""MyImmutableList"":["
+                    + SimpleTestClass.s_json
+                    + ","
+                    + SimpleTestClass.s_json
+                    + @"],"
+                    + @"""MyImmutableStack"":["
+                    + SimpleTestClass.s_json
+                    + ","
+                    + SimpleTestClass.s_json
+                    + @"],"
+                    + @"""MyImmutableQueue"":["
+                    + SimpleTestClass.s_json
+                    + ","
+                    + SimpleTestClass.s_json
+                    + @"]"
+                    + @"}"
+            );
 
         public void Initialize()
         {
@@ -1600,9 +1628,9 @@ namespace System.Text.Json.Serialization.Tests
     {
         public Int16 MyInt16 { get; set; }
 
-        public static readonly byte[] s_data = Encoding.UTF8.GetBytes(
-            @"{" + @"""blah"" : 1" + @"}"
-        );
+        public static readonly byte[] s_data = Encoding
+            .UTF8
+            .GetBytes(@"{" + @"""blah"" : 1" + @"}");
     }
 
     public class LargeDataTestClass : ITestClass
@@ -1715,22 +1743,24 @@ namespace System.Text.Json.Serialization.Tests
             Assert.Equal(98052, address.zip);
         }
 
-        public static readonly byte[] s_data = Encoding.UTF8.GetBytes(
-            "{"
-                + @"""age"" : 30,"
-                + @"""first"" : ""John"","
-                + @"""last"" : ""Smith"","
-                + @"""phoneNumbers"" : ["
-                + @"""425-000-0000"","
-                + @"""425-000-0001"""
-                + @"],"
-                + @"""address"" : {"
-                + @"""street"" : ""1 Microsoft Way"","
-                + @"""city"" : ""Redmond"","
-                + @"""zip"" : 98052"
-                + "}"
-                + "}"
-        );
+        public static readonly byte[] s_data = Encoding
+            .UTF8
+            .GetBytes(
+                "{"
+                    + @"""age"" : 30,"
+                    + @"""first"" : ""John"","
+                    + @"""last"" : ""Smith"","
+                    + @"""phoneNumbers"" : ["
+                    + @"""425-000-0000"","
+                    + @"""425-000-0001"""
+                    + @"],"
+                    + @"""address"" : {"
+                    + @"""street"" : ""1 Microsoft Way"","
+                    + @"""city"" : ""Redmond"","
+                    + @"""zip"" : 98052"
+                    + "}"
+                    + "}"
+            );
     }
 
     public class BasicJsonAddress
@@ -1746,41 +1776,43 @@ namespace System.Text.Json.Serialization.Tests
         public BasicJsonAddress mainSite { get; set; }
         public string name { get; set; }
 
-        public static readonly byte[] s_data = Encoding.UTF8.GetBytes(
-            "{\n"
-                + @"""name"" : ""Microsoft"","
-                + "\n"
-                + @"""sites"" :["
-                + "\n"
-                + "{\n"
-                + @"""street"" : ""1 Lone Tree Rd S"","
-                + "\n"
-                + @"""city"" : ""Fargo"","
-                + "\n"
-                + @"""zip"" : 58104"
-                + "\n"
-                + "},\n"
-                + "{\n"
-                + @"""street"" : ""8055 Microsoft Way"","
-                + "\n"
-                + @"""city"" : ""Charlotte"","
-                + "\n"
-                + @"""zip"" : 28273"
-                + "\n"
-                + "}\n"
-                + "],\n"
-                + @"""mainSite"":"
-                + "\n"
-                + "{\n"
-                + @"""street"" : ""1 Microsoft Way"","
-                + "\n"
-                + @"""city"" : ""Redmond"","
-                + "\n"
-                + @"""zip"" : 98052"
-                + "\n"
-                + "}\n"
-                + "}"
-        );
+        public static readonly byte[] s_data = Encoding
+            .UTF8
+            .GetBytes(
+                "{\n"
+                    + @"""name"" : ""Microsoft"","
+                    + "\n"
+                    + @"""sites"" :["
+                    + "\n"
+                    + "{\n"
+                    + @"""street"" : ""1 Lone Tree Rd S"","
+                    + "\n"
+                    + @"""city"" : ""Fargo"","
+                    + "\n"
+                    + @"""zip"" : 58104"
+                    + "\n"
+                    + "},\n"
+                    + "{\n"
+                    + @"""street"" : ""8055 Microsoft Way"","
+                    + "\n"
+                    + @"""city"" : ""Charlotte"","
+                    + "\n"
+                    + @"""zip"" : 28273"
+                    + "\n"
+                    + "}\n"
+                    + "],\n"
+                    + @"""mainSite"":"
+                    + "\n"
+                    + "{\n"
+                    + @"""street"" : ""1 Microsoft Way"","
+                    + "\n"
+                    + @"""city"" : ""Redmond"","
+                    + "\n"
+                    + @"""zip"" : 98052"
+                    + "\n"
+                    + "}\n"
+                    + "}"
+            );
 
         public void Initialize()
         {
@@ -1882,14 +1914,16 @@ namespace System.Text.Json.Serialization.Tests
     {
         public TestClassWithNestedObjectCommentsInner MyData { get; set; }
 
-        public static readonly byte[] s_data = Encoding.UTF8.GetBytes(
-            @"{"
-                + " // This } will be ignored\n"
-                + @"""MyData"":"
-                + TestClassWithNestedObjectCommentsInner.s_json
-                + " /* As will this [ */\n"
-                + @"}"
-        );
+        public static readonly byte[] s_data = Encoding
+            .UTF8
+            .GetBytes(
+                @"{"
+                    + " // This } will be ignored\n"
+                    + @"""MyData"":"
+                    + TestClassWithNestedObjectCommentsInner.s_json
+                    + " /* As will this [ */\n"
+                    + @"}"
+            );
 
         public void Initialize()
         {

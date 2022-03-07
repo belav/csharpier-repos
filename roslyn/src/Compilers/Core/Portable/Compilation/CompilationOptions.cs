@@ -754,9 +754,9 @@ namespace Microsoft.CodeAnalysis
                                                 (int)this.GeneralDiagnosticOption,
                                                 Hash.Combine(
                                                     this.MainTypeName != null
-                                                      ? StringComparer.Ordinal.GetHashCode(
-                                                            this.MainTypeName
-                                                        )
+                                                      ? StringComparer
+                                                        .Ordinal
+                                                        .GetHashCode(this.MainTypeName)
                                                       : 0,
                                                     Hash.Combine(
                                                         (int)this.MetadataImportOptions,
@@ -764,9 +764,9 @@ namespace Microsoft.CodeAnalysis
                                                             this.ReferencesSupersedeLowerVersions,
                                                             Hash.Combine(
                                                                 this.ModuleName != null
-                                                                  ? StringComparer.Ordinal.GetHashCode(
-                                                                        this.ModuleName
-                                                                    )
+                                                                  ? StringComparer
+                                                                    .Ordinal
+                                                                    .GetHashCode(this.ModuleName)
                                                                   : 0,
                                                                 Hash.Combine(
                                                                     (int)this.OptimizationLevel,
@@ -779,7 +779,9 @@ namespace Microsoft.CodeAnalysis
                                                                                 Hash.Combine(
                                                                                     this.ScriptClassName
                                                                                         != null
-                                                                                      ? StringComparer.Ordinal.GetHashCode(
+                                                                                      ? StringComparer
+                                                                                        .Ordinal
+                                                                                        .GetHashCode(
                                                                                             this.ScriptClassName
                                                                                         )
                                                                                       : 0,

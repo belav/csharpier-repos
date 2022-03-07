@@ -178,7 +178,10 @@ namespace JitBench
                                     case ErrorType.VersionRequestedError:
                                         Console.WriteLine(
                                             new AssemblyName(
-                                                typeof(CommandLineOptions).GetTypeInfo().Assembly.FullName
+                                                typeof(CommandLineOptions)
+                                                    .GetTypeInfo()
+                                                    .Assembly
+                                                    .FullName
                                             ).Version
                                         );
                                         Environment.Exit(0);

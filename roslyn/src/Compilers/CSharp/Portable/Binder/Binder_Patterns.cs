@@ -601,15 +601,18 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                     if (!hasErrors)
                     {
-                        var requiredVersion =
-                            MessageID.IDS_FeatureRecursivePatterns.RequiredVersion();
+                        var requiredVersion = MessageID
+                            .IDS_FeatureRecursivePatterns
+                            .RequiredVersion();
                         if (
                             Compilation.LanguageVersion < requiredVersion
-                            && !this.Conversions.ClassifyConversionFromExpression(
-                                expression,
-                                inputType,
-                                ref useSiteInfo
-                            ).IsImplicit
+                            && !this.Conversions
+                                .ClassifyConversionFromExpression(
+                                    expression,
+                                    inputType,
+                                    ref useSiteInfo
+                                )
+                                .IsImplicit
                         )
                         {
                             diagnostics.Add(
@@ -766,8 +769,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                     )
                     {
                         // permit pattern-matching when one of the types is an open type in C# 7.1.
-                        LanguageVersion requiredVersion =
-                            MessageID.IDS_FeatureGenericPatternMatching.RequiredVersion();
+                        LanguageVersion requiredVersion = MessageID
+                            .IDS_FeatureGenericPatternMatching
+                            .RequiredVersion();
                         if (requiredVersion > Compilation.LanguageVersion)
                         {
                             Error(
@@ -962,11 +966,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                         localSymbol.SetValEscape(GetValEscape(declType.Type, inputValEscape));
 
                         // Check for variable declaration errors.
-                        hasErrors |=
-                            localSymbol.ScopeBinder.ValidateDeclarationNameConflictsInScope(
-                                localSymbol,
-                                diagnostics
-                            );
+                        hasErrors |= localSymbol
+                            .ScopeBinder
+                            .ValidateDeclarationNameConflictsInScope(localSymbol, diagnostics);
 
                         if (!hasErrors)
                             hasErrors = CheckRestrictedTypeInAsyncMethod(
@@ -1580,11 +1582,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                     diagnostics
                 );
                 var result =
-                    Compilation.Conversions.ClassifyBuiltInConversion(
-                        type,
-                        possibleBaseInterface,
-                        ref useSiteInfo
-                    ).IsImplicit;
+                    Compilation
+                        .Conversions
+                        .ClassifyBuiltInConversion(type, possibleBaseInterface, ref useSiteInfo)
+                        .IsImplicit;
                 diagnostics.Add(node, useSiteInfo);
                 return result;
             }

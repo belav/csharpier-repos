@@ -73,10 +73,10 @@ namespace System.Web.Mvc.Routing.Test
             RequestContext requestContext = GetRequestContext();
 
             requestContext.RouteData.DataTokens.Add("area", "Administration");
-            requestContext.RouteData.DataTokens.Add(
-                "controller",
-                "AreaWithPrefixWithControllerRoute"
-            );
+            requestContext
+                .RouteData
+                .DataTokens
+                .Add("controller", "AreaWithPrefixWithControllerRoute");
 
             RouteValueDictionary values = new RouteValueDictionary() { { "action", "A2" }, };
 

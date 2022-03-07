@@ -462,11 +462,13 @@ namespace System.DirectoryServices.AccountManagement
                     // or (2) it's a domain user that's a member of a group on the local machine.  Pass the default machine context options
                     // If we initially targetted AD then those options will not be valid for the machine store.
 
-                    PrincipalContext ctx = SDSCache.LocalMachine.GetContext(
-                        sidIssuerName,
-                        _credentials,
-                        DefaultContextOptions.MachineDefaultContextOption
-                    );
+                    PrincipalContext ctx = SDSCache
+                        .LocalMachine
+                        .GetContext(
+                            sidIssuerName,
+                            _credentials,
+                            DefaultContextOptions.MachineDefaultContextOption
+                        );
                     SecurityIdentifier sidObj = new SecurityIdentifier(sid, 0);
                     group = GroupPrincipal.FindByIdentity(ctx, IdentityType.Sid, sidObj.ToString());
                 }
@@ -483,11 +485,9 @@ namespace System.DirectoryServices.AccountManagement
 
                     // It's a domain group, because it's a domain user and the SID issuer isn't the local machine
 
-                    PrincipalContext ctx = SDSCache.Domain.GetContext(
-                        sidIssuerName,
-                        _credentials,
-                        _contextOptions
-                    );
+                    PrincipalContext ctx = SDSCache
+                        .Domain
+                        .GetContext(sidIssuerName, _credentials, _contextOptions);
 
                     // Retrieve the group.  We'd normally just do a Group.FindByIdentity here, but
                     // because the AZMan API can return "old" SIDs, we also need to check the SID

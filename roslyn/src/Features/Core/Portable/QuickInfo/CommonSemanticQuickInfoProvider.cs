@@ -33,7 +33,8 @@ namespace Microsoft.CodeAnalysis.QuickInfo
                 return null;
 
             var cancellationToken = context.CancellationToken;
-            var semanticModel = await context.Document
+            var semanticModel = await context
+                .Document
                 .GetRequiredSemanticModelAsync(cancellationToken)
                 .ConfigureAwait(false);
             var services = context.Document.Project.Solution.Workspace.Services;
@@ -167,7 +168,8 @@ namespace Microsoft.CodeAnalysis.QuickInfo
             {
                 // Does the candidate have anything remotely equivalent?
                 if (
-                    !tokenInformation.Symbols
+                    !tokenInformation
+                        .Symbols
                         .Intersect(
                             bestBinding.tokenInformation.Symbols,
                             LinkedFilesSymbolEquivalenceComparer.Instance

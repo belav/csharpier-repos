@@ -82,9 +82,10 @@ public class ClientValidatorCacheTest
         var modelMetadataProvider = new TestModelMetadataProvider();
         var metadata = modelMetadataProvider.GetMetadataForType(typeof(TestRecordType));
         var property = metadata.Properties[nameof(TestRecordType.Property1)];
-        var parameter = metadata.BoundConstructor.BoundConstructorParameters.First(
-            f => f.Name == nameof(TestRecordType.Property1)
-        );
+        var parameter = metadata
+            .BoundConstructor
+            .BoundConstructorParameters
+            .First(f => f.Name == nameof(TestRecordType.Property1));
         var validatorProvider = new ProviderWithNonReusableValidators();
 
         // Act

@@ -1922,24 +1922,28 @@ public class PageActionInvokerTest : CommonResourceInvokerTest
         if (result != null)
         {
             handlers.Add((obj, args) => Task.FromResult(result));
-            actionDescriptor.HandlerMethods.Add(
-                new HandlerMethodDescriptor()
-                {
-                    HttpMethod = "GET",
-                    Parameters = new List<HandlerParameterDescriptor>(),
-                }
-            );
+            actionDescriptor
+                .HandlerMethods
+                .Add(
+                    new HandlerMethodDescriptor()
+                    {
+                        HttpMethod = "GET",
+                        Parameters = new List<HandlerParameterDescriptor>(),
+                    }
+                );
         }
         else if (exception != null)
         {
             handlers.Add((obj, args) => Task.FromException<IActionResult>(exception));
-            actionDescriptor.HandlerMethods.Add(
-                new HandlerMethodDescriptor()
-                {
-                    HttpMethod = "GET",
-                    Parameters = new List<HandlerParameterDescriptor>(),
-                }
-            );
+            actionDescriptor
+                .HandlerMethods
+                .Add(
+                    new HandlerMethodDescriptor()
+                    {
+                        HttpMethod = "GET",
+                        Parameters = new List<HandlerParameterDescriptor>(),
+                    }
+                );
         }
 
         return CreateInvoker(

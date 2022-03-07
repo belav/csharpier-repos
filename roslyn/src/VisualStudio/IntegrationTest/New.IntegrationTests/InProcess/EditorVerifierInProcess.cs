@@ -94,20 +94,21 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
 
             if (!RoslynString.IsNullOrEmpty(applyFix))
             {
-                var result = await TestServices.Editor.ApplyLightBulbActionAsync(
-                    applyFix,
-                    fixAllScope,
-                    blockUntilComplete,
-                    cancellationToken
-                );
+                var result = await TestServices
+                    .Editor
+                    .ApplyLightBulbActionAsync(
+                        applyFix,
+                        fixAllScope,
+                        blockUntilComplete,
+                        cancellationToken
+                    );
 
                 if (blockUntilComplete)
                 {
                     // wait for action to complete
-                    await TestServices.Workspace.WaitForAsyncOperationsAsync(
-                        FeatureAttribute.LightBulb,
-                        cancellationToken
-                    );
+                    await TestServices
+                        .Workspace
+                        .WaitForAsyncOperationsAsync(FeatureAttribute.LightBulb, cancellationToken);
                 }
 
                 return result;

@@ -159,10 +159,9 @@ internal partial class HubServerProxyGenerator
             var memberAccessExpressionSyntax = (MemberAccessExpressionSyntax)context.Node;
 
             if (
-                ModelExtensions.GetSymbolInfo(
-                    context.SemanticModel,
-                    memberAccessExpressionSyntax
-                ).Symbol
+                ModelExtensions
+                    .GetSymbolInfo(context.SemanticModel, memberAccessExpressionSyntax)
+                    .Symbol
                 is not IMethodSymbol methodSymbol
             )
             {
@@ -177,7 +176,8 @@ internal partial class HubServerProxyGenerator
             foreach (var attributeData in methodSymbol.GetAttributes())
             {
                 if (
-                    !attributeData.AttributeClass
+                    !attributeData
+                        .AttributeClass
                         .ToString()
                         .EndsWith("HubServerProxyAttribute", StringComparison.Ordinal)
                 )
@@ -270,8 +270,9 @@ internal partial class HubServerProxyGenerator
             }
             sourceGenerationSpec.GetterMethodName = getProxyMethodSymbol.Name;
             sourceGenerationSpec.GetterClassName = getProxyClassSymbol.Name;
-            sourceGenerationSpec.GetterNamespace =
-                getProxyClassSymbol.ContainingNamespace.ToString();
+            sourceGenerationSpec.GetterNamespace = getProxyClassSymbol
+                .ContainingNamespace
+                .ToString();
             sourceGenerationSpec.GetterTypeParameterName =
                 getProxyMethodSymbol.TypeParameters[0].Name;
             sourceGenerationSpec.GetterHubConnectionParameterName =
@@ -323,12 +324,14 @@ internal partial class HubServerProxyGenerator
                     .Where(member => member.Kind == SymbolKind.Method)
                     .Select(member => (IMethodSymbol)member)
                     .Concat(
-                        hubSymbol.AllInterfaces.SelectMany(
-                            x =>
-                                x.GetMembers()
-                                    .Where(member => member.Kind == SymbolKind.Method)
-                                    .Select(member => (IMethodSymbol)member)
-                        )
+                        hubSymbol
+                            .AllInterfaces
+                            .SelectMany(
+                                x =>
+                                    x.GetMembers()
+                                        .Where(member => member.Kind == SymbolKind.Method)
+                                        .Select(member => (IMethodSymbol)member)
+                            )
                     );
 
                 // Generate spec for each method

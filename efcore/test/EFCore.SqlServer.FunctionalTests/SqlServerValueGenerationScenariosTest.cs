@@ -267,7 +267,8 @@ namespace Microsoft.EntityFrameworkCore
                     .Entity<Blog>()
                     .Property(e => e.Id)
                     .HasDefaultValueSql("next value for MySequence")
-                    .Metadata.SetBeforeSaveBehavior(PropertySaveBehavior.Throw);
+                    .Metadata
+                    .SetBeforeSaveBehavior(PropertySaveBehavior.Throw);
             }
         }
 
@@ -629,8 +630,9 @@ namespace Microsoft.EntityFrameworkCore
             }
         }
 
-        private static readonly GeometryFactory GeometryFactory =
-            NtsGeometryServices.Instance.CreateGeometryFactory(srid: 4326);
+        private static readonly GeometryFactory GeometryFactory = NtsGeometryServices
+            .Instance
+            .CreateGeometryFactory(srid: 4326);
 
         public class BlogContextNonKeyDefaultValue : ContextBase
         {
@@ -724,7 +726,8 @@ namespace Microsoft.EntityFrameworkCore
                     .Entity<Blog>()
                     .Property(e => e.CreatedOn)
                     .HasDefaultValueSql("getdate()")
-                    .Metadata.SetBeforeSaveBehavior(PropertySaveBehavior.Throw);
+                    .Metadata
+                    .SetBeforeSaveBehavior(PropertySaveBehavior.Throw);
             }
         }
 
@@ -737,9 +740,9 @@ namespace Microsoft.EntityFrameworkCore
                 context.Database.EnsureCreatedResiliently();
 
                 var blog =
-                    context.Add(
-                        new FullNameBlog { FirstName = "One", LastName = "Unicorn" }
-                    ).Entity;
+                    context
+                        .Add(new FullNameBlog { FirstName = "One", LastName = "Unicorn" })
+                        .Entity;
 
                 context.SaveChanges();
 
@@ -772,7 +775,8 @@ namespace Microsoft.EntityFrameworkCore
                     modelBuilder
                         .Entity<FullNameBlog>()
                         .Property(e => e.FullName)
-                        .HasComputedColumnSql("FirstName + ' ' + LastName").Metadata;
+                        .HasComputedColumnSql("FirstName + ' ' + LastName")
+                        .Metadata;
 
                 property.SetBeforeSaveBehavior(PropertySaveBehavior.Throw);
                 property.SetAfterSaveBehavior(PropertySaveBehavior.Throw);
@@ -786,11 +790,13 @@ namespace Microsoft.EntityFrameworkCore
             using var testStore = SqlServerTestStore.CreateInitialized(DatabaseName);
             using (var context = new BlogContextComputedColumnWithFunction(testStore.Name))
             {
-                context.Database.ExecuteSqlRaw(
-                    @"CREATE FUNCTION
+                context
+                    .Database
+                    .ExecuteSqlRaw(
+                        @"CREATE FUNCTION
 [dbo].[GetFullName](@First NVARCHAR(MAX), @Second NVARCHAR(MAX))
 RETURNS NVARCHAR(MAX) WITH SCHEMABINDING AS BEGIN RETURN @First + @Second END"
-                );
+                    );
 
                 context.GetService<IRelationalDatabaseCreator>().CreateTables();
             }
@@ -798,9 +804,9 @@ RETURNS NVARCHAR(MAX) WITH SCHEMABINDING AS BEGIN RETURN @First + @Second END"
             using (var context = new BlogContextComputedColumnWithFunction(testStore.Name))
             {
                 var blog =
-                    context.Add(
-                        new FullNameBlog { FirstName = "One", LastName = "Unicorn" }
-                    ).Entity;
+                    context
+                        .Add(new FullNameBlog { FirstName = "One", LastName = "Unicorn" })
+                        .Entity;
 
                 context.SaveChanges();
 
@@ -834,7 +840,8 @@ RETURNS NVARCHAR(MAX) WITH SCHEMABINDING AS BEGIN RETURN @First + @Second END"
                     .Entity<FullNameBlog>()
                     .Property(e => e.FullName)
                     .HasComputedColumnSql("[dbo].[GetFullName]([FirstName], [LastName])")
-                    .Metadata.SetAfterSaveBehavior(PropertySaveBehavior.Throw);
+                    .Metadata
+                    .SetAfterSaveBehavior(PropertySaveBehavior.Throw);
             }
         }
 
@@ -847,23 +854,27 @@ RETURNS NVARCHAR(MAX) WITH SCHEMABINDING AS BEGIN RETURN @First + @Second END"
             {
                 context.GetService<IRelationalDatabaseCreator>().CreateTables();
 
-                context.Database.ExecuteSqlRaw(
-                    "ALTER TABLE dbo.FullNameBlogs DROP COLUMN FullName;"
-                );
+                context
+                    .Database
+                    .ExecuteSqlRaw("ALTER TABLE dbo.FullNameBlogs DROP COLUMN FullName;");
 
-                context.Database.ExecuteSqlRaw(
-                    @"CREATE FUNCTION [dbo].[GetFullName](@Id int)
+                context
+                    .Database
+                    .ExecuteSqlRaw(
+                        @"CREATE FUNCTION [dbo].[GetFullName](@Id int)
 RETURNS nvarchar(max) WITH SCHEMABINDING AS
 BEGIN
     DECLARE @FullName nvarchar(max);
     SELECT @FullName = [FirstName] + [LastName] FROM [dbo].[FullNameBlogs] WHERE [Id] = @Id;
     RETURN @FullName
 END"
-                );
+                    );
 
-                context.Database.ExecuteSqlRaw(
-                    "ALTER TABLE dbo.FullNameBlogs ADD FullName AS [dbo].[GetFullName]([Id]); "
-                );
+                context
+                    .Database
+                    .ExecuteSqlRaw(
+                        "ALTER TABLE dbo.FullNameBlogs ADD FullName AS [dbo].[GetFullName]([Id]); "
+                    );
             }
 
             try
@@ -871,9 +882,9 @@ END"
                 using (var context = new BlogContextComputedColumn(testStore.Name))
                 {
                     var blog =
-                        context.Add(
-                            new FullNameBlog { FirstName = "One", LastName = "Unicorn" }
-                        ).Entity;
+                        context
+                            .Add(new FullNameBlog { FirstName = "One", LastName = "Unicorn" })
+                            .Entity;
 
                     context.SaveChanges();
 
@@ -896,13 +907,13 @@ END"
                 using (var context = new BlogContextComputedColumn(testStore.Name))
                 {
                     var blog1 =
-                        context.Add(
-                            new FullNameBlog { FirstName = "Hank", LastName = "Unicorn" }
-                        ).Entity;
+                        context
+                            .Add(new FullNameBlog { FirstName = "Hank", LastName = "Unicorn" })
+                            .Entity;
                     var blog2 =
-                        context.Add(
-                            new FullNameBlog { FirstName = "Jeff", LastName = "Unicorn" }
-                        ).Entity;
+                        context
+                            .Add(new FullNameBlog { FirstName = "Jeff", LastName = "Unicorn" })
+                            .Entity;
 
                     context.SaveChanges();
 
@@ -913,9 +924,9 @@ END"
             finally
             {
                 using var context = new BlogContextComputedColumn(testStore.Name);
-                context.Database.ExecuteSqlRaw(
-                    "ALTER TABLE dbo.FullNameBlogs DROP COLUMN FullName;"
-                );
+                context
+                    .Database
+                    .ExecuteSqlRaw("ALTER TABLE dbo.FullNameBlogs DROP COLUMN FullName;");
                 context.Database.ExecuteSqlRaw("DROP FUNCTION [dbo].[GetFullName];");
             }
         }
@@ -1068,7 +1079,8 @@ END"
             // inner exception for details.
             // SqlException : Cannot insert explicit value for identity column in table
             // 'Blog' when IDENTITY_INSERT is set to OFF.
-            context.Database
+            context
+                .Database
                 .CreateExecutionStrategy()
                 .Execute(
                     context,
@@ -1181,7 +1193,8 @@ END"
                     .Entity<Blog>()
                     .Property(e => e.Id)
                     .HasDefaultValueSql("next value for MySequence")
-                    .Metadata.SetBeforeSaveBehavior(PropertySaveBehavior.Throw);
+                    .Metadata
+                    .SetBeforeSaveBehavior(PropertySaveBehavior.Throw);
             }
         }
 

@@ -54,16 +54,18 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
 
         public void StartListening(Workspace workspace, IDiagnosticService diagnosticService)
         {
-            var errorList = _threadingContext.JoinableTaskFactory.Run(
-                async () =>
-                {
-                    await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync();
+            var errorList = _threadingContext
+                .JoinableTaskFactory
+                .Run(
+                    async () =>
+                    {
+                        await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync();
 
-                    return await _asyncServiceProvider
-                            .GetServiceAsync(typeof(SVsErrorList))
-                            .ConfigureAwait(true) as IErrorList;
-                }
-            );
+                        return await _asyncServiceProvider
+                                .GetServiceAsync(typeof(SVsErrorList))
+                                .ConfigureAwait(true) as IErrorList;
+                    }
+                );
 
             if (errorList == null)
             {

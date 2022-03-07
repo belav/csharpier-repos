@@ -421,10 +421,9 @@ namespace System.Diagnostics.Metrics
                         );
                         double refreshIntervalSecs = defaultIntervalSecs;
                         if (
-                            command.Arguments!.TryGetValue(
-                                "RefreshInterval",
-                                out string? refreshInterval
-                            )
+                            command
+                                .Arguments!
+                                .TryGetValue("RefreshInterval", out string? refreshInterval)
                         )
                         {
                             Log.Message($"RefreshInterval argument received: {refreshInterval}");
@@ -454,10 +453,9 @@ namespace System.Diagnostics.Metrics
                         int defaultMaxTimeSeries = 1000;
                         int maxTimeSeries;
                         if (
-                            command.Arguments!.TryGetValue(
-                                "MaxTimeSeries",
-                                out string? maxTimeSeriesString
-                            )
+                            command
+                                .Arguments!
+                                .TryGetValue("MaxTimeSeries", out string? maxTimeSeriesString)
                         )
                         {
                             Log.Message($"MaxTimeSeries argument received: {maxTimeSeriesString}");
@@ -480,10 +478,9 @@ namespace System.Diagnostics.Metrics
                         int defaultMaxHistograms = 20;
                         int maxHistograms;
                         if (
-                            command.Arguments!.TryGetValue(
-                                "MaxHistograms",
-                                out string? maxHistogramsString
-                            )
+                            command
+                                .Arguments!
+                                .TryGetValue("MaxHistograms", out string? maxHistogramsString)
                         )
                         {
                             Log.Message($"MaxHistograms argument received: {maxHistogramsString}");

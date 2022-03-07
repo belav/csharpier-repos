@@ -45,12 +45,14 @@ namespace System.Net.Security
             SafeSspiAuthDataHandle? authData = null;
             try
             {
-                Interop.SECURITY_STATUS result = Interop.SspiCli.SspiEncodeStringsAsAuthIdentity(
-                    credential.UserName,
-                    credential.Domain,
-                    credential.Password,
-                    out authData
-                );
+                Interop.SECURITY_STATUS result = Interop
+                    .SspiCli
+                    .SspiEncodeStringsAsAuthIdentity(
+                        credential.UserName,
+                        credential.Domain,
+                        credential.Password,
+                        out authData
+                    );
 
                 if (result != Interop.SECURITY_STATUS.OK)
                 {

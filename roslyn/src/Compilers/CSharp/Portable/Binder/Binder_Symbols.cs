@@ -433,11 +433,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                 {
                     // Obsolete alias targets are reported in UnwrapAlias, but if it was a type (not an
                     // alias to a type) we report the obsolete type here.
-                    symbol.TypeWithAnnotations.ReportDiagnosticsIfObsolete(
-                        this,
-                        syntax,
-                        diagnostics
-                    );
+                    symbol
+                        .TypeWithAnnotations
+                        .ReportDiagnosticsIfObsolete(this, syntax, diagnostics);
                 }
 
                 return symbol;
@@ -867,8 +865,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 // Check IDS_FeatureDefaultTypeParameterConstraint feature since `T?` and `where ... : default`
                 // are treated as a single feature, even though the errors reported for the two cases are distinct.
-                var requiredVersion =
-                    MessageID.IDS_FeatureDefaultTypeParameterConstraint.RequiredVersion();
+                var requiredVersion = MessageID
+                    .IDS_FeatureDefaultTypeParameterConstraint
+                    .RequiredVersion();
                 if (requiredVersion > languageVersion)
                 {
                     return new CSDiagnosticInfo(
@@ -1351,9 +1350,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                       (
                           IsInsideNameof
                           && parent.Parent?.Parent is InvocationExpressionSyntax invocation
-                          && (
-                              invocation.Expression as IdentifierNameSyntax
-                          )?.Identifier.ContextualKind() == SyntaxKind.NameOfKeyword
+                          && (invocation.Expression as IdentifierNameSyntax)
+                              ?.Identifier
+                              .ContextualKind() == SyntaxKind.NameOfKeyword
                       ):
                     // Don't bind nameof(nint) or nameof(nuint) so that ERR_NameNotInContext is reported.
                     return null;
@@ -1530,12 +1529,14 @@ namespace Microsoft.CodeAnalysis.CSharp
                     type.VisitType(
                         (typePart, argTuple, isNested) =>
                         {
-                            argTuple.Item1.ReportDiagnosticsIfObsolete(
-                                argTuple.diagnostics,
-                                typePart,
-                                argTuple.syntax,
-                                hasBaseReceiver: false
-                            );
+                            argTuple
+                                .Item1
+                                .ReportDiagnosticsIfObsolete(
+                                    argTuple.diagnostics,
+                                    typePart,
+                                    argTuple.syntax,
+                                    hasBaseReceiver: false
+                                );
                             return false;
                         },
                         args
@@ -2966,11 +2967,13 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 // Complain about unembeddable types from linked assemblies.
                                 if (diagnostics.DiagnosticBag is object)
                                 {
-                                    Emit.NoPia.EmbeddedTypesManager.IsValidEmbeddableType(
-                                        (NamedTypeSymbol)singleResult,
-                                        where,
-                                        diagnostics.DiagnosticBag
-                                    );
+                                    Emit.NoPia
+                                        .EmbeddedTypesManager
+                                        .IsValidEmbeddableType(
+                                            (NamedTypeSymbol)singleResult,
+                                            where,
+                                            diagnostics.DiagnosticBag
+                                        );
                                 }
                             }
 

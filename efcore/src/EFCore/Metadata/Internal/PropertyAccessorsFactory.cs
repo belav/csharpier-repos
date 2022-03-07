@@ -108,9 +108,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                         ),
                         Expression.Call(
                             entryParameter,
-                            InternalEntityEntry.ReadStoreGeneratedValueMethod.MakeGenericMethod(
-                                typeof(TProperty)
-                            ),
+                            InternalEntityEntry
+                                .ReadStoreGeneratedValueMethod
+                                .MakeGenericMethod(typeof(TProperty)),
                             Expression.Constant(storeGeneratedIndex)
                         ),
                         currentValueExpression
@@ -124,9 +124,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     ),
                     Expression.Call(
                         entryParameter,
-                        InternalEntityEntry.ReadTemporaryValueMethod.MakeGenericMethod(
-                            typeof(TProperty)
-                        ),
+                        InternalEntityEntry
+                            .ReadTemporaryValueMethod
+                            .MakeGenericMethod(typeof(TProperty)),
                         Expression.Constant(storeGeneratedIndex)
                     ),
                     currentValueExpression
@@ -151,9 +151,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     originalValuesIndex >= 0
                       ? Expression.Call(
                             entryParameter,
-                            InternalEntityEntry.ReadOriginalValueMethod.MakeGenericMethod(
-                                typeof(TProperty)
-                            ),
+                            InternalEntityEntry
+                                .ReadOriginalValueMethod
+                                .MakeGenericMethod(typeof(TProperty)),
                             Expression.Constant(property),
                             Expression.Constant(originalValuesIndex)
                         )
@@ -190,17 +190,17 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     relationshipIndex >= 0
                       ? Expression.Call(
                             entryParameter,
-                            InternalEntityEntry.ReadRelationshipSnapshotValueMethod.MakeGenericMethod(
-                                typeof(TProperty)
-                            ),
+                            InternalEntityEntry
+                                .ReadRelationshipSnapshotValueMethod
+                                .MakeGenericMethod(typeof(TProperty)),
                             Expression.Constant(propertyBase),
                             Expression.Constant(relationshipIndex)
                         )
                       : Expression.Call(
                             entryParameter,
-                            InternalEntityEntry.GetCurrentValueMethod.MakeGenericMethod(
-                                typeof(TProperty)
-                            ),
+                            InternalEntityEntry
+                                .GetCurrentValueMethod
+                                .MakeGenericMethod(typeof(TProperty)),
                             Expression.Constant(propertyBase)
                         ),
                     updateParameter

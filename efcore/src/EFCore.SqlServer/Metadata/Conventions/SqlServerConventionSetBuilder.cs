@@ -58,13 +58,15 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 RelationalDependencies
             );
             conventionSet.ModelInitializedConventions.Add(valueGenerationStrategyConvention);
-            conventionSet.ModelInitializedConventions.Add(
-                new RelationalMaxIdentifierLengthConvention(
-                    128,
-                    Dependencies,
-                    RelationalDependencies
-                )
-            );
+            conventionSet
+                .ModelInitializedConventions
+                .Add(
+                    new RelationalMaxIdentifierLengthConvention(
+                        128,
+                        Dependencies,
+                        RelationalDependencies
+                    )
+                );
 
             ValueGenerationConvention valueGenerationConvention =
                 new SqlServerValueGenerationConvention(Dependencies, RelationalDependencies);
@@ -83,9 +85,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 Dependencies,
                 RelationalDependencies
             );
-            conventionSet.EntityTypeAnnotationChangedConventions.Add(
-                sqlServerInMemoryTablesConvention
-            );
+            conventionSet
+                .EntityTypeAnnotationChangedConventions
+                .Add(sqlServerInMemoryTablesConvention);
             ReplaceConvention(
                 conventionSet.EntityTypeAnnotationChangedConventions,
                 (RelationalValueGenerationConvention)valueGenerationConvention
@@ -128,9 +130,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 (CascadeDeleteConvention)sqlServerOnDeleteConvention
             );
 
-            conventionSet.SkipNavigationForeignKeyChangedConventions.Add(
-                sqlServerOnDeleteConvention
-            );
+            conventionSet
+                .SkipNavigationForeignKeyChangedConventions
+                .Add(sqlServerOnDeleteConvention);
 
             conventionSet.IndexAddedConventions.Add(sqlServerInMemoryTablesConvention);
             conventionSet.IndexAddedConventions.Add(sqlServerIndexConvention);
@@ -162,9 +164,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                     RelationalDependencies
                 )
             );
-            conventionSet.ModelFinalizingConventions.Add(
-                new SqlServerDbFunctionConvention(Dependencies, RelationalDependencies)
-            );
+            conventionSet
+                .ModelFinalizingConventions
+                .Add(new SqlServerDbFunctionConvention(Dependencies, RelationalDependencies));
 
             ReplaceConvention(
                 conventionSet.ModelFinalizedConventions,
@@ -174,9 +176,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 )
             );
 
-            conventionSet.SkipNavigationForeignKeyChangedConventions.Add(
-                sqlServerTemporalConvention
-            );
+            conventionSet
+                .SkipNavigationForeignKeyChangedConventions
+                .Add(sqlServerTemporalConvention);
 
             return conventionSet;
         }

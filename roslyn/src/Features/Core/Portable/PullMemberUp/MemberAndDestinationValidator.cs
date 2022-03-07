@@ -26,11 +26,15 @@ namespace Microsoft.CodeAnalysis.PullMemberUp
 
             // Don't provide any refactoring option if the destination is not in source.
             // If the destination is generated code, also don't provide refactoring since we can't make sure if we won't break it.
-            var isDestinationInSourceAndNotGeneratedCode = destination.Locations.Any(
-                location =>
-                    location.IsInSource
-                    && !solution.GetDocument(location.SourceTree).IsGeneratedCode(cancellationToken)
-            );
+            var isDestinationInSourceAndNotGeneratedCode = destination
+                .Locations
+                .Any(
+                    location =>
+                        location.IsInSource
+                        && !solution
+                            .GetDocument(location.SourceTree)
+                            .IsGeneratedCode(cancellationToken)
+                );
             return isDestinationInSourceAndNotGeneratedCode;
         }
 

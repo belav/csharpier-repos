@@ -45,8 +45,12 @@ namespace Microsoft.CodeAnalysis.Editor.FindUsages
             // If this document is not in the primary workspace, we may want to search for results
             // in a solution different from the one we started in. Use the starting workspace's
             // ISymbolMappingService to get a context for searching in the proper solution.
-            var mappingService =
-                document.Project.Solution.Workspace.Services.GetService<ISymbolMappingService>();
+            var mappingService = document
+                .Project
+                .Solution
+                .Workspace
+                .Services
+                .GetService<ISymbolMappingService>();
 
             var mapping = await mappingService
                 .MapSymbolAsync(document, symbol, cancellationToken)

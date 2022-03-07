@@ -93,7 +93,8 @@ namespace Microsoft.EntityFrameworkCore.Internal
             if (RemoveConvert(lambdaExpression.Body) is NewExpression newExpression)
             {
                 var memberInfos =
-                    (List<TMemberInfo>)newExpression.Arguments
+                    (List<TMemberInfo>)newExpression
+                        .Arguments
                         .Select(a => memberMatcher(a, parameterExpression))
                         .Where(p => p != null)
                         .ToList()!;

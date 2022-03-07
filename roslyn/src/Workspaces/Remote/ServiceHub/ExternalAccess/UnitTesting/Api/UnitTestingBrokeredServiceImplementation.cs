@@ -27,11 +27,9 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.Api
             ServiceBrokerClient client,
             CancellationToken cancellationToken
         ) =>
-            RemoteWorkspaceManager.Default.GetSolutionAsync(
-                client,
-                solutionInfo.UnderlyingObject,
-                cancellationToken
-            );
+            RemoteWorkspaceManager
+                .Default
+                .GetSolutionAsync(client, solutionInfo.UnderlyingObject, cancellationToken);
 
         public static UnitTestingIncrementalAnalyzerProvider? TryRegisterAnalyzerProvider(
             string analyzerName,

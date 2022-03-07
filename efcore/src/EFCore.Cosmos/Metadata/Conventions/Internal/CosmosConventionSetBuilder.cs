@@ -35,9 +35,9 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Metadata.Conventions.Internal
         {
             var conventionSet = base.CreateConventionSet();
 
-            conventionSet.ModelInitializedConventions.Add(
-                new ContextContainerConvention(Dependencies)
-            );
+            conventionSet
+                .ModelInitializedConventions
+                .Add(new ContextContainerConvention(Dependencies));
 
             conventionSet.ModelFinalizingConventions.Add(new ETagPropertyConvention());
 
@@ -211,15 +211,15 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Metadata.Conventions.Internal
 
             conventionSet.EntityTypeAnnotationChangedConventions.Add(discriminatorConvention);
             conventionSet.EntityTypeAnnotationChangedConventions.Add(storeKeyConvention);
-            conventionSet.EntityTypeAnnotationChangedConventions.Add(
-                (CosmosValueGenerationConvention)valueGenerationConvention
-            );
-            conventionSet.EntityTypeAnnotationChangedConventions.Add(
-                (CosmosKeyDiscoveryConvention)keyDiscoveryConvention
-            );
-            conventionSet.EntityTypeAnnotationChangedConventions.Add(
-                (CosmosManyToManyJoinEntityTypeConvention)manyToManyJoinEntityTypeConvention
-            );
+            conventionSet
+                .EntityTypeAnnotationChangedConventions
+                .Add((CosmosValueGenerationConvention)valueGenerationConvention);
+            conventionSet
+                .EntityTypeAnnotationChangedConventions
+                .Add((CosmosKeyDiscoveryConvention)keyDiscoveryConvention);
+            conventionSet
+                .EntityTypeAnnotationChangedConventions
+                .Add((CosmosManyToManyJoinEntityTypeConvention)manyToManyJoinEntityTypeConvention);
 
             ReplaceConvention(conventionSet.PropertyAddedConventions, keyDiscoveryConvention);
 

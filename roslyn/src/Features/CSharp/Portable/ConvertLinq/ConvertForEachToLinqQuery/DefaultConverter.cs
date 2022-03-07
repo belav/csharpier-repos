@@ -30,22 +30,23 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq.ConvertForEachToLinqQuery
         {
             // Filter out identifiers which are not used in statements.
             var variableNamesReadInside = new HashSet<string>(
-                ForEachInfo.Statements
+                ForEachInfo
+                    .Statements
                     .SelectMany(
                         statement => ForEachInfo.SemanticModel.AnalyzeDataFlow(statement).ReadInside
                     )
                     .Select(symbol => symbol.Name)
             );
-            var identifiersUsedInStatements = ForEachInfo.Identifiers.Where(
-                identifier => variableNamesReadInside.Contains(identifier.ValueText)
-            );
+            var identifiersUsedInStatements = ForEachInfo
+                .Identifiers
+                .Where(identifier => variableNamesReadInside.Contains(identifier.ValueText));
 
             // If there is a single statement and it is a block, leave it as is.
             // Otherwise, wrap with a block.
             var block = WrapWithBlockIfNecessary(
-                ForEachInfo.Statements.Select(
-                    statement => statement.KeepCommentsAndAddElasticMarkers()
-                )
+                ForEachInfo
+                    .Statements
+                    .Select(statement => statement.KeepCommentsAndAddElasticMarkers())
             );
 
             editor.ReplaceNode(

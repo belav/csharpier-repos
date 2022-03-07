@@ -394,8 +394,9 @@ namespace System.Security.Cryptography.Pkcs
                 {
                     // If the cert wasn't provided, but the identifier was IssuerAndSerialNumber,
                     // and the ESSCertId(V2) has specified an issuerSerial value, ensure it's a match.
-                    X509IssuerSerial issuerSerial =
-                        (X509IssuerSerial)signer.SignerIdentifier.Value!;
+                    X509IssuerSerial issuerSerial = (X509IssuerSerial)signer
+                        .SignerIdentifier
+                        .Value!;
 
                     if (certId.HasValue && certId.Value.IssuerSerial != null)
                     {

@@ -23,9 +23,10 @@ namespace System.Data.Odbc
     public sealed class OdbcCommand : DbCommand, ICloneable
     {
         private static int s_objectTypeCount; // Bid counter
-        internal readonly int ObjectID = System.Threading.Interlocked.Increment(
-            ref s_objectTypeCount
-        );
+        internal readonly int ObjectID = System
+            .Threading
+            .Interlocked
+            .Increment(ref s_objectTypeCount);
 
         private string? _commandText;
         private CommandType _commandType;

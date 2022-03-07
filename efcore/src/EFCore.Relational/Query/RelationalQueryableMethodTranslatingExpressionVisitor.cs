@@ -45,11 +45,9 @@ namespace Microsoft.EntityFrameworkCore.Query
 
             var sqlExpressionFactory = relationalDependencies.SqlExpressionFactory;
             _queryCompilationContext = queryCompilationContext;
-            _sqlTranslator =
-                relationalDependencies.RelationalSqlTranslatingExpressionVisitorFactory.Create(
-                    queryCompilationContext,
-                    this
-                );
+            _sqlTranslator = relationalDependencies
+                .RelationalSqlTranslatingExpressionVisitorFactory
+                .Create(queryCompilationContext, this);
             _sharedTypeEntityExpandingExpressionVisitor =
                 new SharedTypeEntityExpandingExpressionVisitor(
                     _sqlTranslator,
@@ -78,11 +76,9 @@ namespace Microsoft.EntityFrameworkCore.Query
         {
             RelationalDependencies = parentVisitor.RelationalDependencies;
             _queryCompilationContext = parentVisitor._queryCompilationContext;
-            _sqlTranslator =
-                RelationalDependencies.RelationalSqlTranslatingExpressionVisitorFactory.Create(
-                    parentVisitor._queryCompilationContext,
-                    parentVisitor
-                );
+            _sqlTranslator = RelationalDependencies
+                .RelationalSqlTranslatingExpressionVisitorFactory
+                .Create(parentVisitor._queryCompilationContext, parentVisitor);
             _sharedTypeEntityExpandingExpressionVisitor =
                 new SharedTypeEntityExpandingExpressionVisitor(
                     _sqlTranslator,
@@ -107,10 +103,13 @@ namespace Microsoft.EntityFrameworkCore.Query
                         _sqlExpressionFactory.Select(
                             fromSqlQueryRootExpression.EntityType,
                             new FromSqlExpression(
-                                fromSqlQueryRootExpression.EntityType
+                                fromSqlQueryRootExpression
+                                    .EntityType
                                     .GetDefaultMappings()
                                     .Single()
-                                    .Table.Name.Substring(0, 1)
+                                    .Table
+                                    .Name
+                                    .Substring(0, 1)
                                     .ToLowerInvariant(),
                                 fromSqlQueryRootExpression.Sql,
                                 fromSqlQueryRootExpression.Argument
@@ -165,7 +164,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                     return CreateShapedQueryExpression(entityType, queryExpression);
 
                 case QueryRootExpression queryRootExpression
-                      when queryRootExpression.EntityType
+                      when queryRootExpression
+                          .EntityType
                           .GetSqlQueryMappings()
                           .FirstOrDefault(m => m.IsDefaultSqlQueryMapping)
                           ?.SqlQuery
@@ -450,7 +450,9 @@ namespace Microsoft.EntityFrameworkCore.Query
                 && selectExpression.Offset == null
             )
             {
-                _queryCompilationContext.Logger.DistinctAfterOrderByWithoutRowLimitingOperatorWarning();
+                _queryCompilationContext
+                    .Logger
+                    .DistinctAfterOrderByWithoutRowLimitingOperatorWarning();
             }
 
             selectExpression.ApplyDistinct();
@@ -1433,7 +1435,9 @@ namespace Microsoft.EntityFrameworkCore.Query
                         _sqlExpressionFactory.Select(targetEntityType)
                     );
 
-                    var makeNullable = foreignKey.PrincipalKey.Properties
+                    var makeNullable = foreignKey
+                        .PrincipalKey
+                        .Properties
                         .Concat(foreignKey.Properties)
                         .Select(p => p.ClrType)
                         .Any(t => t.IsNullableType());
@@ -1463,7 +1467,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                     var predicate = makeNullable
                         ? Expression.AndAlso(
                               outerKey is NewArrayExpression newArrayExpression
-                                ? newArrayExpression.Expressions
+                                ? newArrayExpression
+                                  .Expressions
                                   .Select(
                                       e =>
                                       {
@@ -1514,11 +1519,14 @@ namespace Microsoft.EntityFrameworkCore.Query
                         navigation.DeclaringEntityType.BaseType == null
                         || entityType.FindDiscriminatorProperty() != null
                             ? navigation.DeclaringEntityType.GetViewOrTableMappings().Single().Table
-                            : navigation.DeclaringEntityType
+                            : navigation
+                              .DeclaringEntityType
                               .GetViewOrTableMappings()
                               .Select(tm => tm.Table)
                               .Except(
-                                  navigation.DeclaringEntityType.BaseType
+                                  navigation
+                                      .DeclaringEntityType
+                                      .BaseType
                                       .GetViewOrTableMappings()
                                       .Select(tm => tm.Table)
                               )
@@ -1542,9 +1550,9 @@ namespace Microsoft.EntityFrameworkCore.Query
                             // and for dependent on derived table
                             || (
                                 entityType.FindDiscriminatorProperty() == null
-                                && navigation.DeclaringEntityType.IsStrictlyDerivedFrom(
-                                    entityShaperExpression.EntityType
-                                )
+                                && navigation
+                                    .DeclaringEntityType
+                                    .IsStrictlyDerivedFrom(entityShaperExpression.EntityType)
                             );
 
                         var entityProjection =
@@ -1579,7 +1587,9 @@ namespace Microsoft.EntityFrameworkCore.Query
                             innerSelectExpression
                         );
 
-                        var makeNullable = foreignKey.PrincipalKey.Properties
+                        var makeNullable = foreignKey
+                            .PrincipalKey
+                            .Properties
                             .Concat(foreignKey.Properties)
                             .Select(p => p.ClrType)
                             .Any(t => t.IsNullableType());
@@ -1590,12 +1600,14 @@ namespace Microsoft.EntityFrameworkCore.Query
                               : foreignKey.PrincipalKey.Properties,
                             makeNullable
                         );
-                        var innerKey = innerShapedQuery.ShaperExpression.CreateKeyValuesExpression(
-                            navigation.IsOnDependent
-                              ? foreignKey.PrincipalKey.Properties
-                              : foreignKey.Properties,
-                            makeNullable
-                        );
+                        var innerKey = innerShapedQuery
+                            .ShaperExpression
+                            .CreateKeyValuesExpression(
+                                navigation.IsOnDependent
+                                  ? foreignKey.PrincipalKey.Properties
+                                  : foreignKey.Properties,
+                                makeNullable
+                            );
 
                         var joinPredicate = _sqlTranslator.Translate(
                             Expression.Equal(outerKey, innerKey)

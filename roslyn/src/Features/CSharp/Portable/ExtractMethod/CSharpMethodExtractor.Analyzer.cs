@@ -121,9 +121,12 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                     SpeculativeBindingOption.BindAsExpression
                 );
                 if (
-                    Microsoft.CodeAnalysis.Shared.Extensions.ISymbolExtensions.IsErrorType(
-                        info.Type
-                    )
+                    Microsoft
+                        .CodeAnalysis
+                        .Shared
+                        .Extensions
+                        .ISymbolExtensions
+                        .IsErrorType(info.Type)
                 )
                 {
                     return null;

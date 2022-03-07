@@ -211,13 +211,15 @@ namespace System.IO
 
         #region Task based Async APIs
         public virtual Task<string?> ReadLineAsync() =>
-            Task<string?>.Factory.StartNew(
-                static state => ((TextReader)state!).ReadLine(),
-                this,
-                CancellationToken.None,
-                TaskCreationOptions.DenyChildAttach,
-                TaskScheduler.Default
-            );
+            Task<string?>
+                .Factory
+                .StartNew(
+                    static state => ((TextReader)state!).ReadLine(),
+                    this,
+                    CancellationToken.None,
+                    TaskCreationOptions.DenyChildAttach,
+                    TaskScheduler.Default
+                );
 
         public virtual async Task<string> ReadToEndAsync()
         {
@@ -266,7 +268,9 @@ namespace System.IO
             new ValueTask<int>(
                 MemoryMarshal.TryGetArray(buffer, out ArraySegment<char> array)
                   ? ReadAsync(array.Array!, array.Offset, array.Count)
-                  : Task<int>.Factory.StartNew(
+                  : Task<int>
+                    .Factory
+                    .StartNew(
                         static state =>
                         {
                             var t = (TupleSlim<TextReader, Memory<char>>)state!;
@@ -284,17 +288,19 @@ namespace System.IO
             CancellationToken cancellationToken
         ) =>
             new ValueTask<int>(
-                Task<int>.Factory.StartNew(
-                    static state =>
-                    {
-                        var t = (TupleSlim<TextReader, Memory<char>>)state!;
-                        return t.Item1.Read(t.Item2.Span);
-                    },
-                    new TupleSlim<TextReader, Memory<char>>(this, buffer),
-                    cancellationToken,
-                    TaskCreationOptions.DenyChildAttach,
-                    TaskScheduler.Default
-                )
+                Task<int>
+                    .Factory
+                    .StartNew(
+                        static state =>
+                        {
+                            var t = (TupleSlim<TextReader, Memory<char>>)state!;
+                            return t.Item1.Read(t.Item2.Span);
+                        },
+                        new TupleSlim<TextReader, Memory<char>>(this, buffer),
+                        cancellationToken,
+                        TaskCreationOptions.DenyChildAttach,
+                        TaskScheduler.Default
+                    )
             );
 
         public virtual Task<int> ReadBlockAsync(char[] buffer, int index, int count)
@@ -325,7 +331,9 @@ namespace System.IO
             new ValueTask<int>(
                 MemoryMarshal.TryGetArray(buffer, out ArraySegment<char> array)
                   ? ReadBlockAsync(array.Array!, array.Offset, array.Count)
-                  : Task<int>.Factory.StartNew(
+                  : Task<int>
+                    .Factory
+                    .StartNew(
                         static state =>
                         {
                             var t = (TupleSlim<TextReader, Memory<char>>)state!;

@@ -39,10 +39,10 @@ namespace Internal.Cryptography.Pal.Windows
             {
                 byte[] encodedContent;
                 if (
-                    contentInfo.ContentType.Value!.Equals(
-                        Oids.Pkcs7Data,
-                        StringComparison.OrdinalIgnoreCase
-                    )
+                    contentInfo
+                        .ContentType
+                        .Value!
+                        .Equals(Oids.Pkcs7Data, StringComparison.OrdinalIgnoreCase)
                 )
                 {
                     encodedContent = PkcsHelpers.EncodeOctetString(contentInfo.Content);
@@ -67,12 +67,14 @@ namespace Internal.Cryptography.Pal.Windows
                         try
                         {
                             if (
-                                !Interop.Crypt32.CryptMsgUpdate(
-                                    hCryptMsg,
-                                    encodedContent,
-                                    encodedContent.Length,
-                                    fFinal: true
-                                )
+                                !Interop
+                                    .Crypt32
+                                    .CryptMsgUpdate(
+                                        hCryptMsg,
+                                        encodedContent,
+                                        encodedContent.Length,
+                                        fFinal: true
+                                    )
                             )
                                 throw Marshal.GetLastWin32Error().ToCryptographicException();
                         }
@@ -164,14 +166,16 @@ namespace Internal.Cryptography.Pal.Windows
                                 unprotectedAttributes,
                                 hb
                             );
-                        SafeCryptMsgHandle hCryptMsg = Interop.Crypt32.CryptMsgOpenToEncode(
-                            MsgEncodingType.All,
-                            0,
-                            CryptMsgType.CMSG_ENVELOPED,
-                            pEnvelopedEncodeInfo,
-                            innerContentType.Value!,
-                            IntPtr.Zero
-                        );
+                        SafeCryptMsgHandle hCryptMsg = Interop
+                            .Crypt32
+                            .CryptMsgOpenToEncode(
+                                MsgEncodingType.All,
+                                0,
+                                CryptMsgType.CMSG_ENVELOPED,
+                                pEnvelopedEncodeInfo,
+                                innerContentType.Value!,
+                                IntPtr.Zero
+                            );
                         if (hCryptMsg == null || hCryptMsg.IsInvalid)
                             throw Marshal.GetLastWin32Error().ToCryptographicException();
 
@@ -338,8 +342,9 @@ namespace Internal.Cryptography.Pal.Windows
                 // (The use of SafeCertContextHandle here is about using a consistent pattern to get the CERT_CONTEXT (rather than the ugly (CERT_CONTEXT*)(recipient.Certificate.Handle) pattern.)
                 // It's not about keeping the context alive.)
                 using (
-                    SafeCertContextHandle hCertContext =
-                        recipient.Certificate.CreateCertContextHandle()
+                    SafeCertContextHandle hCertContext = recipient
+                        .Certificate
+                        .CreateCertContextHandle()
                 )
                 {
                     CERT_CONTEXT* pCertContext = hCertContext.DangerousGetCertContext();
@@ -470,8 +475,9 @@ namespace Internal.Cryptography.Pal.Windows
                 // "recipient" is a deep-cloned CmsRecipient object whose lifetime this class controls. Because of this, we can pull out the CERT_CONTEXT* and CERT_INFO* pointers without
                 // bringing in all the SafeCertContextHandle machinery, and embed pointers to them in the memory block we return. Yes, this code is scary.
                 using (
-                    SafeCertContextHandle hCertContext =
-                        recipient.Certificate.CreateCertContextHandle()
+                    SafeCertContextHandle hCertContext = recipient
+                        .Certificate
+                        .CreateCertContextHandle()
                 )
                 {
                     CERT_CONTEXT* pCertContext = hCertContext.DangerousGetCertContext();

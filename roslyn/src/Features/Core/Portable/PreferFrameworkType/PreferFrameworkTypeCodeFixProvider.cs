@@ -71,11 +71,13 @@ namespace Microsoft.CodeAnalysis.PreferFrameworkType
 
             foreach (var diagnostic in diagnostics)
             {
-                var node = diagnostic.Location.FindNode(
-                    findInsideTrivia: true,
-                    getInnermostNodeForTie: true,
-                    cancellationToken
-                );
+                var node = diagnostic
+                    .Location
+                    .FindNode(
+                        findInsideTrivia: true,
+                        getInnermostNodeForTie: true,
+                        cancellationToken
+                    );
 
                 if (
                     semanticModel.GetSymbolInfo(node, cancellationToken).Symbol

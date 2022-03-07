@@ -379,9 +379,9 @@ namespace Microsoft.CodeAnalysis.FindUsages
             // the DefinitionItem.
             if (symbol.Kind != SymbolKind.Namespace)
             {
-                var assemblyName = symbol.ContainingAssembly?.ToDisplayString(
-                    SymbolDisplayFormat.MinimallyQualifiedFormat
-                );
+                var assemblyName = symbol
+                    .ContainingAssembly
+                    ?.ToDisplayString(SymbolDisplayFormat.MinimallyQualifiedFormat);
                 if (!string.IsNullOrWhiteSpace(assemblyName))
                 {
                     return ImmutableArray.Create(new TaggedText(TextTags.Assembly, assemblyName));

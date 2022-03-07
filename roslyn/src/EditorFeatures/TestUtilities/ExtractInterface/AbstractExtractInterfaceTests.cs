@@ -123,7 +123,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.ExtractInterface
             {
                 Assert.True(result.Succeeded);
                 Assert.False(
-                    testState.Workspace.Documents
+                    testState
+                        .Workspace
+                        .Documents
                         .Select(d => d.Id)
                         .Contains(result.NavigationDocumentId)
                 );
@@ -137,7 +139,11 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.ExtractInterface
                     );
                     Assert.Equal(
                         expectedMemberName,
-                        testState.TestExtractInterfaceOptionsService.AllExtractableMembers.Single().Name
+                        testState
+                            .TestExtractInterfaceOptionsService
+                            .AllExtractableMembers
+                            .Single()
+                            .Name
                     );
                 }
 
@@ -161,24 +167,26 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.ExtractInterface
                 {
                     Assert.Equal(
                         expectedTypeParameterSuffix,
-                        testState.TestExtractInterfaceOptionsService.GeneratedNameTypeParameterSuffix
+                        testState
+                            .TestExtractInterfaceOptionsService
+                            .GeneratedNameTypeParameterSuffix
                     );
                 }
 
                 if (expectedUpdatedOriginalDocumentCode != null)
                 {
-                    var updatedOriginalDocument = result.UpdatedSolution.GetDocument(
-                        testState.ExtractFromDocument.Id
-                    );
+                    var updatedOriginalDocument = result
+                        .UpdatedSolution
+                        .GetDocument(testState.ExtractFromDocument.Id);
                     var updatedCode = (await updatedOriginalDocument.GetTextAsync()).ToString();
                     Assert.Equal(expectedUpdatedOriginalDocumentCode, updatedCode);
                 }
 
                 if (expectedInterfaceCode != null)
                 {
-                    var interfaceDocument = result.UpdatedSolution.GetDocument(
-                        result.NavigationDocumentId
-                    );
+                    var interfaceDocument = result
+                        .UpdatedSolution
+                        .GetDocument(result.NavigationDocumentId);
                     var interfaceCode = (await interfaceDocument.GetTextAsync()).ToString();
                     Assert.Equal(expectedInterfaceCode, interfaceCode);
                 }

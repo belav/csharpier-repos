@@ -78,10 +78,9 @@ public class TopLevelParameterNameAnalyzer : DiagnosticAnalyzer
                 }
 
                 if (
-                    method.ContainingType.HasAttribute(
-                        symbolCache.IApiBehaviorMetadata,
-                        inherit: true
-                    )
+                    method
+                        .ContainingType
+                        .HasAttribute(symbolCache.IApiBehaviorMetadata, inherit: true)
                 )
                 {
                     // The issue of parameter name collision with properties affects complex model-bound types
@@ -190,10 +189,9 @@ public class TopLevelParameterNameAnalyzer : DiagnosticAnalyzer
         foreach (var attribute in symbol.GetAttributes(symbolCache.IModelNameProvider))
         {
             // BindAttribute uses the Prefix property as an alias for IModelNameProvider.Name
-            var nameProperty = SymbolEqualityComparer.Default.Equals(
-                attribute.AttributeClass,
-                symbolCache.BindAttribute
-            )
+            var nameProperty = SymbolEqualityComparer
+                .Default
+                .Equals(attribute.AttributeClass, symbolCache.BindAttribute)
               ? "Prefix"
               : "Name";
 

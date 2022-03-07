@@ -139,11 +139,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             // new { - Object Initialization, or with { - Record with initializer, or is { - property pattern clauses
             if (
                 currentToken.IsKind(SyntaxKind.OpenBraceToken)
-                && currentToken.Parent.IsKind(
-                    SyntaxKind.ObjectInitializerExpression,
-                    SyntaxKind.WithInitializerExpression,
-                    SyntaxKind.PropertyPatternClause
-                )
+                && currentToken
+                    .Parent
+                    .IsKind(
+                        SyntaxKind.ObjectInitializerExpression,
+                        SyntaxKind.WithInitializerExpression,
+                        SyntaxKind.PropertyPatternClause
+                    )
             )
             {
                 if (!_options.NewLinesForBracesInObjectCollectionArrayInitializers)
@@ -377,12 +379,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             // is { - property pattern clauses
             if (
                 currentToken.IsKind(SyntaxKind.OpenBraceToken)
-                && currentToken.Parent.IsKind(
-                    SyntaxKind.ObjectInitializerExpression,
-                    SyntaxKind.CollectionInitializerExpression,
-                    SyntaxKind.WithInitializerExpression,
-                    SyntaxKind.PropertyPatternClause
-                )
+                && currentToken
+                    .Parent
+                    .IsKind(
+                        SyntaxKind.ObjectInitializerExpression,
+                        SyntaxKind.CollectionInitializerExpression,
+                        SyntaxKind.WithInitializerExpression,
+                        SyntaxKind.PropertyPatternClause
+                    )
             )
             {
                 if (_options.NewLinesForBracesInObjectCollectionArrayInitializers)
@@ -401,10 +405,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             //             { - Implicit Array
             if (
                 currentToken.IsKind(SyntaxKind.OpenBraceToken)
-                && currentToken.Parent.IsKind(
-                    SyntaxKind.ArrayInitializerExpression,
-                    SyntaxKind.ImplicitArrayCreationExpression
-                )
+                && currentToken
+                    .Parent
+                    .IsKind(
+                        SyntaxKind.ArrayInitializerExpression,
+                        SyntaxKind.ImplicitArrayCreationExpression
+                    )
             )
             {
                 return null;

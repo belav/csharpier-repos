@@ -25,7 +25,8 @@ public static class RazorProjectEngineBuilderExtensions
         IEnumerable<TagHelperDescriptor> tagHelpers
     )
     {
-        var feature = (TestTagHelperFeature)builder.Features
+        var feature = (TestTagHelperFeature)builder
+            .Features
             .OfType<ITagHelperFeature>()
             .FirstOrDefault();
         if (feature == null)
@@ -42,7 +43,8 @@ public static class RazorProjectEngineBuilderExtensions
         this RazorProjectEngineBuilder builder
     )
     {
-        var feature = builder.Features
+        var feature = builder
+            .Features
             .OfType<DefaultDocumentClassifierPassFeature>()
             .FirstOrDefault();
         if (feature == null)
@@ -55,32 +57,38 @@ public static class RazorProjectEngineBuilderExtensions
         feature.ConfigureClass.Clear();
         feature.ConfigureMethod.Clear();
 
-        feature.ConfigureNamespace.Add(
-            (RazorCodeDocument codeDocument, NamespaceDeclarationIntermediateNode node) =>
-            {
-                node.Content = "Microsoft.AspNetCore.Razor.Language.IntegrationTests.TestFiles";
-            }
-        );
+        feature
+            .ConfigureNamespace
+            .Add(
+                (RazorCodeDocument codeDocument, NamespaceDeclarationIntermediateNode node) =>
+                {
+                    node.Content = "Microsoft.AspNetCore.Razor.Language.IntegrationTests.TestFiles";
+                }
+            );
 
-        feature.ConfigureClass.Add(
-            (RazorCodeDocument codeDocument, ClassDeclarationIntermediateNode node) =>
-            {
-                node.ClassName = IntegrationTestBase.FileName.Replace('/', '_');
-                node.Modifiers.Clear();
-                node.Modifiers.Add("public");
-            }
-        );
+        feature
+            .ConfigureClass
+            .Add(
+                (RazorCodeDocument codeDocument, ClassDeclarationIntermediateNode node) =>
+                {
+                    node.ClassName = IntegrationTestBase.FileName.Replace('/', '_');
+                    node.Modifiers.Clear();
+                    node.Modifiers.Add("public");
+                }
+            );
 
-        feature.ConfigureMethod.Add(
-            (RazorCodeDocument codeDocument, MethodDeclarationIntermediateNode node) =>
-            {
-                node.Modifiers.Clear();
-                node.Modifiers.Add("public");
-                node.Modifiers.Add("async");
-                node.MethodName = "ExecuteAsync";
-                node.ReturnType = typeof(Task).FullName;
-            }
-        );
+        feature
+            .ConfigureMethod
+            .Add(
+                (RazorCodeDocument codeDocument, MethodDeclarationIntermediateNode node) =>
+                {
+                    node.Modifiers.Clear();
+                    node.Modifiers.Add("public");
+                    node.Modifiers.Add("async");
+                    node.MethodName = "ExecuteAsync";
+                    node.ReturnType = typeof(Task).FullName;
+                }
+            );
 
         return builder;
     }

@@ -28,7 +28,8 @@ internal static class FilterFactory
 
         var staticFilterItems = new FilterItem[actionDescriptor.FilterDescriptors.Count];
 
-        var orderedFilters = actionDescriptor.FilterDescriptors
+        var orderedFilters = actionDescriptor
+            .FilterDescriptors
             .OrderBy(filter => filter, FilterDescriptorOrderComparer.Comparer)
             .ToList();
 

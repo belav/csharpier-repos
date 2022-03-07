@@ -57,9 +57,11 @@ public class Program
                                     if (OperatingSystem.IsWindows())
                                     {
                                         // Detect Win10+
-                                        var key = Registry.LocalMachine.OpenSubKey(
-                                            @"SOFTWARE\Microsoft\Windows NT\CurrentVersion"
-                                        );
+                                        var key = Registry
+                                            .LocalMachine
+                                            .OpenSubKey(
+                                                @"SOFTWARE\Microsoft\Windows NT\CurrentVersion"
+                                            );
                                         var major =
                                             key.GetValue("CurrentMajorVersionNumber") as int?;
                                         var minor =

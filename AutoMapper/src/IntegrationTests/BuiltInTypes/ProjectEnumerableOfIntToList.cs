@@ -47,22 +47,24 @@ namespace AutoMapper.IntegrationTests
         {
             protected override void Seed(Context context)
             {
-                context.Customers.Add(
-                    new Customer
-                    {
-                        Id = 1,
-                        FirstName = "Bob",
-                        LastName = "Smith",
-                        Items = new List<Item>(
-                            new[]
-                            {
-                                new Item { Id = 1 },
-                                new Item { Id = 3 },
-                                new Item { Id = 3 }
-                            }
-                        )
-                    }
-                );
+                context
+                    .Customers
+                    .Add(
+                        new Customer
+                        {
+                            Id = 1,
+                            FirstName = "Bob",
+                            LastName = "Smith",
+                            Items = new List<Item>(
+                                new[]
+                                {
+                                    new Item { Id = 1 },
+                                    new Item { Id = 3 },
+                                    new Item { Id = 3 }
+                                }
+                            )
+                        }
+                    );
 
                 base.Seed(context);
             }

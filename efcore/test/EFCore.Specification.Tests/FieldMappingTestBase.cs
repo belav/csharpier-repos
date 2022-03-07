@@ -2113,11 +2113,13 @@ namespace Microsoft.EntityFrameworkCore
 
                 modelBuilder
                     .Entity<PostFullExplicit>()
-                    .Metadata.FindNavigation("Blog")
+                    .Metadata
+                    .FindNavigation("Blog")
                     .SetField("_myblog");
                 modelBuilder
                     .Entity<BlogFullExplicit>()
-                    .Metadata.FindNavigation("Posts")
+                    .Metadata
+                    .FindNavigation("Posts")
                     .SetField("_myposts");
 
                 modelBuilder.Entity<LoginSession>().UsePropertyAccessMode(PropertyAccessMode.Field);
@@ -2202,11 +2204,13 @@ namespace Microsoft.EntityFrameworkCore
 
                     modelBuilder
                         .Entity<PostReadOnlyExplicit>()
-                        .Metadata.FindNavigation("Blog")
+                        .Metadata
+                        .FindNavigation("Blog")
                         .SetField("_myblog");
                     modelBuilder
                         .Entity<BlogReadOnlyExplicit>()
-                        .Metadata.FindNavigation("Posts")
+                        .Metadata
+                        .FindNavigation("Posts")
                         .SetField("_myposts");
 
                     modelBuilder.Entity<PostWriteOnly>(
@@ -2253,11 +2257,13 @@ namespace Microsoft.EntityFrameworkCore
 
                     modelBuilder
                         .Entity<PostWriteOnlyExplicit>()
-                        .Metadata.FindNavigation("Blog")
+                        .Metadata
+                        .FindNavigation("Blog")
                         .SetField("_myblog");
                     modelBuilder
                         .Entity<BlogWriteOnlyExplicit>()
-                        .Metadata.FindNavigation("Posts")
+                        .Metadata
+                        .FindNavigation("Posts")
                         .SetField("_myposts");
 
                     modelBuilder.Entity<PostFields>(

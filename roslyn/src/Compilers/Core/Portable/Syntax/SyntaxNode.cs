@@ -942,10 +942,12 @@ namespace Microsoft.CodeAnalysis
                 throw new ArgumentOutOfRangeException(nameof(span));
             }
 
-            var node = FindToken(span.Start, findInsideTrivia).Parent!.FirstAncestorOrSelf<
-                SyntaxNode,
-                TextSpan
-            >((a, span) => a.FullSpan.Contains(span), span);
+            var node = FindToken(span.Start, findInsideTrivia)
+                .Parent!
+                .FirstAncestorOrSelf<SyntaxNode, TextSpan>(
+                    (a, span) => a.FullSpan.Contains(span),
+                    span
+                );
 
             RoslynDebug.Assert(node is object);
             SyntaxNode? cuRoot = node.SyntaxTree?.GetRoot();
@@ -996,13 +998,15 @@ namespace Microsoft.CodeAnalysis
             bool includeDocumentationComments = false
         )
         {
-            return SyntaxNavigator.Instance.GetFirstToken(
-                this,
-                includeZeroWidth,
-                includeSkipped,
-                includeDirectives,
-                includeDocumentationComments
-            );
+            return SyntaxNavigator
+                .Instance
+                .GetFirstToken(
+                    this,
+                    includeZeroWidth,
+                    includeSkipped,
+                    includeDirectives,
+                    includeDocumentationComments
+                );
         }
 
         /// <summary>
@@ -1016,13 +1020,15 @@ namespace Microsoft.CodeAnalysis
             bool includeDocumentationComments = false
         )
         {
-            return SyntaxNavigator.Instance.GetLastToken(
-                this,
-                includeZeroWidth,
-                includeSkipped,
-                includeDirectives,
-                includeDocumentationComments
-            );
+            return SyntaxNavigator
+                .Instance
+                .GetLastToken(
+                    this,
+                    includeZeroWidth,
+                    includeSkipped,
+                    includeDirectives,
+                    includeDocumentationComments
+                );
         }
 
         /// <summary>

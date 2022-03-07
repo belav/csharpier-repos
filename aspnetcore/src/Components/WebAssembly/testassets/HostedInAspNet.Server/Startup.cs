@@ -43,10 +43,11 @@ public class Startup
                 if (
                     context.Request.Query.ContainsKey("customizedbootresource")
                     || context.Request.Headers.ContainsKey("customizedbootresource")
-                    || context.Request.Path.Value.EndsWith(
-                        "/blazor.boot.json",
-                        StringComparison.Ordinal
-                    )
+                    || context
+                        .Request
+                        .Path
+                        .Value
+                        .EndsWith("/blazor.boot.json", StringComparison.Ordinal)
                 )
                 {
                     bootResourceRequestLog.AddRequest(context.Request);

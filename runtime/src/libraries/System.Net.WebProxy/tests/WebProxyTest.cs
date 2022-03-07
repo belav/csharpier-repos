@@ -240,7 +240,8 @@ namespace System.Net.Tests
             foreach (
                 IPAddress address in Dns.GetHostEntryAsync(Dns.GetHostName())
                     .GetAwaiter()
-                    .GetResult().AddressList
+                    .GetResult()
+                    .AddressList
             )
             {
                 if (address.AddressFamily == AddressFamily.InterNetwork)

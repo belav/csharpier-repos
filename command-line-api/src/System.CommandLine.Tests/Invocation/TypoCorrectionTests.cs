@@ -25,7 +25,8 @@ namespace System.CommandLine.Tests.Invocation
 
             await result.InvokeAsync(_console);
 
-            _console.Out
+            _console
+                .Out
                 .ToString()
                 .Should()
                 .Contain(
@@ -62,7 +63,8 @@ namespace System.CommandLine.Tests.Invocation
 
             await result.InvokeAsync(_console);
 
-            _console.Out
+            _console
+                .Out
                 .ToString()
                 .Should()
                 .Contain(
@@ -87,7 +89,8 @@ namespace System.CommandLine.Tests.Invocation
 
             await result.InvokeAsync(_console);
 
-            _console.Out
+            _console
+                .Out
                 .ToString()
                 .Should()
                 .Contain(
@@ -112,7 +115,8 @@ namespace System.CommandLine.Tests.Invocation
 
             await result.InvokeAsync(_console);
 
-            _console.Out
+            _console
+                .Out
                 .ToString()
                 .Should()
                 .Contain($"'een' was not matched. Did you mean one of the following?{NewLine}been");
@@ -151,7 +155,8 @@ namespace System.CommandLine.Tests.Invocation
 
             await result.InvokeAsync(_console);
 
-            _console.Out
+            _console
+                .Out
                 .ToString()
                 .Should()
                 .Contain($"'een' was not matched. Did you mean one of the following?{NewLine}been");
@@ -173,7 +178,8 @@ namespace System.CommandLine.Tests.Invocation
 
             await result.InvokeAsync(_console);
 
-            _console.Out
+            _console
+                .Out
                 .ToString()
                 .Should()
                 .Contain(

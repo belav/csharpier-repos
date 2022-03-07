@@ -79,7 +79,9 @@ namespace ILCompiler.DependencyAnalysisFramework
                     RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
                     && // Processing these event source events is only implemented on Windows
 #endif
-                GraphEventSource.Log.IsEnabled();
+                GraphEventSource
+                    .Log
+                    .IsEnabled();
             }
         }
 
@@ -126,22 +128,21 @@ namespace ILCompiler.DependencyAnalysisFramework
             {
                 if (reasonNode2 != null)
                 {
-                    GraphEventSource.Log.ConditionalEdge(
-                        GraphId,
-                        (int)reasonNode.GetMark(),
-                        (int)reasonNode2.GetMark(),
-                        nodeIndex,
-                        reason
-                    );
+                    GraphEventSource
+                        .Log
+                        .ConditionalEdge(
+                            GraphId,
+                            (int)reasonNode.GetMark(),
+                            (int)reasonNode2.GetMark(),
+                            nodeIndex,
+                            reason
+                        );
                 }
                 else
                 {
-                    GraphEventSource.Log.Edge(
-                        GraphId,
-                        (int)reasonNode.GetMark(),
-                        nodeIndex,
-                        reason
-                    );
+                    GraphEventSource
+                        .Log
+                        .Edge(GraphId, (int)reasonNode.GetMark(), nodeIndex, reason);
                 }
             }
             else

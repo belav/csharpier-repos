@@ -22,8 +22,10 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Tagging
             params Span[] spans
         )
         {
-            var exportProvider =
-                EditorTestCompositions.Editor.ExportProviderFactory.CreateExportProvider();
+            var exportProvider = EditorTestCompositions
+                .Editor
+                .ExportProviderFactory
+                .CreateExportProvider();
             var buffer = EditorFactory.CreateBuffer(exportProvider, text);
             var tags = spans.Select(
                 s =>

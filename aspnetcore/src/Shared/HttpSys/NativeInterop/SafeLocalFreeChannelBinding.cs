@@ -20,10 +20,9 @@ internal class SafeLocalFreeChannelBinding : ChannelBinding
     {
         SafeLocalFreeChannelBinding result;
 
-        result = UnsafeNclNativeMethods.SafeNetHandles.LocalAllocChannelBinding(
-            LMEM_FIXED,
-            (UIntPtr)cb
-        );
+        result = UnsafeNclNativeMethods
+            .SafeNetHandles
+            .LocalAllocChannelBinding(LMEM_FIXED, (UIntPtr)cb);
         if (result.IsInvalid)
         {
             result.SetHandleAsInvalid();

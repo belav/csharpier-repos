@@ -28,7 +28,9 @@ namespace Microsoft.EntityFrameworkCore.Storage
                     new RelationalCommandBuilderDependencies(
                         new TestRelationalTypeMappingSource(
                             TestServiceFactory.Instance.Create<TypeMappingSourceDependencies>(),
-                            TestServiceFactory.Instance.Create<RelationalTypeMappingSourceDependencies>()
+                            TestServiceFactory
+                                .Instance
+                                .Create<RelationalTypeMappingSourceDependencies>()
                         )
                     )
                 ),

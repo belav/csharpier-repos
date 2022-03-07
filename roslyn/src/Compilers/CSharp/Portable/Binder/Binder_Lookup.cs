@@ -2268,9 +2268,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                     {
                         return false;
                     }
-                    var keys = unwrappedSymbol.ContainingAssembly.GetInternalsVisibleToPublicKeys(
-                        assemblyName
-                    );
+                    var keys = unwrappedSymbol
+                        .ContainingAssembly
+                        .GetInternalsVisibleToPublicKeys(assemblyName);
                     if (!keys.Any())
                     {
                         return false;

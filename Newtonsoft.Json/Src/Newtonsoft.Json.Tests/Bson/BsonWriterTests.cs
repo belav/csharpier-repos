@@ -411,19 +411,44 @@ namespace Newtonsoft.Json.Tests.Bson
             );
             Assert.AreEqual(
                 "Santa Clara",
-                placemark.AddressDetails.Country.AdministrativeArea.SubAdministrativeArea.SubAdministrativeAreaName
+                placemark
+                    .AddressDetails
+                    .Country
+                    .AdministrativeArea
+                    .SubAdministrativeArea
+                    .SubAdministrativeAreaName
             );
             Assert.AreEqual(
                 "Mountain View",
-                placemark.AddressDetails.Country.AdministrativeArea.SubAdministrativeArea.Locality.LocalityName
+                placemark
+                    .AddressDetails
+                    .Country
+                    .AdministrativeArea
+                    .SubAdministrativeArea
+                    .Locality
+                    .LocalityName
             );
             Assert.AreEqual(
                 "1600 Amphitheatre Pkwy",
-                placemark.AddressDetails.Country.AdministrativeArea.SubAdministrativeArea.Locality.Thoroughfare.ThoroughfareName
+                placemark
+                    .AddressDetails
+                    .Country
+                    .AdministrativeArea
+                    .SubAdministrativeArea
+                    .Locality
+                    .Thoroughfare
+                    .ThoroughfareName
             );
             Assert.AreEqual(
                 "94043",
-                placemark.AddressDetails.Country.AdministrativeArea.SubAdministrativeArea.Locality.PostalCode.PostalCodeNumber
+                placemark
+                    .AddressDetails
+                    .Country
+                    .AdministrativeArea
+                    .SubAdministrativeArea
+                    .Locality
+                    .PostalCode
+                    .PostalCodeNumber
             );
             Assert.AreEqual(-122.083739m, placemark.Point.Coordinates[0]);
             Assert.AreEqual(37.423021m, placemark.Point.Coordinates[1]);

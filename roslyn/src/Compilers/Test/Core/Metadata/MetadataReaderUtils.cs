@@ -127,14 +127,16 @@ namespace Roslyn.Test.Utilities
 
         public static StringHandle[] GetAssemblyRefNames(this MetadataReader reader)
         {
-            return reader.AssemblyReferences
+            return reader
+                .AssemblyReferences
                 .Select(handle => reader.GetAssemblyReference(handle).Name)
                 .ToArray();
         }
 
         public static StringHandle[] GetTypeDefNames(this MetadataReader reader)
         {
-            return reader.TypeDefinitions
+            return reader
+                .TypeDefinitions
                 .Select(handle => reader.GetTypeDefinition(handle).Name)
                 .ToArray();
         }
@@ -143,7 +145,8 @@ namespace Roslyn.Test.Utilities
             this MetadataReader reader
         )
         {
-            return reader.TypeDefinitions
+            return reader
+                .TypeDefinitions
                 .Select(
                     handle =>
                     {
@@ -156,35 +159,40 @@ namespace Roslyn.Test.Utilities
 
         public static StringHandle[] GetTypeRefNames(this MetadataReader reader)
         {
-            return reader.TypeReferences
+            return reader
+                .TypeReferences
                 .Select(handle => reader.GetTypeReference(handle).Name)
                 .ToArray();
         }
 
         public static StringHandle[] GetEventDefNames(this MetadataReader reader)
         {
-            return reader.EventDefinitions
+            return reader
+                .EventDefinitions
                 .Select(handle => reader.GetEventDefinition(handle).Name)
                 .ToArray();
         }
 
         public static StringHandle[] GetFieldDefNames(this MetadataReader reader)
         {
-            return reader.FieldDefinitions
+            return reader
+                .FieldDefinitions
                 .Select(handle => reader.GetFieldDefinition(handle).Name)
                 .ToArray();
         }
 
         public static StringHandle[] GetMethodDefNames(this MetadataReader reader)
         {
-            return reader.MethodDefinitions
+            return reader
+                .MethodDefinitions
                 .Select(handle => reader.GetMethodDefinition(handle).Name)
                 .ToArray();
         }
 
         public static StringHandle[] GetMemberRefNames(this MetadataReader reader)
         {
-            return reader.MemberReferences
+            return reader
+                .MemberReferences
                 .Select(handle => reader.GetMemberReference(handle).Name)
                 .ToArray();
         }
@@ -199,7 +207,8 @@ namespace Roslyn.Test.Utilities
 
         public static StringHandle[] GetPropertyDefNames(this MetadataReader reader)
         {
-            return reader.PropertyDefinitions
+            return reader
+                .PropertyDefinitions
                 .Select(handle => reader.GetPropertyDefinition(handle).Name)
                 .ToArray();
         }
@@ -385,7 +394,8 @@ namespace Roslyn.Test.Utilities
 
         public static IEnumerable<string> DumpAssemblyReferences(this MetadataReader reader)
         {
-            return reader.AssemblyReferences
+            return reader
+                .AssemblyReferences
                 .Select(r => reader.GetAssemblyReference(r))
                 .Select(
                     row => $"{reader.GetString(row.Name)} {row.Version.Major}.{row.Version.Minor}"
@@ -394,7 +404,8 @@ namespace Roslyn.Test.Utilities
 
         public static IEnumerable<string> DumpTypeReferences(this MetadataReader reader)
         {
-            return reader.TypeReferences
+            return reader
+                .TypeReferences
                 .Select(t => reader.GetTypeReference(t))
                 .Select(
                     t =>
@@ -609,7 +620,8 @@ namespace Roslyn.Test.Utilities
                 );
 
                 AssertEx.SetEqual(
-                    metadataReader.CustomAttributes
+                    metadataReader
+                        .CustomAttributes
                         .Select(a => metadataReader.GetCustomAttribute(a).Constructor)
                         .Select(
                             c => metadataReader.GetMemberReference((MemberReferenceHandle)c).Parent

@@ -165,9 +165,9 @@ namespace System.Security.Cryptography.Xml
             {
                 if (!s_haveInformationLogging)
                 {
-                    s_informationLogging = s_traceSource.Switch.ShouldTrace(
-                        TraceEventType.Information
-                    );
+                    s_informationLogging = s_traceSource
+                        .Switch
+                        .ShouldTrace(TraceEventType.Information);
                     s_haveInformationLogging = true;
                 }
 

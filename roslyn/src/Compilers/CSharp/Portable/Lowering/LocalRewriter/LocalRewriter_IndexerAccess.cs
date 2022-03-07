@@ -276,7 +276,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                 VisitExpression(receiver),
                 out var receiverStore,
                 // Store the receiver as a ref local if it's a value type to ensure side effects are propagated
-                receiver.Type.IsReferenceType ? RefKind.None : RefKind.Ref
+                receiver.Type.IsReferenceType
+                  ? RefKind.None
+                  : RefKind.Ref
             );
             locals.Add(receiverLocal.LocalSymbol);
             sideeffects.Add(receiverStore);

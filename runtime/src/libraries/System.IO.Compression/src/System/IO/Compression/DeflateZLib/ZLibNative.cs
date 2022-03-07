@@ -276,14 +276,16 @@ namespace System.IO.Compression
                 EnsureNotDisposed();
                 EnsureState(State.NotInitialized);
 
-                ErrorCode errC = Interop.zlib.DeflateInit2_(
-                    ref _zStream,
-                    level,
-                    CompressionMethod.Deflated,
-                    windowBits,
-                    memLevel,
-                    strategy
-                );
+                ErrorCode errC = Interop
+                    .zlib
+                    .DeflateInit2_(
+                        ref _zStream,
+                        level,
+                        CompressionMethod.Deflated,
+                        windowBits,
+                        memLevel,
+                        strategy
+                    );
                 _initializationState = State.InitializedForDeflate;
 
                 return errC;

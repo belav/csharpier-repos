@@ -130,9 +130,9 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
 
                 // output EntityType poco .cs file
                 var entityTypeFileName = entityType.Name + FileExtension;
-                resultingFiles.AdditionalFiles.Add(
-                    new ScaffoldedFile { Path = entityTypeFileName, Code = generatedCode }
-                );
+                resultingFiles
+                    .AdditionalFiles
+                    .Add(new ScaffoldedFile { Path = entityTypeFileName, Code = generatedCode });
             }
 
             return resultingFiles;

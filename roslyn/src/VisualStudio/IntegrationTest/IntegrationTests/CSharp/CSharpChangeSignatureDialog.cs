@@ -167,24 +167,27 @@ class Program
             var vbProject = new ProjectUtils.Project("VBProject");
             var vbProjectReference = new ProjectUtils.ProjectReference(vbProject.Name);
             var project = new ProjectUtils.Project(ProjectName);
-            VisualStudio.SolutionExplorer.AddProject(
-                vbProject,
-                WellKnownProjectTemplates.ClassLibrary,
-                LanguageNames.VisualBasic
-            );
-            VisualStudio.Editor.SetText(
-                @"
+            VisualStudio
+                .SolutionExplorer
+                .AddProject(
+                    vbProject,
+                    WellKnownProjectTemplates.ClassLibrary,
+                    LanguageNames.VisualBasic
+                );
+            VisualStudio
+                .Editor
+                .SetText(
+                    @"
 Public Class VBClass
     Public Sub Method(x As Integer, y As String)
     End Sub
 End Class"
-            );
+                );
 
             VisualStudio.SolutionExplorer.SaveAll();
-            VisualStudio.SolutionExplorer.AddProjectReference(
-                fromProjectName: project,
-                toProjectName: vbProjectReference
-            );
+            VisualStudio
+                .SolutionExplorer
+                .AddProjectReference(fromProjectName: project, toProjectName: vbProjectReference);
             VisualStudio.SolutionExplorer.OpenFile(project, "Class1.cs");
 
             ChangeSignatureDialog.Invoke();
@@ -340,30 +343,33 @@ class CSharpTest
 }"
             );
             var vbProject = new ProjectUtils.Project("VBProject");
-            VisualStudio.SolutionExplorer.AddProject(
-                vbProject,
-                WellKnownProjectTemplates.ClassLibrary,
-                LanguageNames.VisualBasic
-            );
-            VisualStudio.Editor.SetText(
-                @"
+            VisualStudio
+                .SolutionExplorer
+                .AddProject(
+                    vbProject,
+                    WellKnownProjectTemplates.ClassLibrary,
+                    LanguageNames.VisualBasic
+                );
+            VisualStudio
+                .Editor
+                .SetText(
+                    @"
 Public Class VBClass
     Public Function Method(a As Integer, b As String, c As Double) As Integer
         Return 1
     End Function
 End Class
 "
-            );
+                );
             VisualStudio.SolutionExplorer.SaveAll();
             var project = new ProjectUtils.Project(ProjectName);
             var vbProjectReference = new ProjectUtils.ProjectReference("VBProject");
             VisualStudio.SolutionExplorer.AddProjectReference(project, vbProjectReference);
             VisualStudio.SolutionExplorer.OpenFile(project, "Class1.cs");
 
-            VisualStudio.Workspace.WaitForAsyncOperations(
-                Helper.HangMitigatingTimeout,
-                FeatureAttribute.Workspace
-            );
+            VisualStudio
+                .Workspace
+                .WaitForAsyncOperations(Helper.HangMitigatingTimeout, FeatureAttribute.Workspace);
 
             ChangeSignatureDialog.Invoke();
             ChangeSignatureDialog.VerifyOpen();

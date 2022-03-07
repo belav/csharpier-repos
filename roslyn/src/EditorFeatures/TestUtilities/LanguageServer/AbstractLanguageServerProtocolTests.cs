@@ -37,11 +37,11 @@ namespace Roslyn.Test.Utilities
     public abstract partial class AbstractLanguageServerProtocolTests
     {
         // TODO: remove WPF dependency (IEditorInlineRenameService)
-        private static readonly TestComposition s_composition =
-            EditorTestCompositions.LanguageServerProtocolWpf
-                .AddParts(typeof(TestDocumentTrackingService))
-                .AddParts(typeof(TestWorkspaceRegistrationService))
-                .RemoveParts(typeof(MockWorkspaceEventListenerProvider));
+        private static readonly TestComposition s_composition = EditorTestCompositions
+            .LanguageServerProtocolWpf
+            .AddParts(typeof(TestDocumentTrackingService))
+            .AddParts(typeof(TestWorkspaceRegistrationService))
+            .RemoveParts(typeof(MockWorkspaceEventListenerProvider));
 
         private class TestSpanMapperProvider : IDocumentServiceProvider
         {
@@ -419,8 +419,9 @@ namespace Roslyn.Test.Utilities
 
         private static IAsynchronousOperationWaiter GetWorkspaceWaiter(TestWorkspace workspace)
         {
-            var operations =
-                workspace.ExportProvider.GetExportedValue<AsynchronousOperationListenerProvider>();
+            var operations = workspace
+                .ExportProvider
+                .GetExportedValue<AsynchronousOperationListenerProvider>();
             return operations.GetWaiter(FeatureAttribute.Workspace);
         }
 
@@ -612,7 +613,8 @@ namespace Roslyn.Test.Utilities
                 {
                     // LSP open files don't care about the project context, just the file contents with the URI.
                     // So pick any of the linked documents to get the text from.
-                    var sourceText = await TestWorkspace.CurrentSolution
+                    var sourceText = await TestWorkspace
+                        .CurrentSolution
                         .GetDocuments(documentUri)
                         .First()
                         .GetTextAsync(CancellationToken.None)

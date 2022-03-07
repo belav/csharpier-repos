@@ -58,7 +58,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             public TestAccessor(RequestExecutionQueue queue) => _queue = queue;
 
             public ImmutableArray<SourceText> GetTrackedTexts() =>
-                _queue._lspWorkspaceManager
+                _queue
+                    ._lspWorkspaceManager
                     .GetTrackedLspText()
                     .Select(i => i.Value)
                     .ToImmutableArray();

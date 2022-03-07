@@ -127,7 +127,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             }
 
             // Check that we know about this file!
-            var documentId = _state.Workspace.CurrentSolution
+            var documentId = _state
+                .Workspace
+                .CurrentSolution
                 .GetDocumentIdsWithFilePath(filePath)
                 .Where(id => id.ProjectId == _projectId)
                 .FirstOrDefault();

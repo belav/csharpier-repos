@@ -59,7 +59,8 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions.LanguageSe
         private static readonly Dictionary<string, RegexOptions> s_nameToOption =
             typeof(RegexOptions)
                 .GetTypeInfo()
-                .DeclaredFields.Where(f => f.FieldType == typeof(RegexOptions))
+                .DeclaredFields
+                .Where(f => f.FieldType == typeof(RegexOptions))
                 .ToDictionary(
                     f => f.Name,
                     f => (RegexOptions)f.GetValue(null),
@@ -417,11 +418,9 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions.LanguageSe
         {
             options = default;
 
-            var parameter = _info.SemanticFacts.FindParameterForArgument(
-                semanticModel,
-                argumentNode,
-                cancellationToken
-            );
+            var parameter = _info
+                .SemanticFacts
+                .FindParameterForArgument(semanticModel, argumentNode, cancellationToken);
             if (parameter?.Name != _patternName)
             {
                 return false;
@@ -482,9 +481,11 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions.LanguageSe
             var syntaxFacts = _info.SyntaxFacts;
             if (syntaxFacts.IsSimpleMemberAccessExpression(invokedExpression))
             {
-                return syntaxFacts.GetIdentifierOfSimpleName(
-                    syntaxFacts.GetNameOfMemberAccessExpression(invokedExpression)
-                ).ValueText;
+                return syntaxFacts
+                    .GetIdentifierOfSimpleName(
+                        syntaxFacts.GetNameOfMemberAccessExpression(invokedExpression)
+                    )
+                    .ValueText;
             }
             else if (syntaxFacts.IsIdentifierName(invokedExpression))
             {

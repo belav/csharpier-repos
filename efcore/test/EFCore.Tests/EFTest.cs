@@ -14,9 +14,9 @@ namespace Microsoft.EntityFrameworkCore
         {
             Assert.Equal(
                 CoreStrings.PropertyMethodInvoked,
-                Assert.Throws<InvalidOperationException>(
-                    () => EF.Property<object>(new object(), "")
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(() => EF.Property<object>(new object(), ""))
+                    .Message
             );
         }
     }

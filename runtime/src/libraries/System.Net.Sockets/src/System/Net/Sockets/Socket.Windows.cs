@@ -126,13 +126,15 @@ namespace System.Net.Sockets
 
             // Get the address family, socket type, and protocol type from the socket.
             if (
-                Interop.Winsock.getsockopt(
-                    handle,
-                    SocketOptionLevel.Socket,
-                    (SocketOptionName)Interop.Winsock.SO_PROTOCOL_INFOW,
-                    (byte*)&info,
-                    ref optionLength
-                ) == SocketError.SocketError
+                Interop
+                    .Winsock
+                    .getsockopt(
+                        handle,
+                        SocketOptionLevel.Socket,
+                        (SocketOptionName)Interop.Winsock.SO_PROTOCOL_INFOW,
+                        (byte*)&info,
+                        ref optionLength
+                    ) == SocketError.SocketError
             )
             {
                 throw new SocketException((int)SocketPal.GetLastSocketError());
@@ -316,13 +318,15 @@ namespace System.Net.Sockets
             // so it can bind to ports from the Windows auto-reuse port range, if configured by an admin.
             // The socket option is supported on Windows 10+, we are ignoring the SocketError in case setsockopt fails.
             int optionValue = 1;
-            SocketError error = Interop.Winsock.setsockopt(
-                _handle,
-                SocketOptionLevel.Socket,
-                SocketOptionName.ReuseUnicastPort,
-                ref optionValue,
-                sizeof(int)
-            );
+            SocketError error = Interop
+                .Winsock
+                .setsockopt(
+                    _handle,
+                    SocketOptionLevel.Socket,
+                    SocketOptionName.ReuseUnicastPort,
+                    ref optionValue,
+                    sizeof(int)
+                );
 
             if (NetEventSource.Log.IsEnabled() && error != SocketError.Success)
             {

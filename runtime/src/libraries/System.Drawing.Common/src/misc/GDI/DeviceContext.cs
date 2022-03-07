@@ -92,22 +92,18 @@ namespace System.Drawing.Internal
         private void CacheInitialState()
         {
             Debug.Assert(_hDC != IntPtr.Zero, "Cannot get initial state without a valid HDC");
-            _hCurrentPen = _hInitialPen = Interop.Gdi32.GetCurrentObject(
-                new HandleRef(this, _hDC),
-                Interop.Gdi32.ObjectType.OBJ_PEN
-            );
-            _hCurrentBrush = _hInitialBrush = Interop.Gdi32.GetCurrentObject(
-                new HandleRef(this, _hDC),
-                Interop.Gdi32.ObjectType.OBJ_BRUSH
-            );
-            _hCurrentBmp = _hInitialBmp = Interop.Gdi32.GetCurrentObject(
-                new HandleRef(this, _hDC),
-                Interop.Gdi32.ObjectType.OBJ_BITMAP
-            );
-            _hCurrentFont = _hInitialFont = Interop.Gdi32.GetCurrentObject(
-                new HandleRef(this, _hDC),
-                Interop.Gdi32.ObjectType.OBJ_FONT
-            );
+            _hCurrentPen = _hInitialPen = Interop
+                .Gdi32
+                .GetCurrentObject(new HandleRef(this, _hDC), Interop.Gdi32.ObjectType.OBJ_PEN);
+            _hCurrentBrush = _hInitialBrush = Interop
+                .Gdi32
+                .GetCurrentObject(new HandleRef(this, _hDC), Interop.Gdi32.ObjectType.OBJ_BRUSH);
+            _hCurrentBmp = _hInitialBmp = Interop
+                .Gdi32
+                .GetCurrentObject(new HandleRef(this, _hDC), Interop.Gdi32.ObjectType.OBJ_BITMAP);
+            _hCurrentFont = _hInitialFont = Interop
+                .Gdi32
+                .GetCurrentObject(new HandleRef(this, _hDC), Interop.Gdi32.ObjectType.OBJ_FONT);
         }
 
         /// <summary>
@@ -327,10 +323,9 @@ namespace System.Drawing.Internal
             WindowsRegion clip = new WindowsRegion(0, 0, 0, 0);
             try
             {
-                int result = Interop.Gdi32.GetClipRgn(
-                    new HandleRef(this, _hDC),
-                    new HandleRef(clip, clip.HRegion)
-                );
+                int result = Interop
+                    .Gdi32
+                    .GetClipRgn(new HandleRef(this, _hDC), new HandleRef(clip, clip.HRegion));
 
                 // If the function succeeds and there is a clipping region for the given device context, the return value is 1.
                 if (result == 1)

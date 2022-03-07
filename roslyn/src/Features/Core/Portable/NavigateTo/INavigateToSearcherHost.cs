@@ -57,8 +57,10 @@ namespace Microsoft.CodeAnalysis.NavigateTo
 
         public async ValueTask<bool> IsFullyLoadedAsync(CancellationToken cancellationToken)
         {
-            var service =
-                _solution.Workspace.Services.GetRequiredService<IWorkspaceStatusService>();
+            var service = _solution
+                .Workspace
+                .Services
+                .GetRequiredService<IWorkspaceStatusService>();
 
             // We consider ourselves fully loaded when both the project system has completed loaded
             // us, and we've totally hydrated the oop side.  Until that happens, we'll attempt to
@@ -97,9 +99,9 @@ namespace Microsoft.CodeAnalysis.NavigateTo
                 {
                     // If there are no projects in this solution that use OOP, then there's nothing we need to do.
                     if (
-                        _solution.Projects.All(
-                            p => !RemoteSupportedLanguages.IsSupported(p.Language)
-                        )
+                        _solution
+                            .Projects
+                            .All(p => !RemoteSupportedLanguages.IsSupported(p.Language))
                     )
                     {
                         s_remoteHostHydrateTask = Task.CompletedTask;

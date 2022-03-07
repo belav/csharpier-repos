@@ -181,9 +181,9 @@ namespace System.Xml.Xsl.Xslt
                         // namespace definition for this prefix and the old definition must not be added to the scope.
                         if (_scopeManager.LookupNamespace(prefixNamespacePair.Key) == null)
                         {
-                            string nsAtomizedValue = _atoms.NameTable.Add(
-                                prefixNamespacePair.Value
-                            );
+                            string nsAtomizedValue = _atoms
+                                .NameTable
+                                .Add(prefixNamespacePair.Value);
                             _scopeManager.AddNsDeclaration(
                                 prefixNamespacePair.Key,
                                 nsAtomizedValue
@@ -1275,10 +1275,15 @@ namespace System.Xml.Xsl.Xslt
                 for (col = 0; col < list.Length; col++)
                 {
                     if (
-                        System.Xml.Xsl.Runtime.XmlCollation.Create(
-                            list[col], /*throw:*/
-                            false
-                        ) != null
+                        System
+                            .Xml
+                            .Xsl
+                            .Runtime
+                            .XmlCollation
+                            .Create(
+                                list[col], /*throw:*/
+                                false
+                            ) != null
                     )
                     {
                         break;

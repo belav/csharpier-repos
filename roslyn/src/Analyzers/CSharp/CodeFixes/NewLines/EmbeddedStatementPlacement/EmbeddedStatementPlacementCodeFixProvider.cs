@@ -65,10 +65,10 @@ namespace Microsoft.CodeAnalysis.CSharp.NewLines.EmbeddedStatementPlacement
             var editor = new SyntaxEditor(root, document.Project.Solution.Workspace);
 
 #if CODE_STYLE
-            var options = document.Project.AnalyzerOptions.GetAnalyzerOptionSet(
-                editor.OriginalRoot.SyntaxTree,
-                cancellationToken
-            );
+            var options = document
+                .Project
+                .AnalyzerOptions
+                .GetAnalyzerOptionSet(editor.OriginalRoot.SyntaxTree, cancellationToken);
 #else
             var options = await document.GetOptionsAsync(cancellationToken).ConfigureAwait(false);
 #endif

@@ -175,10 +175,12 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
 
                 Contract.ThrowIfFalse(
                     firstStatementToRemove.Parent == lastStatementToRemove.Parent
-                        || CSharpSyntaxFacts.Instance.AreStatementsInSameContainer(
-                            firstStatementToRemove,
-                            lastStatementToRemove
-                        )
+                        || CSharpSyntaxFacts
+                            .Instance
+                            .AreStatementsInSameContainer(
+                                firstStatementToRemove,
+                                lastStatementToRemove
+                            )
                 );
 
                 var statementsToInsert = await CreateStatementsOrInitializerToInsertAtCallSiteAsync(
@@ -548,9 +550,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                                     declarationStatement.Declaration.Type,
                                     SyntaxFactory.SeparatedList(list)
                                 ),
-                                declarationStatement.SemicolonToken.WithPrependedLeadingTrivia(
-                                    triviaList
-                                )
+                                declarationStatement
+                                    .SemicolonToken
+                                    .WithPrependedLeadingTrivia(triviaList)
                             )
                         );
                         triviaList.Clear();
@@ -803,7 +805,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                 if (CSharpSelectionResult.ShouldCallConfigureAwaitFalse())
                 {
                     if (
-                        AnalyzerResult.ReturnType
+                        AnalyzerResult
+                            .ReturnType
                             .GetMembers()
                             .Any(
                                 x =>
@@ -940,11 +943,13 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                 {
                     return method.ReplaceToken(
                         expressionBody.ArrowToken,
-                        expressionBody.ArrowToken.WithPrependedLeadingTrivia(
-                            SpecializedCollections.SingletonEnumerable(
-                                SyntaxFactory.ElasticCarriageReturnLineFeed
+                        expressionBody
+                            .ArrowToken
+                            .WithPrependedLeadingTrivia(
+                                SpecializedCollections.SingletonEnumerable(
+                                    SyntaxFactory.ElasticCarriageReturnLineFeed
+                                )
                             )
-                        )
                     );
                 }
                 else
@@ -986,7 +991,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                         .ConfigureAwait(false);
                 }
 
-                var syntaxNode = originalDocument.Root
+                var syntaxNode = originalDocument
+                    .Root
                     .GetAnnotatedNodesAndTokens(MethodDefinitionAnnotation)
                     .FirstOrDefault()
                     .AsNode();
@@ -1102,11 +1108,13 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                 )
                 {
                     // Return type can be updated to not be null
-                    var newType = methodSymbolResult.Data.ReturnType.WithNullableAnnotation(
-                        NullableAnnotation.NotAnnotated
-                    );
+                    var newType = methodSymbolResult
+                        .Data
+                        .ReturnType
+                        .WithNullableAnnotation(NullableAnnotation.NotAnnotated);
 
-                    var oldRoot = await originalDocument.Document
+                    var oldRoot = await originalDocument
+                        .Document
                         .GetSyntaxRootAsync(cancellationToken)
                         .ConfigureAwait(false);
                     var newRoot = oldRoot.ReplaceNode(returnType, newType.GenerateTypeSyntax());
@@ -1148,14 +1156,16 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                     NamingStyleOptions.NamingPreferences,
                     LanguageNames.CSharp
                 );
-                var localFunctionPreferences = namingPreferences.SymbolSpecifications.Where(
-                    symbol =>
-                        symbol.AppliesTo(
-                            new SymbolKindOrTypeKind(MethodKind.LocalFunction),
-                            CreateMethodModifiers(),
-                            null
-                        )
-                );
+                var localFunctionPreferences = namingPreferences
+                    .SymbolSpecifications
+                    .Where(
+                        symbol =>
+                            symbol.AppliesTo(
+                                new SymbolKindOrTypeKind(MethodKind.LocalFunction),
+                                CreateMethodModifiers(),
+                                null
+                            )
+                    );
 
                 var namingRules = namingPreferences.Rules.NamingRules;
                 var localFunctionKind = new SymbolKindOrTypeKind(MethodKind.LocalFunction);
@@ -1164,9 +1174,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                     if (
                         namingRules.Any(
                             rule =>
-                                rule.NamingStyle.CapitalizationScheme.Equals(
-                                    Capitalization.CamelCase
-                                )
+                                rule.NamingStyle
+                                    .CapitalizationScheme
+                                    .Equals(Capitalization.CamelCase)
                                 && rule.SymbolSpecification.AppliesTo(
                                     localFunctionKind,
                                     CreateMethodModifiers(),

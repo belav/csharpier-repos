@@ -261,10 +261,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions.ContextQuery
             var isDestructorTypeContext =
                 targetToken.IsKind(SyntaxKind.TildeToken)
                 && targetToken.Parent.IsKind(SyntaxKind.DestructorDeclaration)
-                && targetToken.Parent.Parent.IsKind(
-                    SyntaxKind.ClassDeclaration,
-                    SyntaxKind.RecordDeclaration
-                );
+                && targetToken
+                    .Parent
+                    .Parent
+                    .IsKind(SyntaxKind.ClassDeclaration, SyntaxKind.RecordDeclaration);
 
             // Typing a dot after a numeric expression (numericExpression.)
             // - maybe a start of MemberAccessExpression like numericExpression.Member.
@@ -276,11 +276,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions.ContextQuery
                 cancellationToken
             );
 
-            var isArgumentListToken = targetToken.Parent.IsKind(
-                SyntaxKind.ArgumentList,
-                SyntaxKind.AttributeArgumentList,
-                SyntaxKind.ArrayRankSpecifier
-            );
+            var isArgumentListToken = targetToken
+                .Parent
+                .IsKind(
+                    SyntaxKind.ArgumentList,
+                    SyntaxKind.AttributeArgumentList,
+                    SyntaxKind.ArrayRankSpecifier
+                );
 
             var isLocalFunctionDeclarationContext = syntaxTree.IsLocalFunctionDeclarationContext(
                 position,

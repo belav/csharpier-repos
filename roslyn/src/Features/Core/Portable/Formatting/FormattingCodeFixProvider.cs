@@ -57,10 +57,12 @@ namespace Microsoft.CodeAnalysis.Formatting
             CancellationToken cancellationToken
         )
         {
-            var options = await context.Document
+            var options = await context
+                .Document
                 .GetOptionsAsync(cancellationToken)
                 .ConfigureAwait(false);
-            var tree = await context.Document
+            var tree = await context
+                .Document
                 .GetSyntaxTreeAsync(cancellationToken)
                 .ConfigureAwait(false);
             var formattedTree = await FormattingCodeFixHelper
@@ -72,9 +74,11 @@ namespace Microsoft.CodeAnalysis.Formatting
                     cancellationToken
                 )
                 .ConfigureAwait(false);
-            return context.Document.WithSyntaxRoot(
-                await formattedTree.GetRootAsync(cancellationToken).ConfigureAwait(false)
-            );
+            return context
+                .Document
+                .WithSyntaxRoot(
+                    await formattedTree.GetRootAsync(cancellationToken).ConfigureAwait(false)
+                );
         }
 
         protected override async Task FixAllAsync(

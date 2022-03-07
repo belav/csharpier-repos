@@ -33,9 +33,9 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
                 this.AssertIsForeground();
 
                 Debug.Assert(
-                    _dataSource.CaretChangeBehavior.HasFlag(
-                        TaggerCaretChangeBehavior.RemoveAllTagsOnCaretMoveOutsideOfTag
-                    )
+                    _dataSource
+                        .CaretChangeBehavior
+                        .HasFlag(TaggerCaretChangeBehavior.RemoveAllTagsOnCaretMoveOutsideOfTag)
                 );
 
                 var caret = _dataSource.GetCaretPoint(_textViewOpt, _subjectBuffer);
@@ -153,9 +153,9 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
 
                 // Don't bother going forward if we're not going adjust any tags based on edits.
                 if (
-                    _dataSource.TextChangeBehavior.HasFlag(
-                        TaggerTextChangeBehavior.RemoveTagsThatIntersectEdits
-                    )
+                    _dataSource
+                        .TextChangeBehavior
+                        .HasFlag(TaggerTextChangeBehavior.RemoveTagsThatIntersectEdits)
                 )
                 {
                     RemoveTagsThatIntersectEdit(e);
@@ -236,9 +236,9 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
                 state.EnqueueWork(
                     async () =>
                     {
-                        await this.ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
-                            cancellationToken
-                        );
+                        await this.ThreadingContext
+                            .JoinableTaskFactory
+                            .SwitchToMainThreadAsync(cancellationToken);
                         await RecomputeTagsForegroundAsync(initialTags, cancellationToken)
                             .ConfigureAwait(false);
                     },
@@ -308,9 +308,9 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
                     );
 
                     // Then switch back to the UI thread to update our state and kick off the work to notify the editor.
-                    await this.ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
-                        cancellationToken
-                    );
+                    await this.ThreadingContext
+                        .JoinableTaskFactory
+                        .SwitchToMainThreadAsync(cancellationToken);
 
                     // Once we assign our state, we're uncancellable.  We must report the changed information
                     // to the editor.  The only case where it's ok not to is if the tagger itself is disposed.
@@ -375,7 +375,8 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
                 var buffersToTag = spansToTag
                     .Select(dss => dss.SnapshotSpan.Snapshot.TextBuffer)
                     .ToSet();
-                var newTagsByBuffer = context.tagSpans
+                var newTagsByBuffer = context
+                    .tagSpans
                     .Where(ts => buffersToTag.Contains(ts.Span.Snapshot.TextBuffer))
                     .ToLookup(t => t.Span.Snapshot.TextBuffer);
                 var spansTagged = context._spansTagged;
@@ -474,13 +475,14 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
 
             private bool ShouldSkipTagProduction() =>
                 _dataSource.Options.Any(option => !_dataSource.GlobalOptions.GetOption(option))
-                || _dataSource.PerLanguageOptions.Any(
-                    option =>
-                        !_dataSource.GlobalOptions.GetOption(
-                            option,
-                            _subjectBuffer.GetLanguageName()
-                        )
-                );
+                || _dataSource
+                    .PerLanguageOptions
+                    .Any(
+                        option =>
+                            !_dataSource
+                                .GlobalOptions
+                                .GetOption(option, _subjectBuffer.GetLanguageName())
+                    );
 
             private Task ProduceTagsAsync(
                 TaggerContext<TTag> context,
@@ -509,9 +511,10 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
                     foreach (var (latestBuffer, latestSpans) in newTagTrees)
                     {
                         var snapshot =
-                            spansToTag.First(
-                                s => s.SnapshotSpan.Snapshot.TextBuffer == latestBuffer
-                            ).SnapshotSpan.Snapshot;
+                            spansToTag
+                                .First(s => s.SnapshotSpan.Snapshot.TextBuffer == latestBuffer)
+                                .SnapshotSpan
+                                .Snapshot;
 
                         if (oldTagTrees.TryGetValue(latestBuffer, out var previousSpans))
                         {
@@ -654,10 +657,15 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
                     {
                         var disposalToken = stateRef.Target.DisposalToken;
 
-                        this.ThreadingContext.JoinableTaskFactory.Run(
-                            () =>
-                                this.RecomputeTagsForegroundAsync(initialTags: true, disposalToken)
-                        );
+                        this.ThreadingContext
+                            .JoinableTaskFactory
+                            .Run(
+                                () =>
+                                    this.RecomputeTagsForegroundAsync(
+                                        initialTags: true,
+                                        disposalToken
+                                    )
+                            );
                     }
                 }
 

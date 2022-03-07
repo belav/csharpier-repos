@@ -77,15 +77,13 @@ namespace System.Management
                 QualifierType.ObjectQualifier
                   => parent.wbemObject.GetQualifierSet_(out qualifierSet),
                 QualifierType.PropertyQualifier
-                  => parent.wbemObject.GetPropertyQualifierSet_(
-                      propertyOrMethodName,
-                      out qualifierSet
-                  ),
+                  => parent
+                      .wbemObject
+                      .GetPropertyQualifierSet_(propertyOrMethodName, out qualifierSet),
                 QualifierType.MethodQualifier
-                  => parent.wbemObject.GetMethodQualifierSet_(
-                      propertyOrMethodName,
-                      out qualifierSet
-                  ),
+                  => parent
+                      .wbemObject
+                      .GetMethodQualifierSet_(propertyOrMethodName, out qualifierSet),
                 _ => throw new ManagementException(ManagementStatus.Unexpected, null, null), //is this the best fit error ??
             };
             if ((status & 0x80000000) == 0) //success
@@ -133,9 +131,9 @@ namespace System.Management
                             for (int i = 0; i < length; i++)
                                 ((int[])(wmiValue))[i] = Convert.ToInt32(
                                     valArray.GetValue(i),
-                                    (IFormatProvider)CultureInfo.InvariantCulture.GetFormat(
-                                        typeof(int)
-                                    )
+                                    (IFormatProvider)CultureInfo
+                                        .InvariantCulture
+                                        .GetFormat(typeof(int))
                                 );
                         }
                         else if (elementType == typeof(double))
@@ -144,9 +142,9 @@ namespace System.Management
                             for (int i = 0; i < length; i++)
                                 ((double[])(wmiValue))[i] = Convert.ToDouble(
                                     valArray.GetValue(i),
-                                    (IFormatProvider)CultureInfo.InvariantCulture.GetFormat(
-                                        typeof(double)
-                                    )
+                                    (IFormatProvider)CultureInfo
+                                        .InvariantCulture
+                                        .GetFormat(typeof(double))
                                 );
                         }
                         else if (elementType == typeof(string))
@@ -161,9 +159,9 @@ namespace System.Management
                             for (int i = 0; i < length; i++)
                                 ((bool[])(wmiValue))[i] = Convert.ToBoolean(
                                     valArray.GetValue(i),
-                                    (IFormatProvider)CultureInfo.InvariantCulture.GetFormat(
-                                        typeof(bool)
-                                    )
+                                    (IFormatProvider)CultureInfo
+                                        .InvariantCulture
+                                        .GetFormat(typeof(bool))
                                 );
                         }
                         else

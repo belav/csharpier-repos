@@ -58,15 +58,15 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.MoveType
 
                 var tree = SemanticDocument.SyntaxTree;
                 var root = SemanticDocument.Root;
-                var syntaxFacts =
-                    SemanticDocument.Document.GetLanguageService<ISyntaxFactsService>();
+                var syntaxFacts = SemanticDocument
+                    .Document
+                    .GetLanguageService<ISyntaxFactsService>();
 
                 // compiler declared types, anonymous types, types defined in metadata should be filtered out.
                 if (
-                    SemanticDocument.SemanticModel.GetDeclaredSymbol(
-                        typeDeclaration,
-                        cancellationToken
-                    )
+                    SemanticDocument
+                        .SemanticModel
+                        .GetDeclaredSymbol(typeDeclaration, cancellationToken)
                         is not INamedTypeSymbol typeSymbol
                     || typeSymbol.Locations.Any(loc => loc.IsInMetadata)
                     || typeSymbol.IsAnonymousType

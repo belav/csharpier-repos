@@ -229,9 +229,9 @@ namespace System.Text.RegularExpressions
                         Match match
                     ) =>
                     {
-                        state.segments.Add(
-                            state.input.AsMemory(state.prevat, match.Index - state.prevat)
-                        );
+                        state
+                            .segments
+                            .Add(state.input.AsMemory(state.prevat, match.Index - state.prevat));
                         state.prevat = match.Index + match.Length;
                         state.segments.Add(state.evaluator(match).AsMemory());
                         return --state.count != 0;
@@ -259,12 +259,16 @@ namespace System.Text.RegularExpressions
                         Match match
                     ) =>
                     {
-                        state.segments.Add(
-                            state.input.AsMemory(
-                                match.Index + match.Length,
-                                state.prevat - match.Index - match.Length
-                            )
-                        );
+                        state
+                            .segments
+                            .Add(
+                                state
+                                    .input
+                                    .AsMemory(
+                                        match.Index + match.Length,
+                                        state.prevat - match.Index - match.Length
+                                    )
+                            );
                         state.prevat = match.Index;
                         state.segments.Add(state.evaluator(match).AsMemory());
                         return --state.count != 0;

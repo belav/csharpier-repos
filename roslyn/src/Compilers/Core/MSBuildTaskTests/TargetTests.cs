@@ -1109,9 +1109,11 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
             );
 
             var expectedVersionString =
-                GetType().Assembly
+                GetType()
+                    .Assembly
                     .GetCustomAttributes<AssemblyMetadataAttribute>()
-                    .Single(a => a.Key == "CurrentCompilerApiVersion").Value ?? string.Empty;
+                    .Single(a => a.Key == "CurrentCompilerApiVersion")
+                    .Value ?? string.Empty;
             var expectedVersion = Version.Parse(expectedVersionString);
 
             Assert.Equal(expectedVersion, compilerApiVersion);

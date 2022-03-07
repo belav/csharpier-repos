@@ -45,7 +45,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Interactive
             _menuCommandService = menuCommandService;
             _monitorSelection = monitorSelection;
             _componentModel = componentModel;
-            _resetInteractiveCommand = _componentModel.DefaultExportProvider
+            _resetInteractiveCommand = _componentModel
+                .DefaultExportProvider
                 .GetExports<IResetInteractiveCommand, ContentTypeMetadata>()
                 .Where(
                     resetInteractiveService =>

@@ -165,7 +165,9 @@ namespace System.ComponentModel.Composition.ReflectionModel
 
                 var genericParameters =
                     (definition.Metadata.Count > 0)
-                        ? definition.Metadata.GetValue<IEnumerable<object>>(
+                        ? definition
+                          .Metadata
+                          .GetValue<IEnumerable<object>>(
                               CompositionConstants.GenericParametersMetadataName
                           )
                         : null;
@@ -332,9 +334,9 @@ namespace System.ComponentModel.Composition.ReflectionModel
             // we iterate over all exports and find only generic ones. Assuming the arity matches, we reorder the original parameters
             foreach (ExportDefinition export in ExportDefinitionsInternal)
             {
-                var genericParametersOrder = export.Metadata.GetValue<int[]>(
-                    CompositionConstants.GenericExportParametersOrderMetadataName
-                );
+                var genericParametersOrder = export
+                    .Metadata
+                    .GetValue<int[]>(CompositionConstants.GenericExportParametersOrderMetadataName);
                 if (
                     (genericParametersOrder != null)
                     && (genericParametersOrder.Length == genericParameters.Length)

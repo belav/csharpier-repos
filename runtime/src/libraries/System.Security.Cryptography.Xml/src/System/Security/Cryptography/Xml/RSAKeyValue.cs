@@ -156,16 +156,20 @@ namespace System.Security.Cryptography.Xml
                     new RSAParameters
                     {
                         Modulus = Convert.FromBase64String(
-                            rsaKeyValueElement.SelectSingleNode(
-                                $"{xmlDsigNamespacePrefix}:{ModulusElementName}",
-                                xmlNamespaceManager
-                            ).InnerText
+                            rsaKeyValueElement
+                                .SelectSingleNode(
+                                    $"{xmlDsigNamespacePrefix}:{ModulusElementName}",
+                                    xmlNamespaceManager
+                                )
+                                .InnerText
                         ),
                         Exponent = Convert.FromBase64String(
-                            rsaKeyValueElement.SelectSingleNode(
-                                $"{xmlDsigNamespacePrefix}:{ExponentElementName}",
-                                xmlNamespaceManager
-                            ).InnerText
+                            rsaKeyValueElement
+                                .SelectSingleNode(
+                                    $"{xmlDsigNamespacePrefix}:{ExponentElementName}",
+                                    xmlNamespaceManager
+                                )
+                                .InnerText
                         )
                     }
                 );

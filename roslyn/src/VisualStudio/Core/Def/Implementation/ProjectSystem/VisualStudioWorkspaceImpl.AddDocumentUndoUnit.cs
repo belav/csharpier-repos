@@ -18,12 +18,14 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
             ) : base(workspace, docInfo, text) { }
 
             protected override Project AddDocument(Project fromProject) =>
-                fromProject.AddDocument(
-                    DocumentInfo.Name,
-                    Text,
-                    DocumentInfo.Folders,
-                    DocumentInfo.FilePath
-                ).Project;
+                fromProject
+                    .AddDocument(
+                        DocumentInfo.Name,
+                        Text,
+                        DocumentInfo.Folders,
+                        DocumentInfo.FilePath
+                    )
+                    .Project;
         }
     }
 }

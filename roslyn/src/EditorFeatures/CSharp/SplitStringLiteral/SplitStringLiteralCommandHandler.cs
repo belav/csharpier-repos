@@ -129,18 +129,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.SplitStringLiteral
             CancellationToken cancellationToken
         )
         {
-            var document =
-                subjectBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
+            var document = subjectBuffer
+                .CurrentSnapshot
+                .GetOpenDocumentInCurrentContextWithChanges();
             if (document == null)
             {
                 return false;
             }
 
             // TODO: read option from textView.Options (https://devdiv.visualstudio.com/DevDiv/_workitems/edit/1412138)
-            var indentStyle = document.Project.Solution.Options.GetOption(
-                FormattingOptions.SmartIndent,
-                LanguageNames.CSharp
-            );
+            var indentStyle = document
+                .Project
+                .Solution
+                .Options
+                .GetOption(FormattingOptions.SmartIndent, LanguageNames.CSharp);
 
             using var transaction = CaretPreservingEditTransaction.TryCreate(
                 CSharpEditorResources.Split_string,
@@ -168,12 +170,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.SplitStringLiteral
 
             // move caret:
             var snapshotPoint = new SnapshotPoint(subjectBuffer.CurrentSnapshot, newPosition);
-            var newCaretPoint = textView.BufferGraph.MapUpToBuffer(
-                snapshotPoint,
-                PointTrackingMode.Negative,
-                PositionAffinity.Predecessor,
-                textView.TextBuffer
-            );
+            var newCaretPoint = textView
+                .BufferGraph
+                .MapUpToBuffer(
+                    snapshotPoint,
+                    PointTrackingMode.Negative,
+                    PositionAffinity.Predecessor,
+                    textView.TextBuffer
+                );
 
             if (newCaretPoint != null)
             {

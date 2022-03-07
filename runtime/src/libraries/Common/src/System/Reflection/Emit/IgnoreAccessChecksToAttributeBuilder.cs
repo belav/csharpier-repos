@@ -82,17 +82,18 @@ namespace System.Reflection.Emit
             TypeInfo attributeUsageTypeInfo = typeof(AttributeUsageAttribute).GetTypeInfo();
 
             // Find the ctor that takes only AttributeTargets
-            ConstructorInfo attributeUsageConstructorInfo =
-                attributeUsageTypeInfo.DeclaredConstructors.Single(
+            ConstructorInfo attributeUsageConstructorInfo = attributeUsageTypeInfo
+                .DeclaredConstructors
+                .Single(
                     c =>
                         c.GetParameters().Length == 1
                         && c.GetParameters()[0].ParameterType == typeof(AttributeTargets)
                 );
 
             // Find the property to set AllowMultiple
-            PropertyInfo allowMultipleProperty = attributeUsageTypeInfo.DeclaredProperties.Single(
-                f => string.Equals(f.Name, "AllowMultiple")
-            );
+            PropertyInfo allowMultipleProperty = attributeUsageTypeInfo
+                .DeclaredProperties
+                .Single(f => string.Equals(f.Name, "AllowMultiple"));
 
             // Create a builder to construct the instance via the ctor and property
             CustomAttributeBuilder customAttributeBuilder = new CustomAttributeBuilder(

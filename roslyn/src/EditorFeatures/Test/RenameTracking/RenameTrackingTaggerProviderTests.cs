@@ -256,9 +256,11 @@ class C$$
 {
 }";
             using var state = RenameTrackingTestState.Create(code, LanguageNames.CSharp);
-            state.EditorOperations.InsertText(
-                "\u0414\u046E\u046A\u00DB\u00CA\u00DB\u00C4\u00C1\u00CD\u00E4\u00E1\u0152\u0178\u00F5\u00E0\u0178\u00FC\u00C4\u00B5\u00C1i\u00DBE\u00EA\u00E0\u00EA\u00E8\u00E4\u00E5\u00ED\u00F2\u00E8\u00F4\u00E8\u00EA\u00E0\u00F2\u00EE\u00F0\u00F1\u00EB\u00EE\u00E2\u00EE"
-            );
+            state
+                .EditorOperations
+                .InsertText(
+                    "\u0414\u046E\u046A\u00DB\u00CA\u00DB\u00C4\u00C1\u00CD\u00E4\u00E1\u0152\u0178\u00F5\u00E0\u0178\u00FC\u00C4\u00B5\u00C1i\u00DBE\u00EA\u00E0\u00EA\u00E8\u00E4\u00E5\u00ED\u00F2\u00E8\u00F4\u00E8\u00EA\u00E0\u00F2\u00EE\u00F0\u00F1\u00EB\u00EE\u00E2\u00EE"
+                );
             await state.AssertTag(
                 "C",
                 "C\u0414\u046E\u046A\u00DB\u00CA\u00DB\u00C4\u00C1\u00CD\u00E4\u00E1\u0152\u0178\u00F5\u00E0\u0178\u00FC\u00C4\u00B5\u00C1i\u00DBE\u00EA\u00E0\u00EA\u00E8\u00E4\u00E5\u00ED\u00F2\u00E8\u00F4\u00E8\u00EA\u00E0\u00F2\u00EE\u00F0\u00F1\u00EB\u00EE\u00E2\u00EE"
@@ -422,10 +424,9 @@ class $$[|Ident|]ifier
 }";
             using var state = RenameTrackingTestState.Create(code, LanguageNames.CSharp);
             var textSpan = state.HostDocument.SelectedSpans.Single();
-            state.EditorOperations.ReplaceText(
-                new Span(textSpan.Start, textSpan.Length),
-                "Complex"
-            );
+            state
+                .EditorOperations
+                .ReplaceText(new Span(textSpan.Start, textSpan.Length), "Complex");
             await state.AssertTag("Identifier", "Complexifier");
         }
 

@@ -38,9 +38,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit.NoPia
             PEModuleBuilder moduleBuilder
         )
         {
-            return UnderlyingParameter.AdaptedParameterSymbol.GetCustomAttributesToEmit(
-                moduleBuilder
-            );
+            return UnderlyingParameter
+                .AdaptedParameterSymbol
+                .GetCustomAttributesToEmit(moduleBuilder);
         }
 
         protected override MetadataConstant GetDefaultValue(EmitContext context)

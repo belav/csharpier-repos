@@ -657,8 +657,10 @@ namespace System.Tests
         [Fact]
         public static void customAttributeCount()
         {
-            List<CustomAttributeData> customAttributes =
-                typeof(GetCustomAttribute).Module.CustomAttributes.ToList();
+            List<CustomAttributeData> customAttributes = typeof(GetCustomAttribute)
+                .Module
+                .CustomAttributes
+                .ToList();
             // [System.Security.UnverifiableCodeAttribute()]
             // [TestAttributes.FooAttribute()]
             // [TestAttributes.ComplicatedAttribute((Int32)1, Stuff = 2)]

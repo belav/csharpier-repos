@@ -83,8 +83,9 @@ public static class SpaProxyingExtensions
 
     private static CancellationToken GetStoppingToken(IApplicationBuilder appBuilder)
     {
-        var applicationLifetime =
-            appBuilder.ApplicationServices.GetRequiredService<IHostApplicationLifetime>();
+        var applicationLifetime = appBuilder
+            .ApplicationServices
+            .GetRequiredService<IHostApplicationLifetime>();
         return applicationLifetime.ApplicationStopping;
     }
 }

@@ -142,7 +142,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                     foreach (var entityTypeToExampleProperty in entityTypesMissingConcurrencyColumn)
                     {
                         var exampleProperty = entityTypeToExampleProperty.Value;
-                        entityTypeToExampleProperty.Key.Builder
+                        entityTypeToExampleProperty
+                            .Key
+                            .Builder
                             .CreateUniqueProperty(
                                 exampleProperty.ClrType,
                                 ConcurrencyPropertyPrefix + exampleProperty.Name,

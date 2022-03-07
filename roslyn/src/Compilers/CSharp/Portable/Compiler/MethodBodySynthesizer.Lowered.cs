@@ -300,9 +300,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     if (this.Arity > 0)
                     {
                         Debug.Assert(this.Arity == methodBeingWrapped.Arity);
-                        methodBeingWrapped = methodBeingWrapped.ConstructedFrom.Construct(
-                            StaticCast<TypeSymbol>.From(this.TypeParameters)
-                        );
+                        methodBeingWrapped = methodBeingWrapped
+                            .ConstructedFrom
+                            .Construct(StaticCast<TypeSymbol>.From(this.TypeParameters));
                     }
 
                     BoundBlock body = MethodBodySynthesizer.ConstructSingleInvocationMethodBody(

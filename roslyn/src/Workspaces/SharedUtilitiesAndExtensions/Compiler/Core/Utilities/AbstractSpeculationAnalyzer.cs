@@ -572,7 +572,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                         methodSymbol.ReturnType,
                         newMethodSymbol.ReturnType
                     )
-                    && methodSymbol.Parameters
+                    && methodSymbol
+                        .Parameters
                         .Zip(newMethodSymbol.Parameters, (p1, p2) => (p1, p2))
                         .All(t => CompareAcrossSemanticModels(t.p1, t.p2));
             }
@@ -957,10 +958,9 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                 if (getEnumerator.IsImplementableMember())
                 {
                     var expressionType =
-                        this.SpeculativeSemanticModel.GetTypeInfo(
-                            newForEachStatementExpression,
-                            _cancellationToken
-                        ).ConvertedType;
+                        this.SpeculativeSemanticModel
+                            .GetTypeInfo(newForEachStatementExpression, _cancellationToken)
+                            .ConvertedType;
                     if (expressionType != null)
                     {
                         var implementationMember =
@@ -1031,11 +1031,9 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                   ? SpeculativeBindingOption.BindAsTypeOrNamespace
                   : SpeculativeBindingOption.BindAsExpression;
                 newSymbol =
-                    this.OriginalSemanticModel.GetSpeculativeSymbolInfo(
-                        type.SpanStart,
-                        newType,
-                        bindingOption
-                    ).Symbol;
+                    this.OriginalSemanticModel
+                        .GetSpeculativeSymbolInfo(type.SpanStart, newType, bindingOption)
+                        .Symbol;
             }
 
             return symbol != null && !SymbolsAreCompatible(symbol, newSymbol);

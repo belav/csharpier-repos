@@ -86,10 +86,9 @@ internal class EventHandlerTagHelperDescriptorProvider : ITagHelperDescriptorPro
                 var attribute = attributes[j];
 
                 if (
-                    SymbolEqualityComparer.Default.Equals(
-                        attribute.AttributeClass,
-                        eventHandlerAttribute
-                    )
+                    SymbolEqualityComparer
+                        .Default
+                        .Equals(attribute.AttributeClass, eventHandlerAttribute)
                 )
                 {
                     var enablePreventDefault = false;
@@ -140,10 +139,12 @@ internal class EventHandlerTagHelperDescriptorProvider : ITagHelperDescriptorPro
                 eventArgType
             );
 
-            builder.Metadata.Add(
-                ComponentMetadata.SpecialKindKey,
-                ComponentMetadata.EventHandler.TagHelperKind
-            );
+            builder
+                .Metadata
+                .Add(
+                    ComponentMetadata.SpecialKindKey,
+                    ComponentMetadata.EventHandler.TagHelperKind
+                );
             builder.Metadata.Add(ComponentMetadata.EventHandler.EventArgsType, eventArgType);
             builder.Metadata.Add(TagHelperMetadata.Common.ClassifyAttributesOnly, bool.TrueString);
             builder.Metadata[TagHelperMetadata.Runtime.Name] =

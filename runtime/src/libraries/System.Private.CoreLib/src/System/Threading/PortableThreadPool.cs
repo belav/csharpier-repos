@@ -336,12 +336,9 @@ namespace System.Threading
 
                     short oldNumThreadsGoal = counts.NumThreadsGoal;
                     int newNumThreadsGoal;
-                    (newNumThreadsGoal, _threadAdjustmentIntervalMs) =
-                        HillClimbing.ThreadPoolHillClimber.Update(
-                            oldNumThreadsGoal,
-                            elapsedSeconds,
-                            numCompletions
-                        );
+                    (newNumThreadsGoal, _threadAdjustmentIntervalMs) = HillClimbing
+                        .ThreadPoolHillClimber
+                        .Update(oldNumThreadsGoal, elapsedSeconds, numCompletions);
                     if (oldNumThreadsGoal != (short)newNumThreadsGoal)
                     {
                         _separated.counts.InterlockedSetNumThreadsGoal((short)newNumThreadsGoal);

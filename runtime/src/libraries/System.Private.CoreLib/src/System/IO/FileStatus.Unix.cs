@@ -214,10 +214,12 @@ namespace System.IO
                 {
                     // If Hidden flag is set and cached file status does not have the flag set then set it
                     Interop.CheckIo(
-                        Interop.Sys.LChflags(
-                            path,
-                            (_fileCache.UserFlags | (uint)Interop.Sys.UserFlags.UF_HIDDEN)
-                        ),
+                        Interop
+                            .Sys
+                            .LChflags(
+                                path,
+                                (_fileCache.UserFlags | (uint)Interop.Sys.UserFlags.UF_HIDDEN)
+                            ),
                         path,
                         InitiallyDirectory
                     );
@@ -226,10 +228,12 @@ namespace System.IO
                 {
                     // If Hidden flag is not set and cached file status does have the flag set then remove it
                     Interop.CheckIo(
-                        Interop.Sys.LChflags(
-                            path,
-                            (_fileCache.UserFlags & ~(uint)Interop.Sys.UserFlags.UF_HIDDEN)
-                        ),
+                        Interop
+                            .Sys
+                            .LChflags(
+                                path,
+                                (_fileCache.UserFlags & ~(uint)Interop.Sys.UserFlags.UF_HIDDEN)
+                            ),
                         path,
                         InitiallyDirectory
                     );

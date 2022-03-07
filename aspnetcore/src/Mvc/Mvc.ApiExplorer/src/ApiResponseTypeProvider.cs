@@ -76,7 +76,8 @@ internal class ApiResponseTypeProvider
         // while searching for a filter that implements IApiResponseMetadataProvider.
         //
         // The workaround for that is to implement the metadata interface on the IFilterFactory.
-        return action.FilterDescriptors
+        return action
+            .FilterDescriptors
             .Select(fd => fd.Filter)
             .OfType<IApiResponseMetadataProvider>()
             .ToList();
@@ -89,8 +90,9 @@ internal class ApiResponseTypeProvider
     )
     {
         var contentTypes = new MediaTypeCollection();
-        var responseTypeMetadataProviders =
-            _mvcOptions.OutputFormatters.OfType<IApiResponseTypeMetadataProvider>();
+        var responseTypeMetadataProviders = _mvcOptions
+            .OutputFormatters
+            .OfType<IApiResponseTypeMetadataProvider>();
 
         var responseTypes = ReadResponseMetadata(
             responseMetadataAttributes,
@@ -290,13 +292,15 @@ internal class ApiResponseTypeProvider
 
                     foreach (var formatterSupportedContentType in formatterSupportedContentTypes)
                     {
-                        apiResponse.ApiResponseFormats.Add(
-                            new ApiResponseFormat
-                            {
-                                Formatter = (IOutputFormatter)responseTypeMetadataProvider,
-                                MediaType = formatterSupportedContentType,
-                            }
-                        );
+                        apiResponse
+                            .ApiResponseFormats
+                            .Add(
+                                new ApiResponseFormat
+                                {
+                                    Formatter = (IOutputFormatter)responseTypeMetadataProvider,
+                                    MediaType = formatterSupportedContentType,
+                                }
+                            );
                     }
                 }
             }
@@ -304,9 +308,9 @@ internal class ApiResponseTypeProvider
             if (!isSupportedContentType && contentType != null)
             {
                 // No output formatter was found that supports this content type. Add the user specified content type as-is to the result.
-                apiResponse.ApiResponseFormats.Add(
-                    new ApiResponseFormat { MediaType = contentType, }
-                );
+                apiResponse
+                    .ApiResponseFormats
+                    .Add(new ApiResponseFormat { MediaType = contentType, });
             }
         }
     }

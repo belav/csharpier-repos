@@ -76,7 +76,8 @@ namespace Microsoft.CodeAnalysis.CSharp.DocumentationComments
         protected override bool HasDocumentationComment(MemberDeclarationSyntax member) =>
             member
                 .GetFirstToken()
-                .LeadingTrivia.Any(
+                .LeadingTrivia
+                .Any(
                     SyntaxKind.SingleLineDocumentationCommentTrivia,
                     SyntaxKind.MultiLineDocumentationCommentTrivia
                 );

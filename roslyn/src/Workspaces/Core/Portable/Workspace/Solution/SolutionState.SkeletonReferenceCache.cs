@@ -229,8 +229,9 @@ internal partial class SolutionState
                             $"Successfully emitted a skeleton assembly for {compilation.AssemblyName}"
                         );
 
-                        var temporaryStorageService =
-                            workspace.Services.GetRequiredService<ITemporaryStorageService>();
+                        var temporaryStorageService = workspace
+                            .Services
+                            .GetRequiredService<ITemporaryStorageService>();
                         var storage = temporaryStorageService.CreateTemporaryStreamStorage(
                             cancellationToken
                         );
@@ -259,7 +260,8 @@ internal partial class SolutionState
                                 {
                                     // log errors in the format of
                                     // CS0001:1;CS002:10;...
-                                    var groups = emitResult.Diagnostics
+                                    var groups = emitResult
+                                        .Diagnostics
                                         .GroupBy(d => d.Id)
                                         .Select(g => $"{g.Key}:{g.Count()}");
                                     m["Errors"] = string.Join(";", groups);

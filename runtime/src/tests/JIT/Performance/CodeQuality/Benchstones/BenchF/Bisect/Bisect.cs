@@ -59,11 +59,9 @@ namespace Benchstone.BenchF
 
                     if (idbg != 0)
                     {
-                        System.Console.WriteLine(
-                            " the root is {0:E} plus/minus {1:E}\n",
-                            xi,
-                            error
-                        );
+                        System
+                            .Console
+                            .WriteLine(" the root is {0:E} plus/minus {1:E}\n", xi, error);
                     }
                 }
             }

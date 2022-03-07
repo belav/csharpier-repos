@@ -957,23 +957,25 @@ namespace Microsoft.EntityFrameworkCore
 
             Assert.Equal(
                 CoreStrings.PropertyNotFound("Foo", nameof(Building)),
-                Assert.Throws<InvalidOperationException>(
-                    () => buildingValues["Foo"] = "foo"
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(() => buildingValues["Foo"] = "foo")
+                    .Message
             );
 
             Assert.Equal(
                 CoreStrings.PropertyNotFound("Foo", nameof(Building)),
-                Assert.Throws<InvalidOperationException>(
-                    () => clonedBuildingValues["Foo"] = "foo"
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(() => clonedBuildingValues["Foo"] = "foo")
+                    .Message
             );
 
             Assert.Equal(
                 CoreStrings.PropertyNotFound("Foo", nameof(Building)),
-                Assert.Throws<InvalidOperationException>(
-                    () => clonedBuildingValues.GetValue<string>("Foo")
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(
+                        () => clonedBuildingValues.GetValue<string>("Foo")
+                    )
+                    .Message
             );
         }
 
@@ -987,7 +989,8 @@ namespace Microsoft.EntityFrameworkCore
             var buildingValues = entry.CurrentValues;
             var clonedBuildingValues = buildingValues.Clone();
 
-            var property = context.Model
+            var property = context
+                .Model
                 .FindEntityType(typeof(Whiteboard))
                 .FindProperty(nameof(Whiteboard.AssetTag));
 
@@ -998,30 +1001,32 @@ namespace Microsoft.EntityFrameworkCore
 
             Assert.Equal(
                 CoreStrings.PropertyDoesNotBelong("AssetTag", nameof(Whiteboard), nameof(Building)),
-                Assert.Throws<InvalidOperationException>(
-                    () => clonedBuildingValues[property]
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(() => clonedBuildingValues[property])
+                    .Message
             );
 
             Assert.Equal(
                 CoreStrings.PropertyDoesNotBelong("AssetTag", nameof(Whiteboard), nameof(Building)),
-                Assert.Throws<InvalidOperationException>(
-                    () => buildingValues[property] = "foo"
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(() => buildingValues[property] = "foo")
+                    .Message
             );
 
             Assert.Equal(
                 CoreStrings.PropertyDoesNotBelong("AssetTag", nameof(Whiteboard), nameof(Building)),
-                Assert.Throws<InvalidOperationException>(
-                    () => clonedBuildingValues[property] = "foo"
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(() => clonedBuildingValues[property] = "foo")
+                    .Message
             );
 
             Assert.Equal(
                 CoreStrings.PropertyDoesNotBelong("AssetTag", nameof(Whiteboard), nameof(Building)),
-                Assert.Throws<InvalidOperationException>(
-                    () => clonedBuildingValues.GetValue<string>(property)
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(
+                        () => clonedBuildingValues.GetValue<string>(property)
+                    )
+                    .Message
             );
         }
 
@@ -1055,9 +1060,9 @@ namespace Microsoft.EntityFrameworkCore
 
             Assert.Equal(
                 CoreStrings.PropertyNotFound("Shadow4", nameof(CurrentEmployee)),
-                Assert.Throws<InvalidOperationException>(
-                    () => clonedValues["Shadow4"] = "foo"
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(() => clonedValues["Shadow4"] = "foo")
+                    .Message
             );
 
             Assert.Equal(
@@ -1067,37 +1072,43 @@ namespace Microsoft.EntityFrameworkCore
 
             Assert.Equal(
                 CoreStrings.PropertyNotFound("TerminationDate", nameof(CurrentEmployee)),
-                Assert.Throws<InvalidOperationException>(
-                    () => clonedValues["TerminationDate"]
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(() => clonedValues["TerminationDate"])
+                    .Message
             );
 
             Assert.Equal(
                 CoreStrings.PropertyNotFound("TerminationDate", nameof(CurrentEmployee)),
-                Assert.Throws<InvalidOperationException>(
-                    () => values["TerminationDate"] = "foo"
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(() => values["TerminationDate"] = "foo")
+                    .Message
             );
 
             Assert.Equal(
                 CoreStrings.PropertyNotFound("TerminationDate", nameof(CurrentEmployee)),
-                Assert.Throws<InvalidOperationException>(
-                    () => clonedValues["TerminationDate"] = "foo"
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(
+                        () => clonedValues["TerminationDate"] = "foo"
+                    )
+                    .Message
             );
 
             Assert.Equal(
                 CoreStrings.PropertyNotFound("Shadow4", nameof(CurrentEmployee)),
-                Assert.Throws<InvalidOperationException>(
-                    () => clonedValues.GetValue<string>("Shadow4")
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(
+                        () => clonedValues.GetValue<string>("Shadow4")
+                    )
+                    .Message
             );
 
             Assert.Equal(
                 CoreStrings.PropertyNotFound("TerminationDate", nameof(CurrentEmployee)),
-                Assert.Throws<InvalidOperationException>(
-                    () => clonedValues.GetValue<string>("TerminationDate")
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(
+                        () => clonedValues.GetValue<string>("TerminationDate")
+                    )
+                    .Message
             );
         }
 
@@ -1114,10 +1125,12 @@ namespace Microsoft.EntityFrameworkCore
             var values = entry.CurrentValues;
             var clonedValues = values.Clone();
 
-            var shadowProperty = context.Model
+            var shadowProperty = context
+                .Model
                 .FindEntityType(typeof(PastEmployee))
                 .FindProperty("Shadow4");
-            var termProperty = context.Model
+            var termProperty = context
+                .Model
                 .FindEntityType(typeof(PastEmployee))
                 .FindProperty(nameof(PastEmployee.TerminationDate));
 
@@ -1145,9 +1158,9 @@ namespace Microsoft.EntityFrameworkCore
                     nameof(PastEmployee),
                     nameof(CurrentEmployee)
                 ),
-                Assert.Throws<InvalidOperationException>(
-                    () => values[shadowProperty] = "foo"
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(() => values[shadowProperty] = "foo")
+                    .Message
             );
 
             Assert.Equal(
@@ -1156,9 +1169,9 @@ namespace Microsoft.EntityFrameworkCore
                     nameof(PastEmployee),
                     nameof(CurrentEmployee)
                 ),
-                Assert.Throws<InvalidOperationException>(
-                    () => clonedValues[shadowProperty] = "foo"
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(() => clonedValues[shadowProperty] = "foo")
+                    .Message
             );
 
             Assert.Equal(
@@ -1167,9 +1180,11 @@ namespace Microsoft.EntityFrameworkCore
                     nameof(PastEmployee),
                     nameof(CurrentEmployee)
                 ),
-                Assert.Throws<InvalidOperationException>(
-                    () => clonedValues.GetValue<string>(shadowProperty)
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(
+                        () => clonedValues.GetValue<string>(shadowProperty)
+                    )
+                    .Message
             );
 
             Assert.Equal(
@@ -1205,9 +1220,9 @@ namespace Microsoft.EntityFrameworkCore
                     nameof(PastEmployee),
                     nameof(CurrentEmployee)
                 ),
-                Assert.Throws<InvalidOperationException>(
-                    () => clonedValues[termProperty] = "foo"
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(() => clonedValues[termProperty] = "foo")
+                    .Message
             );
 
             Assert.Equal(
@@ -1216,9 +1231,11 @@ namespace Microsoft.EntityFrameworkCore
                     nameof(PastEmployee),
                     nameof(CurrentEmployee)
                 ),
-                Assert.Throws<InvalidOperationException>(
-                    () => clonedValues.GetValue<string>(termProperty)
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(
+                        () => clonedValues.GetValue<string>(termProperty)
+                    )
+                    .Message
             );
         }
 
@@ -2152,9 +2169,9 @@ namespace Microsoft.EntityFrameworkCore
 
             Assert.Equal(
                 CoreStrings.KeyReadOnly(nameof(Building.BuildingId), nameof(Building)),
-                Assert.Throws<InvalidOperationException>(
-                    () => values["BuildingId"] = new Guid()
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(() => values["BuildingId"] = new Guid())
+                    .Message
             );
         }
 
@@ -2181,7 +2198,8 @@ namespace Microsoft.EntityFrameworkCore
                 if (
                     context
                         .GetService<IDbContextOptions>()
-                        .FindExtension<CoreOptionsExtension>().IsSensitiveDataLoggingEnabled
+                        .FindExtension<CoreOptionsExtension>()
+                        .IsSensitiveDataLoggingEnabled
                 )
                 {
                     Assert.Equal(
@@ -2192,18 +2210,18 @@ namespace Microsoft.EntityFrameworkCore
                                 + Convert.ToString(originalValue, CultureInfo.InvariantCulture)
                                 + "}"
                         ),
-                        Assert.Throws<InvalidOperationException>(
-                            () => values["Value"] = null
-                        ).Message
+                        Assert
+                            .Throws<InvalidOperationException>(() => values["Value"] = null)
+                            .Message
                     );
                 }
                 else
                 {
                     Assert.Equal(
                         CoreStrings.PropertyConceptualNull("Value", nameof(Building)),
-                        Assert.Throws<InvalidOperationException>(
-                            () => values["Value"] = null
-                        ).Message
+                        Assert
+                            .Throws<InvalidOperationException>(() => values["Value"] = null)
+                            .Message
                     );
                 }
             }
@@ -2240,7 +2258,8 @@ namespace Microsoft.EntityFrameworkCore
                 if (
                     context
                         .GetService<IDbContextOptions>()
-                        .FindExtension<CoreOptionsExtension>().IsSensitiveDataLoggingEnabled
+                        .FindExtension<CoreOptionsExtension>()
+                        .IsSensitiveDataLoggingEnabled
                 )
                 {
                     Assert.Equal(
@@ -2249,18 +2268,18 @@ namespace Microsoft.EntityFrameworkCore
                             nameof(Building),
                             "{Shadow1: 11}"
                         ),
-                        Assert.Throws<InvalidOperationException>(
-                            () => values["Shadow1"] = null
-                        ).Message
+                        Assert
+                            .Throws<InvalidOperationException>(() => values["Shadow1"] = null)
+                            .Message
                     );
                 }
                 else
                 {
                     Assert.Equal(
                         CoreStrings.PropertyConceptualNull("Shadow1", nameof(Building)),
-                        Assert.Throws<InvalidOperationException>(
-                            () => values["Shadow1"] = null
-                        ).Message
+                        Assert
+                            .Throws<InvalidOperationException>(() => values["Shadow1"] = null)
+                            .Message
                     );
                 }
             }
@@ -2407,9 +2426,9 @@ namespace Microsoft.EntityFrameworkCore
 
             Assert.Equal(
                 CoreStrings.KeyReadOnly(nameof(Building.BuildingId), nameof(Building)),
-                Assert.Throws<InvalidOperationException>(
-                    () => values.SetValues(newBuilding)
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(() => values.SetValues(newBuilding))
+                    .Message
             );
         }
 
@@ -2517,7 +2536,8 @@ namespace Microsoft.EntityFrameworkCore
             using var context = CreateContext();
             var building = (Building)context
                 .Entry(context.Set<Building>().Single(b => b.Name == "Building One"))
-                .CurrentValues.ToObject();
+                .CurrentValues
+                .ToObject();
 
             building.BuildingId = new Guid();
 
@@ -2549,7 +2569,8 @@ namespace Microsoft.EntityFrameworkCore
             using var context = CreateContext();
             var building = (Building)context
                 .Entry(context.Set<Building>().Single(b => b.Name == "Building One"))
-                .CurrentValues.ToObject();
+                .CurrentValues
+                .ToObject();
             building.BuildingId = new Guid();
 
             context.Set<Building>().Attach(building);
@@ -2585,7 +2606,8 @@ namespace Microsoft.EntityFrameworkCore
                         .OfType<CurrentEmployee>()
                         .Single(b => b.FirstName == "Rowan")
                 )
-                .CurrentValues.ToObject();
+                .CurrentValues
+                .ToObject();
             employee.EmployeeId = -77;
 
             context.Set<Employee>().Attach(employee);
@@ -2621,7 +2643,8 @@ namespace Microsoft.EntityFrameworkCore
                         .OfType<CurrentEmployee>()
                         .Single(b => b.FirstName == "Rowan")
                 )
-                .CurrentValues.ToObject();
+                .CurrentValues
+                .ToObject();
             employee.EmployeeId = -77;
 
             context.Set<Employee>().Attach(employee);
@@ -2656,7 +2679,8 @@ namespace Microsoft.EntityFrameworkCore
                     .OfType<PastEmployee>()
                     .AsNoTracking()
                     .OrderBy(e => e.EmployeeId)
-                    .FirstOrDefault().EmployeeId;
+                    .FirstOrDefault()
+                    .EmployeeId;
 
             var employee = (CurrentEmployee)context
                 .Entry(
@@ -2665,7 +2689,8 @@ namespace Microsoft.EntityFrameworkCore
                         .OfType<CurrentEmployee>()
                         .Single(b => b.FirstName == "Rowan")
                 )
-                .CurrentValues.ToObject();
+                .CurrentValues
+                .ToObject();
             employee.EmployeeId = pastEmployeeId;
 
             context.Set<Employee>().Attach(employee);
@@ -2700,7 +2725,8 @@ namespace Microsoft.EntityFrameworkCore
                     .OfType<PastEmployee>()
                     .AsNoTracking()
                     .OrderBy(e => e.EmployeeId)
-                    .FirstOrDefault().EmployeeId;
+                    .FirstOrDefault()
+                    .EmployeeId;
 
             var employee = (CurrentEmployee)context
                 .Entry(
@@ -2709,7 +2735,8 @@ namespace Microsoft.EntityFrameworkCore
                         .OfType<CurrentEmployee>()
                         .Single(b => b.FirstName == "Rowan")
                 )
-                .CurrentValues.ToObject();
+                .CurrentValues
+                .ToObject();
             employee.EmployeeId = pastEmployeeId;
 
             context.Set<Employee>().Attach(employee);

@@ -55,9 +55,11 @@ namespace DelegateTest
         {
             bool retVal = true;
 
-            TestLibrary.TestFramework.BeginScenario(
-                "PosTest1: Remove a function from the delegate which contains only 1 callback function"
-            );
+            TestLibrary
+                .TestFramework
+                .BeginScenario(
+                    "PosTest1: Remove a function from the delegate which contains only 1 callback function"
+                );
             try
             {
                 DelegateRemove delctor = new DelegateRemove();
@@ -87,9 +89,9 @@ namespace DelegateTest
         public bool PosTest2()
         {
             bool retVal = true;
-            TestLibrary.TestFramework.BeginScenario(
-                "PosTest2: Remove a function which is in the InvocationList"
-            );
+            TestLibrary
+                .TestFramework
+                .BeginScenario("PosTest2: Remove a function which is in the InvocationList");
             try
             {
                 DelegateRemove delctor = new DelegateRemove();
@@ -108,10 +110,12 @@ namespace DelegateTest
                 Delegate[] invocationList = delctor.starkWork.GetInvocationList();
                 if (invocationList.Length != 2)
                 {
-                    TestLibrary.TestFramework.LogError(
-                        "003",
-                        "remove failure or remove method is not in the InvocationList"
-                    );
+                    TestLibrary
+                        .TestFramework
+                        .LogError(
+                            "003",
+                            "remove failure or remove method is not in the InvocationList"
+                        );
                     retVal = false;
                 }
                 if (
@@ -139,9 +143,9 @@ namespace DelegateTest
         {
             bool retVal = true;
 
-            TestLibrary.TestFramework.BeginScenario(
-                "PosTest3: Remove a function which is not in the InvocationList"
-            );
+            TestLibrary
+                .TestFramework
+                .BeginScenario("PosTest3: Remove a function which is not in the InvocationList");
             try
             {
                 DelegateRemove delctor = new DelegateRemove();
@@ -160,11 +164,13 @@ namespace DelegateTest
                 Delegate[] invocationList = delctor.starkWork.GetInvocationList();
                 if (invocationList.Length != 3)
                 {
-                    TestLibrary.TestFramework.LogError(
-                        "006",
-                        "Call GetInvocationList against a delegate with one function returns wrong result: "
-                            + invocationList.Length
-                    );
+                    TestLibrary
+                        .TestFramework
+                        .LogError(
+                            "006",
+                            "Call GetInvocationList against a delegate with one function returns wrong result: "
+                                + invocationList.Length
+                        );
                     retVal = false;
                 }
                 if (
@@ -193,9 +199,11 @@ namespace DelegateTest
         {
             bool retVal = true;
 
-            TestLibrary.TestFramework.BeginScenario(
-                "PosTest4: Remove a function which is in the InvocationList and not only one method"
-            );
+            TestLibrary
+                .TestFramework
+                .BeginScenario(
+                    "PosTest4: Remove a function which is in the InvocationList and not only one method"
+                );
             try
             {
                 DelegateRemove delctor = new DelegateRemove();
@@ -215,10 +223,9 @@ namespace DelegateTest
                 Delegate[] invocationList = delctor.starkWork.GetInvocationList();
                 if (invocationList.Length != 3)
                 {
-                    TestLibrary.TestFramework.LogError(
-                        "009",
-                        "remove failure: " + invocationList.Length
-                    );
+                    TestLibrary
+                        .TestFramework
+                        .LogError("009", "remove failure: " + invocationList.Length);
                     retVal = false;
                 }
                 if (
@@ -247,9 +254,11 @@ namespace DelegateTest
         {
             bool retVal = true;
 
-            TestLibrary.TestFramework.BeginScenario(
-                "PosTest5: Remove a function which is in the InvocationList and not only one method ,method is static method"
-            );
+            TestLibrary
+                .TestFramework
+                .BeginScenario(
+                    "PosTest5: Remove a function which is in the InvocationList and not only one method ,method is static method"
+                );
             try
             {
                 DelegateRemove delctor = new DelegateRemove();
@@ -268,10 +277,9 @@ namespace DelegateTest
                 Delegate[] invocationList = delctor.starkWork.GetInvocationList();
                 if (invocationList.Length != 3)
                 {
-                    TestLibrary.TestFramework.LogError(
-                        "012",
-                        "remove failure: " + invocationList.Length
-                    );
+                    TestLibrary
+                        .TestFramework
+                        .LogError("012", "remove failure: " + invocationList.Length);
                     retVal = false;
                 }
                 if (

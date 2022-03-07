@@ -1536,9 +1536,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     return true;
 
                 case TypeKind.Enum:
-                    return (
-                        (NamedTypeSymbol)type
-                    ).EnumUnderlyingType.SpecialType.IsValidVolatileFieldType();
+                    return ((NamedTypeSymbol)type)
+                        .EnumUnderlyingType
+                        .SpecialType
+                        .IsValidVolatileFieldType();
 
                 case TypeKind.TypeParameter:
                     return type.IsReferenceType;

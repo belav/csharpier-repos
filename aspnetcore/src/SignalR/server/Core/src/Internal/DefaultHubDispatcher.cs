@@ -194,10 +194,9 @@ internal partial class DefaultHubDispatcher<THub> : HubDispatcher<THub> where TH
                 // Check if there is an associated active stream and cancel it if it exists.
                 // The cts will be removed when the streaming method completes executing
                 if (
-                    connection.ActiveRequestCancellationSources.TryGetValue(
-                        cancelInvocationMessage.InvocationId!,
-                        out var cts
-                    )
+                    connection
+                        .ActiveRequestCancellationSources
+                        .TryGetValue(cancelInvocationMessage.InvocationId!, out var cts)
                 )
                 {
                     Log.CancelStream(_logger, cancelInvocationMessage.InvocationId!);
@@ -323,20 +322,22 @@ internal partial class DefaultHubDispatcher<THub> : HubDispatcher<THub> where TH
             bool isStreamCall = descriptor.StreamingParameters != null;
             if (connection.ActiveInvocationLimit != null && !isStreamCall && !isStreamResponse)
             {
-                return connection.ActiveInvocationLimit.RunAsync(
-                    state =>
-                    {
-                        var (dispatcher, descriptor, connection, invocationMessage) = state;
-                        return dispatcher.Invoke(
-                            descriptor,
-                            connection,
-                            invocationMessage,
-                            isStreamResponse: false,
-                            isStreamCall: false
-                        );
-                    },
-                    (this, descriptor, connection, hubMethodInvocationMessage)
-                );
+                return connection
+                    .ActiveInvocationLimit
+                    .RunAsync(
+                        state =>
+                        {
+                            var (dispatcher, descriptor, connection, invocationMessage) = state;
+                            return dispatcher.Invoke(
+                                descriptor,
+                                connection,
+                                invocationMessage,
+                                isStreamResponse: false,
+                                isStreamCall: false
+                            );
+                        },
+                        (this, descriptor, connection, hubMethodInvocationMessage)
+                    );
             }
             else
             {
@@ -962,11 +963,13 @@ internal partial class DefaultHubDispatcher<THub> : HubDispatcher<THub> where TH
                         hubMethodInvocationMessage.StreamIds![streamPointer]
                     );
                     var itemType = descriptor.StreamingParameters![streamPointer];
-                    arguments[parameterPointer] = connection.StreamTracker.AddStream(
-                        hubMethodInvocationMessage.StreamIds[streamPointer],
-                        itemType,
-                        descriptor.OriginalParameterTypes[parameterPointer]
-                    );
+                    arguments[parameterPointer] = connection
+                        .StreamTracker
+                        .AddStream(
+                            hubMethodInvocationMessage.StreamIds[streamPointer],
+                            itemType,
+                            descriptor.OriginalParameterTypes[parameterPointer]
+                        );
 
                     streamPointer++;
                 }

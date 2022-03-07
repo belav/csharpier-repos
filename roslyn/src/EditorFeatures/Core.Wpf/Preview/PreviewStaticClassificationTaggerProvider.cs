@@ -70,10 +70,12 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
             )
             {
                 if (
-                    !_buffer.Properties.TryGetProperty(
-                        PredefinedPreviewTaggerKeys.StaticClassificationSpansKey,
-                        out ImmutableArray<ClassifiedSpan> classifiedSpans
-                    )
+                    !_buffer
+                        .Properties
+                        .TryGetProperty(
+                            PredefinedPreviewTaggerKeys.StaticClassificationSpansKey,
+                            out ImmutableArray<ClassifiedSpan> classifiedSpans
+                        )
                 )
                 {
                     yield break;

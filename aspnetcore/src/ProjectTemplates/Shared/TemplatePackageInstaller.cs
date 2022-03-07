@@ -48,9 +48,11 @@ internal static class TemplatePackageInstaller
     public static string CustomHivePath { get; } =
         Path.GetFullPath(
             (string.IsNullOrEmpty(Environment.GetEnvironmentVariable("helix")))
-              ? typeof(TemplatePackageInstaller).Assembly
-                    .GetCustomAttributes<AssemblyMetadataAttribute>()
-                    .Single(s => s.Key == "CustomTemplateHivePath").Value
+              ? typeof(TemplatePackageInstaller)
+                .Assembly
+                .GetCustomAttributes<AssemblyMetadataAttribute>()
+                .Single(s => s.Key == "CustomTemplateHivePath")
+                .Value
               : Path.Combine("Hives", ".templateEngine")
         );
 
@@ -103,9 +105,11 @@ internal static class TemplatePackageInstaller
         else
         {
             packagesDir =
-                typeof(TemplatePackageInstaller).Assembly
+                typeof(TemplatePackageInstaller)
+                    .Assembly
                     .GetCustomAttributes<AssemblyMetadataAttribute>()
-                    .Single(a => a.Key == "ArtifactsShippingPackagesDir").Value;
+                    .Single(a => a.Key == "ArtifactsShippingPackagesDir")
+                    .Value;
         }
 
         var builtPackages = Directory

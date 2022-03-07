@@ -275,22 +275,26 @@ namespace System.Net.Http
             lock (_state.Lock)
             {
                 if (
-                    !Interop.WinHttp.WinHttpWriteData(
-                        _requestHandle,
-                        Marshal.UnsafeAddrOfPinnedArrayElement(buffer, offset),
-                        (uint)count,
-                        IntPtr.Zero
-                    )
+                    !Interop
+                        .WinHttp
+                        .WinHttpWriteData(
+                            _requestHandle,
+                            Marshal.UnsafeAddrOfPinnedArrayElement(buffer, offset),
+                            (uint)count,
+                            IntPtr.Zero
+                        )
                 )
                 {
-                    _state.TcsInternalWriteDataToRequestStream.TrySetException(
-                        new IOException(
-                            SR.net_http_io_write,
-                            WinHttpException.CreateExceptionUsingLastError(
-                                nameof(Interop.WinHttp.WinHttpWriteData)
+                    _state
+                        .TcsInternalWriteDataToRequestStream
+                        .TrySetException(
+                            new IOException(
+                                SR.net_http_io_write,
+                                WinHttpException.CreateExceptionUsingLastError(
+                                    nameof(Interop.WinHttp.WinHttpWriteData)
+                                )
                             )
-                        )
-                    );
+                        );
                 }
             }
 
@@ -307,14 +311,16 @@ namespace System.Net.Http
             {
                 if (!Interop.WinHttp.WinHttpWriteData(_requestHandle, IntPtr.Zero, 0, IntPtr.Zero))
                 {
-                    _state.TcsInternalWriteDataToRequestStream.TrySetException(
-                        new IOException(
-                            SR.net_http_io_write,
-                            WinHttpException.CreateExceptionUsingLastError(
-                                nameof(Interop.WinHttp.WinHttpWriteData)
+                    _state
+                        .TcsInternalWriteDataToRequestStream
+                        .TrySetException(
+                            new IOException(
+                                SR.net_http_io_write,
+                                WinHttpException.CreateExceptionUsingLastError(
+                                    nameof(Interop.WinHttp.WinHttpWriteData)
+                                )
                             )
-                        )
-                    );
+                        );
                 }
             }
 

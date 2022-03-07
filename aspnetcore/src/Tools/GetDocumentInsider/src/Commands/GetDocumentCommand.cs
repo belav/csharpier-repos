@@ -91,7 +91,9 @@ internal class GetDocumentCommand : ProjectCommandBase
         };
 
 #elif NETFRAMEWORK
-        AppDomain.CurrentDomain.AssemblyResolve += (source, eventArgs) =>
+        AppDomain
+            .CurrentDomain
+            .AssemblyResolve += (source, eventArgs) =>
         {
             var assemblyName = new AssemblyName(eventArgs.Name);
             var name = assemblyName.Name;

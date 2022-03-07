@@ -1904,7 +1904,8 @@ namespace Microsoft.CodeAnalysis
                         {
                             manifestContents = typeof(Compilation)
                                 .GetTypeInfo()
-                                .Assembly.GetManifestResourceStream(
+                                .Assembly
+                                .GetManifestResourceStream(
                                     "Microsoft.CodeAnalysis.Resources.default.win32manifest"
                                 );
                         }
@@ -2791,9 +2792,9 @@ namespace Microsoft.CodeAnalysis
             }
             else
             {
-                this.ScriptCompilationInfo?.PreviousScriptCompilation?.EnsureAnonymousTypeTemplates(
-                    cancellationToken
-                );
+                this.ScriptCompilationInfo
+                    ?.PreviousScriptCompilation
+                    ?.EnsureAnonymousTypeTemplates(cancellationToken);
             }
         }
 

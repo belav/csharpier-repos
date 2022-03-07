@@ -31,9 +31,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         ) =>
             CompileAndVerify(
                     source,
-                    options: TestOptions.DebugExe.WithMetadataImportOptions(
-                        MetadataImportOptions.All
-                    ),
+                    options: TestOptions
+                        .DebugExe
+                        .WithMetadataImportOptions(MetadataImportOptions.All),
                     parseOptions: TestOptions.RegularPreview,
                     symbolValidator: symbolValidator,
                     expectedOutput: expectedOutput
@@ -54,9 +54,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             {
                 var verifier = CompileAndVerify(
                         source,
-                        options: TestOptions.DebugExe.WithMetadataImportOptions(
-                            MetadataImportOptions.All
-                        ),
+                        options: TestOptions
+                            .DebugExe
+                            .WithMetadataImportOptions(MetadataImportOptions.All),
                         parseOptions: TestOptions.RegularPreview,
                         symbolValidator: symbolValidator,
                         expectedOutput: expectedOutput
@@ -1157,15 +1157,15 @@ public class C
                 .OfType<ParenthesizedLambdaExpressionSyntax>()
                 .Single();
 
-            var anonymousMethod = (IMethodSymbol)semanticModel.GetSymbolInfo(
-                anonymousMethodSyntax
-            ).Symbol!;
-            var simpleLambda = (IMethodSymbol)semanticModel.GetSymbolInfo(
-                simpleLambdaSyntax
-            ).Symbol!;
-            var parenthesizedLambda = (IMethodSymbol)semanticModel.GetSymbolInfo(
-                parenthesizedLambdaSyntax
-            ).Symbol!;
+            var anonymousMethod = (IMethodSymbol)semanticModel
+                .GetSymbolInfo(anonymousMethodSyntax)
+                .Symbol!;
+            var simpleLambda = (IMethodSymbol)semanticModel
+                .GetSymbolInfo(simpleLambdaSyntax)
+                .Symbol!;
+            var parenthesizedLambda = (IMethodSymbol)semanticModel
+                .GetSymbolInfo(parenthesizedLambdaSyntax)
+                .Symbol!;
 
             Assert.True(anonymousMethod.IsStatic);
             Assert.True(simpleLambda.IsStatic);
@@ -1204,15 +1204,15 @@ public class C
                 .OfType<ParenthesizedLambdaExpressionSyntax>()
                 .Single();
 
-            var anonymousMethod = (IMethodSymbol)semanticModel.GetSymbolInfo(
-                anonymousMethodSyntax
-            ).Symbol!;
-            var simpleLambda = (IMethodSymbol)semanticModel.GetSymbolInfo(
-                simpleLambdaSyntax
-            ).Symbol!;
-            var parenthesizedLambda = (IMethodSymbol)semanticModel.GetSymbolInfo(
-                parenthesizedLambdaSyntax
-            ).Symbol!;
+            var anonymousMethod = (IMethodSymbol)semanticModel
+                .GetSymbolInfo(anonymousMethodSyntax)
+                .Symbol!;
+            var simpleLambda = (IMethodSymbol)semanticModel
+                .GetSymbolInfo(simpleLambdaSyntax)
+                .Symbol!;
+            var parenthesizedLambda = (IMethodSymbol)semanticModel
+                .GetSymbolInfo(parenthesizedLambdaSyntax)
+                .Symbol!;
 
             Assert.False(anonymousMethod.IsStatic);
             Assert.False(simpleLambda.IsStatic);
@@ -1403,9 +1403,9 @@ public class Program
             {
                 var verifier = CompileAndVerify(
                         source,
-                        options: TestOptions.DebugExe.WithMetadataImportOptions(
-                            MetadataImportOptions.All
-                        ),
+                        options: TestOptions
+                            .DebugExe
+                            .WithMetadataImportOptions(MetadataImportOptions.All),
                         parseOptions: TestOptions.Regular9,
                         symbolValidator: symbolValidator,
                         expectedOutput: "0False"

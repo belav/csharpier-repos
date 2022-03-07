@@ -14,7 +14,11 @@ namespace Microsoft.Extensions.DependencyInjection
         public static Microsoft.Extensions.Options.OptionsBuilder<TOptions> ValidateDataAnnotations<
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembers(
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicProperties
-                    | System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.NonPublicProperties
+                    | System
+                        .Diagnostics
+                        .CodeAnalysis
+                        .DynamicallyAccessedMemberTypes
+                        .NonPublicProperties
             )]
                 TOptions
         >(this Microsoft.Extensions.Options.OptionsBuilder<TOptions> optionsBuilder)

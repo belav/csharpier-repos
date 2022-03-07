@@ -462,10 +462,9 @@ namespace System.Text.Json.Serialization
                     {
                         // For internal converter only: Handle polymorphic case and get the new converter.
                         // Custom converter, even though polymorphic converter, get called for reading AND writing.
-                        JsonConverter jsonConverter = state.Current.InitializeReEntry(
-                            type,
-                            options
-                        );
+                        JsonConverter jsonConverter = state
+                            .Current
+                            .InitializeReEntry(type, options);
                         Debug.Assert(jsonConverter != this);
 
                         // For boxed value types: invoke the reference handler

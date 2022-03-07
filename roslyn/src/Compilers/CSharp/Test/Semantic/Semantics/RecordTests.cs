@@ -884,9 +884,8 @@ public record A(int, string ) { }
             );
 
             Assert.IsType<ParameterSyntax>(
-                comp.GetMember<NamedTypeSymbol>("A").Constructors[0].Parameters[
-                    1
-                ].DeclaringSyntaxReferences
+                comp.GetMember<NamedTypeSymbol>("A").Constructors[0].Parameters[1]
+                    .DeclaringSyntaxReferences
                     .Single()
                     .GetSyntax()
             );
@@ -934,9 +933,8 @@ public record A(int, int ) { }
             );
 
             Assert.IsType<ParameterSyntax>(
-                comp.GetMember<NamedTypeSymbol>("A").Constructors[0].Parameters[
-                    1
-                ].DeclaringSyntaxReferences
+                comp.GetMember<NamedTypeSymbol>("A").Constructors[0].Parameters[1]
+                    .DeclaringSyntaxReferences
                     .Single()
                     .GetSyntax()
             );
@@ -4301,9 +4299,9 @@ abstract sealed record C1;
             Assert.Equal(
                 "record C1",
                 namedTypeSymbol.ToDisplayString(
-                    SymbolDisplayFormat.TestFormat.AddKindOptions(
-                        SymbolDisplayKindOptions.IncludeTypeKeyword
-                    )
+                    SymbolDisplayFormat
+                        .TestFormat
+                        .AddKindOptions(SymbolDisplayKindOptions.IncludeTypeKeyword)
                 )
             );
         }
@@ -4341,9 +4339,9 @@ sealed abstract record C1;
             Assert.Equal(
                 "record C1",
                 namedTypeSymbol.ToDisplayString(
-                    SymbolDisplayFormat.TestFormat.AddKindOptions(
-                        SymbolDisplayKindOptions.IncludeTypeKeyword
-                    )
+                    SymbolDisplayFormat
+                        .TestFormat
+                        .AddKindOptions(SymbolDisplayKindOptions.IncludeTypeKeyword)
                 )
             );
         }
@@ -4412,9 +4410,9 @@ sealed abstract record C2 : C1;
             Assert.Equal(
                 "record C1",
                 namedTypeSymbol.ToDisplayString(
-                    SymbolDisplayFormat.TestFormat.AddKindOptions(
-                        SymbolDisplayKindOptions.IncludeTypeKeyword
-                    )
+                    SymbolDisplayFormat
+                        .TestFormat
+                        .AddKindOptions(SymbolDisplayKindOptions.IncludeTypeKeyword)
                 )
             );
         }
@@ -4533,9 +4531,9 @@ public record B : A {
                 comp.GlobalNamespace
                     .GetTypeMember("A")
                     .ToDisplayString(
-                        SymbolDisplayFormat.TestFormat.AddKindOptions(
-                            SymbolDisplayKindOptions.IncludeTypeKeyword
-                        )
+                        SymbolDisplayFormat
+                            .TestFormat
+                            .AddKindOptions(SymbolDisplayKindOptions.IncludeTypeKeyword)
                     )
             );
         }
@@ -4656,9 +4654,9 @@ public class Program
                 comp.GlobalNamespace
                     .GetTypeMember("A")
                     .ToDisplayString(
-                        SymbolDisplayFormat.TestFormat.AddKindOptions(
-                            SymbolDisplayKindOptions.IncludeTypeKeyword
-                        )
+                        SymbolDisplayFormat
+                            .TestFormat
+                            .AddKindOptions(SymbolDisplayKindOptions.IncludeTypeKeyword)
                     )
             );
         }
@@ -4791,9 +4789,9 @@ public record B : A {
                 comp.GlobalNamespace
                     .GetTypeMember("A")
                     .ToDisplayString(
-                        SymbolDisplayFormat.TestFormat.AddKindOptions(
-                            SymbolDisplayKindOptions.IncludeTypeKeyword
-                        )
+                        SymbolDisplayFormat
+                            .TestFormat
+                            .AddKindOptions(SymbolDisplayKindOptions.IncludeTypeKeyword)
                     )
             );
         }
@@ -4928,9 +4926,9 @@ public class Program
                 comp.GlobalNamespace
                     .GetTypeMember("A")
                     .ToDisplayString(
-                        SymbolDisplayFormat.TestFormat.AddKindOptions(
-                            SymbolDisplayKindOptions.IncludeTypeKeyword
-                        )
+                        SymbolDisplayFormat
+                            .TestFormat
+                            .AddKindOptions(SymbolDisplayKindOptions.IncludeTypeKeyword)
                     )
             );
         }
@@ -5062,9 +5060,9 @@ public record B : A {
                 comp.GlobalNamespace
                     .GetTypeMember("A")
                     .ToDisplayString(
-                        SymbolDisplayFormat.TestFormat.AddKindOptions(
-                            SymbolDisplayKindOptions.IncludeTypeKeyword
-                        )
+                        SymbolDisplayFormat
+                            .TestFormat
+                            .AddKindOptions(SymbolDisplayKindOptions.IncludeTypeKeyword)
                     )
             );
         }
@@ -5199,9 +5197,9 @@ public class Program
                 comp.GlobalNamespace
                     .GetTypeMember("A")
                     .ToDisplayString(
-                        SymbolDisplayFormat.TestFormat.AddKindOptions(
-                            SymbolDisplayKindOptions.IncludeTypeKeyword
-                        )
+                        SymbolDisplayFormat
+                            .TestFormat
+                            .AddKindOptions(SymbolDisplayKindOptions.IncludeTypeKeyword)
                     )
             );
         }
@@ -5855,9 +5853,9 @@ public record B : A {
                 comp.GlobalNamespace
                     .GetTypeMember("A")
                     .ToDisplayString(
-                        SymbolDisplayFormat.TestFormat.AddKindOptions(
-                            SymbolDisplayKindOptions.IncludeTypeKeyword
-                        )
+                        SymbolDisplayFormat
+                            .TestFormat
+                            .AddKindOptions(SymbolDisplayKindOptions.IncludeTypeKeyword)
                     )
             );
         }
@@ -5976,9 +5974,9 @@ public record B : A {
                 comp.GlobalNamespace
                     .GetTypeMember("A")
                     .ToDisplayString(
-                        SymbolDisplayFormat.TestFormat.AddKindOptions(
-                            SymbolDisplayKindOptions.IncludeTypeKeyword
-                        )
+                        SymbolDisplayFormat
+                            .TestFormat
+                            .AddKindOptions(SymbolDisplayKindOptions.IncludeTypeKeyword)
                     )
             );
         }
@@ -15372,10 +15370,13 @@ B"
             {
                 var returnType = method.ReturnTypeWithAnnotations;
                 Assert.True(
-                    method.OverriddenMethod.ReturnTypeWithAnnotations.Equals(
-                        returnType,
-                        TypeCompareKind.IgnoreNullableModifiersForReferenceTypes
-                    )
+                    method
+                        .OverriddenMethod
+                        .ReturnTypeWithAnnotations
+                        .Equals(
+                            returnType,
+                            TypeCompareKind.IgnoreNullableModifiersForReferenceTypes
+                        )
                 );
                 AssertEx.Equal(expectedModifiers, returnType.CustomModifiers);
             }
@@ -15387,10 +15388,9 @@ B"
             {
                 var parameterType = method.Parameters[0].TypeWithAnnotations;
                 Assert.True(
-                    method.OverriddenMethod.Parameters[0].TypeWithAnnotations.Equals(
-                        parameterType,
-                        TypeCompareKind.ConsiderEverything
-                    )
+                    method.OverriddenMethod.Parameters[0]
+                        .TypeWithAnnotations
+                        .Equals(parameterType, TypeCompareKind.ConsiderEverything)
                 );
                 AssertEx.Equal(expectedModifiers, parameterType.CustomModifiers);
             }
@@ -17447,7 +17447,8 @@ record B(int X)
 
             Assert.Equal(
                 "void B.Deconstruct(out System.Int32 X)",
-                verifier.Compilation
+                verifier
+                    .Compilation
                     .GetMember("B.Deconstruct")
                     .ToTestDisplayString(includeNonNullable: false)
             );
@@ -17560,7 +17561,8 @@ record B(int X, int Y)
 
             Assert.Equal(
                 "void B.Deconstruct(out System.Int32 X, out System.Int32 Y)",
-                verifier.Compilation
+                verifier
+                    .Compilation
                     .GetMember("B.Deconstruct")
                     .ToTestDisplayString(includeNonNullable: false)
             );
@@ -17696,7 +17698,8 @@ record C(int X, int Y) : B
 
             Assert.Equal(
                 "void C.Deconstruct(out System.Int32 X, out System.Int32 Y)",
-                verifier.Compilation
+                verifier
+                    .Compilation
                     .GetMember("C.Deconstruct")
                     .ToTestDisplayString(includeNonNullable: false)
             );
@@ -17939,7 +17942,8 @@ record C(int X) : B
 
             Assert.Equal(
                 "void C.Deconstruct(out System.Int32 X)",
-                verifier.Compilation
+                verifier
+                    .Compilation
                     .GetMember("C.Deconstruct")
                     .ToTestDisplayString(includeNonNullable: false)
             );
@@ -18706,7 +18710,8 @@ record B(int X, int Y)
             };
             Assert.Equal(
                 expectedSymbols,
-                verifier.Compilation
+                verifier
+                    .Compilation
                     .GetMembers("B.Deconstruct")
                     .Select(s => s.ToTestDisplayString(includeNonNullable: false))
             );
@@ -18796,7 +18801,8 @@ record B(int X)
             };
             Assert.Equal(
                 expectedSymbols,
-                verifier.Compilation
+                verifier
+                    .Compilation
                     .GetMembers("B.Deconstruct")
                     .Select(s => s.ToTestDisplayString(includeNonNullable: false))
             );
@@ -18877,7 +18883,8 @@ record B(int X, int Y) : A(X)
 
             Assert.Equal(
                 "void B.Deconstruct(out System.Int32 X, out System.Int32 Y)",
-                verifier.Compilation
+                verifier
+                    .Compilation
                     .GetMember("B.Deconstruct")
                     .ToTestDisplayString(includeNonNullable: false)
             );
@@ -18918,7 +18925,8 @@ record B(int X, int Y) : A(X)
 
             Assert.Equal(
                 "void B.Deconstruct(out System.Int32 X, out System.Int32 Y)",
-                verifier.Compilation
+                verifier
+                    .Compilation
                     .GetMember("B.Deconstruct")
                     .ToTestDisplayString(includeNonNullable: false)
             );
@@ -19085,7 +19093,8 @@ record B(int X)
 
             Assert.Equal(
                 "void B.Deconstruct(out System.Int32 X)",
-                verifier.Compilation
+                verifier
+                    .Compilation
                     .GetMember("B.Deconstruct")
                     .ToTestDisplayString(includeNonNullable: false)
             );
@@ -22207,7 +22216,8 @@ False
                 );
 
             var copyCtor = comp.GetMember<NamedTypeSymbol>("A")
-                .InstanceConstructors.Where(c => c.ParameterCount == 1)
+                .InstanceConstructors
+                .Where(c => c.ParameterCount == 1)
                 .Single();
             Assert.Equal(Accessibility.Protected, copyCtor.DeclaredAccessibility);
             Assert.False(copyCtor.IsOverride);
@@ -22217,7 +22227,8 @@ False
             Assert.True(copyCtor.IsImplicitlyDeclared);
 
             copyCtor = comp.GetMember<NamedTypeSymbol>("B")
-                .InstanceConstructors.Where(c => c.ParameterCount == 1)
+                .InstanceConstructors
+                .Where(c => c.ParameterCount == 1)
                 .Single();
             Assert.Equal(Accessibility.Private, copyCtor.DeclaredAccessibility);
             Assert.False(copyCtor.IsOverride);
@@ -27196,9 +27207,9 @@ interface I {}
 
                 SemanticModel speculativeModel;
                 speculativePrimaryInitializer = baseWithargs.WithArgumentList(
-                    baseWithargs.ArgumentList.WithArguments(
-                        baseWithargs.ArgumentList.Arguments.RemoveAt(1)
-                    )
+                    baseWithargs
+                        .ArgumentList
+                        .WithArguments(baseWithargs.ArgumentList.Arguments.RemoveAt(1))
                 );
 
                 speculativeBaseInitializer = SyntaxFactory.ConstructorInitializer(
@@ -27232,7 +27243,8 @@ interface I {}
                         tree.GetRoot()
                             .DescendantNodes()
                             .OfType<ReturnStatementSyntax>()
-                            .Single().SpanStart,
+                            .Single()
+                            .SpanStart,
                         speculativeBaseInitializer,
                         out _
                     )
@@ -27258,19 +27270,22 @@ interface I {}
                     "Base..ctor(System.Int32 X)",
                     speculativeModel!
                         .GetSymbolInfo((SyntaxNode)speculativePrimaryInitializer)
-                        .Symbol.ToTestDisplayString()
+                        .Symbol
+                        .ToTestDisplayString()
                 );
                 Assert.Equal(
                     "Base..ctor(System.Int32 X)",
                     speculativeModel
                         .GetSymbolInfo(speculativePrimaryInitializer)
-                        .Symbol.ToTestDisplayString()
+                        .Symbol
+                        .ToTestDisplayString()
                 );
                 Assert.Equal(
                     "Base..ctor(System.Int32 X)",
                     CSharpExtensions
                         .GetSymbolInfo(speculativeModel, speculativePrimaryInitializer)
-                        .Symbol.ToTestDisplayString()
+                        .Symbol
+                        .ToTestDisplayString()
                 );
 
                 Assert.True(
@@ -27295,19 +27310,22 @@ interface I {}
                     "Base..ctor(System.Int32 X)",
                     speculativeModel!
                         .GetSymbolInfo((SyntaxNode)speculativePrimaryInitializer)
-                        .Symbol.ToTestDisplayString()
+                        .Symbol
+                        .ToTestDisplayString()
                 );
                 Assert.Equal(
                     "Base..ctor(System.Int32 X)",
                     speculativeModel
                         .GetSymbolInfo(speculativePrimaryInitializer)
-                        .Symbol.ToTestDisplayString()
+                        .Symbol
+                        .ToTestDisplayString()
                 );
                 Assert.Equal(
                     "Base..ctor(System.Int32 X)",
                     CSharpExtensions
                         .GetSymbolInfo(speculativeModel, speculativePrimaryInitializer)
-                        .Symbol.ToTestDisplayString()
+                        .Symbol
+                        .ToTestDisplayString()
                 );
 
                 Assert.Throws<ArgumentNullException>(
@@ -27383,7 +27401,10 @@ interface I {}
                         tree.GetRoot()
                             .DescendantNodes()
                             .OfType<ConstructorInitializerSyntax>()
-                            .Single().ArgumentList.OpenParenToken.SpanStart,
+                            .Single()
+                            .ArgumentList
+                            .OpenParenToken
+                            .SpanStart,
                         (SyntaxNode)speculativePrimaryInitializer,
                         SpeculativeBindingOption.BindAsExpression
                     )
@@ -27545,9 +27566,9 @@ interface I {}
                 Assert.Empty(model.GetMemberGroup(baseWithargs));
 
                 speculativePrimaryInitializer = baseWithargs.WithArgumentList(
-                    baseWithargs.ArgumentList.WithArguments(
-                        baseWithargs.ArgumentList.Arguments.RemoveAt(1)
-                    )
+                    baseWithargs
+                        .ArgumentList
+                        .WithArguments(baseWithargs.ArgumentList.Arguments.RemoveAt(1))
                 );
 
                 speculativeBaseInitializer = SyntaxFactory.ConstructorInitializer(
@@ -27581,7 +27602,8 @@ interface I {}
                         tree.GetRoot()
                             .DescendantNodes()
                             .OfType<ReturnStatementSyntax>()
-                            .Single().SpanStart,
+                            .Single()
+                            .SpanStart,
                         speculativeBaseInitializer,
                         out _
                     )
@@ -27684,7 +27706,10 @@ interface I {}
                         tree.GetRoot()
                             .DescendantNodes()
                             .OfType<ConstructorInitializerSyntax>()
-                            .Single().ArgumentList.OpenParenToken.SpanStart,
+                            .Single()
+                            .ArgumentList
+                            .OpenParenToken
+                            .SpanStart,
                         (SyntaxNode)speculativePrimaryInitializer,
                         SpeculativeBindingOption.BindAsExpression
                     )
@@ -30857,7 +30882,8 @@ public class C
             );
 
             var actualMembers = comp.GetMember<NamedTypeSymbol>("R")
-                .Constructors.ToTestDisplayStrings();
+                .Constructors
+                .ToTestDisplayStrings();
             var expectedMembers = new[] { "R..ctor(in System.Int32 P1)", "R..ctor(R original)" };
             AssertEx.Equal(expectedMembers, actualMembers);
         }
@@ -30909,7 +30935,8 @@ public class C
             );
 
             var actualMembers = comp.GetMember<NamedTypeSymbol>("R")
-                .Constructors.ToTestDisplayStrings();
+                .Constructors
+                .ToTestDisplayStrings();
             var expectedMembers = new[]
             {
                 "R..ctor(params System.Int32[] Array)",
@@ -31137,7 +31164,8 @@ public record Test(
                     .GetMembers(".ctor")
                     .OfType<MethodSymbol>()
                     .Where(m => m.Parameters.AsSingleton()?.Name == "P1")
-                    .Single().Parameters[0];
+                    .Single()
+                    .Parameters[0];
                 AssertEx.SetEqual(new[] { "C", "D" }, getAttributeStrings(param1));
             };
 
@@ -31210,7 +31238,8 @@ public record Test(
                     .GetMembers(".ctor")
                     .OfType<MethodSymbol>()
                     .Where(m => m.Parameters.AsSingleton()?.Name == "P1")
-                    .Single().Parameters[0];
+                    .Single()
+                    .Parameters[0];
                 AssertEx.SetEqual(new[] { "C", "D" }, getAttributeStrings(param1));
             };
 
@@ -31302,7 +31331,8 @@ public record Test(
                     .GetMembers(".ctor")
                     .OfType<MethodSymbol>()
                     .Where(m => m.Parameters.AsSingleton()?.Name == "P1")
-                    .Single().Parameters[0];
+                    .Single()
+                    .Parameters[0];
                 AssertEx.SetEqual(new[] { "C", "D" }, getAttributeStrings(param1));
             };
 
@@ -31374,7 +31404,8 @@ public record Test(
                     .GetMembers(".ctor")
                     .OfType<MethodSymbol>()
                     .Where(m => m.Parameters.AsSingleton()?.Name == "P1")
-                    .Single().Parameters[0];
+                    .Single()
+                    .Parameters[0];
                 AssertEx.SetEqual(new string[] { }, getAttributeStrings(param1));
             };
 
@@ -31466,7 +31497,8 @@ public record Test(
                     .GetMembers(".ctor")
                     .OfType<MethodSymbol>()
                     .Where(m => m.Parameters.AsSingleton()?.Name == "P1")
-                    .Single().Parameters[0];
+                    .Single()
+                    .Parameters[0];
                 AssertEx.SetEqual(new[] { "C", "D" }, getAttributeStrings(param1));
             };
 
@@ -31571,7 +31603,8 @@ public record Test(
                     .GetMembers(".ctor")
                     .OfType<MethodSymbol>()
                     .Where(m => m.Parameters.AsSingleton()?.Name == "P1")
-                    .Single().Parameters[0];
+                    .Single()
+                    .Parameters[0];
                 AssertEx.SetEqual(new[] { "C", "D" }, getAttributeStrings(param1));
             };
 
@@ -31662,7 +31695,8 @@ public record Test(
                     .GetMembers(".ctor")
                     .OfType<MethodSymbol>()
                     .Where(m => m.Parameters.AsSingleton()?.Name == "P1")
-                    .Single().Parameters[0];
+                    .Single()
+                    .Parameters[0];
                 AssertEx.SetEqual(new[] { "C", "D" }, getAttributeStrings(param1));
             };
 
@@ -32485,9 +32519,9 @@ public record A;
                 "class A",
                 SymbolDisplay.ToDisplayString(
                     symbol,
-                    SymbolDisplayFormat.TestFormat.AddKindOptions(
-                        SymbolDisplayKindOptions.IncludeTypeKeyword
-                    )
+                    SymbolDisplayFormat
+                        .TestFormat
+                        .AddKindOptions(SymbolDisplayKindOptions.IncludeTypeKeyword)
                 )
             );
         }
@@ -37310,10 +37344,9 @@ public record C(int I) : B(I);";
             var compB = CreateCompilation(
                 sourceB,
                 references: new[] { refA },
-                options: TestOptions.ReleaseDll.WithSpecificDiagnosticOptions(
-                    "CS1701",
-                    ReportDiagnostic.Suppress
-                ),
+                options: TestOptions
+                    .ReleaseDll
+                    .WithSpecificDiagnosticOptions("CS1701", ReportDiagnostic.Suppress),
                 parseOptions: TestOptions.Regular9,
                 targetFramework: TargetFramework.NetCoreApp
             );

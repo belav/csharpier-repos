@@ -26,23 +26,27 @@ namespace Roslyn.VisualStudio.IntegrationTests.VisualBasic
             var project = new ProjectUtils.Project(ProjectName);
             VisualStudio.SolutionExplorer.AddFile(project, "FileImplementation.vb");
             VisualStudio.SolutionExplorer.OpenFile(project, "FileImplementation.vb");
-            VisualStudio.Editor.SetText(
-                @"Class Implementation
+            VisualStudio
+                .Editor
+                .SetText(
+                    @"Class Implementation
   Implements IGoo
 End Class"
-            );
+                );
             VisualStudio.SolutionExplorer.AddFile(project, "FileInterface.vb");
             VisualStudio.SolutionExplorer.OpenFile(project, "FileInterface.vb");
-            VisualStudio.Editor.SetText(
-                @"Interface IGoo 
+            VisualStudio
+                .Editor
+                .SetText(
+                    @"Interface IGoo 
 End Interface"
-            );
+                );
             VisualStudio.Editor.PlaceCaret("Interface IGoo");
             VisualStudio.Editor.GoToImplementation("FileImplementation.vb");
-            VisualStudio.Editor.Verify.TextContains(
-                @"Class Implementation$$",
-                assertCaretPosition: true
-            );
+            VisualStudio
+                .Editor
+                .Verify
+                .TextContains(@"Class Implementation$$", assertCaretPosition: true);
             Assert.False(VisualStudio.Shell.IsActiveTabProvisional());
         }
     }

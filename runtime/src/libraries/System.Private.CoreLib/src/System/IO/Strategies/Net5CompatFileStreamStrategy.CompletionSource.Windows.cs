@@ -47,15 +47,15 @@ namespace System.IO.Strategies
                 _overlapped =
                     bytes != null
                     && strategy.CompareExchangeCurrentOverlappedOwner(this, null) == null
-                        ? strategy._fileHandle.ThreadPoolBinding!.AllocateNativeOverlapped(
-                              preallocatedOverlapped!
-                          )
+                        ? strategy
+                          ._fileHandle
+                          .ThreadPoolBinding!
+                          .AllocateNativeOverlapped(preallocatedOverlapped!)
                         : // allocated when buffer was created, and buffer is non-null
-                          strategy._fileHandle.ThreadPoolBinding!.AllocateNativeOverlapped(
-                              s_ioCallback,
-                              this,
-                              bytes
-                          );
+                          strategy
+                          ._fileHandle
+                          .ThreadPoolBinding!
+                          .AllocateNativeOverlapped(s_ioCallback, this, bytes);
                 Debug.Assert(_overlapped != null, "AllocateNativeOverlapped returned null");
             }
 
@@ -249,10 +249,12 @@ namespace System.IO.Strategies
                 // If the handle is still valid, attempt to cancel the IO
                 if (
                     !completionSource._strategy._fileHandle.IsInvalid
-                    && !Interop.Kernel32.CancelIoEx(
-                        completionSource._strategy._fileHandle,
-                        completionSource._overlapped
-                    )
+                    && !Interop
+                        .Kernel32
+                        .CancelIoEx(
+                            completionSource._strategy._fileHandle,
+                            completionSource._overlapped
+                        )
                 )
                 {
                     int errorCode = Marshal.GetLastWin32Error();

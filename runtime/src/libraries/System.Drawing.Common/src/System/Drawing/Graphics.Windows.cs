@@ -288,17 +288,19 @@ namespace System.Drawing
             try
             {
                 IntPtr targetDC = GetHdc();
-                int result = Interop.Gdi32.BitBlt(
-                    targetDC,
-                    destinationX,
-                    destinationY,
-                    destWidth,
-                    destHeight,
-                    screenDC,
-                    sourceX,
-                    sourceY,
-                    (Interop.Gdi32.RasterOp)copyPixelOperation
-                );
+                int result = Interop
+                    .Gdi32
+                    .BitBlt(
+                        targetDC,
+                        destinationX,
+                        destinationY,
+                        destWidth,
+                        destHeight,
+                        screenDC,
+                        sourceX,
+                        sourceY,
+                        (Interop.Gdi32.RasterOp)copyPixelOperation
+                    );
 
                 //a zero result indicates a win32 exception has been thrown
                 if (result == 0)

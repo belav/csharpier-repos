@@ -49,11 +49,9 @@ namespace System.Net
                 SslSetConnection(_sslContext);
                 unsafe
                 {
-                    osStatus = Interop.AppleCrypto.SslSetIoCallbacks(
-                        _sslContext,
-                        &ReadFromConnection,
-                        &WriteToConnection
-                    );
+                    osStatus = Interop
+                        .AppleCrypto
+                        .SslSetIoCallbacks(_sslContext, &ReadFromConnection, &WriteToConnection);
                 }
 
                 if (osStatus != 0)
@@ -69,11 +67,13 @@ namespace System.Net
                     {
                         fixed (uint* cipherSuites = tlsCipherSuites)
                         {
-                            osStatus = Interop.AppleCrypto.SslSetEnabledCipherSuites(
-                                _sslContext,
-                                cipherSuites,
-                                tlsCipherSuites.Length
-                            );
+                            osStatus = Interop
+                                .AppleCrypto
+                                .SslSetEnabledCipherSuites(
+                                    _sslContext,
+                                    cipherSuites,
+                                    tlsCipherSuites.Length
+                                );
 
                             if (osStatus != 0)
                             {
@@ -91,10 +91,12 @@ namespace System.Net
                     // On OSX coretls supports only client side. For server, we will silently ignore the option.
                     if (!sslAuthenticationOptions.IsServer)
                     {
-                        Interop.AppleCrypto.SslCtxSetAlpnProtos(
-                            _sslContext,
-                            sslAuthenticationOptions.ApplicationProtocols
-                        );
+                        Interop
+                            .AppleCrypto
+                            .SslCtxSetAlpnProtos(
+                                _sslContext,
+                                sslAuthenticationOptions.ApplicationProtocols
+                            );
                     }
                 }
             }
@@ -191,9 +193,9 @@ namespace System.Net
             void** dataLength
         )
         {
-            SafeDeleteSslContext? context = (SafeDeleteSslContext?)GCHandle.FromIntPtr(
-                connection
-            ).Target;
+            SafeDeleteSslContext? context = (SafeDeleteSslContext?)GCHandle
+                .FromIntPtr(connection)
+                .Target;
             Debug.Assert(context != null);
 
             // We don't pool these buffers and we can't because there's a race between their us in the native
@@ -229,9 +231,9 @@ namespace System.Net
             void** dataLength
         )
         {
-            SafeDeleteSslContext? context = (SafeDeleteSslContext?)GCHandle.FromIntPtr(
-                connection
-            ).Target;
+            SafeDeleteSslContext? context = (SafeDeleteSslContext?)GCHandle
+                .FromIntPtr(connection)
+                .Target;
             Debug.Assert(context != null);
 
             try

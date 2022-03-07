@@ -391,8 +391,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
             Assert.Equal(@interface, innerClass.Interfaces().Single().ConstructedFrom);
 
             var innerClassEvent = (EventSymbol)innerClass.GetMembers(methodName).Single();
-            var innerClassImplementingEvent =
-                innerClassEvent.ExplicitInterfaceImplementations.Single();
+            var innerClassImplementingEvent = innerClassEvent
+                .ExplicitInterfaceImplementations
+                .Single();
             Assert.Equal(interfaceEvent, innerClassImplementingEvent.OriginalDefinition);
             Assert.Equal(@interface, innerClassImplementingEvent.ContainingType.ConstructedFrom);
         }

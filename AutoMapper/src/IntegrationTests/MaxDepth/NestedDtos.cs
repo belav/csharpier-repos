@@ -62,26 +62,28 @@ namespace AutoMapper.IntegrationTests.Net4
         {
             protected override void Seed(TestContext context)
             {
-                context.Arts.AddRange(
-                    new[]
-                    {
-                        new Art
+                context
+                    .Arts
+                    .AddRange(
+                        new[]
                         {
-                            AName = "art1",
-                            Sem = new Sem { Name = "sem1" }
-                        },
-                        new Art
-                        {
-                            AName = "art2",
-                            Sem = new Sem { Name = "sem2" }
-                        },
-                        new Art
-                        {
-                            AName = "art3",
-                            Sem = new Sem { Name = "sem3" }
-                        },
-                    }
-                );
+                            new Art
+                            {
+                                AName = "art1",
+                                Sem = new Sem { Name = "sem1" }
+                            },
+                            new Art
+                            {
+                                AName = "art2",
+                                Sem = new Sem { Name = "sem2" }
+                            },
+                            new Art
+                            {
+                                AName = "art3",
+                                Sem = new Sem { Name = "sem3" }
+                            },
+                        }
+                    );
 
                 base.Seed(context);
             }

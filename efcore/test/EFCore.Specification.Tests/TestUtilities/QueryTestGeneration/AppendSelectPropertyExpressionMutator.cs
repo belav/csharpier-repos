@@ -31,10 +31,9 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities.QueryTestGeneration
 
             var i = random.Next(properties.Count);
 
-            var select = QueryableMethods.Select.MakeGenericMethod(
-                typeArgument,
-                properties[i].PropertyType
-            );
+            var select = QueryableMethods
+                .Select
+                .MakeGenericMethod(typeArgument, properties[i].PropertyType);
             var prm = Expression.Parameter(typeArgument, "prm");
 
             var lambdaBody = (Expression)Expression.Property(prm, properties[i]);
@@ -50,10 +49,9 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities.QueryTestGeneration
                 var nullablePropertyType = typeof(Nullable<>).MakeGenericType(
                     properties[i].PropertyType
                 );
-                select = QueryableMethods.Select.MakeGenericMethod(
-                    typeArgument,
-                    nullablePropertyType
-                );
+                select = QueryableMethods
+                    .Select
+                    .MakeGenericMethod(typeArgument, nullablePropertyType);
                 lambdaBody = Expression.Convert(lambdaBody, nullablePropertyType);
             }
 

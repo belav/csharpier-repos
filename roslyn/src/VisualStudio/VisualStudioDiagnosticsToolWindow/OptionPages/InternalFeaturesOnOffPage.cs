@@ -49,9 +49,9 @@ namespace Roslyn.VisualStudio.DiagnosticsWindow.OptionsPages
                 BindToOption(textBox, ForceLowMemoryMode.SizeInMegabytes);
                 lowMemoryGroup.Children.Add(textBox);
 
-                lowMemoryGroup.Children.Add(
-                    new TextBlock { Text = "megabytes of extra memory in devenv.exe" }
-                );
+                lowMemoryGroup
+                    .Children
+                    .Add(new TextBlock { Text = "megabytes of extra memory in devenv.exe" });
 
                 panel.Children.Add(lowMemoryGroup);
 

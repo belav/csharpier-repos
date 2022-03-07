@@ -105,9 +105,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             {
                 if (oldAnnotation?.Value is string oldPeriodPropertyName)
                 {
-                    var oldPeriodProperty = entityTypeBuilder.Metadata.GetProperty(
-                        oldPeriodPropertyName
-                    );
+                    var oldPeriodProperty = entityTypeBuilder
+                        .Metadata
+                        .GetProperty(oldPeriodPropertyName);
                     entityTypeBuilder.RemoveUnusedImplicitProperties(new[] { oldPeriodProperty });
 
                     if (

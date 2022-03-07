@@ -945,7 +945,8 @@ public class C
 
             // We construct our own composition here because we only want the decompilation metadata as source provider
             // to be available.
-            var composition = EditorTestCompositions.EditorFeatures
+            var composition = EditorTestCompositions
+                .EditorFeatures
                 .WithExcludedPartTypes(
                     ImmutableHashSet.Create(typeof(IMetadataAsSourceFileProvider))
                 )
@@ -1006,9 +1007,11 @@ public class C
 
             var assemblyName = "ReferencedAssembly";
 
-            var languageServices = project.Solution.Workspace.Services.GetLanguageServices(
-                LanguageNames.CSharp
-            );
+            var languageServices = project
+                .Solution
+                .Workspace
+                .Services
+                .GetLanguageServices(LanguageNames.CSharp);
             var compilationFactory =
                 languageServices.GetRequiredService<ICompilationFactoryService>();
             var options = compilationFactory

@@ -190,14 +190,12 @@ namespace System.Text.RegularExpressions.Symbolic
                                                     // which at the character predicate level translates to conjunction or disjunction in the underlying character algebra
                                                     S pred =
                                                         kind == SymbolicRegexKind.Or
-                                                            ? builder._solver.Or(
-                                                                  singleton._set,
-                                                                  alt._set
-                                                              )
-                                                            : builder._solver.And(
-                                                                  singleton._set,
-                                                                  alt._set
-                                                              );
+                                                            ? builder
+                                                              ._solver
+                                                              .Or(singleton._set, alt._set)
+                                                            : builder
+                                                              ._solver
+                                                              .And(singleton._set, alt._set);
                                                     singleton = SymbolicRegexNode<S>.MkSingleton(
                                                         builder,
                                                         pred

@@ -137,23 +137,31 @@ namespace System.CommandLine.Benchmarks.DragonFruit
 
         [Benchmark(Description = "ExecuteAssemblyAsync entry point search.")]
         public async Task SearchForStartingPointUsingReflection() =>
-            await System.CommandLine.DragonFruit.CommandLine.ExecuteAssemblyAsync(
-                _testAssembly,
-                new string[] { },
-                null,
-                _testAssemblyXmlDocsFilePath,
-                _nullConsole
-            );
+            await System
+                .CommandLine
+                .DragonFruit
+                .CommandLine
+                .ExecuteAssemblyAsync(
+                    _testAssembly,
+                    new string[] { },
+                    null,
+                    _testAssemblyXmlDocsFilePath,
+                    _nullConsole
+                );
 
         [Benchmark(Description = "ExecuteAssemblyAsync explicit entry point.")]
         public async Task SearchForStartingPointWhenGivenEntryPointClass() =>
-            await System.CommandLine.DragonFruit.CommandLine.ExecuteAssemblyAsync(
-                _testAssembly,
-                new string[] { },
-                "PerfTestApp.Program",
-                _testAssemblyXmlDocsFilePath,
-                _nullConsole
-            );
+            await System
+                .CommandLine
+                .DragonFruit
+                .CommandLine
+                .ExecuteAssemblyAsync(
+                    _testAssembly,
+                    new string[] { },
+                    "PerfTestApp.Program",
+                    _testAssemblyXmlDocsFilePath,
+                    _nullConsole
+                );
 
         [GlobalCleanup]
         public void Cleanup()

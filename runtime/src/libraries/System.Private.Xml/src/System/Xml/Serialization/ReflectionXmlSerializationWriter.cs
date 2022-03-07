@@ -551,10 +551,11 @@ namespace System.Xml.Serialization
                     WritePrimitiveMethodRequirement suffixNullable = mapping.IsSoap
                         ? WritePrimitiveMethodRequirement.Encoded
                         : WritePrimitiveMethodRequirement.None;
-                    WritePrimitiveMethodRequirement suffixRaw =
-                        mapping.TypeDesc!.XmlEncodingNotRequired
-                            ? WritePrimitiveMethodRequirement.Raw
-                            : WritePrimitiveMethodRequirement.None;
+                    WritePrimitiveMethodRequirement suffixRaw = mapping
+                        .TypeDesc!
+                        .XmlEncodingNotRequired
+                        ? WritePrimitiveMethodRequirement.Raw
+                        : WritePrimitiveMethodRequirement.None;
                     WritePrimitive(
                         element.IsNullable
                           ? WritePrimitiveMethodRequirement.WriteNullableStringLiteral

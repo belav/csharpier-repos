@@ -52,10 +52,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SuggestionServi
                 // These files are opened in the roslyn workspace but are not valid to rename
                 // as they are not proper buffers.  So we exclude any buffer that is marked as a contained language.
                 if (
-                    textBuffer.Properties.TryGetProperty<bool>(
-                        ContainedLanguageMarker,
-                        out var markerValue
-                    ) && markerValue
+                    textBuffer
+                        .Properties
+                        .TryGetProperty<bool>(ContainedLanguageMarker, out var markerValue)
+                    && markerValue
                 )
                 {
                     return false;

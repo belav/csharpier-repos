@@ -921,9 +921,9 @@ namespace System.CommandLine.Tests
             {
                 var argument = new Argument<DayOfWeek?>();
                 argument.Suggestions.Clear();
-                argument.Suggestions.Add(
-                    new[] { "mon", "tues", "wed", "thur", "fri", "sat", "sun" }
-                );
+                argument
+                    .Suggestions
+                    .Add(new[] { "mon", "tues", "wed", "thur", "fri", "sat", "sun" });
                 var command = new Command("the-command") { argument };
 
                 var suggestions = command.Parse("the-command s").GetSuggestions();

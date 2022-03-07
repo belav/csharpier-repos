@@ -53,9 +53,9 @@ public class RouterTest
         _router.OnNavigateAsync = new EventCallback<NavigationContext>(null, OnNavigateAsync);
 
         // Act
-        await _renderer.Dispatcher.InvokeAsync(
-            () => _router.RunOnNavigateAsync("http://example.com/jan", false)
-        );
+        await _renderer
+            .Dispatcher
+            .InvokeAsync(() => _router.RunOnNavigateAsync("http://example.com/jan", false));
 
         // Assert
         Assert.True(called);
@@ -84,12 +84,12 @@ public class RouterTest
         _router.OnNavigateAsync = new EventCallback<NavigationContext>(null, OnNavigateAsync);
 
         // Act
-        var janTask = _renderer.Dispatcher.InvokeAsync(
-            () => _router.RunOnNavigateAsync("http://example.com/jan", false)
-        );
-        var febTask = _renderer.Dispatcher.InvokeAsync(
-            () => _router.RunOnNavigateAsync("http://example.com/feb", false)
-        );
+        var janTask = _renderer
+            .Dispatcher
+            .InvokeAsync(() => _router.RunOnNavigateAsync("http://example.com/jan", false));
+        var febTask = _renderer
+            .Dispatcher
+            .InvokeAsync(() => _router.RunOnNavigateAsync("http://example.com/feb", false));
 
         await janTask;
         await febTask;
@@ -128,12 +128,12 @@ public class RouterTest
         _router.OnNavigateAsync = new EventCallback<NavigationContext>(null, OnNavigateAsync);
 
         // Act (start the operations then await them)
-        var jan = _renderer.Dispatcher.InvokeAsync(
-            () => _router.RunOnNavigateAsync("http://example.com/jan", false)
-        );
-        var feb = _renderer.Dispatcher.InvokeAsync(
-            () => _router.RunOnNavigateAsync("http://example.com/feb", false)
-        );
+        var jan = _renderer
+            .Dispatcher
+            .InvokeAsync(() => _router.RunOnNavigateAsync("http://example.com/jan", false));
+        var feb = _renderer
+            .Dispatcher
+            .InvokeAsync(() => _router.RunOnNavigateAsync("http://example.com/feb", false));
         triggerCancel.TrySetResult();
 
         await jan;
@@ -185,12 +185,12 @@ public class RouterTest
         _router.OnNavigateAsync = new EventCallback<NavigationContext>(null, OnNavigateAsync);
 
         // Act
-        var jan = _renderer.Dispatcher.InvokeAsync(
-            () => _router.RunOnNavigateAsync("http://example.com/jan", false)
-        );
-        var feb = _renderer.Dispatcher.InvokeAsync(
-            () => _router.RunOnNavigateAsync("http://example.com/feb", false)
-        );
+        var jan = _renderer
+            .Dispatcher
+            .InvokeAsync(() => _router.RunOnNavigateAsync("http://example.com/jan", false));
+        var feb = _renderer
+            .Dispatcher
+            .InvokeAsync(() => _router.RunOnNavigateAsync("http://example.com/feb", false));
 
         await jan;
         await feb;
@@ -210,9 +210,11 @@ public class RouterTest
         };
 
         // Act
-        await _renderer.Dispatcher.InvokeAsync(
-            () => _router.SetParametersAsync(ParameterView.FromDictionary(parameters))
-        );
+        await _renderer
+            .Dispatcher
+            .InvokeAsync(
+                () => _router.SetParametersAsync(ParameterView.FromDictionary(parameters))
+            );
 
         // Assert
         var renderedFrame = _renderer.Batches.First().ReferenceFrames.First();

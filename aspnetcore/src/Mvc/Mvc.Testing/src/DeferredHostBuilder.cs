@@ -167,9 +167,11 @@ internal class DeferredHostBuilder : IHostBuilder
 
             // REVIEW: This will deadlock if the application creates the host but never calls start. This is mitigated by the cancellationToken
             // but it's rarely a valid token for Start
-            using var reg2 = _host.Services
+            using var reg2 = _host
+                .Services
                 .GetRequiredService<IHostApplicationLifetime>()
-                .ApplicationStarted.UnsafeRegister(_ => _hostStartedTcs.TrySetResult(), null);
+                .ApplicationStarted
+                .UnsafeRegister(_ => _hostStartedTcs.TrySetResult(), null);
 
             await _hostStartedTcs.Task.ConfigureAwait(false);
         }

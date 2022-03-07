@@ -118,9 +118,9 @@ public class ManifestStaticWebAssetsFileProviderTest
 
         writer.Flush();
         memoryStream.Seek(0, SeekOrigin.Begin);
-        var manifest = ManifestStaticWebAssetFileProvider.StaticWebAssetManifest.Parse(
-            memoryStream
-        );
+        var manifest = ManifestStaticWebAssetFileProvider
+            .StaticWebAssetManifest
+            .Parse(memoryStream);
         var comparer = ManifestStaticWebAssetFileProvider.StaticWebAssetManifest.PathComparer;
 
         var provider = new ManifestStaticWebAssetFileProvider(
@@ -205,9 +205,9 @@ public class ManifestStaticWebAssetsFileProviderTest
 
         writer.Flush();
         memoryStream.Seek(0, SeekOrigin.Begin);
-        var manifest = ManifestStaticWebAssetFileProvider.StaticWebAssetManifest.Parse(
-            memoryStream
-        );
+        var manifest = ManifestStaticWebAssetFileProvider
+            .StaticWebAssetManifest
+            .Parse(memoryStream);
         var comparer = ManifestStaticWebAssetFileProvider.StaticWebAssetManifest.PathComparer;
 
         var provider = new ManifestStaticWebAssetFileProvider(
@@ -291,9 +291,9 @@ public class ManifestStaticWebAssetsFileProviderTest
 
         writer.Flush();
         memoryStream.Seek(0, SeekOrigin.Begin);
-        var manifest = ManifestStaticWebAssetFileProvider.StaticWebAssetManifest.Parse(
-            memoryStream
-        );
+        var manifest = ManifestStaticWebAssetFileProvider
+            .StaticWebAssetManifest
+            .Parse(memoryStream);
         var comparer = ManifestStaticWebAssetFileProvider.StaticWebAssetManifest.PathComparer;
 
         var provider = new ManifestStaticWebAssetFileProvider(

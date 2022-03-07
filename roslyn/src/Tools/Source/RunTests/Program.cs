@@ -44,11 +44,9 @@ namespace RunTests
             }
 
             ConsoleUtil.WriteLine($"Running '{options.DotnetFilePath} --version'..");
-            var dotnetResult = await ProcessRunner.CreateProcess(
-                options.DotnetFilePath,
-                arguments: "--version",
-                captureOutput: true
-            ).Result;
+            var dotnetResult = await ProcessRunner
+                .CreateProcess(options.DotnetFilePath, arguments: "--version", captureOutput: true)
+                .Result;
             ConsoleUtil.WriteLine(string.Join(Environment.NewLine, dotnetResult.OutputLines));
             ConsoleUtil.WriteLine(
                 ConsoleColor.Red,

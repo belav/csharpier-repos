@@ -958,16 +958,18 @@ namespace System.Data.Tests
             DataSet ds = new DataSet("ExampleDataSet");
 
             ds.Tables.Add(new DataTable("ExampleDataTable"));
-            ds.Tables["ExampleDataTable"].Columns.Add(
-                new DataColumn("PrimaryKeyColumn", typeof(int), "", MappingType.Attribute)
-            );
+            ds.Tables["ExampleDataTable"]
+                .Columns
+                .Add(new DataColumn("PrimaryKeyColumn", typeof(int), "", MappingType.Attribute));
             ds.Tables["ExampleDataTable"].Columns["PrimaryKeyColumn"].AllowDBNull = false;
 
-            ds.Tables["ExampleDataTable"].Constraints.Add(
-                "PK_ExampleDataTable",
-                ds.Tables["ExampleDataTable"].Columns["PrimaryKeyColumn"],
-                true
-            );
+            ds.Tables["ExampleDataTable"]
+                .Constraints
+                .Add(
+                    "PK_ExampleDataTable",
+                    ds.Tables["ExampleDataTable"].Columns["PrimaryKeyColumn"],
+                    true
+                );
 
             ds.AcceptChanges();
             StringWriter sw = new StringWriter();
@@ -1163,9 +1165,9 @@ namespace System.Data.Tests
             // Add MyType DataTable
             ds.Tables.Add("MyType");
 
-            ds.Tables["MyType"].Columns.Add(
-                new DataColumn("Desc", typeof(string), "", MappingType.Attribute)
-            );
+            ds.Tables["MyType"]
+                .Columns
+                .Add(new DataColumn("Desc", typeof(string), "", MappingType.Attribute));
             ds.Tables["MyType"].Columns["Desc"].MaxLength = 32;
 
             ds.AcceptChanges();
@@ -1509,9 +1511,11 @@ namespace System.Data.Tests
             parent.Columns.Add("id", typeof(int));
             child.Columns.Add("ref_id", typeof(int));
 
-            child.Constraints.Add(
-                new ForeignKeyConstraint("fk_constraint", parent.Columns[0], child.Columns[0])
-            );
+            child
+                .Constraints
+                .Add(
+                    new ForeignKeyConstraint("fk_constraint", parent.Columns[0], child.Columns[0])
+                );
 
             DataRow dr = parent.NewRow();
             dr[0] = 1;

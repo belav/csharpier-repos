@@ -301,12 +301,14 @@ namespace DefaultNamespace
             while (temp2 != null)
             {
                 TestLibrary.Logging.WriteLine("Edge " + edge++);
-                TestLibrary.Logging.WriteLine(
-                    "Weight: {0}, v1: {1}, v2: {2}",
-                    temp2.Weight,
-                    temp2.v1.Name,
-                    temp2.v2.Name
-                );
+                TestLibrary
+                    .Logging
+                    .WriteLine(
+                        "Weight: {0}, v1: {1}, v2: {2}",
+                        temp2.Weight,
+                        temp2.v1.Name,
+                        temp2.v2.Name
+                    );
                 temp2 = temp2.Next;
             }
             SetWeightSum();

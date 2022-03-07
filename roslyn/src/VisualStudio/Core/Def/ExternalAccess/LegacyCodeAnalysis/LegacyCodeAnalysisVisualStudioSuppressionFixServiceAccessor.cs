@@ -35,8 +35,9 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.LegacyCodeAnalysis
 
         public bool AddSuppressions(IVsHierarchy? projectHierarchy)
         {
-            var errorReportingService =
-                _workspace.Services.GetRequiredService<IErrorReportingService>();
+            var errorReportingService = _workspace
+                .Services
+                .GetRequiredService<IErrorReportingService>();
 
             try
             {
@@ -65,8 +66,9 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.LegacyCodeAnalysis
             IVsHierarchy? projectHierarchy
         )
         {
-            var errorReportingService =
-                _workspace.Services.GetRequiredService<IErrorReportingService>();
+            var errorReportingService = _workspace
+                .Services
+                .GetRequiredService<IErrorReportingService>();
 
             try
             {
@@ -101,8 +103,9 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.LegacyCodeAnalysis
             IVsHierarchy? projectHierarchy
         )
         {
-            var errorReportingService =
-                _workspace.Services.GetRequiredService<IErrorReportingService>();
+            var errorReportingService = _workspace
+                .Services
+                .GetRequiredService<IErrorReportingService>();
 
             try
             {

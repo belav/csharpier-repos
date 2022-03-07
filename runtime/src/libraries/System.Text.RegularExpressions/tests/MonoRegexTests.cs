@@ -63,12 +63,14 @@ namespace System.Text.RegularExpressions.Tests
                     Cases(engine).ToArray();
 
                 Regex[] results =
-                    RegexHelpers.GetRegexesAsync(
-                        engine,
-                        allEngineCases
-                            .Select(c => (c.Pattern, (RegexOptions?)c.Options, (TimeSpan?)null))
-                            .ToArray()
-                    ).Result;
+                    RegexHelpers
+                        .GetRegexesAsync(
+                            engine,
+                            allEngineCases
+                                .Select(c => (c.Pattern, (RegexOptions?)c.Options, (TimeSpan?)null))
+                                .ToArray()
+                        )
+                        .Result;
                 for (int i = 0; i < results.Length; i++)
                 {
                     string expected = allEngineCases[i].Expected;

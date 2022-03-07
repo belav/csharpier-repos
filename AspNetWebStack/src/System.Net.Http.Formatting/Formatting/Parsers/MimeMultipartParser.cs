@@ -640,13 +640,15 @@ namespace System.Net.Http.Formatting.Parsers
                 _referenceBoundary[3] = MimeMultipartParser.Dash;
                 _referenceBoundaryLength =
                     4
-                    + Encoding.UTF8.GetBytes(
-                        referenceBoundary,
-                        0,
-                        referenceBoundary.Length,
-                        _referenceBoundary,
-                        4
-                    );
+                    + Encoding
+                        .UTF8
+                        .GetBytes(
+                            referenceBoundary,
+                            0,
+                            referenceBoundary.Length,
+                            _referenceBoundary,
+                            4
+                        );
 
                 _boundary[0] = MimeMultipartParser.CR;
                 _boundary[1] = MimeMultipartParser.LF;
@@ -890,11 +892,9 @@ namespace System.Net.Http.Formatting.Parsers
             )]
             private string DebuggerToString()
             {
-                var referenceBoundary = Encoding.UTF8.GetString(
-                    _referenceBoundary,
-                    0,
-                    _referenceBoundaryLength
-                );
+                var referenceBoundary = Encoding
+                    .UTF8
+                    .GetString(_referenceBoundary, 0, _referenceBoundaryLength);
                 var boundary = Encoding.UTF8.GetString(_boundary, 0, _boundaryLength);
 
                 return String.Format(

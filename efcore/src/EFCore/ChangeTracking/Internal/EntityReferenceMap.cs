@@ -153,12 +153,14 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                         // ReSharper disable once CheckForReferenceEqualityInstead.2
                         if (
                             keyValue.Key.ClrType.IsAssignableFrom(type)
-                            && keyValue.Value.TryGet(
-                                entity,
-                                entityType,
-                                out var foundEntry,
-                                throwOnNonUniqueness
-                            )
+                            && keyValue
+                                .Value
+                                .TryGet(
+                                    entity,
+                                    entityType,
+                                    out var foundEntry,
+                                    throwOnNonUniqueness
+                                )
                         )
                         {
                             if (found)

@@ -77,12 +77,14 @@ public static class TwitterExtensions
         Action<TwitterOptions> configureOptions
     )
     {
-        builder.Services.TryAddEnumerable(
-            ServiceDescriptor.Singleton<
-                IPostConfigureOptions<TwitterOptions>,
-                TwitterPostConfigureOptions
-            >()
-        );
+        builder
+            .Services
+            .TryAddEnumerable(
+                ServiceDescriptor.Singleton<
+                    IPostConfigureOptions<TwitterOptions>,
+                    TwitterPostConfigureOptions
+                >()
+            );
         return builder.AddRemoteScheme<TwitterOptions, TwitterHandler>(
             authenticationScheme,
             displayName,

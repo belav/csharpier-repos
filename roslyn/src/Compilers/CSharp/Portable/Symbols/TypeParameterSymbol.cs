@@ -651,10 +651,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             }
 
             // Type parameters may be equal but not reference equal due to independent alpha renamings.
-            return other.ContainingSymbol.ContainingType.Equals(
-                this.ContainingSymbol.ContainingType,
-                comparison
-            );
+            return other
+                .ContainingSymbol
+                .ContainingType
+                .Equals(this.ContainingSymbol.ContainingType, comparison);
         }
 
         public override int GetHashCode()

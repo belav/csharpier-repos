@@ -231,9 +231,9 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.LanguageService
             // Local: return the name if it's the declaration, otherwise the type
             if (
                 symbol is ILocalSymbol localSymbol
-                && !symbol.DeclaringSyntaxReferences.Any(
-                    d => d.GetSyntax().DescendantTokens().Contains(token)
-                )
+                && !symbol
+                    .DeclaringSyntaxReferences
+                    .Any(d => d.GetSyntax().DescendantTokens().Contains(token))
             )
             {
                 symbol = localSymbol.Type;

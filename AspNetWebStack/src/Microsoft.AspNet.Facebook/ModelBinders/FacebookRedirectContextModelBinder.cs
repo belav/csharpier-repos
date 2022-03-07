@@ -52,27 +52,31 @@ namespace Microsoft.AspNet.Facebook.ModelBinders
             {
                 if (!originUrl.StartsWith(_config.AppUrl, StringComparison.OrdinalIgnoreCase))
                 {
-                    bindingContext.ModelState.AddModelError(
-                        bindingContext.ModelName,
-                        String.Format(
-                            CultureInfo.CurrentCulture,
-                            Resources.UrlCannotBeExternal,
-                            "originUrl",
-                            _config.AppUrl
-                        )
-                    );
+                    bindingContext
+                        .ModelState
+                        .AddModelError(
+                            bindingContext.ModelName,
+                            String.Format(
+                                CultureInfo.CurrentCulture,
+                                Resources.UrlCannotBeExternal,
+                                "originUrl",
+                                _config.AppUrl
+                            )
+                        );
                 }
             }
             else
             {
-                bindingContext.ModelState.AddModelError(
-                    bindingContext.ModelName,
-                    String.Format(
-                        CultureInfo.CurrentCulture,
-                        Resources.ParameterIsRequired,
-                        "originUrl"
-                    )
-                );
+                bindingContext
+                    .ModelState
+                    .AddModelError(
+                        bindingContext.ModelName,
+                        String.Format(
+                            CultureInfo.CurrentCulture,
+                            Resources.ParameterIsRequired,
+                            "originUrl"
+                        )
+                    );
             }
 
             string redirectUrl = null;

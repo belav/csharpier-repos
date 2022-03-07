@@ -32,12 +32,12 @@ public class Startup
                 }
                 await context.Response.WriteAsync($"Method: {context.Request.Method}\r\n");
                 await context.Response.WriteAsync($"Scheme: {context.Request.Scheme}\r\n");
-                await context.Response.WriteAsync(
-                    $"RemoteIP: {context.Connection.RemoteIpAddress}\r\n"
-                );
-                await context.Response.WriteAsync(
-                    $"RemotePort: {context.Connection.RemotePort}\r\n"
-                );
+                await context
+                    .Response
+                    .WriteAsync($"RemoteIP: {context.Connection.RemoteIpAddress}\r\n");
+                await context
+                    .Response
+                    .WriteAsync($"RemotePort: {context.Connection.RemotePort}\r\n");
             }
         );
     }

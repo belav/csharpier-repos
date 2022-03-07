@@ -165,7 +165,8 @@ namespace System.Tests
                 .GetDeclaredMethod("StringArgument_InvalidCodeUnits_FallbackUsed");
             Assert.NotNull(thisMethod);
 
-            CustomAttributeData cad = thisMethod.CustomAttributes
+            CustomAttributeData cad = thisMethod
+                .CustomAttributes
                 .Where(ca => ca.AttributeType == typeof(StringValueAttribute))
                 .FirstOrDefault();
             Assert.NotNull(cad);

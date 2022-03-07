@@ -47,8 +47,9 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                 )
             )
             {
-                var syntaxFacts =
-                    completionContext.Document.GetRequiredLanguageService<ISyntaxFactsService>();
+                var syntaxFacts = completionContext
+                    .Document
+                    .GetRequiredLanguageService<ISyntaxFactsService>();
                 if (
                     TryGetReceiverTypeSymbol(
                         syntaxContext,
@@ -63,10 +64,11 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                         nestedTokenSource.Token,
                         cancellationToken
                     );
-                    var inferredTypes =
-                        completionContext.CompletionOptions.TargetTypedCompletionFilter
-                            ? syntaxContext.InferredTypes
-                            : ImmutableArray<ITypeSymbol>.Empty;
+                    var inferredTypes = completionContext
+                        .CompletionOptions
+                        .TargetTypedCompletionFilter
+                        ? syntaxContext.InferredTypes
+                        : ImmutableArray<ITypeSymbol>.Empty;
 
                     var getItemsTask = Task.Run(
                         () =>
@@ -77,13 +79,17 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                                 namespaceInScope,
                                 inferredTypes,
                                 forceIndexCreation: isExpandedCompletion,
-                                hideAdvancedMembers: completionContext.CompletionOptions.HideAdvancedMembers,
+                                hideAdvancedMembers: completionContext
+                                    .CompletionOptions
+                                    .HideAdvancedMembers,
                                 linkedTokenSource.Token
                             )
                     );
 
                     var timeoutInMilliseconds =
-                        completionContext.CompletionOptions.TimeoutInMillisecondsForExtensionMethodImportCompletion;
+                        completionContext
+                            .CompletionOptions
+                            .TimeoutInMillisecondsForExtensionMethodImportCompletion;
 
                     // Timebox is enabled if timeout value is >= 0 and we are not triggered via expander
                     if (timeoutInMilliseconds >= 0 && !isExpandedCompletion)
@@ -145,7 +151,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             {
                 // Check if we are accessing members of a type, no extension methods are exposed off of types.
                 if (
-                    syntaxContext.SemanticModel
+                    syntaxContext
+                        .SemanticModel
                         .GetSymbolInfo(expressionNode, cancellationToken)
                         .GetAnySymbol()
                     is not ITypeSymbol
@@ -154,13 +161,14 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                     // The expression we're calling off of needs to have an actual instance type.
                     // We try to be more tolerant to errors here so completion would still be available in certain case of partially typed code.
                     receiverTypeSymbol =
-                        syntaxContext.SemanticModel.GetTypeInfo(
-                            expressionNode,
-                            cancellationToken
-                        ).Type;
+                        syntaxContext
+                            .SemanticModel
+                            .GetTypeInfo(expressionNode, cancellationToken)
+                            .Type;
                     if (receiverTypeSymbol is IErrorTypeSymbol errorTypeSymbol)
                     {
-                        receiverTypeSymbol = errorTypeSymbol.CandidateSymbols
+                        receiverTypeSymbol = errorTypeSymbol
+                            .CandidateSymbols
                             .Select(s => GetSymbolType(s))
                             .FirstOrDefault(s => s != null);
                     }

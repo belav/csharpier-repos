@@ -25,15 +25,17 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
             {
                 var traversal = new List<string>();
 
-                context.ChangeTracker.TrackGraph(
-                    root,
-                    node =>
-                    {
-                        callback(node);
+                context
+                    .ChangeTracker
+                    .TrackGraph(
+                        root,
+                        node =>
+                        {
+                            callback(node);
 
-                        traversal.Add(NodeString(node));
-                    }
-                );
+                            traversal.Add(NodeString(node));
+                        }
+                    );
 
                 return traversal;
             }
@@ -49,23 +51,25 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
             {
                 var traversal = new List<string>();
 
-                context.ChangeTracker.TrackGraph<EntityState>(
-                    root,
-                    default,
-                    node =>
-                    {
-                        if (node.Entry.State != EntityState.Detached)
+                context
+                    .ChangeTracker
+                    .TrackGraph<EntityState>(
+                        root,
+                        default,
+                        node =>
                         {
-                            return false;
+                            if (node.Entry.State != EntityState.Detached)
+                            {
+                                return false;
+                            }
+
+                            callback(node);
+
+                            traversal.Add(NodeString(node));
+
+                            return node.Entry.State != EntityState.Detached;
                         }
-
-                        callback(node);
-
-                        traversal.Add(NodeString(node));
-
-                        return node.Entry.State != EntityState.Detached;
-                    }
-                );
+                    );
 
                 return traversal;
             }
@@ -252,10 +256,14 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
                 dreamsEntry.Property("SweetId").CurrentValue = 1;
                 dreamsEntry
                     .Reference(e => e.Are)
-                    .TargetEntry.Property("DreamsSweetId").CurrentValue = 1;
+                    .TargetEntry
+                    .Property("DreamsSweetId")
+                    .CurrentValue = 1;
                 dreamsEntry
                     .Reference(e => e.Made)
-                    .TargetEntry.Property("DreamsSweetId").CurrentValue = 1;
+                    .TargetEntry
+                    .Property("DreamsSweetId")
+                    .CurrentValue = 1;
             }
 
             if (useAttach)
@@ -313,21 +321,21 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
             Assert.Equal(1, sweet.Id);
             Assert.Equal(
                 1,
-                dependentEntry.Property(
-                    dependentEntry.Metadata.FindPrimaryKey().Properties[0].Name
-                ).CurrentValue
+                dependentEntry
+                    .Property(dependentEntry.Metadata.FindPrimaryKey().Properties[0].Name)
+                    .CurrentValue
             );
             Assert.Equal(
                 1,
-                dependentEntry2a.Property(
-                    dependentEntry2a.Metadata.FindPrimaryKey().Properties[0].Name
-                ).CurrentValue
+                dependentEntry2a
+                    .Property(dependentEntry2a.Metadata.FindPrimaryKey().Properties[0].Name)
+                    .CurrentValue
             );
             Assert.Equal(
                 1,
-                dependentEntry2b.Property(
-                    dependentEntry2b.Metadata.FindPrimaryKey().Properties[0].Name
-                ).CurrentValue
+                dependentEntry2b
+                    .Property(dependentEntry2b.Metadata.FindPrimaryKey().Properties[0].Name)
+                    .CurrentValue
             );
         }
 
@@ -355,10 +363,14 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
                 dreamsEntry.Property("SweetId").CurrentValue = 1;
                 dreamsEntry
                     .Reference(e => e.Are)
-                    .TargetEntry.Property("DreamsSweetId").CurrentValue = 1;
+                    .TargetEntry
+                    .Property("DreamsSweetId")
+                    .CurrentValue = 1;
                 dreamsEntry
                     .Reference(e => e.Made)
-                    .TargetEntry.Property("DreamsSweetId").CurrentValue = 1;
+                    .TargetEntry
+                    .Property("DreamsSweetId")
+                    .CurrentValue = 1;
             }
 
             if (useAttach)
@@ -407,21 +419,21 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
             Assert.Equal(1, dreams.Sweet.Id);
             Assert.Equal(
                 1,
-                dependentEntry.Property(
-                    dependentEntry.Metadata.FindPrimaryKey().Properties[0].Name
-                ).CurrentValue
+                dependentEntry
+                    .Property(dependentEntry.Metadata.FindPrimaryKey().Properties[0].Name)
+                    .CurrentValue
             );
             Assert.Equal(
                 1,
-                dependentEntry2a.Property(
-                    dependentEntry2a.Metadata.FindPrimaryKey().Properties[0].Name
-                ).CurrentValue
+                dependentEntry2a
+                    .Property(dependentEntry2a.Metadata.FindPrimaryKey().Properties[0].Name)
+                    .CurrentValue
             );
             Assert.Equal(
                 1,
-                dependentEntry2b.Property(
-                    dependentEntry2b.Metadata.FindPrimaryKey().Properties[0].Name
-                ).CurrentValue
+                dependentEntry2b
+                    .Property(dependentEntry2b.Metadata.FindPrimaryKey().Properties[0].Name)
+                    .CurrentValue
             );
         }
 
@@ -780,10 +792,14 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
                 dreamsEntry.Property("SweetId").CurrentValue = 1;
                 dreamsEntry
                     .Reference(e => e.Are)
-                    .TargetEntry.Property("DreamsSweetId").CurrentValue = 1;
+                    .TargetEntry
+                    .Property("DreamsSweetId")
+                    .CurrentValue = 1;
                 dreamsEntry
                     .Reference(e => e.Made)
-                    .TargetEntry.Property("DreamsSweetId").CurrentValue = 1;
+                    .TargetEntry
+                    .Property("DreamsSweetId")
+                    .CurrentValue = 1;
             }
 
             if (useAdd)
@@ -830,21 +846,21 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
             Assert.Equal(1, dreams.Sweet.Id);
             Assert.Equal(
                 1,
-                dependentEntry.Property(
-                    dependentEntry.Metadata.FindPrimaryKey().Properties[0].Name
-                ).CurrentValue
+                dependentEntry
+                    .Property(dependentEntry.Metadata.FindPrimaryKey().Properties[0].Name)
+                    .CurrentValue
             );
             Assert.Equal(
                 1,
-                dependentEntry2a.Property(
-                    dependentEntry2a.Metadata.FindPrimaryKey().Properties[0].Name
-                ).CurrentValue
+                dependentEntry2a
+                    .Property(dependentEntry2a.Metadata.FindPrimaryKey().Properties[0].Name)
+                    .CurrentValue
             );
             Assert.Equal(
                 1,
-                dependentEntry2b.Property(
-                    dependentEntry2b.Metadata.FindPrimaryKey().Properties[0].Name
-                ).CurrentValue
+                dependentEntry2b
+                    .Property(dependentEntry2b.Metadata.FindPrimaryKey().Properties[0].Name)
+                    .CurrentValue
             );
         }
 
@@ -1039,23 +1055,25 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
             var visited = new HashSet<object>();
             var traversal = new List<string>();
 
-            context.ChangeTracker.TrackGraph(
-                category,
-                visited,
-                node =>
-                {
-                    if (node.NodeState.Contains(node.Entry.Entity))
+            context
+                .ChangeTracker
+                .TrackGraph(
+                    category,
+                    visited,
+                    node =>
                     {
-                        return false;
+                        if (node.NodeState.Contains(node.Entry.Entity))
+                        {
+                            return false;
+                        }
+
+                        node.NodeState.Add(node.Entry.Entity);
+
+                        traversal.Add(NodeString(node));
+
+                        return true;
                     }
-
-                    node.NodeState.Add(node.Entry.Entity);
-
-                    traversal.Add(NodeString(node));
-
-                    return true;
-                }
-            );
+                );
 
             Assert.Equal(
                 new List<string>
@@ -1241,18 +1259,19 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         [ConditionalFact]
         public void TrackGraph_does_not_call_DetectChanges()
         {
-            var provider = InMemoryTestHelpers.Instance.CreateServiceProvider(
-                new ServiceCollection().AddScoped<IChangeDetector, ChangeDetectorProxy>()
-            );
+            var provider = InMemoryTestHelpers
+                .Instance
+                .CreateServiceProvider(
+                    new ServiceCollection().AddScoped<IChangeDetector, ChangeDetectorProxy>()
+                );
             using var context = new EarlyLearningCenter(GetType().Name, provider);
             var changeDetector = (ChangeDetectorProxy)context.GetService<IChangeDetector>();
 
             changeDetector.DetectChangesCalled = false;
 
-            context.ChangeTracker.TrackGraph(
-                CreateSimpleGraph(2),
-                e => e.Entry.State = EntityState.Unchanged
-            );
+            context
+                .ChangeTracker
+                .TrackGraph(CreateSimpleGraph(2), e => e.Entry.State = EntityState.Unchanged);
 
             Assert.False(changeDetector.DetectChangesCalled);
 
@@ -1296,23 +1315,25 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
             var visited = new HashSet<object>();
             var traversal = new List<string>();
 
-            context.ChangeTracker.TrackGraph(
-                category,
-                visited,
-                e =>
-                {
-                    if (e.NodeState.Contains(e.Entry.Entity))
+            context
+                .ChangeTracker
+                .TrackGraph(
+                    category,
+                    visited,
+                    e =>
                     {
-                        return false;
+                        if (e.NodeState.Contains(e.Entry.Entity))
+                        {
+                            return false;
+                        }
+
+                        e.NodeState.Add(e.Entry.Entity);
+
+                        traversal.Add(NodeString(e));
+
+                        return true;
                     }
-
-                    e.NodeState.Add(e.Entry.Entity);
-
-                    traversal.Add(NodeString(e));
-
-                    return true;
-                }
-            );
+                );
 
             Assert.Equal(
                 new List<string>

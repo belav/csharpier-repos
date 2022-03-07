@@ -248,8 +248,12 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                 && attrType.ContainingNamespace.ContainingNamespace?.Name == nameof(System.Runtime)
                 && attrType.ContainingNamespace.ContainingNamespace.ContainingNamespace?.Name
                     == nameof(System)
-                && attrType.ContainingNamespace.ContainingNamespace.ContainingNamespace.ContainingNamespace?.IsGlobalNamespace
-                    == true;
+                && attrType
+                    .ContainingNamespace
+                    .ContainingNamespace
+                    .ContainingNamespace
+                    .ContainingNamespace
+                    ?.IsGlobalNamespace == true;
         }
 
         private static void AddNonSubmissionDependentProjects(
@@ -318,9 +322,9 @@ namespace Microsoft.CodeAnalysis.FindSymbols
 
             // If our symbol was from a project, then just check if this current project has a direct reference to it.
             if (symbolOrigination.sourceProject != null)
-                return project.ProjectReferences.Any(
-                    p => p.ProjectId == symbolOrigination.sourceProject.Id
-                );
+                return project
+                    .ProjectReferences
+                    .Any(p => p.ProjectId == symbolOrigination.sourceProject.Id);
 
             // Otherwise, if the symbol is from metadata, see if the project's compilation references that metadata assembly.
             return HasReferenceToAssembly(
@@ -342,10 +346,10 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             {
                 // WORKAROUND:
                 // perf check metadata reference using newly created empty compilation with only metadata references.
-                compilation = project.LanguageServices.CompilationFactory!.CreateCompilation(
-                    project.AssemblyName,
-                    project.CompilationOptions!
-                );
+                compilation = project
+                    .LanguageServices
+                    .CompilationFactory!
+                    .CreateCompilation(project.AssemblyName, project.CompilationOptions!);
 
                 compilation = compilation.AddReferences(project.MetadataReferences);
             }

@@ -521,15 +521,15 @@ namespace Microsoft.EntityFrameworkCore
                 var product2 = context.Products.Single(e => e.Description.StartsWith("Chocolate"));
                 var product3 = context.Products.Single(e => e.Description.StartsWith("Assorted"));
 
-                var productReview1 = context.ProductReviews.Single(
-                    e => e.Review.StartsWith("Better")
-                );
-                var productReview2 = context.ProductReviews.Single(
-                    e => e.Review.StartsWith("Good")
-                );
-                var productReview3 = context.ProductReviews.Single(
-                    e => e.Review.StartsWith("Eeky")
-                );
+                var productReview1 = context
+                    .ProductReviews
+                    .Single(e => e.Review.StartsWith("Better"));
+                var productReview2 = context
+                    .ProductReviews
+                    .Single(e => e.Review.StartsWith("Good"));
+                var productReview3 = context
+                    .ProductReviews
+                    .Single(e => e.Review.StartsWith("Eeky"));
 
                 // See issue#16428
                 var sqlite =
@@ -544,12 +544,12 @@ namespace Microsoft.EntityFrameworkCore
                     ? context.ProductPhotos.ToList().Single(e => e.Photo[0] == 105)
                     : context.ProductPhotos.Single(e => e.Photo[0] == 105);
 
-                var productWebFeature1 = context.ProductWebFeatures.Single(
-                    e => e.Heading.StartsWith("Waffle")
-                );
-                var productWebFeature2 = context.ProductWebFeatures.Single(
-                    e => e.Heading.StartsWith("What")
-                );
+                var productWebFeature1 = context
+                    .ProductWebFeatures
+                    .Single(e => e.Heading.StartsWith("Waffle"));
+                var productWebFeature2 = context
+                    .ProductWebFeatures
+                    .Single(e => e.Heading.StartsWith("What"));
 
                 Assert.NotNull(product2);
                 AssertPhotosConsistent(productPhoto1, productWebFeature1);
@@ -635,16 +635,16 @@ namespace Microsoft.EntityFrameworkCore
                 var barcode2 = context.Barcodes.Single(e => e.Text == "Barcode 2 2 3 4");
                 var barcode3 = context.Barcodes.Single(e => e.Text == "Barcode 3 2 3 4");
 
-                var incorrectScan1 = context.IncorrectScans.Single(
-                    e => e.Details.StartsWith("Treats")
-                );
-                var incorrectScan2 = context.IncorrectScans.Single(
-                    e => e.Details.StartsWith("Wot")
-                );
+                var incorrectScan1 = context
+                    .IncorrectScans
+                    .Single(e => e.Details.StartsWith("Treats"));
+                var incorrectScan2 = context
+                    .IncorrectScans
+                    .Single(e => e.Details.StartsWith("Wot"));
 
-                var barcodeDetails1 = context.BarcodeDetails.Single(
-                    e => e.RegisteredTo == "Eeky Bear"
-                );
+                var barcodeDetails1 = context
+                    .BarcodeDetails
+                    .Single(e => e.RegisteredTo == "Eeky Bear");
                 var barcodeDetails2 = context.BarcodeDetails.Single(e => e.RegisteredTo == "Trent");
 
                 AssertBadScansConsistent(barcode1, incorrectScan2);
@@ -890,7 +890,8 @@ namespace Microsoft.EntityFrameworkCore
             {
                 Assert.Equal(
                     new[] { "101", "103", "105" },
-                    context.ProductPhotos
+                    context
+                        .ProductPhotos
                         .ToList()
                         .Select(c => c.Photo.First().ToString())
                         .OrderBy(n => n)
@@ -916,7 +917,8 @@ namespace Microsoft.EntityFrameworkCore
 
             Assert.Equal(
                 new[] { "201", "202" },
-                context.SupplierLogos
+                context
+                    .SupplierLogos
                     .ToList()
                     .SelectMany(c => c.Logo)
                     .Select(l => l.ToString())
@@ -1011,15 +1013,15 @@ namespace Microsoft.EntityFrameworkCore
             Assert.Equal(customer2.CustomerId, login2.CustomerId);
             Assert.Equal(customer3.CustomerId, login3.CustomerId);
 
-            var suspiciousActivity1 = context.SuspiciousActivities.Single(
-                e => e.Activity.StartsWith("Pig")
-            );
-            var suspiciousActivity2 = context.SuspiciousActivities.Single(
-                e => e.Activity.StartsWith("Crumbs")
-            );
-            var suspiciousActivity3 = context.SuspiciousActivities.Single(
-                e => e.Activity.StartsWith("Donuts")
-            );
+            var suspiciousActivity1 = context
+                .SuspiciousActivities
+                .Single(e => e.Activity.StartsWith("Pig"));
+            var suspiciousActivity2 = context
+                .SuspiciousActivities
+                .Single(e => e.Activity.StartsWith("Crumbs"));
+            var suspiciousActivity3 = context
+                .SuspiciousActivities
+                .Single(e => e.Activity.StartsWith("Donuts"));
 
             Assert.Equal(login3.Username, suspiciousActivity1.Username);
             Assert.Equal(login3.Username, suspiciousActivity2.Username);
@@ -1126,12 +1128,12 @@ namespace Microsoft.EntityFrameworkCore
             Assert.Equal(product1.ProductId, productPhoto2.ProductId);
             Assert.Equal(product3.ProductId, productPhoto3.ProductId);
 
-            var productWebFeature1 = context.ProductWebFeatures.Single(
-                e => e.Heading.StartsWith("Waffle")
-            );
-            var productWebFeature2 = context.ProductWebFeatures.Single(
-                e => e.Heading.StartsWith("What")
-            );
+            var productWebFeature1 = context
+                .ProductWebFeatures
+                .Single(e => e.Heading.StartsWith("Waffle"));
+            var productWebFeature2 = context
+                .ProductWebFeatures
+                .Single(e => e.Heading.StartsWith("What"));
 
             Assert.Equal(product1.ProductId, productWebFeature1.ProductId);
             Assert.Equal(product2.ProductId, productWebFeature2.ProductId);
@@ -1149,26 +1151,26 @@ namespace Microsoft.EntityFrameworkCore
 
             Assert.Equal(supplier1.SupplierId, supplierLogo1.SupplierId);
 
-            var supplierInfo1 = context.SupplierInformation.Single(
-                e => e.Information.StartsWith("Seems")
-            );
-            var supplierInfo2 = context.SupplierInformation.Single(
-                e => e.Information.StartsWith("Orange")
-            );
-            var supplierInfo3 = context.SupplierInformation.Single(
-                e => e.Information.StartsWith("Very")
-            );
+            var supplierInfo1 = context
+                .SupplierInformation
+                .Single(e => e.Information.StartsWith("Seems"));
+            var supplierInfo2 = context
+                .SupplierInformation
+                .Single(e => e.Information.StartsWith("Orange"));
+            var supplierInfo3 = context
+                .SupplierInformation
+                .Single(e => e.Information.StartsWith("Very"));
 
             Assert.Equal(supplier1.SupplierId, supplierInfo1.SupplierId);
             Assert.Equal(supplier1.SupplierId, supplierInfo2.SupplierId);
             Assert.Equal(supplier2.SupplierId, supplierInfo3.SupplierId);
 
-            var customerInfo1 = context.CustomerInformation.Single(
-                e => e.Information.StartsWith("Really")
-            );
-            var customerInfo2 = context.CustomerInformation.Single(
-                e => e.Information.StartsWith("Mrs")
-            );
+            var customerInfo1 = context
+                .CustomerInformation
+                .Single(e => e.Information.StartsWith("Really"));
+            var customerInfo2 = context
+                .CustomerInformation
+                .Single(e => e.Information.StartsWith("Mrs"));
 
             Assert.Equal(customer1.CustomerId, customerInfo1.CustomerInfoId);
             Assert.Equal(customer2.CustomerId, customerInfo2.CustomerInfoId);
@@ -1176,12 +1178,12 @@ namespace Microsoft.EntityFrameworkCore
             var computer1 = context.Computers.Single(e => e.Name == "markash420");
             var computer2 = context.Computers.Single(e => e.Name == "unicorns420");
 
-            var computerDetail1 = context.ComputerDetails.Single(
-                e => e.Specifications == "It's a Dell!"
-            );
-            var computerDetail2 = context.ComputerDetails.Single(
-                e => e.Specifications == "It's not a Dell!"
-            );
+            var computerDetail1 = context
+                .ComputerDetails
+                .Single(e => e.Specifications == "It's a Dell!");
+            var computerDetail2 = context
+                .ComputerDetails
+                .Single(e => e.Specifications == "It's not a Dell!");
 
             Assert.Equal(computer1.ComputerId, computerDetail1.ComputerDetailId);
             Assert.Equal(computer2.ComputerId, computerDetail2.ComputerDetailId);
@@ -1329,7 +1331,8 @@ namespace Microsoft.EntityFrameworkCore
             Assert.Same(login2, message3.Recipient);
             Assert.Equal(
                 new[] { "Fanc", "I'll" },
-                login2.ReceivedMessages
+                login2
+                    .ReceivedMessages
                     .Select(m => m.Body.Substring(0, 4))
                     .OrderBy(m => m)
                     .ToArray()
@@ -1429,12 +1432,12 @@ namespace Microsoft.EntityFrameworkCore
             Assert.Same(productPhoto3, product3.Photos.Single());
             Assert.True(product2.Photos == null || product2.Photos.Count == 0);
 
-            var productWebFeature1 = context.ProductWebFeatures.Single(
-                e => e.Heading.StartsWith("Waffle")
-            );
-            var productWebFeature2 = context.ProductWebFeatures.Single(
-                e => e.Heading.StartsWith("What")
-            );
+            var productWebFeature1 = context
+                .ProductWebFeatures
+                .Single(e => e.Heading.StartsWith("Waffle"));
+            var productWebFeature2 = context
+                .ProductWebFeatures
+                .Single(e => e.Heading.StartsWith("What"));
 
             Assert.Same(productPhoto1, productWebFeature1.Photo);
             Assert.Same(productWebFeature1, productPhoto1.Features.Single());
@@ -1460,26 +1463,26 @@ namespace Microsoft.EntityFrameworkCore
 
             Assert.Same(supplierLogo1, supplier1.Logo);
 
-            var supplierInfo1 = context.SupplierInformation.Single(
-                e => e.Information.StartsWith("Seems")
-            );
-            var supplierInfo2 = context.SupplierInformation.Single(
-                e => e.Information.StartsWith("Orange")
-            );
-            var supplierInfo3 = context.SupplierInformation.Single(
-                e => e.Information.StartsWith("Very")
-            );
+            var supplierInfo1 = context
+                .SupplierInformation
+                .Single(e => e.Information.StartsWith("Seems"));
+            var supplierInfo2 = context
+                .SupplierInformation
+                .Single(e => e.Information.StartsWith("Orange"));
+            var supplierInfo3 = context
+                .SupplierInformation
+                .Single(e => e.Information.StartsWith("Very"));
 
             Assert.Same(supplier1, supplierInfo1.Supplier);
             Assert.Same(supplier1, supplierInfo2.Supplier);
             Assert.Same(supplier2, supplierInfo3.Supplier);
 
-            var customerInfo1 = context.CustomerInformation.Single(
-                e => e.Information.StartsWith("Really")
-            );
-            var customerInfo2 = context.CustomerInformation.Single(
-                e => e.Information.StartsWith("Mrs")
-            );
+            var customerInfo1 = context
+                .CustomerInformation
+                .Single(e => e.Information.StartsWith("Really"));
+            var customerInfo2 = context
+                .CustomerInformation
+                .Single(e => e.Information.StartsWith("Mrs"));
 
             Assert.Same(customerInfo1, customer1.Info);
             Assert.Same(customerInfo2, customer2.Info);
@@ -1487,12 +1490,12 @@ namespace Microsoft.EntityFrameworkCore
             var computer1 = context.Computers.Single(e => e.Name == "markash420");
             var computer2 = context.Computers.Single(e => e.Name == "unicorns420");
 
-            var computerDetail1 = context.ComputerDetails.Single(
-                e => e.Specifications == "It's a Dell!"
-            );
-            var computerDetail2 = context.ComputerDetails.Single(
-                e => e.Specifications == "It's not a Dell!"
-            );
+            var computerDetail1 = context
+                .ComputerDetails
+                .Single(e => e.Specifications == "It's a Dell!");
+            var computerDetail2 = context
+                .ComputerDetails
+                .Single(e => e.Specifications == "It's not a Dell!");
 
             Assert.Same(computer1, computerDetail1.Computer);
             Assert.Same(computerDetail1, computer1.ComputerDetail);
@@ -1794,10 +1797,12 @@ namespace Microsoft.EntityFrameworkCore
             if (expectedDependent != null)
             {
                 Assert.True(
-                    StructuralComparisons.StructuralEqualityComparer.Equals(
-                        expectedPrincipal == null ? null : getPrincipalKey(expectedPrincipal),
-                        getForeignKey(expectedDependent)
-                    )
+                    StructuralComparisons
+                        .StructuralEqualityComparer
+                        .Equals(
+                            expectedPrincipal == null ? null : getPrincipalKey(expectedPrincipal),
+                            getForeignKey(expectedDependent)
+                        )
                 );
             }
         }

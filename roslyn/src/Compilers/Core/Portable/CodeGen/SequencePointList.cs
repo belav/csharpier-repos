@@ -261,8 +261,9 @@ namespace Microsoft.CodeAnalysis.CodeGen
                     bool isHidden = span == RawSequencePoint.HiddenSequencePointSpan;
                     if (!isHidden)
                     {
-                        FileLinePositionSpan fileLinePositionSpan =
-                            current._tree.GetMappedLineSpanAndVisibility(span, out isHidden);
+                        FileLinePositionSpan fileLinePositionSpan = current
+                            ._tree
+                            .GetMappedLineSpanAndVisibility(span, out isHidden);
                         if (!isHidden)
                         {
                             return fileLinePositionSpan;

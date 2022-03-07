@@ -143,7 +143,8 @@ namespace Microsoft.CodeAnalysis.CodeCleanup
             CancellationToken cancellationToken = default
         )
         {
-            var cleanupService = workspace.Services
+            var cleanupService = workspace
+                .Services
                 .GetLanguageServices(root.Language)
                 .GetRequiredService<ICodeCleanerService>();
             return cleanupService.CleanupAsync(

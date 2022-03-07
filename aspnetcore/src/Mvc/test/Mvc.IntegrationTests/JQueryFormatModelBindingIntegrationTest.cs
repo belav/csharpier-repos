@@ -72,9 +72,11 @@ public class JQueryFormatModelBindingIntegrationTest
             request =>
             {
                 request.Body = new MemoryStream(
-                    Encoding.UTF8.GetBytes(
-                        "Name=James&Address[0][City]=Redmond&Address[0][State][ShortName]=WA&Address[0][State][LongName]=Washington"
-                    )
+                    Encoding
+                        .UTF8
+                        .GetBytes(
+                            "Name=James&Address[0][City]=Redmond&Address[0][State][ShortName]=WA&Address[0][State][LongName]=Washington"
+                        )
                 );
                 request.ContentType = "application/x-www-form-urlencoded;charset=utf-8";
             }

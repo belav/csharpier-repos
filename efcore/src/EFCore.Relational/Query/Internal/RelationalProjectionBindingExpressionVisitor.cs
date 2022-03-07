@@ -149,10 +149,12 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
 
                         case ParameterExpression parameterExpression:
                             return
-                                parameterExpression.Name?.StartsWith(
-                                    QueryCompilationContext.QueryParameterPrefix,
-                                    StringComparison.Ordinal
-                                ) == true
+                                parameterExpression
+                                    .Name
+                                    ?.StartsWith(
+                                        QueryCompilationContext.QueryParameterPrefix,
+                                        StringComparison.Ordinal
+                                    ) == true
                               ? Expression.Call(
                                     _getParameterValueMethodInfo.MakeGenericMethod(
                                         parameterExpression.Type
@@ -198,7 +200,10 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                                     expression.Type
                                 ),
                                 materializeCollectionNavigationExpression.Navigation,
-                                materializeCollectionNavigationExpression.Navigation.ClrType.GetSequenceType()
+                                materializeCollectionNavigationExpression
+                                    .Navigation
+                                    .ClrType
+                                    .GetSequenceType()
                             );
 
                         case MethodCallExpression methodCallExpression:
@@ -207,9 +212,9 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                                 && methodCallExpression.Method.DeclaringType == typeof(Enumerable)
                                 && methodCallExpression.Method.Name == nameof(Enumerable.ToList)
                                 && methodCallExpression.Arguments.Count == 1
-                                && methodCallExpression.Arguments[0].Type.TryGetElementType(
-                                    typeof(IQueryable<>)
-                                ) != null
+                                && methodCallExpression.Arguments[0]
+                                    .Type
+                                    .TryGetElementType(typeof(IQueryable<>)) != null
                             )
                             {
                                 var subquery =
@@ -423,7 +428,9 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                         Check.DebugAssert(
                             ReferenceEquals(
                                 _selectExpression,
-                                collectionResultExpression.ProjectionBindingExpression.QueryExpression
+                                collectionResultExpression
+                                    .ProjectionBindingExpression
+                                    .QueryExpression
                             ),
                             "The projection should belong to same select expression."
                         );

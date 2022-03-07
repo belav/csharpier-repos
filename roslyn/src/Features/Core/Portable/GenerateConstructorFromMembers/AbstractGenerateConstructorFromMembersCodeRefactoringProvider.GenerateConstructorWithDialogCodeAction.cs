@@ -75,9 +75,9 @@ namespace Microsoft.CodeAnalysis.GenerateConstructorFromMembers
                     return SpecializedCollections.EmptyEnumerable<CodeActionOperation>();
                 }
 
-                var addNullChecksOption = result.Options.FirstOrDefault(
-                    o => o.Id == AddNullChecksId
-                );
+                var addNullChecksOption = result
+                    .Options
+                    .FirstOrDefault(o => o.Id == AddNullChecksId);
                 if (addNullChecksOption != null)
                 {
                     // If we presented the 'Add null check' option, then persist whatever value
@@ -128,9 +128,10 @@ namespace Microsoft.CodeAnalysis.GenerateConstructorFromMembers
                         .GetSyntaxAsync(cancellationToken)
                         .ConfigureAwait(false);
                     var constructorTree = constructorSyntax.SyntaxTree;
-                    var constructorDocument = _document.Project.Solution.GetRequiredDocument(
-                        constructorTree
-                    );
+                    var constructorDocument = _document
+                        .Project
+                        .Solution
+                        .GetRequiredDocument(constructorTree);
                     return ImmutableArray.Create<CodeActionOperation>(
                         new DocumentNavigationOperation(
                             constructorDocument.Id,
@@ -171,11 +172,13 @@ namespace Microsoft.CodeAnalysis.GenerateConstructorFromMembers
                 if (_addNullCheckOptionValue.HasValue)
                 {
                     solution = solution?.WithOptions(
-                        solution.Options.WithChangedOption(
-                            GenerateConstructorFromMembersOptions.AddNullChecks,
-                            _document.Project.Language,
-                            _addNullCheckOptionValue.Value
-                        )
+                        solution
+                            .Options
+                            .WithChangedOption(
+                                GenerateConstructorFromMembersOptions.AddNullChecks,
+                                _document.Project.Language,
+                                _addNullCheckOptionValue.Value
+                            )
                     );
                 }
 

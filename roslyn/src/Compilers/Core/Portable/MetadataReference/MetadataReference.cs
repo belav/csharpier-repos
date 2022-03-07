@@ -259,12 +259,14 @@ namespace Microsoft.CodeAnalysis
             DocumentationProvider? documentation = null
         ) =>
             CreateFromFile(
-                StandardFileSystem.Instance.OpenFileWithNormalizedException(
-                    path,
-                    FileMode.Open,
-                    FileAccess.Read,
-                    FileShare.Read
-                ),
+                StandardFileSystem
+                    .Instance
+                    .OpenFileWithNormalizedException(
+                        path,
+                        FileMode.Open,
+                        FileAccess.Read,
+                        FileShare.Read
+                    ),
                 path,
                 properties,
                 documentation
@@ -394,12 +396,14 @@ namespace Microsoft.CodeAnalysis
                 );
             }
 
-            Stream peStream = StandardFileSystem.Instance.OpenFileWithNormalizedException(
-                location,
-                FileMode.Open,
-                FileAccess.Read,
-                FileShare.Read
-            );
+            Stream peStream = StandardFileSystem
+                .Instance
+                .OpenFileWithNormalizedException(
+                    location,
+                    FileMode.Open,
+                    FileAccess.Read,
+                    FileShare.Read
+                );
 
             // The file is locked by the CLR assembly loader, so we can create a lazily read metadata,
             // which might also lock the file until the reference is GC'd.

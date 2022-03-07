@@ -260,11 +260,11 @@ namespace AutoMapper.UnitTests
         [Fact]
         public void Should_fail_validation()
         {
-            new Action(
-                Configuration.AssertConfigurationIsValid
-            ).ShouldThrow<AutoMapperConfigurationException>().Errors[
-                0
-            ].UnmappedPropertyNames.ShouldBe(new[] { "ValuesCount", "OtherValue" });
+            new Action(Configuration.AssertConfigurationIsValid)
+                .ShouldThrow<AutoMapperConfigurationException>()
+                .Errors[0]
+                .UnmappedPropertyNames
+                .ShouldBe(new[] { "ValuesCount", "OtherValue" });
             Mapper.Map<Destination>(new Source { StringValue = "42" }).StringValue.ShouldBeNull();
         }
     }

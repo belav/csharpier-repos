@@ -19,9 +19,11 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Infrastructure.ServerFixtures;
 public class BlazorWasmTestAppFixture<TProgram> : WebHostServerFixture
 {
     public readonly bool TestTrimmedApps =
-        typeof(ToggleExecutionModeServerFixture<>).Assembly
+        typeof(ToggleExecutionModeServerFixture<>)
+            .Assembly
             .GetCustomAttributes<AssemblyMetadataAttribute>()
-            .First(m => m.Key == "Microsoft.AspNetCore.E2ETesting.TestTrimmedApps").Value == "true";
+            .First(m => m.Key == "Microsoft.AspNetCore.E2ETesting.TestTrimmedApps")
+            .Value == "true";
 
     public string Environment { get; set; }
     public string PathBase { get; set; }

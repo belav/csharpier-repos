@@ -75,8 +75,10 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Internal.Diagnostics
             CancellationToken cancellationToken
         )
         {
-            var analyzer =
-                document.Project.LanguageServices.GetService<FSharpUnusedDeclarationsDiagnosticAnalyzerService>();
+            var analyzer = document
+                .Project
+                .LanguageServices
+                .GetService<FSharpUnusedDeclarationsDiagnosticAnalyzerService>();
             if (analyzer == null)
             {
                 return Task.FromResult(ImmutableArray<Diagnostic>.Empty);

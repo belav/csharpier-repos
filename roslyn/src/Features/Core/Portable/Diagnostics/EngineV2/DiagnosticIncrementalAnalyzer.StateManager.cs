@@ -92,9 +92,9 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
             public IEnumerable<StateSet> GetOrUpdateStateSets(Project project)
             {
                 var projectStateSets = GetOrUpdateProjectStateSets(project);
-                return GetOrCreateHostStateSets(project, projectStateSets).OrderedStateSets.Concat(
-                    projectStateSets.StateSetMap.Values
-                );
+                return GetOrCreateHostStateSets(project, projectStateSets)
+                    .OrderedStateSets
+                    .Concat(projectStateSets.StateSetMap.Values);
             }
 
             /// <summary>
@@ -106,9 +106,9 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
             public IEnumerable<StateSet> GetOrCreateStateSets(Project project)
             {
                 var projectStateSets = GetOrCreateProjectStateSets(project);
-                return GetOrCreateHostStateSets(project, projectStateSets).OrderedStateSets.Concat(
-                    projectStateSets.StateSetMap.Values
-                );
+                return GetOrCreateHostStateSets(project, projectStateSets)
+                    .OrderedStateSets
+                    .Concat(projectStateSets.StateSetMap.Values);
             }
 
             /// <summary>
@@ -157,7 +157,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                 var hostStateSetMap = hostStateSets.StateSetMap;
 
                 // create project analyzer reference identity map
-                var projectAnalyzerReferenceIds = project.AnalyzerReferences
+                var projectAnalyzerReferenceIds = project
+                    .AnalyzerReferences
                     .Select(r => r.Id)
                     .ToSet();
 

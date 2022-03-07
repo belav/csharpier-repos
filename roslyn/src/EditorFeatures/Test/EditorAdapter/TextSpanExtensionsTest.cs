@@ -34,8 +34,10 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.EditorAdapter
         [Fact]
         public void ConvertToSnapshotSpan1()
         {
-            var exportProvider =
-                EditorTestCompositions.EditorFeatures.ExportProviderFactory.CreateExportProvider();
+            var exportProvider = EditorTestCompositions
+                .EditorFeatures
+                .ExportProviderFactory
+                .CreateExportProvider();
             var snapshot =
                 EditorFactory.CreateBuffer(exportProvider, new string('a', 10)).CurrentSnapshot;
             var textSpan = new TextSpan(0, 5);
@@ -48,8 +50,10 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.EditorAdapter
         [Fact]
         public void ConvertToSnapshotSpan2()
         {
-            var exportProvider =
-                EditorTestCompositions.EditorFeatures.ExportProviderFactory.CreateExportProvider();
+            var exportProvider = EditorTestCompositions
+                .EditorFeatures
+                .ExportProviderFactory
+                .CreateExportProvider();
             var snapshot =
                 EditorFactory.CreateBuffer(exportProvider, new string('a', 10)).CurrentSnapshot;
             var textSpan = new TextSpan(0, 10);

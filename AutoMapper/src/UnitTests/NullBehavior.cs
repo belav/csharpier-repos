@@ -583,9 +583,9 @@ namespace AutoMapper.UnitTests.NullBehavior
                             opt =>
                                 opt.MapFrom(
                                     src =>
-                                        src.Subs.FirstOrDefault(
-                                            spt => spt.Sub.Something == src.Id
-                                        ).Something
+                                        src.Subs
+                                            .FirstOrDefault(spt => spt.Sub.Something == src.Id)
+                                            .Something
                                 )
                         )
                         .ForMember(
@@ -694,9 +694,11 @@ namespace AutoMapper.UnitTests.NullBehavior
                                     opt =>
                                         opt.MapFrom(
                                             src =>
-                                                src.Subs.FirstOrDefault(
-                                                    spt => spt.Sub.Something == src.Id
-                                                ).Something
+                                                src.Subs
+                                                    .FirstOrDefault(
+                                                        spt => spt.Sub.Something == src.Id
+                                                    )
+                                                    .Something
                                         )
                                 )
                                 .ForMember(

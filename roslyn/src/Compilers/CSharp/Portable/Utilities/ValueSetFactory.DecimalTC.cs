@@ -195,7 +195,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                     high: uinttc.Random(random),
                     isNegative: random.NextDouble() < 0.5,
                     scale: (byte)random.Next(0, maxScale + 1)
-                ).Normalize().Value;
+                )
+                    .Normalize()
+                    .Value;
             }
 
             public static decimal Normalize(decimal value) =>

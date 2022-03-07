@@ -160,9 +160,11 @@ WHERE (c[""Discriminator""] IN (""Blog"", ""RssBlog"") AND NOT((c[""IndexerVisib
         {
             Assert.Contains(
                 CoreStrings.TranslationFailed("")[47..],
-                Assert.Throws<InvalidOperationException>(
-                    () => base.Value_conversion_on_enum_collection_contains()
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(
+                        () => base.Value_conversion_on_enum_collection_contains()
+                    )
+                    .Message
             );
         }
 
@@ -199,11 +201,13 @@ WHERE (c[""Discriminator""] IN (""Blog"", ""RssBlog"") AND NOT((c[""IndexerVisib
 
                 var shadowJObject = (Property)modelBuilder
                     .Entity<BuiltInDataTypesShadow>()
-                    .Property("__jObject").Metadata;
+                    .Property("__jObject")
+                    .Metadata;
                 shadowJObject.SetConfigurationSource(ConfigurationSource.Convention);
                 var nullableShadowJObject = (Property)modelBuilder
                     .Entity<BuiltInNullableDataTypesShadow>()
-                    .Property("__jObject").Metadata;
+                    .Property("__jObject")
+                    .Metadata;
                 nullableShadowJObject.SetConfigurationSource(ConfigurationSource.Convention);
 
                 modelBuilder.Entity<SimpleCounter>(b => b.ToContainer("SimpleCounters"));

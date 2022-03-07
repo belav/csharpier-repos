@@ -68,10 +68,9 @@ public class JSComponentInterop
     protected internal virtual int AddRootComponent(string identifier, string domElementSelector)
     {
         if (
-            !Configuration.JSComponentTypesByIdentifier.TryGetValue(
-                identifier,
-                out var componentType
-            )
+            !Configuration
+                .JSComponentTypesByIdentifier
+                .TryGetValue(identifier, out var componentType)
         )
         {
             throw new ArgumentException(

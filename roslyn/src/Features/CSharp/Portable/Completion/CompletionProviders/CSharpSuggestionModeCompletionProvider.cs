@@ -204,10 +204,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             // But "(a: b, c" cannot be a lambda
             if (
                 tree.IsPossibleTupleContext(token, position)
-                && token.Parent.IsKind(
-                    SyntaxKind.TupleExpression,
-                    out TupleExpressionSyntax? tupleExpression
-                )
+                && token
+                    .Parent
+                    .IsKind(SyntaxKind.TupleExpression, out TupleExpressionSyntax? tupleExpression)
                 && !tupleExpression.HasNames()
             )
             {

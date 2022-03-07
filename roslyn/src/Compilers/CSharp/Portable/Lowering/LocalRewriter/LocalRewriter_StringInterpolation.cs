@@ -58,11 +58,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             Debug.Assert(rewrittenOperand.Type is object);
 
             CompoundUseSiteInfo<AssemblySymbol> useSiteInfo = GetNewCompoundUseSiteInfo();
-            Conversion conversion = _compilation.Conversions.ClassifyConversionFromType(
-                rewrittenOperand.Type,
-                rewrittenType,
-                ref useSiteInfo
-            );
+            Conversion conversion = _compilation
+                .Conversions
+                .ClassifyConversionFromType(rewrittenOperand.Type, rewrittenType, ref useSiteInfo);
             _diagnostics.Add(rewrittenOperand.Syntax, useSiteInfo);
             if (!conversion.IsImplicit)
             {
@@ -515,15 +513,17 @@ namespace Microsoft.CodeAnalysis.CSharp
                             _ => throw ExceptionUtilities.UnexpectedValue(operand.Kind)
                         };
                         Debug.Assert(
-                            ((BoundObjectCreationExpression)data.Construction).Arguments.All(
-                                a =>
-                                    a
-                                        is BoundInterpolatedStringArgumentPlaceholder
-                                            {
-                                                ArgumentIndex: BoundInterpolatedStringArgumentPlaceholder.TrailingConstructorValidityParameter
-                                            }
-                                            or not BoundInterpolatedStringArgumentPlaceholder
-                            )
+                            ((BoundObjectCreationExpression)data.Construction)
+                                .Arguments
+                                .All(
+                                    a =>
+                                        a
+                                            is BoundInterpolatedStringArgumentPlaceholder
+                                                {
+                                                    ArgumentIndex: BoundInterpolatedStringArgumentPlaceholder.TrailingConstructorValidityParameter
+                                                }
+                                                or not BoundInterpolatedStringArgumentPlaceholder
+                                )
                         );
                     }
                 }

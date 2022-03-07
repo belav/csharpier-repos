@@ -118,13 +118,15 @@ namespace Microsoft.EntityFrameworkCore
             using (var context = CreateContext())
             {
                 var principal =
-                    context.Add(
-                        new NullablePrincipal
-                        {
-                            Id = 1,
-                            Dependents = new List<NonNullableDependent> { new() { Id = 1 } }
-                        }
-                    ).Entity;
+                    context
+                        .Add(
+                            new NullablePrincipal
+                            {
+                                Id = 1,
+                                Dependents = new List<NonNullableDependent> { new() { Id = 1 } }
+                            }
+                        )
+                        .Entity;
 
                 var pkEntry = context.Entry(principal).Property(e => e.Id);
                 var fkEntry = context
@@ -269,7 +271,8 @@ namespace Microsoft.EntityFrameworkCore
                 var principal =
                     context
                         .Set<StringKeyDataType>()
-                        .Add(new StringKeyDataType { Id = "Gumball!!" }).Entity;
+                        .Add(new StringKeyDataType { Id = "Gumball!!" })
+                        .Entity;
 
                 var dependent =
                     context
@@ -280,7 +283,8 @@ namespace Microsoft.EntityFrameworkCore
                                 Id = 7767,
                                 StringKeyDataTypeId = "gumball!!"
                             }
-                        ).Entity;
+                        )
+                        .Entity;
 
                 Assert.Same(principal, dependent.Principal);
 
@@ -711,7 +715,8 @@ namespace Microsoft.EntityFrameworkCore
                     .Throws<InvalidOperationException>(
                         () => context.Set<CollectionScalar>().Where(e => e.Tags.Any()).ToList()
                     )
-                    .Message.Replace("\r", "")
+                    .Message
+                    .Replace("\r", "")
                     .Replace("\n", "")
             );
         }
@@ -728,7 +733,8 @@ namespace Microsoft.EntityFrameworkCore
                     .Throws<InvalidOperationException>(
                         () => context.Set<CollectionScalar>().Where(e => e.Tags.Count == 2).ToList()
                     )
-                    .Message.Replace("\r", "")
+                    .Message
+                    .Replace("\r", "")
                     .Replace("\n", "")
             );
         }
@@ -754,7 +760,8 @@ namespace Microsoft.EntityFrameworkCore
                                 .Where(e => e.Roles.Contains(sameRole))
                                 .ToList()
                     )
-                    .Message.Replace("\r", "")
+                    .Message
+                    .Replace("\r", "")
                     .Replace("\n", "")
             );
         }
@@ -779,13 +786,15 @@ namespace Microsoft.EntityFrameworkCore
             using var context = CreateContext();
             Assert.Equal(
                 "Nullable object must have a value.",
-                Assert.Throws<InvalidOperationException>(
-                    () =>
-                        context
-                            .Set<Parent>()
-                            .Select(e => new { e.OwnedWithConverter.Value })
-                            .ToList()
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(
+                        () =>
+                            context
+                                .Set<Parent>()
+                                .Select(e => new { e.OwnedWithConverter.Value })
+                                .ToList()
+                    )
+                    .Message
             );
         }
 
@@ -860,7 +869,8 @@ namespace Microsoft.EntityFrameworkCore
                                 )
                                 .ToList()
                     )
-                    .Message.Replace("\r", "")
+                    .Message
+                    .Replace("\r", "")
                     .Replace("\n", "")
             );
         }
@@ -1372,7 +1382,8 @@ namespace Microsoft.EntityFrameworkCore
                     {
                         var property =
                             b.Property(e => e.Id)
-                                .HasConversion(v => "KeyValue=" + v, v => v.Substring(9)).Metadata;
+                                .HasConversion(v => "KeyValue=" + v, v => v.Substring(9))
+                                .Metadata;
 
 #pragma warning disable 618
                         property.SetKeyValueComparer(caseInsensitiveComparer);

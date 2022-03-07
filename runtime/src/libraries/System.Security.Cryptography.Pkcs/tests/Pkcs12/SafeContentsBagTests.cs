@@ -29,7 +29,8 @@ namespace System.Security.Cryptography.Pkcs.Tests.Pkcs12
 
             builtContents
                 .AddSecret(s_zeroOid, new byte[] { 4, 1, 2 })
-                .Attributes.Add(new Pkcs9LocalKeyId(s_derNull.Span));
+                .Attributes
+                .Add(new Pkcs9LocalKeyId(s_derNull.Span));
 
             builtContents.AddSecret(s_zeroOid, new byte[] { 4, 1, 3 });
 
@@ -71,7 +72,8 @@ namespace System.Security.Cryptography.Pkcs.Tests.Pkcs12
 
             builtContents
                 .AddSecret(s_zeroOid, new byte[] { 4, 1, 2 })
-                .Attributes.Add(new Pkcs9LocalKeyId(s_derNull.Span));
+                .Attributes
+                .Add(new Pkcs9LocalKeyId(s_derNull.Span));
 
             builtContents.AddSecret(s_zeroOid, new byte[] { 4, 1, 3 });
             container.AddNestedContents(builtContents);

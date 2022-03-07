@@ -147,9 +147,9 @@ namespace System.Collections.Immutable.Tests
             );
 
             // Create a list with contents: 100,101,102,103,104,100,101,102,103,104
-            var list = ImmutableList<int>.Empty.AddRange(
-                Enumerable.Range(100, 5).Concat(Enumerable.Range(100, 5))
-            );
+            var list = ImmutableList<int>
+                .Empty
+                .AddRange(Enumerable.Range(100, 5).Concat(Enumerable.Range(100, 5)));
             var bclList = list.ToList();
             Assert.Equal(-1, this.GetListQuery(list).FindIndex(n => n == 6));
 
@@ -209,9 +209,9 @@ namespace System.Collections.Immutable.Tests
             );
 
             // Create a list with contents: 100,101,102,103,104,100,101,102,103,104
-            var list = ImmutableList<int>.Empty.AddRange(
-                Enumerable.Range(100, 5).Concat(Enumerable.Range(100, 5))
-            );
+            var list = ImmutableList<int>
+                .Empty
+                .AddRange(Enumerable.Range(100, 5).Concat(Enumerable.Range(100, 5)));
             var bclList = list.ToList();
             Assert.Equal(-1, this.GetListQuery(list).FindLastIndex(n => n == 6));
 

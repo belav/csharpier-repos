@@ -197,11 +197,9 @@ public partial class TreeRouter : IRouter
 
             // Create a snapshot before processing the route. We'll restore this snapshot before running each
             // to restore the state. This is likely an "empty" snapshot, which doesn't allocate.
-            var snapshot = context.RouteData.PushState(
-                router: null,
-                values: null,
-                dataTokens: null
-            );
+            var snapshot = context
+                .RouteData
+                .PushState(router: null, values: null, dataTokens: null);
 
             while (treeEnumerator.MoveNext())
             {

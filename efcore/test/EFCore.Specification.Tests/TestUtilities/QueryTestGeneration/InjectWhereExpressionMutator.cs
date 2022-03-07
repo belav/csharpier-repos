@@ -96,9 +96,11 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities.QueryTestGeneration
                 var collectionNavigation = random.Choose(collectionNavigations);
                 if (collectionNavigation != null)
                 {
-                    var any = EnumerableMethods.AnyWithoutPredicate.MakeGenericMethod(
-                        collectionNavigation.ForeignKey.DeclaringEntityType.ClrType
-                    );
+                    var any = EnumerableMethods
+                        .AnyWithoutPredicate
+                        .MakeGenericMethod(
+                            collectionNavigation.ForeignKey.DeclaringEntityType.ClrType
+                        );
 
                     // collection.Any()
                     candidateExpressions.Add(

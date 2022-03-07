@@ -180,11 +180,9 @@ class A { }";
         {
             using var workspace = new AdhocWorkspace();
 
-            var project = workspace.CurrentSolution.AddProject(
-                "Project",
-                "Project.dll",
-                LanguageNames.CSharp
-            );
+            var project = workspace
+                .CurrentSolution
+                .AddProject("Project", "Project.dll", LanguageNames.CSharp);
             var document = project.AddDocument("Document", SourceText.From(""));
 
             var syntaxTree = await document.GetSyntaxTreeAsync();

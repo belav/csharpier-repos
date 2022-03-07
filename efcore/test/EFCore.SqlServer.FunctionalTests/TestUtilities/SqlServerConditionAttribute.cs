@@ -49,10 +49,10 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
                     TestEnvironment.DefaultConnection
                 );
                 isMet &=
-                    defaultConnection.DataSource.Contains(
-                        "(localdb)",
-                        StringComparison.OrdinalIgnoreCase
-                    ) || defaultConnection.UserInstance;
+                    defaultConnection
+                        .DataSource
+                        .Contains("(localdb)", StringComparison.OrdinalIgnoreCase)
+                    || defaultConnection.UserInstance;
             }
 
             if (Conditions.HasFlag(SqlServerCondition.IsNotCI))

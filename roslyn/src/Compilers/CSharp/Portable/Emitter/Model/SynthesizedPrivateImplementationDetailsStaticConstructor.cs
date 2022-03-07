@@ -70,8 +70,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 )
                 {
                     int analysisKind = payloadRoot.Key;
-                    ArrayTypeSymbol payloadArrayType =
-                        (ArrayTypeSymbol)payloadRoot.Value.Type.GetInternalSymbol();
+                    ArrayTypeSymbol payloadArrayType = (ArrayTypeSymbol)payloadRoot
+                        .Value
+                        .Type
+                        .GetInternalSymbol();
 
                     BoundStatement payloadInitialization = factory.Assignment(
                         factory.InstrumentationPayloadRoot(analysisKind, payloadArrayType),

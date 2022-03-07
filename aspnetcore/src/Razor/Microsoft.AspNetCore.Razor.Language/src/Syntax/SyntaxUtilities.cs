@@ -39,9 +39,10 @@ internal static class SyntaxUtilities
             }
         }
 
-        var mergedLiteralSyntax = Syntax.InternalSyntax.SyntaxFactory.MarkupTextLiteral(
-            builder.ToList<Syntax.InternalSyntax.SyntaxToken>()
-        );
+        var mergedLiteralSyntax = Syntax
+            .InternalSyntax
+            .SyntaxFactory
+            .MarkupTextLiteral(builder.ToList<Syntax.InternalSyntax.SyntaxToken>());
 
         return (MarkupTextLiteralSyntax)mergedLiteralSyntax.CreateRed(parent, position);
     }

@@ -57,24 +57,33 @@ namespace MyNamespace
                 composition: EditorTestCompositions.EditorFeaturesWpf
             );
             workspace.TryApplyChanges(
-                workspace.CurrentSolution.WithOptions(
-                    workspace.Options
-                        .WithChangedOption(
-                            BlockStructureOptions.Metadata.CollapseRegionsWhenCollapsingToDefinitions,
-                            LanguageNames.CSharp,
-                            collapseRegionsWhenCollapsingToDefinitions
-                        )
-                        .WithChangedOption(
-                            BlockStructureOptions.Metadata.ShowBlockStructureGuidesForDeclarationLevelConstructs,
-                            LanguageNames.CSharp,
-                            showBlockStructureGuidesForDeclarationLevelConstructs
-                        )
-                        .WithChangedOption(
-                            BlockStructureOptions.Metadata.ShowBlockStructureGuidesForCodeLevelConstructs,
-                            LanguageNames.CSharp,
-                            showBlockStructureGuidesForCodeLevelConstructs
-                        )
-                )
+                workspace
+                    .CurrentSolution
+                    .WithOptions(
+                        workspace
+                            .Options
+                            .WithChangedOption(
+                                BlockStructureOptions
+                                    .Metadata
+                                    .CollapseRegionsWhenCollapsingToDefinitions,
+                                LanguageNames.CSharp,
+                                collapseRegionsWhenCollapsingToDefinitions
+                            )
+                            .WithChangedOption(
+                                BlockStructureOptions
+                                    .Metadata
+                                    .ShowBlockStructureGuidesForDeclarationLevelConstructs,
+                                LanguageNames.CSharp,
+                                showBlockStructureGuidesForDeclarationLevelConstructs
+                            )
+                            .WithChangedOption(
+                                BlockStructureOptions
+                                    .Metadata
+                                    .ShowBlockStructureGuidesForCodeLevelConstructs,
+                                LanguageNames.CSharp,
+                                showBlockStructureGuidesForCodeLevelConstructs
+                            )
+                    )
             );
 
             var tags = await GetTagsFromWorkspaceAsync(workspace);
@@ -167,24 +176,33 @@ public class Bar
                 composition: EditorTestCompositions.EditorFeaturesWpf
             );
             workspace.TryApplyChanges(
-                workspace.CurrentSolution.WithOptions(
-                    workspace.Options
-                        .WithChangedOption(
-                            BlockStructureOptions.Metadata.CollapseRegionsWhenCollapsingToDefinitions,
-                            LanguageNames.CSharp,
-                            collapseRegionsWhenCollapsingToDefinitions
-                        )
-                        .WithChangedOption(
-                            BlockStructureOptions.Metadata.ShowBlockStructureGuidesForDeclarationLevelConstructs,
-                            LanguageNames.CSharp,
-                            showBlockStructureGuidesForDeclarationLevelConstructs
-                        )
-                        .WithChangedOption(
-                            BlockStructureOptions.Metadata.ShowBlockStructureGuidesForCodeLevelConstructs,
-                            LanguageNames.CSharp,
-                            showBlockStructureGuidesForCodeLevelConstructs
-                        )
-                )
+                workspace
+                    .CurrentSolution
+                    .WithOptions(
+                        workspace
+                            .Options
+                            .WithChangedOption(
+                                BlockStructureOptions
+                                    .Metadata
+                                    .CollapseRegionsWhenCollapsingToDefinitions,
+                                LanguageNames.CSharp,
+                                collapseRegionsWhenCollapsingToDefinitions
+                            )
+                            .WithChangedOption(
+                                BlockStructureOptions
+                                    .Metadata
+                                    .ShowBlockStructureGuidesForDeclarationLevelConstructs,
+                                LanguageNames.CSharp,
+                                showBlockStructureGuidesForDeclarationLevelConstructs
+                            )
+                            .WithChangedOption(
+                                BlockStructureOptions
+                                    .Metadata
+                                    .ShowBlockStructureGuidesForCodeLevelConstructs,
+                                LanguageNames.CSharp,
+                                showBlockStructureGuidesForCodeLevelConstructs
+                            )
+                    )
             );
 
             var tags = await GetTagsFromWorkspaceAsync(workspace);
@@ -243,29 +261,40 @@ public class Bar
                 composition: EditorTestCompositions.EditorFeaturesWpf
             );
             workspace.TryApplyChanges(
-                workspace.CurrentSolution.WithOptions(
-                    workspace.Options
-                        .WithChangedOption(
-                            BlockStructureOptions.Metadata.CollapseRegionsWhenCollapsingToDefinitions,
-                            LanguageNames.CSharp,
-                            collapseRegionsWhenCollapsingToDefinitions
-                        )
-                        .WithChangedOption(
-                            BlockStructureOptions.Metadata.ShowBlockStructureGuidesForDeclarationLevelConstructs,
-                            LanguageNames.CSharp,
-                            showBlockStructureGuidesForDeclarationLevelConstructs
-                        )
-                        .WithChangedOption(
-                            BlockStructureOptions.Metadata.ShowBlockStructureGuidesForCodeLevelConstructs,
-                            LanguageNames.CSharp,
-                            showBlockStructureGuidesForCodeLevelConstructs
-                        )
-                        .WithChangedOption(
-                            BlockStructureOptions.Metadata.ShowBlockStructureGuidesForCommentsAndPreprocessorRegions,
-                            LanguageNames.CSharp,
-                            showBlockStructureGuidesForCommentsAndPreprocessorRegions
-                        )
-                )
+                workspace
+                    .CurrentSolution
+                    .WithOptions(
+                        workspace
+                            .Options
+                            .WithChangedOption(
+                                BlockStructureOptions
+                                    .Metadata
+                                    .CollapseRegionsWhenCollapsingToDefinitions,
+                                LanguageNames.CSharp,
+                                collapseRegionsWhenCollapsingToDefinitions
+                            )
+                            .WithChangedOption(
+                                BlockStructureOptions
+                                    .Metadata
+                                    .ShowBlockStructureGuidesForDeclarationLevelConstructs,
+                                LanguageNames.CSharp,
+                                showBlockStructureGuidesForDeclarationLevelConstructs
+                            )
+                            .WithChangedOption(
+                                BlockStructureOptions
+                                    .Metadata
+                                    .ShowBlockStructureGuidesForCodeLevelConstructs,
+                                LanguageNames.CSharp,
+                                showBlockStructureGuidesForCodeLevelConstructs
+                            )
+                            .WithChangedOption(
+                                BlockStructureOptions
+                                    .Metadata
+                                    .ShowBlockStructureGuidesForCommentsAndPreprocessorRegions,
+                                LanguageNames.CSharp,
+                                showBlockStructureGuidesForCommentsAndPreprocessorRegions
+                            )
+                    )
             );
 
             var tags = await GetTagsFromWorkspaceAsync(workspace);
@@ -323,24 +352,33 @@ namespace Foo
                 composition: EditorTestCompositions.EditorFeaturesWpf
             );
             workspace.TryApplyChanges(
-                workspace.CurrentSolution.WithOptions(
-                    workspace.Options
-                        .WithChangedOption(
-                            BlockStructureOptions.Metadata.CollapseRegionsWhenCollapsingToDefinitions,
-                            LanguageNames.CSharp,
-                            collapseRegionsWhenCollapsingToDefinitions
-                        )
-                        .WithChangedOption(
-                            BlockStructureOptions.Metadata.ShowBlockStructureGuidesForDeclarationLevelConstructs,
-                            LanguageNames.CSharp,
-                            showBlockStructureGuidesForDeclarationLevelConstructs
-                        )
-                        .WithChangedOption(
-                            BlockStructureOptions.Metadata.ShowBlockStructureGuidesForCodeLevelConstructs,
-                            LanguageNames.CSharp,
-                            showBlockStructureGuidesForCodeLevelConstructs
-                        )
-                )
+                workspace
+                    .CurrentSolution
+                    .WithOptions(
+                        workspace
+                            .Options
+                            .WithChangedOption(
+                                BlockStructureOptions
+                                    .Metadata
+                                    .CollapseRegionsWhenCollapsingToDefinitions,
+                                LanguageNames.CSharp,
+                                collapseRegionsWhenCollapsingToDefinitions
+                            )
+                            .WithChangedOption(
+                                BlockStructureOptions
+                                    .Metadata
+                                    .ShowBlockStructureGuidesForDeclarationLevelConstructs,
+                                LanguageNames.CSharp,
+                                showBlockStructureGuidesForDeclarationLevelConstructs
+                            )
+                            .WithChangedOption(
+                                BlockStructureOptions
+                                    .Metadata
+                                    .ShowBlockStructureGuidesForCodeLevelConstructs,
+                                LanguageNames.CSharp,
+                                showBlockStructureGuidesForCodeLevelConstructs
+                            )
+                    )
             );
 
             var tags = await GetTagsFromWorkspaceAsync(workspace);
@@ -412,24 +450,33 @@ End Namespace";
                 composition: EditorTestCompositions.EditorFeaturesWpf
             );
             workspace.TryApplyChanges(
-                workspace.CurrentSolution.WithOptions(
-                    workspace.Options
-                        .WithChangedOption(
-                            BlockStructureOptions.Metadata.CollapseRegionsWhenCollapsingToDefinitions,
-                            LanguageNames.VisualBasic,
-                            collapseRegionsWhenCollapsingToDefinitions
-                        )
-                        .WithChangedOption(
-                            BlockStructureOptions.Metadata.ShowBlockStructureGuidesForDeclarationLevelConstructs,
-                            LanguageNames.VisualBasic,
-                            showBlockStructureGuidesForDeclarationLevelConstructs
-                        )
-                        .WithChangedOption(
-                            BlockStructureOptions.Metadata.ShowBlockStructureGuidesForCodeLevelConstructs,
-                            LanguageNames.VisualBasic,
-                            showBlockStructureGuidesForCodeLevelConstructs
-                        )
-                )
+                workspace
+                    .CurrentSolution
+                    .WithOptions(
+                        workspace
+                            .Options
+                            .WithChangedOption(
+                                BlockStructureOptions
+                                    .Metadata
+                                    .CollapseRegionsWhenCollapsingToDefinitions,
+                                LanguageNames.VisualBasic,
+                                collapseRegionsWhenCollapsingToDefinitions
+                            )
+                            .WithChangedOption(
+                                BlockStructureOptions
+                                    .Metadata
+                                    .ShowBlockStructureGuidesForDeclarationLevelConstructs,
+                                LanguageNames.VisualBasic,
+                                showBlockStructureGuidesForDeclarationLevelConstructs
+                            )
+                            .WithChangedOption(
+                                BlockStructureOptions
+                                    .Metadata
+                                    .ShowBlockStructureGuidesForCodeLevelConstructs,
+                                LanguageNames.VisualBasic,
+                                showBlockStructureGuidesForCodeLevelConstructs
+                            )
+                    )
             );
 
             var tags = await GetTagsFromWorkspaceAsync(workspace);
@@ -526,14 +573,16 @@ End Module";
             var hostdoc = workspace.Documents.First();
             var view = hostdoc.GetTextView();
 
-            var provider =
-                workspace.ExportProvider.GetExportedValue<AbstractStructureTaggerProvider>();
+            var provider = workspace
+                .ExportProvider
+                .GetExportedValue<AbstractStructureTaggerProvider>();
 
             var document = workspace.CurrentSolution.GetDocument(hostdoc.Id);
             var context = new TaggerContext<IStructureTag>(document, view.TextSnapshot);
             await provider.GetTestAccessor().ProduceTagsAsync(context);
 
-            return context.tagSpans
+            return context
+                .tagSpans
                 .Select(x => x.Tag)
                 .OrderBy(t => t.OutliningSpan.Value.Start)
                 .ToList();

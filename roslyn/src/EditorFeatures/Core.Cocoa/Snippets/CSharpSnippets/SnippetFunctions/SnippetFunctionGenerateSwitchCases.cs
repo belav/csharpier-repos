@@ -66,9 +66,9 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Snippets.SnippetFunctio
 
             Contract.ThrowIfNull(_snippetExpansionClient.ExpansionSession);
 
-            var subjectBufferFieldSpan = _snippetExpansionClient.ExpansionSession.GetFieldSpan(
-                SwitchExpressionField
-            );
+            var subjectBufferFieldSpan = _snippetExpansionClient
+                .ExpansionSession
+                .GetFieldSpan(SwitchExpressionField);
 
             var expressionSpan = subjectBufferFieldSpan.Span.ToTextSpan();
 
@@ -146,10 +146,9 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Snippets.SnippetFunctio
             var documentWithAnnotations = documentWithCaseAdded.WithSyntaxRoot(updatedRoot);
 
             var simplifiedDocument =
-                Simplifier.ReduceAsync(
-                    documentWithAnnotations,
-                    cancellationToken: cancellationToken
-                ).Result;
+                Simplifier
+                    .ReduceAsync(documentWithAnnotations, cancellationToken: cancellationToken)
+                    .Result;
             simplifiedTypeName = simplifiedDocument
                 .GetRequiredSyntaxRootSynchronously(cancellationToken)
                 .GetAnnotatedNodesAndTokens(typeAnnotation)

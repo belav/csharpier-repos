@@ -65,9 +65,11 @@ internal class RedirectAction : UrlAction
         var split = pattern.IndexOf('?');
         if (split >= 0 && QueryStringAppend)
         {
-            var query = context.HttpContext.Request.QueryString.Add(
-                QueryString.FromUriComponent(pattern.Substring(split))
-            );
+            var query = context
+                .HttpContext
+                .Request
+                .QueryString
+                .Add(QueryString.FromUriComponent(pattern.Substring(split)));
 
             // not using the response.redirect here because status codes may be 301, 302, 307, 308
             response.Headers.Location = pathBase + pattern.Substring(0, split) + query;

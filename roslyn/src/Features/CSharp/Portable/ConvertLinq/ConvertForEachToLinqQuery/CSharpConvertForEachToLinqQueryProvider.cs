@@ -214,9 +214,10 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq.ConvertForEachToLinqQuery
                 // Do not support declarations without initialization.
                 // int a = 0, b, c = 0;
                 if (
-                    localDeclarationStatement.Declaration.Variables.All(
-                        variable => variable.Initializer != null
-                    )
+                    localDeclarationStatement
+                        .Declaration
+                        .Variables
+                        .All(variable => variable.Initializer != null)
                 )
                 {
                     var localDeclarationLeadingTrivia = new IEnumerable<SyntaxTrivia>[]
@@ -229,7 +230,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq.ConvertForEachToLinqQuery
                     var localDeclarationTrailingTrivia = SyntaxNodeOrTokenExtensions.GetTrivia(
                         localDeclarationStatement.SemicolonToken
                     );
-                    var separators = localDeclarationStatement.Declaration.Variables
+                    var separators = localDeclarationStatement
+                        .Declaration
+                        .Variables
                         .GetSeparators()
                         .ToArray();
                     for (var i = 0; i < localDeclarationStatement.Declaration.Variables.Count; i++)
@@ -304,10 +307,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq.ConvertForEachToLinqQuery
                             if (
                                 invocationExpression.Expression
                                     is MemberAccessExpressionSyntax memberAccessExpression
-                                && semanticModel.GetSymbolInfo(
-                                    memberAccessExpression,
-                                    cancellationToken
-                                ).Symbol
+                                && semanticModel
+                                    .GetSymbolInfo(memberAccessExpression, cancellationToken)
+                                    .Symbol
                                     is IMethodSymbol methodSymbol
                                 && TypeSymbolOptIsList(methodSymbol.ContainingType, semanticModel)
                                 && methodSymbol.Name == nameof(IList.Add)
@@ -351,7 +353,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq.ConvertForEachToLinqQuery
                     );
 
                     // Using Single() is valid even for partial methods.
-                    var memberDeclarationSyntax = memberDeclarationSymbol.DeclaringSyntaxReferences
+                    var memberDeclarationSyntax = memberDeclarationSymbol
+                        .DeclaringSyntaxReferences
                         .Single()
                         .GetSyntax();
 
@@ -372,17 +375,17 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq.ConvertForEachToLinqQuery
                         .Count();
 
                     if (
-                        forEachInfo.ForEachStatement.IsParentKind(
-                            SyntaxKind.Block,
-                            out BlockSyntax block
-                        )
+                        forEachInfo
+                            .ForEachStatement
+                            .IsParentKind(SyntaxKind.Block, out BlockSyntax block)
                         && block.Parent == memberDeclarationSyntax
                     )
                     {
                         // Check that
                         // a. There are either just a single 'yield return' or 'yield return' with 'yield break' just after.
                         // b. Those foreach and 'yield break' (if exists) are last statements in the method (do not count local function declaration statements).
-                        var statementsOnBlockWithForEach = block.Statements
+                        var statementsOnBlockWithForEach = block
+                            .Statements
                             .Where(
                                 statement => statement.Kind() != SyntaxKind.LocalFunctionStatement
                             )

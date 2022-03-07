@@ -93,14 +93,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
                 );
 
             if (expression is NameSyntax name)
-                return NameSimplifier.Instance.TrySimplify(
-                    name,
-                    semanticModel,
-                    optionSet,
-                    out replacementNode,
-                    out issueSpan,
-                    cancellationToken
-                );
+                return NameSimplifier
+                    .Instance
+                    .TrySimplify(
+                        name,
+                        semanticModel,
+                        optionSet,
+                        out replacementNode,
+                        out issueSpan,
+                        cancellationToken
+                    );
 
             return false;
         }
@@ -182,24 +184,28 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
                     if (syntaxRef != null)
                     {
                         var declIdentifier =
-                            (
-                                (UsingDirectiveSyntax)syntaxRef.GetSyntax(cancellationToken)
-                            ).Alias.Name.Identifier;
+                            ((UsingDirectiveSyntax)syntaxRef.GetSyntax(cancellationToken))
+                                .Alias
+                                .Name
+                                .Identifier;
                         text = declIdentifier.IsVerbatimIdentifier()
                           ? declIdentifier.ToString().Substring(1)
                           : declIdentifier.ToString();
                     }
 
                     replacementNode = SyntaxFactory.IdentifierName(
-                        memberAccess.Name.Identifier.CopyAnnotationsTo(
-                            SyntaxFactory.Identifier(
-                                memberAccess.GetLeadingTrivia(),
-                                SyntaxKind.IdentifierToken,
-                                text,
-                                aliasReplacement.Name,
-                                memberAccess.GetTrailingTrivia()
+                        memberAccess
+                            .Name
+                            .Identifier
+                            .CopyAnnotationsTo(
+                                SyntaxFactory.Identifier(
+                                    memberAccess.GetLeadingTrivia(),
+                                    SyntaxKind.IdentifierToken,
+                                    text,
+                                    aliasReplacement.Name,
+                                    memberAccess.GetTrailingTrivia()
+                                )
                             )
-                        )
                     );
 
                     replacementNode = memberAccess.CopyAnnotationsTo(replacementNode);
@@ -257,10 +263,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
             // Try to eliminate cases without actually calling CanReplaceWithReducedName. For expressions of the form
             // 'this.Name' or 'base.Name', no additional check here is required.
             if (
-                !memberAccess.Expression.IsKind(
-                    SyntaxKind.ThisExpression,
-                    SyntaxKind.BaseExpression
-                )
+                !memberAccess
+                    .Expression
+                    .IsKind(SyntaxKind.ThisExpression, SyntaxKind.BaseExpression)
             )
             {
                 GetReplacementCandidates(
@@ -585,10 +590,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
 
             if (
                 constructor == null
-                || !constructor.Parent.IsKind(
-                    SyntaxKind.StructDeclaration,
-                    SyntaxKind.RecordStructDeclaration
-                )
+                || !constructor
+                    .Parent
+                    .IsKind(SyntaxKind.StructDeclaration, SyntaxKind.RecordStructDeclaration)
             )
             {
                 return false;
@@ -694,10 +698,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
 
                 if (
                     previousToken.Kind() == SyntaxKind.OpenParenToken
-                    && previousToken.Parent.IsKind(
-                        SyntaxKind.ParenthesizedExpression,
-                        out ParenthesizedExpressionSyntax parenExpr
-                    )
+                    && previousToken
+                        .Parent
+                        .IsKind(
+                            SyntaxKind.ParenthesizedExpression,
+                            out ParenthesizedExpressionSyntax parenExpr
+                        )
                     && !parenExpr.IsParentKind(SyntaxKind.ParenthesizedExpression)
                     && parenExpr.Expression.Kind() == SyntaxKind.SimpleMemberAccessExpression
                     && symbol != null

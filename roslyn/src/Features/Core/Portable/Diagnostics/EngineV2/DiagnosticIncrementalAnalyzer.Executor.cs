@@ -268,9 +268,11 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                 return result;
             }
 
-            var compilerAnalyzer = project.Solution.State.Analyzers.GetCompilerDiagnosticAnalyzer(
-                project.Language
-            );
+            var compilerAnalyzer = project
+                .Solution
+                .State
+                .Analyzers
+                .GetCompilerDiagnosticAnalyzer(project.Language);
             if (compilerAnalyzer == null)
             {
                 // this language doesn't support compiler analyzer
@@ -398,7 +400,9 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                                   .CreateCompilationWithAnalyzersAsync(
                                       project,
                                       analyzersToRun,
-                                      compilationWithAnalyzers.AnalysisOptions.ReportSuppressedDiagnostics,
+                                      compilationWithAnalyzers
+                                          .AnalysisOptions
+                                          .ReportSuppressedDiagnostics,
                                       cancellationToken
                                   )
                                   .ConfigureAwait(false);
@@ -643,7 +647,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
 
             foreach (var document in project.Documents)
             {
-                var loadDiagnostic = await document.State
+                var loadDiagnostic = await document
+                    .State
                     .GetLoadDiagnosticAsync(cancellationToken)
                     .ConfigureAwait(false);
                 if (loadDiagnostic != null)

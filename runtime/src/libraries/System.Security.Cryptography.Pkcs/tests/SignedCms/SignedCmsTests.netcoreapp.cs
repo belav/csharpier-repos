@@ -22,8 +22,9 @@ namespace System.Security.Cryptography.Pkcs.Tests
         public static void CmsSignerKeyIsNullByDefaultWhenCertificateIsPassed()
         {
             using (
-                X509Certificate2 cert =
-                    Certificates.RSA2048SignatureOnly.TryGetCertificateWithPrivateKey()
+                X509Certificate2 cert = Certificates
+                    .RSA2048SignatureOnly
+                    .TryGetCertificateWithPrivateKey()
             )
             {
                 CmsSigner cmsSigner = new CmsSigner(
@@ -38,8 +39,9 @@ namespace System.Security.Cryptography.Pkcs.Tests
         public static void CmsSignerConstructorWithKeySetsProperty()
         {
             using (
-                X509Certificate2 cert =
-                    Certificates.RSA2048SignatureOnly.TryGetCertificateWithPrivateKey()
+                X509Certificate2 cert = Certificates
+                    .RSA2048SignatureOnly
+                    .TryGetCertificateWithPrivateKey()
             )
             using (RSA key = cert.GetRSAPrivateKey())
             {
@@ -56,8 +58,9 @@ namespace System.Security.Cryptography.Pkcs.Tests
         public static void SingUsingExplicitKeySetWithProperty()
         {
             using (
-                X509Certificate2 cert =
-                    Certificates.RSA2048SignatureOnly.TryGetCertificateWithPrivateKey()
+                X509Certificate2 cert = Certificates
+                    .RSA2048SignatureOnly
+                    .TryGetCertificateWithPrivateKey()
             )
             using (X509Certificate2 pubCert = new X509Certificate2(cert.RawData))
             using (RSA key = cert.GetRSAPrivateKey())
@@ -82,8 +85,9 @@ namespace System.Security.Cryptography.Pkcs.Tests
         public static void SignCmsUsingExplicitRSAKey()
         {
             using (
-                X509Certificate2 cert =
-                    Certificates.RSA2048SignatureOnly.TryGetCertificateWithPrivateKey()
+                X509Certificate2 cert = Certificates
+                    .RSA2048SignatureOnly
+                    .TryGetCertificateWithPrivateKey()
             )
             using (RSA key = cert.GetRSAPrivateKey())
             {
@@ -131,13 +135,15 @@ namespace System.Security.Cryptography.Pkcs.Tests
         public static void CounterSignCmsUsingExplicitRSAKeyForFirstSignerAndDSAForCounterSignature()
         {
             using (
-                X509Certificate2 cert =
-                    Certificates.RSA2048SignatureOnly.TryGetCertificateWithPrivateKey()
+                X509Certificate2 cert = Certificates
+                    .RSA2048SignatureOnly
+                    .TryGetCertificateWithPrivateKey()
             )
             using (RSA key = cert.GetRSAPrivateKey())
             using (
-                X509Certificate2 counterSignerCert =
-                    Certificates.Dsa1024.TryGetCertificateWithPrivateKey()
+                X509Certificate2 counterSignerCert = Certificates
+                    .Dsa1024
+                    .TryGetCertificateWithPrivateKey()
             )
             using (DSA counterSignerKey = counterSignerCert.GetDSAPrivateKey())
             {
@@ -157,8 +163,9 @@ namespace System.Security.Cryptography.Pkcs.Tests
             using (X509Certificate2 cert = Certificates.Dsa1024.TryGetCertificateWithPrivateKey())
             using (DSA key = cert.GetDSAPrivateKey())
             using (
-                X509Certificate2 counterSignerCert =
-                    Certificates.ECDsaP256Win.TryGetCertificateWithPrivateKey()
+                X509Certificate2 counterSignerCert = Certificates
+                    .ECDsaP256Win
+                    .TryGetCertificateWithPrivateKey()
             )
             using (ECDsa counterSignerKey = counterSignerCert.GetECDsaPrivateKey())
             {
@@ -179,8 +186,9 @@ namespace System.Security.Cryptography.Pkcs.Tests
             )
             using (ECDsa key = cert.GetECDsaPrivateKey())
             using (
-                X509Certificate2 counterSignerCert =
-                    Certificates.RSA2048SignatureOnly.TryGetCertificateWithPrivateKey()
+                X509Certificate2 counterSignerCert = Certificates
+                    .RSA2048SignatureOnly
+                    .TryGetCertificateWithPrivateKey()
             )
             using (RSA counterSignerKey = counterSignerCert.GetRSAPrivateKey())
             {
@@ -346,8 +354,9 @@ namespace System.Security.Cryptography.Pkcs.Tests
             int numOfCerts = cms.Certificates.Count;
 
             using (
-                X509Certificate2 newCert =
-                    Certificates.RSAKeyTransfer1.TryGetCertificateWithPrivateKey()
+                X509Certificate2 newCert = Certificates
+                    .RSAKeyTransfer1
+                    .TryGetCertificateWithPrivateKey()
             )
             {
                 Assert.True(newCert.HasPrivateKey);
@@ -477,14 +486,14 @@ namespace System.Security.Cryptography.Pkcs.Tests
         {
             using (RSA rsa = RSA.Create())
             using (
-                X509Certificate2 publicCertificate =
-                    Certificates.RSA2048SignatureOnly.GetCertificate()
+                X509Certificate2 publicCertificate = Certificates
+                    .RSA2048SignatureOnly
+                    .GetCertificate()
             )
             using (
-                X509Certificate2 certificateWithKey =
-                    Certificates.RSA2048SignatureOnly.TryGetCertificateWithPrivateKey(
-                        exportable: true
-                    )
+                X509Certificate2 certificateWithKey = Certificates
+                    .RSA2048SignatureOnly
+                    .TryGetCertificateWithPrivateKey(exportable: true)
             )
             {
                 if (certificateWithKey == null)
@@ -518,8 +527,9 @@ namespace System.Security.Cryptography.Pkcs.Tests
             using (DSA dsa = DSA.Create())
             using (X509Certificate2 publicCertificate = Certificates.Dsa1024.GetCertificate())
             using (
-                X509Certificate2 certificateWithKey =
-                    Certificates.Dsa1024.TryGetCertificateWithPrivateKey(exportable: true)
+                X509Certificate2 certificateWithKey = Certificates
+                    .Dsa1024
+                    .TryGetCertificateWithPrivateKey(exportable: true)
             )
             {
                 if (certificateWithKey == null)
@@ -559,8 +569,9 @@ namespace System.Security.Cryptography.Pkcs.Tests
             using (ECDsa ecdsa = ECDsa.Create())
             using (X509Certificate2 publicCertificate = Certificates.ECDsaP256Win.GetCertificate())
             using (
-                X509Certificate2 certificateWithKey =
-                    Certificates.ECDsaP256Win.TryGetCertificateWithPrivateKey(exportable: true)
+                X509Certificate2 certificateWithKey = Certificates
+                    .ECDsaP256Win
+                    .TryGetCertificateWithPrivateKey(exportable: true)
             )
             {
                 if (certificateWithKey == null)
@@ -593,8 +604,9 @@ namespace System.Security.Cryptography.Pkcs.Tests
             ContentInfo content = new ContentInfo(new byte[] { 1, 2, 3 });
             SignedCms cms = new SignedCms(content);
             using (
-                X509Certificate2 cert =
-                    Certificates.RSAKeyTransferCapi1.TryGetCertificateWithPrivateKey()
+                X509Certificate2 cert = Certificates
+                    .RSAKeyTransferCapi1
+                    .TryGetCertificateWithPrivateKey()
             )
             {
                 CmsSigner signer = new CmsSigner(cert);
@@ -625,8 +637,9 @@ namespace System.Security.Cryptography.Pkcs.Tests
             byte[] cmsBytes;
 
             using (
-                X509Certificate2 cert =
-                    Certificates.RSA2048SignatureOnly.TryGetCertificateWithPrivateKey()
+                X509Certificate2 cert = Certificates
+                    .RSA2048SignatureOnly
+                    .TryGetCertificateWithPrivateKey()
             )
             {
                 CmsSigner signer;
@@ -668,8 +681,9 @@ namespace System.Security.Cryptography.Pkcs.Tests
             byte[] cmsBytes;
 
             using (
-                X509Certificate2 cert =
-                    Certificates.RSA2048SignatureOnly.TryGetCertificateWithPrivateKey()
+                X509Certificate2 cert = Certificates
+                    .RSA2048SignatureOnly
+                    .TryGetCertificateWithPrivateKey()
             )
             using (X509Certificate2 pubOnly = new X509Certificate2(cert.RawDataMemory.Span))
             using (RSA rsa = cert.GetRSAPrivateKey())
@@ -700,8 +714,9 @@ namespace System.Security.Cryptography.Pkcs.Tests
             SignedCms cms = new SignedCms(content);
 
             using (
-                X509Certificate2 cert =
-                    Certificates.RSA2048SignatureOnly.TryGetCertificateWithPrivateKey()
+                X509Certificate2 cert = Certificates
+                    .RSA2048SignatureOnly
+                    .TryGetCertificateWithPrivateKey()
             )
             {
                 CmsSigner signer = new CmsSigner(
@@ -723,8 +738,9 @@ namespace System.Security.Cryptography.Pkcs.Tests
             byte[] cmsBytes;
 
             using (
-                X509Certificate2 cert =
-                    Certificates.RSA2048SignatureOnly.TryGetCertificateWithPrivateKey()
+                X509Certificate2 cert = Certificates
+                    .RSA2048SignatureOnly
+                    .TryGetCertificateWithPrivateKey()
             )
             {
                 CmsSigner signer = new CmsSigner(

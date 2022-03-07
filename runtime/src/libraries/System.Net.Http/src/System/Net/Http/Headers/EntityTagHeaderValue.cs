@@ -93,11 +93,9 @@ namespace System.Net.Http.Headers
         public static EntityTagHeaderValue Parse(string? input)
         {
             int index = 0;
-            return (EntityTagHeaderValue)GenericHeaderParser.SingleValueEntityTagParser.ParseValue(
-                input,
-                null,
-                ref index
-            );
+            return (EntityTagHeaderValue)GenericHeaderParser
+                .SingleValueEntityTagParser
+                .ParseValue(input, null, ref index);
         }
 
         public static bool TryParse(
@@ -109,12 +107,9 @@ namespace System.Net.Http.Headers
             parsedValue = null;
 
             if (
-                GenericHeaderParser.SingleValueEntityTagParser.TryParseValue(
-                    input,
-                    null,
-                    ref index,
-                    out object? output
-                )
+                GenericHeaderParser
+                    .SingleValueEntityTagParser
+                    .TryParseValue(input, null, ref index, out object? output)
             )
             {
                 parsedValue = (EntityTagHeaderValue)output!;

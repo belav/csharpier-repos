@@ -35,10 +35,9 @@ namespace System.Diagnostics
                         Process.GetUntruncatedProcessName(ref parsedStat),
                         StringComparison.OrdinalIgnoreCase
                     )
-                    && Interop.procfs.TryReadStatusFile(
-                        pid,
-                        out Interop.procfs.ParsedStatus parsedStatus
-                    )
+                    && Interop
+                        .procfs
+                        .TryReadStatusFile(pid, out Interop.procfs.ParsedStatus parsedStatus)
                 )
                 {
                     ProcessInfo processInfo = ProcessManager.CreateProcessInfo(

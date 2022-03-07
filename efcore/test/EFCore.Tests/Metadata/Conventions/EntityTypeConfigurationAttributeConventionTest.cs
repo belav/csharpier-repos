@@ -47,9 +47,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                     nameof(CustomerConfiguration),
                     nameof(InvalidCustomer)
                 ),
-                Assert.Throws<InvalidOperationException>(
-                    () => builder.Entity<InvalidCustomer>()
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(() => builder.Entity<InvalidCustomer>())
+                    .Message
             );
         }
 

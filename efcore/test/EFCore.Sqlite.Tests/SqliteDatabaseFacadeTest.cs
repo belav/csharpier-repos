@@ -18,7 +18,8 @@ namespace Microsoft.EntityFrameworkCore
                             .AddEntityFrameworkSqlite()
                             .BuildServiceProvider(validateScopes: true)
                     )
-                    .UseSqlite("Database=Maltesers").Options
+                    .UseSqlite("Database=Maltesers")
+                    .Options
             );
             Assert.True(context.Database.IsSqlite());
         }
@@ -29,7 +30,8 @@ namespace Microsoft.EntityFrameworkCore
             using var context = new ProviderContext(
                 new DbContextOptionsBuilder()
                     .UseInternalServiceProvider(InMemoryFixture.DefaultServiceProvider)
-                    .UseInMemoryDatabase("Maltesers").Options
+                    .UseInMemoryDatabase("Maltesers")
+                    .Options
             );
             Assert.False(context.Database.IsSqlite());
         }

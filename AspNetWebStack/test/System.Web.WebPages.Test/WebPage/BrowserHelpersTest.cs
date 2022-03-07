@@ -38,9 +38,9 @@ namespace System.Web.WebPages.Test
                 testUserAgent
             );
             HttpContextBase context =
-                CookieBrowserOverrideStoreTest.CreateCookieContext(
-                    requestCookie: existingOverrideCookie
-                ).Object;
+                CookieBrowserOverrideStoreTest
+                    .CreateCookieContext(requestCookie: existingOverrideCookie)
+                    .Object;
 
             // Act & Assert
             Assert.Equal(testUserAgent, context.GetOverriddenUserAgent());
@@ -120,9 +120,11 @@ namespace System.Web.WebPages.Test
             context.Setup(c => c.Request.Browser.IsMobileDevice).Returns(false);
 
             // Act
-            context.Object.SetOverriddenBrowser(
-                "Mozilla/5.0 (iPhone; U; CPU iPhone OS 3_0 like Mac OS X; en-us) AppleWebKit/528.18 (KHTML, like Gecko) Version/4.0 Mobile/7A341 Safari/528.16"
-            );
+            context
+                .Object
+                .SetOverriddenBrowser(
+                    "Mozilla/5.0 (iPhone; U; CPU iPhone OS 3_0 like Mac OS X; en-us) AppleWebKit/528.18 (KHTML, like Gecko) Version/4.0 Mobile/7A341 Safari/528.16"
+                );
 
             // Assert
             Assert.True(
@@ -198,9 +200,9 @@ namespace System.Web.WebPages.Test
                 mobileUserAgent
             );
             HttpContextBase context =
-                CookieBrowserOverrideStoreTest.CreateCookieContext(
-                    requestCookie: existingOverrideCookie
-                ).Object;
+                CookieBrowserOverrideStoreTest
+                    .CreateCookieContext(requestCookie: existingOverrideCookie)
+                    .Object;
 
             // Act & Assert
             Assert.True(context.GetOverriddenBrowser(CreateBrowserThroughFactory).IsMobileDevice);
@@ -340,9 +342,9 @@ namespace System.Web.WebPages.Test
                 mobileUserAgent
             );
             HttpContextBase context =
-                CookieBrowserOverrideStoreTest.CreateCookieContext(
-                    requestCookie: existingOverrideCookie
-                ).Object;
+                CookieBrowserOverrideStoreTest
+                    .CreateCookieContext(requestCookie: existingOverrideCookie)
+                    .Object;
             Mock.Get(context).Setup(c => c.Request.UserAgent).Returns(mobileUserAgent);
             Mock.Get(context)
                 .Setup(c => c.Request.Browser)

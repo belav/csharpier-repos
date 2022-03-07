@@ -112,9 +112,11 @@ namespace System.Net.NetworkInformation
                 IPAddress ipAddress = IPAddressUtil.GetIPAddressFromNativeInfo(ipAddr);
                 if (!IPAddressUtil.IsMulticast(ipAddress))
                 {
-                    context._collection.InternalAdd(
-                        new UnixUnicastIPAddressInformation(ipAddress, ipAddr->PrefixLength)
-                    );
+                    context
+                        ._collection
+                        .InternalAdd(
+                            new UnixUnicastIPAddressInformation(ipAddress, ipAddr->PrefixLength)
+                        );
                 }
             }
             catch (Exception e)
@@ -137,9 +139,11 @@ namespace System.Net.NetworkInformation
                 IPAddress ipAddress = IPAddressUtil.GetIPAddressFromNativeInfo(ipAddr);
                 if (!IPAddressUtil.IsMulticast(ipAddress))
                 {
-                    context._collection.InternalAdd(
-                        new UnixUnicastIPAddressInformation(ipAddress, ipAddr->PrefixLength)
-                    );
+                    context
+                        ._collection
+                        .InternalAdd(
+                            new UnixUnicastIPAddressInformation(ipAddress, ipAddr->PrefixLength)
+                        );
                 }
             }
             catch (Exception e)
@@ -155,12 +159,14 @@ namespace System.Net.NetworkInformation
             context._exceptions = null;
 
             // Ignore link-layer addresses that are discovered; don't create a callback.
-            Interop.Sys.EnumerateInterfaceAddresses(
-                Unsafe.AsPointer(ref context),
-                &ProcessIpv4Address,
-                &ProcessIpv6Address,
-                null
-            );
+            Interop
+                .Sys
+                .EnumerateInterfaceAddresses(
+                    Unsafe.AsPointer(ref context),
+                    &ProcessIpv4Address,
+                    &ProcessIpv6Address,
+                    null
+                );
 
             if (context._exceptions != null)
                 throw new NetworkInformationException(

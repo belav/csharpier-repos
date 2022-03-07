@@ -103,7 +103,8 @@ namespace System.Net.NetworkInformation
 
                 try
                 {
-                    await processCompletion.Task
+                    await processCompletion
+                        .Task
                         .WaitAsync(TimeSpan.FromMilliseconds(timeout))
                         .ConfigureAwait(false);
                 }

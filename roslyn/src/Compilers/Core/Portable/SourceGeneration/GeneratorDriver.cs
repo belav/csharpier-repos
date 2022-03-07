@@ -103,9 +103,9 @@ namespace Microsoft.CodeAnalysis
             var newState = _state.With(
                 sourceGenerators: _state.Generators.AddRange(filteredGenerators),
                 incrementalGenerators: _state.IncrementalGenerators.AddRange(incrementalGenerators),
-                generatorStates: _state.GeneratorStates.AddRange(
-                    new GeneratorState[filteredGenerators.Length]
-                )
+                generatorStates: _state
+                    .GeneratorStates
+                    .AddRange(new GeneratorState[filteredGenerators.Length])
             );
             return FromState(newState);
         }
@@ -182,17 +182,19 @@ namespace Microsoft.CodeAnalysis
 
         public GeneratorDriverRunResult GetRunResult()
         {
-            var results = _state.Generators.ZipAsArray(
-                _state.GeneratorStates,
-                (generator, generatorState) =>
-                    new GeneratorRunResult(
-                        generator,
-                        diagnostics: generatorState.Diagnostics,
-                        exception: generatorState.Exception,
-                        generatedSources: getGeneratorSources(generatorState),
-                        elapsedTime: generatorState.ElapsedTime
-                    )
-            );
+            var results = _state
+                .Generators
+                .ZipAsArray(
+                    _state.GeneratorStates,
+                    (generator, generatorState) =>
+                        new GeneratorRunResult(
+                            generator,
+                            diagnostics: generatorState.Diagnostics,
+                            exception: generatorState.Exception,
+                            generatedSources: getGeneratorSources(generatorState),
+                            elapsedTime: generatorState.ElapsedTime
+                        )
+                );
             return new GeneratorDriverRunResult(results, _state.RunTime);
 
             static ImmutableArray<GeneratedSourceResult> getGeneratorSources(
@@ -343,8 +345,9 @@ namespace Microsoft.CodeAnalysis
                     continue;
                 }
 
-                using var generatorTimer =
-                    CodeAnalysisEventSource.Log.CreateSingleGeneratorRunTimer(state.Generators[i]);
+                using var generatorTimer = CodeAnalysisEventSource
+                    .Log
+                    .CreateSingleGeneratorRunTimer(state.Generators[i]);
                 try
                 {
                     var context = UpdateOutputs(

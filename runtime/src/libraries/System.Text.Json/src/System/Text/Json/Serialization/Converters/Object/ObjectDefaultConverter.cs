@@ -387,8 +387,9 @@ namespace System.Text.Json.Serialization.Converters
                     state.Current.ProcessedStartToken = true;
                 }
 
-                List<KeyValuePair<string, JsonPropertyInfo?>>? propertyList =
-                    jsonTypeInfo.PropertyCache!.List!;
+                List<KeyValuePair<string, JsonPropertyInfo?>>? propertyList = jsonTypeInfo
+                    .PropertyCache!
+                    .List!;
                 while (state.Current.EnumeratorIndex < propertyList.Count)
                 {
                     JsonPropertyInfo? jsonPropertyInfo =

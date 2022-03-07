@@ -82,12 +82,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Organizing.Organizers
                 {
                     // Fields with initializers can't be reordered relative to
                     // themselves due to ordering issues.
-                    var xHasInitializer = ((FieldDeclarationSyntax)x).Declaration.Variables.Any(
-                        v => v.Initializer != null
-                    );
-                    var yHasInitializer = ((FieldDeclarationSyntax)y).Declaration.Variables.Any(
-                        v => v.Initializer != null
-                    );
+                    var xHasInitializer = ((FieldDeclarationSyntax)x)
+                        .Declaration
+                        .Variables
+                        .Any(v => v.Initializer != null);
+                    var yHasInitializer = ((FieldDeclarationSyntax)y)
+                        .Declaration
+                        .Variables
+                        .Any(v => v.Initializer != null);
                     if (xHasInitializer && yHasInitializer)
                     {
                         return 0;

@@ -598,12 +598,14 @@ namespace System.Net
             // Unwrap() that it's worth it to just rely on Task.Run and accept the closure/delegate.
             return Task.Run(
                 () =>
-                    Task<Stream>.Factory.FromAsync(
-                        (callback, state) =>
-                            ((WebRequest)state!).BeginGetRequestStream(callback, state),
-                        iar => ((WebRequest)iar.AsyncState!).EndGetRequestStream(iar),
-                        this
-                    )
+                    Task<Stream>
+                        .Factory
+                        .FromAsync(
+                            (callback, state) =>
+                                ((WebRequest)state!).BeginGetRequestStream(callback, state),
+                            iar => ((WebRequest)iar.AsyncState!).EndGetRequestStream(iar),
+                            this
+                        )
             );
         }
 
@@ -612,11 +614,14 @@ namespace System.Net
             // See comment in GetRequestStreamAsync().  Same logic applies here.
             return Task.Run(
                 () =>
-                    Task<WebResponse>.Factory.FromAsync(
-                        (callback, state) => ((WebRequest)state!).BeginGetResponse(callback, state),
-                        iar => ((WebRequest)iar.AsyncState!).EndGetResponse(iar),
-                        this
-                    )
+                    Task<WebResponse>
+                        .Factory
+                        .FromAsync(
+                            (callback, state) =>
+                                ((WebRequest)state!).BeginGetResponse(callback, state),
+                            iar => ((WebRequest)iar.AsyncState!).EndGetResponse(iar),
+                            this
+                        )
             );
         }
 

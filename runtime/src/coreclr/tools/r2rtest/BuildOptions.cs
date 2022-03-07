@@ -158,9 +158,11 @@ namespace R2RTest
             string coreRunPath = Path.Combine(coreRunDir, coreRunExe);
             if (!File.Exists(coreRunPath))
             {
-                Console.Error.WriteLine(
-                    $@"{coreRunExe} not found in {coreRunDir}, explicit exe launches won't work"
-                );
+                Console
+                    .Error
+                    .WriteLine(
+                        $@"{coreRunExe} not found in {coreRunDir}, explicit exe launches won't work"
+                    );
             }
             return coreRunPath;
         }

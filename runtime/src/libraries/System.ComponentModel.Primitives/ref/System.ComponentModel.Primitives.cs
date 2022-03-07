@@ -263,53 +263,89 @@ namespace System.ComponentModel
     {
         public DesignerAttribute(
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembers(
-                System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
+                System
+                    .Diagnostics
+                    .CodeAnalysis
+                    .DynamicallyAccessedMemberTypes
+                    .PublicParameterlessConstructor
             )]
                 string designerTypeName
         ) { }
 
         public DesignerAttribute(
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembers(
-                System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
+                System
+                    .Diagnostics
+                    .CodeAnalysis
+                    .DynamicallyAccessedMemberTypes
+                    .PublicParameterlessConstructor
             )]
                 string designerTypeName,
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembers(
-                System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
+                System
+                    .Diagnostics
+                    .CodeAnalysis
+                    .DynamicallyAccessedMemberTypes
+                    .PublicParameterlessConstructor
             )]
                 string designerBaseTypeName
         ) { }
 
         public DesignerAttribute(
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembers(
-                System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
+                System
+                    .Diagnostics
+                    .CodeAnalysis
+                    .DynamicallyAccessedMemberTypes
+                    .PublicParameterlessConstructor
             )]
                 string designerTypeName,
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembers(
-                System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
+                System
+                    .Diagnostics
+                    .CodeAnalysis
+                    .DynamicallyAccessedMemberTypes
+                    .PublicParameterlessConstructor
             )]
                 System.Type designerBaseType
         ) { }
 
         public DesignerAttribute(
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembers(
-                System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
+                System
+                    .Diagnostics
+                    .CodeAnalysis
+                    .DynamicallyAccessedMemberTypes
+                    .PublicParameterlessConstructor
             )]
                 System.Type designerType
         ) { }
 
         public DesignerAttribute(
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembers(
-                System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
+                System
+                    .Diagnostics
+                    .CodeAnalysis
+                    .DynamicallyAccessedMemberTypes
+                    .PublicParameterlessConstructor
             )]
                 System.Type designerType,
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembers(
-                System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
+                System
+                    .Diagnostics
+                    .CodeAnalysis
+                    .DynamicallyAccessedMemberTypes
+                    .PublicParameterlessConstructor
             )]
                 System.Type designerBaseType
         ) { }
 
         [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembers(
-            System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
+            System
+                .Diagnostics
+                .CodeAnalysis
+                .DynamicallyAccessedMemberTypes
+                .PublicParameterlessConstructor
         )]
         public string DesignerBaseTypeName
         {
@@ -317,7 +353,11 @@ namespace System.ComponentModel
         }
 
         [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembers(
-            System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
+            System
+                .Diagnostics
+                .CodeAnalysis
+                .DynamicallyAccessedMemberTypes
+                .PublicParameterlessConstructor
         )]
         public string DesignerTypeName
         {

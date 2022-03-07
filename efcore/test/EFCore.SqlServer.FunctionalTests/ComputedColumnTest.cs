@@ -21,14 +21,16 @@ namespace Microsoft.EntityFrameworkCore
             context.Database.EnsureCreatedResiliently();
 
             var entity =
-                context.Add(
-                    new Entity
-                    {
-                        P1 = 20,
-                        P2 = 30,
-                        P3 = 80
-                    }
-                ).Entity;
+                context
+                    .Add(
+                        new Entity
+                        {
+                            P1 = 20,
+                            P2 = 30,
+                            P3 = 80
+                        }
+                    )
+                    .Entity;
 
             context.SaveChanges();
 
@@ -148,9 +150,16 @@ namespace Microsoft.EntityFrameworkCore
             context.Database.EnsureCreatedResiliently();
 
             var entity =
-                context.EnumItems.Add(
-                    new EnumItem { FlagEnum = FlagEnum.AValue, OptionalFlagEnum = FlagEnum.BValue }
-                ).Entity;
+                context
+                    .EnumItems
+                    .Add(
+                        new EnumItem
+                        {
+                            FlagEnum = FlagEnum.AValue,
+                            OptionalFlagEnum = FlagEnum.BValue
+                        }
+                    )
+                    .Entity;
             context.SaveChanges();
 
             Assert.Equal(FlagEnum.AValue | FlagEnum.BValue, entity.CalculatedFlagEnum);

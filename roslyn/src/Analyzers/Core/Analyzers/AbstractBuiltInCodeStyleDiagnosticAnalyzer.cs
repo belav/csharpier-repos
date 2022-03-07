@@ -187,7 +187,8 @@ namespace Microsoft.CodeAnalysis.CodeStyle
             string language
         )
             : this(
-                supportedDiagnosticsWithLangaugeSpecificOptions.Keys
+                supportedDiagnosticsWithLangaugeSpecificOptions
+                    .Keys
                     .Concat(supportedDiagnosticsWithPerLanguageOptions.Keys)
                     .ToImmutableArray()
             )

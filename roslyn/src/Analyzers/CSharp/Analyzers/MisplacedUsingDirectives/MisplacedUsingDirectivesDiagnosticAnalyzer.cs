@@ -62,7 +62,8 @@ namespace Microsoft.CodeAnalysis.CSharp.MisplacedUsingDirectives
 
         public MisplacedUsingDirectivesDiagnosticAnalyzer()
             : base(
-                ImmutableDictionary<DiagnosticDescriptor, ILanguageSpecificOption>.Empty
+                ImmutableDictionary<DiagnosticDescriptor, ILanguageSpecificOption>
+                    .Empty
                     .Add(
                         s_outsideDiagnosticDescriptor,
                         CSharpCodeStyleOptions.PreferredUsingDirectivePlacement
@@ -92,11 +93,13 @@ namespace Microsoft.CodeAnalysis.CSharp.MisplacedUsingDirectives
 
         private void AnalyzeNamespaceNode(SyntaxNodeAnalysisContext context)
         {
-            var option = context.Options.GetOption(
-                CSharpCodeStyleOptions.PreferredUsingDirectivePlacement,
-                context.Node.SyntaxTree,
-                context.CancellationToken
-            );
+            var option = context
+                .Options
+                .GetOption(
+                    CSharpCodeStyleOptions.PreferredUsingDirectivePlacement,
+                    context.Node.SyntaxTree,
+                    context.CancellationToken
+                );
             if (option.Value != AddImportPlacement.OutsideNamespace)
                 return;
 
@@ -111,11 +114,13 @@ namespace Microsoft.CodeAnalysis.CSharp.MisplacedUsingDirectives
 
         private static void AnalyzeCompilationUnitNode(SyntaxNodeAnalysisContext context)
         {
-            var option = context.Options.GetOption(
-                CSharpCodeStyleOptions.PreferredUsingDirectivePlacement,
-                context.Node.SyntaxTree,
-                context.CancellationToken
-            );
+            var option = context
+                .Options
+                .GetOption(
+                    CSharpCodeStyleOptions.PreferredUsingDirectivePlacement,
+                    context.Node.SyntaxTree,
+                    context.CancellationToken
+                );
             var compilationUnit = (CompilationUnitSyntax)context.Node;
 
             if (

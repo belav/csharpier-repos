@@ -78,7 +78,10 @@ namespace System.Net
                         eppStruct.pwszServerName = (ushort*)namePtr;
                         cppStruct.dwFlags |= (
                             Interop.Crypt32.CertChainPolicyIgnoreFlags.CERT_CHAIN_POLICY_IGNORE_ALL
-                            & ~Interop.Crypt32.CertChainPolicyIgnoreFlags.CERT_CHAIN_POLICY_IGNORE_INVALID_NAME_FLAG
+                            & ~Interop
+                                .Crypt32
+                                .CertChainPolicyIgnoreFlags
+                                .CERT_CHAIN_POLICY_IGNORE_INVALID_NAME_FLAG
                         );
 
                         SafeX509ChainHandle chainContext = chain.SafeHandle!;
@@ -107,12 +110,14 @@ namespace System.Net
             Interop.Crypt32.CERT_CHAIN_POLICY_STATUS status = default;
             status.cbSize = (uint)sizeof(Interop.Crypt32.CERT_CHAIN_POLICY_STATUS);
 
-            bool errorCode = Interop.Crypt32.CertVerifyCertificateChainPolicy(
-                (IntPtr)Interop.Crypt32.CertChainPolicy.CERT_CHAIN_POLICY_SSL,
-                chainContext,
-                ref cpp,
-                ref status
-            );
+            bool errorCode = Interop
+                .Crypt32
+                .CertVerifyCertificateChainPolicy(
+                    (IntPtr)Interop.Crypt32.CertChainPolicy.CERT_CHAIN_POLICY_SSL,
+                    chainContext,
+                    ref cpp,
+                    ref status
+                );
 
             if (NetEventSource.Log.IsEnabled())
                 NetEventSource.Info(

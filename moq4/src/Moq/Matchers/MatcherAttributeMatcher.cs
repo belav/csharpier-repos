@@ -53,7 +53,8 @@ namespace Moq.Matchers
                 // passing generic type arguments for the query.
                 var genericArgs = call.Method.GetGenericArguments();
 
-                method = call.Method.DeclaringType
+                method = call.Method
+                    .DeclaringType
                     .GetMethods(call.Method.Name)
                     .Where(
                         m =>
@@ -61,7 +62,8 @@ namespace Moq.Matchers
                             && m.GetGenericArguments().Length
                                 == call.Method
                                     .GetGenericMethodDefinition()
-                                    .GetGenericArguments().Length
+                                    .GetGenericArguments()
+                                    .Length
                             && expectedParametersTypes.SequenceEqual(
                                 m.MakeGenericMethod(genericArgs)
                                     .GetParameters()
@@ -73,10 +75,9 @@ namespace Moq.Matchers
             }
             else
             {
-                method = call.Method.DeclaringType.GetMethod(
-                    call.Method.Name,
-                    expectedParametersTypes
-                );
+                method = call.Method
+                    .DeclaringType
+                    .GetMethod(call.Method.Name, expectedParametersTypes);
             }
 
             // throw if validatorMethod doesn't exists
@@ -99,9 +100,9 @@ namespace Moq.Matchers
         public bool Matches(object argument, Type parameterType)
         {
             // use matcher Expression to get extra arguments
-            var extraArgs = this.expression.Arguments.Select(
-                ae => ((ConstantExpression)ae.PartialEval()).Value
-            );
+            var extraArgs = this.expression
+                .Arguments
+                .Select(ae => ((ConstantExpression)ae.PartialEval()).Value);
             var args = new[] { argument }.Concat(extraArgs).ToArray();
             // for static and non-static method
             var instance =

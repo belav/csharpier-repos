@@ -100,9 +100,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             // it uninitialized.
 
             var sourceMethodTypeParameters = sourceMethod.TypeParameters;
-            var allSourceTypeParameters = container.SourceTypeParameters.Concat(
-                sourceMethodTypeParameters
-            );
+            var allSourceTypeParameters = container
+                .SourceTypeParameters
+                .Concat(sourceMethodTypeParameters);
 
             var getTypeMap = new Func<TypeMap>(() => this.TypeMap);
             _typeParameters = sourceMethodTypeParameters.SelectAsArray(

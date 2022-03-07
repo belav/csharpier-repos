@@ -655,7 +655,8 @@ public class XmlSerializerOutputFormatterTest
         var request = httpContext.Request;
         request.Headers["Accept-Charset"] = MediaTypeHeaderValue
             .Parse(contentType)
-            .Charset.ToString();
+            .Charset
+            .ToString();
         request.ContentType = contentType;
         httpContext.Response.Body = new MemoryStream();
         httpContext.RequestServices = new ServiceCollection()

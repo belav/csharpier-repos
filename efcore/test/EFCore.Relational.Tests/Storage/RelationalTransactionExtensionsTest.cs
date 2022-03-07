@@ -59,9 +59,9 @@ namespace Microsoft.EntityFrameworkCore.Storage
 
             Assert.Equal(
                 RelationalStrings.RelationalNotInUse,
-                Assert.Throws<InvalidOperationException>(
-                    () => transaction.GetDbTransaction()
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(() => transaction.GetDbTransaction())
+                    .Message
             );
         }
 

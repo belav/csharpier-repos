@@ -50,8 +50,10 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
                 )
                 .ConfigureAwait(false);
 
-            var quickInfoService =
-                document.Project.LanguageServices.GetRequiredService<QuickInfoService>();
+            var quickInfoService = document
+                .Project
+                .LanguageServices
+                .GetRequiredService<QuickInfoService>();
             var info = await quickInfoService
                 .GetQuickInfoAsync(document, position, cancellationToken)
                 .ConfigureAwait(false);

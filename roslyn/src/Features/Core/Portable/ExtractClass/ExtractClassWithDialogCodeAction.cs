@@ -54,7 +54,12 @@ namespace Microsoft.CodeAnalysis.ExtractClass
         {
             var extractClassService =
                 _service
-                ?? _document.Project.Solution.Workspace.Services.GetRequiredService<IExtractClassOptionsService>();
+                ?? _document
+                    .Project
+                    .Solution
+                    .Workspace
+                    .Services
+                    .GetRequiredService<IExtractClassOptionsService>();
             return extractClassService
                 .GetExtractClassOptionsAsync(_document, _selectedType, _selectedMember)
                 .WaitAndGetResult_CanCallOnBackground(cancellationToken);

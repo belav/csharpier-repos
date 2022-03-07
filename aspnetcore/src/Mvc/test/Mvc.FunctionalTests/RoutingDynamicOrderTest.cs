@@ -38,7 +38,10 @@ public class RoutingDynamicOrderTest
             b =>
                 b.UseSetting(
                     "Scenario",
-                    RoutingWebSite.StartupForDynamicOrder.DynamicOrderScenarios.AttributeRouteDynamicRoute
+                    RoutingWebSite
+                        .StartupForDynamicOrder
+                        .DynamicOrderScenarios
+                        .AttributeRouteDynamicRoute
                 )
         );
 
@@ -99,7 +102,10 @@ public class RoutingDynamicOrderTest
             b =>
                 b.UseSetting(
                     "Scenario",
-                    RoutingWebSite.StartupForDynamicOrder.DynamicOrderScenarios.ConventionalRouteDynamicRoute
+                    RoutingWebSite
+                        .StartupForDynamicOrder
+                        .DynamicOrderScenarios
+                        .ConventionalRouteDynamicRoute
                 )
         );
 
@@ -129,7 +135,10 @@ public class RoutingDynamicOrderTest
             b =>
                 b.UseSetting(
                     "Scenario",
-                    RoutingWebSite.StartupForDynamicOrder.DynamicOrderScenarios.ConventionalRouteDynamicRoute
+                    RoutingWebSite
+                        .StartupForDynamicOrder
+                        .DynamicOrderScenarios
+                        .ConventionalRouteDynamicRoute
                 )
         );
 
@@ -160,7 +169,10 @@ public class RoutingDynamicOrderTest
             b =>
                 b.UseSetting(
                     "Scenario",
-                    RoutingWebSite.StartupForDynamicOrder.DynamicOrderScenarios.DynamicControllerAndPages
+                    RoutingWebSite
+                        .StartupForDynamicOrder
+                        .DynamicOrderScenarios
+                        .DynamicControllerAndPages
                 )
         );
 
@@ -189,7 +201,10 @@ public class RoutingDynamicOrderTest
             b =>
                 b.UseSetting(
                     "Scenario",
-                    RoutingWebSite.StartupForDynamicOrder.DynamicOrderScenarios.DynamicControllerAndPages
+                    RoutingWebSite
+                        .StartupForDynamicOrder
+                        .DynamicOrderScenarios
+                        .DynamicControllerAndPages
                 )
         );
 

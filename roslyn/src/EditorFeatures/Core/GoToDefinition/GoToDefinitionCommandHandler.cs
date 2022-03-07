@@ -104,10 +104,12 @@ namespace Microsoft.CodeAnalysis.Editor.GoToDefinition
             string errorMessage = null;
 
             using (
-                context.OperationContext.AddScope(
-                    allowCancellation: true,
-                    EditorFeaturesResources.Navigating_to_definition
-                )
+                context
+                    .OperationContext
+                    .AddScope(
+                        allowCancellation: true,
+                        EditorFeaturesResources.Navigating_to_definition
+                    )
             )
             {
                 if (

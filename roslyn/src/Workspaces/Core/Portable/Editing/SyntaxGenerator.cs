@@ -985,12 +985,16 @@ namespace Microsoft.CodeAnalysis.Editing
         /// </summary>
         public SyntaxNode Attribute(AttributeData attribute)
         {
-            var args = attribute.ConstructorArguments
+            var args = attribute
+                .ConstructorArguments
                 .Select(a => this.AttributeArgument(this.TypedConstantExpression(a)))
                 .Concat(
-                    attribute.NamedArguments.Select(
-                        n => this.AttributeArgument(n.Key, this.TypedConstantExpression(n.Value))
-                    )
+                    attribute
+                        .NamedArguments
+                        .Select(
+                            n =>
+                                this.AttributeArgument(n.Key, this.TypedConstantExpression(n.Value))
+                        )
                 )
                 .ToBoxedImmutableArray();
 

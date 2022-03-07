@@ -71,10 +71,12 @@ internal class Startup
                     else
                     {
                         context.Response.StatusCode = 404;
-                        return context.Response.WriteAsync(
-                            $"The server is configured only to "
-                                + $"handle request URIs within the PathBase '{pathBase}'."
-                        );
+                        return context
+                            .Response
+                            .WriteAsync(
+                                $"The server is configured only to "
+                                    + $"handle request URIs within the PathBase '{pathBase}'."
+                            );
                     }
                 }
             );

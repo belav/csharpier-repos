@@ -126,10 +126,12 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Interactive
             }
 
             textView.Selection.Select(surfaceBufferSpan.Start, surfaceBufferSpan.End);
-            textView.ViewScroller.EnsureSpanVisible(
-                surfaceBufferSpan.SnapshotSpan,
-                EnsureSpanVisibleOptions.AlwaysCenter
-            );
+            textView
+                .ViewScroller
+                .EnsureSpanVisible(
+                    surfaceBufferSpan.SnapshotSpan,
+                    EnsureSpanVisibleOptions.AlwaysCenter
+                );
 
             // Moving the caret must be the last operation involving surfaceBufferSpan because
             // it might update the version number of textView.TextSnapshot (VB does line commit

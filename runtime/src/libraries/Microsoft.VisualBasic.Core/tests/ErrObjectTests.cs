@@ -109,34 +109,40 @@ namespace Microsoft.VisualBasic.Tests
             ProjectData.SetProjectError(new ArgumentException());
             Assert.Equal(
                 "#3",
-                Assert.Throws<OutOfMemoryException>(
-                    () => Information.Err().Raise(7, HelpContext: 3)
-                ).HelpLink
+                Assert
+                    .Throws<OutOfMemoryException>(() => Information.Err().Raise(7, HelpContext: 3))
+                    .HelpLink
             );
 
             ProjectData.SetProjectError(new ArgumentException());
             Assert.Equal(
                 "MyFile1#3",
-                Assert.Throws<OutOfMemoryException>(
-                    () => Information.Err().Raise(7, HelpFile: "MyFile1")
-                ).HelpLink
+                Assert
+                    .Throws<OutOfMemoryException>(
+                        () => Information.Err().Raise(7, HelpFile: "MyFile1")
+                    )
+                    .HelpLink
             );
 
             ProjectData.ClearProjectError();
             ProjectData.SetProjectError(new ArgumentException());
             Assert.Equal(
                 "MyFile2#0",
-                Assert.Throws<OutOfMemoryException>(
-                    () => Information.Err().Raise(7, HelpFile: "MyFile2")
-                ).HelpLink
+                Assert
+                    .Throws<OutOfMemoryException>(
+                        () => Information.Err().Raise(7, HelpFile: "MyFile2")
+                    )
+                    .HelpLink
             );
 
             ProjectData.SetProjectError(new ArgumentException());
             Assert.Equal(
                 "MyFile3#3",
-                Assert.Throws<OutOfMemoryException>(
-                    () => Information.Err().Raise(7, HelpContext: 3, HelpFile: "MyFile3")
-                ).HelpLink
+                Assert
+                    .Throws<OutOfMemoryException>(
+                        () => Information.Err().Raise(7, HelpContext: 3, HelpFile: "MyFile3")
+                    )
+                    .HelpLink
             );
         }
 

@@ -341,16 +341,12 @@ namespace System.Xml.Tests
         [Variation("Get Atomized String with front multi-padded", Pri = 0)]
         public int Variation_8()
         {
-            object objActual = DataReader.NameTable.Get(
-                chValWFrExtras,
-                chValWFrExtras.Length - strVal.Length,
-                strVal.Length
-            );
-            object objActual1 = DataReader.NameTable.Get(
-                chValWFrExtras,
-                chValWFrExtras.Length - strVal.Length,
-                strVal.Length
-            );
+            object objActual = DataReader
+                .NameTable
+                .Get(chValWFrExtras, chValWFrExtras.Length - strVal.Length, strVal.Length);
+            object objActual1 = DataReader
+                .NameTable
+                .Get(chValWFrExtras, chValWFrExtras.Length - strVal.Length, strVal.Length);
 
             CError.Compare(objActual, objActual1, CurVariation.Desc);
             VerifyNameTable(
@@ -1048,11 +1044,9 @@ namespace System.Xml.Tests
             object objAdded = DataReader.NameTable.Add(strEmpty);
             object objAdded1 = DataReader.NameTable.Add(strEmpty.ToCharArray(), 0, strEmpty.Length);
 
-            object objActual1 = DataReader.NameTable.Get(
-                strEmpty.ToCharArray(),
-                0,
-                strEmpty.Length
-            );
+            object objActual1 = DataReader
+                .NameTable
+                .Get(strEmpty.ToCharArray(), 0, strEmpty.Length);
             object objActual2 = DataReader.NameTable.Get(strEmpty);
 
             CError.WriteLine("String " + DataReader.NameTable.Get(strEmpty));

@@ -136,7 +136,8 @@ namespace Microsoft.CodeAnalysis.MSBuild.UnitTests
             var project = await workspace.OpenProjectAsync(projectFilePath);
             AssertFailures(workspace);
 
-            var hasFacades = project.MetadataReferences
+            var hasFacades = project
+                .MetadataReferences
                 .OfType<PortableExecutableReference>()
                 .Any(r => r.FilePath.Contains("Facade"));
             Assert.True(
@@ -145,7 +146,8 @@ namespace Microsoft.CodeAnalysis.MSBuild.UnitTests
                     + Environment.NewLine
                     + string.Join(
                         Environment.NewLine,
-                        project.MetadataReferences
+                        project
+                            .MetadataReferences
                             .OfType<PortableExecutableReference>()
                             .Select(r => r.FilePath)
                     )
@@ -239,7 +241,8 @@ namespace Microsoft.CodeAnalysis.MSBuild.UnitTests
         }
 
         private static MetadataReference GetMetadataReference(Project project, string name) =>
-            project.MetadataReferences
+            project
+                .MetadataReferences
                 .OfType<PortableExecutableReference>()
                 .SingleOrDefault(mr => mr.FilePath.Contains(name));
 
@@ -247,7 +250,8 @@ namespace Microsoft.CodeAnalysis.MSBuild.UnitTests
             Project project,
             string aliasName
         ) =>
-            project.MetadataReferences
+            project
+                .MetadataReferences
                 .OfType<PortableExecutableReference>()
                 .SingleOrDefault(
                     mr =>
@@ -299,10 +303,12 @@ namespace Microsoft.CodeAnalysis.MSBuild.UnitTests
 
             // Exactly one of them should have a compilation to the other. Which one it is, is unspecced
             Assert.True(
-                compilation1.References
+                compilation1
+                    .References
                     .OfType<CompilationReference>()
                     .Any(c => c.Compilation == compilation2)
-                    || compilation2.References
+                    || compilation2
+                        .References
                         .OfType<CompilationReference>()
                         .Any(c => c.Compilation == compilation1)
             );
@@ -1659,8 +1665,9 @@ class C1
             Assert.Equal(expected, e.Message);
         }
 
-        private readonly IEnumerable<Assembly> _defaultAssembliesWithoutCSharp =
-            MefHostServices.DefaultAssemblies.Where(a => !a.FullName.Contains("CSharp"));
+        private readonly IEnumerable<Assembly> _defaultAssembliesWithoutCSharp = MefHostServices
+            .DefaultAssemblies
+            .Where(a => !a.FullName.Contains("CSharp"));
 
         [
             ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
@@ -3071,7 +3078,8 @@ class C1
             // reload project & solution to prove project file change was good
             using var workspaceB = CreateMSBuildWorkspace();
             var solutionB = await workspaceB.OpenSolutionAsync(solutionFilePath);
-            var projectB = workspaceB.CurrentSolution
+            var projectB = workspaceB
+                .CurrentSolution
                 .GetProjectsByName("CSharpProject")
                 .FirstOrDefault();
             var documentsB = projectB.Documents.ToList();
@@ -3163,7 +3171,8 @@ class C1
             var documents = solution
                 .GetProjectsByName("CSharpProject")
                 .FirstOrDefault()
-                .Documents.ToList();
+                .Documents
+                .ToList();
             var document = documents.Single(d => d.Name.Contains("CSharpClass"));
             var text = await document.GetTextAsync();
             var newText = SourceText.From("using System.Diagnostics;\r\n" + text.ToString());
@@ -3196,7 +3205,8 @@ class C1
             var documents = solution
                 .GetProjectsByName("CSharpProject")
                 .FirstOrDefault()
-                .AdditionalDocuments.ToList();
+                .AdditionalDocuments
+                .ToList();
             var document = documents.Single(d => d.Name.Contains("ValidAdditionalFile"));
             var text = await document.GetTextAsync();
             var newText = SourceText.From("New Text In Additional File.\r\n" + text.ToString());
@@ -3269,18 +3279,22 @@ class C1
                 delegate
                 {
                     workspace.TryApplyChanges(
-                        workspace.CurrentSolution.AddAdditionalDocument(
-                            DocumentId.CreateNewId(csProjectId),
-                            "foo.xaml",
-                            SourceText.From("<foo></foo>")
-                        )
+                        workspace
+                            .CurrentSolution
+                            .AddAdditionalDocument(
+                                DocumentId.CreateNewId(csProjectId),
+                                "foo.xaml",
+                                SourceText.From("<foo></foo>")
+                            )
                     );
                 }
             );
 
-            var xaml = workspace.CurrentSolution
+            var xaml = workspace
+                .CurrentSolution
                 .GetProject(csProjectId)
-                .AdditionalDocuments.FirstOrDefault(d => d.Name == "XamlFile.xaml");
+                .AdditionalDocuments
+                .FirstOrDefault(d => d.Name == "XamlFile.xaml");
             Assert.NotNull(xaml);
 
             // removing additional documents not supported
@@ -3323,11 +3337,13 @@ class C1
             var newText = "/* new text */\r\n" + text.ToString();
 
             workspace.TryApplyChanges(
-                workspace.CurrentSolution.WithDocumentText(
-                    doc.Id,
-                    SourceText.From(newText),
-                    PreservationMode.PreserveIdentity
-                )
+                workspace
+                    .CurrentSolution
+                    .WithDocumentText(
+                        doc.Id,
+                        SourceText.From(newText),
+                        PreservationMode.PreserveIdentity
+                    )
             );
 
             Assert.True(
@@ -3368,11 +3384,13 @@ class C1
             var newText = "/* new text */\r\n" + text.ToString();
 
             workspace.TryApplyChanges(
-                workspace.CurrentSolution.WithDocumentText(
-                    doc.Id,
-                    SourceText.From(newText),
-                    PreservationMode.PreserveIdentity
-                )
+                workspace
+                    .CurrentSolution
+                    .WithDocumentText(
+                        doc.Id,
+                        SourceText.From(newText),
+                        PreservationMode.PreserveIdentity
+                    )
             );
 
             Assert.True(
@@ -3442,10 +3460,9 @@ class C1
                 var analyzerReference = proj.AnalyzerReferences[0] as AnalyzerFileReference;
                 Assert.NotNull(analyzerReference);
                 Assert.True(
-                    analyzerReference.FullPath.EndsWith(
-                        "CSharpProject.dll",
-                        StringComparison.OrdinalIgnoreCase
-                    )
+                    analyzerReference
+                        .FullPath
+                        .EndsWith("CSharpProject.dll", StringComparison.OrdinalIgnoreCase)
                 );
             }
 
@@ -3753,9 +3770,10 @@ class C1
 
             using var workspace = CreateMSBuildWorkspace();
             var solution = await workspace.OpenSolutionAsync(solutionFilePath);
-            var csproject = workspace.CurrentSolution.Projects.First(
-                p => p.Language == LanguageNames.CSharp
-            );
+            var csproject = workspace
+                .CurrentSolution
+                .Projects
+                .First(p => p.Language == LanguageNames.CSharp);
             var csoptions = (CS.CSharpParseOptions)csproject.ParseOptions;
             Assert.Equal(DocumentationMode.Parse, csoptions.DocumentationMode);
             var cscomp = await csproject.GetCompilationAsync();
@@ -3763,9 +3781,10 @@ class C1
             var cscomment = cssymbol.GetDocumentationCommentXml();
             Assert.NotNull(cscomment);
 
-            var vbproject = workspace.CurrentSolution.Projects.First(
-                p => p.Language == LanguageNames.VisualBasic
-            );
+            var vbproject = workspace
+                .CurrentSolution
+                .Projects
+                .First(p => p.Language == LanguageNames.VisualBasic);
             var vboptions = (VB.VisualBasicParseOptions)vbproject.ParseOptions;
             Assert.Equal(DocumentationMode.Diagnose, vboptions.DocumentationMode);
             var vbcomp = await vbproject.GetCompilationAsync();
@@ -4022,10 +4041,11 @@ class C1
             var files = new FileSet(
                 (
                     "Encoding.csproj",
-                    Resources.ProjectFiles.CSharp.Encoding.Replace(
-                        "<CodePage>ReplaceMe</CodePage>",
-                        "<CodePage>1254</CodePage>"
-                    )
+                    Resources
+                        .ProjectFiles
+                        .CSharp
+                        .Encoding
+                        .Replace("<CodePage>ReplaceMe</CodePage>", "<CodePage>1254</CodePage>")
                 ),
                 ("class1.cs", "//\u201C")
             );
@@ -4056,10 +4076,11 @@ class C1
             var files = new FileSet(
                 (
                     "Encoding.csproj",
-                    Resources.ProjectFiles.CSharp.Encoding.Replace(
-                        "<CodePage>ReplaceMe</CodePage>",
-                        "<CodePage>-1</CodePage>"
-                    )
+                    Resources
+                        .ProjectFiles
+                        .CSharp
+                        .Encoding
+                        .Replace("<CodePage>ReplaceMe</CodePage>", "<CodePage>-1</CodePage>")
                 ),
                 ("class1.cs", "//\u201C")
             );
@@ -4088,10 +4109,11 @@ class C1
             var files = new FileSet(
                 (
                     "Encoding.csproj",
-                    Resources.ProjectFiles.CSharp.Encoding.Replace(
-                        "<CodePage>ReplaceMe</CodePage>",
-                        "<CodePage>Broken</CodePage>"
-                    )
+                    Resources
+                        .ProjectFiles
+                        .CSharp
+                        .Encoding
+                        .Replace("<CodePage>ReplaceMe</CodePage>", "<CodePage>Broken</CodePage>")
                 ),
                 ("class1.cs", "//\u201C")
             );
@@ -4120,10 +4142,11 @@ class C1
             var files = new FileSet(
                 (
                     "Encoding.csproj",
-                    Resources.ProjectFiles.CSharp.Encoding.Replace(
-                        "<CodePage>ReplaceMe</CodePage>",
-                        string.Empty
-                    )
+                    Resources
+                        .ProjectFiles
+                        .CSharp
+                        .Encoding
+                        .Replace("<CodePage>ReplaceMe</CodePage>", string.Empty)
                 ),
                 ("class1.cs", "//\u201C")
             );
@@ -4157,7 +4180,8 @@ class C1
                 () =>
                     MSBuildWorkspace
                         .Create()
-                        .OpenSolutionAsync(GetSolutionFileName("TestSolution.sln")).Result
+                        .OpenSolutionAsync(GetSolutionFileName("TestSolution.sln"))
+                        .Result
             );
             var workspace = sol.GetObjectReference(static s => s.Workspace);
             var project = sol.GetObjectReference(static s => s.Projects.First());
@@ -4203,10 +4227,11 @@ class C { }";
             var files = new FileSet(
                 (
                     "Encoding.csproj",
-                    Resources.ProjectFiles.CSharp.Encoding.Replace(
-                        "<CodePage>ReplaceMe</CodePage>",
-                        string.Empty
-                    )
+                    Resources
+                        .ProjectFiles
+                        .CSharp
+                        .Encoding
+                        .Replace("<CodePage>ReplaceMe</CodePage>", string.Empty)
                 ),
                 ("class1.cs", encoding.GetBytesWithPreamble(fileContent))
             );
@@ -4292,9 +4317,11 @@ class C { }";
 
             // remove reference to System.Xaml
             workspace.TryApplyChanges(
-                workspace.CurrentSolution
+                workspace
+                    .CurrentSolution
                     .GetProject(project.Id)
-                    .RemoveMetadataReference(mref).Solution
+                    .RemoveMetadataReference(mref)
+                    .Solution
             );
             projFileText = File.ReadAllText(projFile);
             Assert.DoesNotContain(@"<Reference Include=""System.Xaml,", projFileText);
@@ -4327,9 +4354,9 @@ class C { }";
             var csProject = solution.Projects.First(p => p.Language == LanguageNames.CSharp);
             var vbProject = solution.Projects.First(p => p.Language == LanguageNames.VisualBasic);
 
-            var numericsMetadata = csProject.MetadataReferences.Single(
-                m => m.Display.Contains("System.Numerics")
-            );
+            var numericsMetadata = csProject
+                .MetadataReferences
+                .Single(m => m.Display.Contains("System.Numerics"));
 
             // add reference to System.Xaml
             workspace.TryApplyChanges(vbProject.AddMetadataReference(numericsMetadata).Solution);
@@ -4338,9 +4365,11 @@ class C { }";
 
             // remove reference MyAssembly.dll
             workspace.TryApplyChanges(
-                workspace.CurrentSolution
+                workspace
+                    .CurrentSolution
                     .GetProject(vbProject.Id)
-                    .RemoveMetadataReference(numericsMetadata).Solution
+                    .RemoveMetadataReference(numericsMetadata)
+                    .Solution
             );
             var newVbProjFileText2 = File.ReadAllText(vbProjFile);
             Assert.DoesNotContain(@"<Reference Include=""System.Numerics""", newVbProjFileText2);
@@ -4377,9 +4406,11 @@ class C { }";
 
             // remove reference MyAssembly.dll
             workspace.TryApplyChanges(
-                workspace.CurrentSolution
+                workspace
+                    .CurrentSolution
                     .GetProject(project.Id)
-                    .RemoveMetadataReference(mref).Solution
+                    .RemoveMetadataReference(mref)
+                    .Solution
             );
             projFileText = File.ReadAllText(projFile);
             Assert.DoesNotContain(@"<Reference Include=""MyAssembly""", projFileText);
@@ -4416,9 +4447,11 @@ class C { }";
 
             // remove reference MyAnalyzer.dll
             workspace.TryApplyChanges(
-                workspace.CurrentSolution
+                workspace
+                    .CurrentSolution
                     .GetProject(project.Id)
-                    .RemoveAnalyzerReference(aref).Solution
+                    .RemoveAnalyzerReference(aref)
+                    .Solution
             );
             projFileText = File.ReadAllText(projFile);
             Assert.DoesNotContain(@"<Analyzer Include=""..\Analyzers\MyAnalyzer.dll", projFileText);
@@ -4448,9 +4481,11 @@ class C { }";
 
             // remove project reference
             workspace.TryApplyChanges(
-                workspace.CurrentSolution
+                workspace
+                    .CurrentSolution
                     .GetProject(project.Id)
-                    .RemoveProjectReference(pref).Solution
+                    .RemoveProjectReference(pref)
+                    .Solution
             );
             Assert.Empty(workspace.CurrentSolution.GetProject(project.Id).ProjectReferences);
 
@@ -4627,7 +4662,8 @@ class C { }";
             CreateFiles(GetSimpleCSharpSolutionFiles());
 
             using var workspace = CreateMSBuildWorkspace();
-            var loader = workspace.Services
+            var loader = workspace
+                .Services
                 .GetLanguageServices(LanguageNames.CSharp)
                 .GetRequiredService<IProjectFileLoader>();
 
@@ -4646,7 +4682,8 @@ class C { }";
             ).Single();
             buildManager.EndBatchBuild();
 
-            var commandLineParser = workspace.Services
+            var commandLineParser = workspace
+                .Services
                 .GetLanguageServices(loader.Language)
                 .GetRequiredService<ICommandLineParserService>();
 
@@ -4655,7 +4692,11 @@ class C { }";
                 arguments: projectFileInfo.CommandLineArgs,
                 baseDirectory: projectDirectory,
                 isInteractive: false,
-                sdkDirectory: System.Runtime.InteropServices.RuntimeEnvironment.GetRuntimeDirectory()
+                sdkDirectory: System
+                    .Runtime
+                    .InteropServices
+                    .RuntimeEnvironment
+                    .GetRuntimeDirectory()
             );
 
             Assert.Empty(commandLineArgs.Errors);
@@ -4805,15 +4846,16 @@ class C { }";
 
             using var workspace = CreateMSBuildWorkspace();
             var solution = await workspace.OpenSolutionAsync(fullPath);
-            var project = solution.Projects.Single(
-                p => p.FilePath.EndsWith("CSharpProject_ProjectReference.csproj")
-            );
+            var project = solution
+                .Projects
+                .Single(p => p.FilePath.EndsWith("CSharpProject_ProjectReference.csproj"));
 
             Assert.Single(project.ProjectReferences);
 
             AssertEx.Equal(
                 new[] { "EmptyLibrary.dll", "System.Core.dll", "mscorlib.dll" },
-                project.MetadataReferences
+                project
+                    .MetadataReferences
                     .Select(r => Path.GetFileName(((PortableExecutableReference)r).FilePath))
                     .OrderBy(StringComparer.Ordinal)
             );

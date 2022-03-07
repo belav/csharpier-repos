@@ -66,9 +66,9 @@ namespace System.Net
         private HttpListenerContext _context;
         private bool _isChunked;
 
-        private static byte[] s_100continue = Encoding.ASCII.GetBytes(
-            "HTTP/1.1 100 Continue\r\n\r\n"
-        );
+        private static byte[] s_100continue = Encoding
+            .ASCII
+            .GetBytes("HTTP/1.1 100 Continue\r\n\r\n");
 
         internal HttpListenerRequest(HttpListenerContext context)
         {
@@ -415,10 +415,9 @@ namespace System.Net
                 if (_inputStream == null)
                 {
                     if (_isChunked || _contentLength > 0)
-                        _inputStream = _context.Connection.GetRequestStream(
-                            _isChunked,
-                            _contentLength
-                        );
+                        _inputStream = _context
+                            .Connection
+                            .GetRequestStream(_isChunked, _contentLength);
                     else
                         _inputStream = Stream.Null;
                 }

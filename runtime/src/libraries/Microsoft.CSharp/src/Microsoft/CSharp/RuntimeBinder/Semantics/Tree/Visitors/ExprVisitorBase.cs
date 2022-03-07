@@ -42,7 +42,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                 ExpressionKind.MethodInfo => VisitMETHODINFO(pExpr as ExprMethodInfo),
 
                 // Binary operators
-                ExpressionKind.EqualsParam => VisitEQUALS(pExpr as ExprBinOp),
+                ExpressionKind.EqualsParam
+                  => VisitEQUALS(pExpr as ExprBinOp),
                 ExpressionKind.Compare => VisitCOMPARE(pExpr as ExprBinOp),
                 ExpressionKind.NotEq => VisitNE(pExpr as ExprBinOp),
                 ExpressionKind.LessThan => VisitLT(pExpr as ExprBinOp),
@@ -74,7 +75,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                 ExpressionKind.Eq => VisitEQ(pExpr as ExprBinOp),
 
                 // Unary operators
-                ExpressionKind.True => VisitTRUE(pExpr as ExprUnaryOp),
+                ExpressionKind.True
+                  => VisitTRUE(pExpr as ExprUnaryOp),
                 ExpressionKind.False => VisitFALSE(pExpr as ExprUnaryOp),
                 ExpressionKind.Inc => VisitINC(pExpr as ExprUnaryOp),
                 ExpressionKind.Dec => VisitDEC(pExpr as ExprUnaryOp),

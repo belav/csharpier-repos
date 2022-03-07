@@ -226,21 +226,21 @@ namespace System.Media
                 IsLoadCompleted = true;
 
                 ValidateSoundFile(localPath);
-                Interop.WinMM.PlaySound(
-                    localPath,
-                    IntPtr.Zero,
-                    Interop.WinMM.SND_NODEFAULT | flags
-                );
+                Interop
+                    .WinMM
+                    .PlaySound(localPath, IntPtr.Zero, Interop.WinMM.SND_NODEFAULT | flags);
             }
             else
             {
                 LoadSync();
                 ValidateSoundData(_streamData);
-                Interop.WinMM.PlaySound(
-                    _streamData,
-                    IntPtr.Zero,
-                    Interop.WinMM.SND_MEMORY | Interop.WinMM.SND_NODEFAULT | flags
-                );
+                Interop
+                    .WinMM
+                    .PlaySound(
+                        _streamData,
+                        IntPtr.Zero,
+                        Interop.WinMM.SND_MEMORY | Interop.WinMM.SND_NODEFAULT | flags
+                    );
             }
         }
 
@@ -532,11 +532,13 @@ namespace System.Media
 
         private unsafe void ValidateSoundFile(string fileName)
         {
-            IntPtr hMIO = Interop.WinMM.mmioOpen(
-                fileName,
-                IntPtr.Zero,
-                Interop.WinMM.MMIO_READ | Interop.WinMM.MMIO_ALLOCBUF
-            );
+            IntPtr hMIO = Interop
+                .WinMM
+                .mmioOpen(
+                    fileName,
+                    IntPtr.Zero,
+                    Interop.WinMM.MMIO_READ | Interop.WinMM.MMIO_ALLOCBUF
+                );
             if (hMIO == IntPtr.Zero)
             {
                 throw new FileNotFoundException(SR.SoundAPIFileDoesNotExist, _soundLocation);

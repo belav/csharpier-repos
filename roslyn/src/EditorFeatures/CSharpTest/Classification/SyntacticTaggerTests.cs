@@ -98,8 +98,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
 
             var checkpoint = new Checkpoint();
 
-            var typeMap =
-                workspace.ExportProvider.GetExportedValue<SyntacticClassificationTypeMap>();
+            var typeMap = workspace
+                .ExportProvider
+                .GetExportedValue<SyntacticClassificationTypeMap>();
 
             var tagComputer = new SyntacticClassificationTaggerProvider.TagComputer(
                 new SyntacticClassificationTaggerProvider(

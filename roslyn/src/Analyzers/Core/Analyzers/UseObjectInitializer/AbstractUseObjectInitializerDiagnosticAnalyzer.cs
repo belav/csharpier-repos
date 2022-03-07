@@ -166,12 +166,14 @@ namespace Microsoft.CodeAnalysis.UseObjectInitializer
             foreach (var match in matches)
             {
                 var end = FadeOutOperatorToken
-                    ? syntaxFacts.GetOperatorTokenOfMemberAccessExpression(
-                          match.MemberAccessExpression
-                      ).Span.End
-                    : syntaxFacts.GetExpressionOfMemberAccessExpression(
-                          match.MemberAccessExpression
-                      )!.Span.End;
+                    ? syntaxFacts
+                      .GetOperatorTokenOfMemberAccessExpression(match.MemberAccessExpression)
+                      .Span
+                      .End
+                    : syntaxFacts
+                      .GetExpressionOfMemberAccessExpression(match.MemberAccessExpression)!
+                      .Span
+                      .End;
 
                 var location1 = Location.Create(
                     syntaxTree,

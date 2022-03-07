@@ -104,26 +104,30 @@ namespace Microsoft.AspNetCore.SignalR.Tests
             private string GetConnectionId()
             {
                 string connectionId = null;
-                _provider.ScopeProvider?.ForEachScope<object>(
-                    (scope, s) =>
-                    {
-                        if (scope is IReadOnlyList<KeyValuePair<string, object>> logScope)
+                _provider
+                    .ScopeProvider
+                    ?.ForEachScope<object>(
+                        (scope, s) =>
                         {
-                            if (
-                                logScope.FirstOrDefault(
-                                    kv =>
-                                        kv.Key == "TransportConnectionId"
-                                        || kv.Key == "ClientConnectionId"
-                                ).Value
-                                is string id
-                            )
+                            if (scope is IReadOnlyList<KeyValuePair<string, object>> logScope)
                             {
-                                connectionId = id;
+                                if (
+                                    logScope
+                                        .FirstOrDefault(
+                                            kv =>
+                                                kv.Key == "TransportConnectionId"
+                                                || kv.Key == "ClientConnectionId"
+                                        )
+                                        .Value
+                                    is string id
+                                )
+                                {
+                                    connectionId = id;
+                                }
                             }
-                        }
-                    },
-                    null
-                );
+                        },
+                        null
+                    );
                 return connectionId;
             }
         }

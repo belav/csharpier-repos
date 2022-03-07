@@ -194,9 +194,9 @@ namespace Microsoft.Extensions.Logging.Test
                 )
                 .Returns(new Mock<ILogger>().Object);
 
-            var logger = factory.Object.CreateLogger(
-                typeof(GenericClass<TestType, SecondTestType>)
-            );
+            var logger = factory
+                .Object
+                .CreateLogger(typeof(GenericClass<TestType, SecondTestType>));
 
             // Assert
             Assert.NotNull(logger);

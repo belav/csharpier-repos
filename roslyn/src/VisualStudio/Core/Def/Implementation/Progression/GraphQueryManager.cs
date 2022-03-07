@@ -118,7 +118,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
                     var asyncToken = _asyncListener.BeginAsyncOperation(
                         "WorkspaceGraphQueryManager.EnqueueUpdate"
                     );
-                    newDelay.Task
+                    newDelay
+                        .Task
                         .SafeContinueWithFromAsync(
                             _ => UpdateAsync(),
                             CancellationToken.None,

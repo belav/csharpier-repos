@@ -67,11 +67,14 @@ namespace System.Web.Http.Owin
 
             using (HttpServer server = new HttpServer())
             {
-                server.Configuration.Routes.IgnoreRoute(
-                    "Constraints",
-                    "constraint/{id}",
-                    constraints: new { constraint = new CustomConstraint() }
-                );
+                server
+                    .Configuration
+                    .Routes
+                    .IgnoreRoute(
+                        "Constraints",
+                        "constraint/{id}",
+                        constraints: new { constraint = new CustomConstraint() }
+                    );
                 server.Configuration.MapHttpAttributeRoutes(); // See IgnoreController
 
                 OwinMiddleware product = CreateProductUnderTest(null, server);

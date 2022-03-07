@@ -743,7 +743,8 @@ namespace System.Reflection.Tests
         {
             Type t = typeof(ClassWithDefaultMember1<>)
                 .Project()
-                .GetTypeInfo().GenericTypeParameters[0];
+                .GetTypeInfo()
+                .GenericTypeParameters[0];
             MemberInfo[] mems = t.GetDefaultMembers().OrderBy(m => m.Name).ToArray();
             Assert.Equal(1, mems.Length);
             MemberInfo mem = mems[0];

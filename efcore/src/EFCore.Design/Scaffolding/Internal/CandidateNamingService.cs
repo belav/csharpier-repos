@@ -64,7 +64,8 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
             string dependentEndNavigationPropertyName
         )
         {
-            var allForeignKeysBetweenDependentAndPrincipal = foreignKey.PrincipalEntityType
+            var allForeignKeysBetweenDependentAndPrincipal = foreignKey
+                .PrincipalEntityType
                 ?.GetReferencingForeignKeys()
                 .Where(fk => foreignKey.DeclaringEntityType == fk.DeclaringEntityType);
 

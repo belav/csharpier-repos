@@ -259,12 +259,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 var compilation = DeclaringCompilation;
                 bool value =
                     (compilation.Options.NullableContextOptions != NullableContextOptions.Disable)
-                    || compilation.SyntaxTrees.Any(
-                        tree =>
-                            ((CSharpSyntaxTree)tree).IsNullableAnalysisEnabled(
-                                new TextSpan(0, tree.Length)
-                            ) == true
-                    );
+                    || compilation
+                        .SyntaxTrees
+                        .Any(
+                            tree =>
+                                ((CSharpSyntaxTree)tree).IsNullableAnalysisEnabled(
+                                    new TextSpan(0, tree.Length)
+                                ) == true
+                        );
                 _lazyIsNullableAnalysisEnabled = value.ToThreeState();
             }
             return _lazyIsNullableAnalysisEnabled == ThreeState.True;

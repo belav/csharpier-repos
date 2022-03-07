@@ -42,10 +42,12 @@ namespace Microsoft.EntityFrameworkCore
         public void Master_connection_string_contains_filename()
         {
             var options =
-                new DbContextOptionsBuilder().UseSqlServer(
-                    @"Server=(localdb)\MSSQLLocalDB;Database=SqlServerConnectionTest;AttachDBFilename=C:\Narf.mdf",
-                    b => b.CommandTimeout(55)
-                ).Options;
+                new DbContextOptionsBuilder()
+                    .UseSqlServer(
+                        @"Server=(localdb)\MSSQLLocalDB;Database=SqlServerConnectionTest;AttachDBFilename=C:\Narf.mdf",
+                        b => b.CommandTimeout(55)
+                    )
+                    .Options;
 
             using var connection = new SqlServerConnection(CreateDependencies(options));
             using var master = connection.CreateMasterConnection();
@@ -59,10 +61,12 @@ namespace Microsoft.EntityFrameworkCore
         public void Master_connection_string_none_default_command_timeout()
         {
             var options =
-                new DbContextOptionsBuilder().UseSqlServer(
-                    @"Server=(localdb)\MSSQLLocalDB;Database=SqlServerConnectionTest",
-                    b => b.CommandTimeout(55)
-                ).Options;
+                new DbContextOptionsBuilder()
+                    .UseSqlServer(
+                        @"Server=(localdb)\MSSQLLocalDB;Database=SqlServerConnectionTest",
+                        b => b.CommandTimeout(55)
+                    )
+                    .Options;
 
             using var connection = new SqlServerConnection(CreateDependencies(options));
             using var master = connection.CreateMasterConnection();
@@ -74,9 +78,9 @@ namespace Microsoft.EntityFrameworkCore
         )
         {
             options ??=
-                new DbContextOptionsBuilder().UseSqlServer(
-                    @"Server=(localdb)\MSSQLLocalDB;Database=SqlServerConnectionTest"
-                ).Options;
+                new DbContextOptionsBuilder()
+                    .UseSqlServer(@"Server=(localdb)\MSSQLLocalDB;Database=SqlServerConnectionTest")
+                    .Options;
 
             return new RelationalConnectionDependencies(
                 options,
@@ -108,7 +112,9 @@ namespace Microsoft.EntityFrameworkCore
                     new RelationalCommandBuilderDependencies(
                         new TestRelationalTypeMappingSource(
                             TestServiceFactory.Instance.Create<TypeMappingSourceDependencies>(),
-                            TestServiceFactory.Instance.Create<RelationalTypeMappingSourceDependencies>()
+                            TestServiceFactory
+                                .Instance
+                                .Create<RelationalTypeMappingSourceDependencies>()
                         )
                     )
                 )

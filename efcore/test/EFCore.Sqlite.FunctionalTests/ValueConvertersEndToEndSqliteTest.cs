@@ -159,7 +159,8 @@ namespace Microsoft.EntityFrameworkCore
         {
             using var context = CreateContext();
 
-            var property = context.Model
+            var property = context
+                .Model
                 .FindEntityType(typeof(ConvertingEntity))!
                 .FindProperty(propertyName);
 

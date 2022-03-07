@@ -22,7 +22,11 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript
         )
         {
             var analyzer =
-                document.Project.LanguageServices.GetRequiredService<VSTypeScriptDiagnosticAnalyzerLanguageService>().Implementation;
+                document
+                    .Project
+                    .LanguageServices
+                    .GetRequiredService<VSTypeScriptDiagnosticAnalyzerLanguageService>()
+                    .Implementation;
             if (analyzer == null)
             {
                 return SpecializedTasks.EmptyImmutableArray<Diagnostic>();
@@ -37,7 +41,11 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript
         )
         {
             var analyzer =
-                document.Project.LanguageServices.GetRequiredService<VSTypeScriptDiagnosticAnalyzerLanguageService>().Implementation;
+                document
+                    .Project
+                    .LanguageServices
+                    .GetRequiredService<VSTypeScriptDiagnosticAnalyzerLanguageService>()
+                    .Implementation;
             if (analyzer == null)
             {
                 return SpecializedTasks.EmptyImmutableArray<Diagnostic>();

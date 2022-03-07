@@ -239,9 +239,9 @@ namespace System.Collections.Tests
             var list = new SortedList() { { "a", 1 }, { "b", 2 } };
             DebuggerAttributeInfo debuggerAttribute =
                 DebuggerAttributes.ValidateDebuggerTypeProxyProperties(list);
-            PropertyInfo infoProperty = debuggerAttribute.Properties.Single(
-                property => property.Name == "Items"
-            );
+            PropertyInfo infoProperty = debuggerAttribute
+                .Properties
+                .Single(property => property.Name == "Items");
             object[] items = (object[])infoProperty.GetValue(debuggerAttribute.Instance);
             Assert.Equal(list.Count, items.Length);
         }
@@ -252,9 +252,9 @@ namespace System.Collections.Tests
             var list = SortedList.Synchronized(new SortedList() { { "a", 1 }, { "b", 2 } });
             DebuggerAttributeInfo debuggerAttribute =
                 DebuggerAttributes.ValidateDebuggerTypeProxyProperties(typeof(SortedList), list);
-            PropertyInfo infoProperty = debuggerAttribute.Properties.Single(
-                property => property.Name == "Items"
-            );
+            PropertyInfo infoProperty = debuggerAttribute
+                .Properties
+                .Single(property => property.Name == "Items");
             object[] items = (object[])infoProperty.GetValue(debuggerAttribute.Instance);
             Assert.Equal(list.Count, items.Length);
         }

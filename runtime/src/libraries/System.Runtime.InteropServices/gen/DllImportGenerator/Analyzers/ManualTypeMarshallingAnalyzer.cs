@@ -258,21 +258,23 @@ namespace Microsoft.Interop.Analyzers
 
         private void PrepareForAnalysis(CompilationStartAnalysisContext context)
         {
-            INamedTypeSymbol? generatedMarshallingAttribute =
-                context.Compilation.GetTypeByMetadataName(TypeNames.GeneratedMarshallingAttribute);
-            INamedTypeSymbol? blittableTypeAttribute = context.Compilation.GetTypeByMetadataName(
-                TypeNames.BlittableTypeAttribute
-            );
-            INamedTypeSymbol? nativeMarshallingAttribute =
-                context.Compilation.GetTypeByMetadataName(TypeNames.NativeMarshallingAttribute);
-            INamedTypeSymbol? marshalUsingAttribute = context.Compilation.GetTypeByMetadataName(
-                TypeNames.MarshalUsingAttribute
-            );
-            INamedTypeSymbol? genericContiguousCollectionMarshallerAttribute =
-                context.Compilation.GetTypeByMetadataName(
-                    TypeNames.GenericContiguousCollectionMarshallerAttribute
-                );
-            INamedTypeSymbol? spanOfByte = context.Compilation
+            INamedTypeSymbol? generatedMarshallingAttribute = context
+                .Compilation
+                .GetTypeByMetadataName(TypeNames.GeneratedMarshallingAttribute);
+            INamedTypeSymbol? blittableTypeAttribute = context
+                .Compilation
+                .GetTypeByMetadataName(TypeNames.BlittableTypeAttribute);
+            INamedTypeSymbol? nativeMarshallingAttribute = context
+                .Compilation
+                .GetTypeByMetadataName(TypeNames.NativeMarshallingAttribute);
+            INamedTypeSymbol? marshalUsingAttribute = context
+                .Compilation
+                .GetTypeByMetadataName(TypeNames.MarshalUsingAttribute);
+            INamedTypeSymbol? genericContiguousCollectionMarshallerAttribute = context
+                .Compilation
+                .GetTypeByMetadataName(TypeNames.GenericContiguousCollectionMarshallerAttribute);
+            INamedTypeSymbol? spanOfByte = context
+                .Compilation
                 .GetTypeByMetadataName(TypeNames.System_Span_Metadata)!
                 .Construct(context.Compilation.GetSpecialType(SpecialType.System_Byte));
 
@@ -292,9 +294,11 @@ namespace Microsoft.Interop.Analyzers
                     marshalUsingAttribute,
                     genericContiguousCollectionMarshallerAttribute,
                     spanOfByte,
-                    context.Compilation.GetTypeByMetadataName(
-                        TypeNames.System_Runtime_InteropServices_StructLayoutAttribute
-                    )!
+                    context
+                        .Compilation
+                        .GetTypeByMetadataName(
+                            TypeNames.System_Runtime_InteropServices_StructLayoutAttribute
+                        )!
                 );
                 context.RegisterSymbolAction(
                     context => perCompilationAnalyzer.AnalyzeTypeDefinition(context),
@@ -351,10 +355,9 @@ namespace Microsoft.Interop.Analyzers
                 foreach (AttributeData attr in type.GetAttributes())
                 {
                     if (
-                        SymbolEqualityComparer.Default.Equals(
-                            attr.AttributeClass,
-                            _generatedMarshallingAttribute
-                        )
+                        SymbolEqualityComparer
+                            .Default
+                            .Equals(attr.AttributeClass, _generatedMarshallingAttribute)
                     )
                     {
                         // If the type has the GeneratedMarshallingAttribute,
@@ -362,19 +365,17 @@ namespace Microsoft.Interop.Analyzers
                         return;
                     }
                     else if (
-                        SymbolEqualityComparer.Default.Equals(
-                            attr.AttributeClass,
-                            _blittableTypeAttribute
-                        )
+                        SymbolEqualityComparer
+                            .Default
+                            .Equals(attr.AttributeClass, _blittableTypeAttribute)
                     )
                     {
                         blittableTypeAttributeData = attr;
                     }
                     else if (
-                        SymbolEqualityComparer.Default.Equals(
-                            attr.AttributeClass,
-                            _nativeMarshallingAttribute
-                        )
+                        SymbolEqualityComparer
+                            .Default
+                            .Equals(attr.AttributeClass, _nativeMarshallingAttribute)
                     )
                     {
                         nativeMarshallingAttributeData = attr;
@@ -434,14 +435,14 @@ namespace Microsoft.Interop.Analyzers
 
             public void AnalyzeElement(SymbolAnalysisContext context)
             {
-                AttributeData? attrData = context.Symbol
+                AttributeData? attrData = context
+                    .Symbol
                     .GetAttributes()
                     .FirstOrDefault(
                         attr =>
-                            SymbolEqualityComparer.Default.Equals(
-                                _marshalUsingAttribute,
-                                attr.AttributeClass
-                            )
+                            SymbolEqualityComparer
+                                .Default
+                                .Equals(_marshalUsingAttribute, attr.AttributeClass)
                     );
                 if (attrData is not null)
                 {
@@ -473,10 +474,9 @@ namespace Microsoft.Interop.Analyzers
                     .GetReturnTypeAttributes()
                     .FirstOrDefault(
                         attr =>
-                            SymbolEqualityComparer.Default.Equals(
-                                _marshalUsingAttribute,
-                                attr.AttributeClass
-                            )
+                            SymbolEqualityComparer
+                                .Default
+                                .Equals(_marshalUsingAttribute, attr.AttributeClass)
                     );
                 if (attrData is not null)
                 {
@@ -539,15 +539,19 @@ namespace Microsoft.Interop.Analyzers
                         .GetAttributes()
                         .Any(
                             a =>
-                                SymbolEqualityComparer.Default.Equals(
-                                    _genericContiguousCollectionMarshallerAttribute,
-                                    a.AttributeClass
-                                )
+                                SymbolEqualityComparer
+                                    .Default
+                                    .Equals(
+                                        _genericContiguousCollectionMarshallerAttribute,
+                                        a.AttributeClass
+                                    )
                         )
                 )
                 {
                     variant =
-                        ManualTypeMarshallingHelper.NativeTypeMarshallingVariant.ContiguousCollection;
+                        ManualTypeMarshallingHelper
+                            .NativeTypeMarshallingVariant
+                            .ContiguousCollection;
                     requiredShapeRule = CollectionNativeTypeMustHaveRequiredShapeRule;
                     if (
                         !ManualTypeMarshallingHelper.TryGetManagedValuesProperty(
@@ -617,10 +621,12 @@ namespace Microsoft.Interop.Analyzers
                         return;
                     }
                     // Construct the marshaler type around the same type arguments as the managed type.
-                    nativeType = marshalerType = marshalerType.ConstructedFrom.Construct(
-                        namedType.TypeArguments,
-                        namedType.TypeArgumentNullableAnnotations
-                    );
+                    nativeType = marshalerType = marshalerType
+                        .ConstructedFrom
+                        .Construct(
+                            namedType.TypeArguments,
+                            namedType.TypeArgumentNullableAnnotations
+                        );
                 }
 
                 bool hasConstructor = false;
@@ -797,9 +803,9 @@ namespace Microsoft.Interop.Analyzers
                     if (!getPinnableReferenceMethods.Managed.ReturnType.IsConsideredBlittable())
                     {
                         context.ReportDiagnostic(
-                            getPinnableReferenceMethods.Managed.CreateDiagnostic(
-                                GetPinnableReferenceReturnTypeBlittableRule
-                            )
+                            getPinnableReferenceMethods
+                                .Managed
+                                .CreateDiagnostic(GetPinnableReferenceReturnTypeBlittableRule)
                         );
                     }
                     // Validate that our marshaler supports scenarios where GetPinnableReference cannot be used.
@@ -860,10 +866,9 @@ namespace Microsoft.Interop.Analyzers
                 // which can cause exceptions when reporting diagnostics. Make sure the symbol is defined in the current Compilation's source module before using its locations.
                 // If the symbol is not defined in the current Compilation's source module, report the diagnostic at the marshalling attribute's location.
                 if (
-                    SymbolEqualityComparer.Default.Equals(
-                        context.Compilation.SourceModule,
-                        targetSymbol.ContainingModule
-                    )
+                    SymbolEqualityComparer
+                        .Default
+                        .Equals(context.Compilation.SourceModule, targetSymbol.ContainingModule)
                 )
                 {
                     return targetSymbol.Locations;

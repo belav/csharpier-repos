@@ -37,8 +37,9 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             _implMethod = implMethod;
 
             // Ensure types in signature are loadable and resolvable, otherwise we'll fail later while emitting the signature
-            CompilerTypeSystemContext compilerContext =
-                (CompilerTypeSystemContext)declMethod.Method.Context;
+            CompilerTypeSystemContext compilerContext = (CompilerTypeSystemContext)declMethod
+                .Method
+                .Context;
             compilerContext.EnsureLoadableMethod(declMethod.Method);
             compilerContext.EnsureLoadableType(implType);
             if (implMethod != null)

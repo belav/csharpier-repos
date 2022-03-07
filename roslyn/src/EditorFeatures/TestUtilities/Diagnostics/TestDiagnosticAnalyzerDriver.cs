@@ -65,15 +65,20 @@ namespace Microsoft.CodeAnalysis.UnitTests.Diagnostics
                     document.Id,
                     _includeSuppressedDiagnostics
                 );
-                documentDiagnostics = await CodeAnalysis.Diagnostics.Extensions.ToDiagnosticsAsync(
-                    filterSpan is null
-                      ? dxs.Where(d => d.HasTextSpan)
-                      : dxs.Where(
-                            d => d.HasTextSpan && d.GetTextSpan().IntersectsWith(filterSpan.Value)
-                        ),
-                    project,
-                    CancellationToken.None
-                );
+                documentDiagnostics = await CodeAnalysis
+                    .Diagnostics
+                    .Extensions
+                    .ToDiagnosticsAsync(
+                        filterSpan is null
+                          ? dxs.Where(d => d.HasTextSpan)
+                          : dxs.Where(
+                                d =>
+                                    d.HasTextSpan
+                                    && d.GetTextSpan().IntersectsWith(filterSpan.Value)
+                            ),
+                        project,
+                        CancellationToken.None
+                    );
             }
 
             if (getProjectDiagnostics)
@@ -83,11 +88,14 @@ namespace Microsoft.CodeAnalysis.UnitTests.Diagnostics
                     project.Id,
                     includeSuppressedDiagnostics: _includeSuppressedDiagnostics
                 );
-                projectDiagnostics = await CodeAnalysis.Diagnostics.Extensions.ToDiagnosticsAsync(
-                    dxs.Where(d => !d.HasTextSpan),
-                    project,
-                    CancellationToken.None
-                );
+                projectDiagnostics = await CodeAnalysis
+                    .Diagnostics
+                    .Extensions
+                    .ToDiagnosticsAsync(
+                        dxs.Where(d => !d.HasTextSpan),
+                        project,
+                        CancellationToken.None
+                    );
             }
 
             var allDiagnostics = documentDiagnostics.Concat(projectDiagnostics);

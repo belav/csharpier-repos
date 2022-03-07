@@ -34,15 +34,17 @@ namespace AutoMapper.IntegrationTests
         class Initializer : DropCreateDatabaseAlways<TestContext>
         {
             protected override void Seed(TestContext context) =>
-                context.SourceTypes.Add(
-                    new SourceType
-                    {
-                        Parameters =
+                context
+                    .SourceTypes
+                    .Add(
+                        new SourceType
                         {
-                            new Parameter { Name = "Index", Value = 101 }
+                            Parameters =
+                            {
+                                new Parameter { Name = "Index", Value = 101 }
+                            }
                         }
-                    }
-                );
+                    );
         }
 
         class TestContext : DbContext
@@ -62,9 +64,10 @@ namespace AutoMapper.IntegrationTests
                             o =>
                                 o.MapFrom(
                                     source =>
-                                        source.Parameters.FirstOrDefault(
-                                            p => p.Name == "Index"
-                                        ).Value
+                                        source
+                                            .Parameters
+                                            .FirstOrDefault(p => p.Name == "Index")
+                                            .Value
                                 )
                         )
             );

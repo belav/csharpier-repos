@@ -1083,10 +1083,9 @@ private static {JsonParameterInfoValuesTypeRef}[] {typeGenerationSpec.TypeInfoPr
 
                     // Add the property names to the context-wide cache; we'll generate the source to initialize them at the end of generation.
                     Debug.Assert(
-                        !_currentContext.RuntimePropertyNames.TryGetValue(
-                            runtimePropName,
-                            out string? existingName
-                        )
+                        !_currentContext
+                            .RuntimePropertyNames
+                            .TryGetValue(runtimePropName, out string? existingName)
                             || existingName == propVarName
                     );
                     _currentContext.RuntimePropertyNames.TryAdd(runtimePropName, propVarName);

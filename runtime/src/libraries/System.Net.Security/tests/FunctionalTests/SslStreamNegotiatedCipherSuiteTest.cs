@@ -752,8 +752,9 @@ namespace System.Net.Security.Tests
             )
             {
                 var serverOptions = new SslServerAuthenticationOptions();
-                serverOptions.ServerCertificate =
-                    Configuration.Certificates.GetSelfSignedServerCertificate();
+                serverOptions.ServerCertificate = Configuration
+                    .Certificates
+                    .GetSelfSignedServerCertificate();
                 serverOptions.EncryptionPolicy = serverParams.EncryptionPolicy;
                 serverOptions.EnabledSslProtocols = serverParams.SslProtocols;
                 serverOptions.CipherSuitesPolicy = serverParams.CipherSuitesPolicy;

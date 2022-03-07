@@ -183,9 +183,9 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
                         var members = dialog.GetTestAccessor().Members;
                         members.SelectedItem = dialog
                             .GetTestAccessor()
-                            .ViewModel.AllParameters.Single(
-                                p => p.ShortAutomationText == parameterName
-                            );
+                            .ViewModel
+                            .AllParameters
+                            .Single(p => p.ShortAutomationText == parameterName);
                     }
                 );
             }

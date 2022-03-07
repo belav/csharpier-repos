@@ -52,8 +52,8 @@ namespace Microsoft.EntityFrameworkCore.Storage.Internal
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
         public override void AddDbParameter(DbCommand command, object? value) =>
-            command.Parameters.Add(
-                RelationalTypeMapping.CreateParameter(command, Name, value, IsNullable)
-            );
+            command
+                .Parameters
+                .Add(RelationalTypeMapping.CreateParameter(command, Name, value, IsNullable));
     }
 }

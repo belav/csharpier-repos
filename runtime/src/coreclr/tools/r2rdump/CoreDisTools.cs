@@ -199,14 +199,17 @@ namespace R2RDump
                 {
                     // Most instructions are no longer than 7 bytes. CorDisasm::dumpInstruction always pads byte dumps
                     // to 7 * 3 characters; see https://github.com/dotnet/llilc/blob/master/lib/CoreDisTools/coredistools.cpp.
-                    Machine.I386 => 7 * 3,
+                    Machine.I386
+                      => 7 * 3,
                     Machine.Amd64 => 7 * 3,
 
                     // Instructions are either 2 or 4 bytes long
-                    Machine.ArmThumb2 => 4 * 3,
+                    Machine.ArmThumb2
+                      => 4 * 3,
 
                     // Instructions are dumped as 4-byte hexadecimal integers
-                    Machine.Arm64 => 4 * 2 + 1,
+                    Machine.Arm64
+                      => 4 * 2 + 1,
 
                     _ => throw new NotImplementedException()
                 };

@@ -160,11 +160,13 @@ namespace System.Net.Sockets
                 // The socket must be non-blocking with a linger timeout set.
                 // We have to set the socket to blocking.
                 int nonBlockCmd = 0;
-                errorCode = Interop.Winsock.ioctlsocket(
-                    handle,
-                    Interop.Winsock.IoctlSocketConstants.FIONBIO,
-                    ref nonBlockCmd
-                );
+                errorCode = Interop
+                    .Winsock
+                    .ioctlsocket(
+                        handle,
+                        Interop.Winsock.IoctlSocketConstants.FIONBIO,
+                        ref nonBlockCmd
+                    );
                 if (errorCode == SocketError.SocketError)
                     errorCode = (SocketError)Marshal.GetLastWin32Error();
 
@@ -198,13 +200,15 @@ namespace System.Net.Sockets
             lingerStruct.OnOff = 1;
             lingerStruct.Time = 0;
 
-            errorCode = Interop.Winsock.setsockopt(
-                handle,
-                SocketOptionLevel.Socket,
-                SocketOptionName.Linger,
-                ref lingerStruct,
-                4
-            );
+            errorCode = Interop
+                .Winsock
+                .setsockopt(
+                    handle,
+                    SocketOptionLevel.Socket,
+                    SocketOptionName.Linger,
+                    ref lingerStruct,
+                    4
+                );
 #if DEBUG
             _closeSocketLinger = errorCode;
 #endif

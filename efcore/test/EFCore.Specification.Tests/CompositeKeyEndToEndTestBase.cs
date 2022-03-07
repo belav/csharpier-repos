@@ -98,9 +98,9 @@ namespace Microsoft.EntityFrameworkCore
 
             using (var context = CreateContext())
             {
-                var unicorn = context.Unicorns.Single(
-                    e => e.Id1 == id1 && e.Id2 == id2 && e.Id3 == id3
-                );
+                var unicorn = context
+                    .Unicorns
+                    .Single(e => e.Id1 == id1 && e.Id2 == id2 && e.Id3 == id3);
 
                 unicorn.Name = "Bad Hair Day";
 
@@ -109,9 +109,9 @@ namespace Microsoft.EntityFrameworkCore
 
             using (var context = CreateContext())
             {
-                var unicorn = context.Unicorns.Single(
-                    e => e.Id1 == id1 && e.Id2 == id2 && e.Id3 == id3
-                );
+                var unicorn = context
+                    .Unicorns
+                    .Single(e => e.Id1 == id1 && e.Id2 == id2 && e.Id3 == id3);
 
                 Assert.Equal("Bad Hair Day", unicorn.Name);
 
@@ -137,32 +137,38 @@ namespace Microsoft.EntityFrameworkCore
             using (var context = CreateContext())
             {
                 var pony1 =
-                    context.Add(
-                        new EarthPony
-                        {
-                            Id1 = 1,
-                            Id2 = 7,
-                            Name = "Apple Jack 1"
-                        }
-                    ).Entity;
+                    context
+                        .Add(
+                            new EarthPony
+                            {
+                                Id1 = 1,
+                                Id2 = 7,
+                                Name = "Apple Jack 1"
+                            }
+                        )
+                        .Entity;
                 var pony2 =
-                    context.Add(
-                        new EarthPony
-                        {
-                            Id1 = 2,
-                            Id2 = 7,
-                            Name = "Apple Jack 2"
-                        }
-                    ).Entity;
+                    context
+                        .Add(
+                            new EarthPony
+                            {
+                                Id1 = 2,
+                                Id2 = 7,
+                                Name = "Apple Jack 2"
+                            }
+                        )
+                        .Entity;
                 var pony3 =
-                    context.Add(
-                        new EarthPony
-                        {
-                            Id1 = 3,
-                            Id2 = 7,
-                            Name = "Apple Jack 3"
-                        }
-                    ).Entity;
+                    context
+                        .Add(
+                            new EarthPony
+                            {
+                                Id1 = 3,
+                                Id2 = 7,
+                                Name = "Apple Jack 3"
+                            }
+                        )
+                        .Entity;
 
                 await context.SaveChangesAsync();
 

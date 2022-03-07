@@ -50,7 +50,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Diagnostics
         protected override ImmutableArray<PreviousResult>? GetPreviousResults(
             VSInternalWorkspaceDiagnosticsParams diagnosticsParams
         ) =>
-            diagnosticsParams.PreviousResults
+            diagnosticsParams
+                .PreviousResults
                 ?.Where(d => d.PreviousResultId != null)
                 .Select(d => new PreviousResult(d.PreviousResultId!, d.TextDocument!))
                 .ToImmutableArray();
@@ -108,8 +109,10 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Diagnostics
 
             var solution = context.Solution;
 
-            var documentTrackingService =
-                solution.Workspace.Services.GetRequiredService<IDocumentTrackingService>();
+            var documentTrackingService = solution
+                .Workspace
+                .Services
+                .GetRequiredService<IDocumentTrackingService>();
 
             // Collect all the documents from the solution in the order we'd like to get diagnostics for.  This will
             // prioritize the files from currently active projects, but then also include all other docs in all projects

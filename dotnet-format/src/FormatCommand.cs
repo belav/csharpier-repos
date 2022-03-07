@@ -206,7 +206,8 @@ namespace Microsoft.CodeAnalysis.Tools
 
         internal static bool WasOptionUsed(this ParseResult result, params string[] aliases)
         {
-            return result.Tokens
+            return result
+                .Tokens
                 .Where(token => token.Type == TokenType.Option)
                 .Any(token => aliases.Contains(token.Value));
         }

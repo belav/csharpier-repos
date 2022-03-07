@@ -570,7 +570,8 @@ t = typeof(File); // global using exposed
 
             var compilation = CreateSubmission(
                 submissionSource,
-                options: TestOptions.DebugDll
+                options: TestOptions
+                    .DebugDll
                     .WithSourceReferenceResolver(resolver)
                     .WithUsings("System.IO", "System.IO.Path")
             );
@@ -705,22 +706,26 @@ namespace NOuter
         {
             var tree = comp.SyntaxTrees.Single();
             var model = comp.GetSemanticModel(tree);
-            return model.GetSpeculativeSymbolInfo(
-                tree.Length,
-                SyntaxFactory.IdentifierName(name),
-                SpeculativeBindingOption.BindAsExpression
-            ).Symbol;
+            return model
+                .GetSpeculativeSymbolInfo(
+                    tree.Length,
+                    SyntaxFactory.IdentifierName(name),
+                    SpeculativeBindingOption.BindAsExpression
+                )
+                .Symbol;
         }
 
         private static ITypeSymbol GetSpeculativeType(Compilation comp, string name)
         {
             var tree = comp.SyntaxTrees.Single();
             var model = comp.GetSemanticModel(tree);
-            return model.GetSpeculativeTypeInfo(
-                tree.Length,
-                SyntaxFactory.IdentifierName(name),
-                SpeculativeBindingOption.BindAsTypeOrNamespace
-            ).Type;
+            return model
+                .GetSpeculativeTypeInfo(
+                    tree.Length,
+                    SyntaxFactory.IdentifierName(name),
+                    SpeculativeBindingOption.BindAsTypeOrNamespace
+                )
+                .Type;
         }
     }
 }

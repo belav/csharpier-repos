@@ -110,9 +110,10 @@ internal class SpaProxyLaunchManager : IDisposable
             }
         );
         // We don't care about the returned content type as long as the server is able to answer with 2XX
-        httpClient.DefaultRequestHeaders.Accept.Add(
-            new MediaTypeWithQualityHeaderValue("*/*", 0.1)
-        );
+        httpClient
+            .DefaultRequestHeaders
+            .Accept
+            .Add(new MediaTypeWithQualityHeaderValue("*/*", 0.1));
         return httpClient;
     }
 

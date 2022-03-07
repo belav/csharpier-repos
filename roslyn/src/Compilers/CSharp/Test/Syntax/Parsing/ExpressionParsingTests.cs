@@ -70,9 +70,9 @@ class C
         var v = {text};
     }}
 }}",
-                    parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
-                        LanguageVersion.CSharp7_3
-                    )
+                    parseOptions: CSharpParseOptions
+                        .Default
+                        .WithLanguageVersion(LanguageVersion.CSharp7_3)
                 )
                 .VerifyDiagnostics(
                     // (6,17): error CS8370: Feature 'alternative interpolated verbatim strings' is not available in C# 7.3. Please use language version 8.0 or greater.
@@ -109,9 +109,9 @@ class C
         var v = {text};
     }}
 }}",
-                    parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
-                        LanguageVersion.CSharp8
-                    )
+                    parseOptions: CSharpParseOptions
+                        .Default
+                        .WithLanguageVersion(LanguageVersion.CSharp8)
                 )
                 .VerifyDiagnostics();
 
@@ -141,9 +141,9 @@ class C
         var v = {text};
     }}
 }}",
-                    parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
-                        LanguageVersion.CSharp7_3
-                    )
+                    parseOptions: CSharpParseOptions
+                        .Default
+                        .WithLanguageVersion(LanguageVersion.CSharp7_3)
                 )
                 .VerifyDiagnostics(
                     // (6, 24): error CS8401: To use '@$' instead of '$@' for an interpolated verbatim string, please use language version '8.0' or greater.
@@ -199,9 +199,9 @@ class C
         var v = {text};
     }}
 }}",
-                    parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
-                        LanguageVersion.CSharp8
-                    )
+                    parseOptions: CSharpParseOptions
+                        .Default
+                        .WithLanguageVersion(LanguageVersion.CSharp8)
                 )
                 .VerifyDiagnostics();
 

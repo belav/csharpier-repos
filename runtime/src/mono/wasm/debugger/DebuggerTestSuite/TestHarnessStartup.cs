@@ -245,9 +245,9 @@ namespace Microsoft.WebAssembly.Diagnostics
                                             }
                                         }
 
-                                        var wsURl = obj[0]?[
-                                            "webSocketDebuggerUrl"
-                                        ]?.Value<string>();
+                                        var wsURl = obj[0]
+                                            ?["webSocketDebuggerUrl"]
+                                            ?.Value<string>();
                                         Logger.LogTrace(">>> {0}", wsURl);
 
                                         return wsURl;

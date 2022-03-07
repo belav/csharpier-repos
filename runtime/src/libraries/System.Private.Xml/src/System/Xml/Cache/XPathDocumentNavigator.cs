@@ -450,9 +450,9 @@ namespace MS.Internal.Xml.Cache
                 // Virtualize collapsed text nodes
                 _pageParent = _pageCurrent;
                 _idxParent = _idxCurrent;
-                _idxCurrent = _pageCurrent[_idxCurrent].Document.GetCollapsedTextNode(
-                    out _pageCurrent!
-                );
+                _idxCurrent = _pageCurrent[_idxCurrent]
+                    .Document
+                    .GetCollapsedTextNode(out _pageCurrent!);
                 Debug.Assert(_pageCurrent != null);
                 return true;
             }
@@ -614,9 +614,9 @@ namespace MS.Internal.Xml.Cache
                 // Virtualize collapsed text nodes
                 _pageParent = _pageCurrent;
                 _idxParent = _idxCurrent;
-                _idxCurrent = _pageCurrent[_idxCurrent].Document.GetCollapsedTextNode(
-                    out _pageCurrent!
-                );
+                _idxCurrent = _pageCurrent[_idxCurrent]
+                    .Document
+                    .GetCollapsedTextNode(out _pageCurrent!);
                 Debug.Assert(_pageCurrent != null);
                 return true;
             }
@@ -720,9 +720,9 @@ namespace MS.Internal.Xml.Cache
 
                     _pageParent = _pageCurrent;
                     _idxParent = _idxCurrent;
-                    _idxCurrent = _pageCurrent[_idxCurrent].Document.GetCollapsedTextNode(
-                        out _pageCurrent!
-                    );
+                    _idxCurrent = _pageCurrent[_idxCurrent]
+                        .Document
+                        .GetCollapsedTextNode(out _pageCurrent!);
                     Debug.Assert(_pageCurrent != null);
                     return true;
                 }
@@ -967,7 +967,8 @@ namespace MS.Internal.Xml.Cache
                   => int.MinValue + 1 + XPathNodeHelper.GetLocation(_pageCurrent, _idxCurrent),
 
                 // Attribute nodes come next (location is always positive)
-                XPathNodeType.Attribute => XPathNodeHelper.GetLocation(_pageCurrent, _idxCurrent),
+                XPathNodeType.Attribute
+                  => XPathNodeHelper.GetLocation(_pageCurrent, _idxCurrent),
 
                 // Collapsed text nodes are always last
                 _ => int.MaxValue,

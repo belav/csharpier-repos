@@ -62,12 +62,14 @@ public static class MvcViewFeaturesMvcBuilderExtensions
             builder.Services.TryAddTransient(viewComponent, viewComponent);
         }
 
-        builder.Services.Replace(
-            ServiceDescriptor.Singleton<
-                IViewComponentActivator,
-                ServiceBasedViewComponentActivator
-            >()
-        );
+        builder
+            .Services
+            .Replace(
+                ServiceDescriptor.Singleton<
+                    IViewComponentActivator,
+                    ServiceBasedViewComponentActivator
+                >()
+            );
 
         return builder;
     }

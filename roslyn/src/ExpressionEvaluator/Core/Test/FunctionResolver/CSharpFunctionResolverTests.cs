@@ -513,7 +513,11 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator.UnitTests
                 new Module(compilation.EmitToArray()),
                 new Module(metadata: default), // emulates failure of the debugger to retrieve metadata
                 new Module(
-                    metadata: TestResources.MetadataTests.Invalid.IncorrectCustomAssemblyTableSize_TooManyMethodSpecs.ToImmutableArray()
+                    metadata: TestResources
+                        .MetadataTests
+                        .Invalid
+                        .IncorrectCustomAssemblyTableSize_TooManyMethodSpecs
+                        .ToImmutableArray()
                 )
             );
 

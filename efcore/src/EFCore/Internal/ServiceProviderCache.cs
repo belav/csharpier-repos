@@ -68,11 +68,9 @@ namespace Microsoft.EntityFrameworkCore.Internal
                 return BuildServiceProvider(options, _configurations).ServiceProvider;
             }
 
-            return _configurations.GetOrAdd(
-                options,
-                BuildServiceProvider,
-                _configurations
-            ).ServiceProvider;
+            return _configurations
+                .GetOrAdd(options, BuildServiceProvider, _configurations)
+                .ServiceProvider;
 
             static (IServiceProvider ServiceProvider, IDictionary<
                 string,

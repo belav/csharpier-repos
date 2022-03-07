@@ -269,21 +269,21 @@ namespace System.DirectoryServices
 
                     object[] allValues = new object[_changeList.Count];
                     _changeList.CopyTo(allValues, 0);
-                    _entry.AdsObject.PutEx(
-                        (int)AdsPropertyOperation.Append,
-                        PropertyName,
-                        allValues
-                    );
+                    _entry
+                        .AdsObject
+                        .PutEx((int)AdsPropertyOperation.Append, PropertyName, allValues);
 
                     _updateType = UpdateType.Add;
                 }
                 else
                 {
-                    _entry.AdsObject.PutEx(
-                        (int)AdsPropertyOperation.Append,
-                        PropertyName,
-                        new object?[] { value }
-                    );
+                    _entry
+                        .AdsObject
+                        .PutEx(
+                            (int)AdsPropertyOperation.Append,
+                            PropertyName,
+                            new object?[] { value }
+                        );
                 }
             }
             else
@@ -309,21 +309,21 @@ namespace System.DirectoryServices
                     _changeList.Add(value);
                     object?[] allValues = new object[_changeList.Count];
                     _changeList.CopyTo(allValues, 0);
-                    _entry.AdsObject.PutEx(
-                        (int)AdsPropertyOperation.Delete,
-                        PropertyName,
-                        allValues
-                    );
+                    _entry
+                        .AdsObject
+                        .PutEx((int)AdsPropertyOperation.Delete, PropertyName, allValues);
 
                     _updateType = UpdateType.Delete;
                 }
                 else
                 {
-                    _entry.AdsObject.PutEx(
-                        (int)AdsPropertyOperation.Delete,
-                        PropertyName,
-                        new object?[] { value }
-                    );
+                    _entry
+                        .AdsObject
+                        .PutEx(
+                            (int)AdsPropertyOperation.Delete,
+                            PropertyName,
+                            new object?[] { value }
+                        );
                 }
             }
             else
@@ -347,26 +347,28 @@ namespace System.DirectoryServices
             {
                 if (_needNewBehavior)
                 {
-                    _entry.AdsObject.PutEx(
-                        (int)AdsPropertyOperation.Delete,
-                        PropertyName,
-                        new object?[] { oldValue }
-                    );
-                    _entry.AdsObject.PutEx(
-                        (int)AdsPropertyOperation.Append,
-                        PropertyName,
-                        new object?[] { newValue }
-                    );
+                    _entry
+                        .AdsObject
+                        .PutEx(
+                            (int)AdsPropertyOperation.Delete,
+                            PropertyName,
+                            new object?[] { oldValue }
+                        );
+                    _entry
+                        .AdsObject
+                        .PutEx(
+                            (int)AdsPropertyOperation.Append,
+                            PropertyName,
+                            new object?[] { newValue }
+                        );
                 }
                 else
                 {
                     object?[] allValues = new object[InnerList.Count];
                     InnerList.CopyTo(allValues, 0);
-                    _entry.AdsObject.PutEx(
-                        (int)AdsPropertyOperation.Update,
-                        PropertyName,
-                        allValues
-                    );
+                    _entry
+                        .AdsObject
+                        .PutEx((int)AdsPropertyOperation.Update, PropertyName, allValues);
                 }
             }
 

@@ -126,19 +126,25 @@ unsafe class C
                 tree.GetRoot()
                     .DescendantNodes()
                     .OfType<VariableDeclaratorSyntax>()
-                    .First().Initializer!.Value;
+                    .First()
+                    .Initializer!
+                    .Value;
             assertResult(model, initializer1, comp);
             var parameter = tree.GetRoot()
                 .DescendantNodes()
                 .OfType<InvocationExpressionSyntax>()
                 .First()
-                .ArgumentList.Arguments.Single();
+                .ArgumentList
+                .Arguments
+                .Single();
             assertResult(model, parameter.Expression, comp);
             var initializer2 =
                 tree.GetRoot()
                     .DescendantNodes()
                     .OfType<VariableDeclaratorSyntax>()
-                    .Last().Initializer!.Value;
+                    .Last()
+                    .Initializer!
+                    .Value;
             assertResult(model, initializer2, comp);
 
             static void assertResult(
@@ -2211,7 +2217,8 @@ unsafe class C
             );
 
             var declaredSymbol = (IMethodSymbol)comp.GetTypeByMetadataName("C")
-                .GetMethod("M2").ISymbol;
+                .GetMethod("M2")
+                .ISymbol;
             Assert.True(
                 declaredSymbol.TypeParameters[0].Equals(
                     functionPointer.Signature.ReturnType,
@@ -2450,7 +2457,8 @@ public class C<T>
                     "System.Runtime.CompilerServices.CallConvCdecl",
                     "System.Runtime.CompilerServices.CallConvStdcall"
                 },
-                funcPtrType.Signature
+                funcPtrType
+                    .Signature
                     .GetCallingConventionModifiers()
                     .Select(c => ((CSharpCustomModifier)c).ModifierSymbol.ToTestDisplayString())
             );
@@ -4629,7 +4637,8 @@ unsafe class C
                     .GetRoot()
                     .DescendantNodes()
                     .OfType<FieldDeclarationSyntax>()
-                    .Single().Declaration;
+                    .Single()
+                    .Declaration;
             var fieldVariable = fieldDeclaration.Variables.Single();
             Assert.Equal(
                 "delegate*<System.Void> C.field",

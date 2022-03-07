@@ -337,12 +337,14 @@ namespace Microsoft.CodeAnalysis.CodeCleanup
 
             if (spanMarkerType == SpanMarkerType.Normal)
             {
-                return previousToken.GetNextToken(
-                    includeZeroWidth: true,
-                    includeSkipped: true,
-                    includeDirectives: true,
-                    includeDocumentationComments: true
-                ).SpanStart;
+                return previousToken
+                    .GetNextToken(
+                        includeZeroWidth: true,
+                        includeSkipped: true,
+                        includeDirectives: true,
+                        includeDocumentationComments: true
+                    )
+                    .SpanStart;
             }
 
             return previousToken.SpanStart;
@@ -361,12 +363,15 @@ namespace Microsoft.CodeAnalysis.CodeCleanup
 
             if (spanMarkerType == SpanMarkerType.Normal)
             {
-                return nextToken.GetPreviousToken(
-                    includeZeroWidth: true,
-                    includeSkipped: true,
-                    includeDirectives: true,
-                    includeDocumentationComments: true
-                ).Span.End;
+                return nextToken
+                    .GetPreviousToken(
+                        includeZeroWidth: true,
+                        includeSkipped: true,
+                        includeDirectives: true,
+                        includeDocumentationComments: true
+                    )
+                    .Span
+                    .End;
             }
 
             return nextToken.Span.End;
@@ -927,7 +932,8 @@ namespace Microsoft.CodeAnalysis.CodeCleanup
             {
                 Contract.ThrowIfNull(annotation.Data);
 
-                var types = annotation.Data
+                var types = annotation
+                    .Data
                     .Split(s_separators)
                     .Select(s => (SpanMarkerType)Enum.Parse(typeof(SpanMarkerType), s))
                     .ToArray();

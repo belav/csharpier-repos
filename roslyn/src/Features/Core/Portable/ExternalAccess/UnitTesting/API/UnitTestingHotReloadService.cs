@@ -163,17 +163,20 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.Api
                 return (EmptyUpdate, EmptyDiagnostic.Add(results.SyntaxError));
             }
 
-            var updates = results.ModuleUpdates.Updates.SelectAsArray(
-                update =>
-                    new Update(
-                        update.Module,
-                        update.ILDelta,
-                        update.MetadataDelta,
-                        update.PdbDelta,
-                        update.UpdatedMethods,
-                        update.UpdatedTypes
-                    )
-            );
+            var updates = results
+                .ModuleUpdates
+                .Updates
+                .SelectAsArray(
+                    update =>
+                        new Update(
+                            update.Module,
+                            update.ILDelta,
+                            update.MetadataDelta,
+                            update.PdbDelta,
+                            update.UpdatedMethods,
+                            update.UpdatedTypes
+                        )
+                );
 
             var diagnostics = await results
                 .GetAllDiagnosticsAsync(solution, cancellationToken)

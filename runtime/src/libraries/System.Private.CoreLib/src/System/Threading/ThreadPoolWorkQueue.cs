@@ -445,11 +445,13 @@ namespace System.Threading
         [MethodImpl(MethodImplOptions.NoInlining)]
         public void RefreshLoggingEnabledFull()
         {
-            loggingEnabled = FrameworkEventSource.Log.IsEnabled(
-                EventLevel.Verbose,
-                FrameworkEventSource.Keywords.ThreadPool
-                    | FrameworkEventSource.Keywords.ThreadTransfer
-            );
+            loggingEnabled = FrameworkEventSource
+                .Log
+                .IsEnabled(
+                    EventLevel.Verbose,
+                    FrameworkEventSource.Keywords.ThreadPool
+                        | FrameworkEventSource.Keywords.ThreadTransfer
+                );
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -1482,7 +1484,9 @@ namespace System.Threading
 
             // Enumerate each local queue
             foreach (
-                ThreadPoolWorkQueue.WorkStealingQueue wsq in ThreadPoolWorkQueue.WorkStealingQueueList.Queues
+                ThreadPoolWorkQueue.WorkStealingQueue wsq in ThreadPoolWorkQueue
+                    .WorkStealingQueueList
+                    .Queues
             )
             {
                 if (wsq != null && wsq.m_array != null)
@@ -1502,8 +1506,9 @@ namespace System.Threading
 
         internal static IEnumerable<object> GetLocallyQueuedWorkItems()
         {
-            ThreadPoolWorkQueue.WorkStealingQueue? wsq =
-                ThreadPoolWorkQueueThreadLocals.threadLocals?.workStealingQueue;
+            ThreadPoolWorkQueue.WorkStealingQueue? wsq = ThreadPoolWorkQueueThreadLocals
+                .threadLocals
+                ?.workStealingQueue;
             if (wsq != null && wsq.m_array != null)
             {
                 object?[] items = wsq.m_array;

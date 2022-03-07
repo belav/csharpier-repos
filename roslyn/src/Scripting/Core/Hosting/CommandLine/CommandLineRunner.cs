@@ -140,9 +140,10 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
                 emitDebugInformation
             );
 
-            var errors = _compiler.Arguments.Errors.Concat(
-                diagnosticsInfos.Select(Diagnostic.Create)
-            );
+            var errors = _compiler
+                .Arguments
+                .Errors
+                .Concat(diagnosticsInfos.Select(Diagnostic.Create));
             if (_compiler.ReportDiagnostics(errors, _console.Error, errorLogger, compilation: null))
             {
                 return CommonCompiler.Failed;
@@ -256,7 +257,8 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
                 return script
                     .RunAsync(globals, cancellationToken)
                     .GetAwaiter()
-                    .GetResult().ReturnValue;
+                    .GetResult()
+                    .ReturnValue;
             }
             catch (CompilationErrorException e)
             {
@@ -442,7 +444,8 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
                 .RemoveImportsAndReferences()
                 .WithMetadataResolver(
                     currentMetadataResolver.WithRelativePathResolver(
-                        currentMetadataResolver.PathResolver
+                        currentMetadataResolver
+                            .PathResolver
                             .WithBaseDirectory(newWorkingDirectory)
                             .WithSearchPaths(newReferenceSearchPaths)
                     )
@@ -521,9 +524,9 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
                 {
                     int notShown = diagnostics.Length - MaxDisplayCount;
                     _console.SetForegroundColor(ConsoleColor.DarkRed);
-                    _console.Error.WriteLine(
-                        string.Format(ScriptingResources.PlusAdditionalError, notShown)
-                    );
+                    _console
+                        .Error
+                        .WriteLine(string.Format(ScriptingResources.PlusAdditionalError, notShown));
                 }
             }
             finally

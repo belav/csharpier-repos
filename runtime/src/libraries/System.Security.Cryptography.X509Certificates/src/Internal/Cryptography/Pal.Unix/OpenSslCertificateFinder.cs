@@ -17,11 +17,13 @@ namespace Internal.Cryptography.Pal
         {
             OpenSslX509CertificateReader certPal = (OpenSslX509CertificateReader)cert.Pal;
 
-            byte[] publicKeyInfoBytes = Interop.Crypto.OpenSslEncode(
-                Interop.Crypto.GetX509SubjectPublicKeyInfoDerSize,
-                Interop.Crypto.EncodeX509SubjectPublicKeyInfo,
-                certPal.SafeHandle
-            );
+            byte[] publicKeyInfoBytes = Interop
+                .Crypto
+                .OpenSslEncode(
+                    Interop.Crypto.GetX509SubjectPublicKeyInfoDerSize,
+                    Interop.Crypto.EncodeX509SubjectPublicKeyInfo,
+                    certPal.SafeHandle
+                );
 
             return publicKeyInfoBytes;
         }

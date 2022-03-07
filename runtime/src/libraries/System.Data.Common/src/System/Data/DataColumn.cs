@@ -160,13 +160,15 @@ namespace System.Data
         )
         {
             GC.SuppressFinalize(this);
-            DataCommonEventSource.Log.Trace(
-                "<ds.DataColumn.DataColumn|API> {0}, columnName='{1}', expr='{2}', type={3}",
-                ObjectID,
-                columnName,
-                expr,
-                type
-            );
+            DataCommonEventSource
+                .Log
+                .Trace(
+                    "<ds.DataColumn.DataColumn|API> {0}, columnName='{1}', expr='{2}', type={3}",
+                    ObjectID,
+                    columnName,
+                    expr,
+                    type
+                );
 
             if (dataType == null)
             {
@@ -240,11 +242,9 @@ namespace System.Data
             get { return _allowNull; }
             set
             {
-                long logScopeId = DataCommonEventSource.Log.EnterScope(
-                    "<ds.DataColumn.set_AllowDBNull|API> {0}, {1}",
-                    ObjectID,
-                    value
-                );
+                long logScopeId = DataCommonEventSource
+                    .Log
+                    .EnterScope("<ds.DataColumn.set_AllowDBNull|API> {0}, {1}", ObjectID, value);
                 try
                 {
                     if (_allowNull != value)
@@ -277,11 +277,9 @@ namespace System.Data
             get { return ((null != _autoInc) && (_autoInc.Auto)); }
             set
             {
-                DataCommonEventSource.Log.Trace(
-                    "<ds.DataColumn.set_AutoIncrement|API> {0}, {1}",
-                    ObjectID,
-                    value
-                );
+                DataCommonEventSource
+                    .Log
+                    .Trace("<ds.DataColumn.set_AutoIncrement|API> {0}, {1}", ObjectID, value);
                 if (AutoIncrement != value)
                 {
                     if (value)
@@ -351,11 +349,9 @@ namespace System.Data
             get { return ((null != _autoInc) ? _autoInc.Seed : 0L); }
             set
             {
-                DataCommonEventSource.Log.Trace(
-                    "<ds.DataColumn.set_AutoIncrementSeed|API> {0}, {1}",
-                    ObjectID,
-                    value
-                );
+                DataCommonEventSource
+                    .Log
+                    .Trace("<ds.DataColumn.set_AutoIncrementSeed|API> {0}, {1}", ObjectID, value);
                 if (AutoIncrementSeed != value)
                 {
                     AutoInc.Seed = value;
@@ -373,11 +369,9 @@ namespace System.Data
             get { return ((null != _autoInc) ? _autoInc.Step : 1L); }
             set
             {
-                DataCommonEventSource.Log.Trace(
-                    "<ds.DataColumn.set_AutoIncrementStep|API> {0}, {1}",
-                    ObjectID,
-                    value
-                );
+                DataCommonEventSource
+                    .Log
+                    .Trace("<ds.DataColumn.set_AutoIncrementStep|API> {0}, {1}", ObjectID, value);
                 if (AutoIncrementStep != value)
                 {
                     AutoInc.Step = value;
@@ -435,11 +429,9 @@ namespace System.Data
             get { return _columnName; }
             set
             {
-                long logScopeId = DataCommonEventSource.Log.EnterScope(
-                    "<ds.DataColumn.set_ColumnName|API> {0}, '{1}'",
-                    ObjectID,
-                    value
-                );
+                long logScopeId = DataCommonEventSource
+                    .Log
+                    .EnterScope("<ds.DataColumn.set_ColumnName|API> {0}, '{1}'", ObjectID, value);
                 try
                 {
                     if (value == null)
@@ -468,9 +460,14 @@ namespace System.Data
                         _encodedColumnName = null;
                         if (_table != null)
                         {
-                            _table.Columns.OnColumnPropertyChanged(
-                                new CollectionChangeEventArgs(CollectionChangeAction.Refresh, this)
-                            );
+                            _table
+                                .Columns
+                                .OnColumnPropertyChanged(
+                                    new CollectionChangeEventArgs(
+                                        CollectionChangeAction.Refresh,
+                                        this
+                                    )
+                                );
                         }
                     }
                     else if (_columnName != value)
@@ -480,9 +477,14 @@ namespace System.Data
                         _encodedColumnName = null;
                         if (_table != null)
                         {
-                            _table.Columns.OnColumnPropertyChanged(
-                                new CollectionChangeEventArgs(CollectionChangeAction.Refresh, this)
-                            );
+                            _table
+                                .Columns
+                                .OnColumnPropertyChanged(
+                                    new CollectionChangeEventArgs(
+                                        CollectionChangeAction.Refresh,
+                                        this
+                                    )
+                                );
                         }
                     }
                 }
@@ -529,11 +531,9 @@ namespace System.Data
                     value = string.Empty;
                 }
 
-                DataCommonEventSource.Log.Trace(
-                    "<ds.DataColumn.set_Prefix|API> {0}, '{1}'",
-                    ObjectID,
-                    value
-                );
+                DataCommonEventSource
+                    .Log
+                    .Trace("<ds.DataColumn.set_Prefix|API> {0}, '{1}'", ObjectID, value);
 
                 if (
                     (XmlConvert.DecodeName(value) == value)
@@ -814,10 +814,9 @@ namespace System.Data
             }
             set
             {
-                DataCommonEventSource.Log.Trace(
-                    "<ds.DataColumn.set_DefaultValue|API> {0}",
-                    ObjectID
-                );
+                DataCommonEventSource
+                    .Log
+                    .Trace("<ds.DataColumn.set_DefaultValue|API> {0}", ObjectID);
                 if (_defaultValue == null || !DefaultValue.Equals(value))
                 {
                     if (AutoIncrement)
@@ -878,11 +877,9 @@ namespace System.Data
             )]
             set
             {
-                long logScopeId = DataCommonEventSource.Log.EnterScope(
-                    "<ds.DataColumn.set_Expression|API> {0}, '{1}'",
-                    ObjectID,
-                    value
-                );
+                long logScopeId = DataCommonEventSource
+                    .Log
+                    .EnterScope("<ds.DataColumn.set_Expression|API> {0}, '{1}'", ObjectID, value);
 
                 if (value == null)
                 {
@@ -1096,11 +1093,9 @@ namespace System.Data
             get { return _maxLength; }
             set
             {
-                long logScopeId = DataCommonEventSource.Log.EnterScope(
-                    "<ds.DataColumn.set_MaxLength|API> {0}, {1}",
-                    ObjectID,
-                    value
-                );
+                long logScopeId = DataCommonEventSource
+                    .Log
+                    .EnterScope("<ds.DataColumn.set_MaxLength|API> {0}, {1}", ObjectID, value);
                 try
                 {
                     if (_maxLength != value)
@@ -1155,11 +1150,9 @@ namespace System.Data
             }
             set
             {
-                DataCommonEventSource.Log.Trace(
-                    "<ds.DataColumn.set_Namespace|API> {0}, '{1}'",
-                    ObjectID,
-                    value
-                );
+                DataCommonEventSource
+                    .Log
+                    .Trace("<ds.DataColumn.set_Namespace|API> {0}, '{1}'", ObjectID, value);
 
                 if (_columnUri != value)
                 {
@@ -1245,11 +1238,9 @@ namespace System.Data
             get { return _readOnly; }
             set
             {
-                DataCommonEventSource.Log.Trace(
-                    "<ds.DataColumn.set_ReadOnly|API> {0}, {1}",
-                    ObjectID,
-                    value
-                );
+                DataCommonEventSource
+                    .Log
+                    .Trace("<ds.DataColumn.set_ReadOnly|API> {0}, {1}", ObjectID, value);
                 if (_readOnly != value)
                 {
                     if (!value && _expression != null)
@@ -1419,11 +1410,9 @@ namespace System.Data
             get { return _unique; }
             set
             {
-                long logScopeId = DataCommonEventSource.Log.EnterScope(
-                    "<ds.DataColumn.set_Unique|API> {0}, {1}",
-                    ObjectID,
-                    value
-                );
+                long logScopeId = DataCommonEventSource
+                    .Log
+                    .EnterScope("<ds.DataColumn.set_Unique|API> {0}, {1}", ObjectID, value);
                 try
                 {
                     if (_unique != value)
@@ -1525,11 +1514,9 @@ namespace System.Data
             get { return _columnMapping; }
             set
             {
-                DataCommonEventSource.Log.Trace(
-                    "<ds.DataColumn.set_ColumnMapping|API> {0}, {1}",
-                    ObjectID,
-                    value
-                );
+                DataCommonEventSource
+                    .Log
+                    .Trace("<ds.DataColumn.set_ColumnMapping|API> {0}, {1}", ObjectID, value);
                 if (value != _columnMapping)
                 {
                     if (value == MappingType.SimpleContent && _table != null)

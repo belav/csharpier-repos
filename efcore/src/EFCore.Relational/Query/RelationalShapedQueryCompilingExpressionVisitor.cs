@@ -44,9 +44,9 @@ namespace Microsoft.EntityFrameworkCore.Query
                 dependencies.CoreSingletonOptions.AreThreadSafetyChecksEnabled;
             _detailedErrorsEnabled = dependencies.CoreSingletonOptions.AreDetailedErrorsEnabled;
             _useRelationalNulls =
-                RelationalOptionsExtension.Extract(
-                    queryCompilationContext.ContextOptions
-                ).UseRelationalNulls;
+                RelationalOptionsExtension
+                    .Extract(queryCompilationContext.ContextOptions)
+                    .UseRelationalNulls;
         }
 
         /// <summary>
@@ -94,7 +94,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                     ),
                     Expression.Constant(relationalCommandCache),
                     Expression.Constant(
-                        selectExpression.Projection
+                        selectExpression
+                            .Projection
                             .Select(pe => ((ColumnExpression)pe.Expression).Name)
                             .ToList(),
                         typeof(IReadOnlyList<string>)

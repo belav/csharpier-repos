@@ -507,9 +507,10 @@ namespace Microsoft.Cci
             // no extern alias defined in scope at all -> error in compiler
             Debug.Assert(declaredExternAliases != null);
 
-            var allAliases = _metadataWriter.Context.Module.GetAssemblyReferenceAliases(
-                _metadataWriter.Context
-            );
+            var allAliases = _metadataWriter
+                .Context
+                .Module
+                .GetAssemblyReferenceAliases(_metadataWriter.Context);
             foreach (AssemblyReferenceAlias alias in allAliases)
             {
                 // Multiple aliases may be given to an assembly reference.
@@ -918,7 +919,9 @@ namespace Microsoft.Cci
                 compilerAssembly.GetCustomAttribute<AssemblyFileVersionAttribute>().Version
             );
             var versionString =
-                compilerAssembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>().InformationalVersion;
+                compilerAssembly
+                    .GetCustomAttribute<AssemblyInformationalVersionAttribute>()
+                    .InformationalVersion;
             _symWriter.AddCompilerInfo(
                 (ushort)fileVersion.Major,
                 (ushort)fileVersion.Minor,

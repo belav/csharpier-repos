@@ -18,9 +18,11 @@ namespace WebServer
 
         public void ProcessRequest(HttpContext context)
         {
-            _replyWithPartialMessages = context.Request.Url.Query.Contains(
-                "replyWithPartialMessages"
-            );
+            _replyWithPartialMessages = context
+                .Request
+                .Url
+                .Query
+                .Contains("replyWithPartialMessages");
 
             string subProtocol = context.Request.QueryString["subprotocol"];
 

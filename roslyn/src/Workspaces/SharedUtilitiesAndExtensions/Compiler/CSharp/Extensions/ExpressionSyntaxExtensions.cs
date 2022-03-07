@@ -634,9 +634,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                     var parentConditionalAccessExpression =
                         (ConditionalAccessExpressionSyntax)expression.Parent;
                     return expression != parentConditionalAccessExpression.WhenNotNull
-                        && !parentConditionalAccessExpression.Parent.IsKind(
-                            SyntaxKind.ConditionalAccessExpression
-                        );
+                        && !parentConditionalAccessExpression
+                            .Parent
+                            .IsKind(SyntaxKind.ConditionalAccessExpression);
 
                 case SyntaxKind.IsExpression:
                 case SyntaxKind.AsExpression:
@@ -788,10 +788,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                         {
                             var staticType = speculativeSymbolInfo.GetAnySymbol().GetSymbolType();
 
-                            return SymbolEquivalenceComparer.Instance.Equals(
-                                instanceType,
-                                staticType
-                            );
+                            return SymbolEquivalenceComparer
+                                .Instance
+                                .Equals(instanceType, staticType);
                         }
                     }
                 }

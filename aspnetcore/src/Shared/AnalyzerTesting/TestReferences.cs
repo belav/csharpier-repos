@@ -23,9 +23,9 @@ public static class TestReferences
         var references = ImmutableArray.CreateBuilder<MetadataReference>();
 
         foreach (
-            var defaultCompileLibrary in DependencyContext.Load(
-                typeof(TestReferences).Assembly
-            ).CompileLibraries
+            var defaultCompileLibrary in DependencyContext
+                .Load(typeof(TestReferences).Assembly)
+                .CompileLibraries
         )
         {
             foreach (

@@ -633,9 +633,9 @@ public class GoogleTests : RemoteAuthenticationTests<GoogleOptions>
             Assert.Equal(HttpStatusCode.Redirect, transaction.Response.StatusCode);
             Assert.Equal(
                 "/error?FailureMessage=itfailed"
-                    + UrlEncoder.Default.Encode(
-                        ";Description=whyitfailed;Uri=https://example.com/fail"
-                    ),
+                    + UrlEncoder
+                        .Default
+                        .Encode(";Description=whyitfailed;Uri=https://example.com/fail"),
                 transaction.Response.Headers.GetValues("Location").First()
             );
         }
@@ -786,9 +786,11 @@ public class GoogleTests : RemoteAuthenticationTests<GoogleOptions>
             Assert.Equal(HttpStatusCode.Redirect, transaction.Response.StatusCode);
             Assert.Equal(
                 "/error?FailureMessage="
-                    + UrlEncoder.Default.Encode(
-                        "OAuth token endpoint failure: Status: BadRequest;Headers: ;Body: {\"Error\":\"Error\"};"
-                    ),
+                    + UrlEncoder
+                        .Default
+                        .Encode(
+                            "OAuth token endpoint failure: Status: BadRequest;Headers: ;Body: {\"Error\":\"Error\"};"
+                        ),
                 transaction.Response.Headers.GetValues("Location").First()
             );
         }
@@ -890,20 +892,22 @@ public class GoogleTests : RemoteAuthenticationTests<GoogleOptions>
                     OnCreatingTicket = context =>
                     {
                         var refreshToken = context.RefreshToken;
-                        context.Principal.AddIdentity(
-                            new ClaimsIdentity(
-                                new Claim[]
-                                {
-                                    new Claim(
-                                        "RefreshToken",
-                                        refreshToken,
-                                        ClaimValueTypes.String,
-                                        "Google"
-                                    )
-                                },
-                                "Google"
-                            )
-                        );
+                        context
+                            .Principal
+                            .AddIdentity(
+                                new ClaimsIdentity(
+                                    new Claim[]
+                                    {
+                                        new Claim(
+                                            "RefreshToken",
+                                            refreshToken,
+                                            ClaimValueTypes.String,
+                                            "Google"
+                                        )
+                                    },
+                                    "Google"
+                                )
+                            );
                         return Task.FromResult(0);
                     }
                 };

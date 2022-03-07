@@ -1150,13 +1150,15 @@ namespace System.Security.Principal
 
                 someFailed = false;
                 uint ReturnCode;
-                ReturnCode = Interop.Advapi32.LsaLookupSids(
-                    LsaHandle,
-                    sourceSids.Count,
-                    SidArrayPtr,
-                    out ReferencedDomainsPtr,
-                    out NamesPtr
-                );
+                ReturnCode = Interop
+                    .Advapi32
+                    .LsaLookupSids(
+                        LsaHandle,
+                        sourceSids.Count,
+                        SidArrayPtr,
+                        out ReferencedDomainsPtr,
+                        out NamesPtr
+                    );
 
                 //
                 // Make a decision regarding whether it makes sense to proceed

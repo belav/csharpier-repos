@@ -134,7 +134,8 @@ namespace System.Web.Razor.Generator
                 .Add(StartColumn)
                 .Add(StartGeneratedColumn)
                 .Add(StartLine)
-                .Add(StartOffset).CombinedHash;
+                .Add(StartOffset)
+                .CombinedHash;
         }
 
         public static bool operator ==(GeneratedCodeMapping left, GeneratedCodeMapping right)

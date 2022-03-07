@@ -60,10 +60,9 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.OutOfProcess
         {
             if (tagId == _instance.InlineRenameDialog.ValidRenameTag)
             {
-                _instance.Workspace.WaitForAsyncOperations(
-                    Helper.HangMitigatingTimeout,
-                    FeatureAttribute.Rename
-                );
+                _instance
+                    .Workspace
+                    .WaitForAsyncOperations(Helper.HangMitigatingTimeout, FeatureAttribute.Rename);
             }
 
             var tagInfo = _editorInProc.GetTagSpans(tagId).ToList();
@@ -84,10 +83,12 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.OutOfProcess
 
         public void InvokeNavigateToNextHighlightedReference()
         {
-            _instance.Workspace.WaitForAsyncOperations(
-                Helper.HangMitigatingTimeout,
-                FeatureAttribute.ReferenceHighlighting
-            );
+            _instance
+                .Workspace
+                .WaitForAsyncOperations(
+                    Helper.HangMitigatingTimeout,
+                    FeatureAttribute.ReferenceHighlighting
+                );
             _instance.ExecuteCommand(WellKnownCommandNames.Edit_NextHighlightedReference);
         }
 
@@ -106,10 +107,12 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.OutOfProcess
         public void InvokeSignatureHelp()
         {
             _instance.ExecuteCommand(WellKnownCommandNames.Edit_ParameterInfo);
-            _instance.Workspace.WaitForAsyncOperations(
-                Helper.HangMitigatingTimeout,
-                FeatureAttribute.SignatureHelp
-            );
+            _instance
+                .Workspace
+                .WaitForAsyncOperations(
+                    Helper.HangMitigatingTimeout,
+                    FeatureAttribute.SignatureHelp
+                );
         }
 
         public bool IsSignatureHelpActive()
@@ -134,10 +137,9 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.OutOfProcess
         {
             _instance.ExecuteCommand(WellKnownCommandNames.Edit_GoToAll);
             NavigateToSendKeys(keys);
-            _instance.Workspace.WaitForAsyncOperations(
-                Helper.HangMitigatingTimeout,
-                FeatureAttribute.NavigateTo
-            );
+            _instance
+                .Workspace
+                .WaitForAsyncOperations(Helper.HangMitigatingTimeout, FeatureAttribute.NavigateTo);
         }
 
         public void SelectTextInCurrentDocument(string text)
@@ -234,10 +236,9 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.OutOfProcess
 
         public void FormatDocument()
         {
-            VisualStudioInstance.Workspace.WaitForAsyncOperations(
-                Helper.HangMitigatingTimeout,
-                FeatureAttribute.Workspace
-            );
+            VisualStudioInstance
+                .Workspace
+                .WaitForAsyncOperations(Helper.HangMitigatingTimeout, FeatureAttribute.Workspace);
             SendKeys(
                 new KeyPress(VirtualKey.K, ShiftState.Ctrl),
                 new KeyPress(VirtualKey.D, ShiftState.Ctrl)
@@ -246,19 +247,17 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.OutOfProcess
 
         public void FormatDocumentViaCommand()
         {
-            VisualStudioInstance.Workspace.WaitForAsyncOperations(
-                Helper.HangMitigatingTimeout,
-                FeatureAttribute.Workspace
-            );
+            VisualStudioInstance
+                .Workspace
+                .WaitForAsyncOperations(Helper.HangMitigatingTimeout, FeatureAttribute.Workspace);
             _editorInProc.FormatDocumentViaCommand();
         }
 
         public void FormatSelection()
         {
-            VisualStudioInstance.Workspace.WaitForAsyncOperations(
-                Helper.HangMitigatingTimeout,
-                FeatureAttribute.Workspace
-            );
+            VisualStudioInstance
+                .Workspace
+                .WaitForAsyncOperations(Helper.HangMitigatingTimeout, FeatureAttribute.Workspace);
             SendKeys(
                 new KeyPress(VirtualKey.K, ShiftState.Ctrl),
                 new KeyPress(VirtualKey.F, ShiftState.Ctrl)
@@ -304,118 +303,144 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.OutOfProcess
 
         public void ExpandProjectNavBar()
         {
-            _instance.Workspace.WaitForAsyncOperations(
-                Helper.HangMitigatingTimeout,
-                FeatureAttribute.NavigationBar
-            );
+            _instance
+                .Workspace
+                .WaitForAsyncOperations(
+                    Helper.HangMitigatingTimeout,
+                    FeatureAttribute.NavigationBar
+                );
             _editorInProc.ExpandNavigationBar(0);
         }
 
         public void ExpandTypeNavBar()
         {
-            _instance.Workspace.WaitForAsyncOperations(
-                Helper.HangMitigatingTimeout,
-                FeatureAttribute.NavigationBar
-            );
+            _instance
+                .Workspace
+                .WaitForAsyncOperations(
+                    Helper.HangMitigatingTimeout,
+                    FeatureAttribute.NavigationBar
+                );
             _editorInProc.ExpandNavigationBar(1);
         }
 
         public void ExpandMemberNavBar()
         {
-            _instance.Workspace.WaitForAsyncOperations(
-                Helper.HangMitigatingTimeout,
-                FeatureAttribute.NavigationBar
-            );
+            _instance
+                .Workspace
+                .WaitForAsyncOperations(
+                    Helper.HangMitigatingTimeout,
+                    FeatureAttribute.NavigationBar
+                );
             _editorInProc.ExpandNavigationBar(2);
         }
 
         public string[] GetProjectNavBarItems()
         {
-            _instance.Workspace.WaitForAsyncOperations(
-                Helper.HangMitigatingTimeout,
-                FeatureAttribute.NavigationBar
-            );
+            _instance
+                .Workspace
+                .WaitForAsyncOperations(
+                    Helper.HangMitigatingTimeout,
+                    FeatureAttribute.NavigationBar
+                );
             return _editorInProc.GetNavBarItems(0);
         }
 
         public string[] GetTypeNavBarItems()
         {
-            _instance.Workspace.WaitForAsyncOperations(
-                Helper.HangMitigatingTimeout,
-                FeatureAttribute.NavigationBar
-            );
+            _instance
+                .Workspace
+                .WaitForAsyncOperations(
+                    Helper.HangMitigatingTimeout,
+                    FeatureAttribute.NavigationBar
+                );
             return _editorInProc.GetNavBarItems(1);
         }
 
         public string[] GetMemberNavBarItems()
         {
-            _instance.Workspace.WaitForAsyncOperations(
-                Helper.HangMitigatingTimeout,
-                FeatureAttribute.NavigationBar
-            );
+            _instance
+                .Workspace
+                .WaitForAsyncOperations(
+                    Helper.HangMitigatingTimeout,
+                    FeatureAttribute.NavigationBar
+                );
             return _editorInProc.GetNavBarItems(2);
         }
 
         public string? GetProjectNavBarSelection()
         {
-            _instance.Workspace.WaitForAsyncOperations(
-                Helper.HangMitigatingTimeout,
-                FeatureAttribute.NavigationBar
-            );
+            _instance
+                .Workspace
+                .WaitForAsyncOperations(
+                    Helper.HangMitigatingTimeout,
+                    FeatureAttribute.NavigationBar
+                );
             return _editorInProc.GetSelectedNavBarItem(0);
         }
 
         public string? GetTypeNavBarSelection()
         {
-            _instance.Workspace.WaitForAsyncOperations(
-                Helper.HangMitigatingTimeout,
-                FeatureAttribute.NavigationBar
-            );
+            _instance
+                .Workspace
+                .WaitForAsyncOperations(
+                    Helper.HangMitigatingTimeout,
+                    FeatureAttribute.NavigationBar
+                );
             return _editorInProc.GetSelectedNavBarItem(1);
         }
 
         public string? GetMemberNavBarSelection()
         {
-            _instance.Workspace.WaitForAsyncOperations(
-                Helper.HangMitigatingTimeout,
-                FeatureAttribute.NavigationBar
-            );
+            _instance
+                .Workspace
+                .WaitForAsyncOperations(
+                    Helper.HangMitigatingTimeout,
+                    FeatureAttribute.NavigationBar
+                );
             return _editorInProc.GetSelectedNavBarItem(2);
         }
 
         public void SelectProjectNavbarItem(string item)
         {
-            _instance.Workspace.WaitForAsyncOperations(
-                Helper.HangMitigatingTimeout,
-                FeatureAttribute.NavigationBar
-            );
+            _instance
+                .Workspace
+                .WaitForAsyncOperations(
+                    Helper.HangMitigatingTimeout,
+                    FeatureAttribute.NavigationBar
+                );
             _editorInProc.SelectNavBarItem(0, item);
         }
 
         public void SelectTypeNavBarItem(string item)
         {
-            _instance.Workspace.WaitForAsyncOperations(
-                Helper.HangMitigatingTimeout,
-                FeatureAttribute.NavigationBar
-            );
+            _instance
+                .Workspace
+                .WaitForAsyncOperations(
+                    Helper.HangMitigatingTimeout,
+                    FeatureAttribute.NavigationBar
+                );
             _editorInProc.SelectNavBarItem(1, item);
         }
 
         public void SelectMemberNavBarItem(string item)
         {
-            _instance.Workspace.WaitForAsyncOperations(
-                Helper.HangMitigatingTimeout,
-                FeatureAttribute.NavigationBar
-            );
+            _instance
+                .Workspace
+                .WaitForAsyncOperations(
+                    Helper.HangMitigatingTimeout,
+                    FeatureAttribute.NavigationBar
+                );
             _editorInProc.SelectNavBarItem(2, item);
         }
 
         public bool IsNavBarEnabled()
         {
-            _instance.Workspace.WaitForAsyncOperations(
-                Helper.HangMitigatingTimeout,
-                FeatureAttribute.NavigationBar
-            );
+            _instance
+                .Workspace
+                .WaitForAsyncOperations(
+                    Helper.HangMitigatingTimeout,
+                    FeatureAttribute.NavigationBar
+                );
             return _editorInProc.IsNavBarEnabled();
         }
 
@@ -424,10 +449,9 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.OutOfProcess
 
         public TextSpan[] GetOutliningSpans()
         {
-            _instance.Workspace.WaitForAsyncOperations(
-                Helper.HangMitigatingTimeout,
-                FeatureAttribute.Outlining
-            );
+            _instance
+                .Workspace
+                .WaitForAsyncOperations(Helper.HangMitigatingTimeout, FeatureAttribute.Outlining);
             return Deserialize(_editorInProc.GetOutliningSpans());
         }
 

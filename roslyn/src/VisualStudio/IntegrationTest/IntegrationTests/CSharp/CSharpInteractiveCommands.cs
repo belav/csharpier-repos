@@ -72,10 +72,10 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
             VisualStudio.SendKeys.Send(VirtualKey.Enter);
             VisualStudio.InteractiveWindow.SubmitText("+ 3");
             VisualStudio.InteractiveWindow.WaitForLastReplOutputContains("3");
-            VisualStudio.InteractiveWindow.Verify.ReplPromptConsistency(
-                "<![CDATA[1 + 2 + 3]]>",
-                "6"
-            );
+            VisualStudio
+                .InteractiveWindow
+                .Verify
+                .ReplPromptConsistency("<![CDATA[1 + 2 + 3]]>", "6");
         }
 
         [WpfFact]
@@ -93,10 +93,10 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
             VisualStudio.InteractiveWindow.ClearReplText();
             VisualStudio.InteractiveWindow.InsertCode(" 2 + 4 ");
             VisualStudio.SendKeys.Send(Ctrl(VirtualKey.Z));
-            VisualStudio.InteractiveWindow.Verify.ReplPromptConsistency(
-                "< ![CDATA[]] >",
-                string.Empty
-            );
+            VisualStudio
+                .InteractiveWindow
+                .Verify
+                .ReplPromptConsistency("< ![CDATA[]] >", string.Empty);
             VisualStudio.SendKeys.Send(Ctrl(VirtualKey.Y));
             VisualStudio.InteractiveWindow.Verify.LastReplInput(" 2 + 4 ");
             VisualStudio.SendKeys.Send(VirtualKey.Enter);

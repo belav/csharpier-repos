@@ -122,14 +122,11 @@ namespace System.Text.Json.Serialization.Converters
 
             if (typeInfo.CreateObjectWithArgs == null)
             {
-                typeInfo.CreateObjectWithArgs =
-                    options.MemberAccessorStrategy.CreateParameterizedConstructor<
-                        T,
-                        TArg0,
-                        TArg1,
-                        TArg2,
-                        TArg3
-                    >(ConstructorInfo!);
+                typeInfo.CreateObjectWithArgs = options
+                    .MemberAccessorStrategy
+                    .CreateParameterizedConstructor<T, TArg0, TArg1, TArg2, TArg3>(
+                        ConstructorInfo!
+                    );
             }
 
             var arguments = new Arguments<TArg0, TArg1, TArg2, TArg3>();

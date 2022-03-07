@@ -9356,9 +9356,9 @@ class C
     }
 }
 " + TestResources.NetFX.ValueTuple.tuplelib_cs,
-                parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
-                    LanguageVersion.Preview
-                )
+                parseOptions: CSharpParseOptions
+                    .Default
+                    .WithLanguageVersion(LanguageVersion.Preview)
             );
         }
 
@@ -9404,9 +9404,9 @@ class C
     }
 }
 ",
-                parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
-                    LanguageVersion.Preview
-                )
+                parseOptions: CSharpParseOptions
+                    .Default
+                    .WithLanguageVersion(LanguageVersion.Preview)
             );
         }
 
@@ -9454,9 +9454,9 @@ class C
     }
 }
 ",
-                parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
-                    LanguageVersion.Preview
-                )
+                parseOptions: CSharpParseOptions
+                    .Default
+                    .WithLanguageVersion(LanguageVersion.Preview)
             );
         }
 

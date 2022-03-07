@@ -78,9 +78,9 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnreachableCode
             !IsSubsequentSection(diagnostic);
 
         private static bool IsSubsequentSection(Diagnostic diagnostic) =>
-            diagnostic.Properties.ContainsKey(
-                CSharpRemoveUnreachableCodeDiagnosticAnalyzer.IsSubsequentSection
-            );
+            diagnostic
+                .Properties
+                .ContainsKey(CSharpRemoveUnreachableCodeDiagnosticAnalyzer.IsSubsequentSection);
 
         protected override Task FixAllAsync(
             Document document,

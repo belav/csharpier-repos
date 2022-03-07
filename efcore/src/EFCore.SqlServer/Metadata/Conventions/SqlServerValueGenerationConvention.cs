@@ -96,14 +96,14 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 // (e.g. when removing period with default name, while the property with that same name has been explicitly defined)
                 if (oldAnnotation?.Value is string oldPropertyName)
                 {
-                    var oldPeriodProperty = entityTypeBuilder.Metadata.FindProperty(
-                        oldPropertyName
-                    );
+                    var oldPeriodProperty = entityTypeBuilder
+                        .Metadata
+                        .FindProperty(oldPropertyName);
                     if (oldPeriodProperty != null)
                     {
-                        oldPeriodProperty.Builder.ValueGenerated(
-                            GetValueGenerated(oldPeriodProperty)
-                        );
+                        oldPeriodProperty
+                            .Builder
+                            .ValueGenerated(GetValueGenerated(oldPeriodProperty));
                     }
                 }
             }

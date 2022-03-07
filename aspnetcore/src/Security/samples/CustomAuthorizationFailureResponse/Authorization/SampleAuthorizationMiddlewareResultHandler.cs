@@ -37,9 +37,15 @@ public class SampleAuthorizationMiddlewareResultHandler : IAuthorizationMiddlewa
         {
             if (policyAuthorizationResult.AuthorizationFailure.FailureReasons.Any())
             {
-                await httpContext.Response.WriteAsync(
-                    policyAuthorizationResult.AuthorizationFailure.FailureReasons.First().Message
-                );
+                await httpContext
+                    .Response
+                    .WriteAsync(
+                        policyAuthorizationResult
+                            .AuthorizationFailure
+                            .FailureReasons
+                            .First()
+                            .Message
+                    );
 
                 // return right away as the default implementation would overwrite the status code
                 return;
@@ -47,9 +53,10 @@ public class SampleAuthorizationMiddlewareResultHandler : IAuthorizationMiddlewa
 
             // as an example, let's return 404 if specific requirement has failed
             if (
-                policyAuthorizationResult.AuthorizationFailure.FailedRequirements.Any(
-                    requirement => requirement is SampleRequirement
-                )
+                policyAuthorizationResult
+                    .AuthorizationFailure
+                    .FailedRequirements
+                    .Any(requirement => requirement is SampleRequirement)
             )
             {
                 httpContext.Response.StatusCode = (int)HttpStatusCode.NotFound;
@@ -59,9 +66,10 @@ public class SampleAuthorizationMiddlewareResultHandler : IAuthorizationMiddlewa
                 return;
             }
             else if (
-                policyAuthorizationResult.AuthorizationFailure.FailedRequirements.Any(
-                    requirement => requirement is SampleWithCustomMessageRequirement
-                )
+                policyAuthorizationResult
+                    .AuthorizationFailure
+                    .FailedRequirements
+                    .Any(requirement => requirement is SampleWithCustomMessageRequirement)
             )
             {
                 // if other requirements failed, let's just use a custom message
@@ -69,12 +77,16 @@ public class SampleAuthorizationMiddlewareResultHandler : IAuthorizationMiddlewa
                 // and modifications of the response are not allowed once the writing has started
                 var message = Startup.CustomForbiddenMessage;
 
-                httpContext.Response.OnStarting(
-                    () =>
-                        httpContext.Response.BodyWriter
-                            .WriteAsync(Encoding.UTF8.GetBytes(message))
-                            .AsTask()
-                );
+                httpContext
+                    .Response
+                    .OnStarting(
+                        () =>
+                            httpContext
+                                .Response
+                                .BodyWriter
+                                .WriteAsync(Encoding.UTF8.GetBytes(message))
+                                .AsTask()
+                    );
             }
         }
 

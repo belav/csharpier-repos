@@ -143,10 +143,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             }
             else
             {
-                return semanticModel.GetTypeInfo(
-                    potentialAwaitableExpression,
-                    cancellationToken
-                ).Type;
+                return semanticModel
+                    .GetTypeInfo(potentialAwaitableExpression, cancellationToken)
+                    .Type;
             }
         }
     }

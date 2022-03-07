@@ -1737,9 +1737,9 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                         {
                             pSignatures.Add(
                                 new UnaOpFullSig(
-                                    (
-                                        (AggregateType)pArgumentType
-                                    ).OwningAggregate.GetUnderlyingType(),
+                                    ((AggregateType)pArgumentType)
+                                        .OwningAggregate
+                                        .GetUnderlyingType(),
                                     BindEnumUnaOp,
                                     LiftFlags.None,
                                     UnaOpFuncKind.EnumUnaOp
@@ -1752,9 +1752,9 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                             // perform the conversions to and from the enum type.
                             pSignatures.Add(
                                 new UnaOpFullSig(
-                                    (
-                                        (AggregateType)pArgumentType
-                                    ).OwningAggregate.GetUnderlyingType(),
+                                    ((AggregateType)pArgumentType)
+                                        .OwningAggregate
+                                        .GetUnderlyingType(),
                                     null,
                                     LiftFlags.None,
                                     UnaOpFuncKind.None

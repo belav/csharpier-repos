@@ -217,10 +217,9 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
                     {
                         foreach (var relatedEntity in navigationValue)
                         {
-                            var relatedEntry = InternalEntry.StateManager.TryGetEntry(
-                                relatedEntity,
-                                Metadata.TargetEntityType
-                            );
+                            var relatedEntry = InternalEntry
+                                .StateManager
+                                .TryGetEntry(relatedEntity, Metadata.TargetEntityType);
                             if (relatedEntry != null)
                             {
                                 var anyNonPk = foreignKey.Properties.Any(p => !p.IsPrimaryKey());

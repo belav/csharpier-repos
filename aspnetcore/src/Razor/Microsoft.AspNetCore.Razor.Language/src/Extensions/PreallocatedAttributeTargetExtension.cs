@@ -30,7 +30,8 @@ internal class PreallocatedAttributeTargetExtension : IPreallocatedAttributeTarg
         PreallocatedTagHelperHtmlAttributeValueIntermediateNode node
     )
     {
-        context.CodeWriter
+        context
+            .CodeWriter
             .Write("private static readonly global::")
             .Write(TagHelperAttributeTypeName)
             .Write(" ")
@@ -45,7 +46,8 @@ internal class PreallocatedAttributeTargetExtension : IPreallocatedAttributeTarg
         }
         else
         {
-            context.CodeWriter
+            context
+                .CodeWriter
                 .WriteParameterSeparator()
                 .WriteStartNewObject("global::" + EncodedHtmlStringTypeName)
                 .WriteStringLiteral(node.Value)
@@ -72,7 +74,8 @@ internal class PreallocatedAttributeTargetExtension : IPreallocatedAttributeTarg
             throw new InvalidOperationException(message);
         }
 
-        context.CodeWriter
+        context
+            .CodeWriter
             .WriteStartInstanceMethodInvocation(
                 ExecutionContextVariableName,
                 ExecutionContextAddHtmlAttributeMethodName
@@ -86,7 +89,8 @@ internal class PreallocatedAttributeTargetExtension : IPreallocatedAttributeTarg
         PreallocatedTagHelperPropertyValueIntermediateNode node
     )
     {
-        context.CodeWriter
+        context
+            .CodeWriter
             .Write("private static readonly global::")
             .Write(TagHelperAttributeTypeName)
             .Write(" ")
@@ -125,7 +129,8 @@ internal class PreallocatedAttributeTargetExtension : IPreallocatedAttributeTarg
         )
         {
             // Throw a reasonable Exception at runtime if the dictionary property is null.
-            context.CodeWriter
+            context
+                .CodeWriter
                 .Write("if (")
                 .Write(node.FieldName)
                 .Write(".")
@@ -135,7 +140,8 @@ internal class PreallocatedAttributeTargetExtension : IPreallocatedAttributeTarg
             {
                 // System is in Host.NamespaceImports for all MVC scenarios. No need to generate FullName
                 // of InvalidOperationException type.
-                context.CodeWriter
+                context
+                    .CodeWriter
                     .Write("throw ")
                     .WriteStartNewObject(nameof(InvalidOperationException))
                     .WriteStartMethodInvocation(FormatInvalidIndexerAssignmentMethodName)
@@ -149,7 +155,8 @@ internal class PreallocatedAttributeTargetExtension : IPreallocatedAttributeTarg
             }
         }
 
-        context.CodeWriter
+        context
+            .CodeWriter
             .WriteStartAssignment(GetPropertyAccessor(node))
             .Write("(string)")
             .Write($"{node.VariableName}.Value")

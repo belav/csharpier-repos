@@ -37,11 +37,11 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
     }
 }";
 
-            Roslyn.Test.Utilities.MarkupTestFile.GetSpans(
-                input,
-                out var text,
-                out ImmutableArray<TextSpan> spans
-            );
+            Roslyn
+                .Test
+                .Utilities
+                .MarkupTestFile
+                .GetSpans(input, out var text, out ImmutableArray<TextSpan> spans);
 
             VisualStudio.Editor.SetText(text);
 
@@ -72,11 +72,13 @@ class PurchaseTransaction
         CommitHelper();
     }
 }";
-            Test.Utilities.MarkupTestFile.GetSpans(
-                input,
-                out var text,
-                out IDictionary<string, ImmutableArray<TextSpan>> spans
-            );
+            Test.Utilities
+                .MarkupTestFile
+                .GetSpans(
+                    input,
+                    out var text,
+                    out IDictionary<string, ImmutableArray<TextSpan>> spans
+                );
 
             VisualStudio.Editor.SetText(text);
 
@@ -99,11 +101,9 @@ class C
     [|#endregion|]
 }";
 
-            Test.Utilities.MarkupTestFile.GetSpans(
-                input,
-                out var text,
-                out ImmutableArray<TextSpan> spans
-            );
+            Test.Utilities
+                .MarkupTestFile
+                .GetSpans(input, out var text, out ImmutableArray<TextSpan> spans);
 
             VisualStudio.Editor.SetText(text);
 
@@ -114,14 +114,16 @@ class C
         private void Verify(string marker, ImmutableArray<TextSpan> expectedCount)
         {
             VisualStudio.Editor.PlaceCaret(marker, charsOffset: -1);
-            VisualStudio.Workspace.WaitForAllAsyncOperations(
-                Helper.HangMitigatingTimeout,
-                FeatureAttribute.Workspace,
-                FeatureAttribute.SolutionCrawler,
-                FeatureAttribute.DiagnosticService,
-                FeatureAttribute.Classification,
-                FeatureAttribute.KeywordHighlighting
-            );
+            VisualStudio
+                .Workspace
+                .WaitForAllAsyncOperations(
+                    Helper.HangMitigatingTimeout,
+                    FeatureAttribute.Workspace,
+                    FeatureAttribute.SolutionCrawler,
+                    FeatureAttribute.DiagnosticService,
+                    FeatureAttribute.Classification,
+                    FeatureAttribute.KeywordHighlighting
+                );
 
             Assert.Equal(expectedCount, VisualStudio.Editor.GetKeywordHighlightTags());
         }

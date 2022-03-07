@@ -34,7 +34,8 @@ namespace HostActivation.Tests
                 .Execute()
                 .Should()
                 .Pass()
-                .And.HaveUsedDotNetRootInstallLocation(
+                .And
+                .HaveUsedDotNetRootInstallLocation(
                     fixture.BuiltDotnet.BinPath,
                     fixture.CurrentRid,
                     arch
@@ -55,10 +56,8 @@ namespace HostActivation.Tests
                 .Execute()
                 .Should()
                 .Pass()
-                .And.HaveUsedDotNetRootInstallLocation(
-                    fixture.BuiltDotnet.BinPath,
-                    fixture.CurrentRid
-                );
+                .And
+                .HaveUsedDotNetRootInstallLocation(fixture.BuiltDotnet.BinPath, fixture.CurrentRid);
         }
 
         [Fact]
@@ -77,8 +76,10 @@ namespace HostActivation.Tests
                 .Execute()
                 .Should()
                 .Pass()
-                .And.HaveUsedDotNetRootInstallLocation(dotnet, fixture.CurrentRid, arch)
-                .And.NotHaveStdErrContaining("Using environment variable DOTNET_ROOT=");
+                .And
+                .HaveUsedDotNetRootInstallLocation(dotnet, fixture.CurrentRid, arch)
+                .And
+                .NotHaveStdErrContaining("Using environment variable DOTNET_ROOT=");
         }
 
         [Fact]
@@ -108,8 +109,10 @@ namespace HostActivation.Tests
                     .Execute()
                     .Should()
                     .Pass()
-                    .And.HaveUsedDotNetRootInstallLocation(dotnet, fixture.CurrentRid, arch)
-                    .And.NotHaveStdErrContaining("Using global install location");
+                    .And
+                    .HaveUsedDotNetRootInstallLocation(dotnet, fixture.CurrentRid, arch)
+                    .And
+                    .NotHaveStdErrContaining("Using global install location");
             }
         }
 
@@ -133,12 +136,15 @@ namespace HostActivation.Tests
                     .Execute()
                     .Should()
                     .Pass()
-                    .And.HaveStdErrContaining(
+                    .And
+                    .HaveStdErrContaining(
                         "Did not find [DOTNET_ROOT] directory [non_existent_path]"
                     )
                     // If DOTNET_ROOT points to a folder that does not exist, we fall back to the global install path.
-                    .And.HaveUsedGlobalInstallLocation(sharedTestState.InstallLocation)
-                    .And.HaveStdOutContaining("Hello World");
+                    .And
+                    .HaveUsedGlobalInstallLocation(sharedTestState.InstallLocation)
+                    .And
+                    .HaveStdOutContaining("Hello World");
             }
         }
 
@@ -163,9 +169,11 @@ namespace HostActivation.Tests
                     .Execute()
                     .Should()
                     .Fail()
-                    .And.HaveUsedDotNetRootInstallLocation(projDir, fixture.CurrentRid)
+                    .And
+                    .HaveUsedDotNetRootInstallLocation(projDir, fixture.CurrentRid)
                     // If DOTNET_ROOT points to a folder that exists we assume that there's a dotnet installation in it
-                    .And.HaveStdErrContaining(
+                    .And
+                    .HaveStdErrContaining(
                         $"A fatal error occurred. The required library {RuntimeInformationExtensions.GetSharedLibraryFileNameForCurrentPlatform("hostfxr")} could not be found."
                     );
             }
@@ -247,7 +255,8 @@ namespace HostActivation.Tests
                     .HaveLookedForDefaultInstallLocation(
                         registeredInstallLocationOverride.PathValueOverride
                     )
-                    .And.HaveUsedConfigFileInstallLocation(reallyLongPath);
+                    .And
+                    .HaveUsedConfigFileInstallLocation(reallyLongPath);
             }
         }
 

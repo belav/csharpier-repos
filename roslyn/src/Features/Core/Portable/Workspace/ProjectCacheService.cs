@@ -110,9 +110,9 @@ namespace Microsoft.CodeAnalysis.Host
         private bool IsEnabled()
         {
             return _workspace == null
-                || !_workspace.Options.GetOption(
-                    WorkspaceConfigurationOptions.DisableProjectCacheService
-                );
+                || !_workspace
+                    .Options
+                    .GetOption(WorkspaceConfigurationOptions.DisableProjectCacheService);
         }
 
         private bool PartOfP2PReferences(ProjectId key)

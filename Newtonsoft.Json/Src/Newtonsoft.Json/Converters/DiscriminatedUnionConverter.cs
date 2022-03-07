@@ -122,16 +122,12 @@ namespace Newtonsoft.Json.Converters
                     (int)FSharpUtils.Instance.GetUnionCaseInfoTag(unionCaseInfo),
                     (string)FSharpUtils.Instance.GetUnionCaseInfoName(unionCaseInfo),
                     (PropertyInfo[])FSharpUtils.Instance.GetUnionCaseInfoFields(unionCaseInfo)!,
-                    (FSharpFunction)FSharpUtils.Instance.PreComputeUnionReader(
-                        null,
-                        unionCaseInfo,
-                        null
-                    ),
-                    (FSharpFunction)FSharpUtils.Instance.PreComputeUnionConstructor(
-                        null,
-                        unionCaseInfo,
-                        null
-                    )
+                    (FSharpFunction)FSharpUtils
+                        .Instance
+                        .PreComputeUnionReader(null, unionCaseInfo, null),
+                    (FSharpFunction)FSharpUtils
+                        .Instance
+                        .PreComputeUnionConstructor(null, unionCaseInfo, null)
                 );
 
                 u.Cases.Add(unionCase);

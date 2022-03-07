@@ -776,19 +776,31 @@ namespace System.Text.Json.SourceGeneration.Tests
                 SerializationWithPerTypeAttributeContext.Default.RepeatedLocation.SerializeHandler
             );
             Assert.NotNull(
-                SerializationWithPerTypeAttributeContext.Default.ActiveOrUpcomingEvent.SerializeHandler
+                SerializationWithPerTypeAttributeContext
+                    .Default
+                    .ActiveOrUpcomingEvent
+                    .SerializeHandler
             );
             Assert.NotNull(
-                SerializationWithPerTypeAttributeContext.Default.CampaignSummaryViewModel.SerializeHandler
+                SerializationWithPerTypeAttributeContext
+                    .Default
+                    .CampaignSummaryViewModel
+                    .SerializeHandler
             );
             Assert.NotNull(
                 SerializationWithPerTypeAttributeContext.Default.IndexViewModel.SerializeHandler
             );
             Assert.NotNull(
-                SerializationWithPerTypeAttributeContext.Default.WeatherForecastWithPOCOs.SerializeHandler
+                SerializationWithPerTypeAttributeContext
+                    .Default
+                    .WeatherForecastWithPOCOs
+                    .SerializeHandler
             );
             Assert.NotNull(
-                SerializationWithPerTypeAttributeContext.Default.WeatherForecastWithPOCOs.SerializeHandler
+                SerializationWithPerTypeAttributeContext
+                    .Default
+                    .WeatherForecastWithPOCOs
+                    .SerializeHandler
             );
             Assert.NotNull(
                 SerializationWithPerTypeAttributeContext.Default.HighLowTemps.SerializeHandler
@@ -803,13 +815,19 @@ namespace System.Text.Json.SourceGeneration.Tests
                 SerializationWithPerTypeAttributeContext.Default.MyIntermediateType.SerializeHandler
             );
             Assert.NotNull(
-                SerializationWithPerTypeAttributeContext.Default.HighLowTempsImmutable.SerializeHandler
+                SerializationWithPerTypeAttributeContext
+                    .Default
+                    .HighLowTempsImmutable
+                    .SerializeHandler
             );
             Assert.NotNull(
                 SerializationWithPerTypeAttributeContext.Default.MyNestedClass.SerializeHandler
             );
             Assert.NotNull(
-                SerializationWithPerTypeAttributeContext.Default.MyNestedNestedClass.SerializeHandler
+                SerializationWithPerTypeAttributeContext
+                    .Default
+                    .MyNestedNestedClass
+                    .SerializeHandler
             );
             Assert.Null(
                 SerializationWithPerTypeAttributeContext.Default.ObjectArray.SerializeHandler
@@ -822,42 +840,78 @@ namespace System.Text.Json.SourceGeneration.Tests
             );
             Assert.Null(SerializationWithPerTypeAttributeContext.Default.String.SerializeHandler);
             Assert.NotNull(
-                SerializationWithPerTypeAttributeContext.Default.ValueTupleStringInt32Boolean.SerializeHandler
+                SerializationWithPerTypeAttributeContext
+                    .Default
+                    .ValueTupleStringInt32Boolean
+                    .SerializeHandler
             );
             Assert.NotNull(
-                SerializationWithPerTypeAttributeContext.Default.ClassWithEnumAndNullable.SerializeHandler
+                SerializationWithPerTypeAttributeContext
+                    .Default
+                    .ClassWithEnumAndNullable
+                    .SerializeHandler
             );
             Assert.Null(
-                SerializationWithPerTypeAttributeContext.Default.ClassWithCustomConverter.SerializeHandler
+                SerializationWithPerTypeAttributeContext
+                    .Default
+                    .ClassWithCustomConverter
+                    .SerializeHandler
             );
             Assert.Null(
-                SerializationWithPerTypeAttributeContext.Default.StructWithCustomConverter.SerializeHandler
+                SerializationWithPerTypeAttributeContext
+                    .Default
+                    .StructWithCustomConverter
+                    .SerializeHandler
             );
             Assert.Null(
-                SerializationWithPerTypeAttributeContext.Default.ClassWithCustomConverterFactory.SerializeHandler
+                SerializationWithPerTypeAttributeContext
+                    .Default
+                    .ClassWithCustomConverterFactory
+                    .SerializeHandler
             );
             Assert.Null(
-                SerializationWithPerTypeAttributeContext.Default.StructWithCustomConverterFactory.SerializeHandler
+                SerializationWithPerTypeAttributeContext
+                    .Default
+                    .StructWithCustomConverterFactory
+                    .SerializeHandler
             );
             Assert.Null(
-                SerializationWithPerTypeAttributeContext.Default.ClassWithCustomConverterProperty.SerializeHandler
+                SerializationWithPerTypeAttributeContext
+                    .Default
+                    .ClassWithCustomConverterProperty
+                    .SerializeHandler
             );
             Assert.Null(
-                SerializationWithPerTypeAttributeContext.Default.StructWithCustomConverterProperty.SerializeHandler
+                SerializationWithPerTypeAttributeContext
+                    .Default
+                    .StructWithCustomConverterProperty
+                    .SerializeHandler
             );
             Assert.Null(
-                SerializationWithPerTypeAttributeContext.Default.ClassWithCustomConverterPropertyFactory.SerializeHandler
+                SerializationWithPerTypeAttributeContext
+                    .Default
+                    .ClassWithCustomConverterPropertyFactory
+                    .SerializeHandler
             );
             Assert.Null(
-                SerializationWithPerTypeAttributeContext.Default.StructWithCustomConverterPropertyFactory.SerializeHandler
+                SerializationWithPerTypeAttributeContext
+                    .Default
+                    .StructWithCustomConverterPropertyFactory
+                    .SerializeHandler
             );
             Assert.Throws<InvalidOperationException>(
                 () =>
-                    SerializationWithPerTypeAttributeContext.Default.ClassWithBadCustomConverter.SerializeHandler
+                    SerializationWithPerTypeAttributeContext
+                        .Default
+                        .ClassWithBadCustomConverter
+                        .SerializeHandler
             );
             Assert.Throws<InvalidOperationException>(
                 () =>
-                    SerializationWithPerTypeAttributeContext.Default.StructWithBadCustomConverter.SerializeHandler
+                    SerializationWithPerTypeAttributeContext
+                        .Default
+                        .StructWithBadCustomConverter
+                        .SerializeHandler
             );
         }
     }

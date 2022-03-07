@@ -166,9 +166,10 @@ namespace Microsoft.WebAssembly.Diagnostics
 
                     if (!context.IsRuntimeReady)
                     {
-                        string exceptionError = args?["exceptionDetails"]?["exception"]?[
-                            "value"
-                        ]?.Value<string>();
+                        string exceptionError = args?["exceptionDetails"]
+                            ?["exception"]
+                            ?["value"]
+                            ?.Value<string>();
                         if (exceptionError == sPauseOnUncaught || exceptionError == sPauseOnCaught)
                             return true;
                     }
@@ -594,11 +595,14 @@ namespace Microsoft.WebAssembly.Diagnostics
                         // Maybe this is an async method, in which case the debug info is attached
                         // to the async method implementation, in class named:
                         //      `{type_name}/<method_name>::MoveNext`
-                        methodInfo = assembly.TypesByName.Values
+                        methodInfo = assembly
+                            .TypesByName
+                            .Values
                             .SingleOrDefault(
                                 t => t.FullName.StartsWith($"{typeName}/<{methodName}>")
                             )
-                            ?.Methods.FirstOrDefault(mi => mi.Name == "MoveNext");
+                            ?.Methods
+                            .FirstOrDefault(mi => mi.Name == "MoveNext");
                     }
 
                     if (methodInfo == null)
@@ -612,9 +616,11 @@ namespace Microsoft.WebAssembly.Diagnostics
                     }
 
                     string src_url =
-                        methodInfo.Assembly.Sources.Single(
-                            sf => sf.SourceId == methodInfo.SourceId
-                        ).Url;
+                        methodInfo
+                            .Assembly
+                            .Sources
+                            .Single(sf => sf.SourceId == methodInfo.SourceId)
+                            .Url;
                     SendResponse(
                         id,
                         Result.OkFromObject(
@@ -857,9 +863,10 @@ namespace Microsoft.WebAssembly.Diagnostics
                             MonoCommands.GetDetails(int.Parse(objectId.Value), args),
                             token
                         );
-                        string value_json_str = res.Value["result"]?["value"]?[
-                            "__value_as_json_string__"
-                        ]?.Value<string>();
+                        string value_json_str = res.Value["result"]
+                            ?["value"]
+                            ?["__value_as_json_string__"]
+                            ?.Value<string>();
                         return value_json_str != null ? JArray.Parse(value_json_str) : null;
                     }
                     default:
@@ -1189,7 +1196,9 @@ namespace Microsoft.WebAssembly.Diagnostics
                     case EventKind.Step:
                     case EventKind.Breakpoint:
                     {
-                        Breakpoint bp = context.BreakpointRequests.Values
+                        Breakpoint bp = context
+                            .BreakpointRequests
+                            .Values
                             .SelectMany(v => v.Locations)
                             .FirstOrDefault(b => b.RemoteId == request_id);
                         string reason = "other"; //other means breakpoint
@@ -1484,9 +1493,10 @@ namespace Microsoft.WebAssembly.Diagnostics
                         )
                     );
 
-                VarInfo[] varIds = scope.Method.Info.GetLiveVarsAt(
-                    scope.Location.CliLocation.Offset
-                );
+                VarInfo[] varIds = scope
+                    .Method
+                    .Info
+                    .GetLiveVarsAt(scope.Location.CliLocation.Offset);
 
                 var values = await SdbHelper.StackFrameGetValues(
                     msg_id,
@@ -1599,7 +1609,8 @@ namespace Microsoft.WebAssembly.Diagnostics
                 }
 
                 await foreach (
-                    SourceFile source in context.store
+                    SourceFile source in context
+                        .store
                         .Load(sessionId, loaded_files, token)
                         .WithCancellation(token)
                 )
@@ -1693,10 +1704,9 @@ namespace Microsoft.WebAssembly.Diagnostics
 
             ExecutionContext context = GetContext(msg_id);
             if (
-                !context.BreakpointRequests.TryGetValue(
-                    bpid,
-                    out BreakpointRequest breakpointRequest
-                )
+                !context
+                    .BreakpointRequests
+                    .TryGetValue(bpid, out BreakpointRequest breakpointRequest)
             )
                 return;
 

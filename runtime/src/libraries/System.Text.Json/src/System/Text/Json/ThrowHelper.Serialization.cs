@@ -864,7 +864,12 @@ namespace System.Text.Json
         )
         {
             if (
-                state.Current.JsonTypeInfo.PropertyInfoForTypeInfo.ConverterBase.ConstructorIsParameterized
+                state
+                    .Current
+                    .JsonTypeInfo
+                    .PropertyInfoForTypeInfo
+                    .ConverterBase
+                    .ConstructorIsParameterized
             )
             {
                 ThrowNotSupportedException_ObjectWithParameterizedCtorRefMetadataNotHonored(

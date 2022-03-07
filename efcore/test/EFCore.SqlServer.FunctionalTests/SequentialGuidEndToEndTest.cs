@@ -60,14 +60,17 @@ namespace Microsoft.EntityFrameworkCore
                 for (var i = 0; i < 50; i++)
                 {
                     guids.Add(
-                        context.Add(
-                            new Pegasus
-                            {
-                                Name = "Rainbow Dash " + i,
-                                Index = i,
-                                Id = Guid.NewGuid()
-                            }
-                        ).Entity.Id
+                        context
+                            .Add(
+                                new Pegasus
+                                {
+                                    Name = "Rainbow Dash " + i,
+                                    Index = i,
+                                    Id = Guid.NewGuid()
+                                }
+                            )
+                            .Entity
+                            .Id
                     );
                 }
 

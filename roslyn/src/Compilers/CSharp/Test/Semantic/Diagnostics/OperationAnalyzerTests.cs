@@ -862,181 +862,241 @@ interface IDerived : IMiddle, IBase2
                     null,
                     null,
                     Diagnostic(
-                            SymbolCouldHaveMoreSpecificTypeAnalyzer.LocalCouldHaveMoreSpecificTypeDescriptor.Id,
+                            SymbolCouldHaveMoreSpecificTypeAnalyzer
+                                .LocalCouldHaveMoreSpecificTypeDescriptor
+                                .Id,
                             "a"
                         )
                         .WithArguments("a", "Middle")
                         .WithLocation(6, 16),
                     Diagnostic(
-                            SymbolCouldHaveMoreSpecificTypeAnalyzer.LocalCouldHaveMoreSpecificTypeDescriptor.Id,
+                            SymbolCouldHaveMoreSpecificTypeAnalyzer
+                                .LocalCouldHaveMoreSpecificTypeDescriptor
+                                .Id,
                             "b"
                         )
                         .WithArguments("b", "Value")
                         .WithLocation(7, 16),
                     Diagnostic(
-                            SymbolCouldHaveMoreSpecificTypeAnalyzer.LocalCouldHaveMoreSpecificTypeDescriptor.Id,
+                            SymbolCouldHaveMoreSpecificTypeAnalyzer
+                                .LocalCouldHaveMoreSpecificTypeDescriptor
+                                .Id,
                             "c"
                         )
                         .WithArguments("c", "Base")
                         .WithLocation(8, 16),
                     Diagnostic(
-                            SymbolCouldHaveMoreSpecificTypeAnalyzer.LocalCouldHaveMoreSpecificTypeDescriptor.Id,
+                            SymbolCouldHaveMoreSpecificTypeAnalyzer
+                                .LocalCouldHaveMoreSpecificTypeDescriptor
+                                .Id,
                             "d"
                         )
                         .WithArguments("d", "Derived")
                         .WithLocation(10, 14),
                     Diagnostic(
-                            SymbolCouldHaveMoreSpecificTypeAnalyzer.LocalCouldHaveMoreSpecificTypeDescriptor.Id,
+                            SymbolCouldHaveMoreSpecificTypeAnalyzer
+                                .LocalCouldHaveMoreSpecificTypeDescriptor
+                                .Id,
                             "e"
                         )
                         .WithArguments("e", "Middle")
                         .WithLocation(11, 14),
                     Diagnostic(
-                            SymbolCouldHaveMoreSpecificTypeAnalyzer.LocalCouldHaveMoreSpecificTypeDescriptor.Id,
+                            SymbolCouldHaveMoreSpecificTypeAnalyzer
+                                .LocalCouldHaveMoreSpecificTypeDescriptor
+                                .Id,
                             "g"
                         )
                         .WithArguments("g", "Base")
                         .WithLocation(15, 16),
                     Diagnostic(
-                            SymbolCouldHaveMoreSpecificTypeAnalyzer.LocalCouldHaveMoreSpecificTypeDescriptor.Id,
+                            SymbolCouldHaveMoreSpecificTypeAnalyzer
+                                .LocalCouldHaveMoreSpecificTypeDescriptor
+                                .Id,
                             "i"
                         )
                         .WithArguments("i", "int")
                         .WithLocation(20, 16),
                     Diagnostic(
-                            SymbolCouldHaveMoreSpecificTypeAnalyzer.LocalCouldHaveMoreSpecificTypeDescriptor.Id,
+                            SymbolCouldHaveMoreSpecificTypeAnalyzer
+                                .LocalCouldHaveMoreSpecificTypeDescriptor
+                                .Id,
                             "k"
                         )
                         .WithArguments("k", "Derived")
                         .WithLocation(24, 16),
                     Diagnostic(
-                            SymbolCouldHaveMoreSpecificTypeAnalyzer.LocalCouldHaveMoreSpecificTypeDescriptor.Id,
+                            SymbolCouldHaveMoreSpecificTypeAnalyzer
+                                .LocalCouldHaveMoreSpecificTypeDescriptor
+                                .Id,
                             "ia"
                         )
                         .WithArguments("ia", "IMiddle")
                         .WithLocation(34, 16),
                     Diagnostic(
-                            SymbolCouldHaveMoreSpecificTypeAnalyzer.LocalCouldHaveMoreSpecificTypeDescriptor.Id,
+                            SymbolCouldHaveMoreSpecificTypeAnalyzer
+                                .LocalCouldHaveMoreSpecificTypeDescriptor
+                                .Id,
                             "ic"
                         )
                         .WithArguments("ic", "IBase1")
                         .WithLocation(35, 16),
                     Diagnostic(
-                            SymbolCouldHaveMoreSpecificTypeAnalyzer.LocalCouldHaveMoreSpecificTypeDescriptor.Id,
+                            SymbolCouldHaveMoreSpecificTypeAnalyzer
+                                .LocalCouldHaveMoreSpecificTypeDescriptor
+                                .Id,
                             "id"
                         )
                         .WithArguments("id", "IDerived")
                         .WithLocation(37, 16),
                     Diagnostic(
-                            SymbolCouldHaveMoreSpecificTypeAnalyzer.LocalCouldHaveMoreSpecificTypeDescriptor.Id,
+                            SymbolCouldHaveMoreSpecificTypeAnalyzer
+                                .LocalCouldHaveMoreSpecificTypeDescriptor
+                                .Id,
                             "ie"
                         )
                         .WithArguments("ie", "IMiddle")
                         .WithLocation(38, 16),
                     Diagnostic(
-                            SymbolCouldHaveMoreSpecificTypeAnalyzer.LocalCouldHaveMoreSpecificTypeDescriptor.Id,
+                            SymbolCouldHaveMoreSpecificTypeAnalyzer
+                                .LocalCouldHaveMoreSpecificTypeDescriptor
+                                .Id,
                             "ig"
                         )
                         .WithArguments("ig", "IBase1")
                         .WithLocation(42, 16),
                     Diagnostic(
-                            SymbolCouldHaveMoreSpecificTypeAnalyzer.LocalCouldHaveMoreSpecificTypeDescriptor.Id,
+                            SymbolCouldHaveMoreSpecificTypeAnalyzer
+                                .LocalCouldHaveMoreSpecificTypeDescriptor
+                                .Id,
                             "ik"
                         )
                         .WithArguments("ik", "IDerived")
                         .WithLocation(47, 17),
                     Diagnostic(
-                            SymbolCouldHaveMoreSpecificTypeAnalyzer.LocalCouldHaveMoreSpecificTypeDescriptor.Id,
+                            SymbolCouldHaveMoreSpecificTypeAnalyzer
+                                .LocalCouldHaveMoreSpecificTypeDescriptor
+                                .Id,
                             "im"
                         )
                         .WithArguments("im", "IDerived")
                         .WithLocation(51, 16),
                     Diagnostic(
-                            SymbolCouldHaveMoreSpecificTypeAnalyzer.FieldCouldHaveMoreSpecificTypeDescriptor.Id,
+                            SymbolCouldHaveMoreSpecificTypeAnalyzer
+                                .FieldCouldHaveMoreSpecificTypeDescriptor
+                                .Id,
                             "fa"
                         )
                         .WithArguments("C.fa", "Middle")
                         .WithLocation(56, 12),
                     Diagnostic(
-                            SymbolCouldHaveMoreSpecificTypeAnalyzer.FieldCouldHaveMoreSpecificTypeDescriptor.Id,
+                            SymbolCouldHaveMoreSpecificTypeAnalyzer
+                                .FieldCouldHaveMoreSpecificTypeDescriptor
+                                .Id,
                             "fb"
                         )
                         .WithArguments("C.fb", "Value")
                         .WithLocation(57, 12),
                     Diagnostic(
-                            SymbolCouldHaveMoreSpecificTypeAnalyzer.FieldCouldHaveMoreSpecificTypeDescriptor.Id,
+                            SymbolCouldHaveMoreSpecificTypeAnalyzer
+                                .FieldCouldHaveMoreSpecificTypeDescriptor
+                                .Id,
                             "fc"
                         )
                         .WithArguments("C.fc", "Base")
                         .WithLocation(58, 12),
                     Diagnostic(
-                            SymbolCouldHaveMoreSpecificTypeAnalyzer.FieldCouldHaveMoreSpecificTypeDescriptor.Id,
+                            SymbolCouldHaveMoreSpecificTypeAnalyzer
+                                .FieldCouldHaveMoreSpecificTypeDescriptor
+                                .Id,
                             "fd"
                         )
                         .WithArguments("C.fd", "Derived")
                         .WithLocation(59, 10),
                     Diagnostic(
-                            SymbolCouldHaveMoreSpecificTypeAnalyzer.FieldCouldHaveMoreSpecificTypeDescriptor.Id,
+                            SymbolCouldHaveMoreSpecificTypeAnalyzer
+                                .FieldCouldHaveMoreSpecificTypeDescriptor
+                                .Id,
                             "fe"
                         )
                         .WithArguments("C.fe", "Middle")
                         .WithLocation(60, 10),
                     Diagnostic(
-                            SymbolCouldHaveMoreSpecificTypeAnalyzer.FieldCouldHaveMoreSpecificTypeDescriptor.Id,
+                            SymbolCouldHaveMoreSpecificTypeAnalyzer
+                                .FieldCouldHaveMoreSpecificTypeDescriptor
+                                .Id,
                             "fg"
                         )
                         .WithArguments("C.fg", "Base")
                         .WithLocation(62, 12),
                     Diagnostic(
-                            SymbolCouldHaveMoreSpecificTypeAnalyzer.FieldCouldHaveMoreSpecificTypeDescriptor.Id,
+                            SymbolCouldHaveMoreSpecificTypeAnalyzer
+                                .FieldCouldHaveMoreSpecificTypeDescriptor
+                                .Id,
                             "fi"
                         )
                         .WithArguments("C.fi", "int")
                         .WithLocation(64, 12),
                     Diagnostic(
-                            SymbolCouldHaveMoreSpecificTypeAnalyzer.FieldCouldHaveMoreSpecificTypeDescriptor.Id,
+                            SymbolCouldHaveMoreSpecificTypeAnalyzer
+                                .FieldCouldHaveMoreSpecificTypeDescriptor
+                                .Id,
                             "fk"
                         )
                         .WithArguments("C.fk", "Derived")
                         .WithLocation(66, 12),
                     Diagnostic(
-                            SymbolCouldHaveMoreSpecificTypeAnalyzer.FieldCouldHaveMoreSpecificTypeDescriptor.Id,
+                            SymbolCouldHaveMoreSpecificTypeAnalyzer
+                                .FieldCouldHaveMoreSpecificTypeDescriptor
+                                .Id,
                             "fia"
                         )
                         .WithArguments("C.fia", "IMiddle")
                         .WithLocation(75, 12),
                     Diagnostic(
-                            SymbolCouldHaveMoreSpecificTypeAnalyzer.FieldCouldHaveMoreSpecificTypeDescriptor.Id,
+                            SymbolCouldHaveMoreSpecificTypeAnalyzer
+                                .FieldCouldHaveMoreSpecificTypeDescriptor
+                                .Id,
                             "fic"
                         )
                         .WithArguments("C.fic", "IBase1")
                         .WithLocation(76, 12),
                     Diagnostic(
-                            SymbolCouldHaveMoreSpecificTypeAnalyzer.FieldCouldHaveMoreSpecificTypeDescriptor.Id,
+                            SymbolCouldHaveMoreSpecificTypeAnalyzer
+                                .FieldCouldHaveMoreSpecificTypeDescriptor
+                                .Id,
                             "fid"
                         )
                         .WithArguments("C.fid", "IDerived")
                         .WithLocation(77, 12),
                     Diagnostic(
-                            SymbolCouldHaveMoreSpecificTypeAnalyzer.FieldCouldHaveMoreSpecificTypeDescriptor.Id,
+                            SymbolCouldHaveMoreSpecificTypeAnalyzer
+                                .FieldCouldHaveMoreSpecificTypeDescriptor
+                                .Id,
                             "fie"
                         )
                         .WithArguments("C.fie", "IMiddle")
                         .WithLocation(78, 12),
                     Diagnostic(
-                            SymbolCouldHaveMoreSpecificTypeAnalyzer.FieldCouldHaveMoreSpecificTypeDescriptor.Id,
+                            SymbolCouldHaveMoreSpecificTypeAnalyzer
+                                .FieldCouldHaveMoreSpecificTypeDescriptor
+                                .Id,
                             "fig"
                         )
                         .WithArguments("C.fig", "IBase1")
                         .WithLocation(80, 12),
                     Diagnostic(
-                            SymbolCouldHaveMoreSpecificTypeAnalyzer.FieldCouldHaveMoreSpecificTypeDescriptor.Id,
+                            SymbolCouldHaveMoreSpecificTypeAnalyzer
+                                .FieldCouldHaveMoreSpecificTypeDescriptor
+                                .Id,
                             "fik"
                         )
                         .WithArguments("C.fik", "IDerived")
                         .WithLocation(82, 13),
                     Diagnostic(
-                            SymbolCouldHaveMoreSpecificTypeAnalyzer.FieldCouldHaveMoreSpecificTypeDescriptor.Id,
+                            SymbolCouldHaveMoreSpecificTypeAnalyzer
+                                .FieldCouldHaveMoreSpecificTypeDescriptor
+                                .Id,
                             "fim"
                         )
                         .WithArguments("C.fim", "IDerived")
@@ -1340,42 +1400,58 @@ class C
                     null,
                     null,
                     Diagnostic(
-                            ArrayInitializerTestAnalyzer.DoNotUseLargeListOfArrayInitializersDescriptor.Id,
+                            ArrayInitializerTestAnalyzer
+                                .DoNotUseLargeListOfArrayInitializersDescriptor
+                                .Id,
                             "{ 1, 2, 3, 4, 5, 6 }"
                         )
                         .WithLocation(14, 32),
                     Diagnostic(
-                            ArrayInitializerTestAnalyzer.DoNotUseLargeListOfArrayInitializersDescriptor.Id,
+                            ArrayInitializerTestAnalyzer
+                                .DoNotUseLargeListOfArrayInitializersDescriptor
+                                .Id,
                             "{ 1, 2, 3, 4, 5, 6 }"
                         )
                         .WithLocation(15, 23),
                     Diagnostic(
-                            ArrayInitializerTestAnalyzer.DoNotUseLargeListOfArrayInitializersDescriptor.Id,
+                            ArrayInitializerTestAnalyzer
+                                .DoNotUseLargeListOfArrayInitializersDescriptor
+                                .Id,
                             "{ null, null, null, null, null, null }"
                         )
                         .WithLocation(16, 28),
                     Diagnostic(
-                            ArrayInitializerTestAnalyzer.DoNotUseLargeListOfArrayInitializersDescriptor.Id,
+                            ArrayInitializerTestAnalyzer
+                                .DoNotUseLargeListOfArrayInitializersDescriptor
+                                .Id,
                             "{ 1, 2, 3, 4, 5, 6 }"
                         )
                         .WithLocation(18, 37),
                     Diagnostic(
-                            ArrayInitializerTestAnalyzer.DoNotUseLargeListOfArrayInitializersDescriptor.Id,
+                            ArrayInitializerTestAnalyzer
+                                .DoNotUseLargeListOfArrayInitializersDescriptor
+                                .Id,
                             "{ 1, 2, 3, 4, 5, 6 }"
                         )
                         .WithLocation(20, 27),
                     Diagnostic(
-                            ArrayInitializerTestAnalyzer.DoNotUseLargeListOfArrayInitializersDescriptor.Id,
+                            ArrayInitializerTestAnalyzer
+                                .DoNotUseLargeListOfArrayInitializersDescriptor
+                                .Id,
                             "{ 7, 8, 9, 10, 11, 12 }"
                         )
                         .WithLocation(21, 27),
                     Diagnostic(
-                            ArrayInitializerTestAnalyzer.DoNotUseLargeListOfArrayInitializersDescriptor.Id,
+                            ArrayInitializerTestAnalyzer
+                                .DoNotUseLargeListOfArrayInitializersDescriptor
+                                .Id,
                             "{ null, null, null, null, null, null }"
                         )
                         .WithLocation(24, 33),
                     Diagnostic(
-                            ArrayInitializerTestAnalyzer.DoNotUseLargeListOfArrayInitializersDescriptor.Id,
+                            ArrayInitializerTestAnalyzer
+                                .DoNotUseLargeListOfArrayInitializersDescriptor
+                                .Id,
                             "{ 1, 2, 3, 4, 5, 6 }"
                         )
                         .WithLocation(28, 66)
@@ -1415,42 +1491,58 @@ public class C
                     null,
                     null,
                     Diagnostic(
-                            VariableDeclarationTestAnalyzer.TooManyLocalVarDeclarationsDescriptor.Id,
+                            VariableDeclarationTestAnalyzer
+                                .TooManyLocalVarDeclarationsDescriptor
+                                .Id,
                             "int c1, c2, c3, c4;"
                         )
                         .WithLocation(9, 9),
                     Diagnostic(
-                            VariableDeclarationTestAnalyzer.TooManyLocalVarDeclarationsDescriptor.Id,
+                            VariableDeclarationTestAnalyzer
+                                .TooManyLocalVarDeclarationsDescriptor
+                                .Id,
                             "C[] d1, d2, d3, d4 = { null, null };"
                         )
                         .WithLocation(10, 9),
                     Diagnostic(
-                            VariableDeclarationTestAnalyzer.LocalVarInitializedDeclarationDescriptor.Id,
+                            VariableDeclarationTestAnalyzer
+                                .LocalVarInitializedDeclarationDescriptor
+                                .Id,
                             "d4 = { null, null }"
                         )
                         .WithLocation(10, 25),
                     Diagnostic(
-                            VariableDeclarationTestAnalyzer.TooManyLocalVarDeclarationsDescriptor.Id,
+                            VariableDeclarationTestAnalyzer
+                                .TooManyLocalVarDeclarationsDescriptor
+                                .Id,
                             "int e1 = 1, e2, e3, e4 = 10;"
                         )
                         .WithLocation(11, 9),
                     Diagnostic(
-                            VariableDeclarationTestAnalyzer.LocalVarInitializedDeclarationDescriptor.Id,
+                            VariableDeclarationTestAnalyzer
+                                .LocalVarInitializedDeclarationDescriptor
+                                .Id,
                             "e1 = 1"
                         )
                         .WithLocation(11, 13),
                     Diagnostic(
-                            VariableDeclarationTestAnalyzer.LocalVarInitializedDeclarationDescriptor.Id,
+                            VariableDeclarationTestAnalyzer
+                                .LocalVarInitializedDeclarationDescriptor
+                                .Id,
                             "e4 = 10"
                         )
                         .WithLocation(11, 29),
                     Diagnostic(
-                            VariableDeclarationTestAnalyzer.TooManyLocalVarDeclarationsDescriptor.Id,
+                            VariableDeclarationTestAnalyzer
+                                .TooManyLocalVarDeclarationsDescriptor
+                                .Id,
                             "int f1, f2, f3, ;"
                         )
                         .WithLocation(12, 9),
                     Diagnostic(
-                            VariableDeclarationTestAnalyzer.TooManyLocalVarDeclarationsDescriptor.Id,
+                            VariableDeclarationTestAnalyzer
+                                .TooManyLocalVarDeclarationsDescriptor
+                                .Id,
                             "int g1, g2, g3, g4 =;"
                         )
                         .WithLocation(13, 9)
@@ -2351,17 +2443,23 @@ class X
                     null,
                     null,
                     Diagnostic(
-                            ConversionExpressionCSharpTestAnalyzer.InvalidConversionExpressionDescriptor.Id,
+                            ConversionExpressionCSharpTestAnalyzer
+                                .InvalidConversionExpressionDescriptor
+                                .Id,
                             "null.Length"
                         )
                         .WithLocation(8, 17),
                     Diagnostic(
-                            ConversionExpressionCSharpTestAnalyzer.InvalidConversionExpressionDescriptor.Id,
+                            ConversionExpressionCSharpTestAnalyzer
+                                .InvalidConversionExpressionDescriptor
+                                .Id,
                             "string.Empty"
                         )
                         .WithLocation(10, 17),
                     Diagnostic(
-                            ConversionExpressionCSharpTestAnalyzer.InvalidConversionExpressionDescriptor.Id,
+                            ConversionExpressionCSharpTestAnalyzer
+                                .InvalidConversionExpressionDescriptor
+                                .Id,
                             "global::MyType()"
                         )
                         .WithLocation(12, 17)
@@ -2507,82 +2605,114 @@ class C
                     null,
                     null,
                     Diagnostic(
-                            ConditionalAccessOperationTestAnalyzer.ConditionalAccessOperationDescriptor.Id,
+                            ConditionalAccessOperationTestAnalyzer
+                                .ConditionalAccessOperationDescriptor
+                                .Id,
                             "p?.Prop"
                         )
                         .WithLocation(24, 17),
                     Diagnostic(
-                            ConditionalAccessOperationTestAnalyzer.ConditionalAccessInstanceOperationDescriptor.Id,
+                            ConditionalAccessOperationTestAnalyzer
+                                .ConditionalAccessInstanceOperationDescriptor
+                                .Id,
                             "p"
                         )
                         .WithLocation(24, 17),
                     Diagnostic(
-                            ConditionalAccessOperationTestAnalyzer.ConditionalAccessOperationDescriptor.Id,
+                            ConditionalAccessOperationTestAnalyzer
+                                .ConditionalAccessOperationDescriptor
+                                .Id,
                             "p?.Field"
                         )
                         .WithLocation(25, 13),
                     Diagnostic(
-                            ConditionalAccessOperationTestAnalyzer.ConditionalAccessInstanceOperationDescriptor.Id,
+                            ConditionalAccessOperationTestAnalyzer
+                                .ConditionalAccessInstanceOperationDescriptor
+                                .Id,
                             "p"
                         )
                         .WithLocation(25, 13),
                     Diagnostic(
-                            ConditionalAccessOperationTestAnalyzer.ConditionalAccessOperationDescriptor.Id,
+                            ConditionalAccessOperationTestAnalyzer
+                                .ConditionalAccessOperationDescriptor
+                                .Id,
                             "p?[0]"
                         )
                         .WithLocation(26, 13),
                     Diagnostic(
-                            ConditionalAccessOperationTestAnalyzer.ConditionalAccessInstanceOperationDescriptor.Id,
+                            ConditionalAccessOperationTestAnalyzer
+                                .ConditionalAccessInstanceOperationDescriptor
+                                .Id,
                             "p"
                         )
                         .WithLocation(26, 13),
                     Diagnostic(
-                            ConditionalAccessOperationTestAnalyzer.ConditionalAccessOperationDescriptor.Id,
+                            ConditionalAccessOperationTestAnalyzer
+                                .ConditionalAccessOperationDescriptor
+                                .Id,
                             "p?.M0(null)"
                         )
                         .WithLocation(27, 9),
                     Diagnostic(
-                            ConditionalAccessOperationTestAnalyzer.ConditionalAccessInstanceOperationDescriptor.Id,
+                            ConditionalAccessOperationTestAnalyzer
+                                .ConditionalAccessInstanceOperationDescriptor
+                                .Id,
                             "p"
                         )
                         .WithLocation(27, 9),
                     Diagnostic(
-                            ConditionalAccessOperationTestAnalyzer.ConditionalAccessOperationDescriptor.Id,
+                            ConditionalAccessOperationTestAnalyzer
+                                .ConditionalAccessOperationDescriptor
+                                .Id,
                             "Field1?.Prop"
                         )
                         .WithLocation(29, 13),
                     Diagnostic(
-                            ConditionalAccessOperationTestAnalyzer.ConditionalAccessInstanceOperationDescriptor.Id,
+                            ConditionalAccessOperationTestAnalyzer
+                                .ConditionalAccessInstanceOperationDescriptor
+                                .Id,
                             "Field1"
                         )
                         .WithLocation(29, 13),
                     Diagnostic(
-                            ConditionalAccessOperationTestAnalyzer.ConditionalAccessOperationDescriptor.Id,
+                            ConditionalAccessOperationTestAnalyzer
+                                .ConditionalAccessOperationDescriptor
+                                .Id,
                             "Field1?.Field"
                         )
                         .WithLocation(30, 13),
                     Diagnostic(
-                            ConditionalAccessOperationTestAnalyzer.ConditionalAccessInstanceOperationDescriptor.Id,
+                            ConditionalAccessOperationTestAnalyzer
+                                .ConditionalAccessInstanceOperationDescriptor
+                                .Id,
                             "Field1"
                         )
                         .WithLocation(30, 13),
                     Diagnostic(
-                            ConditionalAccessOperationTestAnalyzer.ConditionalAccessOperationDescriptor.Id,
+                            ConditionalAccessOperationTestAnalyzer
+                                .ConditionalAccessOperationDescriptor
+                                .Id,
                             "Field1?[0]"
                         )
                         .WithLocation(31, 13),
                     Diagnostic(
-                            ConditionalAccessOperationTestAnalyzer.ConditionalAccessInstanceOperationDescriptor.Id,
+                            ConditionalAccessOperationTestAnalyzer
+                                .ConditionalAccessInstanceOperationDescriptor
+                                .Id,
                             "Field1"
                         )
                         .WithLocation(31, 13),
                     Diagnostic(
-                            ConditionalAccessOperationTestAnalyzer.ConditionalAccessOperationDescriptor.Id,
+                            ConditionalAccessOperationTestAnalyzer
+                                .ConditionalAccessOperationDescriptor
+                                .Id,
                             "Field1?.M0(null)"
                         )
                         .WithLocation(32, 9),
                     Diagnostic(
-                            ConditionalAccessOperationTestAnalyzer.ConditionalAccessInstanceOperationDescriptor.Id,
+                            ConditionalAccessOperationTestAnalyzer
+                                .ConditionalAccessInstanceOperationDescriptor
+                                .Id,
                             "Field1"
                         )
                         .WithLocation(32, 9)

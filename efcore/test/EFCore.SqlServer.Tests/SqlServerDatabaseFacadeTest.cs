@@ -46,12 +46,14 @@ namespace Microsoft.EntityFrameworkCore
             using var context = new SqlServerUseInOnConfiguringContext();
             Assert.Equal(
                 CoreStrings.RecursiveOnConfiguring,
-                Assert.Throws<InvalidOperationException>(
-                    () =>
-                    {
-                        var _ = context.Model; // Trigger context initialization
-                    }
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(
+                        () =>
+                        {
+                            var _ = context.Model; // Trigger context initialization
+                        }
+                    )
+                    .Message
             );
         }
 
@@ -61,7 +63,8 @@ namespace Microsoft.EntityFrameworkCore
             using var context = new ProviderContext(
                 new DbContextOptionsBuilder()
                     .UseInternalServiceProvider(SqlServerFixture.DefaultServiceProvider)
-                    .UseSqlServer("Database=Maltesers").Options
+                    .UseSqlServer("Database=Maltesers")
+                    .Options
             );
             Assert.True(context.Database.IsSqlServer());
         }
@@ -72,7 +75,8 @@ namespace Microsoft.EntityFrameworkCore
             using var context = new ProviderOnModelContext(
                 new DbContextOptionsBuilder()
                     .UseInternalServiceProvider(SqlServerFixture.DefaultServiceProvider)
-                    .UseSqlServer("Database=Maltesers").Options
+                    .UseSqlServer("Database=Maltesers")
+                    .Options
             );
             var _ = context.Model; // Trigger context initialization
             Assert.True(context.IsSqlServerSet);
@@ -84,7 +88,8 @@ namespace Microsoft.EntityFrameworkCore
             using var context = new ProviderConstructorContext(
                 new DbContextOptionsBuilder()
                     .UseInternalServiceProvider(SqlServerFixture.DefaultServiceProvider)
-                    .UseSqlServer("Database=Maltesers").Options
+                    .UseSqlServer("Database=Maltesers")
+                    .Options
             );
             var _ = context.Model; // Trigger context initialization
             Assert.True(context.IsSqlServerSet);
@@ -96,16 +101,19 @@ namespace Microsoft.EntityFrameworkCore
             using var context = new ProviderUseInOnConfiguringContext(
                 new DbContextOptionsBuilder()
                     .UseInternalServiceProvider(SqlServerFixture.DefaultServiceProvider)
-                    .UseSqlServer("Database=Maltesers").Options
+                    .UseSqlServer("Database=Maltesers")
+                    .Options
             );
             Assert.Equal(
                 CoreStrings.RecursiveOnConfiguring,
-                Assert.Throws<InvalidOperationException>(
-                    () =>
-                    {
-                        var _ = context.Model; // Trigger context initialization
-                    }
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(
+                        () =>
+                        {
+                            var _ = context.Model; // Trigger context initialization
+                        }
+                    )
+                    .Message
             );
         }
 
@@ -115,7 +123,8 @@ namespace Microsoft.EntityFrameworkCore
             using var context = new ProviderContext(
                 new DbContextOptionsBuilder()
                     .UseInternalServiceProvider(InMemoryFixture.DefaultServiceProvider)
-                    .UseInMemoryDatabase("Maltesers").Options
+                    .UseInMemoryDatabase("Maltesers")
+                    .Options
             );
             Assert.False(context.Database.IsSqlServer());
         }

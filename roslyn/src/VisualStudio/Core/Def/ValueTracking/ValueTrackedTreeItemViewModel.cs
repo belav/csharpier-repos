@@ -93,33 +93,39 @@ namespace Microsoft.VisualStudio.LanguageServices.ValueTracking
             var computingItem = new ComputingTreeViewItem();
             ChildItems.Add(computingItem);
 
-            System.Threading.Tasks.Task.Run(
-                async () =>
-                {
-                    try
+            System
+                .Threading
+                .Tasks
+                .Task
+                .Run(
+                    async () =>
                     {
-                        var children = await CalculateChildrenAsync(ThreadingContext.DisposalToken)
-                            .ConfigureAwait(false);
-
-                        await ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync();
-
-                        ChildItems.Clear();
-
-                        foreach (var child in children)
+                        try
                         {
-                            ChildItems.Add(child);
+                            var children = await CalculateChildrenAsync(
+                                    ThreadingContext.DisposalToken
+                                )
+                                .ConfigureAwait(false);
+
+                            await ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync();
+
+                            ChildItems.Clear();
+
+                            foreach (var child in children)
+                            {
+                                ChildItems.Add(child);
+                            }
                         }
-                    }
-                    finally
-                    {
-                        await ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync();
-                        TreeViewModel.LoadingCount--;
-                        _childrenCalculated = true;
-                        IsLoading = false;
-                    }
-                },
-                ThreadingContext.DisposalToken
-            );
+                        finally
+                        {
+                            await ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync();
+                            TreeViewModel.LoadingCount--;
+                            _childrenCalculated = true;
+                            IsLoading = false;
+                        }
+                    },
+                    ThreadingContext.DisposalToken
+                );
         }
 
         public override void NavigateTo()
@@ -131,7 +137,9 @@ namespace Microsoft.VisualStudio.LanguageServices.ValueTracking
             }
 
             // While navigating do not activate the tab, which will change focus from the tool window
-            var options = Workspace.CurrentSolution.Options
+            var options = Workspace
+                .CurrentSolution
+                .Options
                 .WithChangedOption(new OptionKey(NavigationOptions.PreferProvisionalTab), true)
                 .WithChangedOption(new OptionKey(NavigationOptions.ActivateTab), false);
 

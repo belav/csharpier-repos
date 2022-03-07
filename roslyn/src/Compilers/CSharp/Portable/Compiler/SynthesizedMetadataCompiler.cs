@@ -77,9 +77,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                     // some interface methods.  They don't go in the symbol table, but if we are emitting metadata, then we should
                     // generate MethodDef entries for them.
                     foreach (
-                        var synthesizedExplicitImpl in sourceTypeSymbol.GetSynthesizedExplicitImplementations(
-                            _cancellationToken
-                        ).ForwardingMethods
+                        var synthesizedExplicitImpl in sourceTypeSymbol
+                            .GetSynthesizedExplicitImplementations(_cancellationToken)
+                            .ForwardingMethods
                     )
                     {
                         _moduleBeingBuilt.AddSynthesizedDefinition(

@@ -25,7 +25,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
         {
             return Assembly
                 .GetExecutingAssembly()
-                .GetCustomAttribute<AssemblyFileVersionAttribute>().Version;
+                .GetCustomAttribute<AssemblyFileVersionAttribute>()
+                .Version;
         }
 
         public override ObjectData GetData(NodeFactory factory, bool relocsOnly = false)

@@ -58,15 +58,15 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options.Style
                     NotificationPreferences = new List<NotificationOptionViewModel>(_notifications)
                 };
 
-                viewModel.SelectedSpecification = viewModel.Specifications.Single(
-                    s => s.ID == namingRule.SymbolSpecificationID
-                );
-                viewModel.SelectedStyle = viewModel.NamingStyles.Single(
-                    s => s.ID == namingRule.NamingStyleID
-                );
-                viewModel.SelectedNotificationPreference = viewModel.NotificationPreferences.Single(
-                    n => n.Notification.Severity == namingRule.EnforcementLevel
-                );
+                viewModel.SelectedSpecification = viewModel
+                    .Specifications
+                    .Single(s => s.ID == namingRule.SymbolSpecificationID);
+                viewModel.SelectedStyle = viewModel
+                    .NamingStyles
+                    .Single(s => s.ID == namingRule.NamingStyleID);
+                viewModel.SelectedNotificationPreference = viewModel
+                    .NotificationPreferences
+                    .Single(n => n.Notification.Severity == namingRule.EnforcementLevel);
 
                 viewModels.Add(viewModel);
             }
@@ -111,7 +111,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options.Style
 
         internal void UpdateSpecificationList(ManageSymbolSpecificationsDialogViewModel viewModel)
         {
-            var symbolSpecifications = viewModel.Items
+            var symbolSpecifications = viewModel
+                .Items
                 .Cast<SymbolSpecificationViewModel>()
                 .Select(
                     n =>
@@ -193,7 +194,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options.Style
 
         internal void UpdateStyleList(ManageNamingStylesDialogViewModel viewModel)
         {
-            var namingStyles = viewModel.Items
+            var namingStyles = viewModel
+                .Items
                 .Cast<NamingStyleViewModel>()
                 .Select(
                     n =>

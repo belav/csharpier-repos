@@ -78,7 +78,9 @@ namespace Microsoft.CodeAnalysis.AddMissingReference
         )
         {
             var cancellationToken = context.CancellationToken;
-            var compilation = await context.Document.Project
+            var compilation = await context
+                .Document
+                .Project
                 .GetRequiredCompilationAsync(cancellationToken)
                 .ConfigureAwait(false);
 

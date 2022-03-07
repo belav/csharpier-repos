@@ -66,9 +66,11 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
 
             Assert.Equal(
                 CoreStrings.DuplicateAnnotation("Foo", annotatable.ToString()),
-                Assert.Throws<InvalidOperationException>(
-                    () => annotatable.AddAnnotation("Foo", "Bar")
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(
+                        () => annotatable.AddAnnotation("Foo", "Bar")
+                    )
+                    .Message
             );
         }
 
@@ -99,9 +101,9 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                     "Foo",
                     "Microsoft.EntityFrameworkCore.Infrastructure.Annotatable"
                 ),
-                Assert.Throws<InvalidOperationException>(
-                    () => annotatable.GetAnnotation("Foo")
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(() => annotatable.GetAnnotation("Foo"))
+                    .Message
             );
         }
 
@@ -155,9 +157,11 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
 
             Assert.Equal(
                 CoreStrings.DuplicateAnnotation("Foo", annotatable.ToString()),
-                Assert.Throws<InvalidOperationException>(
-                    () => annotatable.AddRuntimeAnnotation("Foo", "Bar")
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(
+                        () => annotatable.AddRuntimeAnnotation("Foo", "Bar")
+                    )
+                    .Message
             );
         }
     }

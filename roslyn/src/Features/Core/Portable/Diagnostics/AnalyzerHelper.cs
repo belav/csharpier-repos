@@ -104,9 +104,9 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             CancellationToken cancellationToken
         )
         {
-            var configOptions = analyzerOptions.AnalyzerConfigOptionsProvider.GetOptions(
-                syntaxTree
-            );
+            var configOptions = analyzerOptions
+                .AnalyzerConfigOptionsProvider
+                .GetOptions(syntaxTree);
 #pragma warning disable CS0612 // Type or member is obsolete
             var optionSet = await GetDocumentOptionSetAsync(
                     analyzerOptions,
@@ -444,9 +444,11 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 {
                     if (
                         ex is not OperationCanceledException
-                        && project.Solution.Workspace.Options.GetOption(
-                            InternalDiagnosticsOptions.CrashOnAnalyzerException
-                        )
+                        && project
+                            .Solution
+                            .Workspace
+                            .Options
+                            .GetOption(InternalDiagnosticsOptions.CrashOnAnalyzerException)
                     )
                     {
                         // report telemetry
@@ -717,10 +719,10 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 {
                     var lineSpan = diagnostic.Location.GetLineSpan();
 
-                    var documentIds =
-                        targetTextDocument.Project.Solution.GetDocumentIdsWithFilePath(
-                            lineSpan.Path
-                        );
+                    var documentIds = targetTextDocument
+                        .Project
+                        .Solution
+                        .GetDocumentIdsWithFilePath(lineSpan.Path);
                     return documentIds.Any(id => id == targetTextDocument.Id);
                 }
 

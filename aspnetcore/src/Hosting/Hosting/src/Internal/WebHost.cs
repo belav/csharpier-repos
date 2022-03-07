@@ -344,10 +344,9 @@ internal sealed partial class WebHost : IWebHost, IAsyncDisposable
         else
         {
             cancellationToken =
-                CancellationTokenSource.CreateLinkedTokenSource(
-                    cancellationToken,
-                    timeoutToken
-                ).Token;
+                CancellationTokenSource
+                    .CreateLinkedTokenSource(cancellationToken, timeoutToken)
+                    .Token;
         }
 
         // Fire IApplicationLifetime.Stopping

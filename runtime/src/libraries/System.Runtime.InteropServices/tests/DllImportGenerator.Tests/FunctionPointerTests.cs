@@ -105,36 +105,28 @@ namespace DllImportGenerator.IntegrationTests
             result = NativeExportsNE.FunctionPointer.InvokeWithBlittableArgument(&Callback, a, b);
             Assert.Equal(expected, result);
 
-            result = NativeExportsNE.FunctionPointer.InvokeWithBlittableArgument(
-                &CallbackUnmanaged,
-                a,
-                b
-            );
+            result = NativeExportsNE
+                .FunctionPointer
+                .InvokeWithBlittableArgument(&CallbackUnmanaged, a, b);
             Assert.Equal(expected, result);
 
-            result = NativeExportsNE.FunctionPointer.InvokeWithBlittableArgument(
-                &CallbackUnmanagedStdcall,
-                a,
-                b
-            );
+            result = NativeExportsNE
+                .FunctionPointer
+                .InvokeWithBlittableArgument(&CallbackUnmanagedStdcall, a, b);
             Assert.Equal(expected, result);
 
             expected = Callback(b, a);
             result = NativeExportsNE.FunctionPointer.InvokeWithBlittableArgument(&Callback, b, a);
             Assert.Equal(expected, result);
 
-            result = NativeExportsNE.FunctionPointer.InvokeWithBlittableArgument(
-                &CallbackUnmanaged,
-                b,
-                a
-            );
+            result = NativeExportsNE
+                .FunctionPointer
+                .InvokeWithBlittableArgument(&CallbackUnmanaged, b, a);
             Assert.Equal(expected, result);
 
-            result = NativeExportsNE.FunctionPointer.InvokeWithBlittableArgument(
-                &CallbackUnmanagedStdcall,
-                b,
-                a
-            );
+            result = NativeExportsNE
+                .FunctionPointer
+                .InvokeWithBlittableArgument(&CallbackUnmanagedStdcall, b, a);
             Assert.Equal(expected, result);
 
             static int Callback(int a, int b)

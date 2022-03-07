@@ -509,9 +509,10 @@ namespace Microsoft.CodeAnalysis.CSharp
             return AddSequencePoint(
                 original.Syntax.Kind() == SyntaxKind.VariableDeclarator
                   ? (VariableDeclaratorSyntax)original.Syntax
-                  : (
-                        (LocalDeclarationStatementSyntax)original.Syntax
-                    ).Declaration.Variables.First(),
+                  : ((LocalDeclarationStatementSyntax)original.Syntax)
+                    .Declaration
+                    .Variables
+                    .First(),
                 base.InstrumentLocalInitialization(original, rewritten)
             );
         }

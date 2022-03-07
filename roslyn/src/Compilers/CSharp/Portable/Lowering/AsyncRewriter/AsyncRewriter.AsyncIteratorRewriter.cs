@@ -236,9 +236,9 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                 if (
                     _isEnumerable
-                    && this.method.Parameters.Any(
-                        p => p.IsSourceParameterWithEnumeratorCancellationAttribute()
-                    )
+                    && this.method
+                        .Parameters
+                        .Any(p => p.IsSourceParameterWithEnumeratorCancellationAttribute())
                 )
                 {
                     // Add a field: CancellationTokenSource combinedTokens
@@ -330,12 +330,14 @@ namespace Microsoft.CodeAnalysis.CSharp
                 if (
                     _combinedTokensField is object
                     && parameter.IsSourceParameterWithEnumeratorCancellationAttribute()
-                    && parameter.Type.Equals(
-                        F.Compilation.GetWellKnownType(
-                            WellKnownType.System_Threading_CancellationToken
-                        ),
-                        TypeCompareKind.ConsiderEverything
-                    )
+                    && parameter
+                        .Type
+                        .Equals(
+                            F.Compilation.GetWellKnownType(
+                                WellKnownType.System_Threading_CancellationToken
+                            ),
+                            TypeCompareKind.ConsiderEverything
+                        )
                 )
                 {
                     // For a parameter of type CancellationToken with [EnumeratorCancellation]
@@ -591,9 +593,9 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                 // _builder.Start(ref inst);
                 Debug.Assert(!_asyncMethodBuilderMemberCollection.CheckGenericMethodConstraints);
-                MethodSymbol startMethod = _asyncMethodBuilderMemberCollection.Start.Construct(
-                    this.stateMachineType
-                );
+                MethodSymbol startMethod = _asyncMethodBuilderMemberCollection
+                    .Start
+                    .Construct(this.stateMachineType);
                 instSymbol = F.SynthesizedLocal(this.stateMachineType);
 
                 // var inst = this;

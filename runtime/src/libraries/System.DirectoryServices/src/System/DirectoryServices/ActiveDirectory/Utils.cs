@@ -171,10 +171,9 @@ namespace System.DirectoryServices.ActiveDirectory
                             (dsNameResultItem.name.Length - 1) == dsNameResultItem.name.IndexOf('/')
                         )
                         {
-                            dnsName = dsNameResultItem.name.Substring(
-                                0,
-                                dsNameResultItem.name.Length - 1
-                            );
+                            dnsName = dsNameResultItem
+                                .name
+                                .Substring(0, dsNameResultItem.name.Length - 1);
                         }
                         else
                         {
@@ -1326,7 +1325,8 @@ namespace System.DirectoryServices.ActiveDirectory
                 }
                 serverName = Locator
                     .GetDomainControllerInfo(null, source, null, (long)flag)
-                    .DomainControllerName.Substring(2);
+                    .DomainControllerName
+                    .Substring(2);
             }
             else
             {
@@ -1338,7 +1338,8 @@ namespace System.DirectoryServices.ActiveDirectory
                         flag |= PrivateLocatorFlags.PdcRequired;
                         serverName = Locator
                             .GetDomainControllerInfo(null, source, null, (long)flag)
-                            .DomainControllerName.Substring(2);
+                            .DomainControllerName
+                            .Substring(2);
                     }
                     else
                     {
@@ -1368,14 +1369,16 @@ namespace System.DirectoryServices.ActiveDirectory
                                 // it is not a server in the root domain, so we need to do dc location
                                 serverName = Locator
                                     .GetDomainControllerInfo(null, source, null, (long)flag)
-                                    .DomainControllerName.Substring(2);
+                                    .DomainControllerName
+                                    .Substring(2);
                             }
                         }
                         else
                         {
                             serverName = Locator
                                 .GetDomainControllerInfo(null, source, null, (long)flag)
-                                .DomainControllerName.Substring(2);
+                                .DomainControllerName
+                                .Substring(2);
                         }
                     }
                 }
@@ -2110,10 +2113,14 @@ namespace System.DirectoryServices.ActiveDirectory
                                                     Utils.Compare(
                                                         property,
                                                         0,
-                                                        PropertyManager.MsDSHasInstantiatedNCs.Length,
+                                                        PropertyManager
+                                                            .MsDSHasInstantiatedNCs
+                                                            .Length,
                                                         PropertyManager.MsDSHasInstantiatedNCs,
                                                         0,
-                                                        PropertyManager.MsDSHasInstantiatedNCs.Length
+                                                        PropertyManager
+                                                            .MsDSHasInstantiatedNCs
+                                                            .Length
                                                     ) == 0
                                                 )
                                             )

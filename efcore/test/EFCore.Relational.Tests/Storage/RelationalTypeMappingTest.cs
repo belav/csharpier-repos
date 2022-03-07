@@ -692,16 +692,21 @@ namespace Microsoft.EntityFrameworkCore.Storage
             using var context = new MismatchedFruityContext(ContextOptions);
             Assert.Equal(
                 typeof(short),
-                context.Model
+                context
+                    .Model
                     .FindEntityType(typeof(Banana))
                     .FindProperty("Id")
-                    .GetTypeMapping().Converter.ProviderClrType
+                    .GetTypeMapping()
+                    .Converter
+                    .ProviderClrType
             );
             Assert.Null(
-                context.Model
+                context
+                    .Model
                     .FindEntityType(typeof(Kiwi))
                     .FindProperty("Id")
-                    .GetTypeMapping().Converter
+                    .GetTypeMapping()
+                    .Converter
             );
         }
 

@@ -77,10 +77,9 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.ChangeSignature
         // Use LangVersion Preview to ensure that all types parse correctly. If the user types in a type only available
         // in a preview version, they'll get a diagnostic after everything is generated
         public override bool IsTypeNameValid(string typeName) =>
-            !SyntaxFactory.ParseTypeName(
-                typeName,
-                options: s_langVersionLatestParseOptions
-            ).ContainsDiagnostics;
+            !SyntaxFactory
+                .ParseTypeName(typeName, options: s_langVersionLatestParseOptions)
+                .ContainsDiagnostics;
 
         public override SyntaxNode GetTypeNode(string typeName) =>
             SyntaxFactory.ParseTypeName(typeName);

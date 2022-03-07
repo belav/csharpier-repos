@@ -193,7 +193,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
                 var suppressionsRoot = await suppressionsDoc
                     .GetSyntaxRootAsync(cancellationToken)
                     .ConfigureAwait(false);
-                var compilation = await suppressionsDoc.Project
+                var compilation = await suppressionsDoc
+                    .Project
                     .GetCompilationAsync(cancellationToken)
                     .ConfigureAwait(false);
                 var addImportsService =

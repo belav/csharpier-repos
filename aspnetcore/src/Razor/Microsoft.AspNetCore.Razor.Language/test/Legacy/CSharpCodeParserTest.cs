@@ -175,7 +175,8 @@ public class CSharpCodeParserTest
         var document = RazorSyntaxTree.Parse(source);
 
         // Assert
-        var erroredNode = document.Root
+        var erroredNode = document
+            .Root
             .DescendantNodes()
             .Last(
                 n => n.GetSpanContext()?.ChunkGenerator is TagHelperPrefixDirectiveChunkGenerator

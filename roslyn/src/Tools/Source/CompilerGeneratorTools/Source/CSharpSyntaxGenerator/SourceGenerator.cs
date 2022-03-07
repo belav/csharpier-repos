@@ -58,9 +58,9 @@ namespace CSharpSyntaxGenerator
             out SourceText? inputText
         )
         {
-            input = context.AdditionalFiles.SingleOrDefault(
-                a => Path.GetFileName(a.Path) == "Syntax.xml"
-            );
+            input = context
+                .AdditionalFiles
+                .SingleOrDefault(a => Path.GetFileName(a.Path) == "Syntax.xml");
             if (input == null)
             {
                 context.ReportDiagnostic(Diagnostic.Create(s_MissingSyntaxXml, location: null));

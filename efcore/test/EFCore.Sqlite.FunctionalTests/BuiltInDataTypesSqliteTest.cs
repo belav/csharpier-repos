@@ -1074,7 +1074,8 @@ namespace Microsoft.EntityFrameworkCore
             var typeMapper = context.GetService<IRelationalTypeMappingSource>();
 
             foreach (
-                var property in context.Model
+                var property in context
+                    .Model
                     .GetEntityTypes()
                     .SelectMany(e => e.GetDeclaredProperties())
             )
@@ -1146,9 +1147,11 @@ namespace Microsoft.EntityFrameworkCore
                     nameof(Queryable.Min),
                     typeof(decimal).ShortDisplayName()
                 ),
-                Assert.Throws<NotSupportedException>(
-                    () => query.Select(g => g.Min(e => e.TestNullableDecimal)).ToList()
-                ).Message
+                Assert
+                    .Throws<NotSupportedException>(
+                        () => query.Select(g => g.Min(e => e.TestNullableDecimal)).ToList()
+                    )
+                    .Message
             );
 
             Assert.Equal(
@@ -1156,9 +1159,11 @@ namespace Microsoft.EntityFrameworkCore
                     nameof(Queryable.Min),
                     typeof(DateTimeOffset).ShortDisplayName()
                 ),
-                Assert.Throws<NotSupportedException>(
-                    () => query.Select(g => g.Min(e => e.TestNullableDateTimeOffset)).ToList()
-                ).Message
+                Assert
+                    .Throws<NotSupportedException>(
+                        () => query.Select(g => g.Min(e => e.TestNullableDateTimeOffset)).ToList()
+                    )
+                    .Message
             );
 
             Assert.Equal(
@@ -1166,9 +1171,11 @@ namespace Microsoft.EntityFrameworkCore
                     nameof(Queryable.Min),
                     typeof(TimeSpan).ShortDisplayName()
                 ),
-                Assert.Throws<NotSupportedException>(
-                    () => query.Select(g => g.Min(e => e.TestNullableTimeSpan)).ToList()
-                ).Message
+                Assert
+                    .Throws<NotSupportedException>(
+                        () => query.Select(g => g.Min(e => e.TestNullableTimeSpan)).ToList()
+                    )
+                    .Message
             );
 
             Assert.Equal(
@@ -1176,9 +1183,11 @@ namespace Microsoft.EntityFrameworkCore
                     nameof(Queryable.Min),
                     typeof(ulong).ShortDisplayName()
                 ),
-                Assert.Throws<NotSupportedException>(
-                    () => query.Select(g => g.Min(e => e.TestNullableUnsignedInt64)).ToList()
-                ).Message
+                Assert
+                    .Throws<NotSupportedException>(
+                        () => query.Select(g => g.Min(e => e.TestNullableUnsignedInt64)).ToList()
+                    )
+                    .Message
             );
         }
 
@@ -1236,9 +1245,11 @@ namespace Microsoft.EntityFrameworkCore
                     nameof(Queryable.Max),
                     typeof(decimal).ShortDisplayName()
                 ),
-                Assert.Throws<NotSupportedException>(
-                    () => query.Select(g => g.Max(e => e.TestNullableDecimal)).ToList()
-                ).Message
+                Assert
+                    .Throws<NotSupportedException>(
+                        () => query.Select(g => g.Max(e => e.TestNullableDecimal)).ToList()
+                    )
+                    .Message
             );
 
             Assert.Equal(
@@ -1246,9 +1257,11 @@ namespace Microsoft.EntityFrameworkCore
                     nameof(Queryable.Max),
                     typeof(DateTimeOffset).ShortDisplayName()
                 ),
-                Assert.Throws<NotSupportedException>(
-                    () => query.Select(g => g.Max(e => e.TestNullableDateTimeOffset)).ToList()
-                ).Message
+                Assert
+                    .Throws<NotSupportedException>(
+                        () => query.Select(g => g.Max(e => e.TestNullableDateTimeOffset)).ToList()
+                    )
+                    .Message
             );
 
             Assert.Equal(
@@ -1256,9 +1269,11 @@ namespace Microsoft.EntityFrameworkCore
                     nameof(Queryable.Max),
                     typeof(TimeSpan).ShortDisplayName()
                 ),
-                Assert.Throws<NotSupportedException>(
-                    () => query.Select(g => g.Max(e => e.TestNullableTimeSpan)).ToList()
-                ).Message
+                Assert
+                    .Throws<NotSupportedException>(
+                        () => query.Select(g => g.Max(e => e.TestNullableTimeSpan)).ToList()
+                    )
+                    .Message
             );
 
             Assert.Equal(
@@ -1266,9 +1281,11 @@ namespace Microsoft.EntityFrameworkCore
                     nameof(Queryable.Max),
                     typeof(ulong).ShortDisplayName()
                 ),
-                Assert.Throws<NotSupportedException>(
-                    () => query.Select(g => g.Max(e => e.TestNullableUnsignedInt64)).ToList()
-                ).Message
+                Assert
+                    .Throws<NotSupportedException>(
+                        () => query.Select(g => g.Max(e => e.TestNullableUnsignedInt64)).ToList()
+                    )
+                    .Message
             );
         }
 
@@ -1301,13 +1318,15 @@ namespace Microsoft.EntityFrameworkCore
                     nameof(Queryable.Average),
                     typeof(decimal).ShortDisplayName()
                 ),
-                Assert.Throws<NotSupportedException>(
-                    () =>
-                        context
-                            .Set<BuiltInNullableDataTypes>()
-                            .Where(e => e.PartitionId == 202)
-                            .Average(e => e.TestNullableDecimal)
-                ).Message
+                Assert
+                    .Throws<NotSupportedException>(
+                        () =>
+                            context
+                                .Set<BuiltInNullableDataTypes>()
+                                .Where(e => e.PartitionId == 202)
+                                .Average(e => e.TestNullableDecimal)
+                    )
+                    .Message
             );
         }
 
@@ -1340,13 +1359,15 @@ namespace Microsoft.EntityFrameworkCore
                     nameof(Queryable.Sum),
                     typeof(decimal).ShortDisplayName()
                 ),
-                Assert.Throws<NotSupportedException>(
-                    () =>
-                        context
-                            .Set<BuiltInDataTypes>()
-                            .Where(e => e.PartitionId == 203)
-                            .Sum(e => e.TestDecimal)
-                ).Message
+                Assert
+                    .Throws<NotSupportedException>(
+                        () =>
+                            context
+                                .Set<BuiltInDataTypes>()
+                                .Where(e => e.PartitionId == 203)
+                                .Sum(e => e.TestDecimal)
+                    )
+                    .Message
             );
         }
 

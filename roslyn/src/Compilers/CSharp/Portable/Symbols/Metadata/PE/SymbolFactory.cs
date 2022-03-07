@@ -145,8 +145,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             NamedTypeSymbol genericType = (NamedTypeSymbol)genericTypeDef;
 
             // See if it is or its enclosing type is a non-interface closed over NoPia local types.
-            ImmutableArray<AssemblySymbol> linkedAssemblies =
-                moduleSymbol.ContainingAssembly.GetLinkedReferencedAssemblies();
+            ImmutableArray<AssemblySymbol> linkedAssemblies = moduleSymbol
+                .ContainingAssembly
+                .GetLinkedReferencedAssemblies();
 
             bool noPiaIllegalGenericInstantiation = false;
 

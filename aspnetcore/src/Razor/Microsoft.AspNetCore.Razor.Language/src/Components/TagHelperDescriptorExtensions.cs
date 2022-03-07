@@ -32,10 +32,9 @@ internal static class TagHelperDescriptorExtensions
     public static bool IsGenericTypedComponent(this TagHelperDescriptor tagHelper)
     {
         return IsComponentTagHelper(tagHelper)
-            && tagHelper.Metadata.TryGetValue(
-                ComponentMetadata.Component.GenericTypedKey,
-                out var value
-            )
+            && tagHelper
+                .Metadata
+                .TryGetValue(ComponentMetadata.Component.GenericTypedKey, out var value)
             && string.Equals(bool.TrueString, value);
     }
 
@@ -80,10 +79,9 @@ internal static class TagHelperDescriptorExtensions
     /// </returns>
     public static bool IsInvariantCultureBindTagHelper(this TagHelperDescriptor tagHelper)
     {
-        return tagHelper.Metadata.TryGetValue(
-                ComponentMetadata.Bind.IsInvariantCulture,
-                out var text
-            )
+        return tagHelper
+                .Metadata
+                .TryGetValue(ComponentMetadata.Bind.IsInvariantCulture, out var text)
             && bool.TryParse(text, out var result)
             && result;
     }
@@ -160,20 +158,19 @@ internal static class TagHelperDescriptorExtensions
         }
 
         value =
-            tagHelper.Metadata.TryGetValue(
-                ComponentMetadata.Component.NameMatchKey,
-                out var matchType
-            ) && string.Equals(ComponentMetadata.Component.FullyQualifiedNameMatch, matchType);
+            tagHelper
+                .Metadata
+                .TryGetValue(ComponentMetadata.Component.NameMatchKey, out var matchType)
+            && string.Equals(ComponentMetadata.Component.FullyQualifiedNameMatch, matchType);
         tagHelper.IsComponentFullyQualifiedNameMatchCache = value;
         return value;
     }
 
     public static string GetEventArgsType(this TagHelperDescriptor tagHelper)
     {
-        tagHelper.Metadata.TryGetValue(
-            ComponentMetadata.EventHandler.EventArgsType,
-            out var result
-        );
+        tagHelper
+            .Metadata
+            .TryGetValue(ComponentMetadata.EventHandler.EventArgsType, out var result);
         return result;
     }
 

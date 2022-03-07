@@ -32,9 +32,11 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure.Internal
                 internalServiceProvider.GetService(typeof(TService))
                 ?? internalServiceProvider
                     .GetService<IDbContextOptions>()
-                    ?.Extensions.OfType<CoreOptionsExtension>()
+                    ?.Extensions
+                    .OfType<CoreOptionsExtension>()
                     .FirstOrDefault()
-                    ?.ApplicationServiceProvider?.GetService(typeof(TService));
+                    ?.ApplicationServiceProvider
+                    ?.GetService(typeof(TService));
 
             if (service == null)
             {

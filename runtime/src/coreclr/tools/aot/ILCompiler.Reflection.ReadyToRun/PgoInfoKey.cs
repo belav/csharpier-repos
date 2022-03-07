@@ -55,10 +55,9 @@ namespace ILCompiler.Reflection.ReadyToRun
                 case HandleKind.MethodDefinition:
 
                     {
-                        MethodDefinition methodDef =
-                            componentReader.MetadataReader.GetMethodDefinition(
-                                (MethodDefinitionHandle)MethodHandle
-                            );
+                        MethodDefinition methodDef = componentReader
+                            .MetadataReader
+                            .GetMethodDefinition((MethodDefinitionHandle)MethodHandle);
                         Name = componentReader.MetadataReader.GetString(methodDef.Name);
                         Signature = methodDef.DecodeSignature<string, DisassemblingGenericContext>(
                             typeProvider,
@@ -71,10 +70,9 @@ namespace ILCompiler.Reflection.ReadyToRun
                 case HandleKind.MemberReference:
 
                     {
-                        MemberReference memberRef =
-                            componentReader.MetadataReader.GetMemberReference(
-                                (MemberReferenceHandle)MethodHandle
-                            );
+                        MemberReference memberRef = componentReader
+                            .MetadataReader
+                            .GetMemberReference((MemberReferenceHandle)MethodHandle);
                         Name = componentReader.MetadataReader.GetString(memberRef.Name);
                         Signature = memberRef.DecodeMethodSignature<
                             string,

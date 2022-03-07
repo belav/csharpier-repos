@@ -18,8 +18,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseNamedArguments
 {
     public class UseNamedArgumentsTests : AbstractCSharpCodeActionTest
     {
-        private static readonly ParseOptions CSharp72 =
-            CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp7_2);
+        private static readonly ParseOptions CSharp72 = CSharpParseOptions
+            .Default
+            .WithLanguageVersion(LanguageVersion.CSharp7_2);
 
         protected override CodeRefactoringProvider CreateCodeRefactoringProvider(
             Workspace workspace,
@@ -31,9 +32,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseNamedArguments
             return TestAsync(
                 initialMarkup,
                 expectedMarkup,
-                parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
-                    LanguageVersion.CSharp7
-                )
+                parseOptions: CSharpParseOptions
+                    .Default
+                    .WithLanguageVersion(LanguageVersion.CSharp7)
             );
         }
 

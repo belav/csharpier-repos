@@ -165,16 +165,18 @@ public static class HubConnectionBuilderHttpExtensions
             throw new ArgumentNullException(nameof(hubConnectionBuilder));
         }
 
-        hubConnectionBuilder.Services.Configure<HttpConnectionOptions>(
-            o =>
-            {
-                o.Url = url;
-                if (transports != null)
+        hubConnectionBuilder
+            .Services
+            .Configure<HttpConnectionOptions>(
+                o =>
                 {
-                    o.Transports = transports.Value;
+                    o.Url = url;
+                    if (transports != null)
+                    {
+                        o.Transports = transports.Value;
+                    }
                 }
-            }
-        );
+            );
 
         if (configureHttpConnection != null)
         {
@@ -183,16 +185,17 @@ public static class HubConnectionBuilderHttpExtensions
 
         // Add HttpConnectionOptionsDerivedHttpEndPoint so HubConnection can read the Url from HttpConnectionOptions
         // without the Signal.Client.Core project taking a new dependency on Http.Connections.Client.
-        hubConnectionBuilder.Services.AddSingleton<
-            EndPoint,
-            HttpConnectionOptionsDerivedHttpEndPoint
-        >();
+        hubConnectionBuilder
+            .Services
+            .AddSingleton<EndPoint, HttpConnectionOptionsDerivedHttpEndPoint>();
 
         // Configure the HttpConnection so that it uses the correct transfer format for the configured IHubProtocol.
-        hubConnectionBuilder.Services.AddSingleton<
-            IConfigureOptions<HttpConnectionOptions>,
-            HubProtocolDerivedHttpOptionsConfigurer
-        >();
+        hubConnectionBuilder
+            .Services
+            .AddSingleton<
+                IConfigureOptions<HttpConnectionOptions>,
+                HubProtocolDerivedHttpOptionsConfigurer
+            >();
 
         // If and when HttpConnectionFactory is made public, it can be moved out of this assembly and into Http.Connections.Client.
         hubConnectionBuilder.Services.AddSingleton<IConnectionFactory, HttpConnectionFactory>();

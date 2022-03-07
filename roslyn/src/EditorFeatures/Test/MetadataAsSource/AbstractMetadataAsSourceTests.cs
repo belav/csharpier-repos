@@ -22,46 +22,62 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.MetadataAsSource
     {
         public virtual Task InitializeAsync()
         {
-            AssemblyResolver.TestAccessor.AddInMemoryImage(
-                TestBase.MscorlibRef_v46,
-                "mscorlib.v4_6_1038_0.dll",
-                ImmutableArray.Create(TestMetadata.ResourcesNet461.mscorlib)
-            );
-            AssemblyResolver.TestAccessor.AddInMemoryImage(
-                TestBase.SystemRef_v46,
-                "System.v4_6_1038_0.dll",
-                ImmutableArray.Create(TestMetadata.ResourcesNet461.System)
-            );
-            AssemblyResolver.TestAccessor.AddInMemoryImage(
-                TestBase.SystemCoreRef_v46,
-                "System.Core.v4_6_1038_0.dll",
-                ImmutableArray.Create(TestMetadata.ResourcesNet461.SystemCore)
-            );
-            AssemblyResolver.TestAccessor.AddInMemoryImage(
-                TestBase.ValueTupleRef,
-                "System.ValueTuple.dll",
-                ImmutableArray.Create(TestResources.NetFX.ValueTuple.tuplelib)
-            );
-            AssemblyResolver.TestAccessor.AddInMemoryImage(
-                TestBase.SystemRuntimeFacadeRef,
-                "System.Runtime.dll",
-                ImmutableArray.Create(TestMetadata.ResourcesNet451.SystemRuntime)
-            );
-            AssemblyResolver.TestAccessor.AddInMemoryImage(
-                TestBase.MsvbRef,
-                "Microsoft.VisualBasic.dll",
-                ImmutableArray.Create(TestMetadata.ResourcesNet451.MicrosoftVisualBasic)
-            );
-            AssemblyResolver.TestAccessor.AddInMemoryImage(
-                TestBase.SystemXmlRef,
-                "System.Xml.v4_0_30319.dll",
-                ImmutableArray.Create(TestMetadata.ResourcesNet451.SystemXml)
-            );
-            AssemblyResolver.TestAccessor.AddInMemoryImage(
-                TestBase.SystemXmlLinqRef,
-                "System.Xml.Linq.v4_0_30319.dll",
-                ImmutableArray.Create(TestMetadata.ResourcesNet451.SystemXmlLinq)
-            );
+            AssemblyResolver
+                .TestAccessor
+                .AddInMemoryImage(
+                    TestBase.MscorlibRef_v46,
+                    "mscorlib.v4_6_1038_0.dll",
+                    ImmutableArray.Create(TestMetadata.ResourcesNet461.mscorlib)
+                );
+            AssemblyResolver
+                .TestAccessor
+                .AddInMemoryImage(
+                    TestBase.SystemRef_v46,
+                    "System.v4_6_1038_0.dll",
+                    ImmutableArray.Create(TestMetadata.ResourcesNet461.System)
+                );
+            AssemblyResolver
+                .TestAccessor
+                .AddInMemoryImage(
+                    TestBase.SystemCoreRef_v46,
+                    "System.Core.v4_6_1038_0.dll",
+                    ImmutableArray.Create(TestMetadata.ResourcesNet461.SystemCore)
+                );
+            AssemblyResolver
+                .TestAccessor
+                .AddInMemoryImage(
+                    TestBase.ValueTupleRef,
+                    "System.ValueTuple.dll",
+                    ImmutableArray.Create(TestResources.NetFX.ValueTuple.tuplelib)
+                );
+            AssemblyResolver
+                .TestAccessor
+                .AddInMemoryImage(
+                    TestBase.SystemRuntimeFacadeRef,
+                    "System.Runtime.dll",
+                    ImmutableArray.Create(TestMetadata.ResourcesNet451.SystemRuntime)
+                );
+            AssemblyResolver
+                .TestAccessor
+                .AddInMemoryImage(
+                    TestBase.MsvbRef,
+                    "Microsoft.VisualBasic.dll",
+                    ImmutableArray.Create(TestMetadata.ResourcesNet451.MicrosoftVisualBasic)
+                );
+            AssemblyResolver
+                .TestAccessor
+                .AddInMemoryImage(
+                    TestBase.SystemXmlRef,
+                    "System.Xml.v4_0_30319.dll",
+                    ImmutableArray.Create(TestMetadata.ResourcesNet451.SystemXml)
+                );
+            AssemblyResolver
+                .TestAccessor
+                .AddInMemoryImage(
+                    TestBase.SystemXmlLinqRef,
+                    "System.Xml.Linq.v4_0_30319.dll",
+                    ImmutableArray.Create(TestMetadata.ResourcesNet451.SystemXmlLinq)
+                );
 
             return Task.CompletedTask;
         }
@@ -127,7 +143,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.MetadataAsSource
 
             using var context = TestContext.Create(projectLanguage);
             var projectId = ProjectId.CreateNewId();
-            var metadataProject = context.CurrentSolution
+            var metadataProject = context
+                .CurrentSolution
                 .AddProject(projectId, "Metadata", "Metadata", LanguageNames.CSharp)
                 .GetProject(projectId)
                 .AddMetadataReference(TestMetadata.Net451.mscorlib)

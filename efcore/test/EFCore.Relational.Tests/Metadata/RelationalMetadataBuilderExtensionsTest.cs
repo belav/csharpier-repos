@@ -131,11 +131,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                 ConfigurationSource.Convention
             );
             var idProperty =
-                entityTypeBuilder.Property(
-                    typeof(int),
-                    "Id",
-                    ConfigurationSource.Convention
-                ).Metadata;
+                entityTypeBuilder
+                    .Property(typeof(int), "Id", ConfigurationSource.Convention)
+                    .Metadata;
             var keyBuilder = entityTypeBuilder.HasKey(
                 new[] { idProperty.Name },
                 ConfigurationSource.Convention

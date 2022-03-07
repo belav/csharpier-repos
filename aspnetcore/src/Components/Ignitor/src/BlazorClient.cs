@@ -31,12 +31,14 @@ public class BlazorClient : IAsyncDisposable
         CancellationToken = CancellationTokenSource.Token;
         TaskCompletionSource = new TaskCompletionSource<object?>();
 
-        CancellationTokenSource.Token.Register(
-            () =>
-            {
-                TaskCompletionSource.TrySetCanceled();
-            }
-        );
+        CancellationTokenSource
+            .Token
+            .Register(
+                () =>
+                {
+                    TaskCompletionSource.TrySetCanceled();
+                }
+            );
     }
 
     public TimeSpan? DefaultConnectionTimeout { get; set; } =
@@ -197,9 +199,9 @@ public class BlazorClient : IAsyncDisposable
 
     public Task DispatchEventAsync(object descriptor, EventArgs eventArgs)
     {
-        var attachWebRendererInteropCall = Operations.JSInteropCalls.FirstOrDefault(
-            c => c.Identifier == "Blazor._internal.attachWebRendererInterop"
-        );
+        var attachWebRendererInteropCall = Operations
+            .JSInteropCalls
+            .FirstOrDefault(c => c.Identifier == "Blazor._internal.attachWebRendererInterop");
         if (attachWebRendererInteropCall is null)
         {
             throw new InvalidOperationException(
@@ -410,9 +412,11 @@ public class BlazorClient : IAsyncDisposable
     )
     {
         var builder = new HubConnectionBuilder();
-        builder.Services.TryAddEnumerable(
-            ServiceDescriptor.Singleton<IHubProtocol, IgnitorMessagePackHubProtocol>()
-        );
+        builder
+            .Services
+            .TryAddEnumerable(
+                ServiceDescriptor.Singleton<IHubProtocol, IgnitorMessagePackHubProtocol>()
+            );
         var hubUrl = GetHubUrl(uri);
         builder.WithUrl(hubUrl);
         builder.ConfigureLogging(
@@ -606,10 +610,9 @@ public class BlazorClient : IAsyncDisposable
     public async Task<string> GetPrerenderDescriptors(Uri uri)
     {
         var httpClient = new HttpClient();
-        httpClient.DefaultRequestHeaders.TryAddWithoutValidation(
-            "Cookie",
-            "__blazor_execution_mode=server"
-        );
+        httpClient
+            .DefaultRequestHeaders
+            .TryAddWithoutValidation("Cookie", "__blazor_execution_mode=server");
         var response = await httpClient.GetAsync(uri);
         response.EnsureSuccessStatusCode();
         var content = await response.Content.ReadAsStringAsync();

@@ -47,9 +47,9 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             params INamedTypeSymbol[] attributesToRemove
         )
         {
-            var someParameterHasAttribute = property.Parameters.Any(
-                p => p.GetAttributes().Any(shouldRemoveAttribute)
-            );
+            var someParameterHasAttribute = property
+                .Parameters
+                .Any(p => p.GetAttributes().Any(shouldRemoveAttribute));
             if (!someParameterHasAttribute)
             {
                 return property;
@@ -64,19 +64,21 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 property.RefKind,
                 property.ExplicitInterfaceImplementations,
                 property.Name,
-                property.Parameters.SelectAsArray(
-                    p =>
-                        CodeGenerationSymbolFactory.CreateParameterSymbol(
-                            p.GetAttributes().WhereAsArray(a => !shouldRemoveAttribute(a)),
-                            p.RefKind,
-                            p.IsParams,
-                            p.Type,
-                            p.Name,
-                            p.IsOptional,
-                            p.HasExplicitDefaultValue,
-                            p.HasExplicitDefaultValue ? p.ExplicitDefaultValue : null
-                        )
-                ),
+                property
+                    .Parameters
+                    .SelectAsArray(
+                        p =>
+                            CodeGenerationSymbolFactory.CreateParameterSymbol(
+                                p.GetAttributes().WhereAsArray(a => !shouldRemoveAttribute(a)),
+                                p.RefKind,
+                                p.IsParams,
+                                p.Type,
+                                p.Name,
+                                p.IsOptional,
+                                p.HasExplicitDefaultValue,
+                                p.HasExplicitDefaultValue ? p.ExplicitDefaultValue : null
+                            )
+                    ),
                 property.GetMethod,
                 property.SetMethod,
                 property.IsIndexer
@@ -91,7 +93,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             (property.SetMethod != null || ContainsBackingField(property));
 
         public static IFieldSymbol? GetBackingFieldIfAny(this IPropertySymbol property) =>
-            property.ContainingType
+            property
+                .ContainingType
                 .GetMembers()
                 .OfType<IFieldSymbol>()
                 .FirstOrDefault(f => property.Equals(f.AssociatedSymbol));

@@ -4341,19 +4341,15 @@ namespace System.Xml.Schema
                 if (destinationType == StringType)
                     return value;
 
-                XsdSimpleValue simpleValue = (XsdSimpleValue)SchemaType!.Datatype!.ParseValue(
-                    (string)value,
-                    new NameTable(),
-                    nsResolver,
-                    true
-                );
+                XsdSimpleValue simpleValue = (XsdSimpleValue)SchemaType!
+                    .Datatype!
+                    .ParseValue((string)value, new NameTable(), nsResolver, true);
 
                 // Allow the member type to perform the conversion
-                return simpleValue.XmlType.ValueConverter.ChangeType(
-                    (string)value,
-                    destinationType,
-                    nsResolver
-                );
+                return simpleValue
+                    .XmlType
+                    .ValueConverter
+                    .ChangeType((string)value, destinationType, nsResolver);
             }
 
             throw CreateInvalidClrMappingException(sourceType, destinationType);

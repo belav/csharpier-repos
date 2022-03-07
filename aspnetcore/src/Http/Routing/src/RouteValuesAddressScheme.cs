@@ -35,10 +35,9 @@ internal sealed class RouteValuesAddressScheme
         IList<OutboundMatchResult>? matchResults = null;
         if (string.IsNullOrEmpty(address.RouteName))
         {
-            matchResults = state.AllMatchesLinkGenerationTree.GetMatches(
-                address.ExplicitValues,
-                address.AmbientValues
-            );
+            matchResults = state
+                .AllMatchesLinkGenerationTree
+                .GetMatches(address.ExplicitValues, address.AmbientValues);
         }
         else if (state.NamedMatches.TryGetValue(address.RouteName, out var namedMatchResults))
         {
@@ -116,7 +115,8 @@ internal sealed class RouteValuesAddressScheme
             }
 
             if (
-                endpoint.Metadata
+                endpoint
+                    .Metadata
                     .GetMetadata<ISuppressLinkGenerationMetadata>()
                     ?.SuppressLinkGeneration == true
             )

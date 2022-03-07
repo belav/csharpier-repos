@@ -129,9 +129,12 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                 var candidateAssets = new Dictionary<(string, string), int>();
                 var rid = RuntimeInformation.RuntimeIdentifier;
                 var rids =
-                    DependencyContext.Default!.RuntimeGraph
+                    DependencyContext
+                        .Default!
+                        .RuntimeGraph
                         .FirstOrDefault(g => g.Runtime == rid)
-                        ?.Fallbacks.ToList() ?? new List<string?>();
+                        ?.Fallbacks
+                        .ToList() ?? new List<string?>();
                 rids.Insert(0, rid);
 
                 foreach (var library in DependencyContext.Default.RuntimeLibraries)

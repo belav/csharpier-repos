@@ -111,9 +111,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         private void DiscoverField(IConventionPropertyBaseBuilder conventionPropertyBaseBuilder)
         {
             if (
-                ConfigurationSource.Convention.Overrides(
-                    conventionPropertyBaseBuilder.Metadata.GetFieldInfoConfigurationSource()
-                )
+                ConfigurationSource
+                    .Convention
+                    .Overrides(
+                        conventionPropertyBaseBuilder.Metadata.GetFieldInfoConfigurationSource()
+                    )
             )
             {
                 var field = GetFieldToSet(conventionPropertyBaseBuilder.Metadata);
@@ -128,9 +130,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         {
             if (
                 propertyBase == null
-                || !ConfigurationSource.Convention.Overrides(
-                    propertyBase.GetFieldInfoConfigurationSource()
-                )
+                || !ConfigurationSource
+                    .Convention
+                    .Overrides(propertyBase.GetFieldInfoConfigurationSource())
                 || propertyBase.IsIndexerProperty()
                 || propertyBase.IsShadowProperty()
             )

@@ -37,9 +37,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 AddKeyword(SyntaxKind.DefaultKeyword);
                 if (
-                    !format.MiscellaneousOptions.IncludesOption(
-                        SymbolDisplayMiscellaneousOptions.AllowDefaultLiteral
-                    )
+                    !format
+                        .MiscellaneousOptions
+                        .IncludesOption(SymbolDisplayMiscellaneousOptions.AllowDefaultLiteral)
                 )
                 {
                     AddPunctuation(SyntaxKind.OpenParenToken);

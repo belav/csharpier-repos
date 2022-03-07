@@ -72,9 +72,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Diagnostics
         // If we are under high contrast mode, the editor ignores classification tags that fade things out,
         // because that reduces contrast. Since the editor will ignore them, there's no reason to produce them.
         protected internal override bool IsEnabled =>
-            !_editorOptionsFactoryService.GlobalOptions.GetOptionValue(
-                DefaultTextViewHostOptions.IsInContrastModeId
-            );
+            !_editorOptionsFactoryService
+                .GlobalOptions
+                .GetOptionValue(DefaultTextViewHostOptions.IsInContrastModeId);
 
         protected internal override bool IncludeDiagnostic(DiagnosticData data) =>
             data.CustomTags.Contains(WellKnownDiagnosticTags.Unnecessary);
@@ -94,16 +94,15 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Diagnostics
             if (
                 diagnosticData.AdditionalLocations.Length > 0
                 && diagnosticData.Properties != null
-                && diagnosticData.Properties.TryGetValue(
-                    WellKnownDiagnosticTags.Unnecessary,
-                    out var unnecessaryIndices
-                )
+                && diagnosticData
+                    .Properties
+                    .TryGetValue(WellKnownDiagnosticTags.Unnecessary, out var unnecessaryIndices)
                 && unnecessaryIndices is object
             )
             {
-                using var _ = PooledObjects.ArrayBuilder<DiagnosticDataLocation>.GetInstance(
-                    out var locationsToTag
-                );
+                using var _ = PooledObjects
+                    .ArrayBuilder<DiagnosticDataLocation>
+                    .GetInstance(out var locationsToTag);
 
                 foreach (var index in GetLocationIndices(unnecessaryIndices))
                     locationsToTag.Add(diagnosticData.AdditionalLocations[index]);

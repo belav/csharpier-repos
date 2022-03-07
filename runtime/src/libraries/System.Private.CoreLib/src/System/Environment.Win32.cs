@@ -69,15 +69,17 @@ namespace System
                 fixed (char* lParam = "Environment")
                 {
                     IntPtr unused;
-                    IntPtr r = Interop.User32.SendMessageTimeout(
-                        new IntPtr(Interop.User32.HWND_BROADCAST),
-                        Interop.User32.WM_SETTINGCHANGE,
-                        IntPtr.Zero,
-                        (IntPtr)lParam,
-                        0,
-                        1000,
-                        &unused
-                    );
+                    IntPtr r = Interop
+                        .User32
+                        .SendMessageTimeout(
+                            new IntPtr(Interop.User32.HWND_BROADCAST),
+                            Interop.User32.WM_SETTINGCHANGE,
+                            IntPtr.Zero,
+                            (IntPtr)lParam,
+                            0,
+                            1000,
+                            &unused
+                        );
                     Debug.Assert(
                         r != IntPtr.Zero,
                         $"SetEnvironmentVariable failed: {Marshal.GetLastPInvokeError()}"
@@ -168,11 +170,13 @@ namespace System
         {
             uint size = 0;
             while (
-                Interop.Secur32.GetUserNameExW(
-                    Interop.Secur32.NameSamCompatible,
-                    ref builder.GetPinnableReference(),
-                    ref size
-                ) == Interop.BOOLEAN.FALSE
+                Interop
+                    .Secur32
+                    .GetUserNameExW(
+                        Interop.Secur32.NameSamCompatible,
+                        ref builder.GetPinnableReference(),
+                        ref size
+                    ) == Interop.BOOLEAN.FALSE
             )
             {
                 if (Marshal.GetLastPInvokeError() == Interop.Errors.ERROR_MORE_DATA)
@@ -220,15 +224,17 @@ namespace System
                 uint sidLength = 68;
 
                 while (
-                    !Interop.Advapi32.LookupAccountNameW(
-                        null,
-                        ref builder.GetPinnableReference(),
-                        ref MemoryMarshal.GetReference(sid),
-                        ref sidLength,
-                        ref domainBuilder.GetPinnableReference(),
-                        ref length,
-                        out _
-                    )
+                    !Interop
+                        .Advapi32
+                        .LookupAccountNameW(
+                            null,
+                            ref builder.GetPinnableReference(),
+                            ref MemoryMarshal.GetReference(sid),
+                            ref sidLength,
+                            ref domainBuilder.GetPinnableReference(),
+                            ref length,
+                            out _
+                        )
                 )
                 {
                     int error = Marshal.GetLastPInvokeError();
@@ -414,12 +420,9 @@ namespace System
         {
             Guid folderId = new Guid(folderGuid);
 
-            int hr = Interop.Shell32.SHGetKnownFolderPath(
-                folderId,
-                (uint)option,
-                IntPtr.Zero,
-                out string path
-            );
+            int hr = Interop
+                .Shell32
+                .SHGetKnownFolderPath(folderId, (uint)option, IntPtr.Zero, out string path);
             if (hr != 0) // Not S_OK
             {
                 return string.Empty;
@@ -436,26 +439,34 @@ namespace System
 
             private static bool GetIsWindows8OrAbove()
             {
-                ulong conditionMask = Interop.Kernel32.VerSetConditionMask(
-                    0,
-                    Interop.Kernel32.VER_MAJORVERSION,
-                    Interop.Kernel32.VER_GREATER_EQUAL
-                );
-                conditionMask = Interop.Kernel32.VerSetConditionMask(
-                    conditionMask,
-                    Interop.Kernel32.VER_MINORVERSION,
-                    Interop.Kernel32.VER_GREATER_EQUAL
-                );
-                conditionMask = Interop.Kernel32.VerSetConditionMask(
-                    conditionMask,
-                    Interop.Kernel32.VER_SERVICEPACKMAJOR,
-                    Interop.Kernel32.VER_GREATER_EQUAL
-                );
-                conditionMask = Interop.Kernel32.VerSetConditionMask(
-                    conditionMask,
-                    Interop.Kernel32.VER_SERVICEPACKMINOR,
-                    Interop.Kernel32.VER_GREATER_EQUAL
-                );
+                ulong conditionMask = Interop
+                    .Kernel32
+                    .VerSetConditionMask(
+                        0,
+                        Interop.Kernel32.VER_MAJORVERSION,
+                        Interop.Kernel32.VER_GREATER_EQUAL
+                    );
+                conditionMask = Interop
+                    .Kernel32
+                    .VerSetConditionMask(
+                        conditionMask,
+                        Interop.Kernel32.VER_MINORVERSION,
+                        Interop.Kernel32.VER_GREATER_EQUAL
+                    );
+                conditionMask = Interop
+                    .Kernel32
+                    .VerSetConditionMask(
+                        conditionMask,
+                        Interop.Kernel32.VER_SERVICEPACKMAJOR,
+                        Interop.Kernel32.VER_GREATER_EQUAL
+                    );
+                conditionMask = Interop
+                    .Kernel32
+                    .VerSetConditionMask(
+                        conditionMask,
+                        Interop.Kernel32.VER_SERVICEPACKMINOR,
+                        Interop.Kernel32.VER_GREATER_EQUAL
+                    );
 
                 // Windows 8 version is 6.2
                 Interop.Kernel32.OSVERSIONINFOEX version = default;
@@ -468,14 +479,16 @@ namespace System
                 version.wServicePackMajor = 0;
                 version.wServicePackMinor = 0;
 
-                return Interop.Kernel32.VerifyVersionInfoW(
-                    ref version,
-                    Interop.Kernel32.VER_MAJORVERSION
-                        | Interop.Kernel32.VER_MINORVERSION
-                        | Interop.Kernel32.VER_SERVICEPACKMAJOR
-                        | Interop.Kernel32.VER_SERVICEPACKMINOR,
-                    conditionMask
-                );
+                return Interop
+                    .Kernel32
+                    .VerifyVersionInfoW(
+                        ref version,
+                        Interop.Kernel32.VER_MAJORVERSION
+                            | Interop.Kernel32.VER_MINORVERSION
+                            | Interop.Kernel32.VER_SERVICEPACKMAJOR
+                            | Interop.Kernel32.VER_SERVICEPACKMINOR,
+                        conditionMask
+                    );
             }
         }
     }

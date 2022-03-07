@@ -318,10 +318,13 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
                 TServiceInterface,
                 OrderableContentTypeMetadata
             >();
-            return values.Single(
-                value =>
-                    value.Metadata.Name == name && value.Metadata.ContentTypes.Contains(contentType)
-            ).Value;
+            return values
+                .Single(
+                    value =>
+                        value.Metadata.Name == name
+                        && value.Metadata.ContentTypes.Contains(contentType)
+                )
+                .Value;
         }
 
         public override bool CanApplyChange(ApplyChangesKind feature)
@@ -562,7 +565,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
                     var snapshotSpan = span.ToSnapshotSpan(
                         document.GetTextBuffer().CurrentSnapshot
                     );
-                    var mappedSpan = projectionBuffer.CurrentSnapshot
+                    var mappedSpan = projectionBuffer
+                        .CurrentSnapshot
                         .MapFromSourceSnapshot(snapshotSpan)
                         .Single();
                     mappedSpans[string.Empty] = mappedSpans[string.Empty].Add(
@@ -588,7 +592,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
                         var snapshotSpan = span.ToSnapshotSpan(
                             document.GetTextBuffer().CurrentSnapshot
                         );
-                        var mappedSpan = projectionBuffer.CurrentSnapshot
+                        var mappedSpan = projectionBuffer
+                            .CurrentSnapshot
                             .MapFromSourceSnapshot(snapshotSpan)
                             .Cast<Span?>()
                             .SingleOrDefault();
@@ -697,7 +702,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
                 var span = new Span(matchingSpan.Start, matchingSpan.Length);
                 var trackingSpan = documentWithSpan
                     .GetTextBuffer()
-                    .CurrentSnapshot.CreateTrackingSpan(span, SpanTrackingMode.EdgeExclusive);
+                    .CurrentSnapshot
+                    .CreateTrackingSpan(span, SpanTrackingMode.EdgeExclusive);
 
                 projectionBufferSpans.Add(trackingSpan);
                 projectionBufferSpanStartingPositions.Add(currentPositionInProjectionBuffer);

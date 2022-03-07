@@ -299,9 +299,9 @@ public class AddressRegistrationTests : TestApplicationErrorLoggerLoggedTest
                                     context =>
                                     {
                                         Assert.Single(serverAddresses.Addresses);
-                                        return context.Response.WriteAsync(
-                                            serverAddresses.Addresses.First()
-                                        );
+                                        return context
+                                            .Response
+                                            .WriteAsync(serverAddresses.Addresses.First());
                                     }
                                 );
                             }
@@ -838,7 +838,9 @@ public class AddressRegistrationTests : TestApplicationErrorLoggerLoggedTest
             var serverAddresses =
                 host.Services
                     .GetRequiredService<IServer>()
-                    .Features.Get<IServerAddressesFeature>().Addresses;
+                    .Features
+                    .Get<IServerAddressesFeature>()
+                    .Addresses;
             Assert.Equal(1, serverAddresses.Count);
             var useUrlsAddressWithPort = $"http://127.0.0.1:{port}";
             Assert.Equal(serverAddresses.First(), useUrlsAddressWithPort);
@@ -910,7 +912,9 @@ public class AddressRegistrationTests : TestApplicationErrorLoggerLoggedTest
             var serverAddresses =
                 host.Services
                     .GetRequiredService<IServer>()
-                    .Features.Get<IServerAddressesFeature>().Addresses;
+                    .Features
+                    .Get<IServerAddressesFeature>()
+                    .Addresses;
             Assert.Equal(1, serverAddresses.Count);
             var endPointAddress = $"https://127.0.0.1:{port}";
             Assert.Equal(serverAddresses.First(), endPointAddress);
@@ -971,7 +975,9 @@ public class AddressRegistrationTests : TestApplicationErrorLoggerLoggedTest
             var serverAddresses =
                 host.Services
                     .GetRequiredService<IServer>()
-                    .Features.Get<IServerAddressesFeature>().Addresses;
+                    .Features
+                    .Get<IServerAddressesFeature>()
+                    .Addresses;
             Assert.Equal(1, serverAddresses.Count);
             var endPointAddress = $"https://127.0.0.1:{port}";
             Assert.Equal(serverAddresses.First(), endPointAddress);

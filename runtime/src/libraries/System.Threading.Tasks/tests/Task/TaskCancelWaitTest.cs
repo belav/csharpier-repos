@@ -82,9 +82,9 @@ namespace System.Threading.Tasks.Tests.CancelWait
                                 _taskCompleted = _taskTree.Task.Wait(_waitTimeout);
                                 break;
                             case WaitBy.TimeSpan:
-                                _taskCompleted = _taskTree.Task.Wait(
-                                    new TimeSpan(0, 0, 0, 0, _waitTimeout)
-                                );
+                                _taskCompleted = _taskTree
+                                    .Task
+                                    .Wait(new TimeSpan(0, 0, 0, 0, _waitTimeout));
                                 break;
                         }
                         break;
@@ -154,10 +154,12 @@ namespace System.Threading.Tasks.Tests.CancelWait
                                 // if child to respect parent cancellation we need to wire a linked token
                                 //
                                 child.CancellationToken =
-                                    CancellationTokenSource.CreateLinkedTokenSource(
-                                        treeNode.CancellationToken,
-                                        child.CancellationToken
-                                    ).Token;
+                                    CancellationTokenSource
+                                        .CreateLinkedTokenSource(
+                                            treeNode.CancellationToken,
+                                            child.CancellationToken
+                                        )
+                                        .Token;
                             }
                             CreateTask(tm, child);
                         }

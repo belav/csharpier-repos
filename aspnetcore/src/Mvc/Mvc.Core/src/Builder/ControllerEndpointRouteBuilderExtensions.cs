@@ -645,15 +645,18 @@ public static class ControllerEndpointRouteBuilderExtensions
         IEndpointRouteBuilder endpoints
     )
     {
-        var dataSource = endpoints.DataSources
+        var dataSource = endpoints
+            .DataSources
             .OfType<ControllerActionEndpointDataSource>()
             .FirstOrDefault();
         if (dataSource == null)
         {
-            var orderProvider =
-                endpoints.ServiceProvider.GetRequiredService<OrderedEndpointsSequenceProviderCache>();
-            var factory =
-                endpoints.ServiceProvider.GetRequiredService<ControllerActionEndpointDataSourceFactory>();
+            var orderProvider = endpoints
+                .ServiceProvider
+                .GetRequiredService<OrderedEndpointsSequenceProviderCache>();
+            var factory = endpoints
+                .ServiceProvider
+                .GetRequiredService<ControllerActionEndpointDataSourceFactory>();
             dataSource = factory.Create(
                 orderProvider.GetOrCreateOrderedEndpointsSequenceProvider(endpoints)
             );

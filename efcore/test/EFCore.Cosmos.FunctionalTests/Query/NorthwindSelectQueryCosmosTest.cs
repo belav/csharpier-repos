@@ -421,7 +421,8 @@ WHERE (c[""Discriminator""] = ""Customer"")"
         {
             using (var context = CreateContext())
             {
-                var customers = context.Customers
+                var customers = context
+                    .Customers
                     .Where(c => c.CustomerID == "ALFKI")
                     .Select(
                         c =>

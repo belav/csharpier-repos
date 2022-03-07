@@ -50,10 +50,9 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Snippets
             SubjectBuffer.Insert(endPosition, commentString);
 
             var commentSpan = new Span(endPosition, commentString.Length);
-            return SubjectBuffer.CurrentSnapshot.CreateTrackingSpan(
-                commentSpan,
-                SpanTrackingMode.EdgeExclusive
-            );
+            return SubjectBuffer
+                .CurrentSnapshot
+                .CreateTrackingSpan(commentSpan, SpanTrackingMode.EdgeExclusive);
         }
 
         public override IExpansionFunction? GetExpansionFunction(

@@ -133,19 +133,21 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                 Contract.ThrowIfNull(directive);
 
                 if (
-                    !directive.DirectiveNameToken.IsKind(
-                        SyntaxKind.IfKeyword,
-                        SyntaxKind.RegionKeyword,
-                        SyntaxKind.ElseKeyword,
-                        SyntaxKind.ElifKeyword,
-                        SyntaxKind.ErrorKeyword,
-                        SyntaxKind.LineKeyword,
-                        SyntaxKind.PragmaKeyword,
-                        SyntaxKind.EndIfKeyword,
-                        SyntaxKind.UndefKeyword,
-                        SyntaxKind.EndRegionKeyword,
-                        SyntaxKind.WarningKeyword
-                    )
+                    !directive
+                        .DirectiveNameToken
+                        .IsKind(
+                            SyntaxKind.IfKeyword,
+                            SyntaxKind.RegionKeyword,
+                            SyntaxKind.ElseKeyword,
+                            SyntaxKind.ElifKeyword,
+                            SyntaxKind.ErrorKeyword,
+                            SyntaxKind.LineKeyword,
+                            SyntaxKind.PragmaKeyword,
+                            SyntaxKind.EndIfKeyword,
+                            SyntaxKind.UndefKeyword,
+                            SyntaxKind.EndRegionKeyword,
+                            SyntaxKind.WarningKeyword
+                        )
                 )
                 {
                     var semanticModel = await document
@@ -207,8 +209,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             return ImmutableArray<CompletionItem>.Empty;
         }
 
-        private static readonly CompletionItemRules s_tupleRules =
-            CompletionItemRules.Default.WithCommitCharacterRule(
+        private static readonly CompletionItemRules s_tupleRules = CompletionItemRules
+            .Default
+            .WithCommitCharacterRule(
                 CharacterSetModificationRule.Create(CharacterSetModificationKind.Remove, ':')
             );
 
@@ -220,7 +223,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             CancellationToken cancellationToken
         )
         {
-            var service = workspace.Services
+            var service = workspace
+                .Services
                 .GetLanguageServices(semanticModel.Language)
                 .GetService<ISnippetInfoService>();
             if (service == null)

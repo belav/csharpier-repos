@@ -97,9 +97,10 @@ namespace ILCompiler
                 // If the method is not excluded from processing
                 if (
                     !profileData.Value.Flags.HasFlag(MethodProfilingDataFlags.ExcludeHotMethodCode)
-                    && !profileData.Value.Flags.HasFlag(
-                        MethodProfilingDataFlags.ExcludeColdMethodCode
-                    )
+                    && !profileData
+                        .Value
+                        .Flags
+                        .HasFlag(MethodProfilingDataFlags.ExcludeColdMethodCode)
                 )
                 {
                     // Check for methods which are defined within the version bubble, and only rely on other modules within the bubble

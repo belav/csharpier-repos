@@ -19,8 +19,9 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
     /// </summary>
     public class SqliteGeometryCollectionMethodTranslator : IMethodCallTranslator
     {
-        private static readonly MethodInfo _item =
-            typeof(GeometryCollection).GetRequiredRuntimeProperty("Item").GetMethod!;
+        private static readonly MethodInfo _item = typeof(GeometryCollection)
+            .GetRequiredRuntimeProperty("Item")
+            .GetMethod!;
         private readonly ISqlExpressionFactory _sqlExpressionFactory;
 
         /// <summary>

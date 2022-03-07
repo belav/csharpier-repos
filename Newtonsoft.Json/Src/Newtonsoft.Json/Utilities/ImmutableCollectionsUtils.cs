@@ -222,10 +222,9 @@ namespace Newtonsoft.Json.Utilities
                         {
                             createdType = createdTypeDefinition.MakeGenericType(collectionItemType);
                             MethodInfo method = mb.MakeGenericMethod(collectionItemType);
-                            parameterizedCreator =
-                                JsonTypeReflector.ReflectionDelegateFactory.CreateParameterizedConstructor(
-                                    method
-                                );
+                            parameterizedCreator = JsonTypeReflector
+                                .ReflectionDelegateFactory
+                                .CreateParameterizedConstructor(method);
                             return true;
                         }
                     }
@@ -286,10 +285,9 @@ namespace Newtonsoft.Json.Utilities
                                 valueItemType
                             );
                             MethodInfo method = mb.MakeGenericMethod(keyItemType, valueItemType);
-                            parameterizedCreator =
-                                JsonTypeReflector.ReflectionDelegateFactory.CreateParameterizedConstructor(
-                                    method
-                                );
+                            parameterizedCreator = JsonTypeReflector
+                                .ReflectionDelegateFactory
+                                .CreateParameterizedConstructor(method);
                             return true;
                         }
                     }

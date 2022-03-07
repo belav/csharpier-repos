@@ -91,7 +91,9 @@ public class Startup
                     {
                         OnMessageReceived = context =>
                         {
-                            var endpoint = context.HttpContext.Features
+                            var endpoint = context
+                                .HttpContext
+                                .Features
                                 .Get<IEndpointFeature>()
                                 ?.Endpoint;
                             if (
@@ -228,11 +230,10 @@ public class Startup
                     context.Response.Cookies.Append("testCookie2", "testValue2", cookieOptions);
 
                     cookieOptions.Expires = DateTimeOffset.Now.AddHours(-1);
-                    context.Response.Cookies.Append(
-                        "expiredCookie",
-                        "doesntmatter",
-                        expiredCookieOptions
-                    );
+                    context
+                        .Response
+                        .Cookies
+                        .Append("expiredCookie", "doesntmatter", expiredCookieOptions);
                 }
 
                 await next.Invoke(context);

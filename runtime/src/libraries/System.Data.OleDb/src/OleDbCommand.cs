@@ -1068,15 +1068,17 @@ namespace System.Data.OleDb
                                 try
                                 {
                                     propSet.DangerousAddRef(ref mustRelease);
-                                    hr = iopenRowset.Value.OpenRowset(
-                                        ADP.PtrZero,
-                                        tableID,
-                                        ADP.PtrZero,
-                                        ref ODB.IID_IRowset,
-                                        propSet.PropertySetCount,
-                                        propSet.DangerousGetHandle(),
-                                        out executeResult
-                                    );
+                                    hr = iopenRowset
+                                        .Value
+                                        .OpenRowset(
+                                            ADP.PtrZero,
+                                            tableID,
+                                            ADP.PtrZero,
+                                            ref ODB.IID_IRowset,
+                                            propSet.PropertySetCount,
+                                            propSet.DangerousGetHandle(),
+                                            out executeResult
+                                        );
                                 }
                                 finally
                                 {
@@ -1088,7 +1090,24 @@ namespace System.Data.OleDb
 
                                 if (OleDbHResult.DB_E_ERRORSOCCURRED == hr)
                                 {
-                                    hr = iopenRowset.Value.OpenRowset(
+                                    hr = iopenRowset
+                                        .Value
+                                        .OpenRowset(
+                                            ADP.PtrZero,
+                                            tableID,
+                                            ADP.PtrZero,
+                                            ref ODB.IID_IRowset,
+                                            0,
+                                            IntPtr.Zero,
+                                            out executeResult
+                                        );
+                                }
+                            }
+                            else
+                            {
+                                hr = iopenRowset
+                                    .Value
+                                    .OpenRowset(
                                         ADP.PtrZero,
                                         tableID,
                                         ADP.PtrZero,
@@ -1097,19 +1116,6 @@ namespace System.Data.OleDb
                                         IntPtr.Zero,
                                         out executeResult
                                     );
-                                }
-                            }
-                            else
-                            {
-                                hr = iopenRowset.Value.OpenRowset(
-                                    ADP.PtrZero,
-                                    tableID,
-                                    ADP.PtrZero,
-                                    ref ODB.IID_IRowset,
-                                    0,
-                                    IntPtr.Zero,
-                                    out executeResult
-                                );
                             }
                         }
                     }
@@ -1138,17 +1144,20 @@ namespace System.Data.OleDb
             return cmdtype switch
             {
                 // do nothing, already expanded by user
-                System.Data.CommandType.Text => cmdtxt,
+                System.Data.CommandType.Text
+                  => cmdtxt,
 
                 // { ? = CALL SPROC (? ?) }, { ? = CALL SPROC }, { CALL SPRC (? ?) }, { CALL SPROC }
-                System.Data.CommandType.StoredProcedure => ExpandStoredProcedureToText(cmdtxt),
+                System.Data.CommandType.StoredProcedure
+                  => ExpandStoredProcedureToText(cmdtxt),
 
                 // @devnote: Provider=Jolt4.0 doesn't like quoted table names, SQOLEDB requires them
                 // Providers should not require table names to be quoted and should guarantee that
                 // unquoted table names correctly open the specified table, even if the table name
                 // contains special characters, as long as the table can be unambiguously identified
                 // without quoting.
-                System.Data.CommandType.TableDirect => cmdtxt,
+                System.Data.CommandType.TableDirect
+                  => cmdtxt,
 
                 _ => throw ADP.InvalidCommandType(cmdtype),
             };

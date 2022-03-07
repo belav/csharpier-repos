@@ -168,7 +168,9 @@ public sealed class CodeWriter
 
         if (
             // Check the last character of the previous write operation.
-            _builder.Length - count - 1
+            _builder.Length
+                - count
+                - 1
                 >= 0
             && _builder[_builder.Length - count - 1] == '\r'
             &&

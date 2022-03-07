@@ -37,9 +37,9 @@ namespace System.Resources.Tests
 
                     // The generic type should not have a 'where new()' constraint since that will tell the trimmer to keep the ctor
                     Assert.False(
-                        genericType.GenericParameterAttributes.HasFlag(
-                            GenericParameterAttributes.DefaultConstructorConstraint
-                        )
+                        genericType
+                            .GenericParameterAttributes
+                            .HasFlag(GenericParameterAttributes.DefaultConstructorConstraint)
                     );
                 }
             }
@@ -49,10 +49,9 @@ namespace System.Resources.Tests
         public static void VerifyFeatureSwitchGeneratesTheRightException()
         {
             var remoteInvokeOptions = new RemoteInvokeOptions();
-            remoteInvokeOptions.RuntimeConfigurationOptions.Add(
-                "System.Resources.ResourceManager.AllowCustomResourceTypes",
-                false
-            );
+            remoteInvokeOptions
+                .RuntimeConfigurationOptions
+                .Add("System.Resources.ResourceManager.AllowCustomResourceTypes", false);
 
             using var handle = RemoteExecutor.Invoke(
                 () =>

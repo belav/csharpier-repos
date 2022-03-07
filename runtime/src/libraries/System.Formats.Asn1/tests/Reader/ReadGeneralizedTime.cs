@@ -565,9 +565,9 @@ namespace System.Formats.Asn1.Tests.Reader
         [Fact]
         public static void ExcessivelyPreciseFraction()
         {
-            byte[] inputData = Text.Encoding.ASCII.GetBytes(
-                "\u0018\u002A2017092118.012345678901234567890123456789Z"
-            );
+            byte[] inputData = Text.Encoding
+                .ASCII
+                .GetBytes("\u0018\u002A2017092118.012345678901234567890123456789Z");
 
             AsnReader berReader = new AsnReader(inputData, AsnEncodingRules.BER);
             DateTimeOffset value = berReader.ReadGeneralizedTime();
@@ -591,9 +591,9 @@ namespace System.Formats.Asn1.Tests.Reader
         [Fact]
         public static void ExcessivelyPreciseFraction_OneTenthPlusEpsilon()
         {
-            byte[] inputData = Text.Encoding.ASCII.GetBytes(
-                "\u0018\u002A20170921180044.10000000000000000000000001Z"
-            );
+            byte[] inputData = Text.Encoding
+                .ASCII
+                .GetBytes("\u0018\u002A20170921180044.10000000000000000000000001Z");
 
             AsnReader derReader = new AsnReader(inputData, AsnEncodingRules.DER);
             DateTimeOffset value = derReader.ReadGeneralizedTime();
@@ -632,9 +632,9 @@ namespace System.Formats.Asn1.Tests.Reader
             //
             // 1001 content bytes + 10 bytes of structure.
             byte[] header = "A080048203E8".HexToByteArray();
-            byte[] contents0 = Text.Encoding.ASCII.GetBytes(
-                "20171207173522." + new string('0', 984) + "1"
-            );
+            byte[] contents0 = Text.Encoding
+                .ASCII
+                .GetBytes("20171207173522." + new string('0', 984) + "1");
             byte[] cdr = { 0x04, 0x01, (byte)'Z', 0x00, 0x00 };
             byte[] inputData = header.Concat(contents0).Concat(cdr).ToArray();
 
@@ -649,9 +649,9 @@ namespace System.Formats.Asn1.Tests.Reader
         [Fact]
         public static void ExcessivelyPreciseFraction_OneTenthPlusEpsilonAndZero()
         {
-            byte[] inputData = Text.Encoding.ASCII.GetBytes(
-                "\u0018\u002A20170921180044.10000000000000000000000010Z"
-            );
+            byte[] inputData = Text.Encoding
+                .ASCII
+                .GetBytes("\u0018\u002A20170921180044.10000000000000000000000010Z");
 
             AsnReader berReader = new AsnReader(inputData, AsnEncodingRules.BER);
             DateTimeOffset value = berReader.ReadGeneralizedTime();
@@ -678,9 +678,9 @@ namespace System.Formats.Asn1.Tests.Reader
         [Fact]
         public static void ExcessivelyPreciseNonFraction()
         {
-            byte[] inputData = Text.Encoding.ASCII.GetBytes(
-                "\u0018\u002A2017092118.012345678901234567890123Q56789Z"
-            );
+            byte[] inputData = Text.Encoding
+                .ASCII
+                .GetBytes("\u0018\u002A2017092118.012345678901234567890123Q56789Z");
             AsnReader berReader = new AsnReader(inputData, AsnEncodingRules.BER);
 
             Assert.Throws<AsnContentException>(() => berReader.ReadGeneralizedTime());

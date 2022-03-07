@@ -288,10 +288,10 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
             ExecuteOnActiveView(
                 view =>
                 {
-                    view.Caret.Position.BufferPosition.GetLineAndCharacter(
-                        out var lineNumber,
-                        out var characterIndex
-                    );
+                    view.Caret
+                        .Position
+                        .BufferPosition
+                        .GetLineAndCharacter(out var lineNumber, out var characterIndex);
                     return lineNumber;
                 }
             );
@@ -300,10 +300,10 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
             ExecuteOnActiveView(
                 view =>
                 {
-                    view.Caret.Position.BufferPosition.GetLineAndCharacter(
-                        out var lineNumber,
-                        out var characterIndex
-                    );
+                    view.Caret
+                        .Position
+                        .BufferPosition
+                        .GetLineAndCharacter(out var lineNumber, out var characterIndex);
                     return characterIndex;
                 }
             );
@@ -467,24 +467,26 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
 
         public ClassifiedToken[] GetLightbulbPreviewClassifications(string menuText)
         {
-            return ThreadHelper.JoinableTaskFactory.Run(
-                async () =>
-                {
-                    await ThreadHelper.JoinableTaskFactory.SwitchToMainThreadAsync();
+            return ThreadHelper
+                .JoinableTaskFactory
+                .Run(
+                    async () =>
+                    {
+                        await ThreadHelper.JoinableTaskFactory.SwitchToMainThreadAsync();
 
-                    var view = GetActiveTextView();
-                    var broker = GetComponentModel().GetService<ILightBulbBroker>();
-                    var classifierAggregatorService =
-                        GetComponentModelService<IViewClassifierAggregatorService>();
-                    return await GetLightbulbPreviewClassificationsAsync(
-                            menuText,
-                            broker,
-                            view,
-                            classifierAggregatorService
-                        )
-                        .ConfigureAwait(false);
-                }
-            );
+                        var view = GetActiveTextView();
+                        var broker = GetComponentModel().GetService<ILightBulbBroker>();
+                        var classifierAggregatorService =
+                            GetComponentModelService<IViewClassifierAggregatorService>();
+                        return await GetLightbulbPreviewClassificationsAsync(
+                                menuText,
+                                broker,
+                                view,
+                                classifierAggregatorService
+                            )
+                            .ConfigureAwait(false);
+                    }
+                );
         }
 
         private async Task<ClassifiedToken[]> GetLightbulbPreviewClassificationsAsync(
@@ -882,9 +884,9 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
                         cancellationToken =>
                         {
                             var button = designerHost.Container.Components[buttonName];
-                            var eventBindingService = (IEventBindingService)button.Site.GetService(
-                                typeof(IEventBindingService)
-                            );
+                            var eventBindingService = (IEventBindingService)button
+                                .Site
+                                .GetService(typeof(IEventBindingService));
                             var events = TypeDescriptor.GetEvents(button);
                             var eventProperty = eventBindingService.GetEventProperty(
                                 events.Find(eventName, ignoreCase: true)
@@ -959,10 +961,12 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
                         textLines.GetLanguageServiceID(out var languageServiceGuid)
                     );
                     Marshal.ThrowExceptionForHR(
-                        Microsoft.VisualStudio.Shell.ServiceProvider.GlobalProvider.QueryService(
-                            languageServiceGuid,
-                            out var languageService
-                        )
+                        Microsoft
+                            .VisualStudio
+                            .Shell
+                            .ServiceProvider
+                            .GlobalProvider
+                            .QueryService(languageServiceGuid, out var languageService)
                     );
                     var languageContextProvider = (IVsLanguageContextProvider)languageService;
 

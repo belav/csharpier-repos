@@ -26,9 +26,9 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
             var designServices = new ServiceCollection();
             AddModelServices(designServices);
 
-            var modelBuilder = SqlServerTestHelpers.Instance.CreateConventionBuilder(
-                customServices: designServices
-            );
+            var modelBuilder = SqlServerTestHelpers
+                .Instance
+                .CreateConventionBuilder(customServices: designServices);
             modelBuilder.Model.RemoveAnnotation(CoreAnnotationNames.ProductVersion);
             buildModel(modelBuilder);
 

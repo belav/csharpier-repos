@@ -38,9 +38,11 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
         public void GetMigrationId_throws_when_no_match() =>
             Assert.Equal(
                 RelationalStrings.MigrationNotFound("Spike"),
-                Assert.Throws<InvalidOperationException>(
-                    () => CreateMigrationsAssembly().GetMigrationId("Spike")
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(
+                        () => CreateMigrationsAssembly().GetMigrationId("Spike")
+                    )
+                    .Message
             );
 
         [ConditionalFact]

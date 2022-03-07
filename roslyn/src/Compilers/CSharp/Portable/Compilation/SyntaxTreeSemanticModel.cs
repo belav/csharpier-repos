@@ -479,19 +479,23 @@ namespace Microsoft.CodeAnalysis.CSharp
                     {
                         if (!type.IsVar)
                         {
-                            return binder.BindTypeOrAlias(
-                                type,
-                                BindingDiagnosticBag.Discarded,
-                                basesBeingResolved
-                            ).Symbol;
+                            return binder
+                                .BindTypeOrAlias(
+                                    type,
+                                    BindingDiagnosticBag.Discarded,
+                                    basesBeingResolved
+                                )
+                                .Symbol;
                         }
 
                         Symbol result = bindVarAsAliasFirst
-                            ? binder.BindTypeOrAlias(
+                            ? binder
+                              .BindTypeOrAlias(
                                   type,
                                   BindingDiagnosticBag.Discarded,
                                   basesBeingResolved
-                              ).Symbol
+                              )
+                              .Symbol
                             : null;
 
                         // CONSIDER: we might bind "var" twice - once to see if it is an alias and again
@@ -522,20 +526,24 @@ namespace Microsoft.CodeAnalysis.CSharp
                         }
 
                         return result
-                            ?? binder.BindTypeOrAlias(
-                                type,
-                                BindingDiagnosticBag.Discarded,
-                                basesBeingResolved
-                            ).Symbol;
+                            ?? binder
+                                .BindTypeOrAlias(
+                                    type,
+                                    BindingDiagnosticBag.Discarded,
+                                    basesBeingResolved
+                                )
+                                .Symbol;
                     }
                     else
                     {
-                        return binder.BindNamespaceOrTypeOrAliasSymbol(
-                            type,
-                            BindingDiagnosticBag.Discarded,
-                            basesBeingResolved,
-                            basesBeingResolved != null
-                        ).Symbol;
+                        return binder
+                            .BindNamespaceOrTypeOrAliasSymbol(
+                                type,
+                                BindingDiagnosticBag.Discarded,
+                                basesBeingResolved,
+                                basesBeingResolved != null
+                            )
+                            .Symbol;
                     }
                 }
             }
@@ -730,9 +738,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                     // we have a winner
                     var decl = (BaseTypeDeclarationSyntax)parent.Parent.Parent;
                     var symbol = this.GetDeclaredSymbol(decl);
-                    return ConsList<TypeSymbol>.Empty.Prepend(
-                        symbol.GetSymbol().OriginalDefinition
-                    );
+                    return ConsList<TypeSymbol>
+                        .Empty
+                        .Prepend(symbol.GetSymbol().OriginalDefinition);
                 }
             }
 
@@ -1020,7 +1028,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             var existingConstructorInitializer = this.Root
                 .FindToken(position)
-                .Parent.AncestorsAndSelf()
+                .Parent
+                .AncestorsAndSelf()
                 .OfType<ConstructorInitializerSyntax>()
                 .FirstOrDefault();
 
@@ -1053,7 +1062,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             var existingConstructorInitializer = this.Root
                 .FindToken(position)
-                .Parent.AncestorsAndSelf()
+                .Parent
+                .AncestorsAndSelf()
                 .OfType<PrimaryConstructorBaseTypeSyntax>()
                 .FirstOrDefault();
 
@@ -1197,8 +1207,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                             }
                             else
                             {
-                                var argumentList =
-                                    recordDecl.PrimaryConstructorBaseTypeIfClass?.ArgumentList;
+                                var argumentList = recordDecl
+                                    .PrimaryConstructorBaseTypeIfClass
+                                    ?.ArgumentList;
                                 outsideMemberDecl =
                                     argumentList is null
                                     || !LookupPosition.IsBetweenTokens(
@@ -1471,7 +1482,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 this,
                                 tuple.paramDecl,
                                 tuple.parameterSymbol,
-                                tuple.containing
+                                tuple
+                                    .containing
                                     .GetEnclosingBinder(tuple.paramDecl.SpanStart)
                                     .CreateBinderForParameterDefaultValue(
                                         tuple.parameterSymbol,
@@ -1816,11 +1828,9 @@ namespace Microsoft.CodeAnalysis.CSharp
         )
         {
             AliasSymbol aliasOpt;
-            var attributeType = (NamedTypeSymbol)enclosingBinder.BindType(
-                attribute.Name,
-                BindingDiagnosticBag.Discarded,
-                out aliasOpt
-            ).Type;
+            var attributeType = (NamedTypeSymbol)enclosingBinder
+                .BindType(attribute.Name, BindingDiagnosticBag.Discarded, out aliasOpt)
+                .Type;
 
             return AttributeSemanticModel.Create(
                 this,
@@ -2337,9 +2347,9 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                 case SyntaxKind.ConstructorDeclaration:
                     if (
-                        ((ConstructorDeclarationSyntax)declaration).Modifiers.Any(
-                            SyntaxKind.StaticKeyword
-                        )
+                        ((ConstructorDeclarationSyntax)declaration)
+                            .Modifiers
+                            .Any(SyntaxKind.StaticKeyword)
                     )
                     {
                         return WellKnownMemberNames.StaticConstructorName;
@@ -3280,7 +3290,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                                     && !(
                                         node.Kind() == SyntaxKind.ArgumentList
                                         && node
-                                            == recordDeclaration.PrimaryConstructorBaseTypeIfClass?.ArgumentList
+                                            == recordDeclaration
+                                                .PrimaryConstructorBaseTypeIfClass
+                                                ?.ArgumentList
                                     );
 
                             default:

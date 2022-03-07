@@ -496,7 +496,8 @@ namespace SoDBench
                 )
                     .GetDirectories("*")
                     .OrderBy(s => s.Name)
-                    .Last().FullName
+                    .Last()
+                    .FullName
             );
 
             Console.WriteLine($"| Source : {sourcedi.FullName}");
@@ -710,7 +711,10 @@ namespace SoDBench
                                         case ErrorType.VersionRequestedError:
                                             Console.WriteLine(
                                                 new AssemblyName(
-                                                    typeof(SoDBenchOptions).GetTypeInfo().Assembly.FullName
+                                                    typeof(SoDBenchOptions)
+                                                        .GetTypeInfo()
+                                                        .Assembly
+                                                        .FullName
                                                 ).Version
                                             );
                                             Environment.Exit(0);

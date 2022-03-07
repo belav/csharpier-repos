@@ -51,8 +51,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
 
             _workspace = workspace;
 
-            _registrationService =
-                (SolutionCrawlerRegistrationService)workspace.Services.GetRequiredService<ISolutionCrawlerRegistrationService>();
+            _registrationService = (SolutionCrawlerRegistrationService)workspace
+                .Services
+                .GetRequiredService<ISolutionCrawlerRegistrationService>();
             _registrationService.Register(workspace);
 
             if (
@@ -64,15 +65,17 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
 
             AnalyzerService = (DiagnosticAnalyzerService?)_registrationService
                 .GetTestAccessor()
-                .AnalyzerProviders.SelectMany(pair => pair.Value)
+                .AnalyzerProviders
+                .SelectMany(pair => pair.Value)
                 .SingleOrDefault(
                     lazyProvider =>
                         lazyProvider.Metadata.Name == WellKnownSolutionCrawlerAnalyzers.Diagnostic
                         && lazyProvider.Metadata.HighPriorityForActiveFile
                 )
                 ?.Value;
-            DiagnosticService =
-                (DiagnosticService)workspace.ExportProvider.GetExportedValue<IDiagnosticService>();
+            DiagnosticService = (DiagnosticService)workspace
+                .ExportProvider
+                .GetExportedValue<IDiagnosticService>();
 
             if (updateSource is object)
             {
@@ -101,7 +104,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
                         || typeof(TProvider) == typeof(DiagnosticsClassificationTaggerProvider)
                     )
                     {
-                        _taggerProvider = _workspace.ExportProvider
+                        _taggerProvider = _workspace
+                            .ExportProvider
                             .GetExportedValues<ITaggerProvider>()
                             .OfType<TProvider>()
                             .Single();

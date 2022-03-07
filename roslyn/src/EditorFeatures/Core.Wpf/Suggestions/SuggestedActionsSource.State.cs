@@ -54,8 +54,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
 
                     if (Workspace != null)
                     {
-                        Workspace.Services.GetRequiredService<IWorkspaceStatusService>().StatusChanged -=
-                            _source.OnWorkspaceStatusChanged;
+                        Workspace
+                            .Services
+                            .GetRequiredService<IWorkspaceStatusService>()
+                            .StatusChanged -= _source.OnWorkspaceStatusChanged;
                         Workspace.DocumentActiveContextChanged -= _source.OnActiveContextChanged;
                     }
 

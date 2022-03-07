@@ -183,9 +183,10 @@ namespace Microsoft.CodeAnalysis.InlineMethod
                 .GetRequiredSemanticModelAsync(cancellationToken)
                 .ConfigureAwait(false);
             var allArgumentOperations = invocationOperation.Arguments;
-            var calleeDocument = document.Project.Solution.GetRequiredDocument(
-                calleeMethodNode.SyntaxTree
-            );
+            var calleeDocument = document
+                .Project
+                .Solution
+                .GetRequiredDocument(calleeMethodNode.SyntaxTree);
             var syntaxGenerator = SyntaxGenerator.GetGenerator(document);
             if (statementContainingInvocation != null)
             {
@@ -512,10 +513,9 @@ namespace Microsoft.CodeAnalysis.InlineMethod
                         location =>
                             !location.IsImplicit
                             && calleeMethodNode.Contains(
-                                location.Location.FindNode(
-                                    getInnermostNodeForTie: true,
-                                    cancellationToken
-                                )
+                                location
+                                    .Location
+                                    .FindNode(getInnermostNodeForTie: true, cancellationToken)
                             )
                     )
                     .ToImmutableArray();
@@ -567,9 +567,9 @@ namespace Microsoft.CodeAnalysis.InlineMethod
                     is ISimpleAssignmentOperation simpleAssignmentOperation
                 && simpleAssignmentOperation.Target
                     is IParameterReferenceOperation parameterOperation
-                && parameterOperation.Parameter.Equals(
-                    parametersWithVariableDeclarationArgument[0].parameterSymbol
-                );
+                && parameterOperation
+                    .Parameter
+                    .Equals(parametersWithVariableDeclarationArgument[0].parameterSymbol);
         }
 
         private TExpressionSyntax GenerateArgumentExpression(

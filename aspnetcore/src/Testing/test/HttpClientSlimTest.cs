@@ -123,11 +123,10 @@ public class HttpClientSlimTest
 
                     if (handler == null)
                     {
-                        await context.Response.OutputStream.WriteAsync(
-                            _defaultResponse,
-                            0,
-                            _defaultResponse.Length
-                        );
+                        await context
+                            .Response
+                            .OutputStream
+                            .WriteAsync(_defaultResponse, 0, _defaultResponse.Length);
                     }
                     else
                     {

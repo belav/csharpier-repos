@@ -246,21 +246,24 @@ class C
             var l1 = m3.DescendantNodes()
                 .OfType<VariableDeclaratorSyntax>()
                 .Single(m => m.Identifier.ValueText == "l1")
-                .Initializer.DescendantNodes()
+                .Initializer
+                .DescendantNodes()
                 .OfType<LambdaExpressionSyntax>()
                 .Single();
 
             var l2 = m3.DescendantNodes()
                 .OfType<VariableDeclaratorSyntax>()
                 .Single(m => m.Identifier.ValueText == "l2")
-                .Initializer.DescendantNodes()
+                .Initializer
+                .DescendantNodes()
                 .OfType<LambdaExpressionSyntax>()
                 .Single();
 
             var l3 = m3.DescendantNodes()
                 .OfType<VariableDeclaratorSyntax>()
                 .Single(m => m.Identifier.ValueText == "l3")
-                .Initializer.DescendantNodes()
+                .Initializer
+                .DescendantNodes()
                 .OfType<AnonymousFunctionExpressionSyntax>()
                 .Single();
 

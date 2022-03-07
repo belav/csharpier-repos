@@ -73,12 +73,14 @@ namespace System.Net.Http
 
             // Clear cookies.
             if (
-                !Interop.WinHttp.WinHttpAddRequestHeaders(
-                    requestHandle,
-                    CookieHeaderNameWithColon,
-                    (uint)CookieHeaderNameWithColon.Length,
-                    Interop.WinHttp.WINHTTP_ADDREQ_FLAG_REPLACE
-                )
+                !Interop
+                    .WinHttp
+                    .WinHttpAddRequestHeaders(
+                        requestHandle,
+                        CookieHeaderNameWithColon,
+                        (uint)CookieHeaderNameWithColon.Length,
+                        Interop.WinHttp.WINHTTP_ADDREQ_FLAG_REPLACE
+                    )
             )
             {
                 int lastError = Marshal.GetLastWin32Error();
@@ -97,12 +99,14 @@ namespace System.Net.Http
             if (!string.IsNullOrEmpty(cookieHeader))
             {
                 if (
-                    !Interop.WinHttp.WinHttpAddRequestHeaders(
-                        requestHandle,
-                        cookieHeader,
-                        (uint)cookieHeader.Length,
-                        Interop.WinHttp.WINHTTP_ADDREQ_FLAG_ADD
-                    )
+                    !Interop
+                        .WinHttp
+                        .WinHttpAddRequestHeaders(
+                            requestHandle,
+                            cookieHeader,
+                            (uint)cookieHeader.Length,
+                            Interop.WinHttp.WINHTTP_ADDREQ_FLAG_ADD
+                        )
                 )
                 {
                     WinHttpException.ThrowExceptionUsingLastError(

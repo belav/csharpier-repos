@@ -62,8 +62,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.PullMemberUp
             )
             {
                 _project = project;
-                _declarationService =
-                    project.LanguageServices.GetRequiredService<ISymbolDeclarationService>();
+                _declarationService = project
+                    .LanguageServices
+                    .GetRequiredService<ISymbolDeclarationService>();
                 _membersInType = membersInType.ToImmutableHashSet();
                 _dependents = new HashSet<ISymbol>();
                 _member = member;

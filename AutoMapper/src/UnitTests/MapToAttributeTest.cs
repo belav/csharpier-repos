@@ -52,23 +52,26 @@ namespace AutoMapper.UnitTests
         {
             if (!_allSourceMembers.TryGetValue(sourceTypeDetails, out SourceMember[] sourceMembers))
             {
-                sourceMembers = sourceTypeDetails.ReadAccessors
+                sourceMembers = sourceTypeDetails
+                    .ReadAccessors
                     .Select(sourceMember => new SourceMember(sourceMember))
                     .Where(s => s.Attribute != null)
                     .ToArray();
                 _allSourceMembers[sourceTypeDetails] =
                     sourceMembers.Length == 0 ? Empty : sourceMembers;
             }
-            return sourceMembers.FirstOrDefault(
-                d =>
-                    d.Attribute.IsMatch(
-                        sourceTypeDetails,
-                        d.Member,
-                        destType,
-                        destMemberType,
-                        nameToSearch
-                    )
-            ).Member;
+            return sourceMembers
+                .FirstOrDefault(
+                    d =>
+                        d.Attribute.IsMatch(
+                            sourceTypeDetails,
+                            d.Member,
+                            destType,
+                            destMemberType,
+                            nameToSearch
+                        )
+                )
+                .Member;
         }
 
         readonly struct SourceMember

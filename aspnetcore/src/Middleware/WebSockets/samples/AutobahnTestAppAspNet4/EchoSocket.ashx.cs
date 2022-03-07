@@ -28,13 +28,17 @@ namespace AutobahnTestAppAspNet4
             }
             else
             {
-                context.Response.Write(
-                    "Ready to accept WebSocket request at: "
-                        + context.Request.Url
-                            .ToString()
-                            .Replace("https://", "wss://")
-                            .Replace("http://", "ws://")
-                );
+                context
+                    .Response
+                    .Write(
+                        "Ready to accept WebSocket request at: "
+                            + context
+                                .Request
+                                .Url
+                                .ToString()
+                                .Replace("https://", "wss://")
+                                .Replace("http://", "ws://")
+                    );
                 context.Response.Flush();
             }
         }

@@ -77,11 +77,13 @@ namespace Microsoft.CodeAnalysis.Remote.Testing
         public override RemoteServiceConnection<T> CreateConnection<T>(object? callbackTarget)
             where T : class
         {
-            var descriptor = ServiceDescriptors.Instance.GetServiceDescriptor(
-                typeof(T),
-                isRemoteHostServerGC: GCSettings.IsServerGC,
-                isRemoteHostCoreClr: RemoteHostOptions.IsCurrentProcessRunningOnCoreClr()
-            );
+            var descriptor = ServiceDescriptors
+                .Instance
+                .GetServiceDescriptor(
+                    typeof(T),
+                    isRemoteHostServerGC: GCSettings.IsServerGC,
+                    isRemoteHostCoreClr: RemoteHostOptions.IsCurrentProcessRunningOnCoreClr()
+                );
             var callbackDispatcher =
                 (descriptor.ClientInterface != null)
                     ? _callbackDispatchers.GetDispatcher(typeof(T))
@@ -287,9 +289,10 @@ namespace Microsoft.CodeAnalysis.Remote.Testing
             public void RegisterRemoteBrokeredService(BrokeredServiceBase.IFactory serviceFactory)
             {
                 var moniker =
-                    ServiceDescriptors.Instance.GetServiceDescriptorForServiceFactory(
-                        serviceFactory.ServiceType
-                    ).Moniker;
+                    ServiceDescriptors
+                        .Instance
+                        .GetServiceDescriptorForServiceFactory(serviceFactory.ServiceType)
+                        .Moniker;
                 _remoteBrokeredServicesMap.Add(moniker, serviceFactory);
             }
 

@@ -87,9 +87,9 @@ namespace Microsoft.EntityFrameworkCore.Query
         [EnableQuery]
         public ITestActionResult Get([FromODataUri] int keyOrderId, [FromODataUri] int keyProductId)
         {
-            var result = _context.OrderDetails.FirstOrDefault(
-                e => e.OrderID == keyOrderId && e.ProductID == keyProductId
-            );
+            var result = _context
+                .OrderDetails
+                .FirstOrDefault(e => e.OrderID == keyOrderId && e.ProductID == keyProductId);
 
             return result == null ? NotFound() : Ok(result);
         }

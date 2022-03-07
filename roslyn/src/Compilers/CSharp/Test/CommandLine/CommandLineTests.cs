@@ -71,12 +71,14 @@ namespace Microsoft.CodeAnalysis.CSharp.CommandLine.UnitTests
             );
             var dotnetExe = DotNetCoreSdk.ExePath;
             var netStandardDllPath =
-                AppDomain.CurrentDomain
+                AppDomain
+                    .CurrentDomain
                     .GetAssemblies()
                     .FirstOrDefault(
                         assembly =>
                             !assembly.IsDynamic && assembly.Location.EndsWith("netstandard.dll")
-                    ).Location;
+                    )
+                    .Location;
             var netStandardDllDir = Path.GetDirectoryName(netStandardDllPath);
             // Since we are using references based on the UnitTest's runtime, we need to use
             // its runtime config when executing out program.
@@ -161,12 +163,9 @@ namespace Microsoft.CodeAnalysis.CSharp.CommandLine.UnitTests
                 commandLine,
                 removeHashComments: true
             );
-            return CSharpCommandLineParser.Default.Parse(
-                args,
-                baseDirectory,
-                sdkDirectory,
-                additionalReferenceDirectories
-            );
+            return CSharpCommandLineParser
+                .Default
+                .Parse(args, baseDirectory, sdkDirectory, additionalReferenceDirectories);
         }
 
         [ConditionalFact(typeof(WindowsDesktopOnly))]
@@ -573,14 +572,17 @@ dotnet_diagnostic.cs0169.severity = suppress";
 System.Console.WriteLine(""*?"");  # this is error
 a.cs
 "
-                    ).Path;
+                    )
+                    .Path;
             var cmd = CreateCSharpCompiler(rsp, WorkingDirectory, new[] { "b.cs" });
 
-            cmd.Arguments.Errors.Verify(
-                // error CS2001: Source file 'System.Console.WriteLine(*?);' could not be found
-                Diagnostic(ErrorCode.ERR_FileNotFound)
-                    .WithArguments("System.Console.WriteLine(*?);")
-            );
+            cmd.Arguments
+                .Errors
+                .Verify(
+                    // error CS2001: Source file 'System.Console.WriteLine(*?);' could not be found
+                    Diagnostic(ErrorCode.ERR_FileNotFound)
+                        .WithArguments("System.Console.WriteLine(*?);")
+                );
 
             AssertEx.Equal(
                 new[] { "System.dll" },
@@ -691,55 +693,63 @@ d.cs
         [ConditionalFact(typeof(WindowsOnly))]
         public void NullBaseDirectoryNotAddedToKeyFileSearchPaths()
         {
-            var parser = CSharpCommandLineParser.Default.Parse(
-                new[] { "c:/test.cs" },
-                baseDirectory: null,
-                SdkDirectory
-            );
+            var parser = CSharpCommandLineParser
+                .Default
+                .Parse(new[] { "c:/test.cs" }, baseDirectory: null, SdkDirectory);
             AssertEx.Equal(ImmutableArray.Create<string>(), parser.KeyFileSearchPaths);
             Assert.Null(parser.OutputDirectory);
-            parser.Errors.Verify(
-                // error CS8762: Output directory could not be determined
-                Diagnostic(ErrorCode.ERR_NoOutputDirectory).WithLocation(1, 1)
-            );
+            parser
+                .Errors
+                .Verify(
+                    // error CS8762: Output directory could not be determined
+                    Diagnostic(ErrorCode.ERR_NoOutputDirectory).WithLocation(1, 1)
+                );
         }
 
         [ConditionalFact(typeof(WindowsOnly))]
         public void NullBaseDirectoryWithAdditionalFiles()
         {
-            var parser = CSharpCommandLineParser.Default.Parse(
-                new[] { "/additionalfile:web.config", "c:/test.cs" },
-                baseDirectory: null,
-                SdkDirectory
-            );
+            var parser = CSharpCommandLineParser
+                .Default
+                .Parse(
+                    new[] { "/additionalfile:web.config", "c:/test.cs" },
+                    baseDirectory: null,
+                    SdkDirectory
+                );
             AssertEx.Equal(ImmutableArray.Create<string>(), parser.KeyFileSearchPaths);
             Assert.Null(parser.OutputDirectory);
-            parser.Errors.Verify(
-                // error CS2021: File name 'web.config' is empty, contains invalid characters, has a drive specification without an absolute path, or is too long
-                Diagnostic(ErrorCode.FTL_InvalidInputFileName)
-                    .WithArguments("web.config")
-                    .WithLocation(1, 1),
-                // error CS8762: Output directory could not be determined
-                Diagnostic(ErrorCode.ERR_NoOutputDirectory).WithLocation(1, 1)
-            );
+            parser
+                .Errors
+                .Verify(
+                    // error CS2021: File name 'web.config' is empty, contains invalid characters, has a drive specification without an absolute path, or is too long
+                    Diagnostic(ErrorCode.FTL_InvalidInputFileName)
+                        .WithArguments("web.config")
+                        .WithLocation(1, 1),
+                    // error CS8762: Output directory could not be determined
+                    Diagnostic(ErrorCode.ERR_NoOutputDirectory).WithLocation(1, 1)
+                );
         }
 
         [ConditionalFact(typeof(WindowsOnly))]
         public void NullBaseDirectoryWithAdditionalFiles_Wildcard()
         {
-            var parser = CSharpCommandLineParser.Default.Parse(
-                new[] { "/additionalfile:*", "c:/test.cs" },
-                baseDirectory: null,
-                SdkDirectory
-            );
+            var parser = CSharpCommandLineParser
+                .Default
+                .Parse(
+                    new[] { "/additionalfile:*", "c:/test.cs" },
+                    baseDirectory: null,
+                    SdkDirectory
+                );
             AssertEx.Equal(ImmutableArray.Create<string>(), parser.KeyFileSearchPaths);
             Assert.Null(parser.OutputDirectory);
-            parser.Errors.Verify(
-                // error CS2001: Source file '*' could not be found.
-                Diagnostic(ErrorCode.ERR_FileNotFound).WithArguments("*").WithLocation(1, 1),
-                // error CS8762: Output directory could not be determined
-                Diagnostic(ErrorCode.ERR_NoOutputDirectory).WithLocation(1, 1)
-            );
+            parser
+                .Errors
+                .Verify(
+                    // error CS2001: Source file '*' could not be found.
+                    Diagnostic(ErrorCode.ERR_FileNotFound).WithArguments("*").WithLocation(1, 1),
+                    // error CS8762: Output directory could not be determined
+                    Diagnostic(ErrorCode.ERR_NoOutputDirectory).WithLocation(1, 1)
+                );
         }
 
 #nullable disable
@@ -748,11 +758,13 @@ d.cs
         public void NoSdkPath()
         {
             var parentDir = Temp.CreateDirectory();
-            var parser = CSharpCommandLineParser.Default.Parse(
-                new[] { "file.cs", $"-out:{parentDir.Path}", "/noSdkPath" },
-                parentDir.Path,
-                null
-            );
+            var parser = CSharpCommandLineParser
+                .Default
+                .Parse(
+                    new[] { "file.cs", $"-out:{parentDir.Path}", "/noSdkPath" },
+                    parentDir.Path,
+                    null
+                );
             AssertEx.Equal(ImmutableArray<string>.Empty, parser.ReferencePaths);
         }
 
@@ -1160,34 +1172,34 @@ class C
         public void Win32ResInvalid()
         {
             var parsedArgs = DefaultParse(new[] { "/win32res", "a.cs" }, WorkingDirectory);
-            parsedArgs.Errors.Verify(
-                Diagnostic(ErrorCode.ERR_NoFileSpec).WithArguments("/win32res")
-            );
+            parsedArgs
+                .Errors
+                .Verify(Diagnostic(ErrorCode.ERR_NoFileSpec).WithArguments("/win32res"));
 
             parsedArgs = DefaultParse(new[] { "/win32res+", "a.cs" }, WorkingDirectory);
-            parsedArgs.Errors.Verify(
-                Diagnostic(ErrorCode.ERR_BadSwitch).WithArguments("/win32res+")
-            );
+            parsedArgs
+                .Errors
+                .Verify(Diagnostic(ErrorCode.ERR_BadSwitch).WithArguments("/win32res+"));
 
             parsedArgs = DefaultParse(new[] { "/win32icon", "a.cs" }, WorkingDirectory);
-            parsedArgs.Errors.Verify(
-                Diagnostic(ErrorCode.ERR_NoFileSpec).WithArguments("/win32icon")
-            );
+            parsedArgs
+                .Errors
+                .Verify(Diagnostic(ErrorCode.ERR_NoFileSpec).WithArguments("/win32icon"));
 
             parsedArgs = DefaultParse(new[] { "/win32icon+", "a.cs" }, WorkingDirectory);
-            parsedArgs.Errors.Verify(
-                Diagnostic(ErrorCode.ERR_BadSwitch).WithArguments("/win32icon+")
-            );
+            parsedArgs
+                .Errors
+                .Verify(Diagnostic(ErrorCode.ERR_BadSwitch).WithArguments("/win32icon+"));
 
             parsedArgs = DefaultParse(new[] { "/win32manifest", "a.cs" }, WorkingDirectory);
-            parsedArgs.Errors.Verify(
-                Diagnostic(ErrorCode.ERR_NoFileSpec).WithArguments("/win32manifest")
-            );
+            parsedArgs
+                .Errors
+                .Verify(Diagnostic(ErrorCode.ERR_NoFileSpec).WithArguments("/win32manifest"));
 
             parsedArgs = DefaultParse(new[] { "/win32manifest+", "a.cs" }, WorkingDirectory);
-            parsedArgs.Errors.Verify(
-                Diagnostic(ErrorCode.ERR_BadSwitch).WithArguments("/win32manifest+")
-            );
+            parsedArgs
+                .Errors
+                .Verify(Diagnostic(ErrorCode.ERR_BadSwitch).WithArguments("/win32manifest+"));
         }
 
         [Fact]
@@ -1699,14 +1711,14 @@ class C
         public void ManagedResourceOptions_SimpleErrors()
         {
             var parsedArgs = DefaultParse(new[] { "/resource:", "a.cs" }, WorkingDirectory);
-            parsedArgs.Errors.Verify(
-                Diagnostic(ErrorCode.ERR_NoFileSpec).WithArguments("/resource:")
-            );
+            parsedArgs
+                .Errors
+                .Verify(Diagnostic(ErrorCode.ERR_NoFileSpec).WithArguments("/resource:"));
 
             parsedArgs = DefaultParse(new[] { "/resource: ", "a.cs" }, WorkingDirectory);
-            parsedArgs.Errors.Verify(
-                Diagnostic(ErrorCode.ERR_NoFileSpec).WithArguments("/resource:")
-            );
+            parsedArgs
+                .Errors
+                .Verify(Diagnostic(ErrorCode.ERR_NoFileSpec).WithArguments("/resource:"));
 
             parsedArgs = DefaultParse(new[] { "/res", "a.cs" }, WorkingDirectory);
             parsedArgs.Errors.Verify(Diagnostic(ErrorCode.ERR_BadSwitch).WithArguments("/res"));
@@ -1718,27 +1730,27 @@ class C
             parsedArgs.Errors.Verify(Diagnostic(ErrorCode.ERR_BadSwitch).WithArguments("/res-:"));
 
             parsedArgs = DefaultParse(new[] { "/linkresource:", "a.cs" }, WorkingDirectory);
-            parsedArgs.Errors.Verify(
-                Diagnostic(ErrorCode.ERR_NoFileSpec).WithArguments("/linkresource:")
-            );
+            parsedArgs
+                .Errors
+                .Verify(Diagnostic(ErrorCode.ERR_NoFileSpec).WithArguments("/linkresource:"));
 
             parsedArgs = DefaultParse(new[] { "/linkresource: ", "a.cs" }, WorkingDirectory);
-            parsedArgs.Errors.Verify(
-                Diagnostic(ErrorCode.ERR_NoFileSpec).WithArguments("/linkresource:")
-            );
+            parsedArgs
+                .Errors
+                .Verify(Diagnostic(ErrorCode.ERR_NoFileSpec).WithArguments("/linkresource:"));
 
             parsedArgs = DefaultParse(new[] { "/linkres", "a.cs" }, WorkingDirectory);
             parsedArgs.Errors.Verify(Diagnostic(ErrorCode.ERR_BadSwitch).WithArguments("/linkres"));
 
             parsedArgs = DefaultParse(new[] { "/linkRES+", "a.cs" }, WorkingDirectory);
-            parsedArgs.Errors.Verify(
-                Diagnostic(ErrorCode.ERR_BadSwitch).WithArguments("/linkRES+")
-            );
+            parsedArgs
+                .Errors
+                .Verify(Diagnostic(ErrorCode.ERR_BadSwitch).WithArguments("/linkRES+"));
 
             parsedArgs = DefaultParse(new[] { "/linkres-:", "a.cs" }, WorkingDirectory);
-            parsedArgs.Errors.Verify(
-                Diagnostic(ErrorCode.ERR_BadSwitch).WithArguments("/linkres-:")
-            );
+            parsedArgs
+                .Errors
+                .Verify(Diagnostic(ErrorCode.ERR_BadSwitch).WithArguments("/linkres-:"));
         }
 
         [Fact]
@@ -1751,7 +1763,8 @@ class C
             parsedArgs.Errors.Verify();
             AssertEx.Equal(
                 new[] { "a", "b", "c" },
-                parsedArgs.MetadataReferences
+                parsedArgs
+                    .MetadataReferences
                     .Where((res) => res.Properties.EmbedInteropTypes)
                     .Select((res) => res.Reference)
             );
@@ -1760,7 +1773,8 @@ class C
             parsedArgs.Errors.Verify();
             AssertEx.Equal(
                 new[] { " b " },
-                parsedArgs.MetadataReferences
+                parsedArgs
+                    .MetadataReferences
                     .Where((res) => res.Properties.EmbedInteropTypes)
                     .Select((res) => res.Reference)
             );
@@ -1769,9 +1783,9 @@ class C
             parsedArgs.Errors.Verify(Diagnostic(ErrorCode.ERR_NoFileSpec).WithArguments("/l:"));
 
             parsedArgs = DefaultParse(new[] { "/L", "a.cs" }, WorkingDirectory);
-            parsedArgs.Errors.Verify(
-                Diagnostic(ErrorCode.ERR_SwitchNeedsString).WithArguments("<text>", "/L")
-            );
+            parsedArgs
+                .Errors
+                .Verify(Diagnostic(ErrorCode.ERR_SwitchNeedsString).WithArguments("<text>", "/L"));
 
             parsedArgs = DefaultParse(new[] { "/l+", "a.cs" }, WorkingDirectory);
             parsedArgs.Errors.Verify(Diagnostic(ErrorCode.ERR_BadSwitch).WithArguments("/l+"));
@@ -1814,27 +1828,27 @@ class C
             );
 
             parsedArgs = DefaultParse(new[] { "/reCURSE:", "a.cs" }, WorkingDirectory);
-            parsedArgs.Errors.Verify(
-                Diagnostic(ErrorCode.ERR_NoFileSpec).WithArguments("/reCURSE:")
-            );
+            parsedArgs
+                .Errors
+                .Verify(Diagnostic(ErrorCode.ERR_NoFileSpec).WithArguments("/reCURSE:"));
 
             parsedArgs = DefaultParse(new[] { "/RECURSE: ", "a.cs" }, WorkingDirectory);
-            parsedArgs.Errors.Verify(
-                Diagnostic(ErrorCode.ERR_NoFileSpec).WithArguments("/RECURSE:")
-            );
+            parsedArgs
+                .Errors
+                .Verify(Diagnostic(ErrorCode.ERR_NoFileSpec).WithArguments("/RECURSE:"));
 
             parsedArgs = DefaultParse(new[] { "/recurse", "a.cs" }, WorkingDirectory);
             parsedArgs.Errors.Verify(Diagnostic(ErrorCode.ERR_BadSwitch).WithArguments("/recurse"));
 
             parsedArgs = DefaultParse(new[] { "/recurse+", "a.cs" }, WorkingDirectory);
-            parsedArgs.Errors.Verify(
-                Diagnostic(ErrorCode.ERR_BadSwitch).WithArguments("/recurse+")
-            );
+            parsedArgs
+                .Errors
+                .Verify(Diagnostic(ErrorCode.ERR_BadSwitch).WithArguments("/recurse+"));
 
             parsedArgs = DefaultParse(new[] { "/recurse-:", "a.cs" }, WorkingDirectory);
-            parsedArgs.Errors.Verify(
-                Diagnostic(ErrorCode.ERR_BadSwitch).WithArguments("/recurse-:")
-            );
+            parsedArgs
+                .Errors
+                .Verify(Diagnostic(ErrorCode.ERR_BadSwitch).WithArguments("/recurse-:"));
 
             CleanupAllGeneratedFiles(file1.Path);
             CleanupAllGeneratedFiles(file2.Path);
@@ -1853,7 +1867,8 @@ class C
             parsedArgs.Errors.Verify();
             AssertEx.Equal(
                 new[] { "a", "b", "c" },
-                parsedArgs.MetadataReferences
+                parsedArgs
+                    .MetadataReferences
                     .Where((res) => !res.Properties.EmbedInteropTypes)
                     .Select((res) => res.Reference)
             );
@@ -1865,7 +1880,8 @@ class C
             parsedArgs.Errors.Verify();
             AssertEx.Equal(
                 new[] { " b " },
-                parsedArgs.MetadataReferences
+                parsedArgs
+                    .MetadataReferences
                     .Where((res) => !res.Properties.EmbedInteropTypes)
                     .Select((res) => res.Reference)
             );
@@ -1879,32 +1895,32 @@ class C
             Assert.Equal("b", parsedArgs.MetadataReferences.Single().Reference);
 
             parsedArgs = DefaultParse(new[] { "/r:a=b,,,c", "a.cs" }, WorkingDirectory);
-            parsedArgs.Errors.Verify(
-                Diagnostic(ErrorCode.ERR_OneAliasPerReference).WithArguments("b,,,c")
-            );
+            parsedArgs
+                .Errors
+                .Verify(Diagnostic(ErrorCode.ERR_OneAliasPerReference).WithArguments("b,,,c"));
 
             parsedArgs = DefaultParse(new[] { "/r:1=b", "a.cs" }, WorkingDirectory);
-            parsedArgs.Errors.Verify(
-                Diagnostic(ErrorCode.ERR_BadExternIdentifier).WithArguments("1")
-            );
+            parsedArgs
+                .Errors
+                .Verify(Diagnostic(ErrorCode.ERR_BadExternIdentifier).WithArguments("1"));
 
             parsedArgs = DefaultParse(new[] { "/r:", "a.cs" }, WorkingDirectory);
             parsedArgs.Errors.Verify(Diagnostic(ErrorCode.ERR_NoFileSpec).WithArguments("/r:"));
 
             parsedArgs = DefaultParse(new[] { "/R", "a.cs" }, WorkingDirectory);
-            parsedArgs.Errors.Verify(
-                Diagnostic(ErrorCode.ERR_SwitchNeedsString).WithArguments("<text>", "/R")
-            );
+            parsedArgs
+                .Errors
+                .Verify(Diagnostic(ErrorCode.ERR_SwitchNeedsString).WithArguments("<text>", "/R"));
 
             parsedArgs = DefaultParse(new[] { "/reference+", "a.cs" }, WorkingDirectory);
-            parsedArgs.Errors.Verify(
-                Diagnostic(ErrorCode.ERR_BadSwitch).WithArguments("/reference+")
-            );
+            parsedArgs
+                .Errors
+                .Verify(Diagnostic(ErrorCode.ERR_BadSwitch).WithArguments("/reference+"));
 
             parsedArgs = DefaultParse(new[] { "/reference-:", "a.cs" }, WorkingDirectory);
-            parsedArgs.Errors.Verify(
-                Diagnostic(ErrorCode.ERR_BadSwitch).WithArguments("/reference-:")
-            );
+            parsedArgs
+                .Errors
+                .Verify(Diagnostic(ErrorCode.ERR_BadSwitch).WithArguments("/reference-:"));
         }
 
         [Fact]
@@ -1966,72 +1982,84 @@ class C
             parsedArgs.Errors.Verify(Diagnostic(ErrorCode.ERR_BadSwitch).WithArguments("/T+"));
 
             parsedArgs = DefaultParse(new[] { "/TARGET-:", "a.cs" }, WorkingDirectory);
-            parsedArgs.Errors.Verify(
-                Diagnostic(ErrorCode.ERR_BadSwitch).WithArguments("/TARGET-:")
-            );
+            parsedArgs
+                .Errors
+                .Verify(Diagnostic(ErrorCode.ERR_BadSwitch).WithArguments("/TARGET-:"));
         }
 
         [Fact]
         public void Target_SimpleTestsNoSource()
         {
             var parsedArgs = DefaultParse(new[] { "/target:exe" }, WorkingDirectory);
-            parsedArgs.Errors.Verify(
-                // warning CS2008: No source files specified.
-                Diagnostic(ErrorCode.WRN_NoSources).WithLocation(1, 1),
-                // error CS1562: Outputs without source must have the /out option specified
-                Diagnostic(ErrorCode.ERR_OutputNeedsName).WithLocation(1, 1)
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    // warning CS2008: No source files specified.
+                    Diagnostic(ErrorCode.WRN_NoSources).WithLocation(1, 1),
+                    // error CS1562: Outputs without source must have the /out option specified
+                    Diagnostic(ErrorCode.ERR_OutputNeedsName).WithLocation(1, 1)
+                );
             Assert.Equal(OutputKind.ConsoleApplication, parsedArgs.CompilationOptions.OutputKind);
 
             parsedArgs = DefaultParse(new[] { "/t:module" }, WorkingDirectory);
-            parsedArgs.Errors.Verify(
-                // warning CS2008: No source files specified.
-                Diagnostic(ErrorCode.WRN_NoSources).WithLocation(1, 1),
-                // error CS1562: Outputs without source must have the /out option specified
-                Diagnostic(ErrorCode.ERR_OutputNeedsName).WithLocation(1, 1)
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    // warning CS2008: No source files specified.
+                    Diagnostic(ErrorCode.WRN_NoSources).WithLocation(1, 1),
+                    // error CS1562: Outputs without source must have the /out option specified
+                    Diagnostic(ErrorCode.ERR_OutputNeedsName).WithLocation(1, 1)
+                );
             Assert.Equal(OutputKind.NetModule, parsedArgs.CompilationOptions.OutputKind);
 
             parsedArgs = DefaultParse(new[] { "/target:library" }, WorkingDirectory);
-            parsedArgs.Errors.Verify(
-                // warning CS2008: No source files specified.
-                Diagnostic(ErrorCode.WRN_NoSources).WithLocation(1, 1),
-                // error CS1562: Outputs without source must have the /out option specified
-                Diagnostic(ErrorCode.ERR_OutputNeedsName).WithLocation(1, 1)
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    // warning CS2008: No source files specified.
+                    Diagnostic(ErrorCode.WRN_NoSources).WithLocation(1, 1),
+                    // error CS1562: Outputs without source must have the /out option specified
+                    Diagnostic(ErrorCode.ERR_OutputNeedsName).WithLocation(1, 1)
+                );
             Assert.Equal(
                 OutputKind.DynamicallyLinkedLibrary,
                 parsedArgs.CompilationOptions.OutputKind
             );
 
             parsedArgs = DefaultParse(new[] { "/TARGET:winexe" }, WorkingDirectory);
-            parsedArgs.Errors.Verify(
-                // warning CS2008: No source files specified.
-                Diagnostic(ErrorCode.WRN_NoSources).WithLocation(1, 1),
-                // error CS1562: Outputs without source must have the /out option specified
-                Diagnostic(ErrorCode.ERR_OutputNeedsName).WithLocation(1, 1)
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    // warning CS2008: No source files specified.
+                    Diagnostic(ErrorCode.WRN_NoSources).WithLocation(1, 1),
+                    // error CS1562: Outputs without source must have the /out option specified
+                    Diagnostic(ErrorCode.ERR_OutputNeedsName).WithLocation(1, 1)
+                );
             Assert.Equal(OutputKind.WindowsApplication, parsedArgs.CompilationOptions.OutputKind);
 
             parsedArgs = DefaultParse(new[] { "/target:appcontainerexe" }, WorkingDirectory);
-            parsedArgs.Errors.Verify(
-                // warning CS2008: No source files specified.
-                Diagnostic(ErrorCode.WRN_NoSources).WithLocation(1, 1),
-                // error CS1562: Outputs without source must have the /out option specified
-                Diagnostic(ErrorCode.ERR_OutputNeedsName).WithLocation(1, 1)
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    // warning CS2008: No source files specified.
+                    Diagnostic(ErrorCode.WRN_NoSources).WithLocation(1, 1),
+                    // error CS1562: Outputs without source must have the /out option specified
+                    Diagnostic(ErrorCode.ERR_OutputNeedsName).WithLocation(1, 1)
+                );
             Assert.Equal(
                 OutputKind.WindowsRuntimeApplication,
                 parsedArgs.CompilationOptions.OutputKind
             );
 
             parsedArgs = DefaultParse(new[] { "/target:winmdobj" }, WorkingDirectory);
-            parsedArgs.Errors.Verify(
-                // warning CS2008: No source files specified.
-                Diagnostic(ErrorCode.WRN_NoSources).WithLocation(1, 1),
-                // error CS1562: Outputs without source must have the /out option specified
-                Diagnostic(ErrorCode.ERR_OutputNeedsName).WithLocation(1, 1)
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    // warning CS2008: No source files specified.
+                    Diagnostic(ErrorCode.WRN_NoSources).WithLocation(1, 1),
+                    // error CS1562: Outputs without source must have the /out option specified
+                    Diagnostic(ErrorCode.ERR_OutputNeedsName).WithLocation(1, 1)
+                );
             Assert.Equal(
                 OutputKind.WindowsRuntimeMetadata,
                 parsedArgs.CompilationOptions.OutputKind
@@ -2041,63 +2069,77 @@ class C
                 new[] { "/target:winexe", "/T:exe", "/target:module" },
                 WorkingDirectory
             );
-            parsedArgs.Errors.Verify(
-                // warning CS2008: No source files specified.
-                Diagnostic(ErrorCode.WRN_NoSources).WithLocation(1, 1),
-                // error CS1562: Outputs without source must have the /out option specified
-                Diagnostic(ErrorCode.ERR_OutputNeedsName).WithLocation(1, 1)
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    // warning CS2008: No source files specified.
+                    Diagnostic(ErrorCode.WRN_NoSources).WithLocation(1, 1),
+                    // error CS1562: Outputs without source must have the /out option specified
+                    Diagnostic(ErrorCode.ERR_OutputNeedsName).WithLocation(1, 1)
+                );
             Assert.Equal(OutputKind.NetModule, parsedArgs.CompilationOptions.OutputKind);
 
             parsedArgs = DefaultParse(new[] { "/t" }, WorkingDirectory);
-            parsedArgs.Errors.Verify(
-                // error CS2007: Unrecognized option: '/t'
-                Diagnostic(ErrorCode.ERR_BadSwitch).WithArguments("/t").WithLocation(1, 1),
-                // warning CS2008: No source files specified.
-                Diagnostic(ErrorCode.WRN_NoSources).WithLocation(1, 1),
-                // error CS1562: Outputs without source must have the /out option specified
-                Diagnostic(ErrorCode.ERR_OutputNeedsName).WithLocation(1, 1)
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    // error CS2007: Unrecognized option: '/t'
+                    Diagnostic(ErrorCode.ERR_BadSwitch).WithArguments("/t").WithLocation(1, 1),
+                    // warning CS2008: No source files specified.
+                    Diagnostic(ErrorCode.WRN_NoSources).WithLocation(1, 1),
+                    // error CS1562: Outputs without source must have the /out option specified
+                    Diagnostic(ErrorCode.ERR_OutputNeedsName).WithLocation(1, 1)
+                );
 
             parsedArgs = DefaultParse(new[] { "/target:" }, WorkingDirectory);
-            parsedArgs.Errors.Verify(
-                // error CS2019: Invalid target type for /target: must specify 'exe', 'winexe', 'library', or 'module'
-                Diagnostic(ErrorCode.FTL_InvalidTarget).WithLocation(1, 1),
-                // warning CS2008: No source files specified.
-                Diagnostic(ErrorCode.WRN_NoSources).WithLocation(1, 1),
-                // error CS1562: Outputs without source must have the /out option specified
-                Diagnostic(ErrorCode.ERR_OutputNeedsName).WithLocation(1, 1)
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    // error CS2019: Invalid target type for /target: must specify 'exe', 'winexe', 'library', or 'module'
+                    Diagnostic(ErrorCode.FTL_InvalidTarget).WithLocation(1, 1),
+                    // warning CS2008: No source files specified.
+                    Diagnostic(ErrorCode.WRN_NoSources).WithLocation(1, 1),
+                    // error CS1562: Outputs without source must have the /out option specified
+                    Diagnostic(ErrorCode.ERR_OutputNeedsName).WithLocation(1, 1)
+                );
 
             parsedArgs = DefaultParse(new[] { "/target:xyz" }, WorkingDirectory);
-            parsedArgs.Errors.Verify(
-                // error CS2019: Invalid target type for /target: must specify 'exe', 'winexe', 'library', or 'module'
-                Diagnostic(ErrorCode.FTL_InvalidTarget).WithLocation(1, 1),
-                // warning CS2008: No source files specified.
-                Diagnostic(ErrorCode.WRN_NoSources).WithLocation(1, 1),
-                // error CS1562: Outputs without source must have the /out option specified
-                Diagnostic(ErrorCode.ERR_OutputNeedsName).WithLocation(1, 1)
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    // error CS2019: Invalid target type for /target: must specify 'exe', 'winexe', 'library', or 'module'
+                    Diagnostic(ErrorCode.FTL_InvalidTarget).WithLocation(1, 1),
+                    // warning CS2008: No source files specified.
+                    Diagnostic(ErrorCode.WRN_NoSources).WithLocation(1, 1),
+                    // error CS1562: Outputs without source must have the /out option specified
+                    Diagnostic(ErrorCode.ERR_OutputNeedsName).WithLocation(1, 1)
+                );
 
             parsedArgs = DefaultParse(new[] { "/T+" }, WorkingDirectory);
-            parsedArgs.Errors.Verify(
-                // error CS2007: Unrecognized option: '/T+'
-                Diagnostic(ErrorCode.ERR_BadSwitch).WithArguments("/T+").WithLocation(1, 1),
-                // warning CS2008: No source files specified.
-                Diagnostic(ErrorCode.WRN_NoSources).WithLocation(1, 1),
-                // error CS1562: Outputs without source must have the /out option specified
-                Diagnostic(ErrorCode.ERR_OutputNeedsName).WithLocation(1, 1)
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    // error CS2007: Unrecognized option: '/T+'
+                    Diagnostic(ErrorCode.ERR_BadSwitch).WithArguments("/T+").WithLocation(1, 1),
+                    // warning CS2008: No source files specified.
+                    Diagnostic(ErrorCode.WRN_NoSources).WithLocation(1, 1),
+                    // error CS1562: Outputs without source must have the /out option specified
+                    Diagnostic(ErrorCode.ERR_OutputNeedsName).WithLocation(1, 1)
+                );
 
             parsedArgs = DefaultParse(new[] { "/TARGET-:" }, WorkingDirectory);
-            parsedArgs.Errors.Verify(
-                // error CS2007: Unrecognized option: '/TARGET-:'
-                Diagnostic(ErrorCode.ERR_BadSwitch).WithArguments("/TARGET-:").WithLocation(1, 1),
-                // warning CS2008: No source files specified.
-                Diagnostic(ErrorCode.WRN_NoSources).WithLocation(1, 1),
-                // error CS1562: Outputs without source must have the /out option specified
-                Diagnostic(ErrorCode.ERR_OutputNeedsName).WithLocation(1, 1)
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    // error CS2007: Unrecognized option: '/TARGET-:'
+                    Diagnostic(ErrorCode.ERR_BadSwitch)
+                        .WithArguments("/TARGET-:")
+                        .WithLocation(1, 1),
+                    // warning CS2008: No source files specified.
+                    Diagnostic(ErrorCode.WRN_NoSources).WithLocation(1, 1),
+                    // error CS1562: Outputs without source must have the /out option specified
+                    Diagnostic(ErrorCode.ERR_OutputNeedsName).WithLocation(1, 1)
+                );
         }
 
         [Fact]
@@ -2120,188 +2162,160 @@ class C
         public void ArgumentParsing()
         {
             var sdkDirectory = SdkDirectory;
-            var parsedArgs = CSharpCommandLineParser.Script.Parse(
-                new[] { "a + b" },
-                WorkingDirectory,
-                sdkDirectory
-            );
+            var parsedArgs = CSharpCommandLineParser
+                .Script
+                .Parse(new[] { "a + b" }, WorkingDirectory, sdkDirectory);
             parsedArgs.Errors.Verify();
             Assert.False(parsedArgs.DisplayHelp);
             Assert.True(parsedArgs.SourceFiles.Any());
 
-            parsedArgs = CSharpCommandLineParser.Script.Parse(
-                new[] { "a + b; c" },
-                WorkingDirectory,
-                sdkDirectory
-            );
+            parsedArgs = CSharpCommandLineParser
+                .Script
+                .Parse(new[] { "a + b; c" }, WorkingDirectory, sdkDirectory);
             parsedArgs.Errors.Verify();
             Assert.False(parsedArgs.DisplayHelp);
             Assert.True(parsedArgs.SourceFiles.Any());
 
-            parsedArgs = CSharpCommandLineParser.Script.Parse(
-                new[] { "/help" },
-                WorkingDirectory,
-                sdkDirectory
-            );
+            parsedArgs = CSharpCommandLineParser
+                .Script
+                .Parse(new[] { "/help" }, WorkingDirectory, sdkDirectory);
             parsedArgs.Errors.Verify();
             Assert.True(parsedArgs.DisplayHelp);
             Assert.False(parsedArgs.SourceFiles.Any());
 
-            parsedArgs = CSharpCommandLineParser.Script.Parse(
-                new[] { "/version" },
-                WorkingDirectory,
-                sdkDirectory
-            );
+            parsedArgs = CSharpCommandLineParser
+                .Script
+                .Parse(new[] { "/version" }, WorkingDirectory, sdkDirectory);
             parsedArgs.Errors.Verify();
             Assert.True(parsedArgs.DisplayVersion);
             Assert.False(parsedArgs.SourceFiles.Any());
 
-            parsedArgs = CSharpCommandLineParser.Script.Parse(
-                new[] { "/langversion:?" },
-                WorkingDirectory,
-                sdkDirectory
-            );
+            parsedArgs = CSharpCommandLineParser
+                .Script
+                .Parse(new[] { "/langversion:?" }, WorkingDirectory, sdkDirectory);
             parsedArgs.Errors.Verify();
             Assert.True(parsedArgs.DisplayLangVersions);
             Assert.False(parsedArgs.SourceFiles.Any());
 
-            parsedArgs = CSharpCommandLineParser.Script.Parse(
-                new[] { "//langversion:?" },
-                WorkingDirectory,
-                sdkDirectory
-            );
-            parsedArgs.Errors.Verify(
-                // error CS2001: Source file '//langversion:?' could not be found.
-                Diagnostic(ErrorCode.ERR_FileNotFound)
-                    .WithArguments("//langversion:?")
-                    .WithLocation(1, 1)
-            );
+            parsedArgs = CSharpCommandLineParser
+                .Script
+                .Parse(new[] { "//langversion:?" }, WorkingDirectory, sdkDirectory);
+            parsedArgs
+                .Errors
+                .Verify(
+                    // error CS2001: Source file '//langversion:?' could not be found.
+                    Diagnostic(ErrorCode.ERR_FileNotFound)
+                        .WithArguments("//langversion:?")
+                        .WithLocation(1, 1)
+                );
 
-            parsedArgs = CSharpCommandLineParser.Script.Parse(
-                new[] { "/version", "c.csx" },
-                WorkingDirectory,
-                sdkDirectory
-            );
+            parsedArgs = CSharpCommandLineParser
+                .Script
+                .Parse(new[] { "/version", "c.csx" }, WorkingDirectory, sdkDirectory);
             parsedArgs.Errors.Verify();
             Assert.True(parsedArgs.DisplayVersion);
             Assert.True(parsedArgs.SourceFiles.Any());
 
-            parsedArgs = CSharpCommandLineParser.Script.Parse(
-                new[] { "/version:something" },
-                WorkingDirectory,
-                sdkDirectory
-            );
+            parsedArgs = CSharpCommandLineParser
+                .Script
+                .Parse(new[] { "/version:something" }, WorkingDirectory, sdkDirectory);
             parsedArgs.Errors.Verify();
             Assert.True(parsedArgs.DisplayVersion);
             Assert.False(parsedArgs.SourceFiles.Any());
 
-            parsedArgs = CSharpCommandLineParser.Script.Parse(
-                new[] { "/?" },
-                WorkingDirectory,
-                sdkDirectory
-            );
+            parsedArgs = CSharpCommandLineParser
+                .Script
+                .Parse(new[] { "/?" }, WorkingDirectory, sdkDirectory);
             parsedArgs.Errors.Verify();
             Assert.True(parsedArgs.DisplayHelp);
             Assert.False(parsedArgs.SourceFiles.Any());
 
-            parsedArgs = CSharpCommandLineParser.Script.Parse(
-                new[] { "c.csx  /langversion:6" },
-                WorkingDirectory,
-                sdkDirectory
-            );
+            parsedArgs = CSharpCommandLineParser
+                .Script
+                .Parse(new[] { "c.csx  /langversion:6" }, WorkingDirectory, sdkDirectory);
             parsedArgs.Errors.Verify();
             Assert.False(parsedArgs.DisplayHelp);
             Assert.True(parsedArgs.SourceFiles.Any());
 
-            parsedArgs = CSharpCommandLineParser.Script.Parse(
-                new[] { "/langversion:-1", "c.csx", },
-                WorkingDirectory,
-                sdkDirectory
-            );
-            parsedArgs.Errors.Verify(
-                // error CS1617: Invalid option '-1' for /langversion. Use '/langversion:?' to list supported values.
-                Diagnostic(ErrorCode.ERR_BadCompatMode).WithArguments("-1").WithLocation(1, 1)
-            );
+            parsedArgs = CSharpCommandLineParser
+                .Script
+                .Parse(new[] { "/langversion:-1", "c.csx", }, WorkingDirectory, sdkDirectory);
+            parsedArgs
+                .Errors
+                .Verify(
+                    // error CS1617: Invalid option '-1' for /langversion. Use '/langversion:?' to list supported values.
+                    Diagnostic(ErrorCode.ERR_BadCompatMode).WithArguments("-1").WithLocation(1, 1)
+                );
 
             Assert.False(parsedArgs.DisplayHelp);
             Assert.Equal(1, parsedArgs.SourceFiles.Length);
 
-            parsedArgs = CSharpCommandLineParser.Script.Parse(
-                new[] { "c.csx  /r:s=d /r:d.dll" },
-                WorkingDirectory,
-                sdkDirectory
-            );
+            parsedArgs = CSharpCommandLineParser
+                .Script
+                .Parse(new[] { "c.csx  /r:s=d /r:d.dll" }, WorkingDirectory, sdkDirectory);
             parsedArgs.Errors.Verify();
             Assert.False(parsedArgs.DisplayHelp);
             Assert.True(parsedArgs.SourceFiles.Any());
 
-            parsedArgs = CSharpCommandLineParser.Script.Parse(
-                new[] { "@roslyn_test_non_existing_file" },
-                WorkingDirectory,
-                sdkDirectory
-            );
-            parsedArgs.Errors.Verify(
-                // error CS2011: Error opening response file 'D:\R0\Main\Binaries\Debug\dd'
-                Diagnostic(ErrorCode.ERR_OpenResponseFile)
-                    .WithArguments(Path.Combine(WorkingDirectory, @"roslyn_test_non_existing_file"))
-            );
+            parsedArgs = CSharpCommandLineParser
+                .Script
+                .Parse(new[] { "@roslyn_test_non_existing_file" }, WorkingDirectory, sdkDirectory);
+            parsedArgs
+                .Errors
+                .Verify(
+                    // error CS2011: Error opening response file 'D:\R0\Main\Binaries\Debug\dd'
+                    Diagnostic(ErrorCode.ERR_OpenResponseFile)
+                        .WithArguments(
+                            Path.Combine(WorkingDirectory, @"roslyn_test_non_existing_file")
+                        )
+                );
 
             Assert.False(parsedArgs.DisplayHelp);
             Assert.False(parsedArgs.SourceFiles.Any());
 
-            parsedArgs = CSharpCommandLineParser.Script.Parse(
-                new[] { "c /define:DEBUG" },
-                WorkingDirectory,
-                sdkDirectory
-            );
+            parsedArgs = CSharpCommandLineParser
+                .Script
+                .Parse(new[] { "c /define:DEBUG" }, WorkingDirectory, sdkDirectory);
             parsedArgs.Errors.Verify();
             Assert.False(parsedArgs.DisplayHelp);
             Assert.True(parsedArgs.SourceFiles.Any());
 
-            parsedArgs = CSharpCommandLineParser.Script.Parse(
-                new[] { "\\" },
-                WorkingDirectory,
-                sdkDirectory
-            );
+            parsedArgs = CSharpCommandLineParser
+                .Script
+                .Parse(new[] { "\\" }, WorkingDirectory, sdkDirectory);
             parsedArgs.Errors.Verify();
             Assert.False(parsedArgs.DisplayHelp);
             Assert.True(parsedArgs.SourceFiles.Any());
 
-            parsedArgs = CSharpCommandLineParser.Script.Parse(
-                new[] { "/r:d.dll", "c.csx" },
-                WorkingDirectory,
-                sdkDirectory
-            );
+            parsedArgs = CSharpCommandLineParser
+                .Script
+                .Parse(new[] { "/r:d.dll", "c.csx" }, WorkingDirectory, sdkDirectory);
             parsedArgs.Errors.Verify();
             Assert.False(parsedArgs.DisplayHelp);
             Assert.True(parsedArgs.SourceFiles.Any());
 
-            parsedArgs = CSharpCommandLineParser.Script.Parse(
-                new[] { "/define:goo", "c.csx" },
-                WorkingDirectory,
-                sdkDirectory
-            );
-            parsedArgs.Errors.Verify(
-                // error CS2007: Unrecognized option: '/define:goo'
-                Diagnostic(ErrorCode.ERR_BadSwitch).WithArguments("/define:goo")
-            );
+            parsedArgs = CSharpCommandLineParser
+                .Script
+                .Parse(new[] { "/define:goo", "c.csx" }, WorkingDirectory, sdkDirectory);
+            parsedArgs
+                .Errors
+                .Verify(
+                    // error CS2007: Unrecognized option: '/define:goo'
+                    Diagnostic(ErrorCode.ERR_BadSwitch).WithArguments("/define:goo")
+                );
             Assert.False(parsedArgs.DisplayHelp);
             Assert.True(parsedArgs.SourceFiles.Any());
 
-            parsedArgs = CSharpCommandLineParser.Script.Parse(
-                new[] { "\"/r d.dll\"" },
-                WorkingDirectory,
-                sdkDirectory
-            );
+            parsedArgs = CSharpCommandLineParser
+                .Script
+                .Parse(new[] { "\"/r d.dll\"" }, WorkingDirectory, sdkDirectory);
             parsedArgs.Errors.Verify();
             Assert.False(parsedArgs.DisplayHelp);
             Assert.True(parsedArgs.SourceFiles.Any());
 
-            parsedArgs = CSharpCommandLineParser.Script.Parse(
-                new[] { "/r: d.dll", "a.cs" },
-                WorkingDirectory,
-                sdkDirectory
-            );
+            parsedArgs = CSharpCommandLineParser
+                .Script
+                .Parse(new[] { "/r: d.dll", "a.cs" }, WorkingDirectory, sdkDirectory);
             parsedArgs.Errors.Verify();
             Assert.False(parsedArgs.DisplayHelp);
             Assert.True(parsedArgs.SourceFiles.Any());
@@ -2377,8 +2391,9 @@ class C
         [Fact]
         public void LangVersion_DefaultMapsCorrectly()
         {
-            LanguageVersion defaultEffectiveVersion =
-                LanguageVersion.Default.MapSpecifiedToEffectiveVersion();
+            LanguageVersion defaultEffectiveVersion = LanguageVersion
+                .Default
+                .MapSpecifiedToEffectiveVersion();
             Assert.NotEqual(LanguageVersion.Default, defaultEffectiveVersion);
 
             var parsedArgs = DefaultParse(
@@ -2394,8 +2409,9 @@ class C
         [Fact]
         public void LangVersion_LatestMapsCorrectly()
         {
-            LanguageVersion latestEffectiveVersion =
-                LanguageVersion.Latest.MapSpecifiedToEffectiveVersion();
+            LanguageVersion latestEffectiveVersion = LanguageVersion
+                .Latest
+                .MapSpecifiedToEffectiveVersion();
             Assert.NotEqual(LanguageVersion.Latest, latestEffectiveVersion);
 
             var parsedArgs = DefaultParse(
@@ -2425,10 +2441,12 @@ class C
         [InlineData("1000")]
         public void LangVersion_BadVersion(string value)
         {
-            DefaultParse(new[] { $"/langversion:{value}", "a.cs" }, WorkingDirectory).Errors.Verify(
-                // error CS1617: Invalid option 'XXX' for /langversion. Use '/langversion:?' to list supported values.
-                Diagnostic(ErrorCode.ERR_BadCompatMode).WithArguments(value).WithLocation(1, 1)
-            );
+            DefaultParse(new[] { $"/langversion:{value}", "a.cs" }, WorkingDirectory)
+                .Errors
+                .Verify(
+                    // error CS1617: Invalid option 'XXX' for /langversion. Use '/langversion:?' to list supported values.
+                    Diagnostic(ErrorCode.ERR_BadCompatMode).WithArguments(value).WithLocation(1, 1)
+                );
         }
 
         [Theory]
@@ -2440,12 +2458,14 @@ class C
         [InlineData("09")]
         public void LangVersion_LeadingZeroes(string value)
         {
-            DefaultParse(new[] { $"/langversion:{value}", "a.cs" }, WorkingDirectory).Errors.Verify(
-                // error CS8303: Specified language version 'XXX' cannot have leading zeroes
-                Diagnostic(ErrorCode.ERR_LanguageVersionCannotHaveLeadingZeroes)
-                    .WithArguments(value)
-                    .WithLocation(1, 1)
-            );
+            DefaultParse(new[] { $"/langversion:{value}", "a.cs" }, WorkingDirectory)
+                .Errors
+                .Verify(
+                    // error CS8303: Specified language version 'XXX' cannot have leading zeroes
+                    Diagnostic(ErrorCode.ERR_LanguageVersionCannotHaveLeadingZeroes)
+                        .WithArguments(value)
+                        .WithLocation(1, 1)
+                );
         }
 
         [Theory]
@@ -2454,12 +2474,14 @@ class C
         [InlineData("/LANGversion:")]
         public void LangVersion_NoVersion(string option)
         {
-            DefaultParse(new[] { option, "a.cs" }, WorkingDirectory).Errors.Verify(
-                // error CS2006: Command-line syntax error: Missing '<text>' for '/langversion:' option
-                Diagnostic(ErrorCode.ERR_SwitchNeedsString)
-                    .WithArguments("<text>", "/langversion:")
-                    .WithLocation(1, 1)
-            );
+            DefaultParse(new[] { option, "a.cs" }, WorkingDirectory)
+                .Errors
+                .Verify(
+                    // error CS2006: Command-line syntax error: Missing '<text>' for '/langversion:' option
+                    Diagnostic(ErrorCode.ERR_SwitchNeedsString)
+                        .WithArguments("<text>", "/langversion:")
+                        .WithLocation(1, 1)
+                );
         }
 
         [Fact]
@@ -2918,17 +2940,19 @@ class C
             );
 
             parsedArgs = DefaultParse(new[] { "/debug:", "a.cs" }, WorkingDirectory);
-            parsedArgs.Errors.Verify(
-                Diagnostic(ErrorCode.ERR_SwitchNeedsString).WithArguments("<text>", "debug")
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    Diagnostic(ErrorCode.ERR_SwitchNeedsString).WithArguments("<text>", "debug")
+                );
 
             parsedArgs = DefaultParse(new[] { "/debug:+", "a.cs" }, WorkingDirectory);
             parsedArgs.Errors.Verify(Diagnostic(ErrorCode.ERR_BadDebugType).WithArguments("+"));
 
             parsedArgs = DefaultParse(new[] { "/debug:invalid", "a.cs" }, WorkingDirectory);
-            parsedArgs.Errors.Verify(
-                Diagnostic(ErrorCode.ERR_BadDebugType).WithArguments("invalid")
-            );
+            parsedArgs
+                .Errors
+                .Verify(Diagnostic(ErrorCode.ERR_BadDebugType).WithArguments("invalid"));
 
             parsedArgs = DefaultParse(new[] { "/debug-:", "a.cs" }, WorkingDirectory);
             parsedArgs.Errors.Verify(Diagnostic(ErrorCode.ERR_BadSwitch).WithArguments("/debug-:"));
@@ -2991,15 +3015,19 @@ class C
             //    Diagnostic(ErrorCode.FTL_InvalidInputFileName).WithArguments(".x"));
 
             parsedArgs = DefaultParse(new[] { @"/pdb:""""", "/debug", "a.cs" }, WorkingDirectory);
-            parsedArgs.Errors.Verify(
-                // error CS2005: Missing file specification for '/pdb:""' option
-                Diagnostic(ErrorCode.ERR_NoFileSpec).WithArguments(@"/pdb:""""").WithLocation(1, 1)
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    // error CS2005: Missing file specification for '/pdb:""' option
+                    Diagnostic(ErrorCode.ERR_NoFileSpec)
+                        .WithArguments(@"/pdb:""""")
+                        .WithLocation(1, 1)
+                );
 
             parsedArgs = DefaultParse(new[] { "/pdb:C:\\", "/debug", "a.cs" }, WorkingDirectory);
-            parsedArgs.Errors.Verify(
-                Diagnostic(ErrorCode.FTL_InvalidInputFileName).WithArguments("C:\\")
-            );
+            parsedArgs
+                .Errors
+                .Verify(Diagnostic(ErrorCode.FTL_InvalidInputFileName).WithArguments("C:\\"));
 
             // Should preserve fully qualified paths
             parsedArgs = DefaultParse(
@@ -3056,20 +3084,25 @@ class C
             // Assert.Equal(FileUtilities.ResolveRelativePath("MyPdb.pdb", "..\\", baseDirectory), parsedArgs.PdbPath);
 
             parsedArgs = DefaultParse(new[] { @"/pdb:\\b", "/debug", "a.cs" }, WorkingDirectory);
-            parsedArgs.Errors.Verify(
-                // error CS2021: File name '.x' is empty, contains invalid characters, has a drive specification without an absolute path, or is too long
-                Diagnostic(ErrorCode.FTL_InvalidInputFileName).WithArguments(@"\\b")
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    // error CS2021: File name '.x' is empty, contains invalid characters, has a drive specification without an absolute path, or is too long
+                    Diagnostic(ErrorCode.FTL_InvalidInputFileName).WithArguments(@"\\b")
+                );
             Assert.Null(parsedArgs.PdbPath);
 
             parsedArgs = DefaultParse(
                 new[] { @"/pdb:\\b\OkFileName.pdb", "/debug", "a.cs" },
                 WorkingDirectory
             );
-            parsedArgs.Errors.Verify(
-                // error CS2021: File name '.x' is empty, contains invalid characters, has a drive specification without an absolute path, or is too long
-                Diagnostic(ErrorCode.FTL_InvalidInputFileName).WithArguments(@"\\b\OkFileName.pdb")
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    // error CS2021: File name '.x' is empty, contains invalid characters, has a drive specification without an absolute path, or is too long
+                    Diagnostic(ErrorCode.FTL_InvalidInputFileName)
+                        .WithArguments(@"\\b\OkFileName.pdb")
+                );
             Assert.Null(parsedArgs.PdbPath);
 
             parsedArgs = DefaultParse(
@@ -3081,9 +3114,9 @@ class C
 
             // invalid name:
             parsedArgs = DefaultParse(new[] { "/pdb:a.b\0b", "/debug", "a.cs" }, WorkingDirectory);
-            parsedArgs.Errors.Verify(
-                Diagnostic(ErrorCode.FTL_InvalidInputFileName).WithArguments("a.b\0b")
-            );
+            parsedArgs
+                .Errors
+                .Verify(Diagnostic(ErrorCode.FTL_InvalidInputFileName).WithArguments("a.b\0b"));
             Assert.Null(parsedArgs.PdbPath);
 
             parsedArgs = DefaultParse(
@@ -3096,10 +3129,12 @@ class C
 
             // Dev11 reports CS0016: Could not write to output file 'd:\Temp\q\a<>.z'
             parsedArgs = DefaultParse(new[] { @"/pdb:""a<>.pdb""", "a.vb" }, WorkingDirectory);
-            parsedArgs.Errors.Verify(
-                // error CS2021: File name 'a<>.pdb' is empty, contains invalid characters, has a drive specification without an absolute path, or is too long
-                Diagnostic(ErrorCode.FTL_InvalidInputFileName).WithArguments("a<>.pdb")
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    // error CS2021: File name 'a<>.pdb' is empty, contains invalid characters, has a drive specification without an absolute path, or is too long
+                    Diagnostic(ErrorCode.FTL_InvalidInputFileName).WithArguments("a<>.pdb")
+                );
             Assert.Null(parsedArgs.PdbPath);
 
             parsedArgs = DefaultParse(new[] { "/pdb:.x", "/debug", "a.cs" }, WorkingDirectory);
@@ -3522,11 +3557,9 @@ print Goodbye, World";
                         continue;
                     }
 
-                    var sourceStr = Encoding.UTF8.GetString(
-                        sourceBlob.Array,
-                        sourceBlob.Offset,
-                        sourceBlob.Count
-                    );
+                    var sourceStr = Encoding
+                        .UTF8
+                        .GetString(sourceBlob.Array, sourceBlob.Offset, sourceBlob.Count);
 
                     Assert.Equal(expectedEmbeddedMap[docPath], sourceStr);
                     Assert.True(expectedEmbeddedMap.Remove(docPath));
@@ -3595,19 +3628,19 @@ print Goodbye, World";
             Assert.Equal(OptimizationLevel.Debug, parsedArgs.CompilationOptions.OptimizationLevel);
 
             parsedArgs = DefaultParse(new[] { "/optimize:+", "a.cs" }, WorkingDirectory);
-            parsedArgs.Errors.Verify(
-                Diagnostic(ErrorCode.ERR_BadSwitch).WithArguments("/optimize:+")
-            );
+            parsedArgs
+                .Errors
+                .Verify(Diagnostic(ErrorCode.ERR_BadSwitch).WithArguments("/optimize:+"));
 
             parsedArgs = DefaultParse(new[] { "/optimize:", "a.cs" }, WorkingDirectory);
-            parsedArgs.Errors.Verify(
-                Diagnostic(ErrorCode.ERR_BadSwitch).WithArguments("/optimize:")
-            );
+            parsedArgs
+                .Errors
+                .Verify(Diagnostic(ErrorCode.ERR_BadSwitch).WithArguments("/optimize:"));
 
             parsedArgs = DefaultParse(new[] { "/optimize-:", "a.cs" }, WorkingDirectory);
-            parsedArgs.Errors.Verify(
-                Diagnostic(ErrorCode.ERR_BadSwitch).WithArguments("/optimize-:")
-            );
+            parsedArgs
+                .Errors
+                .Verify(Diagnostic(ErrorCode.ERR_BadSwitch).WithArguments("/optimize-:"));
 
             parsedArgs = DefaultParse(new[] { "/o-", "a.cs" }, WorkingDirectory);
             Assert.Equal(OptimizationLevel.Debug, parsedArgs.CompilationOptions.OptimizationLevel);
@@ -3739,7 +3772,8 @@ print Goodbye, World";
 
             Assert.Equal("bar.dll", parsedArgs.MetadataReferences[2].Reference);
             Assert.Equal(
-                MetadataReferenceProperties.Assembly
+                MetadataReferenceProperties
+                    .Assembly
                     .WithAliases(new[] { "b" })
                     .WithEmbedInteropTypes(true),
                 parsedArgs.MetadataReferences[2].Properties
@@ -3791,9 +3825,9 @@ print Goodbye, World";
             parsedArgs.Errors.Verify(Diagnostic(ErrorCode.ERR_NoFileSpec).WithArguments("/a:"));
 
             parsedArgs = DefaultParse(new string[] { "/a", "a.cs" }, WorkingDirectory);
-            parsedArgs.Errors.Verify(
-                Diagnostic(ErrorCode.ERR_SwitchNeedsString).WithArguments("<text>", "/a")
-            );
+            parsedArgs
+                .Errors
+                .Verify(Diagnostic(ErrorCode.ERR_SwitchNeedsString).WithArguments("<text>", "/a"));
         }
 
         [Fact]
@@ -3943,22 +3977,28 @@ class C
         public void RuleSetSwitchParseErrors()
         {
             var parsedArgs = DefaultParse(new string[] { @"/ruleset", "a.cs" }, WorkingDirectory);
-            parsedArgs.Errors.Verify(
-                Diagnostic(ErrorCode.ERR_SwitchNeedsString).WithArguments("<text>", "ruleset")
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    Diagnostic(ErrorCode.ERR_SwitchNeedsString).WithArguments("<text>", "ruleset")
+                );
             Assert.Null(parsedArgs.RuleSetPath);
 
             parsedArgs = DefaultParse(new string[] { @"/ruleset:", "a.cs" }, WorkingDirectory);
-            parsedArgs.Errors.Verify(
-                Diagnostic(ErrorCode.ERR_SwitchNeedsString).WithArguments("<text>", "ruleset")
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    Diagnostic(ErrorCode.ERR_SwitchNeedsString).WithArguments("<text>", "ruleset")
+                );
             Assert.Null(parsedArgs.RuleSetPath);
 
             parsedArgs = DefaultParse(new string[] { @"/ruleset:blah", "a.cs" }, WorkingDirectory);
-            parsedArgs.Errors.Verify(
-                Diagnostic(ErrorCode.ERR_CantReadRulesetFile)
-                    .WithArguments(Path.Combine(TempRoot.Root, "blah"), "File not found.")
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    Diagnostic(ErrorCode.ERR_CantReadRulesetFile)
+                        .WithArguments(Path.Combine(TempRoot.Root, "blah"), "File not found.")
+                );
             Assert.Equal(
                 expected: Path.Combine(TempRoot.Root, "blah"),
                 actual: parsedArgs.RuleSetPath
@@ -3968,13 +4008,15 @@ class C
                 new string[] { @"/ruleset:blah;blah.ruleset", "a.cs" },
                 WorkingDirectory
             );
-            parsedArgs.Errors.Verify(
-                Diagnostic(ErrorCode.ERR_CantReadRulesetFile)
-                    .WithArguments(
-                        Path.Combine(TempRoot.Root, "blah;blah.ruleset"),
-                        "File not found."
-                    )
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    Diagnostic(ErrorCode.ERR_CantReadRulesetFile)
+                        .WithArguments(
+                            Path.Combine(TempRoot.Root, "blah;blah.ruleset"),
+                            "File not found."
+                        )
+                );
             Assert.Equal(
                 expected: Path.Combine(TempRoot.Root, "blah;blah.ruleset"),
                 actual: parsedArgs.RuleSetPath
@@ -4643,17 +4685,21 @@ class C
             Assert.Equal(
                 expected: ReportDiagnostic.Suppress,
                 actual: arguments.CompilationOptions.SpecificDiagnosticOptions[
-                    MessageProvider.Instance.GetIdForErrorCode(
-                        (int)ErrorCode.WRN_MissingNonNullTypesContextForAnnotation
-                    )
+                    MessageProvider
+                        .Instance
+                        .GetIdForErrorCode(
+                            (int)ErrorCode.WRN_MissingNonNullTypesContextForAnnotation
+                        )
                 ]
             );
             Assert.Equal(
                 expected: ReportDiagnostic.Suppress,
                 actual: arguments.CompilationOptions.SpecificDiagnosticOptions[
-                    MessageProvider.Instance.GetIdForErrorCode(
-                        (int)ErrorCode.WRN_MissingNonNullTypesContextForAnnotationInGeneratedCode
-                    )
+                    MessageProvider
+                        .Instance
+                        .GetIdForErrorCode(
+                            (int)ErrorCode.WRN_MissingNonNullTypesContextForAnnotationInGeneratedCode
+                        )
                 ]
             );
         }
@@ -4692,17 +4738,21 @@ class C
             Assert.Equal(
                 expected: ReportDiagnostic.Suppress,
                 actual: arguments.CompilationOptions.SpecificDiagnosticOptions[
-                    MessageProvider.Instance.GetIdForErrorCode(
-                        (int)ErrorCode.WRN_MissingNonNullTypesContextForAnnotation
-                    )
+                    MessageProvider
+                        .Instance
+                        .GetIdForErrorCode(
+                            (int)ErrorCode.WRN_MissingNonNullTypesContextForAnnotation
+                        )
                 ]
             );
             Assert.Equal(
                 expected: ReportDiagnostic.Suppress,
                 actual: arguments.CompilationOptions.SpecificDiagnosticOptions[
-                    MessageProvider.Instance.GetIdForErrorCode(
-                        (int)ErrorCode.WRN_MissingNonNullTypesContextForAnnotationInGeneratedCode
-                    )
+                    MessageProvider
+                        .Instance
+                        .GetIdForErrorCode(
+                            (int)ErrorCode.WRN_MissingNonNullTypesContextForAnnotationInGeneratedCode
+                        )
                 ]
             );
         }
@@ -4745,17 +4795,21 @@ class C
             Assert.Equal(
                 expected: ReportDiagnostic.Suppress,
                 actual: arguments.CompilationOptions.SpecificDiagnosticOptions[
-                    MessageProvider.Instance.GetIdForErrorCode(
-                        (int)ErrorCode.WRN_MissingNonNullTypesContextForAnnotation
-                    )
+                    MessageProvider
+                        .Instance
+                        .GetIdForErrorCode(
+                            (int)ErrorCode.WRN_MissingNonNullTypesContextForAnnotation
+                        )
                 ]
             );
             Assert.Equal(
                 expected: ReportDiagnostic.Suppress,
                 actual: arguments.CompilationOptions.SpecificDiagnosticOptions[
-                    MessageProvider.Instance.GetIdForErrorCode(
-                        (int)ErrorCode.WRN_MissingNonNullTypesContextForAnnotationInGeneratedCode
-                    )
+                    MessageProvider
+                        .Instance
+                        .GetIdForErrorCode(
+                            (int)ErrorCode.WRN_MissingNonNullTypesContextForAnnotationInGeneratedCode
+                        )
                 ]
             );
         }
@@ -4794,17 +4848,21 @@ class C
             Assert.Equal(
                 expected: ReportDiagnostic.Error,
                 actual: arguments.CompilationOptions.SpecificDiagnosticOptions[
-                    MessageProvider.Instance.GetIdForErrorCode(
-                        (int)ErrorCode.WRN_MissingNonNullTypesContextForAnnotation
-                    )
+                    MessageProvider
+                        .Instance
+                        .GetIdForErrorCode(
+                            (int)ErrorCode.WRN_MissingNonNullTypesContextForAnnotation
+                        )
                 ]
             );
             Assert.Equal(
                 expected: ReportDiagnostic.Error,
                 actual: arguments.CompilationOptions.SpecificDiagnosticOptions[
-                    MessageProvider.Instance.GetIdForErrorCode(
-                        (int)ErrorCode.WRN_MissingNonNullTypesContextForAnnotationInGeneratedCode
-                    )
+                    MessageProvider
+                        .Instance
+                        .GetIdForErrorCode(
+                            (int)ErrorCode.WRN_MissingNonNullTypesContextForAnnotationInGeneratedCode
+                        )
                 ]
             );
         }
@@ -5017,31 +5075,39 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
             const string baseDirectory = @"C:\abc\def\baz";
 
             var parsedArgs = DefaultParse(new[] { @"/out:""""", "a.cs" }, baseDirectory);
-            parsedArgs.Errors.Verify(
-                // error CS2021: File name '' contains invalid characters, has a drive specification without an absolute path, or is too long
-                Diagnostic(ErrorCode.FTL_InvalidInputFileName).WithArguments("")
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    // error CS2021: File name '' contains invalid characters, has a drive specification without an absolute path, or is too long
+                    Diagnostic(ErrorCode.FTL_InvalidInputFileName).WithArguments("")
+                );
 
             parsedArgs = DefaultParse(new[] { @"/out:", "a.cs" }, baseDirectory);
-            parsedArgs.Errors.Verify(
-                // error CS2005: Missing file specification for '/out:' option
-                Diagnostic(ErrorCode.ERR_NoFileSpec).WithArguments("/out:")
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    // error CS2005: Missing file specification for '/out:' option
+                    Diagnostic(ErrorCode.ERR_NoFileSpec).WithArguments("/out:")
+                );
 
             parsedArgs = DefaultParse(new[] { @"/refout:", "a.cs" }, baseDirectory);
-            parsedArgs.Errors.Verify(
-                // error CS2005: Missing file specification for '/refout:' option
-                Diagnostic(ErrorCode.ERR_NoFileSpec).WithArguments("/refout:")
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    // error CS2005: Missing file specification for '/refout:' option
+                    Diagnostic(ErrorCode.ERR_NoFileSpec).WithArguments("/refout:")
+                );
 
             parsedArgs = DefaultParse(
                 new[] { @"/refout:ref.dll", "/refonly", "a.cs" },
                 baseDirectory
             );
-            parsedArgs.Errors.Verify(
-                // error CS8301: Do not use refout when using refonly.
-                Diagnostic(ErrorCode.ERR_NoRefOutWhenRefOnly).WithLocation(1, 1)
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    // error CS8301: Do not use refout when using refonly.
+                    Diagnostic(ErrorCode.ERR_NoRefOutWhenRefOnly).WithLocation(1, 1)
+                );
 
             parsedArgs = DefaultParse(
                 new[] { @"/refout:ref.dll", "/link:b", "a.cs" },
@@ -5053,37 +5119,47 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
             parsedArgs.Errors.Verify();
 
             parsedArgs = DefaultParse(new[] { "/refonly:incorrect", "a.cs" }, baseDirectory);
-            parsedArgs.Errors.Verify(
-                // error CS2007: Unrecognized option: '/refonly:incorrect'
-                Diagnostic(ErrorCode.ERR_BadSwitch)
-                    .WithArguments("/refonly:incorrect")
-                    .WithLocation(1, 1)
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    // error CS2007: Unrecognized option: '/refonly:incorrect'
+                    Diagnostic(ErrorCode.ERR_BadSwitch)
+                        .WithArguments("/refonly:incorrect")
+                        .WithLocation(1, 1)
+                );
 
             parsedArgs = DefaultParse(
                 new[] { @"/refout:ref.dll", "/target:module", "a.cs" },
                 baseDirectory
             );
-            parsedArgs.Errors.Verify(
-                // error CS8302: Cannot compile net modules when using /refout or /refonly.
-                Diagnostic(ErrorCode.ERR_NoNetModuleOutputWhenRefOutOrRefOnly).WithLocation(1, 1)
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    // error CS8302: Cannot compile net modules when using /refout or /refonly.
+                    Diagnostic(ErrorCode.ERR_NoNetModuleOutputWhenRefOutOrRefOnly)
+                        .WithLocation(1, 1)
+                );
 
             parsedArgs = DefaultParse(
                 new[] { @"/refonly", "/target:module", "a.cs" },
                 baseDirectory
             );
-            parsedArgs.Errors.Verify(
-                // error CS8302: Cannot compile net modules when using /refout or /refonly.
-                Diagnostic(ErrorCode.ERR_NoNetModuleOutputWhenRefOutOrRefOnly).WithLocation(1, 1)
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    // error CS8302: Cannot compile net modules when using /refout or /refonly.
+                    Diagnostic(ErrorCode.ERR_NoNetModuleOutputWhenRefOutOrRefOnly)
+                        .WithLocation(1, 1)
+                );
 
             // Dev11 reports CS2007: Unrecognized option: '/out'
             parsedArgs = DefaultParse(new[] { @"/out", "a.cs" }, baseDirectory);
-            parsedArgs.Errors.Verify(
-                // error CS2005: Missing file specification for '/out' option
-                Diagnostic(ErrorCode.ERR_NoFileSpec).WithArguments("/out")
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    // error CS2005: Missing file specification for '/out' option
+                    Diagnostic(ErrorCode.ERR_NoFileSpec).WithArguments("/out")
+                );
 
             parsedArgs = DefaultParse(new[] { @"/out+", "a.cs" }, baseDirectory);
             parsedArgs.Errors.Verify(Diagnostic(ErrorCode.ERR_BadSwitch).WithArguments("/out+"));
@@ -5176,11 +5252,13 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
             // drive-relative path:
             char currentDrive = Directory.GetCurrentDirectory()[0];
             parsedArgs = DefaultParse(new[] { currentDrive + @":a.cs", "b.cs" }, baseDirectory);
-            parsedArgs.Errors.Verify(
-                // error CS2021: File name 'D:a.cs' is contains invalid characters, has a drive specification without an absolute path, or is too long
-                Diagnostic(ErrorCode.FTL_InvalidInputFileName)
-                    .WithArguments(currentDrive + ":a.cs")
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    // error CS2021: File name 'D:a.cs' is contains invalid characters, has a drive specification without an absolute path, or is too long
+                    Diagnostic(ErrorCode.FTL_InvalidInputFileName)
+                        .WithArguments(currentDrive + ":a.cs")
+                );
 
             Assert.Null(parsedArgs.CompilationName);
             Assert.Null(parsedArgs.OutputFileName);
@@ -5189,10 +5267,12 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
 
             // UNC
             parsedArgs = DefaultParse(new[] { @"/out:\\b", "a.cs" }, baseDirectory);
-            parsedArgs.Errors.Verify(
-                // error CS2021: File name '.x' is empty, contains invalid characters, has a drive specification without an absolute path, or is too long
-                Diagnostic(ErrorCode.FTL_InvalidInputFileName).WithArguments(@"\\b")
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    // error CS2021: File name '.x' is empty, contains invalid characters, has a drive specification without an absolute path, or is too long
+                    Diagnostic(ErrorCode.FTL_InvalidInputFileName).WithArguments(@"\\b")
+                );
 
             Assert.Null(parsedArgs.OutputFileName);
             Assert.Null(parsedArgs.CompilationName);
@@ -5211,10 +5291,12 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
 
             // invalid name:
             parsedArgs = DefaultParse(new[] { "/out:a.b\0b", "a.cs" }, baseDirectory);
-            parsedArgs.Errors.Verify(
-                // error CS2021: File name '.x' is empty, contains invalid characters, has a drive specification without an absolute path, or is too long
-                Diagnostic(ErrorCode.FTL_InvalidInputFileName).WithArguments("a.b\0b")
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    // error CS2021: File name '.x' is empty, contains invalid characters, has a drive specification without an absolute path, or is too long
+                    Diagnostic(ErrorCode.FTL_InvalidInputFileName).WithArguments("a.b\0b")
+                );
 
             Assert.Null(parsedArgs.OutputFileName);
             Assert.Null(parsedArgs.CompilationName);
@@ -5228,40 +5310,48 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
 
             // Dev11 reports CS0016: Could not write to output file 'd:\Temp\q\a<>.z'
             parsedArgs = DefaultParse(new[] { @"/out:""a<>.dll""", "a.vb" }, baseDirectory);
-            parsedArgs.Errors.Verify(
-                // error CS2021: File name 'a<>.dll' is empty, contains invalid characters, has a drive specification without an absolute path, or is too long
-                Diagnostic(ErrorCode.FTL_InvalidInputFileName).WithArguments("a<>.dll")
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    // error CS2021: File name 'a<>.dll' is empty, contains invalid characters, has a drive specification without an absolute path, or is too long
+                    Diagnostic(ErrorCode.FTL_InvalidInputFileName).WithArguments("a<>.dll")
+                );
 
             Assert.Null(parsedArgs.OutputFileName);
             Assert.Null(parsedArgs.CompilationName);
             Assert.Null(parsedArgs.CompilationOptions.ModuleName);
 
             parsedArgs = DefaultParse(new[] { @"/out:.exe", "a.cs" }, baseDirectory);
-            parsedArgs.Errors.Verify(
-                // error CS2021: File name '.exe' is empty, contains invalid characters, has a drive specification without an absolute path, or is too long
-                Diagnostic(ErrorCode.FTL_InvalidInputFileName).WithArguments(".exe")
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    // error CS2021: File name '.exe' is empty, contains invalid characters, has a drive specification without an absolute path, or is too long
+                    Diagnostic(ErrorCode.FTL_InvalidInputFileName).WithArguments(".exe")
+                );
 
             Assert.Null(parsedArgs.OutputFileName);
             Assert.Null(parsedArgs.CompilationName);
             Assert.Null(parsedArgs.CompilationOptions.ModuleName);
 
             parsedArgs = DefaultParse(new[] { @"/t:exe", @"/out:.exe", "a.cs" }, baseDirectory);
-            parsedArgs.Errors.Verify(
-                // error CS2021: File name '.exe' is empty, contains invalid characters, has a drive specification without an absolute path, or is too long
-                Diagnostic(ErrorCode.FTL_InvalidInputFileName).WithArguments(".exe")
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    // error CS2021: File name '.exe' is empty, contains invalid characters, has a drive specification without an absolute path, or is too long
+                    Diagnostic(ErrorCode.FTL_InvalidInputFileName).WithArguments(".exe")
+                );
 
             Assert.Null(parsedArgs.OutputFileName);
             Assert.Null(parsedArgs.CompilationName);
             Assert.Null(parsedArgs.CompilationOptions.ModuleName);
 
             parsedArgs = DefaultParse(new[] { @"/t:library", @"/out:.dll", "a.cs" }, baseDirectory);
-            parsedArgs.Errors.Verify(
-                // error CS2021: File name '.dll' is empty, contains invalid characters, has a drive specification without an absolute path, or is too long
-                Diagnostic(ErrorCode.FTL_InvalidInputFileName).WithArguments(".dll")
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    // error CS2021: File name '.dll' is empty, contains invalid characters, has a drive specification without an absolute path, or is too long
+                    Diagnostic(ErrorCode.FTL_InvalidInputFileName).WithArguments(".dll")
+                );
 
             Assert.Null(parsedArgs.OutputFileName);
             Assert.Null(parsedArgs.CompilationName);
@@ -5271,10 +5361,12 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
                 new[] { @"/t:module", @"/out:.netmodule", "a.cs" },
                 baseDirectory
             );
-            parsedArgs.Errors.Verify(
-                // error CS2021: File name '.netmodule' is empty, contains invalid characters, has a drive specification without an absolute path, or is too long
-                Diagnostic(ErrorCode.FTL_InvalidInputFileName).WithArguments(".netmodule")
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    // error CS2021: File name '.netmodule' is empty, contains invalid characters, has a drive specification without an absolute path, or is too long
+                    Diagnostic(ErrorCode.FTL_InvalidInputFileName).WithArguments(".netmodule")
+                );
 
             Assert.Null(parsedArgs.OutputFileName);
             Assert.Null(parsedArgs.CompilationName);
@@ -5295,10 +5387,12 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
             Assert.Null(parsedArgs.CompilationOptions.ModuleName);
 
             parsedArgs = DefaultParse(new[] { @"/t:library", ".cs" }, baseDirectory);
-            parsedArgs.Errors.Verify(
-                // error CS2021: File name '.dll' is empty, contains invalid characters, has a drive specification without an absolute path, or is too long
-                Diagnostic(ErrorCode.FTL_InvalidInputFileName).WithArguments(".dll")
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    // error CS2021: File name '.dll' is empty, contains invalid characters, has a drive specification without an absolute path, or is too long
+                    Diagnostic(ErrorCode.FTL_InvalidInputFileName).WithArguments(".dll")
+                );
 
             Assert.Null(parsedArgs.OutputFileName);
             Assert.Null(parsedArgs.CompilationName);
@@ -5318,20 +5412,24 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
         public void ParseOut2()
         {
             var parsedArgs = DefaultParse(new[] { "/out:.x", "a.cs" }, WorkingDirectory);
-            parsedArgs.Errors.Verify(
-                // error CS2021: File name '.x' is empty, contains invalid characters, has a drive specification without an absolute path, or is too long
-                Diagnostic(ErrorCode.FTL_InvalidInputFileName).WithArguments(".x")
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    // error CS2021: File name '.x' is empty, contains invalid characters, has a drive specification without an absolute path, or is too long
+                    Diagnostic(ErrorCode.FTL_InvalidInputFileName).WithArguments(".x")
+                );
 
             Assert.Null(parsedArgs.OutputFileName);
             Assert.Null(parsedArgs.CompilationName);
             Assert.Null(parsedArgs.CompilationOptions.ModuleName);
 
             parsedArgs = DefaultParse(new[] { "/out:.x", "a.cs" }, WorkingDirectory);
-            parsedArgs.Errors.Verify(
-                // error CS2021: File name '.x' is empty, contains invalid characters, has a drive specification without an absolute path, or is too long
-                Diagnostic(ErrorCode.FTL_InvalidInputFileName).WithArguments(".x")
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    // error CS2021: File name '.x' is empty, contains invalid characters, has a drive specification without an absolute path, or is too long
+                    Diagnostic(ErrorCode.FTL_InvalidInputFileName).WithArguments(".x")
+                );
 
             Assert.Null(parsedArgs.OutputFileName);
             Assert.Null(parsedArgs.CompilationName);
@@ -5346,92 +5444,118 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
                 WorkingDirectory
             );
             Assert.True(
-                parsedArgs.EmitOptions.InstrumentationKinds.SequenceEqual(
-                    ImmutableArray<InstrumentationKind>.Empty
-                )
+                parsedArgs
+                    .EmitOptions
+                    .InstrumentationKinds
+                    .SequenceEqual(ImmutableArray<InstrumentationKind>.Empty)
             );
 
             parsedArgs = DefaultParse(new[] { @"/instrument", "a.cs" }, WorkingDirectory);
-            parsedArgs.Errors.Verify(
-                // error CS2006: Command-line syntax error: Missing '<text>' for 'instrument' option
-                Diagnostic(ErrorCode.ERR_SwitchNeedsString).WithArguments("<text>", "instrument")
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    // error CS2006: Command-line syntax error: Missing '<text>' for 'instrument' option
+                    Diagnostic(ErrorCode.ERR_SwitchNeedsString)
+                        .WithArguments("<text>", "instrument")
+                );
             Assert.True(
-                parsedArgs.EmitOptions.InstrumentationKinds.SequenceEqual(
-                    ImmutableArray<InstrumentationKind>.Empty
-                )
+                parsedArgs
+                    .EmitOptions
+                    .InstrumentationKinds
+                    .SequenceEqual(ImmutableArray<InstrumentationKind>.Empty)
             );
 
             parsedArgs = DefaultParse(new[] { @"/instrument:""""", "a.cs" }, WorkingDirectory);
-            parsedArgs.Errors.Verify(
-                // error CS2006: Command-line syntax error: Missing '<text>' for 'instrument' option
-                Diagnostic(ErrorCode.ERR_SwitchNeedsString).WithArguments("<text>", "instrument")
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    // error CS2006: Command-line syntax error: Missing '<text>' for 'instrument' option
+                    Diagnostic(ErrorCode.ERR_SwitchNeedsString)
+                        .WithArguments("<text>", "instrument")
+                );
             Assert.True(
-                parsedArgs.EmitOptions.InstrumentationKinds.SequenceEqual(
-                    ImmutableArray<InstrumentationKind>.Empty
-                )
+                parsedArgs
+                    .EmitOptions
+                    .InstrumentationKinds
+                    .SequenceEqual(ImmutableArray<InstrumentationKind>.Empty)
             );
 
             parsedArgs = DefaultParse(new[] { @"/instrument:", "a.cs" }, WorkingDirectory);
-            parsedArgs.Errors.Verify(
-                // error CS2006: Command-line syntax error: Missing '<text>' for 'instrument' option
-                Diagnostic(ErrorCode.ERR_SwitchNeedsString).WithArguments("<text>", "instrument")
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    // error CS2006: Command-line syntax error: Missing '<text>' for 'instrument' option
+                    Diagnostic(ErrorCode.ERR_SwitchNeedsString)
+                        .WithArguments("<text>", "instrument")
+                );
             Assert.True(
-                parsedArgs.EmitOptions.InstrumentationKinds.SequenceEqual(
-                    ImmutableArray<InstrumentationKind>.Empty
-                )
+                parsedArgs
+                    .EmitOptions
+                    .InstrumentationKinds
+                    .SequenceEqual(ImmutableArray<InstrumentationKind>.Empty)
             );
 
             parsedArgs = DefaultParse(
                 new[] { "/instrument:", "Test.Flag.Name", "a.cs" },
                 WorkingDirectory
             );
-            parsedArgs.Errors.Verify(
-                // error CS2006: Command-line syntax error: Missing '<text>' for 'instrument' option
-                Diagnostic(ErrorCode.ERR_SwitchNeedsString).WithArguments("<text>", "instrument")
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    // error CS2006: Command-line syntax error: Missing '<text>' for 'instrument' option
+                    Diagnostic(ErrorCode.ERR_SwitchNeedsString)
+                        .WithArguments("<text>", "instrument")
+                );
             Assert.True(
-                parsedArgs.EmitOptions.InstrumentationKinds.SequenceEqual(
-                    ImmutableArray<InstrumentationKind>.Empty
-                )
+                parsedArgs
+                    .EmitOptions
+                    .InstrumentationKinds
+                    .SequenceEqual(ImmutableArray<InstrumentationKind>.Empty)
             );
 
             parsedArgs = DefaultParse(
                 new[] { "/instrument:InvalidOption", "a.cs" },
                 WorkingDirectory
             );
-            parsedArgs.Errors.Verify(
-                Diagnostic(ErrorCode.ERR_InvalidInstrumentationKind).WithArguments("InvalidOption")
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    Diagnostic(ErrorCode.ERR_InvalidInstrumentationKind)
+                        .WithArguments("InvalidOption")
+                );
             Assert.True(
-                parsedArgs.EmitOptions.InstrumentationKinds.SequenceEqual(
-                    ImmutableArray<InstrumentationKind>.Empty
-                )
+                parsedArgs
+                    .EmitOptions
+                    .InstrumentationKinds
+                    .SequenceEqual(ImmutableArray<InstrumentationKind>.Empty)
             );
 
             parsedArgs = DefaultParse(new[] { "/instrument:None", "a.cs" }, WorkingDirectory);
-            parsedArgs.Errors.Verify(
-                Diagnostic(ErrorCode.ERR_InvalidInstrumentationKind).WithArguments("None")
-            );
+            parsedArgs
+                .Errors
+                .Verify(Diagnostic(ErrorCode.ERR_InvalidInstrumentationKind).WithArguments("None"));
             Assert.True(
-                parsedArgs.EmitOptions.InstrumentationKinds.SequenceEqual(
-                    ImmutableArray<InstrumentationKind>.Empty
-                )
+                parsedArgs
+                    .EmitOptions
+                    .InstrumentationKinds
+                    .SequenceEqual(ImmutableArray<InstrumentationKind>.Empty)
             );
 
             parsedArgs = DefaultParse(
                 new[] { "/instrument:TestCoverage,InvalidOption", "a.cs" },
                 WorkingDirectory
             );
-            parsedArgs.Errors.Verify(
-                Diagnostic(ErrorCode.ERR_InvalidInstrumentationKind).WithArguments("InvalidOption")
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    Diagnostic(ErrorCode.ERR_InvalidInstrumentationKind)
+                        .WithArguments("InvalidOption")
+                );
             Assert.True(
-                parsedArgs.EmitOptions.InstrumentationKinds.SequenceEqual(
-                    ImmutableArray.Create(InstrumentationKind.TestCoverage)
-                )
+                parsedArgs
+                    .EmitOptions
+                    .InstrumentationKinds
+                    .SequenceEqual(ImmutableArray.Create(InstrumentationKind.TestCoverage))
             );
 
             parsedArgs = DefaultParse(
@@ -5440,9 +5564,10 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
             );
             parsedArgs.Errors.Verify();
             Assert.True(
-                parsedArgs.EmitOptions.InstrumentationKinds.SequenceEqual(
-                    ImmutableArray.Create(InstrumentationKind.TestCoverage)
-                )
+                parsedArgs
+                    .EmitOptions
+                    .InstrumentationKinds
+                    .SequenceEqual(ImmutableArray.Create(InstrumentationKind.TestCoverage))
             );
 
             parsedArgs = DefaultParse(
@@ -5451,9 +5576,10 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
             );
             parsedArgs.Errors.Verify();
             Assert.True(
-                parsedArgs.EmitOptions.InstrumentationKinds.SequenceEqual(
-                    ImmutableArray.Create(InstrumentationKind.TestCoverage)
-                )
+                parsedArgs
+                    .EmitOptions
+                    .InstrumentationKinds
+                    .SequenceEqual(ImmutableArray.Create(InstrumentationKind.TestCoverage))
             );
 
             parsedArgs = DefaultParse(
@@ -5462,9 +5588,10 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
             );
             parsedArgs.Errors.Verify();
             Assert.True(
-                parsedArgs.EmitOptions.InstrumentationKinds.SequenceEqual(
-                    ImmutableArray.Create(InstrumentationKind.TestCoverage)
-                )
+                parsedArgs
+                    .EmitOptions
+                    .InstrumentationKinds
+                    .SequenceEqual(ImmutableArray.Create(InstrumentationKind.TestCoverage))
             );
 
             parsedArgs = DefaultParse(
@@ -5473,9 +5600,10 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
             );
             parsedArgs.Errors.Verify();
             Assert.True(
-                parsedArgs.EmitOptions.InstrumentationKinds.SequenceEqual(
-                    ImmutableArray.Create(InstrumentationKind.TestCoverage)
-                )
+                parsedArgs
+                    .EmitOptions
+                    .InstrumentationKinds
+                    .SequenceEqual(ImmutableArray.Create(InstrumentationKind.TestCoverage))
             );
 
             parsedArgs = DefaultParse(
@@ -5484,9 +5612,10 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
             );
             parsedArgs.Errors.Verify();
             Assert.True(
-                parsedArgs.EmitOptions.InstrumentationKinds.SequenceEqual(
-                    ImmutableArray.Create(InstrumentationKind.TestCoverage)
-                )
+                parsedArgs
+                    .EmitOptions
+                    .InstrumentationKinds
+                    .SequenceEqual(ImmutableArray.Create(InstrumentationKind.TestCoverage))
             );
         }
 
@@ -5499,25 +5628,31 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
             const string baseDirectory = @"C:\abc\def\baz";
 
             var parsedArgs = DefaultParse(new[] { @"/doc:""""", "a.cs" }, baseDirectory);
-            parsedArgs.Errors.Verify(
-                // error CS2006: Command-line syntax error: Missing '<text>' for '/doc:' option
-                Diagnostic(ErrorCode.ERR_SwitchNeedsString).WithArguments("<text>", "/doc:")
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    // error CS2006: Command-line syntax error: Missing '<text>' for '/doc:' option
+                    Diagnostic(ErrorCode.ERR_SwitchNeedsString).WithArguments("<text>", "/doc:")
+                );
             Assert.Null(parsedArgs.DocumentationPath);
 
             parsedArgs = DefaultParse(new[] { @"/doc:", "a.cs" }, baseDirectory);
-            parsedArgs.Errors.Verify(
-                // error CS2006: Command-line syntax error: Missing '<text>' for '/doc:' option
-                Diagnostic(ErrorCode.ERR_SwitchNeedsString).WithArguments("<text>", "/doc:")
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    // error CS2006: Command-line syntax error: Missing '<text>' for '/doc:' option
+                    Diagnostic(ErrorCode.ERR_SwitchNeedsString).WithArguments("<text>", "/doc:")
+                );
             Assert.Null(parsedArgs.DocumentationPath);
 
             // NOTE: no colon in error message '/doc'
             parsedArgs = DefaultParse(new[] { @"/doc", "a.cs" }, baseDirectory);
-            parsedArgs.Errors.Verify(
-                // error CS2006: Command-line syntax error: Missing '<text>' for '/doc' option
-                Diagnostic(ErrorCode.ERR_SwitchNeedsString).WithArguments("<text>", "/doc")
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    // error CS2006: Command-line syntax error: Missing '<text>' for '/doc' option
+                    Diagnostic(ErrorCode.ERR_SwitchNeedsString).WithArguments("<text>", "/doc")
+                );
             Assert.Null(parsedArgs.DocumentationPath);
 
             parsedArgs = DefaultParse(new[] { @"/doc+", "a.cs" }, baseDirectory);
@@ -5560,20 +5695,22 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
                 new[] { "/doc:" + currentDrive + @":a.xml", "a.cs" },
                 baseDirectory
             );
-            parsedArgs.Errors.Verify(
-                // error CS2021: File name 'D:a.xml' is contains invalid characters, has a drive specification without an absolute path, or is too long
-                Diagnostic(ErrorCode.FTL_InvalidInputFileName)
-                    .WithArguments(currentDrive + ":a.xml")
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    // error CS2021: File name 'D:a.xml' is contains invalid characters, has a drive specification without an absolute path, or is too long
+                    Diagnostic(ErrorCode.FTL_InvalidInputFileName)
+                        .WithArguments(currentDrive + ":a.xml")
+                );
 
             Assert.Null(parsedArgs.DocumentationPath);
             Assert.Equal(DocumentationMode.Diagnose, parsedArgs.ParseOptions.DocumentationMode); //Even though the format was incorrect
 
             // UNC
             parsedArgs = DefaultParse(new[] { @"/doc:\\b", "a.cs" }, baseDirectory);
-            parsedArgs.Errors.Verify(
-                Diagnostic(ErrorCode.FTL_InvalidInputFileName).WithArguments(@"\\b")
-            );
+            parsedArgs
+                .Errors
+                .Verify(Diagnostic(ErrorCode.FTL_InvalidInputFileName).WithArguments(@"\\b"));
 
             Assert.Null(parsedArgs.DocumentationPath);
             Assert.Equal(DocumentationMode.Diagnose, parsedArgs.ParseOptions.DocumentationMode); //Even though the format was incorrect
@@ -5589,9 +5726,9 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
 
             // invalid name:
             parsedArgs = DefaultParse(new[] { "/doc:a.b\0b", "a.cs" }, baseDirectory);
-            parsedArgs.Errors.Verify(
-                Diagnostic(ErrorCode.FTL_InvalidInputFileName).WithArguments("a.b\0b")
-            );
+            parsedArgs
+                .Errors
+                .Verify(Diagnostic(ErrorCode.FTL_InvalidInputFileName).WithArguments("a.b\0b"));
 
             Assert.Null(parsedArgs.DocumentationPath);
             Assert.Equal(DocumentationMode.Diagnose, parsedArgs.ParseOptions.DocumentationMode); //Even though the format was incorrect
@@ -5605,10 +5742,12 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
             // Assert.Equal(DocumentationMode.Diagnose, parsedArgs.ParseOptions.DocumentationMode); //Even though the format was incorrect
 
             parsedArgs = DefaultParse(new[] { @"/doc:""a<>.xml""", "a.vb" }, baseDirectory);
-            parsedArgs.Errors.Verify(
-                // error CS2021: File name 'a<>.xml' is empty, contains invalid characters, has a drive specification without an absolute path, or is too long
-                Diagnostic(ErrorCode.FTL_InvalidInputFileName).WithArguments("a<>.xml")
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    // error CS2021: File name 'a<>.xml' is empty, contains invalid characters, has a drive specification without an absolute path, or is too long
+                    Diagnostic(ErrorCode.FTL_InvalidInputFileName).WithArguments("a<>.xml")
+                );
 
             Assert.Null(parsedArgs.DocumentationPath);
             Assert.Equal(DocumentationMode.Diagnose, parsedArgs.ParseOptions.DocumentationMode); //Even though the format was incorrect
@@ -5623,29 +5762,35 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
             const string baseDirectory = @"C:\abc\def\baz";
 
             var parsedArgs = DefaultParse(new[] { @"/errorlog:""""", "a.cs" }, baseDirectory);
-            parsedArgs.Errors.Verify(
-                // error CS2006: Command-line syntax error: Missing '<(error log option format>' for '/errorlog:' option
-                Diagnostic(ErrorCode.ERR_SwitchNeedsString)
-                    .WithArguments(CSharpCommandLineParser.ErrorLogOptionFormat, "/errorlog:")
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    // error CS2006: Command-line syntax error: Missing '<(error log option format>' for '/errorlog:' option
+                    Diagnostic(ErrorCode.ERR_SwitchNeedsString)
+                        .WithArguments(CSharpCommandLineParser.ErrorLogOptionFormat, "/errorlog:")
+                );
             Assert.Null(parsedArgs.ErrorLogOptions);
             Assert.False(parsedArgs.CompilationOptions.ReportSuppressedDiagnostics);
 
             parsedArgs = DefaultParse(new[] { @"/errorlog:", "a.cs" }, baseDirectory);
-            parsedArgs.Errors.Verify(
-                // error CS2006: Command-line syntax error: Missing '<(error log option format>' for '/errorlog:' option
-                Diagnostic(ErrorCode.ERR_SwitchNeedsString)
-                    .WithArguments(CSharpCommandLineParser.ErrorLogOptionFormat, "/errorlog:")
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    // error CS2006: Command-line syntax error: Missing '<(error log option format>' for '/errorlog:' option
+                    Diagnostic(ErrorCode.ERR_SwitchNeedsString)
+                        .WithArguments(CSharpCommandLineParser.ErrorLogOptionFormat, "/errorlog:")
+                );
             Assert.Null(parsedArgs.ErrorLogOptions);
             Assert.False(parsedArgs.CompilationOptions.ReportSuppressedDiagnostics);
 
             parsedArgs = DefaultParse(new[] { @"/errorlog", "a.cs" }, baseDirectory);
-            parsedArgs.Errors.Verify(
-                // error CS2006: Command-line syntax error: Missing '<(error log option format>' for '/errorlog' option
-                Diagnostic(ErrorCode.ERR_SwitchNeedsString)
-                    .WithArguments(CSharpCommandLineParser.ErrorLogOptionFormat, "/errorlog")
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    // error CS2006: Command-line syntax error: Missing '<(error log option format>' for '/errorlog' option
+                    Diagnostic(ErrorCode.ERR_SwitchNeedsString)
+                        .WithArguments(CSharpCommandLineParser.ErrorLogOptionFormat, "/errorlog")
+                );
             Assert.Null(parsedArgs.ErrorLogOptions);
             Assert.False(parsedArgs.CompilationOptions.ReportSuppressedDiagnostics);
 
@@ -5663,11 +5808,13 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
                 new[] { @"/errorlog:C:\""My Folder""\MyBinary.xml", "a.cs" },
                 baseDirectory
             );
-            parsedArgs.Errors.Verify(
-                Diagnostic(ErrorCode.FTL_InvalidInputFileName)
-                    .WithArguments(@"C:""My Folder\MyBinary.xml")
-                    .WithLocation(1, 1)
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    Diagnostic(ErrorCode.FTL_InvalidInputFileName)
+                        .WithArguments(@"C:""My Folder\MyBinary.xml")
+                        .WithLocation(1, 1)
+                );
 
             // Should handle quotes
             parsedArgs = DefaultParse(
@@ -5702,20 +5849,22 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
                 new[] { "/errorlog:" + currentDrive + @":a.xml", "a.cs" },
                 baseDirectory
             );
-            parsedArgs.Errors.Verify(
-                // error CS2021: File name 'D:a.xml' is contains invalid characters, has a drive specification without an absolute path, or is too long
-                Diagnostic(ErrorCode.FTL_InvalidInputFileName)
-                    .WithArguments(currentDrive + ":a.xml")
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    // error CS2021: File name 'D:a.xml' is contains invalid characters, has a drive specification without an absolute path, or is too long
+                    Diagnostic(ErrorCode.FTL_InvalidInputFileName)
+                        .WithArguments(currentDrive + ":a.xml")
+                );
 
             Assert.Null(parsedArgs.ErrorLogOptions);
             Assert.False(parsedArgs.CompilationOptions.ReportSuppressedDiagnostics);
 
             // UNC
             parsedArgs = DefaultParse(new[] { @"/errorlog:\\b", "a.cs" }, baseDirectory);
-            parsedArgs.Errors.Verify(
-                Diagnostic(ErrorCode.FTL_InvalidInputFileName).WithArguments(@"\\b")
-            );
+            parsedArgs
+                .Errors
+                .Verify(Diagnostic(ErrorCode.FTL_InvalidInputFileName).WithArguments(@"\\b"));
 
             Assert.Null(parsedArgs.ErrorLogOptions);
             Assert.False(parsedArgs.CompilationOptions.ReportSuppressedDiagnostics);
@@ -5730,18 +5879,20 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
 
             // invalid name:
             parsedArgs = DefaultParse(new[] { "/errorlog:a.b\0b", "a.cs" }, baseDirectory);
-            parsedArgs.Errors.Verify(
-                Diagnostic(ErrorCode.FTL_InvalidInputFileName).WithArguments("a.b\0b")
-            );
+            parsedArgs
+                .Errors
+                .Verify(Diagnostic(ErrorCode.FTL_InvalidInputFileName).WithArguments("a.b\0b"));
 
             Assert.Null(parsedArgs.ErrorLogOptions);
             Assert.False(parsedArgs.CompilationOptions.ReportSuppressedDiagnostics);
 
             parsedArgs = DefaultParse(new[] { @"/errorlog:""a<>.xml""", "a.vb" }, baseDirectory);
-            parsedArgs.Errors.Verify(
-                // error CS2021: File name 'a<>.xml' is empty, contains invalid characters, has a drive specification without an absolute path, or is too long
-                Diagnostic(ErrorCode.FTL_InvalidInputFileName).WithArguments("a<>.xml")
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    // error CS2021: File name 'a<>.xml' is empty, contains invalid characters, has a drive specification without an absolute path, or is too long
+                    Diagnostic(ErrorCode.FTL_InvalidInputFileName).WithArguments("a<>.xml")
+                );
 
             Assert.Null(parsedArgs.ErrorLogOptions);
             Assert.False(parsedArgs.CompilationOptions.ReportSuppressedDiagnostics);
@@ -5770,15 +5921,17 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
                     new[] { $"/errorlog:{invalidSarifVersion}", "a.cs" },
                     baseDirectory
                 );
-                parsedArgs.Errors.Verify(
-                    // error CS2046: Command-line syntax error: 'C:\MyFolder\MyBinary.xml,version=42' is not a valid value for the '/errorlog:' option. The value must be of the form '<file>[,version={1|1.0|2|2.1}]'.
-                    Diagnostic(ErrorCode.ERR_BadSwitchValue)
-                        .WithArguments(
-                            invalidSarifVersion,
-                            "/errorlog:",
-                            CSharpCommandLineParser.ErrorLogOptionFormat
-                        )
-                );
+                parsedArgs
+                    .Errors
+                    .Verify(
+                        // error CS2046: Command-line syntax error: 'C:\MyFolder\MyBinary.xml,version=42' is not a valid value for the '/errorlog:' option. The value must be of the form '<file>[,version={1|1.0|2|2.1}]'.
+                        Diagnostic(ErrorCode.ERR_BadSwitchValue)
+                            .WithArguments(
+                                invalidSarifVersion,
+                                "/errorlog:",
+                                CSharpCommandLineParser.ErrorLogOptionFormat
+                            )
+                    );
                 Assert.Null(parsedArgs.ErrorLogOptions);
                 Assert.False(parsedArgs.CompilationOptions.ReportSuppressedDiagnostics);
             }
@@ -5789,15 +5942,17 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
                 new[] { $"/errorlog:{InvalidErrorLogQualifier}", "a.cs" },
                 baseDirectory
             );
-            parsedArgs.Errors.Verify(
-                // error CS2046: Command-line syntax error: 'C:\MyFolder\MyBinary.xml,invalid=42' is not a valid value for the '/errorlog:' option. The value must be of the form '<file>[,version={1|1.0|2|2.1}]'.
-                Diagnostic(ErrorCode.ERR_BadSwitchValue)
-                    .WithArguments(
-                        InvalidErrorLogQualifier,
-                        "/errorlog:",
-                        CSharpCommandLineParser.ErrorLogOptionFormat
-                    )
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    // error CS2046: Command-line syntax error: 'C:\MyFolder\MyBinary.xml,invalid=42' is not a valid value for the '/errorlog:' option. The value must be of the form '<file>[,version={1|1.0|2|2.1}]'.
+                    Diagnostic(ErrorCode.ERR_BadSwitchValue)
+                        .WithArguments(
+                            InvalidErrorLogQualifier,
+                            "/errorlog:",
+                            CSharpCommandLineParser.ErrorLogOptionFormat
+                        )
+                );
             Assert.Null(parsedArgs.ErrorLogOptions);
             Assert.False(parsedArgs.CompilationOptions.ReportSuppressedDiagnostics);
 
@@ -5808,15 +5963,17 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
                 new[] { $"/errorlog:{TooManyErrorLogQualifiers}", "a.cs" },
                 baseDirectory
             );
-            parsedArgs.Errors.Verify(
-                // error CS2046: Command-line syntax error: 'C:\MyFolder\MyBinary.xml,version=2,version=2' is not a valid value for the '/errorlog:' option. The value must be of the form '<file>[,version={1|1.0|2|2.1}]'.
-                Diagnostic(ErrorCode.ERR_BadSwitchValue)
-                    .WithArguments(
-                        TooManyErrorLogQualifiers,
-                        "/errorlog:",
-                        CSharpCommandLineParser.ErrorLogOptionFormat
-                    )
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    // error CS2046: Command-line syntax error: 'C:\MyFolder\MyBinary.xml,version=2,version=2' is not a valid value for the '/errorlog:' option. The value must be of the form '<file>[,version={1|1.0|2|2.1}]'.
+                    Diagnostic(ErrorCode.ERR_BadSwitchValue)
+                        .WithArguments(
+                            TooManyErrorLogQualifiers,
+                            "/errorlog:",
+                            CSharpCommandLineParser.ErrorLogOptionFormat
+                        )
+                );
             Assert.Null(parsedArgs.ErrorLogOptions);
             Assert.False(parsedArgs.CompilationOptions.ReportSuppressedDiagnostics);
         }
@@ -5827,24 +5984,33 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
             const string baseDirectory = @"C:\abc\def\baz";
 
             var parsedArgs = DefaultParse(new[] { @"/appconfig:""""", "a.cs" }, baseDirectory);
-            parsedArgs.Errors.Verify(
-                // error CS2006: Command-line syntax error: Missing ':<text>' for '/appconfig:' option
-                Diagnostic(ErrorCode.ERR_SwitchNeedsString).WithArguments(":<text>", "/appconfig:")
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    // error CS2006: Command-line syntax error: Missing ':<text>' for '/appconfig:' option
+                    Diagnostic(ErrorCode.ERR_SwitchNeedsString)
+                        .WithArguments(":<text>", "/appconfig:")
+                );
             Assert.Null(parsedArgs.AppConfigPath);
 
             parsedArgs = DefaultParse(new[] { "/appconfig:", "a.cs" }, baseDirectory);
-            parsedArgs.Errors.Verify(
-                // error CS2006: Command-line syntax error: Missing ':<text>' for '/appconfig:' option
-                Diagnostic(ErrorCode.ERR_SwitchNeedsString).WithArguments(":<text>", "/appconfig:")
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    // error CS2006: Command-line syntax error: Missing ':<text>' for '/appconfig:' option
+                    Diagnostic(ErrorCode.ERR_SwitchNeedsString)
+                        .WithArguments(":<text>", "/appconfig:")
+                );
             Assert.Null(parsedArgs.AppConfigPath);
 
             parsedArgs = DefaultParse(new[] { "/appconfig", "a.cs" }, baseDirectory);
-            parsedArgs.Errors.Verify(
-                // error CS2006: Command-line syntax error: Missing ':<text>' for '/appconfig' option
-                Diagnostic(ErrorCode.ERR_SwitchNeedsString).WithArguments(":<text>", "/appconfig")
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    // error CS2006: Command-line syntax error: Missing ':<text>' for '/appconfig' option
+                    Diagnostic(ErrorCode.ERR_SwitchNeedsString)
+                        .WithArguments(":<text>", "/appconfig")
+                );
             Assert.Null(parsedArgs.AppConfigPath);
 
             parsedArgs = DefaultParse(new[] { "/appconfig:a.exe.config", "a.cs" }, baseDirectory);
@@ -5876,7 +6042,8 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
                 Temp.CreateFile()
                     .WriteAllBytes(
                         ProprietaryTestResources.silverlight_v5_0_5_0.System_v5_0_5_0_silverlight
-                    ).Path;
+                    )
+                    .Path;
             var net4_0dll = Temp.CreateFile().WriteAllBytes(ResourcesNet451.System).Path;
 
             // Test linking two appconfig dlls with simple src
@@ -6006,28 +6173,34 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
                 new[] { @"/target:library", "/moduleassemblyname:goo", "a.cs" },
                 WorkingDirectory
             );
-            parsedArgs.Errors.Verify(
-                // error CS0734: The /moduleassemblyname option may only be specified when building a target type of 'module'
-                Diagnostic(ErrorCode.ERR_AssemblyNameOnNonModule)
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    // error CS0734: The /moduleassemblyname option may only be specified when building a target type of 'module'
+                    Diagnostic(ErrorCode.ERR_AssemblyNameOnNonModule)
+                );
 
             parsedArgs = DefaultParse(
                 new[] { @"/target:exe", "/moduleassemblyname:goo", "a.cs" },
                 WorkingDirectory
             );
-            parsedArgs.Errors.Verify(
-                // error CS0734: The /moduleassemblyname option may only be specified when building a target type of 'module'
-                Diagnostic(ErrorCode.ERR_AssemblyNameOnNonModule)
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    // error CS0734: The /moduleassemblyname option may only be specified when building a target type of 'module'
+                    Diagnostic(ErrorCode.ERR_AssemblyNameOnNonModule)
+                );
 
             parsedArgs = DefaultParse(
                 new[] { @"/target:winexe", "/moduleassemblyname:goo", "a.cs" },
                 WorkingDirectory
             );
-            parsedArgs.Errors.Verify(
-                // error CS0734: The /moduleassemblyname option may only be specified when building a target type of 'module'
-                Diagnostic(ErrorCode.ERR_AssemblyNameOnNonModule)
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    // error CS0734: The /moduleassemblyname option may only be specified when building a target type of 'module'
+                    Diagnostic(ErrorCode.ERR_AssemblyNameOnNonModule)
+                );
         }
 
         [Fact]
@@ -6065,12 +6238,14 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
                 new[] { @"/target:exe", "/modulename:", "a.cs" },
                 WorkingDirectory
             );
-            parsedArgs.Errors.Verify(
-                // error CS2006: Command-line syntax error: Missing '<text>' for 'modulename' option
-                Diagnostic(ErrorCode.ERR_SwitchNeedsString)
-                    .WithArguments("<text>", "modulename")
-                    .WithLocation(1, 1)
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    // error CS2006: Command-line syntax error: Missing '<text>' for 'modulename' option
+                    Diagnostic(ErrorCode.ERR_SwitchNeedsString)
+                        .WithArguments("<text>", "modulename")
+                        .WithLocation(1, 1)
+                );
         }
 
         [Fact]
@@ -6162,17 +6337,23 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
             Assert.Equal(Platform.Arm, parsedArgs.CompilationOptions.Platform);
 
             parsedArgs = DefaultParse(new[] { "/platform", "a.cs" }, WorkingDirectory);
-            parsedArgs.Errors.Verify(
-                // error CS2006: Command-line syntax error: Missing '<string>' for 'platform' option
-                Diagnostic(ErrorCode.ERR_SwitchNeedsString).WithArguments("<string>", "/platform")
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    // error CS2006: Command-line syntax error: Missing '<string>' for 'platform' option
+                    Diagnostic(ErrorCode.ERR_SwitchNeedsString)
+                        .WithArguments("<string>", "/platform")
+                );
             Assert.Equal(Platform.AnyCpu, parsedArgs.CompilationOptions.Platform); //anycpu is default
 
             parsedArgs = DefaultParse(new[] { "/platform:", "a.cs" }, WorkingDirectory);
-            parsedArgs.Errors.Verify(
-                // error CS2006: Command-line syntax error: Missing '<string>' for 'platform' option
-                Diagnostic(ErrorCode.ERR_SwitchNeedsString).WithArguments("<string>", "/platform:")
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    // error CS2006: Command-line syntax error: Missing '<string>' for 'platform' option
+                    Diagnostic(ErrorCode.ERR_SwitchNeedsString)
+                        .WithArguments("<string>", "/platform:")
+                );
             Assert.Equal(Platform.AnyCpu, parsedArgs.CompilationOptions.Platform); //anycpu is default
         }
 
@@ -6231,25 +6412,25 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
                 new[] { "test.cs", "/platform:x86", "/baseaddress:0xffffffff" },
                 WorkingDirectory
             );
-            parsedArgs.Errors.Verify(
-                Diagnostic(ErrorCode.ERR_BadBaseNumber).WithArguments("0xFFFFFFFF")
-            );
+            parsedArgs
+                .Errors
+                .Verify(Diagnostic(ErrorCode.ERR_BadBaseNumber).WithArguments("0xFFFFFFFF"));
 
             parsedArgs = DefaultParse(
                 new[] { "test.cs", "/platform:x86", "/baseaddress:0xffff8000" },
                 WorkingDirectory
             );
-            parsedArgs.Errors.Verify(
-                Diagnostic(ErrorCode.ERR_BadBaseNumber).WithArguments("0xFFFF8000")
-            );
+            parsedArgs
+                .Errors
+                .Verify(Diagnostic(ErrorCode.ERR_BadBaseNumber).WithArguments("0xFFFF8000"));
 
             parsedArgs = DefaultParse(
                 new[] { "test.cs", "/baseaddress:0xffff8000" },
                 WorkingDirectory
             );
-            parsedArgs.Errors.Verify(
-                Diagnostic(ErrorCode.ERR_BadBaseNumber).WithArguments("0xFFFF8000")
-            );
+            parsedArgs
+                .Errors
+                .Verify(Diagnostic(ErrorCode.ERR_BadBaseNumber).WithArguments("0xFFFF8000"));
 
             parsedArgs = DefaultParse(
                 new[] { "C:\\test.cs", "/platform:x86", "/baseaddress:0xffff7fff" },
@@ -6273,35 +6454,43 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
                 new[] { "test.cs", "/baseaddress:0xFFFF0000FFFF0000" },
                 WorkingDirectory
             );
-            parsedArgs.Errors.Verify(
-                Diagnostic(ErrorCode.ERR_BadBaseNumber).WithArguments("0xFFFF0000FFFF0000")
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    Diagnostic(ErrorCode.ERR_BadBaseNumber).WithArguments("0xFFFF0000FFFF0000")
+                );
 
             parsedArgs = DefaultParse(
                 new[] { "C:\\test.cs", "/platform:x64", "/baseaddress:0x10000000000000000" },
                 WorkingDirectory
             );
-            parsedArgs.Errors.Verify(
-                Diagnostic(ErrorCode.ERR_BadBaseNumber).WithArguments("0x10000000000000000")
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    Diagnostic(ErrorCode.ERR_BadBaseNumber).WithArguments("0x10000000000000000")
+                );
 
             parsedArgs = DefaultParse(
                 new[] { "C:\\test.cs", "/baseaddress:0xFFFF0000FFFF0000" },
                 WorkingDirectory
             );
-            parsedArgs.Errors.Verify(
-                Diagnostic(ErrorCode.ERR_BadBaseNumber).WithArguments("0xFFFF0000FFFF0000")
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    Diagnostic(ErrorCode.ERR_BadBaseNumber).WithArguments("0xFFFF0000FFFF0000")
+                );
         }
 
         [Fact]
         public void ParseFileAlignment()
         {
             var parsedArgs = DefaultParse(new[] { @"/filealign:x64", "a.cs" }, WorkingDirectory);
-            parsedArgs.Errors.Verify(
-                // error CS2024: Invalid file section alignment number 'x64'
-                Diagnostic(ErrorCode.ERR_InvalidFileAlignment).WithArguments("x64")
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    // error CS2024: Invalid file section alignment number 'x64'
+                    Diagnostic(ErrorCode.ERR_InvalidFileAlignment).WithArguments("x64")
+                );
 
             parsedArgs = DefaultParse(new[] { @"/filealign:0x200", "a.cs" }, WorkingDirectory);
             parsedArgs.Errors.Verify();
@@ -6312,32 +6501,40 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
             Assert.Equal(512, parsedArgs.EmitOptions.FileAlignment);
 
             parsedArgs = DefaultParse(new[] { @"/filealign:", "a.cs" }, WorkingDirectory);
-            parsedArgs.Errors.Verify(
-                // error CS2035: Command-line syntax error: Missing ':<number>' for 'filealign' option
-                Diagnostic(ErrorCode.ERR_SwitchNeedsNumber).WithArguments("filealign")
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    // error CS2035: Command-line syntax error: Missing ':<number>' for 'filealign' option
+                    Diagnostic(ErrorCode.ERR_SwitchNeedsNumber).WithArguments("filealign")
+                );
 
             parsedArgs = DefaultParse(new[] { @"/filealign:-23", "a.cs" }, WorkingDirectory);
-            parsedArgs.Errors.Verify(
-                // error CS2024: Invalid file section alignment number '-23'
-                Diagnostic(ErrorCode.ERR_InvalidFileAlignment).WithArguments("-23")
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    // error CS2024: Invalid file section alignment number '-23'
+                    Diagnostic(ErrorCode.ERR_InvalidFileAlignment).WithArguments("-23")
+                );
 
             parsedArgs = DefaultParse(new[] { @"/filealign:020000", "a.cs" }, WorkingDirectory);
             parsedArgs.Errors.Verify();
             Assert.Equal(8192, parsedArgs.EmitOptions.FileAlignment);
 
             parsedArgs = DefaultParse(new[] { @"/filealign:0", "a.cs" }, WorkingDirectory);
-            parsedArgs.Errors.Verify(
-                // error CS2024: Invalid file section alignment number '0'
-                Diagnostic(ErrorCode.ERR_InvalidFileAlignment).WithArguments("0")
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    // error CS2024: Invalid file section alignment number '0'
+                    Diagnostic(ErrorCode.ERR_InvalidFileAlignment).WithArguments("0")
+                );
 
             parsedArgs = DefaultParse(new[] { @"/filealign:123", "a.cs" }, WorkingDirectory);
-            parsedArgs.Errors.Verify(
-                // error CS2024: Invalid file section alignment number '123'
-                Diagnostic(ErrorCode.ERR_InvalidFileAlignment).WithArguments("123")
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    // error CS2024: Invalid file section alignment number '123'
+                    Diagnostic(ErrorCode.ERR_InvalidFileAlignment).WithArguments("123")
+                );
         }
 
         [ConditionalFact(typeof(WindowsOnly))]
@@ -6367,80 +6564,94 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
                 new[] { @"/lib:c:lib2", @"/lib:o:\sdk1", "a.cs" },
                 WorkingDirectory
             );
-            parsedArgs.Errors.Verify(
-                // warning CS1668: Invalid search path 'c:lib2' specified in '/LIB option' -- 'path is too long or invalid'
-                Diagnostic(ErrorCode.WRN_InvalidSearchPathDir)
-                    .WithArguments(@"c:lib2", "/LIB option", "path is too long or invalid"),
-                // warning CS1668: Invalid search path 'o:\sdk1' specified in '/LIB option' -- 'directory does not exist'
-                Diagnostic(ErrorCode.WRN_InvalidSearchPathDir)
-                    .WithArguments(@"o:\sdk1", "/LIB option", "directory does not exist")
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    // warning CS1668: Invalid search path 'c:lib2' specified in '/LIB option' -- 'path is too long or invalid'
+                    Diagnostic(ErrorCode.WRN_InvalidSearchPathDir)
+                        .WithArguments(@"c:lib2", "/LIB option", "path is too long or invalid"),
+                    // warning CS1668: Invalid search path 'o:\sdk1' specified in '/LIB option' -- 'directory does not exist'
+                    Diagnostic(ErrorCode.WRN_InvalidSearchPathDir)
+                        .WithArguments(@"o:\sdk1", "/LIB option", "directory does not exist")
+                );
 
             parsedArgs = DefaultParse(
                 new[] { @"/lib:c:\Windows,o:\Windows;e:;", "a.cs" },
                 WorkingDirectory
             );
-            parsedArgs.Errors.Verify(
-                // warning CS1668: Invalid search path 'o:\Windows' specified in '/LIB option' -- 'directory does not exist'
-                Diagnostic(ErrorCode.WRN_InvalidSearchPathDir)
-                    .WithArguments(@"o:\Windows", "/LIB option", "directory does not exist"),
-                // warning CS1668: Invalid search path 'e:' specified in '/LIB option' -- 'path is too long or invalid'
-                Diagnostic(ErrorCode.WRN_InvalidSearchPathDir)
-                    .WithArguments(@"e:", "/LIB option", "path is too long or invalid")
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    // warning CS1668: Invalid search path 'o:\Windows' specified in '/LIB option' -- 'directory does not exist'
+                    Diagnostic(ErrorCode.WRN_InvalidSearchPathDir)
+                        .WithArguments(@"o:\Windows", "/LIB option", "directory does not exist"),
+                    // warning CS1668: Invalid search path 'e:' specified in '/LIB option' -- 'path is too long or invalid'
+                    Diagnostic(ErrorCode.WRN_InvalidSearchPathDir)
+                        .WithArguments(@"e:", "/LIB option", "path is too long or invalid")
+                );
 
             parsedArgs = DefaultParse(
                 new[] { @"/lib:c:\Windows,.\Windows;e;", "a.cs" },
                 WorkingDirectory
             );
-            parsedArgs.Errors.Verify(
-                // warning CS1668: Invalid search path '.\Windows' specified in '/LIB option' -- 'directory does not exist'
-                Diagnostic(ErrorCode.WRN_InvalidSearchPathDir)
-                    .WithArguments(@".\Windows", "/LIB option", "directory does not exist"),
-                // warning CS1668: Invalid search path 'e' specified in '/LIB option' -- 'directory does not exist'
-                Diagnostic(ErrorCode.WRN_InvalidSearchPathDir)
-                    .WithArguments(@"e", "/LIB option", "directory does not exist")
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    // warning CS1668: Invalid search path '.\Windows' specified in '/LIB option' -- 'directory does not exist'
+                    Diagnostic(ErrorCode.WRN_InvalidSearchPathDir)
+                        .WithArguments(@".\Windows", "/LIB option", "directory does not exist"),
+                    // warning CS1668: Invalid search path 'e' specified in '/LIB option' -- 'directory does not exist'
+                    Diagnostic(ErrorCode.WRN_InvalidSearchPathDir)
+                        .WithArguments(@"e", "/LIB option", "directory does not exist")
+                );
 
             parsedArgs = DefaultParse(
                 new[] { @"/lib:c:\Windows,o:\Windows;e:; ; ; ; ", "a.cs" },
                 WorkingDirectory
             );
-            parsedArgs.Errors.Verify(
-                // warning CS1668: Invalid search path 'o:\Windows' specified in '/LIB option' -- 'directory does not exist'
-                Diagnostic(ErrorCode.WRN_InvalidSearchPathDir)
-                    .WithArguments(@"o:\Windows", "/LIB option", "directory does not exist"),
-                // warning CS1668: Invalid search path 'e:' specified in '/LIB option' -- 'path is too long or invalid'
-                Diagnostic(ErrorCode.WRN_InvalidSearchPathDir)
-                    .WithArguments("e:", "/LIB option", "path is too long or invalid"),
-                // warning CS1668: Invalid search path ' ' specified in '/LIB option' -- 'path is too long or invalid'
-                Diagnostic(ErrorCode.WRN_InvalidSearchPathDir)
-                    .WithArguments(" ", "/LIB option", "path is too long or invalid"),
-                // warning CS1668: Invalid search path ' ' specified in '/LIB option' -- 'path is too long or invalid'
-                Diagnostic(ErrorCode.WRN_InvalidSearchPathDir)
-                    .WithArguments(" ", "/LIB option", "path is too long or invalid"),
-                // warning CS1668: Invalid search path ' ' specified in '/LIB option' -- 'path is too long or invalid'
-                Diagnostic(ErrorCode.WRN_InvalidSearchPathDir)
-                    .WithArguments(" ", "/LIB option", "path is too long or invalid")
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    // warning CS1668: Invalid search path 'o:\Windows' specified in '/LIB option' -- 'directory does not exist'
+                    Diagnostic(ErrorCode.WRN_InvalidSearchPathDir)
+                        .WithArguments(@"o:\Windows", "/LIB option", "directory does not exist"),
+                    // warning CS1668: Invalid search path 'e:' specified in '/LIB option' -- 'path is too long or invalid'
+                    Diagnostic(ErrorCode.WRN_InvalidSearchPathDir)
+                        .WithArguments("e:", "/LIB option", "path is too long or invalid"),
+                    // warning CS1668: Invalid search path ' ' specified in '/LIB option' -- 'path is too long or invalid'
+                    Diagnostic(ErrorCode.WRN_InvalidSearchPathDir)
+                        .WithArguments(" ", "/LIB option", "path is too long or invalid"),
+                    // warning CS1668: Invalid search path ' ' specified in '/LIB option' -- 'path is too long or invalid'
+                    Diagnostic(ErrorCode.WRN_InvalidSearchPathDir)
+                        .WithArguments(" ", "/LIB option", "path is too long or invalid"),
+                    // warning CS1668: Invalid search path ' ' specified in '/LIB option' -- 'path is too long or invalid'
+                    Diagnostic(ErrorCode.WRN_InvalidSearchPathDir)
+                        .WithArguments(" ", "/LIB option", "path is too long or invalid")
+                );
 
             parsedArgs = DefaultParse(new[] { @"/lib", "a.cs" }, WorkingDirectory);
-            parsedArgs.Errors.Verify(
-                Diagnostic(ErrorCode.ERR_SwitchNeedsString).WithArguments("<path list>", "lib")
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    Diagnostic(ErrorCode.ERR_SwitchNeedsString).WithArguments("<path list>", "lib")
+                );
 
             parsedArgs = DefaultParse(new[] { @"/lib:", "a.cs" }, WorkingDirectory);
-            parsedArgs.Errors.Verify(
-                Diagnostic(ErrorCode.ERR_SwitchNeedsString).WithArguments("<path list>", "lib")
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    Diagnostic(ErrorCode.ERR_SwitchNeedsString).WithArguments("<path list>", "lib")
+                );
 
             parsedArgs = DefaultParse(new[] { @"/lib+", "a.cs" }, WorkingDirectory);
             parsedArgs.Errors.Verify(Diagnostic(ErrorCode.ERR_BadSwitch).WithArguments("/lib+"));
 
             parsedArgs = DefaultParse(new[] { @"/lib: ", "a.cs" }, WorkingDirectory);
-            parsedArgs.Errors.Verify(
-                Diagnostic(ErrorCode.ERR_SwitchNeedsString).WithArguments("<path list>", "lib")
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    Diagnostic(ErrorCode.ERR_SwitchNeedsString).WithArguments("<path list>", "lib")
+                );
         }
 
         [Fact, WorkItem(546005, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/546005")]
@@ -6574,9 +6785,9 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
             Assert.True(parsedArgs.CompilationOptions.CheckOverflow);
 
             parsedArgs = DefaultParse(new[] { @"/checked:", "a.cs" }, WorkingDirectory);
-            parsedArgs.Errors.Verify(
-                Diagnostic(ErrorCode.ERR_BadSwitch).WithArguments("/checked:")
-            );
+            parsedArgs
+                .Errors
+                .Verify(Diagnostic(ErrorCode.ERR_BadSwitch).WithArguments("/checked:"));
         }
 
         [Fact]
@@ -6600,12 +6811,14 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
                 new[] { @"/nullable+", "/langversion:7.0", "a.cs" },
                 WorkingDirectory
             );
-            parsedArgs.Errors.Verify(
-                // error CS8630: Invalid 'nullable' value: 'Enabled' for C# 7.0. Please use language version '8.0' or greater.
-                Diagnostic(ErrorCode.ERR_NullableOptionNotAvailable)
-                    .WithArguments("nullable", "Enable", "7.0", "8.0")
-                    .WithLocation(1, 1)
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    // error CS8630: Invalid 'nullable' value: 'Enabled' for C# 7.0. Please use language version '8.0' or greater.
+                    Diagnostic(ErrorCode.ERR_NullableOptionNotAvailable)
+                        .WithArguments("nullable", "Enable", "7.0", "8.0")
+                        .WithLocation(1, 1)
+                );
             Assert.Equal(
                 NullableContextOptions.Enable,
                 parsedArgs.CompilationOptions.NullableContextOptions
@@ -6626,24 +6839,28 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
             );
 
             parsedArgs = DefaultParse(new[] { @"/nullable:", "a.cs" }, WorkingDirectory);
-            parsedArgs.Errors.Verify(
-                // error CS2006: Command-line syntax error: Missing '<text>' for 'nullable' option
-                Diagnostic(ErrorCode.ERR_SwitchNeedsString)
-                    .WithArguments("<text>", "nullable")
-                    .WithLocation(1, 1)
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    // error CS2006: Command-line syntax error: Missing '<text>' for 'nullable' option
+                    Diagnostic(ErrorCode.ERR_SwitchNeedsString)
+                        .WithArguments("<text>", "nullable")
+                        .WithLocation(1, 1)
+                );
             Assert.Equal(
                 NullableContextOptions.Disable,
                 parsedArgs.CompilationOptions.NullableContextOptions
             );
 
             parsedArgs = DefaultParse(new[] { @"/nullable:yes", "a.cs" }, WorkingDirectory);
-            parsedArgs.Errors.Verify(
-                // error CS8636: Invalid option 'yes' for /nullable; must be 'disable', 'enable', 'warnings' or 'annotations'
-                Diagnostic(ErrorCode.ERR_BadNullableContextOption)
-                    .WithArguments("yes")
-                    .WithLocation(1, 1)
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    // error CS8636: Invalid option 'yes' for /nullable; must be 'disable', 'enable', 'warnings' or 'annotations'
+                    Diagnostic(ErrorCode.ERR_BadNullableContextOption)
+                        .WithArguments("yes")
+                        .WithLocation(1, 1)
+                );
             Assert.Equal(
                 NullableContextOptions.Disable,
                 parsedArgs.CompilationOptions.NullableContextOptions
@@ -6653,12 +6870,14 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
                 new[] { @"/nullable:enable", "/langversion:7.0", "a.cs" },
                 WorkingDirectory
             );
-            parsedArgs.Errors.Verify(
-                // error CS8630: Invalid 'nullable' value: 'Enable' for C# 7.0. Please use language version '8.0' or greater.
-                Diagnostic(ErrorCode.ERR_NullableOptionNotAvailable)
-                    .WithArguments("nullable", "Enable", "7.0", "8.0")
-                    .WithLocation(1, 1)
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    // error CS8630: Invalid 'nullable' value: 'Enable' for C# 7.0. Please use language version '8.0' or greater.
+                    Diagnostic(ErrorCode.ERR_NullableOptionNotAvailable)
+                        .WithArguments("nullable", "Enable", "7.0", "8.0")
+                        .WithLocation(1, 1)
+                );
             Assert.Equal(
                 NullableContextOptions.Enable,
                 parsedArgs.CompilationOptions.NullableContextOptions
@@ -6678,12 +6897,14 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
                 new[] { @"/nullable:safeonly", "/langversion:7.0", "a.cs" },
                 WorkingDirectory
             );
-            parsedArgs.Errors.Verify(
-                // error CS8636: Invalid option 'safeonly' for /nullable; must be 'disable', 'enable', 'warnings' or 'annotations'
-                Diagnostic(ErrorCode.ERR_BadNullableContextOption)
-                    .WithArguments("safeonly")
-                    .WithLocation(1, 1)
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    // error CS8636: Invalid option 'safeonly' for /nullable; must be 'disable', 'enable', 'warnings' or 'annotations'
+                    Diagnostic(ErrorCode.ERR_BadNullableContextOption)
+                        .WithArguments("safeonly")
+                        .WithLocation(1, 1)
+                );
 
             parsedArgs = DefaultParse(
                 new[] { @"/nullable+", "/langversion:8", "a.cs" },
@@ -6719,12 +6940,14 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
                 new[] { @"/nullable:", "/langversion:8", "a.cs" },
                 WorkingDirectory
             );
-            parsedArgs.Errors.Verify(
-                // error CS2006: Command-line syntax error: Missing '<text>' for 'nullable' option
-                Diagnostic(ErrorCode.ERR_SwitchNeedsString)
-                    .WithArguments("<text>", "nullable")
-                    .WithLocation(1, 1)
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    // error CS2006: Command-line syntax error: Missing '<text>' for 'nullable' option
+                    Diagnostic(ErrorCode.ERR_SwitchNeedsString)
+                        .WithArguments("<text>", "nullable")
+                        .WithLocation(1, 1)
+                );
             Assert.Equal(
                 NullableContextOptions.Disable,
                 parsedArgs.CompilationOptions.NullableContextOptions
@@ -6734,12 +6957,14 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
                 new[] { @"/nullable:yes", "/langversion:8", "a.cs" },
                 WorkingDirectory
             );
-            parsedArgs.Errors.Verify(
-                // error CS8636: Invalid option 'yes' for /nullable; must be 'disable', 'enable', 'warnings' or 'annotations'
-                Diagnostic(ErrorCode.ERR_BadNullableContextOption)
-                    .WithArguments("yes")
-                    .WithLocation(1, 1)
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    // error CS8636: Invalid option 'yes' for /nullable; must be 'disable', 'enable', 'warnings' or 'annotations'
+                    Diagnostic(ErrorCode.ERR_BadNullableContextOption)
+                        .WithArguments("yes")
+                        .WithLocation(1, 1)
+                );
             Assert.Equal(
                 NullableContextOptions.Disable,
                 parsedArgs.CompilationOptions.NullableContextOptions
@@ -6769,12 +6994,14 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
                 new[] { @"/nullable:Safeonly", "/langversion:8", "a.cs" },
                 WorkingDirectory
             );
-            parsedArgs.Errors.Verify(
-                // error CS8636: Invalid option 'Safeonly' for /nullable; must be 'disable', 'enable', 'warnings' or 'annotations'
-                Diagnostic(ErrorCode.ERR_BadNullableContextOption)
-                    .WithArguments("Safeonly")
-                    .WithLocation(1, 1)
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    // error CS8636: Invalid option 'Safeonly' for /nullable; must be 'disable', 'enable', 'warnings' or 'annotations'
+                    Diagnostic(ErrorCode.ERR_BadNullableContextOption)
+                        .WithArguments("Safeonly")
+                        .WithLocation(1, 1)
+                );
 
             parsedArgs = DefaultParse(
                 new[] { @"/nullable-", @"/nullable-", "/langversion:8", "a.cs" },
@@ -6810,12 +7037,14 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
                 new[] { @"/nullable-", @"/nullable:", "/langversion:8", "a.cs" },
                 WorkingDirectory
             );
-            parsedArgs.Errors.Verify(
-                // error CS2006: Command-line syntax error: Missing '<text>' for 'nullable' option
-                Diagnostic(ErrorCode.ERR_SwitchNeedsString)
-                    .WithArguments("<text>", "nullable")
-                    .WithLocation(1, 1)
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    // error CS2006: Command-line syntax error: Missing '<text>' for 'nullable' option
+                    Diagnostic(ErrorCode.ERR_SwitchNeedsString)
+                        .WithArguments("<text>", "nullable")
+                        .WithLocation(1, 1)
+                );
             Assert.Equal(
                 NullableContextOptions.Disable,
                 parsedArgs.CompilationOptions.NullableContextOptions
@@ -6825,12 +7054,14 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
                 new[] { @"/nullable-", @"/nullable:YES", "/langversion:8", "a.cs" },
                 WorkingDirectory
             );
-            parsedArgs.Errors.Verify(
-                // error CS8636: Invalid option 'YES' for /nullable; must be 'disable', 'enable', 'warnings' or 'annotations'
-                Diagnostic(ErrorCode.ERR_BadNullableContextOption)
-                    .WithArguments("YES")
-                    .WithLocation(1, 1)
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    // error CS8636: Invalid option 'YES' for /nullable; must be 'disable', 'enable', 'warnings' or 'annotations'
+                    Diagnostic(ErrorCode.ERR_BadNullableContextOption)
+                        .WithArguments("YES")
+                        .WithLocation(1, 1)
+                );
             Assert.Equal(
                 NullableContextOptions.Disable,
                 parsedArgs.CompilationOptions.NullableContextOptions
@@ -6860,12 +7091,14 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
                 new[] { @"/nullable-", @"/nullable:safeonly", "/langversion:8", "a.cs" },
                 WorkingDirectory
             );
-            parsedArgs.Errors.Verify(
-                // error CS8636: Invalid option 'safeonly' for /nullable; must be 'disable', 'enable', 'warnings' or 'annotations'
-                Diagnostic(ErrorCode.ERR_BadNullableContextOption)
-                    .WithArguments("safeonly")
-                    .WithLocation(1, 1)
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    // error CS8636: Invalid option 'safeonly' for /nullable; must be 'disable', 'enable', 'warnings' or 'annotations'
+                    Diagnostic(ErrorCode.ERR_BadNullableContextOption)
+                        .WithArguments("safeonly")
+                        .WithLocation(1, 1)
+                );
 
             parsedArgs = DefaultParse(
                 new[] { @"/nullable+", @"/nullable-", "/langversion:8", "a.cs" },
@@ -6901,12 +7134,14 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
                 new[] { @"/nullable+", @"/nullable:", "/langversion:8", "a.cs" },
                 WorkingDirectory
             );
-            parsedArgs.Errors.Verify(
-                // error CS2006: Command-line syntax error: Missing '<text>' for 'nullable' option
-                Diagnostic(ErrorCode.ERR_SwitchNeedsString)
-                    .WithArguments("<text>", "nullable")
-                    .WithLocation(1, 1)
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    // error CS2006: Command-line syntax error: Missing '<text>' for 'nullable' option
+                    Diagnostic(ErrorCode.ERR_SwitchNeedsString)
+                        .WithArguments("<text>", "nullable")
+                        .WithLocation(1, 1)
+                );
             Assert.Equal(
                 NullableContextOptions.Enable,
                 parsedArgs.CompilationOptions.NullableContextOptions
@@ -6916,12 +7151,14 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
                 new[] { @"/nullable+", @"/nullable:YES", "/langversion:8", "a.cs" },
                 WorkingDirectory
             );
-            parsedArgs.Errors.Verify(
-                // error CS8636: Invalid option 'YES' for /nullable; must be 'disable', 'enable', 'warnings' or 'annotations'
-                Diagnostic(ErrorCode.ERR_BadNullableContextOption)
-                    .WithArguments("YES")
-                    .WithLocation(1, 1)
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    // error CS8636: Invalid option 'YES' for /nullable; must be 'disable', 'enable', 'warnings' or 'annotations'
+                    Diagnostic(ErrorCode.ERR_BadNullableContextOption)
+                        .WithArguments("YES")
+                        .WithLocation(1, 1)
+                );
             Assert.Equal(
                 NullableContextOptions.Enable,
                 parsedArgs.CompilationOptions.NullableContextOptions
@@ -6951,23 +7188,27 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
                 new[] { @"/nullable+", @"/nullable:safeonly", "/langversion:8", "a.cs" },
                 WorkingDirectory
             );
-            parsedArgs.Errors.Verify(
-                // error CS8636: Invalid option 'safeonly' for /nullable; must be 'disable', 'enable', 'warnings' or 'annotations'
-                Diagnostic(ErrorCode.ERR_BadNullableContextOption)
-                    .WithArguments("safeonly")
-                    .WithLocation(1, 1)
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    // error CS8636: Invalid option 'safeonly' for /nullable; must be 'disable', 'enable', 'warnings' or 'annotations'
+                    Diagnostic(ErrorCode.ERR_BadNullableContextOption)
+                        .WithArguments("safeonly")
+                        .WithLocation(1, 1)
+                );
 
             parsedArgs = DefaultParse(
                 new[] { @"/nullable:safeonly", @"/nullable-", "/langversion:8", "a.cs" },
                 WorkingDirectory
             );
-            parsedArgs.Errors.Verify(
-                // error CS8636: Invalid option 'safeonly' for /nullable; must be 'disable', 'enable', 'warnings' or 'annotations'
-                Diagnostic(ErrorCode.ERR_BadNullableContextOption)
-                    .WithArguments("safeonly")
-                    .WithLocation(1, 1)
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    // error CS8636: Invalid option 'safeonly' for /nullable; must be 'disable', 'enable', 'warnings' or 'annotations'
+                    Diagnostic(ErrorCode.ERR_BadNullableContextOption)
+                        .WithArguments("safeonly")
+                        .WithLocation(1, 1)
+                );
             Assert.Equal(
                 NullableContextOptions.Disable,
                 parsedArgs.CompilationOptions.NullableContextOptions
@@ -6977,12 +7218,14 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
                 new[] { @"/nullable:safeonly", @"/nullable", "/langversion:8", "a.cs" },
                 WorkingDirectory
             );
-            parsedArgs.Errors.Verify(
-                // error CS8636: Invalid option 'safeonly' for /nullable; must be 'disable', 'enable', 'warnings' or 'annotations'
-                Diagnostic(ErrorCode.ERR_BadNullableContextOption)
-                    .WithArguments("safeonly")
-                    .WithLocation(1, 1)
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    // error CS8636: Invalid option 'safeonly' for /nullable; must be 'disable', 'enable', 'warnings' or 'annotations'
+                    Diagnostic(ErrorCode.ERR_BadNullableContextOption)
+                        .WithArguments("safeonly")
+                        .WithLocation(1, 1)
+                );
             Assert.Equal(
                 NullableContextOptions.Enable,
                 parsedArgs.CompilationOptions.NullableContextOptions
@@ -6992,12 +7235,14 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
                 new[] { @"/nullable:safeonly", @"/nullable+", "/langversion:8", "a.cs" },
                 WorkingDirectory
             );
-            parsedArgs.Errors.Verify(
-                // error CS8636: Invalid option 'safeonly' for /nullable; must be 'disable', 'enable', 'warnings' or 'annotations'
-                Diagnostic(ErrorCode.ERR_BadNullableContextOption)
-                    .WithArguments("safeonly")
-                    .WithLocation(1, 1)
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    // error CS8636: Invalid option 'safeonly' for /nullable; must be 'disable', 'enable', 'warnings' or 'annotations'
+                    Diagnostic(ErrorCode.ERR_BadNullableContextOption)
+                        .WithArguments("safeonly")
+                        .WithLocation(1, 1)
+                );
             Assert.Equal(
                 NullableContextOptions.Enable,
                 parsedArgs.CompilationOptions.NullableContextOptions
@@ -7007,16 +7252,18 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
                 new[] { @"/nullable:safeonly", @"/nullable:", "/langversion:8", "a.cs" },
                 WorkingDirectory
             );
-            parsedArgs.Errors.Verify(
-                // error CS8636: Invalid option 'safeonly' for /nullable; must be 'disable', 'enable', 'warnings' or 'annotations'
-                Diagnostic(ErrorCode.ERR_BadNullableContextOption)
-                    .WithArguments("safeonly")
-                    .WithLocation(1, 1),
-                // error CS2006: Command-line syntax error: Missing '<text>' for 'nullable' option
-                Diagnostic(ErrorCode.ERR_SwitchNeedsString)
-                    .WithArguments("<text>", "nullable")
-                    .WithLocation(1, 1)
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    // error CS8636: Invalid option 'safeonly' for /nullable; must be 'disable', 'enable', 'warnings' or 'annotations'
+                    Diagnostic(ErrorCode.ERR_BadNullableContextOption)
+                        .WithArguments("safeonly")
+                        .WithLocation(1, 1),
+                    // error CS2006: Command-line syntax error: Missing '<text>' for 'nullable' option
+                    Diagnostic(ErrorCode.ERR_SwitchNeedsString)
+                        .WithArguments("<text>", "nullable")
+                        .WithLocation(1, 1)
+                );
             Assert.Equal(
                 NullableContextOptions.Disable,
                 parsedArgs.CompilationOptions.NullableContextOptions
@@ -7026,16 +7273,18 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
                 new[] { @"/nullable:safeonly", @"/nullable:YES", "/langversion:8", "a.cs" },
                 WorkingDirectory
             );
-            parsedArgs.Errors.Verify(
-                // error CS8636: Invalid option 'safeonly' for /nullable; must be 'disable', 'enable', 'warnings' or 'annotations'
-                Diagnostic(ErrorCode.ERR_BadNullableContextOption)
-                    .WithArguments("safeonly")
-                    .WithLocation(1, 1),
-                // error CS8636: Invalid option 'YES' for /nullable; must be 'disable', 'enable', 'warnings' or 'annotations'
-                Diagnostic(ErrorCode.ERR_BadNullableContextOption)
-                    .WithArguments("YES")
-                    .WithLocation(1, 1)
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    // error CS8636: Invalid option 'safeonly' for /nullable; must be 'disable', 'enable', 'warnings' or 'annotations'
+                    Diagnostic(ErrorCode.ERR_BadNullableContextOption)
+                        .WithArguments("safeonly")
+                        .WithLocation(1, 1),
+                    // error CS8636: Invalid option 'YES' for /nullable; must be 'disable', 'enable', 'warnings' or 'annotations'
+                    Diagnostic(ErrorCode.ERR_BadNullableContextOption)
+                        .WithArguments("YES")
+                        .WithLocation(1, 1)
+                );
             Assert.Equal(
                 NullableContextOptions.Disable,
                 parsedArgs.CompilationOptions.NullableContextOptions
@@ -7045,12 +7294,14 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
                 new[] { @"/nullable:safeonly", @"/nullable:disable", "/langversion:8", "a.cs" },
                 WorkingDirectory
             );
-            parsedArgs.Errors.Verify(
-                // error CS8636: Invalid option 'safeonly' for /nullable; must be 'disable', 'enable', 'warnings' or 'annotations'
-                Diagnostic(ErrorCode.ERR_BadNullableContextOption)
-                    .WithArguments("safeonly")
-                    .WithLocation(1, 1)
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    // error CS8636: Invalid option 'safeonly' for /nullable; must be 'disable', 'enable', 'warnings' or 'annotations'
+                    Diagnostic(ErrorCode.ERR_BadNullableContextOption)
+                        .WithArguments("safeonly")
+                        .WithLocation(1, 1)
+                );
             Assert.Equal(
                 NullableContextOptions.Disable,
                 parsedArgs.CompilationOptions.NullableContextOptions
@@ -7060,12 +7311,14 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
                 new[] { @"/nullable:safeonly", @"/nullable:enable", "/langversion:8", "a.cs" },
                 WorkingDirectory
             );
-            parsedArgs.Errors.Verify(
-                // error CS8636: Invalid option 'safeonly' for /nullable; must be 'disable', 'enable', 'warnings' or 'annotations'
-                Diagnostic(ErrorCode.ERR_BadNullableContextOption)
-                    .WithArguments("safeonly")
-                    .WithLocation(1, 1)
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    // error CS8636: Invalid option 'safeonly' for /nullable; must be 'disable', 'enable', 'warnings' or 'annotations'
+                    Diagnostic(ErrorCode.ERR_BadNullableContextOption)
+                        .WithArguments("safeonly")
+                        .WithLocation(1, 1)
+                );
             Assert.Equal(
                 NullableContextOptions.Enable,
                 parsedArgs.CompilationOptions.NullableContextOptions
@@ -7075,16 +7328,18 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
                 new[] { @"/nullable:safeonly", @"/nullable:safeonly", "/langversion:8", "a.cs" },
                 WorkingDirectory
             );
-            parsedArgs.Errors.Verify(
-                // error CS8636: Invalid option 'safeonly' for /nullable; must be 'disable', 'enable', 'warnings' or 'annotations'
-                Diagnostic(ErrorCode.ERR_BadNullableContextOption)
-                    .WithArguments("safeonly")
-                    .WithLocation(1, 1),
-                // error CS8636: Invalid option 'safeonly' for /nullable; must be 'disable', 'enable', 'warnings' or 'annotations'
-                Diagnostic(ErrorCode.ERR_BadNullableContextOption)
-                    .WithArguments("safeonly")
-                    .WithLocation(1, 1)
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    // error CS8636: Invalid option 'safeonly' for /nullable; must be 'disable', 'enable', 'warnings' or 'annotations'
+                    Diagnostic(ErrorCode.ERR_BadNullableContextOption)
+                        .WithArguments("safeonly")
+                        .WithLocation(1, 1),
+                    // error CS8636: Invalid option 'safeonly' for /nullable; must be 'disable', 'enable', 'warnings' or 'annotations'
+                    Diagnostic(ErrorCode.ERR_BadNullableContextOption)
+                        .WithArguments("safeonly")
+                        .WithLocation(1, 1)
+                );
             Assert.Equal(
                 NullableContextOptions.Disable,
                 parsedArgs.CompilationOptions.NullableContextOptions
@@ -7094,12 +7349,14 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
                 new[] { @"/nullable:", "/langversion:7.3", "a.cs" },
                 WorkingDirectory
             );
-            parsedArgs.Errors.Verify(
-                // error CS2006: Command-line syntax error: Missing '<text>' for 'nullable' option
-                Diagnostic(ErrorCode.ERR_SwitchNeedsString)
-                    .WithArguments("<text>", "nullable")
-                    .WithLocation(1, 1)
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    // error CS2006: Command-line syntax error: Missing '<text>' for 'nullable' option
+                    Diagnostic(ErrorCode.ERR_SwitchNeedsString)
+                        .WithArguments("<text>", "nullable")
+                        .WithLocation(1, 1)
+                );
             Assert.Equal(
                 NullableContextOptions.Disable,
                 parsedArgs.CompilationOptions.NullableContextOptions
@@ -7109,12 +7366,14 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
                 new[] { @"/nullable:yeS", "/langversion:7.0", "a.cs" },
                 WorkingDirectory
             );
-            parsedArgs.Errors.Verify(
-                // error CS8636: Invalid option 'yeS' for /nullable; must be 'disable', 'enable', 'warnings' or 'annotations'
-                Diagnostic(ErrorCode.ERR_BadNullableContextOption)
-                    .WithArguments("yeS")
-                    .WithLocation(1, 1)
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    // error CS8636: Invalid option 'yeS' for /nullable; must be 'disable', 'enable', 'warnings' or 'annotations'
+                    Diagnostic(ErrorCode.ERR_BadNullableContextOption)
+                        .WithArguments("yeS")
+                        .WithLocation(1, 1)
+                );
             Assert.Equal(
                 NullableContextOptions.Disable,
                 parsedArgs.CompilationOptions.NullableContextOptions
@@ -7124,12 +7383,14 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
                 new[] { @"/nullable+", "/langversion:7.3", "a.cs" },
                 WorkingDirectory
             );
-            parsedArgs.Errors.Verify(
-                // error CS8630: Invalid 'nullable' value: 'Enable' for C# 7.3. Please use language version '8.0' or greater.
-                Diagnostic(ErrorCode.ERR_NullableOptionNotAvailable)
-                    .WithArguments("nullable", "Enable", "7.3", "8.0")
-                    .WithLocation(1, 1)
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    // error CS8630: Invalid 'nullable' value: 'Enable' for C# 7.3. Please use language version '8.0' or greater.
+                    Diagnostic(ErrorCode.ERR_NullableOptionNotAvailable)
+                        .WithArguments("nullable", "Enable", "7.3", "8.0")
+                        .WithLocation(1, 1)
+                );
             Assert.Equal(
                 NullableContextOptions.Enable,
                 parsedArgs.CompilationOptions.NullableContextOptions
@@ -7149,12 +7410,14 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
                 new[] { @"/nullable", "/langversion:7.3", "a.cs" },
                 WorkingDirectory
             );
-            parsedArgs.Errors.Verify(
-                // error CS8630: Invalid 'nullable' value: 'Enabled' for C# 7.3. Please use language version '8.0' or greater.
-                Diagnostic(ErrorCode.ERR_NullableOptionNotAvailable)
-                    .WithArguments("nullable", "Enable", "7.3", "8.0")
-                    .WithLocation(1, 1)
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    // error CS8630: Invalid 'nullable' value: 'Enabled' for C# 7.3. Please use language version '8.0' or greater.
+                    Diagnostic(ErrorCode.ERR_NullableOptionNotAvailable)
+                        .WithArguments("nullable", "Enable", "7.3", "8.0")
+                        .WithLocation(1, 1)
+                );
             Assert.Equal(
                 NullableContextOptions.Enable,
                 parsedArgs.CompilationOptions.NullableContextOptions
@@ -7164,12 +7427,14 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
                 new[] { @"/nullable:enable", "/langversion:7.3", "a.cs" },
                 WorkingDirectory
             );
-            parsedArgs.Errors.Verify(
-                // error CS8630: Invalid 'nullable' value: 'Enabled' for C# 7.3. Please use language version '8.0' or greater.
-                Diagnostic(ErrorCode.ERR_NullableOptionNotAvailable)
-                    .WithArguments("nullable", "Enable", "7.3", "8.0")
-                    .WithLocation(1, 1)
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    // error CS8630: Invalid 'nullable' value: 'Enabled' for C# 7.3. Please use language version '8.0' or greater.
+                    Diagnostic(ErrorCode.ERR_NullableOptionNotAvailable)
+                        .WithArguments("nullable", "Enable", "7.3", "8.0")
+                        .WithLocation(1, 1)
+                );
             Assert.Equal(
                 NullableContextOptions.Enable,
                 parsedArgs.CompilationOptions.NullableContextOptions
@@ -7189,12 +7454,14 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
                 new[] { @"/nullable:safeonly", "/langversion:7.3", "a.cs" },
                 WorkingDirectory
             );
-            parsedArgs.Errors.Verify(
-                // error CS8636: Invalid option 'safeonly' for /nullable; must be 'disable', 'enable', 'warnings' or 'annotations'
-                Diagnostic(ErrorCode.ERR_BadNullableContextOption)
-                    .WithArguments("safeonly")
-                    .WithLocation(1, 1)
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    // error CS8636: Invalid option 'safeonly' for /nullable; must be 'disable', 'enable', 'warnings' or 'annotations'
+                    Diagnostic(ErrorCode.ERR_BadNullableContextOption)
+                        .WithArguments("safeonly")
+                        .WithLocation(1, 1)
+                );
             Assert.Equal(
                 NullableContextOptions.Disable,
                 parsedArgs.CompilationOptions.NullableContextOptions
@@ -7218,12 +7485,14 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
                 new[] { @"/nullable:""safeonly""", "/langversion:8", "a.cs" },
                 WorkingDirectory
             );
-            parsedArgs.Errors.Verify(
-                // error CS8636: Invalid option 'safeonly' for /nullable; must be 'disable', 'enable', 'warnings' or 'annotations'
-                Diagnostic(ErrorCode.ERR_BadNullableContextOption)
-                    .WithArguments("safeonly")
-                    .WithLocation(1, 1)
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    // error CS8636: Invalid option 'safeonly' for /nullable; must be 'disable', 'enable', 'warnings' or 'annotations'
+                    Diagnostic(ErrorCode.ERR_BadNullableContextOption)
+                        .WithArguments("safeonly")
+                        .WithLocation(1, 1)
+                );
             Assert.Equal(
                 NullableContextOptions.Disable,
                 parsedArgs.CompilationOptions.NullableContextOptions
@@ -7233,12 +7502,14 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
                 new[] { @"/nullable:\""enable\""", "/langversion:8", "a.cs" },
                 WorkingDirectory
             );
-            parsedArgs.Errors.Verify(
-                // error CS8636: Invalid option '"enable"' for /nullable; must be 'disable', 'enable', 'warnings' or 'annotations'
-                Diagnostic(ErrorCode.ERR_BadNullableContextOption)
-                    .WithArguments("\"enable\"")
-                    .WithLocation(1, 1)
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    // error CS8636: Invalid option '"enable"' for /nullable; must be 'disable', 'enable', 'warnings' or 'annotations'
+                    Diagnostic(ErrorCode.ERR_BadNullableContextOption)
+                        .WithArguments("\"enable\"")
+                        .WithLocation(1, 1)
+                );
             Assert.Equal(
                 NullableContextOptions.Disable,
                 parsedArgs.CompilationOptions.NullableContextOptions
@@ -7248,12 +7519,14 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
                 new[] { @"/nullable:\\disable\\", "/langversion:8", "a.cs" },
                 WorkingDirectory
             );
-            parsedArgs.Errors.Verify(
-                // error CS8636: Invalid option '\\disable\\' for /nullable; must be 'disable', 'enable', 'warnings' or 'annotations'
-                Diagnostic(ErrorCode.ERR_BadNullableContextOption)
-                    .WithArguments("\\\\disable\\\\")
-                    .WithLocation(1, 1)
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    // error CS8636: Invalid option '\\disable\\' for /nullable; must be 'disable', 'enable', 'warnings' or 'annotations'
+                    Diagnostic(ErrorCode.ERR_BadNullableContextOption)
+                        .WithArguments("\\\\disable\\\\")
+                        .WithLocation(1, 1)
+                );
             Assert.Equal(
                 NullableContextOptions.Disable,
                 parsedArgs.CompilationOptions.NullableContextOptions
@@ -7263,12 +7536,14 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
                 new[] { @"/nullable:\\""enable\\""", "/langversion:8", "a.cs" },
                 WorkingDirectory
             );
-            parsedArgs.Errors.Verify(
-                // error CS8636: Invalid option '\enable\' for /nullable; must be 'disable', 'enable', 'warnings' or 'annotations'
-                Diagnostic(ErrorCode.ERR_BadNullableContextOption)
-                    .WithArguments("\\enable\\")
-                    .WithLocation(1, 1)
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    // error CS8636: Invalid option '\enable\' for /nullable; must be 'disable', 'enable', 'warnings' or 'annotations'
+                    Diagnostic(ErrorCode.ERR_BadNullableContextOption)
+                        .WithArguments("\\enable\\")
+                        .WithLocation(1, 1)
+                );
             Assert.Equal(
                 NullableContextOptions.Disable,
                 parsedArgs.CompilationOptions.NullableContextOptions
@@ -7278,12 +7553,14 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
                 new[] { @"/nullable:safeonlywarnings", "/langversion:7.0", "a.cs" },
                 WorkingDirectory
             );
-            parsedArgs.Errors.Verify(
-                // error CS8636: Invalid option 'safeonlywarnings' for /nullable; must be 'disable', 'enable', 'warnings' or 'annotations'
-                Diagnostic(ErrorCode.ERR_BadNullableContextOption)
-                    .WithArguments("safeonlywarnings")
-                    .WithLocation(1, 1)
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    // error CS8636: Invalid option 'safeonlywarnings' for /nullable; must be 'disable', 'enable', 'warnings' or 'annotations'
+                    Diagnostic(ErrorCode.ERR_BadNullableContextOption)
+                        .WithArguments("safeonlywarnings")
+                        .WithLocation(1, 1)
+                );
             Assert.Equal(
                 NullableContextOptions.Disable,
                 parsedArgs.CompilationOptions.NullableContextOptions
@@ -7293,12 +7570,14 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
                 new[] { @"/nullable:SafeonlyWarnings", "/langversion:8", "a.cs" },
                 WorkingDirectory
             );
-            parsedArgs.Errors.Verify(
-                // error CS8636: Invalid option 'SafeonlyWarnings' for /nullable; must be 'disable', 'enable', 'warnings' or 'annotations'
-                Diagnostic(ErrorCode.ERR_BadNullableContextOption)
-                    .WithArguments("SafeonlyWarnings")
-                    .WithLocation(1, 1)
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    // error CS8636: Invalid option 'SafeonlyWarnings' for /nullable; must be 'disable', 'enable', 'warnings' or 'annotations'
+                    Diagnostic(ErrorCode.ERR_BadNullableContextOption)
+                        .WithArguments("SafeonlyWarnings")
+                        .WithLocation(1, 1)
+                );
             Assert.Equal(
                 NullableContextOptions.Disable,
                 parsedArgs.CompilationOptions.NullableContextOptions
@@ -7308,12 +7587,14 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
                 new[] { @"/nullable-", @"/nullable:safeonlyWarnings", "/langversion:8", "a.cs" },
                 WorkingDirectory
             );
-            parsedArgs.Errors.Verify(
-                // error CS8636: Invalid option 'safeonlyWarnings' for /nullable; must be 'disable', 'enable', 'warnings' or 'annotations'
-                Diagnostic(ErrorCode.ERR_BadNullableContextOption)
-                    .WithArguments("safeonlyWarnings")
-                    .WithLocation(1, 1)
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    // error CS8636: Invalid option 'safeonlyWarnings' for /nullable; must be 'disable', 'enable', 'warnings' or 'annotations'
+                    Diagnostic(ErrorCode.ERR_BadNullableContextOption)
+                        .WithArguments("safeonlyWarnings")
+                        .WithLocation(1, 1)
+                );
             Assert.Equal(
                 NullableContextOptions.Disable,
                 parsedArgs.CompilationOptions.NullableContextOptions
@@ -7323,12 +7604,14 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
                 new[] { @"/nullable:warnings", "/langversion:7.0", "a.cs" },
                 WorkingDirectory
             );
-            parsedArgs.Errors.Verify(
-                // error CS8630: Invalid 'nullable' value: 'Warnings' for C# 7.0. Please use language version '8.0' or greater.
-                Diagnostic(ErrorCode.ERR_NullableOptionNotAvailable)
-                    .WithArguments("nullable", "Warnings", "7.0", "8.0")
-                    .WithLocation(1, 1)
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    // error CS8630: Invalid 'nullable' value: 'Warnings' for C# 7.0. Please use language version '8.0' or greater.
+                    Diagnostic(ErrorCode.ERR_NullableOptionNotAvailable)
+                        .WithArguments("nullable", "Warnings", "7.0", "8.0")
+                        .WithLocation(1, 1)
+                );
             Assert.Equal(
                 NullableContextOptions.Warnings,
                 parsedArgs.CompilationOptions.NullableContextOptions
@@ -7398,12 +7681,14 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
                 new[] { @"/nullable:Warnings", @"/nullable:", "/langversion:8", "a.cs" },
                 WorkingDirectory
             );
-            parsedArgs.Errors.Verify(
-                // error CS2006: Command-line syntax error: Missing '<text>' for 'nullable' option
-                Diagnostic(ErrorCode.ERR_SwitchNeedsString)
-                    .WithArguments("<text>", "nullable")
-                    .WithLocation(1, 1)
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    // error CS2006: Command-line syntax error: Missing '<text>' for 'nullable' option
+                    Diagnostic(ErrorCode.ERR_SwitchNeedsString)
+                        .WithArguments("<text>", "nullable")
+                        .WithLocation(1, 1)
+                );
             Assert.Equal(
                 NullableContextOptions.Warnings,
                 parsedArgs.CompilationOptions.NullableContextOptions
@@ -7413,12 +7698,14 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
                 new[] { @"/nullable:Warnings", @"/nullable:YES", "/langversion:8", "a.cs" },
                 WorkingDirectory
             );
-            parsedArgs.Errors.Verify(
-                // error CS8636: Invalid option 'YES' for /nullable; must be 'disable', 'enable', 'warnings' or 'annotations'
-                Diagnostic(ErrorCode.ERR_BadNullableContextOption)
-                    .WithArguments("YES")
-                    .WithLocation(1, 1)
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    // error CS8636: Invalid option 'YES' for /nullable; must be 'disable', 'enable', 'warnings' or 'annotations'
+                    Diagnostic(ErrorCode.ERR_BadNullableContextOption)
+                        .WithArguments("YES")
+                        .WithLocation(1, 1)
+                );
             Assert.Equal(
                 NullableContextOptions.Warnings,
                 parsedArgs.CompilationOptions.NullableContextOptions
@@ -7458,12 +7745,14 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
                 new[] { @"/nullable:Warnings", "/langversion:7.3", "a.cs" },
                 WorkingDirectory
             );
-            parsedArgs.Errors.Verify(
-                // error CS8630: Invalid 'nullable' value: 'Annotations' for C# 7.3. Please use language version '8.0' or greater.
-                Diagnostic(ErrorCode.ERR_NullableOptionNotAvailable)
-                    .WithArguments("nullable", "Warnings", "7.3", "8.0")
-                    .WithLocation(1, 1)
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    // error CS8630: Invalid 'nullable' value: 'Annotations' for C# 7.3. Please use language version '8.0' or greater.
+                    Diagnostic(ErrorCode.ERR_NullableOptionNotAvailable)
+                        .WithArguments("nullable", "Warnings", "7.3", "8.0")
+                        .WithLocation(1, 1)
+                );
             Assert.Equal(
                 NullableContextOptions.Warnings,
                 parsedArgs.CompilationOptions.NullableContextOptions
@@ -7473,12 +7762,14 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
                 new[] { @"/nullable:annotations", "/langversion:7.0", "a.cs" },
                 WorkingDirectory
             );
-            parsedArgs.Errors.Verify(
-                // error CS8630: Invalid 'nullable' value: 'Annotations' for C# 7.0. Please use language version '8.0' or greater.
-                Diagnostic(ErrorCode.ERR_NullableOptionNotAvailable)
-                    .WithArguments("nullable", "Annotations", "7.0", "8.0")
-                    .WithLocation(1, 1)
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    // error CS8630: Invalid 'nullable' value: 'Annotations' for C# 7.0. Please use language version '8.0' or greater.
+                    Diagnostic(ErrorCode.ERR_NullableOptionNotAvailable)
+                        .WithArguments("nullable", "Annotations", "7.0", "8.0")
+                        .WithLocation(1, 1)
+                );
             Assert.Equal(
                 NullableContextOptions.Annotations,
                 parsedArgs.CompilationOptions.NullableContextOptions
@@ -7548,12 +7839,14 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
                 new[] { @"/nullable:Annotations", @"/nullable:", "/langversion:8", "a.cs" },
                 WorkingDirectory
             );
-            parsedArgs.Errors.Verify(
-                // error CS2006: Command-line syntax error: Missing '<text>' for 'nullable' option
-                Diagnostic(ErrorCode.ERR_SwitchNeedsString)
-                    .WithArguments("<text>", "nullable")
-                    .WithLocation(1, 1)
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    // error CS2006: Command-line syntax error: Missing '<text>' for 'nullable' option
+                    Diagnostic(ErrorCode.ERR_SwitchNeedsString)
+                        .WithArguments("<text>", "nullable")
+                        .WithLocation(1, 1)
+                );
             Assert.Equal(
                 NullableContextOptions.Annotations,
                 parsedArgs.CompilationOptions.NullableContextOptions
@@ -7563,12 +7856,14 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
                 new[] { @"/nullable:Annotations", @"/nullable:YES", "/langversion:8", "a.cs" },
                 WorkingDirectory
             );
-            parsedArgs.Errors.Verify(
-                // error CS8636: Invalid option 'YES' for /nullable; must be 'disable', 'enable', 'warnings' or 'annotations'
-                Diagnostic(ErrorCode.ERR_BadNullableContextOption)
-                    .WithArguments("YES")
-                    .WithLocation(1, 1)
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    // error CS8636: Invalid option 'YES' for /nullable; must be 'disable', 'enable', 'warnings' or 'annotations'
+                    Diagnostic(ErrorCode.ERR_BadNullableContextOption)
+                        .WithArguments("YES")
+                        .WithLocation(1, 1)
+                );
             Assert.Equal(
                 NullableContextOptions.Annotations,
                 parsedArgs.CompilationOptions.NullableContextOptions
@@ -7614,12 +7909,14 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
                 new[] { @"/nullable:Annotations", "/langversion:7.3", "a.cs" },
                 WorkingDirectory
             );
-            parsedArgs.Errors.Verify(
-                // error CS8630: Invalid 'nullable' value: 'Annotations' for C# 7.3. Please use language version '8.0' or greater.
-                Diagnostic(ErrorCode.ERR_NullableOptionNotAvailable)
-                    .WithArguments("nullable", "Annotations", "7.3", "8.0")
-                    .WithLocation(1, 1)
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    // error CS8630: Invalid 'nullable' value: 'Annotations' for C# 7.3. Please use language version '8.0' or greater.
+                    Diagnostic(ErrorCode.ERR_NullableOptionNotAvailable)
+                        .WithArguments("nullable", "Annotations", "7.3", "8.0")
+                        .WithLocation(1, 1)
+                );
             Assert.Equal(
                 NullableContextOptions.Annotations,
                 parsedArgs.CompilationOptions.NullableContextOptions
@@ -7632,64 +7929,66 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
             CSharpCommandLineArguments parsedArgs;
 
             var sdkDirectory = SdkDirectory;
-            parsedArgs = CSharpCommandLineParser.Script.Parse(
-                new string[] { "/u:Goo.Bar" },
-                WorkingDirectory,
-                sdkDirectory
-            );
+            parsedArgs = CSharpCommandLineParser
+                .Script
+                .Parse(new string[] { "/u:Goo.Bar" }, WorkingDirectory, sdkDirectory);
             parsedArgs.Errors.Verify();
             AssertEx.Equal(
                 new[] { "Goo.Bar" },
                 parsedArgs.CompilationOptions.Usings.AsEnumerable()
             );
 
-            parsedArgs = CSharpCommandLineParser.Script.Parse(
-                new string[] { "/u:Goo.Bar;Baz", "/using:System.Core;System" },
-                WorkingDirectory,
-                sdkDirectory
-            );
+            parsedArgs = CSharpCommandLineParser
+                .Script
+                .Parse(
+                    new string[] { "/u:Goo.Bar;Baz", "/using:System.Core;System" },
+                    WorkingDirectory,
+                    sdkDirectory
+                );
             parsedArgs.Errors.Verify();
             AssertEx.Equal(
                 new[] { "Goo.Bar", "Baz", "System.Core", "System" },
                 parsedArgs.CompilationOptions.Usings.AsEnumerable()
             );
 
-            parsedArgs = CSharpCommandLineParser.Script.Parse(
-                new string[] { "/u:Goo;;Bar" },
-                WorkingDirectory,
-                sdkDirectory
-            );
+            parsedArgs = CSharpCommandLineParser
+                .Script
+                .Parse(new string[] { "/u:Goo;;Bar" }, WorkingDirectory, sdkDirectory);
             parsedArgs.Errors.Verify();
             AssertEx.Equal(
                 new[] { "Goo", "Bar" },
                 parsedArgs.CompilationOptions.Usings.AsEnumerable()
             );
 
-            parsedArgs = CSharpCommandLineParser.Script.Parse(
-                new string[] { "/u:" },
-                WorkingDirectory,
-                sdkDirectory
-            );
-            parsedArgs.Errors.Verify(
-                // error CS2006: Command-line syntax error: Missing '<namespace>' for '/u:' option
-                Diagnostic(ErrorCode.ERR_SwitchNeedsString).WithArguments("<namespace>", "/u:")
-            );
+            parsedArgs = CSharpCommandLineParser
+                .Script
+                .Parse(new string[] { "/u:" }, WorkingDirectory, sdkDirectory);
+            parsedArgs
+                .Errors
+                .Verify(
+                    // error CS2006: Command-line syntax error: Missing '<namespace>' for '/u:' option
+                    Diagnostic(ErrorCode.ERR_SwitchNeedsString).WithArguments("<namespace>", "/u:")
+                );
         }
 
         [Fact]
         public void WarningsErrors()
         {
             var parsedArgs = DefaultParse(new string[] { "/nowarn", "a.cs" }, WorkingDirectory);
-            parsedArgs.Errors.Verify(
-                // error CS2035: Command-line syntax error: Missing ':<number>' for 'nowarn' option
-                Diagnostic(ErrorCode.ERR_SwitchNeedsNumber).WithArguments("nowarn")
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    // error CS2035: Command-line syntax error: Missing ':<number>' for 'nowarn' option
+                    Diagnostic(ErrorCode.ERR_SwitchNeedsNumber).WithArguments("nowarn")
+                );
 
             parsedArgs = DefaultParse(new string[] { "/nowarn:", "a.cs" }, WorkingDirectory);
-            parsedArgs.Errors.Verify(
-                // error CS2035: Command-line syntax error: Missing ':<number>' for 'nowarn' option
-                Diagnostic(ErrorCode.ERR_SwitchNeedsNumber).WithArguments("nowarn")
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    // error CS2035: Command-line syntax error: Missing ':<number>' for 'nowarn' option
+                    Diagnostic(ErrorCode.ERR_SwitchNeedsNumber).WithArguments("nowarn")
+                );
 
             // Previous versions of the compiler used to report a warning (CS1691)
             // whenever an unrecognized warning code was supplied via /nowarn or /warnaserror.
@@ -7701,10 +8000,12 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
             parsedArgs.Errors.Verify();
 
             parsedArgs = DefaultParse(new string[] { "/warnaserror:", "a.cs" }, WorkingDirectory);
-            parsedArgs.Errors.Verify(
-                // error CS2035: Command-line syntax error: Missing ':<number>' for 'warnaserror' option
-                Diagnostic(ErrorCode.ERR_SwitchNeedsNumber).WithArguments("warnaserror")
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    // error CS2035: Command-line syntax error: Missing ':<number>' for 'warnaserror' option
+                    Diagnostic(ErrorCode.ERR_SwitchNeedsNumber).WithArguments("warnaserror")
+                );
 
             parsedArgs = DefaultParse(new string[] { "/warnaserror:-1", "a.cs" }, WorkingDirectory);
             parsedArgs.Errors.Verify();
@@ -7722,49 +8023,63 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
             parsedArgs.Errors.Verify();
 
             parsedArgs = DefaultParse(new string[] { "/warnaserror+:", "a.cs" }, WorkingDirectory);
-            parsedArgs.Errors.Verify(
-                // error CS2035: Command-line syntax error: Missing ':<number>' for '/warnaserror+:' option
-                Diagnostic(ErrorCode.ERR_SwitchNeedsNumber).WithArguments("warnaserror+")
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    // error CS2035: Command-line syntax error: Missing ':<number>' for '/warnaserror+:' option
+                    Diagnostic(ErrorCode.ERR_SwitchNeedsNumber).WithArguments("warnaserror+")
+                );
 
             parsedArgs = DefaultParse(new string[] { "/warnaserror-:", "a.cs" }, WorkingDirectory);
-            parsedArgs.Errors.Verify(
-                // error CS2035: Command-line syntax error: Missing ':<number>' for '/warnaserror-:' option
-                Diagnostic(ErrorCode.ERR_SwitchNeedsNumber).WithArguments("warnaserror-")
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    // error CS2035: Command-line syntax error: Missing ':<number>' for '/warnaserror-:' option
+                    Diagnostic(ErrorCode.ERR_SwitchNeedsNumber).WithArguments("warnaserror-")
+                );
 
             parsedArgs = DefaultParse(new string[] { "/w", "a.cs" }, WorkingDirectory);
-            parsedArgs.Errors.Verify(
-                // error CS2035: Command-line syntax error: Missing ':<number>' for '/w' option
-                Diagnostic(ErrorCode.ERR_SwitchNeedsNumber).WithArguments("w")
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    // error CS2035: Command-line syntax error: Missing ':<number>' for '/w' option
+                    Diagnostic(ErrorCode.ERR_SwitchNeedsNumber).WithArguments("w")
+                );
 
             parsedArgs = DefaultParse(new string[] { "/w:", "a.cs" }, WorkingDirectory);
-            parsedArgs.Errors.Verify(
-                // error CS2035: Command-line syntax error: Missing ':<number>' for '/w:' option
-                Diagnostic(ErrorCode.ERR_SwitchNeedsNumber).WithArguments("w")
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    // error CS2035: Command-line syntax error: Missing ':<number>' for '/w:' option
+                    Diagnostic(ErrorCode.ERR_SwitchNeedsNumber).WithArguments("w")
+                );
 
             parsedArgs = DefaultParse(new string[] { "/warn:", "a.cs" }, WorkingDirectory);
-            parsedArgs.Errors.Verify(
-                // error CS2035: Command-line syntax error: Missing ':<number>' for '/warn:' option
-                Diagnostic(ErrorCode.ERR_SwitchNeedsNumber).WithArguments("warn")
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    // error CS2035: Command-line syntax error: Missing ':<number>' for '/warn:' option
+                    Diagnostic(ErrorCode.ERR_SwitchNeedsNumber).WithArguments("warn")
+                );
 
             parsedArgs = DefaultParse(new string[] { "/w:-1", "a.cs" }, WorkingDirectory);
-            parsedArgs.Errors.Verify(
-                // error CS1900: Warning level must be zero or greater
-                Diagnostic(ErrorCode.ERR_BadWarningLevel).WithArguments("w")
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    // error CS1900: Warning level must be zero or greater
+                    Diagnostic(ErrorCode.ERR_BadWarningLevel).WithArguments("w")
+                );
 
             parsedArgs = DefaultParse(new string[] { "/w:5", "a.cs" }, WorkingDirectory);
             parsedArgs.Errors.Verify();
 
             parsedArgs = DefaultParse(new string[] { "/warn:-1", "a.cs" }, WorkingDirectory);
-            parsedArgs.Errors.Verify(
-                // error CS1900: Warning level must be zero or greater
-                Diagnostic(ErrorCode.ERR_BadWarningLevel).WithArguments("warn")
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    // error CS1900: Warning level must be zero or greater
+                    Diagnostic(ErrorCode.ERR_BadWarningLevel).WithArguments("warn")
+                );
 
             parsedArgs = DefaultParse(new string[] { "/warn:5", "a.cs" }, WorkingDirectory);
             parsedArgs.Errors.Verify();
@@ -7791,9 +8106,9 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
             CSharpCommandLineArguments args
         )
         {
-            var actualOrdered = args.CompilationOptions.SpecificDiagnosticOptions.OrderBy(
-                entry => entry.Key
-            );
+            var actualOrdered = args.CompilationOptions
+                .SpecificDiagnosticOptions
+                .OrderBy(entry => entry.Key);
 
             AssertEx.Equal(
                 expectedCodes.Select(i => MessageProvider.Instance.GetIdForErrorCode(i)),
@@ -8124,14 +8439,14 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
             parsedArgs.Errors.Verify(Diagnostic(ErrorCode.ERR_BadSwitch).WithArguments("/unsafe:"));
 
             parsedArgs = DefaultParse(new[] { "/unsafe:+", "a.cs" }, WorkingDirectory);
-            parsedArgs.Errors.Verify(
-                Diagnostic(ErrorCode.ERR_BadSwitch).WithArguments("/unsafe:+")
-            );
+            parsedArgs
+                .Errors
+                .Verify(Diagnostic(ErrorCode.ERR_BadSwitch).WithArguments("/unsafe:+"));
 
             parsedArgs = DefaultParse(new[] { "/unsafe-:", "a.cs" }, WorkingDirectory);
-            parsedArgs.Errors.Verify(
-                Diagnostic(ErrorCode.ERR_BadSwitch).WithArguments("/unsafe-:")
-            );
+            parsedArgs
+                .Errors
+                .Verify(Diagnostic(ErrorCode.ERR_BadSwitch).WithArguments("/unsafe-:"));
         }
 
         [Fact]
@@ -8155,10 +8470,12 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
             Assert.False((bool)parsedArgs.CompilationOptions.DelaySign);
 
             parsedArgs = DefaultParse(new[] { "/delaysign:-", "a.cs" }, WorkingDirectory);
-            parsedArgs.Errors.Verify(
-                // error CS2007: Unrecognized option: '/delaysign:-'
-                Diagnostic(ErrorCode.ERR_BadSwitch).WithArguments("/delaysign:-")
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    // error CS2007: Unrecognized option: '/delaysign:-'
+                    Diagnostic(ErrorCode.ERR_BadSwitch).WithArguments("/delaysign:-")
+                );
 
             Assert.Null(parsedArgs.CompilationOptions.DelaySign);
         }
@@ -8179,12 +8496,14 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
             Assert.False(parsedArgs.CompilationOptions.PublicSign);
 
             parsedArgs = DefaultParse(new[] { "/publicsign:-", "a.cs" }, WorkingDirectory);
-            parsedArgs.Errors.Verify(
-                // error CS2007: Unrecognized option: '/publicsign:-'
-                Diagnostic(ErrorCode.ERR_BadSwitch)
-                    .WithArguments("/publicsign:-")
-                    .WithLocation(1, 1)
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    // error CS2007: Unrecognized option: '/publicsign:-'
+                    Diagnostic(ErrorCode.ERR_BadSwitch)
+                        .WithArguments("/publicsign:-")
+                        .WithLocation(1, 1)
+                );
 
             Assert.False(parsedArgs.CompilationOptions.PublicSign);
         }
@@ -8208,26 +8527,28 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
         [WorkItem(11497, "https://github.com/dotnet/roslyn/issues/11497")]
         public void PublicSignWithEmptyKeyPath()
         {
-            DefaultParse(
-                new[] { "/publicsign", "/keyfile:", "a.cs" },
-                WorkingDirectory
-            ).Errors.Verify(
-                // error CS2005: Missing file specification for 'keyfile' option
-                Diagnostic(ErrorCode.ERR_NoFileSpec).WithArguments("keyfile").WithLocation(1, 1)
-            );
+            DefaultParse(new[] { "/publicsign", "/keyfile:", "a.cs" }, WorkingDirectory)
+                .Errors
+                .Verify(
+                    // error CS2005: Missing file specification for 'keyfile' option
+                    Diagnostic(ErrorCode.ERR_NoFileSpec)
+                        .WithArguments("keyfile")
+                        .WithLocation(1, 1)
+                );
         }
 
         [Fact]
         [WorkItem(11497, "https://github.com/dotnet/roslyn/issues/11497")]
         public void PublicSignWithEmptyKeyPath2()
         {
-            DefaultParse(
-                new[] { "/publicsign", "/keyfile:\"\"", "a.cs" },
-                WorkingDirectory
-            ).Errors.Verify(
-                // error CS2005: Missing file specification for 'keyfile' option
-                Diagnostic(ErrorCode.ERR_NoFileSpec).WithArguments("keyfile").WithLocation(1, 1)
-            );
+            DefaultParse(new[] { "/publicsign", "/keyfile:\"\"", "a.cs" }, WorkingDirectory)
+                .Errors
+                .Verify(
+                    // error CS2005: Missing file specification for 'keyfile' option
+                    Diagnostic(ErrorCode.ERR_NoFileSpec)
+                        .WithArguments("keyfile")
+                        .WithLocation(1, 1)
+                );
         }
 
         [WorkItem(546301, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/546301")]
@@ -8263,57 +8584,63 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
             Assert.Equal(SubsystemVersion.Create(5, 333), parsedArgs.EmitOptions.SubsystemVersion);
 
             parsedArgs = DefaultParse(new[] { "/subsystemversion:", "a.cs" }, WorkingDirectory);
-            parsedArgs.Errors.Verify(
-                Diagnostic(ErrorCode.ERR_SwitchNeedsString)
-                    .WithArguments("<text>", "subsystemversion")
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    Diagnostic(ErrorCode.ERR_SwitchNeedsString)
+                        .WithArguments("<text>", "subsystemversion")
+                );
 
             parsedArgs = DefaultParse(new[] { "/subsystemversion", "a.cs" }, WorkingDirectory);
-            parsedArgs.Errors.Verify(
-                Diagnostic(ErrorCode.ERR_SwitchNeedsString)
-                    .WithArguments("<text>", "subsystemversion")
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    Diagnostic(ErrorCode.ERR_SwitchNeedsString)
+                        .WithArguments("<text>", "subsystemversion")
+                );
 
             parsedArgs = DefaultParse(new[] { "/subsystemversion-", "a.cs" }, WorkingDirectory);
-            parsedArgs.Errors.Verify(
-                Diagnostic(ErrorCode.ERR_BadSwitch).WithArguments("/subsystemversion-")
-            );
+            parsedArgs
+                .Errors
+                .Verify(Diagnostic(ErrorCode.ERR_BadSwitch).WithArguments("/subsystemversion-"));
 
             parsedArgs = DefaultParse(new[] { "/subsystemversion: ", "a.cs" }, WorkingDirectory);
-            parsedArgs.Errors.Verify(
-                Diagnostic(ErrorCode.ERR_SwitchNeedsString)
-                    .WithArguments("<text>", "subsystemversion")
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    Diagnostic(ErrorCode.ERR_SwitchNeedsString)
+                        .WithArguments("<text>", "subsystemversion")
+                );
 
             parsedArgs = DefaultParse(new[] { "/subsystemversion: 4.1", "a.cs" }, WorkingDirectory);
-            parsedArgs.Errors.Verify(
-                Diagnostic(ErrorCode.ERR_InvalidSubsystemVersion).WithArguments(" 4.1")
-            );
+            parsedArgs
+                .Errors
+                .Verify(Diagnostic(ErrorCode.ERR_InvalidSubsystemVersion).WithArguments(" 4.1"));
 
             parsedArgs = DefaultParse(new[] { "/subsystemversion:4 .0", "a.cs" }, WorkingDirectory);
-            parsedArgs.Errors.Verify(
-                Diagnostic(ErrorCode.ERR_InvalidSubsystemVersion).WithArguments("4 .0")
-            );
+            parsedArgs
+                .Errors
+                .Verify(Diagnostic(ErrorCode.ERR_InvalidSubsystemVersion).WithArguments("4 .0"));
 
             parsedArgs = DefaultParse(new[] { "/subsystemversion:4. 0", "a.cs" }, WorkingDirectory);
-            parsedArgs.Errors.Verify(
-                Diagnostic(ErrorCode.ERR_InvalidSubsystemVersion).WithArguments("4. 0")
-            );
+            parsedArgs
+                .Errors
+                .Verify(Diagnostic(ErrorCode.ERR_InvalidSubsystemVersion).WithArguments("4. 0"));
 
             parsedArgs = DefaultParse(new[] { "/subsystemversion:.", "a.cs" }, WorkingDirectory);
-            parsedArgs.Errors.Verify(
-                Diagnostic(ErrorCode.ERR_InvalidSubsystemVersion).WithArguments(".")
-            );
+            parsedArgs
+                .Errors
+                .Verify(Diagnostic(ErrorCode.ERR_InvalidSubsystemVersion).WithArguments("."));
 
             parsedArgs = DefaultParse(new[] { "/subsystemversion:4.", "a.cs" }, WorkingDirectory);
-            parsedArgs.Errors.Verify(
-                Diagnostic(ErrorCode.ERR_InvalidSubsystemVersion).WithArguments("4.")
-            );
+            parsedArgs
+                .Errors
+                .Verify(Diagnostic(ErrorCode.ERR_InvalidSubsystemVersion).WithArguments("4."));
 
             parsedArgs = DefaultParse(new[] { "/subsystemversion:.0", "a.cs" }, WorkingDirectory);
-            parsedArgs.Errors.Verify(
-                Diagnostic(ErrorCode.ERR_InvalidSubsystemVersion).WithArguments(".0")
-            );
+            parsedArgs
+                .Errors
+                .Verify(Diagnostic(ErrorCode.ERR_InvalidSubsystemVersion).WithArguments(".0"));
 
             parsedArgs = DefaultParse(new[] { "/subsystemversion:4.2 ", "a.cs" }, WorkingDirectory);
             parsedArgs.Errors.Verify();
@@ -8322,22 +8649,22 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
                 new[] { "/subsystemversion:4.65536", "a.cs" },
                 WorkingDirectory
             );
-            parsedArgs.Errors.Verify(
-                Diagnostic(ErrorCode.ERR_InvalidSubsystemVersion).WithArguments("4.65536")
-            );
+            parsedArgs
+                .Errors
+                .Verify(Diagnostic(ErrorCode.ERR_InvalidSubsystemVersion).WithArguments("4.65536"));
 
             parsedArgs = DefaultParse(
                 new[] { "/subsystemversion:65536.0", "a.cs" },
                 WorkingDirectory
             );
-            parsedArgs.Errors.Verify(
-                Diagnostic(ErrorCode.ERR_InvalidSubsystemVersion).WithArguments("65536.0")
-            );
+            parsedArgs
+                .Errors
+                .Verify(Diagnostic(ErrorCode.ERR_InvalidSubsystemVersion).WithArguments("65536.0"));
 
             parsedArgs = DefaultParse(new[] { "/subsystemversion:-4.0", "a.cs" }, WorkingDirectory);
-            parsedArgs.Errors.Verify(
-                Diagnostic(ErrorCode.ERR_InvalidSubsystemVersion).WithArguments("-4.0")
-            );
+            parsedArgs
+                .Errors
+                .Verify(Diagnostic(ErrorCode.ERR_InvalidSubsystemVersion).WithArguments("-4.0"));
 
             // TODO: incompatibilities: versions lower than '6.2' and 'arm', 'winmdobj', 'appcontainer'
         }
@@ -8353,9 +8680,9 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
             Assert.Equal("A.B.C", parsedArgs.CompilationOptions.MainTypeName);
 
             parsedArgs = DefaultParse(new[] { "/m: ", "a.cs" }, WorkingDirectory); // Mimicking Dev11
-            parsedArgs.Errors.Verify(
-                Diagnostic(ErrorCode.ERR_SwitchNeedsString).WithArguments("<text>", "m")
-            );
+            parsedArgs
+                .Errors
+                .Verify(Diagnostic(ErrorCode.ERR_SwitchNeedsString).WithArguments("<text>", "m"));
             Assert.Null(parsedArgs.CompilationOptions.MainTypeName);
 
             //  overriding the value
@@ -8368,17 +8695,19 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
 
             //  error
             parsedArgs = DefaultParse(new[] { "/maiN:", "a.cs" }, WorkingDirectory);
-            parsedArgs.Errors.Verify(
-                Diagnostic(ErrorCode.ERR_SwitchNeedsString).WithArguments("<text>", "main")
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    Diagnostic(ErrorCode.ERR_SwitchNeedsString).WithArguments("<text>", "main")
+                );
 
             parsedArgs = DefaultParse(new[] { "/MAIN+", "a.cs" }, WorkingDirectory);
             parsedArgs.Errors.Verify(Diagnostic(ErrorCode.ERR_BadSwitch).WithArguments("/MAIN+"));
 
             parsedArgs = DefaultParse(new[] { "/M", "a.cs" }, WorkingDirectory);
-            parsedArgs.Errors.Verify(
-                Diagnostic(ErrorCode.ERR_SwitchNeedsString).WithArguments("<text>", "m")
-            );
+            parsedArgs
+                .Errors
+                .Verify(Diagnostic(ErrorCode.ERR_SwitchNeedsString).WithArguments("<text>", "m"));
 
             //  incompatible values /main && /target
             parsedArgs = DefaultParse(new[] { "/main:a", "/t:library", "a.cs" }, WorkingDirectory);
@@ -8422,14 +8751,16 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
             parsedArgs.Errors.Verify(Diagnostic(ErrorCode.FTL_BadCodepage).WithArguments(""));
 
             parsedArgs = DefaultParse(new[] { "/codepage", "a.cs" }, WorkingDirectory);
-            parsedArgs.Errors.Verify(
-                Diagnostic(ErrorCode.ERR_SwitchNeedsString).WithArguments("<text>", "codepage")
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    Diagnostic(ErrorCode.ERR_SwitchNeedsString).WithArguments("<text>", "codepage")
+                );
 
             parsedArgs = DefaultParse(new[] { "/codepage+", "a.cs" }, WorkingDirectory);
-            parsedArgs.Errors.Verify(
-                Diagnostic(ErrorCode.ERR_BadSwitch).WithArguments("/codepage+")
-            );
+            parsedArgs
+                .Errors
+                .Verify(Diagnostic(ErrorCode.ERR_BadSwitch).WithArguments("/codepage+"));
         }
 
         [Fact, WorkItem(24735, "https://github.com/dotnet/roslyn/issues/24735")]
@@ -8459,45 +8790,51 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
 
             //  error
             parsedArgs = DefaultParse(new[] { "/checksumAlgorithm:256", "a.cs" }, WorkingDirectory);
-            parsedArgs.Errors.Verify(
-                Diagnostic(ErrorCode.FTL_BadChecksumAlgorithm).WithArguments("256")
-            );
+            parsedArgs
+                .Errors
+                .Verify(Diagnostic(ErrorCode.FTL_BadChecksumAlgorithm).WithArguments("256"));
 
             parsedArgs = DefaultParse(
                 new[] { "/checksumAlgorithm:sha-1", "a.cs" },
                 WorkingDirectory
             );
-            parsedArgs.Errors.Verify(
-                Diagnostic(ErrorCode.FTL_BadChecksumAlgorithm).WithArguments("sha-1")
-            );
+            parsedArgs
+                .Errors
+                .Verify(Diagnostic(ErrorCode.FTL_BadChecksumAlgorithm).WithArguments("sha-1"));
 
             parsedArgs = DefaultParse(new[] { "/checksumAlgorithm:sha", "a.cs" }, WorkingDirectory);
-            parsedArgs.Errors.Verify(
-                Diagnostic(ErrorCode.FTL_BadChecksumAlgorithm).WithArguments("sha")
-            );
+            parsedArgs
+                .Errors
+                .Verify(Diagnostic(ErrorCode.FTL_BadChecksumAlgorithm).WithArguments("sha"));
 
             parsedArgs = DefaultParse(new[] { "/checksumAlgorithm: ", "a.cs" }, WorkingDirectory);
-            parsedArgs.Errors.Verify(
-                Diagnostic(ErrorCode.ERR_SwitchNeedsString)
-                    .WithArguments("<text>", "checksumalgorithm")
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    Diagnostic(ErrorCode.ERR_SwitchNeedsString)
+                        .WithArguments("<text>", "checksumalgorithm")
+                );
 
             parsedArgs = DefaultParse(new[] { "/checksumAlgorithm:", "a.cs" }, WorkingDirectory);
-            parsedArgs.Errors.Verify(
-                Diagnostic(ErrorCode.ERR_SwitchNeedsString)
-                    .WithArguments("<text>", "checksumalgorithm")
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    Diagnostic(ErrorCode.ERR_SwitchNeedsString)
+                        .WithArguments("<text>", "checksumalgorithm")
+                );
 
             parsedArgs = DefaultParse(new[] { "/checksumAlgorithm", "a.cs" }, WorkingDirectory);
-            parsedArgs.Errors.Verify(
-                Diagnostic(ErrorCode.ERR_SwitchNeedsString)
-                    .WithArguments("<text>", "checksumalgorithm")
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    Diagnostic(ErrorCode.ERR_SwitchNeedsString)
+                        .WithArguments("<text>", "checksumalgorithm")
+                );
 
             parsedArgs = DefaultParse(new[] { "/checksumAlgorithm+", "a.cs" }, WorkingDirectory);
-            parsedArgs.Errors.Verify(
-                Diagnostic(ErrorCode.ERR_BadSwitch).WithArguments("/checksumAlgorithm+")
-            );
+            parsedArgs
+                .Errors
+                .Verify(Diagnostic(ErrorCode.ERR_BadSwitch).WithArguments("/checksumAlgorithm+"));
         }
 
         [Fact]
@@ -8539,19 +8876,22 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
 
             //  error
             parsedArgs = DefaultParse(new[] { "/ADDMODULE", "a.cs" }, WorkingDirectory);
-            parsedArgs.Errors.Verify(
-                Diagnostic(ErrorCode.ERR_SwitchNeedsString).WithArguments("<text>", "/addmodule:")
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    Diagnostic(ErrorCode.ERR_SwitchNeedsString)
+                        .WithArguments("<text>", "/addmodule:")
+                );
 
             parsedArgs = DefaultParse(new[] { "/ADDMODULE+", "a.cs" }, WorkingDirectory);
-            parsedArgs.Errors.Verify(
-                Diagnostic(ErrorCode.ERR_BadSwitch).WithArguments("/ADDMODULE+")
-            );
+            parsedArgs
+                .Errors
+                .Verify(Diagnostic(ErrorCode.ERR_BadSwitch).WithArguments("/ADDMODULE+"));
 
             parsedArgs = DefaultParse(new[] { "/ADDMODULE:", "a.cs" }, WorkingDirectory);
-            parsedArgs.Errors.Verify(
-                Diagnostic(ErrorCode.ERR_NoFileSpec).WithArguments("/ADDMODULE:")
-            );
+            parsedArgs
+                .Errors
+                .Verify(Diagnostic(ErrorCode.ERR_NoFileSpec).WithArguments("/ADDMODULE:"));
         }
 
         [Fact, WorkItem(530751, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/530751")]
@@ -8564,7 +8904,8 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
 using System.Runtime.CompilerServices;
 [assembly: CompilationRelaxations(CompilationRelaxations.NoStringInterning)]
 public class Mod { }"
-                    ).Path;
+                    )
+                    .Path;
 
             string source2 =
                 Temp.CreateFile(prefix: "", extension: ".cs")
@@ -8573,7 +8914,8 @@ public class Mod { }"
 using System.Runtime.CompilerServices;
 [assembly: CompilationRelaxations(4)]
 public class Mod { }"
-                    ).Path;
+                    )
+                    .Path;
 
             string source =
                 Temp.CreateFile(prefix: "", extension: ".cs")
@@ -8582,7 +8924,8 @@ public class Mod { }"
 using System.Runtime.CompilerServices;
 [assembly: CompilationRelaxations(CompilationRelaxations.NoStringInterning)]
 class Test { static void Main() {} }"
-                    ).Path;
+                    )
+                    .Path;
 
             var baseDir = Path.GetDirectoryName(source);
             // === Scenario 1 ===
@@ -8653,10 +8996,12 @@ class Test { static void Main() {} }"
                 Temp.CreateFile(prefix: "", extension: ".cs")
                     .WriteAllText(
                         @"public static class Extensions { public static bool EB(this bool b) { return b; } }"
-                    ).Path;
+                    )
+                    .Path;
             string source2 =
                 Temp.CreateFile(prefix: "", extension: ".cs")
-                    .WriteAllText(@"class C { static void Main() {} }").Path;
+                    .WriteAllText(@"class C { static void Main() {} }")
+                    .Path;
             var baseDir = Path.GetDirectoryName(source2);
 
             var outWriter = new StringWriter(CultureInfo.InvariantCulture);
@@ -8689,7 +9034,8 @@ class Test { static void Main() {} }"
                 Temp.CreateFile(prefix: "", extension: ".cs").WriteAllText(@"class Mod { }").Path;
             string source2 =
                 Temp.CreateFile(prefix: "", extension: ".cs")
-                    .WriteAllText(@"class C { static void Main() {} }").Path;
+                    .WriteAllText(@"class C { static void Main() {} }")
+                    .Path;
             var baseDir = Path.GetDirectoryName(source2);
 
             var outWriter = new StringWriter(CultureInfo.InvariantCulture);
@@ -8747,9 +9093,9 @@ class Test { static void Main() {} }"
             Assert.True((bool)parsedArgs.Utf8Output);
 
             parsedArgs = DefaultParse(new[] { "/utf8output:", "a.cs" }, WorkingDirectory);
-            parsedArgs.Errors.Verify(
-                Diagnostic(ErrorCode.ERR_BadSwitch).WithArguments("/utf8output:")
-            );
+            parsedArgs
+                .Errors
+                .Verify(Diagnostic(ErrorCode.ERR_BadSwitch).WithArguments("/utf8output:"));
         }
 
         [Fact]
@@ -9101,30 +9447,41 @@ class A                                                               \
             Assert.Equal("RIPAdamYauch", parsedArgs.CompilationOptions.CryptoKeyContainer);
 
             parsedArgs = DefaultParse(new[] { "/keycontainer", "a.cs" }, WorkingDirectory);
-            parsedArgs.Errors.Verify(
-                // error CS2006: Command-line syntax error: Missing '<text>' for 'keycontainer' option
-                Diagnostic(ErrorCode.ERR_SwitchNeedsString).WithArguments("<text>", "keycontainer")
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    // error CS2006: Command-line syntax error: Missing '<text>' for 'keycontainer' option
+                    Diagnostic(ErrorCode.ERR_SwitchNeedsString)
+                        .WithArguments("<text>", "keycontainer")
+                );
             Assert.Null(parsedArgs.CompilationOptions.CryptoKeyContainer);
 
             parsedArgs = DefaultParse(new[] { "/keycontainer-", "a.cs" }, WorkingDirectory);
-            parsedArgs.Errors.Verify(
-                // error CS2007: Unrecognized option: '/keycontainer-'
-                Diagnostic(ErrorCode.ERR_BadSwitch).WithArguments("/keycontainer-")
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    // error CS2007: Unrecognized option: '/keycontainer-'
+                    Diagnostic(ErrorCode.ERR_BadSwitch).WithArguments("/keycontainer-")
+                );
             Assert.Null(parsedArgs.CompilationOptions.CryptoKeyContainer);
 
             parsedArgs = DefaultParse(new[] { "/keycontainer:", "a.cs" }, WorkingDirectory);
-            parsedArgs.Errors.Verify(
-                // error CS2006: Command-line syntax error: Missing '<text>' for 'keycontainer' option
-                Diagnostic(ErrorCode.ERR_SwitchNeedsString).WithArguments("<text>", "keycontainer")
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    // error CS2006: Command-line syntax error: Missing '<text>' for 'keycontainer' option
+                    Diagnostic(ErrorCode.ERR_SwitchNeedsString)
+                        .WithArguments("<text>", "keycontainer")
+                );
             Assert.Null(parsedArgs.CompilationOptions.CryptoKeyContainer);
 
             parsedArgs = DefaultParse(new[] { "/keycontainer: ", "a.cs" }, WorkingDirectory);
-            parsedArgs.Errors.Verify(
-                Diagnostic(ErrorCode.ERR_SwitchNeedsString).WithArguments("<text>", "keycontainer")
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    Diagnostic(ErrorCode.ERR_SwitchNeedsString)
+                        .WithArguments("<text>", "keycontainer")
+                );
             Assert.Null(parsedArgs.CompilationOptions.CryptoKeyContainer);
 
             // KEYFILE
@@ -9137,10 +9494,12 @@ class A                                                               \
             //Assert.Equal(@"\somepath\some File.goo.bar", parsedArgs.CompilationOptions.CryptoKeyFile);
 
             parsedArgs = DefaultParse(new[] { "/keyFile", "a.cs" }, WorkingDirectory);
-            parsedArgs.Errors.Verify(
-                // error CS2005: Missing file specification for 'keyfile' option
-                Diagnostic(ErrorCode.ERR_NoFileSpec).WithArguments("keyfile")
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    // error CS2005: Missing file specification for 'keyfile' option
+                    Diagnostic(ErrorCode.ERR_NoFileSpec).WithArguments("keyfile")
+                );
             Assert.Null(parsedArgs.CompilationOptions.CryptoKeyFile);
 
             parsedArgs = DefaultParse(new[] { "/keyFile: ", "a.cs" }, WorkingDirectory);
@@ -9148,10 +9507,12 @@ class A                                                               \
             Assert.Null(parsedArgs.CompilationOptions.CryptoKeyFile);
 
             parsedArgs = DefaultParse(new[] { "/keyfile-", "a.cs" }, WorkingDirectory);
-            parsedArgs.Errors.Verify(
-                // error CS2007: Unrecognized option: '/keyfile-'
-                Diagnostic(ErrorCode.ERR_BadSwitch).WithArguments("/keyfile-")
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    // error CS2007: Unrecognized option: '/keyfile-'
+                    Diagnostic(ErrorCode.ERR_BadSwitch).WithArguments("/keyfile-")
+                );
             Assert.Null(parsedArgs.CompilationOptions.CryptoKeyFile);
 
             // DEFAULTS
@@ -9381,7 +9742,8 @@ class myClass
 }
 // </Code>
 "
-                    ).Path;
+                    )
+                    .Path;
 
             string rsp =
                 Temp.CreateFile()
@@ -9390,7 +9752,8 @@ class myClass
 /nologo
 /r:myAlias=""""
 "
-                    ).Path;
+                    )
+                    .Path;
 
             var outWriter = new StringWriter(CultureInfo.InvariantCulture);
             // csc errors_whitespace_008.cs @errors_whitespace_008.cs.rsp
@@ -9420,7 +9783,8 @@ class myClass
 /b
 /c
 "
-                    ).Path;
+                    )
+                    .Path;
 
             assertOrder(
                 new[] { "/a", "/b", "/c", "/d" },
@@ -9434,7 +9798,8 @@ class myClass
 /c
 /d
 "
-                    ).Path;
+                    )
+                    .Path;
 
             rspFilePath1 =
                 Temp.CreateFile()
@@ -9443,7 +9808,8 @@ class myClass
 /b
 @""{rspFilePath2}""
 "
-                    ).Path;
+                    )
+                    .Path;
 
             assertOrder(
                 new[] { "/a", "/b", "/c", "/d", "/e" },
@@ -9456,7 +9822,8 @@ class myClass
                         @$"
 /b
 "
-                    ).Path;
+                    )
+                    .Path;
 
             rspFilePath2 =
                 Temp.CreateFile()
@@ -9466,7 +9833,8 @@ class myClass
 /c
 /d
 "
-                    ).Path;
+                    )
+                    .Path;
 
             assertOrder(
                 new[] { "/a", "/b", "/c", "/d", "/e" },
@@ -9477,13 +9845,15 @@ class myClass
             {
                 var flattenedArgs = ArrayBuilder<string>.GetInstance();
                 var diagnostics = new List<Diagnostic>();
-                CSharpCommandLineParser.Default.FlattenArgs(
-                    args,
-                    diagnostics,
-                    flattenedArgs,
-                    scriptArgsOpt: null,
-                    baseDirectory: Path.DirectorySeparatorChar == '\\' ? @"c:\" : "/"
-                );
+                CSharpCommandLineParser
+                    .Default
+                    .FlattenArgs(
+                        args,
+                        diagnostics,
+                        flattenedArgs,
+                        scriptArgsOpt: null,
+                        baseDirectory: Path.DirectorySeparatorChar == '\\' ? @"c:\" : "/"
+                    );
 
                 Assert.Empty(diagnostics);
                 Assert.Equal(expected, flattenedArgs);
@@ -9519,7 +9889,8 @@ class myClass
 }
 // </Code>
 "
-                    ).Path;
+                    )
+                    .Path;
 
             string rsp =
                 Temp.CreateFile()
@@ -9528,7 +9899,8 @@ class myClass
 /nologo
 /r:myAlias=""  ""
 "
-                    ).Path;
+                    )
+                    .Path;
 
             var outWriter = new StringWriter(CultureInfo.InvariantCulture);
             // csc errors_whitespace_008.cs @errors_whitespace_008.cs.rsp
@@ -9575,7 +9947,8 @@ class myClass
 #endif
 
 "
-                    ).Path;
+                    )
+                    .Path;
 
             string rsp =
                 Temp.CreateFile()
@@ -9585,7 +9958,8 @@ class myClass
 /d:""AA;BB""
 /d:""N""N
 "
-                    ).Path;
+                    )
+                    .Path;
 
             var outWriter = new StringWriter(CultureInfo.InvariantCulture);
             // csc errors_whitespace_008.cs @errors_whitespace_008.cs.rsp
@@ -9628,7 +10002,8 @@ class myClass
 #endif
 
 "
-                    ).Path;
+                    )
+                    .Path;
 
             string rsp =
                 Temp.CreateFile()
@@ -9638,7 +10013,8 @@ class myClass
 /d:""AA;BB""
 /d:""N"" ""N
 "
-                    ).Path;
+                    )
+                    .Path;
 
             var outWriter = new StringWriter(CultureInfo.InvariantCulture);
             // csc errors_whitespace_008.cs @errors_whitespace_008.cs.rsp
@@ -10700,10 +11076,12 @@ public class C
 
             options = options.WithMainTypeName("a");
 
-            options.Errors.Verify(
-                // error CS2017: Cannot specify /main if building a module or library
-                Diagnostic(ErrorCode.ERR_NoMainOnDLL)
-            );
+            options
+                .Errors
+                .Verify(
+                    // error CS2017: Cannot specify /main if building a module or library
+                    Diagnostic(ErrorCode.ERR_NoMainOnDLL)
+                );
 
             var comp = CSharpCompilation.Create("a.dll", options: options);
 
@@ -10724,10 +11102,12 @@ public class C
                 );
 
             options = options.WithOutputKind(OutputKind.NetModule);
-            options.Errors.Verify(
-                // error CS2017: Cannot specify /main if building a module or library
-                Diagnostic(ErrorCode.ERR_NoMainOnDLL)
-            );
+            options
+                .Errors
+                .Verify(
+                    // error CS2017: Cannot specify /main if building a module or library
+                    Diagnostic(ErrorCode.ERR_NoMainOnDLL)
+                );
 
             comp = CSharpCompilation.Create("a.dll", options: options);
             comp.GetDiagnostics()
@@ -11205,7 +11585,8 @@ public class C
         int x; // CS0168
     }
 }"
-                    ).Path;
+                    )
+                    .Path;
 
             string rsp =
                 Temp.CreateFile()
@@ -11213,7 +11594,8 @@ public class C
                         @"
 /warnaserror
 "
-                    ).Path;
+                    )
+                    .Path;
             // Checks the base case without /noconfig (expect to see error)
             var outWriter = new StringWriter(CultureInfo.InvariantCulture);
             var csc = CreateCSharpCompiler(
@@ -11292,7 +11674,8 @@ public class C
     {
     }
 }"
-                    ).Path;
+                    )
+                    .Path;
 
             string rsp =
                 Temp.CreateFile()
@@ -11300,7 +11683,8 @@ public class C
                         @"
 /noconfig
 "
-                    ).Path;
+                    )
+                    .Path;
             // Checks the case with /noconfig inside the response file (expect to see warning)
             var outWriter = new StringWriter(CultureInfo.InvariantCulture);
             var csc = CreateCSharpCompiler(
@@ -11353,7 +11737,8 @@ public class C
     {
     }
 }"
-                    ).Path;
+                    )
+                    .Path;
 
             string rsp =
                 Temp.CreateFile()
@@ -11361,7 +11746,8 @@ public class C
                         @"
 /NOCONFIG
 "
-                    ).Path;
+                    )
+                    .Path;
             // Checks the case with /noconfig inside the response file (expect to see warning)
             var outWriter = new StringWriter(CultureInfo.InvariantCulture);
             var csc = CreateCSharpCompiler(
@@ -11411,7 +11797,8 @@ public class C
     {
     }
 }"
-                    ).Path;
+                    )
+                    .Path;
 
             string rsp =
                 Temp.CreateFile()
@@ -11419,7 +11806,8 @@ public class C
                         @"
 -noconfig
 "
-                    ).Path;
+                    )
+                    .Path;
             // Checks the case with /noconfig inside the response file (expect to see warning)
             var outWriter = new StringWriter(CultureInfo.InvariantCulture);
             var csc = CreateCSharpCompiler(
@@ -12119,7 +12507,8 @@ public class C
         string x;
     }
 }"
-                    ).Path;
+                    )
+                    .Path;
 
             var baseDir = Path.GetDirectoryName(source);
             var fileName = Path.GetFileName(source);
@@ -12319,7 +12708,8 @@ static void Main() {
 #pragma warning suppress 440
 }
 }"
-                    ).Path;
+                    )
+                    .Path;
 
             var baseDir = Path.GetDirectoryName(source);
             var fileName = Path.GetFileName(source);
@@ -12392,7 +12782,8 @@ class Test
  }
 }
 "
-                    ).Path;
+                    )
+                    .Path;
 
             var baseDir = Path.GetDirectoryName(source);
             var fileName = Path.GetFileName(source);
@@ -12425,7 +12816,8 @@ public class C
     }
 }
 "
-                    ).Path;
+                    )
+                    .Path;
 
             var baseDir = Path.GetDirectoryName(source);
             var fileName = Path.GetFileName(source);
@@ -12477,7 +12869,8 @@ public class Test
     }
 }
 "
-                    ).Path;
+                    )
+                    .Path;
 
             var baseDir = Path.GetDirectoryName(source);
             var fileName = Path.GetFileName(source);
@@ -12512,7 +12905,8 @@ public class Test
         {
             string source =
                 Temp.CreateFile(prefix: "", extension: ".cs")
-                    .WriteAllText(@"class Test { static void Main() {} }").Path;
+                    .WriteAllText(@"class Test { static void Main() {} }")
+                    .Path;
             string badres =
                 Temp.CreateFile().WriteAllBytes(TestResources.DiagnosticTests.badresfile).Path;
 
@@ -12542,7 +12936,8 @@ public class Test
         {
             string source =
                 Temp.CreateFile(prefix: "", extension: ".cs")
-                    .WriteAllText(@"class Test { static void Main() {} }").Path;
+                    .WriteAllText(@"class Test { static void Main() {} }")
+                    .Path;
             string badres = Temp.CreateFile().WriteAllBytes(new byte[] { 0, 0 }).Path;
 
             var baseDir = Path.GetDirectoryName(source);
@@ -12577,7 +12972,8 @@ class A
 {
 static void Main() { }
 }"
-                    ).Path;
+                    )
+                    .Path;
             var baseDir = Path.GetDirectoryName(source);
             var fileName = Path.GetFileName(source);
 
@@ -12608,7 +13004,8 @@ class Program
         public static void Main() { }
 #pragma warning restore 1998
 } "
-                    ).Path;
+                    )
+                    .Path;
             var outWriter = new StringWriter(CultureInfo.InvariantCulture);
 
             // Repro case 1
@@ -13135,15 +13532,17 @@ Copyright (C) Microsoft Corporation. All rights reserved.",
                     {
                         return new TestStream(
                             backingStream: new MemoryStream(
-                                Encoding.UTF8.GetBytes(
-                                    @"
+                                Encoding
+                                    .UTF8
+                                    .GetBytes(
+                                        @"
 {
   ""documents"": {
      ""f:/build/*"" : ""https://raw.githubusercontent.com/my-org/my-project/1111111111111111111111111111111111111111/*""
   }
 }
 "
-                                )
+                                    )
                             ),
                             dispose: () =>
                             {
@@ -13284,7 +13683,8 @@ class Program
 {
     public static void Main() { }
 } "
-                ).Path;
+                )
+                .Path;
         }
 
         [Fact, WorkItem(546452, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/546452")]
@@ -13366,7 +13766,8 @@ public class C { }
 
             var sourcePath =
                 Temp.CreateFile(directory: WorkingDirectory, extension: ".cs")
-                    .WriteAllText(source).Path;
+                    .WriteAllText(source)
+                    .Path;
             string xmlPath = Path.Combine(WorkingDirectory, "Test.xml");
             var csc = CreateCSharpCompiler(
                 null,
@@ -13879,9 +14280,10 @@ class C { }
                 StringComparison.Ordinal
             );
             Assert.Contains(
-                AnalyzerThatThrowsInGetMessage.Rule.MessageFormat.ToString(
-                    CultureInfo.InvariantCulture
-                ),
+                AnalyzerThatThrowsInGetMessage
+                    .Rule
+                    .MessageFormat
+                    .ToString(CultureInfo.InvariantCulture),
                 output,
                 StringComparison.Ordinal
             );
@@ -14010,7 +14412,8 @@ using System*
                         @"
 using System.Diagnostics; // Unused.
 "
-                    ).Path;
+                    )
+                    .Path;
             var cmd = CreateCSharpCompiler(
                 null,
                 WorkingDirectory,
@@ -14065,17 +14468,23 @@ using System.Diagnostics; // Unused.
             var comp = CreateEmptyCompilation(string.Empty);
             Assert.Equal(
                 "v4.0.30319",
-                ModuleMetadata.CreateFromImage(
-                    comp.EmitToArray(new EmitOptions(runtimeMetadataVersion: "v4.0.30319"))
-                ).Module.MetadataVersion
+                ModuleMetadata
+                    .CreateFromImage(
+                        comp.EmitToArray(new EmitOptions(runtimeMetadataVersion: "v4.0.30319"))
+                    )
+                    .Module
+                    .MetadataVersion
             );
 
             comp = CreateEmptyCompilation(string.Empty);
             Assert.Equal(
                 "_+@%#*^",
-                ModuleMetadata.CreateFromImage(
-                    comp.EmitToArray(new EmitOptions(runtimeMetadataVersion: "_+@%#*^"))
-                ).Module.MetadataVersion
+                ModuleMetadata
+                    .CreateFromImage(
+                        comp.EmitToArray(new EmitOptions(runtimeMetadataVersion: "_+@%#*^"))
+                    )
+                    .Module
+                    .MetadataVersion
             );
         }
 
@@ -14090,46 +14499,52 @@ using System.Diagnostics; // Unused.
             var nonExistentPath = "DoesNotExist";
 
             // lib switch
-            DefaultParse(
-                new[] { "/lib:" + invalidPath, sourceFile.Path },
-                WorkingDirectory
-            ).Errors.Verify(
-                // warning CS1668: Invalid search path '::' specified in '/LIB option' -- 'path is too long or invalid'
-                Diagnostic(ErrorCode.WRN_InvalidSearchPathDir)
-                    .WithArguments("::", "/LIB option", "path is too long or invalid")
-            );
-            DefaultParse(
-                new[] { "/lib:" + nonExistentPath, sourceFile.Path },
-                WorkingDirectory
-            ).Errors.Verify(
-                // warning CS1668: Invalid search path 'DoesNotExist' specified in '/LIB option' -- 'directory does not exist'
-                Diagnostic(ErrorCode.WRN_InvalidSearchPathDir)
-                    .WithArguments("DoesNotExist", "/LIB option", "directory does not exist")
-            );
+            DefaultParse(new[] { "/lib:" + invalidPath, sourceFile.Path }, WorkingDirectory)
+                .Errors
+                .Verify(
+                    // warning CS1668: Invalid search path '::' specified in '/LIB option' -- 'path is too long or invalid'
+                    Diagnostic(ErrorCode.WRN_InvalidSearchPathDir)
+                        .WithArguments("::", "/LIB option", "path is too long or invalid")
+                );
+            DefaultParse(new[] { "/lib:" + nonExistentPath, sourceFile.Path }, WorkingDirectory)
+                .Errors
+                .Verify(
+                    // warning CS1668: Invalid search path 'DoesNotExist' specified in '/LIB option' -- 'directory does not exist'
+                    Diagnostic(ErrorCode.WRN_InvalidSearchPathDir)
+                        .WithArguments("DoesNotExist", "/LIB option", "directory does not exist")
+                );
 
             // LIB environment variable
             DefaultParse(
                 new[] { sourceFile.Path },
                 WorkingDirectory,
                 additionalReferenceDirectories: invalidPath
-            ).Errors.Verify(
-                // warning CS1668: Invalid search path '::' specified in 'LIB environment variable' -- 'path is too long or invalid'
-                Diagnostic(ErrorCode.WRN_InvalidSearchPathDir)
-                    .WithArguments("::", "LIB environment variable", "path is too long or invalid")
-            );
+            )
+                .Errors
+                .Verify(
+                    // warning CS1668: Invalid search path '::' specified in 'LIB environment variable' -- 'path is too long or invalid'
+                    Diagnostic(ErrorCode.WRN_InvalidSearchPathDir)
+                        .WithArguments(
+                            "::",
+                            "LIB environment variable",
+                            "path is too long or invalid"
+                        )
+                );
             DefaultParse(
                 new[] { sourceFile.Path },
                 WorkingDirectory,
                 additionalReferenceDirectories: nonExistentPath
-            ).Errors.Verify(
-                // warning CS1668: Invalid search path 'DoesNotExist' specified in 'LIB environment variable' -- 'directory does not exist'
-                Diagnostic(ErrorCode.WRN_InvalidSearchPathDir)
-                    .WithArguments(
-                        "DoesNotExist",
-                        "LIB environment variable",
-                        "directory does not exist"
-                    )
-            );
+            )
+                .Errors
+                .Verify(
+                    // warning CS1668: Invalid search path 'DoesNotExist' specified in 'LIB environment variable' -- 'directory does not exist'
+                    Diagnostic(ErrorCode.WRN_InvalidSearchPathDir)
+                        .WithArguments(
+                            "DoesNotExist",
+                            "LIB environment variable",
+                            "directory does not exist"
+                        )
+                );
 
             CleanupAllGeneratedFiles(sourceFile.Path);
         }
@@ -14243,17 +14658,19 @@ using System.Diagnostics; // Unused.
             );
             args.Errors.Verify();
             Assert.True(
-                args.ParseOptions.Features.SetEquals(
-                    new Dictionary<string, string> { { "Test", "false" }, { "Key", "value" } }
-                )
+                args.ParseOptions
+                    .Features
+                    .SetEquals(
+                        new Dictionary<string, string> { { "Test", "false" }, { "Key", "value" } }
+                    )
             );
 
             args = DefaultParse(new[] { "/features:Test,", "a.vb" }, WorkingDirectory);
             args.Errors.Verify();
             Assert.True(
-                args.ParseOptions.Features.SetEquals(
-                    new Dictionary<string, string> { { "Test", "true" } }
-                )
+                args.ParseOptions
+                    .Features
+                    .SetEquals(new Dictionary<string, string> { { "Test", "true" } })
             );
         }
 
@@ -17610,22 +18027,28 @@ class C
         public void CompilingCodeWithInvalidPreProcessorSymbolsShouldProvideDiagnostics()
         {
             var parsedArgs = DefaultParse(new[] { "/define:1", "a.cs" }, WorkingDirectory);
-            parsedArgs.Errors.Verify(
-                // warning CS2029: Invalid name for a preprocessing symbol; '1' is not a valid identifier
-                Diagnostic(ErrorCode.WRN_DefineIdentifierRequired)
-                    .WithArguments("1")
-                    .WithLocation(1, 1)
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    // warning CS2029: Invalid name for a preprocessing symbol; '1' is not a valid identifier
+                    Diagnostic(ErrorCode.WRN_DefineIdentifierRequired)
+                        .WithArguments("1")
+                        .WithLocation(1, 1)
+                );
         }
 
         [Fact]
         public void CompilingCodeWithInvalidLanguageVersionShouldProvideDiagnostics()
         {
             var parsedArgs = DefaultParse(new[] { "/langversion:1000", "a.cs" }, WorkingDirectory);
-            parsedArgs.Errors.Verify(
-                // error CS1617: Invalid option '1000' for /langversion. Use '/langversion:?' to list supported values.
-                Diagnostic(ErrorCode.ERR_BadCompatMode).WithArguments("1000").WithLocation(1, 1)
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    // error CS1617: Invalid option '1000' for /langversion. Use '/langversion:?' to list supported values.
+                    Diagnostic(ErrorCode.ERR_BadCompatMode)
+                        .WithArguments("1000")
+                        .WithLocation(1, 1)
+                );
         }
 
         [Fact, WorkItem(16913, "https://github.com/dotnet/roslyn/issues/16913")]
@@ -17635,14 +18058,16 @@ class C
                 new[] { "/define:valid1,2invalid,valid3", "/define:4,5,valid6", "a.cs" },
                 WorkingDirectory
             );
-            parsedArgs.Errors.Verify(
-                // warning CS2029: Invalid value for '/define'; '2invalid' is not a valid identifier
-                Diagnostic(ErrorCode.WRN_DefineIdentifierRequired).WithArguments("2invalid"),
-                // warning CS2029: Invalid value for '/define'; '4' is not a valid identifier
-                Diagnostic(ErrorCode.WRN_DefineIdentifierRequired).WithArguments("4"),
-                // warning CS2029: Invalid value for '/define'; '5' is not a valid identifier
-                Diagnostic(ErrorCode.WRN_DefineIdentifierRequired).WithArguments("5")
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    // warning CS2029: Invalid value for '/define'; '2invalid' is not a valid identifier
+                    Diagnostic(ErrorCode.WRN_DefineIdentifierRequired).WithArguments("2invalid"),
+                    // warning CS2029: Invalid value for '/define'; '4' is not a valid identifier
+                    Diagnostic(ErrorCode.WRN_DefineIdentifierRequired).WithArguments("4"),
+                    // warning CS2029: Invalid value for '/define'; '5' is not a valid identifier
+                    Diagnostic(ErrorCode.WRN_DefineIdentifierRequired).WithArguments("5")
+                );
         }
 
         [WorkItem(406649, "https://devdiv.visualstudio.com/DevDiv/_workitems?id=406649")]
@@ -20177,12 +20602,15 @@ public class TestGenerator : ISourceGenerator
 
                 var comp = CreateEmptyCompilation(
                     source: generatorSource,
-                    references: TargetFrameworkUtil.NetStandard20References.Add(
-                        MetadataReference.CreateFromAssemblyInternal(
-                            typeof(ISourceGenerator).Assembly
-                        )
-                    ),
-                    options: TestOptions.DebugDll
+                    references: TargetFrameworkUtil
+                        .NetStandard20References
+                        .Add(
+                            MetadataReference.CreateFromAssemblyInternal(
+                                typeof(ISourceGenerator).Assembly
+                            )
+                        ),
+                    options: TestOptions
+                        .DebugDll
                         .WithCryptoKeyFile(Path.GetFileName(snk.Path))
                         .WithStrongNameProvider(virtualSnProvider),
                     assemblyName: "generator"
@@ -20343,19 +20771,23 @@ class C
             string baseDirectory = Path.Combine(root, "abc", "def");
 
             var parsedArgs = DefaultParse(new[] { @"/generatedfilesout:", "a.cs" }, baseDirectory);
-            parsedArgs.Errors.Verify(
-                // error CS2006: Command-line syntax error: Missing '<text>' for '/generatedfilesout:' option
-                Diagnostic(ErrorCode.ERR_SwitchNeedsString)
-                    .WithArguments("<text>", "/generatedfilesout:")
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    // error CS2006: Command-line syntax error: Missing '<text>' for '/generatedfilesout:' option
+                    Diagnostic(ErrorCode.ERR_SwitchNeedsString)
+                        .WithArguments("<text>", "/generatedfilesout:")
+                );
             Assert.Null(parsedArgs.GeneratedFilesOutputDirectory);
 
             parsedArgs = DefaultParse(new[] { @"/generatedfilesout:""""", "a.cs" }, baseDirectory);
-            parsedArgs.Errors.Verify(
-                // error CS2006: Command-line syntax error: Missing '<text>' for '/generatedfilesout:' option
-                Diagnostic(ErrorCode.ERR_SwitchNeedsString)
-                    .WithArguments("<text>", "/generatedfilesout:\"\"")
-            );
+            parsedArgs
+                .Errors
+                .Verify(
+                    // error CS2006: Command-line syntax error: Missing '<text>' for '/generatedfilesout:' option
+                    Diagnostic(ErrorCode.ERR_SwitchNeedsString)
+                        .WithArguments("<text>", "/generatedfilesout:\"\"")
+                );
             Assert.Null(parsedArgs.GeneratedFilesOutputDirectory);
 
             parsedArgs = DefaultParse(
@@ -21666,9 +22098,9 @@ public class Generator : ISourceGenerator
         private void AnalyzeNode(SyntaxNodeAnalysisContext context)
         {
             if (
-                (context.Node as PragmaWarningDirectiveTriviaSyntax).DisableOrRestoreKeyword.IsKind(
-                    SyntaxKind.RestoreKeyword
-                )
+                (context.Node as PragmaWarningDirectiveTriviaSyntax)
+                    .DisableOrRestoreKeyword
+                    .IsKind(SyntaxKind.RestoreKeyword)
             )
             {
                 context.ReportDiagnostic(Diagnostic.Create(Info01, context.Node.GetLocation()));
@@ -21749,9 +22181,9 @@ public class Generator : ISourceGenerator
                 (nodeContext) =>
                 {
                     if (
-                        (
-                            nodeContext.Node as PragmaWarningDirectiveTriviaSyntax
-                        ).DisableOrRestoreKeyword.IsKind(SyntaxKind.DisableKeyword)
+                        (nodeContext.Node as PragmaWarningDirectiveTriviaSyntax)
+                            .DisableOrRestoreKeyword
+                            .IsKind(SyntaxKind.DisableKeyword)
                     )
                     {
                         nodeContext.ReportDiagnostic(

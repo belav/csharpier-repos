@@ -141,13 +141,9 @@ internal partial class RequestStream : Stream
 
         if (_dataChunkIndex != -1)
         {
-            dataRead = _requestContext.Request.GetChunks(
-                ref _dataChunkIndex,
-                ref _dataChunkOffset,
-                buffer,
-                offset,
-                size
-            );
+            dataRead = _requestContext
+                .Request
+                .GetChunks(ref _dataChunkIndex, ref _dataChunkOffset, buffer, offset, size);
         }
 
         if (_dataChunkIndex == -1 && dataRead == 0)
@@ -246,13 +242,9 @@ internal partial class RequestStream : Stream
         uint dataRead = 0;
         if (_dataChunkIndex != -1)
         {
-            dataRead = _requestContext.Request.GetChunks(
-                ref _dataChunkIndex,
-                ref _dataChunkOffset,
-                buffer,
-                offset,
-                size
-            );
+            dataRead = _requestContext
+                .Request
+                .GetChunks(ref _dataChunkIndex, ref _dataChunkOffset, buffer, offset, size);
             if (dataRead > 0)
             {
                 UpdateAfterRead(UnsafeNclNativeMethods.ErrorCodes.ERROR_SUCCESS, dataRead);

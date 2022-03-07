@@ -136,9 +136,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                     var bag = DiagnosticBag.GetInstance();
                     bag.Add(
                         ErrorCode.ERR_SimpleProgramIsEmpty,
-                        (
-                            (EmptyStatementSyntax)firstGlobalStatement.Statement
-                        ).SemicolonToken.GetLocation()
+                        ((EmptyStatementSyntax)firstGlobalStatement.Statement)
+                            .SemicolonToken
+                            .GetLocation()
                     );
                     diagnostics = bag.ToReadOnlyAndFree();
                 }
@@ -225,9 +225,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                             : SingleTypeDeclaration.TypeDeclarationFlags.None
                     )
                     | SingleTypeDeclaration.TypeDeclarationFlags.IsSimpleProgram,
-                syntaxReference: firstGlobalStatement.SyntaxTree.GetReference(
-                    firstGlobalStatement.Parent
-                ),
+                syntaxReference: firstGlobalStatement
+                    .SyntaxTree
+                    .GetReference(firstGlobalStatement.Parent),
                 nameLocation: new SourceLocation(firstGlobalStatement.GetFirstToken()),
                 memberNames: ImmutableSegmentedDictionary<string, VoidResult>.Empty,
                 children: ImmutableArray<SingleTypeDeclaration>.Empty,
@@ -1094,9 +1094,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                 case SyntaxKind.FieldDeclaration:
                     anyNonTypeMembers = true;
                     CodeAnalysis.Syntax.InternalSyntax.SeparatedSyntaxList<Syntax.InternalSyntax.VariableDeclaratorSyntax> fieldDeclarators =
-                        (
-                            (Syntax.InternalSyntax.FieldDeclarationSyntax)member
-                        ).Declaration.Variables;
+                        ((Syntax.InternalSyntax.FieldDeclarationSyntax)member)
+                            .Declaration
+                            .Variables;
                     int numFieldDeclarators = fieldDeclarators.Count;
                     for (int i = 0; i < numFieldDeclarators; i++)
                     {
@@ -1107,9 +1107,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                 case SyntaxKind.EventFieldDeclaration:
                     anyNonTypeMembers = true;
                     CoreInternalSyntax.SeparatedSyntaxList<Syntax.InternalSyntax.VariableDeclaratorSyntax> eventDeclarators =
-                        (
-                            (Syntax.InternalSyntax.EventFieldDeclarationSyntax)member
-                        ).Declaration.Variables;
+                        ((Syntax.InternalSyntax.EventFieldDeclarationSyntax)member)
+                            .Declaration
+                            .Variables;
                     int numEventDeclarators = eventDeclarators.Count;
                     for (int i = 0; i < numEventDeclarators; i++)
                     {
@@ -1153,9 +1153,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                 case SyntaxKind.ConstructorDeclaration:
                     anyNonTypeMembers = true;
                     set.TryAdd(
-                        ((Syntax.InternalSyntax.ConstructorDeclarationSyntax)member).Modifiers.Any(
-                            (int)SyntaxKind.StaticKeyword
-                        )
+                        ((Syntax.InternalSyntax.ConstructorDeclarationSyntax)member)
+                            .Modifiers
+                            .Any((int)SyntaxKind.StaticKeyword)
                           ? WellKnownMemberNames.StaticConstructorName
                           : WellKnownMemberNames.InstanceConstructorName
                     );

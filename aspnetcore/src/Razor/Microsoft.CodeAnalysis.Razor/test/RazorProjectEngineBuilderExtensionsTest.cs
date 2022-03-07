@@ -25,7 +25,8 @@ public class RazorProjectEngineBuilderExtensionsTest
         );
 
         // Assert
-        var feature = projectEngine.EngineFeatures
+        var feature = projectEngine
+            .EngineFeatures
             .OfType<ConfigureParserForCSharpVersionFeature>()
             .FirstOrDefault();
         Assert.NotNull(feature);

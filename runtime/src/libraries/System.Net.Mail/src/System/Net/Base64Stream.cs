@@ -566,13 +566,9 @@ namespace System.Net
             {
                 while (true)
                 {
-                    IAsyncResult result = _parent.BaseStream.BeginRead(
-                        _buffer,
-                        _offset,
-                        _count,
-                        s_onRead,
-                        this
-                    );
+                    IAsyncResult result = _parent
+                        .BaseStream
+                        .BeginRead(_buffer, _offset, _count, s_onRead, this);
                     if (!result.CompletedSynchronously || CompleteRead(result))
                     {
                         break;
@@ -651,13 +647,15 @@ namespace System.Net
                     );
                     if (_written < _count)
                     {
-                        IAsyncResult result = _parent.BaseStream.BeginWrite(
-                            _parent.WriteState.Buffer,
-                            0,
-                            _parent.WriteState.Length,
-                            s_onWrite,
-                            this
-                        );
+                        IAsyncResult result = _parent
+                            .BaseStream
+                            .BeginWrite(
+                                _parent.WriteState.Buffer,
+                                0,
+                                _parent.WriteState.Length,
+                                s_onWrite,
+                                this
+                            );
                         if (!result.CompletedSynchronously)
                         {
                             break;

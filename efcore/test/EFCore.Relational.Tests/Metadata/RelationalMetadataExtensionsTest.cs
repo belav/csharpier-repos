@@ -43,7 +43,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                 modelBuilder
                     .Entity<Customer>()
                     .HasIndex(e => e.Id)
-                    .HasFilter("[Id] % 2 = 0").Metadata;
+                    .HasFilter("[Id] % 2 = 0")
+                    .Metadata;
 
             Assert.Equal("[Id] % 2 = 0", index.GetFilter());
 
@@ -272,9 +273,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                     property.ClrType,
                     property.DeclaringEntityType.DisplayName()
                 ),
-                Assert.Throws<InvalidOperationException>(
-                    () => property.SetDefaultValue(guid)
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(() => property.SetDefaultValue(guid))
+                    .Message
             );
         }
 
@@ -308,7 +309,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                     .Entity<Order>()
                     .HasOne<Customer>()
                     .WithOne()
-                    .HasForeignKey<Order>(e => e.CustomerId).Metadata;
+                    .HasForeignKey<Order>(e => e.CustomerId)
+                    .Metadata;
 
             Assert.Equal("FK_Order_Customer_CustomerId", foreignKey.GetConstraintName());
 
@@ -572,10 +574,15 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                     entityType.DisplayName(),
                     entityType.DisplayName()
                 ),
-                Assert.Throws<InvalidOperationException>(
-                    () =>
-                        entityType.AddCheckConstraint("CK_Customer_AlternateId", "AlternateId < Id")
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(
+                        () =>
+                            entityType.AddCheckConstraint(
+                                "CK_Customer_AlternateId",
+                                "AlternateId < Id"
+                            )
+                    )
+                    .Message
             );
         }
 

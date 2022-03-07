@@ -35,23 +35,27 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
             Assert.Equal(
                 CoreStrings.ModelReadOnly,
-                Assert.Throws<InvalidOperationException>(
-                    () =>
-                        firstEntity.AddSkipNavigation(
-                            nameof(Order.Products),
-                            null,
-                            secondEntity,
-                            true,
-                            false
-                        )
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(
+                        () =>
+                            firstEntity.AddSkipNavigation(
+                                nameof(Order.Products),
+                                null,
+                                secondEntity,
+                                true,
+                                false
+                            )
+                    )
+                    .Message
             );
 
             Assert.Equal(
                 CoreStrings.ModelReadOnly,
-                Assert.Throws<InvalidOperationException>(
-                    () => firstEntity.RemoveSkipNavigation(navigation)
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(
+                        () => firstEntity.RemoveSkipNavigation(navigation)
+                    )
+                    .Message
             );
 
             Assert.Equal(
@@ -61,9 +65,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
             Assert.Equal(
                 CoreStrings.ModelReadOnly,
-                Assert.Throws<InvalidOperationException>(
-                    () => navigation.SetForeignKey(null)
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(() => navigation.SetForeignKey(null))
+                    .Message
             );
 
             Assert.Equal(
@@ -73,16 +77,16 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
             Assert.Equal(
                 CoreStrings.ModelReadOnly,
-                Assert.Throws<InvalidOperationException>(
-                    () => navigation.SetIsEagerLoaded(null)
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(() => navigation.SetIsEagerLoaded(null))
+                    .Message
             );
 
             Assert.Equal(
                 CoreStrings.ModelReadOnly,
-                Assert.Throws<InvalidOperationException>(
-                    () => navigation.SetPropertyAccessMode(null)
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(() => navigation.SetPropertyAccessMode(null))
+                    .Message
             );
         }
 
@@ -212,9 +216,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     nameof(Order.Products),
                     nameof(OrderProduct)
                 ),
-                Assert.Throws<InvalidOperationException>(
-                    () => navigation.SetForeignKey(orderProductForeignKey)
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(
+                        () => navigation.SetForeignKey(orderProductForeignKey)
+                    )
+                    .Message
             );
         }
 
@@ -252,9 +258,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     nameof(OrderProduct.Order),
                     nameof(Order)
                 ),
-                Assert.Throws<InvalidOperationException>(
-                    () => navigation.SetForeignKey(orderProductForeignKey)
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(
+                        () => navigation.SetForeignKey(orderProductForeignKey)
+                    )
+                    .Message
             );
         }
 
@@ -311,9 +319,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     nameof(Product.Orders),
                     nameof(Product)
                 ),
-                Assert.Throws<InvalidOperationException>(
-                    () => productsNavigation.SetForeignKey(orderProductForeignKey)
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(
+                        () => productsNavigation.SetForeignKey(orderProductForeignKey)
+                    )
+                    .Message
             );
         }
 
@@ -392,9 +402,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     nameof(Product),
                     nameof(Product.Orders)
                 ),
-                Assert.Throws<InvalidOperationException>(
-                    () => orderEntity.RemoveSkipNavigation(productsNavigation)
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(
+                        () => orderEntity.RemoveSkipNavigation(productsNavigation)
+                    )
+                    .Message
             );
 
             productsNavigation.SetInverse(null);
@@ -461,9 +473,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     nameof(Order.Products),
                     nameof(Product)
                 ),
-                Assert.Throws<InvalidOperationException>(
-                    () => productsNavigation.SetInverse(ordersNavigation)
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(
+                        () => productsNavigation.SetInverse(ordersNavigation)
+                    )
+                    .Message
             );
         }
 
@@ -518,9 +532,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     nameof(Order.Products),
                     nameof(OrderProduct)
                 ),
-                Assert.Throws<InvalidOperationException>(
-                    () => productsNavigation.SetInverse(ordersNavigation)
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(
+                        () => productsNavigation.SetInverse(ordersNavigation)
+                    )
+                    .Message
             );
         }
 

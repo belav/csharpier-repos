@@ -456,21 +456,26 @@ public class HtmlHelperHiddenTest
         );
         helper.ViewContext.ViewData.TemplateInfo.HtmlFieldPrefix = "MyPrefix";
         helper.ViewData.ModelState.Clear();
-        helper.ViewData.ModelState.SetModelValue(
-            "Property1",
-            "modelstate-without-prefix",
-            "modelstate-without-prefix"
-        );
-        helper.ViewData.ModelState.SetModelValue(
-            "MyPrefix.Property1",
-            "modelstate-with-prefix",
-            "modelstate-with-prefix"
-        );
-        helper.ViewData.ModelState.SetModelValue(
-            "MyPrefix$Property1",
-            "modelstate-with-iddotreplacement",
-            "modelstate-with-iddotreplacement"
-        );
+        helper
+            .ViewData
+            .ModelState
+            .SetModelValue("Property1", "modelstate-without-prefix", "modelstate-without-prefix");
+        helper
+            .ViewData
+            .ModelState
+            .SetModelValue(
+                "MyPrefix.Property1",
+                "modelstate-with-prefix",
+                "modelstate-with-prefix"
+            );
+        helper
+            .ViewData
+            .ModelState
+            .SetModelValue(
+                "MyPrefix$Property1",
+                "modelstate-with-iddotreplacement",
+                "modelstate-with-iddotreplacement"
+            );
 
         // Act
         var result = helper.Hidden("Property1", "explicit-value", htmlAttributes: null);
@@ -826,21 +831,26 @@ public class HtmlHelperHiddenTest
         helper.ViewData.Model.Property1 = "propValue";
         helper.ViewContext.ViewData.TemplateInfo.HtmlFieldPrefix = "MyPrefix";
         helper.ViewData.ModelState.Clear();
-        helper.ViewData.ModelState.SetModelValue(
-            "Property1",
-            "modelstate-without-prefix",
-            "modelstate-without-prefix"
-        );
-        helper.ViewData.ModelState.SetModelValue(
-            "MyPrefix.Property1",
-            "modelstate-with-prefix",
-            "modelstate-with-prefix"
-        );
-        helper.ViewData.ModelState.SetModelValue(
-            "MyPrefix$Property1",
-            "modelstate-with-iddotreplacement",
-            "modelstate-with-iddotreplacement"
-        );
+        helper
+            .ViewData
+            .ModelState
+            .SetModelValue("Property1", "modelstate-without-prefix", "modelstate-without-prefix");
+        helper
+            .ViewData
+            .ModelState
+            .SetModelValue(
+                "MyPrefix.Property1",
+                "modelstate-with-prefix",
+                "modelstate-with-prefix"
+            );
+        helper
+            .ViewData
+            .ModelState
+            .SetModelValue(
+                "MyPrefix$Property1",
+                "modelstate-with-iddotreplacement",
+                "modelstate-with-iddotreplacement"
+            );
 
         // Act
         var result = helper.HiddenFor(m => m.Property1, htmlAttributes: null);

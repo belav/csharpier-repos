@@ -12,9 +12,11 @@ internal class TemporaryFileProvider : IDisposable
     public TemporaryFileProvider()
     {
         Root =
-            Directory.CreateDirectory(
-                Path.Combine(Path.GetTempPath(), "tmpfiles", Guid.NewGuid().ToString())
-            ).FullName;
+            Directory
+                .CreateDirectory(
+                    Path.Combine(Path.GetTempPath(), "tmpfiles", Guid.NewGuid().ToString())
+                )
+                .FullName;
     }
 
     public string Root { get; }

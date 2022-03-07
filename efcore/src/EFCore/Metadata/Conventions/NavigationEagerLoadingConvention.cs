@@ -40,9 +40,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             IConventionContext<bool?> context
         )
         {
-            relationshipBuilder.Metadata.PrincipalToDependent?.Builder.AutoInclude(
-                relationshipBuilder.Metadata.IsOwnership
-            );
+            relationshipBuilder
+                .Metadata
+                .PrincipalToDependent
+                ?.Builder
+                .AutoInclude(relationshipBuilder.Metadata.IsOwnership);
         }
     }
 }

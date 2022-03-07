@@ -124,7 +124,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Storage
             if (relativePath == documentKey.FilePath)
                 return null;
 
-            var dimensions = projectContainerKey.Value.Dimensions
+            var dimensions = projectContainerKey
+                .Value
+                .Dimensions
                 .Add($"{nameof(DocumentKey)}.{nameof(DocumentKey.Name)}", documentKey.Name)
                 .Add($"{nameof(DocumentKey)}.{nameof(DocumentKey.FilePath)}", relativePath);
 

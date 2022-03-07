@@ -50,10 +50,10 @@ namespace System.Globalization.Tests
         public void CurrentUICulture()
         {
             var newUICulture = new CultureInfo(
-                CultureInfo.CurrentUICulture.Name.Equals(
-                    "ja-JP",
-                    StringComparison.OrdinalIgnoreCase
-                )
+                CultureInfo
+                    .CurrentUICulture
+                    .Name
+                    .Equals("ja-JP", StringComparison.OrdinalIgnoreCase)
                   ? "ar-SA"
                   : "ja-JP"
             );
@@ -82,10 +82,10 @@ namespace System.Globalization.Tests
                     {
                         CultureInfo newCulture = new CultureInfo(
                             CultureInfo.DefaultThreadCurrentCulture == null
-                                || CultureInfo.DefaultThreadCurrentCulture.Name.Equals(
-                                    "ja-JP",
-                                    StringComparison.OrdinalIgnoreCase
-                                )
+                                || CultureInfo
+                                    .DefaultThreadCurrentCulture
+                                    .Name
+                                    .Equals("ja-JP", StringComparison.OrdinalIgnoreCase)
                               ? "ar-SA"
                               : "ja-JP"
                         );
@@ -113,10 +113,10 @@ namespace System.Globalization.Tests
                     {
                         CultureInfo newUICulture = new CultureInfo(
                             CultureInfo.DefaultThreadCurrentUICulture == null
-                                || CultureInfo.DefaultThreadCurrentUICulture.Name.Equals(
-                                    "ja-JP",
-                                    StringComparison.OrdinalIgnoreCase
-                                )
+                                || CultureInfo
+                                    .DefaultThreadCurrentUICulture
+                                    .Name
+                                    .Equals("ja-JP", StringComparison.OrdinalIgnoreCase)
                               ? "ar-SA"
                               : "ja-JP"
                         );

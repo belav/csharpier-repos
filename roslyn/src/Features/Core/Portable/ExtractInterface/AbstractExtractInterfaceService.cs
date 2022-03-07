@@ -155,10 +155,12 @@ namespace Microsoft.CodeAnalysis.ExtractInterface
             CancellationToken cancellationToken
         )
         {
-            var containingNamespaceDisplay =
-                refactoringResult.TypeToExtractFrom.ContainingNamespace.IsGlobalNamespace
-                    ? string.Empty
-                    : refactoringResult.TypeToExtractFrom.ContainingNamespace.ToDisplayString();
+            var containingNamespaceDisplay = refactoringResult
+                .TypeToExtractFrom
+                .ContainingNamespace
+                .IsGlobalNamespace
+                ? string.Empty
+                : refactoringResult.TypeToExtractFrom.ContainingNamespace.ToDisplayString();
 
             var extractInterfaceOptions = await GetExtractInterfaceOptionsAsync(
                     refactoringResult.DocumentToExtractFrom,
@@ -284,9 +286,10 @@ namespace Microsoft.CodeAnalysis.ExtractInterface
 
             var completedSolution = await GetFormattedSolutionAsync(
                     completedUnformattedSolution,
-                    symbolMapping.DocumentIdsToSymbolMap.Keys.Concat(
-                        unformattedInterfaceDocument.Id
-                    ),
+                    symbolMapping
+                        .DocumentIdsToSymbolMap
+                        .Keys
+                        .Concat(unformattedInterfaceDocument.Id),
                     cancellationToken
                 )
                 .ConfigureAwait(false);
@@ -316,9 +319,9 @@ namespace Microsoft.CodeAnalysis.ExtractInterface
                 )
                 .ConfigureAwait(false);
 
-            var document = symbolMapping.AnnotatedSolution.GetDocument(
-                refactoringResult.DocumentToExtractFrom.Id
-            );
+            var document = symbolMapping
+                .AnnotatedSolution
+                .GetDocument(refactoringResult.DocumentToExtractFrom.Id);
 
             var (documentWithInterface, _) = await ExtractTypeHelpers
                 .AddTypeToExistingFileAsync(
@@ -346,9 +349,10 @@ namespace Microsoft.CodeAnalysis.ExtractInterface
 
             var completedSolution = await GetFormattedSolutionAsync(
                     unformattedSolutionWithUpdatedType,
-                    symbolMapping.DocumentIdsToSymbolMap.Keys.Concat(
-                        refactoringResult.DocumentToExtractFrom.Id
-                    ),
+                    symbolMapping
+                        .DocumentIdsToSymbolMap
+                        .Keys
+                        .Concat(refactoringResult.DocumentToExtractFrom.Id),
                     cancellationToken
                 )
                 .ConfigureAwait(false);
@@ -378,16 +382,24 @@ namespace Microsoft.CodeAnalysis.ExtractInterface
                 name => !conflictingTypeNames.Contains(name)
             );
             var syntaxFactsService = document.GetLanguageService<ISyntaxFactsService>();
-            var notificationService =
-                document.Project.Solution.Workspace.Services.GetService<INotificationService>();
+            var notificationService = document
+                .Project
+                .Solution
+                .Workspace
+                .Services
+                .GetService<INotificationService>();
             var generatedNameTypeParameterSuffix = ExtractTypeHelpers.GetTypeParameterSuffix(
                 document,
                 type,
                 extractableMembers
             );
 
-            var service =
-                document.Project.Solution.Workspace.Services.GetService<IExtractInterfaceOptionsService>();
+            var service = document
+                .Project
+                .Solution
+                .Workspace
+                .Services
+                .GetService<IExtractInterfaceOptionsService>();
             return service.GetExtractInterfaceOptionsAsync(
                 syntaxFactsService,
                 notificationService,

@@ -85,14 +85,16 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
             // button
             var checkAllButton = new Button() { Content = "Check All" };
             checkAllButton.Click += (o, a) =>
-                optionsPanel.Children
+                optionsPanel
+                    .Children
                     .OfType<CheckBox>()
                     .Where(c => c.Visibility == Visibility.Visible)
                     .Do(c => c.IsChecked = true);
 
             var uncheckAllButton = new Button() { Content = "Uncheck All" };
             uncheckAllButton.Click += (o, a) =>
-                optionsPanel.Children
+                optionsPanel
+                    .Children
                     .OfType<CheckBox>()
                     .Where(c => c.Visibility == Visibility.Visible)
                     .Do(c => c.IsChecked = false);

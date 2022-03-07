@@ -103,10 +103,13 @@ public class ResponseCacheFilterApplicationModelProviderTest
     {
         // Arrange
         var options = Options.Create(new MvcOptions());
-        options.Value.CacheProfiles.Add(
-            "TestCacheProfile",
-            new CacheProfile { Duration = 14, VaryByQueryKeys = new[] { "A" }, }
-        );
+        options
+            .Value
+            .CacheProfiles
+            .Add(
+                "TestCacheProfile",
+                new CacheProfile { Duration = 14, VaryByQueryKeys = new[] { "A" }, }
+            );
         var provider = new ResponseCacheFilterApplicationModelProvider(
             options,
             Mock.Of<ILoggerFactory>()

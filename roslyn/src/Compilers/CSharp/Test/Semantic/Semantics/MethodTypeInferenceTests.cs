@@ -934,7 +934,8 @@ public class Test
 
             var book = (IdentifierNameSyntax)tree.GetRoot()
                 .DescendantTokens()
-                .Last(t => t.Text == "b").Parent;
+                .Last(t => t.Text == "b")
+                .Parent;
             var bookType = model.GetTypeInfo(book).Type;
 
             Assert.Equal("Book", bookType.Name);
@@ -978,7 +979,8 @@ public class Test
 
             var author = (IdentifierNameSyntax)tree.GetRoot()
                 .DescendantTokens()
-                .Last(t => t.Text == "a").Parent;
+                .Last(t => t.Text == "a")
+                .Parent;
             var authorType = model.GetTypeInfo(author).Type;
 
             Assert.Equal("Author", authorType.Name);
@@ -1022,13 +1024,15 @@ public class Test
 
             var bookResult = (IdentifierNameSyntax)tree.GetRoot()
                 .DescendantTokens()
-                .Last(t => t.Text == "bookResult").Parent;
+                .Last(t => t.Text == "bookResult")
+                .Parent;
             var bookResultType = model.GetTypeInfo(bookResult).Type;
             Assert.Equal("Book", bookResultType.Name);
 
             var authorResult = (IdentifierNameSyntax)tree.GetRoot()
                 .DescendantTokens()
-                .Last(t => t.Text == "authorResult").Parent;
+                .Last(t => t.Text == "authorResult")
+                .Parent;
             var authorResultType = model.GetTypeInfo(authorResult).Type;
             Assert.Equal("Author", authorResultType.Name);
         }

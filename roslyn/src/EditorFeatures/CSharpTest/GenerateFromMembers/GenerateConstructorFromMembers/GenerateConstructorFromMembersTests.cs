@@ -1289,9 +1289,9 @@ class Z
                 chosenSymbols: new string[] { "a", "b" },
                 optionsCallback: options => options[0].Value = true,
                 parameters: new TestParameters(
-                    parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
-                        LanguageVersion.CSharp6
-                    ),
+                    parseOptions: CSharpParseOptions
+                        .Default
+                        .WithLanguageVersion(LanguageVersion.CSharp6),
                     options: Option(
                         CSharpCodeStyleOptions.PreferThrowExpression,
                         CodeStyleOptions2.FalseWithSilentEnforcement

@@ -17,11 +17,13 @@ namespace System.Net.Security.Tests
         [Fact]
         public static void EventSource_ExistsWithCorrectId()
         {
-            Type esType = typeof(SslStream).Assembly.GetType(
-                "System.Net.Security.NetSecurityTelemetry",
-                throwOnError: true,
-                ignoreCase: false
-            );
+            Type esType = typeof(SslStream)
+                .Assembly
+                .GetType(
+                    "System.Net.Security.NetSecurityTelemetry",
+                    throwOnError: true,
+                    ignoreCase: false
+                );
             Assert.NotNull(esType);
 
             Assert.Equal("System.Net.Security", EventSource.GetName(esType));
@@ -199,15 +201,13 @@ namespace System.Net.Security.Tests
                         Assert.All(failures, f => Assert.NotEmpty(f.Event.Payload[2] as string)); // exceptionMessage
 
                         EventWrittenEventArgs serverFailure =
-                            Assert.Single(
-                                failures,
-                                f => f.ActivityId == serverStart.ActivityId
-                            ).Event;
+                            Assert
+                                .Single(failures, f => f.ActivityId == serverStart.ActivityId)
+                                .Event;
                         EventWrittenEventArgs clientFailure =
-                            Assert.Single(
-                                failures,
-                                f => f.ActivityId == clientStart.ActivityId
-                            ).Event;
+                            Assert
+                                .Single(failures, f => f.ActivityId == clientStart.ActivityId)
+                                .Event;
 
                         // isServer
                         Assert.Equal(true, serverFailure.Payload[0]);

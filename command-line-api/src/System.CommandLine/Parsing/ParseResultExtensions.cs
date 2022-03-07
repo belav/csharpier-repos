@@ -307,9 +307,9 @@ namespace System.CommandLine.Parsing
 
             string[] OptionsWithArgumentLimitReached(SymbolResult symbolResult)
             {
-                var optionsWithArgLimitReached = symbolResult.Children.Where(
-                    c => c.IsArgumentLimitReached
-                );
+                var optionsWithArgLimitReached = symbolResult
+                    .Children
+                    .Where(c => c.IsArgumentLimitReached);
 
                 var exclude = optionsWithArgLimitReached
                     .OfType<OptionResult>()

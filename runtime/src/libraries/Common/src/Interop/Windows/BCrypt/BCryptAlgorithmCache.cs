@@ -40,12 +40,14 @@ internal static partial class Interop
                 }
 
                 SafeBCryptAlgorithmHandle safeBCryptAlgorithmHandle;
-                NTSTATUS ntStatus = Interop.BCrypt.BCryptOpenAlgorithmProvider(
-                    out safeBCryptAlgorithmHandle,
-                    hashAlgorithmId,
-                    null,
-                    flags
-                );
+                NTSTATUS ntStatus = Interop
+                    .BCrypt
+                    .BCryptOpenAlgorithmProvider(
+                        out safeBCryptAlgorithmHandle,
+                        hashAlgorithmId,
+                        null,
+                        flags
+                    );
                 if (ntStatus != NTSTATUS.STATUS_SUCCESS)
                     throw Interop.BCrypt.CreateCryptographicException(ntStatus);
 
@@ -76,14 +78,16 @@ internal static partial class Interop
                     Handle = handle;
 
                     int hashSize;
-                    NTSTATUS ntStatus = Interop.BCrypt.BCryptGetProperty(
-                        handle,
-                        Interop.BCrypt.BCryptPropertyStrings.BCRYPT_HASH_LENGTH,
-                        &hashSize,
-                        sizeof(int),
-                        out int cbHashSize,
-                        0
-                    );
+                    NTSTATUS ntStatus = Interop
+                        .BCrypt
+                        .BCryptGetProperty(
+                            handle,
+                            Interop.BCrypt.BCryptPropertyStrings.BCRYPT_HASH_LENGTH,
+                            &hashSize,
+                            sizeof(int),
+                            out int cbHashSize,
+                            0
+                        );
 
                     if (ntStatus != NTSTATUS.STATUS_SUCCESS)
                     {

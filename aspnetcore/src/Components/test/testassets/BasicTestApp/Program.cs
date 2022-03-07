@@ -29,45 +29,53 @@ public class Program
         var builder = WebAssemblyHostBuilder.CreateDefault(args);
         builder.RootComponents.Add<HeadOutlet>("head::after");
         builder.RootComponents.Add<Index>("root");
-        builder.RootComponents.RegisterForJavaScript<DynamicallyAddedRootComponent>(
-            "my-dynamic-root-component"
-        );
-        builder.RootComponents.RegisterForJavaScript<JavaScriptRootComponentParameterTypes>(
-            "component-with-many-parameters",
-            javaScriptInitializer: "myJsRootComponentInitializers.testInitializer"
-        );
+        builder
+            .RootComponents
+            .RegisterForJavaScript<DynamicallyAddedRootComponent>("my-dynamic-root-component");
+        builder
+            .RootComponents
+            .RegisterForJavaScript<JavaScriptRootComponentParameterTypes>(
+                "component-with-many-parameters",
+                javaScriptInitializer: "myJsRootComponentInitializers.testInitializer"
+            );
 
-        builder.Services.AddSingleton(
-            new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) }
-        );
-        builder.Services.AddSingleton<
-            AuthenticationStateProvider,
-            ServerAuthenticationStateProvider
-        >();
-        builder.Services.AddAuthorizationCore(
-            options =>
-            {
-                options.AddPolicy(
-                    "NameMustStartWithB",
-                    policy =>
-                        policy.RequireAssertion(
-                            ctx => ctx.User.Identity.Name?.StartsWith('B') ?? false
-                        )
-                );
-            }
-        );
+        builder
+            .Services
+            .AddSingleton(
+                new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) }
+            );
+        builder
+            .Services
+            .AddSingleton<AuthenticationStateProvider, ServerAuthenticationStateProvider>();
+        builder
+            .Services
+            .AddAuthorizationCore(
+                options =>
+                {
+                    options.AddPolicy(
+                        "NameMustStartWithB",
+                        policy =>
+                            policy.RequireAssertion(
+                                ctx => ctx.User.Identity.Name?.StartsWith('B') ?? false
+                            )
+                    );
+                }
+            );
 
         builder.Services.AddScoped<PreserveStateService>();
 
         builder.Logging.AddConfiguration(builder.Configuration.GetSection("Logging"));
 
-        builder.Logging.Services.AddSingleton<ILoggerProvider, PrependMessageLoggerProvider>(
-            s =>
-                new PrependMessageLoggerProvider(
-                    builder.Configuration["Logging:PrependMessage:Message"],
-                    s.GetService<IJSRuntime>()
-                )
-        );
+        builder
+            .Logging
+            .Services
+            .AddSingleton<ILoggerProvider, PrependMessageLoggerProvider>(
+                s =>
+                    new PrependMessageLoggerProvider(
+                        builder.Configuration["Logging:PrependMessage:Message"],
+                        s.GetService<IJSRuntime>()
+                    )
+            );
 
         var host = builder.Build();
         ConfigureCulture(host);

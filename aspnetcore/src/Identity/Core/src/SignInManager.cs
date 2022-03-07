@@ -130,9 +130,9 @@ public class SignInManager<TUser> where TUser : class
             throw new ArgumentNullException(nameof(principal));
         }
         return principal.Identities != null
-            && principal.Identities.Any(
-                i => i.AuthenticationType == IdentityConstants.ApplicationScheme
-            );
+            && principal
+                .Identities
+                .Any(i => i.AuthenticationType == IdentityConstants.ApplicationScheme);
     }
 
     /// <summary>

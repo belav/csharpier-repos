@@ -44,7 +44,8 @@ End Interface
             Assert.False(
                 t.GetMembersUnordered()
                     .Where(x => x.Kind == SymbolKind.Property)
-                    .First().CanBeReferencedByName
+                    .First()
+                    .CanBeReferencedByName
             ); //there's only one.
         }
     }

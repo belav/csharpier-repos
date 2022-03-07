@@ -133,15 +133,17 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
         {
             try
             {
-                using var token = SourceProvider.OperationListener.BeginAsyncOperation(
-                    $"{nameof(SuggestedAction)}.{nameof(Invoke)}"
-                );
-                using var context = SourceProvider.UIThreadOperationExecutor.BeginExecute(
-                    EditorFeaturesResources.Execute_Suggested_Action,
-                    CodeAction.Title,
-                    allowCancellation: true,
-                    showProgress: true
-                );
+                using var token = SourceProvider
+                    .OperationListener
+                    .BeginAsyncOperation($"{nameof(SuggestedAction)}.{nameof(Invoke)}");
+                using var context = SourceProvider
+                    .UIThreadOperationExecutor
+                    .BeginExecute(
+                        EditorFeaturesResources.Execute_Suggested_Action,
+                        CodeAction.Title,
+                        allowCancellation: true,
+                        showProgress: true
+                    );
                 using var scope = context.AddScope(allowCancellation: true, CodeAction.Message);
                 await this.InnerInvokeAsync(
                         new UIThreadOperationContextProgressTracker(scope),
@@ -158,14 +160,15 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
             CancellationToken cancellationToken
         )
         {
-            await this.ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
-                cancellationToken
-            );
+            await this.ThreadingContext
+                .JoinableTaskFactory
+                .SwitchToMainThreadAsync(cancellationToken);
 
             using (new CaretPositionRestorer(SubjectBuffer, EditHandler.AssociatedViewService))
             {
                 // ConfigureAwait(true) so that CaretPositionRestorer.Dispose runs on the UI thread.
-                await Workspace.Services
+                await Workspace
+                    .Services
                     .GetService<IExtensionManager>()
                     .PerformActionAsync(
                         Provider,
@@ -180,9 +183,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
             CancellationToken cancellationToken
         )
         {
-            await this.ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
-                cancellationToken
-            );
+            await this.ThreadingContext
+                .JoinableTaskFactory
+                .SwitchToMainThreadAsync(cancellationToken);
 
             IEnumerable<CodeActionOperation> operations = null;
             if (CodeAction is CodeActionWithOptions actionWithOptions)
@@ -218,8 +221,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
                     )
                 )
                 {
-                    var document =
-                        this.SubjectBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
+                    var document = this.SubjectBuffer
+                        .CurrentSnapshot
+                        .GetOpenDocumentInCurrentContextWithChanges();
 
                     await EditHandler
                         .ApplyAsync(

@@ -89,11 +89,13 @@ namespace Microsoft.CodeAnalysis.CSharp.UseIndexOrRangeOperator
         {
             var syntaxTree = context.Operation.SemanticModel!.SyntaxTree;
             var cancellationToken = context.CancellationToken;
-            var option = context.Options.GetOption(
-                CSharpCodeStyleOptions.PreferRangeOperator,
-                syntaxTree,
-                cancellationToken
-            );
+            var option = context
+                .Options
+                .GetOption(
+                    CSharpCodeStyleOptions.PreferRangeOperator,
+                    syntaxTree,
+                    cancellationToken
+                );
             if (!option.Value)
                 return;
 
@@ -218,10 +220,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UseIndexOrRangeOperator
             var startOperation = invocation.Arguments[0].Value;
 
             if (
-                CSharpSyntaxFacts.Instance.AreEquivalent(
-                    startOperation.Syntax,
-                    subtraction.RightOperand.Syntax
-                )
+                CSharpSyntaxFacts
+                    .Instance
+                    .AreEquivalent(startOperation.Syntax, subtraction.RightOperand.Syntax)
             )
             {
                 return new Result(

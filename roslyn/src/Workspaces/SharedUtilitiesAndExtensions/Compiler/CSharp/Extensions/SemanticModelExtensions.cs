@@ -251,10 +251,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                 ) && variableDeclaration.IsParentKind(SyntaxKind.FieldDeclaration)
             )
             {
-                return semanticModel.GetDeclaredSymbol(
-                    variableDeclaration.Variables[0],
-                    cancellationToken
-                ).DeclaredAccessibility;
+                return semanticModel
+                    .GetDeclaredSymbol(variableDeclaration.Variables[0], cancellationToken)
+                    .DeclaredAccessibility;
             }
 
             // Also do the same check if we are in an object creation expression
@@ -262,17 +261,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                 type.IsParentKind(SyntaxKind.ObjectCreationExpression)
                 && type.Parent.IsParentKind(SyntaxKind.EqualsValueClause)
                 && type.Parent.Parent.IsParentKind(SyntaxKind.VariableDeclarator)
-                && type.Parent.Parent.Parent.IsParentKind(
-                    SyntaxKind.VariableDeclaration,
-                    out variableDeclaration
-                )
+                && type.Parent
+                    .Parent
+                    .Parent
+                    .IsParentKind(SyntaxKind.VariableDeclaration, out variableDeclaration)
                 && variableDeclaration.IsParentKind(SyntaxKind.FieldDeclaration)
             )
             {
-                return semanticModel.GetDeclaredSymbol(
-                    variableDeclaration.Variables[0],
-                    cancellationToken
-                ).DeclaredAccessibility;
+                return semanticModel
+                    .GetDeclaredSymbol(variableDeclaration.Variables[0], cancellationToken)
+                    .DeclaredAccessibility;
             }
 
             // 3) The return type of a delegate type must be at least as accessible as the
@@ -293,10 +291,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                 || type.IsParentKind(SyntaxKind.OperatorDeclaration)
             )
             {
-                return semanticModel.GetDeclaredSymbol(
-                    type.Parent,
-                    cancellationToken
-                ).DeclaredAccessibility;
+                return semanticModel
+                    .GetDeclaredSymbol(type.Parent, cancellationToken)
+                    .DeclaredAccessibility;
             }
 
             // 3) The parameter types of a delegate type must be at least as accessible as the
@@ -321,10 +318,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                     || type.Parent.Parent.IsParentKind(SyntaxKind.OperatorDeclaration)
                 )
                 {
-                    return semanticModel.GetDeclaredSymbol(
-                        type.Parent.Parent.Parent,
-                        cancellationToken
-                    ).DeclaredAccessibility;
+                    return semanticModel
+                        .GetDeclaredSymbol(type.Parent.Parent.Parent, cancellationToken)
+                        .DeclaredAccessibility;
                 }
 
                 if (type.Parent.Parent.IsParentKind(SyntaxKind.ConstructorDeclaration))

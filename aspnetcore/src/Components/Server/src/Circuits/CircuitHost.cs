@@ -98,57 +98,61 @@ internal partial class CircuitHost : IAsyncDisposable
     {
         Log.InitializationStarted(_logger);
 
-        return Renderer.Dispatcher.InvokeAsync(
-            async () =>
-            {
-                if (_initialized)
+        return Renderer
+            .Dispatcher
+            .InvokeAsync(
+                async () =>
                 {
-                    throw new InvalidOperationException("The circuit host is already initialized.");
-                }
-
-                try
-                {
-                    _initialized = true; // We're ready to accept incoming JSInterop calls from here on
-
-                    await OnCircuitOpenedAsync(cancellationToken);
-                    await OnConnectionUpAsync(cancellationToken);
-
-                    // Here, we add each root component but don't await the returned tasks so that the
-                    // components can be processed in parallel.
-                    var count = Descriptors.Count;
-                    var pendingRenders = new Task[count];
-                    for (var i = 0; i < count; i++)
+                    if (_initialized)
                     {
-                        var (componentType, parameters, sequence) = Descriptors[i];
-                        pendingRenders[i] = Renderer.AddComponentAsync(
-                            componentType,
-                            parameters,
-                            sequence.ToString(CultureInfo.InvariantCulture)
+                        throw new InvalidOperationException(
+                            "The circuit host is already initialized."
                         );
                     }
 
-                    // Now we wait for all components to finish rendering.
-                    await Task.WhenAll(pendingRenders);
+                    try
+                    {
+                        _initialized = true; // We're ready to accept incoming JSInterop calls from here on
 
-                    // At this point all components have successfully produced an initial render and we can clear the contents of the component
-                    // application state store. This ensures the memory that was not used during the initial render of these components gets
-                    // reclaimed since no-one else is holding on to it any longer.
-                    store.ExistingState.Clear();
+                        await OnCircuitOpenedAsync(cancellationToken);
+                        await OnConnectionUpAsync(cancellationToken);
 
-                    Log.InitializationSucceeded(_logger);
+                        // Here, we add each root component but don't await the returned tasks so that the
+                        // components can be processed in parallel.
+                        var count = Descriptors.Count;
+                        var pendingRenders = new Task[count];
+                        for (var i = 0; i < count; i++)
+                        {
+                            var (componentType, parameters, sequence) = Descriptors[i];
+                            pendingRenders[i] = Renderer.AddComponentAsync(
+                                componentType,
+                                parameters,
+                                sequence.ToString(CultureInfo.InvariantCulture)
+                            );
+                        }
+
+                        // Now we wait for all components to finish rendering.
+                        await Task.WhenAll(pendingRenders);
+
+                        // At this point all components have successfully produced an initial render and we can clear the contents of the component
+                        // application state store. This ensures the memory that was not used during the initial render of these components gets
+                        // reclaimed since no-one else is holding on to it any longer.
+                        store.ExistingState.Clear();
+
+                        Log.InitializationSucceeded(_logger);
+                    }
+                    catch (Exception ex)
+                    {
+                        // Report errors asynchronously. InitializeAsync is designed not to throw.
+                        Log.InitializationFailed(_logger, ex);
+                        UnhandledException?.Invoke(
+                            this,
+                            new UnhandledExceptionEventArgs(ex, isTerminating: false)
+                        );
+                        await TryNotifyClientErrorAsync(Client, GetClientErrorMessage(ex), ex);
+                    }
                 }
-                catch (Exception ex)
-                {
-                    // Report errors asynchronously. InitializeAsync is designed not to throw.
-                    Log.InitializationFailed(_logger, ex);
-                    UnhandledException?.Invoke(
-                        this,
-                        new UnhandledExceptionEventArgs(ex, isTerminating: false)
-                    );
-                    await TryNotifyClientErrorAsync(Client, GetClientErrorMessage(ex), ex);
-                }
-            }
-        );
+            );
     }
 
     // We handle errors in DisposeAsync because there's no real value in letting it propagate.
@@ -159,55 +163,57 @@ internal partial class CircuitHost : IAsyncDisposable
     {
         Log.DisposeStarted(_logger, CircuitId);
 
-        await Renderer.Dispatcher.InvokeAsync(
-            async () =>
-            {
-                if (_disposed)
+        await Renderer
+            .Dispatcher
+            .InvokeAsync(
+                async () =>
                 {
-                    return;
-                }
+                    if (_disposed)
+                    {
+                        return;
+                    }
 
-                // Make sure that no hub or connection can refer to this circuit anymore now that it's shutting down.
-                Handle.CircuitHost = null;
-                _disposed = true;
+                    // Make sure that no hub or connection can refer to this circuit anymore now that it's shutting down.
+                    Handle.CircuitHost = null;
+                    _disposed = true;
 
-                try
-                {
-                    await OnConnectionDownAsync(CancellationToken.None);
-                }
-                catch
-                {
-                    // Individual exceptions logged as part of OnConnectionDownAsync - nothing to do here
-                    // since we're already shutting down.
-                }
+                    try
+                    {
+                        await OnConnectionDownAsync(CancellationToken.None);
+                    }
+                    catch
+                    {
+                        // Individual exceptions logged as part of OnConnectionDownAsync - nothing to do here
+                        // since we're already shutting down.
+                    }
 
-                try
-                {
-                    await OnCircuitDownAsync(CancellationToken.None);
-                }
-                catch
-                {
-                    // Individual exceptions logged as part of OnCircuitDownAsync - nothing to do here
-                    // since we're already shutting down.
-                }
+                    try
+                    {
+                        await OnCircuitDownAsync(CancellationToken.None);
+                    }
+                    catch
+                    {
+                        // Individual exceptions logged as part of OnCircuitDownAsync - nothing to do here
+                        // since we're already shutting down.
+                    }
 
-                try
-                {
-                    // Prevent any further JS interop calls
-                    // Helps with scenarios like https://github.com/dotnet/aspnetcore/issues/32808
-                    JSRuntime.MarkPermanentlyDisconnected();
+                    try
+                    {
+                        // Prevent any further JS interop calls
+                        // Helps with scenarios like https://github.com/dotnet/aspnetcore/issues/32808
+                        JSRuntime.MarkPermanentlyDisconnected();
 
-                    await Renderer.DisposeAsync();
-                    await _scope.DisposeAsync();
+                        await Renderer.DisposeAsync();
+                        await _scope.DisposeAsync();
 
-                    Log.DisposeSucceeded(_logger, CircuitId);
+                        Log.DisposeSucceeded(_logger, CircuitId);
+                    }
+                    catch (Exception ex)
+                    {
+                        Log.DisposeFailed(_logger, CircuitId, ex);
+                    }
                 }
-                catch (Exception ex)
-                {
-                    Log.DisposeFailed(_logger, CircuitId, ex);
-                }
-            }
-        );
+            );
     }
 
     // Note: we log exceptions and re-throw while running handlers, because there may be multiple
@@ -398,25 +404,27 @@ internal partial class CircuitHost : IAsyncDisposable
 
         try
         {
-            await Renderer.Dispatcher.InvokeAsync(
-                () =>
-                {
-                    Log.BeginInvokeDotNet(
-                        _logger,
-                        callId,
-                        assemblyName,
-                        methodIdentifier,
-                        dotNetObjectId
-                    );
-                    var invocationInfo = new DotNetInvocationInfo(
-                        assemblyName,
-                        methodIdentifier,
-                        dotNetObjectId,
-                        callId
-                    );
-                    DotNetDispatcher.BeginInvokeDotNet(JSRuntime, invocationInfo, argsJson);
-                }
-            );
+            await Renderer
+                .Dispatcher
+                .InvokeAsync(
+                    () =>
+                    {
+                        Log.BeginInvokeDotNet(
+                            _logger,
+                            callId,
+                            assemblyName,
+                            methodIdentifier,
+                            dotNetObjectId
+                        );
+                        var invocationInfo = new DotNetInvocationInfo(
+                            assemblyName,
+                            methodIdentifier,
+                            dotNetObjectId,
+                            callId
+                        );
+                        DotNetDispatcher.BeginInvokeDotNet(JSRuntime, invocationInfo, argsJson);
+                    }
+                );
         }
         catch (Exception ex)
         {
@@ -450,22 +458,24 @@ internal partial class CircuitHost : IAsyncDisposable
 
         try
         {
-            await Renderer.Dispatcher.InvokeAsync(
-                () =>
-                {
-                    if (!succeeded)
+            await Renderer
+                .Dispatcher
+                .InvokeAsync(
+                    () =>
                     {
-                        // We can log the arguments here because it is simply the JS error with the call stack.
-                        Log.EndInvokeJSFailed(_logger, asyncCall, arguments);
-                    }
-                    else
-                    {
-                        Log.EndInvokeJSSucceeded(_logger, asyncCall);
-                    }
+                        if (!succeeded)
+                        {
+                            // We can log the arguments here because it is simply the JS error with the call stack.
+                            Log.EndInvokeJSFailed(_logger, asyncCall, arguments);
+                        }
+                        else
+                        {
+                            Log.EndInvokeJSSucceeded(_logger, asyncCall);
+                        }
 
-                    DotNetDispatcher.EndInvokeJS(JSRuntime, arguments);
-                }
-            );
+                        DotNetDispatcher.EndInvokeJS(JSRuntime, arguments);
+                    }
+                );
         }
         catch (Exception ex)
         {
@@ -492,13 +502,15 @@ internal partial class CircuitHost : IAsyncDisposable
 
         try
         {
-            await Renderer.Dispatcher.InvokeAsync(
-                () =>
-                {
-                    Log.ReceiveByteArraySuccess(_logger, id);
-                    DotNetDispatcher.ReceiveByteArray(JSRuntime, id, data);
-                }
-            );
+            await Renderer
+                .Dispatcher
+                .InvokeAsync(
+                    () =>
+                    {
+                        Log.ReceiveByteArraySuccess(_logger, id);
+                        DotNetDispatcher.ReceiveByteArray(JSRuntime, id, data);
+                    }
+                );
         }
         catch (Exception ex)
         {
@@ -530,18 +542,20 @@ internal partial class CircuitHost : IAsyncDisposable
 
         try
         {
-            return await Renderer.Dispatcher.InvokeAsync(
-                () =>
-                {
-                    return RemoteJSDataStream.ReceiveData(
-                        JSRuntime,
-                        streamId,
-                        chunkId,
-                        chunk,
-                        error
-                    );
-                }
-            );
+            return await Renderer
+                .Dispatcher
+                .InvokeAsync(
+                    () =>
+                    {
+                        return RemoteJSDataStream.ReceiveData(
+                            JSRuntime,
+                            streamId,
+                            chunkId,
+                            chunk,
+                            error
+                        );
+                    }
+                );
         }
         catch (Exception ex)
         {
@@ -571,9 +585,9 @@ internal partial class CircuitHost : IAsyncDisposable
 
         try
         {
-            return await Renderer.Dispatcher.InvokeAsync<int>(
-                async () => await dotNetStreamReference.Stream.ReadAsync(buffer)
-            );
+            return await Renderer
+                .Dispatcher
+                .InvokeAsync<int>(async () => await dotNetStreamReference.Stream.ReadAsync(buffer));
         }
         catch (Exception ex)
         {
@@ -601,24 +615,26 @@ internal partial class CircuitHost : IAsyncDisposable
 
         try
         {
-            return await Renderer.Dispatcher.InvokeAsync<DotNetStreamReference>(
-                () =>
-                {
-                    if (
-                        !JSRuntime.TryClaimPendingStreamForSending(
-                            streamId,
-                            out dotNetStreamReference
-                        )
-                    )
+            return await Renderer
+                .Dispatcher
+                .InvokeAsync<DotNetStreamReference>(
+                    () =>
                     {
-                        throw new InvalidOperationException(
-                            $"The stream with ID {streamId} is not available. It may have timed out."
-                        );
-                    }
+                        if (
+                            !JSRuntime.TryClaimPendingStreamForSending(
+                                streamId,
+                                out dotNetStreamReference
+                            )
+                        )
+                        {
+                            throw new InvalidOperationException(
+                                $"The stream with ID {streamId} is not available. It may have timed out."
+                            );
+                        }
 
-                    return dotNetStreamReference;
-                }
-            );
+                        return dotNetStreamReference;
+                    }
+                );
         }
         catch (Exception ex)
         {
@@ -646,16 +662,18 @@ internal partial class CircuitHost : IAsyncDisposable
 
         try
         {
-            await Renderer.Dispatcher.InvokeAsync(
-                () =>
-                {
-                    Log.LocationChange(_logger, uri, CircuitId);
-                    var navigationManager =
-                        (RemoteNavigationManager)Services.GetRequiredService<NavigationManager>();
-                    navigationManager.NotifyLocationChanged(uri, intercepted);
-                    Log.LocationChangeSucceeded(_logger, uri, CircuitId);
-                }
-            );
+            await Renderer
+                .Dispatcher
+                .InvokeAsync(
+                    () =>
+                    {
+                        Log.LocationChange(_logger, uri, CircuitId);
+                        var navigationManager =
+                            (RemoteNavigationManager)Services.GetRequiredService<NavigationManager>();
+                        navigationManager.NotifyLocationChanged(uri, intercepted);
+                        Log.LocationChangeSucceeded(_logger, uri, CircuitId);
+                    }
+                );
         }
         // It's up to the NavigationManager implementation to validate the URI.
         //

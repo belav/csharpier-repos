@@ -147,11 +147,13 @@ namespace System.Xml.Serialization
                             $"{a} = {castString}EnsureArrayIndex({a}, {c}, {outerClass.RaCodeGen.GetStringForTypeof(choiceTypeFullName)});";
                         _choiceArraySource =
                             init
-                            + outerClass.RaCodeGen.GetStringForArrayMember(
-                                a,
-                                $"{c}++",
-                                mapping.ChoiceIdentifier.Mapping.TypeDesc
-                            );
+                            + outerClass
+                                .RaCodeGen
+                                .GetStringForArrayMember(
+                                    a,
+                                    $"{c}++",
+                                    mapping.ChoiceIdentifier.Mapping.TypeDesc
+                                );
                     }
                     else
                     {
@@ -805,13 +807,16 @@ namespace System.Xml.Serialization
         [RequiresUnreferencedCode("XmlSerializationReader methods have RequiresUnreferencedCode")]
         private void WritePrimitive(TypeMapping mapping, string source)
         {
-            System.Diagnostics.Debug.Assert(
-                source == "Reader.ReadElementString()"
-                    || source == "Reader.ReadString()"
-                    || source == "false"
-                    || source == "Reader.Value"
-                    || source == "vals[i]"
-            );
+            System
+                .Diagnostics
+                .Debug
+                .Assert(
+                    source == "Reader.ReadElementString()"
+                        || source == "Reader.ReadString()"
+                        || source == "false"
+                        || source == "Reader.Value"
+                        || source == "vals[i]"
+                );
             if (mapping is EnumMapping)
             {
                 string? enumMethodName = ReferenceMapping(mapping);
@@ -932,11 +937,14 @@ namespace System.Xml.Serialization
             }
             else if (mapping.TypeDesc!.FormatterName == "String")
             {
-                System.Diagnostics.Debug.Assert(
-                    source == "Reader.Value"
-                        || source == "Reader.ReadElementString()"
-                        || source == "vals[i]"
-                );
+                System
+                    .Diagnostics
+                    .Debug
+                    .Assert(
+                        source == "Reader.Value"
+                            || source == "Reader.ReadElementString()"
+                            || source == "vals[i]"
+                    );
                 if (source == "vals[i]")
                 {
                     if (mapping.TypeDesc.CollapseWhitespace)
@@ -2200,21 +2208,26 @@ namespace System.Xml.Serialization
                 ilg.Load(null);
                 ilg.If(Cmp.EqualTo);
                 WriteSourceBegin(xmlnsMember.Source);
-                ConstructorInfo ctor = xmlnsMember.Mapping.TypeDesc!.Type!.GetConstructor(
-                    CodeGenerator.InstanceBindingFlags,
-                    Type.EmptyTypes
-                )!;
+                ConstructorInfo ctor = xmlnsMember
+                    .Mapping
+                    .TypeDesc!
+                    .Type!
+                    .GetConstructor(CodeGenerator.InstanceBindingFlags, Type.EmptyTypes)!;
                 ilg.New(ctor);
                 WriteSourceEnd(xmlnsMember.Source, xmlnsMember.Mapping.TypeDesc.Type!);
                 ilg.EndIf(); // if (xmlnsMember.Source == null
 
                 Label labelEqual5 = ilg.DefineLabel();
                 Label labelEndLength = ilg.DefineLabel();
-                MethodInfo Add = xmlnsMember.Mapping.TypeDesc.Type!.GetMethod(
-                    "Add",
-                    CodeGenerator.InstanceBindingFlags,
-                    new Type[] { typeof(string), typeof(string) }
-                )!;
+                MethodInfo Add = xmlnsMember
+                    .Mapping
+                    .TypeDesc
+                    .Type!
+                    .GetMethod(
+                        "Add",
+                        CodeGenerator.InstanceBindingFlags,
+                        new Type[] { typeof(string), typeof(string) }
+                    )!;
                 MethodInfo String_get_Length = typeof(string).GetMethod(
                     "get_Length",
                     CodeGenerator.InstanceBindingFlags,
@@ -3100,11 +3113,23 @@ namespace System.Xml.Serialization
                             ilg.Call(XmlSerializationReader_ShrinkArray);
                             ilg.ConvertValue(
                                 XmlSerializationReader_ShrinkArray.ReturnType,
-                                member.Mapping.ChoiceIdentifier.Mapping.TypeDesc.Type!.MakeArrayType()
+                                member
+                                    .Mapping
+                                    .ChoiceIdentifier
+                                    .Mapping
+                                    .TypeDesc
+                                    .Type!
+                                    .MakeArrayType()
                             );
                             WriteSourceEnd(
                                 member.ChoiceSource!,
-                                member.Mapping.ChoiceIdentifier.Mapping.TypeDesc.Type!.MakeArrayType()
+                                member
+                                    .Mapping
+                                    .ChoiceIdentifier
+                                    .Mapping
+                                    .TypeDesc
+                                    .Type!
+                                    .MakeArrayType()
                             );
                         }
                     }
@@ -3201,9 +3226,10 @@ namespace System.Xml.Serialization
             match = regex.Match(source);
             if (match.Success)
             {
-                System.Diagnostics.Debug.Assert(
-                    ilg.GetVariableType(ilg.GetVariable(match.Groups["a"].Value)).IsArray
-                );
+                System
+                    .Diagnostics
+                    .Debug
+                    .Assert(ilg.GetVariableType(ilg.GetVariable(match.Groups["a"].Value)).IsArray);
                 ilg.Load(ilg.GetVariable(match.Groups["a"].Value));
                 ilg.Load(ilg.GetVariable(match.Groups["ia"].Value));
                 return;
@@ -3288,11 +3314,13 @@ namespace System.Xml.Serialization
                             )
                         )
                 );
-                MethodInfo Add = localA.LocalType.GetMethod(
-                    "Add",
-                    CodeGenerator.InstanceBindingFlags,
-                    new Type[] { elementType }
-                )!;
+                MethodInfo Add = localA
+                    .LocalType
+                    .GetMethod(
+                        "Add",
+                        CodeGenerator.InstanceBindingFlags,
+                        new Type[] { elementType }
+                    )!;
                 Debug.Assert(Add != null);
                 Type addParameterType = Add.GetParameters()[0].ParameterType;
                 ilg.ConvertValue(stackType, addParameterType);

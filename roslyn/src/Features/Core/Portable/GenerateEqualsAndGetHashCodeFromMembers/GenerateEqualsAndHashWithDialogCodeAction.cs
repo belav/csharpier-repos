@@ -56,7 +56,12 @@ namespace Microsoft.CodeAnalysis.GenerateEqualsAndGetHashCodeFromMembers
             {
                 var service =
                     _service._pickMembersService_forTestingPurposes
-                    ?? _document.Project.Solution.Workspace.Services.GetRequiredService<IPickMembersService>();
+                    ?? _document
+                        .Project
+                        .Solution
+                        .Workspace
+                        .Services
+                        .GetRequiredService<IPickMembersService>();
                 return service.PickMembers(
                     FeaturesResources.Pick_members_to_be_used_in_Equals_GetHashCode,
                     _viableMembers,
@@ -79,17 +84,17 @@ namespace Microsoft.CodeAnalysis.GenerateEqualsAndGetHashCodeFromMembers
                 // the user chose.  That way we'll keep that as the default for the
                 // next time the user opens the dialog.
                 var workspace = _document.Project.Solution.Workspace;
-                var implementIEqutableOption = result.Options.FirstOrDefault(
-                    o => o.Id == ImplementIEquatableId
-                );
+                var implementIEqutableOption = result
+                    .Options
+                    .FirstOrDefault(o => o.Id == ImplementIEquatableId);
                 if (implementIEqutableOption != null)
                 {
                     _implementIEqutableOptionValue = implementIEqutableOption.Value;
                 }
 
-                var generateOperatorsOption = result.Options.FirstOrDefault(
-                    o => o.Id == GenerateOperatorsId
-                );
+                var generateOperatorsOption = result
+                    .Options
+                    .FirstOrDefault(o => o.Id == GenerateOperatorsId);
                 if (generateOperatorsOption != null)
                 {
                     _generateOperatorsOptionValue = generateOperatorsOption.Value;
@@ -125,22 +130,26 @@ namespace Microsoft.CodeAnalysis.GenerateEqualsAndGetHashCodeFromMembers
                 if (_implementIEqutableOptionValue.HasValue)
                 {
                     solution = solution?.WithOptions(
-                        solution.Options.WithChangedOption(
-                            GenerateEqualsAndGetHashCodeFromMembersOptions.ImplementIEquatable,
-                            _document.Project.Language,
-                            _implementIEqutableOptionValue.Value
-                        )
+                        solution
+                            .Options
+                            .WithChangedOption(
+                                GenerateEqualsAndGetHashCodeFromMembersOptions.ImplementIEquatable,
+                                _document.Project.Language,
+                                _implementIEqutableOptionValue.Value
+                            )
                     );
                 }
 
                 if (_generateOperatorsOptionValue.HasValue)
                 {
                     solution = solution?.WithOptions(
-                        solution.Options.WithChangedOption(
-                            GenerateEqualsAndGetHashCodeFromMembersOptions.GenerateOperators,
-                            _document.Project.Language,
-                            _generateOperatorsOptionValue.Value
-                        )
+                        solution
+                            .Options
+                            .WithChangedOption(
+                                GenerateEqualsAndGetHashCodeFromMembersOptions.GenerateOperators,
+                                _document.Project.Language,
+                                _generateOperatorsOptionValue.Value
+                            )
                     );
                 }
 

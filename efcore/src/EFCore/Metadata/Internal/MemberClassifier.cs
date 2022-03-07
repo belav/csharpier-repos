@@ -105,10 +105,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
             if (!((Annotatable)entityType).IsReadOnly && entityType.IsInModel)
             {
-                entityType.Builder.HasAnnotation(
-                    CoreAnnotationNames.NavigationCandidates,
-                    navigationCandidates
-                );
+                entityType
+                    .Builder
+                    .HasAnnotation(CoreAnnotationNames.NavigationCandidates, navigationCandidates);
             }
 
             return navigationCandidates;
@@ -125,7 +124,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         )
         {
             if (
-                entityType.Model
+                entityType
+                    .Model
                     .FindAnnotation(CoreAnnotationNames.InverseNavigationCandidates)
                     ?.Value
                     is not Dictionary<Type, SortedSet<Type>> inverseCandidatesLookup
@@ -226,9 +226,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 return false;
             }
 
-            var configurationType = ((Model)model).Configuration?.GetConfigurationType(
-                propertyInfo.PropertyType
-            );
+            var configurationType = ((Model)model)
+                .Configuration
+                ?.GetConfigurationType(propertyInfo.PropertyType);
             return configurationType == TypeConfigurationType.Property
                 || (
                     configurationType == null

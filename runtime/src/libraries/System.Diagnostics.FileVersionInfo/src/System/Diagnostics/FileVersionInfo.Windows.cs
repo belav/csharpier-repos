@@ -13,11 +13,13 @@ namespace System.Diagnostics
             _fileName = fileName;
 
             uint handle; // This variable is not used, but we need an out variable.
-            uint infoSize = Interop.Version.GetFileVersionInfoSizeEx(
-                (uint)Interop.Version.FileVersionInfoType.FILE_VER_GET_LOCALISED,
-                _fileName,
-                out handle
-            );
+            uint infoSize = Interop
+                .Version
+                .GetFileVersionInfoSizeEx(
+                    (uint)Interop.Version.FileVersionInfoType.FILE_VER_GET_LOCALISED,
+                    _fileName,
+                    out handle
+                );
 
             if (infoSize != 0)
             {
@@ -26,14 +28,19 @@ namespace System.Diagnostics
                 {
                     IntPtr memIntPtr = new IntPtr((void*)memPtr);
                     if (
-                        Interop.Version.GetFileVersionInfoEx(
-                            (uint)Interop.Version.FileVersionInfoType.FILE_VER_GET_LOCALISED
-                                | (uint)Interop.Version.FileVersionInfoType.FILE_VER_GET_NEUTRAL,
-                            _fileName,
-                            0U,
-                            infoSize,
-                            memIntPtr
-                        )
+                        Interop
+                            .Version
+                            .GetFileVersionInfoEx(
+                                (uint)Interop.Version.FileVersionInfoType.FILE_VER_GET_LOCALISED
+                                    | (uint)Interop
+                                        .Version
+                                        .FileVersionInfoType
+                                        .FILE_VER_GET_NEUTRAL,
+                                _fileName,
+                                0U,
+                                infoSize,
+                                memIntPtr
+                            )
                     )
                     {
                         uint langid = GetVarEntry(memIntPtr);
@@ -124,12 +131,9 @@ namespace System.Diagnostics
             uint memLen;
 
             if (
-                Interop.Version.VerQueryValue(
-                    memPtr,
-                    "\\VarFileInfo\\Translation",
-                    out memRef,
-                    out memLen
-                )
+                Interop
+                    .Version
+                    .VerQueryValue(memPtr, "\\VarFileInfo\\Translation", out memRef, out memLen)
             )
             {
                 return (uint)(

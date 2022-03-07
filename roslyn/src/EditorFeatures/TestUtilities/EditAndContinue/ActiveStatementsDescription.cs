@@ -284,7 +284,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
         );
 
         internal static IEnumerable<int> GetIds(Match match) =>
-            match.Groups["Id"].Value
+            match.Groups["Id"]
+                .Value
                 .Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
                 .Select(int.Parse);
 
@@ -294,10 +295,9 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
                 .ToArray();
 
         internal static IEnumerable<(int, int)> GetDottedIds(Match match) =>
-            from ids in match.Groups["Id"].Value.Split(
-                new[] { ',' },
-                StringSplitOptions.RemoveEmptyEntries
-            )
+            from ids in match.Groups["Id"]
+                .Value
+                .Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
             let parts = ids.Split('.')
             select (int.Parse(parts[0]), int.Parse(parts[1]));
 

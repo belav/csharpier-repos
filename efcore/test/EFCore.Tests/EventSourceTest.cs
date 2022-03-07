@@ -98,9 +98,9 @@ namespace Microsoft.EntityFrameworkCore
             {
                 using var context = new SomeDbContext();
 
-                var query = context.Foos.Where(
-                    e => e.Id == new Guid("6898CFFC-3DCC-45A6-A472-A23057462EE6")
-                );
+                var query = context
+                    .Foos
+                    .Where(e => e.Id == new Guid("6898CFFC-3DCC-45A6-A472-A23057462EE6"));
 
                 _ = async ? await query.ToListAsync() : query.ToList();
 
@@ -191,21 +191,23 @@ namespace Microsoft.EntityFrameworkCore
                 else
                 {
                     Assert.IsType<ArgumentOutOfRangeException>(
-                        Assert.Throws<RetryLimitExceededException>(
-                            () =>
-                                executionStrategyMock.Execute(
-                                    () =>
-                                    {
-                                        if (executionCount++ < 3)
+                        Assert
+                            .Throws<RetryLimitExceededException>(
+                                () =>
+                                    executionStrategyMock.Execute(
+                                        () =>
                                         {
-                                            throw new ArgumentOutOfRangeException();
-                                        }
+                                            if (executionCount++ < 3)
+                                            {
+                                                throw new ArgumentOutOfRangeException();
+                                            }
 
-                                        Assert.True(false);
-                                        return 0;
-                                    }
-                                )
-                        ).InnerException
+                                            Assert.True(false);
+                                            return 0;
+                                        }
+                                    )
+                            )
+                            .InnerException
                     );
                 }
 
@@ -283,16 +285,18 @@ namespace Microsoft.EntityFrameworkCore
         private static readonly MethodInfo _resetCacheInfo =
             typeof(EntityFrameworkEventSource).GetMethod("ResetCacheInfo", _bindingFlags);
 
-        private static readonly FieldInfo _compiledQueryCacheInfoHits =
-            _compiledQueryCacheInfo.FieldType.GetField("Hits", _bindingFlags);
+        private static readonly FieldInfo _compiledQueryCacheInfoHits = _compiledQueryCacheInfo
+            .FieldType
+            .GetField("Hits", _bindingFlags);
 
         private static int CompiledQueryCacheInfoHits =>
             (int)_compiledQueryCacheInfoHits.GetValue(
                 _compiledQueryCacheInfo.GetValue(EntityFrameworkEventSource.Log)
             );
 
-        private static readonly FieldInfo _compiledQueryCacheInfoMisses =
-            _compiledQueryCacheInfo.FieldType.GetField("Misses", _bindingFlags);
+        private static readonly FieldInfo _compiledQueryCacheInfoMisses = _compiledQueryCacheInfo
+            .FieldType
+            .GetField("Misses", _bindingFlags);
 
         private static int CompiledQueryCacheInfoMisses =>
             (int)_compiledQueryCacheInfoMisses.GetValue(

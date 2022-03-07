@@ -96,7 +96,8 @@ namespace Microsoft.CodeAnalysis
                                 {
                                     // log errors in the format of
                                     // CS0001:1;CS002:10;...
-                                    var groups = emitResult.Diagnostics
+                                    var groups = emitResult
+                                        .Diagnostics
                                         .GroupBy(d => d.Id)
                                         .Select(g => $"{g.Key}:{g.Count()}");
                                     m["Errors"] = string.Join(";", groups);

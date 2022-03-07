@@ -225,9 +225,9 @@ namespace Microsoft.Cci
                     }
 
                     sizeOfDirectoryTree += 24;
-                    typeDirectory.Entries.Add(
-                        nameDirectory = new Directory(lastTypeName, lastTypeID)
-                    );
+                    typeDirectory
+                        .Entries
+                        .Add(nameDirectory = new Directory(lastTypeName, lastTypeID));
                 }
 
                 if (typeDifferent || (r.Id < 0 && r.Name != lastName) || r.Id > lastID)

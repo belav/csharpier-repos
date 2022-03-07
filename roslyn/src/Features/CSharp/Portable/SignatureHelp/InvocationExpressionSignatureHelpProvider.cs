@@ -145,10 +145,14 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
 
             methodGroup = methodGroup.Sort(semanticModel, invocationExpression.SpanStart);
 
-            var structuralTypeDisplayService =
-                document.Project.LanguageServices.GetRequiredService<IStructuralTypeDisplayService>();
-            var documentationCommentFormattingService =
-                document.Project.LanguageServices.GetRequiredService<IDocumentationCommentFormattingService>();
+            var structuralTypeDisplayService = document
+                .Project
+                .LanguageServices
+                .GetRequiredService<IStructuralTypeDisplayService>();
+            var documentationCommentFormattingService = document
+                .Project
+                .LanguageServices
+                .GetRequiredService<IDocumentationCommentFormattingService>();
 
             var textSpan = SignatureHelpUtilities.GetSignatureHelpSpan(
                 invocationExpression.ArgumentList

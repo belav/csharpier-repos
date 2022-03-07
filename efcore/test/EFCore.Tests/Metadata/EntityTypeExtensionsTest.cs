@@ -126,9 +126,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata
 
             Assert.Equal(
                 CoreStrings.DiscriminatorPropertyMustBeOnRoot(nameof(SpecialCustomer)),
-                Assert.Throws<InvalidOperationException>(
-                    () => derivedType.SetDiscriminatorProperty(property)
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(
+                        () => derivedType.SetDiscriminatorProperty(property)
+                    )
+                    .Message
             );
         }
 
@@ -145,9 +147,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata
 
             Assert.Equal(
                 CoreStrings.DiscriminatorPropertyNotFound("D", nameof(SpecialCustomer)),
-                Assert.Throws<InvalidOperationException>(
-                    () => otherType.SetDiscriminatorProperty(property)
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(
+                        () => otherType.SetDiscriminatorProperty(property)
+                    )
+                    .Message
             );
         }
 
@@ -181,9 +185,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata
 
             Assert.Equal(
                 CoreStrings.NoDiscriminatorForValue("Customer", "Customer"),
-                Assert.Throws<InvalidOperationException>(
-                    () => entityType.SetDiscriminatorValue("V")
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(() => entityType.SetDiscriminatorValue("V"))
+                    .Message
             );
         }
 
@@ -199,9 +203,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata
 
             Assert.Equal(
                 CoreStrings.DiscriminatorValueIncompatible("V", "D", typeof(int)),
-                Assert.Throws<InvalidOperationException>(
-                    () => entityType.SetDiscriminatorValue("V")
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(() => entityType.SetDiscriminatorValue("V"))
+                    .Message
             );
 
             entityType.SetDiscriminatorValue(null);

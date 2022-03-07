@@ -26,9 +26,9 @@ namespace System.Text.Json.Serialization.Tests
         {
             // Verify the test class has >32 properties since that is a threshold for using the fallback dictionary.
             Assert.True(
-                typeof(ClassWithConstructor_SimpleAndComplexParameters).GetProperties(
-                    BindingFlags.Instance | BindingFlags.Public
-                ).Length > 32
+                typeof(ClassWithConstructor_SimpleAndComplexParameters)
+                    .GetProperties(BindingFlags.Instance | BindingFlags.Public)
+                    .Length > 32
             );
 
             async Task DeserializeObjectAsync(string json, Type type, JsonSerializerOptions options)

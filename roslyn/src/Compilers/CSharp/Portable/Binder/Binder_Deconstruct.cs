@@ -54,11 +54,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                     case SyntaxKind.ExpressionStatement:
                         if (expression != null)
                         {
-                            MessageID.IDS_FeatureMixedDeclarationsAndExpressionsInDeconstruction.CheckFeatureAvailability(
-                                diagnostics,
-                                Compilation,
-                                node.Location
-                            );
+                            MessageID
+                                .IDS_FeatureMixedDeclarationsAndExpressionsInDeconstruction
+                                .CheckFeatureAvailability(diagnostics, Compilation, node.Location);
                         }
                         break;
                     case SyntaxKind.ForStatement:
@@ -66,11 +64,13 @@ namespace Microsoft.CodeAnalysis.CSharp
                         {
                             if (expression != null)
                             {
-                                MessageID.IDS_FeatureMixedDeclarationsAndExpressionsInDeconstruction.CheckFeatureAvailability(
-                                    diagnostics,
-                                    Compilation,
-                                    node.Location
-                                );
+                                MessageID
+                                    .IDS_FeatureMixedDeclarationsAndExpressionsInDeconstruction
+                                    .CheckFeatureAvailability(
+                                        diagnostics,
+                                        Compilation,
+                                        node.Location
+                                    );
                             }
                         }
                         else
@@ -843,8 +843,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             ImmutableArray<bool> inferredPositions = tupleNames.IsDefault
                 ? default
                 : tupleNames.SelectAsArray(n => n != null);
-            bool disallowInferredNames =
-                this.Compilation.LanguageVersion.DisallowInferredTupleElementNames();
+            bool disallowInferredNames = this.Compilation
+                .LanguageVersion
+                .DisallowInferredTupleElementNames();
 
             var type = NamedTypeSymbol.CreateTuple(
                 syntax.Location,
@@ -1247,10 +1248,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                 // Check for variable declaration errors.
                 // Use the binder that owns the scope for the local because this (the current) binder
                 // might own nested scope.
-                var hasErrors = localSymbol.ScopeBinder.ValidateDeclarationNameConflictsInScope(
-                    localSymbol,
-                    diagnostics
-                );
+                var hasErrors = localSymbol
+                    .ScopeBinder
+                    .ValidateDeclarationNameConflictsInScope(localSymbol, diagnostics);
 
                 if (declTypeWithAnnotations.HasType)
                 {

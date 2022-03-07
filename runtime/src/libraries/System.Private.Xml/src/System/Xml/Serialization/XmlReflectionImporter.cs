@@ -2061,23 +2061,27 @@ namespace System.Xml.Serialization
         {
             // check that the choice field exists
 
-            MemberInfo[] infos = structModel.Type.GetMember(
-                choice.MemberName,
-                BindingFlags.DeclaredOnly
-                    | BindingFlags.Public
-                    | BindingFlags.Instance
-                    | BindingFlags.Static
-            );
-            if (infos == null || infos.Length == 0)
-            {
-                // if we can not find the choice identifier between fields, check properties
-                PropertyInfo? info = structModel.Type.GetProperty(
+            MemberInfo[] infos = structModel
+                .Type
+                .GetMember(
                     choice.MemberName,
                     BindingFlags.DeclaredOnly
                         | BindingFlags.Public
                         | BindingFlags.Instance
                         | BindingFlags.Static
                 );
+            if (infos == null || infos.Length == 0)
+            {
+                // if we can not find the choice identifier between fields, check properties
+                PropertyInfo? info = structModel
+                    .Type
+                    .GetProperty(
+                        choice.MemberName,
+                        BindingFlags.DeclaredOnly
+                            | BindingFlags.Public
+                            | BindingFlags.Instance
+                            | BindingFlags.Static
+                    );
 
                 if (info == null)
                 {

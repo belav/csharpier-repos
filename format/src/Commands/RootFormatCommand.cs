@@ -37,10 +37,12 @@ namespace Microsoft.CodeAnalysis.Tools.Commands
             {
                 var parseResult = context.ParseResult;
                 var formatOptions = parseResult.ParseVerbosityOption(FormatOptions.Instance);
-                var logger = context.Console.SetupLogging(
-                    minimalLogLevel: formatOptions.LogLevel,
-                    minimalErrorLevel: LogLevel.Warning
-                );
+                var logger = context
+                    .Console
+                    .SetupLogging(
+                        minimalLogLevel: formatOptions.LogLevel,
+                        minimalErrorLevel: LogLevel.Warning
+                    );
                 formatOptions = parseResult.ParseCommonOptions(formatOptions, logger);
                 formatOptions = parseResult.ParseWorkspaceOptions(formatOptions);
 

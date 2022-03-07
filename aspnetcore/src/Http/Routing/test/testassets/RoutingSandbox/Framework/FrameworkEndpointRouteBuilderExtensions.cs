@@ -29,8 +29,9 @@ public static class FrameworkEndpointRouteBuilderExtensions
             throw new ArgumentNullException(nameof(configure));
         }
 
-        var dataSource =
-            endpoints.ServiceProvider.GetRequiredService<FrameworkEndpointDataSource>();
+        var dataSource = endpoints
+            .ServiceProvider
+            .GetRequiredService<FrameworkEndpointDataSource>();
 
         var configurationBuilder = new FrameworkConfigurationBuilder(dataSource);
         configure(configurationBuilder);

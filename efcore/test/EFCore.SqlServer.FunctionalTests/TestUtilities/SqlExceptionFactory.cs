@@ -31,7 +31,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
                 );
             var errors = (SqlErrorCollection)typeof(SqlErrorCollection)
                 .GetTypeInfo()
-                .DeclaredConstructors.Single()
+                .DeclaredConstructors
+                .Single()
                 .Invoke(null);
 
             typeof(SqlErrorCollection)

@@ -206,10 +206,12 @@ namespace Newtonsoft.Json
                         {
                             if (
                                 schema.Properties != null
-                                && schema.Properties.TryGetValue(
-                                    _currentScope.CurrentPropertyName,
-                                    out JsonSchemaModel propertySchema
-                                )
+                                && schema
+                                    .Properties
+                                    .TryGetValue(
+                                        _currentScope.CurrentPropertyName,
+                                        out JsonSchemaModel propertySchema
+                                    )
                             )
                             {
                                 schemas.Add(propertySchema);
@@ -715,10 +717,9 @@ namespace Newtonsoft.Json
                         if (isInUniqueArray)
                         {
                             if (
-                                schemaScope.UniqueArrayItems.Contains(
-                                    finishedItem,
-                                    JToken.EqualityComparer
-                                )
+                                schemaScope
+                                    .UniqueArrayItems
+                                    .Contains(finishedItem, JToken.EqualityComparer)
                             )
                             {
                                 RaiseError(
@@ -739,10 +740,9 @@ namespace Newtonsoft.Json
                                 if (schema.Enum != null)
                                 {
                                     if (
-                                        !schema.Enum.ContainsValue(
-                                            finishedItem,
-                                            JToken.EqualityComparer
-                                        )
+                                        !schema
+                                            .Enum
+                                            .ContainsValue(finishedItem, JToken.EqualityComparer)
                                     )
                                     {
                                         StringWriter sw = new StringWriter(

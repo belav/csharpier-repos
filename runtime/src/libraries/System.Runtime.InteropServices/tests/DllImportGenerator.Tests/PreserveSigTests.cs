@@ -284,10 +284,13 @@ namespace DllImportGenerator.IntegrationTests
                 ex = Assert.Throws(
                     exceptionType,
                     () =>
-                        NativeExportsNE.PreserveSig.False.SafeHandle_Out(
-                            input,
-                            out NativeExportsNE.PreserveSig.DummySafeHandle ret
-                        )
+                        NativeExportsNE
+                            .PreserveSig
+                            .False
+                            .SafeHandle_Out(
+                                input,
+                                out NativeExportsNE.PreserveSig.DummySafeHandle ret
+                            )
                 );
                 Assert.Equal(expectedHR, ex.HResult);
 

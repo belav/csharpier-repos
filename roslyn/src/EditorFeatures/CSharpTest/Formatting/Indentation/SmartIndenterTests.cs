@@ -23,9 +23,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Formatting.Indentation
     public partial class SmartIndenterTests : CSharpFormatterTestsBase
     {
         private static readonly TestComposition s_compositionWithTestFormattingRules =
-            EditorTestCompositions.EditorFeatures.AddParts(
-                typeof(TestFormattingRuleFactoryServiceFactory)
-            );
+            EditorTestCompositions
+                .EditorFeatures
+                .AddParts(typeof(TestFormattingRuleFactoryServiceFactory));
 
         public SmartIndenterTests(ITestOutputHelper output) : base(output) { }
 
@@ -2858,15 +2858,18 @@ return;
                 );
 
                 workspace.TryApplyChanges(
-                    workspace.CurrentSolution.WithOptions(
-                        workspace.Options
-                            .WithChangedOption(
-                                FormattingBehaviorOptions.SmartIndent,
-                                LanguageNames.CSharp,
-                                indentStyle
-                            )
-                            .WithChangedOption(UseTabs, LanguageNames.CSharp, useTabs)
-                    )
+                    workspace
+                        .CurrentSolution
+                        .WithOptions(
+                            workspace
+                                .Options
+                                .WithChangedOption(
+                                    FormattingBehaviorOptions.SmartIndent,
+                                    LanguageNames.CSharp,
+                                    indentStyle
+                                )
+                                .WithChangedOption(UseTabs, LanguageNames.CSharp, useTabs)
+                        )
                 );
                 var subjectDocument = workspace.Documents.Single();
 
@@ -2875,17 +2878,20 @@ return;
                     workspace.Documents
                 );
 
-                var provider =
-                    (TestFormattingRuleFactoryServiceFactory.Factory)workspace.Services.GetService<IHostDependentFormattingRuleFactoryService>();
+                var provider = (TestFormattingRuleFactoryServiceFactory.Factory)workspace
+                    .Services
+                    .GetService<IHostDependentFormattingRuleFactoryService>();
                 provider.BaseIndentation = BaseIndentationOfNugget;
                 provider.TextSpan = subjectDocument.SelectedSpans.Single();
 
                 var indentationLine = projectedDocument
                     .GetTextBuffer()
-                    .CurrentSnapshot.GetLineFromPosition(projectedDocument.CursorPosition.Value);
+                    .CurrentSnapshot
+                    .GetLineFromPosition(projectedDocument.CursorPosition.Value);
                 var point = projectedDocument
                     .GetTextView()
-                    .BufferGraph.MapDownToBuffer(
+                    .BufferGraph
+                    .MapDownToBuffer(
                         indentationLine.Start,
                         PointTrackingMode.Negative,
                         subjectDocument.GetTextBuffer(),
@@ -2944,15 +2950,18 @@ return;
                 using var workspace = TestWorkspace.CreateCSharp(code, parseOptions: option);
 
                 workspace.TryApplyChanges(
-                    workspace.CurrentSolution.WithOptions(
-                        workspace.Options
-                            .WithChangedOption(
-                                FormattingBehaviorOptions.SmartIndent,
-                                LanguageNames.CSharp,
-                                indentStyle
-                            )
-                            .WithChangedOption(UseTabs, LanguageNames.CSharp, useTabs)
-                    )
+                    workspace
+                        .CurrentSolution
+                        .WithOptions(
+                            workspace
+                                .Options
+                                .WithChangedOption(
+                                    FormattingBehaviorOptions.SmartIndent,
+                                    LanguageNames.CSharp,
+                                    indentStyle
+                                )
+                                .WithChangedOption(UseTabs, LanguageNames.CSharp, useTabs)
+                        )
                 );
                 TestIndentation(workspace, indentationLine, expectedIndentation);
             }
@@ -2991,21 +3000,26 @@ return;
                 using var workspace = TestWorkspace.CreateCSharp(code, parseOptions: option);
 
                 workspace.TryApplyChanges(
-                    workspace.CurrentSolution.WithOptions(
-                        workspace.Options
-                            .WithChangedOption(
-                                FormattingBehaviorOptions.SmartIndent,
-                                LanguageNames.CSharp,
-                                indentStyle
-                            )
-                            .WithChangedOption(UseTabs, LanguageNames.CSharp, useTabs)
-                    )
+                    workspace
+                        .CurrentSolution
+                        .WithOptions(
+                            workspace
+                                .Options
+                                .WithChangedOption(
+                                    FormattingBehaviorOptions.SmartIndent,
+                                    LanguageNames.CSharp,
+                                    indentStyle
+                                )
+                                .WithChangedOption(UseTabs, LanguageNames.CSharp, useTabs)
+                        )
                 );
                 var wpfTextView = workspace.Documents.First().GetTextView();
                 var line =
-                    wpfTextView.TextBuffer.CurrentSnapshot.GetLineFromPosition(
-                        wpfTextView.Caret.Position.BufferPosition
-                    ).LineNumber;
+                    wpfTextView
+                        .TextBuffer
+                        .CurrentSnapshot
+                        .GetLineFromPosition(wpfTextView.Caret.Position.BufferPosition)
+                        .LineNumber;
                 TestIndentation(workspace, line, expectedIndentation);
             }
         }

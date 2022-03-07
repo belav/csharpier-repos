@@ -129,17 +129,17 @@ namespace Microsoft.CodeAnalysis.CSharp.Test.Utilities
             return new string(' ', level * 4);
         }
 
-        private static readonly SymbolDisplayFormat _displayFormat =
-            SymbolDisplayFormat.TestFormatWithConstraints
-                .WithMemberOptions(
-                    SymbolDisplayMemberOptions.IncludeParameters
-                        | SymbolDisplayMemberOptions.IncludeType
-                        | SymbolDisplayMemberOptions.IncludeRef
-                        | SymbolDisplayMemberOptions.IncludeExplicitInterface
-                )
-                .WithCompilerInternalOptions(
-                    SymbolDisplayCompilerInternalOptions.UseNativeIntegerUnderlyingType
-                );
+        private static readonly SymbolDisplayFormat _displayFormat = SymbolDisplayFormat
+            .TestFormatWithConstraints
+            .WithMemberOptions(
+                SymbolDisplayMemberOptions.IncludeParameters
+                    | SymbolDisplayMemberOptions.IncludeType
+                    | SymbolDisplayMemberOptions.IncludeRef
+                    | SymbolDisplayMemberOptions.IncludeExplicitInterface
+            )
+            .WithCompilerInternalOptions(
+                SymbolDisplayCompilerInternalOptions.UseNativeIntegerUnderlyingType
+            );
 
         private void ReportContainingSymbols(Symbol symbol)
         {

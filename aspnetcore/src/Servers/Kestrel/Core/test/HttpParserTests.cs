@@ -516,9 +516,9 @@ public class HttpParserTests : LoggedTest
     public void ParseHeadersWithGratuitouslySplitBuffers()
     {
         var parser = CreateParser(_nullTrace);
-        var buffer = BytePerSegmentTestSequenceFactory.Instance.CreateWithContent(
-            "Host:\r\nConnection: keep-alive\r\n\r\n"
-        );
+        var buffer = BytePerSegmentTestSequenceFactory
+            .Instance
+            .CreateWithContent("Host:\r\nConnection: keep-alive\r\n\r\n");
 
         var requestHandler = new RequestHandler();
         var reader = new SequenceReader<byte>(buffer);
@@ -531,9 +531,9 @@ public class HttpParserTests : LoggedTest
     public void ParseHeadersWithGratuitouslySplitBuffers2()
     {
         var parser = CreateParser(_nullTrace);
-        var buffer = BytePerSegmentTestSequenceFactory.Instance.CreateWithContent(
-            "A:B\r\nB: C\r\n\r\n"
-        );
+        var buffer = BytePerSegmentTestSequenceFactory
+            .Instance
+            .CreateWithContent("A:B\r\nB: C\r\n\r\n");
 
         var requestHandler = new RequestHandler();
         var reader = new SequenceReader<byte>(buffer);

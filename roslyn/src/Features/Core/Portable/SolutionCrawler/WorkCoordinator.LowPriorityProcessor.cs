@@ -63,10 +63,11 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                             await WaitForHigherPriorityOperationsAsync().ConfigureAwait(false);
 
                             // process any available project work, preferring the active project.
-                            var preferableProjectId =
-                                Processor._documentTracker.SupportsDocumentTracking
-                                    ? Processor._documentTracker.TryGetActiveDocument()?.ProjectId
-                                    : null;
+                            var preferableProjectId = Processor
+                                ._documentTracker
+                                .SupportsDocumentTracking
+                                ? Processor._documentTracker.TryGetActiveDocument()?.ProjectId
+                                : null;
 
                             if (
                                 _workItemQueue.TryTakeAnyWork(

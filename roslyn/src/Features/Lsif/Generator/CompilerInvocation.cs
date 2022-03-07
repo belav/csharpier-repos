@@ -112,18 +112,21 @@ namespace Microsoft.CodeAnalysis.LanguageServerIndexFormat.Generator
                     outputFilePath: parsedCommandLine.OutputFileName,
                     parsedCommandLine.CompilationOptions,
                     parsedCommandLine.ParseOptions,
-                    parsedCommandLine.SourceFiles.Select(
-                        s => CreateDocumentInfo(unmappedPath: s.Path)
-                    ),
-                    metadataReferences: parsedCommandLine.MetadataReferences.Select(
-                        r => MetadataReference.CreateFromFile(mapPath(r.Reference), r.Properties)
-                    ),
-                    additionalDocuments: parsedCommandLine.AdditionalFiles.Select(
-                        f => CreateDocumentInfo(unmappedPath: f.Path)
-                    ),
-                    analyzerReferences: parsedCommandLine.AnalyzerReferences.Select(
-                        r => new AnalyzerFileReference(r.FilePath, analyzerLoader)
-                    )
+                    parsedCommandLine
+                        .SourceFiles
+                        .Select(s => CreateDocumentInfo(unmappedPath: s.Path)),
+                    metadataReferences: parsedCommandLine
+                        .MetadataReferences
+                        .Select(
+                            r =>
+                                MetadataReference.CreateFromFile(mapPath(r.Reference), r.Properties)
+                        ),
+                    additionalDocuments: parsedCommandLine
+                        .AdditionalFiles
+                        .Select(f => CreateDocumentInfo(unmappedPath: f.Path)),
+                    analyzerReferences: parsedCommandLine
+                        .AnalyzerReferences
+                        .Select(r => new AnalyzerFileReference(r.FilePath, analyzerLoader))
                 )
                 .WithAnalyzerConfigDocuments(
                     parsedCommandLine.AnalyzerConfigPaths.Select(CreateDocumentInfo)
@@ -131,7 +134,8 @@ namespace Microsoft.CodeAnalysis.LanguageServerIndexFormat.Generator
 
             workspace.AddProject(projectInfo);
 
-            var compilation = await workspace.CurrentSolution
+            var compilation = await workspace
+                .CurrentSolution
                 .GetProject(projectId)!
                 .GetRequiredCompilationAsync(CancellationToken.None);
 

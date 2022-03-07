@@ -422,11 +422,10 @@ namespace System.Threading
                     return;
                 }
 
-                int waitResult = Thread.CurrentThread.WaitInfo.Wait(
-                    timeoutMilliseconds,
-                    interruptible,
-                    isSleep: true
-                );
+                int waitResult = Thread
+                    .CurrentThread
+                    .WaitInfo
+                    .Wait(timeoutMilliseconds, interruptible, isSleep: true);
                 Debug.Assert(waitResult == WaitHandle.WaitTimeout);
             }
 

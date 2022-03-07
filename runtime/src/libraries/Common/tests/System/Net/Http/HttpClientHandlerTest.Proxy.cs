@@ -924,9 +924,10 @@ namespace System.Net.Http.Functional.Tests
                             TestHelper.AllowAllCertificates;
                         if (addUserAgentHeader)
                         {
-                            client.DefaultRequestHeaders.UserAgent.Add(
-                                new ProductInfoHeaderValue("Mozilla", "5.0")
-                            );
+                            client
+                                .DefaultRequestHeaders
+                                .UserAgent
+                                .Add(new ProductInfoHeaderValue("Mozilla", "5.0"));
                         }
                         try
                         {

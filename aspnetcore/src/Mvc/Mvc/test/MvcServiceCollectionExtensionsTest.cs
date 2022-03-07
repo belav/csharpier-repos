@@ -455,9 +455,9 @@ public class MvcServiceCollectionExtensionsTest
             )
             {
                 // This will throw if something is invalid.
-                scope.ServiceProvider.GetService(
-                    typeof(IEnumerable<>).MakeGenericType(serviceType)
-                );
+                scope
+                    .ServiceProvider
+                    .GetService(typeof(IEnumerable<>).MakeGenericType(serviceType));
             }
         }
     }

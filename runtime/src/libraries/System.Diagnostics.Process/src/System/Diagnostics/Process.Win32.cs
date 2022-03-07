@@ -315,15 +315,17 @@ namespace System.Diagnostics
             IntPtr result;
             unsafe
             {
-                return Interop.User32.SendMessageTimeout(
-                        mainWindow,
-                        WM_NULL,
-                        IntPtr.Zero,
-                        IntPtr.Zero,
-                        SMTO_ABORTIFHUNG,
-                        5000,
-                        &result
-                    ) != (IntPtr)0;
+                return Interop
+                        .User32
+                        .SendMessageTimeout(
+                            mainWindow,
+                            WM_NULL,
+                            IntPtr.Zero,
+                            IntPtr.Zero,
+                            SMTO_ABORTIFHUNG,
+                            5000,
+                            &result
+                        ) != (IntPtr)0;
             }
         }
 
@@ -399,13 +401,15 @@ namespace System.Diagnostics
                     Interop.NtDll.PROCESS_BASIC_INFORMATION info;
 
                     if (
-                        Interop.NtDll.NtQueryInformationProcess(
-                            handle,
-                            Interop.NtDll.ProcessBasicInformation,
-                            &info,
-                            (uint)sizeof(Interop.NtDll.PROCESS_BASIC_INFORMATION),
-                            out _
-                        ) != 0
+                        Interop
+                            .NtDll
+                            .NtQueryInformationProcess(
+                                handle,
+                                Interop.NtDll.ProcessBasicInformation,
+                                &info,
+                                (uint)sizeof(Interop.NtDll.PROCESS_BASIC_INFORMATION),
+                                out _
+                            ) != 0
                     )
                         throw new Win32Exception(SR.ProcessInformationUnavailable);
 

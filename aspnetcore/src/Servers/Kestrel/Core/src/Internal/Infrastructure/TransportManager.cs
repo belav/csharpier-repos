@@ -151,7 +151,8 @@ internal class TransportManager
         async Task StopTransportConnection(ActiveTransport transport)
         {
             if (
-                !await transport.TransportConnectionManager
+                !await transport
+                    .TransportConnectionManager
                     .CloseAllConnectionsAsync(cancellationToken)
                     .ConfigureAwait(false)
             )
@@ -159,7 +160,8 @@ internal class TransportManager
                 Trace.NotAllConnectionsClosedGracefully();
 
                 if (
-                    !await transport.TransportConnectionManager
+                    !await transport
+                        .TransportConnectionManager
                         .AbortAllConnectionsAsync()
                         .ConfigureAwait(false)
                 )

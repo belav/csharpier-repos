@@ -48,7 +48,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseExplicitTypeForConst
 
         public override async Task RegisterCodeFixesAsync(CodeFixContext context)
         {
-            var root = await context.Document
+            var root = await context
+                .Document
                 .GetSyntaxRootAsync(context.CancellationToken)
                 .ConfigureAwait(false);
 
@@ -57,15 +58,15 @@ namespace Microsoft.CodeAnalysis.CSharp.UseExplicitTypeForConst
                 && variableDeclaration.Variables.Count == 1
             )
             {
-                var semanticModel = await context.Document
+                var semanticModel = await context
+                    .Document
                     .GetSemanticModelAsync(context.CancellationToken)
                     .ConfigureAwait(false);
 
                 var type =
-                    semanticModel.GetTypeInfo(
-                        variableDeclaration.Type,
-                        context.CancellationToken
-                    ).ConvertedType;
+                    semanticModel
+                        .GetTypeInfo(variableDeclaration.Type, context.CancellationToken)
+                        .ConvertedType;
                 if (type == null || type.TypeKind == TypeKind.Error || type.IsAnonymousType)
                 {
                     return;

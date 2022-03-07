@@ -107,9 +107,10 @@ namespace Microsoft.CodeAnalysis.AddConstructorParametersFromMembers
             {
                 get
                 {
-                    var parameters = _constructorCandidate.Constructor.Parameters.Select(
-                        p => p.ToDisplayString(SimpleFormat)
-                    );
+                    var parameters = _constructorCandidate
+                        .Constructor
+                        .Parameters
+                        .Select(p => p.ToDisplayString(SimpleFormat));
                     var parameterString = string.Join(", ", parameters);
                     var signature = $"{_containingType.Name}({parameterString})";
 

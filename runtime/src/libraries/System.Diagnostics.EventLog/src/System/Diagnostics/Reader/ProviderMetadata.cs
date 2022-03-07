@@ -96,7 +96,9 @@ namespace System.Diagnostics.Eventing.Reader
             {
                 return (Guid)NativeWrapper.EvtGetPublisherMetadataProperty(
                     _handle,
-                    UnsafeNativeMethods.EvtPublisherMetadataPropertyId.EvtPublisherMetadataPublisherGuid
+                    UnsafeNativeMethods
+                        .EvtPublisherMetadataPropertyId
+                        .EvtPublisherMetadataPublisherGuid
                 );
             }
         }
@@ -107,7 +109,9 @@ namespace System.Diagnostics.Eventing.Reader
             {
                 return (string)NativeWrapper.EvtGetPublisherMetadataProperty(
                     _handle,
-                    UnsafeNativeMethods.EvtPublisherMetadataPropertyId.EvtPublisherMetadataMessageFilePath
+                    UnsafeNativeMethods
+                        .EvtPublisherMetadataPropertyId
+                        .EvtPublisherMetadataMessageFilePath
                 );
             }
         }
@@ -118,7 +122,9 @@ namespace System.Diagnostics.Eventing.Reader
             {
                 return (string)NativeWrapper.EvtGetPublisherMetadataProperty(
                     _handle,
-                    UnsafeNativeMethods.EvtPublisherMetadataPropertyId.EvtPublisherMetadataResourceFilePath
+                    UnsafeNativeMethods
+                        .EvtPublisherMetadataPropertyId
+                        .EvtPublisherMetadataResourceFilePath
                 );
             }
         }
@@ -129,7 +135,9 @@ namespace System.Diagnostics.Eventing.Reader
             {
                 return (string)NativeWrapper.EvtGetPublisherMetadataProperty(
                     _handle,
-                    UnsafeNativeMethods.EvtPublisherMetadataPropertyId.EvtPublisherMetadataParameterFilePath
+                    UnsafeNativeMethods
+                        .EvtPublisherMetadataPropertyId
+                        .EvtPublisherMetadataParameterFilePath
                 );
             }
         }
@@ -154,7 +162,9 @@ namespace System.Diagnostics.Eventing.Reader
             {
                 return (uint)NativeWrapper.EvtGetPublisherMetadataProperty(
                     _handle,
-                    UnsafeNativeMethods.EvtPublisherMetadataPropertyId.EvtPublisherMetadataPublisherMessageID
+                    UnsafeNativeMethods
+                        .EvtPublisherMetadataPropertyId
+                        .EvtPublisherMetadataPublisherMessageID
                 );
             }
         }
@@ -186,7 +196,9 @@ namespace System.Diagnostics.Eventing.Reader
 
                         elHandle = NativeWrapper.EvtGetPublisherMetadataPropertyHandle(
                             _handle,
-                            UnsafeNativeMethods.EvtPublisherMetadataPropertyId.EvtPublisherMetadataChannelReferences
+                            UnsafeNativeMethods
+                                .EvtPublisherMetadataPropertyId
+                                .EvtPublisherMetadataChannelReferences
                         );
 
                         int arraySize = NativeWrapper.EvtGetObjectArraySize(elHandle);
@@ -198,25 +210,33 @@ namespace System.Diagnostics.Eventing.Reader
                             string channelName = (string)NativeWrapper.EvtGetObjectArrayProperty(
                                 elHandle,
                                 index,
-                                (int)UnsafeNativeMethods.EvtPublisherMetadataPropertyId.EvtPublisherMetadataChannelReferencePath
+                                (int)UnsafeNativeMethods
+                                    .EvtPublisherMetadataPropertyId
+                                    .EvtPublisherMetadataChannelReferencePath
                             );
 
                             uint channelId = (uint)NativeWrapper.EvtGetObjectArrayProperty(
                                 elHandle,
                                 index,
-                                (int)UnsafeNativeMethods.EvtPublisherMetadataPropertyId.EvtPublisherMetadataChannelReferenceID
+                                (int)UnsafeNativeMethods
+                                    .EvtPublisherMetadataPropertyId
+                                    .EvtPublisherMetadataChannelReferenceID
                             );
 
                             uint flag = (uint)NativeWrapper.EvtGetObjectArrayProperty(
                                 elHandle,
                                 index,
-                                (int)UnsafeNativeMethods.EvtPublisherMetadataPropertyId.EvtPublisherMetadataChannelReferenceFlags
+                                (int)UnsafeNativeMethods
+                                    .EvtPublisherMetadataPropertyId
+                                    .EvtPublisherMetadataChannelReferenceFlags
                             );
 
                             bool isImported;
                             if (
                                 flag
-                                == (int)UnsafeNativeMethods.EvtChannelReferenceFlags.EvtChannelReferenceImported
+                                == (int)UnsafeNativeMethods
+                                    .EvtChannelReferenceFlags
+                                    .EvtChannelReferenceImported
                             )
                                 isImported = true;
                             else
@@ -227,7 +247,9 @@ namespace System.Diagnostics.Eventing.Reader
                                     (uint)NativeWrapper.EvtGetObjectArrayProperty(
                                         elHandle,
                                         index,
-                                        (int)UnsafeNativeMethods.EvtPublisherMetadataPropertyId.EvtPublisherMetadataChannelReferenceMessageID
+                                        (int)UnsafeNativeMethods
+                                            .EvtPublisherMetadataPropertyId
+                                            .EvtPublisherMetadataChannelReferenceMessageID
                                     )
                                 )
                             );
@@ -332,7 +354,9 @@ namespace System.Diagnostics.Eventing.Reader
                 _standardLevels =
                     (List<EventLevel>)GetProviderListProperty(
                         _defaultProviderHandle,
-                        UnsafeNativeMethods.EvtPublisherMetadataPropertyId.EvtPublisherMetadataLevels
+                        UnsafeNativeMethods
+                            .EvtPublisherMetadataPropertyId
+                            .EvtPublisherMetadataLevels
                     );
             foreach (EventLevel standardLevel in _standardLevels)
             {
@@ -348,7 +372,9 @@ namespace System.Diagnostics.Eventing.Reader
                 _standardOpcodes =
                     (List<EventOpcode>)GetProviderListProperty(
                         _defaultProviderHandle,
-                        UnsafeNativeMethods.EvtPublisherMetadataPropertyId.EvtPublisherMetadataOpcodes
+                        UnsafeNativeMethods
+                            .EvtPublisherMetadataPropertyId
+                            .EvtPublisherMetadataOpcodes
                     );
             foreach (EventOpcode standardOpcode in _standardOpcodes)
             {
@@ -364,7 +390,9 @@ namespace System.Diagnostics.Eventing.Reader
                 _standardKeywords =
                     (List<EventKeyword>)GetProviderListProperty(
                         _defaultProviderHandle,
-                        UnsafeNativeMethods.EvtPublisherMetadataPropertyId.EvtPublisherMetadataKeywords
+                        UnsafeNativeMethods
+                            .EvtPublisherMetadataPropertyId
+                            .EvtPublisherMetadataKeywords
                     );
             foreach (EventKeyword standardKeyword in _standardKeywords)
             {
@@ -418,46 +446,78 @@ namespace System.Diagnostics.Eventing.Reader
 
                 switch (metadataProperty)
                 {
-                    case UnsafeNativeMethods.EvtPublisherMetadataPropertyId.EvtPublisherMetadataLevels:
+                    case UnsafeNativeMethods
+                        .EvtPublisherMetadataPropertyId
+                        .EvtPublisherMetadataLevels:
                         propName =
-                            UnsafeNativeMethods.EvtPublisherMetadataPropertyId.EvtPublisherMetadataLevelName;
+                            UnsafeNativeMethods
+                                .EvtPublisherMetadataPropertyId
+                                .EvtPublisherMetadataLevelName;
                         propValue =
-                            UnsafeNativeMethods.EvtPublisherMetadataPropertyId.EvtPublisherMetadataLevelValue;
+                            UnsafeNativeMethods
+                                .EvtPublisherMetadataPropertyId
+                                .EvtPublisherMetadataLevelValue;
                         propMessageId =
-                            UnsafeNativeMethods.EvtPublisherMetadataPropertyId.EvtPublisherMetadataLevelMessageID;
+                            UnsafeNativeMethods
+                                .EvtPublisherMetadataPropertyId
+                                .EvtPublisherMetadataLevelMessageID;
                         objectTypeName = ObjectTypeName.Level;
                         levelList = new List<EventLevel>(arraySize);
                         break;
 
-                    case UnsafeNativeMethods.EvtPublisherMetadataPropertyId.EvtPublisherMetadataOpcodes:
+                    case UnsafeNativeMethods
+                        .EvtPublisherMetadataPropertyId
+                        .EvtPublisherMetadataOpcodes:
                         propName =
-                            UnsafeNativeMethods.EvtPublisherMetadataPropertyId.EvtPublisherMetadataOpcodeName;
+                            UnsafeNativeMethods
+                                .EvtPublisherMetadataPropertyId
+                                .EvtPublisherMetadataOpcodeName;
                         propValue =
-                            UnsafeNativeMethods.EvtPublisherMetadataPropertyId.EvtPublisherMetadataOpcodeValue;
+                            UnsafeNativeMethods
+                                .EvtPublisherMetadataPropertyId
+                                .EvtPublisherMetadataOpcodeValue;
                         propMessageId =
-                            UnsafeNativeMethods.EvtPublisherMetadataPropertyId.EvtPublisherMetadataOpcodeMessageID;
+                            UnsafeNativeMethods
+                                .EvtPublisherMetadataPropertyId
+                                .EvtPublisherMetadataOpcodeMessageID;
                         objectTypeName = ObjectTypeName.Opcode;
                         opcodeList = new List<EventOpcode>(arraySize);
                         break;
 
-                    case UnsafeNativeMethods.EvtPublisherMetadataPropertyId.EvtPublisherMetadataKeywords:
+                    case UnsafeNativeMethods
+                        .EvtPublisherMetadataPropertyId
+                        .EvtPublisherMetadataKeywords:
                         propName =
-                            UnsafeNativeMethods.EvtPublisherMetadataPropertyId.EvtPublisherMetadataKeywordName;
+                            UnsafeNativeMethods
+                                .EvtPublisherMetadataPropertyId
+                                .EvtPublisherMetadataKeywordName;
                         propValue =
-                            UnsafeNativeMethods.EvtPublisherMetadataPropertyId.EvtPublisherMetadataKeywordValue;
+                            UnsafeNativeMethods
+                                .EvtPublisherMetadataPropertyId
+                                .EvtPublisherMetadataKeywordValue;
                         propMessageId =
-                            UnsafeNativeMethods.EvtPublisherMetadataPropertyId.EvtPublisherMetadataKeywordMessageID;
+                            UnsafeNativeMethods
+                                .EvtPublisherMetadataPropertyId
+                                .EvtPublisherMetadataKeywordMessageID;
                         objectTypeName = ObjectTypeName.Keyword;
                         keywordList = new List<EventKeyword>(arraySize);
                         break;
 
-                    case UnsafeNativeMethods.EvtPublisherMetadataPropertyId.EvtPublisherMetadataTasks:
+                    case UnsafeNativeMethods
+                        .EvtPublisherMetadataPropertyId
+                        .EvtPublisherMetadataTasks:
                         propName =
-                            UnsafeNativeMethods.EvtPublisherMetadataPropertyId.EvtPublisherMetadataTaskName;
+                            UnsafeNativeMethods
+                                .EvtPublisherMetadataPropertyId
+                                .EvtPublisherMetadataTaskName;
                         propValue =
-                            UnsafeNativeMethods.EvtPublisherMetadataPropertyId.EvtPublisherMetadataTaskValue;
+                            UnsafeNativeMethods
+                                .EvtPublisherMetadataPropertyId
+                                .EvtPublisherMetadataTaskValue;
                         propMessageId =
-                            UnsafeNativeMethods.EvtPublisherMetadataPropertyId.EvtPublisherMetadataTaskMessageID;
+                            UnsafeNativeMethods
+                                .EvtPublisherMetadataPropertyId
+                                .EvtPublisherMetadataTaskMessageID;
                         objectTypeName = ObjectTypeName.Task;
                         taskList = new List<EventTask>(arraySize);
                         break;
@@ -577,7 +637,9 @@ namespace System.Diagnostics.Eventing.Reader
                             Guid taskGuid = (Guid)NativeWrapper.EvtGetObjectArrayProperty(
                                 elHandle,
                                 index,
-                                (int)UnsafeNativeMethods.EvtPublisherMetadataPropertyId.EvtPublisherMetadataTaskEventGuid
+                                (int)UnsafeNativeMethods
+                                    .EvtPublisherMetadataPropertyId
+                                    .EvtPublisherMetadataTaskEventGuid
                             );
                             taskList.Add(
                                 new EventTask(
@@ -621,7 +683,9 @@ namespace System.Diagnostics.Eventing.Reader
                     el =
                         (List<EventLevel>)this.GetProviderListProperty(
                             _handle,
-                            UnsafeNativeMethods.EvtPublisherMetadataPropertyId.EvtPublisherMetadataLevels
+                            UnsafeNativeMethods
+                                .EvtPublisherMetadataPropertyId
+                                .EvtPublisherMetadataLevels
                         );
                     _levels = el.AsReadOnly();
                 }
@@ -642,7 +706,9 @@ namespace System.Diagnostics.Eventing.Reader
                     eo =
                         (List<EventOpcode>)this.GetProviderListProperty(
                             _handle,
-                            UnsafeNativeMethods.EvtPublisherMetadataPropertyId.EvtPublisherMetadataOpcodes
+                            UnsafeNativeMethods
+                                .EvtPublisherMetadataPropertyId
+                                .EvtPublisherMetadataOpcodes
                         );
                     _opcodes = eo.AsReadOnly();
                 }
@@ -663,7 +729,9 @@ namespace System.Diagnostics.Eventing.Reader
                     ek =
                         (List<EventKeyword>)this.GetProviderListProperty(
                             _handle,
-                            UnsafeNativeMethods.EvtPublisherMetadataPropertyId.EvtPublisherMetadataKeywords
+                            UnsafeNativeMethods
+                                .EvtPublisherMetadataPropertyId
+                                .EvtPublisherMetadataKeywords
                         );
                     _keywords = ek.AsReadOnly();
                 }
@@ -684,7 +752,9 @@ namespace System.Diagnostics.Eventing.Reader
                     et =
                         (List<EventTask>)this.GetProviderListProperty(
                             _handle,
-                            UnsafeNativeMethods.EvtPublisherMetadataPropertyId.EvtPublisherMetadataTasks
+                            UnsafeNativeMethods
+                                .EvtPublisherMetadataPropertyId
+                                .EvtPublisherMetadataTasks
                         );
                     _tasks = et.AsReadOnly();
                 }
@@ -717,54 +787,72 @@ namespace System.Diagnostics.Eventing.Reader
                             {
                                 uint emId = (uint)NativeWrapper.EvtGetEventMetadataProperty(
                                     emHandle,
-                                    UnsafeNativeMethods.EvtEventMetadataPropertyId.EventMetadataEventID
+                                    UnsafeNativeMethods
+                                        .EvtEventMetadataPropertyId
+                                        .EventMetadataEventID
                                 );
                                 byte emVersion = (byte)(
                                     (uint)(
                                         NativeWrapper.EvtGetEventMetadataProperty(
                                             emHandle,
-                                            UnsafeNativeMethods.EvtEventMetadataPropertyId.EventMetadataEventVersion
+                                            UnsafeNativeMethods
+                                                .EvtEventMetadataPropertyId
+                                                .EventMetadataEventVersion
                                         )
                                     )
                                 );
                                 byte emChannelId = (byte)(
                                     (uint)NativeWrapper.EvtGetEventMetadataProperty(
                                         emHandle,
-                                        UnsafeNativeMethods.EvtEventMetadataPropertyId.EventMetadataEventChannel
+                                        UnsafeNativeMethods
+                                            .EvtEventMetadataPropertyId
+                                            .EventMetadataEventChannel
                                     )
                                 );
                                 byte emLevel = (byte)(
                                     (uint)NativeWrapper.EvtGetEventMetadataProperty(
                                         emHandle,
-                                        UnsafeNativeMethods.EvtEventMetadataPropertyId.EventMetadataEventLevel
+                                        UnsafeNativeMethods
+                                            .EvtEventMetadataPropertyId
+                                            .EventMetadataEventLevel
                                     )
                                 );
                                 byte emOpcode = (byte)(
                                     (uint)NativeWrapper.EvtGetEventMetadataProperty(
                                         emHandle,
-                                        UnsafeNativeMethods.EvtEventMetadataPropertyId.EventMetadataEventOpcode
+                                        UnsafeNativeMethods
+                                            .EvtEventMetadataPropertyId
+                                            .EventMetadataEventOpcode
                                     )
                                 );
                                 short emTask = (short)(
                                     (uint)NativeWrapper.EvtGetEventMetadataProperty(
                                         emHandle,
-                                        UnsafeNativeMethods.EvtEventMetadataPropertyId.EventMetadataEventTask
+                                        UnsafeNativeMethods
+                                            .EvtEventMetadataPropertyId
+                                            .EventMetadataEventTask
                                     )
                                 );
                                 long emKeywords =
                                     (long)(ulong)NativeWrapper.EvtGetEventMetadataProperty(
                                         emHandle,
-                                        UnsafeNativeMethods.EvtEventMetadataPropertyId.EventMetadataEventKeyword
+                                        UnsafeNativeMethods
+                                            .EvtEventMetadataPropertyId
+                                            .EventMetadataEventKeyword
                                     );
                                 string emTemplate =
                                     (string)NativeWrapper.EvtGetEventMetadataProperty(
                                         emHandle,
-                                        UnsafeNativeMethods.EvtEventMetadataPropertyId.EventMetadataEventTemplate
+                                        UnsafeNativeMethods
+                                            .EvtEventMetadataPropertyId
+                                            .EventMetadataEventTemplate
                                     );
                                 int messageId = (int)(
                                     (uint)NativeWrapper.EvtGetEventMetadataProperty(
                                         emHandle,
-                                        UnsafeNativeMethods.EvtEventMetadataPropertyId.EventMetadataEventMessageID
+                                        UnsafeNativeMethods
+                                            .EvtEventMetadataPropertyId
+                                            .EventMetadataEventMessageID
                                     )
                                 );
 

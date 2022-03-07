@@ -52,20 +52,23 @@ namespace IdeCoreBenchmarks
             var projectId = ProjectId.CreateNewId();
             var documentId = DocumentId.CreateNewId(projectId);
 
-            var solution = new AdhocWorkspace().CurrentSolution
+            var solution = new AdhocWorkspace()
+                .CurrentSolution
                 .AddProject(projectId, "ProjectName", "AssemblyName", LanguageNames.CSharp)
                 .AddDocument(documentId, "DocumentName", text);
 
             var document = solution.GetDocument(documentId);
             var root = document
                 .GetSyntaxRootAsync(CancellationToken.None)
-                .Result.WithAdditionalAnnotations(Formatter.Annotation);
+                .Result
+                .WithAdditionalAnnotations(Formatter.Annotation);
             solution = solution.WithDocumentSyntaxRoot(documentId, root);
 
             _document = solution.GetDocument(documentId);
             _options = _document
                 .GetOptionsAsync()
-                .Result.WithChangedOption(CSharpFormattingOptions.NewLinesForBracesInTypes, true)
+                .Result
+                .WithChangedOption(CSharpFormattingOptions.NewLinesForBracesInTypes, true)
                 .WithChangedOption(
                     CSharpFormattingOptions.WrappingKeepStatementsOnSingleLine,
                     false
@@ -79,12 +82,14 @@ namespace IdeCoreBenchmarks
             for (int i = 0; i < _iterationCount; ++i)
             {
                 var formattedDoc =
-                    Formatter.FormatAsync(
-                        _document,
-                        Formatter.Annotation,
-                        _options,
-                        CancellationToken.None
-                    ).Result;
+                    Formatter
+                        .FormatAsync(
+                            _document,
+                            Formatter.Annotation,
+                            _options,
+                            CancellationToken.None
+                        )
+                        .Result;
                 var formattedRoot = formattedDoc.GetSyntaxRootAsync(CancellationToken.None).Result;
                 _ = formattedRoot.DescendantNodesAndSelf().ToImmutableArray();
             }

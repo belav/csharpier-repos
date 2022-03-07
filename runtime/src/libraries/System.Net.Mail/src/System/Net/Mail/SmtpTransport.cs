@@ -413,15 +413,17 @@ namespace System.Net.Mail
                     string response;
                     if (!RecipientCommand.EndSend(result, out response))
                     {
-                        thisPtr._failedRecipientExceptions.Add(
-                            new SmtpFailedRecipientException(
-                                thisPtr._connection.Reader!.StatusCode,
-                                thisPtr._toCollection[thisPtr._toIndex - 1].GetSmtpAddress(
-                                    thisPtr._allowUnicode
-                                ),
-                                response
-                            )
-                        );
+                        thisPtr
+                            ._failedRecipientExceptions
+                            .Add(
+                                new SmtpFailedRecipientException(
+                                    thisPtr._connection.Reader!.StatusCode,
+                                    thisPtr._toCollection[thisPtr._toIndex - 1].GetSmtpAddress(
+                                        thisPtr._allowUnicode
+                                    ),
+                                    response
+                                )
+                            );
 
                         if (thisPtr._failedRecipientExceptions.Count == thisPtr._toCollection.Count)
                         {

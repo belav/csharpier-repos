@@ -131,15 +131,18 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                 && caseExpression.Operand == null
                 && caseExpression.ElseResult == null
                 && caseExpression.WhenClauses.Count == 3
-                && caseExpression.WhenClauses.All(
-                    c =>
-                        c.Test is SqlBinaryExpression
-                        && c.Result is SqlConstantExpression constant
-                        && constant.Value is int
-                )
+                && caseExpression
+                    .WhenClauses
+                    .All(
+                        c =>
+                            c.Test is SqlBinaryExpression
+                            && c.Result is SqlConstantExpression constant
+                            && constant.Value is int
+                    )
             )
             {
-                var whenClauses = caseExpression.WhenClauses
+                var whenClauses = caseExpression
+                    .WhenClauses
                     .Select(
                         c =>
                             new
@@ -300,9 +303,9 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                 && caseComponent.Operand == null
             )
             {
-                var matchingCaseBlock = caseComponent.WhenClauses.FirstOrDefault(
-                    wc => sqlConstantComponent.Equals(wc.Result)
-                );
+                var matchingCaseBlock = caseComponent
+                    .WhenClauses
+                    .FirstOrDefault(wc => sqlConstantComponent.Equals(wc.Result));
                 if (matchingCaseBlock != null)
                 {
                     return Visit(matchingCaseBlock.Test);

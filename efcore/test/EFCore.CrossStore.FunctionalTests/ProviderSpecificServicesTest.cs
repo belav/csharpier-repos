@@ -20,14 +20,15 @@ namespace Microsoft.EntityFrameworkCore
                             .AddEntityFrameworkInMemoryDatabase()
                             .BuildServiceProvider(validateScopes: true)
                     )
-                    .UseInMemoryDatabase(Guid.NewGuid().ToString()).Options;
+                    .UseInMemoryDatabase(Guid.NewGuid().ToString())
+                    .Options;
 
             using var context = new ConstructorTestContext1A(options);
             Assert.Equal(
                 RelationalStrings.RelationalNotInUse,
-                Assert.Throws<InvalidOperationException>(
-                    () => context.Database.GetDbConnection()
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(() => context.Database.GetDbConnection())
+                    .Message
             );
         }
 
@@ -50,9 +51,9 @@ namespace Microsoft.EntityFrameworkCore
 
             Assert.Equal(
                 RelationalStrings.RelationalNotInUse,
-                Assert.Throws<InvalidOperationException>(
-                    () => context.Database.GetDbConnection()
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(() => context.Database.GetDbConnection())
+                    .Message
             );
         }
 

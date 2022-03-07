@@ -47,15 +47,19 @@ namespace Microsoft.CodeAnalysis.PreferFrameworkType
         public override bool OpenFileOnly(OptionSet options)
         {
             var preferTypeKeywordInDeclarationOption =
-                options.GetOption(
-                    CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInDeclaration,
-                    GetLanguageName()
-                ).Notification;
+                options
+                    .GetOption(
+                        CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInDeclaration,
+                        GetLanguageName()
+                    )
+                    .Notification;
             var preferTypeKeywordInMemberAccessOption =
-                options.GetOption(
-                    CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInMemberAccess,
-                    GetLanguageName()
-                ).Notification;
+                options
+                    .GetOption(
+                        CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInMemberAccess,
+                        GetLanguageName()
+                    )
+                    .Notification;
 
             return !(
                 preferTypeKeywordInDeclarationOption == NotificationOption2.Warning

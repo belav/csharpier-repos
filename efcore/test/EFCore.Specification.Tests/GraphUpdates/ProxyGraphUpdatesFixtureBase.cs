@@ -796,10 +796,9 @@ namespace Microsoft.EntityFrameworkCore
             {
                 var tracker = new KeyValueEntityTracker();
 
-                context.ChangeTracker.TrackGraph(
-                    CreateFullGraph(context),
-                    e => tracker.TrackEntity(e.Entry)
-                );
+                context
+                    .ChangeTracker
+                    .TrackGraph(CreateFullGraph(context), e => tracker.TrackEntity(e.Entry));
 
                 context.Add(
                     context.CreateProxy<BadOrder>(

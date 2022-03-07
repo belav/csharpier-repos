@@ -24,7 +24,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
                 new DbContext(
                     new DbContextOptionsBuilder()
                         .EnableServiceProviderCaching(false)
-                        .UseSqlServer(TestEnvironment.DefaultConnection).Options
+                        .UseSqlServer(TestEnvironment.DefaultConnection)
+                        .Options
                 ),
                 DefaultMaxRetryCount,
                 DefaultMaxDelay,

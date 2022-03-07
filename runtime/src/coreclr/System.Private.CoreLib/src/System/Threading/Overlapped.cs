@@ -300,9 +300,10 @@ namespace System.Threading
             if (nativeOverlappedPtr == null)
                 throw new ArgumentNullException(nameof(nativeOverlappedPtr));
 
-            OverlappedData.GetOverlappedFromNative(
-                nativeOverlappedPtr
-            )._overlapped._overlappedData = null;
+            OverlappedData
+                .GetOverlappedFromNative(nativeOverlappedPtr)
+                ._overlapped
+                ._overlappedData = null;
             OverlappedData.FreeNativeOverlapped(nativeOverlappedPtr);
         }
 

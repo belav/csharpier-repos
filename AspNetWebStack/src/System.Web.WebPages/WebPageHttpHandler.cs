@@ -27,11 +27,11 @@ namespace System.Web.WebPages
                 webPage,
                 new Lazy<WebPageRenderingBase>(
                     () =>
-                        System.Web.WebPages.StartPage.GetStartPage(
-                            webPage,
-                            StartPageFileName,
-                            GetRegisteredExtensions()
-                        )
+                        System
+                            .Web
+                            .WebPages
+                            .StartPage
+                            .GetStartPage(webPage, StartPageFileName, GetRegisteredExtensions())
                 )
             ) { }
 
@@ -123,9 +123,9 @@ namespace System.Web.WebPages
             // DevDiv 216459:
             // This code originally used Assembly.GetName(), but that requires FileIOPermission, which isn't granted in
             // medium trust. However, Assembly.FullName *is* accessible in medium trust.
-            return new AssemblyName(typeof(WebPageHttpHandler).Assembly.FullName).Version.ToString(
-                2
-            );
+            return new AssemblyName(typeof(WebPageHttpHandler).Assembly.FullName)
+                .Version
+                .ToString(2);
         }
 
         private static bool HandleError(Exception e)

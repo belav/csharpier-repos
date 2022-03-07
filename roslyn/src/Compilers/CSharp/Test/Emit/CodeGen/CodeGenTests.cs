@@ -32,7 +32,8 @@ public class P {
     public static void Main() {}
 }";
             var parseOptions = TestOptions.RegularWithDocumentationComments;
-            var options = TestOptions.ReleaseDll
+            var options = TestOptions
+                .ReleaseDll
                 .WithXmlReferenceResolver(XmlFileResolver.Default)
                 .WithGeneralDiagnosticOption(ReportDiagnostic.Error);
 
@@ -15627,15 +15628,17 @@ class C
             using (var stream = new MemoryStream())
             {
                 var result = compilation.Emit(stream);
-                result.Diagnostics.Verify(
-                    // warning CS8021: No value for RuntimeMetadataVersion found. No assembly containing System.Object was found nor was a value for RuntimeMetadataVersion specified through options.
-                    Diagnostic(ErrorCode.WRN_NoRuntimeMetadataVersion).WithLocation(1, 1),
-                    // (14,27): error CS0656: Missing compiler required member 'System.String.op_Equality'
-                    //         switch (s) { case "A": break; case "B": break; }
-                    Diagnostic(ErrorCode.ERR_MissingPredefinedMember, @"""A""")
-                        .WithArguments("System.String", "op_Equality")
-                        .WithLocation(14, 27)
-                );
+                result
+                    .Diagnostics
+                    .Verify(
+                        // warning CS8021: No value for RuntimeMetadataVersion found. No assembly containing System.Object was found nor was a value for RuntimeMetadataVersion specified through options.
+                        Diagnostic(ErrorCode.WRN_NoRuntimeMetadataVersion).WithLocation(1, 1),
+                        // (14,27): error CS0656: Missing compiler required member 'System.String.op_Equality'
+                        //         switch (s) { case "A": break; case "B": break; }
+                        Diagnostic(ErrorCode.ERR_MissingPredefinedMember, @"""A""")
+                            .WithArguments("System.String", "op_Equality")
+                            .WithLocation(14, 27)
+                    );
             }
         }
 
@@ -15663,15 +15666,17 @@ class C
             using (var stream = new MemoryStream())
             {
                 var result = compilation.Emit(stream);
-                result.Diagnostics.Verify(
-                    // warning CS8021: No value for RuntimeMetadataVersion found. No assembly containing System.Object was found nor was a value for RuntimeMetadataVersion specified through options.
-                    Diagnostic(ErrorCode.WRN_NoRuntimeMetadataVersion),
-                    // (13,23): error CS0656: Missing compiler required member 'System.Type.GetTypeFromHandle'
-                    //     static object F = typeof(C);
-                    Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "typeof(C)")
-                        .WithArguments("System.Type", "GetTypeFromHandle")
-                        .WithLocation(13, 23)
-                );
+                result
+                    .Diagnostics
+                    .Verify(
+                        // warning CS8021: No value for RuntimeMetadataVersion found. No assembly containing System.Object was found nor was a value for RuntimeMetadataVersion specified through options.
+                        Diagnostic(ErrorCode.WRN_NoRuntimeMetadataVersion),
+                        // (13,23): error CS0656: Missing compiler required member 'System.Type.GetTypeFromHandle'
+                        //     static object F = typeof(C);
+                        Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "typeof(C)")
+                            .WithArguments("System.Type", "GetTypeFromHandle")
+                            .WithLocation(13, 23)
+                    );
             }
         }
 
@@ -15702,15 +15707,17 @@ class C
             using (var stream = new MemoryStream())
             {
                 var result = compilation.Emit(stream);
-                result.Diagnostics.Verify(
-                    // warning CS8021: No value for RuntimeMetadataVersion found. No assembly containing System.Object was found nor was a value for RuntimeMetadataVersion specified through options.
-                    Diagnostic(ErrorCode.WRN_NoRuntimeMetadataVersion),
-                    // (15,16): error CS0656: Missing compiler required member 'System.Type.GetTypeFromHandle'
-                    //         return __reftype(__makeref(o));
-                    Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "__reftype(__makeref(o))")
-                        .WithArguments("System.Type", "GetTypeFromHandle")
-                        .WithLocation(15, 16)
-                );
+                result
+                    .Diagnostics
+                    .Verify(
+                        // warning CS8021: No value for RuntimeMetadataVersion found. No assembly containing System.Object was found nor was a value for RuntimeMetadataVersion specified through options.
+                        Diagnostic(ErrorCode.WRN_NoRuntimeMetadataVersion),
+                        // (15,16): error CS0656: Missing compiler required member 'System.Type.GetTypeFromHandle'
+                        //         return __reftype(__makeref(o));
+                        Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "__reftype(__makeref(o))")
+                            .WithArguments("System.Type", "GetTypeFromHandle")
+                            .WithLocation(15, 16)
+                    );
             }
 
             // Similar to above but with mscorlib.
@@ -15882,9 +15889,9 @@ class c1
                 source,
                 expectedOutput: "",
                 symbolValidator: validator,
-                options: TestOptions.UnsafeDebugExe.WithMetadataImportOptions(
-                    MetadataImportOptions.All
-                ),
+                options: TestOptions
+                    .UnsafeDebugExe
+                    .WithMetadataImportOptions(MetadataImportOptions.All),
                 parseOptions: TestOptions.Regular9
             );
 

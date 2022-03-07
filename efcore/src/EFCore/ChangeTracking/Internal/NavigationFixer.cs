@@ -162,10 +162,12 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                                             victimDependentEntry[navigation],
                                             newTargetEntry.Entity
                                         )
-                                        && victimDependentEntry.StateManager.TryGetEntry(
-                                            victimDependentEntry.Entity,
-                                            navigation.DeclaringEntityType
-                                        ) != null
+                                        && victimDependentEntry
+                                            .StateManager
+                                            .TryGetEntry(
+                                                victimDependentEntry.Entity,
+                                                navigation.DeclaringEntityType
+                                            ) != null
                                     )
                                     {
                                         SetNavigation(
@@ -243,7 +245,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                             inverse != null
                             && ReferenceEquals(oldTargetEntry[inverse], entry.Entity)
                             && (
-                                entry.EntityType
+                                entry
+                                    .EntityType
                                     .GetNavigations()
                                     .All(
                                         n =>
@@ -587,10 +590,12 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                                             targetDependentEntry[dependentToPrincipal],
                                             newPrincipalEntry.Entity
                                         )
-                                        && targetDependentEntry.StateManager.TryGetEntry(
-                                            targetDependentEntry.Entity,
-                                            foreignKey.DeclaringEntityType
-                                        ) != null
+                                        && targetDependentEntry
+                                            .StateManager
+                                            .TryGetEntry(
+                                                targetDependentEntry.Entity,
+                                                foreignKey.DeclaringEntityType
+                                            ) != null
                                     )
                                     {
                                         SetNavigation(
@@ -620,10 +625,10 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                                     entry[dependentToPrincipal],
                                     oldPrincipalEntry.Entity
                                 )
-                                && entry.StateManager.TryGetEntry(
-                                    entry.Entity,
-                                    foreignKey.DeclaringEntityType
-                                ) != null
+                                && entry
+                                    .StateManager
+                                    .TryGetEntry(entry.Entity, foreignKey.DeclaringEntityType)
+                                    != null
                             )
                             {
                                 SetNavigation(entry, dependentToPrincipal, null, fromQuery: false);
@@ -633,10 +638,10 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                         {
                             if (
                                 entry[dependentToPrincipal] == null
-                                && entry.StateManager.TryGetEntry(
-                                    entry.Entity,
-                                    foreignKey.DeclaringEntityType
-                                ) != null
+                                && entry
+                                    .StateManager
+                                    .TryGetEntry(entry.Entity, foreignKey.DeclaringEntityType)
+                                    != null
                             )
                             {
                                 // FK has changed but navigation is still null
@@ -830,10 +835,9 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                     );
 
                     if (
-                        StringComparer.Ordinal.Compare(
-                            skipNavigation.Name,
-                            skipNavigation.Inverse.Name
-                        ) < 0
+                        StringComparer
+                            .Ordinal
+                            .Compare(skipNavigation.Name, skipNavigation.Inverse.Name) < 0
                     )
                     {
                         // Only do this once for any given pair of skip navigations
@@ -1225,10 +1229,10 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             && (
                 dependentEntry.SharedIdentityEntry != null
                 || dependentEntry.EntityType.HasSharedClrType
-                    && dependentEntry.StateManager.TryGetEntry(
-                        dependentEntry.Entity,
-                        throwOnNonUniqueness: false
-                    ) != dependentEntry
+                    && dependentEntry
+                        .StateManager
+                        .TryGetEntry(dependentEntry.Entity, throwOnNonUniqueness: false)
+                        != dependentEntry
             );
 
         private void DelayedFixup(
@@ -1313,10 +1317,9 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                 var leftEntry = entry.StateManager.FindPrincipal(entry, foreignKey);
                 if (leftEntry != null)
                 {
-                    var rightEntry = entry.StateManager.FindPrincipal(
-                        entry,
-                        skipNavigation.Inverse.ForeignKey
-                    );
+                    var rightEntry = entry
+                        .StateManager
+                        .FindPrincipal(entry, skipNavigation.Inverse.ForeignKey);
                     if (rightEntry != null)
                     {
                         AddToCollection(leftEntry, skipNavigation, rightEntry, fromQuery);
@@ -1362,10 +1365,10 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                     )
                 );
 
-                joinEntry = arguments.Entry.StateManager.GetOrCreateEntry(
-                    joinEntity,
-                    joinEntityType
-                );
+                joinEntry = arguments
+                    .Entry
+                    .StateManager
+                    .GetOrCreateEntry(joinEntity, joinEntityType);
 
                 SetForeignKeyProperties(
                     joinEntry,
@@ -1445,7 +1448,9 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
 
             // Perf - see #21900
 
-            var keyValues = foreignKey.PrincipalKey.Properties
+            var keyValues = foreignKey
+                .PrincipalKey
+                .Properties
                 .Select(p => entry[p])
                 .Concat(otherForeignKey.PrincipalKey.Properties.Select(p => otherEntry[p]))
                 .ToList();
@@ -1490,14 +1495,16 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                 );
                 if (key != null)
                 {
-                    joinEntry = entry.StateManager.TryGetEntry(
-                        key,
-                        new[]
-                        {
-                            firstEntry[firstForeignKey.PrincipalKey.Properties[0]],
-                            secondEntry[secondForeignKey.PrincipalKey.Properties[0]]
-                        }
-                    );
+                    joinEntry = entry
+                        .StateManager
+                        .TryGetEntry(
+                            key,
+                            new[]
+                            {
+                                firstEntry[firstForeignKey.PrincipalKey.Properties[0]],
+                                secondEntry[secondForeignKey.PrincipalKey.Properties[0]]
+                            }
+                        );
                     return true;
                 }
 
@@ -1602,11 +1609,11 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                     principalToDependent == null ? null : principalEntry[principalToDependent];
                 var oldDependentEntry =
                     oldDependent != null && !ReferenceEquals(dependentEntry.Entity, oldDependent)
-                        ? dependentEntry.StateManager.TryGetEntry(
-                              oldDependent,
-                              foreignKey.DeclaringEntityType
-                          )
-                        : (InternalEntityEntry?)dependentEntry.StateManager
+                        ? dependentEntry
+                          .StateManager
+                          .TryGetEntry(oldDependent, foreignKey.DeclaringEntityType)
+                        : (InternalEntityEntry?)dependentEntry
+                              .StateManager
                               .GetDependentsUsingRelationshipSnapshot(principalEntry, foreignKey)
                               .FirstOrDefault();
 
@@ -1629,10 +1636,10 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                             oldDependentEntry[dependentToPrincipal],
                             principalEntry.Entity
                         )
-                        && oldDependentEntry.StateManager.TryGetEntry(
-                            oldDependentEntry.Entity,
-                            foreignKey.DeclaringEntityType
-                        ) != null
+                        && oldDependentEntry
+                            .StateManager
+                            .TryGetEntry(oldDependentEntry.Entity, foreignKey.DeclaringEntityType)
+                            != null
                     )
                     {
                         SetNavigation(oldDependentEntry, dependentToPrincipal, null, fromQuery);
@@ -1717,10 +1724,9 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             object? principalValue
         ) =>
             (principalProperty.GetKeyValueComparer())?.Equals(dependentValue, principalValue)
-            ?? StructuralComparisons.StructuralEqualityComparer.Equals(
-                dependentValue,
-                principalValue
-            );
+            ?? StructuralComparisons
+                .StructuralEqualityComparer
+                .Equals(dependentValue, principalValue);
 
         private void ConditionallyNullForeignKeyProperties(
             InternalEntityEntry dependentEntry,
@@ -1728,10 +1734,9 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             IForeignKey foreignKey
         )
         {
-            var currentPrincipal = dependentEntry.StateManager.FindPrincipal(
-                dependentEntry,
-                foreignKey
-            );
+            var currentPrincipal = dependentEntry
+                .StateManager
+                .FindPrincipal(dependentEntry, foreignKey);
             if (currentPrincipal != null && currentPrincipal != principalEntry)
             {
                 return;

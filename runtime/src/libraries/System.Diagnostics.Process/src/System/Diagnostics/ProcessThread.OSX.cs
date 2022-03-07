@@ -50,10 +50,9 @@ namespace System.Diagnostics
 
         private Interop.libproc.proc_threadinfo GetThreadInfo()
         {
-            Interop.libproc.proc_threadinfo? info = Interop.libproc.GetThreadInfoById(
-                _processId,
-                _threadInfo._threadId
-            );
+            Interop.libproc.proc_threadinfo? info = Interop
+                .libproc
+                .GetThreadInfoById(_processId, _threadInfo._threadId);
             if (!info.HasValue)
             {
                 throw new InvalidOperationException(SR.Format(SR.ThreadExited, Id));

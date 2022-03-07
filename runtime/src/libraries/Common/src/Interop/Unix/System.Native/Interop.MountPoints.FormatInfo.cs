@@ -14,10 +14,13 @@ internal static partial class Interop
         {
             foreach (string name in Enum.GetNames(typeof(UnixFileSystemTypes)))
             {
-                System.Diagnostics.Debug.Assert(
-                    GetDriveType(name) != DriveType.Unknown,
-                    $"Expected {nameof(UnixFileSystemTypes)}.{name} to have an entry in {nameof(GetDriveType)}."
-                );
+                System
+                    .Diagnostics
+                    .Debug
+                    .Assert(
+                        GetDriveType(name) != DriveType.Unknown,
+                        $"Expected {nameof(UnixFileSystemTypes)}.{name} to have an entry in {nameof(GetDriveType)}."
+                    );
             }
         }
 #endif

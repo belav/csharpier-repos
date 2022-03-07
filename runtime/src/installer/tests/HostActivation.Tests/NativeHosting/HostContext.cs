@@ -133,9 +133,12 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
             result
                 .Should()
                 .Pass()
-                .And.InitializeContextForApp(expectedAppPath)
-                .And.ExecuteAssemblyMock(expectedAppPath, appArgs)
-                .And.HaveStdErrContaining(
+                .And
+                .InitializeContextForApp(expectedAppPath)
+                .And
+                .ExecuteAssemblyMock(expectedAppPath, appArgs)
+                .And
+                .HaveStdErrContaining(
                     $"Executing as a {(isSelfContained ? "self-contained" : "framework-dependent")} app"
                 );
 
@@ -176,8 +179,10 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
             result
                 .Should()
                 .Pass()
-                .And.InitializeContextForConfig(sharedState.RuntimeConfigPath)
-                .And.CreateDelegateMock_COM();
+                .And
+                .InitializeContextForConfig(sharedState.RuntimeConfigPath)
+                .And
+                .CreateDelegateMock_COM();
 
             CheckPropertiesValidation propertyValidation = new CheckPropertiesValidation(
                 checkProperties,
@@ -206,7 +211,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
             result
                 .Should()
                 .Fail()
-                .And.HaveStdErrContaining(
+                .And
+                .HaveStdErrContaining(
                     "Initialization for self-contained components is not supported"
                 );
         }
@@ -239,13 +245,17 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
             result
                 .Should()
                 .Pass()
-                .And.InitializeContextForConfig(sharedState.RuntimeConfigPath)
-                .And.InitializeSecondaryContext(
+                .And
+                .InitializeContextForConfig(sharedState.RuntimeConfigPath)
+                .And
+                .InitializeSecondaryContext(
                     sharedState.SecondaryRuntimeConfigPath,
                     Success_DifferentRuntimeProperties
                 )
-                .And.CreateDelegateMock_COM()
-                .And.CreateDelegateMock_InMemoryAssembly();
+                .And
+                .CreateDelegateMock_COM()
+                .And
+                .CreateDelegateMock_InMemoryAssembly();
 
             CheckPropertiesValidation propertyValidation = new CheckPropertiesValidation(
                 checkProperties,
@@ -325,12 +335,15 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
             result
                 .Should()
                 .Pass()
-                .And.ExecuteAssemblyMock(sharedState.AppPath, appArgs)
-                .And.InitializeSecondaryContext(
+                .And
+                .ExecuteAssemblyMock(sharedState.AppPath, appArgs)
+                .And
+                .InitializeSecondaryContext(
                     sharedState.RuntimeConfigPath,
                     Success_DifferentRuntimeProperties
                 )
-                .And.CreateDelegateMock_InMemoryAssembly();
+                .And
+                .CreateDelegateMock_InMemoryAssembly();
 
             CheckPropertiesValidation propertyValidation = new CheckPropertiesValidation(
                 checkProperties,
@@ -459,20 +472,23 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
                     result
                         .Should()
                         .InitializeContextForConfig(appOrConfigPath)
-                        .And.CreateDelegateMock_COM();
+                        .And
+                        .CreateDelegateMock_COM();
                     break;
                 case Scenario.Mixed:
                     result
                         .Should()
                         .InitializeContextForApp(appOrConfigPath)
-                        .And.ExecuteAssemblyMock(appOrConfigPath, new string[0]);
+                        .And
+                        .ExecuteAssemblyMock(appOrConfigPath, new string[0]);
                     break;
                 case Scenario.NonContextMixedAppHost:
                 case Scenario.NonContextMixedDotnet:
                     result
                         .Should()
                         .ExecuteAssemblyMock(appOrConfigPath, new string[0])
-                        .And.HaveStdErrContaining(
+                        .And
+                        .HaveStdErrContaining(
                             $"Mode: {(scenario == Scenario.NonContextMixedAppHost ? "apphost" : "muxer")}"
                         );
                     break;
@@ -486,19 +502,23 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
                     result
                         .Should()
                         .Pass()
-                        .And.InitializeSecondaryContext(
+                        .And
+                        .InitializeSecondaryContext(
                             frameworkCompatConfig,
                             Success_HostAlreadyInitialized
                         )
-                        .And.CreateDelegateMock_InMemoryAssembly();
+                        .And
+                        .CreateDelegateMock_InMemoryAssembly();
                 }
                 else
                 {
                     result
                         .Should()
                         .Fail()
-                        .And.FailToInitializeContextForConfig(CoreHostIncompatibleConfig)
-                        .And.HaveStdErrMatching(
+                        .And
+                        .FailToInitializeContextForConfig(CoreHostIncompatibleConfig)
+                        .And
+                        .HaveStdErrMatching(
                             $".*The specified framework '{frameworkName}', version '{version}', apply_patches=[0-1], version_compatibility_range=[^ ]* is incompatible with the previously loaded version '{SharedTestState.NetCoreAppVersion}'.*"
                         );
                 }
@@ -508,8 +528,10 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
                 result
                     .Should()
                     .Fail()
-                    .And.FailToInitializeContextForConfig(CoreHostIncompatibleConfig)
-                    .And.HaveStdErrContaining(
+                    .And
+                    .FailToInitializeContextForConfig(CoreHostIncompatibleConfig)
+                    .And
+                    .HaveStdErrContaining(
                         $"The specified framework '{frameworkName}' is not present in the previously loaded runtime"
                     );
             }
@@ -629,13 +651,15 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
                     result
                         .Should()
                         .InitializeContextForConfig(appOrConfigPath)
-                        .And.CreateDelegateMock_COM();
+                        .And
+                        .CreateDelegateMock_COM();
                     break;
                 case Scenario.Mixed:
                     result
                         .Should()
                         .InitializeContextForApp(appOrConfigPath)
-                        .And.ExecuteAssemblyMock(appOrConfigPath, new string[0]);
+                        .And
+                        .ExecuteAssemblyMock(appOrConfigPath, new string[0]);
                     break;
                 case Scenario.NonContextMixedAppHost:
                 case Scenario.NonContextMixedDotnet:
@@ -664,7 +688,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
                             propertyCompatConfig,
                             Success_DifferentRuntimeProperties
                         )
-                        .And.HaveStdErrContaining(
+                        .And
+                        .HaveStdErrContaining(
                             $"The property [{prop.Name}] has a different value [{prop.NewValue}] from that in the previously loaded runtime [{prop.ExistingValue}]"
                         );
                 }
@@ -731,34 +756,43 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
                         result
                             .Should()
                             .GetRuntimePropertyValue(logPrefix, PropertyName, propertyValue)
-                            .And.FailToGetRuntimePropertyValue(
+                            .And
+                            .FailToGetRuntimePropertyValue(
                                 logPrefix,
                                 newPropertyName,
                                 HostPropertyNotFound
                             )
-                            .And.HavePropertyMock(PropertyName, propertyValue);
+                            .And
+                            .HavePropertyMock(PropertyName, propertyValue);
                         break;
                     case CheckProperties.Set:
                         result
                             .Should()
                             .SetRuntimePropertyValue(logPrefix, PropertyName)
-                            .And.SetRuntimePropertyValue(logPrefix, newPropertyName)
-                            .And.HavePropertyMock(PropertyName, PropertyValueFromHost)
-                            .And.HavePropertyMock(newPropertyName, PropertyValueFromHost);
+                            .And
+                            .SetRuntimePropertyValue(logPrefix, newPropertyName)
+                            .And
+                            .HavePropertyMock(PropertyName, PropertyValueFromHost)
+                            .And
+                            .HavePropertyMock(newPropertyName, PropertyValueFromHost);
                         break;
                     case CheckProperties.Remove:
                         result
                             .Should()
                             .SetRuntimePropertyValue(logPrefix, PropertyName)
-                            .And.SetRuntimePropertyValue(logPrefix, newPropertyName)
-                            .And.NotHavePropertyMock(PropertyName)
-                            .And.NotHavePropertyMock(newPropertyName);
+                            .And
+                            .SetRuntimePropertyValue(logPrefix, newPropertyName)
+                            .And
+                            .NotHavePropertyMock(PropertyName)
+                            .And
+                            .NotHavePropertyMock(newPropertyName);
                         break;
                     case CheckProperties.GetAll:
                         result
                             .Should()
                             .GetRuntimePropertiesIncludes(logPrefix, PropertyName, propertyValue)
-                            .And.HavePropertyMock(PropertyName, propertyValue);
+                            .And
+                            .HavePropertyMock(PropertyName, propertyValue);
                         break;
                     case CheckProperties.GetActive:
                         result
@@ -768,18 +802,21 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
                                 PropertyName,
                                 HostInvalidState
                             )
-                            .And.FailToGetRuntimePropertyValue(
+                            .And
+                            .FailToGetRuntimePropertyValue(
                                 logPrefix,
                                 newPropertyName,
                                 HostInvalidState
                             )
-                            .And.HavePropertyMock(PropertyName, propertyValue);
+                            .And
+                            .HavePropertyMock(PropertyName, propertyValue);
                         break;
                     case CheckProperties.GetAllActive:
                         result
                             .Should()
                             .FailToGetRuntimeProperties(logPrefix, HostInvalidState)
-                            .And.HavePropertyMock(PropertyName, propertyValue);
+                            .And
+                            .HavePropertyMock(PropertyName, propertyValue);
                         break;
                     default:
                         throw new Exception($"Unknown option: {checkProperties}");
@@ -804,7 +841,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
                                 PropertyName,
                                 HostPropertyNotFound
                             )
-                            .And.GetRuntimePropertyValue(
+                            .And
+                            .GetRuntimePropertyValue(
                                 LogPrefix.Secondary,
                                 secondaryPropertyName,
                                 secondaryPropertyValue
@@ -818,7 +856,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
                                 PropertyName,
                                 InvalidArgFailure
                             )
-                            .And.FailToSetRuntimePropertyValue(
+                            .And
+                            .FailToSetRuntimePropertyValue(
                                 LogPrefix.Secondary,
                                 secondaryPropertyName,
                                 InvalidArgFailure
@@ -832,7 +871,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
                                 PropertyName,
                                 InvalidArgFailure
                             )
-                            .And.FailToSetRuntimePropertyValue(
+                            .And
+                            .FailToSetRuntimePropertyValue(
                                 LogPrefix.Secondary,
                                 secondaryPropertyName,
                                 InvalidArgFailure
@@ -846,7 +886,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
                                 secondaryPropertyName,
                                 secondaryPropertyValue
                             )
-                            .And.GetRuntimePropertiesExcludes(LogPrefix.Secondary, PropertyName);
+                            .And
+                            .GetRuntimePropertiesExcludes(LogPrefix.Secondary, PropertyName);
                         break;
                     case CheckProperties.GetActive:
                         result
@@ -856,7 +897,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
                                 PropertyName,
                                 propertyValue
                             )
-                            .And.FailToGetRuntimePropertyValue(
+                            .And
+                            .FailToGetRuntimePropertyValue(
                                 LogPrefix.Secondary,
                                 secondaryPropertyName,
                                 HostPropertyNotFound
@@ -870,7 +912,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
                                 PropertyName,
                                 propertyValue
                             )
-                            .And.GetRuntimePropertiesExcludes(
+                            .And
+                            .GetRuntimePropertiesExcludes(
                                 LogPrefix.Secondary,
                                 secondaryPropertyName
                             );

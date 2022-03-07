@@ -70,10 +70,9 @@ namespace Microsoft.AspNetCore.Components.WebView.WebView2
             await _webview.EnsureCoreWebView2Async(environment);
             ApplyDefaultWebViewSettings();
 
-            _webview.CoreWebView2.AddWebResourceRequestedFilter(
-                $"{AppOrigin}*",
-                CoreWebView2WebResourceContext.All
-            );
+            _webview
+                .CoreWebView2
+                .AddWebResourceRequestedFilter($"{AppOrigin}*", CoreWebView2WebResourceContext.All);
             _webview.CoreWebView2.WebResourceRequested += (sender, eventArgs) =>
             {
                 // Unlike server-side code, we get told exactly why the browser is making the request,
@@ -106,7 +105,8 @@ namespace Microsoft.AspNetCore.Components.WebView.WebView2
 
             // The code inside blazor.webview.js is meant to be agnostic to specific webview technologies,
             // so the following is an adaptor from blazor.webview.js conventions to WebView2 APIs
-            await _webview.CoreWebView2
+            await _webview
+                .CoreWebView2
                 .AddScriptToExecuteOnDocumentCreatedAsync(
                     @"
                 window.external = {

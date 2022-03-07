@@ -1373,10 +1373,12 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
         public void VerifyOpenGenericTrimmabilityChecks()
         {
             RemoteInvokeOptions options = new RemoteInvokeOptions();
-            options.RuntimeConfigurationOptions.Add(
-                "Microsoft.Extensions.DependencyInjection.VerifyOpenGenericServiceTrimmability",
-                "true"
-            );
+            options
+                .RuntimeConfigurationOptions
+                .Add(
+                    "Microsoft.Extensions.DependencyInjection.VerifyOpenGenericServiceTrimmability",
+                    "true"
+                );
 
             using RemoteInvokeHandle remoteHandle = RemoteExecutor.Invoke(
                 () =>
@@ -1467,7 +1469,8 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
 
         private static ConstructorInfo GetConstructor(Type type, Type[] parameterTypes) =>
             type.GetTypeInfo()
-                .DeclaredConstructors.First(
+                .DeclaredConstructors
+                .First(
                     c =>
                         Enumerable.SequenceEqual(
                             c.GetParameters().Select(p => p.ParameterType),

@@ -566,14 +566,16 @@ namespace System.Diagnostics.Tracing
 #endif
                 try
                 {
-                    DataCollector.ThreadInstance.Enable(
-                        scratch,
-                        eventTypes.scratchSize,
-                        descriptors + 3,
-                        eventTypes.dataCount,
-                        pins,
-                        pinCount
-                    );
+                    DataCollector
+                        .ThreadInstance
+                        .Enable(
+                            scratch,
+                            eventTypes.scratchSize,
+                            descriptors + 3,
+                            eventTypes.dataCount,
+                            pins,
+                            pinCount
+                        );
 
                     for (int i = 0; i < eventTypes.typeInfos.Length; i++)
                     {
@@ -772,7 +774,11 @@ namespace System.Diagnostics.Tracing
 #endif // FEATURE_MANAGED_ETW
 
 #if ES_BUILD_STANDALONE
-                    System.Runtime.CompilerServices.RuntimeHelpers.PrepareConstrainedRegions();
+                    System
+                        .Runtime
+                        .CompilerServices
+                        .RuntimeHelpers
+                        .PrepareConstrainedRegions();
 #endif
                     EventOpcode opcode = (EventOpcode)descriptor.Opcode;
 
@@ -816,14 +822,16 @@ namespace System.Diagnostics.Tracing
                     try
                     {
 #if FEATURE_MANAGED_ETW
-                            DataCollector.ThreadInstance.Enable(
-                                scratch,
-                                eventTypes.scratchSize,
-                                descriptors + 3,
-                                eventTypes.dataCount,
-                                pins,
-                                pinCount
-                            );
+                            DataCollector
+                                .ThreadInstance
+                                .Enable(
+                                    scratch,
+                                    eventTypes.scratchSize,
+                                    descriptors + 3,
+                                    eventTypes.dataCount,
+                                    pins,
+                                    pinCount
+                                );
 
                             TraceLoggingTypeInfo info = eventTypes.typeInfos[0];
                             info.WriteData(info.PropertyValueFactory(data));

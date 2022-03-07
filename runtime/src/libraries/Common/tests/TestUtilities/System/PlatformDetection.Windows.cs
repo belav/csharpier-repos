@@ -19,10 +19,9 @@ namespace System
 
         public static bool IsWindows => RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
         public static bool IsNetFramework =>
-            RuntimeInformation.FrameworkDescription.StartsWith(
-                ".NET Framework",
-                StringComparison.OrdinalIgnoreCase
-            );
+            RuntimeInformation
+                .FrameworkDescription
+                .StartsWith(".NET Framework", StringComparison.OrdinalIgnoreCase);
         public static bool HasWindowsShell =>
             IsWindows && IsNotWindowsServerCore && IsNotWindowsNanoServer && IsNotWindowsIoTCore;
         public static bool IsWindows7 =>
@@ -263,10 +262,8 @@ namespace System
                     // desire to use this method elsewhere.
                     if (
                         e.GetType()
-                            .FullName.Equals(
-                                "System.EntryPointNotFoundException",
-                                StringComparison.Ordinal
-                            )
+                            .FullName
+                            .Equals("System.EntryPointNotFoundException", StringComparison.Ordinal)
                     )
                     {
                         // API doesn't exist, likely pre Win8

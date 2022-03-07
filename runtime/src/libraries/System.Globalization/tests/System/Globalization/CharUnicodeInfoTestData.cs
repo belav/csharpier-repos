@@ -18,7 +18,8 @@ namespace System.Globalization.Tests
                 string fileName = "UnicodeData.txt";
                 Stream stream = typeof(CharUnicodeInfoTestData)
                     .GetTypeInfo()
-                    .Assembly.GetManifestResourceStream(fileName);
+                    .Assembly
+                    .GetManifestResourceStream(fileName);
                 using (StreamReader reader = new StreamReader(stream))
                 {
                     while (!reader.EndOfStream)

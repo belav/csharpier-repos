@@ -92,10 +92,9 @@ namespace AutoMapper.Execution
                 if (!typeMap.HasDerivedTypesToInclude)
                 {
                     typeMap.Seal(configurationProvider);
-                    mapExpression = typeMap.MapExpression?.ConvertReplaceParameters(
-                        sourceParameter,
-                        destinationParameter
-                    );
+                    mapExpression = typeMap
+                        .MapExpression
+                        ?.ConvertReplaceParameters(sourceParameter, destinationParameter);
                 }
             }
             else
@@ -287,9 +286,9 @@ namespace AutoMapper.Execution
                         source,
                         (current, vtConfig) =>
                             ToType(
-                                vtConfig.TransformerExpression.ReplaceParameters(
-                                    ToType(current, vtConfig.ValueType)
-                                ),
+                                vtConfig
+                                    .TransformerExpression
+                                    .ReplaceParameters(ToType(current, vtConfig.ValueType)),
                                 memberMap.DestinationType
                             )
                     );

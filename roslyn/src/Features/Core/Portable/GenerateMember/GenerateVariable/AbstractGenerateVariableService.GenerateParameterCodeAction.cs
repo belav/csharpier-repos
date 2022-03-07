@@ -50,16 +50,18 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateVariable
                 CancellationToken cancellationToken
             )
             {
-                return AddParameterService.Instance.AddParameterAsync(
-                    _document,
-                    _state.ContainingMethod,
-                    _state.LocalType,
-                    RefKind.None,
-                    _state.IdentifierToken.ValueText,
-                    newParameterIndex: null,
-                    _includeOverridesAndImplementations,
-                    cancellationToken
-                );
+                return AddParameterService
+                    .Instance
+                    .AddParameterAsync(
+                        _document,
+                        _state.ContainingMethod,
+                        _state.LocalType,
+                        RefKind.None,
+                        _state.IdentifierToken.ValueText,
+                        newParameterIndex: null,
+                        _includeOverridesAndImplementations,
+                        cancellationToken
+                    );
             }
         }
     }

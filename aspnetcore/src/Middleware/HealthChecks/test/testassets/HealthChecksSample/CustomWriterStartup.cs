@@ -58,24 +58,26 @@ public class CustomWriterStartup
             new JProperty(
                 "results",
                 new JObject(
-                    result.Entries.Select(
-                        pair =>
-                            new JProperty(
-                                pair.Key,
-                                new JObject(
-                                    new JProperty("status", pair.Value.Status.ToString()),
-                                    new JProperty("description", pair.Value.Description),
-                                    new JProperty(
-                                        "data",
-                                        new JObject(
-                                            pair.Value.Data.Select(
-                                                p => new JProperty(p.Key, p.Value)
+                    result
+                        .Entries
+                        .Select(
+                            pair =>
+                                new JProperty(
+                                    pair.Key,
+                                    new JObject(
+                                        new JProperty("status", pair.Value.Status.ToString()),
+                                        new JProperty("description", pair.Value.Description),
+                                        new JProperty(
+                                            "data",
+                                            new JObject(
+                                                pair.Value
+                                                    .Data
+                                                    .Select(p => new JProperty(p.Key, p.Value))
                                             )
                                         )
                                     )
                                 )
-                            )
-                    )
+                        )
                 )
             )
         );

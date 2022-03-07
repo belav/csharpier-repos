@@ -125,9 +125,9 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                                 var compilationAnalysisScope =
                                     new HostCompilationStartAnalysisScope(sessionScope);
                                 analyzerExecutor.ExecuteCompilationStartActions(
-                                    sessionScope.GetAnalyzerActions(
-                                        _analyzer
-                                    ).CompilationStartActions,
+                                    sessionScope
+                                        .GetAnalyzerActions(_analyzer)
+                                        .CompilationStartActions,
                                     compilationAnalysisScope
                                 );
                                 return compilationAnalysisScope;

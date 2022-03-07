@@ -124,8 +124,9 @@ public sealed class XmlKeyManager : IKeyManager, IInternalXmlKeyManager
         KeyRepository = keyRepository;
         KeyEncryptor = keyEncryptor;
 
-        _authenticatedEncryptorConfiguration =
-            keyManagementOptions.Value.AuthenticatedEncryptorConfiguration!;
+        _authenticatedEncryptorConfiguration = keyManagementOptions
+            .Value
+            .AuthenticatedEncryptorConfiguration!;
 
         var escrowSinks = keyManagementOptions.Value.KeyEscrowSinks;
         _keyEscrowSink = escrowSinks.Count > 0 ? new AggregateKeyEscrowSink(escrowSinks) : null;
@@ -164,10 +165,9 @@ public sealed class XmlKeyManager : IKeyManager, IInternalXmlKeyManager
     private static string DateTimeOffsetToFilenameSafeString(DateTimeOffset dateTime)
     {
         // similar to the XML format for dates, but with punctuation stripped
-        return dateTime.UtcDateTime.ToString(
-            "yyyyMMddTHHmmssFFFFFFFZ",
-            CultureInfo.InvariantCulture
-        );
+        return dateTime
+            .UtcDateTime
+            .ToString("yyyyMMddTHHmmssFFFFFFFZ", CultureInfo.InvariantCulture);
     }
 
     /// <inheritdoc/>
@@ -276,11 +276,9 @@ public sealed class XmlKeyManager : IKeyManager, IInternalXmlKeyManager
             $"{nameof(TriggerAndResetCacheExpirationToken)} must have been called first."
         );
 
-        return Interlocked.CompareExchange<CancellationTokenSource?>(
-            ref _cacheExpirationTokenSource,
-            null,
-            null
-        ).Token;
+        return Interlocked
+            .CompareExchange<CancellationTokenSource?>(ref _cacheExpirationTokenSource, null, null)
+            .Token;
     }
 
     private KeyBase? ProcessKeyElement(XElement keyElement)

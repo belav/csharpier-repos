@@ -73,10 +73,12 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Services
         {
             using var workspace = (await CreateTestLspServerAsync("")).TestWorkspace;
             workspace.SetOptions(
-                workspace.Options.WithChangedOption(
-                    InternalDiagnosticsOptions.NormalDiagnosticMode,
-                    DiagnosticMode.Pull
-                )
+                workspace
+                    .Options
+                    .WithChangedOption(
+                        InternalDiagnosticsOptions.NormalDiagnosticMode,
+                        DiagnosticMode.Pull
+                    )
             );
 
             var document = workspace.CurrentSolution.Projects.First().Documents.First();
@@ -304,7 +306,8 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Services
                 "id2",
                 testAccessor
                     .GetDiagnosticsForUriAndDocument(document.Id, mappedFileURIM2)
-                    .Single().Code
+                    .Single()
+                    .Code
             );
             Assert.Empty(
                 testAccessor.GetDiagnosticsForUriAndDocument(document.Id, mappedFileURIM1)
@@ -381,7 +384,8 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Services
                 "doc2Diagnostic",
                 testAccessor
                     .GetDiagnosticsForUriAndDocument(documents[1].Id, expectedUri)
-                    .Single().Code
+                    .Single()
+                    .Code
             );
             Assert.Empty(
                 testAccessor.GetDiagnosticsForUriAndDocument(documents[0].Id, expectedUri)
@@ -575,14 +579,18 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Services
                 IDiagnosticService mockDiagnosticService
             )
             {
-                var dispatcherFactory =
-                    workspace.ExportProvider.GetExportedValue<RequestDispatcherFactory>();
-                var listenerProvider =
-                    workspace.ExportProvider.GetExportedValue<IAsynchronousOperationListenerProvider>();
-                var lspWorkspaceRegistrationService =
-                    workspace.ExportProvider.GetExportedValue<LspWorkspaceRegistrationService>();
-                var capabilitiesProvider =
-                    workspace.ExportProvider.GetExportedValue<DefaultCapabilitiesProvider>();
+                var dispatcherFactory = workspace
+                    .ExportProvider
+                    .GetExportedValue<RequestDispatcherFactory>();
+                var listenerProvider = workspace
+                    .ExportProvider
+                    .GetExportedValue<IAsynchronousOperationListenerProvider>();
+                var lspWorkspaceRegistrationService = workspace
+                    .ExportProvider
+                    .GetExportedValue<LspWorkspaceRegistrationService>();
+                var capabilitiesProvider = workspace
+                    .ExportProvider
+                    .GetExportedValue<DefaultCapabilitiesProvider>();
 
                 var jsonRpc = new JsonRpc(
                     new HeaderDelimitedMessageHandler(outputStream, inputStream)

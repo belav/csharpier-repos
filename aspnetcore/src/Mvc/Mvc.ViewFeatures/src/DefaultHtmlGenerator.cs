@@ -926,10 +926,10 @@ public class DefaultHtmlGenerator : IHtmlGenerator
             return null;
         }
 
-        var tryGetModelStateResult = viewContext.ViewData.ModelState.TryGetValue(
-            fullName,
-            out var entry
-        );
+        var tryGetModelStateResult = viewContext
+            .ViewData
+            .ModelState
+            .TryGetValue(fullName, out var entry);
         var modelErrors = tryGetModelStateResult ? entry.Errors : null;
 
         ModelError modelError = null;
@@ -976,9 +976,15 @@ public class DefaultHtmlGenerator : IHtmlGenerator
                     viewContext.ViewData,
                     _metadataProvider
                 );
-            tagBuilder.InnerHtml.SetContent(
-                ValidationHelpers.GetModelErrorMessageOrDefault(modelError, entry, modelExplorer)
-            );
+            tagBuilder
+                .InnerHtml
+                .SetContent(
+                    ValidationHelpers.GetModelErrorMessageOrDefault(
+                        modelError,
+                        entry,
+                        modelExplorer
+                    )
+                );
         }
 
         if (formContext != null)
@@ -1022,10 +1028,9 @@ public class DefaultHtmlGenerator : IHtmlGenerator
         if (
             excludePropertyErrors
             && (
-                !viewData.ModelState.TryGetValue(
-                    viewData.TemplateInfo.HtmlFieldPrefix,
-                    out var entryForModel
-                )
+                !viewData
+                    .ModelState
+                    .TryGetValue(viewData.TemplateInfo.HtmlFieldPrefix, out var entryForModel)
                 || entryForModel.Errors.Count == 0
             )
         )
@@ -1924,9 +1929,9 @@ public class DefaultHtmlGenerator : IHtmlGenerator
                             !optionGenerated[j] && object.ReferenceEquals(optGroup, groupItem.Group)
                         )
                         {
-                            groupBuilder.InnerHtml.AppendLine(
-                                GenerateOption(groupItem, currentValues)
-                            );
+                            groupBuilder
+                                .InnerHtml
+                                .AppendLine(GenerateOption(groupItem, currentValues));
                             optionGenerated[j] = true;
                         }
                     }

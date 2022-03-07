@@ -559,8 +559,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 _cancellationToken.ThrowIfCancellationRequested();
 
-                bool reportDiagnosticsForCurrentTrivia =
-                    trivia.SyntaxTree.ReportDocumentationCommentDiagnostics();
+                bool reportDiagnosticsForCurrentTrivia = trivia
+                    .SyntaxTree
+                    .ReportDocumentationCommentDiagnostics();
 
                 if (!processedDocComment)
                 {

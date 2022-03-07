@@ -250,9 +250,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
             var startingSpan = triggerSpan.Span;
 
             // Select this span if we didn't already have something selected
-            var selections = _triggerView.Selection.GetSnapshotSpansOnBuffer(
-                triggerSpan.Snapshot.TextBuffer
-            );
+            var selections = _triggerView
+                .Selection
+                .GetSnapshotSpansOnBuffer(triggerSpan.Snapshot.TextBuffer);
             if (
                 !selections.Any()
                 || selections.First().IsEmpty
@@ -272,13 +272,15 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
             );
 
             UpdateReferenceLocationsTask(
-                ThreadingContext.JoinableTaskFactory.RunAsync(
-                    () =>
-                        _renameInfo.FindRenameLocationsAsync(
-                            _optionSet,
-                            _cancellationTokenSource.Token
-                        )
-                )
+                ThreadingContext
+                    .JoinableTaskFactory
+                    .RunAsync(
+                        () =>
+                            _renameInfo.FindRenameLocationsAsync(
+                                _optionSet,
+                                _cancellationTokenSource.Token
+                            )
+                    )
             );
 
             RenameTrackingDismisser.DismissRenameTracking(
@@ -343,27 +345,33 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
             AssertIsForeground();
 
             var asyncToken = _asyncListener.BeginAsyncOperation("UpdateReferencesTask");
-            _allRenameLocationsTask = ThreadingContext.JoinableTaskFactory.RunAsync(
-                async () =>
-                {
-                    var inlineRenameLocations = await findRenameLocationsTask
-                        .JoinAsync()
-                        .ConfigureAwaitRunInline();
+            _allRenameLocationsTask = ThreadingContext
+                .JoinableTaskFactory
+                .RunAsync(
+                    async () =>
+                    {
+                        var inlineRenameLocations = await findRenameLocationsTask
+                            .JoinAsync()
+                            .ConfigureAwaitRunInline();
 
-                    // It's unfortunate that _allRenameLocationsTask has a UI thread dependency (prevents continuations
-                    // from running prior to the completion of the UI operation), but the implementation does not currently
-                    // follow the originally-intended design.
-                    // https://github.com/dotnet/roslyn/issues/40890
-                    await ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
-                        alwaysYield: true,
-                        _cancellationTokenSource.Token
-                    );
+                        // It's unfortunate that _allRenameLocationsTask has a UI thread dependency (prevents continuations
+                        // from running prior to the completion of the UI operation), but the implementation does not currently
+                        // follow the originally-intended design.
+                        // https://github.com/dotnet/roslyn/issues/40890
+                        await ThreadingContext
+                            .JoinableTaskFactory
+                            .SwitchToMainThreadAsync(
+                                alwaysYield: true,
+                                _cancellationTokenSource.Token
+                            );
 
-                    RaiseSessionSpansUpdated(inlineRenameLocations.Locations.ToImmutableArray());
+                        RaiseSessionSpansUpdated(
+                            inlineRenameLocations.Locations.ToImmutableArray()
+                        );
 
-                    return inlineRenameLocations;
-                }
-            );
+                        return inlineRenameLocations;
+                    }
+                );
 
             _allRenameLocationsTask.Task.CompletesAsyncOperation(asyncToken);
 
@@ -403,24 +411,26 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
                 var cancellationToken = _cancellationTokenSource.Token;
 
                 UpdateReferenceLocationsTask(
-                    ThreadingContext.JoinableTaskFactory.RunAsync(
-                        async () =>
-                        {
-                            // Join prior work before proceeding, since it performs a required state update.
-                            // https://github.com/dotnet/roslyn/pull/34254#discussion_r267024593
-                            //
-                            // The cancellation token is passed to the prior work when it starts, not when it's joined. This is
-                            // the equivalent of TaskContinuationOptions.LazyCancellation.
-                            await _allRenameLocationsTask
-                                .JoinAsync(CancellationToken.None)
-                                .ConfigureAwait(false);
-                            await TaskScheduler.Default;
+                    ThreadingContext
+                        .JoinableTaskFactory
+                        .RunAsync(
+                            async () =>
+                            {
+                                // Join prior work before proceeding, since it performs a required state update.
+                                // https://github.com/dotnet/roslyn/pull/34254#discussion_r267024593
+                                //
+                                // The cancellation token is passed to the prior work when it starts, not when it's joined. This is
+                                // the equivalent of TaskContinuationOptions.LazyCancellation.
+                                await _allRenameLocationsTask
+                                    .JoinAsync(CancellationToken.None)
+                                    .ConfigureAwait(false);
+                                await TaskScheduler.Default;
 
-                            return await _renameInfo
-                                .FindRenameLocationsAsync(_optionSet, cancellationToken)
-                                .ConfigureAwait(false);
-                        }
-                    )
+                                return await _renameInfo
+                                    .FindRenameLocationsAsync(_optionSet, cancellationToken)
+                                    .ConfigureAwait(false);
+                            }
+                        )
                 );
             }
         }
@@ -436,8 +446,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
 
             foreach (var textBuffer in _openTextBuffers.Keys)
             {
-                var document =
-                    textBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
+                var document = textBuffer
+                    .CurrentSnapshot
+                    .GetOpenDocumentInCurrentContextWithChanges();
                 var isClosed = document == null;
 
                 var openBuffer = _openTextBuffers[textBuffer];
@@ -590,15 +601,17 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
             else
             {
                 // When responding to a text edit, we delay propagating the edit until the first transaction completes.
-                ThreadingContext.JoinableTaskFactory.RunAsync(
-                    async () =>
-                    {
-                        await ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
-                            alwaysYield: true
-                        );
-                        propagateEditAction();
-                    }
-                );
+                ThreadingContext
+                    .JoinableTaskFactory
+                    .RunAsync(
+                        async () =>
+                        {
+                            await ThreadingContext
+                                .JoinableTaskFactory
+                                .SwitchToMainThreadAsync(alwaysYield: true);
+                            propagateEditAction();
+                        }
+                    );
             }
         }
 
@@ -624,25 +637,27 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
                 nameof(UpdateConflictResolutionTask)
             );
 
-            _conflictResolutionTask = ThreadingContext.JoinableTaskFactory.RunAsync(
-                async () =>
-                {
-                    // Join prior work before proceeding, since it performs a required state update.
-                    // https://github.com/dotnet/roslyn/pull/34254#discussion_r267024593
-                    //
-                    // If cancellation of the conflict resolution task is requested before the rename locations task
-                    // completes, we do not need to wait for rename before cancelling. The next conflict resolution task
-                    // will wait on the latest rename location task if/when necessary.
-                    var result = await _allRenameLocationsTask
-                        .JoinAsync(cancellationToken)
-                        .ConfigureAwait(false);
-                    await TaskScheduler.Default;
+            _conflictResolutionTask = ThreadingContext
+                .JoinableTaskFactory
+                .RunAsync(
+                    async () =>
+                    {
+                        // Join prior work before proceeding, since it performs a required state update.
+                        // https://github.com/dotnet/roslyn/pull/34254#discussion_r267024593
+                        //
+                        // If cancellation of the conflict resolution task is requested before the rename locations task
+                        // completes, we do not need to wait for rename before cancelling. The next conflict resolution task
+                        // will wait on the latest rename location task if/when necessary.
+                        var result = await _allRenameLocationsTask
+                            .JoinAsync(cancellationToken)
+                            .ConfigureAwait(false);
+                        await TaskScheduler.Default;
 
-                    return await result
-                        .GetReplacementsAsync(replacementText, optionSet, cancellationToken)
-                        .ConfigureAwait(false);
-                }
-            );
+                        return await result
+                            .GetReplacementsAsync(replacementText, optionSet, cancellationToken)
+                            .ConfigureAwait(false);
+                    }
+                );
 
             _conflictResolutionTask.Task.CompletesAsyncOperation(asyncToken);
         }
@@ -663,34 +678,35 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
 
             var cancellationToken = _conflictResolutionTaskCancellationSource.Token;
             var asyncToken = _asyncListener.BeginAsyncOperation(nameof(QueueApplyReplacements));
-            var replacementOperation = ThreadingContext.JoinableTaskFactory.RunAsync(
-                async () =>
-                {
-                    var replacementInfo = await _conflictResolutionTask
-                        .JoinAsync(CancellationToken.None)
-                        .ConfigureAwait(false);
-                    if (replacementInfo == null || cancellationToken.IsCancellationRequested)
+            var replacementOperation = ThreadingContext
+                .JoinableTaskFactory
+                .RunAsync(
+                    async () =>
                     {
-                        return;
-                    }
+                        var replacementInfo = await _conflictResolutionTask
+                            .JoinAsync(CancellationToken.None)
+                            .ConfigureAwait(false);
+                        if (replacementInfo == null || cancellationToken.IsCancellationRequested)
+                        {
+                            return;
+                        }
 
-                    // Switch to a background thread for expensive work
-                    await TaskScheduler.Default;
-                    var computedMergeResult = await ComputeMergeResultAsync(
-                        replacementInfo,
-                        cancellationToken
-                    );
-                    await ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
-                        alwaysYield: true,
-                        cancellationToken
-                    );
-                    ApplyReplacements(
-                        computedMergeResult.replacementInfo,
-                        computedMergeResult.mergeResult,
-                        cancellationToken
-                    );
-                }
-            );
+                        // Switch to a background thread for expensive work
+                        await TaskScheduler.Default;
+                        var computedMergeResult = await ComputeMergeResultAsync(
+                            replacementInfo,
+                            cancellationToken
+                        );
+                        await ThreadingContext
+                            .JoinableTaskFactory
+                            .SwitchToMainThreadAsync(alwaysYield: true, cancellationToken);
+                        ApplyReplacements(
+                            computedMergeResult.replacementInfo,
+                            computedMergeResult.mergeResult,
+                            cancellationToken
+                        );
+                    }
+                );
             replacementOperation.Task.CompletesAsyncOperation(asyncToken);
         }
 
@@ -883,9 +899,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
             )
             {
                 var newSolution =
-                    _conflictResolutionTask.Join(
-                        operationContext.UserCancellationToken
-                    ).NewSolution;
+                    _conflictResolutionTask
+                        .Join(operationContext.UserCancellationToken)
+                        .NewSolution;
 
                 if (previewChanges)
                 {
@@ -1031,8 +1047,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
                     )
                 )
                 {
-                    var notificationService =
-                        _workspace.Services.GetService<INotificationService>();
+                    var notificationService = _workspace
+                        .Services
+                        .GetService<INotificationService>();
                     operationContext.TakeOwnership();
                     notificationService.SendNotification(
                         EditorFeaturesResources.Rename_operation_was_not_properly_completed_Some_file_might_not_have_been_updated,

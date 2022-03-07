@@ -39,8 +39,11 @@ namespace Microsoft.CodeAnalysis.Editor.Extensibility.NavigationBar
         {
             var service =
                 document.GetRequiredLanguageService<CodeAnalysis.NavigationBar.INavigationBarItemService>();
-            var workspaceSupportsDocumentChanges =
-                document.Project.Solution.Workspace.CanApplyChange(ApplyChangesKind.ChangeDocument);
+            var workspaceSupportsDocumentChanges = document
+                .Project
+                .Solution
+                .Workspace
+                .CanApplyChange(ApplyChangesKind.ChangeDocument);
             var items = await service
                 .GetItemsAsync(document, workspaceSupportsDocumentChanges, cancellationToken)
                 .ConfigureAwait(false);
@@ -84,9 +87,9 @@ namespace Microsoft.CodeAnalysis.Editor.Extensibility.NavigationBar
                 .ConfigureAwait(false);
 
             // Ensure we're back on the UI thread before either navigating or showing a failure message.
-            await this.ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
-                cancellationToken
-            );
+            await this.ThreadingContext
+                .JoinableTaskFactory
+                .SwitchToMainThreadAsync(cancellationToken);
             NavigateToPosition(workspace, documentId, position, virtualSpace, cancellationToken);
         }
 
@@ -99,8 +102,9 @@ namespace Microsoft.CodeAnalysis.Editor.Extensibility.NavigationBar
         )
         {
             this.AssertIsForeground();
-            var navigationService =
-                workspace.Services.GetRequiredService<IDocumentNavigationService>();
+            var navigationService = workspace
+                .Services
+                .GetRequiredService<IDocumentNavigationService>();
             if (
                 navigationService.CanNavigateToPosition(
                     workspace,
@@ -122,8 +126,9 @@ namespace Microsoft.CodeAnalysis.Editor.Extensibility.NavigationBar
             }
             else
             {
-                var notificationService =
-                    workspace.Services.GetRequiredService<INotificationService>();
+                var notificationService = workspace
+                    .Services
+                    .GetRequiredService<INotificationService>();
                 notificationService.SendNotification(
                     EditorFeaturesResources.The_definition_of_the_object_is_hidden,
                     severity: NotificationSeverity.Error

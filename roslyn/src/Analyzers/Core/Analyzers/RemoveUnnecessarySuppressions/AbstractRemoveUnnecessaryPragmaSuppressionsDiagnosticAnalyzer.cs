@@ -121,16 +121,24 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessarySuppressions
             // However, this is a special analyzer that is directly invoked by the analysis host (IDE), so we do this check here.
             if (
                 compilationWithAnalyzers.Compilation.Options.SyntaxTreeOptionsProvider != null
-                    && compilationWithAnalyzers.Compilation.Options.SyntaxTreeOptionsProvider.TryGetDiagnosticValue(
-                        tree,
+                    && compilationWithAnalyzers
+                        .Compilation
+                        .Options
+                        .SyntaxTreeOptionsProvider
+                        .TryGetDiagnosticValue(
+                            tree,
+                            IDEDiagnosticIds.RemoveUnnecessarySuppressionDiagnosticId,
+                            cancellationToken,
+                            out var severity
+                        )
+                || compilationWithAnalyzers
+                    .Compilation
+                    .Options
+                    .SpecificDiagnosticOptions
+                    .TryGetValue(
                         IDEDiagnosticIds.RemoveUnnecessarySuppressionDiagnosticId,
-                        cancellationToken,
-                        out var severity
+                        out severity
                     )
-                || compilationWithAnalyzers.Compilation.Options.SpecificDiagnosticOptions.TryGetValue(
-                    IDEDiagnosticIds.RemoveUnnecessarySuppressionDiagnosticId,
-                    out severity
-                )
             )
             {
                 if (severity == ReportDiagnostic.Suppress)
@@ -140,7 +148,9 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessarySuppressions
             }
 
             // Bail out if analyzer has been turned off through options.
-            var option = compilationWithAnalyzers.AnalysisOptions.Options
+            var option = compilationWithAnalyzers
+                .AnalysisOptions
+                .Options
                 ?.GetOption(
                     CodeStyleOptions2.RemoveUnnecessarySuppressionExclusions,
                     tree,
@@ -606,10 +616,9 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessarySuppressions
                     .ConfigureAwait(false);
                 cancellationToken.ThrowIfCancellationRequested();
                 if (
-                    analysisResult.SyntaxDiagnostics.TryGetValue(
-                        semanticModel.SyntaxTree,
-                        out var diagnostics
-                    )
+                    analysisResult
+                        .SyntaxDiagnostics
+                        .TryGetValue(semanticModel.SyntaxTree, out var diagnostics)
                 )
                 {
                     AddAllDiagnostics(diagnostics, reportedDiagnostics);
@@ -625,10 +634,9 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessarySuppressions
                     .ConfigureAwait(false);
                 cancellationToken.ThrowIfCancellationRequested();
                 if (
-                    analysisResult.SemanticDiagnostics.TryGetValue(
-                        semanticModel.SyntaxTree,
-                        out diagnostics
-                    )
+                    analysisResult
+                        .SemanticDiagnostics
+                        .TryGetValue(semanticModel.SyntaxTree, out diagnostics)
                 )
                 {
                     AddAllDiagnostics(diagnostics, reportedDiagnostics);
@@ -781,7 +789,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessarySuppressions
                     return;
                 }
 
-                var attributeNode = await attribute.ApplicationSyntaxReference
+                var attributeNode = await attribute
+                    .ApplicationSyntaxReference
                     .GetSyntaxAsync(cancellationToken)
                     .ConfigureAwait(false);
                 foreach (var node in suppressMessageAttributesForId)
@@ -968,8 +977,9 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessarySuppressions
             CancellationToken cancellationToken
         )
         {
-            var suppressMessageAttributeType =
-                semanticModel.Compilation.SuppressMessageAttributeType();
+            var suppressMessageAttributeType = semanticModel
+                .Compilation
+                .SuppressMessageAttributeType();
             if (suppressMessageAttributeType == null)
             {
                 return false;
@@ -1054,7 +1064,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessarySuppressions
                                     idToSuppressMessageAttributesMap.Add(id, nodesForId);
                                 }
 
-                                var attributeNode = await attribute.ApplicationSyntaxReference
+                                var attributeNode = await attribute
+                                    .ApplicationSyntaxReference
                                     .GetSyntaxAsync(cancellationToken)
                                     .ConfigureAwait(false);
                                 nodesForId.Add(attributeNode);

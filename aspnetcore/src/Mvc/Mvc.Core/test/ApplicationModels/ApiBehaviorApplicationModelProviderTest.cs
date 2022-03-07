@@ -144,7 +144,9 @@ public class ApiBehaviorApplicationModelProviderTest
 
         // Act & Assert
         Assert.Empty(
-            provider.ActionModelConventions.OfType<ConsumesConstraintForFormFileParameterConvention>()
+            provider
+                .ActionModelConventions
+                .OfType<ConsumesConstraintForFormFileParameterConvention>()
         );
     }
 

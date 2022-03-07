@@ -201,7 +201,8 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnnecessaryImports
                 // follows the usings.
                 if (finalTrivia.Count > 0)
                 {
-                    var nextToken = namespaceDeclaration.Usings
+                    var nextToken = namespaceDeclaration
+                        .Usings
                         .Last()
                         .GetLastToken()
                         .GetNextToken();

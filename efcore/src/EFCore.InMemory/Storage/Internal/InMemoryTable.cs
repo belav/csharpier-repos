@@ -269,10 +269,9 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Storage.Internal
                     (comparer != null && !comparer.Equals(rowValue, originalValue))
                     || (
                         comparer == null
-                        && !StructuralComparisons.StructuralEqualityComparer.Equals(
-                            rowValue,
-                            originalValue
-                        )
+                        && !StructuralComparisons
+                            .StructuralEqualityComparer
+                            .Equals(rowValue, originalValue)
                     )
                 )
                 {

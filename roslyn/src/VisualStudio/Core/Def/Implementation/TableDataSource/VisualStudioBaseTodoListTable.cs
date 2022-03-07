@@ -212,7 +212,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
 
                 public override ImmutableArray<TodoTableItem> GetItems()
                 {
-                    return _source._todoListProvider
+                    return _source
+                        ._todoListProvider
                         .GetTodoItems(_workspace, _documentId, CancellationToken.None)
                         .Select(data => TodoTableItem.Create(_workspace, data))
                         .ToImmutableArray();

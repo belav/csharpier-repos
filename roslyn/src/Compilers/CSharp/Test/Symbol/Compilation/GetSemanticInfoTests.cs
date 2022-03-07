@@ -1053,10 +1053,9 @@ class C {
             else
             {
                 Assert.NotNull(info.Type);
-                var act2 = semanticModel.Compilation.ClassifyConversion(
-                    info.Type,
-                    info.ConvertedType
-                );
+                var act2 = semanticModel
+                    .Compilation
+                    .ClassifyConversion(info.Type, info.ConvertedType);
                 Assert.Equal(ept2, act2.Kind);
                 ValidateConversion(act2, ept2);
             }
@@ -1914,7 +1913,8 @@ class C
 
             var indexerSymbol = comp.GlobalNamespace
                 .GetMember<NamedTypeSymbol>("C")
-                .Indexers.Where(i => i.ParameterCount == 1)
+                .Indexers
+                .Where(i => i.ParameterCount == 1)
                 .Single()
                 .GetPublicSymbol();
             Assert.Equal(indexerSymbol, bindInfo.Symbol);
@@ -1957,22 +1957,23 @@ class C
 
             var indexerSymbol1 = comp.GlobalNamespace
                 .GetMember<NamedTypeSymbol>("C")
-                .Indexers.Where(i => i.ParameterCount == 1)
+                .Indexers
+                .Where(i => i.ParameterCount == 1)
                 .Single()
                 .GetPublicSymbol();
             var indexerSymbol2 = comp.GlobalNamespace
                 .GetMember<NamedTypeSymbol>("C")
-                .Indexers.Where(i => i.ParameterCount == 2)
+                .Indexers
+                .Where(i => i.ParameterCount == 2)
                 .Single()
                 .GetPublicSymbol();
             var candidateIndexers = ImmutableArray.Create<ISymbol>(indexerSymbol1, indexerSymbol2);
 
             Assert.Null(bindInfo.Symbol);
             Assert.True(
-                bindInfo.CandidateSymbols.SetEquals(
-                    candidateIndexers,
-                    EqualityComparer<ISymbol>.Default
-                )
+                bindInfo
+                    .CandidateSymbols
+                    .SetEquals(candidateIndexers, EqualityComparer<ISymbol>.Default)
             );
             Assert.Equal(CandidateReason.OverloadResolutionFailure, bindInfo.CandidateReason);
 
@@ -3955,10 +3956,12 @@ class C
             var operatorSymbol = operators
                 .Where(
                     method =>
-                        method.Parameters[0].Type.Equals(
-                            method.Parameters[1].Type,
-                            SymbolEqualityComparer.ConsiderEverything
-                        )
+                        method.Parameters[0]
+                            .Type
+                            .Equals(
+                                method.Parameters[1].Type,
+                                SymbolEqualityComparer.ConsiderEverything
+                            )
                 )
                 .Single();
 
@@ -4557,7 +4560,8 @@ class C
                 SpeculativeBindingOption.BindAsExpression
             );
             Assert.Equal(
-                compilation.GlobalNamespace
+                compilation
+                    .GlobalNamespace
                     .GetMember<INamedTypeSymbol>("C")
                     .GetMember<IMethodSymbol>("M"),
                 info.CandidateSymbols.Single()
@@ -4628,7 +4632,8 @@ class C
 
             var info = model.GetSymbolInfo(syntax);
             Assert.Equal(
-                compilation.GlobalNamespace
+                compilation
+                    .GlobalNamespace
                     .GetMember<INamedTypeSymbol>("C")
                     .GetMember<IMethodSymbol>("M"),
                 info.CandidateSymbols.Single()
@@ -4710,7 +4715,8 @@ class C
                 SpeculativeBindingOption.BindAsExpression
             );
             Assert.Equal(
-                compilation.GlobalNamespace
+                compilation
+                    .GlobalNamespace
                     .GetMember<INamedTypeSymbol>("IA")
                     .GetMember<IPropertySymbol>("P"),
                 info.Symbol
@@ -4891,12 +4897,14 @@ static class Program
             Assert.Throws<ArgumentException>(
                 () =>
                     method1.GetTypeInferredDuringReduction(
-                        comp.Assembly.GlobalNamespace
+                        comp.Assembly
+                            .GlobalNamespace
                             .GetMember<INamedTypeSymbol>("Program")
                             .GetMembers("Any")
                             .Where((m) => (object)m != (object)method1.ReducedFrom)
                             .Cast<IMethodSymbol>()
-                            .Single().TypeParameters[0]
+                            .Single()
+                            .TypeParameters[0]
                     )
             );
 
@@ -5102,7 +5110,8 @@ class C
             var position = text.IndexOf("< >", StringComparison.Ordinal);
             var syntax = tree.GetCompilationUnitRoot()
                 .FindToken(position)
-                .Parent.DescendantNodesAndSelf()
+                .Parent
+                .DescendantNodesAndSelf()
                 .OfType<OmittedTypeArgumentSyntax>()
                 .Single();
 
@@ -5140,7 +5149,8 @@ class C
             var position = text.IndexOf("< >", StringComparison.Ordinal);
             var syntax = tree.GetCompilationUnitRoot()
                 .FindToken(position)
-                .Parent.DescendantNodesAndSelf()
+                .Parent
+                .DescendantNodesAndSelf()
                 .OfType<OmittedTypeArgumentSyntax>()
                 .Single();
 
@@ -5179,7 +5189,8 @@ class C
             var position = text.IndexOf("S<,,,>", StringComparison.Ordinal);
             var syntax = tree.GetCompilationUnitRoot()
                 .FindToken(position)
-                .Parent.DescendantNodesAndSelf()
+                .Parent
+                .DescendantNodesAndSelf()
                 .OfType<GenericNameSyntax>()
                 .Single();
 
@@ -5664,7 +5675,8 @@ class C : A
                 tree.GetRoot()
                     .DescendantNodes()
                     .OfType<InvocationExpressionSyntax>()
-                    .First().SpanStart;
+                    .First()
+                    .SpanStart;
 
             Assert.Contains("Goo", model.LookupNames(position, paramType0));
             Assert.Contains("Goo", model.LookupNames(position, paramType1));
@@ -5714,7 +5726,8 @@ class C : A
                 tree.GetRoot()
                     .DescendantNodes()
                     .OfType<InvocationExpressionSyntax>()
-                    .First().SpanStart;
+                    .First()
+                    .SpanStart;
 
             Assert.Contains("Goo", model.LookupNames(position, paramType0));
             Assert.Contains("Goo", model.LookupNames(position, paramType1));

@@ -98,8 +98,9 @@ public class VirtualFileResultTest : VirtualFileResultTestBase
         bool enableRangeProcessing = false
     )
     {
-        var webHostEnvironment =
-            httpContext.RequestServices.GetRequiredService<IWebHostEnvironment>();
+        var webHostEnvironment = httpContext
+            .RequestServices
+            .GetRequiredService<IWebHostEnvironment>();
         httpContext.RequestServices = new ServiceCollection()
             .AddSingleton(webHostEnvironment)
             .AddTransient<IActionResultExecutor<VirtualFileResult>, VirtualFileResultExecutor>()

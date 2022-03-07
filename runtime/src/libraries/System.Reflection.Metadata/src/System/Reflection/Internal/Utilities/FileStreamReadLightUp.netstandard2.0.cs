@@ -49,13 +49,9 @@ namespace System.Reflection.Internal
                 return 0;
             }
 
-            int result = Interop.Kernel32.ReadFile(
-                handle,
-                buffer,
-                size,
-                out int bytesRead,
-                IntPtr.Zero
-            );
+            int result = Interop
+                .Kernel32
+                .ReadFile(handle, buffer, size, out int bytesRead, IntPtr.Zero);
             return result == 0 ? 0 : bytesRead;
         }
     }

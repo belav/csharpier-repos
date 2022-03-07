@@ -260,8 +260,9 @@ namespace Microsoft.EntityFrameworkCore.Query
                     && methodCallExpression.Method.IsGenericMethod
                 )
                 {
-                    var genericMethodDefinition =
-                        methodCallExpression.Method.GetGenericMethodDefinition();
+                    var genericMethodDefinition = methodCallExpression
+                        .Method
+                        .GetGenericMethodDefinition();
                     if (genericMethodDefinition == _includeMethodInfo)
                     {
                         var source = Visit(methodCallExpression.Arguments[0]);

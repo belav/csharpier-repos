@@ -35,7 +35,8 @@ namespace Microsoft.CodeAnalysis.Remote
             ImmutableArray<IMessagePackFormatter> additionalFormatters,
             ImmutableArray<IFormatterResolver> additionalResolvers
         ) =>
-            _options = StandardResolverAllowPrivate.Options
+            _options = StandardResolverAllowPrivate
+                .Options
                 .WithSecurity(MessagePackSecurity.UntrustedData.WithHashCollisionResistant(false))
                 .WithResolver(
                     MessagePackFormatters.CreateResolver(additionalFormatters, additionalResolvers)

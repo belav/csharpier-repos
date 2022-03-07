@@ -586,8 +586,9 @@ namespace System.Security.Cryptography.Pkcs.Tests
             Assert.Empty(firstSigner.UnsignedAttributes);
 
             using (
-                X509Certificate2 signerCert =
-                    Certificates.RSAKeyTransferCapi1.TryGetCertificateWithPrivateKey()
+                X509Certificate2 signerCert = Certificates
+                    .RSAKeyTransferCapi1
+                    .TryGetCertificateWithPrivateKey()
             )
             {
                 CmsSigner signer = new CmsSigner(
@@ -646,8 +647,9 @@ namespace System.Security.Cryptography.Pkcs.Tests
             Assert.Empty(firstSigner.UnsignedAttributes);
 
             using (
-                X509Certificate2 signerCert =
-                    Certificates.RSA2048SignatureOnly.TryGetCertificateWithPrivateKey()
+                X509Certificate2 signerCert = Certificates
+                    .RSA2048SignatureOnly
+                    .TryGetCertificateWithPrivateKey()
             )
             {
                 CmsSigner signer = new CmsSigner(identifierType, signerCert);
@@ -700,8 +702,9 @@ namespace System.Security.Cryptography.Pkcs.Tests
             SignerInfo signerInfo = signers[0];
 
             using (
-                X509Certificate2 cert =
-                    Certificates.RSAKeyTransferCapi1.TryGetCertificateWithPrivateKey()
+                X509Certificate2 cert = Certificates
+                    .RSAKeyTransferCapi1
+                    .TryGetCertificateWithPrivateKey()
             )
             {
                 signerInfo.ComputeCounterSignature(
@@ -816,8 +819,9 @@ namespace System.Security.Cryptography.Pkcs.Tests
             Assert.Empty(firstSigner.UnsignedAttributes);
 
             using (
-                X509Certificate2 signerCert =
-                    Certificates.ECDsaP256Win.TryGetCertificateWithPrivateKey()
+                X509Certificate2 signerCert = Certificates
+                    .ECDsaP256Win
+                    .TryGetCertificateWithPrivateKey()
             )
             {
                 CmsSigner signer = new CmsSigner(identifierType, signerCert);
@@ -917,8 +921,9 @@ namespace System.Security.Cryptography.Pkcs.Tests
             // it will prompt for the counter-signer's certificate if it's null,
             // even if the signature type is NoSignature.
             using (
-                X509Certificate2 cert =
-                    Certificates.RSAKeyTransferCapi1.TryGetCertificateWithPrivateKey()
+                X509Certificate2 cert = Certificates
+                    .RSAKeyTransferCapi1
+                    .TryGetCertificateWithPrivateKey()
             )
             {
                 firstSigner.ComputeCounterSignature(
@@ -988,8 +993,9 @@ namespace System.Security.Cryptography.Pkcs.Tests
             SignerInfo firstSigner = cms.SignerInfos[0];
 
             using (
-                X509Certificate2 cert =
-                    Certificates.RSAKeyTransferCapi1.TryGetCertificateWithPrivateKey()
+                X509Certificate2 cert = Certificates
+                    .RSAKeyTransferCapi1
+                    .TryGetCertificateWithPrivateKey()
             )
             using (X509Certificate2 cert2 = Certificates.DHKeyAgree1.GetCertificate())
             {
@@ -1099,8 +1105,9 @@ namespace System.Security.Cryptography.Pkcs.Tests
             using (X509Certificate2 unrelated2 = Certificates.RSAKeyTransfer2.GetCertificate())
             using (X509Certificate2 unrelated3 = Certificates.RSAKeyTransfer3.GetCertificate())
             using (
-                X509Certificate2 signerCert =
-                    Certificates.RSAKeyTransferCapi1.TryGetCertificateWithPrivateKey()
+                X509Certificate2 signerCert = Certificates
+                    .RSAKeyTransferCapi1
+                    .TryGetCertificateWithPrivateKey()
             )
             {
                 var signer = new CmsSigner(SubjectIdentifierType.IssuerAndSerialNumber, signerCert);

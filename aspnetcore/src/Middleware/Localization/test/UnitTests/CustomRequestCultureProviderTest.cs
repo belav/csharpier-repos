@@ -41,26 +41,31 @@ public class CustomRequestCultureProviderTest
                                         new CultureInfo("ar")
                                     }
                                 };
-                                options.RequestCultureProviders.Insert(
-                                    0,
-                                    new CustomRequestCultureProvider(
-                                        context =>
-                                        {
-                                            var culture = GetCultureInfoFromUrl(
-                                                context,
-                                                options.SupportedCultures
-                                            );
-                                            var requestCulture = new ProviderCultureResult(culture);
-                                            return Task.FromResult(requestCulture);
-                                        }
-                                    )
-                                );
+                                options
+                                    .RequestCultureProviders
+                                    .Insert(
+                                        0,
+                                        new CustomRequestCultureProvider(
+                                            context =>
+                                            {
+                                                var culture = GetCultureInfoFromUrl(
+                                                    context,
+                                                    options.SupportedCultures
+                                                );
+                                                var requestCulture = new ProviderCultureResult(
+                                                    culture
+                                                );
+                                                return Task.FromResult(requestCulture);
+                                            }
+                                        )
+                                    );
                                 app.UseRequestLocalization(options);
                                 app.Run(
                                     context =>
                                     {
-                                        var requestCultureFeature =
-                                            context.Features.Get<IRequestCultureFeature>();
+                                        var requestCultureFeature = context
+                                            .Features
+                                            .Get<IRequestCultureFeature>();
                                         var requestCulture = requestCultureFeature.RequestCulture;
                                         Assert.Equal("ar", requestCulture.Culture.Name);
                                         return Task.FromResult(0);
@@ -84,10 +89,11 @@ public class CustomRequestCultureProviderTest
     private string GetCultureInfoFromUrl(HttpContext context, IList<CultureInfo> supportedCultures)
     {
         var currentCulture = "en";
-        var segments = context.Request.Path.Value.Split(
-            new char[] { '/' },
-            StringSplitOptions.RemoveEmptyEntries
-        );
+        var segments = context
+            .Request
+            .Path
+            .Value
+            .Split(new char[] { '/' }, StringSplitOptions.RemoveEmptyEntries);
         if (segments.Length > 1 && segments[0].Length == 2)
         {
             currentCulture = segments[0];

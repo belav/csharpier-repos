@@ -221,11 +221,9 @@ internal class TestApp
 
     private static int test_2_9(int num)
     {
-        return AA.aa_init[
-            num - 100,
-            (AA.a_init[num].q.val | 1) - 2,
-            1 + AA.a_zero[num].q.val
-        ].q.val;
+        return AA.aa_init[num - 100, (AA.a_init[num].q.val | 1) - 2, 1 + AA.a_zero[num].q.val]
+            .q
+            .val;
     }
 
     private static int test_2_10(int num)
@@ -316,7 +314,9 @@ internal class TestApp
             num - 100,
             (AA.aa_init[0, num - 1, num / 100].q.val | 1) - 2,
             1 + AA.aa_zero[0, num - 1, num / 100].q.val
-        ].q.val;
+        ]
+            .q
+            .val;
     }
 
     private static int test_3_10(int num)

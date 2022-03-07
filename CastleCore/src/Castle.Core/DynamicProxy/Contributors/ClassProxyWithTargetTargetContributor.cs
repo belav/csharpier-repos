@@ -154,13 +154,15 @@ namespace Castle.DynamicProxy.Contributors
                 null
             );
 
-            return scope.TypeCache.GetOrAddWithoutTakingLock(
-                key,
-                _ =>
-                    new DelegateTypeGenerator(method, targetType)
-                        .Generate(@class, namingScope)
-                        .BuildType()
-            );
+            return scope
+                .TypeCache
+                .GetOrAddWithoutTakingLock(
+                    key,
+                    _ =>
+                        new DelegateTypeGenerator(method, targetType)
+                            .Generate(@class, namingScope)
+                            .BuildType()
+                );
         }
 
         private Type GetInvocationType(MetaMethod method, ClassEmitter @class)
@@ -177,10 +179,9 @@ namespace Castle.DynamicProxy.Contributors
 
             // no locking required as we're already within a lock
 
-            return scope.TypeCache.GetOrAddWithoutTakingLock(
-                key,
-                _ => BuildInvocationType(method, @class)
-            );
+            return scope
+                .TypeCache
+                .GetOrAddWithoutTakingLock(key, _ => BuildInvocationType(method, @class));
         }
 
         private MethodGenerator IndirectlyCalledMethodGenerator(

@@ -120,7 +120,8 @@ namespace Test
             if (
                 typeof(int[,])
                     .GetConstructor(new Type[] { typeof(int), typeof(int) })
-                    .GetCustomAttributes(true).Length != 0
+                    .GetCustomAttributes(true)
+                    .Length != 0
             )
                 return 7;
 

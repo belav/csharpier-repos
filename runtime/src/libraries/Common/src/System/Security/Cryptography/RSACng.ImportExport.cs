@@ -351,49 +351,33 @@ namespace System.Security.Cryptography
                         int offset = sizeof(BCRYPT_RSAKEY_BLOB);
 
                         // Read out the exponent
-                        rsaParams.Exponent = Interop.BCrypt.Consume(
-                            rsaBlob,
-                            ref offset,
-                            pBcryptBlob->cbPublicExp
-                        );
-                        rsaParams.Modulus = Interop.BCrypt.Consume(
-                            rsaBlob,
-                            ref offset,
-                            pBcryptBlob->cbModulus
-                        );
+                        rsaParams.Exponent = Interop
+                            .BCrypt
+                            .Consume(rsaBlob, ref offset, pBcryptBlob->cbPublicExp);
+                        rsaParams.Modulus = Interop
+                            .BCrypt
+                            .Consume(rsaBlob, ref offset, pBcryptBlob->cbModulus);
 
                         if (includePrivateParameters)
                         {
-                            rsaParams.P = Interop.BCrypt.Consume(
-                                rsaBlob,
-                                ref offset,
-                                pBcryptBlob->cbPrime1
-                            );
-                            rsaParams.Q = Interop.BCrypt.Consume(
-                                rsaBlob,
-                                ref offset,
-                                pBcryptBlob->cbPrime2
-                            );
-                            rsaParams.DP = Interop.BCrypt.Consume(
-                                rsaBlob,
-                                ref offset,
-                                pBcryptBlob->cbPrime1
-                            );
-                            rsaParams.DQ = Interop.BCrypt.Consume(
-                                rsaBlob,
-                                ref offset,
-                                pBcryptBlob->cbPrime2
-                            );
-                            rsaParams.InverseQ = Interop.BCrypt.Consume(
-                                rsaBlob,
-                                ref offset,
-                                pBcryptBlob->cbPrime1
-                            );
-                            rsaParams.D = Interop.BCrypt.Consume(
-                                rsaBlob,
-                                ref offset,
-                                pBcryptBlob->cbModulus
-                            );
+                            rsaParams.P = Interop
+                                .BCrypt
+                                .Consume(rsaBlob, ref offset, pBcryptBlob->cbPrime1);
+                            rsaParams.Q = Interop
+                                .BCrypt
+                                .Consume(rsaBlob, ref offset, pBcryptBlob->cbPrime2);
+                            rsaParams.DP = Interop
+                                .BCrypt
+                                .Consume(rsaBlob, ref offset, pBcryptBlob->cbPrime1);
+                            rsaParams.DQ = Interop
+                                .BCrypt
+                                .Consume(rsaBlob, ref offset, pBcryptBlob->cbPrime2);
+                            rsaParams.InverseQ = Interop
+                                .BCrypt
+                                .Consume(rsaBlob, ref offset, pBcryptBlob->cbPrime1);
+                            rsaParams.D = Interop
+                                .BCrypt
+                                .Consume(rsaBlob, ref offset, pBcryptBlob->cbModulus);
                         }
                     }
                 }

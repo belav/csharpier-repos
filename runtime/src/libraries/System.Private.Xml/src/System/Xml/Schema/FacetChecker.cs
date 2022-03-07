@@ -49,9 +49,9 @@ namespace System.Xml.Schema
                 _baseFixedFlags =
                     _datatype.Restriction != null ? _datatype.Restriction.FixedFlags : 0;
                 _validRestrictionFlags = _datatype.ValidRestrictionFlags;
-                _nonNegativeInt = DatatypeImplementation.GetSimpleTypeFromTypeCode(
-                    XmlTypeCode.NonNegativeInteger
-                ).Datatype!;
+                _nonNegativeInt = DatatypeImplementation
+                    .GetSimpleTypeFromTypeCode(XmlTypeCode.NonNegativeInteger)
+                    .Datatype!;
                 _builtInEnum = !(_datatype is Datatype_union || _datatype is Datatype_List)
                     ? _datatype.TypeCode
                     : 0;
@@ -241,15 +241,17 @@ namespace System.Xml.Schema
                 {
                     _derivedRestriction.Enumeration = new ArrayList();
                 }
-                _derivedRestriction.Enumeration.Add(
-                    ParseFacetValue(
-                        _datatype,
-                        facet,
-                        SR.Sch_EnumerationFacetInvalid,
-                        nsmgr,
-                        nameTable
-                    )
-                );
+                _derivedRestriction
+                    .Enumeration
+                    .Add(
+                        ParseFacetValue(
+                            _datatype,
+                            facet,
+                            SR.Sch_EnumerationFacetInvalid,
+                            nsmgr,
+                            nameTable
+                        )
+                    );
                 SetFlag(facet, RestrictionFlags.Enumeration);
             }
 
@@ -455,9 +457,9 @@ namespace System.Xml.Schema
                     SR.Sch_TotalDigitsFacetProhibited
                 );
                 CheckDupFlag(facet, RestrictionFlags.TotalDigits, SR.Sch_DupTotalDigitsFacet);
-                XmlSchemaDatatype positiveInt = DatatypeImplementation.GetSimpleTypeFromTypeCode(
-                    XmlTypeCode.PositiveInteger
-                ).Datatype!;
+                XmlSchemaDatatype positiveInt = DatatypeImplementation
+                    .GetSimpleTypeFromTypeCode(XmlTypeCode.PositiveInteger)
+                    .Datatype!;
                 _derivedRestriction.TotalDigits = XmlBaseConverter.DecimalToInt32(
                     (decimal)ParseFacetValue(
                         positiveInt,
@@ -1597,10 +1599,9 @@ namespace System.Xml.Schema
     {
         internal override Exception? CheckValueFacets(object value, XmlSchemaDatatype datatype)
         {
-            TimeSpan timeSpanValue = (TimeSpan)datatype.ValueConverter.ChangeType(
-                value,
-                typeof(TimeSpan)
-            );
+            TimeSpan timeSpanValue = (TimeSpan)datatype
+                .ValueConverter
+                .ChangeType(value, typeof(TimeSpan));
             return CheckValueFacets(timeSpanValue, datatype);
         }
 
@@ -1965,11 +1966,9 @@ namespace System.Xml.Schema
     {
         internal override Exception? CheckValueFacets(object value, XmlSchemaDatatype datatype)
         {
-            XmlQualifiedName qualifiedNameValue =
-                (XmlQualifiedName)datatype.ValueConverter.ChangeType(
-                    value,
-                    typeof(XmlQualifiedName)
-                );
+            XmlQualifiedName qualifiedNameValue = (XmlQualifiedName)datatype
+                .ValueConverter
+                .ChangeType(value, typeof(XmlQualifiedName));
             return CheckValueFacets(qualifiedNameValue, datatype);
         }
 
@@ -2035,10 +2034,9 @@ namespace System.Xml.Schema
         )
         {
             return MatchEnumeration(
-                (XmlQualifiedName)datatype.ValueConverter.ChangeType(
-                    value,
-                    typeof(XmlQualifiedName)
-                ),
+                (XmlQualifiedName)datatype
+                    .ValueConverter
+                    .ChangeType(value, typeof(XmlQualifiedName)),
                 enumeration
             );
         }

@@ -56,9 +56,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
                 return;
             }
 
-            var projectCodeModel = this.State.ProjectCodeModelFactory.GetProjectCodeModel(
-                document.Project.Id
-            );
+            var projectCodeModel = this.State
+                .ProjectCodeModelFactory
+                .GetProjectCodeModel(document.Project.Id);
             if (projectCodeModel == null)
             {
                 return;
@@ -74,9 +74,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
                 return;
             }
 
-            var extensibility = (EnvDTE80.IVsExtensibility2)this.State.ServiceProvider.GetService(
-                typeof(EnvDTE.IVsExtensibility)
-            );
+            var extensibility = (EnvDTE80.IVsExtensibility2)this.State
+                .ServiceProvider
+                .GetService(typeof(EnvDTE.IVsExtensibility));
             if (extensibility == null)
                 return;
 

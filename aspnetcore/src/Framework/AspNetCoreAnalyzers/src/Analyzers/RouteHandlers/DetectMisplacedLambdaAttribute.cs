@@ -82,10 +82,10 @@ public partial class RouteHandlerAnalyzer : DiagnosticAnalyzer
                 // Check for Microsoft.AspNetCore in the ContainingNamespaces for this type
                 if (
                     @namespace.Name.Equals("AspNetCore", System.StringComparison.Ordinal)
-                    && @namespace.ContainingNamespace.Name.Equals(
-                        "Microsoft",
-                        System.StringComparison.Ordinal
-                    )
+                    && @namespace
+                        .ContainingNamespace
+                        .Name
+                        .Equals("Microsoft", System.StringComparison.Ordinal)
                 )
                 {
                     return true;

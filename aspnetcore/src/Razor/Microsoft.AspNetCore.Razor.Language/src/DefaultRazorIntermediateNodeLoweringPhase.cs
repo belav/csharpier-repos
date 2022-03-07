@@ -207,11 +207,13 @@ internal class DefaultRazorIntermediateNodeLoweringPhase
                     if (descriptor.Usage == DirectiveUsage.FileScopedSinglyOccurring)
                     {
                         // A block directive cannot be imported.
-                        document.Diagnostics.Add(
-                            RazorDiagnosticFactory.CreateDirective_BlockDirectiveCannotBeImported(
-                                descriptor.Directive
-                            )
-                        );
+                        document
+                            .Diagnostics
+                            .Add(
+                                RazorDiagnosticFactory.CreateDirective_BlockDirectiveCannotBeImported(
+                                    descriptor.Directive
+                                )
+                            );
                     }
 
                     break;
@@ -539,7 +541,8 @@ internal class DefaultRazorIntermediateNodeLoweringPhase
             );
             var prefix = (MarkupTextLiteralSyntax)SyntaxFactory
                 .MarkupTextLiteral(prefixTokens)
-                .Green.CreateRed(node, node.NamePrefix?.Position ?? node.Name.Position);
+                .Green
+                .CreateRed(node, node.NamePrefix?.Position ?? node.Name.Position);
 
             var name = node.Name.GetContent();
             if (
@@ -578,7 +581,8 @@ internal class DefaultRazorIntermediateNodeLoweringPhase
                     );
                     var mergedAttribute = SyntaxFactory
                         .MarkupTextLiteral(mergedLiterals)
-                        .Green.CreateRed(node.Parent, node.Position);
+                        .Green
+                        .CreateRed(node.Parent, node.Position);
                     Visit(mergedAttribute);
                 }
                 else
@@ -618,7 +622,8 @@ internal class DefaultRazorIntermediateNodeLoweringPhase
             var literals = MergeLiterals(node.NamePrefix?.LiteralTokens, node.Name?.LiteralTokens);
             var literal = SyntaxFactory
                 .MarkupTextLiteral(literals)
-                .Green.CreateRed(node.Parent, node.Position);
+                .Green
+                .CreateRed(node.Parent, node.Position);
 
             Visit(literal);
         }
@@ -714,15 +719,16 @@ internal class DefaultRazorIntermediateNodeLoweringPhase
 
             if (templateNode.Children.Count > 0)
             {
-                var sourceRangeStart = templateNode.Children
+                var sourceRangeStart = templateNode
+                    .Children
                     .FirstOrDefault(child => child.Source != null)
                     ?.Source;
 
                 if (sourceRangeStart != null)
                 {
-                    var contentLength = templateNode.Children.Sum(
-                        child => child.Source?.Length ?? 0
-                    );
+                    var contentLength = templateNode
+                        .Children
+                        .Sum(child => child.Source?.Length ?? 0);
 
                     templateNode.Source = new SourceSpan(
                         sourceRangeStart.Value.FilePath ?? SourceDocument.FilePath,
@@ -761,15 +767,16 @@ internal class DefaultRazorIntermediateNodeLoweringPhase
 
             if (expressionNode.Children.Count > 0)
             {
-                var sourceRangeStart = expressionNode.Children
+                var sourceRangeStart = expressionNode
+                    .Children
                     .FirstOrDefault(child => child.Source != null)
                     ?.Source;
 
                 if (sourceRangeStart != null)
                 {
-                    var contentLength = expressionNode.Children.Sum(
-                        child => child.Source?.Length ?? 0
-                    );
+                    var contentLength = expressionNode
+                        .Children
+                        .Sum(child => child.Source?.Length ?? 0);
 
                     expressionNode.Source = new SourceSpan(
                         sourceRangeStart.Value.FilePath ?? SourceDocument.FilePath,
@@ -802,15 +809,16 @@ internal class DefaultRazorIntermediateNodeLoweringPhase
 
             if (expressionNode.Children.Count > 0)
             {
-                var sourceRangeStart = expressionNode.Children
+                var sourceRangeStart = expressionNode
+                    .Children
                     .FirstOrDefault(child => child.Source != null)
                     ?.Source;
 
                 if (sourceRangeStart != null)
                 {
-                    var contentLength = expressionNode.Children.Sum(
-                        child => child.Source?.Length ?? 0
-                    );
+                    var contentLength = expressionNode
+                        .Children
+                        .Sum(child => child.Source?.Length ?? 0);
 
                     expressionNode.Source = new SourceSpan(
                         sourceRangeStart.Value.FilePath ?? SourceDocument.FilePath,
@@ -834,7 +842,8 @@ internal class DefaultRazorIntermediateNodeLoweringPhase
                 // CSharp but since they are duplicate, they should just be markup.
                 var markupLiteral = SyntaxFactory
                     .MarkupTextLiteral(node.LiteralTokens)
-                    .Green.CreateRed(node.Parent, node.Position);
+                    .Green
+                    .CreateRed(node.Parent, node.Position);
                 Visit(markupLiteral);
                 return;
             }
@@ -1064,28 +1073,32 @@ internal class DefaultRazorIntermediateNodeLoweringPhase
             var attributeName = node.Name.GetContent();
             var associatedDescriptors = descriptors.Where(
                 descriptor =>
-                    descriptor.BoundAttributes.Any(
-                        attributeDescriptor =>
-                            TagHelperMatchingConventions.CanSatisfyBoundAttribute(
-                                attributeName,
-                                attributeDescriptor
-                            )
-                    )
+                    descriptor
+                        .BoundAttributes
+                        .Any(
+                            attributeDescriptor =>
+                                TagHelperMatchingConventions.CanSatisfyBoundAttribute(
+                                    attributeName,
+                                    attributeDescriptor
+                                )
+                        )
             );
 
             if (associatedDescriptors.Any() && _renderedBoundAttributeNames.Add(attributeName))
             {
                 foreach (var associatedDescriptor in associatedDescriptors)
                 {
-                    var associatedAttributeDescriptor = associatedDescriptor.BoundAttributes.First(
-                        a =>
-                        {
-                            return TagHelperMatchingConventions.CanSatisfyBoundAttribute(
-                                attributeName,
-                                a
-                            );
-                        }
-                    );
+                    var associatedAttributeDescriptor = associatedDescriptor
+                        .BoundAttributes
+                        .First(
+                            a =>
+                            {
+                                return TagHelperMatchingConventions.CanSatisfyBoundAttribute(
+                                    attributeName,
+                                    a
+                                );
+                            }
+                        );
 
                     var expectsBooleanValue = associatedAttributeDescriptor.ExpectsBooleanValue(
                         attributeName
@@ -1134,28 +1147,32 @@ internal class DefaultRazorIntermediateNodeLoweringPhase
             var attributeValueNode = node.Value;
             var associatedDescriptors = descriptors.Where(
                 descriptor =>
-                    descriptor.BoundAttributes.Any(
-                        attributeDescriptor =>
-                            TagHelperMatchingConventions.CanSatisfyBoundAttribute(
-                                attributeName,
-                                attributeDescriptor
-                            )
-                    )
+                    descriptor
+                        .BoundAttributes
+                        .Any(
+                            attributeDescriptor =>
+                                TagHelperMatchingConventions.CanSatisfyBoundAttribute(
+                                    attributeName,
+                                    attributeDescriptor
+                                )
+                        )
             );
 
             if (associatedDescriptors.Any() && _renderedBoundAttributeNames.Add(attributeName))
             {
                 foreach (var associatedDescriptor in associatedDescriptors)
                 {
-                    var associatedAttributeDescriptor = associatedDescriptor.BoundAttributes.First(
-                        a =>
-                        {
-                            return TagHelperMatchingConventions.CanSatisfyBoundAttribute(
-                                attributeName,
-                                a
-                            );
-                        }
-                    );
+                    var associatedAttributeDescriptor = associatedDescriptor
+                        .BoundAttributes
+                        .First(
+                            a =>
+                            {
+                                return TagHelperMatchingConventions.CanSatisfyBoundAttribute(
+                                    attributeName,
+                                    a
+                                );
+                            }
+                        );
 
                     var setTagHelperProperty = new TagHelperPropertyIntermediateNode()
                     {
@@ -1227,7 +1244,8 @@ internal class DefaultRazorIntermediateNodeLoweringPhase
                 }
                 var rewritten = SyntaxFactory
                     .MarkupTextLiteral(valueTokens.ToList())
-                    .Green.CreateRed(node.Parent, position);
+                    .Green
+                    .CreateRed(node.Parent, position);
                 Visit(rewritten);
             }
             else if (children.All(c => c is MarkupTextLiteralSyntax))
@@ -1240,7 +1258,8 @@ internal class DefaultRazorIntermediateNodeLoweringPhase
                 }
                 var rewritten = SyntaxFactory
                     .MarkupTextLiteral(builder.ToList())
-                    .Green.CreateRed(node.Parent, position);
+                    .Green
+                    .CreateRed(node.Parent, position);
                 Visit(rewritten);
             }
             else if (children.All(c => c is CSharpExpressionLiteralSyntax))
@@ -1255,7 +1274,8 @@ internal class DefaultRazorIntermediateNodeLoweringPhase
                 }
                 var rewritten = SyntaxFactory
                     .CSharpExpressionLiteral(builder.ToList())
-                    .Green.CreateRed(node.Parent, position);
+                    .Green
+                    .CreateRed(node.Parent, position);
                 rewritten = context != null ? rewritten.WithSpanContext(context) : rewritten;
                 Visit(rewritten);
             }
@@ -1366,12 +1386,14 @@ internal class DefaultRazorIntermediateNodeLoweringPhase
 
             if (node.StartTag != null && node.EndTag != null && node.StartTag.IsVoidElement())
             {
-                element.Diagnostics.Add(
-                    ComponentDiagnosticFactory.Create_UnexpectedClosingTagForVoidElement(
-                        BuildSourceSpanFromNode(node.EndTag),
-                        node.EndTag.GetTagNameWithOptionalBang()
-                    )
-                );
+                element
+                    .Diagnostics
+                    .Add(
+                        ComponentDiagnosticFactory.Create_UnexpectedClosingTagForVoidElement(
+                            BuildSourceSpanFromNode(node.EndTag),
+                            node.EndTag.GetTagNameWithOptionalBang()
+                        )
+                    );
             }
             else if (
                 node.StartTag != null
@@ -1380,21 +1402,25 @@ internal class DefaultRazorIntermediateNodeLoweringPhase
                 && !node.StartTag.IsSelfClosing()
             )
             {
-                element.Diagnostics.Add(
-                    ComponentDiagnosticFactory.Create_UnclosedTag(
-                        BuildSourceSpanFromNode(node.StartTag),
-                        node.StartTag.GetTagNameWithOptionalBang()
-                    )
-                );
+                element
+                    .Diagnostics
+                    .Add(
+                        ComponentDiagnosticFactory.Create_UnclosedTag(
+                            BuildSourceSpanFromNode(node.StartTag),
+                            node.StartTag.GetTagNameWithOptionalBang()
+                        )
+                    );
             }
             else if (node.StartTag == null && node.EndTag != null)
             {
-                element.Diagnostics.Add(
-                    ComponentDiagnosticFactory.Create_UnexpectedClosingTag(
-                        BuildSourceSpanFromNode(node.EndTag),
-                        node.EndTag.GetTagNameWithOptionalBang()
-                    )
-                );
+                element
+                    .Diagnostics
+                    .Add(
+                        ComponentDiagnosticFactory.Create_UnexpectedClosingTag(
+                            BuildSourceSpanFromNode(node.EndTag),
+                            node.EndTag.GetTagNameWithOptionalBang()
+                        )
+                    );
             }
 
             if (node.StartTag != null && !_document.Options.SuppressPrimaryMethodBody)
@@ -1406,12 +1432,14 @@ internal class DefaultRazorIntermediateNodeLoweringPhase
                     && LooksLikeAComponentName(_document, startTagName)
                 )
                 {
-                    element.Diagnostics.Add(
-                        ComponentDiagnosticFactory.Create_UnexpectedMarkupElement(
-                            startTagName,
-                            BuildSourceSpanFromNode(node.StartTag)
-                        )
-                    );
+                    element
+                        .Diagnostics
+                        .Add(
+                            ComponentDiagnosticFactory.Create_UnexpectedMarkupElement(
+                                startTagName,
+                                BuildSourceSpanFromNode(node.StartTag)
+                            )
+                        );
                 }
             }
 
@@ -1498,7 +1526,8 @@ internal class DefaultRazorIntermediateNodeLoweringPhase
             );
             var prefix = (MarkupTextLiteralSyntax)SyntaxFactory
                 .MarkupTextLiteral(prefixTokens)
-                .Green.CreateRed(node, node.NamePrefix?.Position ?? node.Name.Position);
+                .Green
+                .CreateRed(node, node.NamePrefix?.Position ?? node.Name.Position);
 
             var name = node.Name.GetContent();
             _builder.Push(
@@ -1526,7 +1555,8 @@ internal class DefaultRazorIntermediateNodeLoweringPhase
             );
             var prefix = (MarkupTextLiteralSyntax)SyntaxFactory
                 .MarkupTextLiteral(prefixTokens)
-                .Green.CreateRed(node, node.NamePrefix?.Position ?? node.Name.Position);
+                .Green
+                .CreateRed(node, node.NamePrefix?.Position ?? node.Name.Position);
 
             var name = node.Name.GetContent();
             _builder.Add(
@@ -1729,15 +1759,16 @@ internal class DefaultRazorIntermediateNodeLoweringPhase
 
             if (templateNode.Children.Count > 0)
             {
-                var sourceRangeStart = templateNode.Children
+                var sourceRangeStart = templateNode
+                    .Children
                     .FirstOrDefault(child => child.Source != null)
                     ?.Source;
 
                 if (sourceRangeStart != null)
                 {
-                    var contentLength = templateNode.Children.Sum(
-                        child => child.Source?.Length ?? 0
-                    );
+                    var contentLength = templateNode
+                        .Children
+                        .Sum(child => child.Source?.Length ?? 0);
 
                     templateNode.Source = new SourceSpan(
                         sourceRangeStart.Value.FilePath ?? SourceDocument.FilePath,
@@ -1794,15 +1825,16 @@ internal class DefaultRazorIntermediateNodeLoweringPhase
 
             if (expressionNode.Children.Count > 0)
             {
-                var sourceRangeStart = expressionNode.Children
+                var sourceRangeStart = expressionNode
+                    .Children
                     .FirstOrDefault(child => child.Source != null)
                     ?.Source;
 
                 if (sourceRangeStart != null)
                 {
-                    var contentLength = expressionNode.Children.Sum(
-                        child => child.Source?.Length ?? 0
-                    );
+                    var contentLength = expressionNode
+                        .Children
+                        .Sum(child => child.Source?.Length ?? 0);
 
                     expressionNode.Source = new SourceSpan(
                         sourceRangeStart.Value.FilePath ?? SourceDocument.FilePath,
@@ -1853,15 +1885,16 @@ internal class DefaultRazorIntermediateNodeLoweringPhase
 
             if (expressionNode.Children.Count > 0)
             {
-                var sourceRangeStart = expressionNode.Children
+                var sourceRangeStart = expressionNode
+                    .Children
                     .FirstOrDefault(child => child.Source != null)
                     ?.Source;
 
                 if (sourceRangeStart != null)
                 {
-                    var contentLength = expressionNode.Children.Sum(
-                        child => child.Source?.Length ?? 0
-                    );
+                    var contentLength = expressionNode
+                        .Children
+                        .Sum(child => child.Source?.Length ?? 0);
 
                     expressionNode.Source = new SourceSpan(
                         sourceRangeStart.Value.FilePath ?? SourceDocument.FilePath,
@@ -1885,7 +1918,8 @@ internal class DefaultRazorIntermediateNodeLoweringPhase
                 // CSharp but since they are duplicate, they should just be markup.
                 var markupLiteral = SyntaxFactory
                     .MarkupTextLiteral(node.LiteralTokens)
-                    .Green.CreateRed(node.Parent, node.Position);
+                    .Green
+                    .CreateRed(node.Parent, node.Position);
                 Visit(markupLiteral);
                 return;
             }
@@ -1984,13 +2018,15 @@ internal class DefaultRazorIntermediateNodeLoweringPhase
                 {
                     // This is most likely a case mismatch in start and end tags. Otherwise the parser wouldn't have grouped them together.
                     // But we can't have case mismatch in start and end tags in components. Add a diagnostic.
-                    tagHelperNode.Diagnostics.Add(
-                        ComponentDiagnosticFactory.Create_InconsistentStartAndEndTagName(
-                            startTagName,
-                            endTagName,
-                            BuildSourceSpanFromNode(node.EndTag)
-                        )
-                    );
+                    tagHelperNode
+                        .Diagnostics
+                        .Add(
+                            ComponentDiagnosticFactory.Create_InconsistentStartAndEndTagName(
+                                startTagName,
+                                endTagName,
+                                BuildSourceSpanFromNode(node.EndTag)
+                            )
+                        );
                 }
             }
         }
@@ -2027,13 +2063,15 @@ internal class DefaultRazorIntermediateNodeLoweringPhase
             var attributeName = node.Name.GetContent();
             var associatedDescriptors = descriptors.Where(
                 descriptor =>
-                    descriptor.BoundAttributes.Any(
-                        attributeDescriptor =>
-                            TagHelperMatchingConventions.CanSatisfyBoundAttribute(
-                                attributeName,
-                                attributeDescriptor
-                            )
-                    )
+                    descriptor
+                        .BoundAttributes
+                        .Any(
+                            attributeDescriptor =>
+                                TagHelperMatchingConventions.CanSatisfyBoundAttribute(
+                                    attributeName,
+                                    attributeDescriptor
+                                )
+                        )
             );
 
             if (associatedDescriptors.Any() && _renderedBoundAttributeNames.Add(attributeName))
@@ -2103,13 +2141,15 @@ internal class DefaultRazorIntermediateNodeLoweringPhase
             var attributeName = node.FullName;
             var associatedDescriptors = descriptors.Where(
                 descriptor =>
-                    descriptor.BoundAttributes.Any(
-                        attributeDescriptor =>
-                            TagHelperMatchingConventions.CanSatisfyBoundAttribute(
-                                attributeName,
-                                attributeDescriptor
-                            )
-                    )
+                    descriptor
+                        .BoundAttributes
+                        .Any(
+                            attributeDescriptor =>
+                                TagHelperMatchingConventions.CanSatisfyBoundAttribute(
+                                    attributeName,
+                                    attributeDescriptor
+                                )
+                        )
             );
 
             if (associatedDescriptors.Any() && _renderedBoundAttributeNames.Add(attributeName))
@@ -2216,13 +2256,15 @@ internal class DefaultRazorIntermediateNodeLoweringPhase
             var attributeValueNode = node.Value;
             var associatedDescriptors = descriptors.Where(
                 descriptor =>
-                    descriptor.BoundAttributes.Any(
-                        attributeDescriptor =>
-                            TagHelperMatchingConventions.CanSatisfyBoundAttribute(
-                                attributeName,
-                                attributeDescriptor
-                            )
-                    )
+                    descriptor
+                        .BoundAttributes
+                        .Any(
+                            attributeDescriptor =>
+                                TagHelperMatchingConventions.CanSatisfyBoundAttribute(
+                                    attributeName,
+                                    attributeDescriptor
+                                )
+                        )
             );
 
             if (associatedDescriptors.Any() && _renderedBoundAttributeNames.Add(attributeName))
@@ -2281,13 +2323,15 @@ internal class DefaultRazorIntermediateNodeLoweringPhase
 
             var associatedDescriptors = descriptors.Where(
                 descriptor =>
-                    descriptor.BoundAttributes.Any(
-                        attributeDescriptor =>
-                            TagHelperMatchingConventions.CanSatisfyBoundAttribute(
-                                attributeName,
-                                attributeDescriptor
-                            )
-                    )
+                    descriptor
+                        .BoundAttributes
+                        .Any(
+                            attributeDescriptor =>
+                                TagHelperMatchingConventions.CanSatisfyBoundAttribute(
+                                    attributeName,
+                                    attributeDescriptor
+                                )
+                        )
             );
 
             if (associatedDescriptors.Any() && _renderedBoundAttributeNames.Add(attributeName))
@@ -2411,7 +2455,8 @@ internal class DefaultRazorIntermediateNodeLoweringPhase
                 }
                 var rewritten = SyntaxFactory
                     .MarkupTextLiteral(valueTokens.ToList())
-                    .Green.CreateRed(node.Parent, position);
+                    .Green
+                    .CreateRed(node.Parent, position);
                 Visit(rewritten);
             }
             else if (children.All(c => c is MarkupTextLiteralSyntax))
@@ -2424,7 +2469,8 @@ internal class DefaultRazorIntermediateNodeLoweringPhase
                 }
                 var rewritten = SyntaxFactory
                     .MarkupTextLiteral(builder.ToList())
-                    .Green.CreateRed(node.Parent, position);
+                    .Green
+                    .CreateRed(node.Parent, position);
                 Visit(rewritten);
             }
             else if (children.All(c => c is CSharpExpressionLiteralSyntax))
@@ -2439,7 +2485,8 @@ internal class DefaultRazorIntermediateNodeLoweringPhase
                 }
                 var rewritten = SyntaxFactory
                     .CSharpExpressionLiteral(builder.ToList())
-                    .Green.CreateRed(node.Parent, position);
+                    .Green
+                    .CreateRed(node.Parent, position);
                 rewritten = context != null ? rewritten.WithSpanContext(context) : rewritten;
                 Visit(rewritten);
             }
@@ -2526,44 +2573,52 @@ internal class DefaultRazorIntermediateNodeLoweringPhase
 
         public override void VisitMarkupElement(MarkupElementSyntax node)
         {
-            _document.Diagnostics.Add(
-                ComponentDiagnosticFactory.Create_UnsupportedComponentImportContent(
-                    BuildSourceSpanFromNode(node)
-                )
-            );
+            _document
+                .Diagnostics
+                .Add(
+                    ComponentDiagnosticFactory.Create_UnsupportedComponentImportContent(
+                        BuildSourceSpanFromNode(node)
+                    )
+                );
 
             base.VisitMarkupElement(node);
         }
 
         public override void VisitMarkupCommentBlock(MarkupCommentBlockSyntax node)
         {
-            _document.Diagnostics.Add(
-                ComponentDiagnosticFactory.Create_UnsupportedComponentImportContent(
-                    BuildSourceSpanFromNode(node)
-                )
-            );
+            _document
+                .Diagnostics
+                .Add(
+                    ComponentDiagnosticFactory.Create_UnsupportedComponentImportContent(
+                        BuildSourceSpanFromNode(node)
+                    )
+                );
 
             base.VisitMarkupCommentBlock(node);
         }
 
         public override void VisitMarkupTagHelperElement(MarkupTagHelperElementSyntax node)
         {
-            _document.Diagnostics.Add(
-                ComponentDiagnosticFactory.Create_UnsupportedComponentImportContent(
-                    BuildSourceSpanFromNode(node)
-                )
-            );
+            _document
+                .Diagnostics
+                .Add(
+                    ComponentDiagnosticFactory.Create_UnsupportedComponentImportContent(
+                        BuildSourceSpanFromNode(node)
+                    )
+                );
 
             base.VisitMarkupTagHelperElement(node);
         }
 
         public override void VisitCSharpExplicitExpression(CSharpExplicitExpressionSyntax node)
         {
-            _document.Diagnostics.Add(
-                ComponentDiagnosticFactory.Create_UnsupportedComponentImportContent(
-                    BuildSourceSpanFromNode(node)
-                )
-            );
+            _document
+                .Diagnostics
+                .Add(
+                    ComponentDiagnosticFactory.Create_UnsupportedComponentImportContent(
+                        BuildSourceSpanFromNode(node)
+                    )
+                );
 
             base.VisitCSharpExplicitExpression(node);
         }
@@ -2593,15 +2648,16 @@ internal class DefaultRazorIntermediateNodeLoweringPhase
 
             if (expressionNode.Children.Count > 0)
             {
-                var sourceRangeStart = expressionNode.Children
+                var sourceRangeStart = expressionNode
+                    .Children
                     .FirstOrDefault(child => child.Source != null)
                     ?.Source;
 
                 if (sourceRangeStart != null)
                 {
-                    var contentLength = expressionNode.Children.Sum(
-                        child => child.Source?.Length ?? 0
-                    );
+                    var contentLength = expressionNode
+                        .Children
+                        .Sum(child => child.Source?.Length ?? 0);
 
                     expressionNode.Source = new SourceSpan(
                         sourceRangeStart.Value.FilePath ?? SourceDocument.FilePath,
@@ -2615,11 +2671,13 @@ internal class DefaultRazorIntermediateNodeLoweringPhase
                 }
             }
 
-            _document.Diagnostics.Add(
-                ComponentDiagnosticFactory.Create_UnsupportedComponentImportContent(
-                    expressionNode.Source
-                )
-            );
+            _document
+                .Diagnostics
+                .Add(
+                    ComponentDiagnosticFactory.Create_UnsupportedComponentImportContent(
+                        expressionNode.Source
+                    )
+                );
 
             base.VisitCSharpImplicitExpression(node);
         }
@@ -2649,11 +2707,13 @@ internal class DefaultRazorIntermediateNodeLoweringPhase
 
         public override void VisitCSharpStatement(CSharpStatementSyntax node)
         {
-            _document.Diagnostics.Add(
-                ComponentDiagnosticFactory.Create_UnsupportedComponentImportContent(
-                    BuildSourceSpanFromNode(node)
-                )
-            );
+            _document
+                .Diagnostics
+                .Add(
+                    ComponentDiagnosticFactory.Create_UnsupportedComponentImportContent(
+                        BuildSourceSpanFromNode(node)
+                    )
+                );
 
             base.VisitCSharpStatement(node);
         }

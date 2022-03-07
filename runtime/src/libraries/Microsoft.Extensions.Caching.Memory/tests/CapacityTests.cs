@@ -134,13 +134,15 @@ namespace Microsoft.Extensions.Caching.Memory
 
             var entryOptions = new MemoryCacheEntryOptions { Size = long.MaxValue };
             var sem = new SemaphoreSlim(0, 1);
-            entryOptions.PostEvictionCallbacks.Add(
-                new PostEvictionCallbackRegistration
-                {
-                    EvictionCallback = (k, v, r, s) => sem.Release(),
-                    State = null
-                }
-            );
+            entryOptions
+                .PostEvictionCallbacks
+                .Add(
+                    new PostEvictionCallbackRegistration
+                    {
+                        EvictionCallback = (k, v, r, s) => sem.Release(),
+                        State = null
+                    }
+                );
 
             Assert.Equal(0, cache.Size);
 
@@ -176,13 +178,15 @@ namespace Microsoft.Extensions.Caching.Memory
 
             var entryOptions = new MemoryCacheEntryOptions { Size = 6 };
             var sem = new SemaphoreSlim(0, 1);
-            entryOptions.PostEvictionCallbacks.Add(
-                new PostEvictionCallbackRegistration
-                {
-                    EvictionCallback = (k, v, r, s) => sem.Release(),
-                    State = null
-                }
-            );
+            entryOptions
+                .PostEvictionCallbacks
+                .Add(
+                    new PostEvictionCallbackRegistration
+                    {
+                        EvictionCallback = (k, v, r, s) => sem.Release(),
+                        State = null
+                    }
+                );
 
             Assert.Equal(0, cache.Size);
 
@@ -267,13 +271,15 @@ namespace Microsoft.Extensions.Caching.Memory
 
             var entryOptions = new MemoryCacheEntryOptions { Size = 6 };
             var sem = new SemaphoreSlim(0, 1);
-            entryOptions.PostEvictionCallbacks.Add(
-                new PostEvictionCallbackRegistration
-                {
-                    EvictionCallback = (k, v, r, s) => sem.Release(),
-                    State = null
-                }
-            );
+            entryOptions
+                .PostEvictionCallbacks
+                .Add(
+                    new PostEvictionCallbackRegistration
+                    {
+                        EvictionCallback = (k, v, r, s) => sem.Release(),
+                        State = null
+                    }
+                );
 
             Assert.Equal(0, cache.Size);
 
@@ -337,13 +343,15 @@ namespace Microsoft.Extensions.Caching.Memory
             var changeToken = new TestExpirationToken();
             var sem = new SemaphoreSlim(0, 1);
             entryOptions.ExpirationTokens.Add(changeToken);
-            entryOptions.PostEvictionCallbacks.Add(
-                new PostEvictionCallbackRegistration
-                {
-                    EvictionCallback = (k, v, r, s) => sem.Release(),
-                    State = null
-                }
-            );
+            entryOptions
+                .PostEvictionCallbacks
+                .Add(
+                    new PostEvictionCallbackRegistration
+                    {
+                        EvictionCallback = (k, v, r, s) => sem.Release(),
+                        State = null
+                    }
+                );
 
             cache.Set("key", "value", entryOptions);
 
@@ -418,13 +426,15 @@ namespace Microsoft.Extensions.Caching.Memory
             for (var i = 0; i < numEntries; i++)
             {
                 var entryOptions = new MemoryCacheEntryOptions { Size = i };
-                entryOptions.PostEvictionCallbacks.Add(
-                    new PostEvictionCallbackRegistration
-                    {
-                        EvictionCallback = (k, v, r, s) => sem.Release(),
-                        State = null
-                    }
-                );
+                entryOptions
+                    .PostEvictionCallbacks
+                    .Add(
+                        new PostEvictionCallbackRegistration
+                        {
+                            EvictionCallback = (k, v, r, s) => sem.Release(),
+                            State = null
+                        }
+                    );
                 cache.Set($"key{i}", $"value{i}", entryOptions);
                 testClock.Add(TimeSpan.FromSeconds(1));
             }

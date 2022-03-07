@@ -23,13 +23,13 @@ namespace System.Text.Json.SourceGeneration
     {
         public void Initialize(IncrementalGeneratorInitializationContext context)
         {
-            IncrementalValuesProvider<ClassDeclarationSyntax> classDeclarations =
-                context.SyntaxProvider
-                    .CreateSyntaxProvider(
-                        static (s, _) => Parser.IsSyntaxTargetForGeneration(s),
-                        static (s, _) => Parser.GetSemanticTargetForGeneration(s)
-                    )
-                    .Where(static c => c is not null);
+            IncrementalValuesProvider<ClassDeclarationSyntax> classDeclarations = context
+                .SyntaxProvider
+                .CreateSyntaxProvider(
+                    static (s, _) => Parser.IsSyntaxTargetForGeneration(s),
+                    static (s, _) => Parser.GetSemanticTargetForGeneration(s)
+                )
+                .Where(static c => c is not null);
 
             IncrementalValueProvider<(Compilation, ImmutableArray<ClassDeclarationSyntax>)> compilationAndClasses =
                 context.CompilationProvider.Combine(classDeclarations.Collect());

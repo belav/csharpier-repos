@@ -78,7 +78,8 @@ namespace Internal.IL.Stubs
 
             TypeSystemContext context = comparerType.Context;
             TypeDesc objectType = context.GetWellKnownType(WellKnownType.Object);
-            MethodDesc compareExchangeObject = context.SystemModule
+            MethodDesc compareExchangeObject = context
+                .SystemModule
                 .GetKnownType("System.Threading", "Interlocked")
                 .GetKnownMethod(
                     "CompareExchange",
@@ -140,7 +141,8 @@ namespace Internal.IL.Stubs
                 }
                 else if (ImplementsInterfaceOfSelf(nullableType, interfaceName))
                 {
-                    return context.SystemModule
+                    return context
+                        .SystemModule
                         .GetKnownType("System.Collections.Generic", $"Nullable{flavor}`1")
                         .MakeInstantiatedType(nullableType);
                 }
@@ -148,18 +150,21 @@ namespace Internal.IL.Stubs
             else if (type.IsEnum)
             {
                 // Enums have a specialized comparer that avoids boxing
-                return context.SystemModule
+                return context
+                    .SystemModule
                     .GetKnownType("System.Collections.Generic", $"Enum{flavor}`1")
                     .MakeInstantiatedType(type);
             }
             else if (ImplementsInterfaceOfSelf(type, interfaceName))
             {
-                return context.SystemModule
+                return context
+                    .SystemModule
                     .GetKnownType("System.Collections.Generic", $"Generic{flavor}`1")
                     .MakeInstantiatedType(type);
             }
 
-            return context.SystemModule
+            return context
+                .SystemModule
                 .GetKnownType("System.Collections.Generic", $"Object{flavor}`1")
                 .MakeInstantiatedType(type);
         }
@@ -203,26 +208,30 @@ namespace Internal.IL.Stubs
                 ArrayBuilder<TypeDesc> universalComparers = new ArrayBuilder<TypeDesc>();
 
                 universalComparers.Add(
-                    context.SystemModule
+                    context
+                        .SystemModule
                         .GetKnownType("System.Collections.Generic", $"Nullable{flavor}`1")
                         .MakeInstantiatedType(type)
                 );
 
                 if (flavor == "EqualityComparer")
                     universalComparers.Add(
-                        context.SystemModule
+                        context
+                            .SystemModule
                             .GetKnownType("System.Collections.Generic", $"Enum{flavor}`1")
                             .MakeInstantiatedType(type)
                     );
 
                 universalComparers.Add(
-                    context.SystemModule
+                    context
+                        .SystemModule
                         .GetKnownType("System.Collections.Generic", $"Generic{flavor}`1")
                         .MakeInstantiatedType(type)
                 );
 
                 universalComparers.Add(
-                    context.SystemModule
+                    context
+                        .SystemModule
                         .GetKnownType("System.Collections.Generic", $"Object{flavor}`1")
                         .MakeInstantiatedType(type)
                 );
@@ -246,10 +255,12 @@ namespace Internal.IL.Stubs
 
                 return new TypeDesc[]
                 {
-                    context.SystemModule
+                    context
+                        .SystemModule
                         .GetKnownType("System.Collections.Generic", $"Nullable{flavor}`1")
                         .MakeInstantiatedType(nullableType),
-                    context.SystemModule
+                    context
+                        .SystemModule
                         .GetKnownType("System.Collections.Generic", $"Object{flavor}`1")
                         .MakeInstantiatedType(type),
                 };
@@ -257,10 +268,12 @@ namespace Internal.IL.Stubs
 
             return new TypeDesc[]
             {
-                context.SystemModule
+                context
+                    .SystemModule
                     .GetKnownType("System.Collections.Generic", $"Generic{flavor}`1")
                     .MakeInstantiatedType(type),
-                context.SystemModule
+                context
+                    .SystemModule
                     .GetKnownType("System.Collections.Generic", $"Object{flavor}`1")
                     .MakeInstantiatedType(type),
             };
@@ -279,10 +292,9 @@ namespace Internal.IL.Stubs
                 if (interfaceInstantiation.Length == 1 && interfaceInstantiation[0] == type)
                 {
                     if (interfaceType == null)
-                        interfaceType = type.Context.SystemModule.GetKnownType(
-                            "System",
-                            interfaceName
-                        );
+                        interfaceType = type.Context
+                            .SystemModule
+                            .GetKnownType("System", interfaceName);
 
                     if (implementedInterface.GetTypeDefinition() == interfaceType)
                         return true;

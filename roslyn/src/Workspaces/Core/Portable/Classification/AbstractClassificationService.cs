@@ -112,8 +112,12 @@ namespace Microsoft.CodeAnalysis.Classification
             var reassignedVariableService =
                 document.GetRequiredLanguageService<IReassignedVariableService>();
 
-            var extensionManager =
-                document.Project.Solution.Workspace.Services.GetRequiredService<IExtensionManager>();
+            var extensionManager = document
+                .Project
+                .Solution
+                .Workspace
+                .Services
+                .GetRequiredService<IExtensionManager>();
             var classifiers = classificationService.GetDefaultSyntaxClassifiers();
 
             var getNodeClassifiers = extensionManager.CreateNodeExtensionGetter(
@@ -177,7 +181,8 @@ namespace Microsoft.CodeAnalysis.Classification
             if (root == null)
                 return;
 
-            var classificationService = workspace.Services
+            var classificationService = workspace
+                .Services
                 .GetLanguageServices(root.Language)
                 .GetService<ISyntaxClassificationService>();
             if (classificationService == null)
@@ -221,7 +226,8 @@ namespace Microsoft.CodeAnalysis.Classification
             CancellationToken cancellationToken
         )
         {
-            var classificationService = workspace.Services
+            var classificationService = workspace
+                .Services
                 .GetLanguageServices(oldRoot.Language)
                 .GetService<ISyntaxClassificationService>();
             return classificationService?.ComputeSyntacticChangeRange(

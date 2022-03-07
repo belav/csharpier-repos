@@ -49,7 +49,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Intents
             var documentSet = additionalDocuments.Prepend(activeDocument).ToArray();
             using var workspace = TestWorkspace.CreateCSharp(
                 documentSet,
-                exportProvider: EditorTestCompositions.EditorFeatures.ExportProviderFactory.CreateExportProvider()
+                exportProvider: EditorTestCompositions
+                    .EditorFeatures
+                    .ExportProviderFactory
+                    .CreateExportProvider()
             );
             if (options != null)
             {

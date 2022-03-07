@@ -183,23 +183,25 @@ namespace Microsoft.AspNetCore.Components.WebView.Wpf
             if (_webviewManager != null)
             {
                 // Dispatch because this is going to be async, and we want to catch any errors
-                WpfDispatcher.Instance.InvokeAsync(
-                    async () =>
-                    {
-                        var newItems = eventArgs.NewItems.Cast<RootComponent>();
-                        var oldItems = eventArgs.OldItems.Cast<RootComponent>();
-
-                        foreach (var item in newItems.Except(oldItems))
+                WpfDispatcher
+                    .Instance
+                    .InvokeAsync(
+                        async () =>
                         {
-                            await item.AddToWebViewManagerAsync(_webviewManager);
-                        }
+                            var newItems = eventArgs.NewItems.Cast<RootComponent>();
+                            var oldItems = eventArgs.OldItems.Cast<RootComponent>();
 
-                        foreach (var item in oldItems.Except(newItems))
-                        {
-                            await item.RemoveFromWebViewManagerAsync(_webviewManager);
+                            foreach (var item in newItems.Except(oldItems))
+                            {
+                                await item.AddToWebViewManagerAsync(_webviewManager);
+                            }
+
+                            foreach (var item in oldItems.Except(newItems))
+                            {
+                                await item.RemoveFromWebViewManagerAsync(_webviewManager);
+                            }
                         }
-                    }
-                );
+                    );
             }
         }
 

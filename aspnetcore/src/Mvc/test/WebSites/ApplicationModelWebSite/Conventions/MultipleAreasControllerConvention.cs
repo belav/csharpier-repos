@@ -15,7 +15,8 @@ public class MultipleAreasControllerConvention : IApplicationModelConvention
         var controllerModels = new List<ControllerModel>();
         foreach (var controller in application.Controllers)
         {
-            var areaNames = controller.ControllerType
+            var areaNames = controller
+                .ControllerType
                 .GetCustomAttributes<MultipleAreasAttribute>()
                 ?.FirstOrDefault()
                 ?.AreaNames;

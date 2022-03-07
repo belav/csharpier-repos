@@ -298,7 +298,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 // We sort fields that belong to the same compilation by location to process cycles in deterministic order.
                 // Relative order between compilations is not important, cycles do not cross compilation boundaries.
                 fieldsInvolvedInCycles.AddRange(
-                    graph.Keys
+                    graph
+                        .Keys
                         .GroupBy(static f => f.DeclaringCompilation)
                         .SelectMany(
                             static g =>

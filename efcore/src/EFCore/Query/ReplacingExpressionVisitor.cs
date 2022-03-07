@@ -109,9 +109,9 @@ namespace Microsoft.EntityFrameworkCore.Query
             );
             if (
                 mayBeMemberInitExpression is MemberInitExpression memberInitExpression
-                && memberInitExpression.Bindings.SingleOrDefault(
-                    mb => mb.Member.IsSameAs(memberExpression.Member)
-                )
+                && memberInitExpression
+                    .Bindings
+                    .SingleOrDefault(mb => mb.Member.IsSameAs(memberExpression.Member))
                     is MemberAssignment memberAssignment
             )
             {
@@ -146,9 +146,9 @@ namespace Microsoft.EntityFrameworkCore.Query
                 );
                 if (
                     mayBeMemberInitExpression is MemberInitExpression memberInitExpression
-                    && memberInitExpression.Bindings.SingleOrDefault(
-                        mb => mb.Member.Name == propertyName
-                    )
+                    && memberInitExpression
+                        .Bindings
+                        .SingleOrDefault(mb => mb.Member.Name == propertyName)
                         is MemberAssignment memberAssignment
                 )
                 {

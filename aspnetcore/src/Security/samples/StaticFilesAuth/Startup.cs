@@ -62,8 +62,9 @@ public class Startup
                                     {
                                         var userPath = Path.Combine(usersPath, userName);
 
-                                        var directory =
-                                            endpoint.Metadata.GetMetadata<DirectoryInfo>();
+                                        var directory = endpoint
+                                            .Metadata
+                                            .GetMetadata<DirectoryInfo>();
                                         if (directory != null)
                                         {
                                             return string.Equals(
@@ -81,10 +82,12 @@ public class Startup
                                                     userPath,
                                                     StringComparison.OrdinalIgnoreCase
                                                 )
-                                                || directory.FullName.StartsWith(
-                                                    userPath + Path.DirectorySeparatorChar,
-                                                    StringComparison.OrdinalIgnoreCase
-                                                );
+                                                || directory
+                                                    .FullName
+                                                    .StartsWith(
+                                                        userPath + Path.DirectorySeparatorChar,
+                                                        StringComparison.OrdinalIgnoreCase
+                                                    );
                                         }
 
                                         throw new InvalidOperationException(

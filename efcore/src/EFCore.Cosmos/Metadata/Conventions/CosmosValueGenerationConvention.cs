@@ -84,9 +84,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                         pk != null
                         && !ownership.Properties.Contains(property)
                         && pk.Properties.Count == ownership.Properties.Count + 1
-                        && ownership.Properties.All(
-                            fkProperty => pk.Properties.Contains(fkProperty)
-                        )
+                        && ownership
+                            .Properties
+                            .All(fkProperty => pk.Properties.Contains(fkProperty))
                     )
                     {
                         return base.GetValueGenerated(property);

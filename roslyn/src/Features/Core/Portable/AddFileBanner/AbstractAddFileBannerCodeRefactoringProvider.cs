@@ -39,11 +39,14 @@ namespace Microsoft.CodeAnalysis.AddFileBanner
                 .ConfigureAwait(false);
 
             if (
-                document.Project.AnalyzerOptions.TryGetEditorConfigOption<string>(
-                    CodeStyleOptions2.FileHeaderTemplate,
-                    tree,
-                    out var fileHeaderTemplate
-                ) && !string.IsNullOrEmpty(fileHeaderTemplate)
+                document
+                    .Project
+                    .AnalyzerOptions
+                    .TryGetEditorConfigOption<string>(
+                        CodeStyleOptions2.FileHeaderTemplate,
+                        tree,
+                        out var fileHeaderTemplate
+                    ) && !string.IsNullOrEmpty(fileHeaderTemplate)
             )
             {
                 // If we have a defined file header template, allow the analyzer and code fix to handle it
@@ -71,7 +74,9 @@ namespace Microsoft.CodeAnalysis.AddFileBanner
             // Process the other documents in this document's project.  Look at the
             // ones that we can get a root from (without having to parse).  Then
             // look at the ones we'd need to parse.
-            var siblingDocumentsAndRoots = document.Project.Documents
+            var siblingDocumentsAndRoots = document
+                .Project
+                .Documents
                 .Where(d => d != document)
                 .Select(
                     d =>

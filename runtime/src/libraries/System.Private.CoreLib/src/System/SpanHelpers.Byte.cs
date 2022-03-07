@@ -2162,10 +2162,9 @@ namespace System
 
             // Find the first lane that is set inside compareResult.
             Vector128<byte> maskedSelectedLanes = AdvSimd.And(compareResult, mask);
-            Vector128<byte> pairwiseSelectedLane = AdvSimd.Arm64.AddPairwise(
-                maskedSelectedLanes,
-                maskedSelectedLanes
-            );
+            Vector128<byte> pairwiseSelectedLane = AdvSimd
+                .Arm64
+                .AddPairwise(maskedSelectedLanes, maskedSelectedLanes);
             ulong selectedLanes = pairwiseSelectedLane.AsUInt64().ToScalar();
             if (selectedLanes == 0)
             {

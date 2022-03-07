@@ -335,9 +335,10 @@ internal class Http3InMemory
         {
             _inner.OnInboundControlStreamSetting(type, value);
 
-            var success = _http3TestBase._serverReceivedSettings.Writer.TryWrite(
-                new KeyValuePair<Http3SettingType, long>(type, value)
-            );
+            var success = _http3TestBase
+                ._serverReceivedSettings
+                .Writer
+                .TryWrite(new KeyValuePair<Http3SettingType, long>(type, value));
             Debug.Assert(success);
         }
 
@@ -778,11 +779,9 @@ internal class Http3RequestStream : Http3StreamBase, IHttpHeadersHandler
         _headerHandler.DecodedHeaders.Clear();
         _headerHandler.QpackDecoder.Decode(http3WithPayload.PayloadSequence, this);
         _headerHandler.QpackDecoder.Reset();
-        return _headerHandler.DecodedHeaders.ToDictionary(
-            kvp => kvp.Key,
-            kvp => kvp.Value,
-            _headerHandler.DecodedHeaders.Comparer
-        );
+        return _headerHandler
+            .DecodedHeaders
+            .ToDictionary(kvp => kvp.Key, kvp => kvp.Value, _headerHandler.DecodedHeaders.Comparer);
     }
 
     internal async ValueTask<Memory<byte>> ExpectDataAsync()
@@ -799,11 +798,9 @@ internal class Http3RequestStream : Http3StreamBase, IHttpHeadersHandler
         _headerHandler.DecodedHeaders.Clear();
         _headerHandler.QpackDecoder.Decode(http3WithPayload.PayloadSequence, this);
         _headerHandler.QpackDecoder.Reset();
-        return _headerHandler.DecodedHeaders.ToDictionary(
-            kvp => kvp.Key,
-            kvp => kvp.Value,
-            _headerHandler.DecodedHeaders.Comparer
-        );
+        return _headerHandler
+            .DecodedHeaders
+            .ToDictionary(kvp => kvp.Key, kvp => kvp.Value, _headerHandler.DecodedHeaders.Comparer);
     }
 
     internal async Task ExpectReceiveEndOfStream()
@@ -1312,9 +1309,11 @@ internal class TestStreamContext
         else
         {
             // Note that completed flags could be out of date at this point.
-            _testBase.Logger.LogDebug(
-                $"Can't reuse stream {StreamId}. Aborted: {_isAborted}, Reader completed successfully: {_transportPipeReader.IsCompletedSuccessfully}, Writer completed successfully: {_transportPipeWriter.IsCompletedSuccessfully}."
-            );
+            _testBase
+                .Logger
+                .LogDebug(
+                    $"Can't reuse stream {StreamId}. Aborted: {_isAborted}, Reader completed successfully: {_transportPipeReader.IsCompletedSuccessfully}, Writer completed successfully: {_transportPipeWriter.IsCompletedSuccessfully}."
+                );
         }
 
         Disposed = true;

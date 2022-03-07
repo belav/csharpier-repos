@@ -6193,7 +6193,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                     {
                         var isAfterNewLine = parentType
                             .GetLastToken()
-                            .TrailingTrivia.Any((int)SyntaxKind.EndOfLineTrivia);
+                            .TrailingTrivia
+                            .Any((int)SyntaxKind.EndOfLineTrivia);
                         if (isAfterNewLine)
                         {
                             int offset,

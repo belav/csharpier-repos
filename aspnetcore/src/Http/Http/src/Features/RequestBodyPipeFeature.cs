@@ -43,14 +43,16 @@ public class RequestBodyPipeFeature : IRequestBodyPipeFeature
                 _streamInstanceWhenWrapped = _context.Request.Body;
                 _internalPipeReader = PipeReader.Create(_context.Request.Body);
 
-                _context.Response.OnCompleted(
-                    (self) =>
-                    {
-                        ((PipeReader)self).Complete();
-                        return Task.CompletedTask;
-                    },
-                    _internalPipeReader
-                );
+                _context
+                    .Response
+                    .OnCompleted(
+                        (self) =>
+                        {
+                            ((PipeReader)self).Complete();
+                            return Task.CompletedTask;
+                        },
+                        _internalPipeReader
+                    );
             }
 
             return _internalPipeReader;

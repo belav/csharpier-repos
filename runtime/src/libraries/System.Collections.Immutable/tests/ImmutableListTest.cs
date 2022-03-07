@@ -155,9 +155,9 @@ namespace System.Collections.Immutable.Tests
                 Assert.Equal(i * 10, list[i - 1]);
             }
 
-            var bulkList = ImmutableList<int>.Empty.AddRange(
-                Enumerable.Range(1, 10).Select(i => i * 10)
-            );
+            var bulkList = ImmutableList<int>
+                .Empty
+                .AddRange(Enumerable.Range(1, 10).Select(i => i * 10));
             Assert.Equal<int>(list.ToArray(), bulkList.ToArray());
         }
 

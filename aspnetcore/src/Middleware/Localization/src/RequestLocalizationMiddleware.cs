@@ -128,9 +128,11 @@ public class RequestLocalizationMiddleware
             }
         }
 
-        context.Features.Set<IRequestCultureFeature>(
-            new RequestCultureFeature(requestCulture, winningProvider)
-        );
+        context
+            .Features
+            .Set<IRequestCultureFeature>(
+                new RequestCultureFeature(requestCulture, winningProvider)
+            );
 
         SetCurrentThreadCulture(requestCulture);
 

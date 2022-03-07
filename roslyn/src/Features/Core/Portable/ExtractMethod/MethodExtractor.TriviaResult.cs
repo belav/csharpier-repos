@@ -75,14 +75,16 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
                     return status.With(document);
                 }
 
-                return OperationStatus.Succeeded.With(
-                    await document
-                        .WithSyntaxRootAsync(
-                            _result.RestoreTrivia(root, annotationResolver, triviaResolver),
-                            cancellationToken
-                        )
-                        .ConfigureAwait(false)
-                );
+                return OperationStatus
+                    .Succeeded
+                    .With(
+                        await document
+                            .WithSyntaxRootAsync(
+                                _result.RestoreTrivia(root, annotationResolver, triviaResolver),
+                                cancellationToken
+                            )
+                            .ConfigureAwait(false)
+                    );
             }
 
             protected IEnumerable<SyntaxTrivia> FilterTriviaList(IEnumerable<SyntaxTrivia> list)

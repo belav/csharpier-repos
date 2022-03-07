@@ -35,18 +35,18 @@ namespace System.Net.Http
         /// </summary>
         private const int Expect100ErrorSendThreshold = 1024;
 
-        private static readonly byte[] s_contentLength0NewlineAsciiBytes = Encoding.ASCII.GetBytes(
-            "Content-Length: 0\r\n"
-        );
-        private static readonly byte[] s_spaceHttp10NewlineAsciiBytes = Encoding.ASCII.GetBytes(
-            " HTTP/1.0\r\n"
-        );
-        private static readonly byte[] s_spaceHttp11NewlineAsciiBytes = Encoding.ASCII.GetBytes(
-            " HTTP/1.1\r\n"
-        );
-        private static readonly byte[] s_httpSchemeAndDelimiter = Encoding.ASCII.GetBytes(
-            Uri.UriSchemeHttp + Uri.SchemeDelimiter
-        );
+        private static readonly byte[] s_contentLength0NewlineAsciiBytes = Encoding
+            .ASCII
+            .GetBytes("Content-Length: 0\r\n");
+        private static readonly byte[] s_spaceHttp10NewlineAsciiBytes = Encoding
+            .ASCII
+            .GetBytes(" HTTP/1.0\r\n");
+        private static readonly byte[] s_spaceHttp11NewlineAsciiBytes = Encoding
+            .ASCII
+            .GetBytes(" HTTP/1.1\r\n");
+        private static readonly byte[] s_httpSchemeAndDelimiter = Encoding
+            .ASCII
+            .GetBytes(Uri.UriSchemeHttp + Uri.SchemeDelimiter);
         private static readonly byte[] s_http1DotBytes = Encoding.ASCII.GetBytes("HTTP/1.");
         private static readonly ulong s_http10Bytes = BitConverter.ToUInt64(
             Encoding.ASCII.GetBytes("HTTP/1.0")
@@ -313,11 +313,10 @@ namespace System.Net.Http
                     Debug.Assert(headerValuesCount > 0, "No values for header??");
                     if (headerValuesCount > 0)
                     {
-                        Encoding? valueEncoding =
-                            _pool.Settings._requestHeaderEncodingSelector?.Invoke(
-                                header.Key.Name,
-                                _currentRequest
-                            );
+                        Encoding? valueEncoding = _pool
+                            .Settings
+                            ._requestHeaderEncodingSelector
+                            ?.Invoke(header.Key.Name, _currentRequest);
 
                         await WriteStringAsync(_headerValues[0], async, valueEncoding)
                             .ConfigureAwait(false);
@@ -364,10 +363,10 @@ namespace System.Net.Http
                     .ConfigureAwait(false);
                 await WriteTwoBytesAsync((byte)':', (byte)' ', async).ConfigureAwait(false);
 
-                Encoding? valueEncoding = _pool.Settings._requestHeaderEncodingSelector?.Invoke(
-                    HttpKnownHeaderNames.Cookie,
-                    _currentRequest
-                );
+                Encoding? valueEncoding = _pool
+                    .Settings
+                    ._requestHeaderEncodingSelector
+                    ?.Invoke(HttpKnownHeaderNames.Cookie, _currentRequest);
                 await WriteStringAsync(cookiesFromContainer, async, valueEncoding)
                     .ConfigureAwait(false);
 
@@ -544,9 +543,10 @@ namespace System.Net.Http
                 string? cookiesFromContainer = null;
                 if (_pool.Settings._useCookies)
                 {
-                    cookiesFromContainer = _pool.Settings._cookieContainer!.GetCookieHeader(
-                        request.RequestUri
-                    );
+                    cookiesFromContainer = _pool
+                        .Settings
+                        ._cookieContainer!
+                        .GetCookieHeader(request.RequestUri);
                     if (cookiesFromContainer == "")
                     {
                         cookiesFromContainer = null;
@@ -1103,7 +1103,8 @@ namespace System.Net.Http
             // Copy all of the data to the server.
             if (async)
             {
-                await request.Content!
+                await request
+                    .Content!
                     .CopyToAsync(stream, _transportContext, cancellationToken)
                     .ConfigureAwait(false);
             }
@@ -1244,9 +1245,9 @@ namespace System.Net.Http
                 {
                     try
                     {
-                        response.ReasonPhrase = HttpRuleParser.DefaultHttpEncoding.GetString(
-                            reasonBytes
-                        );
+                        response.ReasonPhrase = HttpRuleParser
+                            .DefaultHttpEncoding
+                            .GetString(reasonBytes);
                     }
                     catch (FormatException error)
                     {
@@ -1365,23 +1366,25 @@ namespace System.Net.Http
             }
 
             Debug.Assert(response.RequestMessage != null);
-            Encoding? valueEncoding =
-                connection._pool.Settings._responseHeaderEncodingSelector?.Invoke(
-                    descriptor.Name,
-                    response.RequestMessage
-                );
+            Encoding? valueEncoding = connection
+                ._pool
+                .Settings
+                ._responseHeaderEncodingSelector
+                ?.Invoke(descriptor.Name, response.RequestMessage);
 
             // Note we ignore the return value from TryAddWithoutValidation. If the header can't be added, we silently drop it.
             ReadOnlySpan<byte> value = line.Slice(pos);
             if (isFromTrailer)
             {
                 string headerValue = descriptor.GetHeaderValue(value, valueEncoding);
-                response.TrailingHeaders.TryAddWithoutValidation(
-                    (descriptor.HeaderType & HttpHeaderType.Request) == HttpHeaderType.Request
-                      ? descriptor.AsCustomHeader()
-                      : descriptor,
-                    headerValue
-                );
+                response
+                    .TrailingHeaders
+                    .TryAddWithoutValidation(
+                        (descriptor.HeaderType & HttpHeaderType.Request) == HttpHeaderType.Request
+                          ? descriptor.AsCustomHeader()
+                          : descriptor,
+                        headerValue
+                    );
             }
             else if ((descriptor.HeaderType & HttpHeaderType.Content) == HttpHeaderType.Content)
             {
@@ -1396,12 +1399,14 @@ namespace System.Net.Http
                     value,
                     valueEncoding
                 );
-                response.Headers.TryAddWithoutValidation(
-                    (descriptor.HeaderType & HttpHeaderType.Request) == HttpHeaderType.Request
-                      ? descriptor.AsCustomHeader()
-                      : descriptor,
-                    headerValue
-                );
+                response
+                    .Headers
+                    .TryAddWithoutValidation(
+                        (descriptor.HeaderType & HttpHeaderType.Request) == HttpHeaderType.Request
+                          ? descriptor.AsCustomHeader()
+                          : descriptor,
+                        headerValue
+                    );
             }
         }
 
@@ -2507,12 +2512,14 @@ namespace System.Net.Http
             string message,
             [CallerMemberName] string? memberName = null
         ) =>
-            NetEventSource.Log.HandlerMessage(
-                _pool?.GetHashCode() ?? 0, // pool ID
-                GetHashCode(), // connection ID
-                _currentRequest?.GetHashCode() ?? 0, // request ID
-                memberName, // method name
-                message
-            ); // message
+            NetEventSource
+                .Log
+                .HandlerMessage(
+                    _pool?.GetHashCode() ?? 0, // pool ID
+                    GetHashCode(), // connection ID
+                    _currentRequest?.GetHashCode() ?? 0, // request ID
+                    memberName, // method name
+                    message
+                ); // message
     }
 }

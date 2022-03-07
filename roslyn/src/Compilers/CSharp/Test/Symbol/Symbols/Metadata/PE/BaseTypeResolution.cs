@@ -145,7 +145,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
             AssertBaseType(varTC8.BaseType(), "C1<System.Type>");
             AssertBaseType(varTC9.BaseType(), "TC6<TC6_T1>");
 
-            var varCorTypes = module2.GlobalNamespace
+            var varCorTypes = module2
+                .GlobalNamespace
                 .GetMembers("CorTypes")
                 .OfType<NamespaceSymbol>()
                 .Single();
@@ -180,7 +181,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
             var module1 = assemblies[0].Modules[0];
             var module2 = assemblies[1].Modules[0];
 
-            var varCorTypes = module2.GlobalNamespace
+            var varCorTypes = module2
+                .GlobalNamespace
                 .GetMembers("CorTypes")
                 .OfType<NamespaceSymbol>()
                 .Single();
@@ -308,65 +310,65 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
             Assert.Equal(
                 base1,
                 module0.TypeRefHandleToTypeMap[
-                    (TypeReferenceHandle)module0.Module.GetBaseTypeOfTypeOrThrow(
-                        ((PENamedTypeSymbol)localTC1).Handle
-                    )
+                    (TypeReferenceHandle)module0
+                        .Module
+                        .GetBaseTypeOfTypeOrThrow(((PENamedTypeSymbol)localTC1).Handle)
                 ]
             );
             Assert.Equal(
                 base2,
                 module0.TypeRefHandleToTypeMap[
-                    (TypeReferenceHandle)module0.Module.GetBaseTypeOfTypeOrThrow(
-                        ((PENamedTypeSymbol)localTC2).Handle
-                    )
+                    (TypeReferenceHandle)module0
+                        .Module
+                        .GetBaseTypeOfTypeOrThrow(((PENamedTypeSymbol)localTC2).Handle)
                 ]
             );
             Assert.Equal(
                 base3,
                 module0.TypeRefHandleToTypeMap[
-                    (TypeReferenceHandle)module0.Module.GetBaseTypeOfTypeOrThrow(
-                        ((PENamedTypeSymbol)localTC3).Handle
-                    )
+                    (TypeReferenceHandle)module0
+                        .Module
+                        .GetBaseTypeOfTypeOrThrow(((PENamedTypeSymbol)localTC3).Handle)
                 ]
             );
             Assert.Equal(
                 base4,
                 module0.TypeRefHandleToTypeMap[
-                    (TypeReferenceHandle)module0.Module.GetBaseTypeOfTypeOrThrow(
-                        ((PENamedTypeSymbol)localTC4).Handle
-                    )
+                    (TypeReferenceHandle)module0
+                        .Module
+                        .GetBaseTypeOfTypeOrThrow(((PENamedTypeSymbol)localTC4).Handle)
                 ]
             );
             Assert.Equal(
                 base5,
                 module0.TypeRefHandleToTypeMap[
-                    (TypeReferenceHandle)module0.Module.GetBaseTypeOfTypeOrThrow(
-                        ((PENamedTypeSymbol)localTC5).Handle
-                    )
+                    (TypeReferenceHandle)module0
+                        .Module
+                        .GetBaseTypeOfTypeOrThrow(((PENamedTypeSymbol)localTC5).Handle)
                 ]
             );
             Assert.Equal(
                 base6,
                 module0.TypeRefHandleToTypeMap[
-                    (TypeReferenceHandle)module0.Module.GetBaseTypeOfTypeOrThrow(
-                        ((PENamedTypeSymbol)localTC6).Handle
-                    )
+                    (TypeReferenceHandle)module0
+                        .Module
+                        .GetBaseTypeOfTypeOrThrow(((PENamedTypeSymbol)localTC6).Handle)
                 ]
             );
             Assert.Equal(
                 base7,
                 module0.TypeRefHandleToTypeMap[
-                    (TypeReferenceHandle)module0.Module.GetBaseTypeOfTypeOrThrow(
-                        ((PENamedTypeSymbol)localTC7).Handle
-                    )
+                    (TypeReferenceHandle)module0
+                        .Module
+                        .GetBaseTypeOfTypeOrThrow(((PENamedTypeSymbol)localTC7).Handle)
                 ]
             );
             Assert.Equal(
                 base8,
                 module0.TypeRefHandleToTypeMap[
-                    (TypeReferenceHandle)module0.Module.GetBaseTypeOfTypeOrThrow(
-                        ((PENamedTypeSymbol)localTC8).Handle
-                    )
+                    (TypeReferenceHandle)module0
+                        .Module
+                        .GetBaseTypeOfTypeOrThrow(((PENamedTypeSymbol)localTC8).Handle)
                 ]
             );
 

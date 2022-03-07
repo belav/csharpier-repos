@@ -136,12 +136,9 @@ namespace System.Net
             {
                 bool ignore = false;
                 context.DangerousAddRef(ref ignore);
-                return Interop.SspiCli.EncryptMessage(
-                    ref context._handle,
-                    0,
-                    ref inputOutput,
-                    sequenceNumber
-                );
+                return Interop
+                    .SspiCli
+                    .EncryptMessage(ref context._handle, 0, ref inputOutput, sequenceNumber);
             }
             finally
             {
@@ -159,12 +156,9 @@ namespace System.Net
             {
                 bool ignore = false;
                 context.DangerousAddRef(ref ignore);
-                return Interop.SspiCli.DecryptMessage(
-                    ref context._handle,
-                    ref inputOutput,
-                    sequenceNumber,
-                    null
-                );
+                return Interop
+                    .SspiCli
+                    .DecryptMessage(ref context._handle, ref inputOutput, sequenceNumber, null);
             }
             finally
             {

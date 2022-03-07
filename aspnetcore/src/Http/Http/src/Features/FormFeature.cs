@@ -288,11 +288,14 @@ public class FormFeature : IFormFeature
                     }
                     else
                     {
-                        System.Diagnostics.Debug.Assert(
-                            false,
-                            "Unrecognized content-disposition for this section: "
-                                + section.ContentDisposition
-                        );
+                        System
+                            .Diagnostics
+                            .Debug
+                            .Assert(
+                                false,
+                                "Unrecognized content-disposition for this section: "
+                                    + section.ContentDisposition
+                            );
                     }
 
                     section = await multipartReader.ReadNextSectionAsync(cancellationToken);
@@ -344,10 +347,9 @@ public class FormFeature : IFormFeature
     {
         // Content-Type: application/x-www-form-urlencoded; charset=utf-8
         return contentType != null
-            && contentType.MediaType.Equals(
-                "application/x-www-form-urlencoded",
-                StringComparison.OrdinalIgnoreCase
-            );
+            && contentType
+                .MediaType
+                .Equals("application/x-www-form-urlencoded", StringComparison.OrdinalIgnoreCase);
     }
 
     private static bool HasMultipartFormContentType(
@@ -356,10 +358,9 @@ public class FormFeature : IFormFeature
     {
         // Content-Type: multipart/form-data; boundary=----WebKitFormBoundarymx2fSWqWSd0OxQqq
         return contentType != null
-            && contentType.MediaType.Equals(
-                "multipart/form-data",
-                StringComparison.OrdinalIgnoreCase
-            );
+            && contentType
+                .MediaType
+                .Equals("multipart/form-data", StringComparison.OrdinalIgnoreCase);
     }
 
     // Content-Type: multipart/form-data; boundary="----WebKitFormBoundarymx2fSWqWSd0OxQqq"

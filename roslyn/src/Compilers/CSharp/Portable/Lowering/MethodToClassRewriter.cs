@@ -423,10 +423,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             //  add the method to module
             if (this.CompilationState.Emitting)
             {
-                this.CompilationState.ModuleBuilderOpt.AddSynthesizedDefinition(
-                    containingType,
-                    wrapper.GetCciAdapter()
-                );
+                this.CompilationState
+                    .ModuleBuilderOpt
+                    .AddSynthesizedDefinition(containingType, wrapper.GetCciAdapter());
             }
 
             Debug.Assert(wrapper.SynthesizesLoweredBoundBody);

@@ -137,11 +137,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
                         : SpeculativeBindingOption.BindAsExpression;
 
                 var newSymbol =
-                    semanticModel.GetSpeculativeSymbolInfo(
-                        crefSyntax.SpanStart,
-                        replacement,
-                        speculativeBindingOption
-                    ).Symbol;
+                    semanticModel
+                        .GetSpeculativeSymbolInfo(
+                            crefSyntax.SpanStart,
+                            replacement,
+                            speculativeBindingOption
+                        )
+                        .Symbol;
 
                 if (Equals(newSymbol, oldSymbol))
                 {

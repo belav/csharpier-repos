@@ -376,12 +376,14 @@ namespace System.Reflection
                             prevInputPos
                         );
 
-                        short numberOfBytes = (short)Encoding.UTF8.GetBytes(
-                            pStr + i,
-                            count,
-                            bytes,
-                            c_MaxUnicodeCharsReallocate * c_MaxUTF_8BytesPerUnicodeChar
-                        );
+                        short numberOfBytes = (short)Encoding
+                            .UTF8
+                            .GetBytes(
+                                pStr + i,
+                                count,
+                                bytes,
+                                c_MaxUnicodeCharsReallocate * c_MaxUTF_8BytesPerUnicodeChar
+                            );
 
                         // This is the only exception that built in UriParser can throw after a Uri ctor.
                         // Should not happen unless the app tries to feed an invalid Unicode string

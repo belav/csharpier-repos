@@ -85,8 +85,10 @@ namespace Microsoft.DotNet.Tools.Publish.Tests
                 .Execute(fExpectedToFail: true)
                 .Should()
                 .Fail()
-                .And.HaveStdOutContaining("Total: 2")
-                .And.HaveStdOutContaining("Failed: 1");
+                .And
+                .HaveStdOutContaining("Total: 2")
+                .And
+                .HaveStdOutContaining("Failed: 1");
         }
 
         private string FindDotnetTestXunitDll(

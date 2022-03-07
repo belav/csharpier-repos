@@ -35,9 +35,9 @@ namespace Microsoft.EntityFrameworkCore
             modelBuilder.Entity("Dummy");
 
             var context = new F1Context(
-                new DbContextOptionsBuilder(Fixture.CreateOptions()).UseModel(
-                    (IModel)modelBuilder.Model
-                ).Options
+                new DbContextOptionsBuilder(Fixture.CreateOptions())
+                    .UseModel((IModel)modelBuilder.Model)
+                    .Options
             );
 
             Assert.Equal(
@@ -63,13 +63,15 @@ namespace Microsoft.EntityFrameworkCore
                         Assert.Null(
                             context
                                 .Entry(sponsor)
-                                .Property<int?>(Sponsor.ClientTokenPropertyName).CurrentValue
+                                .Property<int?>(Sponsor.ClientTokenPropertyName)
+                                .CurrentValue
                         );
                         originalName = sponsor.Name;
                         sponsor.Name = "New name";
                         context
                             .Entry(sponsor)
-                            .Property<int?>(Sponsor.ClientTokenPropertyName).CurrentValue = 1;
+                            .Property<int?>(Sponsor.ClientTokenPropertyName)
+                            .CurrentValue = 1;
                         context.SaveChanges();
 
                         using var innerContext = CreateF1Context();
@@ -79,13 +81,15 @@ namespace Microsoft.EntityFrameworkCore
                             1,
                             innerContext
                                 .Entry(sponsor)
-                                .Property<int?>(Sponsor.ClientTokenPropertyName).CurrentValue
+                                .Property<int?>(Sponsor.ClientTokenPropertyName)
+                                .CurrentValue
                         );
                         Assert.Equal(newName, sponsor.Name);
                         sponsor.Name = originalName;
                         innerContext
                             .Entry(sponsor)
-                            .Property<int?>(Sponsor.ClientTokenPropertyName).OriginalValue = null;
+                            .Property<int?>(Sponsor.ClientTokenPropertyName)
+                            .OriginalValue = null;
                         Assert.Throws<DbUpdateConcurrencyException>(
                             () => innerContext.SaveChanges()
                         );
@@ -198,9 +202,11 @@ namespace Microsoft.EntityFrameworkCore
                     {
                         Assert.Equal(
                             LogLevel.Debug,
-                            Fixture.ListLoggerFactory.Log.Single(
-                                l => l.Id == CoreEventId.OptimisticConcurrencyException
-                            ).Level
+                            Fixture
+                                .ListLoggerFactory
+                                .Log
+                                .Single(l => l.Id == CoreEventId.OptimisticConcurrencyException)
+                                .Level
                         );
 
                         var entry2 = ex2.Entries.Single();
@@ -253,9 +259,11 @@ namespace Microsoft.EntityFrameworkCore
                     {
                         Assert.Equal(
                             LogLevel.Debug,
-                            Fixture.ListLoggerFactory.Log.Single(
-                                l => l.Id == CoreEventId.OptimisticConcurrencyException
-                            ).Level
+                            Fixture
+                                .ListLoggerFactory
+                                .Log
+                                .Single(l => l.Id == CoreEventId.OptimisticConcurrencyException)
+                                .Level
                         );
 
                         var entry2 = ex2.Entries.Single();
@@ -344,7 +352,8 @@ namespace Microsoft.EntityFrameworkCore
                     c.Teams.Include(e => e.Sponsors).Load();
                     c.Teams
                         .Single(t => t.Id == Team.McLaren)
-                        .Sponsors.Remove(c.Sponsors.Single(s => s.Name.Contains("FIA")));
+                        .Sponsors
+                        .Remove(c.Sponsors.Single(s => s.Name.Contains("FIA")));
                 },
                 (c, ex) =>
                 {
@@ -374,7 +383,8 @@ namespace Microsoft.EntityFrameworkCore
                 c.Teams.Include(e => e.Sponsors).Load();
                 c.Teams
                     .Single(t => t.Id == Team.McLaren)
-                    .Sponsors.Add(c.Sponsors.Single(s => s.Name.Contains("Shell")));
+                    .Sponsors
+                    .Add(c.Sponsors.Single(s => s.Name.Contains("Shell")));
             }
         }
 
@@ -417,25 +427,29 @@ namespace Microsoft.EntityFrameworkCore
                     async context =>
                     {
                         using var transaction = BeginTransaction(context.Database);
-                        context.Teams.Add(
-                            new Team
-                            {
-                                Id = -1,
-                                Name = "Wubbsy Racing",
-                                Chassis = new Chassis { TeamId = -1, Name = "Wubbsy" }
-                            }
-                        );
+                        context
+                            .Teams
+                            .Add(
+                                new Team
+                                {
+                                    Id = -1,
+                                    Name = "Wubbsy Racing",
+                                    Chassis = new Chassis { TeamId = -1, Name = "Wubbsy" }
+                                }
+                            );
 
                         using var innerContext = CreateF1Context();
                         UseTransaction(innerContext.Database, transaction);
-                        innerContext.Teams.Add(
-                            new Team
-                            {
-                                Id = -1,
-                                Name = "Wubbsy Racing",
-                                Chassis = new Chassis { TeamId = -1, Name = "Wubbsy" }
-                            }
-                        );
+                        innerContext
+                            .Teams
+                            .Add(
+                                new Team
+                                {
+                                    Id = -1,
+                                    Name = "Wubbsy Racing",
+                                    Chassis = new Chassis { TeamId = -1, Name = "Wubbsy" }
+                                }
+                            );
 
                         await innerContext.SaveChangesAsync();
 
@@ -552,9 +566,9 @@ namespace Microsoft.EntityFrameworkCore
                     {
                         using (BeginTransaction(context.Database))
                         {
-                            var entry = context.Drivers.Add(
-                                new Driver { Name = "Larry David", TeamId = Team.Ferrari }
-                            );
+                            var entry = context
+                                .Drivers
+                                .Add(new Driver { Name = "Larry David", TeamId = Team.Ferrari });
 
                             if (async)
                             {
@@ -610,14 +624,16 @@ namespace Microsoft.EntityFrameworkCore
                     {
                         using (BeginTransaction(context.Database))
                         {
-                            var entry = context.Drivers.Add(
-                                new Driver
-                                {
-                                    Id = 676,
-                                    Name = "Larry David",
-                                    TeamId = Team.Ferrari
-                                }
-                            );
+                            var entry = context
+                                .Drivers
+                                .Add(
+                                    new Driver
+                                    {
+                                        Id = 676,
+                                        Name = "Larry David",
+                                        TeamId = Team.Ferrari
+                                    }
+                                );
 
                             entry.State = state;
 
@@ -885,9 +901,11 @@ namespace Microsoft.EntityFrameworkCore
                         {
                             Assert.Equal(
                                 LogLevel.Debug,
-                                Fixture.ListLoggerFactory.Log.Single(
-                                    l => l.Id == CoreEventId.OptimisticConcurrencyException
-                                ).Level
+                                Fixture
+                                    .ListLoggerFactory
+                                    .Log
+                                    .Single(l => l.Id == CoreEventId.OptimisticConcurrencyException)
+                                    .Level
                             );
                         }
                         Fixture.ListLoggerFactory.Clear();

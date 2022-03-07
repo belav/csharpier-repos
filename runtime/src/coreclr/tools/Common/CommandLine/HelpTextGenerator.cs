@@ -216,7 +216,8 @@ namespace Internal.CommandLine
 
         private static IEnumerable<HelpRow> GetCommandRows(ArgumentSyntax argumentSyntax)
         {
-            return argumentSyntax.Commands
+            return argumentSyntax
+                .Commands
                 .Where(c => !c.IsHidden)
                 .Select(c => new HelpRow { Header = c.Name, Text = c.Help });
         }

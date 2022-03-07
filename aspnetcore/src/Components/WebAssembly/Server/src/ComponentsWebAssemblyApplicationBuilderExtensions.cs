@@ -38,8 +38,9 @@ public static class ComponentsWebAssemblyApplicationBuilderExtensions
             throw new ArgumentNullException(nameof(builder));
         }
 
-        var webHostEnvironment =
-            builder.ApplicationServices.GetRequiredService<IWebHostEnvironment>();
+        var webHostEnvironment = builder
+            .ApplicationServices
+            .GetRequiredService<IWebHostEnvironment>();
 
         var options = CreateStaticFilesOptions(webHostEnvironment.WebRootFileProvider);
 
@@ -53,10 +54,10 @@ public static class ComponentsWebAssemblyApplicationBuilderExtensions
                 subBuilder.Use(
                     async (context, next) =>
                     {
-                        context.Response.Headers.Append(
-                            "Blazor-Environment",
-                            webHostEnvironment.EnvironmentName
-                        );
+                        context
+                            .Response
+                            .Headers
+                            .Append("Blazor-Environment", webHostEnvironment.EnvironmentName);
 
                         if (webHostEnvironment.IsDevelopment())
                         {
@@ -69,10 +70,13 @@ public static class ComponentsWebAssemblyApplicationBuilderExtensions
                                 is string dotnetModifiableAssemblies
                             )
                             {
-                                context.Response.Headers.Append(
-                                    "DOTNET-MODIFIABLE-ASSEMBLIES",
-                                    dotnetModifiableAssemblies
-                                );
+                                context
+                                    .Response
+                                    .Headers
+                                    .Append(
+                                        "DOTNET-MODIFIABLE-ASSEMBLIES",
+                                        dotnetModifiableAssemblies
+                                    );
                             }
 
                             // See https://github.com/dotnet/aspnetcore/issues/37357#issuecomment-941237000
@@ -82,10 +86,10 @@ public static class ComponentsWebAssemblyApplicationBuilderExtensions
                                 is string blazorWasmHotReload
                             )
                             {
-                                context.Response.Headers.Append(
-                                    "ASPNETCORE-BROWSER-TOOLS",
-                                    blazorWasmHotReload
-                                );
+                                context
+                                    .Response
+                                    .Headers
+                                    .Append("ASPNETCORE-BROWSER-TOOLS", blazorWasmHotReload);
                             }
                         }
 

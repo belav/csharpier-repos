@@ -132,7 +132,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
                 Assert.NotNull(modifiedProjectId);
                 addedDocument = newSolution
                     .GetProject(modifiedProjectId)
-                    .Documents.SingleOrDefault(doc => doc.Name == expectedDocumentName);
+                    .Documents
+                    .SingleOrDefault(doc => doc.Name == expectedDocumentName);
             }
 
             Assert.NotNull(addedDocument);
@@ -142,8 +143,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
             var actual = (await addedDocument.GetTextAsync()).ToString();
             Assert.Equal(expected, actual);
 
-            var editHandler =
-                workspace.ExportProvider.GetExportedValue<ICodeActionEditHandlerService>();
+            var editHandler = workspace
+                .ExportProvider
+                .GetExportedValue<ICodeActionEditHandlerService>();
             if (!hasProjectChange)
             {
                 // If there is just one document change then we expect the preview to be a WpfTextView

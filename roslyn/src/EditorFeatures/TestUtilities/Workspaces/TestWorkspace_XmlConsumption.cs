@@ -579,7 +579,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
             else if (language == LanguageNames.VisualBasic)
             {
                 return new VisualBasicParseOptions(
-                    preprocessorSymbols: preprocessorSymbolsAttribute.Value
+                    preprocessorSymbols: preprocessorSymbolsAttribute
+                        .Value
                         .Split(',')
                         .Select(
                             v =>
@@ -630,10 +631,10 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
             if (language == LanguageNames.CSharp)
             {
                 if (
-                    CodeAnalysis.CSharp.LanguageVersionFacts.TryParse(
-                        languageVersionAttribute.Value,
-                        out var languageVersion
-                    )
+                    CodeAnalysis
+                        .CSharp
+                        .LanguageVersionFacts
+                        .TryParse(languageVersionAttribute.Value, out var languageVersion)
                 )
                 {
                     return ((CSharpParseOptions)parseOptions).WithLanguageVersion(languageVersion);
@@ -643,10 +644,10 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
             {
                 var languageVersion = CodeAnalysis.VisualBasic.LanguageVersion.Default;
                 if (
-                    CodeAnalysis.VisualBasic.LanguageVersionFacts.TryParse(
-                        languageVersionAttribute.Value,
-                        ref languageVersion
-                    )
+                    CodeAnalysis
+                        .VisualBasic
+                        .LanguageVersionFacts
+                        .TryParse(languageVersionAttribute.Value, ref languageVersion)
                 )
                 {
                     return ((VisualBasicParseOptions)parseOptions).WithLanguageVersion(
@@ -1205,10 +1206,12 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
                 return null;
             }
 
-            var folderContainers = folderAttribute.Value.Split(
-                new[] { PathUtilities.DirectorySeparatorChar },
-                StringSplitOptions.RemoveEmptyEntries
-            );
+            var folderContainers = folderAttribute
+                .Value
+                .Split(
+                    new[] { PathUtilities.DirectorySeparatorChar },
+                    StringSplitOptions.RemoveEmptyEntries
+                );
             return new ReadOnlyCollection<string>(folderContainers.ToList());
         }
 
@@ -1307,17 +1310,19 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
         {
             if (LanguageNames.CSharp == options.Language)
             {
-                return Microsoft.CodeAnalysis.CSharp.SyntaxFactory.ParseSyntaxTree(
-                    referencedCode,
-                    options
-                );
+                return Microsoft
+                    .CodeAnalysis
+                    .CSharp
+                    .SyntaxFactory
+                    .ParseSyntaxTree(referencedCode, options);
             }
             else
             {
-                return Microsoft.CodeAnalysis.VisualBasic.SyntaxFactory.ParseSyntaxTree(
-                    referencedCode,
-                    options
-                );
+                return Microsoft
+                    .CodeAnalysis
+                    .VisualBasic
+                    .SyntaxFactory
+                    .ParseSyntaxTree(referencedCode, options);
             }
         }
 

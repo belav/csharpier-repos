@@ -99,17 +99,18 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             Debug.Assert(!attributeItem.Properties.ContainsKey(AttributeFullName));
 
             // Remember the full type name so we can get the symbol when description is displayed.
-            var newProperties = attributeItem.Properties.Add(
-                AttributeFullName,
-                attributeItem.DisplayText
-            );
+            var newProperties = attributeItem
+                .Properties
+                .Add(AttributeFullName, attributeItem.DisplayText);
 
             var sortTextBuilder = PooledStringBuilder.GetInstance();
-            sortTextBuilder.Builder.AppendFormat(
-                SortTextFormat,
-                attributeNameWithoutSuffix,
-                attributeItem.InlineDescription
-            );
+            sortTextBuilder
+                .Builder
+                .AppendFormat(
+                    SortTextFormat,
+                    attributeNameWithoutSuffix,
+                    attributeItem.InlineDescription
+                );
 
             var item = CompletionItem.Create(
                 displayText: attributeNameWithoutSuffix,
@@ -141,7 +142,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             CancellationToken cancellationToken
         )
         {
-            var compilation = await document.Project
+            var compilation = await document
+                .Project
                 .GetRequiredCompilationAsync(cancellationToken)
                 .ConfigureAwait(false);
             var (symbol, overloadCount) = GetSymbolAndOverloadCount(item, compilation);

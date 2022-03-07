@@ -45,9 +45,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
 
             Contract.ThrowIfNull(_snippetExpansionClient.ExpansionSession);
 
-            var surfaceBufferFieldSpan = _snippetExpansionClient.ExpansionSession.GetFieldSpan(
-                FieldName
-            );
+            var surfaceBufferFieldSpan = _snippetExpansionClient
+                .ExpansionSession
+                .GetFieldSpan(FieldName);
 
             if (
                 !_snippetExpansionClient.TryGetSubjectBufferSpan(

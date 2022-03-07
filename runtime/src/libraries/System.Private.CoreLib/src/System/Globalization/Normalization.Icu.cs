@@ -23,11 +23,9 @@ namespace System.Globalization
             int ret;
             fixed (char* pInput = strInput)
             {
-                ret = Interop.Globalization.IsNormalized(
-                    normalizationForm,
-                    pInput,
-                    strInput.Length
-                );
+                ret = Interop
+                    .Globalization
+                    .IsNormalized(normalizationForm, pInput, strInput.Length);
             }
 
             if (ret == -1)
@@ -67,13 +65,15 @@ namespace System.Globalization
                     fixed (char* pInput = strInput)
                     fixed (char* pDest = &MemoryMarshal.GetReference(buffer))
                     {
-                        realLen = Interop.Globalization.NormalizeString(
-                            normalizationForm,
-                            pInput,
-                            strInput.Length,
-                            pDest,
-                            buffer.Length
-                        );
+                        realLen = Interop
+                            .Globalization
+                            .NormalizeString(
+                                normalizationForm,
+                                pInput,
+                                strInput.Length,
+                                pDest,
+                                buffer.Length
+                            );
                     }
 
                     if (realLen == -1)

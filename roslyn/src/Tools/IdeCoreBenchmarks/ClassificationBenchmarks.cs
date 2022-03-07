@@ -82,7 +82,8 @@ namespace IdeCoreBenchmarks
 
             Console.WriteLine("Found Roslyn.sln: " + Process.GetCurrentProcess().Id);
 
-            var assemblies = MSBuildMefHostServices.DefaultAssemblies
+            var assemblies = MSBuildMefHostServices
+                .DefaultAssemblies
                 .Add(typeof(AnalyzerRunnerHelper).Assembly)
                 .Add(typeof(FindReferencesBenchmarks).Assembly);
             var services = MefHostServices.Create(assemblies);
@@ -100,12 +101,13 @@ namespace IdeCoreBenchmarks
                 throw new ArgumentException("Couldn't create workspace");
 
             _workspace.TryApplyChanges(
-                _workspace.CurrentSolution.WithOptions(
-                    _workspace.Options.WithChangedOption(
-                        StorageOptions.Database,
-                        StorageDatabase.SQLite
+                _workspace
+                    .CurrentSolution
+                    .WithOptions(
+                        _workspace
+                            .Options
+                            .WithChangedOption(StorageOptions.Database, StorageDatabase.SQLite)
                     )
-                )
             );
 
             Console.WriteLine("Opening roslyn.  Attach to: " + Process.GetCurrentProcess().Id);

@@ -71,7 +71,8 @@ namespace Microsoft.CodeAnalysis.MoveStaticMembers
             // add annotations to the symbols that we selected so we can find them later to pull up
             // These symbols should all have (singular) definitions, but in the case that we can't find
             // any location, we just won't move that particular symbol
-            var memberNodes = moveOptions.SelectedMembers
+            var memberNodes = moveOptions
+                .SelectedMembers
                 .Select(symbol => symbol.Locations.FirstOrDefault())
                 .WhereNotNull()
                 .SelectAsArray(loc => loc.FindNode(cancellationToken));
@@ -237,10 +238,10 @@ namespace Microsoft.CodeAnalysis.MoveStaticMembers
             // keep extension method flag attached to node through dict
             var trackNodesDict = referenceLocations.ToImmutableDictionary(
                 refLoc =>
-                    refLoc.location.Location.FindNode(
-                        getInnermostNodeForTie: true,
-                        cancellationToken
-                    )
+                    refLoc
+                        .location
+                        .Location
+                        .FindNode(getInnermostNodeForTie: true, cancellationToken)
             );
 
             var docEditor = await DocumentEditor
@@ -375,7 +376,8 @@ namespace Microsoft.CodeAnalysis.MoveStaticMembers
                 .Flatten()
                 .SelectMany(
                     refSymbol =>
-                        refSymbol.Locations
+                        refSymbol
+                            .Locations
                             .Where(loc => !loc.IsCandidateLocation && !loc.IsImplicit)
                             .Select(loc => (loc, refSymbol.Definition.IsExtensionMethod()))
                 )

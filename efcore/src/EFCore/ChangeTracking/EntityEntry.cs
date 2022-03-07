@@ -280,7 +280,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         ///     See <see href="https://aka.ms/efcore-docs-entity-entries">Accessing tracked entities in EF Core</see> for more information.
         /// </remarks>
         public virtual IEnumerable<PropertyEntry> Properties =>
-            InternalEntry.EntityType
+            InternalEntry
+                .EntityType
                 .GetProperties()
                 .Select(property => new PropertyEntry(InternalEntry, property));
 
@@ -315,7 +316,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         ///     for more information.
         /// </remarks>
         public virtual IEnumerable<ReferenceEntry> References =>
-            InternalEntry.EntityType
+            InternalEntry
+                .EntityType
                 .GetNavigations()
                 .Where(n => !n.IsCollection)
                 .Select(navigation => new ReferenceEntry(InternalEntry, navigation));

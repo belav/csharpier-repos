@@ -91,9 +91,9 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Storage.Internal
                         IEntityType? targetEntityType = null;
                         foreach (var targetSeed in entityType.GetSeedData())
                         {
-                            targetEntityType ??= updateAdapter.Model.FindEntityType(
-                                entityType.Name
-                            )!;
+                            targetEntityType ??= updateAdapter
+                                .Model
+                                .FindEntityType(entityType.Name)!;
                             var entry = updateAdapter.CreateEntry(targetSeed, targetEntityType);
                             entry.EntityState = EntityState.Added;
                             entries.Add(entry);

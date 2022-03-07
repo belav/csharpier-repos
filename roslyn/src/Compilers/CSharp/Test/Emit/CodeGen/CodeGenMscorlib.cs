@@ -488,7 +488,8 @@ namespace System.Collections
             compilation2.VerifyDiagnostics();
             compilation2
                 .Emit(new System.IO.MemoryStream())
-                .Diagnostics.Verify(
+                .Diagnostics
+                .Verify(
                     // (5,9): error CS0656: Missing compiler required member 'System.String.get_Length'
                     //         foreach (var c in s)
                     Diagnostic(

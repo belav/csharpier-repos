@@ -422,8 +422,11 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
                 // Session.Commit can throw if it can't commit
                 // rename operation.
                 // handle that case gracefully
-                var notificationService =
-                    _model.Session.Workspace.Services.GetService<INotificationService>();
+                var notificationService = _model
+                    .Session
+                    .Workspace
+                    .Services
+                    .GetService<INotificationService>();
                 notificationService.SendNotification(
                     ex.Message,
                     title: EditorFeaturesResources.Rename,
@@ -433,8 +436,11 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
             catch (Exception ex) when (FatalError.ReportAndCatch(ex))
             {
                 // Show a nice error to the user via an info bar
-                var errorReportingService =
-                    _model.Session.Workspace.Services.GetService<IErrorReportingService>();
+                var errorReportingService = _model
+                    .Session
+                    .Workspace
+                    .Services
+                    .GetService<IErrorReportingService>();
                 if (errorReportingService is null)
                 {
                     return;

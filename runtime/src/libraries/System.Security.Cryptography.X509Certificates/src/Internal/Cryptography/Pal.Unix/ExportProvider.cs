@@ -83,11 +83,13 @@ namespace Internal.Cryptography.Pal
                 )
                 {
                     Interop.Crypto.CheckValidOpenSslHandle(pkcs7);
-                    return Interop.Crypto.OpenSslEncode(
-                        handle => Interop.Crypto.GetPkcs7DerSize(handle),
-                        (handle, buf) => Interop.Crypto.EncodePkcs7(handle, buf),
-                        pkcs7
-                    );
+                    return Interop
+                        .Crypto
+                        .OpenSslEncode(
+                            handle => Interop.Crypto.GetPkcs7DerSize(handle),
+                            (handle, buf) => Interop.Crypto.EncodePkcs7(handle, buf),
+                            pkcs7
+                        );
                 }
             }
         }

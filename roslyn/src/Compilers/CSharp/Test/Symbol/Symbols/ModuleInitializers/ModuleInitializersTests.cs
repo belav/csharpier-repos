@@ -233,9 +233,9 @@ namespace System.Runtime.CompilerServices { class ModuleInitializerAttribute : S
                 symbolValidator: module =>
                 {
                     Assert.Equal(MetadataImportOptions.All, ((PEModuleSymbol)module).ImportOptions);
-                    var rootModuleType = module.ContainingAssembly.GetTypeByMetadataName(
-                        "<Module>"
-                    );
+                    var rootModuleType = module
+                        .ContainingAssembly
+                        .GetTypeByMetadataName("<Module>");
                     Assert.NotNull(rootModuleType.GetMember(".cctor"));
                 }
             );
@@ -846,9 +846,9 @@ namespace System.Runtime.CompilerServices { class ModuleInitializerAttribute : S
                 symbolValidator: module =>
                 {
                     Assert.Equal(MetadataImportOptions.All, ((PEModuleSymbol)module).ImportOptions);
-                    var rootModuleType = module.ContainingAssembly.GetTypeByMetadataName(
-                        "<Module>"
-                    );
+                    var rootModuleType = module
+                        .ContainingAssembly
+                        .GetTypeByMetadataName("<Module>");
                     Assert.Null(rootModuleType.GetMember(".cctor"));
                 }
             );
@@ -890,9 +890,9 @@ Program.Main"
         )]
         public void MultipleNetmodules()
         {
-            var moduleOptions = TestOptions.ReleaseModule.WithMetadataImportOptions(
-                MetadataImportOptions.All
-            );
+            var moduleOptions = TestOptions
+                .ReleaseModule
+                .WithMetadataImportOptions(MetadataImportOptions.All);
             var s1 =
                 @"
 using System;
@@ -948,7 +948,8 @@ public class B
                 verify: Verification.Skipped
             );
 
-            var exeOptions = TestOptions.ReleaseExe
+            var exeOptions = TestOptions
+                .ReleaseExe
                 .WithMetadataImportOptions(MetadataImportOptions.All)
                 .WithModuleName("C");
             var s3 =
@@ -1228,7 +1229,8 @@ public class A
 
 namespace System.Runtime.CompilerServices { public class ModuleInitializerAttribute : System.Attribute { } }
 ";
-            var exeOptions = TestOptions.ReleaseExe
+            var exeOptions = TestOptions
+                .ReleaseExe
                 .WithMetadataImportOptions(MetadataImportOptions.All)
                 .WithModuleName("C");
 
@@ -1347,11 +1349,13 @@ namespace System.Runtime.CompilerServices { class ModuleInitializerAttribute : S
             CompileAndVerify(
                 source,
                 options: TestOptions.ReleaseExe,
-                emitOptions: EmitOptions.Default.WithDebugInformationFormat(
-                    PathUtilities.IsUnixLikePlatform
-                      ? DebugInformationFormat.PortablePdb
-                      : DebugInformationFormat.Pdb
-                ),
+                emitOptions: EmitOptions
+                    .Default
+                    .WithDebugInformationFormat(
+                        PathUtilities.IsUnixLikePlatform
+                          ? DebugInformationFormat.PortablePdb
+                          : DebugInformationFormat.Pdb
+                    ),
                 expectedOutput: @"
 C.M
 Program.Main"

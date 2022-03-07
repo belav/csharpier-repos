@@ -3065,7 +3065,9 @@ namespace System.Net.Sockets
             if (!ti.IsCompleted)
             {
                 // TODO https://github.com/dotnet/runtime/issues/17148: Wait without throwing
-                ((IAsyncResult)ti).AsyncWaitHandle.WaitOne();
+                ((IAsyncResult)ti)
+                    .AsyncWaitHandle
+                    .WaitOne();
             }
 
             if (ti.IsCompletedSuccessfully)

@@ -47,53 +47,51 @@ public class InterlockedExchange1
         T prevLocation;
         T oldLocation;
 
-        TestLibrary.TestFramework.BeginScenario(
-            "PosTest1: T Interlocked.Exchange(T&,T) (T=" + typeof(T) + ")"
-        );
+        TestLibrary
+            .TestFramework
+            .BeginScenario("PosTest1: T Interlocked.Exchange(T&,T) (T=" + typeof(T) + ")");
 
         try
         {
             for (int i = 0; i < c_NUM_LOOPS; i++)
             {
-                value = (T)(object)TestLibrary.Generator.GetString(
-                    -55,
-                    false,
-                    c_MIN_STRING_LEN,
-                    c_MAX_STRING_LEN
-                );
-                location = (T)(object)TestLibrary.Generator.GetString(
-                    -55,
-                    false,
-                    c_MIN_STRING_LEN,
-                    c_MAX_STRING_LEN
-                );
+                value = (T)(object)TestLibrary
+                    .Generator
+                    .GetString(-55, false, c_MIN_STRING_LEN, c_MAX_STRING_LEN);
+                location = (T)(object)TestLibrary
+                    .Generator
+                    .GetString(-55, false, c_MIN_STRING_LEN, c_MAX_STRING_LEN);
                 prevLocation = location;
 
                 oldLocation = Interlocked.Exchange<T>(ref location, value);
 
                 if (!location.Equals(value))
                 {
-                    TestLibrary.TestFramework.LogError(
-                        "001",
-                        "Interlocked.Exchange() did not do the exchange correctly: Expected("
-                            + value
-                            + ") Actual("
-                            + location
-                            + ")"
-                    );
+                    TestLibrary
+                        .TestFramework
+                        .LogError(
+                            "001",
+                            "Interlocked.Exchange() did not do the exchange correctly: Expected("
+                                + value
+                                + ") Actual("
+                                + location
+                                + ")"
+                        );
                     retVal = false;
                 }
 
                 if (!oldLocation.Equals(prevLocation))
                 {
-                    TestLibrary.TestFramework.LogError(
-                        "002",
-                        "Interlocked.Exchange() did not return the expected value: Expected("
-                            + prevLocation
-                            + ") Actual("
-                            + oldLocation
-                            + ")"
-                    );
+                    TestLibrary
+                        .TestFramework
+                        .LogError(
+                            "002",
+                            "Interlocked.Exchange() did not return the expected value: Expected("
+                                + prevLocation
+                                + ") Actual("
+                                + oldLocation
+                                + ")"
+                        );
                     retVal = false;
                 }
             }

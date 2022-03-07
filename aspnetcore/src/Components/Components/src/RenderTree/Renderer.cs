@@ -548,9 +548,9 @@ public abstract partial class Renderer : IDisposable, IAsyncDisposable
             return;
         }
 
-        _batchBuilder.ComponentRenderQueue.Enqueue(
-            new RenderQueueEntry(componentState, renderFragment)
-        );
+        _batchBuilder
+            .ComponentRenderQueue
+            .Enqueue(new RenderQueueEntry(componentState, renderFragment));
 
         if (!_isBatchInProgress)
         {

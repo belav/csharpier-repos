@@ -334,7 +334,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
             else
             {
                 var fromMigrationId = _migrationsAssembly.GetMigrationId(fromMigration);
-                appliedMigrations = _migrationsAssembly.Migrations
+                appliedMigrations = _migrationsAssembly
+                    .Migrations
                     .Where(
                         t =>
                             string.Compare(

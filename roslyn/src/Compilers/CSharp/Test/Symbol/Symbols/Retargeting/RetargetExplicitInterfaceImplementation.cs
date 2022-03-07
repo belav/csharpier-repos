@@ -94,17 +94,19 @@ public class C : Interface1
                     case SymbolKind.Property:
                         Assert.Equal(
                             interfaceV1,
-                            (
-                                (PropertySymbol)member
-                            ).ExplicitInterfaceImplementations.Single().ContainingType
+                            ((PropertySymbol)member)
+                                .ExplicitInterfaceImplementations
+                                .Single()
+                                .ContainingType
                         );
                         break;
                     case SymbolKind.Event:
                         Assert.Equal(
                             interfaceV1,
-                            (
-                                (EventSymbol)member
-                            ).ExplicitInterfaceImplementations.Single().ContainingType
+                            ((EventSymbol)member)
+                                .ExplicitInterfaceImplementations
+                                .Single()
+                                .ContainingType
                         );
                         break;
                     case SymbolKind.ErrorType:
@@ -175,8 +177,9 @@ public  class D : C
                     retargetedClassCMethod1.MethodKind
                 );
 
-                var retargetedClassCMethod1Impl =
-                    retargetedClassCMethod1.ExplicitInterfaceImplementations.Single();
+                var retargetedClassCMethod1Impl = retargetedClassCMethod1
+                    .ExplicitInterfaceImplementations
+                    .Single();
                 Assert.Same(interfaceV2Method1, retargetedClassCMethod1Impl);
                 Assert.NotSame(interfaceV1Method1, retargetedClassCMethod1Impl);
                 Assert.Equal(
@@ -223,8 +226,9 @@ public  class D : C
                     retargetedClassCMethod4.MethodKind
                 );
 
-                var retargetedClassCMethod4Impl =
-                    retargetedClassCMethod4.ExplicitInterfaceImplementations.Single();
+                var retargetedClassCMethod4Impl = retargetedClassCMethod4
+                    .ExplicitInterfaceImplementations
+                    .Single();
                 Assert.Same(interfaceV2Method4, retargetedClassCMethod4Impl);
                 Assert.NotSame(interfaceV1Method4, retargetedClassCMethod4Impl);
                 Assert.Equal(
@@ -239,8 +243,9 @@ public  class D : C
             {
                 Assert.IsType<RetargetingPropertySymbol>(retargetedClassCProperty1);
 
-                var retargetedClassCProperty1Impl =
-                    retargetedClassCProperty1.ExplicitInterfaceImplementations.Single();
+                var retargetedClassCProperty1Impl = retargetedClassCProperty1
+                    .ExplicitInterfaceImplementations
+                    .Single();
                 Assert.Same(interfaceV2Property1, retargetedClassCProperty1Impl);
                 Assert.NotSame(interfaceV1Property1, retargetedClassCProperty1Impl);
                 Assert.Equal(retargetedClassCProperty1Impl.Name, interfaceV1Property1.Name);
@@ -276,8 +281,9 @@ public  class D : C
             {
                 Assert.IsType<RetargetingPropertySymbol>(retargetedClassCProperty4);
 
-                var retargetedClassCProperty4Impl =
-                    retargetedClassCProperty4.ExplicitInterfaceImplementations.Single();
+                var retargetedClassCProperty4Impl = retargetedClassCProperty4
+                    .ExplicitInterfaceImplementations
+                    .Single();
                 Assert.Same(interfaceV2Property4, retargetedClassCProperty4Impl);
                 Assert.NotSame(interfaceV1Property4, retargetedClassCProperty4Impl);
                 Assert.Equal(retargetedClassCProperty4Impl.Name, interfaceV1Property4.Name);
@@ -291,8 +297,9 @@ public  class D : C
             {
                 Assert.IsType<RetargetingPropertySymbol>(retargetedClassCIndexer1);
 
-                var retargetedClassCIndexer1Impl =
-                    retargetedClassCIndexer1.ExplicitInterfaceImplementations.Single();
+                var retargetedClassCIndexer1Impl = retargetedClassCIndexer1
+                    .ExplicitInterfaceImplementations
+                    .Single();
                 Assert.Same(interfaceV2Indexer1, retargetedClassCIndexer1Impl);
                 Assert.NotSame(interfaceV1Indexer1, retargetedClassCIndexer1Impl);
                 Assert.Equal(retargetedClassCIndexer1Impl.Name, interfaceV1Indexer1.Name);
@@ -322,8 +329,9 @@ public  class D : C
             {
                 Assert.IsType<RetargetingPropertySymbol>(retargetedClassCIndexer4);
 
-                var retargetedClassCIndexer4Impl =
-                    retargetedClassCIndexer4.ExplicitInterfaceImplementations.Single();
+                var retargetedClassCIndexer4Impl = retargetedClassCIndexer4
+                    .ExplicitInterfaceImplementations
+                    .Single();
                 Assert.Same(interfaceV2Indexer4, retargetedClassCIndexer4Impl);
                 Assert.NotSame(interfaceV1Indexer4, retargetedClassCIndexer4Impl);
                 Assert.Equal(retargetedClassCIndexer4Impl.Name, interfaceV1Indexer4.Name);
@@ -339,8 +347,9 @@ public  class D : C
             {
                 Assert.IsType<RetargetingEventSymbol>(retargetedClassCEvent1);
 
-                var retargetedClassCEvent1Impl =
-                    retargetedClassCEvent1.ExplicitInterfaceImplementations.Single();
+                var retargetedClassCEvent1Impl = retargetedClassCEvent1
+                    .ExplicitInterfaceImplementations
+                    .Single();
                 Assert.Same(interfaceV2Event1, retargetedClassCEvent1Impl);
                 Assert.NotSame(interfaceV1Event1, retargetedClassCEvent1Impl);
                 Assert.Equal(retargetedClassCEvent1Impl.Name, interfaceV1Event1.Name);
@@ -376,8 +385,9 @@ public  class D : C
             {
                 Assert.IsType<RetargetingEventSymbol>(retargetedClassCEvent4);
 
-                var retargetedClassCEvent4Impl =
-                    retargetedClassCEvent4.ExplicitInterfaceImplementations.Single();
+                var retargetedClassCEvent4Impl = retargetedClassCEvent4
+                    .ExplicitInterfaceImplementations
+                    .Single();
                 Assert.Same(interfaceV2Event4, retargetedClassCEvent4Impl);
                 Assert.NotSame(interfaceV1Event4, retargetedClassCEvent4Impl);
                 Assert.Equal(retargetedClassCEvent4Impl.Name, interfaceV1Event4.Name);
@@ -489,64 +499,73 @@ public  class D3 : C3
             var retargetedClassC1Method1 = (MethodSymbol)retargetedClassC1
                 .GetMembers("Interface2<S>.Method1")
                 .Single();
-            var retargetedClassC1Method1Impl =
-                retargetedClassC1Method1.ExplicitInterfaceImplementations.Single();
+            var retargetedClassC1Method1Impl = retargetedClassC1Method1
+                .ExplicitInterfaceImplementations
+                .Single();
             Assert.Same(interfaceV2Method1, retargetedClassC1Method1Impl.OriginalDefinition);
 
             var retargetedClassC2Method1 = (MethodSymbol)retargetedClassC2
                 .GetMembers("Interface2<System.Int32>.Method1")
                 .Single();
-            var retargetedClassC2Method1Impl =
-                retargetedClassC2Method1.ExplicitInterfaceImplementations.Single();
+            var retargetedClassC2Method1Impl = retargetedClassC2Method1
+                .ExplicitInterfaceImplementations
+                .Single();
             Assert.Same(interfaceV2Method1, retargetedClassC2Method1Impl.OriginalDefinition);
 
             var retargetedClassC3Method1 = (MethodSymbol)retargetedClassC3
                 .GetMembers("Interface2<Class1>.Method1")
                 .Single();
-            var retargetedClassC3Method1Impl =
-                retargetedClassC3Method1.ExplicitInterfaceImplementations.Single();
+            var retargetedClassC3Method1Impl = retargetedClassC3Method1
+                .ExplicitInterfaceImplementations
+                .Single();
             Assert.Same(interfaceV2Method1, retargetedClassC3Method1Impl.OriginalDefinition);
 
             var retargetedClassC1Property1 = (PropertySymbol)retargetedClassC1
                 .GetMembers("Interface2<S>.Property1")
                 .Single();
-            var retargetedClassC1Property1Impl =
-                retargetedClassC1Property1.ExplicitInterfaceImplementations.Single();
+            var retargetedClassC1Property1Impl = retargetedClassC1Property1
+                .ExplicitInterfaceImplementations
+                .Single();
             Assert.Same(interfaceV2Property1, retargetedClassC1Property1Impl.OriginalDefinition);
 
             var retargetedClassC2Property1 = (PropertySymbol)retargetedClassC2
                 .GetMembers("Interface2<System.Int32>.Property1")
                 .Single();
-            var retargetedClassC2Property1Impl =
-                retargetedClassC2Property1.ExplicitInterfaceImplementations.Single();
+            var retargetedClassC2Property1Impl = retargetedClassC2Property1
+                .ExplicitInterfaceImplementations
+                .Single();
             Assert.Same(interfaceV2Property1, retargetedClassC2Property1Impl.OriginalDefinition);
 
             var retargetedClassC3Property1 = (PropertySymbol)retargetedClassC3
                 .GetMembers("Interface2<Class1>.Property1")
                 .Single();
-            var retargetedClassC3Property1Impl =
-                retargetedClassC3Property1.ExplicitInterfaceImplementations.Single();
+            var retargetedClassC3Property1Impl = retargetedClassC3Property1
+                .ExplicitInterfaceImplementations
+                .Single();
             Assert.Same(interfaceV2Property1, retargetedClassC3Property1Impl.OriginalDefinition);
 
             var retargetedClassC1Event1 = (EventSymbol)retargetedClassC1
                 .GetMembers("Interface2<S>.Event1")
                 .Single();
-            var retargetedClassC1Event1Impl =
-                retargetedClassC1Event1.ExplicitInterfaceImplementations.Single();
+            var retargetedClassC1Event1Impl = retargetedClassC1Event1
+                .ExplicitInterfaceImplementations
+                .Single();
             Assert.Same(interfaceV2Event1, retargetedClassC1Event1Impl.OriginalDefinition);
 
             var retargetedClassC2Event1 = (EventSymbol)retargetedClassC2
                 .GetMembers("Interface2<System.Int32>.Event1")
                 .Single();
-            var retargetedClassC2Event1Impl =
-                retargetedClassC2Event1.ExplicitInterfaceImplementations.Single();
+            var retargetedClassC2Event1Impl = retargetedClassC2Event1
+                .ExplicitInterfaceImplementations
+                .Single();
             Assert.Same(interfaceV2Event1, retargetedClassC2Event1Impl.OriginalDefinition);
 
             var retargetedClassC3Event1 = (EventSymbol)retargetedClassC3
                 .GetMembers("Interface2<Class1>.Event1")
                 .Single();
-            var retargetedClassC3Event1Impl =
-                retargetedClassC3Event1.ExplicitInterfaceImplementations.Single();
+            var retargetedClassC3Event1Impl = retargetedClassC3Event1
+                .ExplicitInterfaceImplementations
+                .Single();
             Assert.Same(interfaceV2Event1, retargetedClassC3Event1Impl.OriginalDefinition);
         }
 

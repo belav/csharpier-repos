@@ -20,9 +20,9 @@ namespace System.Reflection.Context.Virtual
             {
                 get
                 {
-                    return DeclaringProperty.ReflectionContext.MapType(
-                        IntrospectionExtensions.GetTypeInfo(typeof(void))
-                    );
+                    return DeclaringProperty
+                        .ReflectionContext
+                        .MapType(IntrospectionExtensions.GetTypeInfo(typeof(void)));
                 }
             }
 

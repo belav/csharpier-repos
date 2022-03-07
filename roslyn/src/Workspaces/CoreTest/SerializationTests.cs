@@ -27,7 +27,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var pid = ProjectId.CreateNewId();
             var did = DocumentId.CreateNewId(pid);
 
-            var solution = new AdhocWorkspace().CurrentSolution
+            var solution = new AdhocWorkspace()
+                .CurrentSolution
                 .AddProject(pid, "test", "test", LanguageNames.CSharp)
                 .AddMetadataReference(pid, TestMetadata.Net451.mscorlib)
                 .AddDocument(did, "goo.cs", SourceText.From(sourceText));
@@ -67,11 +68,9 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var model = document.GetSemanticModelAsync().Result;
             var name = CS.SyntaxFactory.ParseName(symbolName);
             var symbol =
-                model.GetSpeculativeSymbolInfo(
-                    0,
-                    name,
-                    SpeculativeBindingOption.BindAsExpression
-                ).Symbol;
+                model
+                    .GetSpeculativeSymbolInfo(0, name, SpeculativeBindingOption.BindAsExpression)
+                    .Symbol;
 
             var root = (CS.Syntax.CompilationUnitSyntax)model.SyntaxTree.GetRoot();
             var annotation = SymbolAnnotation.Create(symbol);

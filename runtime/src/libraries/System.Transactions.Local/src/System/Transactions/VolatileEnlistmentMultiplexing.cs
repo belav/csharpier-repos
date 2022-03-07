@@ -31,9 +31,9 @@ namespace System.Transactions
             // Broadcast preprepare to the volatile subordinates
             for (int i = 0; i < volatiles._volatileEnlistmentCount; i++)
             {
-                volatiles._volatileEnlistments[i]._twoPhaseState!.InternalCommitted(
-                    volatiles._volatileEnlistments[i]
-                );
+                volatiles._volatileEnlistments[i]
+                    ._twoPhaseState!
+                    .InternalCommitted(volatiles._volatileEnlistments[i]);
             }
         }
 
@@ -43,9 +43,9 @@ namespace System.Transactions
             // Broadcast preprepare to the volatile subordinates
             for (int i = 0; i < volatiles._volatileEnlistmentCount; i++)
             {
-                volatiles._volatileEnlistments[i]._twoPhaseState!.InternalAborted(
-                    volatiles._volatileEnlistments[i]
-                );
+                volatiles._volatileEnlistments[i]
+                    ._twoPhaseState!
+                    .InternalAborted(volatiles._volatileEnlistments[i]);
             }
         }
 
@@ -54,9 +54,9 @@ namespace System.Transactions
             // Broadcast preprepare to the volatile subordinates
             for (int i = 0; i < volatiles._volatileEnlistmentCount; i++)
             {
-                volatiles._volatileEnlistments[i]._twoPhaseState!.InternalIndoubt(
-                    volatiles._volatileEnlistments[i]
-                );
+                volatiles._volatileEnlistments[i]
+                    ._twoPhaseState!
+                    .InternalIndoubt(volatiles._volatileEnlistments[i]);
             }
         }
 

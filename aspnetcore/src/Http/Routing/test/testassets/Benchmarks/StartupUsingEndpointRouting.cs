@@ -37,11 +37,9 @@ public class StartupUsingEndpointRouting
                                 response.StatusCode = 200;
                                 response.ContentType = "text/plain";
                                 response.ContentLength = payloadLength;
-                                return response.Body.WriteAsync(
-                                    _helloWorldPayload,
-                                    0,
-                                    payloadLength
-                                );
+                                return response
+                                    .Body
+                                    .WriteAsync(_helloWorldPayload, 0, payloadLength);
                             },
                             routePattern: RoutePatternFactory.Parse("/plaintext"),
                             order: 0,

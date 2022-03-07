@@ -241,10 +241,9 @@ namespace System.Runtime.Serialization.Json
                         }
                         catch (Exception ex)
                         {
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperFatal(
-                                ex.Message,
-                                ex
-                            );
+                            throw DiagnosticUtility
+                                .ExceptionUtility
+                                .ThrowHelperFatal(ex.Message, ex);
                         }
                     }
                     return id.Value;
@@ -377,9 +376,11 @@ namespace System.Runtime.Serialization.Json
                             )
                             {
                                 DataContract itemDataContract = DataContract.GetDataContract(
-                                    Globals.TypeOfKeyValuePair.MakeGenericType(
-                                        collectionDataContract.ItemType.GenericTypeArguments
-                                    )
+                                    Globals
+                                        .TypeOfKeyValuePair
+                                        .MakeGenericType(
+                                            collectionDataContract.ItemType.GenericTypeArguments
+                                        )
                                 );
                                 _knownDataContracts.TryAdd(
                                     itemDataContract.StableName,

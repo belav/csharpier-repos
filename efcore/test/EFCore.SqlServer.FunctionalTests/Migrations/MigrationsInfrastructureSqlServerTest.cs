@@ -536,9 +536,12 @@ GO
         public async Task Empty_Migration_Creates_Database()
         {
             using var context = new BloggingContext(
-                Fixture.TestStore.AddProviderOptions(
-                    new DbContextOptionsBuilder().EnableServiceProviderCaching(false)
-                ).Options
+                Fixture
+                    .TestStore
+                    .AddProviderOptions(
+                        new DbContextOptionsBuilder().EnableServiceProviderCaching(false)
+                    )
+                    .Options
             );
             var creator =
                 (SqlServerDatabaseCreator)context.GetService<IRelationalDatabaseCreator>();
@@ -1470,7 +1473,8 @@ DROP DATABASE TransactionSuppressed"
                 var options =
                     AddOptions(TestStore.AddProviderOptions(new DbContextOptionsBuilder()))
                         .UseSqlServer(TestStore.ConnectionString, b => b.ApplyConfiguration())
-                        .UseInternalServiceProvider(ServiceProvider).Options;
+                        .UseInternalServiceProvider(ServiceProvider)
+                        .Options;
                 return new MigrationsContext(options);
             }
         }

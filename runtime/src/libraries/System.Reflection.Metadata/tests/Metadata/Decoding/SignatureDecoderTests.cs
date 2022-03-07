@@ -469,9 +469,9 @@ namespace System.Reflection.Metadata.Decoding.Tests
                     reader.GetMethodDefinition(MetadataTokens.MethodDefinitionHandle(1)).Signature
                 );
                 BlobReader propertySignature = reader.GetBlobReader(
-                    reader.GetPropertyDefinition(
-                        MetadataTokens.PropertyDefinitionHandle(1)
-                    ).Signature
+                    reader
+                        .GetPropertyDefinition(MetadataTokens.PropertyDefinitionHandle(1))
+                        .Signature
                 );
 
                 Assert.Throws<BadImageFormatException>(

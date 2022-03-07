@@ -1164,13 +1164,15 @@ public class UserManagerTest
         services
             .AddIdentity<PocoUser, PocoRole>(
                 o =>
-                    o.Tokens.ProviderMap.Add(
-                        "A",
-                        new TokenProviderDescriptor(typeof(ATokenProvider))
-                        {
-                            ProviderInstance = provider
-                        }
-                    )
+                    o.Tokens
+                        .ProviderMap
+                        .Add(
+                            "A",
+                            new TokenProviderDescriptor(typeof(ATokenProvider))
+                            {
+                                ProviderInstance = provider
+                            }
+                        )
             )
             .AddUserStore<NoopUserStore>();
         var manager = services.BuildServiceProvider().GetService<UserManager<PocoUser>>();
@@ -1287,13 +1289,15 @@ public class UserManagerTest
         services
             .AddIdentity<PocoUser, PocoRole>(
                 o =>
-                    o.Tokens.ProviderMap.Add(
-                        TokenOptions.DefaultProvider,
-                        new TokenProviderDescriptor(typeof(ATokenProvider))
-                        {
-                            ProviderInstance = provider
-                        }
-                    )
+                    o.Tokens
+                        .ProviderMap
+                        .Add(
+                            TokenOptions.DefaultProvider,
+                            new TokenProviderDescriptor(typeof(ATokenProvider))
+                            {
+                                ProviderInstance = provider
+                            }
+                        )
             )
             .AddUserStore<NoopUserStore>()
             .AddDefaultTokenProviders();

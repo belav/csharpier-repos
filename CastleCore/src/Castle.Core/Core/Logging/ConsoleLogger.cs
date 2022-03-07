@@ -73,14 +73,16 @@ namespace Castle.Core.Logging
 
             if (exception != null)
             {
-                Console.Out.WriteLine(
-                    "[{0}] '{1}' {2}: {3} {4}",
-                    loggerLevel,
-                    loggerName,
-                    exception.GetType().FullName,
-                    exception.Message,
-                    exception.StackTrace
-                );
+                Console
+                    .Out
+                    .WriteLine(
+                        "[{0}] '{1}' {2}: {3} {4}",
+                        loggerLevel,
+                        loggerName,
+                        exception.GetType().FullName,
+                        exception.Message,
+                        exception.StackTrace
+                    );
             }
         }
 

@@ -123,12 +123,14 @@ public class PageDirectiveTest
 
     private RazorEngine CreateEngine()
     {
-        return RazorProjectEngine.Create(
-            b =>
-            {
-                PageDirective.Register(b);
-            }
-        ).Engine;
+        return RazorProjectEngine
+            .Create(
+                b =>
+                {
+                    PageDirective.Register(b);
+                }
+            )
+            .Engine;
     }
 
     private DocumentIntermediateNode CreateIRDocument(

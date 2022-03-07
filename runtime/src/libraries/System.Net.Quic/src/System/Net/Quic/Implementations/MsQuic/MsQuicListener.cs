@@ -107,12 +107,14 @@ namespace System.Net.Quic.Implementations.MsQuic
             _stateHandle = GCHandle.Alloc(_state);
             try
             {
-                uint status = MsQuicApi.Api.ListenerOpenDelegate(
-                    MsQuicApi.Api.Registration,
-                    s_listenerDelegate,
-                    GCHandle.ToIntPtr(_stateHandle),
-                    out _state.Handle
-                );
+                uint status = MsQuicApi
+                    .Api
+                    .ListenerOpenDelegate(
+                        MsQuicApi.Api.Registration,
+                        s_listenerDelegate,
+                        GCHandle.ToIntPtr(_stateHandle),
+                        out _state.Handle
+                    );
 
                 QuicExceptionHelpers.ThrowIfFailed(status, "ListenerOpen failed.");
             }
@@ -149,7 +151,9 @@ namespace System.Net.Quic.Implementations.MsQuic
 
             try
             {
-                return await _state.AcceptConnectionQueue.Reader
+                return await _state
+                    .AcceptConnectionQueue
+                    .Reader
                     .ReadAsync(cancellationToken)
                     .ConfigureAwait(false);
             }
@@ -195,8 +199,9 @@ namespace System.Net.Quic.Implementations.MsQuic
 
         private unsafe IPEndPoint Start(QuicListenerOptions options)
         {
-            List<SslApplicationProtocol> applicationProtocols =
-                options.ServerAuthenticationOptions!.ApplicationProtocols!;
+            List<SslApplicationProtocol> applicationProtocols = options
+                .ServerAuthenticationOptions!
+                .ApplicationProtocols!;
             IPEndPoint listenEndPoint = options.ListenEndPoint!;
 
             SOCKADDR_INET address = MsQuicAddressHelpers.IPEndPointToINet(listenEndPoint);
@@ -210,12 +215,14 @@ namespace System.Net.Quic.Implementations.MsQuic
             try
             {
                 MsQuicAlpnHelper.Prepare(applicationProtocols, out handles, out buffers);
-                status = MsQuicApi.Api.ListenerStartDelegate(
-                    _state.Handle,
-                    (QuicBuffer*)Marshal.UnsafeAddrOfPinnedArrayElement(buffers, 0),
-                    (uint)applicationProtocols.Count,
-                    ref address
-                );
+                status = MsQuicApi
+                    .Api
+                    .ListenerStartDelegate(
+                        _state.Handle,
+                        (QuicBuffer*)Marshal.UnsafeAddrOfPinnedArrayElement(buffers, 0),
+                        (uint)applicationProtocols.Count,
+                        ref address
+                    );
             }
             catch
             {
@@ -330,10 +337,9 @@ namespace System.Net.Quic.Implementations.MsQuic
                     evt.Data.NewConnection.Connection
                 );
 
-                uint status = MsQuicApi.Api.ConnectionSetConfigurationDelegate(
-                    connectionHandle,
-                    connectionConfiguration
-                );
+                uint status = MsQuicApi
+                    .Api
+                    .ConnectionSetConfigurationDelegate(connectionHandle, connectionConfiguration);
                 if (MsQuicStatusHelper.SuccessfulStatusCode(status))
                 {
                     msQuicConnection = new MsQuicConnection(
@@ -351,10 +357,9 @@ namespace System.Net.Quic.Implementations.MsQuic
                     );
 
                     if (
-                        !state.PendingConnections.TryAdd(
-                            connectionHandle.DangerousGetHandle(),
-                            msQuicConnection
-                        )
+                        !state
+                            .PendingConnections
+                            .TryAdd(connectionHandle.DangerousGetHandle(), msQuicConnection)
                     )
                     {
                         msQuicConnection.Dispose();

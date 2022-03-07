@@ -2009,7 +2009,8 @@ namespace Microsoft.EntityFrameworkCore
                     // is not nullable, so need to do this on the EF side.
                     context
                         .Set<OptionalSingleComposite2>()
-                        .Single(e => e.Id == orphanedIdC).BackId = null;
+                        .Single(e => e.Id == orphanedIdC)
+                        .BackId = null;
 
                     Assert.True(context.ChangeTracker.HasChanges());
 
@@ -2028,7 +2029,8 @@ namespace Microsoft.EntityFrameworkCore
                     Assert.Null(
                         context
                             .Set<OptionalSingleComposite2>()
-                            .Single(e => e.Id == orphanedIdC).BackId
+                            .Single(e => e.Id == orphanedIdC)
+                            .BackId
                     );
 
                     Assert.Same(root, removed.Root);
@@ -2052,7 +2054,8 @@ namespace Microsoft.EntityFrameworkCore
                     Assert.Null(
                         context
                             .Set<OptionalSingleComposite2>()
-                            .Single(e => e.Id == orphanedIdC).BackId
+                            .Single(e => e.Id == orphanedIdC)
+                            .BackId
                     );
                 }
             );

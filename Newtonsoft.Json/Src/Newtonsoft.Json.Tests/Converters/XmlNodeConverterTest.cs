@@ -2898,9 +2898,10 @@ namespace Newtonsoft.Json.Tests.Converters
             Newtonsoft.Json.JsonSerializerSettings settings =
                 new Newtonsoft.Json.JsonSerializerSettings();
             settings.Converters.Add(new Newtonsoft.Json.Converters.XmlNodeConverter());
-            Newtonsoft.Json.JsonSerializer serializer = Newtonsoft.Json.JsonSerializer.Create(
-                settings
-            );
+            Newtonsoft.Json.JsonSerializer serializer = Newtonsoft
+                .Json
+                .JsonSerializer
+                .Create(settings);
             using (
                 Newtonsoft.Json.JsonTextReader reader = new Newtonsoft.Json.JsonTextReader(
                     new System.IO.StreamReader(json)

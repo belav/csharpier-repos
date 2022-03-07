@@ -15,9 +15,9 @@ namespace Microsoft.EntityFrameworkCore.Query
 
         protected override NorthwindContext CreateNoTrackingContext() =>
             new NorthwindRelationalContext(
-                new DbContextOptionsBuilder(Fixture.CreateOptions()).UseQueryTrackingBehavior(
-                    QueryTrackingBehavior.NoTracking
-                ).Options
+                new DbContextOptionsBuilder(Fixture.CreateOptions())
+                    .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking)
+                    .Options
             );
     }
 }

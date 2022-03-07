@@ -1416,9 +1416,9 @@ namespace System.Net.Tests
 
                     if (IsAsync)
                     {
-                        await downloadProgressInvoked.Task.WaitAsync(
-                            TimeSpan.FromMilliseconds(TimeoutMilliseconds)
-                        );
+                        await downloadProgressInvoked
+                            .Task
+                            .WaitAsync(TimeSpan.FromMilliseconds(TimeoutMilliseconds));
                     }
                 }
             );
@@ -1451,9 +1451,9 @@ namespace System.Net.Tests
 
                     if (IsAsync)
                     {
-                        await downloadProgressInvokedWithContentLength.Task.WaitAsync(
-                            TimeSpan.FromMilliseconds(TimeoutMilliseconds)
-                        );
+                        await downloadProgressInvokedWithContentLength
+                            .Task
+                            .WaitAsync(TimeSpan.FromMilliseconds(TimeoutMilliseconds));
                     }
                 }
             );
@@ -1535,9 +1535,9 @@ namespace System.Net.Tests
             );
             if (IsAsync)
             {
-                await uploadProgressInvoked.Task.WaitAsync(
-                    TimeSpan.FromMilliseconds(TimeoutMilliseconds)
-                );
+                await uploadProgressInvoked
+                    .Task
+                    .WaitAsync(TimeSpan.FromMilliseconds(TimeoutMilliseconds));
             }
         }
 

@@ -37,7 +37,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit.NoPia
         {
             get
             {
-                return UnderlyingTypeParameter.AdaptedTypeParameterSymbol.HasReferenceTypeConstraint;
+                return UnderlyingTypeParameter
+                    .AdaptedTypeParameterSymbol
+                    .HasReferenceTypeConstraint;
             }
         }
 

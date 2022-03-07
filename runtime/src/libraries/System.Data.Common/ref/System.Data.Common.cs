@@ -205,7 +205,11 @@ namespace System.Data
     )]
     [System.ComponentModel.ToolboxItemAttribute(false)]
     [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
-        System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
+        System
+            .Diagnostics
+            .CodeAnalysis
+            .DynamicallyAccessedMemberTypes
+            .PublicParameterlessConstructor
     )]
     public partial class DataColumn : System.ComponentModel.MarshalByValueComponent
     {
@@ -1622,7 +1626,11 @@ namespace System.Data
     [System.Xml.Serialization.XmlRootAttribute("DataSet")]
     [System.Xml.Serialization.XmlSchemaProviderAttribute("GetDataSetSchema")]
     [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
-        System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
+        System
+            .Diagnostics
+            .CodeAnalysis
+            .DynamicallyAccessedMemberTypes
+            .PublicParameterlessConstructor
             | System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.NonPublicConstructors
     )]
     public partial class DataSet
@@ -2231,7 +2239,11 @@ namespace System.Data
     [System.ComponentModel.ToolboxItemAttribute(false)]
     [System.Xml.Serialization.XmlSchemaProviderAttribute("GetDataTableSchema")]
     [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
-        System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
+        System
+            .Diagnostics
+            .CodeAnalysis
+            .DynamicallyAccessedMemberTypes
+            .PublicParameterlessConstructor
             | System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.NonPublicConstructors
     )]
     public partial class DataTable
@@ -5069,7 +5081,11 @@ namespace System.Data.Common
     }
 
     [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
-        System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
+        System
+            .Diagnostics
+            .CodeAnalysis
+            .DynamicallyAccessedMemberTypes
+            .PublicParameterlessConstructor
     )]
     public partial class DataAdapter : System.ComponentModel.Component, System.Data.IDataAdapter
     {

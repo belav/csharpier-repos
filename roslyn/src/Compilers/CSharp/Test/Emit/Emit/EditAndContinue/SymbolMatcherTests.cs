@@ -208,15 +208,17 @@ class C
             var member1 = compilation1.GetMember<MethodSymbol>("B.F");
             Assert.Equal(
                 1,
-                (
-                    (PointerTypeSymbol)member1.Parameters[0].Type
-                ).PointedAtTypeWithAnnotations.CustomModifiers.Length
+                ((PointerTypeSymbol)member1.Parameters[0].Type)
+                    .PointedAtTypeWithAnnotations
+                    .CustomModifiers
+                    .Length
             );
             Assert.Equal(
                 1,
-                (
-                    (ArrayTypeSymbol)member1.ReturnType
-                ).ElementTypeWithAnnotations.CustomModifiers.Length
+                ((ArrayTypeSymbol)member1.ReturnType)
+                    .ElementTypeWithAnnotations
+                    .CustomModifiers
+                    .Length
             );
 
             var matcher = new CSharpSymbolMatcher(
@@ -235,15 +237,17 @@ class C
             Assert.NotNull(other);
             Assert.Equal(
                 1,
-                (
-                    (PointerTypeSymbol)other.Parameters[0].Type
-                ).PointedAtTypeWithAnnotations.CustomModifiers.Length
+                ((PointerTypeSymbol)other.Parameters[0].Type)
+                    .PointedAtTypeWithAnnotations
+                    .CustomModifiers
+                    .Length
             );
             Assert.Equal(
                 1,
-                (
-                    (ArrayTypeSymbol)other.ReturnType
-                ).ElementTypeWithAnnotations.CustomModifiers.Length
+                ((ArrayTypeSymbol)other.ReturnType)
+                    .ElementTypeWithAnnotations
+                    .CustomModifiers
+                    .Length
             );
         }
 
@@ -347,10 +351,12 @@ abstract class C
                 peAssemblySymbol
             );
 
-            var f0 = peAssemblySymbol.GlobalNamespace
+            var f0 = peAssemblySymbol
+                .GlobalNamespace
                 .GetMember<NamedTypeSymbol>("C")
                 .GetMember("F");
-            var g0 = peAssemblySymbol.GlobalNamespace
+            var g0 = peAssemblySymbol
+                .GlobalNamespace
                 .GetMember<NamedTypeSymbol>("C")
                 .GetMember("G");
             var f1 = compilation1.GetMember<MethodSymbol>("C.F");

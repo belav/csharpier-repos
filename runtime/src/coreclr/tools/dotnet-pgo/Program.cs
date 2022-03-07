@@ -429,10 +429,12 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                 );
                 if (result == 0 && commandLineOptions.InheritTimestamp)
                 {
-                    commandLineOptions.OutputFileName.CreationTimeUtc =
-                        commandLineOptions.InputFilesToMerge.Max(fi => fi.CreationTimeUtc);
-                    commandLineOptions.OutputFileName.LastWriteTimeUtc =
-                        commandLineOptions.InputFilesToMerge.Max(fi => fi.LastWriteTimeUtc);
+                    commandLineOptions.OutputFileName.CreationTimeUtc = commandLineOptions
+                        .InputFilesToMerge
+                        .Max(fi => fi.CreationTimeUtc);
+                    commandLineOptions.OutputFileName.LastWriteTimeUtc = commandLineOptions
+                        .InputFilesToMerge
+                        .Max(fi => fi.LastWriteTimeUtc);
                 }
 
                 return result;
@@ -739,7 +741,8 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                 int devirtToSameLikelihood70 = 0;
                 foreach ((MethodProfileData prof1, MethodProfileData prof2) in fgMatches)
                 {
-                    List<int> typeHandleHistogramCallSites = prof1.SchemaData
+                    List<int> typeHandleHistogramCallSites = prof1
+                        .SchemaData
                         .Concat(prof2.SchemaData)
                         .Where(
                             e =>
@@ -1507,9 +1510,9 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                     {
                         if (debugEntry.Type == DebugDirectoryEntryType.CodeView)
                         {
-                            var codeViewData = ecmaModule.PEReader.ReadCodeViewDebugDirectoryData(
-                                debugEntry
-                            );
+                            var codeViewData = ecmaModule
+                                .PEReader
+                                .ReadCodeViewDebugDirectoryData(debugEntry);
                             if (codeViewData.Path.EndsWith("ni.pdb"))
                                 continue;
                             if (codeViewData.Guid != e.ManagedPdbSignature)
@@ -2030,14 +2033,20 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                                             // Same function at least, check for same basic block
                                             toFG ??= GetFlowGraph(endRunMeth.Method);
                                             BasicBlock endRunBB = toFG.Lookup(
-                                                endRunMeth.NativeToILMap.Lookup(
-                                                    (uint)(lbrRuns[j].end - endRunMeth.StartAddress)
-                                                )
+                                                endRunMeth
+                                                    .NativeToILMap
+                                                    .Lookup(
+                                                        (uint)(
+                                                            lbrRuns[j].end - endRunMeth.StartAddress
+                                                        )
+                                                    )
                                             );
                                             BasicBlock toBB = toFG.Lookup(
-                                                endRunMeth.NativeToILMap.Lookup(
-                                                    (uint)(prevTo - endRunMeth.StartAddress)
-                                                )
+                                                endRunMeth
+                                                    .NativeToILMap
+                                                    .Lookup(
+                                                        (uint)(prevTo - endRunMeth.StartAddress)
+                                                    )
                                             );
                                             if (endRunBB == toBB && prevTo > lbrRuns[j].end)
                                             {

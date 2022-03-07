@@ -45,19 +45,18 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             if (
                 analyzerConfigOptions.HasValue
                 && (
-                    !compilationOptions.SpecificDiagnosticOptions.TryGetValue(
-                        descriptor.Id,
-                        out var reportDiagnostic
-                    )
+                    !compilationOptions
+                        .SpecificDiagnosticOptions
+                        .TryGetValue(descriptor.Id, out var reportDiagnostic)
                     || reportDiagnostic == ReportDiagnostic.Default
                 )
             )
             {
                 if (
-                    analyzerConfigOptions.Value.TreeOptions.TryGetValue(
-                        descriptor.Id,
-                        out reportDiagnostic
-                    )
+                    analyzerConfigOptions
+                        .Value
+                        .TreeOptions
+                        .TryGetValue(descriptor.Id, out reportDiagnostic)
                         && reportDiagnostic != ReportDiagnostic.Default
                     || TryGetSeverityFromBulkConfiguration(
                         descriptor,
@@ -247,10 +246,10 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             // Otherwise, if user has explicitly configured default severity for all analyzer diagnostics, that should be respected.
             // For example, 'dotnet_analyzer_diagnostic.severity = error'
             if (
-                analyzerConfigOptions.AnalyzerOptions.TryGetValue(
-                    DotnetAnalyzerDiagnosticSeverityKey,
-                    out value
-                ) && EditorConfigSeverityStrings.TryParse(value, out severity)
+                analyzerConfigOptions
+                    .AnalyzerOptions
+                    .TryGetValue(DotnetAnalyzerDiagnosticSeverityKey, out value)
+                && EditorConfigSeverityStrings.TryParse(value, out severity)
             )
             {
                 return true;

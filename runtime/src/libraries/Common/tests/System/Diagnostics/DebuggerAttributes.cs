@@ -66,7 +66,8 @@ namespace System.Diagnostics
             );
             // Enums in attribute constructors are boxed as ints, so cast to int? first.
             return (DebuggerBrowsableState?)(int?)debuggerBrowsableAttribute
-                ?.ConstructorArguments.Single()
+                ?.ConstructorArguments
+                .Single()
                 .Value;
         }
 
@@ -108,7 +109,8 @@ namespace System.Diagnostics
         {
             // Get the DebuggerTypeProxyAttibute for obj
             var attrs = type.GetTypeInfo()
-                .CustomAttributes.Where(a => a.AttributeType == typeof(DebuggerTypeProxyAttribute))
+                .CustomAttributes
+                .Where(a => a.AttributeType == typeof(DebuggerTypeProxyAttribute))
                 .ToArray();
             if (attrs.Length != 1)
             {
@@ -136,7 +138,8 @@ namespace System.Diagnostics
             var objType = obj.GetType();
             var attrs = objType
                 .GetTypeInfo()
-                .CustomAttributes.Where(a => a.AttributeType == typeof(DebuggerDisplayAttribute))
+                .CustomAttributes
+                .Where(a => a.AttributeType == typeof(DebuggerDisplayAttribute))
                 .ToArray();
             if (attrs.Length != 1)
             {

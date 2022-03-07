@@ -4005,7 +4005,9 @@ class X : List<int>
                     from node in tree.GetRoot().DescendantNodes()
                     where node.IsKind(SyntaxKind.CollectionInitializerExpression)
                     select (InitializerExpressionSyntax)node
-                ).Single().Expressions;
+                )
+                    .Single()
+                    .Expressions;
 
             SymbolInfo symbolInfo;
 
@@ -4057,7 +4059,9 @@ class X : Base
                     from node in tree.GetRoot().DescendantNodes()
                     where node.IsKind(SyntaxKind.CollectionInitializerExpression)
                     select (InitializerExpressionSyntax)node
-                ).Single().Expressions;
+                )
+                    .Single()
+                    .Expressions;
 
             SymbolInfo symbolInfo;
 
@@ -4132,7 +4136,9 @@ class Y
                     from node in tree.GetRoot().DescendantNodes()
                     where node.IsKind(SyntaxKind.CollectionInitializerExpression)
                     select (InitializerExpressionSyntax)node
-                ).Single().Expressions;
+                )
+                    .Single()
+                    .Expressions;
 
             SymbolInfo symbolInfo;
 
@@ -4175,7 +4181,9 @@ class X : List<int>
                     from node in tree.GetRoot().DescendantNodes()
                     where node.IsKind(SyntaxKind.CollectionInitializerExpression)
                     select (InitializerExpressionSyntax)node
-                ).Single().Expressions;
+                )
+                    .Single()
+                    .Expressions;
 
             SymbolInfo symbolInfo;
 
@@ -4219,7 +4227,9 @@ class X : List<int>
                     from node in tree.GetRoot().DescendantNodes()
                     where node.IsKind(SyntaxKind.CollectionInitializerExpression)
                     select (InitializerExpressionSyntax)node
-                ).Single().Expressions;
+                )
+                    .Single()
+                    .Expressions;
 
             SymbolInfo symbolInfo;
 
@@ -4487,7 +4497,8 @@ class C
                     .DescendantNodes()
                     .OfType<InitializerExpressionSyntax>()
                     .Skip(1)
-                    .Single().Expressions;
+                    .Single()
+                    .Expressions;
 
             SymbolInfo symbolInfo;
 

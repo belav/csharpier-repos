@@ -15,9 +15,9 @@ namespace System.Text.Json.Serialization
 
         public ReadBufferState(int defaultBufferSize)
         {
-            Buffer = ArrayPool<byte>.Shared.Rent(
-                Math.Max(defaultBufferSize, JsonConstants.Utf8Bom.Length)
-            );
+            Buffer = ArrayPool<byte>
+                .Shared
+                .Rent(Math.Max(defaultBufferSize, JsonConstants.Utf8Bom.Length));
             BytesInBuffer = ClearMax = 0;
             IsFirstIteration = true;
             IsFinalBlock = false;

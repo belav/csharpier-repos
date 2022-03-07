@@ -21,9 +21,11 @@ namespace Microsoft.EntityFrameworkCore.Storage
 
             Assert.Equal(
                 RelationalStrings.NamedConnectionStringNotFound("foo"),
-                Assert.Throws<InvalidOperationException>(
-                    () => resolver.ResolveConnectionString("name=foo")
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(
+                        () => resolver.ResolveConnectionString("name=foo")
+                    )
+                    .Message
             );
         }
 
@@ -34,9 +36,11 @@ namespace Microsoft.EntityFrameworkCore.Storage
 
             Assert.Equal(
                 RelationalStrings.NamedConnectionStringNotFound("foo"),
-                Assert.Throws<InvalidOperationException>(
-                    () => resolver.ResolveConnectionString("name=foo")
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(
+                        () => resolver.ResolveConnectionString("name=foo")
+                    )
+                    .Message
             );
         }
 
@@ -49,9 +53,11 @@ namespace Microsoft.EntityFrameworkCore.Storage
 
             Assert.Equal(
                 RelationalStrings.NamedConnectionStringNotFound("foo"),
-                Assert.Throws<InvalidOperationException>(
-                    () => resolver.ResolveConnectionString("name=foo")
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(
+                        () => resolver.ResolveConnectionString("name=foo")
+                    )
+                    .Message
             );
         }
 

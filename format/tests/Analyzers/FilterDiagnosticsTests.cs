@@ -139,10 +139,9 @@ dotnet_diagnostic.DiagnosticAnalyzerId.severity = warning
         {
             var analyzersAndFixers = await GetAnalyzersAndFixersAsync();
 
-            return solution.Projects.ToImmutableDictionary(
-                project => project.Id,
-                project => analyzersAndFixers
-            );
+            return solution
+                .Projects
+                .ToImmutableDictionary(project => project.Id, project => analyzersAndFixers);
         }
 
         private protected override ICodeFormatter Formatter { get; }

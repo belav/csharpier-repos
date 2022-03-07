@@ -25,20 +25,24 @@ namespace System.Reflection
                               && otherPropertyInfo.DeclaringType != null
                               && (
                                   propertyInfo.DeclaringType == otherPropertyInfo.DeclaringType
-                                  || propertyInfo.DeclaringType
+                                  || propertyInfo
+                                      .DeclaringType
                                       .GetTypeInfo()
                                       .IsSubclassOf(otherPropertyInfo.DeclaringType)
-                                  || otherPropertyInfo.DeclaringType
+                                  || otherPropertyInfo
+                                      .DeclaringType
                                       .GetTypeInfo()
                                       .IsSubclassOf(propertyInfo.DeclaringType)
-                                  || propertyInfo.DeclaringType
+                                  || propertyInfo
+                                      .DeclaringType
                                       .GetTypeInfo()
-                                      .ImplementedInterfaces.Contains(
-                                          otherPropertyInfo.DeclaringType
-                                      )
-                                  || otherPropertyInfo.DeclaringType
+                                      .ImplementedInterfaces
+                                      .Contains(otherPropertyInfo.DeclaringType)
+                                  || otherPropertyInfo
+                                      .DeclaringType
                                       .GetTypeInfo()
-                                      .ImplementedInterfaces.Contains(propertyInfo.DeclaringType)
+                                      .ImplementedInterfaces
+                                      .Contains(propertyInfo.DeclaringType)
                               )
                           )
                       )
@@ -60,12 +64,15 @@ namespace System.Reflection
                               && otherPropertyInfo.DeclaringType != null
                               && (
                                   propertyInfo.DeclaringType == otherPropertyInfo.DeclaringType
-                                  || otherPropertyInfo.DeclaringType
+                                  || otherPropertyInfo
+                                      .DeclaringType
                                       .GetTypeInfo()
                                       .IsSubclassOf(propertyInfo.DeclaringType)
-                                  || otherPropertyInfo.DeclaringType
+                                  || otherPropertyInfo
+                                      .DeclaringType
                                       .GetTypeInfo()
-                                      .ImplementedInterfaces.Contains(propertyInfo.DeclaringType)
+                                      .ImplementedInterfaces
+                                      .Contains(propertyInfo.DeclaringType)
                               )
                           )
                       )

@@ -149,9 +149,9 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
 
             Assert.Equal(
                 CoreStrings.NoParameterlessConstructor(nameof(WithProperties)),
-                Assert.Throws<InvalidOperationException>(
-                    () => entityType.GetInstanceFactory()
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(() => entityType.GetInstanceFactory())
+                    .Message
             );
         }
 

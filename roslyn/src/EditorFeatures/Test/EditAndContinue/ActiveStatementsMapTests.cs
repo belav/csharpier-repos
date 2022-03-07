@@ -140,13 +140,12 @@ S5();
 }";
 
             var solution =
-                workspace.CurrentSolution
+                workspace
+                    .CurrentSolution
                     .AddProject("proj", "proj", LanguageNames.CSharp)
-                    .AddDocument(
-                        "doc",
-                        SourceText.From(source, Encoding.UTF8),
-                        filePath: "a.cs"
-                    ).Project.Solution;
+                    .AddDocument("doc", SourceText.From(source, Encoding.UTF8), filePath: "a.cs")
+                    .Project
+                    .Solution;
 
             var project = solution.Projects.Single();
             var document = project.Documents.Single();

@@ -3351,7 +3351,8 @@ WHERE (c[""Discriminator""] = ""Customer"")"
                                 {
                                     A = c.Orders
                                         .OrderByDescending(o => o.OrderID)
-                                        .FirstOrDefault().OrderDate
+                                        .FirstOrDefault()
+                                        .OrderDate
                                 }
                         )
                         .OrderBy(n => n.A),
@@ -3465,7 +3466,8 @@ WHERE (c[""Discriminator""] = ""Customer"")"
                                     Property =
                                         c.Orders
                                             .OrderByDescending(o => o.OrderID)
-                                            .FirstOrDefault().OrderDate
+                                            .FirstOrDefault()
+                                            .OrderDate
                                 }
                         )
                         .OrderBy(n => n.Property),
@@ -4136,16 +4138,17 @@ OFFSET @__p_0 LIMIT @__p_1"
             using (var context = CreateContext())
             {
                 var results = (
-                    context.Customers
+                    context
+                        .Customers
                         .Where(c => c.CustomerID == "ALFKI")
                         .Select(
                             c =>
                                 new
                                 {
                                     c.CustomerID,
-                                    Orders = context.Orders.Where(
-                                        o => o.Customer.CustomerID == c.CustomerID
-                                    )
+                                    Orders = context
+                                        .Orders
+                                        .Where(o => o.Customer.CustomerID == c.CustomerID)
                                 }
                         )
                         .ToList()
@@ -4305,7 +4308,8 @@ WHERE (c[""Discriminator""] = ""Customer"")"
                                 c.Orders
                                     .Where(o => o.OrderID < 10250)
                                     .OrderBy(o => o.OrderID)
-                                    .FirstOrDefault().OrderDetails == null
+                                    .FirstOrDefault()
+                                    .OrderDetails == null
                         ),
                 ss =>
                     ss.Set<Customer>()
@@ -4340,7 +4344,8 @@ WHERE (c[""Discriminator""] = ""Customer"")"
                                 c.Orders
                                     .Where(o => o.OrderID < 10250)
                                     .OrderBy(o => o.OrderID)
-                                    .FirstOrDefault().Customer == null
+                                    .FirstOrDefault()
+                                    .Customer == null
                         ),
                 ss =>
                     ss.Set<Customer>()

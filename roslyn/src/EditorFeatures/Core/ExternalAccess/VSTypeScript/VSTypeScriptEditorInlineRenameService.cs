@@ -37,7 +37,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript
             CancellationToken cancellationToken
         )
         {
-            var info = await _service.Value
+            var info = await _service
+                .Value
                 .GetRenameInfoAsync(document, position, cancellationToken)
                 .ConfigureAwait(false);
             if (info != null)

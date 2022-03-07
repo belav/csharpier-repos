@@ -25,15 +25,15 @@ namespace System.ServiceModel.Syndication.Tests
             Assert.Equal(0, extension.GetObject<ExtensionObject>().Value);
             Assert.Equal(
                 0,
-                extension.GetObject<ExtensionObject>(
-                    new DataContractSerializer(typeof(ExtensionObject))
-                ).Value
+                extension
+                    .GetObject<ExtensionObject>(new DataContractSerializer(typeof(ExtensionObject)))
+                    .Value
             );
             Assert.Equal(
                 10,
-                extension.GetObject<ExtensionObject>(
-                    new XmlSerializer(typeof(ExtensionObject))
-                ).Value
+                extension
+                    .GetObject<ExtensionObject>(new XmlSerializer(typeof(ExtensionObject)))
+                    .Value
             );
         }
 
@@ -56,15 +56,17 @@ namespace System.ServiceModel.Syndication.Tests
                 Assert.Equal(0, extension.GetObject<ExtensionObject>().Value);
                 Assert.Equal(
                     0,
-                    extension.GetObject<ExtensionObject>(
-                        new DataContractSerializer(typeof(ExtensionObject))
-                    ).Value
+                    extension
+                        .GetObject<ExtensionObject>(
+                            new DataContractSerializer(typeof(ExtensionObject))
+                        )
+                        .Value
                 );
                 Assert.Equal(
                     10,
-                    extension.GetObject<ExtensionObject>(
-                        new XmlSerializer(typeof(ExtensionObject))
-                    ).Value
+                    extension
+                        .GetObject<ExtensionObject>(new XmlSerializer(typeof(ExtensionObject)))
+                        .Value
                 );
             }
         }
@@ -328,15 +330,15 @@ namespace System.ServiceModel.Syndication.Tests
             Assert.Equal(10, extension.GetObject<ExtensionObject>().Value);
             Assert.Equal(
                 10,
-                extension.GetObject<ExtensionObject>(
-                    new DataContractSerializer(typeof(ExtensionObject))
-                ).Value
+                extension
+                    .GetObject<ExtensionObject>(new DataContractSerializer(typeof(ExtensionObject)))
+                    .Value
             );
             Assert.Equal(
                 10,
-                extension.GetObject<ExtensionObject>(
-                    new XmlSerializer(typeof(ExtensionObject))
-                ).Value
+                extension
+                    .GetObject<ExtensionObject>(new XmlSerializer(typeof(ExtensionObject)))
+                    .Value
             );
 
             // Get Object first.

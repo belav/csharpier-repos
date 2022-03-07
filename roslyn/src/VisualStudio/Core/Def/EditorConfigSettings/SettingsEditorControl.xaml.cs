@@ -69,7 +69,8 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings
             }
 
             var solution = _workspace.CurrentSolution;
-            var analyzerConfigDocument = solution.Projects
+            var analyzerConfigDocument = solution
+                .Projects
                 .Select(p => p.TryGetExistingAnalyzerConfigDocumentAtPath(_filepath))
                 .FirstOrDefault();
             if (analyzerConfigDocument is null)
@@ -77,24 +78,26 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings
                 return;
             }
 
-            _threadingContext.JoinableTaskFactory.Run(
-                async () =>
-                {
-                    var originalText = await analyzerConfigDocument
-                        .GetTextAsync(default)
-                        .ConfigureAwait(false);
-                    var updatedText = await _whitespaceView
-                        .UpdateEditorConfigAsync(originalText)
-                        .ConfigureAwait(false);
-                    updatedText = await _codeStyleView
-                        .UpdateEditorConfigAsync(updatedText)
-                        .ConfigureAwait(false);
-                    updatedText = await _analyzerView
-                        .UpdateEditorConfigAsync(updatedText)
-                        .ConfigureAwait(false);
-                    _textUpdater.UpdateText(updatedText.GetTextChanges(originalText));
-                }
-            );
+            _threadingContext
+                .JoinableTaskFactory
+                .Run(
+                    async () =>
+                    {
+                        var originalText = await analyzerConfigDocument
+                            .GetTextAsync(default)
+                            .ConfigureAwait(false);
+                        var updatedText = await _whitespaceView
+                            .UpdateEditorConfigAsync(originalText)
+                            .ConfigureAwait(false);
+                        updatedText = await _codeStyleView
+                            .UpdateEditorConfigAsync(updatedText)
+                            .ConfigureAwait(false);
+                        updatedText = await _analyzerView
+                            .UpdateEditorConfigAsync(updatedText)
+                            .ConfigureAwait(false);
+                        _textUpdater.UpdateText(updatedText.GetTextChanges(originalText));
+                    }
+                );
         }
 
         internal IWpfTableControl[] GetTableControls() =>

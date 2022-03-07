@@ -22,7 +22,8 @@ public class AssemblyTestLogTests : LoggedTest
         ThisAssembly
             .GetCustomAttributes()
             .OfType<TestOutputDirectoryAttribute>()
-            .FirstOrDefault().TargetFramework;
+            .FirstOrDefault()
+            .TargetFramework;
 
     [Fact]
     public void FunctionalLogs_LogsPreservedFromNonQuarantinedTest() { }

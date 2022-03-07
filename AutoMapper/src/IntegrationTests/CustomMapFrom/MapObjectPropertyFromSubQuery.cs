@@ -56,20 +56,22 @@ namespace AutoMapper.IntegrationTests
         {
             protected override void Seed(Context context)
             {
-                context.Customers.Add(
-                    new Customer
-                    {
-                        Id = 1,
-                        FirstName = "Bob",
-                        LastName = "Smith",
-                        Items = new[]
+                context
+                    .Customers
+                    .Add(
+                        new Customer
                         {
-                            new Item { Code = 1 },
-                            new Item { Code = 3 },
-                            new Item { Code = 5 }
+                            Id = 1,
+                            FirstName = "Bob",
+                            LastName = "Smith",
+                            Items = new[]
+                            {
+                                new Item { Code = 1 },
+                                new Item { Code = 3 },
+                                new Item { Code = 5 }
+                            }
                         }
-                    }
-                );
+                    );
                 base.Seed(context);
             }
         }
@@ -147,20 +149,22 @@ namespace AutoMapper.IntegrationTests
         {
             protected override void Seed(Context context)
             {
-                context.Customers.Add(
-                    new Customer
-                    {
-                        Id = 1,
-                        FirstName = "Bob",
-                        LastName = "Smith",
-                        Items = new[]
+                context
+                    .Customers
+                    .Add(
+                        new Customer
                         {
-                            new Item { Code = 1 },
-                            new Item { Code = 3 },
-                            new Item { Code = 5 }
+                            Id = 1,
+                            FirstName = "Bob",
+                            LastName = "Smith",
+                            Items = new[]
+                            {
+                                new Item { Code = 1 },
+                                new Item { Code = 3 },
+                                new Item { Code = 5 }
+                            }
                         }
-                    }
-                );
+                    );
                 base.Seed(context);
             }
         }
@@ -208,7 +212,8 @@ namespace AutoMapper.IntegrationTests
                             o =>
                                 o.MapFrom(
                                     source =>
-                                        source.Articles
+                                        source
+                                            .Articles
                                             .Where(
                                                 x =>
                                                     x.IsDefault
@@ -315,21 +320,23 @@ namespace AutoMapper.IntegrationTests
         {
             protected override void Seed(ClientContext context)
             {
-                context.Products.Add(
-                    new Product
-                    {
-                        ECommercePublished = true,
-                        Articles = new[]
+                context
+                    .Products
+                    .Add(
+                        new Product
                         {
-                            new Article
+                            ECommercePublished = true,
+                            Articles = new[]
                             {
-                                IsDefault = true,
-                                NationId = 1,
-                                ProductId = 1
+                                new Article
+                                {
+                                    IsDefault = true,
+                                    NationId = 1,
+                                    ProductId = 1
+                                }
                             }
                         }
-                    }
-                );
+                    );
             }
         }
 
@@ -357,7 +364,8 @@ namespace AutoMapper.IntegrationTests
                             {
                                 o.MapFrom(
                                     source =>
-                                        source.Articles
+                                        source
+                                            .Articles
                                             .Where(
                                                 x =>
                                                     x.IsDefault
@@ -439,21 +447,23 @@ namespace AutoMapper.IntegrationTests
         {
             protected override void Seed(ClientContext context)
             {
-                context.Products.Add(
-                    new Product
-                    {
-                        ECommercePublished = true,
-                        Articles = new[]
+                context
+                    .Products
+                    .Add(
+                        new Product
                         {
-                            new Article
+                            ECommercePublished = true,
+                            Articles = new[]
                             {
-                                IsDefault = true,
-                                NationId = 1,
-                                ProductId = 1
+                                new Article
+                                {
+                                    IsDefault = true,
+                                    NationId = 1,
+                                    ProductId = 1
+                                }
                             }
                         }
-                    }
-                );
+                    );
             }
         }
 
@@ -480,7 +490,8 @@ namespace AutoMapper.IntegrationTests
                             o =>
                                 o.MapFrom(
                                     source =>
-                                        source.Articles
+                                        source
+                                            .Articles
                                             .Where(
                                                 x =>
                                                     x.IsDefault
@@ -565,21 +576,23 @@ namespace AutoMapper.IntegrationTests
         {
             protected override void Seed(ClientContext context)
             {
-                context.Products.Add(
-                    new Product
-                    {
-                        ECommercePublished = true,
-                        Articles = new[]
+                context
+                    .Products
+                    .Add(
+                        new Product
                         {
-                            new Article
+                            ECommercePublished = true,
+                            Articles = new[]
                             {
-                                IsDefault = true,
-                                NationId = 1,
-                                ProductId = 1
+                                new Article
+                                {
+                                    IsDefault = true,
+                                    NationId = 1,
+                                    ProductId = 1
+                                }
                             }
                         }
-                    }
-                );
+                    );
             }
         }
 
@@ -607,7 +620,8 @@ namespace AutoMapper.IntegrationTests
                             o =>
                                 o.MapFrom(
                                     source =>
-                                        source.Articles
+                                        source
+                                            .Articles
                                             .Where(
                                                 x =>
                                                     x.IsDefault
@@ -693,39 +707,43 @@ namespace AutoMapper.IntegrationTests
         {
             protected override void Seed(ClientContext context)
             {
-                var product1 = context.Products.Add(
-                    new Product
-                    {
-                        ECommercePublished = true,
-                        Articles = new[]
+                var product1 = context
+                    .Products
+                    .Add(
+                        new Product
                         {
-                            new Article
+                            ECommercePublished = true,
+                            Articles = new[]
                             {
-                                IsDefault = true,
-                                NationId = 1,
-                                ProductId = 1
+                                new Article
+                                {
+                                    IsDefault = true,
+                                    NationId = 1,
+                                    ProductId = 1
+                                }
                             }
                         }
-                    }
-                );
-                var product2 = context.Products.Add(
-                    new Product
-                    {
-                        ECommercePublished = true,
-                        Articles = new[]
+                    );
+                var product2 = context
+                    .Products
+                    .Add(
+                        new Product
                         {
-                            new Article
+                            ECommercePublished = true,
+                            Articles = new[]
                             {
-                                IsDefault = true,
-                                NationId = 1,
-                                ProductId = 2
+                                new Article
+                                {
+                                    IsDefault = true,
+                                    NationId = 1,
+                                    ProductId = 2
+                                }
                             }
                         }
-                    }
-                );
-                context.ProductArticles.Add(
-                    new ProductArticle { Product = product1, OtherProduct = product2 }
-                );
+                    );
+                context
+                    .ProductArticles
+                    .Add(new ProductArticle { Product = product1, OtherProduct = product2 });
             }
         }
 
@@ -754,7 +772,8 @@ namespace AutoMapper.IntegrationTests
                             o =>
                                 o.MapFrom(
                                     source =>
-                                        source.Articles
+                                        source
+                                            .Articles
                                             .Where(
                                                 x =>
                                                     x.IsDefault
@@ -846,21 +865,23 @@ namespace AutoMapper.IntegrationTests
         {
             protected override void Seed(ClientContext context)
             {
-                var product = context.Products.Add(
-                    new Product
-                    {
-                        ECommercePublished = true,
-                        Articles = new[]
+                var product = context
+                    .Products
+                    .Add(
+                        new Product
                         {
-                            new Article
+                            ECommercePublished = true,
+                            Articles = new[]
                             {
-                                IsDefault = true,
-                                NationId = 1,
-                                ProductId = 1
+                                new Article
+                                {
+                                    IsDefault = true,
+                                    NationId = 1,
+                                    ProductId = 1
+                                }
                             }
                         }
-                    }
-                );
+                    );
                 context.ProductArticles.Add(new ProductArticle { Products = new[] { product } });
             }
         }
@@ -891,7 +912,8 @@ namespace AutoMapper.IntegrationTests
                             o =>
                                 o.MapFrom(
                                     source =>
-                                        source.Articles
+                                        source
+                                            .Articles
                                             .Where(
                                                 x =>
                                                     x.IsDefault
@@ -999,21 +1021,23 @@ namespace AutoMapper.IntegrationTests
         {
             protected override void Seed(ClientContext context)
             {
-                var product = context.Products.Add(
-                    new Product
-                    {
-                        ECommercePublished = true,
-                        Articles = new[]
+                var product = context
+                    .Products
+                    .Add(
+                        new Product
                         {
-                            new Article
+                            ECommercePublished = true,
+                            Articles = new[]
                             {
-                                IsDefault = true,
-                                NationId = 1,
-                                ProductId = 1
+                                new Article
+                                {
+                                    IsDefault = true,
+                                    NationId = 1,
+                                    ProductId = 1
+                                }
                             }
                         }
-                    }
-                );
+                    );
                 context.ProductArticles.Add(new ProductArticle { Products = new[] { product } });
             }
         }
@@ -1230,20 +1254,22 @@ namespace AutoMapper.IntegrationTests
         {
             protected override void Seed(ClientContext context)
             {
-                context.ProductReviews.AddRange(
-                    new[]
-                    {
-                        new ProductReview
+                context
+                    .ProductReviews
+                    .AddRange(
+                        new[]
                         {
-                            Product = new Product
+                            new ProductReview
                             {
-                                Brand = new Brand { Owners = { new Owner { Name = "Owner" } } }
-                            }
-                        },
-                        new ProductReview { Product = new Product { Brand = new Brand { } } },
-                        new ProductReview { Product = new Product { } }
-                    }
-                );
+                                Product = new Product
+                                {
+                                    Brand = new Brand { Owners = { new Owner { Name = "Owner" } } }
+                                }
+                            },
+                            new ProductReview { Product = new Product { Brand = new Brand { } } },
+                            new ProductReview { Product = new Product { } }
+                        }
+                    );
             }
         }
 

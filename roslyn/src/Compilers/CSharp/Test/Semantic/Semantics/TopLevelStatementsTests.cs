@@ -234,9 +234,9 @@ void local() => System.Console.WriteLine(2);
 
             comp = CreateCompilation(
                 text1,
-                options: TestOptions.DebugExe.WithNullableContextOptions(
-                    NullableContextOptions.Enable
-                ),
+                options: TestOptions
+                    .DebugExe
+                    .WithNullableContextOptions(NullableContextOptions.Enable),
                 parseOptions: DefaultParseOptions
             );
             verifyModel(comp, comp.SyntaxTrees[0], nullableEnabled: true);
@@ -410,9 +410,9 @@ IMethodBodyOperation (OperationKind.MethodBody, Type: null) (Syntax: 'local(); .
 
             comp = CreateCompilation(
                 new[] { text1, text2 },
-                options: TestOptions.DebugExe.WithNullableContextOptions(
-                    NullableContextOptions.Enable
-                ),
+                options: TestOptions
+                    .DebugExe
+                    .WithNullableContextOptions(NullableContextOptions.Enable),
                 parseOptions: DefaultParseOptions
             );
             verifyModel(comp, comp.SyntaxTrees[0], comp.SyntaxTrees[1], nullableEnabled: true);
@@ -682,9 +682,9 @@ void local() => System.Console.WriteLine(i);
 
                 Assert.DoesNotContain(
                     declSymbol,
-                    model1.AnalyzeDataFlow(
-                        localDecl.Ancestors().OfType<StatementSyntax>().First()
-                    ).DataFlowsOut
+                    model1
+                        .AnalyzeDataFlow(localDecl.Ancestors().OfType<StatementSyntax>().First())
+                        .DataFlowsOut
                 );
 
                 var model2 = comp.GetSemanticModel(tree2);
@@ -824,9 +824,9 @@ void local() => System.Console.WriteLine(i);
 
                 Assert.Contains(
                     declSymbol,
-                    model1.AnalyzeDataFlow(
-                        localDecl.Ancestors().OfType<StatementSyntax>().First()
-                    ).DataFlowsOut
+                    model1
+                        .AnalyzeDataFlow(localDecl.Ancestors().OfType<StatementSyntax>().First())
+                        .DataFlowsOut
                 );
 
                 var localRef = tree1
@@ -1220,14 +1220,16 @@ System.Console.Write(x);
             Assert.Equal("System.String x", symbol1.ToTestDisplayString());
             Assert.Same(
                 symbol1,
-                model1.GetSymbolInfo(
-                    tree1
-                        .GetRoot()
-                        .DescendantNodes()
-                        .OfType<IdentifierNameSyntax>()
-                        .Where(id => id.Identifier.ValueText == "x")
-                        .Single()
-                ).Symbol
+                model1
+                    .GetSymbolInfo(
+                        tree1
+                            .GetRoot()
+                            .DescendantNodes()
+                            .OfType<IdentifierNameSyntax>()
+                            .Where(id => id.Identifier.ValueText == "x")
+                            .Single()
+                    )
+                    .Symbol
             );
 
             var tree2 = comp.SyntaxTrees[1];
@@ -1238,14 +1240,16 @@ System.Console.Write(x);
             Assert.Equal("System.Int32 x", symbol2.ToTestDisplayString());
             Assert.Same(
                 symbol2,
-                model2.GetSymbolInfo(
-                    tree2
-                        .GetRoot()
-                        .DescendantNodes()
-                        .OfType<IdentifierNameSyntax>()
-                        .Where(id => id.Identifier.ValueText == "x")
-                        .Single()
-                ).Symbol
+                model2
+                    .GetSymbolInfo(
+                        tree2
+                            .GetRoot()
+                            .DescendantNodes()
+                            .OfType<IdentifierNameSyntax>()
+                            .Where(id => id.Identifier.ValueText == "x")
+                            .Single()
+                    )
+                    .Symbol
             );
         }
 
@@ -1382,14 +1386,16 @@ System.Console.Write(x);
             Assert.Equal("System.String x", symbol1.ToTestDisplayString());
             Assert.Same(
                 symbol1,
-                model1.GetSymbolInfo(
-                    tree1
-                        .GetRoot()
-                        .DescendantNodes()
-                        .OfType<IdentifierNameSyntax>()
-                        .Where(id => id.Identifier.ValueText == "x")
-                        .First()
-                ).Symbol
+                model1
+                    .GetSymbolInfo(
+                        tree1
+                            .GetRoot()
+                            .DescendantNodes()
+                            .OfType<IdentifierNameSyntax>()
+                            .Where(id => id.Identifier.ValueText == "x")
+                            .First()
+                    )
+                    .Symbol
             );
 
             var symbol2 = model1.GetDeclaredSymbol(
@@ -1403,15 +1409,17 @@ System.Console.Write(x);
             Assert.Equal("System.Int32 x", symbol2.ToTestDisplayString());
             Assert.Same(
                 symbol1,
-                model1.GetSymbolInfo(
-                    tree1
-                        .GetRoot()
-                        .DescendantNodes()
-                        .OfType<IdentifierNameSyntax>()
-                        .Where(id => id.Identifier.ValueText == "x")
-                        .Skip(1)
-                        .Single()
-                ).Symbol
+                model1
+                    .GetSymbolInfo(
+                        tree1
+                            .GetRoot()
+                            .DescendantNodes()
+                            .OfType<IdentifierNameSyntax>()
+                            .Where(id => id.Identifier.ValueText == "x")
+                            .Skip(1)
+                            .Single()
+                    )
+                    .Symbol
             );
         }
 
@@ -1484,14 +1492,16 @@ System.Console.Write(args);
             Assert.Equal("System.String args", symbol1.ToTestDisplayString());
             Assert.Same(
                 symbol1,
-                model1.GetSymbolInfo(
-                    tree1
-                        .GetRoot()
-                        .DescendantNodes()
-                        .OfType<IdentifierNameSyntax>()
-                        .Where(id => id.Identifier.ValueText == "args")
-                        .Single()
-                ).Symbol
+                model1
+                    .GetSymbolInfo(
+                        tree1
+                            .GetRoot()
+                            .DescendantNodes()
+                            .OfType<IdentifierNameSyntax>()
+                            .Where(id => id.Identifier.ValueText == "args")
+                            .Single()
+                    )
+                    .Symbol
             );
         }
 
@@ -6308,14 +6318,16 @@ void local2()
             Assert.Equal("void local1(System.Int32 x)", symbol1.ToTestDisplayString());
             Assert.Same(
                 symbol1,
-                model1.GetSymbolInfo(
-                    tree1
-                        .GetRoot()
-                        .DescendantNodes()
-                        .OfType<IdentifierNameSyntax>()
-                        .Where(id => id.Identifier.ValueText == "local1")
-                        .Single()
-                ).Symbol
+                model1
+                    .GetSymbolInfo(
+                        tree1
+                            .GetRoot()
+                            .DescendantNodes()
+                            .OfType<IdentifierNameSyntax>()
+                            .Where(id => id.Identifier.ValueText == "local1")
+                            .Single()
+                    )
+                    .Symbol
             );
 
             var tree2 = comp.SyntaxTrees[1];
@@ -6326,14 +6338,16 @@ void local2()
             Assert.Equal("void local1(System.Byte y)", symbol2.ToTestDisplayString());
             Assert.Same(
                 symbol2,
-                model2.GetSymbolInfo(
-                    tree2
-                        .GetRoot()
-                        .DescendantNodes()
-                        .OfType<IdentifierNameSyntax>()
-                        .Where(id => id.Identifier.ValueText == "local1")
-                        .Single()
-                ).Symbol
+                model2
+                    .GetSymbolInfo(
+                        tree2
+                            .GetRoot()
+                            .DescendantNodes()
+                            .OfType<IdentifierNameSyntax>()
+                            .Where(id => id.Identifier.ValueText == "local1")
+                            .Single()
+                    )
+                    .Symbol
             );
         }
 
@@ -6412,14 +6426,16 @@ void local2()
             Assert.Equal("void local1(System.Int32 x)", symbol1.ToTestDisplayString());
             Assert.Same(
                 symbol1,
-                model1.GetSymbolInfo(
-                    tree1
-                        .GetRoot()
-                        .DescendantNodes()
-                        .OfType<IdentifierNameSyntax>()
-                        .Where(id => id.Identifier.ValueText == "local1")
-                        .First()
-                ).Symbol
+                model1
+                    .GetSymbolInfo(
+                        tree1
+                            .GetRoot()
+                            .DescendantNodes()
+                            .OfType<IdentifierNameSyntax>()
+                            .Where(id => id.Identifier.ValueText == "local1")
+                            .First()
+                    )
+                    .Symbol
             );
 
             var symbol2 = model1.GetDeclaredSymbol(
@@ -6433,15 +6449,17 @@ void local2()
             Assert.Equal("void local1(System.Byte y)", symbol2.ToTestDisplayString());
             Assert.Same(
                 symbol1,
-                model1.GetSymbolInfo(
-                    tree1
-                        .GetRoot()
-                        .DescendantNodes()
-                        .OfType<IdentifierNameSyntax>()
-                        .Where(id => id.Identifier.ValueText == "local1")
-                        .Skip(1)
-                        .Single()
-                ).Symbol
+                model1
+                    .GetSymbolInfo(
+                        tree1
+                            .GetRoot()
+                            .DescendantNodes()
+                            .OfType<IdentifierNameSyntax>()
+                            .Where(id => id.Identifier.ValueText == "local1")
+                            .Skip(1)
+                            .Single()
+                    )
+                    .Symbol
             );
         }
 
@@ -6503,14 +6521,16 @@ void args(int x)
             Assert.Equal("void args(System.Int32 x)", symbol1.ToTestDisplayString());
             Assert.Same(
                 symbol1,
-                model1.GetSymbolInfo(
-                    tree1
-                        .GetRoot()
-                        .DescendantNodes()
-                        .OfType<IdentifierNameSyntax>()
-                        .Where(id => id.Identifier.ValueText == "args")
-                        .Single()
-                ).Symbol
+                model1
+                    .GetSymbolInfo(
+                        tree1
+                            .GetRoot()
+                            .DescendantNodes()
+                            .OfType<IdentifierNameSyntax>()
+                            .Where(id => id.Identifier.ValueText == "args")
+                            .Single()
+                    )
+                    .Symbol
             );
         }
 
@@ -6953,14 +6973,16 @@ goto label1;
             Assert.Equal("label1", symbol1.ToTestDisplayString());
             Assert.Same(
                 symbol1,
-                model1.GetSymbolInfo(
-                    tree1
-                        .GetRoot()
-                        .DescendantNodes()
-                        .OfType<IdentifierNameSyntax>()
-                        .Where(id => id.Identifier.ValueText == "label1")
-                        .Single()
-                ).Symbol
+                model1
+                    .GetSymbolInfo(
+                        tree1
+                            .GetRoot()
+                            .DescendantNodes()
+                            .OfType<IdentifierNameSyntax>()
+                            .Where(id => id.Identifier.ValueText == "label1")
+                            .Single()
+                    )
+                    .Symbol
             );
 
             var tree2 = comp.SyntaxTrees[1];
@@ -6972,14 +6994,16 @@ goto label1;
             Assert.NotEqual(symbol1, symbol2);
             Assert.Same(
                 symbol2,
-                model2.GetSymbolInfo(
-                    tree2
-                        .GetRoot()
-                        .DescendantNodes()
-                        .OfType<IdentifierNameSyntax>()
-                        .Where(id => id.Identifier.ValueText == "label1")
-                        .Single()
-                ).Symbol
+                model2
+                    .GetSymbolInfo(
+                        tree2
+                            .GetRoot()
+                            .DescendantNodes()
+                            .OfType<IdentifierNameSyntax>()
+                            .Where(id => id.Identifier.ValueText == "label1")
+                            .Single()
+                    )
+                    .Symbol
             );
         }
 
@@ -8552,9 +8576,11 @@ static extern void local1();
             {
                 var fromSource = module is SourceModuleSymbol;
 
-                var program = module.GlobalNamespace.GetMember<NamedTypeSymbol>(
-                    WellKnownMemberNames.TopLevelStatementsEntryPointTypeName
-                );
+                var program = module
+                    .GlobalNamespace
+                    .GetMember<NamedTypeSymbol>(
+                        WellKnownMemberNames.TopLevelStatementsEntryPointTypeName
+                    );
                 var programAttributes = GetAttributeNames(
                     program.GetAttributes().As<CSharpAttributeData>()
                 );
@@ -9820,7 +9846,9 @@ class Test
                         break;
                 }
 
-                var decl = (CSharpSyntaxNode)context.ContainingSymbol.DeclaringSyntaxReferences
+                var decl = (CSharpSyntaxNode)context
+                    .ContainingSymbol
+                    .DeclaringSyntaxReferences
                     .Single()
                     .GetSyntax();
 
@@ -11983,10 +12011,11 @@ return Task.WhenAll(
     Task.WhenAll(this.c01234567890123456789.Select(v01234567 => v01234567.U0123456789012345678901234())));
 ";
 
-            var newText = Microsoft.CodeAnalysis.Text.StringText.From(
-                text2,
-                System.Text.Encoding.UTF8
-            );
+            var newText = Microsoft
+                .CodeAnalysis
+                .Text
+                .StringText
+                .From(text2, System.Text.Encoding.UTF8);
             using var lexer = new Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax.Lexer(
                 newText,
                 TestOptions.RegularDefault
@@ -12365,9 +12394,11 @@ System.Console.WriteLine(""Hi!"");
             void validate(ModuleSymbol module)
             {
                 bool fromSource = module is SourceModuleSymbol;
-                var program = module.GlobalNamespace.GetMember<NamedTypeSymbol>(
-                    WellKnownMemberNames.TopLevelStatementsEntryPointTypeName
-                );
+                var program = module
+                    .GlobalNamespace
+                    .GetMember<NamedTypeSymbol>(
+                        WellKnownMemberNames.TopLevelStatementsEntryPointTypeName
+                    );
                 Assert.False(program.IsImplicitlyDeclared);
                 if (fromSource)
                 {
@@ -12445,9 +12476,11 @@ public partial class Program
 
             void validate(ModuleSymbol module)
             {
-                var program = module.GlobalNamespace.GetMember<NamedTypeSymbol>(
-                    WellKnownMemberNames.TopLevelStatementsEntryPointTypeName
-                );
+                var program = module
+                    .GlobalNamespace
+                    .GetMember<NamedTypeSymbol>(
+                        WellKnownMemberNames.TopLevelStatementsEntryPointTypeName
+                    );
                 Assert.Empty(program.GetAttributes().As<CSharpAttributeData>());
                 Assert.False(program.IsImplicitlyDeclared);
                 Assert.Empty(
@@ -12888,7 +12921,8 @@ partial class Program
             void validate(ModuleSymbol module)
             {
                 bool fromSource = module is SourceModuleSymbol;
-                var field = module.GlobalNamespace
+                var field = module
+                    .GlobalNamespace
                     .GetMember<NamedTypeSymbol>("Program")
                     .GetField("<Property>k__BackingField");
                 Assert.False(field.ContainingType.IsImplicitlyDeclared);

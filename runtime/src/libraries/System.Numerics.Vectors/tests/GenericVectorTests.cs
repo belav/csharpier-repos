@@ -5310,7 +5310,8 @@ namespace System.Numerics.Tests
         {
             ConstructorInfo constructor = typeof(Vector<T>)
                 .GetTypeInfo()
-                .DeclaredConstructors.Where(
+                .DeclaredConstructors
+                .Where(
                     ci =>
                         ci.GetParameters()
                             .Select(pi => pi.ParameterType)
@@ -5395,7 +5396,8 @@ namespace System.Numerics.Tests
         {
             ConstructorInfo constructor = typeof(Vector<T>)
                 .GetTypeInfo()
-                .DeclaredConstructors.Where(
+                .DeclaredConstructors
+                .Where(
                     ci =>
                         ci.GetParameters()
                             .Select(pi => pi.ParameterType)

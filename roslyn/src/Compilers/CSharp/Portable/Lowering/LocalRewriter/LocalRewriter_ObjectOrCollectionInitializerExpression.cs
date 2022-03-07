@@ -203,7 +203,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             Debug.Assert(addMethod.Name == "Add");
             Debug.Assert(
-                addMethod.Parameters
+                addMethod
+                    .Parameters
                     .Skip(addMethod.IsExtensionMethod ? 1 : 0)
                     .All(p => p.RefKind == RefKind.None || p.RefKind == RefKind.In)
             );
@@ -693,11 +694,14 @@ namespace Microsoft.CodeAnalysis.CSharp
 #if DEBUG
             var discardedUseSiteInfo = CompoundUseSiteInfo<AssemblySymbol>.Discarded;
             Debug.Assert(
-                _compilation.Conversions.ClassifyConversionFromType(
-                    rewrittenReceiver.Type,
-                    memberSymbol.ContainingType,
-                    ref discardedUseSiteInfo
-                ).IsImplicit
+                _compilation
+                    .Conversions
+                    .ClassifyConversionFromType(
+                        rewrittenReceiver.Type,
+                        memberSymbol.ContainingType,
+                        ref discardedUseSiteInfo
+                    )
+                    .IsImplicit
             );
             // It is possible there are use site diagnostics from the above, but none that we need report as we aren't generating code for the conversion
 #endif

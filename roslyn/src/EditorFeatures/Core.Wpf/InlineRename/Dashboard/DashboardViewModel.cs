@@ -48,12 +48,12 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
             _defaultRenameOverloadFlag =
                 session.OptionSet.GetOption(RenameOptions.RenameOverloads)
                 || session.ForceRenameOverloads;
-            _defaultRenameInStringsFlag = session.OptionSet.GetOption(
-                RenameOptions.RenameInStrings
-            );
-            _defaultRenameInCommentsFlag = session.OptionSet.GetOption(
-                RenameOptions.RenameInComments
-            );
+            _defaultRenameInStringsFlag = session
+                .OptionSet
+                .GetOption(RenameOptions.RenameInStrings);
+            _defaultRenameInCommentsFlag = session
+                .OptionSet
+                .GetOption(RenameOptions.RenameInComments);
             _defaultPreviewChangesFlag = session.OptionSet.GetOption(RenameOptions.PreviewChanges);
 
             _session.ReferenceLocationsChanged += OnReferenceLocationsChanged;

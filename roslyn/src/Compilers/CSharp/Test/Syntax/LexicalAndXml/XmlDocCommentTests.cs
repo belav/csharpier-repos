@@ -2154,9 +2154,10 @@ x
             );
 
             // we grab the open bracket for the Goo method decl
-            var typeParameter = (
-                tree.GetCompilationUnitRoot().Members[0] as TypeDeclarationSyntax
-            ).TypeParameterList.Parameters.Single();
+            var typeParameter = (tree.GetCompilationUnitRoot().Members[0] as TypeDeclarationSyntax)
+                .TypeParameterList
+                .Parameters
+                .Single();
 
             var trivias = typeParameter.GetLeadingTrivia();
 
@@ -2479,7 +2480,9 @@ class C{}";
                 (
                     (trivias[0].GetStructure() as DocumentationCommentTriviaSyntax).Content[0]
                     as XmlElementSyntax
-                ).StartTag.Attributes,
+                )
+                    .StartTag
+                    .Attributes,
                 new Dictionary<string, string>()
                 {
                     { "attr1", "a" },

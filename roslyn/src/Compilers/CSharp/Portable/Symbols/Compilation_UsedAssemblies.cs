@@ -218,10 +218,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                                         // be emitted into the resulting binary for that compilation. An alternative
                                         // would be to attempt to emit and get the exact set of emitted references
                                         // in case of success. This might be too slow though.
-                                        usedAssemblies =
-                                            sourceAssembly.DeclaringCompilation.GetCompleteSetOfUsedAssemblies(
-                                                cancellationToken
-                                            );
+                                        usedAssemblies = sourceAssembly
+                                            .DeclaringCompilation
+                                            .GetCompleteSetOfUsedAssemblies(cancellationToken);
                                         if (usedAssemblies is object)
                                         {
                                             foreach (AssemblySymbol dependency in usedAssemblies)
@@ -233,14 +232,17 @@ namespace Microsoft.CodeAnalysis.CSharp
                                         break;
 
                                     case RetargetingAssemblySymbol retargetingAssembly:
-                                        usedAssemblies =
-                                            retargetingAssembly.UnderlyingAssembly.DeclaringCompilation.GetCompleteSetOfUsedAssemblies(
-                                                cancellationToken
-                                            );
+                                        usedAssemblies = retargetingAssembly
+                                            .UnderlyingAssembly
+                                            .DeclaringCompilation
+                                            .GetCompleteSetOfUsedAssemblies(cancellationToken);
                                         if (usedAssemblies is object)
                                         {
                                             foreach (
-                                                AssemblySymbol underlyingDependency in retargetingAssembly.UnderlyingAssembly.SourceModule.ReferencedAssemblySymbols
+                                                AssemblySymbol underlyingDependency in retargetingAssembly
+                                                    .UnderlyingAssembly
+                                                    .SourceModule
+                                                    .ReferencedAssemblySymbols
                                             )
                                             {
                                                 if (
@@ -262,11 +264,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                                                     )
                                                     {
                                                         Debug.Assert(
-                                                            retargetingAssembly.Modules[
-                                                                0
-                                                            ].ReferencedAssemblySymbols.Contains(
-                                                                underlyingDependency
-                                                            )
+                                                            retargetingAssembly.Modules[0]
+                                                                .ReferencedAssemblySymbols
+                                                                .Contains(underlyingDependency)
                                                         );
                                                         dependency = underlyingDependency;
                                                     }

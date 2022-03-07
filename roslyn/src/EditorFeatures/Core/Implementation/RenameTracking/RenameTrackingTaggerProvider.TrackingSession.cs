@@ -62,10 +62,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.RenameTracking
                 AssertIsForeground();
 
                 _asyncListener = asyncListener;
-                _trackingSpan = snapshotSpan.Snapshot.CreateTrackingSpan(
-                    snapshotSpan.Span,
-                    SpanTrackingMode.EdgeInclusive
-                );
+                _trackingSpan = snapshotSpan
+                    .Snapshot
+                    .CreateTrackingSpan(snapshotSpan.Span, SpanTrackingMode.EdgeInclusive);
                 _cancellationTokenSource = new CancellationTokenSource();
                 _cancellationToken = _cancellationTokenSource.Token;
 
@@ -91,10 +90,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.RenameTracking
                         .SafeContinueWithFromAsync(
                             async t =>
                             {
-                                await ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
-                                    alwaysYield: true,
-                                    _cancellationToken
-                                );
+                                await ThreadingContext
+                                    .JoinableTaskFactory
+                                    .SwitchToMainThreadAsync(alwaysYield: true, _cancellationToken);
 
                                 stateMachine.UpdateTrackingSessionIfRenamable();
                             },
@@ -127,10 +125,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.RenameTracking
                 task.SafeContinueWithFromAsync(
                         async t =>
                         {
-                            await ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
-                                alwaysYield: true,
-                                _cancellationToken
-                            );
+                            await ThreadingContext
+                                .JoinableTaskFactory
+                                .SwitchToMainThreadAsync(alwaysYield: true, _cancellationToken);
 
                             if (
                                 _isRenamableIdentifierTask.Result

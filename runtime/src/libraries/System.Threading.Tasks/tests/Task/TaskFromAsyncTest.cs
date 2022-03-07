@@ -84,7 +84,9 @@ namespace System.Threading.Tasks.Tests.FromAsync
                 RunAPMTest();
 
                 //block until the expcetion is thrown
-                ((IAsyncResult)_task).AsyncWaitHandle.WaitOne(); // avoid Wait() as we are using Exception property directly
+                ((IAsyncResult)_task)
+                    .AsyncWaitHandle
+                    .WaitOne(); // avoid Wait() as we are using Exception property directly
 
                 AggregateException exp = _task.Exception;
 
@@ -278,44 +280,48 @@ namespace System.Threading.Tasks.Tests.FromAsync
                         AsyncFunc func = new AsyncFunc(_errorCase == ErrorCase.Throwing);
 
                         if (_errorCase == ErrorCase.NullBegin)
-                            Task<ReadOnlyCollection<object>>.Factory.FromAsync(
-                                (Func<AsyncCallback, object, IAsyncResult>)null,
-                                func.EndInvoke,
-                                null
-                            );
+                            Task<ReadOnlyCollection<object>>
+                                .Factory
+                                .FromAsync(
+                                    (Func<AsyncCallback, object, IAsyncResult>)null,
+                                    func.EndInvoke,
+                                    null
+                                );
                         else if (_errorCase == ErrorCase.NullEnd)
-                            Task<ReadOnlyCollection<object>>.Factory.FromAsync(
-                                func.BeginInvoke,
-                                null,
-                                null
-                            );
+                            Task<ReadOnlyCollection<object>>
+                                .Factory
+                                .FromAsync(func.BeginInvoke, null, null);
                         else
                         {
                             switch (_overloadChoice)
                             {
                                 case OverloadChoice.None:
-                                    _task = Task<ReadOnlyCollection<object>>.Factory.FromAsync(
-                                        func.BeginInvoke,
-                                        func.EndInvoke,
-                                        new TaskOptionAndScheduler
-                                        {
-                                            Scheduler = TaskScheduler.Default,
-                                            Option = TaskCreationOptions.None
-                                        }
-                                    );
+                                    _task = Task<ReadOnlyCollection<object>>
+                                        .Factory
+                                        .FromAsync(
+                                            func.BeginInvoke,
+                                            func.EndInvoke,
+                                            new TaskOptionAndScheduler
+                                            {
+                                                Scheduler = TaskScheduler.Default,
+                                                Option = TaskCreationOptions.None
+                                            }
+                                        );
                                     break;
 
                                 case OverloadChoice.WithTaskOption:
-                                    _task = Task<ReadOnlyCollection<object>>.Factory.FromAsync(
-                                        func.BeginInvoke,
-                                        func.EndInvoke,
-                                        new TaskOptionAndScheduler
-                                        {
-                                            Scheduler = TaskScheduler.Default,
-                                            Option = TestOption
-                                        },
-                                        TestOption
-                                    );
+                                    _task = Task<ReadOnlyCollection<object>>
+                                        .Factory
+                                        .FromAsync(
+                                            func.BeginInvoke,
+                                            func.EndInvoke,
+                                            new TaskOptionAndScheduler
+                                            {
+                                                Scheduler = TaskScheduler.Default,
+                                                Option = TestOption
+                                            },
+                                            TestOption
+                                        );
                                     break;
 
                                 default:
@@ -466,48 +472,51 @@ namespace System.Threading.Tasks.Tests.FromAsync
                         AsyncFunc<int> func1 = new AsyncFunc<int>(_errorCase == ErrorCase.Throwing);
 
                         if (_errorCase == ErrorCase.NullBegin)
-                            Task<ReadOnlyCollection<object>>.Factory.FromAsync(
-                                (Func<int, AsyncCallback, object, IAsyncResult>)null,
-                                func1.EndInvoke,
-                                TestInteger,
-                                null
-                            );
+                            Task<ReadOnlyCollection<object>>
+                                .Factory
+                                .FromAsync(
+                                    (Func<int, AsyncCallback, object, IAsyncResult>)null,
+                                    func1.EndInvoke,
+                                    TestInteger,
+                                    null
+                                );
                         else if (_errorCase == ErrorCase.NullEnd)
-                            Task<ReadOnlyCollection<object>>.Factory.FromAsync(
-                                func1.BeginInvoke,
-                                null,
-                                TestInteger,
-                                null
-                            );
+                            Task<ReadOnlyCollection<object>>
+                                .Factory
+                                .FromAsync(func1.BeginInvoke, null, TestInteger, null);
                         else
                         {
                             switch (_overloadChoice)
                             {
                                 case OverloadChoice.None:
-                                    _task = Task<ReadOnlyCollection<object>>.Factory.FromAsync(
-                                        func1.BeginInvoke,
-                                        func1.EndInvoke,
-                                        TestInteger,
-                                        new TaskOptionAndScheduler
-                                        {
-                                            Scheduler = TaskScheduler.Default,
-                                            Option = TaskCreationOptions.None
-                                        }
-                                    );
+                                    _task = Task<ReadOnlyCollection<object>>
+                                        .Factory
+                                        .FromAsync(
+                                            func1.BeginInvoke,
+                                            func1.EndInvoke,
+                                            TestInteger,
+                                            new TaskOptionAndScheduler
+                                            {
+                                                Scheduler = TaskScheduler.Default,
+                                                Option = TaskCreationOptions.None
+                                            }
+                                        );
                                     break;
 
                                 case OverloadChoice.WithTaskOption:
-                                    _task = Task<ReadOnlyCollection<object>>.Factory.FromAsync(
-                                        func1.BeginInvoke,
-                                        func1.EndInvoke,
-                                        TestInteger,
-                                        new TaskOptionAndScheduler
-                                        {
-                                            Scheduler = TaskScheduler.Default,
-                                            Option = TestOption
-                                        },
-                                        TestOption
-                                    );
+                                    _task = Task<ReadOnlyCollection<object>>
+                                        .Factory
+                                        .FromAsync(
+                                            func1.BeginInvoke,
+                                            func1.EndInvoke,
+                                            TestInteger,
+                                            new TaskOptionAndScheduler
+                                            {
+                                                Scheduler = TaskScheduler.Default,
+                                                Option = TestOption
+                                            },
+                                            TestOption
+                                        );
                                     break;
 
                                 default:
@@ -671,52 +680,54 @@ namespace System.Threading.Tasks.Tests.FromAsync
                         );
 
                         if (_errorCase == ErrorCase.NullBegin)
-                            Task<ReadOnlyCollection<object>>.Factory.FromAsync(
-                                (Func<int, double, AsyncCallback, object, IAsyncResult>)null,
-                                func2.EndInvoke,
-                                TestInteger,
-                                TestDouble,
-                                null
-                            );
+                            Task<ReadOnlyCollection<object>>
+                                .Factory
+                                .FromAsync(
+                                    (Func<int, double, AsyncCallback, object, IAsyncResult>)null,
+                                    func2.EndInvoke,
+                                    TestInteger,
+                                    TestDouble,
+                                    null
+                                );
                         else if (_errorCase == ErrorCase.NullEnd)
-                            Task<ReadOnlyCollection<object>>.Factory.FromAsync(
-                                func2.BeginInvoke,
-                                null,
-                                TestInteger,
-                                TestDouble,
-                                null
-                            );
+                            Task<ReadOnlyCollection<object>>
+                                .Factory
+                                .FromAsync(func2.BeginInvoke, null, TestInteger, TestDouble, null);
                         else
                         {
                             switch (_overloadChoice)
                             {
                                 case OverloadChoice.None:
-                                    _task = Task<ReadOnlyCollection<object>>.Factory.FromAsync(
-                                        func2.BeginInvoke,
-                                        func2.EndInvoke,
-                                        TestInteger,
-                                        TestDouble,
-                                        new TaskOptionAndScheduler
-                                        {
-                                            Scheduler = TaskScheduler.Default,
-                                            Option = TaskCreationOptions.None
-                                        }
-                                    );
+                                    _task = Task<ReadOnlyCollection<object>>
+                                        .Factory
+                                        .FromAsync(
+                                            func2.BeginInvoke,
+                                            func2.EndInvoke,
+                                            TestInteger,
+                                            TestDouble,
+                                            new TaskOptionAndScheduler
+                                            {
+                                                Scheduler = TaskScheduler.Default,
+                                                Option = TaskCreationOptions.None
+                                            }
+                                        );
                                     break;
 
                                 case OverloadChoice.WithTaskOption:
-                                    _task = Task<ReadOnlyCollection<object>>.Factory.FromAsync(
-                                        func2.BeginInvoke,
-                                        func2.EndInvoke,
-                                        TestInteger,
-                                        TestDouble,
-                                        new TaskOptionAndScheduler
-                                        {
-                                            Scheduler = TaskScheduler.Default,
-                                            Option = TestOption
-                                        },
-                                        TestOption
-                                    );
+                                    _task = Task<ReadOnlyCollection<object>>
+                                        .Factory
+                                        .FromAsync(
+                                            func2.BeginInvoke,
+                                            func2.EndInvoke,
+                                            TestInteger,
+                                            TestDouble,
+                                            new TaskOptionAndScheduler
+                                            {
+                                                Scheduler = TaskScheduler.Default,
+                                                Option = TestOption
+                                            },
+                                            TestOption
+                                        );
                                     break;
 
                                 default:
@@ -917,56 +928,71 @@ namespace System.Threading.Tasks.Tests.FromAsync
                         );
 
                         if (_errorCase == ErrorCase.NullBegin)
-                            Task<ReadOnlyCollection<object>>.Factory.FromAsync(
-                                (Func<int, double, bool, AsyncCallback, object, IAsyncResult>)null,
-                                func3.EndInvoke,
-                                TestInteger,
-                                TestDouble,
-                                TestBoolean,
-                                null
-                            );
+                            Task<ReadOnlyCollection<object>>
+                                .Factory
+                                .FromAsync(
+                                    (Func<
+                                        int,
+                                        double,
+                                        bool,
+                                        AsyncCallback,
+                                        object,
+                                        IAsyncResult
+                                    >)null,
+                                    func3.EndInvoke,
+                                    TestInteger,
+                                    TestDouble,
+                                    TestBoolean,
+                                    null
+                                );
                         else if (_errorCase == ErrorCase.NullEnd)
-                            Task<ReadOnlyCollection<object>>.Factory.FromAsync(
-                                func3.BeginInvoke,
-                                null,
-                                TestInteger,
-                                TestDouble,
-                                TestBoolean,
-                                null
-                            );
+                            Task<ReadOnlyCollection<object>>
+                                .Factory
+                                .FromAsync(
+                                    func3.BeginInvoke,
+                                    null,
+                                    TestInteger,
+                                    TestDouble,
+                                    TestBoolean,
+                                    null
+                                );
                         else
                         {
                             switch (_overloadChoice)
                             {
                                 case OverloadChoice.None:
-                                    _task = Task<ReadOnlyCollection<object>>.Factory.FromAsync(
-                                        func3.BeginInvoke,
-                                        func3.EndInvoke,
-                                        TestInteger,
-                                        TestDouble,
-                                        TestBoolean,
-                                        new TaskOptionAndScheduler
-                                        {
-                                            Scheduler = TaskScheduler.Default,
-                                            Option = TaskCreationOptions.None
-                                        }
-                                    );
+                                    _task = Task<ReadOnlyCollection<object>>
+                                        .Factory
+                                        .FromAsync(
+                                            func3.BeginInvoke,
+                                            func3.EndInvoke,
+                                            TestInteger,
+                                            TestDouble,
+                                            TestBoolean,
+                                            new TaskOptionAndScheduler
+                                            {
+                                                Scheduler = TaskScheduler.Default,
+                                                Option = TaskCreationOptions.None
+                                            }
+                                        );
                                     break;
 
                                 case OverloadChoice.WithTaskOption:
-                                    _task = Task<ReadOnlyCollection<object>>.Factory.FromAsync(
-                                        func3.BeginInvoke,
-                                        func3.EndInvoke,
-                                        TestInteger,
-                                        TestDouble,
-                                        TestBoolean,
-                                        new TaskOptionAndScheduler
-                                        {
-                                            Scheduler = TaskScheduler.Default,
-                                            Option = TestOption
-                                        },
-                                        TestOption
-                                    );
+                                    _task = Task<ReadOnlyCollection<object>>
+                                        .Factory
+                                        .FromAsync(
+                                            func3.BeginInvoke,
+                                            func3.EndInvoke,
+                                            TestInteger,
+                                            TestDouble,
+                                            TestBoolean,
+                                            new TaskOptionAndScheduler
+                                            {
+                                                Scheduler = TaskScheduler.Default,
+                                                Option = TestOption
+                                            },
+                                            TestOption
+                                        );
                                     break;
 
                                 default:
@@ -1105,46 +1131,48 @@ namespace System.Threading.Tasks.Tests.FromAsync
                         AsyncFunc func = new AsyncFunc(inputs, _errorCase == ErrorCase.Throwing);
 
                         if (_errorCase == ErrorCase.NullBegin)
-                            Task<ReadOnlyCollection<object>>.Factory.FromAsync(
-                                (IAsyncResult)null,
-                                func.EndInvoke
-                            );
+                            Task<ReadOnlyCollection<object>>
+                                .Factory
+                                .FromAsync((IAsyncResult)null, func.EndInvoke);
                         else if (_errorCase == ErrorCase.NullEnd)
-                            Task<ReadOnlyCollection<object>>.Factory.FromAsync(
-                                func.BeginInvoke(null, null),
-                                null
-                            );
+                            Task<ReadOnlyCollection<object>>
+                                .Factory
+                                .FromAsync(func.BeginInvoke(null, null), null);
                         else
                         {
                             switch (_overloadChoice)
                             {
                                 case OverloadChoice.None:
-                                    _task = Task<ReadOnlyCollection<object>>.Factory.FromAsync(
-                                        func.BeginInvoke(
-                                            null,
-                                            new TaskOptionAndScheduler
-                                            {
-                                                Scheduler = TaskScheduler.Default,
-                                                Option = TaskCreationOptions.None
-                                            }
-                                        ),
-                                        func.EndInvoke
-                                    );
+                                    _task = Task<ReadOnlyCollection<object>>
+                                        .Factory
+                                        .FromAsync(
+                                            func.BeginInvoke(
+                                                null,
+                                                new TaskOptionAndScheduler
+                                                {
+                                                    Scheduler = TaskScheduler.Default,
+                                                    Option = TaskCreationOptions.None
+                                                }
+                                            ),
+                                            func.EndInvoke
+                                        );
                                     break;
 
                                 case OverloadChoice.WithTaskOption:
-                                    _task = Task<ReadOnlyCollection<object>>.Factory.FromAsync(
-                                        func.BeginInvoke(
-                                            null,
-                                            new TaskOptionAndScheduler
-                                            {
-                                                Scheduler = TaskScheduler.Default,
-                                                Option = TestOption
-                                            }
-                                        ),
-                                        func.EndInvoke,
-                                        TestOption
-                                    );
+                                    _task = Task<ReadOnlyCollection<object>>
+                                        .Factory
+                                        .FromAsync(
+                                            func.BeginInvoke(
+                                                null,
+                                                new TaskOptionAndScheduler
+                                                {
+                                                    Scheduler = TaskScheduler.Default,
+                                                    Option = TestOption
+                                                }
+                                            ),
+                                            func.EndInvoke,
+                                            TestOption
+                                        );
                                     break;
 
                                 default:

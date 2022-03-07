@@ -18,7 +18,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests
 {
     public static class EditorTestCompositions
     {
-        public static readonly TestComposition Editor = TestComposition.Empty
+        public static readonly TestComposition Editor = TestComposition
+            .Empty
             .AddAssemblies(
                 // Microsoft.VisualStudio.Platform.VSEditor.dll:
                 Assembly.LoadFrom("Microsoft.VisualStudio.Platform.VSEditor.dll"),
@@ -52,7 +53,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests
                 typeof(TestObscuringTipManager)
             ); // TODO: https://devdiv.visualstudio.com/DevDiv/_workitems?id=544569
 
-        public static readonly TestComposition EditorFeatures = FeaturesTestCompositions.Features
+        public static readonly TestComposition EditorFeatures = FeaturesTestCompositions
+            .Features
             .Add(Editor)
             .AddAssemblies(
                 typeof(TextEditorResources).Assembly,

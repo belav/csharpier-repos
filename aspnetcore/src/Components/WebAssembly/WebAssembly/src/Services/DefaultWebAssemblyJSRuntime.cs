@@ -29,9 +29,9 @@ internal sealed class DefaultWebAssemblyJSRuntime : WebAssemblyJSRuntime
     private DefaultWebAssemblyJSRuntime()
     {
         ElementReferenceContext = new WebElementReferenceContext(this);
-        JsonSerializerOptions.Converters.Add(
-            new ElementReferenceJsonConverter(ElementReferenceContext)
-        );
+        JsonSerializerOptions
+            .Converters
+            .Add(new ElementReferenceJsonConverter(ElementReferenceContext));
     }
 
     public JsonSerializerOptions ReadJsonSerializerOptions() => JsonSerializerOptions;

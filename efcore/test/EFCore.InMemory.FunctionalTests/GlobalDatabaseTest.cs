@@ -34,7 +34,8 @@ namespace Microsoft.EntityFrameworkCore
                 var context = new BooFooContext(
                     new DbContextOptionsBuilder()
                         .UseInMemoryDatabase(nameof(BooFooContext))
-                        .EnableSensitiveDataLogging().Options
+                        .EnableSensitiveDataLogging()
+                        .Options
                 )
             )
             {
@@ -73,7 +74,8 @@ namespace Microsoft.EntityFrameworkCore
                 var context = new BooFooContext(
                     new DbContextOptionsBuilder()
                         .EnableServiceProviderCaching(false)
-                        .UseInMemoryDatabase(nameof(BooFooContext), _databaseRoot).Options
+                        .UseInMemoryDatabase(nameof(BooFooContext), _databaseRoot)
+                        .Options
                 )
             )
             {
@@ -86,7 +88,8 @@ namespace Microsoft.EntityFrameworkCore
                     new DbContextOptionsBuilder()
                         .EnableServiceProviderCaching(false)
                         .UseInMemoryDatabase(nameof(BooFooContext), _databaseRoot)
-                        .EnableSensitiveDataLogging().Options
+                        .EnableSensitiveDataLogging()
+                        .Options
                 )
             )
             {
@@ -136,7 +139,8 @@ namespace Microsoft.EntityFrameworkCore
                 var context = new BooFooContext(
                     new DbContextOptionsBuilder()
                         .EnableServiceProviderCaching(false)
-                        .UseInMemoryDatabase(nameof(BooFooContext), _databaseRoot).Options
+                        .UseInMemoryDatabase(nameof(BooFooContext), _databaseRoot)
+                        .Options
                 )
             )
             {

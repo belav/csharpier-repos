@@ -1342,9 +1342,9 @@ namespace System.Net
             if (str == null)
                 return null;
             byte[] bytes = Encoding.UTF8.GetBytes(str);
-            return Encoding.ASCII.GetString(
-                UrlEncodeBytesToBytesInternal(bytes, 0, bytes.Length, false)
-            );
+            return Encoding
+                .ASCII
+                .GetString(UrlEncodeBytesToBytesInternal(bytes, 0, bytes.Length, false));
         }
 
         private static byte[] UrlEncodeBytesToBytesInternal(

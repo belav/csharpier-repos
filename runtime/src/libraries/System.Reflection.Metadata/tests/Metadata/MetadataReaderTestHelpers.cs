@@ -22,9 +22,9 @@ namespace System.Reflection.Metadata.Tests
         {
             for (int i = 1, n = reader.GetTableRowCount(TableIndex.ModuleRef); i <= n; i++)
             {
-                yield return reader.GetModuleReference(
-                    MetadataTokens.ModuleReferenceHandle(i)
-                ).Name;
+                yield return reader
+                    .GetModuleReference(MetadataTokens.ModuleReferenceHandle(i))
+                    .Name;
             }
         }
 

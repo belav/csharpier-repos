@@ -204,11 +204,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
 
             bool hasAnyDiagnostics;
-            (attributeData, boundAttribute) = arguments.Binder.GetAttribute(
-                syntax,
-                type,
-                out hasAnyDiagnostics
-            );
+            (attributeData, boundAttribute) = arguments
+                .Binder
+                .GetAttribute(syntax, type, out hasAnyDiagnostics);
             if (!attributeData.HasErrors)
             {
                 obsoleteData = attributeData.DecodeObsoleteAttribute(kind);
@@ -374,10 +372,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                     {
                         if (attributeTypesBuilder[i].IsGenericType)
                         {
-                            MessageID.IDS_FeatureGenericAttributes.CheckFeatureAvailability(
-                                diagnostics,
-                                attributesToBind[i]
-                            );
+                            MessageID
+                                .IDS_FeatureGenericAttributes
+                                .CheckFeatureAvailability(diagnostics, attributesToBind[i]);
                         }
                     }
                 }

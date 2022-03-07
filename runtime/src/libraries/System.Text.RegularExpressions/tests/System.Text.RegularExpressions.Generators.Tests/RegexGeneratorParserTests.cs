@@ -675,10 +675,8 @@ namespace System.Text.RegularExpressions.Generator.Tests
                         ).WithNullableContextOptions(NullableContextOptions.Enable)
                     )
                     .WithParseOptions(new CSharpParseOptions(langVersion))
-                    .AddDocument(
-                        "RegexGenerator.g.cs",
-                        SourceText.From(code, Encoding.UTF8)
-                    ).Project;
+                    .AddDocument("RegexGenerator.g.cs", SourceText.From(code, Encoding.UTF8))
+                    .Project;
 
             Assert.True(proj.Solution.Workspace.TryApplyChanges(proj.Solution));
 
@@ -720,7 +718,8 @@ namespace System.Text.RegularExpressions.Generator.Tests
                 );
             }
 
-            return generatorResults.Diagnostics
+            return generatorResults
+                .Diagnostics
                 .Concat(results.Diagnostics)
                 .Where(d => d.Severity != DiagnosticSeverity.Hidden)
                 .ToArray();

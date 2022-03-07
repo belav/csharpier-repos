@@ -38,12 +38,9 @@ namespace System.Runtime.InteropServices.JavaScript
         {
             AssertNotDisposed();
 
-            object res = Interop.Runtime.InvokeJSWithArgs(
-                JSHandle,
-                method,
-                args,
-                out int exception
-            );
+            object res = Interop
+                .Runtime
+                .InvokeJSWithArgs(JSHandle, method, args, out int exception);
             if (exception != 0)
                 throw new JSException((string)res);
             Interop.Runtime.ReleaseInFlight(res);
@@ -88,12 +85,9 @@ namespace System.Runtime.InteropServices.JavaScript
                 // TODO: Handle errors
                 // We can't currently do this because adding any additional parameters or a return value causes
                 //  a signature mismatch at runtime
-                var ret = Interop.Runtime.AddEventListener(
-                    JSHandle,
-                    name,
-                    jsfunc,
-                    optionsDict?.JSHandle ?? 0
-                );
+                var ret = Interop
+                    .Runtime
+                    .AddEventListener(JSHandle, name, jsfunc, optionsDict?.JSHandle ?? 0);
                 if (ret != null)
                     throw new JSException(ret);
                 return jsfunc;
@@ -126,12 +120,9 @@ namespace System.Runtime.InteropServices.JavaScript
         {
             AssertNotDisposed();
 
-            var ret = Interop.Runtime.RemoveEventListener(
-                JSHandle,
-                name,
-                listenerGCHandle,
-                options?.Capture ?? false
-            );
+            var ret = Interop
+                .Runtime
+                .RemoveEventListener(JSHandle, name, listenerGCHandle, options?.Capture ?? false);
             if (ret != null)
                 throw new JSException(ret);
         }
@@ -162,11 +153,9 @@ namespace System.Runtime.InteropServices.JavaScript
         {
             AssertNotDisposed();
 
-            object propertyValue = Interop.Runtime.GetObjectProperty(
-                JSHandle,
-                name,
-                out int exception
-            );
+            object propertyValue = Interop
+                .Runtime
+                .GetObjectProperty(JSHandle, name, out int exception);
             if (exception != 0)
                 throw new JSException((string)propertyValue);
             Interop.Runtime.ReleaseInFlight(propertyValue);
@@ -193,14 +182,16 @@ namespace System.Runtime.InteropServices.JavaScript
         {
             AssertNotDisposed();
 
-            object setPropResult = Interop.Runtime.SetObjectProperty(
-                JSHandle,
-                name,
-                value,
-                createIfNotExists,
-                hasOwnProperty,
-                out int exception
-            );
+            object setPropResult = Interop
+                .Runtime
+                .SetObjectProperty(
+                    JSHandle,
+                    name,
+                    value,
+                    createIfNotExists,
+                    hasOwnProperty,
+                    out int exception
+                );
             if (exception != 0)
                 throw new JSException($"Error setting {name} on (js-obj js '{JSHandle}')");
         }

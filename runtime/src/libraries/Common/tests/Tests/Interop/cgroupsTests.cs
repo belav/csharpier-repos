@@ -55,11 +55,9 @@ namespace Common.Tests
         {
             Assert.Equal(
                 expectedResult,
-                Interop.cgroups.FindCGroupPath(
-                    hierarchyRoot,
-                    hierarchyMount,
-                    cgroupPathRelativeToMount
-                )
+                Interop
+                    .cgroups
+                    .FindCGroupPath(hierarchyRoot, hierarchyMount, cgroupPathRelativeToMount)
             );
         }
 
@@ -151,13 +149,15 @@ namespace Common.Tests
 
             Assert.Equal(
                 expectedFound,
-                Interop.cgroups.TryFindHierarchyMount(
-                    (Interop.cgroups.CGroupVersion)cgroupVersion,
-                    path,
-                    subsystem,
-                    out string root,
-                    out string mount
-                )
+                Interop
+                    .cgroups
+                    .TryFindHierarchyMount(
+                        (Interop.cgroups.CGroupVersion)cgroupVersion,
+                        path,
+                        subsystem,
+                        out string root,
+                        out string mount
+                    )
             );
             if (expectedFound)
             {
@@ -191,12 +191,14 @@ namespace Common.Tests
 
             Assert.Equal(
                 expectedFound,
-                Interop.cgroups.TryFindCGroupPathForSubsystem(
-                    (Interop.cgroups.CGroupVersion)cgroupVersion,
-                    path,
-                    subsystem,
-                    out string mountPath
-                )
+                Interop
+                    .cgroups
+                    .TryFindCGroupPathForSubsystem(
+                        (Interop.cgroups.CGroupVersion)cgroupVersion,
+                        path,
+                        subsystem,
+                        out string mountPath
+                    )
             );
             if (expectedFound)
             {

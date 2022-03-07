@@ -326,9 +326,9 @@ namespace Internal.TypeSystem
 
                 protected override int GetValueHashCode(InstantiatedType value)
                 {
-                    return value.Instantiation.ComputeGenericInstanceHashCode(
-                        value.GetTypeDefinition().GetHashCode()
-                    );
+                    return value
+                        .Instantiation
+                        .ComputeGenericInstanceHashCode(value.GetTypeDefinition().GetHashCode());
                 }
 
                 protected override bool CompareKeyToValue(

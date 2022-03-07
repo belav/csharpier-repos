@@ -412,9 +412,11 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
 
             Assert.Equal(
                 CoreStrings.LiteralGenerationNotSupported(nameof(SimpleTestType)),
-                Assert.Throws<NotSupportedException>(
-                    () => new CSharpHelper(typeMapping).UnknownLiteral(new SimpleTestType())
-                ).Message
+                Assert
+                    .Throws<NotSupportedException>(
+                        () => new CSharpHelper(typeMapping).UnknownLiteral(new SimpleTestType())
+                    )
+                    .Message
             );
         }
 
@@ -712,9 +714,11 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
 
             Assert.Equal(
                 DesignStrings.LiteralExpressionNotSupported("(10 * 10)", nameof(SimpleTestType)),
-                Assert.Throws<NotSupportedException>(
-                    () => new CSharpHelper(typeMapping).UnknownLiteral(new SimpleTestType())
-                ).Message
+                Assert
+                    .Throws<NotSupportedException>(
+                        () => new CSharpHelper(typeMapping).UnknownLiteral(new SimpleTestType())
+                    )
+                    .Message
             );
         }
 

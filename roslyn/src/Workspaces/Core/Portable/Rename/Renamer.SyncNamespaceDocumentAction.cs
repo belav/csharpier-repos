@@ -37,10 +37,12 @@ namespace Microsoft.CodeAnalysis.Rename
             }
 
             public override string GetDescription(CultureInfo? culture) =>
-                WorkspacesResources.ResourceManager.GetString(
-                    "Sync_namespace_to_folder_structure",
-                    culture ?? WorkspacesResources.Culture
-                )!;
+                WorkspacesResources
+                    .ResourceManager
+                    .GetString(
+                        "Sync_namespace_to_folder_structure",
+                        culture ?? WorkspacesResources.Culture
+                    )!;
 
             internal override async Task<Solution> GetModifiedSolutionAsync(
                 Document document,

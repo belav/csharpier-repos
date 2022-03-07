@@ -302,7 +302,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.EnableNullable
             {
                 // If the file starts with a #region/#endregion that contains no semantic content (e.g. just a file
                 // header), skip it.
-                var nextToken = firstToken.Parent
+                var nextToken = firstToken
+                    .Parent
                     .GetLastToken(includeDirectives: true)
                     .GetNextToken(includeDirectives: true);
                 if (
@@ -310,7 +311,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.EnableNullable
                     && nextToken.Parent.IsKind(SyntaxKind.EndRegionDirectiveTrivia)
                 )
                 {
-                    firstToken = nextToken.Parent
+                    firstToken = nextToken
+                        .Parent
                         .GetLastToken(includeDirectives: true)
                         .GetNextToken(includeDirectives: true);
                 }

@@ -221,10 +221,10 @@ namespace AutoMapper.UnitTests.Mappers
                         Mapper.Map<Destination>(_source);
                     }
                 )
-                .InnerException.ShouldBeOfType<AutoMapperMappingException>()
-                .Types.ShouldBe(
-                    new TypePair(typeof(IDictionary<string, object>), typeof(Destination))
-                );
+                .InnerException
+                .ShouldBeOfType<AutoMapperMappingException>()
+                .Types
+                .ShouldBe(new TypePair(typeof(IDictionary<string, object>), typeof(Destination)));
         }
     }
 
@@ -405,9 +405,11 @@ namespace AutoMapper.UnitTests.Mappers
                 () => Mapper.Map<SomeBase>(new StringDictionary())
             ).ShouldThrowException<AutoMapperMappingException>(
                 ex =>
-                    ex.InnerException.Message.ShouldStartWith(
-                        $"Cannot create an instance of abstract type {typeof(SomeBase)}."
-                    )
+                    ex.InnerException
+                        .Message
+                        .ShouldStartWith(
+                            $"Cannot create an instance of abstract type {typeof(SomeBase)}."
+                        )
             );
         }
     }

@@ -238,7 +238,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                     ss.Set<Level1>()
                         .Include(
                             l1 =>
-                                l1.OneToOne_Optional_FK1.OneToMany_Optional2
+                                l1.OneToOne_Optional_FK1
+                                    .OneToMany_Optional2
                                     .Where(x => x.Name != "Foo")
                                     .OrderBy(x => x.Name)
                                     .Skip(1)

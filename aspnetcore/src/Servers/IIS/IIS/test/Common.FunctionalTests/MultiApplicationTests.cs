@@ -117,7 +117,8 @@ public class MultiApplicationTests : IISFunctionalTestBase
     {
         var webConfigLocation = GetWebConfigLocation(directory);
         XDocument webConfig = XDocument.Load(webConfigLocation);
-        webConfig.Root
+        webConfig
+            .Root
             .Descendants("system.webServer")
             .Single()
             .GetOrAdd("aspNetCore")

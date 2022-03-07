@@ -199,7 +199,8 @@ namespace Microsoft.EntityFrameworkCore.Update
         /// <returns>The command.</returns>
         protected virtual RawSqlCommand CreateStoreCommand()
         {
-            var commandBuilder = Dependencies.CommandBuilderFactory
+            var commandBuilder = Dependencies
+                .CommandBuilderFactory
                 .Create()
                 .Append(GetCommandText());
 
@@ -221,9 +222,9 @@ namespace Microsoft.EntityFrameworkCore.Update
                     {
                         commandBuilder.AddParameter(
                             columnModification.ParameterName,
-                            Dependencies.SqlGenerationHelper.GenerateParameterName(
-                                columnModification.ParameterName
-                            ),
+                            Dependencies
+                                .SqlGenerationHelper
+                                .GenerateParameterName(columnModification.ParameterName),
                             columnModification.TypeMapping!,
                             columnModification.IsNullable
                         );
@@ -238,9 +239,9 @@ namespace Microsoft.EntityFrameworkCore.Update
                     {
                         commandBuilder.AddParameter(
                             columnModification.OriginalParameterName,
-                            Dependencies.SqlGenerationHelper.GenerateParameterName(
-                                columnModification.OriginalParameterName
-                            ),
+                            Dependencies
+                                .SqlGenerationHelper
+                                .GenerateParameterName(columnModification.OriginalParameterName),
                             columnModification.TypeMapping!,
                             columnModification.IsNullable
                         );
@@ -267,16 +268,18 @@ namespace Microsoft.EntityFrameworkCore.Update
 
             try
             {
-                using var dataReader = storeCommand.RelationalCommand.ExecuteReader(
-                    new RelationalCommandParameterObject(
-                        connection,
-                        storeCommand.ParameterValues,
-                        null,
-                        Dependencies.CurrentContext.Context,
-                        Dependencies.Logger,
-                        CommandSource.SaveChanges
-                    )
-                );
+                using var dataReader = storeCommand
+                    .RelationalCommand
+                    .ExecuteReader(
+                        new RelationalCommandParameterObject(
+                            connection,
+                            storeCommand.ParameterValues,
+                            null,
+                            Dependencies.CurrentContext.Context,
+                            Dependencies.Logger,
+                            CommandSource.SaveChanges
+                        )
+                    );
                 Consume(dataReader);
             }
             catch (Exception ex)
@@ -307,7 +310,8 @@ namespace Microsoft.EntityFrameworkCore.Update
 
             try
             {
-                await using var dataReader = await storeCommand.RelationalCommand
+                await using var dataReader = await storeCommand
+                    .RelationalCommand
                     .ExecuteReaderAsync(
                         new RelationalCommandParameterObject(
                             connection,
@@ -363,18 +367,20 @@ namespace Microsoft.EntityFrameworkCore.Update
         protected virtual IRelationalValueBufferFactory CreateValueBufferFactory(
             IReadOnlyList<IColumnModification> columnModifications
         ) =>
-            Dependencies.ValueBufferFactoryFactory.Create(
-                columnModifications
-                    .Where(c => c.IsRead)
-                    .Select(
-                        c =>
-                            new TypeMaterializationInfo(
-                                c.Property!.ClrType,
-                                c.Property,
-                                c.TypeMapping!
-                            )
-                    )
-                    .ToArray()
-            );
+            Dependencies
+                .ValueBufferFactoryFactory
+                .Create(
+                    columnModifications
+                        .Where(c => c.IsRead)
+                        .Select(
+                            c =>
+                                new TypeMaterializationInfo(
+                                    c.Property!.ClrType,
+                                    c.Property,
+                                    c.TypeMapping!
+                                )
+                        )
+                        .ToArray()
+                );
     }
 }

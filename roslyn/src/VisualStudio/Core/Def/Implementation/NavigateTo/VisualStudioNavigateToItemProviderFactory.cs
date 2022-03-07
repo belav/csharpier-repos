@@ -39,7 +39,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.NavigateTo
         {
             // Let LSP handle goto when running under the LSP editor.
             if (
-                _workspace.Services
+                _workspace
+                    .Services
                     .GetRequiredService<IWorkspaceContextService>()
                     .IsInLspEditorContext()
             )

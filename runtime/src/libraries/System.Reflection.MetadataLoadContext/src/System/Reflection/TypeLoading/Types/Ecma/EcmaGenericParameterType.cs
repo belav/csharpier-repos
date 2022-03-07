@@ -69,7 +69,8 @@ namespace System.Reflection.TypeLoading.Ecma
             foreach (GenericParameterConstraintHandle h in handles)
             {
                 RoType constraint = h.GetGenericParameterConstraint(reader)
-                    .Type.ResolveTypeDefRefOrSpec(GetEcmaModule(), typeContext);
+                    .Type
+                    .ResolveTypeDefRefOrSpec(GetEcmaModule(), typeContext);
                 constraints[index++] = constraint;
             }
             return constraints;

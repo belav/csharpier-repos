@@ -180,9 +180,9 @@ namespace System.ServiceModel.Syndication.Tests
                 Assert.Equal(2, document.ElementExtensions.Count);
                 Assert.Equal(
                     10,
-                    document.ElementExtensions[0].GetObject<ExtensionObject>(
-                        new XmlSerializer(typeof(ExtensionObject))
-                    ).Value
+                    document.ElementExtensions[0]
+                        .GetObject<ExtensionObject>(new XmlSerializer(typeof(ExtensionObject)))
+                        .Value
                 );
                 Assert.Equal("ExtensionObject", document.ElementExtensions[0].OuterName);
                 Assert.Empty(document.ElementExtensions[0].OuterNamespace);
@@ -227,9 +227,9 @@ namespace System.ServiceModel.Syndication.Tests
                 Assert.Equal(2, collection.ElementExtensions.Count);
                 Assert.Equal(
                     10,
-                    collection.ElementExtensions[0].GetObject<ExtensionObject>(
-                        new XmlSerializer(typeof(ExtensionObject))
-                    ).Value
+                    collection.ElementExtensions[0]
+                        .GetObject<ExtensionObject>(new XmlSerializer(typeof(ExtensionObject)))
+                        .Value
                 );
                 Assert.Equal("ExtensionObject", collection.ElementExtensions[0].OuterName);
                 Assert.Empty(collection.ElementExtensions[0].OuterNamespace);
@@ -274,9 +274,9 @@ namespace System.ServiceModel.Syndication.Tests
                 Assert.Equal(2, workspace.ElementExtensions.Count);
                 Assert.Equal(
                     10,
-                    workspace.ElementExtensions[0].GetObject<ExtensionObject>(
-                        new XmlSerializer(typeof(ExtensionObject))
-                    ).Value
+                    workspace.ElementExtensions[0]
+                        .GetObject<ExtensionObject>(new XmlSerializer(typeof(ExtensionObject)))
+                        .Value
                 );
                 Assert.Equal("ExtensionObject", workspace.ElementExtensions[0].OuterName);
                 Assert.Empty(workspace.ElementExtensions[0].OuterNamespace);
@@ -317,9 +317,9 @@ namespace System.ServiceModel.Syndication.Tests
                 Assert.Equal(2, document.ElementExtensions.Count);
                 Assert.Equal(
                     10,
-                    document.ElementExtensions[0].GetObject<ExtensionObject>(
-                        new XmlSerializer(typeof(ExtensionObject))
-                    ).Value
+                    document.ElementExtensions[0]
+                        .GetObject<ExtensionObject>(new XmlSerializer(typeof(ExtensionObject)))
+                        .Value
                 );
                 Assert.Equal("ExtensionObject", document.ElementExtensions[0].OuterName);
                 Assert.Empty(document.ElementExtensions[0].OuterNamespace);

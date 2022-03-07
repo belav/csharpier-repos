@@ -754,7 +754,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos
                 ImmutableDictionary<string, short?>.Empty.Add("2", 2).Add("1", 1),
                 c =>
                 {
-                    c.Collection = ImmutableDictionary<string, short?>.Empty
+                    c.Collection = ImmutableDictionary<string, short?>
+                        .Empty
                         .Add("1", 1)
                         .Add("2", null);
                 },
@@ -866,12 +867,14 @@ namespace Microsoft.EntityFrameworkCore.Cosmos
             await Can_add_update_delete_with_collection<
                 IReadOnlyDictionary<string, Dictionary<string, short?>>
             >(
-                ImmutableDictionary<string, Dictionary<string, short?>>.Empty
+                ImmutableDictionary<string, Dictionary<string, short?>>
+                    .Empty
                     .Add("2", new Dictionary<string, short?> { { "value", 2 } })
                     .Add("1", new Dictionary<string, short?> { { "value", 1 } }),
                 c =>
                 {
-                    c.Collection = ImmutableDictionary<string, Dictionary<string, short?>>.Empty
+                    c.Collection = ImmutableDictionary<string, Dictionary<string, short?>>
+                        .Empty
                         .Add("1", new Dictionary<string, short?> { { "value", 1 } })
                         .Add("2", null);
                 },
@@ -992,7 +995,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos
                 await context.Database.EnsureCreatedAsync();
 
                 Assert.Null(
-                    context.Model
+                    context
+                        .Model
                         .FindEntityType(typeof(CustomerWithResourceId))
                         .FindProperty(StoreKeyConvention.DefaultIdPropertyName)
                 );
@@ -1107,9 +1111,11 @@ namespace Microsoft.EntityFrameworkCore.Cosmos
 
                 Assert.Equal(
                     CosmosStrings.InvalidResourceId,
-                    Assert.Throws<InvalidOperationException>(
-                        () => context.Set<CustomerWithResourceId>().Find(1, "")
-                    ).Message
+                    Assert
+                        .Throws<InvalidOperationException>(
+                            () => context.Set<CustomerWithResourceId>().Find(1, "")
+                        )
+                        .Message
                 );
             }
         }
@@ -1725,11 +1731,9 @@ OFFSET 0 LIMIT 1"
 
                 Assert.StartsWith(
                     "Response status code does not indicate success: NotFound (404); Substatus: 0",
-                    (
-                        await Assert.ThrowsAsync<DbUpdateException>(
-                            () => context.SaveChangesAsync()
-                        )
-                    ).InnerException!.Message
+                    (await Assert.ThrowsAsync<DbUpdateException>(() => context.SaveChangesAsync()))
+                        .InnerException!
+                        .Message
                 );
             }
 
@@ -1739,11 +1743,9 @@ OFFSET 0 LIMIT 1"
 
                 Assert.StartsWith(
                     "Response status code does not indicate success: NotFound (404); Substatus: 0",
-                    (
-                        await Assert.ThrowsAsync<DbUpdateException>(
-                            () => context.SaveChangesAsync()
-                        )
-                    ).InnerException!.Message
+                    (await Assert.ThrowsAsync<DbUpdateException>(() => context.SaveChangesAsync()))
+                        .InnerException!
+                        .Message
                 );
             }
 
@@ -1753,11 +1755,9 @@ OFFSET 0 LIMIT 1"
 
                 Assert.StartsWith(
                     "Response status code does not indicate success: NotFound (404); Substatus: 0",
-                    (
-                        await Assert.ThrowsAsync<DbUpdateException>(
-                            () => context.SaveChangesAsync()
-                        )
-                    ).InnerException!.Message
+                    (await Assert.ThrowsAsync<DbUpdateException>(() => context.SaveChangesAsync()))
+                        .InnerException!
+                        .Message
                 );
             }
 

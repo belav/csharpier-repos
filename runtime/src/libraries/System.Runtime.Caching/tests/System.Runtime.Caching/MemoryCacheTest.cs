@@ -61,10 +61,9 @@ namespace MonoTests.System.Runtime.Caching
                 // On non-windows, we only support .Net 5.0 and higher
                 if (
                     Environment.Version.Major >= 5
-                    || RuntimeInformation.FrameworkDescription.StartsWith(
-                        ".NET Core",
-                        StringComparison.OrdinalIgnoreCase
-                    )
+                    || RuntimeInformation
+                        .FrameworkDescription
+                        .StartsWith(".NET Core", StringComparison.OrdinalIgnoreCase)
                 )
                 {
                     return true;
@@ -75,10 +74,9 @@ namespace MonoTests.System.Runtime.Caching
         }
         public static bool DoesNotSupportPhysicalMemoryMonitor => !SupportsPhysicalMemoryMonitor;
 
-        private bool IsFullFramework = RuntimeInformation.FrameworkDescription.StartsWith(
-            ".NET Framework",
-            StringComparison.OrdinalIgnoreCase
-        );
+        private bool IsFullFramework = RuntimeInformation
+            .FrameworkDescription
+            .StartsWith(".NET Framework", StringComparison.OrdinalIgnoreCase);
 
         private PokerMemoryCache CreatePokerMemoryCache(string name, string throwOnDisposed)
         {

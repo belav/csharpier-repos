@@ -250,9 +250,9 @@ namespace Microsoft.CodeAnalysis.Formatting
             // relative indentation case where indentation depends on other token
             if (operation.IsRelativeIndentation)
             {
-                var effectiveBaseToken = operation.Option.IsOn(
-                    IndentBlockOption.RelativeToFirstTokenOnBaseTokenLine
-                )
+                var effectiveBaseToken = operation
+                    .Option
+                    .IsOn(IndentBlockOption.RelativeToFirstTokenOnBaseTokenLine)
                   ? _tokenStream.FirstTokenOfBaseTokenLine(operation.BaseToken)
                   : operation.BaseToken;
                 var inseparableRegionStartingPosition = effectiveBaseToken.FullSpan.Start;
@@ -270,9 +270,9 @@ namespace Microsoft.CodeAnalysis.Formatting
 
                         // baseIndentation is calculated for the adjusted token if option is RelativeToFirstTokenOnBaseTokenLine
                         var baseIndentation = _tokenStream.GetCurrentColumn(
-                            operation.Option.IsOn(
-                                IndentBlockOption.RelativeToFirstTokenOnBaseTokenLine
-                            )
+                            operation
+                                .Option
+                                .IsOn(IndentBlockOption.RelativeToFirstTokenOnBaseTokenLine)
                               ? _tokenStream.FirstTokenOfBaseTokenLine(operation.BaseToken)
                               : operation.BaseToken
                         );

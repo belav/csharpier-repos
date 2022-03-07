@@ -39,9 +39,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
 
             public async Task SizeToFitAsync(CancellationToken cancellationToken)
             {
-                await ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
-                    cancellationToken
-                );
+                await ThreadingContext
+                    .JoinableTaskFactory
+                    .SwitchToMainThreadAsync(cancellationToken);
 
                 await CalculateSizeAsync(cancellationToken).ConfigureAwait(true);
 
@@ -76,7 +76,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
 
                 try
                 {
-                    return await completionSource.Task
+                    return await completionSource
+                        .Task
                         .WithCancellation(cancellationToken)
                         .ConfigureAwaitRunInline();
                 }
@@ -103,9 +104,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
 
             private async Task CalculateSizeAsync(CancellationToken cancellationToken)
             {
-                await ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
-                    cancellationToken
-                );
+                await ThreadingContext
+                    .JoinableTaskFactory
+                    .SwitchToMainThreadAsync(cancellationToken);
 
                 ICocoaTextView textView;
                 ITextSnapshot snapshot;

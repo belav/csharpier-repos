@@ -198,7 +198,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             var getSymbolsTicks = Environment.TickCount - ticks;
             ticks = Environment.TickCount;
 
-            var compilation = await document.Project
+            var compilation = await document
+                .Project
                 .GetRequiredCompilationAsync(cancellationToken)
                 .ConfigureAwait(false);
             var items = ConvertSymbolsToCompletionItems(

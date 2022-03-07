@@ -31,7 +31,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
 
             var localConsumer1 = CreateCompilation(localTypeSource);
 
-            NamedTypeSymbol classLocalType1 = localConsumer1.SourceModule.GlobalNamespace
+            NamedTypeSymbol classLocalType1 = localConsumer1
+                .SourceModule
+                .GlobalNamespace
                 .GetTypeMembers("NoPIAGenerics")
                 .Single();
             var localField = classLocalType1.GetMembers("field").OfType<FieldSymbol>().Single();
@@ -53,7 +55,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
 
             var localConsumer = CreateCompilation(localTypeSource);
 
-            NamedTypeSymbol classLocalType = localConsumer.GlobalNamespace
+            NamedTypeSymbol classLocalType = localConsumer
+                .GlobalNamespace
                 .GetTypeMembers("NoPIAGenerics")
                 .Single();
             var localField = classLocalType.GetMembers("nested").OfType<FieldSymbol>().Single();
@@ -76,7 +79,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
 
             var localConsumer = CreateCompilation(localTypeSource);
 
-            NamedTypeSymbol classLocalType = localConsumer.GlobalNamespace
+            NamedTypeSymbol classLocalType = localConsumer
+                .GlobalNamespace
                 .GetTypeMembers("NoPIAGenerics")
                 .Single();
             var localField = classLocalType.GetMembers("nested").OfType<FieldSymbol>().Single();
@@ -98,7 +102,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
 }";
             var localConsumer = CreateCompilation(localTypeSource);
 
-            NamedTypeSymbol classLocalType = localConsumer.GlobalNamespace
+            NamedTypeSymbol classLocalType = localConsumer
+                .GlobalNamespace
                 .GetTypeMembers("NoPIAGenerics")
                 .Single();
             var localField = classLocalType.GetMembers("nested").OfType<FieldSymbol>().Single();
@@ -125,7 +130,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
 }";
             var localConsumer = CreateCompilation(localTypeSource);
 
-            NamedTypeSymbol classLocalType1 = localConsumer.GlobalNamespace
+            NamedTypeSymbol classLocalType1 = localConsumer
+                .GlobalNamespace
                 .GetTypeMembers("NoPIAGenerics")
                 .Single();
             var var1 = classLocalType1.GetMembers("i1").OfType<FieldSymbol>().Single();
@@ -146,7 +152,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
 }";
             var localConsumer = CreateCompilation(localTypeSource1);
 
-            NamedTypeSymbol classLocalType = localConsumer.GlobalNamespace
+            NamedTypeSymbol classLocalType = localConsumer
+                .GlobalNamespace
                 .GetTypeMembers("NoPIAGenerics")
                 .Single();
             var localField = classLocalType
@@ -164,14 +171,17 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
                             .Where(arg => arg.Name == "c1")
                             .Select(arg => arg)
                             .Single()
-                            .Type.BaseType().Kind
+                            .Type
+                            .BaseType()
+                            .Kind
                     );
                     Assert.IsType<NoPiaIllegalGenericInstantiationSymbol>(
                         m.Parameters
                             .Where(arg => arg.Name == "c1")
                             .Select(arg => arg)
                             .Single()
-                            .Type.BaseType()
+                            .Type
+                            .BaseType()
                     );
                 }
                 if (m.ReturnType.TypeKind != TypeKind.Struct)
@@ -194,7 +204,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
 }";
             var localConsumer = CreateCompilation(localTypeSource1);
 
-            NamedTypeSymbol classLocalType = localConsumer.GlobalNamespace
+            NamedTypeSymbol classLocalType = localConsumer
+                .GlobalNamespace
                 .GetTypeMembers("NoPIAGenerics")
                 .Single();
             var var1 = classLocalType.GetMembers("i1").OfType<FieldSymbol>().Single();
@@ -215,11 +226,13 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
 }";
             var localConsumer = CreateCompilation(localTypeSource);
 
-            NamedTypeSymbol classLocalType1 = localConsumer.GlobalNamespace
+            NamedTypeSymbol classLocalType1 = localConsumer
+                .GlobalNamespace
                 .GetTypeMembers("NoPIAGenerics")
                 .Single();
             var local = classLocalType1.GetMembers("typeRef").OfType<FieldSymbol>().Single();
-            var importedProperty = local.Type
+            var importedProperty = local
+                .Type
                 .GetMembers("Property1")
                 .OfType<PropertySymbol>()
                 .Single();
@@ -246,11 +259,13 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
 }";
             var localConsumer = CreateCompilation(localTypeSource);
 
-            NamedTypeSymbol classLocalType1 = localConsumer.GlobalNamespace
+            NamedTypeSymbol classLocalType1 = localConsumer
+                .GlobalNamespace
                 .GetTypeMembers("NoPIAGenerics")
                 .Single();
             var local = classLocalType1.GetMembers("typeRef").OfType<FieldSymbol>().Single();
-            var importedProperty = local.Type
+            var importedProperty = local
+                .Type
                 .GetMembers("Property2")
                 .OfType<PropertySymbol>()
                 .Single();
@@ -271,7 +286,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
 }";
             var localConsumer = CreateCompilation(localTypeSource);
 
-            NamedTypeSymbol classLocalType1 = localConsumer.GlobalNamespace
+            NamedTypeSymbol classLocalType1 = localConsumer
+                .GlobalNamespace
                 .GetTypeMembers("NoPIAGenerics")
                 .Single();
             var local = classLocalType1.GetMembers("typeRef").OfType<FieldSymbol>().Single();
@@ -279,16 +295,21 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
 
             Assert.Equal(
                 SymbolKind.ErrorType,
-                importedMethod.Parameters
+                importedMethod
+                    .Parameters
                     .Where(arg => arg.Name == "x")
                     .Select(arg => arg)
-                    .Single().Type.Kind
+                    .Single()
+                    .Type
+                    .Kind
             );
             Assert.IsType<NoPiaIllegalGenericInstantiationSymbol>(
-                importedMethod.Parameters
+                importedMethod
+                    .Parameters
                     .Where(arg => arg.Name == "x")
                     .Select(arg => arg)
-                    .Single().Type
+                    .Single()
+                    .Type
             );
         }
 
@@ -304,7 +325,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
 }";
             var localConsumer = CreateCompilation(localTypeSource);
 
-            NamedTypeSymbol classLocalType1 = localConsumer.GlobalNamespace
+            NamedTypeSymbol classLocalType1 = localConsumer
+                .GlobalNamespace
                 .GetTypeMembers("NoPIAGenerics")
                 .Single();
             var local = classLocalType1.GetMembers("typeRef").OfType<FieldSymbol>().Single();
@@ -312,16 +334,21 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
 
             Assert.Equal(
                 SymbolKind.ErrorType,
-                importedMethod.Parameters
+                importedMethod
+                    .Parameters
                     .Where(arg => arg.Name == "x")
                     .Select(arg => arg)
-                    .Single().Type.Kind
+                    .Single()
+                    .Type
+                    .Kind
             );
             Assert.IsType<NoPiaIllegalGenericInstantiationSymbol>(
-                importedMethod.Parameters
+                importedMethod
+                    .Parameters
                     .Where(arg => arg.Name == "x")
                     .Select(arg => arg)
-                    .Single().Type
+                    .Single()
+                    .Type
             );
         }
 
@@ -337,7 +364,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
 }";
             var localConsumer = CreateCompilation(localTypeSource);
 
-            NamedTypeSymbol classLocalType = localConsumer.GlobalNamespace
+            NamedTypeSymbol classLocalType = localConsumer
+                .GlobalNamespace
                 .GetTypeMembers("NoPIAGenerics")
                 .Single();
             var local = classLocalType.GetMembers("i2").OfType<FieldSymbol>().Single();
@@ -345,16 +373,21 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
 
             Assert.Equal(
                 SymbolKind.ErrorType,
-                importedMethod.Parameters
+                importedMethod
+                    .Parameters
                     .Where(arg => arg.Name == "x")
                     .Select(arg => arg)
-                    .Single().Type.Kind
+                    .Single()
+                    .Type
+                    .Kind
             );
             Assert.IsType<NoPiaIllegalGenericInstantiationSymbol>(
-                importedMethod.Parameters
+                importedMethod
+                    .Parameters
                     .Where(arg => arg.Name == "x")
                     .Select(arg => arg)
-                    .Single().Type
+                    .Single()
+                    .Type
             );
         }
 
@@ -370,7 +403,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
 }";
             var localConsumer = CreateCompilation(localTypeSource);
 
-            NamedTypeSymbol classLocalType = localConsumer.GlobalNamespace
+            NamedTypeSymbol classLocalType = localConsumer
+                .GlobalNamespace
                 .GetTypeMembers("NoPIAGenerics")
                 .Single();
             var local = classLocalType.GetMembers("typeRef").OfType<FieldSymbol>().Single();
@@ -392,7 +426,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
 }";
             var localConsumer = CreateCompilation(localTypeSource);
 
-            NamedTypeSymbol classLocalType = localConsumer.GlobalNamespace
+            NamedTypeSymbol classLocalType = localConsumer
+                .GlobalNamespace
                 .GetTypeMembers("NoPIAGenerics")
                 .Single();
             var local = classLocalType.GetMembers("tr2a").OfType<FieldSymbol>().Single();
@@ -400,16 +435,21 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
 
             Assert.Equal(
                 SymbolKind.ErrorType,
-                importedMethod.Parameters
+                importedMethod
+                    .Parameters
                     .Where(arg => arg.Name == "x")
                     .Select(arg => arg)
-                    .Single().Type.Kind
+                    .Single()
+                    .Type
+                    .Kind
             );
             Assert.IsType<NoPiaIllegalGenericInstantiationSymbol>(
-                importedMethod.Parameters
+                importedMethod
+                    .Parameters
                     .Where(arg => arg.Name == "x")
                     .Select(arg => arg)
-                    .Single().Type
+                    .Single()
+                    .Type
             );
         }
 
@@ -425,11 +465,13 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
 }";
             var localConsumer = CreateCompilation(localTypeSource);
 
-            NamedTypeSymbol classLocalType = localConsumer.GlobalNamespace
+            NamedTypeSymbol classLocalType = localConsumer
+                .GlobalNamespace
                 .GetTypeMembers("NoPIAGenerics")
                 .Single();
             var local = classLocalType.GetMembers("tr2a").OfType<FieldSymbol>().Single();
-            var importedMethod = local.Type
+            var importedMethod = local
+                .Type
                 .GetMembers("op_Implicit")
                 .OfType<MethodSymbol>()
                 .Single();
@@ -455,7 +497,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
 }";
             var localConsumer = CreateCompilation(localTypeSource);
 
-            NamedTypeSymbol classLocalType = localConsumer.GlobalNamespace
+            NamedTypeSymbol classLocalType = localConsumer
+                .GlobalNamespace
                 .GetTypeMembers("NoPIAGenerics")
                 .Single();
             var local = classLocalType.GetMembers("tr2b").OfType<FieldSymbol>().Single();
@@ -477,7 +520,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
 }";
             var localConsumer = CreateCompilation(localTypeSource);
 
-            NamedTypeSymbol classLocalType = localConsumer.GlobalNamespace
+            NamedTypeSymbol classLocalType = localConsumer
+                .GlobalNamespace
                 .GetTypeMembers("NoPIAGenerics")
                 .Single();
             var var1 = classLocalType.GetMembers("Event2").OfType<EventSymbol>().Single();
@@ -497,7 +541,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
 }";
             var localConsumer = CreateCompilation(localTypeSource);
 
-            NamedTypeSymbol classLocalType = localConsumer.GlobalNamespace
+            NamedTypeSymbol classLocalType = localConsumer
+                .GlobalNamespace
                 .GetTypeMembers("NoPIAGenerics")
                 .Single();
             var var1 = classLocalType.GetMembers("Event3").OfType<FieldSymbol>().Single();
@@ -520,7 +565,8 @@ public class NoPIAGenerics
 }";
             var localConsumer = CreateCompilation(localTypeSource);
 
-            NamedTypeSymbol classLocalType = localConsumer.GlobalNamespace
+            NamedTypeSymbol classLocalType = localConsumer
+                .GlobalNamespace
                 .GetTypeMembers("NoPIAGenerics")
                 .Single();
             var localField = classLocalType.GetMembers("myclass").OfType<FieldSymbol>().Single();
@@ -544,7 +590,8 @@ public class NoPIAGenerics
 }";
             var localConsumer = CreateCompilation(localTypeSource);
 
-            NamedTypeSymbol classLocalType = localConsumer.GlobalNamespace
+            NamedTypeSymbol classLocalType = localConsumer
+                .GlobalNamespace
                 .GetTypeMembers("NoPIAGenerics")
                 .Single();
             var localField = classLocalType.GetMembers("mygeneric").OfType<FieldSymbol>().Single();
@@ -577,7 +624,8 @@ public class DrivedClass
 
 }";
             var localConsumer = CreateCompilation(localTypeSource1);
-            NamedTypeSymbol classLocalType = localConsumer.GlobalNamespace
+            NamedTypeSymbol classLocalType = localConsumer
+                .GlobalNamespace
                 .GetTypeMembers("DrivedClass")
                 .Single();
 
@@ -594,7 +642,8 @@ public class DrivedClass
                             .Where(arg => arg.Name == "c1")
                             .Select(arg => arg)
                             .Single()
-                            .Type.IsFromCompilation(localConsumer)
+                            .Type
+                            .IsFromCompilation(localConsumer)
                     );
                 }
                 if (m.ReturnType.TypeKind != TypeKind.Struct)
@@ -616,7 +665,8 @@ public class DrivedClass
 }";
             var localConsumer = CreateCompilation(localTypeSource);
 
-            NamedTypeSymbol classLocalType = localConsumer.GlobalNamespace
+            NamedTypeSymbol classLocalType = localConsumer
+                .GlobalNamespace
                 .GetTypeMembers("Interface1Impl2")
                 .Single();
 
@@ -641,7 +691,8 @@ public class DrivedClass
             var nestedType = localConsumerRefsAsm
                 .Where(a => a.Name == "NoPIAGenerics1-Asm1")
                 .Single()
-                .GlobalNamespace.GetTypeMembers("NestedConstructs")
+                .GlobalNamespace
+                .GetTypeMembers("NestedConstructs")
                 .Single();
             var localField = nestedType.GetMembers("field1").OfType<FieldSymbol>().Single();
 
@@ -658,7 +709,8 @@ public class DrivedClass
 
             var localConsumerRefsAsm = localConsumer.Assembly.GetNoPiaResolutionAssemblies();
 
-            var nestedType = localConsumerRefsAsm[1].GlobalNamespace
+            var nestedType = localConsumerRefsAsm[1]
+                .GlobalNamespace
                 .GetTypeMembers("NestedConstructs")
                 .Single();
             var localField = nestedType.GetMembers("field1").OfType<FieldSymbol>().Single();
@@ -676,7 +728,8 @@ public class DrivedClass
 
             var localConsumerRefsAsm = localConsumer.Assembly.GetNoPiaResolutionAssemblies();
 
-            var nestedType = localConsumerRefsAsm[1].GlobalNamespace
+            var nestedType = localConsumerRefsAsm[1]
+                .GlobalNamespace
                 .GetTypeMembers("TypeRefs1")
                 .Single();
             var localMethod = nestedType.GetMembers("Method4").OfType<MethodSymbol>().Single();
@@ -738,7 +791,8 @@ public class TypeRefs1
 
             var nestedType = localConsumerRefsAsm
                 .First(arg => arg.Name == "Dummy")
-                .GlobalNamespace.GetTypeMembers("TypeRefs1")
+                .GlobalNamespace
+                .GetTypeMembers("TypeRefs1")
                 .Single();
             var methodSymbol = nestedType.GetMembers("Method4").OfType<MethodSymbol>();
 

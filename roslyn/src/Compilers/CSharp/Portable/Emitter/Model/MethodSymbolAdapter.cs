@@ -218,10 +218,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             Debug.Assert(AdaptedMethodSymbol.Parameters.All(p => p.IsDefinition));
 
 #if DEBUG
-            return AdaptedMethodSymbol.Parameters.SelectAsArray<
-                ParameterSymbol,
-                Cci.IParameterDefinition
-            >(p => p.GetCciAdapter());
+            return AdaptedMethodSymbol
+                .Parameters
+                .SelectAsArray<ParameterSymbol, Cci.IParameterDefinition>(p => p.GetCciAdapter());
 #else
             return StaticCast<Cci.IParameterDefinition>.From(AdaptedMethodSymbol.Parameters);
 #endif

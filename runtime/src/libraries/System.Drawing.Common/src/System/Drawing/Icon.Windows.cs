@@ -100,13 +100,15 @@ namespace System.Drawing
             if (_iconData == null)
             {
                 _iconSize = original.Size;
-                _handle = Interop.User32.CopyImage(
-                    new HandleRef(original, original.Handle),
-                    SafeNativeMethods.IMAGE_ICON,
-                    _iconSize.Width,
-                    _iconSize.Height,
-                    0
-                );
+                _handle = Interop
+                    .User32
+                    .CopyImage(
+                        new HandleRef(original, original.Handle),
+                        SafeNativeMethods.IMAGE_ICON,
+                        _iconSize.Width,
+                        _iconSize.Height,
+                        0
+                    );
             }
             else
             {
@@ -193,20 +195,18 @@ namespace System.Drawing
             // look at the code it might be hard coded to 128 chars for some cases. Leaving the
             // historical MAX_PATH as a minimum to be safe.
 
-            char[] buffer = ArrayPool<char>.Shared.Rent(
-                Math.Max(NativeMethods.MAX_PATH, filePath.Length)
-            );
+            char[] buffer = ArrayPool<char>
+                .Shared
+                .Rent(Math.Max(NativeMethods.MAX_PATH, filePath.Length));
             filePath.CopyTo(0, buffer, 0, filePath.Length);
             buffer[filePath.Length] = '\0';
 
             IntPtr hIcon;
             fixed (char* b = buffer)
             {
-                hIcon = Interop.Shell32.ExtractAssociatedIcon(
-                    NativeMethods.NullHandleRef,
-                    b,
-                    ref index
-                );
+                hIcon = Interop
+                    .Shell32
+                    .ExtractAssociatedIcon(NativeMethods.NullHandleRef, b, ref index);
             }
 
             ArrayPool<char>.Shared.Return(buffer);
@@ -247,21 +247,25 @@ namespace System.Drawing
 
                     if (info.hbmColor != IntPtr.Zero)
                     {
-                        Interop.Gdi32.GetObject(
-                            new HandleRef(null, info.hbmColor),
-                            sizeof(Interop.Gdi32.BITMAP),
-                            ref bitmap
-                        );
+                        Interop
+                            .Gdi32
+                            .GetObject(
+                                new HandleRef(null, info.hbmColor),
+                                sizeof(Interop.Gdi32.BITMAP),
+                                ref bitmap
+                            );
                         Interop.Gdi32.DeleteObject(info.hbmColor);
                         _iconSize = new Size((int)bitmap.bmWidth, (int)bitmap.bmHeight);
                     }
                     else if (info.hbmMask != IntPtr.Zero)
                     {
-                        Interop.Gdi32.GetObject(
-                            new HandleRef(null, info.hbmMask),
-                            sizeof(Interop.Gdi32.BITMAP),
-                            ref bitmap
-                        );
+                        Interop
+                            .Gdi32
+                            .GetObject(
+                                new HandleRef(null, info.hbmMask),
+                                sizeof(Interop.Gdi32.BITMAP),
+                                ref bitmap
+                            );
                         _iconSize = new Size((int)bitmap.bmWidth, (int)(bitmap.bmHeight / 2));
                     }
 
@@ -391,24 +395,28 @@ namespace System.Drawing
             IntPtr hSaveRgn = SaveClipRgn(dc);
             try
             {
-                Interop.Gdi32.IntersectClipRect(
-                    new HandleRef(this, dc),
-                    targetX,
-                    targetY,
-                    targetX + clipWidth,
-                    targetY + clipHeight
-                );
-                Interop.User32.DrawIconEx(
-                    new HandleRef(null, dc),
-                    targetX - imageX,
-                    targetY - imageY,
-                    new HandleRef(this, _handle),
-                    drawWidth,
-                    drawHeight,
-                    0,
-                    NativeMethods.NullHandleRef,
-                    SafeNativeMethods.DI_NORMAL
-                );
+                Interop
+                    .Gdi32
+                    .IntersectClipRect(
+                        new HandleRef(this, dc),
+                        targetX,
+                        targetY,
+                        targetX + clipWidth,
+                        targetY + clipHeight
+                    );
+                Interop
+                    .User32
+                    .DrawIconEx(
+                        new HandleRef(null, dc),
+                        targetX - imageX,
+                        targetY - imageY,
+                        new HandleRef(this, _handle),
+                        drawWidth,
+                        drawHeight,
+                        0,
+                        NativeMethods.NullHandleRef,
+                        SafeNativeMethods.DI_NORMAL
+                    );
             }
             finally
             {
@@ -534,14 +542,12 @@ namespace System.Drawing
             if (s_bitDepth == 0)
             {
                 IntPtr dc = Interop.User32.GetDC(IntPtr.Zero);
-                s_bitDepth = Interop.Gdi32.GetDeviceCaps(
-                    dc,
-                    Interop.Gdi32.DeviceCapability.BITSPIXEL
-                );
-                s_bitDepth *= Interop.Gdi32.GetDeviceCaps(
-                    dc,
-                    Interop.Gdi32.DeviceCapability.PLANES
-                );
+                s_bitDepth = Interop
+                    .Gdi32
+                    .GetDeviceCaps(dc, Interop.Gdi32.DeviceCapability.BITSPIXEL);
+                s_bitDepth *= Interop
+                    .Gdi32
+                    .GetDeviceCaps(dc, Interop.Gdi32.DeviceCapability.PLANES);
                 Interop.User32.ReleaseDC(IntPtr.Zero, dc);
 
                 // If the bitdepth is 8, make it 4 because windows does not
@@ -687,15 +693,17 @@ namespace System.Drawing
 
                     fixed (byte* pbAlignedBuffer = alignedBuffer)
                     {
-                        _handle = Interop.User32.CreateIconFromResourceEx(
-                            pbAlignedBuffer,
-                            _bestBytesInRes,
-                            true,
-                            0x00030000,
-                            0,
-                            0,
-                            0
-                        );
+                        _handle = Interop
+                            .User32
+                            .CreateIconFromResourceEx(
+                                pbAlignedBuffer,
+                                _bestBytesInRes,
+                                true,
+                                0x00030000,
+                                0,
+                                0,
+                                0
+                            );
                     }
                     ArrayPool<byte>.Shared.Return(alignedBuffer);
                 }
@@ -703,15 +711,17 @@ namespace System.Drawing
                 {
                     try
                     {
-                        _handle = Interop.User32.CreateIconFromResourceEx(
-                            checked(b + _bestImageOffset),
-                            _bestBytesInRes,
-                            true,
-                            0x00030000,
-                            0,
-                            0,
-                            0
-                        );
+                        _handle = Interop
+                            .User32
+                            .CreateIconFromResourceEx(
+                                checked(b + _bestImageOffset),
+                                _bestBytesInRes,
+                                true,
+                                0x00030000,
+                                0,
+                                0,
+                                0
+                            );
                     }
                     catch (OverflowException)
                     {
@@ -852,11 +862,13 @@ namespace System.Drawing
                 {
                     if (info.hbmColor != IntPtr.Zero)
                     {
-                        Interop.Gdi32.GetObject(
-                            new HandleRef(null, info.hbmColor),
-                            sizeof(Interop.Gdi32.BITMAP),
-                            ref bmp
-                        );
+                        Interop
+                            .Gdi32
+                            .GetObject(
+                                new HandleRef(null, info.hbmColor),
+                                sizeof(Interop.Gdi32.BITMAP),
+                                ref bmp
+                            );
                         if (bmp.bmBitsPixel == 32)
                         {
                             Bitmap? tmpBitmap = null;

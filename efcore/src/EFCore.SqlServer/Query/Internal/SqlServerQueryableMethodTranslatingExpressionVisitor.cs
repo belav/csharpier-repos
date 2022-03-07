@@ -81,10 +81,9 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
                     _ => throw new InvalidOperationException(queryRootExpression.Print())
                 };
 
-                var selectExpression = RelationalDependencies.SqlExpressionFactory.Select(
-                    queryRootExpression.EntityType,
-                    temporalTableExpression
-                );
+                var selectExpression = RelationalDependencies
+                    .SqlExpressionFactory
+                    .Select(queryRootExpression.EntityType, temporalTableExpression);
 
                 return new ShapedQueryExpression(
                     selectExpression,

@@ -62,7 +62,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer
                 // 2.  That the handler provider's CreateRequestHandlers is only called once and always returns the same handler instances.
                 var lazyProviders = new Lazy<ImmutableDictionary<string, IRequestHandler>>(
                     () =>
-                        handlerProvider.Value
+                        handlerProvider
+                            .Value
                             .CreateRequestHandlers()
                             .ToImmutableDictionary(
                                 p => p.Method,

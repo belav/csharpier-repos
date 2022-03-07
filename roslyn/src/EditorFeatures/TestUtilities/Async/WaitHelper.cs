@@ -16,7 +16,9 @@ namespace Roslyn.Test.Utilities
         {
             Action action = delegate { };
 #pragma warning disable VSTHRD001 // Avoid legacy thread switching APIs
-            new FrameworkElement().Dispatcher.Invoke(action, priority);
+            new FrameworkElement()
+                .Dispatcher
+                .Invoke(action, priority);
 #pragma warning restore VSTHRD001 // Avoid legacy thread switching APIs
         }
     }

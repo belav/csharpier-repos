@@ -90,9 +90,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             TestConditional(
                 "true ? T : U",
                 null,
-                parseOptions: TestOptions.Regular8.WithLanguageVersion(
-                    MessageID.IDS_FeatureTargetTypedConditional.RequiredVersion()
-                ),
+                parseOptions: TestOptions
+                    .Regular8
+                    .WithLanguageVersion(
+                        MessageID.IDS_FeatureTargetTypedConditional.RequiredVersion()
+                    ),
                 Diagnostic(ErrorCode.ERR_BadSKunknown, "T").WithArguments("T", "type"),
                 Diagnostic(ErrorCode.ERR_BadSKunknown, "U").WithArguments("U", "type")
             );
@@ -105,9 +107,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             TestConditional(
                 "false ? T : 1",
                 null,
-                parseOptions: TestOptions.Regular8.WithLanguageVersion(
-                    MessageID.IDS_FeatureTargetTypedConditional.RequiredVersion()
-                ),
+                parseOptions: TestOptions
+                    .Regular8
+                    .WithLanguageVersion(
+                        MessageID.IDS_FeatureTargetTypedConditional.RequiredVersion()
+                    ),
                 Diagnostic(ErrorCode.ERR_BadSKunknown, "T").WithArguments("T", "type")
             );
             TestConditional(
@@ -339,9 +343,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             TestConditional(
                 "1 ? null : null",
                 null,
-                parseOptions: TestOptions.Regular.WithLanguageVersion(
-                    MessageID.IDS_FeatureTargetTypedConditional.RequiredVersion()
-                ),
+                parseOptions: TestOptions
+                    .Regular
+                    .WithLanguageVersion(
+                        MessageID.IDS_FeatureTargetTypedConditional.RequiredVersion()
+                    ),
                 Diagnostic(ErrorCode.ERR_NoImplicitConv, "1").WithArguments("int", "bool")
             );
         }
@@ -1416,9 +1422,11 @@ System.Collections.Generic.List`1[System.Int32]
                 TestConditionalCore(
                     conditionalExpression,
                     expectedType,
-                    TestOptions.Regular8.WithLanguageVersion(
-                        MessageID.IDS_FeatureTargetTypedConditional.RequiredVersion()
-                    ),
+                    TestOptions
+                        .Regular8
+                        .WithLanguageVersion(
+                            MessageID.IDS_FeatureTargetTypedConditional.RequiredVersion()
+                        ),
                     expectedDiagnostics
                 );
             }
@@ -1498,13 +1506,15 @@ interface I<in T, out U> {{ }}";
                         expectedType,
                         model
                             .GetTypeInfo(conditionalExpr.WhenTrue)
-                            .ConvertedType.ToTestDisplayString()
+                            .ConvertedType
+                            .ToTestDisplayString()
                     ); //in parent to catch conversion
                     Assert.Equal(
                         expectedType,
                         model
                             .GetTypeInfo(conditionalExpr.WhenFalse)
-                            .ConvertedType.ToTestDisplayString()
+                            .ConvertedType
+                            .ToTestDisplayString()
                     ); //in parent to catch conversion
                 }
             }

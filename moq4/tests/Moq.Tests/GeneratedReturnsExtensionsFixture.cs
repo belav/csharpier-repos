@@ -79,11 +79,9 @@ namespace Moq.Tests
                 .ReturnsAsync((DateTime[] dateTimes) => dateTimes.Max());
 
             DateTime evaluationResult =
-                mock.Object.WithParamsAsync(
-                    DateTime.MinValue,
-                    DateTime.Now,
-                    DateTime.MaxValue
-                ).Result;
+                mock.Object
+                    .WithParamsAsync(DateTime.MinValue, DateTime.Now, DateTime.MaxValue)
+                    .Result;
 
             Assert.Equal(DateTime.MaxValue, evaluationResult);
         }

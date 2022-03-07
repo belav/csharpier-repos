@@ -28,7 +28,8 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
             CancellationToken cancellationToken
         )
         {
-            var accessibleConstructors = normalType.InstanceConstructors
+            var accessibleConstructors = normalType
+                .InstanceConstructors
                 .WhereAsArray(c => c.IsAccessibleWithin(within))
                 .WhereAsArray(
                     s => s.IsEditorBrowsable(options.HideAdvancedMembers, semanticModel.Compilation)
@@ -78,7 +79,8 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
                 GetNormalTypePreambleParts(constructor, semanticModel, position),
                 GetSeparatorParts(),
                 GetNormalTypePostambleParts(),
-                constructor.Parameters
+                constructor
+                    .Parameters
                     .Select(
                         p =>
                             Convert(

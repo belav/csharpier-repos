@@ -115,9 +115,9 @@ public class CompilationTagHelperFeatureTest
         var engine = RazorProjectEngine.Create(
             configure =>
             {
-                configure.Features.Add(
-                    new DefaultMetadataReferenceFeature { References = references }
-                );
+                configure
+                    .Features
+                    .Add(new DefaultMetadataReferenceFeature { References = references });
                 configure.Features.Add(provider.Object);
                 configure.Features.Add(new CompilationTagHelperFeature());
             }

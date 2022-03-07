@@ -1536,7 +1536,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
                         o.GetEntityTypes()
                             .First()
                             .GetDeclaredKeys()
-                            .First(k => k.Properties.Count == 2).Properties,
+                            .First(k => k.Properties.Count == 2)
+                            .Properties,
                         t => Assert.Equal("Id", t.Name),
                         t => Assert.Equal("AlternateId", t.Name)
                     );
@@ -2684,9 +2685,9 @@ namespace Microsoft.EntityFrameworkCore.Migrations
                     );
 
                     var ownership1 =
-                        entityWithOneProperty.FindNavigation(
-                            nameof(EntityWithOneProperty.EntityWithTwoProperties)
-                        ).ForeignKey;
+                        entityWithOneProperty
+                            .FindNavigation(nameof(EntityWithOneProperty.EntityWithTwoProperties))
+                            .ForeignKey;
                     Assert.Equal(
                         nameof(EntityWithTwoProperties.AlternateId),
                         ownership1.Properties[0].Name
@@ -2727,16 +2728,16 @@ namespace Microsoft.EntityFrameworkCore.Migrations
                     var entityWithStringKey = o.FindEntityType(typeof(EntityWithStringKey));
                     Assert.Same(
                         entityWithStringKey,
-                        ownedType1.FindNavigation(
-                            nameof(EntityWithTwoProperties.EntityWithStringKey)
-                        ).TargetEntityType
+                        ownedType1
+                            .FindNavigation(nameof(EntityWithTwoProperties.EntityWithStringKey))
+                            .TargetEntityType
                     );
                     Assert.Equal(nameof(EntityWithStringKey), entityWithStringKey.GetTableName());
 
                     var ownership2 =
-                        entityWithStringKey.FindNavigation(
-                            nameof(EntityWithStringKey.Properties)
-                        ).ForeignKey;
+                        entityWithStringKey
+                            .FindNavigation(nameof(EntityWithStringKey.Properties))
+                            .ForeignKey;
                     Assert.Equal("EntityWithStringKeyId", ownership2.Properties[0].Name);
                     Assert.Null(ownership2.DependentToPrincipal);
                     Assert.True(ownership2.IsRequired);
@@ -2956,9 +2957,9 @@ namespace Microsoft.EntityFrameworkCore.Migrations
                     );
 
                     var ownership1 =
-                        entityWithOneProperty.FindNavigation(
-                            nameof(EntityWithOneProperty.EntityWithTwoProperties)
-                        ).ForeignKey;
+                        entityWithOneProperty
+                            .FindNavigation(nameof(EntityWithOneProperty.EntityWithTwoProperties))
+                            .ForeignKey;
                     Assert.Equal(
                         nameof(EntityWithTwoProperties.AlternateId),
                         ownership1.Properties[0].Name
@@ -2994,17 +2995,17 @@ namespace Microsoft.EntityFrameworkCore.Migrations
                     var entityWithStringKey = o.FindEntityType(typeof(EntityWithStringKey));
                     Assert.Same(
                         entityWithStringKey,
-                        ownedType1.FindNavigation(
-                            nameof(EntityWithTwoProperties.EntityWithStringKey)
-                        ).TargetEntityType
+                        ownedType1
+                            .FindNavigation(nameof(EntityWithTwoProperties.EntityWithStringKey))
+                            .TargetEntityType
                     );
                     Assert.Equal(nameof(EntityWithStringKey), entityWithStringKey.GetTableName());
                     Assert.True(entityWithStringKey.IsTableExcludedFromMigrations());
 
                     var ownership2 =
-                        entityWithStringKey.FindNavigation(
-                            nameof(EntityWithStringKey.Properties)
-                        ).ForeignKey;
+                        entityWithStringKey
+                            .FindNavigation(nameof(EntityWithStringKey.Properties))
+                            .ForeignKey;
                     Assert.Equal("EntityWithStringKeyId", ownership2.Properties[0].Name);
                     Assert.Null(ownership2.DependentToPrincipal);
                     Assert.True(ownership2.IsRequired);
@@ -3193,9 +3194,9 @@ namespace Microsoft.EntityFrameworkCore.Migrations
                     Assert.Equal(1, orderBillingDetails.PropertyCount());
 
                     var orderBillingDetailsAddress =
-                        orderBillingDetails.FindNavigation(
-                            nameof(OrderDetails.StreetAddress)
-                        ).TargetEntityType;
+                        orderBillingDetails
+                            .FindNavigation(nameof(OrderDetails.StreetAddress))
+                            .TargetEntityType;
                     Assert.Equal(2, orderBillingDetailsAddress.PropertyCount());
 
                     var orderShippingDetails =
@@ -3203,9 +3204,9 @@ namespace Microsoft.EntityFrameworkCore.Migrations
                     Assert.Equal(1, orderShippingDetails.PropertyCount());
 
                     var orderShippingDetailsAddress =
-                        orderShippingDetails.FindNavigation(
-                            nameof(OrderDetails.StreetAddress)
-                        ).TargetEntityType;
+                        orderShippingDetails
+                            .FindNavigation(nameof(OrderDetails.StreetAddress))
+                            .TargetEntityType;
                     Assert.Equal(2, orderShippingDetailsAddress.PropertyCount());
                 }
             );
@@ -3587,14 +3588,12 @@ namespace RootNamespace
                         x =>
                         {
                             x.Property(e => e.Id)
-                                .Metadata.SetValueGenerationStrategy(
-                                    SqlServerValueGenerationStrategy.None
-                                );
+                                .Metadata
+                                .SetValueGenerationStrategy(SqlServerValueGenerationStrategy.None);
                             x.Property(e => e.Day)
                                 .ValueGeneratedOnAdd()
-                                .Metadata.SetValueGenerationStrategy(
-                                    SqlServerValueGenerationStrategy.None
-                                );
+                                .Metadata
+                                .SetValueGenerationStrategy(SqlServerValueGenerationStrategy.None);
                         }
                     ),
                 AddBoilerPlate(
@@ -5677,7 +5676,8 @@ namespace RootNamespace
                 o =>
                     Assert.False(
                         o.FindEntityType(typeof(EntityWithStringProperty))
-                            .FindProperty("Name").IsNullable
+                            .FindProperty("Name")
+                            .IsNullable
                     )
             );
         }
@@ -5741,7 +5741,8 @@ namespace RootNamespace
                     Assert.False(
                         o.FindEntityType(typeof(EntityWithStringProperty))
                             .GetForeignKeys()
-                            .First().IsUnique
+                            .First()
+                            .IsUnique
                     )
             );
         }
@@ -5814,7 +5815,8 @@ namespace RootNamespace
                     Assert.False(
                         o.FindEntityType(typeof(EntityWithStringProperty))
                             .GetForeignKeys()
-                            .First().IsUnique
+                            .First()
+                            .IsUnique
                     )
             );
         }
@@ -5877,7 +5879,8 @@ namespace RootNamespace
                         DeleteBehavior.Cascade,
                         o.FindEntityType(typeof(EntityWithOneProperty))
                             .GetForeignKeys()
-                            .First().DeleteBehavior
+                            .First()
+                            .DeleteBehavior
                     )
             );
         }
@@ -5944,7 +5947,8 @@ namespace RootNamespace
                         DeleteBehavior.Cascade,
                         o.FindEntityType(typeof(EntityWithOneProperty))
                             .GetForeignKeys()
-                            .First().DeleteBehavior
+                            .First()
+                            .DeleteBehavior
                     )
             );
         }
@@ -6582,7 +6586,9 @@ namespace RootNamespace
                     Assert.True(
                         o.FindEntityType(typeof(EntityWithOneProperty))
                             .GetNavigations()
-                            .First().ForeignKey.IsRequiredDependent
+                            .First()
+                            .ForeignKey
+                            .IsRequiredDependent
                     )
             );
         }

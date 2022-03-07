@@ -55,13 +55,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
         )
         {
             return context.TargetToken.IsKindOrHasMatchingText(SyntaxKind.AsyncKeyword)
-                && context.SyntaxTree.IsExpressionContext(
-                    context.TargetToken.SpanStart,
-                    context.TargetToken,
-                    attributes: false,
-                    cancellationToken: cancellationToken,
-                    semanticModelOpt: context.SemanticModel
-                );
+                && context
+                    .SyntaxTree
+                    .IsExpressionContext(
+                        context.TargetToken.SpanStart,
+                        context.TargetToken,
+                        attributes: false,
+                        cancellationToken: cancellationToken,
+                        semanticModelOpt: context.SemanticModel
+                    );
         }
     }
 }

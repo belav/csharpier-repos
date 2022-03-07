@@ -424,9 +424,9 @@ namespace Microsoft.EntityFrameworkCore.Utilities
 
             Assert.Equal(
                 CoreStrings.CircularDependency(message),
-                Assert.Throws<InvalidOperationException>(
-                    () => graph.TopologicalSort(formatter)
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(() => graph.TopologicalSort(formatter))
+                    .Message
             );
 
             Assert.Equal(3, cycleData.Count());
@@ -474,9 +474,11 @@ namespace Microsoft.EntityFrameworkCore.Utilities
 
             Assert.Equal(
                 CoreStrings.CircularDependency(message),
-                Assert.Throws<InvalidOperationException>(
-                    () => graph.BatchingTopologicalSort(null, formatter)
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(
+                        () => graph.BatchingTopologicalSort(null, formatter)
+                    )
+                    .Message
             );
 
             Assert.Equal(3, cycleData.Count());
@@ -528,9 +530,11 @@ namespace Microsoft.EntityFrameworkCore.Utilities
 
             Assert.Equal(
                 CoreStrings.CircularDependency(message),
-                Assert.Throws<InvalidOperationException>(
-                    () => graph.BatchingTopologicalSort(null, formatter)
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(
+                        () => graph.BatchingTopologicalSort(null, formatter)
+                    )
+                    .Message
             );
 
             Assert.Equal(2, cycleData.Count);
@@ -743,9 +747,9 @@ namespace Microsoft.EntityFrameworkCore.Utilities
 
             Assert.Equal(
                 CoreStrings.CircularDependency(nameof(A) + " ->" + Environment.NewLine + nameof(A)),
-                Assert.Throws<InvalidOperationException>(
-                    () => graph.BatchingTopologicalSort()
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(() => graph.BatchingTopologicalSort())
+                    .Message
             );
         }
 
@@ -788,9 +792,9 @@ namespace Microsoft.EntityFrameworkCore.Utilities
                         + Environment.NewLine
                         + nameof(A)
                 ),
-                Assert.Throws<InvalidOperationException>(
-                    () => graph.BatchingTopologicalSort()
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(() => graph.BatchingTopologicalSort())
+                    .Message
             );
         }
 
@@ -841,9 +845,9 @@ namespace Microsoft.EntityFrameworkCore.Utilities
                         + Environment.NewLine
                         + nameof(A)
                 ),
-                Assert.Throws<InvalidOperationException>(
-                    () => graph.BatchingTopologicalSort()
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(() => graph.BatchingTopologicalSort())
+                    .Message
             );
         }
 
@@ -917,9 +921,9 @@ namespace Microsoft.EntityFrameworkCore.Utilities
                         + Environment.NewLine
                         + nameof(A)
                 ),
-                Assert.Throws<InvalidOperationException>(
-                    () => graph.BatchingTopologicalSort()
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(() => graph.BatchingTopologicalSort())
+                    .Message
             );
         }
 
@@ -967,9 +971,9 @@ namespace Microsoft.EntityFrameworkCore.Utilities
                         + Environment.NewLine
                         + nameof(C)
                 ),
-                Assert.Throws<InvalidOperationException>(
-                    () => graph.BatchingTopologicalSort()
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(() => graph.BatchingTopologicalSort())
+                    .Message
             );
         }
 

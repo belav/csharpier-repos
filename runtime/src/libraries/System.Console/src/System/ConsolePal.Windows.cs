@@ -102,13 +102,9 @@ namespace System
             // appropriate modes. This must handle console-less Windows apps.
             int bytesWritten;
             byte junkByte = 0x41;
-            int r = Interop.Kernel32.WriteFile(
-                outErrHandle,
-                &junkByte,
-                0,
-                out bytesWritten,
-                IntPtr.Zero
-            );
+            int r = Interop
+                .Kernel32
+                .WriteFile(outErrHandle, &junkByte, 0, out bytesWritten, IntPtr.Zero);
             return r != 0; // In Win32 apps w/ no console, bResult should be 0 for failure.
         }
 
@@ -312,12 +308,9 @@ namespace System
                 int numEventsRead = 0;
                 while (true)
                 {
-                    bool r = Interop.Kernel32.PeekConsoleInput(
-                        InputHandle,
-                        out ir,
-                        1,
-                        out numEventsRead
-                    );
+                    bool r = Interop
+                        .Kernel32
+                        .PeekConsoleInput(InputHandle, out ir, 1, out numEventsRead);
                     if (!r)
                     {
                         int errorCode = Marshal.GetLastPInvokeError();
@@ -334,12 +327,9 @@ namespace System
                     // Skip non key-down && mod key events.
                     if (!IsKeyDownEvent(ir) || IsModKey(ir))
                     {
-                        r = Interop.Kernel32.ReadConsoleInput(
-                            InputHandle,
-                            out ir,
-                            1,
-                            out numEventsRead
-                        );
+                        r = Interop
+                            .Kernel32
+                            .ReadConsoleInput(InputHandle, out ir, 1, out numEventsRead);
 
                         if (!r)
                             throw Win32Marshal.GetExceptionForWin32Error(
@@ -382,12 +372,9 @@ namespace System
                 { // We did NOT have a previous keystroke with repeated characters:
                     while (true)
                     {
-                        r = Interop.Kernel32.ReadConsoleInput(
-                            InputHandle,
-                            out ir,
-                            1,
-                            out numEventsRead
-                        );
+                        r = Interop
+                            .Kernel32
+                            .ReadConsoleInput(InputHandle, out ir, 1, out numEventsRead);
                         if (!r || numEventsRead == 0)
                         {
                             // This will fail when stdin is redirected from a file or pipe.
@@ -864,13 +851,15 @@ namespace System
 
             bool r;
             fixed (Interop.Kernel32.CHAR_INFO* pCharInfo = data)
-                r = Interop.Kernel32.ReadConsoleOutput(
-                    OutputHandle,
-                    pCharInfo,
-                    bufferSize,
-                    bufferCoord,
-                    ref readRegion
-                );
+                r = Interop
+                    .Kernel32
+                    .ReadConsoleOutput(
+                        OutputHandle,
+                        pCharInfo,
+                        bufferSize,
+                        bufferCoord,
+                        ref readRegion
+                    );
             if (!r)
                 throw Win32Marshal.GetExceptionForWin32Error(Marshal.GetLastPInvokeError());
 
@@ -884,13 +873,15 @@ namespace System
             for (int i = sourceTop; i < sourceTop + sourceHeight; i++)
             {
                 writeCoord.Y = (short)i;
-                r = Interop.Kernel32.FillConsoleOutputCharacter(
-                    OutputHandle,
-                    sourceChar,
-                    sourceWidth,
-                    writeCoord,
-                    out numWritten
-                );
+                r = Interop
+                    .Kernel32
+                    .FillConsoleOutputCharacter(
+                        OutputHandle,
+                        sourceChar,
+                        sourceWidth,
+                        writeCoord,
+                        out numWritten
+                    );
                 Debug.Assert(
                     numWritten == sourceWidth,
                     "FillConsoleOutputCharacter wrote the wrong number of chars!"
@@ -898,13 +889,15 @@ namespace System
                 if (!r)
                     throw Win32Marshal.GetExceptionForWin32Error(Marshal.GetLastPInvokeError());
 
-                r = Interop.Kernel32.FillConsoleOutputAttribute(
-                    OutputHandle,
-                    attr,
-                    sourceWidth,
-                    writeCoord,
-                    out numWritten
-                );
+                r = Interop
+                    .Kernel32
+                    .FillConsoleOutputAttribute(
+                        OutputHandle,
+                        attr,
+                        sourceWidth,
+                        writeCoord,
+                        out numWritten
+                    );
                 if (!r)
                     throw Win32Marshal.GetExceptionForWin32Error(Marshal.GetLastPInvokeError());
             }
@@ -917,13 +910,15 @@ namespace System
             writeRegion.Bottom = (short)(targetTop + sourceHeight);
 
             fixed (Interop.Kernel32.CHAR_INFO* pCharInfo = data)
-                Interop.Kernel32.WriteConsoleOutput(
-                    OutputHandle,
-                    pCharInfo,
-                    bufferSize,
-                    bufferCoord,
-                    ref writeRegion
-                );
+                Interop
+                    .Kernel32
+                    .WriteConsoleOutput(
+                        OutputHandle,
+                        pCharInfo,
+                        bufferSize,
+                        bufferCoord,
+                        ref writeRegion
+                    );
         }
 
         public static void Clear()
@@ -946,26 +941,30 @@ namespace System
             // fill the entire screen with blanks
 
             int numCellsWritten = 0;
-            success = Interop.Kernel32.FillConsoleOutputCharacter(
-                hConsole,
-                ' ',
-                conSize,
-                coordScreen,
-                out numCellsWritten
-            );
+            success = Interop
+                .Kernel32
+                .FillConsoleOutputCharacter(
+                    hConsole,
+                    ' ',
+                    conSize,
+                    coordScreen,
+                    out numCellsWritten
+                );
             if (!success)
                 throw Win32Marshal.GetExceptionForWin32Error(Marshal.GetLastPInvokeError());
 
             // now set the buffer's attributes accordingly
 
             numCellsWritten = 0;
-            success = Interop.Kernel32.FillConsoleOutputAttribute(
-                hConsole,
-                csbi.wAttributes,
-                conSize,
-                coordScreen,
-                out numCellsWritten
-            );
+            success = Interop
+                .Kernel32
+                .FillConsoleOutputAttribute(
+                    hConsole,
+                    csbi.wAttributes,
+                    conSize,
+                    coordScreen,
+                    out numCellsWritten
+                );
             if (!success)
                 throw Win32Marshal.GetExceptionForWin32Error(Marshal.GetLastPInvokeError());
 
@@ -1057,9 +1056,9 @@ namespace System
             {
                 // Note this varies based on current screen resolution and
                 // current console font.  Do not cache this value.
-                Interop.Kernel32.COORD bounds = Interop.Kernel32.GetLargestConsoleWindowSize(
-                    OutputHandle
-                );
+                Interop.Kernel32.COORD bounds = Interop
+                    .Kernel32
+                    .GetLargestConsoleWindowSize(OutputHandle);
                 return bounds.X;
             }
         }
@@ -1070,9 +1069,9 @@ namespace System
             {
                 // Note this varies based on current screen resolution and
                 // current console font.  Do not cache this value.
-                Interop.Kernel32.COORD bounds = Interop.Kernel32.GetLargestConsoleWindowSize(
-                    OutputHandle
-                );
+                Interop.Kernel32.COORD bounds = Interop
+                    .Kernel32
+                    .GetLargestConsoleWindowSize(OutputHandle);
                 return bounds.Y;
             }
         }
@@ -1223,9 +1222,9 @@ namespace System
                 }
 
                 // Try to give a better error message here
-                Interop.Kernel32.COORD bounds = Interop.Kernel32.GetLargestConsoleWindowSize(
-                    OutputHandle
-                );
+                Interop.Kernel32.COORD bounds = Interop
+                    .Kernel32
+                    .GetLargestConsoleWindowSize(OutputHandle);
                 if (width > bounds.X)
                     throw new ArgumentOutOfRangeException(
                         nameof(width),
@@ -1419,26 +1418,24 @@ namespace System
                     {
                         readSuccess = (
                             0
-                            != Interop.Kernel32.ReadFile(
-                                hFile,
-                                p,
-                                buffer.Length,
-                                out bytesRead,
-                                IntPtr.Zero
-                            )
+                            != Interop
+                                .Kernel32
+                                .ReadFile(hFile, p, buffer.Length, out bytesRead, IntPtr.Zero)
                         );
                     }
                     else
                     {
                         // If the code page could be Unicode, we should use ReadConsole instead, e.g.
                         int charsRead;
-                        readSuccess = Interop.Kernel32.ReadConsole(
-                            hFile,
-                            p,
-                            buffer.Length / BytesPerWChar,
-                            out charsRead,
-                            IntPtr.Zero
-                        );
+                        readSuccess = Interop
+                            .Kernel32
+                            .ReadConsole(
+                                hFile,
+                                p,
+                                buffer.Length / BytesPerWChar,
+                                out charsRead,
+                                IntPtr.Zero
+                            );
                         bytesRead = charsRead * BytesPerWChar;
                     }
                 }
@@ -1474,13 +1471,9 @@ namespace System
                         int numBytesWritten;
                         writeSuccess = (
                             0
-                            != Interop.Kernel32.WriteFile(
-                                hFile,
-                                p,
-                                bytes.Length,
-                                out numBytesWritten,
-                                IntPtr.Zero
-                            )
+                            != Interop
+                                .Kernel32
+                                .WriteFile(hFile, p, bytes.Length, out numBytesWritten, IntPtr.Zero)
                         );
                         // In some cases we have seen numBytesWritten returned that is twice count;
                         // so we aren't asserting the value of it. See https://github.com/dotnet/runtime/issues/23776
@@ -1493,13 +1486,15 @@ namespace System
                         // However, we do not need to worry about that because the StreamWriter in Console has
                         // a much shorter buffer size anyway.
                         int charsWritten;
-                        writeSuccess = Interop.Kernel32.WriteConsole(
-                            hFile,
-                            p,
-                            bytes.Length / BytesPerWChar,
-                            out charsWritten,
-                            IntPtr.Zero
-                        );
+                        writeSuccess = Interop
+                            .Kernel32
+                            .WriteConsole(
+                                hFile,
+                                p,
+                                bytes.Length / BytesPerWChar,
+                                out charsWritten,
+                                IntPtr.Zero
+                            );
                         Debug.Assert(!writeSuccess || bytes.Length / BytesPerWChar == charsWritten);
                     }
                 }

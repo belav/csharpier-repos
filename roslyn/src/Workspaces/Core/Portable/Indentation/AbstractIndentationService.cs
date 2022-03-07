@@ -25,8 +25,9 @@ namespace Microsoft.CodeAnalysis.Indentation
         )
         {
             var workspace = document.Project.Solution.Workspace;
-            var formattingRuleFactory =
-                workspace.Services.GetRequiredService<IHostDependentFormattingRuleFactoryService>();
+            var formattingRuleFactory = workspace
+                .Services
+                .GetRequiredService<IHostDependentFormattingRuleFactoryService>();
             var baseIndentationRule = formattingRuleFactory.CreateRule(document, position);
 
             var formattingRules = new[]

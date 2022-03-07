@@ -107,9 +107,9 @@ namespace Microsoft.EntityFrameworkCore
             Check.NotNull(parameters, nameof(parameters));
 
             var queryableSource = (IQueryable)source;
-            return queryableSource.Provider.CreateQuery<TEntity>(
-                GenerateFromSqlQueryRoot(queryableSource, sql, parameters)
-            );
+            return queryableSource
+                .Provider
+                .CreateQuery<TEntity>(GenerateFromSqlQueryRoot(queryableSource, sql, parameters));
         }
 
         /// <summary>
@@ -147,9 +147,11 @@ namespace Microsoft.EntityFrameworkCore
             Check.NotEmpty(sql.Format, nameof(source));
 
             var queryableSource = (IQueryable)source;
-            return queryableSource.Provider.CreateQuery<TEntity>(
-                GenerateFromSqlQueryRoot(queryableSource, sql.Format, sql.GetArguments())
-            );
+            return queryableSource
+                .Provider
+                .CreateQuery<TEntity>(
+                    GenerateFromSqlQueryRoot(queryableSource, sql.Format, sql.GetArguments())
+                );
         }
 
         private static FromSqlQueryRootExpression GenerateFromSqlQueryRoot(
@@ -206,7 +208,9 @@ namespace Microsoft.EntityFrameworkCore
         public static IQueryable<TEntity> AsSingleQuery<TEntity>(this IQueryable<TEntity> source)
             where TEntity : class =>
             source.Provider is EntityQueryProvider
-                ? source.Provider.CreateQuery<TEntity>(
+                ? source
+                  .Provider
+                  .CreateQuery<TEntity>(
                       Expression.Call(
                           AsSingleQueryMethodInfo.MakeGenericMethod(typeof(TEntity)),
                           source.Expression
@@ -241,7 +245,9 @@ namespace Microsoft.EntityFrameworkCore
         public static IQueryable<TEntity> AsSplitQuery<TEntity>(this IQueryable<TEntity> source)
             where TEntity : class =>
             source.Provider is EntityQueryProvider
-                ? source.Provider.CreateQuery<TEntity>(
+                ? source
+                  .Provider
+                  .CreateQuery<TEntity>(
                       Expression.Call(
                           AsSplitQueryMethodInfo.MakeGenericMethod(typeof(TEntity)),
                           source.Expression

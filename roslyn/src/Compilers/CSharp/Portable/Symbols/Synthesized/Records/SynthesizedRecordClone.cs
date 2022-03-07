@@ -158,10 +158,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     if (
                         ctor.ParameterCount == 1
                         && ctor.Parameters[0].RefKind == RefKind.None
-                        && ctor.Parameters[0].Type.Equals(
-                            ContainingType,
-                            TypeCompareKind.AllIgnoreOptions
-                        )
+                        && ctor.Parameters[0]
+                            .Type
+                            .Equals(ContainingType, TypeCompareKind.AllIgnoreOptions)
                     )
                     {
                         F.CloseMethod(F.Return(F.New(ctor, F.This())));

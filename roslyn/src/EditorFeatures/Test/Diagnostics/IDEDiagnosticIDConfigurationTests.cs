@@ -665,7 +665,8 @@ dotnet_diagnostic.RE0001.severity = %value%
                 var hasEditorConfigCodeStyleOptions = false;
                 foreach (var option in options.OrderBy(o => o.Name))
                 {
-                    var editorConfigLocation = option.StorageLocations
+                    var editorConfigLocation = option
+                        .StorageLocations
                         .OfType<IEditorConfigStorageLocation2>()
                         .FirstOrDefault();
                     if (editorConfigLocation == null)

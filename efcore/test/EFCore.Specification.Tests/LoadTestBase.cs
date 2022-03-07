@@ -166,7 +166,8 @@ namespace Microsoft.EntityFrameworkCore
                 context.ChangeTracker.LazyLoadingEnabled = false;
 
                 foreach (
-                    var child in parent.Children
+                    var child in parent
+                        .Children
                         .Cast<object>()
                         .Concat(parent.ChildrenAk)
                         .Concat(parent.ChildrenShadowFk)
@@ -423,9 +424,15 @@ namespace Microsoft.EntityFrameworkCore
             var changeDetector = (ChangeDetectorProxy)context.GetService<IChangeDetector>();
 
             var child =
-                context.Attach(
-                    new Child(context.GetService<ILazyLoader>().Load) { Id = 767, ParentId = null }
-                ).Entity;
+                context
+                    .Attach(
+                        new Child(context.GetService<ILazyLoader>().Load)
+                        {
+                            Id = 767,
+                            ParentId = null
+                        }
+                    )
+                    .Entity;
 
             ClearLog();
 
@@ -460,9 +467,15 @@ namespace Microsoft.EntityFrameworkCore
             var changeDetector = (ChangeDetectorProxy)context.GetService<IChangeDetector>();
 
             var single =
-                context.Attach(
-                    new Single(context.GetService<ILazyLoader>().Load) { Id = 767, ParentId = null }
-                ).Entity;
+                context
+                    .Attach(
+                        new Single(context.GetService<ILazyLoader>().Load)
+                        {
+                            Id = 767,
+                            ParentId = null
+                        }
+                    )
+                    .Entity;
 
             ClearLog();
 
@@ -498,13 +511,15 @@ namespace Microsoft.EntityFrameworkCore
             var changeDetector = (ChangeDetectorProxy)context.GetService<IChangeDetector>();
 
             var parent =
-                context.Attach(
-                    new Parent(context.GetService<ILazyLoader>().Load)
-                    {
-                        Id = 767,
-                        AlternateId = "NewRoot"
-                    }
-                ).Entity;
+                context
+                    .Attach(
+                        new Parent(context.GetService<ILazyLoader>().Load)
+                        {
+                            Id = 767,
+                            AlternateId = "NewRoot"
+                        }
+                    )
+                    .Entity;
 
             ClearLog();
 
@@ -541,9 +556,15 @@ namespace Microsoft.EntityFrameworkCore
             var changeDetector = (ChangeDetectorProxy)context.GetService<IChangeDetector>();
 
             var child =
-                context.Attach(
-                    new Child(context.GetService<ILazyLoader>().Load) { Id = 767, ParentId = 787 }
-                ).Entity;
+                context
+                    .Attach(
+                        new Child(context.GetService<ILazyLoader>().Load)
+                        {
+                            Id = 767,
+                            ParentId = 787
+                        }
+                    )
+                    .Entity;
 
             ClearLog();
 
@@ -578,9 +599,15 @@ namespace Microsoft.EntityFrameworkCore
             var changeDetector = (ChangeDetectorProxy)context.GetService<IChangeDetector>();
 
             var single =
-                context.Attach(
-                    new Single(context.GetService<ILazyLoader>().Load) { Id = 767, ParentId = 787 }
-                ).Entity;
+                context
+                    .Attach(
+                        new Single(context.GetService<ILazyLoader>().Load)
+                        {
+                            Id = 767,
+                            ParentId = 787
+                        }
+                    )
+                    .Entity;
 
             ClearLog();
 
@@ -616,13 +643,15 @@ namespace Microsoft.EntityFrameworkCore
             var changeDetector = (ChangeDetectorProxy)context.GetService<IChangeDetector>();
 
             var parent =
-                context.Attach(
-                    new Parent(context.GetService<ILazyLoader>().Load)
-                    {
-                        Id = 767,
-                        AlternateId = "NewRoot"
-                    }
-                ).Entity;
+                context
+                    .Attach(
+                        new Parent(context.GetService<ILazyLoader>().Load)
+                        {
+                            Id = 767,
+                            AlternateId = "NewRoot"
+                        }
+                    )
+                    .Entity;
 
             ClearLog();
 
@@ -1026,13 +1055,15 @@ namespace Microsoft.EntityFrameworkCore
         {
             using var context = CreateContext(lazyLoadingEnabled: true);
             var child =
-                context.Attach(
-                    new ChildAk(context.GetService<ILazyLoader>().Load)
-                    {
-                        Id = 767,
-                        ParentId = null
-                    }
-                ).Entity;
+                context
+                    .Attach(
+                        new ChildAk(context.GetService<ILazyLoader>().Load)
+                        {
+                            Id = 767,
+                            ParentId = null
+                        }
+                    )
+                    .Entity;
 
             ClearLog();
 
@@ -1063,13 +1094,15 @@ namespace Microsoft.EntityFrameworkCore
         {
             using var context = CreateContext(lazyLoadingEnabled: true);
             var single =
-                context.Attach(
-                    new SingleAk(context.GetService<ILazyLoader>().Load)
-                    {
-                        Id = 767,
-                        ParentId = null
-                    }
-                ).Entity;
+                context
+                    .Attach(
+                        new SingleAk(context.GetService<ILazyLoader>().Load)
+                        {
+                            Id = 767,
+                            ParentId = null
+                        }
+                    )
+                    .Entity;
 
             ClearLog();
 
@@ -1229,9 +1262,9 @@ namespace Microsoft.EntityFrameworkCore
         {
             using var context = CreateContext(lazyLoadingEnabled: true);
             var child =
-                context.Attach(
-                    new ChildShadowFk(context.GetService<ILazyLoader>().Load) { Id = 767 }
-                ).Entity;
+                context
+                    .Attach(new ChildShadowFk(context.GetService<ILazyLoader>().Load) { Id = 767 })
+                    .Entity;
 
             ClearLog();
 
@@ -1262,9 +1295,9 @@ namespace Microsoft.EntityFrameworkCore
         {
             using var context = CreateContext(lazyLoadingEnabled: true);
             var single =
-                context.Attach(
-                    new SingleShadowFk(context.GetService<ILazyLoader>().Load) { Id = 767 }
-                ).Entity;
+                context
+                    .Attach(new SingleShadowFk(context.GetService<ILazyLoader>().Load) { Id = 767 })
+                    .Entity;
 
             ClearLog();
 
@@ -1431,13 +1464,15 @@ namespace Microsoft.EntityFrameworkCore
         {
             using var context = CreateContext(lazyLoadingEnabled: true);
             var child =
-                context.Attach(
-                    new ChildCompositeKey(context.GetService<ILazyLoader>().Load)
-                    {
-                        Id = 767,
-                        ParentId = 567
-                    }
-                ).Entity;
+                context
+                    .Attach(
+                        new ChildCompositeKey(context.GetService<ILazyLoader>().Load)
+                        {
+                            Id = 767,
+                            ParentId = 567
+                        }
+                    )
+                    .Entity;
 
             ClearLog();
 
@@ -1468,13 +1503,15 @@ namespace Microsoft.EntityFrameworkCore
         {
             using var context = CreateContext(lazyLoadingEnabled: true);
             var single =
-                context.Attach(
-                    new SingleCompositeKey(context.GetService<ILazyLoader>().Load)
-                    {
-                        Id = 767,
-                        ParentAlternateId = "Boot"
-                    }
-                ).Entity;
+                context
+                    .Attach(
+                        new SingleCompositeKey(context.GetService<ILazyLoader>().Load)
+                        {
+                            Id = 767,
+                            ParentAlternateId = "Boot"
+                        }
+                    )
+                    .Entity;
 
             ClearLog();
 
@@ -5531,9 +5568,9 @@ namespace Microsoft.EntityFrameworkCore
         {
             using var context = CreateContext();
             var single =
-                context.Attach(
-                    new SingleCompositeKey { Id = 767, ParentAlternateId = "Boot" }
-                ).Entity;
+                context
+                    .Attach(new SingleCompositeKey { Id = 767, ParentAlternateId = "Boot" })
+                    .Entity;
 
             ClearLog();
 
@@ -5575,9 +5612,9 @@ namespace Microsoft.EntityFrameworkCore
         {
             using var context = CreateContext();
             var child =
-                context.Attach(
-                    new ChildCompositeKey { Id = 767, ParentAlternateId = "Boot" }
-                ).Entity;
+                context
+                    .Attach(new ChildCompositeKey { Id = 767, ParentAlternateId = "Boot" })
+                    .Entity;
 
             ClearLog();
 
@@ -5704,9 +5741,9 @@ namespace Microsoft.EntityFrameworkCore
 
             Assert.Equal(
                 CoreStrings.ReferenceMustBeLoaded("Parent", typeof(Child).Name),
-                Assert.Throws<InvalidOperationException>(
-                    () => referenceEntry.IsLoaded = false
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(() => referenceEntry.IsLoaded = false)
+                    .Message
             );
         }
 

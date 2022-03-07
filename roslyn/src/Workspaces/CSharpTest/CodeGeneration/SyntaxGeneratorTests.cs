@@ -3115,10 +3115,12 @@ public interface IFace
         [Fact]
         public void TestAddRemoveAttributesPerservesTrivia()
         {
-            var cls = SyntaxFactory.ParseCompilationUnit(
-                @"// comment
+            var cls = SyntaxFactory
+                .ParseCompilationUnit(
+                    @"// comment
 public class C { } // end"
-            ).Members[0];
+                )
+                .Members[0];
 
             var added = Generator.AddAttributes(cls, Generator.Attribute("a"));
             VerifySyntax<ClassDeclarationSyntax>(
@@ -3553,9 +3555,14 @@ public class C { } // end"
         private void TestRemoveAllNamespaceImports(SyntaxNode declaration) =>
             Assert.Equal(
                 0,
-                Generator.GetNamespaceImports(
-                    Generator.RemoveNodes(declaration, Generator.GetNamespaceImports(declaration))
-                ).Count
+                Generator
+                    .GetNamespaceImports(
+                        Generator.RemoveNodes(
+                            declaration,
+                            Generator.GetNamespaceImports(declaration)
+                        )
+                    )
+                    .Count
             );
 
         private void TestRemoveNamespaceImport(
@@ -3845,9 +3852,11 @@ public class C
         private void TestRemoveAllMembers(SyntaxNode declaration) =>
             Assert.Equal(
                 0,
-                Generator.GetMembers(
-                    Generator.RemoveNodes(declaration, Generator.GetMembers(declaration))
-                ).Count
+                Generator
+                    .GetMembers(
+                        Generator.RemoveNodes(declaration, Generator.GetMembers(declaration))
+                    )
+                    .Count
             );
 
         private void TestRemoveMember(SyntaxNode declaration, string name, string[] remainingNames)
@@ -5175,119 +5184,147 @@ public class C
             Assert.Equal(0, Generator.GetParameters(Generator.MethodDeclaration("m")).Count);
             Assert.Equal(
                 1,
-                Generator.GetParameters(
-                    Generator.MethodDeclaration(
-                        "m",
-                        parameters: new[]
-                        {
-                            Generator.ParameterDeclaration("p", Generator.IdentifierName("t"))
-                        }
+                Generator
+                    .GetParameters(
+                        Generator.MethodDeclaration(
+                            "m",
+                            parameters: new[]
+                            {
+                                Generator.ParameterDeclaration("p", Generator.IdentifierName("t"))
+                            }
+                        )
                     )
-                ).Count
+                    .Count
             );
             Assert.Equal(
                 2,
-                Generator.GetParameters(
-                    Generator.MethodDeclaration(
-                        "m",
-                        parameters: new[]
-                        {
-                            Generator.ParameterDeclaration("p", Generator.IdentifierName("t")),
-                            Generator.ParameterDeclaration("p2", Generator.IdentifierName("t2"))
-                        }
+                Generator
+                    .GetParameters(
+                        Generator.MethodDeclaration(
+                            "m",
+                            parameters: new[]
+                            {
+                                Generator.ParameterDeclaration("p", Generator.IdentifierName("t")),
+                                Generator.ParameterDeclaration("p2", Generator.IdentifierName("t2"))
+                            }
+                        )
                     )
-                ).Count
+                    .Count
             );
 
             Assert.Equal(0, Generator.GetParameters(Generator.ConstructorDeclaration()).Count);
             Assert.Equal(
                 1,
-                Generator.GetParameters(
-                    Generator.ConstructorDeclaration(
-                        parameters: new[]
-                        {
-                            Generator.ParameterDeclaration("p", Generator.IdentifierName("t"))
-                        }
+                Generator
+                    .GetParameters(
+                        Generator.ConstructorDeclaration(
+                            parameters: new[]
+                            {
+                                Generator.ParameterDeclaration("p", Generator.IdentifierName("t"))
+                            }
+                        )
                     )
-                ).Count
+                    .Count
             );
             Assert.Equal(
                 2,
-                Generator.GetParameters(
-                    Generator.ConstructorDeclaration(
-                        parameters: new[]
-                        {
-                            Generator.ParameterDeclaration("p", Generator.IdentifierName("t")),
-                            Generator.ParameterDeclaration("p2", Generator.IdentifierName("t2"))
-                        }
+                Generator
+                    .GetParameters(
+                        Generator.ConstructorDeclaration(
+                            parameters: new[]
+                            {
+                                Generator.ParameterDeclaration("p", Generator.IdentifierName("t")),
+                                Generator.ParameterDeclaration("p2", Generator.IdentifierName("t2"))
+                            }
+                        )
                     )
-                ).Count
+                    .Count
             );
 
             Assert.Equal(
                 1,
-                Generator.GetParameters(
-                    Generator.IndexerDeclaration(
-                        new[]
-                        {
-                            Generator.ParameterDeclaration("p", Generator.IdentifierName("t"))
-                        },
-                        Generator.IdentifierName("t")
+                Generator
+                    .GetParameters(
+                        Generator.IndexerDeclaration(
+                            new[]
+                            {
+                                Generator.ParameterDeclaration("p", Generator.IdentifierName("t"))
+                            },
+                            Generator.IdentifierName("t")
+                        )
                     )
-                ).Count
+                    .Count
             );
             Assert.Equal(
                 2,
-                Generator.GetParameters(
-                    Generator.IndexerDeclaration(
-                        new[]
-                        {
-                            Generator.ParameterDeclaration("p", Generator.IdentifierName("t")),
-                            Generator.ParameterDeclaration("p2", Generator.IdentifierName("t2"))
-                        },
-                        Generator.IdentifierName("t")
+                Generator
+                    .GetParameters(
+                        Generator.IndexerDeclaration(
+                            new[]
+                            {
+                                Generator.ParameterDeclaration("p", Generator.IdentifierName("t")),
+                                Generator.ParameterDeclaration("p2", Generator.IdentifierName("t2"))
+                            },
+                            Generator.IdentifierName("t")
+                        )
                     )
-                ).Count
+                    .Count
             );
 
             Assert.Equal(
                 0,
-                Generator.GetParameters(
-                    Generator.ValueReturningLambdaExpression(Generator.IdentifierName("expr"))
-                ).Count
+                Generator
+                    .GetParameters(
+                        Generator.ValueReturningLambdaExpression(Generator.IdentifierName("expr"))
+                    )
+                    .Count
             );
             Assert.Equal(
                 1,
-                Generator.GetParameters(
-                    Generator.ValueReturningLambdaExpression("p1", Generator.IdentifierName("expr"))
-                ).Count
+                Generator
+                    .GetParameters(
+                        Generator.ValueReturningLambdaExpression(
+                            "p1",
+                            Generator.IdentifierName("expr")
+                        )
+                    )
+                    .Count
             );
 
             Assert.Equal(
                 0,
-                Generator.GetParameters(
-                    Generator.VoidReturningLambdaExpression(Generator.IdentifierName("expr"))
-                ).Count
+                Generator
+                    .GetParameters(
+                        Generator.VoidReturningLambdaExpression(Generator.IdentifierName("expr"))
+                    )
+                    .Count
             );
             Assert.Equal(
                 1,
-                Generator.GetParameters(
-                    Generator.VoidReturningLambdaExpression("p1", Generator.IdentifierName("expr"))
-                ).Count
+                Generator
+                    .GetParameters(
+                        Generator.VoidReturningLambdaExpression(
+                            "p1",
+                            Generator.IdentifierName("expr")
+                        )
+                    )
+                    .Count
             );
 
             Assert.Equal(0, Generator.GetParameters(Generator.DelegateDeclaration("d")).Count);
             Assert.Equal(
                 1,
-                Generator.GetParameters(
-                    Generator.DelegateDeclaration(
-                        "d",
-                        parameters: new[]
-                        {
-                            Generator.ParameterDeclaration("p", Generator.IdentifierName("t"))
-                        }
+                Generator
+                    .GetParameters(
+                        Generator.DelegateDeclaration(
+                            "d",
+                            parameters: new[]
+                            {
+                                Generator.ParameterDeclaration("p", Generator.IdentifierName("t"))
+                            }
+                        )
                     )
-                ).Count
+                    .Count
             );
 
             Assert.Equal(0, Generator.GetParameters(Generator.ClassDeclaration("c")).Count);
@@ -5299,88 +5336,129 @@ public class C
         {
             Assert.Equal(
                 1,
-                Generator.GetParameters(
-                    Generator.AddParameters(
-                        Generator.MethodDeclaration("m"),
-                        new[] { Generator.ParameterDeclaration("p", Generator.IdentifierName("t")) }
-                    )
-                ).Count
-            );
-            Assert.Equal(
-                1,
-                Generator.GetParameters(
-                    Generator.AddParameters(
-                        Generator.ConstructorDeclaration(),
-                        new[] { Generator.ParameterDeclaration("p", Generator.IdentifierName("t")) }
-                    )
-                ).Count
-            );
-            Assert.Equal(
-                3,
-                Generator.GetParameters(
-                    Generator.AddParameters(
-                        Generator.IndexerDeclaration(
+                Generator
+                    .GetParameters(
+                        Generator.AddParameters(
+                            Generator.MethodDeclaration("m"),
                             new[]
                             {
                                 Generator.ParameterDeclaration("p", Generator.IdentifierName("t"))
-                            },
-                            Generator.IdentifierName("t")
-                        ),
-                        new[]
-                        {
-                            Generator.ParameterDeclaration("p2", Generator.IdentifierName("t2")),
-                            Generator.ParameterDeclaration("p3", Generator.IdentifierName("t3"))
-                        }
+                            }
+                        )
                     )
-                ).Count
+                    .Count
+            );
+            Assert.Equal(
+                1,
+                Generator
+                    .GetParameters(
+                        Generator.AddParameters(
+                            Generator.ConstructorDeclaration(),
+                            new[]
+                            {
+                                Generator.ParameterDeclaration("p", Generator.IdentifierName("t"))
+                            }
+                        )
+                    )
+                    .Count
+            );
+            Assert.Equal(
+                3,
+                Generator
+                    .GetParameters(
+                        Generator.AddParameters(
+                            Generator.IndexerDeclaration(
+                                new[]
+                                {
+                                    Generator.ParameterDeclaration(
+                                        "p",
+                                        Generator.IdentifierName("t")
+                                    )
+                                },
+                                Generator.IdentifierName("t")
+                            ),
+                            new[]
+                            {
+                                Generator.ParameterDeclaration(
+                                    "p2",
+                                    Generator.IdentifierName("t2")
+                                ),
+                                Generator.ParameterDeclaration("p3", Generator.IdentifierName("t3"))
+                            }
+                        )
+                    )
+                    .Count
             );
 
             Assert.Equal(
                 1,
-                Generator.GetParameters(
-                    Generator.AddParameters(
-                        Generator.ValueReturningLambdaExpression(Generator.IdentifierName("expr")),
-                        new[] { Generator.LambdaParameter("p") }
+                Generator
+                    .GetParameters(
+                        Generator.AddParameters(
+                            Generator.ValueReturningLambdaExpression(
+                                Generator.IdentifierName("expr")
+                            ),
+                            new[] { Generator.LambdaParameter("p") }
+                        )
                     )
-                ).Count
+                    .Count
             );
             Assert.Equal(
                 1,
-                Generator.GetParameters(
-                    Generator.AddParameters(
-                        Generator.VoidReturningLambdaExpression(Generator.IdentifierName("expr")),
-                        new[] { Generator.LambdaParameter("p") }
+                Generator
+                    .GetParameters(
+                        Generator.AddParameters(
+                            Generator.VoidReturningLambdaExpression(
+                                Generator.IdentifierName("expr")
+                            ),
+                            new[] { Generator.LambdaParameter("p") }
+                        )
                     )
-                ).Count
+                    .Count
             );
 
             Assert.Equal(
                 1,
-                Generator.GetParameters(
-                    Generator.AddParameters(
-                        Generator.DelegateDeclaration("d"),
-                        new[] { Generator.ParameterDeclaration("p", Generator.IdentifierName("t")) }
+                Generator
+                    .GetParameters(
+                        Generator.AddParameters(
+                            Generator.DelegateDeclaration("d"),
+                            new[]
+                            {
+                                Generator.ParameterDeclaration("p", Generator.IdentifierName("t"))
+                            }
+                        )
                     )
-                ).Count
+                    .Count
             );
 
             Assert.Equal(
                 0,
-                Generator.GetParameters(
-                    Generator.AddParameters(
-                        Generator.ClassDeclaration("c"),
-                        new[] { Generator.ParameterDeclaration("p", Generator.IdentifierName("t")) }
+                Generator
+                    .GetParameters(
+                        Generator.AddParameters(
+                            Generator.ClassDeclaration("c"),
+                            new[]
+                            {
+                                Generator.ParameterDeclaration("p", Generator.IdentifierName("t"))
+                            }
+                        )
                     )
-                ).Count
+                    .Count
             );
             Assert.Equal(
                 0,
-                Generator.GetParameters(
-                    Generator.AddParameters(
-                        Generator.IdentifierName("x"),
-                        new[] { Generator.ParameterDeclaration("p", Generator.IdentifierName("t")) }
+                Generator
+                    .GetParameters(
+                        Generator.AddParameters(
+                            Generator.IdentifierName("x"),
+                            new[]
+                            {
+                                Generator.ParameterDeclaration("p", Generator.IdentifierName("t"))
+                            }
+                        )
                     )
-                ).Count
+                    .Count
             );
         }
 
@@ -5435,12 +5513,14 @@ public class C
             );
             Assert.Equal(
                 1,
-                Generator.GetStatements(
-                    Generator.ValueReturningLambdaExpression(
-                        "p",
-                        new[] { Generator.IdentifierName("x") }
+                Generator
+                    .GetStatements(
+                        Generator.ValueReturningLambdaExpression(
+                            "p",
+                            new[] { Generator.IdentifierName("x") }
+                        )
                     )
-                ).Count
+                    .Count
             );
             Assert.Equal(
                 "x",
@@ -6035,9 +6115,9 @@ public class C
 
             Assert.Equal(
                 0,
-                Generator.GetStatements(
-                    Generator.VoidReturningLambdaExpression(new SyntaxNode[] { })
-                ).Count
+                Generator
+                    .GetStatements(Generator.VoidReturningLambdaExpression(new SyntaxNode[] { }))
+                    .Count
             );
             Assert.Equal(
                 2,
@@ -6046,9 +6126,9 @@ public class C
 
             Assert.Equal(
                 0,
-                Generator.GetStatements(
-                    Generator.ValueReturningLambdaExpression(new SyntaxNode[] { })
-                ).Count
+                Generator
+                    .GetStatements(Generator.ValueReturningLambdaExpression(new SyntaxNode[] { }))
+                    .Count
             );
             Assert.Equal(
                 2,
@@ -6081,40 +6161,48 @@ public class C
 
             Assert.Equal(
                 2,
-                Generator.GetStatements(
-                    Generator.WithStatements(Generator.MethodDeclaration("m"), stmts)
-                ).Count
-            );
-            Assert.Equal(
-                2,
-                Generator.GetStatements(
-                    Generator.WithStatements(Generator.ConstructorDeclaration(), stmts)
-                ).Count
-            );
-            Assert.Equal(
-                2,
-                Generator.GetStatements(
-                    Generator.WithStatements(
-                        Generator.VoidReturningLambdaExpression(new SyntaxNode[] { }),
-                        stmts
+                Generator
+                    .GetStatements(
+                        Generator.WithStatements(Generator.MethodDeclaration("m"), stmts)
                     )
-                ).Count
+                    .Count
             );
             Assert.Equal(
                 2,
-                Generator.GetStatements(
-                    Generator.WithStatements(
-                        Generator.ValueReturningLambdaExpression(new SyntaxNode[] { }),
-                        stmts
+                Generator
+                    .GetStatements(
+                        Generator.WithStatements(Generator.ConstructorDeclaration(), stmts)
                     )
-                ).Count
+                    .Count
+            );
+            Assert.Equal(
+                2,
+                Generator
+                    .GetStatements(
+                        Generator.WithStatements(
+                            Generator.VoidReturningLambdaExpression(new SyntaxNode[] { }),
+                            stmts
+                        )
+                    )
+                    .Count
+            );
+            Assert.Equal(
+                2,
+                Generator
+                    .GetStatements(
+                        Generator.WithStatements(
+                            Generator.ValueReturningLambdaExpression(new SyntaxNode[] { }),
+                            stmts
+                        )
+                    )
+                    .Count
             );
 
             Assert.Equal(
                 0,
-                Generator.GetStatements(
-                    Generator.WithStatements(Generator.IdentifierName("x"), stmts)
-                ).Count
+                Generator
+                    .GetStatements(Generator.WithStatements(Generator.IdentifierName("x"), stmts))
+                    .Count
             );
         }
 
@@ -6144,36 +6232,44 @@ public class C
             // get-accessor
             Assert.Equal(
                 0,
-                Generator.GetGetAccessorStatements(
-                    Generator.PropertyDeclaration("p", Generator.IdentifierName("t"))
-                ).Count
+                Generator
+                    .GetGetAccessorStatements(
+                        Generator.PropertyDeclaration("p", Generator.IdentifierName("t"))
+                    )
+                    .Count
             );
             Assert.Equal(
                 2,
-                Generator.GetGetAccessorStatements(
-                    Generator.PropertyDeclaration(
-                        "p",
-                        Generator.IdentifierName("t"),
-                        getAccessorStatements: stmts
+                Generator
+                    .GetGetAccessorStatements(
+                        Generator.PropertyDeclaration(
+                            "p",
+                            Generator.IdentifierName("t"),
+                            getAccessorStatements: stmts
+                        )
                     )
-                ).Count
+                    .Count
             );
 
             Assert.Equal(
                 0,
-                Generator.GetGetAccessorStatements(
-                    Generator.IndexerDeclaration(new[] { p }, Generator.IdentifierName("t"))
-                ).Count
+                Generator
+                    .GetGetAccessorStatements(
+                        Generator.IndexerDeclaration(new[] { p }, Generator.IdentifierName("t"))
+                    )
+                    .Count
             );
             Assert.Equal(
                 2,
-                Generator.GetGetAccessorStatements(
-                    Generator.IndexerDeclaration(
-                        new[] { p },
-                        Generator.IdentifierName("t"),
-                        getAccessorStatements: stmts
+                Generator
+                    .GetGetAccessorStatements(
+                        Generator.IndexerDeclaration(
+                            new[] { p },
+                            Generator.IdentifierName("t"),
+                            getAccessorStatements: stmts
+                        )
                     )
-                ).Count
+                    .Count
             );
 
             Assert.Equal(
@@ -6184,36 +6280,44 @@ public class C
             // set-accessor
             Assert.Equal(
                 0,
-                Generator.GetSetAccessorStatements(
-                    Generator.PropertyDeclaration("p", Generator.IdentifierName("t"))
-                ).Count
+                Generator
+                    .GetSetAccessorStatements(
+                        Generator.PropertyDeclaration("p", Generator.IdentifierName("t"))
+                    )
+                    .Count
             );
             Assert.Equal(
                 2,
-                Generator.GetSetAccessorStatements(
-                    Generator.PropertyDeclaration(
-                        "p",
-                        Generator.IdentifierName("t"),
-                        setAccessorStatements: stmts
+                Generator
+                    .GetSetAccessorStatements(
+                        Generator.PropertyDeclaration(
+                            "p",
+                            Generator.IdentifierName("t"),
+                            setAccessorStatements: stmts
+                        )
                     )
-                ).Count
+                    .Count
             );
 
             Assert.Equal(
                 0,
-                Generator.GetSetAccessorStatements(
-                    Generator.IndexerDeclaration(new[] { p }, Generator.IdentifierName("t"))
-                ).Count
+                Generator
+                    .GetSetAccessorStatements(
+                        Generator.IndexerDeclaration(new[] { p }, Generator.IdentifierName("t"))
+                    )
+                    .Count
             );
             Assert.Equal(
                 2,
-                Generator.GetSetAccessorStatements(
-                    Generator.IndexerDeclaration(
-                        new[] { p },
-                        Generator.IdentifierName("t"),
-                        setAccessorStatements: stmts
+                Generator
+                    .GetSetAccessorStatements(
+                        Generator.IndexerDeclaration(
+                            new[] { p },
+                            Generator.IdentifierName("t"),
+                            setAccessorStatements: stmts
+                        )
                     )
-                ).Count
+                    .Count
             );
 
             Assert.Equal(
@@ -6248,64 +6352,84 @@ public class C
             // get-accessor
             Assert.Equal(
                 2,
-                Generator.GetGetAccessorStatements(
-                    Generator.WithGetAccessorStatements(
-                        Generator.PropertyDeclaration("p", Generator.IdentifierName("t")),
-                        stmts
+                Generator
+                    .GetGetAccessorStatements(
+                        Generator.WithGetAccessorStatements(
+                            Generator.PropertyDeclaration("p", Generator.IdentifierName("t")),
+                            stmts
+                        )
                     )
-                ).Count
+                    .Count
             );
             Assert.Equal(
                 2,
-                Generator.GetGetAccessorStatements(
-                    Generator.WithGetAccessorStatements(
-                        Generator.IndexerDeclaration(new[] { p }, Generator.IdentifierName("t")),
-                        stmts
+                Generator
+                    .GetGetAccessorStatements(
+                        Generator.WithGetAccessorStatements(
+                            Generator.IndexerDeclaration(
+                                new[] { p },
+                                Generator.IdentifierName("t")
+                            ),
+                            stmts
+                        )
                     )
-                ).Count
+                    .Count
             );
             Assert.Equal(
                 0,
-                Generator.GetGetAccessorStatements(
-                    Generator.WithGetAccessorStatements(Generator.IdentifierName("x"), stmts)
-                ).Count
+                Generator
+                    .GetGetAccessorStatements(
+                        Generator.WithGetAccessorStatements(Generator.IdentifierName("x"), stmts)
+                    )
+                    .Count
             );
 
             // set-accessor
             Assert.Equal(
                 2,
-                Generator.GetSetAccessorStatements(
-                    Generator.WithSetAccessorStatements(
-                        Generator.PropertyDeclaration("p", Generator.IdentifierName("t")),
-                        stmts
+                Generator
+                    .GetSetAccessorStatements(
+                        Generator.WithSetAccessorStatements(
+                            Generator.PropertyDeclaration("p", Generator.IdentifierName("t")),
+                            stmts
+                        )
                     )
-                ).Count
+                    .Count
             );
             Assert.Equal(
                 2,
-                Generator.GetSetAccessorStatements(
-                    Generator.WithSetAccessorStatements(
-                        Generator.IndexerDeclaration(new[] { p }, Generator.IdentifierName("t")),
-                        stmts
+                Generator
+                    .GetSetAccessorStatements(
+                        Generator.WithSetAccessorStatements(
+                            Generator.IndexerDeclaration(
+                                new[] { p },
+                                Generator.IdentifierName("t")
+                            ),
+                            stmts
+                        )
                     )
-                ).Count
+                    .Count
             );
             Assert.Equal(
                 0,
-                Generator.GetSetAccessorStatements(
-                    Generator.WithSetAccessorStatements(Generator.IdentifierName("x"), stmts)
-                ).Count
+                Generator
+                    .GetSetAccessorStatements(
+                        Generator.WithSetAccessorStatements(Generator.IdentifierName("x"), stmts)
+                    )
+                    .Count
             );
         }
 
         [Fact]
         public void TestGetBaseAndInterfaceTypes()
         {
-            var classBI = SyntaxFactory.ParseCompilationUnit(
-                @"class C : B, I
+            var classBI = SyntaxFactory
+                .ParseCompilationUnit(
+                    @"class C : B, I
 {
 }"
-            ).Members[0];
+                )
+                .Members[0];
 
             var baseListBI = Generator.GetBaseAndInterfaceTypes(classBI);
             Assert.NotNull(baseListBI);
@@ -6313,22 +6437,26 @@ public class C
             Assert.Equal("B", baseListBI[0].ToString());
             Assert.Equal("I", baseListBI[1].ToString());
 
-            var classB = SyntaxFactory.ParseCompilationUnit(
-                @"class C : B
+            var classB = SyntaxFactory
+                .ParseCompilationUnit(
+                    @"class C : B
 {
 }"
-            ).Members[0];
+                )
+                .Members[0];
 
             var baseListB = Generator.GetBaseAndInterfaceTypes(classB);
             Assert.NotNull(baseListB);
             Assert.Equal(1, baseListB.Count);
             Assert.Equal("B", baseListB[0].ToString());
 
-            var classN = SyntaxFactory.ParseCompilationUnit(
-                @"class C
+            var classN = SyntaxFactory
+                .ParseCompilationUnit(
+                    @"class C
 {
 }"
-            ).Members[0];
+                )
+                .Members[0];
 
             var baseListN = Generator.GetBaseAndInterfaceTypes(classN);
             Assert.NotNull(baseListN);
@@ -6338,11 +6466,13 @@ public class C
         [Fact]
         public void TestRemoveBaseAndInterfaceTypes()
         {
-            var classBI = SyntaxFactory.ParseCompilationUnit(
-                @"class C : B, I
+            var classBI = SyntaxFactory
+                .ParseCompilationUnit(
+                    @"class C : B, I
 {
 }"
-            ).Members[0];
+                )
+                .Members[0];
 
             var baseListBI = Generator.GetBaseAndInterfaceTypes(classBI);
             Assert.NotNull(baseListBI);
@@ -6372,23 +6502,29 @@ public class C
         [Fact]
         public void TestAddBaseType()
         {
-            var classC = SyntaxFactory.ParseCompilationUnit(
-                @"class C
+            var classC = SyntaxFactory
+                .ParseCompilationUnit(
+                    @"class C
 {
 }"
-            ).Members[0];
+                )
+                .Members[0];
 
-            var classCI = SyntaxFactory.ParseCompilationUnit(
-                @"class C : I
+            var classCI = SyntaxFactory
+                .ParseCompilationUnit(
+                    @"class C : I
 {
 }"
-            ).Members[0];
+                )
+                .Members[0];
 
-            var classCB = SyntaxFactory.ParseCompilationUnit(
-                @"class C : B
+            var classCB = SyntaxFactory
+                .ParseCompilationUnit(
+                    @"class C : B
 {
 }"
-            ).Members[0];
+                )
+                .Members[0];
 
             VerifySyntax<ClassDeclarationSyntax>(
                 Generator.AddBaseType(classC, Generator.IdentifierName("T")),
@@ -6416,23 +6552,29 @@ public class C
         [Fact]
         public void TestAddInterfaceTypes()
         {
-            var classC = SyntaxFactory.ParseCompilationUnit(
-                @"class C
+            var classC = SyntaxFactory
+                .ParseCompilationUnit(
+                    @"class C
 {
 }"
-            ).Members[0];
+                )
+                .Members[0];
 
-            var classCI = SyntaxFactory.ParseCompilationUnit(
-                @"class C : I
+            var classCI = SyntaxFactory
+                .ParseCompilationUnit(
+                    @"class C : I
 {
 }"
-            ).Members[0];
+                )
+                .Members[0];
 
-            var classCB = SyntaxFactory.ParseCompilationUnit(
-                @"class C : B
+            var classCB = SyntaxFactory
+                .ParseCompilationUnit(
+                    @"class C : B
 {
 }"
-            ).Members[0];
+                )
+                .Members[0];
 
             VerifySyntax<ClassDeclarationSyntax>(
                 Generator.AddInterfaceType(classC, Generator.IdentifierName("T")),
@@ -6739,9 +6881,9 @@ public class C
                 .AddSyntaxTrees(
                     SyntaxFactory.ParseSyntaxTree(
                         src,
-                        options: CSharpParseOptions.Default.WithLanguageVersion(
-                            LanguageVersion.Preview
-                        )
+                        options: CSharpParseOptions
+                            .Default
+                            .WithLanguageVersion(LanguageVersion.Preview)
                     )
                 );
 

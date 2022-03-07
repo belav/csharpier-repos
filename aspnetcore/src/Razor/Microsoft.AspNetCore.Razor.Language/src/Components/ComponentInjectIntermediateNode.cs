@@ -50,10 +50,8 @@ internal class ComponentInjectIntermediateNode : ExtensionIntermediateNode
             throw new ArgumentNullException(nameof(context));
         }
 
-        context.CodeWriter.WriteAutoPropertyDeclaration(
-            _injectedPropertyModifiers,
-            TypeName,
-            MemberName
-        );
+        context
+            .CodeWriter
+            .WriteAutoPropertyDeclaration(_injectedPropertyModifiers, TypeName, MemberName);
     }
 }

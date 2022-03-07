@@ -298,7 +298,9 @@ namespace Microsoft.EntityFrameworkCore.Query
                     relationalCommandCache = new RelationalCommandCache(
                         _parentVisitor.Dependencies.MemoryCache,
                         _parentVisitor.RelationalDependencies.QuerySqlGeneratorFactory,
-                        _parentVisitor.RelationalDependencies.RelationalParameterBasedSqlProcessorFactory,
+                        _parentVisitor
+                            .RelationalDependencies
+                            .RelationalParameterBasedSqlProcessorFactory,
                         _selectExpression,
                         _readerColumns,
                         _parentVisitor._useRelationalNulls
@@ -328,7 +330,9 @@ namespace Microsoft.EntityFrameworkCore.Query
                         ? new RelationalCommandCache(
                               _parentVisitor.Dependencies.MemoryCache,
                               _parentVisitor.RelationalDependencies.QuerySqlGeneratorFactory,
-                              _parentVisitor.RelationalDependencies.RelationalParameterBasedSqlProcessorFactory,
+                              _parentVisitor
+                                  .RelationalDependencies
+                                  .RelationalParameterBasedSqlProcessorFactory,
                               _selectExpression,
                               _readerColumns,
                               _parentVisitor._useRelationalNulls
@@ -453,7 +457,9 @@ namespace Microsoft.EntityFrameworkCore.Query
                         ? new RelationalCommandCache(
                               _parentVisitor.Dependencies.MemoryCache,
                               _parentVisitor.RelationalDependencies.QuerySqlGeneratorFactory,
-                              _parentVisitor.RelationalDependencies.RelationalParameterBasedSqlProcessorFactory,
+                              _parentVisitor
+                                  .RelationalDependencies
+                                  .RelationalParameterBasedSqlProcessorFactory,
                               _selectExpression,
                               _readerColumns,
                               _parentVisitor._useRelationalNulls

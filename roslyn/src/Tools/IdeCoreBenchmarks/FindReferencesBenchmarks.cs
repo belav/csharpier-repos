@@ -79,7 +79,8 @@ namespace IdeCoreBenchmarks
 
             Console.WriteLine("Found Compilers.sln: " + Process.GetCurrentProcess().Id);
 
-            var assemblies = MSBuildMefHostServices.DefaultAssemblies
+            var assemblies = MSBuildMefHostServices
+                .DefaultAssemblies
                 .Add(typeof(AnalyzerRunnerHelper).Assembly)
                 .Add(typeof(FindReferencesBenchmarks).Assembly);
             var services = MefHostServices.Create(assemblies);
@@ -97,12 +98,13 @@ namespace IdeCoreBenchmarks
                 throw new ArgumentException("Couldn't create workspace");
 
             _workspace.TryApplyChanges(
-                _workspace.CurrentSolution.WithOptions(
-                    _workspace.Options.WithChangedOption(
-                        StorageOptions.Database,
-                        StorageDatabase.SQLite
+                _workspace
+                    .CurrentSolution
+                    .WithOptions(
+                        _workspace
+                            .Options
+                            .WithChangedOption(StorageOptions.Database, StorageDatabase.SQLite)
                     )
-                )
             );
 
             Console.WriteLine("Opening roslyn.  Attach to: " + Process.GetCurrentProcess().Id);
@@ -117,9 +119,9 @@ namespace IdeCoreBenchmarks
 
             // Force a storage instance to be created.  This makes it simple to go examine it prior to any operations we
             // perform, including seeing how big the initial string table is.
-            var storageService = _workspace.Services.GetPersistentStorageService(
-                _workspace.CurrentSolution.Options
-            );
+            var storageService = _workspace
+                .Services
+                .GetPersistentStorageService(_workspace.CurrentSolution.Options);
             if (storageService == null)
                 throw new ArgumentException("Couldn't get storage service");
 

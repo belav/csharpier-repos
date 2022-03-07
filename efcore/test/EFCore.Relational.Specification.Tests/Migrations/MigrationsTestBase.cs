@@ -71,11 +71,9 @@ namespace Microsoft.EntityFrameworkCore.Migrations
         {
             var intStoreType = TypeMappingSource.FindMapping(typeof(int)).StoreType;
             var char11StoreType =
-                TypeMappingSource.FindMapping(
-                    typeof(string),
-                    storeTypeName: null,
-                    size: 11
-                ).StoreType;
+                TypeMappingSource
+                    .FindMapping(typeof(string), storeTypeName: null, size: 11)
+                    .StoreType;
 
             await Test(
                 builder =>
@@ -587,11 +585,9 @@ namespace Microsoft.EntityFrameworkCore.Migrations
                     var table = Assert.Single(model.Tables);
                     var column = Assert.Single(table.Columns, c => c.Name == "Name");
                     Assert.Equal(
-                        TypeMappingSource.FindMapping(
-                            typeof(string),
-                            storeTypeName: null,
-                            unicode: false
-                        ).StoreType,
+                        TypeMappingSource
+                            .FindMapping(typeof(string), storeTypeName: null, unicode: false)
+                            .StoreType,
                         column.StoreType
                     );
                     Assert.True(column.IsNullable);
@@ -609,11 +605,9 @@ namespace Microsoft.EntityFrameworkCore.Migrations
                     var table = Assert.Single(model.Tables);
                     var column = Assert.Single(table.Columns, c => c.Name == "Name");
                     Assert.Equal(
-                        TypeMappingSource.FindMapping(
-                            typeof(string),
-                            storeTypeName: null,
-                            size: 30
-                        ).StoreType,
+                        TypeMappingSource
+                            .FindMapping(typeof(string), storeTypeName: null, size: 30)
+                            .StoreType,
                         column.StoreType
                     );
                 }
@@ -643,11 +637,9 @@ namespace Microsoft.EntityFrameworkCore.Migrations
                     var table = Assert.Single(model.Tables, t => t.Name == "Person");
                     var column = Assert.Single(table.Columns, c => c.Name == "Name");
                     Assert.Equal(
-                        TypeMappingSource.FindMapping(
-                            typeof(string),
-                            storeTypeName: null,
-                            size: 30
-                        ).StoreType,
+                        TypeMappingSource
+                            .FindMapping(typeof(string), storeTypeName: null, size: 30)
+                            .StoreType,
                         column.StoreType
                     );
                 }
@@ -669,12 +661,14 @@ namespace Microsoft.EntityFrameworkCore.Migrations
                     var table = Assert.Single(model.Tables);
                     var column = Assert.Single(table.Columns, c => c.Name == "Name");
                     Assert.Equal(
-                        TypeMappingSource.FindMapping(
-                            typeof(string),
-                            storeTypeName: null,
-                            fixedLength: true,
-                            size: 100
-                        ).StoreType,
+                        TypeMappingSource
+                            .FindMapping(
+                                typeof(string),
+                                storeTypeName: null,
+                                fixedLength: true,
+                                size: 100
+                            )
+                            .StoreType,
                         column.StoreType
                     );
                 }
@@ -2191,9 +2185,9 @@ namespace Microsoft.EntityFrameworkCore.Migrations
         {
             var options = new LoggingOptions();
             options.Initialize(
-                new DbContextOptionsBuilder().EnableSensitiveDataLogging(
-                    sensitiveDataLoggingEnabled
-                ).Options
+                new DbContextOptionsBuilder()
+                    .EnableSensitiveDataLogging(sensitiveDataLoggingEnabled)
+                    .Options
             );
             return new DiagnosticsLogger<DbLoggerCategory.Model.Validation>(
                 Fixture.TestSqlLoggerFactory,

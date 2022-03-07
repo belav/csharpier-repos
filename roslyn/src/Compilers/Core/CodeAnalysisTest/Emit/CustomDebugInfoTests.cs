@@ -53,10 +53,12 @@ namespace Microsoft.CodeAnalysis.UnitTests.Emit
 
             // unknown version
             Assert.True(
-                CustomDebugInfoReader.TryGetCustomDebugInfoRecord(
-                    new byte[] { 5, 1, 0, 0 },
-                    CustomDebugInfoKind.EditAndContinueLocalSlotMap
-                ).IsDefault
+                CustomDebugInfoReader
+                    .TryGetCustomDebugInfoRecord(
+                        new byte[] { 5, 1, 0, 0 },
+                        CustomDebugInfoKind.EditAndContinueLocalSlotMap
+                    )
+                    .IsDefault
             );
 
             // incomplete record header
@@ -71,10 +73,12 @@ namespace Microsoft.CodeAnalysis.UnitTests.Emit
             };
 
             Assert.True(
-                CustomDebugInfoReader.TryGetCustomDebugInfoRecord(
-                    cdi,
-                    CustomDebugInfoKind.EditAndContinueLocalSlotMap
-                ).IsDefault
+                CustomDebugInfoReader
+                    .TryGetCustomDebugInfoRecord(
+                        cdi,
+                        CustomDebugInfoKind.EditAndContinueLocalSlotMap
+                    )
+                    .IsDefault
             );
 
             // record size too small
@@ -149,10 +153,12 @@ namespace Microsoft.CodeAnalysis.UnitTests.Emit
             };
 
             Assert.True(
-                CustomDebugInfoReader.TryGetCustomDebugInfoRecord(
-                    cdi,
-                    CustomDebugInfoKind.EditAndContinueLocalSlotMap
-                ).IsEmpty
+                CustomDebugInfoReader
+                    .TryGetCustomDebugInfoRecord(
+                        cdi,
+                        CustomDebugInfoKind.EditAndContinueLocalSlotMap
+                    )
+                    .IsEmpty
             );
 
             // record size too big
@@ -226,10 +232,12 @@ namespace Microsoft.CodeAnalysis.UnitTests.Emit
             };
 
             Assert.True(
-                CustomDebugInfoReader.TryGetCustomDebugInfoRecord(
-                    cdi,
-                    CustomDebugInfoKind.EditAndContinueLocalSlotMap
-                ).IsDefault
+                CustomDebugInfoReader
+                    .TryGetCustomDebugInfoRecord(
+                        cdi,
+                        CustomDebugInfoKind.EditAndContinueLocalSlotMap
+                    )
+                    .IsDefault
             );
 
             // unknown record kind
@@ -251,10 +259,12 @@ namespace Microsoft.CodeAnalysis.UnitTests.Emit
             };
 
             Assert.True(
-                CustomDebugInfoReader.TryGetCustomDebugInfoRecord(
-                    cdi,
-                    CustomDebugInfoKind.EditAndContinueLocalSlotMap
-                ).IsDefault
+                CustomDebugInfoReader
+                    .TryGetCustomDebugInfoRecord(
+                        cdi,
+                        CustomDebugInfoKind.EditAndContinueLocalSlotMap
+                    )
+                    .IsDefault
             );
 
             // multiple records (number in global header is ignored, the first matching record is returned)
@@ -481,10 +491,9 @@ namespace Microsoft.CodeAnalysis.UnitTests.Emit
             );
 
             var deserialized =
-                EditAndContinueMethodDebugInformation.Create(
-                    bytes,
-                    default(ImmutableArray<byte>)
-                ).LocalSlots;
+                EditAndContinueMethodDebugInformation
+                    .Create(bytes, default(ImmutableArray<byte>))
+                    .LocalSlots;
 
             AssertEx.Equal(slots, deserialized);
         }

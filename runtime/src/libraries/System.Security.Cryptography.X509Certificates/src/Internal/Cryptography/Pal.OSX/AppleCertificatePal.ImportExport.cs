@@ -83,14 +83,16 @@ namespace Internal.Cryptography.Pal
             }
 
             SafeSecIdentityHandle identityHandle;
-            SafeSecCertificateHandle certHandle = Interop.AppleCrypto.X509ImportCertificate(
-                rawData,
-                contentType,
-                SafePasswordHandle.InvalidHandle,
-                SafeTemporaryKeychainHandle.InvalidHandle,
-                exportable: true,
-                out identityHandle
-            );
+            SafeSecCertificateHandle certHandle = Interop
+                .AppleCrypto
+                .X509ImportCertificate(
+                    rawData,
+                    contentType,
+                    SafePasswordHandle.InvalidHandle,
+                    SafeTemporaryKeychainHandle.InvalidHandle,
+                    exportable: true,
+                    out identityHandle
+                );
 
             if (identityHandle.IsInvalid)
             {
@@ -119,9 +121,9 @@ namespace Internal.Cryptography.Pal
             Debug.Assert(_identityHandle != null);
 
             using (
-                SafeSecKeyRefHandle key = Interop.AppleCrypto.X509GetPrivateKeyFromIdentity(
-                    _identityHandle
-                )
+                SafeSecKeyRefHandle key = Interop
+                    .AppleCrypto
+                    .X509GetPrivateKeyFromIdentity(_identityHandle)
             )
             {
                 return ExportPkcs8(key, password);
@@ -134,16 +136,14 @@ namespace Internal.Cryptography.Pal
         )
         {
             using (
-                SafeCFDataHandle data = Interop.AppleCrypto.SecKeyExportData(
-                    key,
-                    exportPrivate: true,
-                    password
-                )
+                SafeCFDataHandle data = Interop
+                    .AppleCrypto
+                    .SecKeyExportData(key, exportPrivate: true, password)
             )
             {
-                ReadOnlySpan<byte> systemExport = Interop.CoreFoundation.CFDataDangerousGetSpan(
-                    data
-                );
+                ReadOnlySpan<byte> systemExport = Interop
+                    .CoreFoundation
+                    .CFDataDangerousGetSpan(data);
 
                 fixed (byte* ptr = systemExport)
                 {
@@ -177,11 +177,9 @@ namespace Internal.Cryptography.Pal
             SafeSecKeyRefHandle? privateKey
         )
         {
-            SafeSecIdentityHandle? identity = Interop.AppleCrypto.X509MoveToKeychain(
-                _certHandle,
-                keychain,
-                privateKey
-            );
+            SafeSecIdentityHandle? identity = Interop
+                .AppleCrypto
+                .X509MoveToKeychain(_certHandle, keychain, privateKey);
 
             if (identity != null)
             {

@@ -32,30 +32,36 @@ namespace Microsoft.EntityFrameworkCore
                 {
                     var leftEntities = new[]
                     {
-                        context.EntityCompositeKeys.CreateInstance(
-                            (e, p) =>
-                            {
-                                e.Key1 = Fixture.UseGeneratedKeys ? 0 : 7711;
-                                e.Key2 = "7711";
-                                e.Key3 = new DateTime(7711, 1, 1);
-                            }
-                        ),
-                        context.EntityCompositeKeys.CreateInstance(
-                            (e, p) =>
-                            {
-                                e.Key1 = Fixture.UseGeneratedKeys ? 0 : 7712;
-                                e.Key2 = "7712";
-                                e.Key3 = new DateTime(7712, 1, 1);
-                            }
-                        ),
-                        context.EntityCompositeKeys.CreateInstance(
-                            (e, p) =>
-                            {
-                                e.Key1 = Fixture.UseGeneratedKeys ? 0 : 7713;
-                                e.Key2 = "7713";
-                                e.Key3 = new DateTime(7713, 1, 1);
-                            }
-                        ),
+                        context
+                            .EntityCompositeKeys
+                            .CreateInstance(
+                                (e, p) =>
+                                {
+                                    e.Key1 = Fixture.UseGeneratedKeys ? 0 : 7711;
+                                    e.Key2 = "7711";
+                                    e.Key3 = new DateTime(7711, 1, 1);
+                                }
+                            ),
+                        context
+                            .EntityCompositeKeys
+                            .CreateInstance(
+                                (e, p) =>
+                                {
+                                    e.Key1 = Fixture.UseGeneratedKeys ? 0 : 7712;
+                                    e.Key2 = "7712";
+                                    e.Key3 = new DateTime(7712, 1, 1);
+                                }
+                            ),
+                        context
+                            .EntityCompositeKeys
+                            .CreateInstance(
+                                (e, p) =>
+                                {
+                                    e.Key1 = Fixture.UseGeneratedKeys ? 0 : 7713;
+                                    e.Key2 = "7713";
+                                    e.Key3 = new DateTime(7713, 1, 1);
+                                }
+                            ),
                     };
                     var rightEntities = new[]
                     {
@@ -125,13 +131,15 @@ namespace Microsoft.EntityFrameworkCore
                     var results = async ? await queryable.ToListAsync() : queryable.ToList();
                     Assert.Equal(3, results.Count);
 
-                    var leftEntities = context.ChangeTracker
+                    var leftEntities = context
+                        .ChangeTracker
                         .Entries<EntityCompositeKey>()
                         .Select(e => e.Entity)
                         .OrderBy(e => e.Key2)
                         .ToList();
 
-                    var rightEntities = context.ChangeTracker
+                    var rightEntities = context
+                        .ChangeTracker
                         .Entries<EntityLeaf>()
                         .Select(e => e.Entity)
                         .OrderBy(e => e.Name)
@@ -160,7 +168,8 @@ namespace Microsoft.EntityFrameworkCore
                 Assert.Single(rightEntities[1].CompositeKeySkipFull);
                 Assert.Single(rightEntities[2].CompositeKeySkipFull);
 
-                var joinEntities = context.ChangeTracker
+                var joinEntities = context
+                    .ChangeTracker
                     .Entries<JoinCompositeKeyToLeaf>()
                     .Select(e => e.Entity)
                     .ToList();
@@ -198,110 +207,134 @@ namespace Microsoft.EntityFrameworkCore
                         .OrderBy(e => e.Name)
                         .ToList();
 
-                    leftEntities[0].LeafSkipFull.Add(
-                        context
-                            .Set<EntityLeaf>()
-                            .CreateInstance(
-                                (e, p) =>
-                                {
-                                    e.Id = Fixture.UseGeneratedKeys ? 0 : 7721;
-                                    e.Name = "Z7721";
-                                }
-                            )
-                    );
-                    leftEntities[0].LeafSkipFull.Add(
-                        context
-                            .Set<EntityLeaf>()
-                            .CreateInstance(
-                                (e, p) =>
-                                {
-                                    e.Id = Fixture.UseGeneratedKeys ? 0 : 7722;
-                                    e.Name = "Z7722";
-                                }
-                            )
-                    );
-                    leftEntities[0].LeafSkipFull.Add(
-                        context
-                            .Set<EntityLeaf>()
-                            .CreateInstance(
-                                (e, p) =>
-                                {
-                                    e.Id = Fixture.UseGeneratedKeys ? 0 : 7723;
-                                    e.Name = "Z7723";
-                                }
-                            )
-                    );
+                    leftEntities[0]
+                        .LeafSkipFull
+                        .Add(
+                            context
+                                .Set<EntityLeaf>()
+                                .CreateInstance(
+                                    (e, p) =>
+                                    {
+                                        e.Id = Fixture.UseGeneratedKeys ? 0 : 7721;
+                                        e.Name = "Z7721";
+                                    }
+                                )
+                        );
+                    leftEntities[0]
+                        .LeafSkipFull
+                        .Add(
+                            context
+                                .Set<EntityLeaf>()
+                                .CreateInstance(
+                                    (e, p) =>
+                                    {
+                                        e.Id = Fixture.UseGeneratedKeys ? 0 : 7722;
+                                        e.Name = "Z7722";
+                                    }
+                                )
+                        );
+                    leftEntities[0]
+                        .LeafSkipFull
+                        .Add(
+                            context
+                                .Set<EntityLeaf>()
+                                .CreateInstance(
+                                    (e, p) =>
+                                    {
+                                        e.Id = Fixture.UseGeneratedKeys ? 0 : 7723;
+                                        e.Name = "Z7723";
+                                    }
+                                )
+                        );
 
-                    rightEntities[0].CompositeKeySkipFull.Add(
-                        context.EntityCompositeKeys.CreateInstance(
-                            (e, p) =>
-                            {
-                                e.Key1 = Fixture.UseGeneratedKeys ? 0 : 7711;
-                                e.Key2 = "7711";
-                                e.Key3 = new DateTime(7711, 1, 1);
-                                e.Name = "Z7711";
-                            }
-                        )
-                    );
-                    rightEntities[0].CompositeKeySkipFull.Add(
-                        context.EntityCompositeKeys.CreateInstance(
-                            (e, p) =>
-                            {
-                                e.Key1 = Fixture.UseGeneratedKeys ? 0 : 7712;
-                                e.Key2 = "7712";
-                                e.Key3 = new DateTime(7712, 1, 1);
-                                e.Name = "Z7712";
-                            }
-                        )
-                    );
-                    rightEntities[0].CompositeKeySkipFull.Add(
-                        context.EntityCompositeKeys.CreateInstance(
-                            (e, p) =>
-                            {
-                                e.Key1 = Fixture.UseGeneratedKeys ? 0 : 7713;
-                                e.Key2 = "7713";
-                                e.Key3 = new DateTime(7713, 1, 1);
-                                e.Name = "Z7713";
-                            }
-                        )
-                    );
+                    rightEntities[0]
+                        .CompositeKeySkipFull
+                        .Add(
+                            context
+                                .EntityCompositeKeys
+                                .CreateInstance(
+                                    (e, p) =>
+                                    {
+                                        e.Key1 = Fixture.UseGeneratedKeys ? 0 : 7711;
+                                        e.Key2 = "7711";
+                                        e.Key3 = new DateTime(7711, 1, 1);
+                                        e.Name = "Z7711";
+                                    }
+                                )
+                        );
+                    rightEntities[0]
+                        .CompositeKeySkipFull
+                        .Add(
+                            context
+                                .EntityCompositeKeys
+                                .CreateInstance(
+                                    (e, p) =>
+                                    {
+                                        e.Key1 = Fixture.UseGeneratedKeys ? 0 : 7712;
+                                        e.Key2 = "7712";
+                                        e.Key3 = new DateTime(7712, 1, 1);
+                                        e.Name = "Z7712";
+                                    }
+                                )
+                        );
+                    rightEntities[0]
+                        .CompositeKeySkipFull
+                        .Add(
+                            context
+                                .EntityCompositeKeys
+                                .CreateInstance(
+                                    (e, p) =>
+                                    {
+                                        e.Key1 = Fixture.UseGeneratedKeys ? 0 : 7713;
+                                        e.Key2 = "7713";
+                                        e.Key3 = new DateTime(7713, 1, 1);
+                                        e.Name = "Z7713";
+                                    }
+                                )
+                        );
 
-                    leftEntities[0].LeafSkipFull.Remove(
-                        leftEntities[0].LeafSkipFull.Single(e => e.Name == "Leaf 1")
-                    );
-                    rightEntities[1].CompositeKeySkipFull.Remove(
-                        rightEntities[1].CompositeKeySkipFull.Single(e => e.Key2 == "3_1")
-                    );
+                    leftEntities[0]
+                        .LeafSkipFull
+                        .Remove(leftEntities[0].LeafSkipFull.Single(e => e.Name == "Leaf 1"));
+                    rightEntities[1]
+                        .CompositeKeySkipFull
+                        .Remove(rightEntities[1].CompositeKeySkipFull.Single(e => e.Key2 == "3_1"));
 
-                    leftEntities[2].LeafSkipFull.Remove(
-                        leftEntities[2].LeafSkipFull.Single(e => e.Name == "Leaf 3")
-                    );
-                    leftEntities[2].LeafSkipFull.Add(
-                        context
-                            .Set<EntityLeaf>()
-                            .CreateInstance(
-                                (e, p) =>
-                                {
-                                    e.Id = Fixture.UseGeneratedKeys ? 0 : 7724;
-                                    e.Name = "Z7724";
-                                }
-                            )
-                    );
+                    leftEntities[2]
+                        .LeafSkipFull
+                        .Remove(leftEntities[2].LeafSkipFull.Single(e => e.Name == "Leaf 3"));
+                    leftEntities[2]
+                        .LeafSkipFull
+                        .Add(
+                            context
+                                .Set<EntityLeaf>()
+                                .CreateInstance(
+                                    (e, p) =>
+                                    {
+                                        e.Id = Fixture.UseGeneratedKeys ? 0 : 7724;
+                                        e.Name = "Z7724";
+                                    }
+                                )
+                        );
 
-                    rightEntities[2].CompositeKeySkipFull.Remove(
-                        rightEntities[2].CompositeKeySkipFull.Single(e => e.Key2 == "8_3")
-                    );
-                    rightEntities[2].CompositeKeySkipFull.Add(
-                        context.EntityCompositeKeys.CreateInstance(
-                            (e, p) =>
-                            {
-                                e.Key1 = Fixture.UseGeneratedKeys ? 0 : 7714;
-                                e.Key2 = "7714";
-                                e.Key3 = new DateTime(7714, 1, 1);
-                                e.Name = "Z7714";
-                            }
-                        )
-                    );
+                    rightEntities[2]
+                        .CompositeKeySkipFull
+                        .Remove(rightEntities[2].CompositeKeySkipFull.Single(e => e.Key2 == "8_3"));
+                    rightEntities[2]
+                        .CompositeKeySkipFull
+                        .Add(
+                            context
+                                .EntityCompositeKeys
+                                .CreateInstance(
+                                    (e, p) =>
+                                    {
+                                        e.Key1 = Fixture.UseGeneratedKeys ? 0 : 7714;
+                                        e.Key2 = "7714";
+                                        e.Key3 = new DateTime(7714, 1, 1);
+                                        e.Name = "Z7714";
+                                    }
+                                )
+                        );
 
                     if (RequiresDetectChanges)
                     {
@@ -385,12 +418,14 @@ namespace Microsoft.EntityFrameworkCore
                     Assert.Contains(joinEntity, joinEntity.Leaf.JoinCompositeKeyFull);
                 }
 
-                var allLeft = context.ChangeTracker
+                var allLeft = context
+                    .ChangeTracker
                     .Entries<EntityCompositeKey>()
                     .Select(e => e.Entity)
                     .OrderBy(e => e.Key2)
                     .ToList();
-                var allRight = context.ChangeTracker
+                var allRight = context
+                    .ChangeTracker
                     .Entries<EntityLeaf>()
                     .Select(e => e.Entity)
                     .OrderBy(e => e.Name)
@@ -419,7 +454,8 @@ namespace Microsoft.EntityFrameworkCore
                     }
                 }
 
-                var deleted = context.ChangeTracker
+                var deleted = context
+                    .ChangeTracker
                     .Entries<JoinCompositeKeyToLeaf>()
                     .Count(e => e.State == EntityState.Deleted);
                 Assert.Equal(joinCount, (count / 2) + deleted);
@@ -451,9 +487,9 @@ namespace Microsoft.EntityFrameworkCore
                     // Make sure other related entities are loaded for delete fixup
                     context.Set<JoinThreeToCompositeKeyFull>().Load();
 
-                    var toRemoveOne = context.EntityCompositeKeys.Single(
-                        e => e.Name == "Composite 6"
-                    );
+                    var toRemoveOne = context
+                        .EntityCompositeKeys
+                        .Single(e => e.Name == "Composite 6");
                     key1 = toRemoveOne.Key1;
                     key2 = toRemoveOne.Key2;
                     key3 = toRemoveOne.Key3;
@@ -461,15 +497,16 @@ namespace Microsoft.EntityFrameworkCore
                         .SelectMany(e => e.CompositeKeySkipFull)
                         .Count(e => e == toRemoveOne);
 
-                    var toRemoveThree = (EntityLeaf)context.EntityRoots.Single(
-                        e => e.Name == "Leaf 3"
-                    );
+                    var toRemoveThree = (EntityLeaf)context
+                        .EntityRoots
+                        .Single(e => e.Name == "Leaf 3");
                     id = toRemoveThree.Id;
                     var refCountThrees = ones.SelectMany(e => e.RootSkipShared)
                         .Count(e => e == toRemoveThree);
 
                     foreach (
-                        var joinEntity in context.ChangeTracker
+                        var joinEntity in context
+                            .ChangeTracker
                             .Entries<JoinCompositeKeyToLeaf>()
                             .Select(e => e.Entity)
                             .ToList()
@@ -644,7 +681,8 @@ namespace Microsoft.EntityFrameworkCore
             static void ValidateJoinNavigations(DbContext context)
             {
                 foreach (
-                    var joinEntity in context.ChangeTracker
+                    var joinEntity in context
+                        .ChangeTracker
                         .Entries<JoinCompositeKeyToLeaf>()
                         .Select(e => e.Entity)
                         .ToList()
@@ -673,30 +711,36 @@ namespace Microsoft.EntityFrameworkCore
                 {
                     var leftEntities = new[]
                     {
-                        context.EntityCompositeKeys.CreateInstance(
-                            (e, p) =>
-                            {
-                                e.Key1 = Fixture.UseGeneratedKeys ? 0 : 7711;
-                                e.Key2 = "7711";
-                                e.Key3 = new DateTime(7711, 1, 1);
-                            }
-                        ),
-                        context.EntityCompositeKeys.CreateInstance(
-                            (e, p) =>
-                            {
-                                e.Key1 = Fixture.UseGeneratedKeys ? 0 : 7712;
-                                e.Key2 = "7712";
-                                e.Key3 = new DateTime(7712, 1, 1);
-                            }
-                        ),
-                        context.EntityCompositeKeys.CreateInstance(
-                            (e, p) =>
-                            {
-                                e.Key1 = Fixture.UseGeneratedKeys ? 0 : 7713;
-                                e.Key2 = "7713";
-                                e.Key3 = new DateTime(7713, 1, 1);
-                            }
-                        ),
+                        context
+                            .EntityCompositeKeys
+                            .CreateInstance(
+                                (e, p) =>
+                                {
+                                    e.Key1 = Fixture.UseGeneratedKeys ? 0 : 7711;
+                                    e.Key2 = "7711";
+                                    e.Key3 = new DateTime(7711, 1, 1);
+                                }
+                            ),
+                        context
+                            .EntityCompositeKeys
+                            .CreateInstance(
+                                (e, p) =>
+                                {
+                                    e.Key1 = Fixture.UseGeneratedKeys ? 0 : 7712;
+                                    e.Key2 = "7712";
+                                    e.Key3 = new DateTime(7712, 1, 1);
+                                }
+                            ),
+                        context
+                            .EntityCompositeKeys
+                            .CreateInstance(
+                                (e, p) =>
+                                {
+                                    e.Key1 = Fixture.UseGeneratedKeys ? 0 : 7713;
+                                    e.Key2 = "7713";
+                                    e.Key3 = new DateTime(7713, 1, 1);
+                                }
+                            ),
                     };
                     var rightEntities = new[]
                     {
@@ -767,13 +811,15 @@ namespace Microsoft.EntityFrameworkCore
                     var results = async ? await queryable.ToListAsync() : queryable.ToList();
                     Assert.Equal(3, results.Count);
 
-                    var leftEntities = context.ChangeTracker
+                    var leftEntities = context
+                        .ChangeTracker
                         .Entries<EntityCompositeKey>()
                         .Select(e => e.Entity)
                         .OrderBy(e => e.Key2)
                         .ToList();
 
-                    var rightEntities = context.ChangeTracker
+                    var rightEntities = context
+                        .ChangeTracker
                         .Entries<EntityRoot>()
                         .Select(e => e.Entity)
                         .OrderBy(e => e.Name)
@@ -874,62 +920,82 @@ namespace Microsoft.EntityFrameworkCore
                     leftEntities[0].RootSkipShared.Add(roots[1]);
                     leftEntities[0].RootSkipShared.Add(roots[2]);
 
-                    rightEntities[0].CompositeKeySkipShared.Add(
-                        context.EntityCompositeKeys.CreateInstance(
-                            (e, p) =>
-                            {
-                                e.Key1 = Fixture.UseGeneratedKeys ? 0 : 7711;
-                                e.Key2 = "Z7711";
-                                e.Key3 = new DateTime(7711, 1, 1);
-                            }
-                        )
-                    );
-                    rightEntities[0].CompositeKeySkipShared.Add(
-                        context.EntityCompositeKeys.CreateInstance(
-                            (e, p) =>
-                            {
-                                e.Key1 = Fixture.UseGeneratedKeys ? 0 : 7712;
-                                e.Key2 = "Z7712";
-                                e.Key3 = new DateTime(7712, 1, 1);
-                            }
-                        )
-                    );
-                    rightEntities[0].CompositeKeySkipShared.Add(
-                        context.EntityCompositeKeys.CreateInstance(
-                            (e, p) =>
-                            {
-                                e.Key1 = Fixture.UseGeneratedKeys ? 0 : 7713;
-                                e.Key2 = "Z7713";
-                                e.Key3 = new DateTime(7713, 1, 1);
-                            }
-                        )
-                    );
+                    rightEntities[0]
+                        .CompositeKeySkipShared
+                        .Add(
+                            context
+                                .EntityCompositeKeys
+                                .CreateInstance(
+                                    (e, p) =>
+                                    {
+                                        e.Key1 = Fixture.UseGeneratedKeys ? 0 : 7711;
+                                        e.Key2 = "Z7711";
+                                        e.Key3 = new DateTime(7711, 1, 1);
+                                    }
+                                )
+                        );
+                    rightEntities[0]
+                        .CompositeKeySkipShared
+                        .Add(
+                            context
+                                .EntityCompositeKeys
+                                .CreateInstance(
+                                    (e, p) =>
+                                    {
+                                        e.Key1 = Fixture.UseGeneratedKeys ? 0 : 7712;
+                                        e.Key2 = "Z7712";
+                                        e.Key3 = new DateTime(7712, 1, 1);
+                                    }
+                                )
+                        );
+                    rightEntities[0]
+                        .CompositeKeySkipShared
+                        .Add(
+                            context
+                                .EntityCompositeKeys
+                                .CreateInstance(
+                                    (e, p) =>
+                                    {
+                                        e.Key1 = Fixture.UseGeneratedKeys ? 0 : 7713;
+                                        e.Key2 = "Z7713";
+                                        e.Key3 = new DateTime(7713, 1, 1);
+                                    }
+                                )
+                        );
 
-                    leftEntities[0].RootSkipShared.Remove(
-                        leftEntities[0].RootSkipShared.Single(e => e.Name == "Root 9")
-                    );
-                    rightEntities[1].CompositeKeySkipShared.Remove(
-                        rightEntities[1].CompositeKeySkipShared.Single(e => e.Key2 == "8_2")
-                    );
+                    leftEntities[0]
+                        .RootSkipShared
+                        .Remove(leftEntities[0].RootSkipShared.Single(e => e.Name == "Root 9"));
+                    rightEntities[1]
+                        .CompositeKeySkipShared
+                        .Remove(
+                            rightEntities[1].CompositeKeySkipShared.Single(e => e.Key2 == "8_2")
+                        );
 
-                    leftEntities[2].RootSkipShared.Remove(
-                        leftEntities[2].RootSkipShared.Single(e => e.Name == "Branch 6")
-                    );
+                    leftEntities[2]
+                        .RootSkipShared
+                        .Remove(leftEntities[2].RootSkipShared.Single(e => e.Name == "Branch 6"));
                     leftEntities[2].RootSkipShared.Add(roots[3]);
 
-                    rightEntities[3].CompositeKeySkipShared.Remove(
-                        rightEntities[3].CompositeKeySkipShared.Single(e => e.Key2 == "8_5")
-                    );
-                    rightEntities[3].CompositeKeySkipShared.Add(
-                        context.EntityCompositeKeys.CreateInstance(
-                            (e, p) =>
-                            {
-                                e.Key1 = Fixture.UseGeneratedKeys ? 0 : 7714;
-                                e.Key2 = "Z7714";
-                                e.Key3 = new DateTime(7714, 1, 1);
-                            }
-                        )
-                    );
+                    rightEntities[3]
+                        .CompositeKeySkipShared
+                        .Remove(
+                            rightEntities[3].CompositeKeySkipShared.Single(e => e.Key2 == "8_5")
+                        );
+                    rightEntities[3]
+                        .CompositeKeySkipShared
+                        .Add(
+                            context
+                                .EntityCompositeKeys
+                                .CreateInstance(
+                                    (e, p) =>
+                                    {
+                                        e.Key1 = Fixture.UseGeneratedKeys ? 0 : 7714;
+                                        e.Key2 = "Z7714";
+                                        e.Key3 = new DateTime(7714, 1, 1);
+                                    }
+                                )
+                        );
 
                     if (RequiresDetectChanges)
                     {
@@ -1023,12 +1089,14 @@ namespace Microsoft.EntityFrameworkCore
                 );
                 Assert.Contains(rightEntities[3].CompositeKeySkipShared, e => e.Key2 == "Z7714");
 
-                var allLeft = context.ChangeTracker
+                var allLeft = context
+                    .ChangeTracker
                     .Entries<EntityCompositeKey>()
                     .Select(e => e.Entity)
                     .OrderBy(e => e.Key2)
                     .ToList();
-                var allRight = context.ChangeTracker
+                var allRight = context
+                    .ChangeTracker
                     .Entries<EntityRoot>()
                     .Select(e => e.Entity)
                     .OrderBy(e => e.Name)
@@ -1056,7 +1124,8 @@ namespace Microsoft.EntityFrameworkCore
                     }
                 }
 
-                var deleted = context.ChangeTracker
+                var deleted = context
+                    .ChangeTracker
                     .Entries<Dictionary<string, object>>()
                     .Count(e => e.State == EntityState.Deleted);
                 Assert.Equal(joinCount, (count / 2) + deleted);
@@ -1088,9 +1157,9 @@ namespace Microsoft.EntityFrameworkCore
                     // Make sure other related entities are loaded for delete fixup
                     context.Set<JoinThreeToCompositeKeyFull>().Load();
 
-                    var toRemoveOne = context.EntityCompositeKeys.Single(
-                        e => e.Name == "Composite 6"
-                    );
+                    var toRemoveOne = context
+                        .EntityCompositeKeys
+                        .Single(e => e.Name == "Composite 6");
                     key1 = toRemoveOne.Key1;
                     key2 = toRemoveOne.Key2;
                     key3 = toRemoveOne.Key3;
@@ -1252,30 +1321,36 @@ namespace Microsoft.EntityFrameworkCore
                 {
                     var leftEntities = new[]
                     {
-                        context.EntityCompositeKeys.CreateInstance(
-                            (e, p) =>
-                            {
-                                e.Key1 = Fixture.UseGeneratedKeys ? 0 : 7711;
-                                e.Key2 = "7711";
-                                e.Key3 = new DateTime(7711, 1, 1);
-                            }
-                        ),
-                        context.EntityCompositeKeys.CreateInstance(
-                            (e, p) =>
-                            {
-                                e.Key1 = Fixture.UseGeneratedKeys ? 0 : 7712;
-                                e.Key2 = "7712";
-                                e.Key3 = new DateTime(7712, 1, 1);
-                            }
-                        ),
-                        context.EntityCompositeKeys.CreateInstance(
-                            (e, p) =>
-                            {
-                                e.Key1 = Fixture.UseGeneratedKeys ? 0 : 7713;
-                                e.Key2 = "7713";
-                                e.Key3 = new DateTime(7713, 1, 1);
-                            }
-                        ),
+                        context
+                            .EntityCompositeKeys
+                            .CreateInstance(
+                                (e, p) =>
+                                {
+                                    e.Key1 = Fixture.UseGeneratedKeys ? 0 : 7711;
+                                    e.Key2 = "7711";
+                                    e.Key3 = new DateTime(7711, 1, 1);
+                                }
+                            ),
+                        context
+                            .EntityCompositeKeys
+                            .CreateInstance(
+                                (e, p) =>
+                                {
+                                    e.Key1 = Fixture.UseGeneratedKeys ? 0 : 7712;
+                                    e.Key2 = "7712";
+                                    e.Key3 = new DateTime(7712, 1, 1);
+                                }
+                            ),
+                        context
+                            .EntityCompositeKeys
+                            .CreateInstance(
+                                (e, p) =>
+                                {
+                                    e.Key1 = Fixture.UseGeneratedKeys ? 0 : 7713;
+                                    e.Key2 = "7713";
+                                    e.Key3 = new DateTime(7713, 1, 1);
+                                }
+                            ),
                     };
                     var rightEntities = new[]
                     {
@@ -1363,13 +1438,15 @@ namespace Microsoft.EntityFrameworkCore
                     var results = async ? await queryable.ToListAsync() : queryable.ToList();
                     Assert.Equal(3, results.Count);
 
-                    var leftEntities = context.ChangeTracker
+                    var leftEntities = context
+                        .ChangeTracker
                         .Entries<EntityCompositeKey>()
                         .Select(e => e.Entity)
                         .OrderBy(e => e.Key2)
                         .ToList();
 
-                    var rightEntities = context.ChangeTracker
+                    var rightEntities = context
+                        .ChangeTracker
                         .Entries<EntityThree>()
                         .Select(e => e.Entity)
                         .OrderBy(e => e.Name)
@@ -1403,7 +1480,8 @@ namespace Microsoft.EntityFrameworkCore
                 Assert.Single(rightEntities[1].CompositeKeySkipFull);
                 Assert.Single(rightEntities[2].CompositeKeySkipFull);
 
-                var joinEntities = context.ChangeTracker
+                var joinEntities = context
+                    .ChangeTracker
                     .Entries<JoinThreeToCompositeKeyFull>()
                     .Select(e => e.Entity)
                     .ToList();
@@ -1490,38 +1568,46 @@ namespace Microsoft.EntityFrameworkCore
 
                     var composites = new[]
                     {
-                        context.EntityCompositeKeys.CreateInstance(
-                            (e, p) =>
-                            {
-                                e.Key1 = Fixture.UseGeneratedKeys ? 0 : 7711;
-                                e.Key2 = "Z7711";
-                                e.Key3 = new DateTime(7711, 1, 1);
-                            }
-                        ),
-                        context.EntityCompositeKeys.CreateInstance(
-                            (e, p) =>
-                            {
-                                e.Key1 = Fixture.UseGeneratedKeys ? 0 : 7712;
-                                e.Key2 = "Z7712";
-                                e.Key3 = new DateTime(7712, 1, 1);
-                            }
-                        ),
-                        context.EntityCompositeKeys.CreateInstance(
-                            (e, p) =>
-                            {
-                                e.Key1 = Fixture.UseGeneratedKeys ? 0 : 7713;
-                                e.Key2 = "Z7713";
-                                e.Key3 = new DateTime(7713, 1, 1);
-                            }
-                        ),
-                        context.EntityCompositeKeys.CreateInstance(
-                            (e, p) =>
-                            {
-                                e.Key1 = Fixture.UseGeneratedKeys ? 0 : 7714;
-                                e.Key2 = "Z7714";
-                                e.Key3 = new DateTime(7714, 1, 1);
-                            }
-                        )
+                        context
+                            .EntityCompositeKeys
+                            .CreateInstance(
+                                (e, p) =>
+                                {
+                                    e.Key1 = Fixture.UseGeneratedKeys ? 0 : 7711;
+                                    e.Key2 = "Z7711";
+                                    e.Key3 = new DateTime(7711, 1, 1);
+                                }
+                            ),
+                        context
+                            .EntityCompositeKeys
+                            .CreateInstance(
+                                (e, p) =>
+                                {
+                                    e.Key1 = Fixture.UseGeneratedKeys ? 0 : 7712;
+                                    e.Key2 = "Z7712";
+                                    e.Key3 = new DateTime(7712, 1, 1);
+                                }
+                            ),
+                        context
+                            .EntityCompositeKeys
+                            .CreateInstance(
+                                (e, p) =>
+                                {
+                                    e.Key1 = Fixture.UseGeneratedKeys ? 0 : 7713;
+                                    e.Key2 = "Z7713";
+                                    e.Key3 = new DateTime(7713, 1, 1);
+                                }
+                            ),
+                        context
+                            .EntityCompositeKeys
+                            .CreateInstance(
+                                (e, p) =>
+                                {
+                                    e.Key1 = Fixture.UseGeneratedKeys ? 0 : 7714;
+                                    e.Key2 = "Z7714";
+                                    e.Key3 = new DateTime(7714, 1, 1);
+                                }
+                            )
                     };
 
                     leftEntities[0].ThreeSkipFull.Add(threes[0]);
@@ -1532,21 +1618,33 @@ namespace Microsoft.EntityFrameworkCore
                     rightEntities[0].CompositeKeySkipFull.Add(composites[1]);
                     rightEntities[0].CompositeKeySkipFull.Add(composites[2]);
 
-                    leftEntities[0].ThreeSkipFull.Remove(
-                        leftEntities[0].ThreeSkipFull.Single(e => e.Name == "EntityThree 2")
-                    );
-                    rightEntities[1].CompositeKeySkipFull.Remove(
-                        rightEntities[1].CompositeKeySkipFull.Single(e => e.Name == "Composite 16")
-                    );
+                    leftEntities[0]
+                        .ThreeSkipFull
+                        .Remove(
+                            leftEntities[0].ThreeSkipFull.Single(e => e.Name == "EntityThree 2")
+                        );
+                    rightEntities[1]
+                        .CompositeKeySkipFull
+                        .Remove(
+                            rightEntities[1]
+                                .CompositeKeySkipFull
+                                .Single(e => e.Name == "Composite 16")
+                        );
 
-                    leftEntities[3].ThreeSkipFull.Remove(
-                        leftEntities[3].ThreeSkipFull.Single(e => e.Name == "EntityThree 7")
-                    );
+                    leftEntities[3]
+                        .ThreeSkipFull
+                        .Remove(
+                            leftEntities[3].ThreeSkipFull.Single(e => e.Name == "EntityThree 7")
+                        );
                     leftEntities[3].ThreeSkipFull.Add(threes[3]);
 
-                    rightEntities[2].CompositeKeySkipFull.Remove(
-                        rightEntities[2].CompositeKeySkipFull.Single(e => e.Name == "Composite 7")
-                    );
+                    rightEntities[2]
+                        .CompositeKeySkipFull
+                        .Remove(
+                            rightEntities[2]
+                                .CompositeKeySkipFull
+                                .Single(e => e.Name == "Composite 7")
+                        );
                     rightEntities[2].CompositeKeySkipFull.Add(composites[3]);
 
                     if (RequiresDetectChanges)
@@ -1641,7 +1739,8 @@ namespace Microsoft.EntityFrameworkCore
                 Assert.DoesNotContain(rightEntities[2].CompositeKeySkipFull, e => e.Key2 == "6_1");
                 Assert.Contains(rightEntities[2].CompositeKeySkipFull, e => e.Key2 == "Z7714");
 
-                var joinEntries = context.ChangeTracker
+                var joinEntries = context
+                    .ChangeTracker
                     .Entries<JoinThreeToCompositeKeyFull>()
                     .ToList();
                 foreach (var joinEntry in joinEntries)
@@ -1657,12 +1756,14 @@ namespace Microsoft.EntityFrameworkCore
                     Assert.Contains(joinEntity, joinEntity.Three.JoinCompositeKeyFull);
                 }
 
-                var allLeft = context.ChangeTracker
+                var allLeft = context
+                    .ChangeTracker
                     .Entries<EntityCompositeKey>()
                     .Select(e => e.Entity)
                     .OrderBy(e => e.Key2)
                     .ToList();
-                var allRight = context.ChangeTracker
+                var allRight = context
+                    .ChangeTracker
                     .Entries<EntityThree>()
                     .Select(e => e.Entity)
                     .OrderBy(e => e.Name)
@@ -1691,7 +1792,8 @@ namespace Microsoft.EntityFrameworkCore
                     }
                 }
 
-                var deleted = context.ChangeTracker
+                var deleted = context
+                    .ChangeTracker
                     .Entries<JoinThreeToCompositeKeyFull>()
                     .Count(e => e.State == EntityState.Deleted);
                 Assert.Equal(joinCount, (count / 2) + deleted);
@@ -1720,22 +1822,23 @@ namespace Microsoft.EntityFrameworkCore
                     // Make sure other related entities are loaded for delete fixup
                     context.Set<JoinThreeToCompositeKeyFull>().Load();
 
-                    var toRemoveOne = context.EntityCompositeKeys.Single(
-                        e => e.Name == "Composite 6"
-                    );
+                    var toRemoveOne = context
+                        .EntityCompositeKeys
+                        .Single(e => e.Name == "Composite 6");
                     var refCountOnes = threes
                         .SelectMany(e => e.CompositeKeySkipFull)
                         .Count(e => e == toRemoveOne);
 
-                    var toRemoveThree = context.EntityThrees.Single(
-                        e => e.Name == "EntityThree 17"
-                    );
+                    var toRemoveThree = context
+                        .EntityThrees
+                        .Single(e => e.Name == "EntityThree 17");
                     threeId = toRemoveThree.Id;
                     var refCountThrees = ones.SelectMany(e => e.ThreeSkipFull)
                         .Count(e => e == toRemoveThree);
 
                     foreach (
-                        var joinEntity in context.ChangeTracker
+                        var joinEntity in context
+                            .ChangeTracker
                             .Entries<JoinThreeToCompositeKeyFull>()
                             .Select(e => e.Entity)
                             .ToList()
@@ -1908,7 +2011,8 @@ namespace Microsoft.EntityFrameworkCore
             static void ValidateJoinNavigations(DbContext context)
             {
                 foreach (
-                    var joinEntity in context.ChangeTracker
+                    var joinEntity in context
+                        .ChangeTracker
                         .Entries<JoinThreeToCompositeKeyFull>()
                         .Select(e => e.Entity)
                         .ToList()
@@ -1938,27 +2042,27 @@ namespace Microsoft.EntityFrameworkCore
                 {
                     var leftEntities = new[]
                     {
-                        context.EntityTwos.CreateInstance(
-                            (e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7711
-                        ),
-                        context.EntityTwos.CreateInstance(
-                            (e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7712
-                        ),
-                        context.EntityTwos.CreateInstance(
-                            (e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7713
-                        )
+                        context
+                            .EntityTwos
+                            .CreateInstance((e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7711),
+                        context
+                            .EntityTwos
+                            .CreateInstance((e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7712),
+                        context
+                            .EntityTwos
+                            .CreateInstance((e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7713)
                     };
                     var rightEntities = new[]
                     {
-                        context.EntityTwos.CreateInstance(
-                            (e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7721
-                        ),
-                        context.EntityTwos.CreateInstance(
-                            (e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7722
-                        ),
-                        context.EntityTwos.CreateInstance(
-                            (e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7723
-                        )
+                        context
+                            .EntityTwos
+                            .CreateInstance((e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7721),
+                        context
+                            .EntityTwos
+                            .CreateInstance((e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7722),
+                        context
+                            .EntityTwos
+                            .CreateInstance((e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7723)
                     };
 
                     leftEntities[0].SelfSkipSharedLeft = CreateCollection<EntityTwo>();
@@ -2018,14 +2122,16 @@ namespace Microsoft.EntityFrameworkCore
                     var results = async ? await queryable.ToListAsync() : queryable.ToList();
                     Assert.Equal(6, results.Count);
 
-                    var leftEntities = context.ChangeTracker
+                    var leftEntities = context
+                        .ChangeTracker
                         .Entries<EntityTwo>()
                         .Select(e => e.Entity)
                         .Where(e => leftKeys.Contains(e.Id))
                         .OrderBy(e => e.Name)
                         .ToList();
 
-                    var rightEntities = context.ChangeTracker
+                    var rightEntities = context
+                        .ChangeTracker
                         .Entries<EntityTwo>()
                         .Select(e => e.Entity)
                         .Where(e => rightKeys.Contains(e.Id))
@@ -2083,62 +2189,78 @@ namespace Microsoft.EntityFrameworkCore
 
                     var twos = new[]
                     {
-                        context.EntityTwos.CreateInstance(
-                            (e, p) =>
-                            {
-                                e.Id = Fixture.UseGeneratedKeys ? 0 : 7721;
-                                e.Name = "Z7721";
-                            }
-                        ),
-                        context.EntityTwos.CreateInstance(
-                            (e, p) =>
-                            {
-                                e.Id = Fixture.UseGeneratedKeys ? 0 : 7722;
-                                e.Name = "Z7722";
-                            }
-                        ),
-                        context.EntityTwos.CreateInstance(
-                            (e, p) =>
-                            {
-                                e.Id = Fixture.UseGeneratedKeys ? 0 : 7723;
-                                e.Name = "Z7723";
-                            }
-                        ),
-                        context.EntityTwos.CreateInstance(
-                            (e, p) =>
-                            {
-                                e.Id = Fixture.UseGeneratedKeys ? 0 : 7724;
-                                e.Name = "Z7724";
-                            }
-                        ),
-                        context.EntityTwos.CreateInstance(
-                            (e, p) =>
-                            {
-                                e.Id = Fixture.UseGeneratedKeys ? 0 : 7711;
-                                e.Name = "Z7711";
-                            }
-                        ),
-                        context.EntityTwos.CreateInstance(
-                            (e, p) =>
-                            {
-                                e.Id = Fixture.UseGeneratedKeys ? 0 : 7712;
-                                e.Name = "Z7712";
-                            }
-                        ),
-                        context.EntityTwos.CreateInstance(
-                            (e, p) =>
-                            {
-                                e.Id = Fixture.UseGeneratedKeys ? 0 : 7713;
-                                e.Name = "Z7713";
-                            }
-                        ),
-                        context.EntityTwos.CreateInstance(
-                            (e, p) =>
-                            {
-                                e.Id = Fixture.UseGeneratedKeys ? 0 : 7714;
-                                e.Name = "Z7714";
-                            }
-                        )
+                        context
+                            .EntityTwos
+                            .CreateInstance(
+                                (e, p) =>
+                                {
+                                    e.Id = Fixture.UseGeneratedKeys ? 0 : 7721;
+                                    e.Name = "Z7721";
+                                }
+                            ),
+                        context
+                            .EntityTwos
+                            .CreateInstance(
+                                (e, p) =>
+                                {
+                                    e.Id = Fixture.UseGeneratedKeys ? 0 : 7722;
+                                    e.Name = "Z7722";
+                                }
+                            ),
+                        context
+                            .EntityTwos
+                            .CreateInstance(
+                                (e, p) =>
+                                {
+                                    e.Id = Fixture.UseGeneratedKeys ? 0 : 7723;
+                                    e.Name = "Z7723";
+                                }
+                            ),
+                        context
+                            .EntityTwos
+                            .CreateInstance(
+                                (e, p) =>
+                                {
+                                    e.Id = Fixture.UseGeneratedKeys ? 0 : 7724;
+                                    e.Name = "Z7724";
+                                }
+                            ),
+                        context
+                            .EntityTwos
+                            .CreateInstance(
+                                (e, p) =>
+                                {
+                                    e.Id = Fixture.UseGeneratedKeys ? 0 : 7711;
+                                    e.Name = "Z7711";
+                                }
+                            ),
+                        context
+                            .EntityTwos
+                            .CreateInstance(
+                                (e, p) =>
+                                {
+                                    e.Id = Fixture.UseGeneratedKeys ? 0 : 7712;
+                                    e.Name = "Z7712";
+                                }
+                            ),
+                        context
+                            .EntityTwos
+                            .CreateInstance(
+                                (e, p) =>
+                                {
+                                    e.Id = Fixture.UseGeneratedKeys ? 0 : 7713;
+                                    e.Name = "Z7713";
+                                }
+                            ),
+                        context
+                            .EntityTwos
+                            .CreateInstance(
+                                (e, p) =>
+                                {
+                                    e.Id = Fixture.UseGeneratedKeys ? 0 : 7714;
+                                    e.Name = "Z7714";
+                                }
+                            )
                     };
 
                     leftEntities[0].SelfSkipSharedRight.Add(twos[0]);
@@ -2149,21 +2271,33 @@ namespace Microsoft.EntityFrameworkCore
                     rightEntities[0].SelfSkipSharedLeft.Add(twos[5]);
                     rightEntities[0].SelfSkipSharedLeft.Add(twos[6]);
 
-                    leftEntities[0].SelfSkipSharedRight.Remove(
-                        leftEntities[0].SelfSkipSharedRight.Single(e => e.Name == "EntityTwo 9")
-                    );
-                    rightEntities[1].SelfSkipSharedLeft.Remove(
-                        rightEntities[1].SelfSkipSharedLeft.Single(e => e.Name == "EntityTwo 1")
-                    );
+                    leftEntities[0]
+                        .SelfSkipSharedRight
+                        .Remove(
+                            leftEntities[0].SelfSkipSharedRight.Single(e => e.Name == "EntityTwo 9")
+                        );
+                    rightEntities[1]
+                        .SelfSkipSharedLeft
+                        .Remove(
+                            rightEntities[1].SelfSkipSharedLeft.Single(e => e.Name == "EntityTwo 1")
+                        );
 
-                    leftEntities[4].SelfSkipSharedRight.Remove(
-                        leftEntities[4].SelfSkipSharedRight.Single(e => e.Name == "EntityTwo 18")
-                    );
+                    leftEntities[4]
+                        .SelfSkipSharedRight
+                        .Remove(
+                            leftEntities[4]
+                                .SelfSkipSharedRight
+                                .Single(e => e.Name == "EntityTwo 18")
+                        );
                     leftEntities[4].SelfSkipSharedRight.Add(twos[3]);
 
-                    rightEntities[5].SelfSkipSharedLeft.Remove(
-                        rightEntities[5].SelfSkipSharedLeft.Single(e => e.Name == "EntityTwo 12")
-                    );
+                    rightEntities[5]
+                        .SelfSkipSharedLeft
+                        .Remove(
+                            rightEntities[5]
+                                .SelfSkipSharedLeft
+                                .Single(e => e.Name == "EntityTwo 12")
+                        );
                     rightEntities[5].SelfSkipSharedLeft.Add(twos[7]);
 
                     if (RequiresDetectChanges)
@@ -2267,12 +2401,14 @@ namespace Microsoft.EntityFrameworkCore
                     e => context.Entry(e).Property(e => e.Id).CurrentValue == ids[7]
                 );
 
-                var allLeft = context.ChangeTracker
+                var allLeft = context
+                    .ChangeTracker
                     .Entries<EntityTwo>()
                     .Select(e => e.Entity)
                     .OrderBy(e => e.Name)
                     .ToList();
-                var allRight = context.ChangeTracker
+                var allRight = context
+                    .ChangeTracker
                     .Entries<EntityTwo>()
                     .Select(e => e.Entity)
                     .OrderBy(e => e.Name)
@@ -2300,7 +2436,8 @@ namespace Microsoft.EntityFrameworkCore
                     }
                 }
 
-                var deleted = context.ChangeTracker
+                var deleted = context
+                    .ChangeTracker
                     .Entries<Dictionary<string, object>>()
                     .Count(e => e.State == EntityState.Deleted);
                 Assert.Equal(joinCount, (joins / 2) + deleted);
@@ -2319,27 +2456,27 @@ namespace Microsoft.EntityFrameworkCore
                 {
                     var leftEntities = new[]
                     {
-                        context.EntityTwos.CreateInstance(
-                            (e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7711
-                        ),
-                        context.EntityTwos.CreateInstance(
-                            (e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7712
-                        ),
-                        context.EntityTwos.CreateInstance(
-                            (e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7713
-                        )
+                        context
+                            .EntityTwos
+                            .CreateInstance((e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7711),
+                        context
+                            .EntityTwos
+                            .CreateInstance((e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7712),
+                        context
+                            .EntityTwos
+                            .CreateInstance((e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7713)
                     };
                     var rightEntities = new[]
                     {
-                        context.EntityThrees.CreateInstance(
-                            (e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7721
-                        ),
-                        context.EntityThrees.CreateInstance(
-                            (e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7722
-                        ),
-                        context.EntityThrees.CreateInstance(
-                            (e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7723
-                        )
+                        context
+                            .EntityThrees
+                            .CreateInstance((e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7721),
+                        context
+                            .EntityThrees
+                            .CreateInstance((e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7722),
+                        context
+                            .EntityThrees
+                            .CreateInstance((e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7723)
                     };
 
                     leftEntities[0].ThreeSkipFull = CreateCollection<EntityThree>();
@@ -2397,12 +2534,14 @@ namespace Microsoft.EntityFrameworkCore
                     var results = async ? await queryable.ToListAsync() : queryable.ToList();
                     Assert.Equal(3, results.Count);
 
-                    var leftEntities = context.ChangeTracker
+                    var leftEntities = context
+                        .ChangeTracker
                         .Entries<EntityTwo>()
                         .Select(e => e.Entity)
                         .OrderBy(e => e.Name)
                         .ToList();
-                    var rightEntities = context.ChangeTracker
+                    var rightEntities = context
+                        .ChangeTracker
                         .Entries<EntityThree>()
                         .Select(e => e.Entity)
                         .OrderBy(e => e.Name)
@@ -2431,7 +2570,8 @@ namespace Microsoft.EntityFrameworkCore
                 Assert.Single(rightEntities[1].TwoSkipFull);
                 Assert.Single(rightEntities[2].TwoSkipFull);
 
-                var joinEntities = context.ChangeTracker
+                var joinEntities = context
+                    .ChangeTracker
                     .Entries<JoinTwoToThree>()
                     .Select(e => e.Entity)
                     .ToList();
@@ -2466,94 +2606,130 @@ namespace Microsoft.EntityFrameworkCore
                         .OrderBy(e => e.Name)
                         .ToList();
 
-                    leftEntities[0].ThreeSkipFull.Add(
-                        context.EntityThrees.CreateInstance(
-                            (e, p) =>
-                            {
-                                e.Id = Fixture.UseGeneratedKeys ? 0 : 7721;
-                                e.Name = "Z7721";
-                            }
-                        )
-                    );
-                    leftEntities[0].ThreeSkipFull.Add(
-                        context.EntityThrees.CreateInstance(
-                            (e, p) =>
-                            {
-                                e.Id = Fixture.UseGeneratedKeys ? 0 : 7722;
-                                e.Name = "Z7722";
-                            }
-                        )
-                    );
-                    leftEntities[0].ThreeSkipFull.Add(
-                        context.EntityThrees.CreateInstance(
-                            (e, p) =>
-                            {
-                                e.Id = Fixture.UseGeneratedKeys ? 0 : 7723;
-                                e.Name = "Z7723";
-                            }
-                        )
-                    );
+                    leftEntities[0]
+                        .ThreeSkipFull
+                        .Add(
+                            context
+                                .EntityThrees
+                                .CreateInstance(
+                                    (e, p) =>
+                                    {
+                                        e.Id = Fixture.UseGeneratedKeys ? 0 : 7721;
+                                        e.Name = "Z7721";
+                                    }
+                                )
+                        );
+                    leftEntities[0]
+                        .ThreeSkipFull
+                        .Add(
+                            context
+                                .EntityThrees
+                                .CreateInstance(
+                                    (e, p) =>
+                                    {
+                                        e.Id = Fixture.UseGeneratedKeys ? 0 : 7722;
+                                        e.Name = "Z7722";
+                                    }
+                                )
+                        );
+                    leftEntities[0]
+                        .ThreeSkipFull
+                        .Add(
+                            context
+                                .EntityThrees
+                                .CreateInstance(
+                                    (e, p) =>
+                                    {
+                                        e.Id = Fixture.UseGeneratedKeys ? 0 : 7723;
+                                        e.Name = "Z7723";
+                                    }
+                                )
+                        );
 
-                    rightEntities[0].TwoSkipFull.Add(
-                        context.EntityTwos.CreateInstance(
-                            (e, p) =>
-                            {
-                                e.Id = Fixture.UseGeneratedKeys ? 0 : 7711;
-                                e.Name = "Z7711";
-                            }
-                        )
-                    );
-                    rightEntities[0].TwoSkipFull.Add(
-                        context.EntityTwos.CreateInstance(
-                            (e, p) =>
-                            {
-                                e.Id = Fixture.UseGeneratedKeys ? 0 : 7712;
-                                e.Name = "Z7712";
-                            }
-                        )
-                    );
-                    rightEntities[0].TwoSkipFull.Add(
-                        context.EntityTwos.CreateInstance(
-                            (e, p) =>
-                            {
-                                e.Id = Fixture.UseGeneratedKeys ? 0 : 7713;
-                                e.Name = "Z7713";
-                            }
-                        )
-                    );
+                    rightEntities[0]
+                        .TwoSkipFull
+                        .Add(
+                            context
+                                .EntityTwos
+                                .CreateInstance(
+                                    (e, p) =>
+                                    {
+                                        e.Id = Fixture.UseGeneratedKeys ? 0 : 7711;
+                                        e.Name = "Z7711";
+                                    }
+                                )
+                        );
+                    rightEntities[0]
+                        .TwoSkipFull
+                        .Add(
+                            context
+                                .EntityTwos
+                                .CreateInstance(
+                                    (e, p) =>
+                                    {
+                                        e.Id = Fixture.UseGeneratedKeys ? 0 : 7712;
+                                        e.Name = "Z7712";
+                                    }
+                                )
+                        );
+                    rightEntities[0]
+                        .TwoSkipFull
+                        .Add(
+                            context
+                                .EntityTwos
+                                .CreateInstance(
+                                    (e, p) =>
+                                    {
+                                        e.Id = Fixture.UseGeneratedKeys ? 0 : 7713;
+                                        e.Name = "Z7713";
+                                    }
+                                )
+                        );
 
-                    leftEntities[1].ThreeSkipFull.Remove(
-                        leftEntities[1].ThreeSkipFull.Single(e => e.Name == "EntityThree 17")
-                    );
-                    rightEntities[1].TwoSkipFull.Remove(
-                        rightEntities[1].TwoSkipFull.Single(e => e.Name == "EntityTwo 6")
-                    );
+                    leftEntities[1]
+                        .ThreeSkipFull
+                        .Remove(
+                            leftEntities[1].ThreeSkipFull.Single(e => e.Name == "EntityThree 17")
+                        );
+                    rightEntities[1]
+                        .TwoSkipFull
+                        .Remove(rightEntities[1].TwoSkipFull.Single(e => e.Name == "EntityTwo 6"));
 
-                    leftEntities[2].ThreeSkipFull.Remove(
-                        leftEntities[2].ThreeSkipFull.Single(e => e.Name == "EntityThree 13")
-                    );
-                    leftEntities[2].ThreeSkipFull.Add(
-                        context.EntityThrees.CreateInstance(
-                            (e, p) =>
-                            {
-                                e.Id = Fixture.UseGeneratedKeys ? 0 : 7724;
-                                e.Name = "Z7724";
-                            }
-                        )
-                    );
+                    leftEntities[2]
+                        .ThreeSkipFull
+                        .Remove(
+                            leftEntities[2].ThreeSkipFull.Single(e => e.Name == "EntityThree 13")
+                        );
+                    leftEntities[2]
+                        .ThreeSkipFull
+                        .Add(
+                            context
+                                .EntityThrees
+                                .CreateInstance(
+                                    (e, p) =>
+                                    {
+                                        e.Id = Fixture.UseGeneratedKeys ? 0 : 7724;
+                                        e.Name = "Z7724";
+                                    }
+                                )
+                        );
 
-                    rightEntities[2].TwoSkipFull.Remove(
-                        rightEntities[2].TwoSkipFull.Single(e => e.Name == "EntityTwo 3")
-                    );
-                    rightEntities[2].TwoSkipFull.Add(
-                        context.EntityTwos.CreateInstance(
-                            (e, p) =>
-                            {
-                                e.Id = Fixture.UseGeneratedKeys ? 0 : 7714;
-                                e.Name = "Z7714";
-                            }
-                        )
-                    );
+                    rightEntities[2]
+                        .TwoSkipFull
+                        .Remove(rightEntities[2].TwoSkipFull.Single(e => e.Name == "EntityTwo 3"));
+                    rightEntities[2]
+                        .TwoSkipFull
+                        .Add(
+                            context
+                                .EntityTwos
+                                .CreateInstance(
+                                    (e, p) =>
+                                    {
+                                        e.Id = Fixture.UseGeneratedKeys ? 0 : 7714;
+                                        e.Name = "Z7714";
+                                    }
+                                )
+                        );
 
                     if (RequiresDetectChanges)
                     {
@@ -2633,12 +2809,14 @@ namespace Microsoft.EntityFrameworkCore
                     Assert.Contains(joinEntity, joinEntity.Three.JoinTwoFull);
                 }
 
-                var allLeft = context.ChangeTracker
+                var allLeft = context
+                    .ChangeTracker
                     .Entries<EntityTwo>()
                     .Select(e => e.Entity)
                     .OrderBy(e => e.Name)
                     .ToList();
-                var allRight = context.ChangeTracker
+                var allRight = context
+                    .ChangeTracker
                     .Entries<EntityThree>()
                     .Select(e => e.Entity)
                     .OrderBy(e => e.Name)
@@ -2667,7 +2845,8 @@ namespace Microsoft.EntityFrameworkCore
                     }
                 }
 
-                var deleted = context.ChangeTracker
+                var deleted = context
+                    .ChangeTracker
                     .Entries<JoinTwoToThree>()
                     .Count(e => e.State == EntityState.Deleted);
                 Assert.Equal(joinCount, (count / 2) + deleted);
@@ -2686,15 +2865,15 @@ namespace Microsoft.EntityFrameworkCore
                 {
                     var leftEntities = new[]
                     {
-                        context.EntityOnes.CreateInstance(
-                            (e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7711
-                        ),
-                        context.EntityOnes.CreateInstance(
-                            (e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7712
-                        ),
-                        context.EntityOnes.CreateInstance(
-                            (e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7713
-                        ),
+                        context
+                            .EntityOnes
+                            .CreateInstance((e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7711),
+                        context
+                            .EntityOnes
+                            .CreateInstance((e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7712),
+                        context
+                            .EntityOnes
+                            .CreateInstance((e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7713),
                     };
                     var rightEntities = new[]
                     {
@@ -2764,12 +2943,14 @@ namespace Microsoft.EntityFrameworkCore
                     var results = async ? await queryable.ToListAsync() : queryable.ToList();
                     Assert.Equal(3, results.Count);
 
-                    var leftEntities = context.ChangeTracker
+                    var leftEntities = context
+                        .ChangeTracker
                         .Entries<EntityOne>()
                         .Select(e => e.Entity)
                         .OrderBy(e => e.Name)
                         .ToList();
-                    var rightEntities = context.ChangeTracker
+                    var rightEntities = context
+                        .ChangeTracker
                         .Entries<EntityBranch>()
                         .Select(e => e.Entity)
                         .OrderBy(e => e.Name)
@@ -2820,102 +3001,126 @@ namespace Microsoft.EntityFrameworkCore
                         .OrderBy(e => e.Name)
                         .ToList();
 
-                    leftEntities[0].BranchSkip.Add(
-                        context
-                            .Set<EntityBranch>()
-                            .CreateInstance(
-                                (e, p) =>
-                                {
-                                    e.Id = Fixture.UseGeneratedKeys ? 0 : 7721;
-                                    e.Name = "Z7721";
-                                }
-                            )
-                    );
-                    leftEntities[0].BranchSkip.Add(
-                        context
-                            .Set<EntityBranch>()
-                            .CreateInstance(
-                                (e, p) =>
-                                {
-                                    e.Id = Fixture.UseGeneratedKeys ? 0 : 7722;
-                                    e.Name = "Z7722";
-                                }
-                            )
-                    );
-                    leftEntities[0].BranchSkip.Add(
-                        context
-                            .Set<EntityBranch>()
-                            .CreateInstance(
-                                (e, p) =>
-                                {
-                                    e.Id = Fixture.UseGeneratedKeys ? 0 : 7723;
-                                    e.Name = "Z7723";
-                                }
-                            )
-                    );
+                    leftEntities[0]
+                        .BranchSkip
+                        .Add(
+                            context
+                                .Set<EntityBranch>()
+                                .CreateInstance(
+                                    (e, p) =>
+                                    {
+                                        e.Id = Fixture.UseGeneratedKeys ? 0 : 7721;
+                                        e.Name = "Z7721";
+                                    }
+                                )
+                        );
+                    leftEntities[0]
+                        .BranchSkip
+                        .Add(
+                            context
+                                .Set<EntityBranch>()
+                                .CreateInstance(
+                                    (e, p) =>
+                                    {
+                                        e.Id = Fixture.UseGeneratedKeys ? 0 : 7722;
+                                        e.Name = "Z7722";
+                                    }
+                                )
+                        );
+                    leftEntities[0]
+                        .BranchSkip
+                        .Add(
+                            context
+                                .Set<EntityBranch>()
+                                .CreateInstance(
+                                    (e, p) =>
+                                    {
+                                        e.Id = Fixture.UseGeneratedKeys ? 0 : 7723;
+                                        e.Name = "Z7723";
+                                    }
+                                )
+                        );
 
-                    rightEntities[0].OneSkip.Add(
-                        context.EntityOnes.CreateInstance(
-                            (e, p) =>
-                            {
-                                e.Id = Fixture.UseGeneratedKeys ? 0 : 7711;
-                                e.Name = "Z7711";
-                            }
-                        )
-                    );
-                    rightEntities[0].OneSkip.Add(
-                        context.EntityOnes.CreateInstance(
-                            (e, p) =>
-                            {
-                                e.Id = Fixture.UseGeneratedKeys ? 0 : 7712;
-                                e.Name = "Z7712";
-                            }
-                        )
-                    );
-                    rightEntities[0].OneSkip.Add(
-                        context.EntityOnes.CreateInstance(
-                            (e, p) =>
-                            {
-                                e.Id = Fixture.UseGeneratedKeys ? 0 : 7713;
-                                e.Name = "Z7713";
-                            }
-                        )
-                    );
+                    rightEntities[0]
+                        .OneSkip
+                        .Add(
+                            context
+                                .EntityOnes
+                                .CreateInstance(
+                                    (e, p) =>
+                                    {
+                                        e.Id = Fixture.UseGeneratedKeys ? 0 : 7711;
+                                        e.Name = "Z7711";
+                                    }
+                                )
+                        );
+                    rightEntities[0]
+                        .OneSkip
+                        .Add(
+                            context
+                                .EntityOnes
+                                .CreateInstance(
+                                    (e, p) =>
+                                    {
+                                        e.Id = Fixture.UseGeneratedKeys ? 0 : 7712;
+                                        e.Name = "Z7712";
+                                    }
+                                )
+                        );
+                    rightEntities[0]
+                        .OneSkip
+                        .Add(
+                            context
+                                .EntityOnes
+                                .CreateInstance(
+                                    (e, p) =>
+                                    {
+                                        e.Id = Fixture.UseGeneratedKeys ? 0 : 7713;
+                                        e.Name = "Z7713";
+                                    }
+                                )
+                        );
 
-                    leftEntities[1].BranchSkip.Remove(
-                        leftEntities[1].BranchSkip.Single(e => e.Name == "Branch 4")
-                    );
-                    rightEntities[1].OneSkip.Remove(
-                        rightEntities[1].OneSkip.Single(e => e.Name == "EntityOne 9")
-                    );
+                    leftEntities[1]
+                        .BranchSkip
+                        .Remove(leftEntities[1].BranchSkip.Single(e => e.Name == "Branch 4"));
+                    rightEntities[1]
+                        .OneSkip
+                        .Remove(rightEntities[1].OneSkip.Single(e => e.Name == "EntityOne 9"));
 
-                    leftEntities[4].BranchSkip.Remove(
-                        leftEntities[4].BranchSkip.Single(e => e.Name == "Branch 5")
-                    );
-                    leftEntities[2].BranchSkip.Add(
-                        context
-                            .Set<EntityBranch>()
-                            .CreateInstance(
-                                (e, p) =>
-                                {
-                                    e.Id = Fixture.UseGeneratedKeys ? 0 : 7724;
-                                    e.Name = "Z7724";
-                                }
-                            )
-                    );
+                    leftEntities[4]
+                        .BranchSkip
+                        .Remove(leftEntities[4].BranchSkip.Single(e => e.Name == "Branch 5"));
+                    leftEntities[2]
+                        .BranchSkip
+                        .Add(
+                            context
+                                .Set<EntityBranch>()
+                                .CreateInstance(
+                                    (e, p) =>
+                                    {
+                                        e.Id = Fixture.UseGeneratedKeys ? 0 : 7724;
+                                        e.Name = "Z7724";
+                                    }
+                                )
+                        );
 
-                    rightEntities[2].OneSkip.Remove(
-                        rightEntities[2].OneSkip.Single(e => e.Name == "EntityOne 8")
-                    );
-                    rightEntities[2].OneSkip.Add(
-                        context.EntityOnes.CreateInstance(
-                            (e, p) =>
-                            {
-                                e.Id = Fixture.UseGeneratedKeys ? 0 : 7714;
-                                e.Name = "Z7714";
-                            }
-                        )
-                    );
+                    rightEntities[2]
+                        .OneSkip
+                        .Remove(rightEntities[2].OneSkip.Single(e => e.Name == "EntityOne 8"));
+                    rightEntities[2]
+                        .OneSkip
+                        .Add(
+                            context
+                                .EntityOnes
+                                .CreateInstance(
+                                    (e, p) =>
+                                    {
+                                        e.Id = Fixture.UseGeneratedKeys ? 0 : 7714;
+                                        e.Name = "Z7714";
+                                    }
+                                )
+                        );
 
                     if (RequiresDetectChanges)
                     {
@@ -2979,12 +3184,14 @@ namespace Microsoft.EntityFrameworkCore
                 Assert.DoesNotContain(rightEntities[2].OneSkip, e => e.Name == "EntityOne 8");
                 Assert.Contains(rightEntities[2].OneSkip, e => e.Name == "Z7714");
 
-                var allLeft = context.ChangeTracker
+                var allLeft = context
+                    .ChangeTracker
                     .Entries<EntityOne>()
                     .Select(e => e.Entity)
                     .OrderBy(e => e.Name)
                     .ToList();
-                var allRight = context.ChangeTracker
+                var allRight = context
+                    .ChangeTracker
                     .Entries<EntityBranch>()
                     .Select(e => e.Entity)
                     .OrderBy(e => e.Name)
@@ -3012,7 +3219,8 @@ namespace Microsoft.EntityFrameworkCore
                     }
                 }
 
-                var deleted = context.ChangeTracker
+                var deleted = context
+                    .ChangeTracker
                     .Entries<JoinOneToBranch>()
                     .Count(e => e.State == EntityState.Deleted);
                 Assert.Equal(joinCount, (count / 2) + deleted);
@@ -3032,27 +3240,27 @@ namespace Microsoft.EntityFrameworkCore
                 {
                     var leftEntities = new[]
                     {
-                        context.EntityOnes.CreateInstance(
-                            (e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7711
-                        ),
-                        context.EntityOnes.CreateInstance(
-                            (e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7712
-                        ),
-                        context.EntityOnes.CreateInstance(
-                            (e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7713
-                        )
+                        context
+                            .EntityOnes
+                            .CreateInstance((e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7711),
+                        context
+                            .EntityOnes
+                            .CreateInstance((e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7712),
+                        context
+                            .EntityOnes
+                            .CreateInstance((e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7713)
                     };
                     var rightEntities = new[]
                     {
-                        context.EntityOnes.CreateInstance(
-                            (e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7721
-                        ),
-                        context.EntityOnes.CreateInstance(
-                            (e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7722
-                        ),
-                        context.EntityOnes.CreateInstance(
-                            (e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7723
-                        )
+                        context
+                            .EntityOnes
+                            .CreateInstance((e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7721),
+                        context
+                            .EntityOnes
+                            .CreateInstance((e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7722),
+                        context
+                            .EntityOnes
+                            .CreateInstance((e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7723)
                     };
 
                     leftEntities[0].SelfSkipPayloadLeft = CreateCollection<EntityOne>();
@@ -3112,14 +3320,16 @@ namespace Microsoft.EntityFrameworkCore
                     var results = async ? await queryable.ToListAsync() : queryable.ToList();
                     Assert.Equal(6, results.Count);
 
-                    var leftEntities = context.ChangeTracker
+                    var leftEntities = context
+                        .ChangeTracker
                         .Entries<EntityOne>()
                         .Select(e => e.Entity)
                         .Where(e => leftKeys.Contains(e.Id))
                         .OrderBy(e => e.Name)
                         .ToList();
 
-                    var rightEntities = context.ChangeTracker
+                    var rightEntities = context
+                        .ChangeTracker
                         .Entries<EntityOne>()
                         .Select(e => e.Entity)
                         .Where(e => rightKeys.Contains(e.Id))
@@ -3149,7 +3359,8 @@ namespace Microsoft.EntityFrameworkCore
                 Assert.Single(rightEntities[1].SelfSkipPayloadRight);
                 Assert.Single(rightEntities[2].SelfSkipPayloadRight);
 
-                var joinEntities = context.ChangeTracker
+                var joinEntities = context
+                    .ChangeTracker
                     .Entries<JoinOneSelfPayload>()
                     .Select(e => e.Entity)
                     .ToList();
@@ -3197,62 +3408,78 @@ namespace Microsoft.EntityFrameworkCore
 
                     var ones = new[]
                     {
-                        context.EntityOnes.CreateInstance(
-                            (e, p) =>
-                            {
-                                e.Id = Fixture.UseGeneratedKeys ? 0 : 7721;
-                                e.Name = "Z7721";
-                            }
-                        ),
-                        context.EntityOnes.CreateInstance(
-                            (e, p) =>
-                            {
-                                e.Id = Fixture.UseGeneratedKeys ? 0 : 7722;
-                                e.Name = "Z7722";
-                            }
-                        ),
-                        context.EntityOnes.CreateInstance(
-                            (e, p) =>
-                            {
-                                e.Id = Fixture.UseGeneratedKeys ? 0 : 7723;
-                                e.Name = "Z7723";
-                            }
-                        ),
-                        context.EntityOnes.CreateInstance(
-                            (e, p) =>
-                            {
-                                e.Id = Fixture.UseGeneratedKeys ? 0 : 7724;
-                                e.Name = "Z7724";
-                            }
-                        ),
-                        context.EntityOnes.CreateInstance(
-                            (e, p) =>
-                            {
-                                e.Id = Fixture.UseGeneratedKeys ? 0 : 7711;
-                                e.Name = "Z7711";
-                            }
-                        ),
-                        context.EntityOnes.CreateInstance(
-                            (e, p) =>
-                            {
-                                e.Id = Fixture.UseGeneratedKeys ? 0 : 7712;
-                                e.Name = "Z7712";
-                            }
-                        ),
-                        context.EntityOnes.CreateInstance(
-                            (e, p) =>
-                            {
-                                e.Id = Fixture.UseGeneratedKeys ? 0 : 7713;
-                                e.Name = "Z7713";
-                            }
-                        ),
-                        context.EntityOnes.CreateInstance(
-                            (e, p) =>
-                            {
-                                e.Id = Fixture.UseGeneratedKeys ? 0 : 7714;
-                                e.Name = "Z7714";
-                            }
-                        )
+                        context
+                            .EntityOnes
+                            .CreateInstance(
+                                (e, p) =>
+                                {
+                                    e.Id = Fixture.UseGeneratedKeys ? 0 : 7721;
+                                    e.Name = "Z7721";
+                                }
+                            ),
+                        context
+                            .EntityOnes
+                            .CreateInstance(
+                                (e, p) =>
+                                {
+                                    e.Id = Fixture.UseGeneratedKeys ? 0 : 7722;
+                                    e.Name = "Z7722";
+                                }
+                            ),
+                        context
+                            .EntityOnes
+                            .CreateInstance(
+                                (e, p) =>
+                                {
+                                    e.Id = Fixture.UseGeneratedKeys ? 0 : 7723;
+                                    e.Name = "Z7723";
+                                }
+                            ),
+                        context
+                            .EntityOnes
+                            .CreateInstance(
+                                (e, p) =>
+                                {
+                                    e.Id = Fixture.UseGeneratedKeys ? 0 : 7724;
+                                    e.Name = "Z7724";
+                                }
+                            ),
+                        context
+                            .EntityOnes
+                            .CreateInstance(
+                                (e, p) =>
+                                {
+                                    e.Id = Fixture.UseGeneratedKeys ? 0 : 7711;
+                                    e.Name = "Z7711";
+                                }
+                            ),
+                        context
+                            .EntityOnes
+                            .CreateInstance(
+                                (e, p) =>
+                                {
+                                    e.Id = Fixture.UseGeneratedKeys ? 0 : 7712;
+                                    e.Name = "Z7712";
+                                }
+                            ),
+                        context
+                            .EntityOnes
+                            .CreateInstance(
+                                (e, p) =>
+                                {
+                                    e.Id = Fixture.UseGeneratedKeys ? 0 : 7713;
+                                    e.Name = "Z7713";
+                                }
+                            ),
+                        context
+                            .EntityOnes
+                            .CreateInstance(
+                                (e, p) =>
+                                {
+                                    e.Id = Fixture.UseGeneratedKeys ? 0 : 7714;
+                                    e.Name = "Z7714";
+                                }
+                            )
                     };
 
                     leftEntities[0].SelfSkipPayloadRight.Add(ones[0]);
@@ -3263,21 +3490,37 @@ namespace Microsoft.EntityFrameworkCore
                     rightEntities[0].SelfSkipPayloadLeft.Add(ones[5]);
                     rightEntities[0].SelfSkipPayloadLeft.Add(ones[6]);
 
-                    leftEntities[7].SelfSkipPayloadRight.Remove(
-                        leftEntities[7].SelfSkipPayloadRight.Single(e => e.Name == "EntityOne 6")
-                    );
-                    rightEntities[11].SelfSkipPayloadLeft.Remove(
-                        rightEntities[11].SelfSkipPayloadLeft.Single(e => e.Name == "EntityOne 13")
-                    );
+                    leftEntities[7]
+                        .SelfSkipPayloadRight
+                        .Remove(
+                            leftEntities[7]
+                                .SelfSkipPayloadRight
+                                .Single(e => e.Name == "EntityOne 6")
+                        );
+                    rightEntities[11]
+                        .SelfSkipPayloadLeft
+                        .Remove(
+                            rightEntities[11]
+                                .SelfSkipPayloadLeft
+                                .Single(e => e.Name == "EntityOne 13")
+                        );
 
-                    leftEntities[4].SelfSkipPayloadRight.Remove(
-                        leftEntities[4].SelfSkipPayloadRight.Single(e => e.Name == "EntityOne 18")
-                    );
+                    leftEntities[4]
+                        .SelfSkipPayloadRight
+                        .Remove(
+                            leftEntities[4]
+                                .SelfSkipPayloadRight
+                                .Single(e => e.Name == "EntityOne 18")
+                        );
                     leftEntities[4].SelfSkipPayloadRight.Add(ones[3]);
 
-                    rightEntities[4].SelfSkipPayloadLeft.Remove(
-                        rightEntities[4].SelfSkipPayloadLeft.Single(e => e.Name == "EntityOne 6")
-                    );
+                    rightEntities[4]
+                        .SelfSkipPayloadLeft
+                        .Remove(
+                            rightEntities[4]
+                                .SelfSkipPayloadLeft
+                                .Single(e => e.Name == "EntityOne 6")
+                        );
                     rightEntities[4].SelfSkipPayloadLeft.Add(ones[7]);
 
                     if (RequiresDetectChanges)
@@ -3288,21 +3531,34 @@ namespace Microsoft.EntityFrameworkCore
                     keys = ones.Select(e => context.Entry(e).Property(e => e.Id).CurrentValue)
                         .ToList();
 
-                    context.Find<JoinOneSelfPayload>(
-                        keys[5],
-                        context
-                            .Entry(context.EntityOnes.Local.Single(e => e.Name == "EntityOne 1"))
-                            .Property(e => e.Id).CurrentValue
-                    ).Payload = new DateTime(1973, 9, 3);
+                    context
+                        .Find<JoinOneSelfPayload>(
+                            keys[5],
+                            context
+                                .Entry(
+                                    context.EntityOnes.Local.Single(e => e.Name == "EntityOne 1")
+                                )
+                                .Property(e => e.Id)
+                                .CurrentValue
+                        )
+                        .Payload = new DateTime(1973, 9, 3);
 
-                    context.Find<JoinOneSelfPayload>(
-                        context
-                            .Entry(context.EntityOnes.Local.Single(e => e.Name == "EntityOne 20"))
-                            .Property(e => e.Id).CurrentValue,
-                        context
-                            .Entry(context.EntityOnes.Local.Single(e => e.Name == "EntityOne 16"))
-                            .Property(e => e.Id).CurrentValue
-                    ).Payload = new DateTime(1969, 8, 3);
+                    context
+                        .Find<JoinOneSelfPayload>(
+                            context
+                                .Entry(
+                                    context.EntityOnes.Local.Single(e => e.Name == "EntityOne 20")
+                                )
+                                .Property(e => e.Id)
+                                .CurrentValue,
+                            context
+                                .Entry(
+                                    context.EntityOnes.Local.Single(e => e.Name == "EntityOne 16")
+                                )
+                                .Property(e => e.Id)
+                                .CurrentValue
+                        )
+                        .Payload = new DateTime(1969, 8, 3);
 
                     ValidateFixup(context, leftEntities, rightEntities, 28, 37, postSave: false);
 
@@ -3426,12 +3682,14 @@ namespace Microsoft.EntityFrameworkCore
                     }
                 }
 
-                var allLeft = context.ChangeTracker
+                var allLeft = context
+                    .ChangeTracker
                     .Entries<EntityOne>()
                     .Select(e => e.Entity)
                     .OrderBy(e => e.Name)
                     .ToList();
-                var allRight = context.ChangeTracker
+                var allRight = context
+                    .ChangeTracker
                     .Entries<EntityOne>()
                     .Select(e => e.Entity)
                     .OrderBy(e => e.Name)
@@ -3460,7 +3718,8 @@ namespace Microsoft.EntityFrameworkCore
                     }
                 }
 
-                var deleted = context.ChangeTracker
+                var deleted = context
+                    .ChangeTracker
                     .Entries<JoinOneSelfPayload>()
                     .Count(e => e.State == EntityState.Deleted);
                 Assert.Equal(joinCount, (joins / 2) + deleted);
@@ -3479,27 +3738,27 @@ namespace Microsoft.EntityFrameworkCore
                 {
                     var leftEntities = new[]
                     {
-                        context.EntityOnes.CreateInstance(
-                            (e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7711
-                        ),
-                        context.EntityOnes.CreateInstance(
-                            (e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7712
-                        ),
-                        context.EntityOnes.CreateInstance(
-                            (e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7713
-                        )
+                        context
+                            .EntityOnes
+                            .CreateInstance((e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7711),
+                        context
+                            .EntityOnes
+                            .CreateInstance((e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7712),
+                        context
+                            .EntityOnes
+                            .CreateInstance((e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7713)
                     };
                     var rightEntities = new[]
                     {
-                        context.EntityThrees.CreateInstance(
-                            (e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7721
-                        ),
-                        context.EntityThrees.CreateInstance(
-                            (e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7722
-                        ),
-                        context.EntityThrees.CreateInstance(
-                            (e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7723
-                        )
+                        context
+                            .EntityThrees
+                            .CreateInstance((e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7721),
+                        context
+                            .EntityThrees
+                            .CreateInstance((e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7722),
+                        context
+                            .EntityThrees
+                            .CreateInstance((e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7723)
                     };
 
                     leftEntities[0].ThreeSkipPayloadFullShared = CreateCollection<EntityThree>();
@@ -3557,12 +3816,14 @@ namespace Microsoft.EntityFrameworkCore
                     var results = async ? await queryable.ToListAsync() : queryable.ToList();
                     Assert.Equal(3, results.Count);
 
-                    var leftEntities = context.ChangeTracker
+                    var leftEntities = context
+                        .ChangeTracker
                         .Entries<EntityOne>()
                         .Select(e => e.Entity)
                         .OrderBy(e => e.Name)
                         .ToList();
-                    var rightEntities = context.ChangeTracker
+                    var rightEntities = context
+                        .ChangeTracker
                         .Entries<EntityThree>()
                         .Select(e => e.Entity)
                         .OrderBy(e => e.Name)
@@ -3601,7 +3862,8 @@ namespace Microsoft.EntityFrameworkCore
                 if (postSave && SupportsDatabaseDefaults)
                 {
                     foreach (
-                        var joinEntity in context.ChangeTracker
+                        var joinEntity in context
+                            .ChangeTracker
                             .Entries<Dictionary<string, object>>()
                             .Select(e => e.Entity)
                             .ToList()
@@ -3630,102 +3892,142 @@ namespace Microsoft.EntityFrameworkCore
                         .OrderBy(e => e.Name)
                         .ToList();
 
-                    leftEntities[0].ThreeSkipPayloadFullShared.Add(
-                        context.EntityThrees.CreateInstance(
-                            (e, p) =>
-                            {
-                                e.Id = Fixture.UseGeneratedKeys ? 0 : 7721;
-                                e.Name = "Z7721";
-                            }
-                        )
-                    );
-                    leftEntities[0].ThreeSkipPayloadFullShared.Add(
-                        context.EntityThrees.CreateInstance(
-                            (e, p) =>
-                            {
-                                e.Id = Fixture.UseGeneratedKeys ? 0 : 7722;
-                                e.Name = "Z7722";
-                            }
-                        )
-                    );
-                    leftEntities[0].ThreeSkipPayloadFullShared.Add(
-                        context.EntityThrees.CreateInstance(
-                            (e, p) =>
-                            {
-                                e.Id = Fixture.UseGeneratedKeys ? 0 : 7723;
-                                e.Name = "Z7723";
-                            }
-                        )
-                    );
+                    leftEntities[0]
+                        .ThreeSkipPayloadFullShared
+                        .Add(
+                            context
+                                .EntityThrees
+                                .CreateInstance(
+                                    (e, p) =>
+                                    {
+                                        e.Id = Fixture.UseGeneratedKeys ? 0 : 7721;
+                                        e.Name = "Z7721";
+                                    }
+                                )
+                        );
+                    leftEntities[0]
+                        .ThreeSkipPayloadFullShared
+                        .Add(
+                            context
+                                .EntityThrees
+                                .CreateInstance(
+                                    (e, p) =>
+                                    {
+                                        e.Id = Fixture.UseGeneratedKeys ? 0 : 7722;
+                                        e.Name = "Z7722";
+                                    }
+                                )
+                        );
+                    leftEntities[0]
+                        .ThreeSkipPayloadFullShared
+                        .Add(
+                            context
+                                .EntityThrees
+                                .CreateInstance(
+                                    (e, p) =>
+                                    {
+                                        e.Id = Fixture.UseGeneratedKeys ? 0 : 7723;
+                                        e.Name = "Z7723";
+                                    }
+                                )
+                        );
 
-                    rightEntities[0].OneSkipPayloadFullShared.Add(
-                        context.EntityOnes.CreateInstance(
-                            (e, p) =>
-                            {
-                                e.Id = Fixture.UseGeneratedKeys ? 0 : 7711;
-                                e.Name = "Z7711";
-                            }
-                        )
-                    );
-                    rightEntities[0].OneSkipPayloadFullShared.Add(
-                        context.EntityOnes.CreateInstance(
-                            (e, p) =>
-                            {
-                                e.Id = Fixture.UseGeneratedKeys ? 0 : 7712;
-                                e.Name = "Z7712";
-                            }
-                        )
-                    );
-                    rightEntities[0].OneSkipPayloadFullShared.Add(
-                        context.EntityOnes.CreateInstance(
-                            (e, p) =>
-                            {
-                                e.Id = Fixture.UseGeneratedKeys ? 0 : 7713;
-                                e.Name = "Z7713";
-                            }
-                        )
-                    );
+                    rightEntities[0]
+                        .OneSkipPayloadFullShared
+                        .Add(
+                            context
+                                .EntityOnes
+                                .CreateInstance(
+                                    (e, p) =>
+                                    {
+                                        e.Id = Fixture.UseGeneratedKeys ? 0 : 7711;
+                                        e.Name = "Z7711";
+                                    }
+                                )
+                        );
+                    rightEntities[0]
+                        .OneSkipPayloadFullShared
+                        .Add(
+                            context
+                                .EntityOnes
+                                .CreateInstance(
+                                    (e, p) =>
+                                    {
+                                        e.Id = Fixture.UseGeneratedKeys ? 0 : 7712;
+                                        e.Name = "Z7712";
+                                    }
+                                )
+                        );
+                    rightEntities[0]
+                        .OneSkipPayloadFullShared
+                        .Add(
+                            context
+                                .EntityOnes
+                                .CreateInstance(
+                                    (e, p) =>
+                                    {
+                                        e.Id = Fixture.UseGeneratedKeys ? 0 : 7713;
+                                        e.Name = "Z7713";
+                                    }
+                                )
+                        );
 
-                    leftEntities[2].ThreeSkipPayloadFullShared.Remove(
-                        leftEntities[2].ThreeSkipPayloadFullShared.Single(
-                            e => e.Name == "EntityThree 10"
-                        )
-                    );
-                    rightEntities[4].OneSkipPayloadFullShared.Remove(
-                        rightEntities[4].OneSkipPayloadFullShared.Single(
-                            e => e.Name == "EntityOne 6"
-                        )
-                    );
+                    leftEntities[2]
+                        .ThreeSkipPayloadFullShared
+                        .Remove(
+                            leftEntities[2]
+                                .ThreeSkipPayloadFullShared
+                                .Single(e => e.Name == "EntityThree 10")
+                        );
+                    rightEntities[4]
+                        .OneSkipPayloadFullShared
+                        .Remove(
+                            rightEntities[4]
+                                .OneSkipPayloadFullShared
+                                .Single(e => e.Name == "EntityOne 6")
+                        );
 
-                    leftEntities[3].ThreeSkipPayloadFullShared.Remove(
-                        leftEntities[3].ThreeSkipPayloadFullShared.Single(
-                            e => e.Name == "EntityThree 17"
-                        )
-                    );
-                    leftEntities[3].ThreeSkipPayloadFullShared.Add(
-                        context.EntityThrees.CreateInstance(
-                            (e, p) =>
-                            {
-                                e.Id = Fixture.UseGeneratedKeys ? 0 : 7724;
-                                e.Name = "Z7724";
-                            }
-                        )
-                    );
+                    leftEntities[3]
+                        .ThreeSkipPayloadFullShared
+                        .Remove(
+                            leftEntities[3]
+                                .ThreeSkipPayloadFullShared
+                                .Single(e => e.Name == "EntityThree 17")
+                        );
+                    leftEntities[3]
+                        .ThreeSkipPayloadFullShared
+                        .Add(
+                            context
+                                .EntityThrees
+                                .CreateInstance(
+                                    (e, p) =>
+                                    {
+                                        e.Id = Fixture.UseGeneratedKeys ? 0 : 7724;
+                                        e.Name = "Z7724";
+                                    }
+                                )
+                        );
 
-                    rightEntities[2].OneSkipPayloadFullShared.Remove(
-                        rightEntities[2].OneSkipPayloadFullShared.Single(
-                            e => e.Name == "EntityOne 12"
-                        )
-                    );
-                    rightEntities[2].OneSkipPayloadFullShared.Add(
-                        context.EntityOnes.CreateInstance(
-                            (e, p) =>
-                            {
-                                e.Id = Fixture.UseGeneratedKeys ? 0 : 7714;
-                                e.Name = "Z7714";
-                            }
-                        )
-                    );
+                    rightEntities[2]
+                        .OneSkipPayloadFullShared
+                        .Remove(
+                            rightEntities[2]
+                                .OneSkipPayloadFullShared
+                                .Single(e => e.Name == "EntityOne 12")
+                        );
+                    rightEntities[2]
+                        .OneSkipPayloadFullShared
+                        .Add(
+                            context
+                                .EntityOnes
+                                .CreateInstance(
+                                    (e, p) =>
+                                    {
+                                        e.Id = Fixture.UseGeneratedKeys ? 0 : 7714;
+                                        e.Name = "Z7714";
+                                    }
+                                )
+                        );
 
                     if (RequiresDetectChanges)
                     {
@@ -3794,12 +4096,14 @@ namespace Microsoft.EntityFrameworkCore
             static int GetEntityOneId(ManyToManyContext context, string name) =>
                 context
                     .Entry(context.EntityOnes.Local.Single(e => e.Name == name))
-                    .Property(e => e.Id).CurrentValue;
+                    .Property(e => e.Id)
+                    .CurrentValue;
 
             static int GetEntityThreeId(ManyToManyContext context, string name) =>
                 context
                     .Entry(context.EntityThrees.Local.Single(e => e.Name == name))
-                    .Property(e => e.Id).CurrentValue;
+                    .Property(e => e.Id)
+                    .CurrentValue;
 
             void ValidateFixup(
                 ManyToManyContext context,
@@ -3856,7 +4160,8 @@ namespace Microsoft.EntityFrameworkCore
                 var oneId2 = GetEntityOneId(context, "EntityOne 20");
                 var threeId2 = GetEntityThreeId(context, "EntityThree 20");
 
-                var joinEntries = context.ChangeTracker
+                var joinEntries = context
+                    .ChangeTracker
                     .Entries<Dictionary<string, object>>()
                     .ToList();
                 foreach (var joinEntry in joinEntries)
@@ -3890,12 +4195,14 @@ namespace Microsoft.EntityFrameworkCore
                     }
                 }
 
-                var allLeft = context.ChangeTracker
+                var allLeft = context
+                    .ChangeTracker
                     .Entries<EntityOne>()
                     .Select(e => e.Entity)
                     .OrderBy(e => e.Name)
                     .ToList();
-                var allRight = context.ChangeTracker
+                var allRight = context
+                    .ChangeTracker
                     .Entries<EntityThree>()
                     .Select(e => e.Entity)
                     .OrderBy(e => e.Name)
@@ -3924,7 +4231,8 @@ namespace Microsoft.EntityFrameworkCore
                     }
                 }
 
-                var deleted = context.ChangeTracker
+                var deleted = context
+                    .ChangeTracker
                     .Entries<Dictionary<string, object>>()
                     .Count(e => e.State == EntityState.Deleted);
                 Assert.Equal(joinCount, (count / 2) + deleted);
@@ -3943,27 +4251,27 @@ namespace Microsoft.EntityFrameworkCore
                 {
                     var leftEntities = new[]
                     {
-                        context.EntityOnes.CreateInstance(
-                            (e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7711
-                        ),
-                        context.EntityOnes.CreateInstance(
-                            (e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7712
-                        ),
-                        context.EntityOnes.CreateInstance(
-                            (e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7713
-                        )
+                        context
+                            .EntityOnes
+                            .CreateInstance((e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7711),
+                        context
+                            .EntityOnes
+                            .CreateInstance((e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7712),
+                        context
+                            .EntityOnes
+                            .CreateInstance((e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7713)
                     };
                     var rightEntities = new[]
                     {
-                        context.EntityTwos.CreateInstance(
-                            (e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7721
-                        ),
-                        context.EntityTwos.CreateInstance(
-                            (e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7722
-                        ),
-                        context.EntityTwos.CreateInstance(
-                            (e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7723
-                        )
+                        context
+                            .EntityTwos
+                            .CreateInstance((e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7721),
+                        context
+                            .EntityTwos
+                            .CreateInstance((e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7722),
+                        context
+                            .EntityTwos
+                            .CreateInstance((e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7723)
                     };
 
                     leftEntities[0].TwoSkipShared = CreateCollection<EntityTwo>();
@@ -4021,12 +4329,14 @@ namespace Microsoft.EntityFrameworkCore
                     var results = async ? await queryable.ToListAsync() : queryable.ToList();
                     Assert.Equal(3, results.Count);
 
-                    var leftEntities = context.ChangeTracker
+                    var leftEntities = context
+                        .ChangeTracker
                         .Entries<EntityOne>()
                         .Select(e => e.Entity)
                         .OrderBy(e => e.Name)
                         .ToList();
-                    var rightEntities = context.ChangeTracker
+                    var rightEntities = context
+                        .ChangeTracker
                         .Entries<EntityTwo>()
                         .Select(e => e.Entity)
                         .OrderBy(e => e.Name)
@@ -4082,66 +4392,82 @@ namespace Microsoft.EntityFrameworkCore
 
                     var twos = new[]
                     {
-                        context.EntityTwos.CreateInstance(
-                            (e, p) =>
-                            {
-                                e.Id = Fixture.UseGeneratedKeys ? 0 : 7721;
-                                e.Name = "Z7721";
-                            }
-                        ),
-                        context.EntityTwos.CreateInstance(
-                            (e, p) =>
-                            {
-                                e.Id = Fixture.UseGeneratedKeys ? 0 : 7722;
-                                e.Name = "Z7722";
-                            }
-                        ),
-                        context.EntityTwos.CreateInstance(
-                            (e, p) =>
-                            {
-                                e.Id = Fixture.UseGeneratedKeys ? 0 : 7723;
-                                e.Name = "Z7723";
-                            }
-                        ),
-                        context.EntityTwos.CreateInstance(
-                            (e, p) =>
-                            {
-                                e.Id = Fixture.UseGeneratedKeys ? 0 : 7724;
-                                e.Name = "Z7724";
-                            }
-                        ),
+                        context
+                            .EntityTwos
+                            .CreateInstance(
+                                (e, p) =>
+                                {
+                                    e.Id = Fixture.UseGeneratedKeys ? 0 : 7721;
+                                    e.Name = "Z7721";
+                                }
+                            ),
+                        context
+                            .EntityTwos
+                            .CreateInstance(
+                                (e, p) =>
+                                {
+                                    e.Id = Fixture.UseGeneratedKeys ? 0 : 7722;
+                                    e.Name = "Z7722";
+                                }
+                            ),
+                        context
+                            .EntityTwos
+                            .CreateInstance(
+                                (e, p) =>
+                                {
+                                    e.Id = Fixture.UseGeneratedKeys ? 0 : 7723;
+                                    e.Name = "Z7723";
+                                }
+                            ),
+                        context
+                            .EntityTwos
+                            .CreateInstance(
+                                (e, p) =>
+                                {
+                                    e.Id = Fixture.UseGeneratedKeys ? 0 : 7724;
+                                    e.Name = "Z7724";
+                                }
+                            ),
                     };
 
                     var ones = new[]
                     {
-                        context.EntityOnes.CreateInstance(
-                            (e, p) =>
-                            {
-                                e.Id = Fixture.UseGeneratedKeys ? 0 : 7711;
-                                e.Name = "Z7711";
-                            }
-                        ),
-                        context.EntityOnes.CreateInstance(
-                            (e, p) =>
-                            {
-                                e.Id = Fixture.UseGeneratedKeys ? 0 : 7712;
-                                e.Name = "Z7712";
-                            }
-                        ),
-                        context.EntityOnes.CreateInstance(
-                            (e, p) =>
-                            {
-                                e.Id = Fixture.UseGeneratedKeys ? 0 : 7713;
-                                e.Name = "Z7713";
-                            }
-                        ),
-                        context.EntityOnes.CreateInstance(
-                            (e, p) =>
-                            {
-                                e.Id = Fixture.UseGeneratedKeys ? 0 : 7714;
-                                e.Name = "Z7714";
-                            }
-                        ),
+                        context
+                            .EntityOnes
+                            .CreateInstance(
+                                (e, p) =>
+                                {
+                                    e.Id = Fixture.UseGeneratedKeys ? 0 : 7711;
+                                    e.Name = "Z7711";
+                                }
+                            ),
+                        context
+                            .EntityOnes
+                            .CreateInstance(
+                                (e, p) =>
+                                {
+                                    e.Id = Fixture.UseGeneratedKeys ? 0 : 7712;
+                                    e.Name = "Z7712";
+                                }
+                            ),
+                        context
+                            .EntityOnes
+                            .CreateInstance(
+                                (e, p) =>
+                                {
+                                    e.Id = Fixture.UseGeneratedKeys ? 0 : 7713;
+                                    e.Name = "Z7713";
+                                }
+                            ),
+                        context
+                            .EntityOnes
+                            .CreateInstance(
+                                (e, p) =>
+                                {
+                                    e.Id = Fixture.UseGeneratedKeys ? 0 : 7714;
+                                    e.Name = "Z7714";
+                                }
+                            ),
                     };
 
                     leftEntities[0].TwoSkipShared.Add(twos[0]);
@@ -4152,21 +4478,29 @@ namespace Microsoft.EntityFrameworkCore
                     rightEntities[0].OneSkipShared.Add(ones[1]);
                     rightEntities[0].OneSkipShared.Add(ones[2]);
 
-                    leftEntities[1].TwoSkipShared.Remove(
-                        leftEntities[1].TwoSkipShared.Single(e => e.Name == "EntityTwo 17")
-                    );
-                    rightEntities[1].OneSkipShared.Remove(
-                        rightEntities[1].OneSkipShared.Single(e => e.Name == "EntityOne 3")
-                    );
+                    leftEntities[1]
+                        .TwoSkipShared
+                        .Remove(
+                            leftEntities[1].TwoSkipShared.Single(e => e.Name == "EntityTwo 17")
+                        );
+                    rightEntities[1]
+                        .OneSkipShared
+                        .Remove(
+                            rightEntities[1].OneSkipShared.Single(e => e.Name == "EntityOne 3")
+                        );
 
-                    leftEntities[2].TwoSkipShared.Remove(
-                        leftEntities[2].TwoSkipShared.Single(e => e.Name == "EntityTwo 18")
-                    );
+                    leftEntities[2]
+                        .TwoSkipShared
+                        .Remove(
+                            leftEntities[2].TwoSkipShared.Single(e => e.Name == "EntityTwo 18")
+                        );
                     leftEntities[2].TwoSkipShared.Add(twos[3]);
 
-                    rightEntities[2].OneSkipShared.Remove(
-                        rightEntities[2].OneSkipShared.Single(e => e.Name == "EntityOne 9")
-                    );
+                    rightEntities[2]
+                        .OneSkipShared
+                        .Remove(
+                            rightEntities[2].OneSkipShared.Single(e => e.Name == "EntityOne 9")
+                        );
                     rightEntities[2].OneSkipShared.Add(ones[3]);
 
                     if (RequiresDetectChanges)
@@ -4234,12 +4568,14 @@ namespace Microsoft.EntityFrameworkCore
                 Assert.DoesNotContain(rightEntities[2].OneSkipShared, e => e.Name == "EntityOne 9");
                 Assert.Contains(rightEntities[2].OneSkipShared, e => e.Name == "Z7714");
 
-                var allLeft = context.ChangeTracker
+                var allLeft = context
+                    .ChangeTracker
                     .Entries<EntityOne>()
                     .Select(e => e.Entity)
                     .OrderBy(e => e.Name)
                     .ToList();
-                var allRight = context.ChangeTracker
+                var allRight = context
+                    .ChangeTracker
                     .Entries<EntityTwo>()
                     .Select(e => e.Entity)
                     .OrderBy(e => e.Name)
@@ -4267,7 +4603,8 @@ namespace Microsoft.EntityFrameworkCore
                     }
                 }
 
-                var deleted = context.ChangeTracker
+                var deleted = context
+                    .ChangeTracker
                     .Entries<Dictionary<string, object>>()
                     .Count(e => e.State == EntityState.Deleted);
                 Assert.Equal(joinCount, (count / 2) + deleted);
@@ -4286,27 +4623,27 @@ namespace Microsoft.EntityFrameworkCore
                 {
                     var leftEntities = new[]
                     {
-                        context.EntityOnes.CreateInstance(
-                            (e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7711
-                        ),
-                        context.EntityOnes.CreateInstance(
-                            (e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7712
-                        ),
-                        context.EntityOnes.CreateInstance(
-                            (e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7713
-                        )
+                        context
+                            .EntityOnes
+                            .CreateInstance((e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7711),
+                        context
+                            .EntityOnes
+                            .CreateInstance((e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7712),
+                        context
+                            .EntityOnes
+                            .CreateInstance((e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7713)
                     };
                     var rightEntities = new[]
                     {
-                        context.EntityThrees.CreateInstance(
-                            (e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7721
-                        ),
-                        context.EntityThrees.CreateInstance(
-                            (e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7722
-                        ),
-                        context.EntityThrees.CreateInstance(
-                            (e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7723
-                        )
+                        context
+                            .EntityThrees
+                            .CreateInstance((e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7721),
+                        context
+                            .EntityThrees
+                            .CreateInstance((e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7722),
+                        context
+                            .EntityThrees
+                            .CreateInstance((e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7723)
                     };
 
                     leftEntities[0].ThreeSkipPayloadFull = CreateCollection<EntityThree>();
@@ -4364,12 +4701,14 @@ namespace Microsoft.EntityFrameworkCore
                     var results = async ? await queryable.ToListAsync() : queryable.ToList();
                     Assert.Equal(3, results.Count);
 
-                    var leftEntities = context.ChangeTracker
+                    var leftEntities = context
+                        .ChangeTracker
                         .Entries<EntityOne>()
                         .Select(e => e.Entity)
                         .OrderBy(e => e.Name)
                         .ToList();
-                    var rightEntities = context.ChangeTracker
+                    var rightEntities = context
+                        .ChangeTracker
                         .Entries<EntityThree>()
                         .Select(e => e.Entity)
                         .OrderBy(e => e.Name)
@@ -4399,7 +4738,8 @@ namespace Microsoft.EntityFrameworkCore
                 Assert.Single(rightEntities[1].OneSkipPayloadFull);
                 Assert.Single(rightEntities[2].OneSkipPayloadFull);
 
-                var joinEntities = context.ChangeTracker
+                var joinEntities = context
+                    .ChangeTracker
                     .Entries<JoinOneToThreePayloadFull>()
                     .Select(e => e.Entity)
                     .ToList();
@@ -4439,109 +4779,159 @@ namespace Microsoft.EntityFrameworkCore
                         .OrderBy(e => e.Name)
                         .ToList();
 
-                    leftEntities[0].ThreeSkipPayloadFull.Add(
-                        context.EntityThrees.CreateInstance(
-                            (e, p) =>
-                            {
-                                e.Id = Fixture.UseGeneratedKeys ? 0 : 7721;
-                                e.Name = "Z7721";
-                            }
-                        )
-                    );
-                    leftEntities[0].ThreeSkipPayloadFull.Add(
-                        context.EntityThrees.CreateInstance(
-                            (e, p) =>
-                            {
-                                e.Id = Fixture.UseGeneratedKeys ? 0 : 7722;
-                                e.Name = "Z7722";
-                            }
-                        )
-                    );
-                    leftEntities[0].ThreeSkipPayloadFull.Add(
-                        context.EntityThrees.CreateInstance(
-                            (e, p) =>
-                            {
-                                e.Id = Fixture.UseGeneratedKeys ? 0 : 7723;
-                                e.Name = "Z7723";
-                            }
-                        )
-                    );
+                    leftEntities[0]
+                        .ThreeSkipPayloadFull
+                        .Add(
+                            context
+                                .EntityThrees
+                                .CreateInstance(
+                                    (e, p) =>
+                                    {
+                                        e.Id = Fixture.UseGeneratedKeys ? 0 : 7721;
+                                        e.Name = "Z7721";
+                                    }
+                                )
+                        );
+                    leftEntities[0]
+                        .ThreeSkipPayloadFull
+                        .Add(
+                            context
+                                .EntityThrees
+                                .CreateInstance(
+                                    (e, p) =>
+                                    {
+                                        e.Id = Fixture.UseGeneratedKeys ? 0 : 7722;
+                                        e.Name = "Z7722";
+                                    }
+                                )
+                        );
+                    leftEntities[0]
+                        .ThreeSkipPayloadFull
+                        .Add(
+                            context
+                                .EntityThrees
+                                .CreateInstance(
+                                    (e, p) =>
+                                    {
+                                        e.Id = Fixture.UseGeneratedKeys ? 0 : 7723;
+                                        e.Name = "Z7723";
+                                    }
+                                )
+                        );
 
-                    rightEntities[0].OneSkipPayloadFull.Add(
-                        context.EntityOnes.CreateInstance(
-                            (e, p) =>
-                            {
-                                e.Id = Fixture.UseGeneratedKeys ? 0 : 7711;
-                                e.Name = "Z7711";
-                            }
-                        )
-                    );
-                    rightEntities[0].OneSkipPayloadFull.Add(
-                        context.EntityOnes.CreateInstance(
-                            (e, p) =>
-                            {
-                                e.Id = Fixture.UseGeneratedKeys ? 0 : 7712;
-                                e.Name = "Z7712";
-                            }
-                        )
-                    );
-                    rightEntities[0].OneSkipPayloadFull.Add(
-                        context.EntityOnes.CreateInstance(
-                            (e, p) =>
-                            {
-                                e.Id = Fixture.UseGeneratedKeys ? 0 : 7713;
-                                e.Name = "Z7713";
-                            }
-                        )
-                    );
+                    rightEntities[0]
+                        .OneSkipPayloadFull
+                        .Add(
+                            context
+                                .EntityOnes
+                                .CreateInstance(
+                                    (e, p) =>
+                                    {
+                                        e.Id = Fixture.UseGeneratedKeys ? 0 : 7711;
+                                        e.Name = "Z7711";
+                                    }
+                                )
+                        );
+                    rightEntities[0]
+                        .OneSkipPayloadFull
+                        .Add(
+                            context
+                                .EntityOnes
+                                .CreateInstance(
+                                    (e, p) =>
+                                    {
+                                        e.Id = Fixture.UseGeneratedKeys ? 0 : 7712;
+                                        e.Name = "Z7712";
+                                    }
+                                )
+                        );
+                    rightEntities[0]
+                        .OneSkipPayloadFull
+                        .Add(
+                            context
+                                .EntityOnes
+                                .CreateInstance(
+                                    (e, p) =>
+                                    {
+                                        e.Id = Fixture.UseGeneratedKeys ? 0 : 7713;
+                                        e.Name = "Z7713";
+                                    }
+                                )
+                        );
 
-                    leftEntities[1].ThreeSkipPayloadFull.Remove(
-                        leftEntities[1].ThreeSkipPayloadFull.Single(e => e.Name == "EntityThree 10")
-                    );
-                    rightEntities[1].OneSkipPayloadFull.Remove(
-                        rightEntities[1].OneSkipPayloadFull.Single(e => e.Name == "EntityOne 7")
-                    );
+                    leftEntities[1]
+                        .ThreeSkipPayloadFull
+                        .Remove(
+                            leftEntities[1]
+                                .ThreeSkipPayloadFull
+                                .Single(e => e.Name == "EntityThree 10")
+                        );
+                    rightEntities[1]
+                        .OneSkipPayloadFull
+                        .Remove(
+                            rightEntities[1].OneSkipPayloadFull.Single(e => e.Name == "EntityOne 7")
+                        );
 
-                    leftEntities[2].ThreeSkipPayloadFull.Remove(
-                        leftEntities[2].ThreeSkipPayloadFull.Single(e => e.Name == "EntityThree 13")
-                    );
-                    leftEntities[2].ThreeSkipPayloadFull.Add(
-                        context.EntityThrees.CreateInstance(
-                            (e, p) =>
-                            {
-                                e.Id = Fixture.UseGeneratedKeys ? 0 : 7724;
-                                e.Name = "Z7724";
-                            }
-                        )
-                    );
+                    leftEntities[2]
+                        .ThreeSkipPayloadFull
+                        .Remove(
+                            leftEntities[2]
+                                .ThreeSkipPayloadFull
+                                .Single(e => e.Name == "EntityThree 13")
+                        );
+                    leftEntities[2]
+                        .ThreeSkipPayloadFull
+                        .Add(
+                            context
+                                .EntityThrees
+                                .CreateInstance(
+                                    (e, p) =>
+                                    {
+                                        e.Id = Fixture.UseGeneratedKeys ? 0 : 7724;
+                                        e.Name = "Z7724";
+                                    }
+                                )
+                        );
 
-                    rightEntities[2].OneSkipPayloadFull.Remove(
-                        rightEntities[2].OneSkipPayloadFull.Single(e => e.Name == "EntityOne 15")
-                    );
-                    rightEntities[2].OneSkipPayloadFull.Add(
-                        context.EntityOnes.CreateInstance(
-                            (e, p) =>
-                            {
-                                e.Id = Fixture.UseGeneratedKeys ? 0 : 7714;
-                                e.Name = "Z7714";
-                            }
-                        )
-                    );
+                    rightEntities[2]
+                        .OneSkipPayloadFull
+                        .Remove(
+                            rightEntities[2]
+                                .OneSkipPayloadFull
+                                .Single(e => e.Name == "EntityOne 15")
+                        );
+                    rightEntities[2]
+                        .OneSkipPayloadFull
+                        .Add(
+                            context
+                                .EntityOnes
+                                .CreateInstance(
+                                    (e, p) =>
+                                    {
+                                        e.Id = Fixture.UseGeneratedKeys ? 0 : 7714;
+                                        e.Name = "Z7714";
+                                    }
+                                )
+                        );
 
                     if (RequiresDetectChanges)
                     {
                         context.ChangeTracker.DetectChanges();
                     }
 
-                    context.Find<JoinOneToThreePayloadFull>(
-                        GetEntityOneId(context, "Z7712"),
-                        GetEntityThreeId(context, "EntityThree 1")
-                    ).Payload = "Set!";
+                    context
+                        .Find<JoinOneToThreePayloadFull>(
+                            GetEntityOneId(context, "Z7712"),
+                            GetEntityThreeId(context, "EntityThree 1")
+                        )
+                        .Payload = "Set!";
 
-                    context.Find<JoinOneToThreePayloadFull>(
-                        GetEntityOneId(context, "EntityOne 20"),
-                        GetEntityThreeId(context, "EntityThree 20")
-                    ).Payload = "Changed!";
+                    context
+                        .Find<JoinOneToThreePayloadFull>(
+                            GetEntityOneId(context, "EntityOne 20"),
+                            GetEntityThreeId(context, "EntityThree 20")
+                        )
+                        .Payload = "Changed!";
 
                     if (RequiresDetectChanges)
                     {
@@ -4598,12 +4988,14 @@ namespace Microsoft.EntityFrameworkCore
             static int GetEntityOneId(ManyToManyContext context, string name) =>
                 context
                     .Entry(context.EntityOnes.Local.Single(e => e.Name == name))
-                    .Property(e => e.Id).CurrentValue;
+                    .Property(e => e.Id)
+                    .CurrentValue;
 
             static int GetEntityThreeId(ManyToManyContext context, string name) =>
                 context
                     .Entry(context.EntityThrees.Local.Single(e => e.Name == name))
-                    .Property(e => e.Id).CurrentValue;
+                    .Property(e => e.Id)
+                    .CurrentValue;
 
             void ValidateFixup(
                 ManyToManyContext context,
@@ -4660,7 +5052,8 @@ namespace Microsoft.EntityFrameworkCore
                 var oneId2 = GetEntityOneId(context, "EntityOne 20");
                 var threeId2 = GetEntityThreeId(context, "EntityThree 20");
 
-                var joinEntries = context.ChangeTracker
+                var joinEntries = context
+                    .ChangeTracker
                     .Entries<JoinOneToThreePayloadFull>()
                     .ToList();
                 foreach (var joinEntry in joinEntries)
@@ -4698,12 +5091,14 @@ namespace Microsoft.EntityFrameworkCore
                     }
                 }
 
-                var allLeft = context.ChangeTracker
+                var allLeft = context
+                    .ChangeTracker
                     .Entries<EntityOne>()
                     .Select(e => e.Entity)
                     .OrderBy(e => e.Name)
                     .ToList();
-                var allRight = context.ChangeTracker
+                var allRight = context
+                    .ChangeTracker
                     .Entries<EntityThree>()
                     .Select(e => e.Entity)
                     .OrderBy(e => e.Name)
@@ -4732,7 +5127,8 @@ namespace Microsoft.EntityFrameworkCore
                     }
                 }
 
-                var deleted = context.ChangeTracker
+                var deleted = context
+                    .ChangeTracker
                     .Entries<JoinOneToThreePayloadFull>()
                     .Count(e => e.State == EntityState.Deleted);
                 Assert.Equal(joinCount, (count / 2) + deleted);
@@ -4771,7 +5167,8 @@ namespace Microsoft.EntityFrameworkCore
                         .Count(e => e == toRemoveThree);
 
                     foreach (
-                        var joinEntity in context.ChangeTracker
+                        var joinEntity in context
+                            .ChangeTracker
                             .Entries<JoinOneToThreePayloadFull>()
                             .Select(e => e.Entity)
                             .ToList()
@@ -4910,7 +5307,8 @@ namespace Microsoft.EntityFrameworkCore
             static void ValidateJoinNavigations(DbContext context)
             {
                 foreach (
-                    var joinEntity in context.ChangeTracker
+                    var joinEntity in context
+                        .ChangeTracker
                         .Entries<JoinOneToThreePayloadFull>()
                         .Select(e => e.Entity)
                         .ToList()
@@ -4936,27 +5334,27 @@ namespace Microsoft.EntityFrameworkCore
                 {
                     var leftEntities = new[]
                     {
-                        context.EntityOnes.CreateInstance(
-                            (e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7711
-                        ),
-                        context.EntityOnes.CreateInstance(
-                            (e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7712
-                        ),
-                        context.EntityOnes.CreateInstance(
-                            (e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7713
-                        )
+                        context
+                            .EntityOnes
+                            .CreateInstance((e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7711),
+                        context
+                            .EntityOnes
+                            .CreateInstance((e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7712),
+                        context
+                            .EntityOnes
+                            .CreateInstance((e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7713)
                     };
                     var rightEntities = new[]
                     {
-                        context.EntityTwos.CreateInstance(
-                            (e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7721
-                        ),
-                        context.EntityTwos.CreateInstance(
-                            (e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7722
-                        ),
-                        context.EntityTwos.CreateInstance(
-                            (e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7723
-                        )
+                        context
+                            .EntityTwos
+                            .CreateInstance((e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7721),
+                        context
+                            .EntityTwos
+                            .CreateInstance((e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7722),
+                        context
+                            .EntityTwos
+                            .CreateInstance((e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7723)
                     };
 
                     leftEntities[0].TwoSkip = CreateCollection<EntityTwo>();
@@ -5014,12 +5412,14 @@ namespace Microsoft.EntityFrameworkCore
                     var results = async ? await queryable.ToListAsync() : queryable.ToList();
                     Assert.Equal(3, results.Count);
 
-                    var leftEntities = context.ChangeTracker
+                    var leftEntities = context
+                        .ChangeTracker
                         .Entries<EntityOne>()
                         .Select(e => e.Entity)
                         .OrderBy(e => e.Name)
                         .ToList();
-                    var rightEntities = context.ChangeTracker
+                    var rightEntities = context
+                        .ChangeTracker
                         .Entries<EntityTwo>()
                         .Select(e => e.Entity)
                         .OrderBy(e => e.Name)
@@ -5075,27 +5475,27 @@ namespace Microsoft.EntityFrameworkCore
                 {
                     var leftEntities = new[]
                     {
-                        context.EntityOnes.CreateInstance(
-                            (e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7711
-                        ),
-                        context.EntityOnes.CreateInstance(
-                            (e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7712
-                        ),
-                        context.EntityOnes.CreateInstance(
-                            (e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7713
-                        )
+                        context
+                            .EntityOnes
+                            .CreateInstance((e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7711),
+                        context
+                            .EntityOnes
+                            .CreateInstance((e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7712),
+                        context
+                            .EntityOnes
+                            .CreateInstance((e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7713)
                     };
                     var rightEntities = new[]
                     {
-                        context.EntityTwos.CreateInstance(
-                            (e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7721
-                        ),
-                        context.EntityTwos.CreateInstance(
-                            (e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7722
-                        ),
-                        context.EntityTwos.CreateInstance(
-                            (e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7723
-                        )
+                        context
+                            .EntityTwos
+                            .CreateInstance((e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7721),
+                        context
+                            .EntityTwos
+                            .CreateInstance((e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7722),
+                        context
+                            .EntityTwos
+                            .CreateInstance((e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7723)
                     };
 
                     leftEntities[0].TwoSkip = CreateCollection<EntityTwo>();
@@ -5184,10 +5584,9 @@ namespace Microsoft.EntityFrameworkCore
                     {
                         foreach (var leftEntity in leftEntities)
                         {
-                            context.ChangeTracker.TrackGraph(
-                                leftEntity,
-                                n => n.Entry.State = EntityState.Added
-                            );
+                            context
+                                .ChangeTracker
+                                .TrackGraph(leftEntity, n => n.Entry.State = EntityState.Added);
                         }
                     }
                     else
@@ -5242,12 +5641,14 @@ namespace Microsoft.EntityFrameworkCore
                     var results = async ? await queryable.ToListAsync() : queryable.ToList();
                     Assert.Equal(3, results.Count);
 
-                    var leftEntities = context.ChangeTracker
+                    var leftEntities = context
+                        .ChangeTracker
                         .Entries<EntityOne>()
                         .Select(e => e.Entity)
                         .OrderBy(e => e.Name)
                         .ToList();
-                    var rightEntities = context.ChangeTracker
+                    var rightEntities = context
+                        .ChangeTracker
                         .Entries<EntityTwo>()
                         .Select(e => e.Entity)
                         .OrderBy(e => e.Name)
@@ -5277,7 +5678,8 @@ namespace Microsoft.EntityFrameworkCore
                 Assert.Single(rightEntities[1].OneSkip);
                 Assert.Single(rightEntities[2].OneSkip);
 
-                var extra = context.ChangeTracker
+                var extra = context
+                    .ChangeTracker
                     .Entries<JoinOneToTwoExtra>()
                     .Select(e => e.Entity)
                     .Single();
@@ -5316,27 +5718,27 @@ namespace Microsoft.EntityFrameworkCore
                 {
                     var leftEntities = new[]
                     {
-                        context.EntityOnes.CreateInstance(
-                            (e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7711
-                        ),
-                        context.EntityOnes.CreateInstance(
-                            (e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7712
-                        ),
-                        context.EntityOnes.CreateInstance(
-                            (e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7713
-                        )
+                        context
+                            .EntityOnes
+                            .CreateInstance((e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7711),
+                        context
+                            .EntityOnes
+                            .CreateInstance((e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7712),
+                        context
+                            .EntityOnes
+                            .CreateInstance((e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7713)
                     };
                     var rightEntities = new[]
                     {
-                        context.EntityTwos.CreateInstance(
-                            (e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7721
-                        ),
-                        context.EntityTwos.CreateInstance(
-                            (e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7722
-                        ),
-                        context.EntityTwos.CreateInstance(
-                            (e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7723
-                        )
+                        context
+                            .EntityTwos
+                            .CreateInstance((e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7721),
+                        context
+                            .EntityTwos
+                            .CreateInstance((e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7722),
+                        context
+                            .EntityTwos
+                            .CreateInstance((e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7723)
                     };
 
                     leftEntities[0].TwoSkip = CreateCollection<EntityTwo>();
@@ -5358,10 +5760,9 @@ namespace Microsoft.EntityFrameworkCore
                     {
                         foreach (var leftEntity in leftEntities)
                         {
-                            context.ChangeTracker.TrackGraph(
-                                leftEntity,
-                                n => n.Entry.State = EntityState.Added
-                            );
+                            context
+                                .ChangeTracker
+                                .TrackGraph(leftEntity, n => n.Entry.State = EntityState.Added);
                         }
                     }
                     else
@@ -5418,12 +5819,14 @@ namespace Microsoft.EntityFrameworkCore
                     var results = async ? await queryable.ToListAsync() : queryable.ToList();
                     Assert.Equal(3, results.Count);
 
-                    var leftEntities = context.ChangeTracker
+                    var leftEntities = context
+                        .ChangeTracker
                         .Entries<EntityOne>()
                         .Select(e => e.Entity)
                         .OrderBy(e => e.Name)
                         .ToList();
-                    var rightEntities = context.ChangeTracker
+                    var rightEntities = context
+                        .ChangeTracker
                         .Entries<EntityTwo>()
                         .Select(e => e.Entity)
                         .OrderBy(e => e.Name)
@@ -5452,7 +5855,8 @@ namespace Microsoft.EntityFrameworkCore
                 Assert.Single(rightEntities[1].OneSkip);
                 Assert.Single(rightEntities[2].OneSkip);
 
-                var joinEntities = context.ChangeTracker
+                var joinEntities = context
+                    .ChangeTracker
                     .Entries<JoinOneToTwo>()
                     .Select(e => e.Entity)
                     .ToList();
@@ -5491,66 +5895,82 @@ namespace Microsoft.EntityFrameworkCore
 
                     var twos = new[]
                     {
-                        context.EntityTwos.CreateInstance(
-                            (e, p) =>
-                            {
-                                e.Id = Fixture.UseGeneratedKeys ? 0 : 7721;
-                                e.Name = "Z7721";
-                            }
-                        ),
-                        context.EntityTwos.CreateInstance(
-                            (e, p) =>
-                            {
-                                e.Id = Fixture.UseGeneratedKeys ? 0 : 7722;
-                                e.Name = "Z7722";
-                            }
-                        ),
-                        context.EntityTwos.CreateInstance(
-                            (e, p) =>
-                            {
-                                e.Id = Fixture.UseGeneratedKeys ? 0 : 7723;
-                                e.Name = "Z7723";
-                            }
-                        ),
-                        context.EntityTwos.CreateInstance(
-                            (e, p) =>
-                            {
-                                e.Id = Fixture.UseGeneratedKeys ? 0 : 7724;
-                                e.Name = "Z7724";
-                            }
-                        )
+                        context
+                            .EntityTwos
+                            .CreateInstance(
+                                (e, p) =>
+                                {
+                                    e.Id = Fixture.UseGeneratedKeys ? 0 : 7721;
+                                    e.Name = "Z7721";
+                                }
+                            ),
+                        context
+                            .EntityTwos
+                            .CreateInstance(
+                                (e, p) =>
+                                {
+                                    e.Id = Fixture.UseGeneratedKeys ? 0 : 7722;
+                                    e.Name = "Z7722";
+                                }
+                            ),
+                        context
+                            .EntityTwos
+                            .CreateInstance(
+                                (e, p) =>
+                                {
+                                    e.Id = Fixture.UseGeneratedKeys ? 0 : 7723;
+                                    e.Name = "Z7723";
+                                }
+                            ),
+                        context
+                            .EntityTwos
+                            .CreateInstance(
+                                (e, p) =>
+                                {
+                                    e.Id = Fixture.UseGeneratedKeys ? 0 : 7724;
+                                    e.Name = "Z7724";
+                                }
+                            )
                     };
 
                     var ones = new[]
                     {
-                        context.EntityOnes.CreateInstance(
-                            (e, p) =>
-                            {
-                                e.Id = Fixture.UseGeneratedKeys ? 0 : 7711;
-                                e.Name = "Z7711";
-                            }
-                        ),
-                        context.EntityOnes.CreateInstance(
-                            (e, p) =>
-                            {
-                                e.Id = Fixture.UseGeneratedKeys ? 0 : 7712;
-                                e.Name = "Z7712";
-                            }
-                        ),
-                        context.EntityOnes.CreateInstance(
-                            (e, p) =>
-                            {
-                                e.Id = Fixture.UseGeneratedKeys ? 0 : 7713;
-                                e.Name = "Z7713";
-                            }
-                        ),
-                        context.EntityOnes.CreateInstance(
-                            (e, p) =>
-                            {
-                                e.Id = Fixture.UseGeneratedKeys ? 0 : 7714;
-                                e.Name = "Z7714";
-                            }
-                        ),
+                        context
+                            .EntityOnes
+                            .CreateInstance(
+                                (e, p) =>
+                                {
+                                    e.Id = Fixture.UseGeneratedKeys ? 0 : 7711;
+                                    e.Name = "Z7711";
+                                }
+                            ),
+                        context
+                            .EntityOnes
+                            .CreateInstance(
+                                (e, p) =>
+                                {
+                                    e.Id = Fixture.UseGeneratedKeys ? 0 : 7712;
+                                    e.Name = "Z7712";
+                                }
+                            ),
+                        context
+                            .EntityOnes
+                            .CreateInstance(
+                                (e, p) =>
+                                {
+                                    e.Id = Fixture.UseGeneratedKeys ? 0 : 7713;
+                                    e.Name = "Z7713";
+                                }
+                            ),
+                        context
+                            .EntityOnes
+                            .CreateInstance(
+                                (e, p) =>
+                                {
+                                    e.Id = Fixture.UseGeneratedKeys ? 0 : 7714;
+                                    e.Name = "Z7714";
+                                }
+                            ),
                     };
 
                     leftEntities[0].TwoSkip.Add(twos[0]);
@@ -5561,21 +5981,21 @@ namespace Microsoft.EntityFrameworkCore
                     rightEntities[0].OneSkip.Add(ones[1]);
                     rightEntities[0].OneSkip.Add(ones[2]);
 
-                    leftEntities[1].TwoSkip.Remove(
-                        leftEntities[1].TwoSkip.Single(e => e.Name == "EntityTwo 1")
-                    );
-                    rightEntities[1].OneSkip.Remove(
-                        rightEntities[1].OneSkip.Single(e => e.Name == "EntityOne 1")
-                    );
+                    leftEntities[1]
+                        .TwoSkip
+                        .Remove(leftEntities[1].TwoSkip.Single(e => e.Name == "EntityTwo 1"));
+                    rightEntities[1]
+                        .OneSkip
+                        .Remove(rightEntities[1].OneSkip.Single(e => e.Name == "EntityOne 1"));
 
-                    leftEntities[2].TwoSkip.Remove(
-                        leftEntities[2].TwoSkip.Single(e => e.Name == "EntityTwo 1")
-                    );
+                    leftEntities[2]
+                        .TwoSkip
+                        .Remove(leftEntities[2].TwoSkip.Single(e => e.Name == "EntityTwo 1"));
                     leftEntities[2].TwoSkip.Add(twos[3]);
 
-                    rightEntities[2].OneSkip.Remove(
-                        rightEntities[2].OneSkip.Single(e => e.Name == "EntityOne 1")
-                    );
+                    rightEntities[2]
+                        .OneSkip
+                        .Remove(rightEntities[2].OneSkip.Single(e => e.Name == "EntityOne 1"));
                     rightEntities[2].OneSkip.Add(ones[3]);
 
                     if (RequiresDetectChanges)
@@ -5672,12 +6092,14 @@ namespace Microsoft.EntityFrameworkCore
                     e => context.Entry(e).Property(e => e.Id).CurrentValue == oneIds[3]
                 );
 
-                var allLeft = context.ChangeTracker
+                var allLeft = context
+                    .ChangeTracker
                     .Entries<EntityOne>()
                     .Select(e => e.Entity)
                     .OrderBy(e => e.Name)
                     .ToList();
-                var allRight = context.ChangeTracker
+                var allRight = context
+                    .ChangeTracker
                     .Entries<EntityTwo>()
                     .Select(e => e.Entity)
                     .OrderBy(e => e.Name)
@@ -5705,7 +6127,8 @@ namespace Microsoft.EntityFrameworkCore
                     }
                 }
 
-                var deleted = context.ChangeTracker
+                var deleted = context
+                    .ChangeTracker
                     .Entries<JoinOneToTwo>()
                     .Count(e => e.State == EntityState.Deleted);
                 Assert.Equal(joinCount, (count / 2) + deleted);
@@ -5935,12 +6358,14 @@ namespace Microsoft.EntityFrameworkCore
                         context.ChangeTracker.Entries<Dictionary<string, object>>().Count()
                     );
 
-                    var leftEntities = context.ChangeTracker
+                    var leftEntities = context
+                        .ChangeTracker
                         .Entries<ImplicitManyToManyA>()
                         .Select(e => e.Entity)
                         .OrderBy(e => e.Name)
                         .ToList();
-                    var rightEntities = context.ChangeTracker
+                    var rightEntities = context
+                        .ChangeTracker
                         .Entries<ImplicitManyToManyB>()
                         .Select(e => e.Entity)
                         .OrderBy(e => e.Name)
@@ -6060,12 +6485,14 @@ namespace Microsoft.EntityFrameworkCore
                         context.ChangeTracker.Entries<Dictionary<string, object>>().Count()
                     );
 
-                    var leftEntities = context.ChangeTracker
+                    var leftEntities = context
+                        .ChangeTracker
                         .Entries<GeneratedKeysLeft>()
                         .Select(e => e.Entity)
                         .OrderBy(e => e.Name)
                         .ToList();
-                    var rightEntities = context.ChangeTracker
+                    var rightEntities = context
+                        .ChangeTracker
                         .Entries<GeneratedKeysRight>()
                         .Select(e => e.Entity)
                         .OrderBy(e => e.Name)
@@ -6183,7 +6610,8 @@ namespace Microsoft.EntityFrameworkCore
 
                     ValidateFixup(context, leftEntities, rightEntities);
 
-                    var entityEntries = context.ChangeTracker
+                    var entityEntries = context
+                        .ChangeTracker
                         .Entries<Dictionary<string, object>>()
                         .ToList();
                     foreach (var joinEntry in entityEntries)
@@ -6248,12 +6676,14 @@ namespace Microsoft.EntityFrameworkCore
                         context.ChangeTracker.Entries<Dictionary<string, object>>().Count()
                     );
 
-                    var leftEntities = context.ChangeTracker
+                    var leftEntities = context
+                        .ChangeTracker
                         .Entries<GeneratedKeysLeft>()
                         .Select(e => e.Entity)
                         .OrderBy(e => e.Name)
                         .ToList();
-                    var rightEntities = context.ChangeTracker
+                    var rightEntities = context
+                        .ChangeTracker
                         .Entries<GeneratedKeysRight>()
                         .Select(e => e.Entity)
                         .OrderBy(e => e.Name)
@@ -6372,12 +6802,14 @@ namespace Microsoft.EntityFrameworkCore
                     var results = async ? await queryable.ToListAsync() : queryable.ToList();
                     Assert.Equal(3, results.Count);
 
-                    var leftEntities = context.ChangeTracker
+                    var leftEntities = context
+                        .ChangeTracker
                         .Entries<ImplicitManyToManyA>()
                         .Select(e => e.Entity)
                         .OrderBy(e => e.Name)
                         .ToList();
-                    var rightEntities = context.ChangeTracker
+                    var rightEntities = context
+                        .ChangeTracker
                         .Entries<ImplicitManyToManyB>()
                         .Select(e => e.Entity)
                         .OrderBy(e => e.Name)
@@ -6444,12 +6876,14 @@ namespace Microsoft.EntityFrameworkCore
             Assert.Equal(20, context.ChangeTracker.Entries<EntityTwo>().Count());
             Assert.Equal(112, context.ChangeTracker.Entries<JoinOneToTwo>().Count());
 
-            var leftEntities = context.ChangeTracker
+            var leftEntities = context
+                .ChangeTracker
                 .Entries<EntityOne>()
                 .Select(e => e.Entity)
                 .OrderBy(e => e.Name)
                 .ToList();
-            var rightEntities = context.ChangeTracker
+            var rightEntities = context
+                .ChangeTracker
                 .Entries<EntityTwo>()
                 .Select(e => e.Entity)
                 .OrderBy(e => e.Name)
@@ -6474,7 +6908,8 @@ namespace Microsoft.EntityFrameworkCore
                 }
             }
 
-            var deleted = context.ChangeTracker
+            var deleted = context
+                .ChangeTracker
                 .Entries<JoinOneToTwo>()
                 .Count(e => e.State == EntityState.Deleted);
             Assert.Equal(112, (joinCount / 2) + deleted);
@@ -6611,51 +7046,63 @@ namespace Microsoft.EntityFrameworkCore
                 {
                     var leftEntities = new[]
                     {
-                        context.EntityTwos.CreateInstance(
-                            (e, p) =>
-                            {
-                                e.Id = Fixture.UseGeneratedKeys ? 0 : 7711;
-                                e.Name = "Z7711";
-                            }
-                        ),
-                        context.EntityTwos.CreateInstance(
-                            (e, p) =>
-                            {
-                                e.Id = Fixture.UseGeneratedKeys ? 0 : 7712;
-                                e.Name = "Z7712";
-                            }
-                        ),
-                        context.EntityTwos.CreateInstance(
-                            (e, p) =>
-                            {
-                                e.Id = Fixture.UseGeneratedKeys ? 0 : 7713;
-                                e.Name = "Z7713";
-                            }
-                        )
+                        context
+                            .EntityTwos
+                            .CreateInstance(
+                                (e, p) =>
+                                {
+                                    e.Id = Fixture.UseGeneratedKeys ? 0 : 7711;
+                                    e.Name = "Z7711";
+                                }
+                            ),
+                        context
+                            .EntityTwos
+                            .CreateInstance(
+                                (e, p) =>
+                                {
+                                    e.Id = Fixture.UseGeneratedKeys ? 0 : 7712;
+                                    e.Name = "Z7712";
+                                }
+                            ),
+                        context
+                            .EntityTwos
+                            .CreateInstance(
+                                (e, p) =>
+                                {
+                                    e.Id = Fixture.UseGeneratedKeys ? 0 : 7713;
+                                    e.Name = "Z7713";
+                                }
+                            )
                     };
                     var rightEntities = new[]
                     {
-                        context.EntityThrees.CreateInstance(
-                            (e, p) =>
-                            {
-                                e.Id = Fixture.UseGeneratedKeys ? 0 : 7721;
-                                e.Name = "Z7721";
-                            }
-                        ),
-                        context.EntityThrees.CreateInstance(
-                            (e, p) =>
-                            {
-                                e.Id = Fixture.UseGeneratedKeys ? 0 : 7722;
-                                e.Name = "Z7722";
-                            }
-                        ),
-                        context.EntityThrees.CreateInstance(
-                            (e, p) =>
-                            {
-                                e.Id = Fixture.UseGeneratedKeys ? 0 : 7723;
-                                e.Name = "Z7723";
-                            }
-                        )
+                        context
+                            .EntityThrees
+                            .CreateInstance(
+                                (e, p) =>
+                                {
+                                    e.Id = Fixture.UseGeneratedKeys ? 0 : 7721;
+                                    e.Name = "Z7721";
+                                }
+                            ),
+                        context
+                            .EntityThrees
+                            .CreateInstance(
+                                (e, p) =>
+                                {
+                                    e.Id = Fixture.UseGeneratedKeys ? 0 : 7722;
+                                    e.Name = "Z7722";
+                                }
+                            ),
+                        context
+                            .EntityThrees
+                            .CreateInstance(
+                                (e, p) =>
+                                {
+                                    e.Id = Fixture.UseGeneratedKeys ? 0 : 7723;
+                                    e.Name = "Z7723";
+                                }
+                            )
                     };
 
                     var joinEntities = new[]
@@ -6740,12 +7187,14 @@ namespace Microsoft.EntityFrameworkCore
                     var results = async ? await queryable.ToListAsync() : queryable.ToList();
                     Assert.Equal(3, results.Count);
 
-                    var leftEntities = context.ChangeTracker
+                    var leftEntities = context
+                        .ChangeTracker
                         .Entries<EntityTwo>()
                         .Select(e => e.Entity)
                         .OrderBy(e => e.Name)
                         .ToList();
-                    var rightEntities = context.ChangeTracker
+                    var rightEntities = context
+                        .ChangeTracker
                         .Entries<EntityThree>()
                         .Select(e => e.Entity)
                         .OrderBy(e => e.Name)
@@ -6775,7 +7224,8 @@ namespace Microsoft.EntityFrameworkCore
                 Assert.Single(rightEntities[2].TwoSkipFull);
 
                 foreach (
-                    var joinEntity in context.ChangeTracker
+                    var joinEntity in context
+                        .ChangeTracker
                         .Entries<JoinTwoToThree>()
                         .Select(e => e.Entity)
                         .ToList()

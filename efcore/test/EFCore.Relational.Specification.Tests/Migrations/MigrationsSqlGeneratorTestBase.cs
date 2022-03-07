@@ -360,18 +360,20 @@ namespace Microsoft.EntityFrameworkCore.Migrations
         public void InsertDataOperation_throws_for_missing_column_types() =>
             Assert.Equal(
                 RelationalStrings.InsertDataOperationNoModel("dbo.People"),
-                Assert.Throws<InvalidOperationException>(
-                    () =>
-                        Generate(
-                            new InsertDataOperation
-                            {
-                                Table = "People",
-                                Schema = "dbo",
-                                Columns = new[] { "First Name" },
-                                Values = new object[,] { { "John" } }
-                            }
-                        )
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(
+                        () =>
+                            Generate(
+                                new InsertDataOperation
+                                {
+                                    Table = "People",
+                                    Schema = "dbo",
+                                    Columns = new[] { "First Name" },
+                                    Values = new object[,] { { "John" } }
+                                }
+                            )
+                    )
+                    .Message
             );
 
         [ConditionalFact]
@@ -381,92 +383,102 @@ namespace Microsoft.EntityFrameworkCore.Migrations
                     "char[]",
                     "dbo.People.First Name"
                 ),
-                Assert.Throws<InvalidOperationException>(
-                    () =>
-                        Generate(
-                            new InsertDataOperation
-                            {
-                                Table = "People",
-                                Schema = "dbo",
-                                Columns = new[] { "First Name" },
-                                ColumnTypes = new[] { "char[]" },
-                                Values = new object[,] { { null } }
-                            }
-                        )
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(
+                        () =>
+                            Generate(
+                                new InsertDataOperation
+                                {
+                                    Table = "People",
+                                    Schema = "dbo",
+                                    Columns = new[] { "First Name" },
+                                    ColumnTypes = new[] { "char[]" },
+                                    Values = new object[,] { { null } }
+                                }
+                            )
+                    )
+                    .Message
             );
 
         [ConditionalFact]
         public void InsertDataOperation_throws_for_values_count_mismatch() =>
             Assert.Equal(
                 RelationalStrings.InsertDataOperationValuesCountMismatch(1, 2, "People"),
-                Assert.Throws<InvalidOperationException>(
-                    () =>
-                        Generate(
-                            CreateGotModel,
-                            new InsertDataOperation
-                            {
-                                Table = "People",
-                                Columns = new[] { "First Name", "Last Name" },
-                                Values = new object[,] { { "John" } }
-                            }
-                        )
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(
+                        () =>
+                            Generate(
+                                CreateGotModel,
+                                new InsertDataOperation
+                                {
+                                    Table = "People",
+                                    Columns = new[] { "First Name", "Last Name" },
+                                    Values = new object[,] { { "John" } }
+                                }
+                            )
+                    )
+                    .Message
             );
 
         [ConditionalFact]
         public void InsertDataOperation_throws_for_types_count_mismatch() =>
             Assert.Equal(
                 RelationalStrings.InsertDataOperationTypesCountMismatch(2, 1, "People"),
-                Assert.Throws<InvalidOperationException>(
-                    () =>
-                        Generate(
-                            new InsertDataOperation
-                            {
-                                Table = "People",
-                                Columns = new[] { "First Name" },
-                                ColumnTypes = new[] { "string", "string" },
-                                Values = new object[,] { { "John" } }
-                            }
-                        )
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(
+                        () =>
+                            Generate(
+                                new InsertDataOperation
+                                {
+                                    Table = "People",
+                                    Columns = new[] { "First Name" },
+                                    ColumnTypes = new[] { "string", "string" },
+                                    Values = new object[,] { { "John" } }
+                                }
+                            )
+                    )
+                    .Message
             );
 
         [ConditionalFact]
         public void InsertDataOperation_throws_for_missing_entity_type() =>
             Assert.Equal(
                 RelationalStrings.DataOperationNoTable("dbo.People"),
-                Assert.Throws<InvalidOperationException>(
-                    () =>
-                        Generate(
-                            CreateGotModel,
-                            new InsertDataOperation
-                            {
-                                Table = "People",
-                                Schema = "dbo",
-                                Columns = new[] { "First Name" },
-                                Values = new object[,] { { "John" } }
-                            }
-                        )
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(
+                        () =>
+                            Generate(
+                                CreateGotModel,
+                                new InsertDataOperation
+                                {
+                                    Table = "People",
+                                    Schema = "dbo",
+                                    Columns = new[] { "First Name" },
+                                    Values = new object[,] { { "John" } }
+                                }
+                            )
+                    )
+                    .Message
             );
 
         [ConditionalFact]
         public void InsertDataOperation_throws_for_missing_property() =>
             Assert.Equal(
                 RelationalStrings.DataOperationNoProperty("People", "Name"),
-                Assert.Throws<InvalidOperationException>(
-                    () =>
-                        Generate(
-                            CreateGotModel,
-                            new InsertDataOperation
-                            {
-                                Table = "People",
-                                Columns = new[] { "Name" },
-                                Values = new object[,] { { "John" } }
-                            }
-                        )
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(
+                        () =>
+                            Generate(
+                                CreateGotModel,
+                                new InsertDataOperation
+                                {
+                                    Table = "People",
+                                    Columns = new[] { "Name" },
+                                    Values = new object[,] { { "John" } }
+                                }
+                            )
+                    )
+                    .Message
             );
 
         [ConditionalFact]
@@ -535,53 +547,59 @@ namespace Microsoft.EntityFrameworkCore.Migrations
         public void DeleteDataOperation_throws_for_missing_column_types() =>
             Assert.Equal(
                 RelationalStrings.DeleteDataOperationNoModel("People"),
-                Assert.Throws<InvalidOperationException>(
-                    () =>
-                        Generate(
-                            new DeleteDataOperation
-                            {
-                                Table = "People",
-                                KeyColumns = new[] { "First Name" },
-                                KeyValues = new object[,] { { "John" } }
-                            }
-                        )
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(
+                        () =>
+                            Generate(
+                                new DeleteDataOperation
+                                {
+                                    Table = "People",
+                                    KeyColumns = new[] { "First Name" },
+                                    KeyValues = new object[,] { { "John" } }
+                                }
+                            )
+                    )
+                    .Message
             );
 
         [ConditionalFact]
         public void DeleteDataOperation_throws_for_values_count_mismatch() =>
             Assert.Equal(
                 RelationalStrings.DeleteDataOperationValuesCountMismatch(1, 2, "People"),
-                Assert.Throws<InvalidOperationException>(
-                    () =>
-                        Generate(
-                            CreateGotModel,
-                            new DeleteDataOperation
-                            {
-                                Table = "People",
-                                KeyColumns = new[] { "First Name", "Last Name" },
-                                KeyValues = new object[,] { { "John" } }
-                            }
-                        )
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(
+                        () =>
+                            Generate(
+                                CreateGotModel,
+                                new DeleteDataOperation
+                                {
+                                    Table = "People",
+                                    KeyColumns = new[] { "First Name", "Last Name" },
+                                    KeyValues = new object[,] { { "John" } }
+                                }
+                            )
+                    )
+                    .Message
             );
 
         [ConditionalFact]
         public void DeleteDataOperation_throws_for_types_count_mismatch() =>
             Assert.Equal(
                 RelationalStrings.DeleteDataOperationTypesCountMismatch(2, 1, "People"),
-                Assert.Throws<InvalidOperationException>(
-                    () =>
-                        Generate(
-                            new DeleteDataOperation
-                            {
-                                Table = "People",
-                                KeyColumns = new[] { "First Name" },
-                                KeyColumnTypes = new[] { "string", "string" },
-                                KeyValues = new object[,] { { "John" } }
-                            }
-                        )
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(
+                        () =>
+                            Generate(
+                                new DeleteDataOperation
+                                {
+                                    Table = "People",
+                                    KeyColumns = new[] { "First Name" },
+                                    KeyColumnTypes = new[] { "string", "string" },
+                                    KeyValues = new object[,] { { "John" } }
+                                }
+                            )
+                    )
+                    .Message
             );
 
         [ConditionalFact]
@@ -722,120 +740,132 @@ namespace Microsoft.EntityFrameworkCore.Migrations
         public void UpdateDataOperation_throws_for_missing_column_types() =>
             Assert.Equal(
                 RelationalStrings.UpdateDataOperationNoModel("People"),
-                Assert.Throws<InvalidOperationException>(
-                    () =>
-                        Generate(
-                            new UpdateDataOperation
-                            {
-                                Table = "People",
-                                KeyColumns = new[] { "First Name" },
-                                KeyValues = new object[,] { { "Daenerys" } },
-                                Columns = new[] { "House Allegiance" },
-                                Values = new object[,] { { "Targaryen" } }
-                            }
-                        )
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(
+                        () =>
+                            Generate(
+                                new UpdateDataOperation
+                                {
+                                    Table = "People",
+                                    KeyColumns = new[] { "First Name" },
+                                    KeyValues = new object[,] { { "Daenerys" } },
+                                    Columns = new[] { "House Allegiance" },
+                                    Values = new object[,] { { "Targaryen" } }
+                                }
+                            )
+                    )
+                    .Message
             );
 
         [ConditionalFact]
         public void UpdateDataOperation_throws_for_row_count_mismatch() =>
             Assert.Equal(
                 RelationalStrings.UpdateDataOperationRowCountMismatch(1, 2, "People"),
-                Assert.Throws<InvalidOperationException>(
-                    () =>
-                        Generate(
-                            CreateGotModel,
-                            new UpdateDataOperation
-                            {
-                                Table = "People",
-                                KeyColumns = new[] { "First Name" },
-                                KeyColumnTypes = new[] { "string" },
-                                KeyValues = new object[,] { { "Daenerys" }, { "John" } },
-                                Columns = new[] { "House Allegiance" },
-                                Values = new object[,] { { "Targaryen" } }
-                            }
-                        )
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(
+                        () =>
+                            Generate(
+                                CreateGotModel,
+                                new UpdateDataOperation
+                                {
+                                    Table = "People",
+                                    KeyColumns = new[] { "First Name" },
+                                    KeyColumnTypes = new[] { "string" },
+                                    KeyValues = new object[,] { { "Daenerys" }, { "John" } },
+                                    Columns = new[] { "House Allegiance" },
+                                    Values = new object[,] { { "Targaryen" } }
+                                }
+                            )
+                    )
+                    .Message
             );
 
         [ConditionalFact]
         public void UpdateDataOperation_throws_for_key_values_count_mismatch() =>
             Assert.Equal(
                 RelationalStrings.UpdateDataOperationKeyValuesCountMismatch(1, 2, "People"),
-                Assert.Throws<InvalidOperationException>(
-                    () =>
-                        Generate(
-                            CreateGotModel,
-                            new UpdateDataOperation
-                            {
-                                Table = "People",
-                                KeyColumns = new[] { "First Name", "Last Name" },
-                                KeyValues = new object[,] { { "Daenerys" } },
-                                Columns = new[] { "House Allegiance" },
-                                Values = new object[,] { { "Targaryen" } }
-                            }
-                        )
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(
+                        () =>
+                            Generate(
+                                CreateGotModel,
+                                new UpdateDataOperation
+                                {
+                                    Table = "People",
+                                    KeyColumns = new[] { "First Name", "Last Name" },
+                                    KeyValues = new object[,] { { "Daenerys" } },
+                                    Columns = new[] { "House Allegiance" },
+                                    Values = new object[,] { { "Targaryen" } }
+                                }
+                            )
+                    )
+                    .Message
             );
 
         [ConditionalFact]
         public void UpdateDataOperation_throws_for_key_types_count_mismatch() =>
             Assert.Equal(
                 RelationalStrings.UpdateDataOperationKeyTypesCountMismatch(2, 1, "People"),
-                Assert.Throws<InvalidOperationException>(
-                    () =>
-                        Generate(
-                            new UpdateDataOperation
-                            {
-                                Table = "People",
-                                KeyColumns = new[] { "First Name" },
-                                KeyColumnTypes = new[] { "string", "string" },
-                                KeyValues = new object[,] { { "Daenerys" } },
-                                Columns = new[] { "House Allegiance" },
-                                Values = new object[,] { { "Targaryen" } }
-                            }
-                        )
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(
+                        () =>
+                            Generate(
+                                new UpdateDataOperation
+                                {
+                                    Table = "People",
+                                    KeyColumns = new[] { "First Name" },
+                                    KeyColumnTypes = new[] { "string", "string" },
+                                    KeyValues = new object[,] { { "Daenerys" } },
+                                    Columns = new[] { "House Allegiance" },
+                                    Values = new object[,] { { "Targaryen" } }
+                                }
+                            )
+                    )
+                    .Message
             );
 
         [ConditionalFact]
         public void UpdateDataOperation_throws_for_values_count_mismatch() =>
             Assert.Equal(
                 RelationalStrings.UpdateDataOperationValuesCountMismatch(1, 2, "People"),
-                Assert.Throws<InvalidOperationException>(
-                    () =>
-                        Generate(
-                            CreateGotModel,
-                            new UpdateDataOperation
-                            {
-                                Table = "People",
-                                KeyColumns = new[] { "First Name" },
-                                KeyValues = new object[,] { { "Daenerys" } },
-                                Columns = new[] { "House Allegiance", "Culture" },
-                                Values = new object[,] { { "Targaryen" } }
-                            }
-                        )
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(
+                        () =>
+                            Generate(
+                                CreateGotModel,
+                                new UpdateDataOperation
+                                {
+                                    Table = "People",
+                                    KeyColumns = new[] { "First Name" },
+                                    KeyValues = new object[,] { { "Daenerys" } },
+                                    Columns = new[] { "House Allegiance", "Culture" },
+                                    Values = new object[,] { { "Targaryen" } }
+                                }
+                            )
+                    )
+                    .Message
             );
 
         [ConditionalFact]
         public void UpdateDataOperation_throws_for_types_count_mismatch() =>
             Assert.Equal(
                 RelationalStrings.UpdateDataOperationTypesCountMismatch(2, 1, "People"),
-                Assert.Throws<InvalidOperationException>(
-                    () =>
-                        Generate(
-                            new UpdateDataOperation
-                            {
-                                Table = "People",
-                                KeyColumns = new[] { "First Name" },
-                                KeyValues = new object[,] { { "Daenerys" } },
-                                Columns = new[] { "House Allegiance" },
-                                ColumnTypes = new[] { "string", "string" },
-                                Values = new object[,] { { "Targaryen" } }
-                            }
-                        )
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(
+                        () =>
+                            Generate(
+                                new UpdateDataOperation
+                                {
+                                    Table = "People",
+                                    KeyColumns = new[] { "First Name" },
+                                    KeyValues = new object[,] { { "Daenerys" } },
+                                    Columns = new[] { "House Allegiance" },
+                                    ColumnTypes = new[] { "string", "string" },
+                                    Values = new object[,] { { "Targaryen" } }
+                                }
+                            )
+                    )
+                    .Message
             );
 
         [ConditionalTheory]

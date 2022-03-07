@@ -441,11 +441,13 @@ public static class RazorPagesEndpointRouteBuilderExtensions
         if (marker == null)
         {
             throw new InvalidOperationException(
-                Mvc.Core.Resources.FormatUnableToFindServices(
-                    nameof(IServiceCollection),
-                    "AddRazorPages",
-                    "ConfigureServices(...)"
-                )
+                Mvc.Core
+                    .Resources
+                    .FormatUnableToFindServices(
+                        nameof(IServiceCollection),
+                        "AddRazorPages",
+                        "ConfigureServices(...)"
+                    )
             );
         }
     }
@@ -454,15 +456,18 @@ public static class RazorPagesEndpointRouteBuilderExtensions
         IEndpointRouteBuilder endpoints
     )
     {
-        var dataSource = endpoints.DataSources
+        var dataSource = endpoints
+            .DataSources
             .OfType<PageActionEndpointDataSource>()
             .FirstOrDefault();
         if (dataSource == null)
         {
-            var orderProviderCache =
-                endpoints.ServiceProvider.GetRequiredService<OrderedEndpointsSequenceProviderCache>();
-            var factory =
-                endpoints.ServiceProvider.GetRequiredService<PageActionEndpointDataSourceFactory>();
+            var orderProviderCache = endpoints
+                .ServiceProvider
+                .GetRequiredService<OrderedEndpointsSequenceProviderCache>();
+            var factory = endpoints
+                .ServiceProvider
+                .GetRequiredService<PageActionEndpointDataSourceFactory>();
             dataSource = factory.Create(
                 orderProviderCache.GetOrCreateOrderedEndpointsSequenceProvider(endpoints)
             );

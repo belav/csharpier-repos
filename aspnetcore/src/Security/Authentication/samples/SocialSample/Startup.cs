@@ -157,14 +157,14 @@ public class Startup
                                 "Bearer",
                                 context.AccessToken
                             );
-                            request.Headers.Accept.Add(
-                                new MediaTypeWithQualityHeaderValue("application/json")
-                            );
+                            request
+                                .Headers
+                                .Accept
+                                .Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-                            var response = await context.Backchannel.SendAsync(
-                                request,
-                                context.HttpContext.RequestAborted
-                            );
+                            var response = await context
+                                .Backchannel
+                                .SendAsync(request, context.HttpContext.RequestAborted);
                             response.EnsureSuccessStatusCode();
 
                             using (
@@ -238,14 +238,14 @@ public class Startup
                                 "Bearer",
                                 context.AccessToken
                             );
-                            request.Headers.Accept.Add(
-                                new MediaTypeWithQualityHeaderValue("application/json")
-                            );
+                            request
+                                .Headers
+                                .Accept
+                                .Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-                            var response = await context.Backchannel.SendAsync(
-                                request,
-                                context.HttpContext.RequestAborted
-                            );
+                            var response = await context
+                                .Backchannel
+                                .SendAsync(request, context.HttpContext.RequestAborted);
                             response.EnsureSuccessStatusCode();
 
                             using (
@@ -267,22 +267,28 @@ public class Startup
         context.Response.StatusCode = 500;
         context.Response.ContentType = "text/html";
         await context.Response.WriteAsync("<html><body>");
-        await context.Response.WriteAsync(
-            "A remote failure has occurred: <br>"
-                + context.Failure.Message
-                    .Split(Environment.NewLine)
-                    .Select(s => HtmlEncoder.Default.Encode(s) + "<br>")
-                    .Aggregate((s1, s2) => s1 + s2)
-        );
+        await context
+            .Response
+            .WriteAsync(
+                "A remote failure has occurred: <br>"
+                    + context
+                        .Failure
+                        .Message
+                        .Split(Environment.NewLine)
+                        .Select(s => HtmlEncoder.Default.Encode(s) + "<br>")
+                        .Aggregate((s1, s2) => s1 + s2)
+            );
 
         if (context.Properties != null)
         {
             await context.Response.WriteAsync("Properties:<br>");
             foreach (var pair in context.Properties.Items)
             {
-                await context.Response.WriteAsync(
-                    $"-{HtmlEncoder.Default.Encode(pair.Key)}={HtmlEncoder.Default.Encode(pair.Value)}<br>"
-                );
+                await context
+                    .Response
+                    .WriteAsync(
+                        $"-{HtmlEncoder.Default.Encode(pair.Key)}={HtmlEncoder.Default.Encode(pair.Value)}<br>"
+                    );
             }
         }
 
@@ -324,8 +330,9 @@ public class Startup
                         response.ContentType = "text/html";
                         await response.WriteAsync("<html><body>");
                         await response.WriteAsync("Choose an authentication scheme: <br>");
-                        var schemeProvider =
-                            context.RequestServices.GetRequiredService<IAuthenticationSchemeProvider>();
+                        var schemeProvider = context
+                            .RequestServices
+                            .GetRequiredService<IAuthenticationSchemeProvider>();
                         foreach (var provider in await schemeProvider.GetAllSchemesAsync())
                         {
                             await response.WriteAsync(
@@ -412,11 +419,9 @@ public class Startup
                                 { "refresh_token", refreshToken }
                             };
                             var content = new FormUrlEncodedContent(pairs);
-                            var refreshResponse = await options.Backchannel.PostAsync(
-                                options.TokenEndpoint,
-                                content,
-                                context.RequestAborted
-                            );
+                            var refreshResponse = await options
+                                .Backchannel
+                                .PostAsync(options.TokenEndpoint, content, context.RequestAborted);
                             refreshResponse.EnsureSuccessStatusCode();
 
                             using (
@@ -436,10 +441,10 @@ public class Startup
                                     authProperties.UpdateTokenValue("refresh_token", refreshToken);
                                 }
                                 if (
-                                    payload.RootElement.TryGetProperty(
-                                        "expires_in",
-                                        out var property
-                                    ) && property.TryGetInt32(out var seconds)
+                                    payload
+                                        .RootElement
+                                        .TryGetProperty("expires_in", out var property)
+                                    && property.TryGetInt32(out var seconds)
                                 )
                                 {
                                     var expiresAt =
@@ -472,9 +477,9 @@ public class Startup
                                 { "fb_exchange_token", accessToken },
                             }.ToQueryString();
 
-                            var refreshResponse = await options.Backchannel.GetStringAsync(
-                                options.TokenEndpoint + query
-                            );
+                            var refreshResponse = await options
+                                .Backchannel
+                                .GetStringAsync(options.TokenEndpoint + query);
                             using (var payload = JsonDocument.Parse(refreshResponse))
                             {
                                 authProperties.UpdateTokenValue(
@@ -482,10 +487,10 @@ public class Startup
                                     payload.RootElement.GetString("access_token")
                                 );
                                 if (
-                                    payload.RootElement.TryGetProperty(
-                                        "expires_in",
-                                        out var property
-                                    ) && property.TryGetInt32(out var seconds)
+                                    payload
+                                        .RootElement
+                                        .TryGetProperty("expires_in", out var property)
+                                    && property.TryGetInt32(out var seconds)
                                 )
                                 {
                                     var expiresAt =
@@ -626,7 +631,8 @@ public class Startup
         if (string.Equals(GoogleDefaults.AuthenticationScheme, currentAuthType))
         {
             return Task.FromResult<OAuthOptions>(
-                context.RequestServices
+                context
+                    .RequestServices
                     .GetRequiredService<IOptionsMonitor<GoogleOptions>>()
                     .Get(currentAuthType)
             );
@@ -634,7 +640,8 @@ public class Startup
         else if (string.Equals(MicrosoftAccountDefaults.AuthenticationScheme, currentAuthType))
         {
             return Task.FromResult<OAuthOptions>(
-                context.RequestServices
+                context
+                    .RequestServices
                     .GetRequiredService<IOptionsMonitor<MicrosoftAccountOptions>>()
                     .Get(currentAuthType)
             );
@@ -642,7 +649,8 @@ public class Startup
         else if (string.Equals(FacebookDefaults.AuthenticationScheme, currentAuthType))
         {
             return Task.FromResult<OAuthOptions>(
-                context.RequestServices
+                context
+                    .RequestServices
                     .GetRequiredService<IOptionsMonitor<FacebookOptions>>()
                     .Get(currentAuthType)
             );
@@ -650,7 +658,8 @@ public class Startup
         else if (string.Equals("IdentityServer", currentAuthType))
         {
             return Task.FromResult<OAuthOptions>(
-                context.RequestServices
+                context
+                    .RequestServices
                     .GetRequiredService<IOptionsMonitor<OAuthOptions>>()
                     .Get(currentAuthType)
             );

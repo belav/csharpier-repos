@@ -177,7 +177,9 @@ public static class TestReferences
                     () =>
                         AssemblyMetadata
                             .CreateFromImage(
-                                ProprietaryTestResources.silverlight_v5_0_5_0.System_v5_0_5_0_silverlight
+                                ProprietaryTestResources
+                                    .silverlight_v5_0_5_0
+                                    .System_v5_0_5_0_silverlight
                             )
                             .GetReference(display: "System.v5.0.5.0_silverlight.dll"),
                     LazyThreadSafetyMode.PublicationOnly
@@ -828,7 +830,10 @@ public static class TestReferences
                         () =>
                             AssemblyMetadata
                                 .CreateFromImage(
-                                    TestResources.SymbolsTests.CustomModifiers.GenericMethodWithModifiers
+                                    TestResources
+                                        .SymbolsTests
+                                        .CustomModifiers
+                                        .GenericMethodWithModifiers
                                 )
                                 .GetReference(display: "GenericMethodWithModifiers.dll"),
                         LazyThreadSafetyMode.PublicationOnly
@@ -1553,7 +1558,9 @@ public static class TestReferences
                         () =>
                             AssemblyMetadata
                                 .CreateFromImage(
-                                    TestResources.General.CSharpExplicitInterfaceImplementationProperties
+                                    TestResources
+                                        .General
+                                        .CSharpExplicitInterfaceImplementationProperties
                                 )
                                 .GetReference(
                                     display: "CSharpExplicitInterfaceImplementationProperties.dll"
@@ -1567,7 +1574,9 @@ public static class TestReferences
                         () =>
                             AssemblyMetadata
                                 .CreateFromImage(
-                                    TestResources.General.ILExplicitInterfaceImplementationProperties
+                                    TestResources
+                                        .General
+                                        .ILExplicitInterfaceImplementationProperties
                                 )
                                 .GetReference(
                                     display: "ILExplicitInterfaceImplementationProperties.dll"
@@ -1584,7 +1593,9 @@ public static class TestReferences
                         () =>
                             AssemblyMetadata
                                 .CreateFromImage(
-                                    TestResources.General.CSharpExplicitInterfaceImplementationEvents
+                                    TestResources
+                                        .General
+                                        .CSharpExplicitInterfaceImplementationEvents
                                 )
                                 .GetReference(
                                     display: "CSharpExplicitInterfaceImplementationEvents.dll"

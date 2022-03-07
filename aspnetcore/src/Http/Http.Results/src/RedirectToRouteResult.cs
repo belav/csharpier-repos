@@ -148,9 +148,9 @@ internal sealed partial class RedirectToRouteResult : IResult
             throw new InvalidOperationException("No route matches the supplied values.");
         }
 
-        var logger = httpContext.RequestServices.GetRequiredService<
-            ILogger<RedirectToRouteResult>
-        >();
+        var logger = httpContext
+            .RequestServices
+            .GetRequiredService<ILogger<RedirectToRouteResult>>();
         Log.RedirectToRouteResultExecuting(logger, destinationUrl, RouteName);
 
         if (PreserveMethod)

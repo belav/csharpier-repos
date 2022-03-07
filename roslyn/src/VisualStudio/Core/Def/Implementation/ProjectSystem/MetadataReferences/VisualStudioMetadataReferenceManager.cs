@@ -163,12 +163,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                 && TryCreateAssemblyMetadataFromMetadataImporter(key, out var newMetadata)
             )
             {
-                ValueSource<Optional<AssemblyMetadata>> metadataValueSource =
-                    _workspace.Options.GetOption(
+                ValueSource<Optional<AssemblyMetadata>> metadataValueSource = _workspace
+                    .Options
+                    .GetOption(
                         WorkspaceConfigurationOptions.DisableReferenceManagerWeakRuntimeReferences
                     )
-                      ? new ConstantValueSource<Optional<AssemblyMetadata>>(newMetadata)
-                      : new WeakValueSource<AssemblyMetadata>(newMetadata);
+                  ? new ConstantValueSource<Optional<AssemblyMetadata>>(newMetadata)
+                  : new WeakValueSource<AssemblyMetadata>(newMetadata);
 
                 if (!_metadataCache.GetOrAddMetadata(key, metadataValueSource, out metadata))
                 {

@@ -2243,9 +2243,9 @@ class C
                         "System.Threading.Tasks.Sources.IValueTaskSource",
                         "System.Collections.Generic.IAsyncEnumerator<System.Int32>"
                     },
-                    type.InterfacesAndTheirBaseInterfacesNoUseSiteDiagnostics.Keys.Select(
-                        m => m.ToTestDisplayString()
-                    )
+                    type.InterfacesAndTheirBaseInterfacesNoUseSiteDiagnostics
+                        .Keys
+                        .Select(m => m.ToTestDisplayString())
                 );
             }
         }
@@ -2859,9 +2859,9 @@ class C
                         "System.Collections.Generic.IAsyncEnumerable<System.Int32>",
                         "System.Collections.Generic.IAsyncEnumerator<System.Int32>"
                     },
-                    type.InterfacesAndTheirBaseInterfacesNoUseSiteDiagnostics.Keys.Select(
-                        m => m.ToTestDisplayString()
-                    )
+                    type.InterfacesAndTheirBaseInterfacesNoUseSiteDiagnostics
+                        .Keys
+                        .Select(m => m.ToTestDisplayString())
                 );
             }
         }
@@ -4759,13 +4759,16 @@ class C
         {
             var peReader = new PEReader(comp.EmitToArray());
             var metadataReader = peReader.GetMetadataReader();
-            var types = metadataReader.TypeDefinitions.Select(
-                t => metadataReader.GetString(metadataReader.GetTypeDefinition(t).Name)
-            );
-            var type = metadataReader.TypeDefinitions.Single(
-                t =>
-                    metadataReader.GetString(metadataReader.GetTypeDefinition(t).Name) == methodName
-            );
+            var types = metadataReader
+                .TypeDefinitions
+                .Select(t => metadataReader.GetString(metadataReader.GetTypeDefinition(t).Name));
+            var type = metadataReader
+                .TypeDefinitions
+                .Single(
+                    t =>
+                        metadataReader.GetString(metadataReader.GetTypeDefinition(t).Name)
+                        == methodName
+                );
             var fields = metadataReader
                 .GetTypeDefinition(type)
                 .GetFields()

@@ -204,9 +204,9 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                 );
 
                 return Expression.Call(
-                    QueryableMethods.AsQueryable.MakeGenericMethod(
-                        updatedMemberExpression.Type.GetSequenceType()
-                    ),
+                    QueryableMethods
+                        .AsQueryable
+                        .MakeGenericMethod(updatedMemberExpression.Type.GetSequenceType()),
                     updatedMemberExpression
                 );
             }
@@ -250,10 +250,12 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                 );
 
                 source = Expression.Call(
-                    QueryableMethods.Select.MakeGenericMethod(
-                        sourceMethodCallExpression.Arguments[0].Type.GetSequenceType(),
-                        memberAccessExpression.Type
-                    ),
+                    QueryableMethods
+                        .Select
+                        .MakeGenericMethod(
+                            sourceMethodCallExpression.Arguments[0].Type.GetSequenceType(),
+                            memberAccessExpression.Type
+                        ),
                     sourceMethodCallExpression.Arguments[0],
                     Expression.Quote(
                         Expression.Lambda(memberAccessExpression, selector.Parameters[0])
@@ -271,10 +273,9 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                 );
 
                 source = Expression.Call(
-                    QueryableMethods.Select.MakeGenericMethod(
-                        queryableType,
-                        memberAccessExpression.Type
-                    ),
+                    QueryableMethods
+                        .Select
+                        .MakeGenericMethod(queryableType, memberAccessExpression.Type),
                     source,
                     Expression.Quote(Expression.Lambda(memberAccessExpression, parameter))
                 );

@@ -1166,10 +1166,12 @@ namespace System.ComponentModel.Tests
         {
             Assert.Equal(
                 3,
-                TypeDescriptor.GetProperties(
-                    typeof(PropertyFilterAttributeMatchPoco),
-                    new[] { new PropertyFilterAttribute() }
-                ).Count
+                TypeDescriptor
+                    .GetProperties(
+                        typeof(PropertyFilterAttributeMatchPoco),
+                        new[] { new PropertyFilterAttribute() }
+                    )
+                    .Count
             );
         }
 

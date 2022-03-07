@@ -31,7 +31,8 @@ namespace Microsoft.EntityFrameworkCore
             AddOptions(testStore.AddProviderOptions(new DbContextOptionsBuilder()))
                 .EnableDetailedErrors()
                 .UseInternalServiceProvider(ServiceProvider)
-                .EnableServiceProviderCaching(false).Options;
+                .EnableServiceProviderCaching(false)
+                .Options;
 
         protected override IServiceCollection AddServices(IServiceCollection serviceCollection) =>
             base.AddServices(serviceCollection)

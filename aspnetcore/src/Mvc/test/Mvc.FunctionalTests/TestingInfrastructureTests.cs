@@ -101,10 +101,10 @@ public class TestingInfrastructureTests
             request.Headers.TryAddWithoutValidation("X-Invalid-Request-Header", "Bearer 1234,5678")
         );
         Assert.True(
-            request.Content.Headers.TryAddWithoutValidation(
-                "X-Invalid-Content-Header",
-                "Bearer 1234,5678"
-            )
+            request
+                .Content
+                .Headers
+                .TryAddWithoutValidation("X-Invalid-Content-Header", "Bearer 1234,5678")
         );
         var response = await Client.SendAsync(request);
 

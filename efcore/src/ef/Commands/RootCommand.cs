@@ -68,6 +68,9 @@ namespace Microsoft.EntityFrameworkCore.Tools.Commands
         }
 
         private static string GetVersion() =>
-            typeof(RootCommand).Assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>()!.InformationalVersion;
+            typeof(RootCommand)
+                .Assembly
+                .GetCustomAttribute<AssemblyInformationalVersionAttribute>()!
+                .InformationalVersion;
     }
 }

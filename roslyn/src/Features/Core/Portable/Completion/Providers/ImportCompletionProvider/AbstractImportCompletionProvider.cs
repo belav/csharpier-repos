@@ -203,7 +203,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             var allowInHiddenRegions = document.CanAddImportsInHiddenRegions();
             var importNode = CreateImport(document, containingNamespace);
 
-            var compilation = await document.Project
+            var compilation = await document
+                .Project
                 .GetRequiredCompilationAsync(cancellationToken)
                 .ConfigureAwait(false);
             var rootWithImport = addImportService.AddImport(
@@ -323,8 +324,9 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             }
 
             // Certain documents, e.g. Razor document, don't support adding imports
-            var documentSupportsFeatureService =
-                workspace.Services.GetRequiredService<IDocumentSupportsFeatureService>();
+            var documentSupportsFeatureService = workspace
+                .Services
+                .GetRequiredService<IDocumentSupportsFeatureService>();
             if (!documentSupportsFeatureService.SupportsRefactorings(document))
             {
                 return false;

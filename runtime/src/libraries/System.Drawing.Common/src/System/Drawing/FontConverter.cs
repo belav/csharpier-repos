@@ -166,11 +166,9 @@ namespace System.Drawing
             {
                 // Get the style index (if any). The size is a bit problematic because it can be formatted differently
                 // depending on the culture, we'll parse it last.
-                int styleIndex = culture.CompareInfo.IndexOf(
-                    font,
-                    StylePrefix,
-                    CompareOptions.IgnoreCase
-                );
+                int styleIndex = culture
+                    .CompareInfo
+                    .IndexOf(font, StylePrefix, CompareOptions.IgnoreCase);
 
                 if (styleIndex != -1)
                 {

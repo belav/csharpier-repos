@@ -181,15 +181,15 @@ namespace Microsoft.EntityFrameworkCore
 
             Assert.Equal(
                 lifetime,
-                serviceCollection.Single(
-                    e => e.ServiceType == typeof(IDbContextFactory<WoolacombeContext>)
-                ).Lifetime
+                serviceCollection
+                    .Single(e => e.ServiceType == typeof(IDbContextFactory<WoolacombeContext>))
+                    .Lifetime
             );
             Assert.Equal(
                 lifetime,
-                serviceCollection.Single(
-                    e => e.ServiceType == typeof(DbContextOptions<WoolacombeContext>)
-                ).Lifetime
+                serviceCollection
+                    .Single(e => e.ServiceType == typeof(DbContextOptions<WoolacombeContext>))
+                    .Lifetime
             );
         }
 
@@ -202,16 +202,16 @@ namespace Microsoft.EntityFrameworkCore
 
             Assert.Equal(
                 ServiceLifetime.Singleton,
-                serviceCollection.Single(
-                    e => e.ServiceType == typeof(IDbContextFactory<WoolacombeContext>)
-                ).Lifetime
+                serviceCollection
+                    .Single(e => e.ServiceType == typeof(IDbContextFactory<WoolacombeContext>))
+                    .Lifetime
             );
 
             Assert.Equal(
                 ServiceLifetime.Singleton,
-                serviceCollection.Single(
-                    e => e.ServiceType == typeof(DbContextOptions<WoolacombeContext>)
-                ).Lifetime
+                serviceCollection
+                    .Single(e => e.ServiceType == typeof(DbContextOptions<WoolacombeContext>))
+                    .Lifetime
             );
         }
 
@@ -225,23 +225,23 @@ namespace Microsoft.EntityFrameworkCore
 
             Assert.Equal(
                 ServiceLifetime.Singleton,
-                serviceCollection.Single(
-                    e => e.ServiceType == typeof(IDbContextPool<WoolacombeContext>)
-                ).Lifetime
+                serviceCollection
+                    .Single(e => e.ServiceType == typeof(IDbContextPool<WoolacombeContext>))
+                    .Lifetime
             );
 
             Assert.Equal(
                 ServiceLifetime.Singleton,
-                serviceCollection.Single(
-                    e => e.ServiceType == typeof(IDbContextFactory<WoolacombeContext>)
-                ).Lifetime
+                serviceCollection
+                    .Single(e => e.ServiceType == typeof(IDbContextFactory<WoolacombeContext>))
+                    .Lifetime
             );
 
             Assert.Equal(
                 ServiceLifetime.Singleton,
-                serviceCollection.Single(
-                    e => e.ServiceType == typeof(DbContextOptions<WoolacombeContext>)
-                ).Lifetime
+                serviceCollection
+                    .Single(e => e.ServiceType == typeof(DbContextOptions<WoolacombeContext>))
+                    .Lifetime
             );
         }
 
@@ -1005,17 +1005,17 @@ namespace Microsoft.EntityFrameworkCore
 
             Assert.Equal(
                 factoryLifetime,
-                serviceCollection.Single(
-                    d => d.ServiceType == typeof(IDbContextFactory<WoolacombeContext>)
-                ).Lifetime
+                serviceCollection
+                    .Single(d => d.ServiceType == typeof(IDbContextFactory<WoolacombeContext>))
+                    .Lifetime
             );
 
             // Options are added first by the factory, and always match the factory scope.
             Assert.Equal(
                 factoryLifetime,
-                serviceCollection.Single(
-                    d => d.ServiceType == typeof(DbContextOptions<WoolacombeContext>)
-                ).Lifetime
+                serviceCollection
+                    .Single(d => d.ServiceType == typeof(DbContextOptions<WoolacombeContext>))
+                    .Lifetime
             );
 
             var serviceProvider = serviceCollection.BuildServiceProvider(validateScopes);
@@ -1036,7 +1036,8 @@ namespace Microsoft.EntityFrameworkCore
                 scope.ServiceProvider.GetRequiredService<WoolacombeContext>();
             }
 
-            using var factoryContext = scope.ServiceProvider
+            using var factoryContext = scope
+                .ServiceProvider
                 .GetRequiredService<IDbContextFactory<WoolacombeContext>>()
                 .CreateDbContext();
         }
@@ -1381,17 +1382,17 @@ namespace Microsoft.EntityFrameworkCore
 
             Assert.Equal(
                 factoryLifetime,
-                serviceCollection.Single(
-                    d => d.ServiceType == typeof(IDbContextFactory<WoolacombeContext>)
-                ).Lifetime
+                serviceCollection
+                    .Single(d => d.ServiceType == typeof(IDbContextFactory<WoolacombeContext>))
+                    .Lifetime
             );
 
             // Options are added first by the factory, and always match the factory scope.
             Assert.Equal(
                 factoryLifetime,
-                serviceCollection.Single(
-                    d => d.ServiceType == typeof(DbContextOptions<WoolacombeContext>)
-                ).Lifetime
+                serviceCollection
+                    .Single(d => d.ServiceType == typeof(DbContextOptions<WoolacombeContext>))
+                    .Lifetime
             );
 
             var serviceProvider = serviceCollection.BuildServiceProvider(validateScopes);
@@ -1767,9 +1768,9 @@ namespace Microsoft.EntityFrameworkCore
 
             Assert.Equal(
                 factoryLifetime,
-                serviceCollection.Single(
-                    d => d.ServiceType == typeof(IDbContextFactory<WoolacombeContext>)
-                ).Lifetime
+                serviceCollection
+                    .Single(d => d.ServiceType == typeof(IDbContextFactory<WoolacombeContext>))
+                    .Lifetime
             );
 
             var effectiveOptionsLifetime =
@@ -1779,9 +1780,9 @@ namespace Microsoft.EntityFrameworkCore
 
             Assert.Equal(
                 effectiveOptionsLifetime,
-                serviceCollection.Single(
-                    d => d.ServiceType == typeof(DbContextOptions<WoolacombeContext>)
-                ).Lifetime
+                serviceCollection
+                    .Single(d => d.ServiceType == typeof(DbContextOptions<WoolacombeContext>))
+                    .Lifetime
             );
 
             var serviceProvider = serviceCollection.BuildServiceProvider(validateScopes);
@@ -1801,7 +1802,8 @@ namespace Microsoft.EntityFrameworkCore
             }
             else
             {
-                using var factoryContext = scope.ServiceProvider
+                using var factoryContext = scope
+                    .ServiceProvider
                     .GetRequiredService<IDbContextFactory<WoolacombeContext>>()
                     .CreateDbContext();
             }
@@ -2147,9 +2149,9 @@ namespace Microsoft.EntityFrameworkCore
 
             Assert.Equal(
                 factoryLifetime,
-                serviceCollection.Single(
-                    d => d.ServiceType == typeof(IDbContextFactory<WoolacombeContext>)
-                ).Lifetime
+                serviceCollection
+                    .Single(d => d.ServiceType == typeof(IDbContextFactory<WoolacombeContext>))
+                    .Lifetime
             );
 
             var effectiveOptionsLifetime =
@@ -2159,9 +2161,9 @@ namespace Microsoft.EntityFrameworkCore
 
             Assert.Equal(
                 effectiveOptionsLifetime,
-                serviceCollection.Single(
-                    d => d.ServiceType == typeof(DbContextOptions<WoolacombeContext>)
-                ).Lifetime
+                serviceCollection
+                    .Single(d => d.ServiceType == typeof(DbContextOptions<WoolacombeContext>))
+                    .Lifetime
             );
 
             var serviceProvider = serviceCollection.BuildServiceProvider(validateScopes);
@@ -2206,6 +2208,7 @@ namespace Microsoft.EntityFrameworkCore
         private static string GetStoreName(DbContext context1) =>
             context1
                 .GetService<IDbContextOptions>()
-                .FindExtension<InMemoryOptionsExtension>().StoreName;
+                .FindExtension<InMemoryOptionsExtension>()
+                .StoreName;
     }
 }

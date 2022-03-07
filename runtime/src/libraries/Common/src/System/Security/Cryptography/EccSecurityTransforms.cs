@@ -129,10 +129,12 @@ namespace System.Security.Cryptography
                 throw new CryptographicException(SR.Cryptography_OpenInvalidHandle);
             }
 
-            bool gotKeyBlob = Interop.AppleCrypto.TrySecKeyCopyExternalRepresentation(
-                includePrivateParameters ? keys.PrivateKey! : keys.PublicKey,
-                out byte[] keyBlob
-            );
+            bool gotKeyBlob = Interop
+                .AppleCrypto
+                .TrySecKeyCopyExternalRepresentation(
+                    includePrivateParameters ? keys.PrivateKey! : keys.PublicKey,
+                    out byte[] keyBlob
+                );
 
             if (!gotKeyBlob)
             {
@@ -253,11 +255,13 @@ namespace System.Security.Cryptography
                     dataKey
                 );
 
-                return Interop.AppleCrypto.CreateDataKey(
-                    dataKey,
-                    Interop.AppleCrypto.PAL_KeyAlgorithm.EC,
-                    isPublic: parameters.D == null
-                );
+                return Interop
+                    .AppleCrypto
+                    .CreateDataKey(
+                        dataKey,
+                        Interop.AppleCrypto.PAL_KeyAlgorithm.EC,
+                        isPublic: parameters.D == null
+                    );
             }
             finally
             {

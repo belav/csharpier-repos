@@ -37,9 +37,9 @@ namespace Microsoft.EntityFrameworkCore
                 .BuildServiceProvider(validateScopes: true);
 
             using var context = new BloggingContext(serviceProvider);
-            context.Blogs.Add(
-                new BloggingContext.Blog(jimSaysThrow: false) { Url = "http://sample.com" }
-            );
+            context
+                .Blogs
+                .Add(new BloggingContext.Blog(jimSaysThrow: false) { Url = "http://sample.com" });
             context.SaveChanges();
             context.ChangeTracker.Entries().Single().State = EntityState.Added;
 
@@ -56,16 +56,17 @@ namespace Microsoft.EntityFrameworkCore
             Assert.Same(ex, loggerFactory.Logger.LastDatabaseErrorException);
             Assert.Same(
                 typeof(BloggingContext),
-                loggerFactory.Logger.LastDatabaseErrorState.Single(
-                    p => p.Key == "contextType"
-                ).Value
+                loggerFactory
+                    .Logger
+                    .LastDatabaseErrorState
+                    .Single(p => p.Key == "contextType")
+                    .Value
             );
             Assert.EndsWith(
                 ex.ToString(),
-                loggerFactory.Logger.LastDatabaseErrorFormatter(
-                    loggerFactory.Logger.LastDatabaseErrorState,
-                    ex
-                )
+                loggerFactory
+                    .Logger
+                    .LastDatabaseErrorFormatter(loggerFactory.Logger.LastDatabaseErrorState, ex)
             );
         }
 
@@ -134,16 +135,17 @@ namespace Microsoft.EntityFrameworkCore
             Assert.Same(ex, loggerFactory.Logger.LastDatabaseErrorException);
             Assert.Same(
                 typeof(BloggingContext),
-                loggerFactory.Logger.LastDatabaseErrorState.Single(
-                    p => p.Key == "contextType"
-                ).Value
+                loggerFactory
+                    .Logger
+                    .LastDatabaseErrorState
+                    .Single(p => p.Key == "contextType")
+                    .Value
             );
             Assert.EndsWith(
                 ex.ToString(),
-                loggerFactory.Logger.LastDatabaseErrorFormatter(
-                    loggerFactory.Logger.LastDatabaseErrorState,
-                    ex
-                )
+                loggerFactory
+                    .Logger
+                    .LastDatabaseErrorFormatter(loggerFactory.Logger.LastDatabaseErrorState, ex)
             );
         }
 

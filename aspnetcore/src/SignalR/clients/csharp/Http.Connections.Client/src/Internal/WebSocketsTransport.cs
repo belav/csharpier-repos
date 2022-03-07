@@ -66,15 +66,16 @@ internal partial class WebSocketsTransport : ITransport
             webSocket.Options.SetRequestHeader("User-Agent", Constants.UserAgentHeader.ToString());
 #else
             // Set an alternative user agent header on Full framework
-            webSocket.Options.SetRequestHeader(
-                "X-SignalR-User-Agent",
-                Constants.UserAgentHeader.ToString()
-            );
+            webSocket
+                .Options
+                .SetRequestHeader("X-SignalR-User-Agent", Constants.UserAgentHeader.ToString());
 #endif
 
             // Set this header so the server auth middleware will set an Unauthorized instead of Redirect status code
             // See: https://github.com/aspnet/Security/blob/ff9f145a8e89c9756ea12ff10c6d47f2f7eb345f/src/Microsoft.AspNetCore.Authentication.Cookies/Events/CookieAuthenticationEvents.cs#L42
-            webSocket.Options.SetRequestHeader("X-Requested-With", "XMLHttpRequest");
+            webSocket
+                .Options
+                .SetRequestHeader("X-Requested-With", "XMLHttpRequest");
         }
 
         if (context.Options != null)
@@ -103,9 +104,10 @@ internal partial class WebSocketsTransport : ITransport
 
                 if (context.Options.ClientCertificates != null)
                 {
-                    webSocket.Options.ClientCertificates.AddRange(
-                        context.Options.ClientCertificates
-                    );
+                    webSocket
+                        .Options
+                        .ClientCertificates
+                        .AddRange(context.Options.ClientCertificates);
                 }
 
                 if (context.Options.Credentials != null)

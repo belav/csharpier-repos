@@ -86,7 +86,9 @@ public class DefaultRazorDocumentClassifierPhaseTest
                 () =>
                 {
                     // Works only when the first pass has run before this.
-                    originalNode.Children[0].Children.Add(secondPassNode);
+                    originalNode.Children[0]
+                        .Children
+                        .Add(secondPassNode);
                 }
             );
 

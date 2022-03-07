@@ -918,13 +918,17 @@ public delegate dynamic[] MyDelegate(dynamic[] x);
                     {
                         Assert.Equal(
                             "System.Boolean[]",
-                            dynamicAttribute.AttributeConstructor.Parameters
+                            dynamicAttribute
+                                .AttributeConstructor
+                                .Parameters
                                 .Single()
-                                .TypeWithAnnotations.ToTestDisplayString()
+                                .TypeWithAnnotations
+                                .ToTestDisplayString()
                         );
 
-                        TypedConstant argument =
-                            dynamicAttribute.CommonConstructorArguments.Single();
+                        TypedConstant argument = dynamicAttribute
+                            .CommonConstructorArguments
+                            .Single();
                         Assert.Equal(TypedConstantKind.Array, argument.Kind);
 
                         ImmutableArray<TypedConstant> actualTransformFlags = argument.Values;
@@ -1389,7 +1393,8 @@ dynamic x = 0;
                 comp,
                 symbolValidator: module =>
                 {
-                    var implicitField = module.GlobalNamespace
+                    var implicitField = module
+                        .GlobalNamespace
                         .GetTypeMember("Script")
                         .GetMember<FieldSymbol>("x");
                     DynamicAttributeValidator.ValidateDynamicAttribute(
@@ -1436,7 +1441,8 @@ Gen<dynamic> x = null;";
                 comp,
                 symbolValidator: module =>
                 {
-                    var implicitField = module.GlobalNamespace
+                    var implicitField = module
+                        .GlobalNamespace
                         .GetTypeMember("Script")
                         .GetMember<FieldSymbol>("x");
                     var expectedTransformsFlags = new bool[] { false, true };
@@ -1489,7 +1495,8 @@ Gen<dynamic> x = null;";
                 comp,
                 symbolValidator: module =>
                 {
-                    var implicitField = module.GlobalNamespace
+                    var implicitField = module
+                        .GlobalNamespace
                         .GetTypeMember("Script")
                         .GetMember<FieldSymbol>("x");
                     var expectedTransformsFlags = new bool[] { false, true };
@@ -1690,9 +1697,9 @@ class C
             CompileAndVerify(
                 source,
                 references: new[] { CSharpRef },
-                options: TestOptions.ReleaseDll.WithMetadataImportOptions(
-                    MetadataImportOptions.All
-                ),
+                options: TestOptions
+                    .ReleaseDll
+                    .WithMetadataImportOptions(MetadataImportOptions.All),
                 symbolValidator: module =>
                 {
                     var c = module.GlobalNamespace.GetMember<NamedTypeSymbol>("C");

@@ -78,23 +78,24 @@ namespace Microsoft.Interop
 
         public void Initialize(IncrementalGeneratorInitializationContext context)
         {
-            var attributedMethods = context.SyntaxProvider
+            var attributedMethods = context
+                .SyntaxProvider
                 .CreateSyntaxProvider(
                     static (node, ct) => ShouldVisitNode(node),
                     static (context, ct) =>
                         new
                         {
                             Syntax = (MethodDeclarationSyntax)context.Node,
-                            Symbol = (IMethodSymbol)context.SemanticModel.GetDeclaredSymbol(
-                                context.Node,
-                                ct
-                            )!
+                            Symbol = (IMethodSymbol)context
+                                .SemanticModel
+                                .GetDeclaredSymbol(context.Node, ct)!
                         }
                 )
                 .Where(
                     static modelData =>
                         modelData.Symbol.IsStatic
-                        && modelData.Symbol
+                        && modelData
+                            .Symbol
                             .GetAttributes()
                             .Any(
                                 static attribute =>
@@ -127,16 +128,18 @@ namespace Microsoft.Interop
             );
 
             IncrementalValueProvider<(Compilation compilation, TargetFramework targetFramework, Version targetFrameworkVersion)> compilationAndTargetFramework =
-                context.CompilationProvider.Select(
-                    static (compilation, ct) =>
-                    {
-                        TargetFramework fmk = DetermineTargetFramework(
-                            compilation,
-                            out Version targetFrameworkVersion
-                        );
-                        return (compilation, fmk, targetFrameworkVersion);
-                    }
-                );
+                context
+                    .CompilationProvider
+                    .Select(
+                        static (compilation, ct) =>
+                        {
+                            TargetFramework fmk = DetermineTargetFramework(
+                                compilation,
+                                out Version targetFrameworkVersion
+                            );
+                            return (compilation, fmk, targetFrameworkVersion);
+                        }
+                    );
 
             context.RegisterSourceOutput(
                 compilationAndTargetFramework.Combine(methodsToGenerate.Collect()),
@@ -158,10 +161,9 @@ namespace Microsoft.Interop
                 }
             );
 
-            IncrementalValueProvider<DllImportGeneratorOptions> stubOptions =
-                context.AnalyzerConfigOptionsProvider.Select(
-                    (options, ct) => new DllImportGeneratorOptions(options.GlobalOptions)
-                );
+            IncrementalValueProvider<DllImportGeneratorOptions> stubOptions = context
+                .AnalyzerConfigOptionsProvider
+                .Select((options, ct) => new DllImportGeneratorOptions(options.GlobalOptions));
 
             IncrementalValueProvider<StubEnvironment> stubEnvironment =
                 compilationAndTargetFramework
@@ -172,7 +174,9 @@ namespace Microsoft.Interop
                                 data.Left.compilation,
                                 data.Left.targetFramework,
                                 data.Left.targetFrameworkVersion,
-                                data.Left.compilation.SourceModule
+                                data.Left
+                                    .compilation
+                                    .SourceModule
                                     .GetAttributes()
                                     .Any(
                                         attr =>
@@ -533,14 +537,15 @@ namespace Microsoft.Interop
             CancellationToken ct
         )
         {
-            INamedTypeSymbol? lcidConversionAttrType =
-                environment.Compilation.GetTypeByMetadataName(TypeNames.LCIDConversionAttribute);
-            INamedTypeSymbol? suppressGCTransitionAttrType =
-                environment.Compilation.GetTypeByMetadataName(
-                    TypeNames.SuppressGCTransitionAttribute
-                );
-            INamedTypeSymbol? unmanagedCallConvAttrType =
-                environment.Compilation.GetTypeByMetadataName(TypeNames.UnmanagedCallConvAttribute);
+            INamedTypeSymbol? lcidConversionAttrType = environment
+                .Compilation
+                .GetTypeByMetadataName(TypeNames.LCIDConversionAttribute);
+            INamedTypeSymbol? suppressGCTransitionAttrType = environment
+                .Compilation
+                .GetTypeByMetadataName(TypeNames.SuppressGCTransitionAttribute);
+            INamedTypeSymbol? unmanagedCallConvAttrType = environment
+                .Compilation
+                .GetTypeByMetadataName(TypeNames.UnmanagedCallConvAttribute);
             // Get any attributes of interest on the method
             AttributeData? generatedDllImportAttr = null;
             AttributeData? lcidConversionAttr = null;
@@ -558,30 +563,27 @@ namespace Microsoft.Interop
                 }
                 else if (
                     lcidConversionAttrType != null
-                    && SymbolEqualityComparer.Default.Equals(
-                        attr.AttributeClass,
-                        lcidConversionAttrType
-                    )
+                    && SymbolEqualityComparer
+                        .Default
+                        .Equals(attr.AttributeClass, lcidConversionAttrType)
                 )
                 {
                     lcidConversionAttr = attr;
                 }
                 else if (
                     suppressGCTransitionAttrType != null
-                    && SymbolEqualityComparer.Default.Equals(
-                        attr.AttributeClass,
-                        suppressGCTransitionAttrType
-                    )
+                    && SymbolEqualityComparer
+                        .Default
+                        .Equals(attr.AttributeClass, suppressGCTransitionAttrType)
                 )
                 {
                     suppressGCTransitionAttribute = attr;
                 }
                 else if (
                     unmanagedCallConvAttrType != null
-                    && SymbolEqualityComparer.Default.Equals(
-                        attr.AttributeClass,
-                        unmanagedCallConvAttrType
-                    )
+                    && SymbolEqualityComparer
+                        .Default
+                        .Equals(attr.AttributeClass, unmanagedCallConvAttrType)
                 )
                 {
                     unmanagedCallConvAttribute = attr;

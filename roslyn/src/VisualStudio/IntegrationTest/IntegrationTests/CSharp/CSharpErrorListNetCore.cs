@@ -25,10 +25,12 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
             await base.InitializeAsync().ConfigureAwait(false);
 
             // The CSharpNetCoreClassLibrary template does not open a file automatically.
-            VisualStudio.SolutionExplorer.OpenFile(
-                new Project(ProjectName),
-                WellKnownProjectTemplates.CSharpNetCoreClassLibraryClassFileName
-            );
+            VisualStudio
+                .SolutionExplorer
+                .OpenFile(
+                    new Project(ProjectName),
+                    WellKnownProjectTemplates.CSharpNetCoreClassLibraryClassFileName
+                );
         }
 
         [WpfFact]

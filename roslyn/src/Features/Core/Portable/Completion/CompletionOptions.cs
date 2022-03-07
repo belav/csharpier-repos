@@ -44,13 +44,21 @@ namespace Microsoft.CodeAnalysis.Completion
                 SnippetsBehavior: Metadata.SnippetsBehavior.DefaultValue,
                 HideAdvancedMembers: Metadata.HideAdvancedMembers.DefaultValue,
                 ShowNameSuggestions: Metadata.ShowNameSuggestions.DefaultValue,
-                ShowItemsFromUnimportedNamespaces: Metadata.ShowItemsFromUnimportedNamespaces.DefaultValue,
-                UnnamedSymbolCompletionDisabled: Metadata.UnnamedSymbolCompletionDisabledFeatureFlag.DefaultValue,
-                TargetTypedCompletionFilter: Metadata.TargetTypedCompletionFilterFeatureFlag.DefaultValue,
+                ShowItemsFromUnimportedNamespaces: Metadata
+                    .ShowItemsFromUnimportedNamespaces
+                    .DefaultValue,
+                UnnamedSymbolCompletionDisabled: Metadata
+                    .UnnamedSymbolCompletionDisabledFeatureFlag
+                    .DefaultValue,
+                TargetTypedCompletionFilter: Metadata
+                    .TargetTypedCompletionFilterFeatureFlag
+                    .DefaultValue,
                 TypeImportCompletion: Metadata.TypeImportCompletionFeatureFlag.DefaultValue,
                 ProvideDateAndTimeCompletions: Metadata.ProvideDateAndTimeCompletions.DefaultValue,
                 ProvideRegexCompletions: Metadata.ProvideRegexCompletions.DefaultValue,
-                TimeoutInMillisecondsForExtensionMethodImportCompletion: Metadata.TimeoutInMillisecondsForExtensionMethodImportCompletion.DefaultValue
+                TimeoutInMillisecondsForExtensionMethodImportCompletion: Metadata
+                    .TimeoutInMillisecondsForExtensionMethodImportCompletion
+                    .DefaultValue
             );
 
         public static CompletionOptions From(Project project) =>

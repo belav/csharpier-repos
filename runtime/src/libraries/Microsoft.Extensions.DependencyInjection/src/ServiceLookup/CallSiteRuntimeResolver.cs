@@ -69,12 +69,14 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
                 throw;
             }
 #else
-            return constructorCallSite.ConstructorInfo.Invoke(
-                BindingFlags.DoNotWrapExceptions,
-                binder: null,
-                parameters: parameterValues,
-                culture: null
-            );
+            return constructorCallSite
+                .ConstructorInfo
+                .Invoke(
+                    BindingFlags.DoNotWrapExceptions,
+                    binder: null,
+                    parameters: parameterValues,
+                    culture: null
+                );
 #endif
         }
 

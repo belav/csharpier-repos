@@ -37,16 +37,18 @@ namespace Internal
             fixed (char* pChars = s)
             fixed (byte* pBytes = bytes)
             {
-                cbytes = Interop.Kernel32.WideCharToMultiByte(
-                    Interop.Kernel32.GetConsoleOutputCP(),
-                    0,
-                    pChars,
-                    s.Length,
-                    pBytes,
-                    bytes.Length,
-                    IntPtr.Zero,
-                    IntPtr.Zero
-                );
+                cbytes = Interop
+                    .Kernel32
+                    .WideCharToMultiByte(
+                        Interop.Kernel32.GetConsoleOutputCP(),
+                        0,
+                        pChars,
+                        s.Length,
+                        pBytes,
+                        bytes.Length,
+                        IntPtr.Zero,
+                        IntPtr.Zero
+                    );
             }
 
             fixed (byte* pBytes = bytes)
