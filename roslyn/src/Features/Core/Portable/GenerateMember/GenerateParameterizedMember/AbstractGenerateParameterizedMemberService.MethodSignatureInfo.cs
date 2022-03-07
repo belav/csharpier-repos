@@ -56,9 +56,9 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
             protected override ImmutableArray<ParameterName> DetermineParameterNames(
                 CancellationToken cancellationToken
             ) =>
-                _methodSymbol.Parameters.SelectAsArray(
-                    p => new ParameterName(p.Name, isFixed: true)
-                );
+                _methodSymbol
+                    .Parameters
+                    .SelectAsArray(p => new ParameterName(p.Name, isFixed: true));
 
             protected override ImmutableArray<ITypeSymbol> DetermineTypeArguments(
                 CancellationToken cancellationToken

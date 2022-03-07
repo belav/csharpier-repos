@@ -608,16 +608,14 @@ class C
 
             // Verify CS0168 reported by CSharpCompilerDiagnosticAnalyzer is not affected by "dotnet_analyzer_diagnostic = none"
             var analyzerConfigOptions = new CompilerAnalyzerConfigOptions(
-                ImmutableDictionary<string, string>.Empty.Add(
-                    "dotnet_analyzer_diagnostic.severity",
-                    "none"
-                )
+                ImmutableDictionary<string, string>
+                    .Empty
+                    .Add("dotnet_analyzer_diagnostic.severity", "none")
             );
             var analyzerConfigOptionsProvider = new CompilerAnalyzerConfigOptionsProvider(
-                ImmutableDictionary<object, AnalyzerConfigOptions>.Empty.Add(
-                    compilation.SyntaxTrees.Single(),
-                    analyzerConfigOptions
-                ),
+                ImmutableDictionary<object, AnalyzerConfigOptions>
+                    .Empty
+                    .Add(compilation.SyntaxTrees.Single(), analyzerConfigOptions),
                 CompilerAnalyzerConfigOptions.Empty
             );
             var analyzerOptions = new AnalyzerOptions(
@@ -686,16 +684,14 @@ class C
                 if (options.HasValue)
                 {
                     var analyzerConfigOptions = new CompilerAnalyzerConfigOptions(
-                        ImmutableDictionary<string, string>.Empty.Add(
-                            options.Value.key,
-                            options.Value.value
-                        )
+                        ImmutableDictionary<string, string>
+                            .Empty
+                            .Add(options.Value.key, options.Value.value)
                     );
                     var analyzerConfigOptionsProvider = new CompilerAnalyzerConfigOptionsProvider(
-                        ImmutableDictionary<object, AnalyzerConfigOptions>.Empty.Add(
-                            compilation.SyntaxTrees.Single(),
-                            analyzerConfigOptions
-                        ),
+                        ImmutableDictionary<object, AnalyzerConfigOptions>
+                            .Empty
+                            .Add(compilation.SyntaxTrees.Single(), analyzerConfigOptions),
                         CompilerAnalyzerConfigOptions.Empty
                     );
                     analyzerOptions = new AnalyzerOptions(

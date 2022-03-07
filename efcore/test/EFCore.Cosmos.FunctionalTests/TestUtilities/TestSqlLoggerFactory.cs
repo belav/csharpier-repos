@@ -63,10 +63,9 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             }
             catch
             {
-                var methodCallLine = Environment.StackTrace.Split(
-                    new[] { _eol },
-                    StringSplitOptions.RemoveEmptyEntries
-                )[3][6..];
+                var methodCallLine = Environment
+                    .StackTrace
+                    .Split(new[] { _eol }, StringSplitOptions.RemoveEmptyEntries)[3][6..];
 
                 var indexMethodEnding = methodCallLine.IndexOf(')') + 1;
                 var testName = methodCallLine.Substring(0, indexMethodEnding);
@@ -98,9 +97,11 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
                     newBaseLine += "Output truncated.";
                 }
 
-                Logger.TestOutputHelper?.WriteLine(
-                    "---- New Baseline -------------------------------------------------------------------"
-                );
+                Logger
+                    .TestOutputHelper
+                    ?.WriteLine(
+                        "---- New Baseline -------------------------------------------------------------------"
+                    );
                 Logger.TestOutputHelper?.WriteLine(newBaseLine);
 
                 var contents =

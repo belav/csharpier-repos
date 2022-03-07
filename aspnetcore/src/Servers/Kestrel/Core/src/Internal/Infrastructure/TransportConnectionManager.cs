@@ -83,11 +83,13 @@ internal class TransportConnectionManager
         {
             if (kvp.Value.TryGetConnection(out var connection))
             {
-                connection.TransportConnection.Abort(
-                    new ConnectionAbortedException(
-                        CoreStrings.ConnectionAbortedDuringServerShutdown
-                    )
-                );
+                connection
+                    .TransportConnection
+                    .Abort(
+                        new ConnectionAbortedException(
+                            CoreStrings.ConnectionAbortedDuringServerShutdown
+                        )
+                    );
                 abortTasks.Add(connection.ExecutionTask);
             }
         }

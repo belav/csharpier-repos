@@ -25,11 +25,13 @@ namespace System.Web.Http
                 IncludeErrorDetailPolicy = IncludeErrorDetailPolicy.Always
             };
 
-            config.Routes.MapHttpRoute(
-                "Default",
-                "{controller}" + routeSuffix,
-                new { controller = controllerName }
-            );
+            config
+                .Routes
+                .MapHttpRoute(
+                    "Default",
+                    "{controller}" + routeSuffix,
+                    new { controller = controllerName }
+                );
             if (configurer != null)
             {
                 configurer(config);

@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             Workspace workspace,
             string language
         ) =>
-            workspace.Services
+            workspace
+                .Services
                 .GetLanguageServices(language)
                 .GetRequiredService<ICodeGenerationService>();
 

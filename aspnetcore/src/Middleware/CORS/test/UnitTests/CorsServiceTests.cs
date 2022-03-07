@@ -960,18 +960,21 @@ public class CorsServiceTests
 
         if (accessControlRequestMethod != null)
         {
-            context.Request.Headers.Add(
-                CorsConstants.AccessControlRequestMethod,
-                new[] { accessControlRequestMethod }
-            );
+            context
+                .Request
+                .Headers
+                .Add(
+                    CorsConstants.AccessControlRequestMethod,
+                    new[] { accessControlRequestMethod }
+                );
         }
 
         if (accessControlRequestHeaders != null)
         {
-            context.Request.Headers.Add(
-                CorsConstants.AccessControlRequestHeaders,
-                accessControlRequestHeaders
-            );
+            context
+                .Request
+                .Headers
+                .Add(CorsConstants.AccessControlRequestHeaders, accessControlRequestHeaders);
         }
 
         return context;

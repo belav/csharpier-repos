@@ -94,9 +94,9 @@ namespace Microsoft.CodeAnalysis.Editor.FindUsages
                 isPrimary: false,
                 includeHiddenLocations,
                 includeClassifiedSpans: false,
-                options: FindReferencesSearchOptions.Default.With(
-                    unidirectionalHierarchyCascade: true
-                ),
+                options: FindReferencesSearchOptions
+                    .Default
+                    .With(unidirectionalHierarchyCascade: true),
                 cancellationToken: cancellationToken
             );
         }

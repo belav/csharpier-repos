@@ -27,9 +27,11 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.SignatureHel
 
         public IClassifier GetClassifier(ITextBuffer subjectBuffer)
         {
-            return subjectBuffer.Properties.GetOrCreateSingletonProperty<IClassifier>(
-                () => new SignatureHelpClassifier(subjectBuffer, _typeMap)
-            );
+            return subjectBuffer
+                .Properties
+                .GetOrCreateSingletonProperty<IClassifier>(
+                    () => new SignatureHelpClassifier(subjectBuffer, _typeMap)
+                );
         }
     }
 }

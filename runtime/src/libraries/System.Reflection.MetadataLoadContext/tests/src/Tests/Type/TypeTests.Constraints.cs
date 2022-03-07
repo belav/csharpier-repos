@@ -14,7 +14,8 @@ namespace System.Reflection.Tests
         {
             Type theT = typeof(GenericClassWithNoConstraint<>)
                 .Project()
-                .GetTypeInfo().GenericTypeParameters[0];
+                .GetTypeInfo()
+                .GenericTypeParameters[0];
             Assert.Equal(GenericParameterAttributes.None, theT.GenericParameterAttributes);
             Assert.Equal(0, theT.GetGenericParameterConstraints().Length);
             Assert.Equal(typeof(object).Project(), theT.BaseType);
@@ -25,7 +26,8 @@ namespace System.Reflection.Tests
         {
             Type theT = typeof(GenericClassWithClassConstraint<>)
                 .Project()
-                .GetTypeInfo().GenericTypeParameters[0];
+                .GetTypeInfo()
+                .GenericTypeParameters[0];
             Assert.Equal(
                 GenericParameterAttributes.ReferenceTypeConstraint,
                 theT.GenericParameterAttributes
@@ -39,7 +41,8 @@ namespace System.Reflection.Tests
         {
             Type theT = typeof(GenericClassWithStructConstraint<>)
                 .Project()
-                .GetTypeInfo().GenericTypeParameters[0];
+                .GetTypeInfo()
+                .GenericTypeParameters[0];
             Assert.Equal(
                 GenericParameterAttributes.NotNullableValueTypeConstraint
                     | GenericParameterAttributes.DefaultConstructorConstraint,
@@ -56,7 +59,8 @@ namespace System.Reflection.Tests
         {
             Type theT = typeof(GenericClassWithNewConstraint<>)
                 .Project()
-                .GetTypeInfo().GenericTypeParameters[0];
+                .GetTypeInfo()
+                .GenericTypeParameters[0];
             Assert.Equal(
                 GenericParameterAttributes.DefaultConstructorConstraint,
                 theT.GenericParameterAttributes
@@ -70,7 +74,8 @@ namespace System.Reflection.Tests
         {
             Type theT = typeof(GenericClassWithTypeConstraints<>)
                 .Project()
-                .GetTypeInfo().GenericTypeParameters[0];
+                .GetTypeInfo()
+                .GenericTypeParameters[0];
             Assert.Equal(GenericParameterAttributes.None, theT.GenericParameterAttributes);
             Type[] constraints = theT.GetGenericParameterConstraints();
             constraints = constraints.OrderBy(c => c.Name).ToArray();
@@ -86,7 +91,8 @@ namespace System.Reflection.Tests
         {
             Type theT = typeof(GenericClassWithInterfaceConstraints<>)
                 .Project()
-                .GetTypeInfo().GenericTypeParameters[0];
+                .GetTypeInfo()
+                .GenericTypeParameters[0];
             Assert.Equal(GenericParameterAttributes.None, theT.GenericParameterAttributes);
             Type[] constraints = theT.GetGenericParameterConstraints();
             constraints = constraints.OrderBy(c => c.Name).ToArray();
@@ -101,10 +107,12 @@ namespace System.Reflection.Tests
         {
             Type theT = typeof(GenericClassWithQuirkyConstraints1<,>)
                 .Project()
-                .GetTypeInfo().GenericTypeParameters[0];
+                .GetTypeInfo()
+                .GenericTypeParameters[0];
             Type theU = typeof(GenericClassWithQuirkyConstraints1<,>)
                 .Project()
-                .GetTypeInfo().GenericTypeParameters[1];
+                .GetTypeInfo()
+                .GenericTypeParameters[1];
             Assert.Equal(GenericParameterAttributes.None, theT.GenericParameterAttributes);
             Type[] constraints = theT.GetGenericParameterConstraints();
             Assert.Equal(1, constraints.Length);
@@ -119,10 +127,12 @@ namespace System.Reflection.Tests
         {
             Type theT = typeof(GenericClassWithQuirkyConstraints2<,>)
                 .Project()
-                .GetTypeInfo().GenericTypeParameters[0];
+                .GetTypeInfo()
+                .GenericTypeParameters[0];
             Type theU = typeof(GenericClassWithQuirkyConstraints2<,>)
                 .Project()
-                .GetTypeInfo().GenericTypeParameters[1];
+                .GetTypeInfo()
+                .GenericTypeParameters[1];
             Assert.Equal(GenericParameterAttributes.None, theT.GenericParameterAttributes);
             Type[] constraints = theT.GetGenericParameterConstraints();
             Assert.Equal(1, constraints.Length);
@@ -137,7 +147,8 @@ namespace System.Reflection.Tests
         {
             Type theT = typeof(GenericClassWithTypeConstraints<>)
                 .Project()
-                .GetTypeInfo().GenericTypeParameters[0];
+                .GetTypeInfo()
+                .GenericTypeParameters[0];
             Assert.Equal(GenericParameterAttributes.None, theT.GenericParameterAttributes);
             TestUtils.AssertNewObjectReturnedEachTime(() => theT.GetGenericParameterConstraints());
         }

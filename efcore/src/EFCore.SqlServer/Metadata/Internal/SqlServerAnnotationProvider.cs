@@ -75,11 +75,13 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Metadata.Internal
             }
 
             if (
-                model.Tables.Any(
-                    t =>
-                        !t.IsExcludedFromMigrations
-                        && (t[SqlServerAnnotationNames.MemoryOptimized] as bool? == true)
-                )
+                model
+                    .Tables
+                    .Any(
+                        t =>
+                            !t.IsExcludedFromMigrations
+                            && (t[SqlServerAnnotationNames.MemoryOptimized] as bool? == true)
+                    )
             )
             {
                 yield return new Annotation(SqlServerAnnotationNames.MemoryOptimized, true);
@@ -211,7 +213,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Metadata.Internal
                 var includeColumns = includeProperties
                     .Select(
                         p =>
-                            modelIndex.DeclaringEntityType
+                            modelIndex
+                                .DeclaringEntityType
                                 .FindProperty(p)!
                                 .GetColumnName(
                                     StoreObjectIdentifier.Table(table.Name, table.Schema)
@@ -247,7 +250,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Metadata.Internal
             }
 
             var table = StoreObjectIdentifier.Table(column.Table.Name, column.Table.Schema);
-            var identityProperty = column.PropertyMappings
+            var identityProperty = column
+                .PropertyMappings
                 .Where(
                     m =>
                         m.TableMapping.IsSharedTablePrincipal

@@ -288,9 +288,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                 original.Syntax.Kind() == SyntaxKind.VariableDeclarator
                     || (
                         original.Syntax.Kind() == SyntaxKind.LocalDeclarationStatement
-                        && (
-                            (LocalDeclarationStatementSyntax)original.Syntax
-                        ).Declaration.Variables.Count == 1
+                        && ((LocalDeclarationStatementSyntax)original.Syntax)
+                            .Declaration
+                            .Variables
+                            .Count == 1
                     )
             );
             return InstrumentStatement(original, rewritten);

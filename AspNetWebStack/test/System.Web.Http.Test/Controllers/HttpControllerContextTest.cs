@@ -87,49 +87,57 @@ namespace System.Web.Http
         [Fact]
         public void Configuration_Property()
         {
-            Assert.Reflection.Property<HttpControllerContext, HttpConfiguration>(
-                instance: new HttpControllerContext(),
-                propertyGetter: cc => cc.Configuration,
-                expectedDefaultValue: null,
-                allowNull: false,
-                roundTripTestValue: new HttpConfiguration()
-            );
+            Assert
+                .Reflection
+                .Property<HttpControllerContext, HttpConfiguration>(
+                    instance: new HttpControllerContext(),
+                    propertyGetter: cc => cc.Configuration,
+                    expectedDefaultValue: null,
+                    allowNull: false,
+                    roundTripTestValue: new HttpConfiguration()
+                );
         }
 
         [Fact]
         public void Controller_Property()
         {
-            Assert.Reflection.Property<HttpControllerContext, IHttpController>(
-                instance: new HttpControllerContext(),
-                propertyGetter: cc => cc.Controller,
-                expectedDefaultValue: null,
-                allowNull: false,
-                roundTripTestValue: new Mock<IHttpController>().Object
-            );
+            Assert
+                .Reflection
+                .Property<HttpControllerContext, IHttpController>(
+                    instance: new HttpControllerContext(),
+                    propertyGetter: cc => cc.Controller,
+                    expectedDefaultValue: null,
+                    allowNull: false,
+                    roundTripTestValue: new Mock<IHttpController>().Object
+                );
         }
 
         [Fact]
         public void ControllerDescriptor_Property()
         {
-            Assert.Reflection.Property<HttpControllerContext, HttpControllerDescriptor>(
-                instance: new HttpControllerContext(),
-                propertyGetter: cc => cc.ControllerDescriptor,
-                expectedDefaultValue: null,
-                allowNull: false,
-                roundTripTestValue: new HttpControllerDescriptor()
-            );
+            Assert
+                .Reflection
+                .Property<HttpControllerContext, HttpControllerDescriptor>(
+                    instance: new HttpControllerContext(),
+                    propertyGetter: cc => cc.ControllerDescriptor,
+                    expectedDefaultValue: null,
+                    allowNull: false,
+                    roundTripTestValue: new HttpControllerDescriptor()
+                );
         }
 
         [Fact]
         public void RouteData_Property()
         {
-            Assert.Reflection.Property<HttpControllerContext, IHttpRouteData>(
-                instance: new HttpControllerContext(),
-                propertyGetter: cc => cc.RouteData,
-                expectedDefaultValue: null,
-                allowNull: false,
-                roundTripTestValue: new Mock<IHttpRouteData>().Object
-            );
+            Assert
+                .Reflection
+                .Property<HttpControllerContext, IHttpRouteData>(
+                    instance: new HttpControllerContext(),
+                    propertyGetter: cc => cc.RouteData,
+                    expectedDefaultValue: null,
+                    allowNull: false,
+                    roundTripTestValue: new Mock<IHttpRouteData>().Object
+                );
         }
     }
 }

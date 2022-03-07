@@ -293,9 +293,11 @@ namespace System.Diagnostics.Tracing
 
             protected static Delegate GetGetMethod(PropertyInfo property, Type propertyType)
             {
-                return property.GetMethod!.CreateDelegate(
-                    typeof(Func<,>).MakeGenericType(property.DeclaringType!, propertyType)
-                );
+                return property
+                    .GetMethod!
+                    .CreateDelegate(
+                        typeof(Func<,>).MakeGenericType(property.DeclaringType!, propertyType)
+                    );
             }
         }
 
@@ -305,11 +307,13 @@ namespace System.Diagnostics.Tracing
                 PropertyInfo property
             ) where TProperty : struct =>
 #if ES_BUILD_STANDALONE
-                (Func<TContainer, TProperty>)property.GetMethod!.CreateDelegate(
-                    typeof(Func<TContainer, TProperty>)
-                );
+                (Func<TContainer, TProperty>)property
+                    .GetMethod!
+                    .CreateDelegate(typeof(Func<TContainer, TProperty>));
 #else
-                property.GetMethod!.CreateDelegate<Func<TContainer, TProperty>>();
+                property
+                    .GetMethod!
+                    .CreateDelegate<Func<TContainer, TProperty>>();
 #endif
 
             public override Func<PropertyValue, PropertyValue> GetPropertyGetter(

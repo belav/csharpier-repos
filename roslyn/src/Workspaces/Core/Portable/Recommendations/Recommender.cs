@@ -26,13 +26,15 @@ namespace Microsoft.CodeAnalysis.Recommendations
             options ??= solution.Options;
             var document = solution.GetRequiredDocument(semanticModel.SyntaxTree);
             var languageRecommender = document.GetRequiredLanguageService<IRecommendationService>();
-            return languageRecommender.GetRecommendedSymbolsAtPosition(
-                document,
-                semanticModel,
-                position,
-                RecommendationServiceOptions.From(options, document.Project.Language),
-                cancellationToken
-            ).NamedSymbols;
+            return languageRecommender
+                .GetRecommendedSymbolsAtPosition(
+                    document,
+                    semanticModel,
+                    position,
+                    RecommendationServiceOptions.From(options, document.Project.Language),
+                    cancellationToken
+                )
+                .NamedSymbols;
         }
 
         [Obsolete("Use GetRecommendedSymbolsAtPosition")]

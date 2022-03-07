@@ -15,9 +15,9 @@ namespace System.Text.Json.Reflection
             Type type
         )
         {
-            return memberInfo.CustomAttributes.FirstOrDefault(
-                a => type.IsAssignableFrom(a.AttributeType)
-            );
+            return memberInfo
+                .CustomAttributes
+                .FirstOrDefault(a => type.IsAssignableFrom(a.AttributeType));
         }
 
         public static TValue GetConstructorArgument<TValue>(

@@ -58,10 +58,10 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.HideBase
                     .ConfigureAwait(false);
                 var option = options.GetOption(CSharpCodeStyleOptions.PreferredModifierOrder);
                 if (
-                    !CSharpOrderModifiersHelper.Instance.TryGetOrComputePreferredOrder(
-                        option.Value,
-                        out var preferredOrder
-                    ) || !AbstractOrderModifiersHelpers.IsOrdered(preferredOrder, modifiers)
+                    !CSharpOrderModifiersHelper
+                        .Instance
+                        .TryGetOrComputePreferredOrder(option.Value, out var preferredOrder)
+                    || !AbstractOrderModifiersHelpers.IsOrdered(preferredOrder, modifiers)
                 )
                 {
                     return syntaxFacts.WithModifiers(node, newModifiers);

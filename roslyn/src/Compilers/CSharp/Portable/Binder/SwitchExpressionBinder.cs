@@ -173,8 +173,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             BindingDiagnosticBag diagnostics
         )
         {
-            var seenTypes =
-                Symbols.SpecializedSymbolCollections.GetPooledSymbolHashSetInstance<TypeSymbol>();
+            var seenTypes = Symbols
+                .SpecializedSymbolCollections
+                .GetPooledSymbolHashSetInstance<TypeSymbol>();
             var typesInOrder = ArrayBuilder<TypeSymbol>.GetInstance();
             foreach (var @case in switchCases)
             {
@@ -203,11 +204,13 @@ namespace Microsoft.CodeAnalysis.CSharp
                 foreach (var @case in switchCases)
                 {
                     if (
-                        !this.Conversions.ClassifyImplicitConversionFromExpression(
-                            @case.Value,
-                            commonType,
-                            ref useSiteInfo
-                        ).Exists
+                        !this.Conversions
+                            .ClassifyImplicitConversionFromExpression(
+                                @case.Value,
+                                commonType,
+                                ref useSiteInfo
+                            )
+                            .Exists
                     )
                     {
                         commonType = null;

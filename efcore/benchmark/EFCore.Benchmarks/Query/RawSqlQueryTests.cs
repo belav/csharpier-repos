@@ -67,7 +67,8 @@ namespace Microsoft.EntityFrameworkCore.Benchmarks.Query
         public virtual async Task SelectAll()
         {
             var sql = @"SELECT * FROM ""Products""";
-            var query = _context.Products
+            var query = _context
+                .Products
 #if OLD_FROM_SQL
                 .FromSql(sql)
 #else
@@ -90,7 +91,8 @@ namespace Microsoft.EntityFrameworkCore.Benchmarks.Query
         {
             var sql =
                 @"SELECT * FROM ""Products"" WHERE ""CurrentPrice"" >= @p0 AND ""CurrentPrice"" <= @p1";
-            var query = _context.Products
+            var query = _context
+                .Products
 #if OLD_FROM_SQL
                 .FromSql(sql, 10, 14)
 #else
@@ -112,7 +114,8 @@ namespace Microsoft.EntityFrameworkCore.Benchmarks.Query
         public virtual async Task SelectComposed()
         {
             var sql = @"SELECT * FROM ""Products""";
-            var query = _context.Products
+            var query = _context
+                .Products
 #if OLD_FROM_SQL
                 .FromSql(sql)
 #else
@@ -136,7 +139,8 @@ namespace Microsoft.EntityFrameworkCore.Benchmarks.Query
         public virtual async Task StoredProcedure()
         {
             var sql = @"EXECUTE dbo.SearchProducts @p0, @p1";
-            var query = _context.Products
+            var query = _context
+                .Products
 #if OLD_FROM_SQL
                 .FromSql(sql, 10, 14)
 #else

@@ -30,7 +30,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeFixes
     public class CodeFixServiceTests
     {
         private static readonly TestComposition s_compositionWithMockDiagnosticUpdateSourceRegistrationService =
-            EditorTestCompositions.EditorFeatures
+            EditorTestCompositions
+                .EditorFeatures
                 .AddExcludedPartTypes(typeof(IDiagnosticUpdateSourceRegistrationService))
                 .AddParts(typeof(MockDiagnosticUpdateSourceRegistrationService));
 
@@ -82,7 +83,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeFixes
             var analyzer = incrementalAnalyzer.CreateIncrementalAnalyzer(workspace);
 
             var reference = new MockAnalyzerReference();
-            var project = workspace.CurrentSolution.Projects
+            var project = workspace
+                .CurrentSolution
+                .Projects
                 .Single()
                 .AddAnalyzerReference(reference);
             var document = project.Documents.Single();
@@ -125,12 +128,14 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeFixes
             );
 
             // Verify that we do not crash when computing fixes.
-            _ = await tuple.codeFixService.GetFixesAsync(
-                document,
-                TextSpan.FromBounds(0, 0),
-                includeConfigurationFixes: false,
-                cancellationToken: CancellationToken.None
-            );
+            _ = await tuple
+                .codeFixService
+                .GetFixesAsync(
+                    document,
+                    TextSpan.FromBounds(0, 0),
+                    includeConfigurationFixes: false,
+                    cancellationToken: CancellationToken.None
+                );
 
             // Verify that code fix is invoked with both the diagnostics in the context,
             // i.e. duplicate diagnostics are not silently discarded by the CodeFixService.
@@ -164,12 +169,14 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeFixes
             );
 
             // Verify registered configuration code actions do not have duplicates.
-            var fixCollections = await tuple.codeFixService.GetFixesAsync(
-                document,
-                TextSpan.FromBounds(0, 0),
-                includeConfigurationFixes: true,
-                cancellationToken: CancellationToken.None
-            );
+            var fixCollections = await tuple
+                .codeFixService
+                .GetFixesAsync(
+                    document,
+                    TextSpan.FromBounds(0, 0),
+                    includeConfigurationFixes: true,
+                    cancellationToken: CancellationToken.None
+                );
             var codeActions = fixCollections
                 .SelectMany(c => c.Fixes.Select(f => f.Action))
                 .ToImmutableArray();
@@ -283,8 +290,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeFixes
 
             using var workspace = tuple.workspace;
 
-            var errorReportingService =
-                (TestErrorReportingService)workspace.Services.GetRequiredService<IErrorReportingService>();
+            var errorReportingService = (TestErrorReportingService)workspace
+                .Services
+                .GetRequiredService<IErrorReportingService>();
 
             var errorReported = false;
             errorReportingService.OnError = message => errorReported = true;
@@ -301,16 +309,20 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeFixes
                 codefix,
                 ImmutableArray.Create(diagnosticAnalyzer)
             );
-            var project = workspace.CurrentSolution.Projects
+            var project = workspace
+                .CurrentSolution
+                .Projects
                 .Single()
                 .AddAnalyzerReference(reference);
             document = project.Documents.Single();
-            var fixes = await tuple.codeFixService.GetFixesAsync(
-                document,
-                TextSpan.FromBounds(0, 0),
-                includeConfigurationFixes: true,
-                cancellationToken: CancellationToken.None
-            );
+            var fixes = await tuple
+                .codeFixService
+                .GetFixesAsync(
+                    document,
+                    TextSpan.FromBounds(0, 0),
+                    includeConfigurationFixes: true,
+                    cancellationToken: CancellationToken.None
+                );
 
             if (exception)
             {
@@ -330,8 +342,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeFixes
             var tuple = ServiceSetup(codefix);
             using var workspace = tuple.workspace;
 
-            var errorReportingService =
-                (TestErrorReportingService)workspace.Services.GetRequiredService<IErrorReportingService>();
+            var errorReportingService = (TestErrorReportingService)workspace
+                .Services
+                .GetRequiredService<IErrorReportingService>();
 
             var errorReported = false;
             errorReportingService.OnError = message => errorReported = true;
@@ -342,11 +355,13 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeFixes
                 out var document,
                 out var extensionManager
             );
-            var unused = await tuple.codeFixService.GetMostSevereFixableDiagnosticAsync(
-                document,
-                TextSpan.FromBounds(0, 0),
-                cancellationToken: CancellationToken.None
-            );
+            var unused = await tuple
+                .codeFixService
+                .GetMostSevereFixableDiagnosticAsync(
+                    document,
+                    TextSpan.FromBounds(0, 0),
+                    cancellationToken: CancellationToken.None
+                );
             Assert.True(extensionManager.IsDisabled(codefix));
             Assert.False(extensionManager.IsIgnored(codefix));
             Assert.True(errorReported);
@@ -391,10 +406,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeFixes
             var errorLogger = logger.First().Value;
 
             var configurationFixProviders = includeConfigurationFixProviders
-                ? workspace.ExportProvider.GetExports<
-                      IConfigurationFixProvider,
-                      CodeChangeProviderMetadata
-                  >()
+                ? workspace
+                  .ExportProvider
+                  .GetExports<IConfigurationFixProvider, CodeChangeProviderMetadata>()
                 : SpecializedCollections.EmptyEnumerable<
                       Lazy<IConfigurationFixProvider, CodeChangeProviderMetadata>
                   >();
@@ -423,12 +437,18 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeFixes
             _ = incrementalAnalyzer.CreateIncrementalAnalyzer(workspace);
 
             var reference = analyzerReference ?? new MockAnalyzerReference();
-            var project = workspace.CurrentSolution.Projects
+            var project = workspace
+                .CurrentSolution
+                .Projects
                 .Single()
                 .AddAnalyzerReference(reference);
             document = project.Documents.Single();
-            extensionManager =
-                (EditorLayerExtensionManager.ExtensionManager)document.Project.Solution.Workspace.Services.GetRequiredService<IExtensionManager>();
+            extensionManager = (EditorLayerExtensionManager.ExtensionManager)document
+                .Project
+                .Solution
+                .Workspace
+                .Services
+                .GetRequiredService<IExtensionManager>();
         }
 
         private static IEnumerable<Lazy<CodeFixProvider, CodeChangeProviderMetadata>> CreateFixers()
@@ -815,7 +835,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeFixes
             diagnosticAnalyzer ??= new MockAnalyzerReference.MockDiagnosticAnalyzer();
             var analyzers = ImmutableArray.Create<DiagnosticAnalyzer>(diagnosticAnalyzer);
             var reference = new MockAnalyzerReference(nugetFixer, analyzers);
-            var project = workspace.CurrentSolution.Projects
+            var project = workspace
+                .CurrentSolution
+                .Projects
                 .Single()
                 .AddAnalyzerReference(reference);
 
@@ -857,9 +879,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeFixes
 
             public override Task RegisterCodeFixesAsync(CodeFixContext context)
             {
-                var fixableDiagnostics = context.Diagnostics.WhereAsArray(
-                    d => FixableDiagnosticIds.Contains(d.Id)
-                );
+                var fixableDiagnostics = context
+                    .Diagnostics
+                    .WhereAsArray(d => FixableDiagnosticIds.Contains(d.Id));
                 context.RegisterCodeFix(
                     CodeAction.Create(_name, ct => Task.FromResult(context.Document)),
                     fixableDiagnostics

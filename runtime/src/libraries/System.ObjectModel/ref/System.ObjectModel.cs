@@ -684,20 +684,32 @@ namespace System.ComponentModel
     {
         public TypeDescriptionProviderAttribute(
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
-                System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
+                System
+                    .Diagnostics
+                    .CodeAnalysis
+                    .DynamicallyAccessedMemberTypes
+                    .PublicParameterlessConstructor
             )]
                 string typeName
         ) { }
 
         public TypeDescriptionProviderAttribute(
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
-                System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
+                System
+                    .Diagnostics
+                    .CodeAnalysis
+                    .DynamicallyAccessedMemberTypes
+                    .PublicParameterlessConstructor
             )]
                 System.Type type
         ) { }
 
         [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
-            System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
+            System
+                .Diagnostics
+                .CodeAnalysis
+                .DynamicallyAccessedMemberTypes
+                .PublicParameterlessConstructor
         )]
         public string TypeName
         {

@@ -169,9 +169,10 @@ namespace System.Data
         private SerializationFormat _remotingFormat = SerializationFormat.Xml;
 
         private static int s_objectTypeCount; // Bid counter
-        private readonly int _objectID = System.Threading.Interlocked.Increment(
-            ref s_objectTypeCount
-        );
+        private readonly int _objectID = System
+            .Threading
+            .Interlocked
+            .Increment(ref s_objectTypeCount);
 
         /// <summary>
         /// Initializes a new instance of the <see cref='System.Data.DataTable'/> class with no arguments.
@@ -1255,11 +1256,13 @@ namespace System.Data
 
         internal void RestoreIndexEvents(bool forceReset)
         {
-            DataCommonEventSource.Log.Trace(
-                "<ds.DataTable.RestoreIndexEvents|Info> {0}, {1}",
-                ObjectID,
-                _suspendIndexEvents
-            );
+            DataCommonEventSource
+                .Log
+                .Trace(
+                    "<ds.DataTable.RestoreIndexEvents|Info> {0}, {1}",
+                    ObjectID,
+                    _suspendIndexEvents
+                );
             if (0 < _suspendIndexEvents)
             {
                 _suspendIndexEvents--;
@@ -1311,11 +1314,13 @@ namespace System.Data
 
         internal void SuspendIndexEvents()
         {
-            DataCommonEventSource.Log.Trace(
-                "<ds.DataTable.SuspendIndexEvents|Info> {0}, {1}",
-                ObjectID,
-                _suspendIndexEvents
-            );
+            DataCommonEventSource
+                .Log
+                .Trace(
+                    "<ds.DataTable.SuspendIndexEvents|Info> {0}, {1}",
+                    ObjectID,
+                    _suspendIndexEvents
+                );
             _suspendIndexEvents++;
         }
 
@@ -1700,10 +1705,9 @@ namespace System.Data
             }
             set
             {
-                long logScopeId = DataCommonEventSource.Log.EnterScope(
-                    "<ds.DataTable.set_Locale|API> {0}",
-                    ObjectID
-                );
+                long logScopeId = DataCommonEventSource
+                    .Log
+                    .EnterScope("<ds.DataTable.set_Locale|API> {0}", ObjectID);
                 try
                 {
                     bool userSet = true;
@@ -2083,11 +2087,13 @@ namespace System.Data
             get { return _tableName; }
             set
             {
-                long logScopeId = DataCommonEventSource.Log.EnterScope(
-                    "<ds.DataTable.set_TableName|API> {0}, value='{1}'",
-                    ObjectID,
-                    value
-                );
+                long logScopeId = DataCommonEventSource
+                    .Log
+                    .EnterScope(
+                        "<ds.DataTable.set_TableName|API> {0}, value='{1}'",
+                        ObjectID,
+                        value
+                    );
                 try
                 {
                     if (value == null)
@@ -2236,11 +2242,13 @@ namespace System.Data
             get { return _tableNamespace ?? GetInheritedNamespace(new List<DataTable>()); }
             set
             {
-                long logScopeId = DataCommonEventSource.Log.EnterScope(
-                    "<ds.DataTable.set_Namespace|API> {0}, value='{1}'",
-                    ObjectID,
-                    value
-                );
+                long logScopeId = DataCommonEventSource
+                    .Log
+                    .EnterScope(
+                        "<ds.DataTable.set_Namespace|API> {0}, value='{1}'",
+                        ObjectID,
+                        value
+                    );
                 try
                 {
                     if (value != _tableNamespace)
@@ -2431,11 +2439,9 @@ namespace System.Data
                 {
                     value = string.Empty;
                 }
-                DataCommonEventSource.Log.Trace(
-                    "<ds.DataTable.set_Prefix|API> {0}, value='{1}'",
-                    ObjectID,
-                    value
-                );
+                DataCommonEventSource
+                    .Log
+                    .Trace("<ds.DataTable.set_Prefix|API> {0}, value='{1}'", ObjectID, value);
                 if (
                     (XmlConvert.DecodeName(value) == value)
                     && (XmlConvert.EncodeName(value) != value)
@@ -2719,10 +2725,9 @@ namespace System.Data
         /// </summary>
         public void AcceptChanges()
         {
-            long logScopeId = DataCommonEventSource.Log.EnterScope(
-                "<ds.DataTable.AcceptChanges|API> {0}",
-                ObjectID
-            );
+            long logScopeId = DataCommonEventSource
+                .Log
+                .EnterScope("<ds.DataTable.AcceptChanges|API> {0}", ObjectID);
             try
             {
                 DataRow[] oldRows = new DataRow[Rows.Count];
@@ -2761,11 +2766,13 @@ namespace System.Data
 
         internal DataTable Clone(DataSet? cloneDS)
         {
-            long logScopeId = DataCommonEventSource.Log.EnterScope(
-                "<ds.DataTable.Clone|INFO> {0}, cloneDS={1}",
-                ObjectID,
-                (cloneDS != null) ? cloneDS.ObjectID : 0
-            );
+            long logScopeId = DataCommonEventSource
+                .Log
+                .EnterScope(
+                    "<ds.DataTable.Clone|INFO> {0}, cloneDS={1}",
+                    ObjectID,
+                    (cloneDS != null) ? cloneDS.ObjectID : 0
+                );
             try
             {
                 DataTable clone = CreateInstance();
@@ -2970,10 +2977,9 @@ namespace System.Data
 
         public DataTable Copy()
         {
-            long logScopeId = DataCommonEventSource.Log.EnterScope(
-                "<ds.DataTable.Copy|API> {0}",
-                ObjectID
-            );
+            long logScopeId = DataCommonEventSource
+                .Log
+                .EnterScope("<ds.DataTable.Copy|API> {0}", ObjectID);
             try
             {
                 DataTable destTable = Clone();
@@ -2998,18 +3004,16 @@ namespace System.Data
         {
             add
             {
-                DataCommonEventSource.Log.Trace(
-                    "<ds.DataTable.add_ColumnChanging|API> {0}",
-                    ObjectID
-                );
+                DataCommonEventSource
+                    .Log
+                    .Trace("<ds.DataTable.add_ColumnChanging|API> {0}", ObjectID);
                 _onColumnChangingDelegate += value;
             }
             remove
             {
-                DataCommonEventSource.Log.Trace(
-                    "<ds.DataTable.remove_ColumnChanging|API> {0}",
-                    ObjectID
-                );
+                DataCommonEventSource
+                    .Log
+                    .Trace("<ds.DataTable.remove_ColumnChanging|API> {0}", ObjectID);
                 _onColumnChangingDelegate -= value;
             }
         }
@@ -3018,18 +3022,16 @@ namespace System.Data
         {
             add
             {
-                DataCommonEventSource.Log.Trace(
-                    "<ds.DataTable.add_ColumnChanged|API> {0}",
-                    ObjectID
-                );
+                DataCommonEventSource
+                    .Log
+                    .Trace("<ds.DataTable.add_ColumnChanged|API> {0}", ObjectID);
                 _onColumnChangedDelegate += value;
             }
             remove
             {
-                DataCommonEventSource.Log.Trace(
-                    "<ds.DataTable.remove_ColumnChanged|API> {0}",
-                    ObjectID
-                );
+                DataCommonEventSource
+                    .Log
+                    .Trace("<ds.DataTable.remove_ColumnChanged|API> {0}", ObjectID);
                 _onColumnChangedDelegate -= value;
             }
         }
@@ -3044,18 +3046,16 @@ namespace System.Data
         {
             add
             {
-                DataCommonEventSource.Log.Trace(
-                    "<ds.DataTable.add_PropertyChanging|INFO> {0}",
-                    ObjectID
-                );
+                DataCommonEventSource
+                    .Log
+                    .Trace("<ds.DataTable.add_PropertyChanging|INFO> {0}", ObjectID);
                 _onPropertyChangingDelegate += value;
             }
             remove
             {
-                DataCommonEventSource.Log.Trace(
-                    "<ds.DataTable.remove_PropertyChanging|INFO> {0}",
-                    ObjectID
-                );
+                DataCommonEventSource
+                    .Log
+                    .Trace("<ds.DataTable.remove_PropertyChanging|INFO> {0}", ObjectID);
                 _onPropertyChangingDelegate -= value;
             }
         }
@@ -3072,10 +3072,9 @@ namespace System.Data
             }
             remove
             {
-                DataCommonEventSource.Log.Trace(
-                    "<ds.DataTable.remove_RowChanged|API> {0}",
-                    ObjectID
-                );
+                DataCommonEventSource
+                    .Log
+                    .Trace("<ds.DataTable.remove_RowChanged|API> {0}", ObjectID);
                 _onRowChangedDelegate -= value;
             }
         }
@@ -3092,10 +3091,9 @@ namespace System.Data
             }
             remove
             {
-                DataCommonEventSource.Log.Trace(
-                    "<ds.DataTable.remove_RowChanging|API> {0}",
-                    ObjectID
-                );
+                DataCommonEventSource
+                    .Log
+                    .Trace("<ds.DataTable.remove_RowChanging|API> {0}", ObjectID);
                 _onRowChangingDelegate -= value;
             }
         }
@@ -3112,10 +3110,9 @@ namespace System.Data
             }
             remove
             {
-                DataCommonEventSource.Log.Trace(
-                    "<ds.DataTable.remove_RowDeleting|API> {0}",
-                    ObjectID
-                );
+                DataCommonEventSource
+                    .Log
+                    .Trace("<ds.DataTable.remove_RowDeleting|API> {0}", ObjectID);
                 _onRowDeletingDelegate -= value;
             }
         }
@@ -3132,10 +3129,9 @@ namespace System.Data
             }
             remove
             {
-                DataCommonEventSource.Log.Trace(
-                    "<ds.DataTable.remove_RowDeleted|API> {0}",
-                    ObjectID
-                );
+                DataCommonEventSource
+                    .Log
+                    .Trace("<ds.DataTable.remove_RowDeleted|API> {0}", ObjectID);
                 _onRowDeletedDelegate -= value;
             }
         }
@@ -3144,18 +3140,16 @@ namespace System.Data
         {
             add
             {
-                DataCommonEventSource.Log.Trace(
-                    "<ds.DataTable.add_TableClearing|API> {0}",
-                    ObjectID
-                );
+                DataCommonEventSource
+                    .Log
+                    .Trace("<ds.DataTable.add_TableClearing|API> {0}", ObjectID);
                 _onTableClearingDelegate += value;
             }
             remove
             {
-                DataCommonEventSource.Log.Trace(
-                    "<ds.DataTable.remove_TableClearing|API> {0}",
-                    ObjectID
-                );
+                DataCommonEventSource
+                    .Log
+                    .Trace("<ds.DataTable.remove_TableClearing|API> {0}", ObjectID);
                 _onTableClearingDelegate -= value;
             }
         }
@@ -3164,18 +3158,16 @@ namespace System.Data
         {
             add
             {
-                DataCommonEventSource.Log.Trace(
-                    "<ds.DataTable.add_TableCleared|API> {0}",
-                    ObjectID
-                );
+                DataCommonEventSource
+                    .Log
+                    .Trace("<ds.DataTable.add_TableCleared|API> {0}", ObjectID);
                 _onTableClearedDelegate += value;
             }
             remove
             {
-                DataCommonEventSource.Log.Trace(
-                    "<ds.DataTable.remove_TableCleared|API> {0}",
-                    ObjectID
-                );
+                DataCommonEventSource
+                    .Log
+                    .Trace("<ds.DataTable.remove_TableCleared|API> {0}", ObjectID);
                 _onTableClearedDelegate -= value;
             }
         }
@@ -3337,11 +3329,9 @@ namespace System.Data
 
         internal void Clear(bool clearAll)
         {
-            long logScopeId = DataCommonEventSource.Log.EnterScope(
-                "<ds.DataTable.Clear|INFO> {0}, clearAll={1}",
-                ObjectID,
-                clearAll
-            );
+            long logScopeId = DataCommonEventSource
+                .Log
+                .EnterScope("<ds.DataTable.Clear|INFO> {0}, clearAll={1}", ObjectID, clearAll);
             try
             {
                 Debug.Assert(null == _rowDiffId, "wasn't previously cleared");
@@ -3611,10 +3601,9 @@ namespace System.Data
 
         public DataTable? GetChanges()
         {
-            long logScopeId = DataCommonEventSource.Log.EnterScope(
-                "<ds.DataTable.GetChanges|API> {0}",
-                ObjectID
-            );
+            long logScopeId = DataCommonEventSource
+                .Log
+                .EnterScope("<ds.DataTable.GetChanges|API> {0}", ObjectID);
             try
             {
                 DataTable dtChanges = Clone();
@@ -3644,11 +3633,13 @@ namespace System.Data
 
         public DataTable? GetChanges(DataRowState rowStates)
         {
-            long logScopeId = DataCommonEventSource.Log.EnterScope(
-                "<ds.DataTable.GetChanges|API> {0}, rowStates={1}",
-                ObjectID,
-                rowStates
-            );
+            long logScopeId = DataCommonEventSource
+                .Log
+                .EnterScope(
+                    "<ds.DataTable.GetChanges|API> {0}, rowStates={1}",
+                    ObjectID,
+                    rowStates
+                );
             try
             {
                 DataTable dtChanges = Clone();
@@ -3767,10 +3758,9 @@ namespace System.Data
 
         public void ImportRow(DataRow? row)
         {
-            long logScopeId = DataCommonEventSource.Log.EnterScope(
-                "<ds.DataTable.ImportRow|API> {0}",
-                ObjectID
-            );
+            long logScopeId = DataCommonEventSource
+                .Log
+                .EnterScope("<ds.DataTable.ImportRow|API> {0}", ObjectID);
             try
             {
                 int oldRecord = -1,
@@ -3823,11 +3813,9 @@ namespace System.Data
 
         internal void InsertRow(DataRow row, long proposedID)
         {
-            long logScopeId = DataCommonEventSource.Log.EnterScope(
-                "<ds.DataTable.InsertRow|INFO> {0}, row={1}",
-                ObjectID,
-                row._objectID
-            );
+            long logScopeId = DataCommonEventSource
+                .Log
+                .EnterScope("<ds.DataTable.InsertRow|INFO> {0}, row={1}", ObjectID, row._objectID);
             try
             {
                 if (row.Table != this)
@@ -4111,10 +4099,9 @@ namespace System.Data
             Debug.Assert(e != null, "e should not be null");
             if (_onColumnChangingDelegate != null)
             {
-                DataCommonEventSource.Log.Trace(
-                    "<ds.DataTable.OnColumnChanging|INFO> {0}",
-                    ObjectID
-                );
+                DataCommonEventSource
+                    .Log
+                    .Trace("<ds.DataTable.OnColumnChanging|INFO> {0}", ObjectID);
                 _onColumnChangingDelegate(this, e);
             }
         }
@@ -4124,10 +4111,9 @@ namespace System.Data
             Debug.Assert(e != null, "e should not be null");
             if (_onColumnChangedDelegate != null)
             {
-                DataCommonEventSource.Log.Trace(
-                    "<ds.DataTable.OnColumnChanged|INFO> {0}",
-                    ObjectID
-                );
+                DataCommonEventSource
+                    .Log
+                    .Trace("<ds.DataTable.OnColumnChanged|INFO> {0}", ObjectID);
                 _onColumnChangedDelegate(this, e);
             }
         }
@@ -4136,10 +4122,9 @@ namespace System.Data
         {
             if (_onPropertyChangingDelegate != null)
             {
-                DataCommonEventSource.Log.Trace(
-                    "<ds.DataTable.OnPropertyChanging|INFO> {0}",
-                    ObjectID
-                );
+                DataCommonEventSource
+                    .Log
+                    .Trace("<ds.DataTable.OnPropertyChanging|INFO> {0}", ObjectID);
                 _onPropertyChangingDelegate(this, pcevent);
             }
         }
@@ -4263,10 +4248,9 @@ namespace System.Data
         {
             if (_onTableClearingDelegate != null)
             {
-                DataCommonEventSource.Log.Trace(
-                    "<ds.DataTable.OnTableClearing|INFO> {0}",
-                    ObjectID
-                );
+                DataCommonEventSource
+                    .Log
+                    .Trace("<ds.DataTable.OnTableClearing|INFO> {0}", ObjectID);
                 _onTableClearingDelegate(this, e);
             }
         }
@@ -4613,10 +4597,9 @@ namespace System.Data
         /// </summary>
         public void RejectChanges()
         {
-            long logScopeId = DataCommonEventSource.Log.EnterScope(
-                "<ds.DataTable.RejectChanges|API> {0}",
-                ObjectID
-            );
+            long logScopeId = DataCommonEventSource
+                .Log
+                .EnterScope("<ds.DataTable.RejectChanges|API> {0}", ObjectID);
             try
             {
                 DataRow[] oldRows = new DataRow[Rows.Count];
@@ -4686,10 +4669,9 @@ namespace System.Data
         // Resets the table back to its original state.
         public virtual void Reset()
         {
-            long logScopeId = DataCommonEventSource.Log.EnterScope(
-                "<ds.DataTable.Reset|API> {0}",
-                ObjectID
-            );
+            long logScopeId = DataCommonEventSource
+                .Log
+                .EnterScope("<ds.DataTable.Reset|API> {0}", ObjectID);
             try
             {
                 Clear();
@@ -4924,11 +4906,13 @@ namespace System.Data
         [RequiresUnreferencedCode(Data.Select.RequiresUnreferencedCodeMessage)]
         public DataRow[] Select(string? filterExpression)
         {
-            DataCommonEventSource.Log.Trace(
-                "<ds.DataTable.Select|API> {0}, filterExpression='{1}'",
-                ObjectID,
-                filterExpression
-            );
+            DataCommonEventSource
+                .Log
+                .Trace(
+                    "<ds.DataTable.Select|API> {0}, filterExpression='{1}'",
+                    ObjectID,
+                    filterExpression
+                );
             return new Select(
                 this,
                 filterExpression,
@@ -4944,12 +4928,14 @@ namespace System.Data
         [RequiresUnreferencedCode(Data.Select.RequiresUnreferencedCodeMessage)]
         public DataRow[] Select(string? filterExpression, string? sort)
         {
-            DataCommonEventSource.Log.Trace(
-                "<ds.DataTable.Select|API> {0}, filterExpression='{1}', sort='{2}'",
-                ObjectID,
-                filterExpression,
-                sort
-            );
+            DataCommonEventSource
+                .Log
+                .Trace(
+                    "<ds.DataTable.Select|API> {0}, filterExpression='{1}', sort='{2}'",
+                    ObjectID,
+                    filterExpression,
+                    sort
+                );
             return new Select(
                 this,
                 filterExpression,
@@ -4969,13 +4955,15 @@ namespace System.Data
             DataViewRowState recordStates
         )
         {
-            DataCommonEventSource.Log.Trace(
-                "<ds.DataTable.Select|API> {0}, filterExpression='{1}', sort='{2}', recordStates={3}",
-                ObjectID,
-                filterExpression,
-                sort,
-                recordStates
-            );
+            DataCommonEventSource
+                .Log
+                .Trace(
+                    "<ds.DataTable.Select|API> {0}, filterExpression='{1}', sort='{2}', recordStates={3}",
+                    ObjectID,
+                    filterExpression,
+                    sort,
+                    recordStates
+                );
             return new Select(this, filterExpression, sort, recordStates).SelectRows();
         }
 
@@ -5379,10 +5367,9 @@ namespace System.Data
 
         public void BeginLoadData()
         {
-            long logScopeId = DataCommonEventSource.Log.EnterScope(
-                "<ds.DataTable.BeginLoadData|API> {0}",
-                ObjectID
-            );
+            long logScopeId = DataCommonEventSource
+                .Log
+                .EnterScope("<ds.DataTable.BeginLoadData|API> {0}", ObjectID);
             try
             {
                 if (_inDataLoad)
@@ -5432,10 +5419,9 @@ namespace System.Data
 
         public void EndLoadData()
         {
-            long logScopeId = DataCommonEventSource.Log.EnterScope(
-                "<ds.DataTable.EndLoadData|API> {0}",
-                ObjectID
-            );
+            long logScopeId = DataCommonEventSource
+                .Log
+                .EnterScope("<ds.DataTable.EndLoadData|API> {0}", ObjectID);
             try
             {
                 if (!_inDataLoad)
@@ -5485,11 +5471,13 @@ namespace System.Data
         /// </summary>
         public DataRow LoadDataRow(object?[] values, bool fAcceptChanges)
         {
-            long logScopeId = DataCommonEventSource.Log.EnterScope(
-                "<ds.DataTable.LoadDataRow|API> {0}, fAcceptChanges={1}",
-                ObjectID,
-                fAcceptChanges
-            );
+            long logScopeId = DataCommonEventSource
+                .Log
+                .EnterScope(
+                    "<ds.DataTable.LoadDataRow|API> {0}, fAcceptChanges={1}",
+                    ObjectID,
+                    fAcceptChanges
+                );
             try
             {
                 DataRow row;
@@ -5556,11 +5544,13 @@ namespace System.Data
         /// </summary>
         public DataRow LoadDataRow(object?[] values, LoadOption loadOption)
         {
-            long logScopeId = DataCommonEventSource.Log.EnterScope(
-                "<ds.DataTable.LoadDataRow|API> {0}, loadOption={1}",
-                ObjectID,
-                loadOption
-            );
+            long logScopeId = DataCommonEventSource
+                .Log
+                .EnterScope(
+                    "<ds.DataTable.LoadDataRow|API> {0}, loadOption={1}",
+                    ObjectID,
+                    loadOption
+                );
             try
             {
                 Index? indextoUse = null;
@@ -5571,9 +5561,11 @@ namespace System.Data
                         // CurrentVersion, and Deleted
                         if (_loadIndexwithCurrentDeleted == null)
                         {
-                            _loadIndexwithCurrentDeleted = _primaryKey.Key.GetSortIndex(
-                                DataViewRowState.CurrentRows | DataViewRowState.Deleted
-                            );
+                            _loadIndexwithCurrentDeleted = _primaryKey
+                                .Key
+                                .GetSortIndex(
+                                    DataViewRowState.CurrentRows | DataViewRowState.Deleted
+                                );
                             Debug.Assert(
                                 _loadIndexwithCurrentDeleted != null,
                                 "loadIndexwithCurrentDeleted should not be null"
@@ -5590,9 +5582,11 @@ namespace System.Data
                         // CurrentVersion, and Deleted : OverwriteRow, PreserveCurrentValues
                         if (_loadIndexwithOriginalAdded == null)
                         {
-                            _loadIndexwithOriginalAdded = _primaryKey.Key.GetSortIndex(
-                                DataViewRowState.OriginalRows | DataViewRowState.Added
-                            );
+                            _loadIndexwithOriginalAdded = _primaryKey
+                                .Key
+                                .GetSortIndex(
+                                    DataViewRowState.OriginalRows | DataViewRowState.Added
+                                );
                             Debug.Assert(
                                 _loadIndexwithOriginalAdded != null,
                                 "loadIndexwithOriginalAdded should not be null"
@@ -5798,13 +5792,15 @@ namespace System.Data
             MissingSchemaAction missingSchemaAction
         )
         {
-            long logScopeId = DataCommonEventSource.Log.EnterScope(
-                "<ds.DataTable.Merge|API> {0}, table={1}, preserveChanges={2}, missingSchemaAction={3}",
-                ObjectID,
-                (table != null) ? table.ObjectID : 0,
-                preserveChanges,
-                missingSchemaAction
-            );
+            long logScopeId = DataCommonEventSource
+                .Log
+                .EnterScope(
+                    "<ds.DataTable.Merge|API> {0}, table={1}, preserveChanges={2}, missingSchemaAction={3}",
+                    ObjectID,
+                    (table != null) ? table.ObjectID : 0,
+                    preserveChanges,
+                    missingSchemaAction
+                );
             try
             {
                 if (table == null)
@@ -5851,11 +5847,9 @@ namespace System.Data
             FillErrorEventHandler? errorHandler
         )
         {
-            long logScopeId = DataCommonEventSource.Log.EnterScope(
-                "<ds.DataTable.Load|API> {0}, loadOption={1}",
-                ObjectID,
-                loadOption
-            );
+            long logScopeId = DataCommonEventSource
+                .Log
+                .EnterScope("<ds.DataTable.Load|API> {0}, loadOption={1}", ObjectID, loadOption);
             try
             {
                 if (PrimaryKey.Length == 0)
@@ -6280,11 +6274,9 @@ namespace System.Data
         [RequiresUnreferencedCode(DataSet.RequiresUnreferencedCodeMessage)]
         public void WriteXml(XmlWriter? writer, XmlWriteMode mode, bool writeHierarchy)
         {
-            long logScopeId = DataCommonEventSource.Log.EnterScope(
-                "<ds.DataTable.WriteXml|API> {0}, mode={1}",
-                ObjectID,
-                mode
-            );
+            long logScopeId = DataCommonEventSource
+                .Log
+                .EnterScope("<ds.DataTable.WriteXml|API> {0}, mode={1}", ObjectID, mode);
             try
             {
                 if (_tableName.Length == 0)
@@ -6367,12 +6359,14 @@ namespace System.Data
         [RequiresUnreferencedCode(DataSet.RequiresUnreferencedCodeMessage)]
         public void WriteXml(string fileName, XmlWriteMode mode, bool writeHierarchy)
         {
-            long logScopeId = DataCommonEventSource.Log.EnterScope(
-                "<ds.DataTable.WriteXml|API> {0}, fileName='{1}', mode={2}",
-                ObjectID,
-                fileName,
-                mode
-            );
+            long logScopeId = DataCommonEventSource
+                .Log
+                .EnterScope(
+                    "<ds.DataTable.WriteXml|API> {0}, fileName='{1}', mode={2}",
+                    ObjectID,
+                    fileName,
+                    mode
+                );
             try
             {
                 using (XmlTextWriter xw = new XmlTextWriter(fileName, null))
@@ -6466,10 +6460,9 @@ namespace System.Data
         [RequiresUnreferencedCode(DataSet.RequiresUnreferencedCodeMessage)]
         public void WriteXmlSchema(XmlWriter? writer, bool writeHierarchy)
         {
-            long logScopeId = DataCommonEventSource.Log.EnterScope(
-                "<ds.DataTable.WriteXmlSchema|API> {0}",
-                ObjectID
-            );
+            long logScopeId = DataCommonEventSource
+                .Log
+                .EnterScope("<ds.DataTable.WriteXmlSchema|API> {0}", ObjectID);
             try
             {
                 if (_tableName.Length == 0)
@@ -6640,11 +6633,13 @@ namespace System.Data
         internal XmlReadMode ReadXml(XmlReader? reader, bool denyResolving)
         {
             IDisposable? restrictedScope = null;
-            long logScopeId = DataCommonEventSource.Log.EnterScope(
-                "<ds.DataTable.ReadXml|INFO> {0}, denyResolving={1}",
-                ObjectID,
-                denyResolving
-            );
+            long logScopeId = DataCommonEventSource
+                .Log
+                .EnterScope(
+                    "<ds.DataTable.ReadXml|INFO> {0}, denyResolving={1}",
+                    ObjectID,
+                    denyResolving
+                );
             try
             {
                 restrictedScope = TypeLimiter.EnterRestrictedScope(this);
@@ -6748,10 +6743,9 @@ namespace System.Data
 
                         if (
                             reader.LocalName == Keywords.XSD_SCHEMA
-                            && reader.NamespaceURI.StartsWith(
-                                Keywords.XSD_NS_START,
-                                StringComparison.Ordinal
-                            )
+                            && reader
+                                .NamespaceURI
+                                .StartsWith(Keywords.XSD_NS_START, StringComparison.Ordinal)
                         )
                         {
                             if (DataSet != null)
@@ -6841,10 +6835,9 @@ namespace System.Data
 
                             if (
                                 reader.LocalName == Keywords.XSD_SCHEMA
-                                && reader.NamespaceURI.StartsWith(
-                                    Keywords.XSD_NS_START,
-                                    StringComparison.Ordinal
-                                )
+                                && reader
+                                    .NamespaceURI
+                                    .StartsWith(Keywords.XSD_NS_START, StringComparison.Ordinal)
                             )
                             {
                                 if (DataSet != null)
@@ -7073,10 +7066,9 @@ namespace System.Data
 
                         if (
                             reader.LocalName == Keywords.XSD_SCHEMA
-                            && reader.NamespaceURI.StartsWith(
-                                Keywords.XSD_NS_START,
-                                StringComparison.Ordinal
-                            )
+                            && reader
+                                .NamespaceURI
+                                .StartsWith(Keywords.XSD_NS_START, StringComparison.Ordinal)
                         )
                         {
                             if (DataSet != null)
@@ -7199,10 +7191,9 @@ namespace System.Data
 
                         if (
                             reader.LocalName == Keywords.XSD_SCHEMA
-                            && reader.NamespaceURI.StartsWith(
-                                Keywords.XSD_NS_START,
-                                StringComparison.Ordinal
-                            )
+                            && reader
+                                .NamespaceURI
+                                .StartsWith(Keywords.XSD_NS_START, StringComparison.Ordinal)
                         )
                         {
                             if (DataSet != null)
@@ -7517,11 +7508,13 @@ namespace System.Data
         [RequiresUnreferencedCode(DataSet.RequiresUnreferencedCodeMessage)]
         internal void ReadXmlSchema(XmlReader? reader, bool denyResolving)
         {
-            long logScopeId = DataCommonEventSource.Log.EnterScope(
-                "<ds.DataTable.ReadXmlSchema|INFO> {0}, denyResolving={1}",
-                ObjectID,
-                denyResolving
-            );
+            long logScopeId = DataCommonEventSource
+                .Log
+                .EnterScope(
+                    "<ds.DataTable.ReadXmlSchema|INFO> {0}, denyResolving={1}",
+                    ObjectID,
+                    denyResolving
+                );
             try
             {
                 DataSet ds = new DataSet();
@@ -7668,9 +7661,9 @@ namespace System.Data
                                                 destinationTable.DataSet!
                                             )!;
                                         if (
-                                            !destinationTable.Constraints.Contains(
-                                                newFKC.ConstraintName
-                                            )
+                                            !destinationTable
+                                                .Constraints
+                                                .Contains(newFKC.ConstraintName)
                                         )
                                         {
                                             destinationTable.Constraints.Add(newFKC); // we know that the dest table is already in the table
@@ -8217,30 +8210,36 @@ namespace System.Data
                             && relatedRow._oldRecord != relatedRow._newRecord
                         )
                         {
-                            relatedRow.Table.EvaluateDependentExpressions(
-                                relatedRow.Table._dependentColumns,
-                                relatedRow,
-                                DataRowVersion.Original,
-                                null
-                            );
+                            relatedRow
+                                .Table
+                                .EvaluateDependentExpressions(
+                                    relatedRow.Table._dependentColumns,
+                                    relatedRow,
+                                    DataRowVersion.Original,
+                                    null
+                                );
                         }
                         if (relatedRow._newRecord != -1)
                         {
-                            relatedRow.Table.EvaluateDependentExpressions(
-                                relatedRow.Table._dependentColumns,
-                                relatedRow,
-                                DataRowVersion.Current,
-                                null
-                            );
+                            relatedRow
+                                .Table
+                                .EvaluateDependentExpressions(
+                                    relatedRow.Table._dependentColumns,
+                                    relatedRow,
+                                    DataRowVersion.Current,
+                                    null
+                                );
                         }
                         if (relatedRow._tempRecord != -1)
                         {
-                            relatedRow.Table.EvaluateDependentExpressions(
-                                relatedRow.Table._dependentColumns,
-                                relatedRow,
-                                DataRowVersion.Proposed,
-                                null
-                            );
+                            relatedRow
+                                .Table
+                                .EvaluateDependentExpressions(
+                                    relatedRow.Table._dependentColumns,
+                                    relatedRow,
+                                    DataRowVersion.Proposed,
+                                    null
+                                );
                         }
                     }
                 }
@@ -8284,24 +8283,21 @@ namespace System.Data
 
                     if (row._oldRecord != -1 && row._oldRecord != row._newRecord)
                     {
-                        column[row._oldRecord] = column.DataExpression.Evaluate(
-                            row,
-                            DataRowVersion.Original
-                        );
+                        column[row._oldRecord] = column
+                            .DataExpression
+                            .Evaluate(row, DataRowVersion.Original);
                     }
                     if (row._newRecord != -1)
                     {
-                        column[row._newRecord] = column.DataExpression.Evaluate(
-                            row,
-                            DataRowVersion.Current
-                        );
+                        column[row._newRecord] = column
+                            .DataExpression
+                            .Evaluate(row, DataRowVersion.Current);
                     }
                     if (row._tempRecord != -1)
                     {
-                        column[row._tempRecord] = column.DataExpression.Evaluate(
-                            row,
-                            DataRowVersion.Proposed
-                        );
+                        column[row._tempRecord] = column
+                            .DataExpression
+                            .Evaluate(row, DataRowVersion.Proposed);
                     }
                 }
             }

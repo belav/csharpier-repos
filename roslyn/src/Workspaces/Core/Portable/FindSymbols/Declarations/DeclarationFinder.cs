@@ -128,7 +128,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                                     .Resolve(
                                         startingCompilation,
                                         cancellationToken: cancellationToken
-                                    ).Symbol
+                                    )
+                                    .Symbol
                         )
                         .WhereNotNull()
                         .ToImmutableArray();

@@ -9,12 +9,14 @@ namespace System
         {
             Interop.NtDll.SYSTEM_LEAP_SECOND_INFORMATION slsi;
 
-            return Interop.NtDll.NtQuerySystemInformation(
-                    Interop.NtDll.SystemLeapSecondInformation,
-                    &slsi,
-                    (uint)sizeof(Interop.NtDll.SYSTEM_LEAP_SECOND_INFORMATION),
-                    null
-                ) == 0
+            return Interop
+                    .NtDll
+                    .NtQuerySystemInformation(
+                        Interop.NtDll.SystemLeapSecondInformation,
+                        &slsi,
+                        (uint)sizeof(Interop.NtDll.SYSTEM_LEAP_SECOND_INFORMATION),
+                        null
+                    ) == 0
                 && slsi.Enabled != Interop.BOOLEAN.FALSE;
         }
     }

@@ -77,7 +77,8 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
 
                 modelBuilder.FinalizeModel();
 
-                var property = modelBuilder.Model
+                var property = modelBuilder
+                    .Model
                     .FindEntityType(typeof(DoubleProperty))!
                     .GetProperty("Property");
                 Assert.EndsWith(
@@ -1184,30 +1185,32 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
             ) =>
                 new GenericTestEntityTypeBuilder<Dictionary<string, object>>(
                     new(
-                        CollectionCollectionBuilder.UsingEntity(
-                            l =>
-                                (
-                                    (GenericTestReferenceCollectionBuilder<
-                                        TLeftEntity,
-                                        Dictionary<string, object>
-                                    >)configureRight(
-                                        new GenericTestEntityTypeBuilder<
+                        CollectionCollectionBuilder
+                            .UsingEntity(
+                                l =>
+                                    (
+                                        (GenericTestReferenceCollectionBuilder<
+                                            TLeftEntity,
                                             Dictionary<string, object>
-                                        >(new(l.Metadata))
-                                    )
-                                ).ReferenceCollectionBuilder,
-                            r =>
-                                (
-                                    (GenericTestReferenceCollectionBuilder<
-                                        TRightEntity,
-                                        Dictionary<string, object>
-                                    >)configureLeft(
-                                        new GenericTestEntityTypeBuilder<
+                                        >)configureRight(
+                                            new GenericTestEntityTypeBuilder<
+                                                Dictionary<string, object>
+                                            >(new(l.Metadata))
+                                        )
+                                    ).ReferenceCollectionBuilder,
+                                r =>
+                                    (
+                                        (GenericTestReferenceCollectionBuilder<
+                                            TRightEntity,
                                             Dictionary<string, object>
-                                        >(new(r.Metadata))
-                                    )
-                                ).ReferenceCollectionBuilder
-                        ).Metadata
+                                        >)configureLeft(
+                                            new GenericTestEntityTypeBuilder<
+                                                Dictionary<string, object>
+                                            >(new(r.Metadata))
+                                        )
+                                    ).ReferenceCollectionBuilder
+                            )
+                            .Metadata
                     )
                 );
 
@@ -1224,31 +1227,33 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
             ) =>
                 new GenericTestEntityTypeBuilder<Dictionary<string, object>>(
                     new(
-                        CollectionCollectionBuilder.UsingEntity(
-                            joinEntityName,
-                            l =>
-                                (
-                                    (GenericTestReferenceCollectionBuilder<
-                                        TLeftEntity,
-                                        Dictionary<string, object>
-                                    >)configureRight(
-                                        new GenericTestEntityTypeBuilder<
+                        CollectionCollectionBuilder
+                            .UsingEntity(
+                                joinEntityName,
+                                l =>
+                                    (
+                                        (GenericTestReferenceCollectionBuilder<
+                                            TLeftEntity,
                                             Dictionary<string, object>
-                                        >(new(l.Metadata))
-                                    )
-                                ).ReferenceCollectionBuilder,
-                            r =>
-                                (
-                                    (GenericTestReferenceCollectionBuilder<
-                                        TRightEntity,
-                                        Dictionary<string, object>
-                                    >)configureLeft(
-                                        new GenericTestEntityTypeBuilder<
+                                        >)configureRight(
+                                            new GenericTestEntityTypeBuilder<
+                                                Dictionary<string, object>
+                                            >(new(l.Metadata))
+                                        )
+                                    ).ReferenceCollectionBuilder,
+                                r =>
+                                    (
+                                        (GenericTestReferenceCollectionBuilder<
+                                            TRightEntity,
                                             Dictionary<string, object>
-                                        >(new(r.Metadata))
-                                    )
-                                ).ReferenceCollectionBuilder
-                        ).Metadata
+                                        >)configureLeft(
+                                            new GenericTestEntityTypeBuilder<
+                                                Dictionary<string, object>
+                                            >(new(r.Metadata))
+                                        )
+                                    ).ReferenceCollectionBuilder
+                            )
+                            .Metadata
                     )
                 );
 

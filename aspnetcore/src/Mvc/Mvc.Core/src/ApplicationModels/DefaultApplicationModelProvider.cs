@@ -166,10 +166,9 @@ internal class DefaultApplicationModelProvider : IApplicationModelProvider
 
         AddRange(controllerModel.Selectors, CreateSelectors(attributes));
 
-        controllerModel.ControllerName = typeInfo.Name.EndsWith(
-            "Controller",
-            StringComparison.OrdinalIgnoreCase
-        )
+        controllerModel.ControllerName = typeInfo
+            .Name
+            .EndsWith("Controller", StringComparison.OrdinalIgnoreCase)
           ? typeInfo.Name.Substring(0, typeInfo.Name.Length - "Controller".Length)
           : typeInfo.Name;
 
@@ -177,10 +176,9 @@ internal class DefaultApplicationModelProvider : IApplicationModelProvider
 
         foreach (var routeValueProvider in attributes.OfType<IRouteValueProvider>())
         {
-            controllerModel.RouteValues.Add(
-                routeValueProvider.RouteKey,
-                routeValueProvider.RouteValue
-            );
+            controllerModel
+                .RouteValues
+                .Add(routeValueProvider.RouteKey, routeValueProvider.RouteValue);
         }
 
         var apiVisibility = attributes.OfType<IApiDescriptionVisibilityProvider>().FirstOrDefault();

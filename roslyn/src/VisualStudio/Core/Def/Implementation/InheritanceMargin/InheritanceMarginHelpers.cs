@@ -175,9 +175,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.InheritanceMarg
             IEnumerable<InheritanceTargetItem> targets
         )
         {
-            using var _ = CodeAnalysis.PooledObjects.ArrayBuilder<MenuItemViewModel>.GetInstance(
-                out var builder
-            );
+            using var _ = CodeAnalysis
+                .PooledObjects
+                .ArrayBuilder<MenuItemViewModel>
+                .GetInstance(out var builder);
             var displayContent = relationship switch
             {
                 InheritanceRelationship.ImplementedInterface

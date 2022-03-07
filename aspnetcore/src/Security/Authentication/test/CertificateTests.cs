@@ -430,10 +430,12 @@ public class ClientCertificateAuthenticationTests
 
         using var server = host.GetTestServer();
         var client = server.CreateClient();
-        client.DefaultRequestHeaders.Add(
-            "X-Client-Cert",
-            Convert.ToBase64String(Certificates.SelfSignedValidWithNoEku.RawData)
-        );
+        client
+            .DefaultRequestHeaders
+            .Add(
+                "X-Client-Cert",
+                Convert.ToBase64String(Certificates.SelfSignedValidWithNoEku.RawData)
+            );
         var response = await client.GetAsync("https://example.com/");
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
     }
@@ -448,10 +450,12 @@ public class ClientCertificateAuthenticationTests
 
         using var server = host.GetTestServer();
         var client = server.CreateClient();
-        client.DefaultRequestHeaders.Add(
-            "X-Client-Cert",
-            "OOPS" + Convert.ToBase64String(Certificates.SelfSignedValidWithNoEku.RawData)
-        );
+        client
+            .DefaultRequestHeaders
+            .Add(
+                "X-Client-Cert",
+                "OOPS" + Convert.ToBase64String(Certificates.SelfSignedValidWithNoEku.RawData)
+            );
         var response = await client.GetAsync("https://example.com/");
         Assert.Equal(HttpStatusCode.Forbidden, response.StatusCode);
     }
@@ -471,10 +475,12 @@ public class ClientCertificateAuthenticationTests
 
         using var server = host.GetTestServer();
         var client = server.CreateClient();
-        client.DefaultRequestHeaders.Add(
-            "X-ARR-ClientCert",
-            Convert.ToBase64String(Certificates.SelfSignedValidWithNoEku.RawData)
-        );
+        client
+            .DefaultRequestHeaders
+            .Add(
+                "X-ARR-ClientCert",
+                Convert.ToBase64String(Certificates.SelfSignedValidWithNoEku.RawData)
+            );
         var response = await client.GetAsync("https://example.com/");
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
     }
@@ -490,10 +496,12 @@ public class ClientCertificateAuthenticationTests
 
         using var server = host.GetTestServer();
         var client = server.CreateClient();
-        client.DefaultRequestHeaders.Add(
-            "random-Weird-header",
-            Convert.ToBase64String(Certificates.SelfSignedValidWithNoEku.RawData)
-        );
+        client
+            .DefaultRequestHeaders
+            .Add(
+                "random-Weird-header",
+                Convert.ToBase64String(Certificates.SelfSignedValidWithNoEku.RawData)
+            );
         var response = await client.GetAsync("https://example.com/");
         Assert.Equal(HttpStatusCode.Forbidden, response.StatusCode);
     }
@@ -602,10 +610,9 @@ public class ClientCertificateAuthenticationTests
             {
                 Assert.Single(actual);
                 Assert.Equal(
-                    Certificates.SelfSignedValidWithNoEku.GetNameInfo(
-                        X509NameType.EmailName,
-                        false
-                    ),
+                    Certificates
+                        .SelfSignedValidWithNoEku
+                        .GetNameInfo(X509NameType.EmailName, false),
                     actual.First().Value
                 );
             }
@@ -624,10 +631,9 @@ public class ClientCertificateAuthenticationTests
             {
                 Assert.Single(actual);
                 Assert.Equal(
-                    Certificates.SelfSignedValidWithNoEku.GetNameInfo(
-                        X509NameType.SimpleName,
-                        false
-                    ),
+                    Certificates
+                        .SelfSignedValidWithNoEku
+                        .GetNameInfo(X509NameType.SimpleName, false),
                     actual.First().Value
                 );
             }

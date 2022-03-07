@@ -1073,7 +1073,9 @@ public interface I
                         (INamedTypeSymbol)((INamedTypeSymbol)method.ReturnType)
                             .GetMembers("B")
                             .Single()
-                    ).TypeParameters.Single();
+                    )
+                        .TypeParameters
+                        .Single();
                     var result = typeParameterSymbol.ConstraintTypes.Single().NullableAnnotation;
                     Assert.Equal(
                         result,
@@ -1159,14 +1161,15 @@ public interface IB<T, U, V>
                 method =>
                 {
                     var result =
-                        (
-                            (INamedTypeSymbol)method.ReturnType
-                        ).TypeArguments.Single().NullableAnnotation;
+                        ((INamedTypeSymbol)method.ReturnType)
+                            .TypeArguments
+                            .Single()
+                            .NullableAnnotation;
                     Assert.Equal(
                         result,
-                        (
-                            (INamedTypeSymbol)method.ReturnType
-                        ).TypeArgumentNullableAnnotations.Single()
+                        ((INamedTypeSymbol)method.ReturnType)
+                            .TypeArgumentNullableAnnotations
+                            .Single()
                     );
                     Assert.Equal(
                         result,
@@ -1525,26 +1528,30 @@ class C
                     {
                         if (syntaxContext.Node.ToString() != "o")
                             return;
-                        var info = syntaxContext.SemanticModel.GetTypeInfoAndVerifyIOperation(
-                            syntaxContext.Node
-                        );
+                        var info = syntaxContext
+                            .SemanticModel
+                            .GetTypeInfoAndVerifyIOperation(syntaxContext.Node);
                         Assert.True(
-                            syntaxContext.SemanticModel.TryGetSpeculativeSemanticModel(
-                                syntaxContext.Node.SpanStart,
-                                newSource,
-                                out var specModel
-                            )
+                            syntaxContext
+                                .SemanticModel
+                                .TryGetSpeculativeSemanticModel(
+                                    syntaxContext.Node.SpanStart,
+                                    newSource,
+                                    out var specModel
+                                )
                         );
                         var specInfo = specModel.GetTypeInfoAndVerifyIOperation(oReference);
                         syntaxContext.ReportDiagnostic(
-                            CodeAnalysis.Diagnostic.Create(
-                                s_descriptor1,
-                                syntaxContext.Node.GetLocation(),
-                                syntaxContext.Node,
-                                info.Nullability.FlowState,
-                                info.Nullability.Annotation,
-                                specInfo.Nullability.FlowState
-                            )
+                            CodeAnalysis
+                                .Diagnostic
+                                .Create(
+                                    s_descriptor1,
+                                    syntaxContext.Node.GetLocation(),
+                                    syntaxContext.Node,
+                                    info.Nullability.FlowState,
+                                    info.Nullability.Annotation,
+                                    specInfo.Nullability.FlowState
+                                )
                         );
                     },
                     SyntaxKind.IdentifierName
@@ -1554,20 +1561,22 @@ class C
                     context =>
                     {
                         var declarator = (VariableDeclaratorSyntax)context.Node;
-                        var declaredSymbol = (ILocalSymbol)context.SemanticModel.GetDeclaredSymbol(
-                            declarator
-                        );
+                        var declaredSymbol = (ILocalSymbol)context
+                            .SemanticModel
+                            .GetDeclaredSymbol(declarator);
                         Assert.Equal(
                             declaredSymbol.Type.NullableAnnotation,
                             declaredSymbol.NullableAnnotation
                         );
                         context.ReportDiagnostic(
-                            CodeAnalysis.Diagnostic.Create(
-                                s_descriptor2,
-                                declarator.GetLocation(),
-                                declaredSymbol.Name,
-                                declaredSymbol.NullableAnnotation
-                            )
+                            CodeAnalysis
+                                .Diagnostic
+                                .Create(
+                                    s_descriptor2,
+                                    declarator.GetLocation(),
+                                    declaredSymbol.Name,
+                                    declaredSymbol.NullableAnnotation
+                                )
                         );
                     },
                     SyntaxKind.VariableDeclarator
@@ -1620,7 +1629,8 @@ class E
 
             var dCast = (CastExpressionSyntax)root.DescendantNodes()
                 .OfType<EqualsValueClauseSyntax>()
-                .Single().Value;
+                .Single()
+                .Value;
             var dInfo = model.GetTypeInfoAndVerifyIOperation(dCast);
             Assert.Equal(dType, dInfo.Type);
             Assert.Equal(dType, dInfo.ConvertedType);
@@ -1915,7 +1925,8 @@ class C
                     (MemberAccessExpressionSyntax)newSource
                         .DescendantNodes()
                         .OfType<InvocationExpressionSyntax>()
-                        .Single().Expression
+                        .Single()
+                        .Expression
                 ).Expression;
             Assert.True(
                 model.TryGetSpeculativeSemanticModel(
@@ -2553,9 +2564,9 @@ class C
                 );
                 Assert.Equal(
                     expectedAnnotation,
-                    (
-                        (INamedTypeSymbol)methodSymbol.ReturnType
-                    ).TypeArgumentNullableAnnotations.Single()
+                    ((INamedTypeSymbol)methodSymbol.ReturnType)
+                        .TypeArgumentNullableAnnotations
+                        .Single()
                 );
                 Assert.Equal(
                     expectedAnnotation,
@@ -4923,7 +4934,8 @@ class C
                 localFunctionBody
                     .DescendantNodes()
                     .OfType<ReturnStatementSyntax>()
-                    .Single().Expression!
+                    .Single()
+                    .Expression!
             );
             Assert.Equal(
                 "System.String!",
@@ -4980,7 +4992,8 @@ class C
                 localFunctionBody
                     .DescendantNodes()
                     .OfType<ReturnStatementSyntax>()
-                    .Single().Expression!
+                    .Single()
+                    .Expression!
             );
             Assert.Equal(
                 "System.String!",
@@ -5460,7 +5473,8 @@ class C
                 speculativeAttribute
                     .DescendantNodes()
                     .OfType<AttributeArgumentSyntax>()
-                    .Single().Expression;
+                    .Single()
+                    .Expression;
             Assert.True(
                 model.TryGetSpeculativeSemanticModel(
                     localFunction.SpanStart,
@@ -5548,7 +5562,9 @@ class C
                 localFunction
                     .DescendantNodes()
                     .OfType<VariableDeclarationSyntax>()
-                    .Single().Span.End;
+                    .Single()
+                    .Span
+                    .End;
 
             var lookupResults = model.LookupSymbols(position);
 
@@ -5876,7 +5892,8 @@ class C
                 tree.GetRoot()
                     .DescendantNodes()
                     .OfType<DeclarationExpressionSyntax>()
-                    .Single().Type;
+                    .Single()
+                    .Type;
 
             var statement = SyntaxFactory.ParseStatement(@"M(out C c);");
             Assert.True(
@@ -5918,7 +5935,8 @@ class C
                 tree.GetRoot()
                     .DescendantNodes()
                     .OfType<DeclarationExpressionSyntax>()
-                    .Single().Type;
+                    .Single()
+                    .Type;
 
             var statement = SyntaxFactory.ParseStatement(@"M(out C c);");
             Assert.True(
@@ -5960,7 +5978,8 @@ class C
                 tree.GetRoot()
                     .DescendantNodes()
                     .OfType<DeclarationExpressionSyntax>()
-                    .Single().Type;
+                    .Single()
+                    .Type;
 
             var statement = SyntaxFactory.ParseStatement(
                 @"
@@ -6006,7 +6025,8 @@ class C
                 tree.GetRoot()
                     .DescendantNodes()
                     .OfType<DeclarationExpressionSyntax>()
-                    .Single().Type;
+                    .Single()
+                    .Type;
 
             var statement = SyntaxFactory.ParseStatement(
                 @"
@@ -6052,7 +6072,8 @@ class C
                 tree.GetRoot()
                     .DescendantNodes()
                     .OfType<DeclarationExpressionSyntax>()
-                    .Single().Type;
+                    .Single()
+                    .Type;
 
             var statement = SyntaxFactory.ParseStatement(
                 @"
@@ -6098,7 +6119,8 @@ class C
                 tree.GetRoot()
                     .DescendantNodes()
                     .OfType<DeclarationExpressionSyntax>()
-                    .Single().Type;
+                    .Single()
+                    .Type;
 
             var methodDeclaration = (MethodDeclarationSyntax)SyntaxFactory.ParseMemberDeclaration(
                 @"
@@ -6119,7 +6141,8 @@ void M2(out C c2)
                 methodDeclaration
                     .DescendantNodes()
                     .OfType<DeclarationExpressionSyntax>()
-                    .Single().Type;
+                    .Single()
+                    .Type;
             var symbol2 = speculativeModel.GetSymbolInfo(type2);
             Assert.Equal(
                 PublicNullableAnnotation.NotAnnotated,
@@ -6149,7 +6172,8 @@ class C
                 tree.GetRoot()
                     .DescendantNodes()
                     .OfType<DeclarationExpressionSyntax>()
-                    .Single().Type;
+                    .Single()
+                    .Type;
 
             var methodDeclaration = (MethodDeclarationSyntax)SyntaxFactory.ParseMemberDeclaration(
                 @"
@@ -6171,7 +6195,8 @@ void M2(out C c2)
                 methodDeclaration
                     .DescendantNodes()
                     .OfType<DeclarationExpressionSyntax>()
-                    .Single().Type;
+                    .Single()
+                    .Type;
             var symbol2 = speculativeModel.GetSymbolInfo(type2);
             Assert.Equal(
                 PublicNullableAnnotation.None,
@@ -6201,7 +6226,8 @@ class C
                 tree.GetRoot()
                     .DescendantNodes()
                     .OfType<DeclarationExpressionSyntax>()
-                    .Single().Type;
+                    .Single()
+                    .Type;
 
             var arrow = SyntaxFactory.ArrowExpressionClause(
                 SyntaxFactory.ParseExpression(" M(out C c)")
@@ -6244,7 +6270,8 @@ class C
                 tree.GetRoot()
                     .DescendantNodes()
                     .OfType<DeclarationExpressionSyntax>()
-                    .Single().Type;
+                    .Single()
+                    .Type;
 
             var arrow = SyntaxFactory.ArrowExpressionClause(
                 SyntaxFactory.ParseExpression(
@@ -6311,7 +6338,8 @@ class C
                 newInitializer
                     .DescendantNodes()
                     .OfType<DeclarationExpressionSyntax>()
-                    .Single().Type;
+                    .Single()
+                    .Type;
             var symbol2 = speculativeModel.GetSymbolInfo(type2);
             Assert.Equal(
                 PublicNullableAnnotation.NotAnnotated,
@@ -6365,7 +6393,8 @@ M(out C c))"
                 newInitializer
                     .DescendantNodes()
                     .OfType<DeclarationExpressionSyntax>()
-                    .Single().Type;
+                    .Single()
+                    .Type;
             var symbol2 = speculativeModel.GetSymbolInfo(type2);
             Assert.Equal(
                 PublicNullableAnnotation.None,
@@ -6400,11 +6429,13 @@ class C
                 .Single();
 
             var expression = SyntaxFactory.ParseExpression(@"M(out C c)");
-            var symbol2 = (IMethodSymbol)model.GetSpeculativeSymbolInfo(
-                initializer.Position,
-                expression,
-                SpeculativeBindingOption.BindAsExpression
-            ).Symbol;
+            var symbol2 = (IMethodSymbol)model
+                .GetSpeculativeSymbolInfo(
+                    initializer.Position,
+                    expression,
+                    SpeculativeBindingOption.BindAsExpression
+                )
+                .Symbol;
             Assert.Equal(
                 PublicNullableAnnotation.NotAnnotated,
                 symbol2.Parameters.Single().Type.NullableAnnotation
@@ -6679,9 +6710,9 @@ M();"
         {
             var comp = CreateCompilation(
                 code,
-                options: TestOptions.ReleaseExe.WithNullableContextOptions(
-                    NullableContextOptions.Enable
-                )
+                options: TestOptions
+                    .ReleaseExe
+                    .WithNullableContextOptions(NullableContextOptions.Enable)
             );
 
             var tree = comp.SyntaxTrees[0];
@@ -6880,13 +6911,15 @@ public class C
                 "System.String?",
                 model
                     .GetTypeInfo(assignmentsInLambda[0].Right)
-                    .Type.ToTestDisplayString(includeNonNullable: true)
+                    .Type
+                    .ToTestDisplayString(includeNonNullable: true)
             );
             AssertEx.Equal(
                 "System.String!",
                 model
                     .GetTypeInfo(assignmentsInLambda[2].Right)
-                    .Type.ToTestDisplayString(includeNonNullable: true)
+                    .Type
+                    .ToTestDisplayString(includeNonNullable: true)
             );
         }
 
@@ -6903,14 +6936,16 @@ public class C
                 tree.GetRoot()
                     .DescendantNodes()
                     .OfType<SwitchExpressionSyntax>()
-                    .Single().GoverningExpression;
+                    .Single()
+                    .GoverningExpression;
 
             var model = comp.GetSemanticModel(tree);
             AssertEx.Equal(
                 "System.String!",
                 model
                     .GetTypeInfo(switchExpressionInput)
-                    .Type.ToTestDisplayString(includeNonNullable: true)
+                    .Type
+                    .ToTestDisplayString(includeNonNullable: true)
             );
 
             // New model should be able to get info, including nullability, without issue
@@ -6919,7 +6954,8 @@ public class C
                 "System.String!",
                 model
                     .GetTypeInfo(switchExpressionInput)
-                    .Type.ToTestDisplayString(includeNonNullable: true)
+                    .Type
+                    .ToTestDisplayString(includeNonNullable: true)
             );
         }
 
@@ -7028,14 +7064,17 @@ class C
                     .DescendantNodes()
                     .OfType<BinaryExpressionSyntax>()
                     .Single()
-                    .Right.DescendantNodes()
+                    .Right
+                    .DescendantNodes()
                     .OfType<ArgumentSyntax>()
-                    .Single().Expression;
+                    .Single()
+                    .Expression;
             Assert.Equal(
                 "System.Object?",
                 model
                     .GetTypeInfo(binaryRightArgument)
-                    .Type.ToTestDisplayString(includeNonNullable: true)
+                    .Type
+                    .ToTestDisplayString(includeNonNullable: true)
             );
         }
     }

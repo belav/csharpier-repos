@@ -224,10 +224,9 @@ namespace System.Net
 
                     if (NetEventSource.Log.IsEnabled())
                     {
-                        string sendCommand = _commands[_index].Command.Substring(
-                            0,
-                            _commands[_index].Command.Length - 2
-                        );
+                        string sendCommand = _commands[_index]
+                            .Command
+                            .Substring(0, _commands[_index].Command.Length - 2);
                         if (_commands[_index].HasFlag(PipelineEntryFlags.DontLogParameter))
                         {
                             int index = sendCommand.IndexOf(' ');

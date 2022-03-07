@@ -817,37 +817,39 @@ namespace Microsoft.EntityFrameworkCore
         {
             var entityEntry = set.Add(new TEntity { Id = 11 });
 
-            entityEntry.CurrentValues.SetValues(
-                new BuiltInDataTypes
-                {
-                    Id = 11,
-                    PartitionId = 1,
-                    TestInt16 = -1234,
-                    TestInt32 = -123456789,
-                    TestInt64 = -1234567890123456789L,
-                    TestDouble = -1.23456789,
-                    TestDecimal = -1234567890.01M,
-                    TestDateTime = Fixture.DefaultDateTime,
-                    TestDateTimeOffset = new DateTimeOffset(new DateTime(), TimeSpan.Zero),
-                    TestTimeSpan = new TimeSpan(0, 10, 9, 8, 7),
-                    TestSingle = -1.234F,
-                    TestBoolean = true,
-                    TestByte = 255,
-                    TestUnsignedInt16 = 1234,
-                    TestUnsignedInt32 = 1234565789U,
-                    TestUnsignedInt64 = 1234567890123456789UL,
-                    TestCharacter = 'a',
-                    TestSignedByte = -128,
-                    Enum64 = Enum64.SomeValue,
-                    Enum32 = Enum32.SomeValue,
-                    Enum16 = Enum16.SomeValue,
-                    Enum8 = Enum8.SomeValue,
-                    EnumU64 = EnumU64.SomeValue,
-                    EnumU32 = EnumU32.SomeValue,
-                    EnumU16 = EnumU16.SomeValue,
-                    EnumS8 = EnumS8.SomeValue
-                }
-            );
+            entityEntry
+                .CurrentValues
+                .SetValues(
+                    new BuiltInDataTypes
+                    {
+                        Id = 11,
+                        PartitionId = 1,
+                        TestInt16 = -1234,
+                        TestInt32 = -123456789,
+                        TestInt64 = -1234567890123456789L,
+                        TestDouble = -1.23456789,
+                        TestDecimal = -1234567890.01M,
+                        TestDateTime = Fixture.DefaultDateTime,
+                        TestDateTimeOffset = new DateTimeOffset(new DateTime(), TimeSpan.Zero),
+                        TestTimeSpan = new TimeSpan(0, 10, 9, 8, 7),
+                        TestSingle = -1.234F,
+                        TestBoolean = true,
+                        TestByte = 255,
+                        TestUnsignedInt16 = 1234,
+                        TestUnsignedInt32 = 1234565789U,
+                        TestUnsignedInt64 = 1234567890123456789UL,
+                        TestCharacter = 'a',
+                        TestSignedByte = -128,
+                        Enum64 = Enum64.SomeValue,
+                        Enum32 = Enum32.SomeValue,
+                        Enum16 = Enum16.SomeValue,
+                        Enum8 = Enum8.SomeValue,
+                        EnumU64 = EnumU64.SomeValue,
+                        EnumU32 = EnumU32.SomeValue,
+                        EnumU16 = EnumU16.SomeValue,
+                        EnumS8 = EnumS8.SomeValue
+                    }
+                );
 
             return entityEntry;
         }
@@ -1523,40 +1525,42 @@ namespace Microsoft.EntityFrameworkCore
         {
             var entityEntry = set.Add(new TEntity { Id = 11 });
 
-            entityEntry.CurrentValues.SetValues(
-                new BuiltInNullableDataTypes
-                {
-                    Id = 11,
-                    PartitionId = 1,
-                    TestNullableInt16 = -1234,
-                    TestNullableInt32 = -123456789,
-                    TestNullableInt64 = -1234567890123456789L,
-                    TestNullableDouble = -1.23456789,
-                    TestNullableDecimal = -1234567890.01M,
-                    TestNullableDateTime = Fixture.DefaultDateTime,
-                    TestNullableDateTimeOffset = new DateTimeOffset(
-                        new DateTime(),
-                        TimeSpan.FromHours(-8.0)
-                    ),
-                    TestNullableTimeSpan = new TimeSpan(0, 10, 9, 8, 7),
-                    TestNullableSingle = -1.234F,
-                    TestNullableBoolean = true,
-                    TestNullableByte = 255,
-                    TestNullableUnsignedInt16 = 1234,
-                    TestNullableUnsignedInt32 = 1234565789U,
-                    TestNullableUnsignedInt64 = 1234567890123456789UL,
-                    TestNullableCharacter = 'a',
-                    TestNullableSignedByte = -128,
-                    Enum64 = Enum64.SomeValue,
-                    Enum32 = Enum32.SomeValue,
-                    Enum16 = Enum16.SomeValue,
-                    Enum8 = Enum8.SomeValue,
-                    EnumU64 = EnumU64.SomeValue,
-                    EnumU32 = EnumU32.SomeValue,
-                    EnumU16 = EnumU16.SomeValue,
-                    EnumS8 = EnumS8.SomeValue
-                }
-            );
+            entityEntry
+                .CurrentValues
+                .SetValues(
+                    new BuiltInNullableDataTypes
+                    {
+                        Id = 11,
+                        PartitionId = 1,
+                        TestNullableInt16 = -1234,
+                        TestNullableInt32 = -123456789,
+                        TestNullableInt64 = -1234567890123456789L,
+                        TestNullableDouble = -1.23456789,
+                        TestNullableDecimal = -1234567890.01M,
+                        TestNullableDateTime = Fixture.DefaultDateTime,
+                        TestNullableDateTimeOffset = new DateTimeOffset(
+                            new DateTime(),
+                            TimeSpan.FromHours(-8.0)
+                        ),
+                        TestNullableTimeSpan = new TimeSpan(0, 10, 9, 8, 7),
+                        TestNullableSingle = -1.234F,
+                        TestNullableBoolean = true,
+                        TestNullableByte = 255,
+                        TestNullableUnsignedInt16 = 1234,
+                        TestNullableUnsignedInt32 = 1234565789U,
+                        TestNullableUnsignedInt64 = 1234567890123456789UL,
+                        TestNullableCharacter = 'a',
+                        TestNullableSignedByte = -128,
+                        Enum64 = Enum64.SomeValue,
+                        Enum32 = Enum32.SomeValue,
+                        Enum16 = Enum16.SomeValue,
+                        Enum8 = Enum8.SomeValue,
+                        EnumU64 = EnumU64.SomeValue,
+                        EnumU32 = EnumU32.SomeValue,
+                        EnumU16 = EnumU16.SomeValue,
+                        EnumS8 = EnumS8.SomeValue
+                    }
+                );
 
             return entityEntry;
         }
@@ -2541,7 +2545,8 @@ namespace Microsoft.EntityFrameworkCore
                 var principal =
                     context
                         .Set<StringKeyDataType>()
-                        .Add(new StringKeyDataType { Id = "Gumball!" }).Entity;
+                        .Add(new StringKeyDataType { Id = "Gumball!" })
+                        .Entity;
 
                 var dependent =
                     context
@@ -2552,7 +2557,8 @@ namespace Microsoft.EntityFrameworkCore
                                 Id = 77,
                                 StringKeyDataTypeId = "Gumball!"
                             }
-                        ).Entity;
+                        )
+                        .Entity;
 
                 Assert.Same(principal, dependent.Principal);
 
@@ -3432,7 +3438,8 @@ namespace Microsoft.EntityFrameworkCore
                         foreach (
                             var property in modelBuilder
                                 .Entity<BuiltInDataTypes>()
-                                .Metadata.GetProperties()
+                                .Metadata
+                                .GetProperties()
                                 .Where(p => p.Name != "Id")
                         )
                         {
@@ -3447,7 +3454,8 @@ namespace Microsoft.EntityFrameworkCore
                         foreach (
                             var property in modelBuilder
                                 .Entity<BuiltInNullableDataTypes>()
-                                .Metadata.GetProperties()
+                                .Metadata
+                                .GetProperties()
                                 .Where(p => p.Name != "Id")
                         )
                         {

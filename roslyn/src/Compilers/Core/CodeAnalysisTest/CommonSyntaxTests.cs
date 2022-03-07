@@ -121,7 +121,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
         [Fact]
         public void CommonSyntaxTriviaSpan_CSharp()
         {
-            var csharpToken = CSharp.SyntaxFactory
+            var csharpToken = CSharp
+                .SyntaxFactory
                 .ParseExpression("1 + 123 /*hello*/")
                 .GetLastToken();
             var csharpTriviaList = csharpToken.TrailingTrivia;
@@ -267,7 +268,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             trackedExpr = trackedExpr.ReplaceNodes(
                 nodes: trackedExpr.DescendantNodes().OfType<CSharp.Syntax.ExpressionSyntax>(),
                 computeReplacementNode: (node, rewritten) =>
-                    CSharp.SyntaxFactory
+                    CSharp
+                        .SyntaxFactory
                         .ParenthesizedExpression(rewritten)
                         .WithAdditionalAnnotations(annotation)
             );

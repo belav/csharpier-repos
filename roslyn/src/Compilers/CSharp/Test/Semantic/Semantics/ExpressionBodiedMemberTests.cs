@@ -530,7 +530,8 @@ public class C
                 tree.GetRoot()
                     .DescendantNodes()
                     .OfType<ArrowExpressionClauseSyntax>()
-                    .Single().Expression;
+                    .Single()
+                    .Expression;
 
             Assert.Equal("P1", node.ToString());
             Assert.Equal(
@@ -574,7 +575,8 @@ public class C
                 tree.GetRoot()
                     .DescendantNodes()
                     .OfType<ArrowExpressionClauseSyntax>()
-                    .Single().Expression;
+                    .Single()
+                    .Expression;
 
             Assert.Equal("P1", node.ToString());
             Assert.Equal(
@@ -616,7 +618,8 @@ public class C
                 tree.GetRoot()
                     .DescendantNodes()
                     .OfType<ArrowExpressionClauseSyntax>()
-                    .Single().Expression;
+                    .Single()
+                    .Expression;
 
             Assert.Equal("P1", node.ToString());
             Assert.Equal(
@@ -630,7 +633,9 @@ public class C
                     tree.GetRoot()
                         .DescendantNodes()
                         .OfType<ConstructorDeclarationSyntax>()
-                        .Single().Body.Position
+                        .Single()
+                        .Body
+                        .Position
                 )
             );
 
@@ -639,9 +644,11 @@ public class C
                     .DescendantNodes()
                     .OfType<ConstructorDeclarationSyntax>()
                     .Single()
-                    .Body.DescendantNodes()
+                    .Body
+                    .DescendantNodes()
                     .OfType<AssignmentExpressionSyntax>()
-                    .Single().Left;
+                    .Single()
+                    .Left;
 
             Assert.Equal("P1", node2.ToString());
             Assert.Equal(
@@ -685,7 +692,8 @@ public class C
                 tree.GetRoot()
                     .DescendantNodes()
                     .OfType<ArrowExpressionClauseSyntax>()
-                    .Single().Expression;
+                    .Single()
+                    .Expression;
 
             Assert.Equal("P1", node.ToString());
             Assert.Equal(
@@ -699,7 +707,9 @@ public class C
                     tree.GetRoot()
                         .DescendantNodes()
                         .OfType<DestructorDeclarationSyntax>()
-                        .Single().Body.Position
+                        .Single()
+                        .Body
+                        .Position
                 )
             );
 
@@ -708,9 +718,11 @@ public class C
                     .DescendantNodes()
                     .OfType<DestructorDeclarationSyntax>()
                     .Single()
-                    .Body.DescendantNodes()
+                    .Body
+                    .DescendantNodes()
                     .OfType<AssignmentExpressionSyntax>()
-                    .Single().Left;
+                    .Single()
+                    .Left;
 
             Assert.Equal("P1", node2.ToString());
             Assert.Equal(
@@ -799,7 +811,8 @@ public class C
                 tree.GetRoot()
                     .DescendantNodes()
                     .OfType<ArrowExpressionClauseSyntax>()
-                    .Single().Expression;
+                    .Single()
+                    .Expression;
 
             Assert.Equal("P1", node.ToString());
             Assert.Null(model.GetSymbolInfo(node).Symbol);
@@ -840,7 +853,8 @@ public class C
                 tree.GetRoot()
                     .DescendantNodes()
                     .OfType<ArrowExpressionClauseSyntax>()
-                    .Single().Expression;
+                    .Single()
+                    .Expression;
 
             Assert.Equal("P1", node.ToString());
             Assert.Equal(
@@ -884,7 +898,8 @@ public class C
                 tree.GetRoot()
                     .DescendantNodes()
                     .OfType<ReturnStatementSyntax>()
-                    .Single().Expression;
+                    .Single()
+                    .Expression;
 
             Assert.Equal("P1", node.ToString());
             Assert.Equal(
@@ -928,7 +943,8 @@ public class C
                 tree.GetRoot()
                     .DescendantNodes()
                     .OfType<ReturnStatementSyntax>()
-                    .Single().Expression;
+                    .Single()
+                    .Expression;
 
             Assert.Equal("P1", node.ToString());
             Assert.Equal(
@@ -976,7 +992,8 @@ public class C
                 tree.GetRoot()
                     .DescendantNodes()
                     .OfType<ReturnStatementSyntax>()
-                    .Single().Expression;
+                    .Single()
+                    .Expression;
 
             Assert.Equal("P1", node.ToString());
             Assert.Equal(
@@ -1020,7 +1037,8 @@ public class C
                 tree.GetRoot()
                     .DescendantNodes()
                     .OfType<ReturnStatementSyntax>()
-                    .Single().Expression;
+                    .Single()
+                    .Expression;
 
             Assert.Equal("P1", node.ToString());
             Assert.Equal(

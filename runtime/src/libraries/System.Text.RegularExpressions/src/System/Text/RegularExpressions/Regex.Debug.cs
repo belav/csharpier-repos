@@ -49,16 +49,18 @@ namespace System.Text.RegularExpressions
                 throw new NotSupportedException();
             }
 
-            srmFactory._matcher.SaveDGML(
-                writer,
-                bound,
-                hideStateInfo,
-                addDotStar,
-                inReverse,
-                onlyDFAinfo,
-                maxLabelLength,
-                asNFA
-            );
+            srmFactory
+                ._matcher
+                .SaveDGML(
+                    writer,
+                    bound,
+                    hideStateInfo,
+                    addDotStar,
+                    inReverse,
+                    onlyDFAinfo,
+                    maxLabelLength,
+                    asNFA
+                );
         }
 
         /// <summary>

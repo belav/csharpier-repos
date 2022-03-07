@@ -257,12 +257,14 @@ namespace Internal.Cryptography.Pal
                 int cbData = IntPtr.Size;
 
                 if (
-                    Interop.Crypt32.CertGetCertificateContextProperty(
-                        certificateContext,
-                        Interop.Crypt32.CertContextPropId.CERT_NCRYPT_KEY_HANDLE_PROP_ID,
-                        out privateKeyPtr,
-                        ref cbData
-                    )
+                    Interop
+                        .Crypt32
+                        .CertGetCertificateContextProperty(
+                            certificateContext,
+                            Interop.Crypt32.CertContextPropId.CERT_NCRYPT_KEY_HANDLE_PROP_ID,
+                            out privateKeyPtr,
+                            ref cbData
+                        )
                 )
                 {
                     handleOptions = CngKeyHandleOpenOptions.EphemeralKey;
@@ -277,14 +279,16 @@ namespace Internal.Cryptography.Pal
             {
                 int keySpec = 0;
                 if (
-                    !Interop.crypt32.CryptAcquireCertificatePrivateKey(
-                        certificateContext,
-                        CryptAcquireFlags.CRYPT_ACQUIRE_ONLY_NCRYPT_KEY_FLAG,
-                        IntPtr.Zero,
-                        out privateKey,
-                        out keySpec,
-                        out freeKey
-                    )
+                    !Interop
+                        .crypt32
+                        .CryptAcquireCertificatePrivateKey(
+                            certificateContext,
+                            CryptAcquireFlags.CRYPT_ACQUIRE_ONLY_NCRYPT_KEY_FLAG,
+                            IntPtr.Zero,
+                            out privateKey,
+                            out keySpec,
+                            out freeKey
+                        )
                 )
                 {
                     // The documentation for CryptAcquireCertificatePrivateKey says that freeKey
@@ -340,12 +344,14 @@ namespace Internal.Cryptography.Pal
         {
             int cbData = 0;
             if (
-                !Interop.Crypt32.CertGetCertificateContextProperty(
-                    _certContext,
-                    Interop.Crypt32.CertContextPropId.CERT_KEY_PROV_INFO_PROP_ID,
-                    null,
-                    ref cbData
-                )
+                !Interop
+                    .Crypt32
+                    .CertGetCertificateContextProperty(
+                        _certContext,
+                        Interop.Crypt32.CertContextPropId.CERT_KEY_PROV_INFO_PROP_ID,
+                        null,
+                        ref cbData
+                    )
             )
             {
                 int dwErrorCode = Marshal.GetLastWin32Error();
@@ -359,12 +365,14 @@ namespace Internal.Cryptography.Pal
                 fixed (byte* pPrivateKey = privateKey)
                 {
                     if (
-                        !Interop.Crypt32.CertGetCertificateContextProperty(
-                            _certContext,
-                            Interop.Crypt32.CertContextPropId.CERT_KEY_PROV_INFO_PROP_ID,
-                            privateKey,
-                            ref cbData
-                        )
+                        !Interop
+                            .Crypt32
+                            .CertGetCertificateContextProperty(
+                                _certContext,
+                                Interop.Crypt32.CertContextPropId.CERT_KEY_PROV_INFO_PROP_ID,
+                                privateKey,
+                                ref cbData
+                            )
                     )
                         throw Marshal.GetLastWin32Error().ToCryptographicException();
                     Interop.Crypt32.CRYPT_KEY_PROV_INFO* pKeyProvInfo =
@@ -427,12 +435,14 @@ namespace Internal.Cryptography.Pal
                 keyProvInfo.dwKeySpec = keySpec;
 
                 if (
-                    !Interop.Crypt32.CertSetCertificateContextProperty(
-                        pal._certContext,
-                        Interop.Crypt32.CertContextPropId.CERT_KEY_PROV_INFO_PROP_ID,
-                        Interop.Crypt32.CertSetPropertyFlags.None,
-                        &keyProvInfo
-                    )
+                    !Interop
+                        .Crypt32
+                        .CertSetCertificateContextProperty(
+                            pal._certContext,
+                            Interop.Crypt32.CertContextPropId.CERT_KEY_PROV_INFO_PROP_ID,
+                            Interop.Crypt32.CertSetPropertyFlags.None,
+                            &keyProvInfo
+                        )
                 )
                 {
                     pal.Dispose();
@@ -623,12 +633,14 @@ namespace Internal.Cryptography.Pal
                 keyProvInfo.dwKeySpec = (int)keyContainerInfo.KeyNumber;
 
                 if (
-                    !Interop.Crypt32.CertSetCertificateContextProperty(
-                        pal._certContext,
-                        Interop.Crypt32.CertContextPropId.CERT_KEY_PROV_INFO_PROP_ID,
-                        Interop.Crypt32.CertSetPropertyFlags.None,
-                        &keyProvInfo
-                    )
+                    !Interop
+                        .Crypt32
+                        .CertSetCertificateContextProperty(
+                            pal._certContext,
+                            Interop.Crypt32.CertContextPropId.CERT_KEY_PROV_INFO_PROP_ID,
+                            Interop.Crypt32.CertSetPropertyFlags.None,
+                            &keyProvInfo
+                        )
                 )
                 {
                     pal.Dispose();
@@ -653,12 +665,14 @@ namespace Internal.Cryptography.Pal
             );
 
             if (
-                !Interop.Crypt32.CertSetCertificateContextProperty(
-                    pal._certContext,
-                    Interop.Crypt32.CertContextPropId.CERT_NCRYPT_KEY_HANDLE_PROP_ID,
-                    Interop.Crypt32.CertSetPropertyFlags.CERT_SET_PROPERTY_INHIBIT_PERSIST_FLAG,
-                    handle
-                )
+                !Interop
+                    .Crypt32
+                    .CertSetCertificateContextProperty(
+                        pal._certContext,
+                        Interop.Crypt32.CertContextPropId.CERT_NCRYPT_KEY_HANDLE_PROP_ID,
+                        Interop.Crypt32.CertSetPropertyFlags.CERT_SET_PROPERTY_INHIBIT_PERSIST_FLAG,
+                        handle
+                    )
             )
             {
                 pal.Dispose();

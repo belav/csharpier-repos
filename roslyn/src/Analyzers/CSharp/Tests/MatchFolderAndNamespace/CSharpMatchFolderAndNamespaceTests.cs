@@ -80,13 +80,15 @@ build_property.RootNamespace = {DefaultNamespace}
             // If empty string was provided as the namespace, then we will not set a default
             if (defaultNamespace.Length > 0)
             {
-                testState.SolutionTransforms.Add(
-                    (solution, projectId) =>
-                    {
-                        var project = solution.GetRequiredProject(projectId);
-                        return project.WithDefaultNamespace(defaultNamespace).Solution;
-                    }
-                );
+                testState
+                    .SolutionTransforms
+                    .Add(
+                        (solution, projectId) =>
+                        {
+                            var project = solution.GetRequiredProject(projectId);
+                            return project.WithDefaultNamespace(defaultNamespace).Solution;
+                        }
+                    );
             }
 
             return testState.RunAsync();

@@ -159,7 +159,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Semantic.UnitTests.Semantics
                 tree.GetRoot()
                     .DescendantNodes()
                     .OfType<ClassDeclarationSyntax>()
-                    .Single().SyntaxTree
+                    .Single()
+                    .SyntaxTree
             );
         }
 

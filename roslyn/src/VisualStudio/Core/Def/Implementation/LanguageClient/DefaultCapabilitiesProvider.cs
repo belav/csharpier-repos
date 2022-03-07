@@ -45,7 +45,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageClient
 
         public VSServerCapabilities GetCapabilities()
         {
-            var commitCharacters = CompletionRules.Default.DefaultCommitCharacters
+            var commitCharacters = CompletionRules
+                .Default
+                .DefaultCommitCharacters
                 .Select(c => c.ToString())
                 .ToArray();
             var triggerCharacters = _completionProviders
@@ -97,7 +99,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageClient
                     RangeProvider = true,
                     Legend = new SemanticTokensLegend
                     {
-                        TokenTypes = SemanticTokenTypes.AllTypes
+                        TokenTypes = SemanticTokenTypes
+                            .AllTypes
                             .Concat(SemanticTokensHelpers.RoslynCustomTokenTypes)
                             .ToArray(),
                         TokenModifiers = new string[] { SemanticTokenModifiers.Static }

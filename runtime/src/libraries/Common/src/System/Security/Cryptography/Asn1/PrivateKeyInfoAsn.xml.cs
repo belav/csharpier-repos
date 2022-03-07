@@ -116,11 +116,12 @@ namespace System.Security.Cryptography.Asn1
                 sequenceReader.ThrowIfNotEmpty();
             }
 
-            System.Security.Cryptography.Asn1.AlgorithmIdentifierAsn.Decode(
-                ref sequenceReader,
-                rebind,
-                out decoded.PrivateKeyAlgorithm
-            );
+            System
+                .Security
+                .Cryptography
+                .Asn1
+                .AlgorithmIdentifierAsn
+                .Decode(ref sequenceReader, rebind, out decoded.PrivateKeyAlgorithm);
 
             if (sequenceReader.TryReadPrimitiveOctetString(out tmpSpan))
             {
@@ -150,11 +151,12 @@ namespace System.Security.Cryptography.Asn1
 
                     while (collectionReader.HasData)
                     {
-                        System.Security.Cryptography.Asn1.AttributeAsn.Decode(
-                            ref collectionReader,
-                            rebind,
-                            out tmpItem
-                        );
+                        System
+                            .Security
+                            .Cryptography
+                            .Asn1
+                            .AttributeAsn
+                            .Decode(ref collectionReader, rebind, out tmpItem);
                         tmpList.Add(tmpItem);
                     }
 

@@ -90,7 +90,8 @@ namespace Microsoft.EntityFrameworkCore.Update
             command.AddEntry(entry, true);
 
             var fakeSqlGenerator = new FakeSqlGenerator(
-                RelationalTestHelpers.Instance
+                RelationalTestHelpers
+                    .Instance
                     .CreateContextServices()
                     .GetRequiredService<UpdateSqlGeneratorDependencies>()
             );
@@ -118,7 +119,8 @@ namespace Microsoft.EntityFrameworkCore.Update
             command.AddEntry(entry, true);
 
             var fakeSqlGenerator = new FakeSqlGenerator(
-                RelationalTestHelpers.Instance
+                RelationalTestHelpers
+                    .Instance
                     .CreateContextServices()
                     .GetRequiredService<UpdateSqlGeneratorDependencies>()
             );
@@ -146,7 +148,8 @@ namespace Microsoft.EntityFrameworkCore.Update
             command.AddEntry(entry, true);
 
             var fakeSqlGenerator = new FakeSqlGenerator(
-                RelationalTestHelpers.Instance
+                RelationalTestHelpers
+                    .Instance
                     .CreateContextServices()
                     .GetRequiredService<UpdateSqlGeneratorDependencies>()
             );
@@ -174,7 +177,8 @@ namespace Microsoft.EntityFrameworkCore.Update
             command.AddEntry(entry, true);
 
             var fakeSqlGenerator = new FakeSqlGenerator(
-                RelationalTestHelpers.Instance
+                RelationalTestHelpers
+                    .Instance
                     .CreateContextServices()
                     .GetRequiredService<UpdateSqlGeneratorDependencies>()
             );
@@ -747,11 +751,13 @@ namespace Microsoft.EntityFrameworkCore.Update
         {
             var model = BuildModel(generateKeyValues, computeNonKeyValue);
 
-            return RelationalTestHelpers.Instance.CreateInternalEntry(
-                model,
-                entityState,
-                new T1 { Id = 1, Name = computeNonKeyValue ? null : "Test" }
-            );
+            return RelationalTestHelpers
+                .Instance
+                .CreateInternalEntry(
+                    model,
+                    entityState,
+                    new T1 { Id = 1, Name = computeNonKeyValue ? null : "Test" }
+                );
         }
 
         private static FakeDbDataReader CreateFakeDataReader(
@@ -794,7 +800,8 @@ namespace Microsoft.EntityFrameworkCore.Update
                     ),
                     sqlGenerator
                         ?? new FakeSqlGenerator(
-                            RelationalTestHelpers.Instance
+                            RelationalTestHelpers
+                                .Instance
                                 .CreateContextServices()
                                 .GetRequiredService<UpdateSqlGeneratorDependencies>()
                         ),

@@ -32,10 +32,10 @@ namespace Microsoft.CodeAnalysis.Remote
             )
         );
 
-        internal static readonly ImmutableArray<Assembly> RemoteHostAssemblies =
-            MefHostServices.DefaultAssemblies
-                .Add(typeof(BrokeredServiceBase).Assembly)
-                .Add(typeof(RemoteWorkspacesResources).Assembly);
+        internal static readonly ImmutableArray<Assembly> RemoteHostAssemblies = MefHostServices
+            .DefaultAssemblies
+            .Add(typeof(BrokeredServiceBase).Assembly)
+            .Add(typeof(RemoteWorkspacesResources).Assembly);
 
         private readonly Lazy<RemoteWorkspace> _lazyPrimaryWorkspace;
         internal readonly SolutionAssetCache SolutionAssetCache;

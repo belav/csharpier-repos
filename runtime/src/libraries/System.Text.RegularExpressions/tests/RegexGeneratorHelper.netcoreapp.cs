@@ -21,8 +21,9 @@ namespace System.Text.RegularExpressions.Tests
 {
     public static class RegexGeneratorHelper
     {
-        private static readonly CSharpParseOptions s_previewParseOptions =
-            CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.Preview);
+        private static readonly CSharpParseOptions s_previewParseOptions = CSharpParseOptions
+            .Default
+            .WithLanguageVersion(LanguageVersion.Preview);
         private static readonly MetadataReference[] s_refs = CreateReferences();
         private static readonly EmitOptions s_emitOptions = new EmitOptions(
             debugInformationFormat: DebugInformationFormat.Embedded
@@ -134,7 +135,8 @@ namespace System.Text.RegularExpressions.Tests
                         .AddDocument(
                             "RegexGenerator.g.cs",
                             SourceText.From("// Empty", Encoding.UTF8)
-                        ).Project;
+                        )
+                        .Project;
                 Assert.True(proj.Solution.Workspace.TryApplyChanges(proj.Solution));
 
                 s_compilation = comp = await proj!

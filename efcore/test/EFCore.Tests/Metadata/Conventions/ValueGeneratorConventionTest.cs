@@ -457,11 +457,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             var idProperty =
                 entityBuilder.Property(typeof(int), "Id", ConfigurationSource.Convention).Metadata;
             var numberProperty =
-                entityBuilder.Property(
-                    typeof(int),
-                    "Number",
-                    ConfigurationSource.Convention
-                ).Metadata;
+                entityBuilder
+                    .Property(typeof(int), "Number", ConfigurationSource.Convention)
+                    .Metadata;
 
             Assert.Same(idProperty, entityBuilder.Metadata.FindProperty("Id"));
             Assert.Same(numberProperty, entityBuilder.Metadata.FindProperty("Number"));
@@ -634,7 +632,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             );
 
         private static ProviderConventionSetBuilderDependencies CreateDependencies() =>
-            InMemoryTestHelpers.Instance
+            InMemoryTestHelpers
+                .Instance
                 .CreateContextServices()
                 .GetRequiredService<ProviderConventionSetBuilderDependencies>();
 
@@ -646,9 +645,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 serviceProvider.GetRequiredService<ProviderConventionSetBuilderDependencies>();
 
             // Use public API to add conventions, issue #214
-            conventionSet.EntityTypeAddedConventions.Add(
-                new PropertyDiscoveryConvention(dependencies)
-            );
+            conventionSet
+                .EntityTypeAddedConventions
+                .Add(new PropertyDiscoveryConvention(dependencies));
             conventionSet.EntityTypeAddedConventions.Add(new KeyDiscoveryConvention(dependencies));
 
             var keyConvention = new ValueGenerationConvention(dependencies);

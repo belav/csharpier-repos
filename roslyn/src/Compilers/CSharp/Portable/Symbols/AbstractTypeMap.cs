@@ -445,9 +445,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 if (dynamicEraser == null)
                 {
                     dynamicEraser = new DynamicTypeEraser(
-                        owner.ContainingAssembly.CorLibrary.GetSpecialType(
-                            SpecialType.System_Object
-                        )
+                        owner
+                            .ContainingAssembly
+                            .CorLibrary
+                            .GetSpecialType(SpecialType.System_Object)
                     );
                 }
 

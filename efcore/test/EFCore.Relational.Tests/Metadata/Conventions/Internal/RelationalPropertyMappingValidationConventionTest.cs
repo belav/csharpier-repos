@@ -39,9 +39,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal
                     "LongProperty",
                     typeof(Tuple<long>).ShortDisplayName()
                 ),
-                Assert.Throws<InvalidOperationException>(
-                    () => CreatePropertyMappingValidator()(modelBuilder.Metadata)
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(
+                        () => CreatePropertyMappingValidator()(modelBuilder.Metadata)
+                    )
+                    .Message
             );
         }
 
@@ -63,9 +65,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal
                     "LongProperty",
                     typeof(Tuple<long>).ShortDisplayName()
                 ),
-                Assert.Throws<InvalidOperationException>(
-                    () => CreatePropertyMappingValidator()(modelBuilder.Metadata)
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(
+                        () => CreatePropertyMappingValidator()(modelBuilder.Metadata)
+                    )
+                    .Message
             );
         }
 

@@ -53,9 +53,11 @@ namespace DelegateTest
         {
             bool retVal = true;
             //Type,target, method, and invocation list
-            TestLibrary.TestFramework.BeginScenario(
-                "PosTest1: Use one delegate object to instance the other delegate object,then use equals method to compare"
-            );
+            TestLibrary
+                .TestFramework
+                .BeginScenario(
+                    "PosTest1: Use one delegate object to instance the other delegate object,then use equals method to compare"
+                );
 
             try
             {
@@ -93,9 +95,11 @@ namespace DelegateTest
         {
             bool retVal = true;
 
-            TestLibrary.TestFramework.BeginScenario(
-                "PosTest2: Use the same instance's same instance method to create two different delegate ,then use equals method to compare"
-            );
+            TestLibrary
+                .TestFramework
+                .BeginScenario(
+                    "PosTest2: Use the same instance's same instance method to create two different delegate ,then use equals method to compare"
+                );
 
             try
             {
@@ -135,9 +139,11 @@ namespace DelegateTest
         {
             bool retVal = true;
 
-            TestLibrary.TestFramework.BeginScenario(
-                "PosTest3: Use the same type's same static method to create two delegate ,then use equals method to compare"
-            );
+            TestLibrary
+                .TestFramework
+                .BeginScenario(
+                    "PosTest3: Use the same type's same static method to create two delegate ,then use equals method to compare"
+                );
 
             try
             {
@@ -175,9 +181,11 @@ namespace DelegateTest
         {
             bool retVal = true;
 
-            TestLibrary.TestFramework.BeginScenario(
-                "PosTest4: Use the same type's different static method to create two delegate ,then use equals method to compare"
-            );
+            TestLibrary
+                .TestFramework
+                .BeginScenario(
+                    "PosTest4: Use the same type's different static method to create two delegate ,then use equals method to compare"
+                );
 
             try
             {
@@ -208,9 +216,11 @@ namespace DelegateTest
         {
             bool retVal = true;
 
-            TestLibrary.TestFramework.BeginScenario(
-                "PosTest6:  Use the different type's same static method to create two delegate ,then use equals method to compare"
-            );
+            TestLibrary
+                .TestFramework
+                .BeginScenario(
+                    "PosTest6:  Use the different type's same static method to create two delegate ,then use equals method to compare"
+                );
 
             try
             {
@@ -242,9 +252,11 @@ namespace DelegateTest
         {
             bool retVal = true;
 
-            TestLibrary.TestFramework.BeginScenario(
-                "PosTest7:  Use the different instance's same instance method to create two delegate ,then use equals method to compare"
-            );
+            TestLibrary
+                .TestFramework
+                .BeginScenario(
+                    "PosTest7:  Use the different instance's same instance method to create two delegate ,then use equals method to compare"
+                );
 
             try
             {
@@ -300,25 +312,25 @@ namespace DelegateTest
 
         public bool StartWork_Bool()
         {
-            TestLibrary.TestFramework.LogInformation(
-                "TestClass's StartWork_Bool method  is running. id=" + this.id
-            );
+            TestLibrary
+                .TestFramework
+                .LogInformation("TestClass's StartWork_Bool method  is running. id=" + this.id);
             return true;
         }
 
         public static bool Working_Bool()
         {
-            TestLibrary.TestFramework.LogInformation(
-                "TestClass's Working_Bool method  is running ."
-            );
+            TestLibrary
+                .TestFramework
+                .LogInformation("TestClass's Working_Bool method  is running .");
             return true;
         }
 
         public static bool Completed_Bool()
         {
-            TestLibrary.TestFramework.LogInformation(
-                "TestClass's Completed_Bool method  is running ."
-            );
+            TestLibrary
+                .TestFramework
+                .LogInformation("TestClass's Completed_Bool method  is running .");
             return true;
         }
     }
@@ -334,25 +346,25 @@ namespace DelegateTest
 
         public bool StartWork_Bool()
         {
-            TestLibrary.TestFramework.LogInformation(
-                "TestClass1's StartWork_Bool method  is running. id=" + this.id
-            );
+            TestLibrary
+                .TestFramework
+                .LogInformation("TestClass1's StartWork_Bool method  is running. id=" + this.id);
             return true;
         }
 
         public static bool Working_Bool()
         {
-            TestLibrary.TestFramework.LogInformation(
-                "TestClass1's Working_Bool method  is running ."
-            );
+            TestLibrary
+                .TestFramework
+                .LogInformation("TestClass1's Working_Bool method  is running .");
             return true;
         }
 
         public static bool Completed_Bool()
         {
-            TestLibrary.TestFramework.LogInformation(
-                "TestClass1's Completed_Bool method  is running ."
-            );
+            TestLibrary
+                .TestFramework
+                .LogInformation("TestClass1's Completed_Bool method  is running .");
             return true;
         }
     }

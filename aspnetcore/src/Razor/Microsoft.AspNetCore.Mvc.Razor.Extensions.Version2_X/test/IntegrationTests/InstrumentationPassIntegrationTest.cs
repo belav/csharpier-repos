@@ -13,8 +13,9 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version2_X.IntegrationTests;
 
 public class InstrumentationPassIntegrationTest : IntegrationTestBase
 {
-    private static readonly CSharpCompilation DefaultBaseCompilation =
-        MvcShim.BaseCompilation.WithAssemblyName("AppCode");
+    private static readonly CSharpCompilation DefaultBaseCompilation = MvcShim
+        .BaseCompilation
+        .WithAssemblyName("AppCode");
 
     public InstrumentationPassIntegrationTest()
         : base(

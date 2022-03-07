@@ -80,13 +80,15 @@ class C
     </assemblyBinding>
   </runtime>
 </configuration>"
-                    ).Path;
+                    )
+                    .Path;
 
             var silverlight =
                 Temp.CreateFile()
                     .WriteAllBytes(
                         ProprietaryTestResources.silverlight_v5_0_5_0.System_v5_0_5_0_silverlight
-                    ).Path;
+                    )
+                    .Path;
             var net4_0dll = Temp.CreateFile().WriteAllBytes(ResourcesNet451.System).Path;
 
             var outWriter = new StringWriter(CultureInfo.InvariantCulture);
@@ -126,7 +128,8 @@ class C
             var hello = Temp.CreateFile().WriteAllText(helloWorldCS).Path;
             var snkPath =
                 Temp.CreateFile("TestKeyPair_", ".snk")
-                    .WriteAllBytes(TestResources.General.snKey).Path;
+                    .WriteAllBytes(TestResources.General.snKey)
+                    .Path;
             var touchedDir = Temp.CreateDirectory();
             var touchedBase = Path.Combine(touchedDir.Path, "touched");
 
@@ -166,7 +169,8 @@ class C
 /// A subtype of <see cref=""object""/>.
 /// </summary>
 public class C { }"
-                    ).Path;
+                    )
+                    .Path;
             var xml = Temp.CreateFile();
             var touchedDir = Temp.CreateDirectory();
             var touchedBase = Path.Combine(touchedDir.Path, "touched");

@@ -357,9 +357,10 @@ public class WebHostBuilderTests
         using (var host = builder.Build())
         {
             await host.StartAsync();
-            var context = provider.Sink.Writes.Where(
-                s => s.EventId.Id == LoggerEventIds.HostingStartupAssemblyException
-            );
+            var context = provider
+                .Sink
+                .Writes
+                .Where(s => s.EventId.Id == LoggerEventIds.HostingStartupAssemblyException);
             Assert.NotNull(context);
             Assert.Single(context);
         }
@@ -1360,9 +1361,12 @@ public class WebHostBuilderTests
         using (var host = builder.Build())
         {
             await host.StartAsync();
-            var context = provider.Sink.Writes.FirstOrDefault(
-                s => s.EventId.Id == LoggerEventIds.HostingStartupAssemblyException
-            );
+            var context = provider
+                .Sink
+                .Writes
+                .FirstOrDefault(
+                    s => s.EventId.Id == LoggerEventIds.HostingStartupAssemblyException
+                );
             Assert.NotNull(context);
         }
     }

@@ -49,7 +49,9 @@ class Application
             Fact,
             Trait(
                 Traits.Feature,
-                Traits.Features.CodeActionsAddParenthesesAroundConditionalExpressionInInterpolatedString
+                Traits
+                    .Features
+                    .CodeActionsAddParenthesesAroundConditionalExpressionInInterpolatedString
             )
         ]
         public async Task TestAddParenthesesSimpleConditionalExpression()
@@ -64,7 +66,9 @@ class Application
             Fact,
             Trait(
                 Traits.Feature,
-                Traits.Features.CodeActionsAddParenthesesAroundConditionalExpressionInInterpolatedString
+                Traits
+                    .Features
+                    .CodeActionsAddParenthesesAroundConditionalExpressionInInterpolatedString
             )
         ]
         public async Task TestAddParenthesesMultiLineConditionalExpression1()
@@ -87,7 +91,9 @@ var s = $@""{ (true
             Fact,
             Trait(
                 Traits.Feature,
-                Traits.Features.CodeActionsAddParenthesesAroundConditionalExpressionInInterpolatedString
+                Traits
+                    .Features
+                    .CodeActionsAddParenthesesAroundConditionalExpressionInInterpolatedString
             )
         ]
         public async Task TestAddParenthesesMultiLineConditionalExpression2()
@@ -118,7 +124,9 @@ var s = $@""{
             Fact,
             Trait(
                 Traits.Feature,
-                Traits.Features.CodeActionsAddParenthesesAroundConditionalExpressionInInterpolatedString
+                Traits
+                    .Features
+                    .CodeActionsAddParenthesesAroundConditionalExpressionInInterpolatedString
             )
         ]
         public async Task TestAddParenthesesWithTrivia()
@@ -133,7 +141,9 @@ var s = $@""{
             Fact,
             Trait(
                 Traits.Feature,
-                Traits.Features.CodeActionsAddParenthesesAroundConditionalExpressionInInterpolatedString
+                Traits
+                    .Features
+                    .CodeActionsAddParenthesesAroundConditionalExpressionInInterpolatedString
             )
         ]
         public async Task TestAddParenthesesClosingBracketInFalseCondition()
@@ -148,7 +158,9 @@ var s = $@""{
             Fact,
             Trait(
                 Traits.Feature,
-                Traits.Features.CodeActionsAddParenthesesAroundConditionalExpressionInInterpolatedString
+                Traits
+                    .Features
+                    .CodeActionsAddParenthesesAroundConditionalExpressionInInterpolatedString
             )
         ]
         public async Task TestAddParenthesesStringLiteralInFalseCondition()
@@ -163,7 +175,9 @@ var s = $@""{
             Fact,
             Trait(
                 Traits.Feature,
-                Traits.Features.CodeActionsAddParenthesesAroundConditionalExpressionInInterpolatedString
+                Traits
+                    .Features
+                    .CodeActionsAddParenthesesAroundConditionalExpressionInInterpolatedString
             )
         ]
         public async Task TestAddParenthesesVerbatimStringLiteralInFalseCondition()
@@ -178,7 +192,9 @@ var s = $@""{
             Fact,
             Trait(
                 Traits.Feature,
-                Traits.Features.CodeActionsAddParenthesesAroundConditionalExpressionInInterpolatedString
+                Traits
+                    .Features
+                    .CodeActionsAddParenthesesAroundConditionalExpressionInInterpolatedString
             )
         ]
         public async Task TestAddParenthesesStringLiteralInFalseConditionWithClosingParenthesisInLiteral()
@@ -193,7 +209,9 @@ var s = $@""{
             Fact,
             Trait(
                 Traits.Feature,
-                Traits.Features.CodeActionsAddParenthesesAroundConditionalExpressionInInterpolatedString
+                Traits
+                    .Features
+                    .CodeActionsAddParenthesesAroundConditionalExpressionInInterpolatedString
             )
         ]
         public async Task TestAddParenthesesStringLiteralInFalseConditionWithEscapedDoubleQuotes()
@@ -208,7 +226,9 @@ var s = $@""{
             Fact,
             Trait(
                 Traits.Feature,
-                Traits.Features.CodeActionsAddParenthesesAroundConditionalExpressionInInterpolatedString
+                Traits
+                    .Features
+                    .CodeActionsAddParenthesesAroundConditionalExpressionInInterpolatedString
             )
         ]
         public async Task TestAddParenthesesStringLiteralInFalseConditionWithCodeLikeContent()
@@ -223,7 +243,9 @@ var s = $@""{
             Fact,
             Trait(
                 Traits.Feature,
-                Traits.Features.CodeActionsAddParenthesesAroundConditionalExpressionInInterpolatedString
+                Traits
+                    .Features
+                    .CodeActionsAddParenthesesAroundConditionalExpressionInInterpolatedString
             )
         ]
         public async Task TestAddParenthesesNestedConditionalExpression1()
@@ -238,7 +260,9 @@ var s = $@""{
             Fact,
             Trait(
                 Traits.Feature,
-                Traits.Features.CodeActionsAddParenthesesAroundConditionalExpressionInInterpolatedString
+                Traits
+                    .Features
+                    .CodeActionsAddParenthesesAroundConditionalExpressionInInterpolatedString
             )
         ]
         public async Task TestAddParenthesesNestedConditionalExpression2()
@@ -253,7 +277,9 @@ var s = $@""{
             Fact,
             Trait(
                 Traits.Feature,
-                Traits.Features.CodeActionsAddParenthesesAroundConditionalExpressionInInterpolatedString
+                Traits
+                    .Features
+                    .CodeActionsAddParenthesesAroundConditionalExpressionInInterpolatedString
             )
         ]
         public async Task TestAddParenthesesNestedConditionalWithNestedInterpolatedString()
@@ -268,7 +294,9 @@ var s = $@""{
             Fact,
             Trait(
                 Traits.Feature,
-                Traits.Features.CodeActionsAddParenthesesAroundConditionalExpressionInInterpolatedString
+                Traits
+                    .Features
+                    .CodeActionsAddParenthesesAroundConditionalExpressionInInterpolatedString
             )
         ]
         public async Task TestAddParenthesesMultipleInterpolatedSections1()
@@ -283,7 +311,9 @@ var s = $@""{
             Fact,
             Trait(
                 Traits.Feature,
-                Traits.Features.CodeActionsAddParenthesesAroundConditionalExpressionInInterpolatedString
+                Traits
+                    .Features
+                    .CodeActionsAddParenthesesAroundConditionalExpressionInInterpolatedString
             )
         ]
         public async Task TestAddParenthesesMultipleInterpolatedSections2()
@@ -298,7 +328,9 @@ var s = $@""{
             Fact,
             Trait(
                 Traits.Feature,
-                Traits.Features.CodeActionsAddParenthesesAroundConditionalExpressionInInterpolatedString
+                Traits
+                    .Features
+                    .CodeActionsAddParenthesesAroundConditionalExpressionInInterpolatedString
             )
         ]
         public async Task TestAddParenthesesMultipleInterpolatedSections3()
@@ -313,7 +345,9 @@ var s = $@""{
             Fact,
             Trait(
                 Traits.Feature,
-                Traits.Features.CodeActionsAddParenthesesAroundConditionalExpressionInInterpolatedString
+                Traits
+                    .Features
+                    .CodeActionsAddParenthesesAroundConditionalExpressionInInterpolatedString
             )
         ]
         public async Task TestAddParenthesesWhileTyping1()
@@ -334,7 +368,9 @@ var s = $@""{
             Fact,
             Trait(
                 Traits.Feature,
-                Traits.Features.CodeActionsAddParenthesesAroundConditionalExpressionInInterpolatedString
+                Traits
+                    .Features
+                    .CodeActionsAddParenthesesAroundConditionalExpressionInInterpolatedString
             )
         ]
         public async Task TestAddParenthesesWhileTyping2()
@@ -355,7 +391,9 @@ var s = $@""{
             Fact,
             Trait(
                 Traits.Feature,
-                Traits.Features.CodeActionsAddParenthesesAroundConditionalExpressionInInterpolatedString
+                Traits
+                    .Features
+                    .CodeActionsAddParenthesesAroundConditionalExpressionInInterpolatedString
             )
         ]
         public async Task TestAddParenthesesWhileTyping3()
@@ -376,7 +414,9 @@ var s = $@""{
             Fact,
             Trait(
                 Traits.Feature,
-                Traits.Features.CodeActionsAddParenthesesAroundConditionalExpressionInInterpolatedString
+                Traits
+                    .Features
+                    .CodeActionsAddParenthesesAroundConditionalExpressionInInterpolatedString
             )
         ]
         public async Task TestAddParenthesesWhileTyping4()
@@ -397,7 +437,9 @@ var s = $@""{
             Fact,
             Trait(
                 Traits.Feature,
-                Traits.Features.CodeActionsAddParenthesesAroundConditionalExpressionInInterpolatedString
+                Traits
+                    .Features
+                    .CodeActionsAddParenthesesAroundConditionalExpressionInInterpolatedString
             )
         ]
         public async Task TestAddParenthesesWhileTyping5()
@@ -418,7 +460,9 @@ var s = $@""{
             Fact,
             Trait(
                 Traits.Feature,
-                Traits.Features.CodeActionsAddParenthesesAroundConditionalExpressionInInterpolatedString
+                Traits
+                    .Features
+                    .CodeActionsAddParenthesesAroundConditionalExpressionInInterpolatedString
             )
         ]
         public async Task TestAddParenthesesWithCS1026PresentBeforeFixIsApplied1()
@@ -439,7 +483,9 @@ var s = $@""{
             Fact,
             Trait(
                 Traits.Feature,
-                Traits.Features.CodeActionsAddParenthesesAroundConditionalExpressionInInterpolatedString
+                Traits
+                    .Features
+                    .CodeActionsAddParenthesesAroundConditionalExpressionInInterpolatedString
             )
         ]
         public async Task TestAddParenthesesWithCS1026PresentBeforeFixIsApplied2()
@@ -460,7 +506,9 @@ var s = $@""{
             Fact,
             Trait(
                 Traits.Feature,
-                Traits.Features.CodeActionsAddParenthesesAroundConditionalExpressionInInterpolatedString
+                Traits
+                    .Features
+                    .CodeActionsAddParenthesesAroundConditionalExpressionInInterpolatedString
             )
         ]
         public async Task TestAddParenthesesWithCS1026PresentBeforeFixIsApplied3()
@@ -481,7 +529,9 @@ var s = $@""{
             Fact,
             Trait(
                 Traits.Feature,
-                Traits.Features.CodeActionsAddParenthesesAroundConditionalExpressionInInterpolatedString
+                Traits
+                    .Features
+                    .CodeActionsAddParenthesesAroundConditionalExpressionInInterpolatedString
             )
         ]
         public async Task TestAddParenthesesAddOpeningParenthesisOnly()

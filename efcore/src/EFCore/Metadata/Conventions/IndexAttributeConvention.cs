@@ -97,7 +97,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                     indexBuilder =
                         indexAttribute.Name == null
                             ? entityType.Builder.HasIndex(indexProperties, fromDataAnnotation: true)
-                            : entityType.Builder.HasIndex(
+                            : entityType
+                              .Builder
+                              .HasIndex(
                                   indexProperties,
                                   indexAttribute.Name,
                                   fromDataAnnotation: true
@@ -112,11 +114,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                         // e.g. if the CLR property existed but was non-public.
                         indexBuilder =
                             indexAttribute.Name == null
-                                ? entityType.Builder.HasIndex(
-                                      indexAttribute.PropertyNames,
-                                      fromDataAnnotation: true
-                                  )
-                                : entityType.Builder.HasIndex(
+                                ? entityType
+                                  .Builder
+                                  .HasIndex(indexAttribute.PropertyNames, fromDataAnnotation: true)
+                                : entityType
+                                  .Builder
+                                  .HasIndex(
                                       indexAttribute.PropertyNames,
                                       indexAttribute.Name,
                                       fromDataAnnotation: true

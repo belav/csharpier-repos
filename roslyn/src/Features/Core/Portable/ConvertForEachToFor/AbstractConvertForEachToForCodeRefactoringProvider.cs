@@ -354,9 +354,11 @@ namespace Microsoft.CodeAnalysis.ConvertForEachToFor
 
             // check ImmutableArray case
             if (
-                collectionType.OriginalDefinition.Equals(
-                    model.Compilation.GetTypeByMetadataName(typeof(ImmutableArray<>).FullName!)
-                )
+                collectionType
+                    .OriginalDefinition
+                    .Equals(
+                        model.Compilation.GetTypeByMetadataName(typeof(ImmutableArray<>).FullName!)
+                    )
             )
             {
                 var indexer = GetInterfaceMember(collectionType, get_Item);

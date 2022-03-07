@@ -81,9 +81,9 @@ namespace Microsoft.EntityFrameworkCore.Internal
                         );
                     }
 
-                    var findSameTypeName = _context.Model.FindSameTypeNameWithDifferentNamespace(
-                        typeof(TEntity)
-                    );
+                    var findSameTypeName = _context
+                        .Model
+                        .FindSameTypeNameWithDifferentNamespace(typeof(TEntity));
                     //if the same name exists in your entity types we will show you the full namespace of the type
                     if (!string.IsNullOrEmpty(findSameTypeName))
                     {
@@ -465,7 +465,8 @@ namespace Microsoft.EntityFrameworkCore.Internal
         private IEntityFinder<TEntity> Finder =>
             (IEntityFinder<TEntity>)_context
                 .GetDependencies()
-                .EntityFinderFactory.Create(EntityType);
+                .EntityFinderFactory
+                .Create(EntityType);
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -568,12 +569,8 @@ namespace Microsoft.EntityFrameworkCore.Internal
             {
                 _context
                     .GetDependencies()
-                    .EntityGraphAttacher.AttachGraph(
-                        entry,
-                        entityState,
-                        entityState,
-                        forceStateWhenUnknownKey: true
-                    );
+                    .EntityGraphAttacher
+                    .AttachGraph(entry, entityState, entityState, forceStateWhenUnknownKey: true);
             }
             else
             {
@@ -594,7 +591,8 @@ namespace Microsoft.EntityFrameworkCore.Internal
             return entry.EntityState == EntityState.Detached
               ? _context
                 .GetDependencies()
-                .EntityGraphAttacher.AttachGraphAsync(
+                .EntityGraphAttacher
+                .AttachGraphAsync(
                     entry,
                     entityState,
                     entityState,

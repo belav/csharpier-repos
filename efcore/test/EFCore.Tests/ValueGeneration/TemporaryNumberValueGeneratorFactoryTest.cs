@@ -96,9 +96,12 @@ namespace Microsoft.EntityFrameworkCore.ValueGeneration
                     "BadCheese",
                     "AnEntity"
                 ),
-                Assert.Throws<ArgumentException>(
-                    () => new TemporaryNumberValueGeneratorFactory().Create(property, entityType)
-                ).Message
+                Assert
+                    .Throws<ArgumentException>(
+                        () =>
+                            new TemporaryNumberValueGeneratorFactory().Create(property, entityType)
+                    )
+                    .Message
             );
         }
 

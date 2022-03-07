@@ -217,10 +217,9 @@ public class DeveloperExceptionPageMiddleware
                 continue;
             }
 
-            var sourceLines = compilationFailure.SourceFileContent?.Split(
-                new[] { Environment.NewLine },
-                StringSplitOptions.None
-            );
+            var sourceLines = compilationFailure
+                .SourceFileContent
+                ?.Split(new[] { Environment.NewLine }, StringSplitOptions.None);
 
             foreach (var item in compilationFailure.Messages)
             {
@@ -283,9 +282,9 @@ public class DeveloperExceptionPageMiddleware
 
         if (ex is BadHttpRequestException badHttpRequestException)
         {
-            var badRequestReasonPhrase = WebUtilities.ReasonPhrases.GetReasonPhrase(
-                badHttpRequestException.StatusCode
-            );
+            var badRequestReasonPhrase = WebUtilities
+                .ReasonPhrases
+                .GetReasonPhrase(badHttpRequestException.StatusCode);
 
             if (!string.IsNullOrEmpty(badRequestReasonPhrase))
             {

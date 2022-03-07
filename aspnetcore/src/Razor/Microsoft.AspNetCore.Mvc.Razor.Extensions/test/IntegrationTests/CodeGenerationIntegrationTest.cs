@@ -13,8 +13,9 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.IntegrationTests;
 
 public class CodeGenerationIntegrationTest : IntegrationTestBase
 {
-    private static readonly CSharpCompilation DefaultBaseCompilation =
-        MvcShim.BaseCompilation.WithAssemblyName("AppCode");
+    private static readonly CSharpCompilation DefaultBaseCompilation = MvcShim
+        .BaseCompilation
+        .WithAssemblyName("AppCode");
 
     public CodeGenerationIntegrationTest()
         : base(
@@ -49,7 +50,8 @@ public class CodeGenerationIntegrationTest : IntegrationTestBase
         AssertCSharpDocumentMatchesBaseline(compiled.CodeDocument.GetCSharpDocument());
         AssertLinePragmas(compiled.CodeDocument, designTime: false);
 
-        var diagnostics = compiled.Compilation
+        var diagnostics = compiled
+            .Compilation
             .GetDiagnostics()
             .Where(d => d.Severity >= DiagnosticSeverity.Warning);
         Assert.Equal(
@@ -190,7 +192,8 @@ public class MyModel
         AssertCSharpDocumentMatchesBaseline(compiled.CodeDocument.GetCSharpDocument());
         AssertLinePragmas(compiled.CodeDocument, designTime: false);
 
-        var diagnostics = compiled.Compilation
+        var diagnostics = compiled
+            .Compilation
             .GetDiagnostics()
             .Where(d => d.Severity >= DiagnosticSeverity.Warning);
         Assert.Equal("Duplicate 'Serializable' attribute", Assert.Single(diagnostics).GetMessage());
@@ -769,7 +772,8 @@ public class FormTagHelper : {typeof(TagHelper).FullName}
         AssertLinePragmas(compiled.CodeDocument, designTime: true);
         AssertSourceMappingsMatchBaseline(compiled.CodeDocument);
 
-        var diagnostics = compiled.Compilation
+        var diagnostics = compiled
+            .Compilation
             .GetDiagnostics()
             .Where(d => d.Severity >= DiagnosticSeverity.Warning);
         Assert.Equal(
@@ -921,7 +925,8 @@ public class MyModel
         AssertLinePragmas(compiled.CodeDocument, designTime: true);
         AssertSourceMappingsMatchBaseline(compiled.CodeDocument);
 
-        var diagnostics = compiled.Compilation
+        var diagnostics = compiled
+            .Compilation
             .GetDiagnostics()
             .Where(d => d.Severity >= DiagnosticSeverity.Warning);
         Assert.Equal("Duplicate 'Serializable' attribute", Assert.Single(diagnostics).GetMessage());

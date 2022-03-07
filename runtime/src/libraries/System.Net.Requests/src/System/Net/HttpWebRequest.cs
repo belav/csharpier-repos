@@ -1068,17 +1068,16 @@ namespace System.Net
                             request.Content = new ByteArrayContent(Array.Empty<byte>());
                         }
 
-                        request.Content.Headers.TryAddWithoutValidation(
-                            headerName,
-                            _webHeaderCollection[headerName!]
-                        );
+                        request
+                            .Content
+                            .Headers
+                            .TryAddWithoutValidation(headerName, _webHeaderCollection[headerName!]);
                     }
                     else
                     {
-                        request.Headers.TryAddWithoutValidation(
-                            headerName,
-                            _webHeaderCollection[headerName!]
-                        );
+                        request
+                            .Headers
+                            .TryAddWithoutValidation(headerName, _webHeaderCollection[headerName!]);
                     }
                 }
 

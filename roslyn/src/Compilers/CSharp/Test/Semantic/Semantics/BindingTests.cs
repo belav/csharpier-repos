@@ -2418,12 +2418,13 @@ partial class C
 ";
             CompileAndVerify(
                 source,
-                options: TestOptions.ReleaseDll.WithMetadataImportOptions(
-                    MetadataImportOptions.All
-                ),
+                options: TestOptions
+                    .ReleaseDll
+                    .WithMetadataImportOptions(MetadataImportOptions.All),
                 symbolValidator: module =>
                 {
-                    var method = module.GlobalNamespace
+                    var method = module
+                        .GlobalNamespace
                         .GetMember<TypeSymbol>("C")
                         .GetMember<MethodSymbol>("F");
                     Assert.Equal("i", method.Parameters[0].Name);
@@ -2449,12 +2450,13 @@ partial class C
 ";
             CompileAndVerify(
                 source,
-                options: TestOptions.ReleaseDll.WithMetadataImportOptions(
-                    MetadataImportOptions.All
-                ),
+                options: TestOptions
+                    .ReleaseDll
+                    .WithMetadataImportOptions(MetadataImportOptions.All),
                 symbolValidator: module =>
                 {
-                    var method = module.GlobalNamespace
+                    var method = module
+                        .GlobalNamespace
                         .GetMember<TypeSymbol>("C")
                         .GetMember<MethodSymbol>("F");
                     Assert.Equal("i", method.Parameters[0].Name);
@@ -3690,7 +3692,8 @@ class C
                             n.IsKind(SyntaxKind.IdentifierName)
                             && ((IdentifierNameSyntax)n).Identifier.ValueText == "Use"
                     )
-                    .Single().Parent;
+                    .Single()
+                    .Parent;
             Assert.Equal("app.Use", node1.ToString());
             var group1 = model.GetMemberGroup(node1);
             Assert.Equal(2, group1.Length);
@@ -3720,7 +3723,8 @@ class C
                             n.IsKind(SyntaxKind.IdentifierName)
                             && ((IdentifierNameSyntax)n).Identifier.ValueText == "AuthenticateAsync"
                     )
-                    .Single().Parent;
+                    .Single()
+                    .Parent;
 
             Assert.Equal("ctx.Authentication.AuthenticateAsync", node.ToString());
 
@@ -3805,7 +3809,8 @@ class C
                             n.IsKind(SyntaxKind.IdentifierName)
                             && ((IdentifierNameSyntax)n).Identifier.ValueText == "Use"
                     )
-                    .Single().Parent;
+                    .Single()
+                    .Parent;
             Assert.Equal("app.Use", node1.ToString());
             var group1 = model.GetMemberGroup(node1);
             Assert.Equal(2, group1.Length);
@@ -3835,7 +3840,8 @@ class C
                             n.IsKind(SyntaxKind.IdentifierName)
                             && ((IdentifierNameSyntax)n).Identifier.ValueText == "AuthenticateAsync"
                     )
-                    .Single().Parent;
+                    .Single()
+                    .Parent;
 
             Assert.Equal("ctx.Authentication.AuthenticateAsync", node.ToString());
 
@@ -3910,7 +3916,8 @@ class C
                             n.IsKind(SyntaxKind.IdentifierName)
                             && ((IdentifierNameSyntax)n).Identifier.ValueText == "Use"
                     )
-                    .Single().Parent;
+                    .Single()
+                    .Parent;
             Assert.Equal("app.Use", node1.ToString());
             var group1 = model.GetMemberGroup(node1);
             Assert.Equal(2, group1.Length);
@@ -3944,7 +3951,8 @@ class C
                             n.IsKind(SyntaxKind.IdentifierName)
                             && ((IdentifierNameSyntax)n).Identifier.ValueText == "AuthenticateAsync"
                     )
-                    .Single().Parent;
+                    .Single()
+                    .Parent;
 
             Assert.Equal("ctx.Authentication.AuthenticateAsync", node.ToString());
 
@@ -4033,7 +4041,8 @@ class C
                             n.IsKind(SyntaxKind.IdentifierName)
                             && ((IdentifierNameSyntax)n).Identifier.ValueText == "Use"
                     )
-                    .Single().Parent;
+                    .Single()
+                    .Parent;
             Assert.Equal("app.Use", node1.ToString());
             var group1 = model.GetMemberGroup(node1);
             Assert.Equal(2, group1.Length);
@@ -4067,7 +4076,8 @@ class C
                             n.IsKind(SyntaxKind.IdentifierName)
                             && ((IdentifierNameSyntax)n).Identifier.ValueText == "AuthenticateAsync"
                     )
-                    .Single().Parent;
+                    .Single()
+                    .Parent;
 
             Assert.Equal("ctx.Authentication.AuthenticateAsync", node.ToString());
 
@@ -4174,7 +4184,8 @@ static class Extension2
                             n.IsKind(SyntaxKind.IdentifierName)
                             && ((IdentifierNameSyntax)n).Identifier.ValueText == "MathMin"
                     )
-                    .Single().Parent;
+                    .Single()
+                    .Parent;
             Assert.Equal("MathMin(0, 1)", node1.ToString());
 
             var names = model.LookupNames(node1.SpanStart);
@@ -4332,7 +4343,8 @@ class Program
                             n.IsKind(SyntaxKind.IdentifierName)
                             && ((IdentifierNameSyntax)n).Identifier.ValueText == "E"
                     )
-                    .Single().Parent;
+                    .Single()
+                    .Parent;
             Assert.Equal("x.E1.E", node1.ToString());
             Assert.Equal(SyntaxKind.QualifiedName, node1.Kind());
 

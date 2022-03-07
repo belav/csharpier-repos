@@ -39,12 +39,14 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
     public class DiagnosticAnalyzerServiceTests
     {
         private static readonly TestComposition s_featuresCompositionWithMockDiagnosticUpdateSourceRegistrationService =
-            FeaturesTestCompositions.Features
+            FeaturesTestCompositions
+                .Features
                 .AddExcludedPartTypes(typeof(IDiagnosticUpdateSourceRegistrationService))
                 .AddParts(typeof(MockDiagnosticUpdateSourceRegistrationService));
 
         private static readonly TestComposition s_editorFeaturesCompositionWithMockDiagnosticUpdateSourceRegistrationService =
-            EditorTestCompositions.EditorFeatures
+            EditorTestCompositions
+                .EditorFeatures
                 .AddExcludedPartTypes(typeof(IDiagnosticUpdateSourceRegistrationService))
                 .AddParts(typeof(MockDiagnosticUpdateSourceRegistrationService));
 
@@ -108,14 +110,18 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
                 ImmutableArray.Create<DiagnosticAnalyzer>(new Analyzer())
             );
 
-            var options = workspace.CurrentSolution.Options.WithChangedOption(
-                SolutionCrawlerOptions.BackgroundAnalysisScopeOption,
-                LanguageNames.CSharp,
-                BackgroundAnalysisScope.FullSolution
-            );
+            var options = workspace
+                .CurrentSolution
+                .Options
+                .WithChangedOption(
+                    SolutionCrawlerOptions.BackgroundAnalysisScopeOption,
+                    LanguageNames.CSharp,
+                    BackgroundAnalysisScope.FullSolution
+                );
 
             workspace.TryApplyChanges(
-                workspace.CurrentSolution
+                workspace
+                    .CurrentSolution
                     .WithOptions(options)
                     .WithAnalyzerReferences(new[] { analyzerReference })
             );
@@ -194,14 +200,18 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
                 ImmutableArray.Create<DiagnosticAnalyzer>(new CSharpCompilerDiagnosticAnalyzer())
             );
 
-            var options = workspace.CurrentSolution.Options.WithChangedOption(
-                SolutionCrawlerOptions.BackgroundAnalysisScopeOption,
-                LanguageNames.CSharp,
-                BackgroundAnalysisScope.FullSolution
-            );
+            var options = workspace
+                .CurrentSolution
+                .Options
+                .WithChangedOption(
+                    SolutionCrawlerOptions.BackgroundAnalysisScopeOption,
+                    LanguageNames.CSharp,
+                    BackgroundAnalysisScope.FullSolution
+                );
 
             workspace.TryApplyChanges(
-                workspace.CurrentSolution
+                workspace
+                    .CurrentSolution
                     .WithOptions(options)
                     .WithAnalyzerReferences(new[] { analyzerReference })
             );
@@ -230,14 +240,18 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
                 ImmutableArray.Create<DiagnosticAnalyzer>(new DisabledByDefaultAnalyzer())
             );
 
-            var options = workspace.CurrentSolution.Options.WithChangedOption(
-                SolutionCrawlerOptions.BackgroundAnalysisScopeOption,
-                LanguageNames.CSharp,
-                BackgroundAnalysisScope.FullSolution
-            );
+            var options = workspace
+                .CurrentSolution
+                .Options
+                .WithChangedOption(
+                    SolutionCrawlerOptions.BackgroundAnalysisScopeOption,
+                    LanguageNames.CSharp,
+                    BackgroundAnalysisScope.FullSolution
+                );
 
             workspace.TryApplyChanges(
-                workspace.CurrentSolution
+                workspace
+                    .CurrentSolution
                     .WithAnalyzerReferences(new[] { analyzerReference })
                     .WithOptions(options)
             );
@@ -263,11 +277,13 @@ dotnet_diagnostic.{DisabledByDefaultAnalyzer.s_semanticRule.Id}.severity = warni
 dotnet_diagnostic.{DisabledByDefaultAnalyzer.s_compilationRule.Id}.severity = warning";
 
                 project =
-                    project.AddAnalyzerConfigDocument(
-                        ".editorconfig",
-                        filePath: "z:\\.editorconfig",
-                        text: SourceText.From(editorconfigText)
-                    ).Project;
+                    project
+                        .AddAnalyzerConfigDocument(
+                            ".editorconfig",
+                            filePath: "z:\\.editorconfig",
+                            text: SourceText.From(editorconfigText)
+                        )
+                        .Project;
             }
 
             var document = project.AddDocument(
@@ -539,15 +555,17 @@ dotnet_diagnostic.{DisabledByDefaultAnalyzer.s_compilationRule.Id}.severity = wa
 
             await service.SynchronizeWithBuildAsync(
                 workspace,
-                ImmutableDictionary<ProjectId, ImmutableArray<DiagnosticData>>.Empty.Add(
-                    document.Project.Id,
-                    ImmutableArray.Create(
-                        DiagnosticData.Create(
-                            Diagnostic.Create(NoNameAnalyzer.s_syntaxRule, location),
-                            document.Project
+                ImmutableDictionary<ProjectId, ImmutableArray<DiagnosticData>>
+                    .Empty
+                    .Add(
+                        document.Project.Id,
+                        ImmutableArray.Create(
+                            DiagnosticData.Create(
+                                Diagnostic.Create(NoNameAnalyzer.s_syntaxRule, location),
+                                document.Project
+                            )
                         )
-                    )
-                ),
+                    ),
                 new TaskQueue(service.Listener, TaskScheduler.Default),
                 onBuildCompleted: true,
                 CancellationToken.None
@@ -637,11 +655,13 @@ dotnet_diagnostic.{DisabledByDefaultAnalyzer.s_compilationRule.Id}.severity = wa
                 )
             );
 
-            var options = solution.Options.WithChangedOption(
-                SolutionCrawlerOptions.BackgroundAnalysisScopeOption,
-                LanguageNames.CSharp,
-                BackgroundAnalysisScope.FullSolution
-            );
+            var options = solution
+                .Options
+                .WithChangedOption(
+                    SolutionCrawlerOptions.BackgroundAnalysisScopeOption,
+                    LanguageNames.CSharp,
+                    BackgroundAnalysisScope.FullSolution
+                );
             workspace.TryApplyChanges(
                 solution.WithOptions(options).WithAnalyzerReferences(new[] { analyzerReference })
             );
@@ -739,10 +759,10 @@ dotnet_diagnostic.{DisabledByDefaultAnalyzer.s_compilationRule.Id}.severity = wa
             );
             var project = workspace.CurrentSolution.Projects.Single();
 
-            var newSpecificOptions = project.CompilationOptions.SpecificDiagnosticOptions.Add(
-                NamedTypeAnalyzer.DiagnosticId,
-                ReportDiagnostic.Warn
-            );
+            var newSpecificOptions = project
+                .CompilationOptions
+                .SpecificDiagnosticOptions
+                .Add(NamedTypeAnalyzer.DiagnosticId, ReportDiagnostic.Warn);
             project = project.WithCompilationOptions(
                 project.CompilationOptions.WithSpecificDiagnosticOptions(newSpecificOptions)
             );
@@ -770,11 +790,13 @@ dotnet_diagnostic.{NamedTypeAnalyzer.DiagnosticId}.severity = warning
 ";
 
             project =
-                project.AddAnalyzerConfigDocument(
-                    ".editorconfig",
-                    text: SourceText.From(analyzerConfigText),
-                    filePath: "z:\\.editorconfig"
-                ).Project;
+                project
+                    .AddAnalyzerConfigDocument(
+                        ".editorconfig",
+                        text: SourceText.From(analyzerConfigText),
+                        filePath: "z:\\.editorconfig"
+                    )
+                    .Project;
 
             await TestFullSolutionAnalysisForProjectAsync(
                 workspace,
@@ -794,11 +816,13 @@ dotnet_diagnostic.{NamedTypeAnalyzer.DiagnosticId}.severity = warning
 
             solution = solution
                 .WithOptions(
-                    solution.Options.WithChangedOption(
-                        SolutionCrawlerOptions.BackgroundAnalysisScopeOption,
-                        LanguageNames.CSharp,
-                        BackgroundAnalysisScope.FullSolution
-                    )
+                    solution
+                        .Options
+                        .WithChangedOption(
+                            SolutionCrawlerOptions.BackgroundAnalysisScopeOption,
+                            LanguageNames.CSharp,
+                            BackgroundAnalysisScope.FullSolution
+                        )
                 )
                 .AddAnalyzerReference(new AnalyzerImageReference(ImmutableArray.Create(analyzer)))
                 .AddProject(
@@ -892,11 +916,13 @@ dotnet_diagnostic.{NamedTypeAnalyzer.DiagnosticId}.severity = warning
             var exportProvider = (IMefHostExportProvider)workspace.Services.HostServices;
             var globalOptions = exportProvider.GetExportedValue<IGlobalOptionService>();
 
-            var options = workspace.Options.WithChangedOption(
-                SolutionCrawlerOptions.BackgroundAnalysisScopeOption,
-                LanguageNames.CSharp,
-                analysisScope
-            );
+            var options = workspace
+                .Options
+                .WithChangedOption(
+                    SolutionCrawlerOptions.BackgroundAnalysisScopeOption,
+                    LanguageNames.CSharp,
+                    analysisScope
+                );
             workspace.SetOptions(options);
 
             var projectInfo = ProjectInfo.Create(
@@ -933,15 +959,18 @@ dotnet_diagnostic.{NamedTypeAnalyzer.DiagnosticId}.severity = warning
                         name: "dummy.txt",
                         text: "Additional File Text",
                         filePath: "dummy.txt"
-                    ).Project;
+                    )
+                    .Project;
             if (testMultiple)
             {
                 project =
-                    project.AddAdditionalDocument(
-                        name: "dummy2.txt",
-                        text: "Additional File2 Text",
-                        filePath: "dummy2.txt"
-                    ).Project;
+                    project
+                        .AddAdditionalDocument(
+                            name: "dummy2.txt",
+                            text: "Additional File2 Text",
+                            filePath: "dummy2.txt"
+                        )
+                        .Project;
             }
 
             var applied = workspace.TryApplyChanges(project.Solution);
@@ -1081,11 +1110,13 @@ dotnet_diagnostic.{NamedTypeAnalyzer.DiagnosticId}.severity = warning
                     typeof(TestDocumentTrackingService)
                 )
             );
-            var options = workspace.Options.WithChangedOption(
-                SolutionCrawlerOptions.BackgroundAnalysisScopeOption,
-                LanguageNames.CSharp,
-                analysisScope
-            );
+            var options = workspace
+                .Options
+                .WithChangedOption(
+                    SolutionCrawlerOptions.BackgroundAnalysisScopeOption,
+                    LanguageNames.CSharp,
+                    analysisScope
+                );
             workspace.SetOptions(options);
 
             workspace.TryApplyChanges(
@@ -1125,8 +1156,9 @@ dotnet_diagnostic.{NamedTypeAnalyzer.DiagnosticId}.severity = warning
             {
                 case BackgroundAnalysisScope.ActiveFile:
                     workspace.OpenDocument(document.Id);
-                    var documentTrackingService =
-                        (TestDocumentTrackingService)workspace.Services.GetService<IDocumentTrackingService>();
+                    var documentTrackingService = (TestDocumentTrackingService)workspace
+                        .Services
+                        .GetService<IDocumentTrackingService>();
                     documentTrackingService.SetActiveDocument(document.Id);
                     await incrementalAnalyzer.AnalyzeDocumentAsync(
                         document,
@@ -1227,11 +1259,13 @@ class A
                     typeof(TestDocumentTrackingService)
                 )
             );
-            var options = workspace.Options.WithChangedOption(
-                SolutionCrawlerOptions.BackgroundAnalysisScopeOption,
-                LanguageNames.CSharp,
-                analysisScope
-            );
+            var options = workspace
+                .Options
+                .WithChangedOption(
+                    SolutionCrawlerOptions.BackgroundAnalysisScopeOption,
+                    LanguageNames.CSharp,
+                    analysisScope
+                );
             workspace.SetOptions(options);
 
             workspace.TryApplyChanges(
@@ -1271,8 +1305,9 @@ class A
             {
                 case BackgroundAnalysisScope.ActiveFile:
                     workspace.OpenDocument(document.Id);
-                    var documentTrackingService =
-                        (TestDocumentTrackingService)workspace.Services.GetRequiredService<IDocumentTrackingService>();
+                    var documentTrackingService = (TestDocumentTrackingService)workspace
+                        .Services
+                        .GetRequiredService<IDocumentTrackingService>();
                     documentTrackingService.SetActiveDocument(document.Id);
                     await incrementalAnalyzer.AnalyzeDocumentAsync(
                         document,

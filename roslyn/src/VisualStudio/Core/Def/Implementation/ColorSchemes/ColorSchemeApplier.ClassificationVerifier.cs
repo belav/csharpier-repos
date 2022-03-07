@@ -83,23 +83,30 @@ namespace Microsoft.VisualStudio.LanguageServices.ColorSchemes
                 _colorSchemes = colorSchemes.ToImmutableDictionary(
                     nameAndScheme => nameAndScheme.Key,
                     nameAndScheme =>
-                        nameAndScheme.Value.Themes.ToImmutableDictionary(
-                            theme => theme.Guid,
-                            theme =>
-                                theme.Category.Colors
-                                    .Where(color => color.Foreground.HasValue)
-                                    .ToImmutableDictionary(
-                                        color => color.Name,
-                                        color => color.Foreground!.Value
-                                    )
-                        )
+                        nameAndScheme
+                            .Value
+                            .Themes
+                            .ToImmutableDictionary(
+                                theme => theme.Guid,
+                                theme =>
+                                    theme
+                                        .Category
+                                        .Colors
+                                        .Where(color => color.Foreground.HasValue)
+                                        .ToImmutableDictionary(
+                                            color => color.Name,
+                                            color => color.Foreground!.Value
+                                        )
+                            )
                 );
 
                 // Gather all the classifications from the core and scheme dictionaries.
-                var coreClassifications = DarkThemeForeground.Keys
+                var coreClassifications = DarkThemeForeground
+                    .Keys
                     .Concat(BlueLightThemeForeground.Keys)
                     .Distinct();
-                var colorSchemeClassifications = _colorSchemes.Values
+                var colorSchemeClassifications = _colorSchemes
+                    .Values
                     .SelectMany(scheme => scheme.Values.SelectMany(theme => theme.Keys))
                     .Distinct();
                 Classifications = coreClassifications

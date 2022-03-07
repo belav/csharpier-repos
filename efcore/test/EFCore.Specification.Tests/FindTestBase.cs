@@ -315,13 +315,15 @@ namespace Microsoft.EntityFrameworkCore
                     typeof(Microsoft.EntityFrameworkCore.DifferentNamespace.ShadowKey).DisplayName(),
                     typeof(ShadowKey).DisplayName()
                 ),
-                Assert.Throws<InvalidOperationException>(
-                    () =>
-                        Find<Microsoft.EntityFrameworkCore.DifferentNamespace.ShadowKey>(
-                            context,
-                            77
-                        )
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(
+                        () =>
+                            Find<Microsoft.EntityFrameworkCore.DifferentNamespace.ShadowKey>(
+                                context,
+                                77
+                            )
+                    )
+                    .Message
             );
         }
 

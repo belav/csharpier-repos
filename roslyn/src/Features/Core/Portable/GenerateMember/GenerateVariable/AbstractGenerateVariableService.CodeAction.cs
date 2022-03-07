@@ -64,7 +64,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateVariable
                     afterThisLocation: _state.AfterThisLocation,
                     beforeThisLocation: _state.BeforeThisLocation,
                     contextLocation: _state.IdentifierToken.GetLocation(),
-                    options: await _semanticDocument.Document
+                    options: await _semanticDocument
+                        .Document
                         .GetOptionsAsync(cancellationToken)
                         .ConfigureAwait(false)
                 );
@@ -143,7 +144,11 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateVariable
 
             private ImmutableArray<SyntaxNode> GenerateStatements()
             {
-                var syntaxFactory = _semanticDocument.Project.Solution.Workspace.Services
+                var syntaxFactory = _semanticDocument
+                    .Project
+                    .Solution
+                    .Workspace
+                    .Services
                     .GetLanguageServices(_state.TypeToGenerateIn.Language)
                     .GetService<SyntaxGenerator>();
 
@@ -170,8 +175,9 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateVariable
                 var accessibility = Accessibility.Public;
 
                 // Ensure that we're not overly exposing a type.
-                var containingTypeAccessibility =
-                    state.TypeToGenerateIn.DetermineMinimalAccessibility();
+                var containingTypeAccessibility = state
+                    .TypeToGenerateIn
+                    .DetermineMinimalAccessibility();
                 var effectiveAccessibility = AccessibilityUtilities.Minimum(
                     containingTypeAccessibility,
                     accessibility
@@ -199,8 +205,9 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateVariable
 
                 // Otherwise, figure out what accessibility modifier to use and optionally mark
                 // it as static.
-                var syntaxFacts =
-                    _semanticDocument.Document.GetLanguageService<ISyntaxFactsService>();
+                var syntaxFacts = _semanticDocument
+                    .Document
+                    .GetLanguageService<ISyntaxFactsService>();
                 if (
                     syntaxFacts.IsAttributeNamedArgumentIdentifier(
                         state.SimpleNameOrMemberAccessExpressionOpt
@@ -234,9 +241,12 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateVariable
                     return Accessibility.Protected;
                 }
                 else if (
-                    state.ContainingType.ContainingAssembly.IsSameAssemblyOrHasFriendAccessTo(
-                        state.TypeToGenerateIn.ContainingAssembly
-                    )
+                    state
+                        .ContainingType
+                        .ContainingAssembly
+                        .IsSameAssemblyOrHasFriendAccessTo(
+                            state.TypeToGenerateIn.ContainingAssembly
+                        )
                 )
                 {
                     return Accessibility.Internal;

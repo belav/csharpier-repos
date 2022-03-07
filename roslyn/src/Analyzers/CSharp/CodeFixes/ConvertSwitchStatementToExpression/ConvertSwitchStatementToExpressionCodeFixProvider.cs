@@ -97,8 +97,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertSwitchStatementToExpression
                     properties[Constants.ShouldRemoveNextStatementKey]
                 );
 
-                var declaratorToRemoveLocationOpt =
-                    diagnostic.AdditionalLocations.ElementAtOrDefault(1);
+                var declaratorToRemoveLocationOpt = diagnostic
+                    .AdditionalLocations
+                    .ElementAtOrDefault(1);
                 var semanticModel = await document
                     .GetSemanticModelAsync(cancellationToken)
                     .ConfigureAwait(false);

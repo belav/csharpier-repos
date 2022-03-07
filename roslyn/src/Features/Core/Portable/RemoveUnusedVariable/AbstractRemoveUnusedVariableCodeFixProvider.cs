@@ -101,7 +101,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedVariable
                         () =>
                             syntaxEditor.ReplaceNode(
                                 token.Parent,
-                                token.Parent
+                                token
+                                    .Parent
                                     .ReplaceToken(token, default(SyntaxToken))
                                     .WithAdditionalAnnotations(Formatter.Annotation)
                             )
@@ -113,10 +114,9 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedVariable
                     nodesToRemove.Add(node);
                 }
 
-                var symbol = documentEditor.SemanticModel.GetDeclaredSymbol(
-                    node,
-                    cancellationToken
-                );
+                var symbol = documentEditor
+                    .SemanticModel
+                    .GetDeclaredSymbol(node, cancellationToken);
                 var referencedSymbols = await SymbolFinder
                     .FindReferencesAsync(
                         symbol,

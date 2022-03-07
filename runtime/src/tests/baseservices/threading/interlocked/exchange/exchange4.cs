@@ -49,9 +49,9 @@ public class InterlockedExchange4
         Single prevLocation;
         Single oldLocation;
 
-        TestLibrary.TestFramework.BeginScenario(
-            "PosTest1: Single Interlocked.Exchange(Single&,Single)"
-        );
+        TestLibrary
+            .TestFramework
+            .BeginScenario("PosTest1: Single Interlocked.Exchange(Single&,Single)");
 
         try
         {
@@ -65,27 +65,31 @@ public class InterlockedExchange4
 
                 if (!location.Equals(value))
                 {
-                    TestLibrary.TestFramework.LogError(
-                        "001",
-                        "Interlocked.Exchange() did not do the exchange correctly: Expected("
-                            + value
-                            + ") Actual("
-                            + location
-                            + ")"
-                    );
+                    TestLibrary
+                        .TestFramework
+                        .LogError(
+                            "001",
+                            "Interlocked.Exchange() did not do the exchange correctly: Expected("
+                                + value
+                                + ") Actual("
+                                + location
+                                + ")"
+                        );
                     retVal = false;
                 }
 
                 if (!oldLocation.Equals(prevLocation))
                 {
-                    TestLibrary.TestFramework.LogError(
-                        "002",
-                        "Interlocked.Exchange() did not return the expected value: Expected("
-                            + prevLocation
-                            + ") Actual("
-                            + oldLocation
-                            + ")"
-                    );
+                    TestLibrary
+                        .TestFramework
+                        .LogError(
+                            "002",
+                            "Interlocked.Exchange() did not return the expected value: Expected("
+                                + prevLocation
+                                + ") Actual("
+                                + oldLocation
+                                + ")"
+                        );
                     retVal = false;
                 }
             }

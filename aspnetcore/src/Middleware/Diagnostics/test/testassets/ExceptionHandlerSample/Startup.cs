@@ -28,19 +28,23 @@ public class Startup
                         context.Response.StatusCode = 500;
                         context.Response.ContentType = "text/html";
                         await context.Response.WriteAsync("<html><body>\r\n");
-                        await context.Response.WriteAsync(
-                            "We're sorry, we encountered an un-expected issue with your application.<br>\r\n"
-                        );
+                        await context
+                            .Response
+                            .WriteAsync(
+                                "We're sorry, we encountered an un-expected issue with your application.<br>\r\n"
+                            );
 
                         var error = context.Features.Get<IExceptionHandlerFeature>();
                         if (error != null)
                         {
                             // This error would not normally be exposed to the client
-                            await context.Response.WriteAsync(
-                                "<br>Error: "
-                                    + HtmlEncoder.Default.Encode(error.Error.Message)
-                                    + "<br>\r\n"
-                            );
+                            await context
+                                .Response
+                                .WriteAsync(
+                                    "<br>Error: "
+                                        + HtmlEncoder.Default.Encode(error.Error.Message)
+                                        + "<br>\r\n"
+                                );
                         }
                         await context.Response.WriteAsync("<br><a href=\"/\">Home</a><br>\r\n");
                         await context.Response.WriteAsync("</body></html>\r\n");
@@ -75,9 +79,11 @@ public class Startup
             {
                 context.Response.ContentType = "text/html";
                 await context.Response.WriteAsync("<html><body>Welcome to the sample<br><br>\r\n");
-                await context.Response.WriteAsync(
-                    "Click here to throw an exception: <a href=\"/throw\">throw</a>\r\n"
-                );
+                await context
+                    .Response
+                    .WriteAsync(
+                        "Click here to throw an exception: <a href=\"/throw\">throw</a>\r\n"
+                    );
                 await context.Response.WriteAsync("</body></html>\r\n");
             }
         );

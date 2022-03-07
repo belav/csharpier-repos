@@ -445,9 +445,9 @@ namespace System.Security.Cryptography.Cng.Tests
                 {
                     // Windows 7 (Microsoft Windows 6.1) does not support persisted symmetric keys
                     // in the Microsoft Software KSP
-                    s_supportsPersistedSymmetricKeys = !RuntimeInformation.OSDescription.Contains(
-                        "Windows 6.1"
-                    );
+                    s_supportsPersistedSymmetricKeys = !RuntimeInformation
+                        .OSDescription
+                        .Contains("Windows 6.1");
                 }
 
                 return s_supportsPersistedSymmetricKeys.Value;

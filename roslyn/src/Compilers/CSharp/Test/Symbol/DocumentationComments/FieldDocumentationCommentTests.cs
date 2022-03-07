@@ -57,7 +57,8 @@ namespace Acme
 "
             );
 
-            _acmeNamespace = (NamespaceSymbol)_compilation.GlobalNamespace
+            _acmeNamespace = (NamespaceSymbol)_compilation
+                .GlobalNamespace
                 .GetMembers("Acme")
                 .Single();
             _widgetClass = _acmeNamespace.GetTypeMembers("Widget").Single();

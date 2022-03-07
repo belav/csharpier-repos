@@ -207,7 +207,8 @@ namespace System.Web.Http.ModelBinding.Binders
 
         private static object GetPropertyDefaultValue(PropertyDescriptor propertyDescriptor)
         {
-            DefaultValueAttribute attr = propertyDescriptor.Attributes
+            DefaultValueAttribute attr = propertyDescriptor
+                .Attributes
                 .OfType<DefaultValueAttribute>()
                 .FirstOrDefault();
             return (attr != null) ? attr.Value : null;
@@ -247,7 +248,8 @@ namespace System.Web.Http.ModelBinding.Binders
                     .FirstOrDefault();
                 requiredValidators[propertyName] = requiredValidator;
 
-                HttpBindingBehaviorAttribute propAttr = propertyDescriptor.Attributes
+                HttpBindingBehaviorAttribute propAttr = propertyDescriptor
+                    .Attributes
                     .OfType<HttpBindingBehaviorAttribute>()
                     .SingleOrDefault();
                 HttpBindingBehaviorAttribute workingAttr = propAttr ?? typeAttr;
@@ -319,10 +321,12 @@ namespace System.Web.Http.ModelBinding.Binders
                 // (oddly) succeeded.
                 if (!addedError)
                 {
-                    bindingContext.ModelState.AddModelError(
-                        modelStateKey,
-                        Error.Format(SRResources.MissingRequiredMember, missingRequiredProperty)
-                    );
+                    bindingContext
+                        .ModelState
+                        .AddModelError(
+                            modelStateKey,
+                            Error.Format(SRResources.MissingRequiredMember, missingRequiredProperty)
+                        );
                 }
             }
 
@@ -439,10 +443,9 @@ namespace System.Web.Http.ModelBinding.Binders
                     )
                 )
                 {
-                    bindingContext.ModelState.AddModelError(
-                        modelStateKey,
-                        validationResult.Message
-                    );
+                    bindingContext
+                        .ModelState
+                        .AddModelError(modelStateKey, validationResult.Message);
                     addedError = true;
                 }
             }

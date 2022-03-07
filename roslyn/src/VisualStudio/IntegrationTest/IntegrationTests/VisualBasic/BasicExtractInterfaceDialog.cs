@@ -35,11 +35,10 @@ End Class"
             );
 
             VisualStudio.Editor.InvokeCodeActionList();
-            VisualStudio.Editor.Verify.CodeAction(
-                "Extract interface...",
-                applyFix: true,
-                blockUntilComplete: false
-            );
+            VisualStudio
+                .Editor
+                .Verify
+                .CodeAction("Extract interface...", applyFix: true, blockUntilComplete: false);
 
             ExtractInterfaceDialog.VerifyOpen();
             ExtractInterfaceDialog.ClickOK();
@@ -48,22 +47,28 @@ End Class"
             var project = new ProjectUtils.Project(ProjectName);
             VisualStudio.SolutionExplorer.OpenFile(project, "Class1.vb");
 
-            VisualStudio.Editor.Verify.TextContains(
-                @"Class C
+            VisualStudio
+                .Editor
+                .Verify
+                .TextContains(
+                    @"Class C
     Implements IC
 
     Public Sub M() Implements IC.M
     End Sub
 End Class"
-            );
+                );
 
             VisualStudio.SolutionExplorer.OpenFile(project, "IC.vb");
 
-            VisualStudio.Editor.Verify.TextContains(
-                @"Interface IC
+            VisualStudio
+                .Editor
+                .Verify
+                .TextContains(
+                    @"Interface IC
     Sub M()
 End Interface"
-            );
+                );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.CodeActionsExtractInterface)]
@@ -77,11 +82,10 @@ End Class"
             );
 
             VisualStudio.Editor.InvokeCodeActionList();
-            VisualStudio.Editor.Verify.CodeAction(
-                "Extract interface...",
-                applyFix: true,
-                blockUntilComplete: false
-            );
+            VisualStudio
+                .Editor
+                .Verify
+                .CodeAction("Extract interface...", applyFix: true, blockUntilComplete: false);
 
             ExtractInterfaceDialog.VerifyOpen();
 
@@ -102,11 +106,10 @@ End Class"
 End Class"
             );
             VisualStudio.Editor.InvokeCodeActionList();
-            VisualStudio.Editor.Verify.CodeAction(
-                "Extract interface...",
-                applyFix: true,
-                blockUntilComplete: false
-            );
+            VisualStudio
+                .Editor
+                .Verify
+                .CodeAction("Extract interface...", applyFix: true, blockUntilComplete: false);
 
             ExtractInterfaceDialog.VerifyOpen();
 
@@ -116,8 +119,11 @@ End Class"
             ExtractInterfaceDialog.VerifyClosed();
 
             _ = new ProjectUtils.Project(ProjectName);
-            VisualStudio.Editor.Verify.TextContains(
-                @"Interface IC
+            VisualStudio
+                .Editor
+                .Verify
+                .TextContains(
+                    @"Interface IC
     Sub M()
 End Interface
 
@@ -127,7 +133,7 @@ Class C
     Public Sub M() Implements IC.M
     End Sub
 End Class"
-            );
+                );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.CodeActionsExtractInterface)]
@@ -142,11 +148,10 @@ End Class"
             );
 
             VisualStudio.Editor.InvokeCodeActionList();
-            VisualStudio.Editor.Verify.CodeAction(
-                "Extract interface...",
-                applyFix: true,
-                blockUntilComplete: false
-            );
+            VisualStudio
+                .Editor
+                .Verify
+                .CodeAction("Extract interface...", applyFix: true, blockUntilComplete: false);
 
             ExtractInterfaceDialog.VerifyOpen();
             ExtractInterfaceDialog.ClickDeselectAll();
@@ -155,8 +160,11 @@ End Class"
             ExtractInterfaceDialog.ClickOK();
             ExtractInterfaceDialog.VerifyClosed();
 
-            VisualStudio.Editor.Verify.TextContains(
-                @"Interface IC
+            VisualStudio
+                .Editor
+                .Verify
+                .TextContains(
+                    @"Interface IC
     Sub M2()
 End Interface
 
@@ -167,7 +175,7 @@ Class C
     Public Sub M2() Implements IC.M2
     End Sub
 End Class"
-            );
+                );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.CodeActionsExtractInterface)]
@@ -183,11 +191,10 @@ End Namespace"
             );
 
             VisualStudio.Editor.InvokeCodeActionList();
-            VisualStudio.Editor.Verify.CodeAction(
-                "Extract interface...",
-                applyFix: true,
-                blockUntilComplete: false
-            );
+            VisualStudio
+                .Editor
+                .Verify
+                .CodeAction("Extract interface...", applyFix: true, blockUntilComplete: false);
 
             ExtractInterfaceDialog.VerifyOpen();
 
@@ -197,8 +204,11 @@ End Namespace"
             ExtractInterfaceDialog.VerifyClosed();
 
             _ = new ProjectUtils.Project(ProjectName);
-            VisualStudio.Editor.Verify.TextContains(
-                @"Namespace A
+            VisualStudio
+                .Editor
+                .Verify
+                .TextContains(
+                    @"Namespace A
     Interface IC
         Sub M()
     End Interface
@@ -210,7 +220,7 @@ End Namespace"
         End Sub
     End Class
 End Namespace"
-            );
+                );
         }
     }
 }

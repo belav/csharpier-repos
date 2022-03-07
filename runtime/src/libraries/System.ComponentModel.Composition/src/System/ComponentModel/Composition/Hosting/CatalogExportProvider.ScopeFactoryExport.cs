@@ -51,18 +51,19 @@ namespace System.ComponentModel.Composition.Hosting
                 {
                     if (_export == null)
                     {
-                        CompositionContainer? childContainer =
-                            _scopeFactoryExport._scopeManager.CreateChildContainer(
-                                _scopeFactoryExport._catalog
-                            );
+                        CompositionContainer? childContainer = _scopeFactoryExport
+                            ._scopeManager
+                            .CreateChildContainer(_scopeFactoryExport._catalog);
 
                         Debug.Assert(childContainer.CatalogExportProvider != null);
-                        Export? export = childContainer.CatalogExportProvider.CreateExport(
-                            _scopeFactoryExport.UnderlyingPartDefinition,
-                            _scopeFactoryExport.UnderlyingExportDefinition,
-                            false,
-                            CreationPolicy.Any
-                        );
+                        Export? export = childContainer
+                            .CatalogExportProvider
+                            .CreateExport(
+                                _scopeFactoryExport.UnderlyingPartDefinition,
+                                _scopeFactoryExport.UnderlyingExportDefinition,
+                                false,
+                                CreationPolicy.Any
+                            );
                         lock (_lock)
                         {
                             if (_export == null)

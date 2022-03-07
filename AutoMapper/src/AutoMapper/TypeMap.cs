@@ -190,7 +190,8 @@ namespace AutoMapper
         public Type MakeGenericType(Type type) =>
             type.IsGenericTypeDefinition
                 ? type.MakeGenericType(
-                      SourceType.GenericTypeArguments
+                      SourceType
+                          .GenericTypeArguments
                           .Concat(DestinationType.GenericTypeArguments)
                           .Take(type.GenericParametersCount())
                           .ToArray()
@@ -211,14 +212,16 @@ namespace AutoMapper
                   );
 
         public bool ConstructorParameterMatches(string destinationPropertyName) =>
-            ConstructorMap.CtorParams.Any(
-                c =>
-                    string.Equals(
-                        c.Parameter.Name,
-                        destinationPropertyName,
-                        StringComparison.OrdinalIgnoreCase
-                    )
-            );
+            ConstructorMap
+                .CtorParams
+                .Any(
+                    c =>
+                        string.Equals(
+                            c.Parameter.Name,
+                            destinationPropertyName,
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                );
 
         public void AddPropertyMap(
             MemberInfo destProperty,
@@ -247,7 +250,8 @@ namespace AutoMapper
             {
                 properties = Profile
                     .CreateTypeDetails(DestinationType)
-                    .WriteAccessors.Select(p => p.Name)
+                    .WriteAccessors
+                    .Select(p => p.Name)
                     .Except(autoMappedProperties)
                     .Except(PathMaps.Select(p => p.MemberPath.First.Name));
                 if (ConstructorMapping)
@@ -267,12 +271,14 @@ namespace AutoMapper
                     .Select(pm => pm.SourceMember.Name);
 
                 var ignoredSourceMembers = _sourceMemberConfigs
-                    ?.Values.Where(smc => smc.IsIgnored())
+                    ?.Values
+                    .Where(smc => smc.IsIgnored())
                     .Select(pm => pm.SourceMember.Name);
 
                 properties = Profile
                     .CreateTypeDetails(SourceType)
-                    .ReadAccessors.Select(p => p.Name)
+                    .ReadAccessors
+                    .Select(p => p.Name)
                     .Except(autoMappedProperties)
                     .Except(redirectedSourceMembers)
                     .Except(ignoredSourceMembers ?? Array.Empty<string>());
@@ -475,7 +481,8 @@ namespace AutoMapper
         private void ApplyIncludedMemberTypeMap(IncludedMember includedMember)
         {
             var typeMap = includedMember.TypeMap;
-            var includedMemberMaps = typeMap.PropertyMaps
+            var includedMemberMaps = typeMap
+                .PropertyMaps
                 .Where(m => m.CanResolveValue && GetPropertyMap(m) == null)
                 .Select(p => new PropertyMap(p, this, includedMember))
                 .ToArray();
@@ -596,7 +603,8 @@ namespace AutoMapper
                 return Array.Empty<PathMap>();
             }
             _pathMaps ??= new();
-            return inheritedTypeMap.PathMaps
+            return inheritedTypeMap
+                .PathMaps
                 .Where(baseConfig => !_pathMaps.ContainsKey(baseConfig.MemberPath))
                 .ToArray();
         }

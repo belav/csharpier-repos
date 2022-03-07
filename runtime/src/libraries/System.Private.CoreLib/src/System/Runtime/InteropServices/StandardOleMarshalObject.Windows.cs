@@ -44,14 +44,16 @@ namespace System.Runtime.InteropServices
                 try
                 {
                     IntPtr pStandardMarshal = IntPtr.Zero;
-                    int hr = Interop.Ole32.CoGetStandardMarshal(
-                        ref riid,
-                        pUnknown,
-                        dwDestContext,
-                        IntPtr.Zero,
-                        mshlflags,
-                        out pStandardMarshal
-                    );
+                    int hr = Interop
+                        .Ole32
+                        .CoGetStandardMarshal(
+                            ref riid,
+                            pUnknown,
+                            dwDestContext,
+                            IntPtr.Zero,
+                            mshlflags,
+                            out pStandardMarshal
+                        );
                     if (hr == HResults.S_OK)
                     {
                         Debug.Assert(

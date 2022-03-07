@@ -170,15 +170,15 @@ namespace JIT.HardwareIntrinsics.General
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation(
-                    $"Vector256<Int64>.AsVector: {method} failed:"
-                );
-                TestLibrary.TestFramework.LogInformation(
-                    $"   value: ({string.Join(", ", valueElements)})"
-                );
-                TestLibrary.TestFramework.LogInformation(
-                    $"  result: ({string.Join(", ", resultElements)})"
-                );
+                TestLibrary
+                    .TestFramework
+                    .LogInformation($"Vector256<Int64>.AsVector: {method} failed:");
+                TestLibrary
+                    .TestFramework
+                    .LogInformation($"   value: ({string.Join(", ", valueElements)})");
+                TestLibrary
+                    .TestFramework
+                    .LogInformation($"  result: ({string.Join(", ", resultElements)})");
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;

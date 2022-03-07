@@ -60,7 +60,8 @@ namespace System.Web.Razor.Editor
                 .Start()
                 .Add(base.GetHashCode())
                 .Add(AcceptTrailingDot)
-                .Add(Keywords).CombinedHash;
+                .Add(Keywords)
+                .CombinedHash;
         }
 
         protected override PartialParseResult CanAcceptChange(

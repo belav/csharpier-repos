@@ -78,12 +78,14 @@ namespace System.Net.Security
         {
             try
             {
-                resultSize = Interop.OpenSsl.Encrypt(
-                    securityContext.SslContext,
-                    input.Span,
-                    ref output,
-                    out Interop.Ssl.SslErrorCode errorCode
-                );
+                resultSize = Interop
+                    .OpenSsl
+                    .Encrypt(
+                        securityContext.SslContext,
+                        input.Span,
+                        ref output,
+                        out Interop.Ssl.SslErrorCode errorCode
+                    );
 
                 return MapNativeErrorCode(errorCode);
             }
@@ -106,11 +108,13 @@ namespace System.Net.Security
 
             try
             {
-                int resultSize = Interop.OpenSsl.Decrypt(
-                    securityContext.SslContext,
-                    buffer,
-                    out Interop.Ssl.SslErrorCode errorCode
-                );
+                int resultSize = Interop
+                    .OpenSsl
+                    .Decrypt(
+                        securityContext.SslContext,
+                        buffer,
+                        out Interop.Ssl.SslErrorCode errorCode
+                    );
 
                 SecurityStatusPal retVal = MapNativeErrorCode(errorCode);
 
@@ -165,10 +169,9 @@ namespace System.Net.Security
             }
             else
             {
-                bindingHandle = Interop.OpenSsl.QueryChannelBinding(
-                    securityContext.SslContext,
-                    attribute
-                );
+                bindingHandle = Interop
+                    .OpenSsl
+                    .QueryChannelBinding(securityContext.SslContext, attribute);
             }
 
             return bindingHandle;
@@ -244,27 +247,31 @@ namespace System.Net.Security
                     );
                 }
 
-                bool done = Interop.OpenSsl.DoSslHandshake(
-                    ((SafeDeleteSslContext)context).SslContext,
-                    inputBuffer,
-                    out output,
-                    out outputSize
-                );
+                bool done = Interop
+                    .OpenSsl
+                    .DoSslHandshake(
+                        ((SafeDeleteSslContext)context).SslContext,
+                        inputBuffer,
+                        out output,
+                        out outputSize
+                    );
                 // sometimes during renegotiation processing messgae does not yield new output.
                 // That seems to be flaw in OpenSSL state machine and we have workaround to peek it and try it again.
                 if (
                     outputSize == 0
-                    && Interop.Ssl.IsSslRenegotiatePending(
-                        ((SafeDeleteSslContext)context).SslContext
-                    )
+                    && Interop
+                        .Ssl
+                        .IsSslRenegotiatePending(((SafeDeleteSslContext)context).SslContext)
                 )
                 {
-                    done = Interop.OpenSsl.DoSslHandshake(
-                        ((SafeDeleteSslContext)context).SslContext,
-                        ReadOnlySpan<byte>.Empty,
-                        out output,
-                        out outputSize
-                    );
+                    done = Interop
+                        .OpenSsl
+                        .DoSslHandshake(
+                            ((SafeDeleteSslContext)context).SslContext,
+                            ReadOnlySpan<byte>.Empty,
+                            out output,
+                            out outputSize
+                        );
                 }
 
                 // When the handshake is done, and the context is server, check if the alpnHandle target was set to null during ALPN.

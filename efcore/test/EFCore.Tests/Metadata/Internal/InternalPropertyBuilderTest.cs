@@ -629,9 +629,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
             Assert.Equal(
                 CoreStrings.CannotBeNullable(nameof(Customer.Id), typeof(Customer).Name, "int"),
-                Assert.Throws<InvalidOperationException>(
-                    () => builder.IsRequired(false, ConfigurationSource.Explicit)
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(
+                        () => builder.IsRequired(false, ConfigurationSource.Explicit)
+                    )
+                    .Message
             );
         }
 
@@ -736,7 +738,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
         private InternalPropertyBuilder CreateInternalPropertyBuilder()
         {
-            var modelBuilder = (InternalModelBuilder)InMemoryTestHelpers.Instance
+            var modelBuilder = (InternalModelBuilder)InMemoryTestHelpers
+                .Instance
                 .CreateConventionBuilder()
                 .GetInfrastructure();
             var entityBuilder = modelBuilder.Entity(

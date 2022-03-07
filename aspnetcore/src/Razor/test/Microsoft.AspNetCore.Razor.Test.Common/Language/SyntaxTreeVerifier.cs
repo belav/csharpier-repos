@@ -43,12 +43,9 @@ internal class SyntaxTreeVerifier
                     var snippetStartIndex = Math.Max(0, i - 10);
                     var snippetStartLength = i - snippetStartIndex;
                     var snippetStart = new char[snippetStartLength];
-                    syntaxTree.Source.CopyTo(
-                        snippetStartIndex,
-                        snippetStart,
-                        0,
-                        snippetStartLength
-                    );
+                    syntaxTree
+                        .Source
+                        .CopyTo(snippetStartIndex, snippetStart, 0, snippetStartLength);
 
                     var snippetEndIndex = Math.Min(syntaxTree.Source.Length - 1, i + 10);
                     var snippetEndLength = snippetEndIndex - i;

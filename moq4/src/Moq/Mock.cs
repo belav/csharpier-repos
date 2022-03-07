@@ -807,10 +807,9 @@ namespace Moq
         {
             Guard.NotNull(action, nameof(action));
 
-            var expression = ExpressionReconstructor.Instance.ReconstructExpression(
-                action,
-                mock.ConstructorArguments
-            );
+            var expression = ExpressionReconstructor
+                .Instance
+                .ReconstructExpression(action, mock.ConstructorArguments);
             var parts = expression.Split();
             Mock.RaiseEvent(mock, expression, parts, arguments);
         }
@@ -837,7 +836,8 @@ namespace Moq
                 if (method.IsEventAddAccessor())
                 {
                     var implementingMethod = method.GetImplementingMethod(mock.Object.GetType());
-                    @event = implementingMethod.DeclaringType
+                    @event = implementingMethod
+                        .DeclaringType
                         .GetEvents(bindingFlags)
                         .SingleOrDefault(e => e.GetAddMethod(true) == implementingMethod);
                     if (@event == null)
@@ -854,7 +854,8 @@ namespace Moq
                 else if (method.IsEventRemoveAccessor())
                 {
                     var implementingMethod = method.GetImplementingMethod(mock.Object.GetType());
-                    @event = implementingMethod.DeclaringType
+                    @event = implementingMethod
+                        .DeclaringType
                         .GetEvents(bindingFlags)
                         .SingleOrDefault(e => e.GetRemoveMethod(true) == implementingMethod);
                     if (@event == null)

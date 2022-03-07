@@ -251,9 +251,11 @@ namespace JIT.HardwareIntrinsics.X86
 
             if (isUnexpectedResult)
             {
-                TestLibrary.TestFramework.LogInformation(
-                    $"{nameof(Bmi1)}.{nameof(Bmi1.BitFieldExtract)}<UInt32>(UInt32, Byte, Byte): BitFieldExtract failed:"
-                );
+                TestLibrary
+                    .TestFramework
+                    .LogInformation(
+                        $"{nameof(Bmi1)}.{nameof(Bmi1.BitFieldExtract)}<UInt32>(UInt32, Byte, Byte): BitFieldExtract failed:"
+                    );
                 TestLibrary.TestFramework.LogInformation($"   op1: {op1}");
                 TestLibrary.TestFramework.LogInformation($"   op2: {op2}");
                 TestLibrary.TestFramework.LogInformation($"   op3: {op3}");

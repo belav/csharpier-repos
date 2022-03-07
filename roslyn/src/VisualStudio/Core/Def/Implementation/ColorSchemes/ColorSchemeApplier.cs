@@ -92,9 +92,9 @@ namespace Microsoft.VisualStudio.LanguageServices.ColorSchemes
             var settingsManager = (ISettingsManager)_serviceProvider.GetService(
                 typeof(SVsSettingsPersistenceManager)
             );
-            settingsManager.GetSubset(
-                ColorSchemeOptions.ColorSchemeSettingKey
-            ).SettingChangedAsync += ColorSchemeChangedAsync;
+            settingsManager
+                .GetSubset(ColorSchemeOptions.ColorSchemeSettingKey)
+                .SettingChangedAsync += ColorSchemeChangedAsync;
 
             VSColorTheme.ThemeChanged += VSColorTheme_ThemeChanged;
 
@@ -188,9 +188,9 @@ namespace Microsoft.VisualStudio.LanguageServices.ColorSchemes
 
         public bool IsSupportedTheme(Guid themeId)
         {
-            return _colorSchemes.Values.Any(
-                scheme => scheme.Themes.Any(theme => theme.Guid == themeId)
-            );
+            return _colorSchemes
+                .Values
+                .Any(scheme => scheme.Themes.Any(theme => theme.Guid == themeId));
         }
 
         public bool IsThemeCustomized() =>

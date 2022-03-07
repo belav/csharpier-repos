@@ -107,11 +107,9 @@ namespace System.Security.Cryptography
                 return false;
             }
 
-            bytesWritten = HashProviderDispenser.OneShotHashProvider.HashData(
-                HashAlgorithmNames.SHA1,
-                source,
-                destination
-            );
+            bytesWritten = HashProviderDispenser
+                .OneShotHashProvider
+                .HashData(HashAlgorithmNames.SHA1, source, destination);
             Debug.Assert(bytesWritten == HashSizeBytes);
 
             return true;

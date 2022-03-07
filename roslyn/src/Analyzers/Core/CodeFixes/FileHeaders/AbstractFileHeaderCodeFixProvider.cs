@@ -61,10 +61,10 @@ namespace Microsoft.CodeAnalysis.FileHeaders
             var root = await document
                 .GetRequiredSyntaxRootAsync(cancellationToken)
                 .ConfigureAwait(false);
-            var options = document.Project.AnalyzerOptions.GetAnalyzerOptionSet(
-                root.SyntaxTree,
-                cancellationToken
-            );
+            var options = document
+                .Project
+                .AnalyzerOptions
+                .GetAnalyzerOptionSet(root.SyntaxTree, cancellationToken);
 #else
             var options = await document.GetOptionsAsync(cancellationToken).ConfigureAwait(false);
 #endif
@@ -101,11 +101,14 @@ namespace Microsoft.CodeAnalysis.FileHeaders
             // If we weren't given a header lets get the one from editorconfig
             if (
                 fileHeaderTemplate is null
-                && !document.Project.AnalyzerOptions.TryGetEditorConfigOption<string>(
-                    CodeStyleOptions2.FileHeaderTemplate,
-                    tree,
-                    out fileHeaderTemplate
-                )
+                && !document
+                    .Project
+                    .AnalyzerOptions
+                    .TryGetEditorConfigOption<string>(
+                        CodeStyleOptions2.FileHeaderTemplate,
+                        tree,
+                        out fileHeaderTemplate
+                    )
             )
             {
                 // No header supplied, no editorconfig setting, nothing to do

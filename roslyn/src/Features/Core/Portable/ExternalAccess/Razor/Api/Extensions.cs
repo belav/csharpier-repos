@@ -12,8 +12,9 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Razor.Api
 
         public static bool IsRazorDocument(this Document document)
         {
-            var documentPropertiesService =
-                document.Services.GetService<DocumentPropertiesService>();
+            var documentPropertiesService = document
+                .Services
+                .GetService<DocumentPropertiesService>();
             if (
                 documentPropertiesService != null
                 && documentPropertiesService.DiagnosticsLspClientName == RazorCSharp

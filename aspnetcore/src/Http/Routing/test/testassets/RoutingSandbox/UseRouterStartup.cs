@@ -29,9 +29,11 @@ public class UseRouterStartup
                     (httpContext) =>
                     {
                         var request = httpContext.Request;
-                        return httpContext.Response.WriteAsync(
-                            $"Verb =  {request.Method.ToUpperInvariant()} - Path = {request.Path} - Route values - {string.Join(", ", httpContext.GetRouteData().Values)}"
-                        );
+                        return httpContext
+                            .Response
+                            .WriteAsync(
+                                $"Verb =  {request.Method.ToUpperInvariant()} - Path = {request.Path} - Route values - {string.Join(", ", httpContext.GetRouteData().Values)}"
+                            );
                     }
                 );
 

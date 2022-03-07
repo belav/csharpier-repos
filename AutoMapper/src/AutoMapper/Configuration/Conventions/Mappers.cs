@@ -116,7 +116,8 @@ namespace AutoMapper.Configuration.Conventions
         )
         {
             var possibleSourceNames = PossibleNames(nameToSearch);
-            var possibleDestNames = sourceTypeDetails.ReadAccessors
+            var possibleDestNames = sourceTypeDetails
+                .ReadAccessors
                 .Select(mi => new { mi, possibles = PossibleNames(mi.Name) })
                 .ToArray();
             foreach (var sourceName in possibleSourceNames)

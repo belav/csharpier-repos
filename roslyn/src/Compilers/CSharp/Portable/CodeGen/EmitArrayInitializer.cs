@@ -249,9 +249,11 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
         {
             get
             {
-                var sustainedLowLatency = _module.Compilation.GetWellKnownTypeMember(
-                    WellKnownMember.System_Runtime_GCLatencyMode__SustainedLowLatency
-                );
+                var sustainedLowLatency = _module
+                    .Compilation
+                    .GetWellKnownTypeMember(
+                        WellKnownMember.System_Runtime_GCLatencyMode__SustainedLowLatency
+                    );
                 return sustainedLowLatency != null
                     && sustainedLowLatency.ContainingAssembly
                         == _module.Compilation.Assembly.CorLibrary;
@@ -417,9 +419,9 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
             }
 
             var ctor = (
-                (MethodSymbol)this._module.Compilation.GetWellKnownTypeMember(
-                    WellKnownMember.System_ReadOnlySpan_T__ctor
-                )
+                (MethodSymbol)this._module
+                    .Compilation
+                    .GetWellKnownTypeMember(WellKnownMember.System_ReadOnlySpan_T__ctor)
             );
             if (ctor == null)
             {

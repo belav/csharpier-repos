@@ -24,12 +24,10 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
         public void VerifyCompletionListOnEmptyTextAtTopLevel()
         {
             VisualStudio.InteractiveWindow.InvokeCompletionList();
-            VisualStudio.InteractiveWindow.Verify.CompletionItemsExist(
-                "var",
-                "public",
-                "readonly",
-                "goto"
-            );
+            VisualStudio
+                .InteractiveWindow
+                .Verify
+                .CompletionItemsExist("var", "public", "readonly", "goto");
         }
 
         [WpfFact]
@@ -54,11 +52,13 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
         [WpfFact]
         public void VerifyCompletionListForAmbiguousParsingCases()
         {
-            VisualStudio.InteractiveWindow.InsertCode(
-                @"class C { }
+            VisualStudio
+                .InteractiveWindow
+                .InsertCode(
+                    @"class C { }
 public delegate R Del<T, R>(T arg);
 Del<C, System"
-            );
+                );
             VisualStudio.SendKeys.Send(VirtualKey.Period);
             VisualStudio.InteractiveWindow.Verify.CompletionItemsExist("ArgumentException");
         }
@@ -96,9 +96,9 @@ Del<C, System"
                 "int x = 2; class Complex { public int goo() { return 4; } }"
             );
             temporaryTextFile.Create();
-            VisualStudio.InteractiveWindow.SubmitText(
-                string.Format("#load \"{0}\"", temporaryTextFile.FullName)
-            );
+            VisualStudio
+                .InteractiveWindow
+                .SubmitText(string.Format("#load \"{0}\"", temporaryTextFile.FullName));
             VisualStudio.InteractiveWindow.InvokeCompletionList();
             VisualStudio.InteractiveWindow.Verify.CompletionItemsExist("x", "Complex");
             VisualStudio.SendKeys.Send(VirtualKey.Escape);

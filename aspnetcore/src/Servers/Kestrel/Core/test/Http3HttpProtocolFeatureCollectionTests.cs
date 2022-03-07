@@ -19,10 +19,9 @@ public class Http3HttpProtocolFeatureCollectionTests
     public Http3HttpProtocolFeatureCollectionTests()
     {
         var streamContext = TestContextFactory.CreateHttp3StreamContext(
-            transport: DuplexPipe.CreateConnectionPair(
-                new PipeOptions(),
-                new PipeOptions()
-            ).Application
+            transport: DuplexPipe
+                .CreateConnectionPair(new PipeOptions(), new PipeOptions())
+                .Application
         );
 
         var http3Stream = new TestHttp3Stream();

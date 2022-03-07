@@ -34,9 +34,11 @@ public class InterlockedCompareExchange1
     {
         bool retVal = true;
 
-        TestLibrary.TestFramework.BeginScenario(
-            "PosTest1: Using another thread to change the value of variable in this thread"
-        );
+        TestLibrary
+            .TestFramework
+            .BeginScenario(
+                "PosTest1: Using another thread to change the value of variable in this thread"
+            );
 
         try
         {
@@ -51,10 +53,12 @@ public class InterlockedCompareExchange1
             // now, the final value of globalValue and state should be -0.1
             if (globalValue != -0.1 && state != -0.1)
             {
-                TestLibrary.TestFramework.LogError(
-                    "001",
-                    "The method did not works, the result is" + globalValue + " " + state
-                );
+                TestLibrary
+                    .TestFramework
+                    .LogError(
+                        "001",
+                        "The method did not works, the result is" + globalValue + " " + state
+                    );
                 retVal = false;
             }
         }

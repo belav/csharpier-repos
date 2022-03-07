@@ -27,10 +27,10 @@ namespace Microsoft.Web.Mvc.Resources
             {
                 // on POST we return Created, otherwise (EG: DELETE) we return OK
                 context.HttpContext.Response.ClearContent();
-                context.HttpContext.Response.StatusCode = context.HttpContext.Request.IsHttpMethod(
-                    HttpVerbs.Post,
-                    true
-                )
+                context.HttpContext.Response.StatusCode = context
+                    .HttpContext
+                    .Request
+                    .IsHttpMethod(HttpVerbs.Post, true)
                   ? (int)HttpStatusCode.Created
                   : (int)HttpStatusCode.OK;
             }

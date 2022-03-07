@@ -1387,9 +1387,9 @@ public class DerivedClass : Interface3Derived
 
             var comp = CreateCompilation(text);
 
-            var derivedClass = (NamedTypeSymbol)comp.SourceModule.GlobalNamespace.GetMembers(
-                "DerivedClass"
-            )[0];
+            var derivedClass = (NamedTypeSymbol)comp.SourceModule
+                .GlobalNamespace
+                .GetMembers("DerivedClass")[0];
             var members = derivedClass.GetMembers();
             Assert.Equal(3, members.Length);
         }
@@ -1696,7 +1696,8 @@ class C1 : @int, @void
 }
 ";
             var comp = CreateCompilation(Parse(text));
-            NamedTypeSymbol c1 = (NamedTypeSymbol)comp.SourceModule.GlobalNamespace
+            NamedTypeSymbol c1 = (NamedTypeSymbol)comp.SourceModule
+                .GlobalNamespace
                 .GetMembers("C1")
                 .Single();
             // Per explanation from NGafter:
@@ -1713,8 +1714,9 @@ class C1 : @int, @void
             NamedTypeSymbol rvoid = (NamedTypeSymbol)mreturn.ReturnType;
             Assert.Equal("void", rvoid.Name);
             Assert.Equal("@void", rvoid.ToString());
-            MethodSymbol mvoidreturn =
-                (MethodSymbol)mreturn.ExplicitInterfaceImplementations.Single();
+            MethodSymbol mvoidreturn = (MethodSymbol)mreturn
+                .ExplicitInterfaceImplementations
+                .Single();
             Assert.Equal("return", mvoidreturn.Name);
             Assert.Equal("@void.@return(@void)", mvoidreturn.ToString());
             ParameterSymbol pin = mreturn.Parameters.Single();
@@ -2749,7 +2751,8 @@ public partial class C
                 source,
                 sourceSymbolValidator: module =>
                 {
-                    var m = module.GlobalNamespace
+                    var m = module
+                        .GlobalNamespace
                         .GetTypeMember("C")
                         .GetMethod("M")
                         .GetPublicSymbol();
@@ -2759,7 +2762,8 @@ public partial class C
                 },
                 symbolValidator: module =>
                 {
-                    var m = module.GlobalNamespace
+                    var m = module
+                        .GlobalNamespace
                         .GetTypeMember("C")
                         .GetMethod("M")
                         .GetPublicSymbol();

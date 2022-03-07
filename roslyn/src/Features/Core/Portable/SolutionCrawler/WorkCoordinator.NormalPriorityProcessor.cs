@@ -280,7 +280,9 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
 
                         // Now any visible documents
                         foreach (
-                            var visibleDocumentId in Processor._documentTracker.GetVisibleDocuments()
+                            var visibleDocumentId in Processor
+                                ._documentTracker
+                                .GetVisibleDocuments()
                         )
                         {
                             yield return visibleDocumentId;
@@ -510,9 +512,9 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                     {
                         if (
                             !isOpen
-                            || !workItem.InvocationReasons.Contains(
-                                PredefinedInvocationReasons.DocumentOpened
-                            )
+                            || !workItem
+                                .InvocationReasons
+                                .Contains(PredefinedInvocationReasons.DocumentOpened)
                         )
                         {
                             return;
@@ -565,9 +567,9 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                     {
                         if (
                             isOpen
-                            || !workItem.InvocationReasons.Contains(
-                                PredefinedInvocationReasons.DocumentClosed
-                            )
+                            || !workItem
+                                .InvocationReasons
+                                .Contains(PredefinedInvocationReasons.DocumentClosed)
                         )
                         {
                             return;
@@ -620,9 +622,9 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                         {
 #if DEBUG
                             Debug.Assert(
-                                !workItem.InvocationReasons.Contains(
-                                    PredefinedInvocationReasons.Reanalyze
-                                )
+                                !workItem
+                                    .InvocationReasons
+                                    .Contains(PredefinedInvocationReasons.Reanalyze)
                                     || workItem.SpecificAnalyzers.Count > 0
                             );
 #endif
@@ -630,9 +632,9 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                             // No-reanalyze request or we already have a request to re-analyze every thing
                             if (
                                 workItem.MustRefresh
-                                || !workItem.InvocationReasons.Contains(
-                                    PredefinedInvocationReasons.Reanalyze
-                                )
+                                || !workItem
+                                    .InvocationReasons
+                                    .Contains(PredefinedInvocationReasons.Reanalyze)
                             )
                             {
                                 return;
@@ -669,9 +671,9 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                             // Note: Semantic analysis is not supported for non-source documents.
                             if (
                                 document is Document sourceDocument
-                                && !workItem.InvocationReasons.Contains(
-                                    PredefinedInvocationReasons.SemanticChanged
-                                )
+                                && !workItem
+                                    .InvocationReasons
+                                    .Contains(PredefinedInvocationReasons.SemanticChanged)
                             )
                             {
                                 await Processor

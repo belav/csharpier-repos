@@ -38,9 +38,9 @@ public static class JsonProtocolDependencyInjectionExtensions
         Action<JsonHubProtocolOptions> configure
     ) where TBuilder : ISignalRBuilder
     {
-        builder.Services.TryAddEnumerable(
-            ServiceDescriptor.Singleton<IHubProtocol, JsonHubProtocol>()
-        );
+        builder
+            .Services
+            .TryAddEnumerable(ServiceDescriptor.Singleton<IHubProtocol, JsonHubProtocol>());
         builder.Services.Configure(configure);
         return builder;
     }

@@ -376,7 +376,11 @@ namespace Microsoft.Extensions.Options
 
     public partial interface IOptionsFactory<
         [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembers(
-            System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
+            System
+                .Diagnostics
+                .CodeAnalysis
+                .DynamicallyAccessedMemberTypes
+                .PublicParameterlessConstructor
         )]
             TOptions
     > where TOptions : class
@@ -386,7 +390,11 @@ namespace Microsoft.Extensions.Options
 
     public partial interface IOptionsMonitorCache<
         [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembers(
-            System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
+            System
+                .Diagnostics
+                .CodeAnalysis
+                .DynamicallyAccessedMemberTypes
+                .PublicParameterlessConstructor
         )]
             TOptions
     > where TOptions : class
@@ -399,7 +407,11 @@ namespace Microsoft.Extensions.Options
 
     public partial interface IOptionsMonitor<
         [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembers(
-            System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
+            System
+                .Diagnostics
+                .CodeAnalysis
+                .DynamicallyAccessedMemberTypes
+                .PublicParameterlessConstructor
         )]
             out TOptions
     >
@@ -411,7 +423,11 @@ namespace Microsoft.Extensions.Options
 
     public partial interface IOptionsSnapshot<
         [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembers(
-            System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
+            System
+                .Diagnostics
+                .CodeAnalysis
+                .DynamicallyAccessedMemberTypes
+                .PublicParameterlessConstructor
         )]
             out TOptions
     > : Microsoft.Extensions.Options.IOptions<TOptions> where TOptions : class
@@ -421,7 +437,11 @@ namespace Microsoft.Extensions.Options
 
     public partial interface IOptions<
         [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembers(
-            System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
+            System
+                .Diagnostics
+                .CodeAnalysis
+                .DynamicallyAccessedMemberTypes
+                .PublicParameterlessConstructor
         )]
             out TOptions
     > where TOptions : class
@@ -445,7 +465,11 @@ namespace Microsoft.Extensions.Options
 
         public static Microsoft.Extensions.Options.IOptions<TOptions> Create<
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembers(
-                System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
+                System
+                    .Diagnostics
+                    .CodeAnalysis
+                    .DynamicallyAccessedMemberTypes
+                    .PublicParameterlessConstructor
             )]
                 TOptions
         >(TOptions options) where TOptions : class
@@ -713,7 +737,11 @@ namespace Microsoft.Extensions.Options
 
     public partial class OptionsCache<
         [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembers(
-            System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
+            System
+                .Diagnostics
+                .CodeAnalysis
+                .DynamicallyAccessedMemberTypes
+                .PublicParameterlessConstructor
         )]
             TOptions
     > : Microsoft.Extensions.Options.IOptionsMonitorCache<TOptions> where TOptions : class
@@ -740,7 +768,11 @@ namespace Microsoft.Extensions.Options
 
     public partial class OptionsFactory<
         [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembers(
-            System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
+            System
+                .Diagnostics
+                .CodeAnalysis
+                .DynamicallyAccessedMemberTypes
+                .PublicParameterlessConstructor
         )]
             TOptions
     > : Microsoft.Extensions.Options.IOptionsFactory<TOptions> where TOptions : class
@@ -769,7 +801,11 @@ namespace Microsoft.Extensions.Options
 
     public partial class OptionsManager<
         [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembers(
-            System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
+            System
+                .Diagnostics
+                .CodeAnalysis
+                .DynamicallyAccessedMemberTypes
+                .PublicParameterlessConstructor
         )]
             TOptions
     >
@@ -793,7 +829,11 @@ namespace Microsoft.Extensions.Options
     {
         public static System.IDisposable OnChange<
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembers(
-                System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
+                System
+                    .Diagnostics
+                    .CodeAnalysis
+                    .DynamicallyAccessedMemberTypes
+                    .PublicParameterlessConstructor
             )]
                 TOptions
         >(
@@ -807,7 +847,11 @@ namespace Microsoft.Extensions.Options
 
     public partial class OptionsMonitor<
         [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembers(
-            System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
+            System
+                .Diagnostics
+                .CodeAnalysis
+                .DynamicallyAccessedMemberTypes
+                .PublicParameterlessConstructor
         )]
             TOptions
     > : Microsoft.Extensions.Options.IOptionsMonitor<TOptions>, System.IDisposable
@@ -865,7 +909,11 @@ namespace Microsoft.Extensions.Options
 
     public partial class OptionsWrapper<
         [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembers(
-            System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
+            System
+                .Diagnostics
+                .CodeAnalysis
+                .DynamicallyAccessedMemberTypes
+                .PublicParameterlessConstructor
         )]
             TOptions
     > : Microsoft.Extensions.Options.IOptions<TOptions> where TOptions : class

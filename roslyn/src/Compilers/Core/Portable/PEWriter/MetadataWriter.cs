@@ -1541,13 +1541,15 @@ namespace Microsoft.Cci
             if (IsTooLongInternal(name, NameLengthLimit))
             {
                 Location location = GetNamedEntityLocation(errorEntity);
-                this.Context.Diagnostics.Add(
-                    this.messageProvider.CreateDiagnostic(
-                        this.messageProvider.ERR_MetadataNameTooLong,
-                        location,
-                        name
-                    )
-                );
+                this.Context
+                    .Diagnostics
+                    .Add(
+                        this.messageProvider.CreateDiagnostic(
+                            this.messageProvider.ERR_MetadataNameTooLong,
+                            location,
+                            name
+                        )
+                    );
             }
         }
 
@@ -1556,13 +1558,15 @@ namespace Microsoft.Cci
             if (IsTooLongInternal(path, PathLengthLimit))
             {
                 Location location = GetNamedEntityLocation(errorEntity);
-                this.Context.Diagnostics.Add(
-                    this.messageProvider.CreateDiagnostic(
-                        this.messageProvider.ERR_MetadataNameTooLong,
-                        location,
-                        path
-                    )
-                );
+                this.Context
+                    .Diagnostics
+                    .Add(
+                        this.messageProvider.CreateDiagnostic(
+                            this.messageProvider.ERR_MetadataNameTooLong,
+                            location,
+                            path
+                        )
+                    );
             }
         }
 
@@ -1591,13 +1595,15 @@ namespace Microsoft.Cci
                 if (utf8Length > NameLengthLimit)
                 {
                     Location location = GetNamedEntityLocation(errorEntity);
-                    this.Context.Diagnostics.Add(
-                        this.messageProvider.CreateDiagnostic(
-                            this.messageProvider.ERR_MetadataNameTooLong,
-                            location,
-                            namespaceName + "." + mangledTypeName
-                        )
-                    );
+                    this.Context
+                        .Diagnostics
+                        .Add(
+                            this.messageProvider.CreateDiagnostic(
+                                this.messageProvider.ERR_MetadataNameTooLong,
+                                location,
+                                namespaceName + "." + mangledTypeName
+                            )
+                        );
                 }
             }
         }
@@ -1607,13 +1613,15 @@ namespace Microsoft.Cci
             if (IsTooLongInternal(usingString, PdbLengthLimit))
             {
                 Location location = GetNamedEntityLocation(errorEntity);
-                this.Context.Diagnostics.Add(
-                    this.messageProvider.CreateDiagnostic(
-                        this.messageProvider.WRN_PdbUsingNameTooLong,
-                        location,
-                        usingString
-                    )
-                );
+                this.Context
+                    .Diagnostics
+                    .Add(
+                        this.messageProvider.CreateDiagnostic(
+                            this.messageProvider.WRN_PdbUsingNameTooLong,
+                            location,
+                            usingString
+                        )
+                    );
                 return true;
             }
 
@@ -1625,13 +1633,15 @@ namespace Microsoft.Cci
             string name = localDefinition.Name;
             if (IsTooLongInternal(name, PdbLengthLimit))
             {
-                this.Context.Diagnostics.Add(
-                    this.messageProvider.CreateDiagnostic(
-                        this.messageProvider.WRN_PdbLocalNameTooLong,
-                        localDefinition.Location,
-                        name
-                    )
-                );
+                this.Context
+                    .Diagnostics
+                    .Add(
+                        this.messageProvider.CreateDiagnostic(
+                            this.messageProvider.WRN_PdbLocalNameTooLong,
+                            localDefinition.Location,
+                            name
+                        )
+                    );
                 return true;
             }
 
@@ -2044,8 +2054,9 @@ namespace Microsoft.Cci
                 if (Context.RebuildData is { } rebuildData)
                 {
                     _usingNonSourceDocumentNameEnumerator = true;
-                    _nonSourceDocumentNameEnumerator =
-                        rebuildData.NonSourceFileDocumentNames.GetEnumerator();
+                    _nonSourceDocumentNameEnumerator = rebuildData
+                        .NonSourceFileDocumentNames
+                        .GetEnumerator();
                 }
 
                 DefineModuleImportScope();
@@ -3623,12 +3634,14 @@ namespace Microsoft.Cci
                 }
                 catch (ImageFormatLimitationException)
                 {
-                    this.Context.Diagnostics.Add(
-                        this.messageProvider.CreateDiagnostic(
-                            this.messageProvider.ERR_TooManyUserStrings,
-                            NoLocation.Singleton
-                        )
-                    );
+                    this.Context
+                        .Diagnostics
+                        .Add(
+                            this.messageProvider.CreateDiagnostic(
+                                this.messageProvider.ERR_TooManyUserStrings,
+                                NoLocation.Singleton
+                            )
+                        );
                     _userStringTokenOverflow = true;
                 }
             }
@@ -3646,12 +3659,14 @@ namespace Microsoft.Cci
                 }
                 catch (ImageFormatLimitationException)
                 {
-                    this.Context.Diagnostics.Add(
-                        this.messageProvider.CreateDiagnostic(
-                            this.messageProvider.ERR_TooManyUserStrings,
-                            NoLocation.Singleton
-                        )
-                    );
+                    this.Context
+                        .Diagnostics
+                        .Add(
+                            this.messageProvider.CreateDiagnostic(
+                                this.messageProvider.ERR_TooManyUserStrings,
+                                NoLocation.Singleton
+                            )
+                        );
                     _userStringTokenOverflow = true;
                 }
             }
@@ -4588,9 +4603,9 @@ namespace Microsoft.Cci
                     // "void" is handled specifically for "void*" with custom modifiers.
                     // If SignatureTypeEncoder supports such cases directly, this can
                     // be removed. See https://github.com/dotnet/corefx/issues/14571.
-                    encoder.Builder.WriteByte(
-                        (byte)System.Reflection.Metadata.PrimitiveTypeCode.Void
-                    );
+                    encoder
+                        .Builder
+                        .WriteByte((byte)System.Reflection.Metadata.PrimitiveTypeCode.Void);
                     break;
 
                 default:

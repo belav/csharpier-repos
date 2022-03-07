@@ -378,9 +378,9 @@ namespace Microsoft.Extensions.Caching.Memory
         {
             long currentSize = Interlocked.Read(ref cache._cacheSize);
 
-            cache._logger.LogDebug(
-                $"Overcapacity compaction executing. Current size {currentSize}"
-            );
+            cache
+                ._logger
+                .LogDebug($"Overcapacity compaction executing. Current size {currentSize}");
 
             double? lowWatermark =
                 cache._options.SizeLimit * (1 - cache._options.CompactionPercentage);
@@ -389,9 +389,11 @@ namespace Microsoft.Extensions.Caching.Memory
                 cache.Compact(currentSize - (long)lowWatermark, entry => entry.Size.Value);
             }
 
-            cache._logger.LogDebug(
-                $"Overcapacity compaction executed. New size {Interlocked.Read(ref cache._cacheSize)}"
-            );
+            cache
+                ._logger
+                .LogDebug(
+                    $"Overcapacity compaction executed. New size {Interlocked.Read(ref cache._cacheSize)}"
+                );
         }
 
         /// Remove at least the given percentage (0.10 for 10%) of the total entries (or estimated memory?), according to the following policy:

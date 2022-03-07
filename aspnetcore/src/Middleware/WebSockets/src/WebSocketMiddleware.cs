@@ -188,9 +188,10 @@ public partial class WebSocketMiddleware
                 {
                     // loop over each extension offer, extensions can have multiple offers, we can accept any
                     foreach (
-                        var extension in _context.Request.Headers.GetCommaSeparatedValues(
-                            HeaderNames.SecWebSocketExtensions
-                        )
+                        var extension in _context
+                            .Request
+                            .Headers
+                            .GetCommaSeparatedValues(HeaderNames.SecWebSocketExtensions)
                     )
                     {
                         if (

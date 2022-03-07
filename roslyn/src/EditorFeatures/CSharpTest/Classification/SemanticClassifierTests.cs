@@ -2753,18 +2753,21 @@ struct Type<T>
 
             var contentTypeService = document.GetLanguageService<IContentTypeLanguageService>();
             var contentType = contentTypeService.GetDefaultContentType();
-            var extraBuffer = workspace.ExportProvider
+            var extraBuffer = workspace
+                .ExportProvider
                 .GetExportedValue<ITextBufferFactoryService>()
                 .CreateTextBuffer("", contentType);
 
             WpfTestRunner.RequireWpfFact(
                 $"Creates an {nameof(IWpfTextView)} explicitly with an unrelated buffer"
             );
-            using var disposableView = workspace.ExportProvider
+            using var disposableView = workspace
+                .ExportProvider
                 .GetExportedValue<ITextEditorFactoryService>()
                 .CreateDisposableTextView(extraBuffer);
-            var listenerProvider =
-                workspace.ExportProvider.GetExportedValue<IAsynchronousOperationListenerProvider>();
+            var listenerProvider = workspace
+                .ExportProvider
+                .GetExportedValue<IAsynchronousOperationListenerProvider>();
             var globalOptions = workspace.ExportProvider.GetExportedValue<IGlobalOptionService>();
 
             var provider = new SemanticClassificationViewTaggerProvider(

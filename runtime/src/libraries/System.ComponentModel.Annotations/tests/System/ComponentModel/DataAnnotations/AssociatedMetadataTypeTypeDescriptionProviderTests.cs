@@ -53,9 +53,9 @@ namespace System.ComponentModel.DataAnnotations.Tests
                 Assert.Equal(1, attributes.Count);
                 Assert.Equal(
                     "typeName",
-                    Assert.IsType<TypeConverterAttribute>(
-                        attributes[typeof(TypeConverterAttribute)]
-                    ).ConverterTypeName
+                    Assert
+                        .IsType<TypeConverterAttribute>(attributes[typeof(TypeConverterAttribute)])
+                        .ConverterTypeName
                 );
             }
         }
@@ -77,15 +77,15 @@ namespace System.ComponentModel.DataAnnotations.Tests
                 Assert.Equal(2, attributes.Count);
                 Assert.Equal(
                     typeof(ClassWithMetadata),
-                    Assert.IsType<MetadataTypeAttribute>(
-                        attributes[typeof(MetadataTypeAttribute)]
-                    ).MetadataClassType
+                    Assert
+                        .IsType<MetadataTypeAttribute>(attributes[typeof(MetadataTypeAttribute)])
+                        .MetadataClassType
                 );
                 Assert.Equal(
                     "typeName",
-                    Assert.IsType<TypeConverterAttribute>(
-                        attributes[typeof(TypeConverterAttribute)]
-                    ).ConverterTypeName
+                    Assert
+                        .IsType<TypeConverterAttribute>(attributes[typeof(TypeConverterAttribute)])
+                        .ConverterTypeName
                 );
             }
         }
@@ -108,15 +108,17 @@ namespace System.ComponentModel.DataAnnotations.Tests
                 Assert.Equal(2, attributes.Count);
                 Assert.Equal(
                     typeof(ClassWithMetadata),
-                    Assert.IsType<MetadataTypeAttribute>(
-                        attributes[typeof(MetadataTypeAttribute)]
-                    ).MetadataClassType
+                    Assert
+                        .IsType<MetadataTypeAttribute>(attributes[typeof(MetadataTypeAttribute)])
+                        .MetadataClassType
                 );
                 Assert.Equal(
                     EditorBrowsableState.Always,
-                    Assert.IsType<EditorBrowsableAttribute>(
-                        attributes[typeof(EditorBrowsableAttribute)]
-                    ).State
+                    Assert
+                        .IsType<EditorBrowsableAttribute>(
+                            attributes[typeof(EditorBrowsableAttribute)]
+                        )
+                        .State
                 );
             }
         }
@@ -137,9 +139,9 @@ namespace System.ComponentModel.DataAnnotations.Tests
                 AttributeCollection attributes = typeDescriptor.GetAttributes();
                 Assert.Equal(
                     "typeName",
-                    Assert.IsType<TypeConverterAttribute>(
-                        attributes[typeof(TypeConverterAttribute)]
-                    ).ConverterTypeName
+                    Assert
+                        .IsType<TypeConverterAttribute>(attributes[typeof(TypeConverterAttribute)])
+                        .ConverterTypeName
                 );
             }
         }
@@ -159,9 +161,9 @@ namespace System.ComponentModel.DataAnnotations.Tests
                 AttributeCollection attributes = typeDescriptor.GetAttributes();
                 Assert.Equal(
                     "typeName",
-                    Assert.IsType<TypeConverterAttribute>(
-                        attributes[typeof(TypeConverterAttribute)]
-                    ).ConverterTypeName
+                    Assert
+                        .IsType<TypeConverterAttribute>(attributes[typeof(TypeConverterAttribute)])
+                        .ConverterTypeName
                 );
             }
         }

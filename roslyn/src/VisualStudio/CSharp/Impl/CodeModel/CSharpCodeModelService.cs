@@ -1205,7 +1205,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                 )
                 {
                     var specialType = predefinedType.ToSpecialType();
-                    return semanticModel.Compilation
+                    return semanticModel
+                        .Compilation
                         .GetSpecialType(specialType)
                         .GetEscapedFullName();
                 }
@@ -1999,9 +2000,10 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                 .First(n => n.Kind() == SyntaxKind.Attribute);
 
             attributeNode = attribute;
-            index = attribute.ArgumentList!.Arguments.IndexOf(
-                (AttributeArgumentSyntax)attributeArgumentNode
-            );
+            index = attribute
+                .ArgumentList!
+                .Arguments
+                .IndexOf((AttributeArgumentSyntax)attributeArgumentNode);
         }
 
         public override SyntaxNode GetAttributeTargetNode(SyntaxNode attributeNode)
@@ -2758,9 +2760,11 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                             updatedAccessors.Add(updatedAccessor);
                         }
 
-                        var updatedAccessorList = property.AccessorList.WithAccessors(
-                            SyntaxFactory.List<AccessorDeclarationSyntax>(updatedAccessors)
-                        );
+                        var updatedAccessorList = property
+                            .AccessorList
+                            .WithAccessors(
+                                SyntaxFactory.List<AccessorDeclarationSyntax>(updatedAccessors)
+                            );
                         member = property.ReplaceNode(property.AccessorList, updatedAccessorList);
                     }
                 }
@@ -2776,9 +2780,9 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                     {
                         var newBody = SyntaxFactory.Block();
                         newBody = newBody.WithCloseBraceToken(
-                            newBody.CloseBraceToken.WithTrailingTrivia(
-                                method.SemicolonToken.TrailingTrivia
-                            )
+                            newBody
+                                .CloseBraceToken
+                                .WithTrailingTrivia(method.SemicolonToken.TrailingTrivia)
                         );
                         member = method.WithSemicolonToken(default).WithBody(newBody);
                     }
@@ -2803,9 +2807,9 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
 
                             var newBody = SyntaxFactory.Block();
                             newBody = newBody.WithCloseBraceToken(
-                                newBody.CloseBraceToken.WithTrailingTrivia(
-                                    accessor.SemicolonToken.TrailingTrivia
-                                )
+                                newBody
+                                    .CloseBraceToken
+                                    .WithTrailingTrivia(accessor.SemicolonToken.TrailingTrivia)
                             );
                             var updatedAccessor = accessor
                                 .WithSemicolonToken(default)
@@ -2813,9 +2817,11 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                             updatedAccessors.Add(updatedAccessor);
                         }
 
-                        var updatedAccessorList = property.AccessorList.WithAccessors(
-                            SyntaxFactory.List<AccessorDeclarationSyntax>(updatedAccessors)
-                        );
+                        var updatedAccessorList = property
+                            .AccessorList
+                            .WithAccessors(
+                                SyntaxFactory.List<AccessorDeclarationSyntax>(updatedAccessors)
+                            );
                         member = property.ReplaceNode(property.AccessorList, updatedAccessorList);
                     }
                 }
@@ -3547,11 +3553,13 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
         {
             var parsedTypeName = SyntaxFactory.ParseTypeName(partialName);
 
-            return semanticModel.GetSpeculativeTypeInfo(
-                position,
-                parsedTypeName,
-                SpeculativeBindingOption.BindAsTypeOrNamespace
-            ).Type;
+            return semanticModel
+                .GetSpeculativeTypeInfo(
+                    position,
+                    parsedTypeName,
+                    SpeculativeBindingOption.BindAsTypeOrNamespace
+                )
+                .Type;
         }
 
         public override ITypeSymbol? GetTypeSymbolFromFullName(
@@ -3589,11 +3597,13 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
 
                 var semanticModel = compilation.GetSemanticModel(tree);
                 typeSymbol =
-                    semanticModel.GetSpeculativeTypeInfo(
-                        0,
-                        parsedTypeName,
-                        SpeculativeBindingOption.BindAsTypeOrNamespace
-                    ).Type;
+                    semanticModel
+                        .GetSpeculativeTypeInfo(
+                            0,
+                            parsedTypeName,
+                            SpeculativeBindingOption.BindAsTypeOrNamespace
+                        )
+                        .Type;
             }
 
             if (typeSymbol == null)
@@ -3632,9 +3642,9 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                     // make sure to return the index of the last attribute in the declaration.
                     if (attributeDeclaration.Attributes.Count > 1)
                     {
-                        var indexOfAttributeInDeclaration = attributeDeclaration.Attributes.IndexOf(
-                            attribute
-                        );
+                        var indexOfAttributeInDeclaration = attributeDeclaration
+                            .Attributes
+                            .IndexOf(attribute);
                         return index
                             + (
                                 attributeDeclaration.Attributes.Count
@@ -3728,9 +3738,9 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                     )
                     {
                         var variableDeclaration = (VariableDeclarationSyntax)member.Parent!;
-                        var indexOfDeclaratorInField = variableDeclaration.Variables.IndexOf(
-                            variableDeclarator
-                        );
+                        var indexOfDeclaratorInField = variableDeclaration
+                            .Variables
+                            .IndexOf(variableDeclarator);
                         return index
                             + (variableDeclaration.Variables.Count - indexOfDeclaratorInField);
                     }
@@ -3795,26 +3805,23 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
         {
             if (container is CompilationUnitSyntax compilationUnit)
             {
-                var newMembers = compilationUnit.Members.Insert(
-                    index,
-                    (MemberDeclarationSyntax)member
-                );
+                var newMembers = compilationUnit
+                    .Members
+                    .Insert(index, (MemberDeclarationSyntax)member);
                 return compilationUnit.WithMembers(newMembers);
             }
             else if (container is BaseNamespaceDeclarationSyntax namespaceDeclaration)
             {
-                var newMembers = namespaceDeclaration.Members.Insert(
-                    index,
-                    (MemberDeclarationSyntax)member
-                );
+                var newMembers = namespaceDeclaration
+                    .Members
+                    .Insert(index, (MemberDeclarationSyntax)member);
                 return namespaceDeclaration.WithMembers(newMembers);
             }
             else if (container is TypeDeclarationSyntax typeDeclaration)
             {
-                var newMembers = typeDeclaration.Members.Insert(
-                    index,
-                    (MemberDeclarationSyntax)member
-                );
+                var newMembers = typeDeclaration
+                    .Members
+                    .Insert(index, (MemberDeclarationSyntax)member);
                 return typeDeclaration.WithMembers(newMembers);
             }
             else if (container is EnumDeclarationSyntax enumDeclaration)
@@ -3830,10 +3837,9 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                         lastMember.WithTrailingTrivia(SyntaxTriviaList.Empty)
                     );
 
-                    var newMembers = enumDeclaration.Members.Insert(
-                        index,
-                        (EnumMemberDeclarationSyntax)member
-                    );
+                    var newMembers = enumDeclaration
+                        .Members
+                        .Insert(index, (EnumMemberDeclarationSyntax)member);
                     enumDeclaration = enumDeclaration.WithMembers(newMembers);
 
                     var separator = enumDeclaration.Members.GetSeparator(index - 1);
@@ -3844,10 +3850,9 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                 }
                 else
                 {
-                    var newMembers = enumDeclaration.Members.Insert(
-                        index,
-                        (EnumMemberDeclarationSyntax)member
-                    );
+                    var newMembers = enumDeclaration
+                        .Members
+                        .Insert(index, (EnumMemberDeclarationSyntax)member);
                     return enumDeclaration.WithMembers(newMembers);
                 }
             }
@@ -3947,10 +3952,9 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                 }
                 else
                 {
-                    var newArguments = argumentList.Arguments.Insert(
-                        index,
-                        (AttributeArgumentSyntax)attributeArgument
-                    );
+                    var newArguments = argumentList
+                        .Arguments
+                        .Insert(index, (AttributeArgumentSyntax)attributeArgument);
                     newArgumentList = argumentList.WithArguments(newArguments);
                 }
 
@@ -3985,146 +3989,128 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
 
             if (container is CompilationUnitSyntax compilationUnit)
             {
-                var newAttributeLists = compilationUnit.AttributeLists.Insert(
-                    index,
-                    (AttributeListSyntax)list
-                );
+                var newAttributeLists = compilationUnit
+                    .AttributeLists
+                    .Insert(index, (AttributeListSyntax)list);
                 return compilationUnit.WithAttributeLists(newAttributeLists);
             }
             else if (container is EnumDeclarationSyntax enumDeclaration)
             {
-                var newAttributeLists = enumDeclaration.AttributeLists.Insert(
-                    index,
-                    (AttributeListSyntax)list
-                );
+                var newAttributeLists = enumDeclaration
+                    .AttributeLists
+                    .Insert(index, (AttributeListSyntax)list);
                 return enumDeclaration.WithAttributeLists(newAttributeLists);
             }
             else if (container is ClassDeclarationSyntax classDeclaration)
             {
-                var newAttributeLists = classDeclaration.AttributeLists.Insert(
-                    index,
-                    (AttributeListSyntax)list
-                );
+                var newAttributeLists = classDeclaration
+                    .AttributeLists
+                    .Insert(index, (AttributeListSyntax)list);
                 return classDeclaration.WithAttributeLists(newAttributeLists);
             }
             else if (container is StructDeclarationSyntax structDeclaration)
             {
-                var newAttributeLists = structDeclaration.AttributeLists.Insert(
-                    index,
-                    (AttributeListSyntax)list
-                );
+                var newAttributeLists = structDeclaration
+                    .AttributeLists
+                    .Insert(index, (AttributeListSyntax)list);
                 return structDeclaration.WithAttributeLists(newAttributeLists);
             }
             else if (container is InterfaceDeclarationSyntax interfaceDeclaration)
             {
-                var newAttributeLists = interfaceDeclaration.AttributeLists.Insert(
-                    index,
-                    (AttributeListSyntax)list
-                );
+                var newAttributeLists = interfaceDeclaration
+                    .AttributeLists
+                    .Insert(index, (AttributeListSyntax)list);
                 return interfaceDeclaration.WithAttributeLists(newAttributeLists);
             }
             else if (container is MethodDeclarationSyntax method)
             {
-                var newAttributeLists = method.AttributeLists.Insert(
-                    index,
-                    (AttributeListSyntax)list
-                );
+                var newAttributeLists = method
+                    .AttributeLists
+                    .Insert(index, (AttributeListSyntax)list);
                 return method.WithAttributeLists(newAttributeLists);
             }
             else if (container is OperatorDeclarationSyntax operationDeclaration)
             {
-                var newAttributeLists = operationDeclaration.AttributeLists.Insert(
-                    index,
-                    (AttributeListSyntax)list
-                );
+                var newAttributeLists = operationDeclaration
+                    .AttributeLists
+                    .Insert(index, (AttributeListSyntax)list);
                 return operationDeclaration.WithAttributeLists(newAttributeLists);
             }
             else if (container is ConversionOperatorDeclarationSyntax conversion)
             {
-                var newAttributeLists = conversion.AttributeLists.Insert(
-                    index,
-                    (AttributeListSyntax)list
-                );
+                var newAttributeLists = conversion
+                    .AttributeLists
+                    .Insert(index, (AttributeListSyntax)list);
                 return conversion.WithAttributeLists(newAttributeLists);
             }
             else if (container is ConstructorDeclarationSyntax constructor)
             {
-                var newAttributeLists = constructor.AttributeLists.Insert(
-                    index,
-                    (AttributeListSyntax)list
-                );
+                var newAttributeLists = constructor
+                    .AttributeLists
+                    .Insert(index, (AttributeListSyntax)list);
                 return constructor.WithAttributeLists(newAttributeLists);
             }
             else if (container is DestructorDeclarationSyntax destructor)
             {
-                var newAttributeLists = destructor.AttributeLists.Insert(
-                    index,
-                    (AttributeListSyntax)list
-                );
+                var newAttributeLists = destructor
+                    .AttributeLists
+                    .Insert(index, (AttributeListSyntax)list);
                 return destructor.WithAttributeLists(newAttributeLists);
             }
             else if (container is PropertyDeclarationSyntax property)
             {
-                var newAttributeLists = property.AttributeLists.Insert(
-                    index,
-                    (AttributeListSyntax)list
-                );
+                var newAttributeLists = property
+                    .AttributeLists
+                    .Insert(index, (AttributeListSyntax)list);
                 return property.WithAttributeLists(newAttributeLists);
             }
             else if (container is EventDeclarationSyntax eventDeclaration)
             {
-                var newAttributeLists = eventDeclaration.AttributeLists.Insert(
-                    index,
-                    (AttributeListSyntax)list
-                );
+                var newAttributeLists = eventDeclaration
+                    .AttributeLists
+                    .Insert(index, (AttributeListSyntax)list);
                 return eventDeclaration.WithAttributeLists(newAttributeLists);
             }
             else if (container is IndexerDeclarationSyntax indexer)
             {
-                var newAttributeLists = indexer.AttributeLists.Insert(
-                    index,
-                    (AttributeListSyntax)list
-                );
+                var newAttributeLists = indexer
+                    .AttributeLists
+                    .Insert(index, (AttributeListSyntax)list);
                 return indexer.WithAttributeLists(newAttributeLists);
             }
             else if (container is FieldDeclarationSyntax field)
             {
-                var newAttributeLists = field.AttributeLists.Insert(
-                    index,
-                    (AttributeListSyntax)list
-                );
+                var newAttributeLists = field
+                    .AttributeLists
+                    .Insert(index, (AttributeListSyntax)list);
                 return field.WithAttributeLists(newAttributeLists);
             }
             else if (container is EventFieldDeclarationSyntax eventFieldDeclaration)
             {
-                var newAttributeLists = eventFieldDeclaration.AttributeLists.Insert(
-                    index,
-                    (AttributeListSyntax)list
-                );
+                var newAttributeLists = eventFieldDeclaration
+                    .AttributeLists
+                    .Insert(index, (AttributeListSyntax)list);
                 return eventFieldDeclaration.WithAttributeLists(newAttributeLists);
             }
             else if (container is DelegateDeclarationSyntax delegateDeclaration)
             {
-                var newAttributeLists = delegateDeclaration.AttributeLists.Insert(
-                    index,
-                    (AttributeListSyntax)list
-                );
+                var newAttributeLists = delegateDeclaration
+                    .AttributeLists
+                    .Insert(index, (AttributeListSyntax)list);
                 return delegateDeclaration.WithAttributeLists(newAttributeLists);
             }
             else if (container is EnumMemberDeclarationSyntax member)
             {
-                var newAttributeLists = member.AttributeLists.Insert(
-                    index,
-                    (AttributeListSyntax)list
-                );
+                var newAttributeLists = member
+                    .AttributeLists
+                    .Insert(index, (AttributeListSyntax)list);
                 return member.WithAttributeLists(newAttributeLists);
             }
             else if (container is ParameterSyntax parameter)
             {
-                var newAttributeLists = parameter.AttributeLists.Insert(
-                    index,
-                    (AttributeListSyntax)list
-                );
+                var newAttributeLists = parameter
+                    .AttributeLists
+                    .Insert(index, (AttributeListSyntax)list);
                 return parameter.WithAttributeLists(newAttributeLists);
             }
             else if (container is VariableDeclaratorSyntax or VariableDeclarationSyntax)
@@ -4160,28 +4146,28 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
         {
             if (container is BaseMethodDeclarationSyntax method)
             {
-                var parameterList = method.ParameterList.Parameters.Insert(
-                    index,
-                    (ParameterSyntax)parameter
-                );
+                var parameterList = method
+                    .ParameterList
+                    .Parameters
+                    .Insert(index, (ParameterSyntax)parameter);
                 return method.WithParameterList(method.ParameterList.WithParameters(parameterList));
             }
             else if (container is IndexerDeclarationSyntax indexer)
             {
-                var parameterList = indexer.ParameterList.Parameters.Insert(
-                    index,
-                    (ParameterSyntax)parameter
-                );
+                var parameterList = indexer
+                    .ParameterList
+                    .Parameters
+                    .Insert(index, (ParameterSyntax)parameter);
                 return indexer.WithParameterList(
                     indexer.ParameterList.WithParameters(parameterList)
                 );
             }
             else if (container is DelegateDeclarationSyntax delegateDeclaration)
             {
-                var parameterList = delegateDeclaration.ParameterList.Parameters.Insert(
-                    index,
-                    (ParameterSyntax)parameter
-                );
+                var parameterList = delegateDeclaration
+                    .ParameterList
+                    .Parameters
+                    .Insert(index, (ParameterSyntax)parameter);
                 return delegateDeclaration.WithParameterList(
                     delegateDeclaration.ParameterList.WithParameters(parameterList)
                 );
@@ -4303,9 +4289,9 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                 return false;
             }
 
-            return methodDeclaration.ParameterList.Parameters[0].Modifiers.Any(
-                SyntaxKind.ThisKeyword
-            );
+            return methodDeclaration.ParameterList.Parameters[0]
+                .Modifiers
+                .Any(SyntaxKind.ThisKeyword);
         }
 
         private static bool IsPartialMethod(MethodDeclarationSyntax methodDeclaration) =>
@@ -4432,11 +4418,13 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
             );
             var baseList =
                 typeDeclaration.BaseList != null
-                    ? typeDeclaration.BaseList.WithTypes(
-                          typeDeclaration.BaseList.Types.Insert(
-                              insertionIndex,
-                              SyntaxFactory.SimpleBaseType(typeName)
-                          )
+                    ? typeDeclaration
+                      .BaseList
+                      .WithTypes(
+                          typeDeclaration
+                              .BaseList
+                              .Types
+                              .Insert(insertionIndex, SyntaxFactory.SimpleBaseType(typeName))
                       )
                     : SyntaxFactory.BaseList(
                           SyntaxFactory.SingletonSeparatedList(

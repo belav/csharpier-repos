@@ -101,9 +101,9 @@ namespace Castle.Components.DictionaryAdapter
                                         let parms = ctor.GetParameters()
                                         where
                                             parms.Length == 1
-                                            && parms[0].ParameterType.IsAssignableFrom(
-                                                dictionaryAdapter.Meta.Type
-                                            )
+                                            && parms[0]
+                                                .ParameterType
+                                                .IsAssignableFrom(dictionaryAdapter.Meta.Type)
                                         select ctor
                                     ).FirstOrDefault();
 

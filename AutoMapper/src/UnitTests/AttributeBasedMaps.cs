@@ -899,12 +899,9 @@ namespace AutoMapper.UnitTests
                 )
                 {
                     var childModels = _childModels.Where(x => x.Parent.Id == source).ToList();
-                    return (List<ChildDto>)resolutionContext.Mapper.Map(
-                        childModels,
-                        destination,
-                        typeof(List<Child>),
-                        typeof(List<ChildDto>)
-                    );
+                    return (List<ChildDto>)resolutionContext
+                        .Mapper
+                        .Map(childModels, destination, typeof(List<Child>), typeof(List<ChildDto>));
                 }
             }
 

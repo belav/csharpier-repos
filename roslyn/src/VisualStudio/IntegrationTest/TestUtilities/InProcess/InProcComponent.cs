@@ -42,10 +42,12 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
                 {
                     Interlocked.CompareExchange(
                         ref _joinableTaskFactory,
-                        ThreadHelper.JoinableTaskFactory.WithPriority(
-                            CurrentApplicationDispatcher,
-                            DispatcherPriority.Background
-                        ),
+                        ThreadHelper
+                            .JoinableTaskFactory
+                            .WithPriority(
+                                CurrentApplicationDispatcher,
+                                DispatcherPriority.Background
+                            ),
                         null
                     );
                 }

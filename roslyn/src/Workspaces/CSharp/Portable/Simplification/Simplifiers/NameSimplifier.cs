@@ -142,9 +142,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
                         if (syntaxRef != null)
                         {
                             var declIdentifier =
-                                (
-                                    (UsingDirectiveSyntax)syntaxRef.GetSyntax(cancellationToken)
-                                ).Alias.Name.Identifier;
+                                ((UsingDirectiveSyntax)syntaxRef.GetSyntax(cancellationToken))
+                                    .Alias
+                                    .Name
+                                    .Identifier;
                             text = declIdentifier.IsVerbatimIdentifier()
                               ? declIdentifier.ToString().Substring(1)
                               : declIdentifier.ToString();
@@ -283,12 +284,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
                     {
                         if (
                             aliasQualifiedName.Name is SimpleNameSyntax
-                            && !aliasQualifiedName.Name.Identifier.HasAnnotations(
-                                AliasAnnotation.Kind
-                            )
-                            && !aliasQualifiedName.Name.HasAnnotation(
-                                Simplifier.SpecialTypeAnnotation
-                            )
+                            && !aliasQualifiedName
+                                .Name
+                                .Identifier
+                                .HasAnnotations(AliasAnnotation.Kind)
+                            && !aliasQualifiedName
+                                .Name
+                                .HasAnnotation(Simplifier.SpecialTypeAnnotation)
                         )
                         {
                             nameHasNoAlias = true;
@@ -429,17 +431,25 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
                 switch (name.Kind())
                 {
                     case SyntaxKind.AliasQualifiedName:
-                        var simpleName = ((AliasQualifiedNameSyntax)name).Name.WithLeadingTrivia(
-                            name.GetLeadingTrivia()
-                        );
+                        var simpleName = ((AliasQualifiedNameSyntax)name)
+                            .Name
+                            .WithLeadingTrivia(name.GetLeadingTrivia());
 
                         simpleName = simpleName.ReplaceToken(
                             simpleName.Identifier,
-                            ((AliasQualifiedNameSyntax)name).Name.Identifier.CopyAnnotationsTo(
-                                simpleName.Identifier.WithLeadingTrivia(
-                                    ((AliasQualifiedNameSyntax)name).Alias.Identifier.LeadingTrivia
+                            ((AliasQualifiedNameSyntax)name)
+                                .Name
+                                .Identifier
+                                .CopyAnnotationsTo(
+                                    simpleName
+                                        .Identifier
+                                        .WithLeadingTrivia(
+                                            ((AliasQualifiedNameSyntax)name)
+                                                .Alias
+                                                .Identifier
+                                                .LeadingTrivia
+                                        )
                                 )
-                            )
                         );
 
                         replacementNode = simpleName;
@@ -449,9 +459,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
                         break;
 
                     case SyntaxKind.QualifiedName:
-                        replacementNode = ((QualifiedNameSyntax)name).Right.WithLeadingTrivia(
-                            name.GetLeadingTrivia()
-                        );
+                        replacementNode = ((QualifiedNameSyntax)name)
+                            .Right
+                            .WithLeadingTrivia(name.GetLeadingTrivia());
                         issueSpan = ((QualifiedNameSyntax)name).Left.Span;
 
                         break;
@@ -664,10 +674,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
                     // an attribute that should keep it (unnecessary "Attribute" suffix should be annotated with a DontSimplifyAnnotation
                     if (
                         identifierToken.ValueText != AttributeName
-                        && identifierToken.ValueText.EndsWith(
-                            AttributeName,
-                            StringComparison.Ordinal
-                        )
+                        && identifierToken
+                            .ValueText
+                            .EndsWith(AttributeName, StringComparison.Ordinal)
                         && !identifierToken.HasAnnotation(
                             SimplificationHelpers.DontSimplifyAnnotation
                         )
@@ -675,10 +684,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
                     {
                         // weird. the semantic model is able to bind attribute syntax like "[as()]" although it's not valid code.
                         // so we need another check for keywords manually.
-                        var newAttributeName = identifierToken.ValueText.Substring(
-                            0,
-                            identifierToken.ValueText.Length - 9
-                        );
+                        var newAttributeName = identifierToken
+                            .ValueText
+                            .Substring(0, identifierToken.ValueText.Length - 9);
                         if (SyntaxFacts.GetKeywordKind(newAttributeName) != SyntaxKind.None)
                         {
                             return false;

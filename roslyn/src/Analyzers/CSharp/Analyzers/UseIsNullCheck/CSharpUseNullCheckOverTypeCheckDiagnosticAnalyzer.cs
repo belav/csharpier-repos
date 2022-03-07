@@ -66,11 +66,13 @@ namespace Microsoft.CodeAnalysis.CSharp.UseIsNullCheck
             out ReportDiagnostic severity
         )
         {
-            var option = context.Options.GetOption(
-                CSharpCodeStyleOptions.PreferNullCheckOverTypeCheck,
-                context.Operation.Syntax.SyntaxTree,
-                context.CancellationToken
-            );
+            var option = context
+                .Options
+                .GetOption(
+                    CSharpCodeStyleOptions.PreferNullCheckOverTypeCheck,
+                    context.Operation.Syntax.SyntaxTree,
+                    context.CancellationToken
+                );
             if (!option.Value)
             {
                 severity = ReportDiagnostic.Default;
@@ -103,9 +105,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UseIsNullCheck
             // be `DeclarationPattern`, not `TypePattern`.
             if (
                 negatedPattern.Pattern is ITypePatternOperation typePatternOperation
-                && typePatternOperation.InputType.InheritsFromOrEquals(
-                    typePatternOperation.MatchedType
-                )
+                && typePatternOperation
+                    .InputType
+                    .InheritsFromOrEquals(typePatternOperation.MatchedType)
             )
             {
                 context.ReportDiagnostic(
@@ -138,9 +140,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UseIsNullCheck
             // This doesn't match `x is MyType y` because in such case, we have an IsPattern instead of IsType operation.
             if (
                 isTypeOperation.ValueOperand.Type is not null
-                && isTypeOperation.ValueOperand.Type.InheritsFromOrEquals(
-                    isTypeOperation.TypeOperand
-                )
+                && isTypeOperation
+                    .ValueOperand
+                    .Type
+                    .InheritsFromOrEquals(isTypeOperation.TypeOperand)
             )
             {
                 context.ReportDiagnostic(

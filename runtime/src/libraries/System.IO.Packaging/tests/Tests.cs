@@ -1832,7 +1832,8 @@ namespace System.IO.Packaging.Tests
                     using (var partStream = mainDocumentPart.GetStream(FileMode.Open))
                     {
                         xdMain = XDocument.Load(partStream);
-                        var lastPara = xdMain.Root
+                        var lastPara = xdMain
+                            .Root
                             .Elements(W + "body")
                             .Elements(W + "p")
                             .LastOrDefault();
@@ -2853,7 +2854,8 @@ namespace System.IO.Packaging.Tests
                 using (var partStream = mainDocumentPart.GetStream())
                 {
                     xdMain = XDocument.Load(partStream);
-                    var lastPara = xdMain.Root
+                    var lastPara = xdMain
+                        .Root
                         .Elements(W + "body")
                         .Elements(W + "p")
                         .LastOrDefault();

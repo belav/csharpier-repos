@@ -67,14 +67,18 @@ internal static class StartupFacts
 
         if (
             symbol.Name == null
-            || !symbol.Name.StartsWith(
-                SymbolNames.ConfigureServicesMethodPrefix,
-                StringComparison.OrdinalIgnoreCase
-            )
-            || !symbol.Name.EndsWith(
-                SymbolNames.ConfigureServicesMethodSuffix,
-                StringComparison.OrdinalIgnoreCase
-            )
+            || !symbol
+                .Name
+                .StartsWith(
+                    SymbolNames.ConfigureServicesMethodPrefix,
+                    StringComparison.OrdinalIgnoreCase
+                )
+            || !symbol
+                .Name
+                .EndsWith(
+                    SymbolNames.ConfigureServicesMethodSuffix,
+                    StringComparison.OrdinalIgnoreCase
+                )
         )
         {
             return false;
@@ -85,10 +89,9 @@ internal static class StartupFacts
             return false;
         }
 
-        return SymbolEqualityComparer.Default.Equals(
-            symbol.Parameters[0].Type,
-            symbols.IServiceCollection
-        );
+        return SymbolEqualityComparer
+            .Default
+            .Equals(symbol.Parameters[0].Type, symbols.IServiceCollection);
     }
 
     // Based on StartupLoader. The philosophy is that we want to do analysis only on things
@@ -116,10 +119,9 @@ internal static class StartupFacts
 
         if (
             symbol.Name == null
-            || !symbol.Name.StartsWith(
-                SymbolNames.ConfigureMethodPrefix,
-                StringComparison.OrdinalIgnoreCase
-            )
+            || !symbol
+                .Name
+                .StartsWith(SymbolNames.ConfigureMethodPrefix, StringComparison.OrdinalIgnoreCase)
         )
         {
             return false;
@@ -129,10 +131,9 @@ internal static class StartupFacts
         for (var i = 0; i < symbol.Parameters.Length; i++)
         {
             if (
-                SymbolEqualityComparer.Default.Equals(
-                    symbol.Parameters[i].Type,
-                    symbols.IApplicationBuilder
-                )
+                SymbolEqualityComparer
+                    .Default
+                    .Equals(symbol.Parameters[i].Type, symbols.IApplicationBuilder)
             )
             {
                 return true;

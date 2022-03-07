@@ -281,11 +281,9 @@ namespace Microsoft.EntityFrameworkCore.Storage
                         );
                     }
 
-                    Dependencies.Logger.ExecutionStrategyRetrying(
-                        ExceptionsEncountered,
-                        delay.Value,
-                        async: true
-                    );
+                    Dependencies
+                        .Logger
+                        .ExecutionStrategyRetrying(ExceptionsEncountered, delay.Value, async: true);
 
                     OnRetry();
 
@@ -432,11 +430,9 @@ namespace Microsoft.EntityFrameworkCore.Storage
                         );
                     }
 
-                    Dependencies.Logger.ExecutionStrategyRetrying(
-                        ExceptionsEncountered,
-                        delay.Value,
-                        async: true
-                    );
+                    Dependencies
+                        .Logger
+                        .ExecutionStrategyRetrying(ExceptionsEncountered, delay.Value, async: true);
 
                     OnRetry();
 
@@ -462,8 +458,13 @@ namespace Microsoft.EntityFrameworkCore.Storage
                         is not null
                     || (
                         (
-                            (IDatabaseFacadeDependenciesAccessor)Dependencies.CurrentContext.Context.Database
-                        ).Dependencies.TransactionManager as ITransactionEnlistmentManager
+                            (IDatabaseFacadeDependenciesAccessor)Dependencies
+                                .CurrentContext
+                                .Context
+                                .Database
+                        )
+                            .Dependencies
+                            .TransactionManager as ITransactionEnlistmentManager
                     )?.CurrentAmbientTransaction
                         is not null
                 )

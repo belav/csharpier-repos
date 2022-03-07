@@ -58,9 +58,11 @@ internal static class MicrsoftNETBug
 
     private static int Main()
     {
-        System.Console.WriteLine(
-            ".NET 4.6.01055 bug repro: unshort comparison below incorrectly outputs False (only) when code is optimized"
-        );
+        System
+            .Console
+            .WriteLine(
+                ".NET 4.6.01055 bug repro: unshort comparison below incorrectly outputs False (only) when code is optimized"
+            );
 
         C c3 = new C(0);
         C c1 = new C(256 * 128 - 1); // 0x7fff

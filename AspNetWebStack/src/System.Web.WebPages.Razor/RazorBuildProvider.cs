@@ -155,14 +155,16 @@ namespace System.Web.WebPages.Razor
 
         public override Type GetGeneratedType(CompilerResults results)
         {
-            return results.CompiledAssembly.GetType(
-                String.Format(
-                    CultureInfo.CurrentCulture,
-                    "{0}.{1}",
-                    Host.DefaultNamespace,
-                    Host.DefaultClassName
-                )
-            );
+            return results
+                .CompiledAssembly
+                .GetType(
+                    String.Format(
+                        CultureInfo.CurrentCulture,
+                        "{0}.{1}",
+                        Host.DefaultNamespace,
+                        Host.DefaultClassName
+                    )
+                );
         }
 
         public override void GenerateCode(AssemblyBuilder assemblyBuilder)

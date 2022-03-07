@@ -55,12 +55,14 @@ internal class WebAssemblyRenderer : WebRenderer
 
     protected override void AttachRootComponentToBrowser(int componentId, string domElementSelector)
     {
-        DefaultWebAssemblyJSRuntime.Instance.InvokeVoid(
-            "Blazor._internal.attachRootComponentToElement",
-            domElementSelector,
-            componentId,
-            RendererId
-        );
+        DefaultWebAssemblyJSRuntime
+            .Instance
+            .InvokeVoid(
+                "Blazor._internal.attachRootComponentToElement",
+                domElementSelector,
+                componentId,
+                RendererId
+            );
     }
 
     /// <inheritdoc />
@@ -102,11 +104,13 @@ internal class WebAssemblyRenderer : WebRenderer
     /// <inheritdoc />
     protected override Task UpdateDisplayAsync(in RenderBatch batch)
     {
-        DefaultWebAssemblyJSRuntime.Instance.InvokeUnmarshalled<int, RenderBatch, object>(
-            "Blazor._internal.renderBatch",
-            RendererId,
-            batch
-        );
+        DefaultWebAssemblyJSRuntime
+            .Instance
+            .InvokeUnmarshalled<int, RenderBatch, object>(
+                "Blazor._internal.renderBatch",
+                RendererId,
+                batch
+            );
 
         if (WebAssemblyCallQueue.HasUnstartedWork)
         {

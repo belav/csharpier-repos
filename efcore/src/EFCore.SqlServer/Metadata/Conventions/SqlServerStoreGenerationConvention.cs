@@ -135,29 +135,35 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
                 if (property.TryGetDefaultValue(storeObject, out _))
                 {
-                    Dependencies.ValidationLogger.ConflictingValueGenerationStrategiesWarning(
-                        generationStrategy,
-                        "DefaultValue",
-                        property
-                    );
+                    Dependencies
+                        .ValidationLogger
+                        .ConflictingValueGenerationStrategiesWarning(
+                            generationStrategy,
+                            "DefaultValue",
+                            property
+                        );
                 }
 
                 if (property.GetDefaultValueSql(storeObject) != null)
                 {
-                    Dependencies.ValidationLogger.ConflictingValueGenerationStrategiesWarning(
-                        generationStrategy,
-                        "DefaultValueSql",
-                        property
-                    );
+                    Dependencies
+                        .ValidationLogger
+                        .ConflictingValueGenerationStrategiesWarning(
+                            generationStrategy,
+                            "DefaultValueSql",
+                            property
+                        );
                 }
 
                 if (property.GetComputedColumnSql(storeObject) != null)
                 {
-                    Dependencies.ValidationLogger.ConflictingValueGenerationStrategiesWarning(
-                        generationStrategy,
-                        "ComputedColumnSql",
-                        property
-                    );
+                    Dependencies
+                        .ValidationLogger
+                        .ConflictingValueGenerationStrategiesWarning(
+                            generationStrategy,
+                            "ComputedColumnSql",
+                            property
+                        );
                 }
             }
 

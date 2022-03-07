@@ -75,14 +75,16 @@ namespace Internal.Cryptography.Pal
             byte[] smallPfx = exporter.Export(X509ContentType.Pkcs12, password)!;
 
             SafeSecIdentityHandle identityHandle;
-            SafeSecCertificateHandle certHandle = Interop.AppleCrypto.X509ImportCertificate(
-                smallPfx,
-                X509ContentType.Pkcs12,
-                password,
-                keychain,
-                exportable: false,
-                out identityHandle
-            );
+            SafeSecCertificateHandle certHandle = Interop
+                .AppleCrypto
+                .X509ImportCertificate(
+                    smallPfx,
+                    X509ContentType.Pkcs12,
+                    password,
+                    keychain,
+                    exportable: false,
+                    out identityHandle
+                );
 
             // On Windows and Linux if a PFX uses a LocalKeyId to bind the wrong key to a cert, the
             // nonsensical object of "this cert, that key" is returned.

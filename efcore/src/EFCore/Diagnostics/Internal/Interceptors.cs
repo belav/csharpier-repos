@@ -81,7 +81,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
         private CoreOptionsExtension? CoreOptionsExtension =>
             _coreOptionsExtension ??= _serviceProvider
                 .GetRequiredService<IDbContextOptions>()
-                .Extensions.OfType<CoreOptionsExtension>()
+                .Extensions
+                .OfType<CoreOptionsExtension>()
                 .FirstOrDefault();
     }
 }

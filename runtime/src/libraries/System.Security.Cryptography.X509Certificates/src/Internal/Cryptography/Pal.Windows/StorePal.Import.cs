@@ -63,21 +63,26 @@ namespace Internal.Cryptography.Pal
                         Interop.Crypt32.ContentType contentType;
                         SafeCertStoreHandle certStore;
                         if (
-                            !Interop.Crypt32.CryptQueryObject(
-                                fromFile
-                                  ? Interop.Crypt32.CertQueryObjectType.CERT_QUERY_OBJECT_FILE
-                                  : Interop.Crypt32.CertQueryObjectType.CERT_QUERY_OBJECT_BLOB,
-                                pvObject,
-                                StoreExpectedContentFlags,
-                                Interop.Crypt32.ExpectedFormatTypeFlags.CERT_QUERY_FORMAT_FLAG_ALL,
-                                0,
-                                IntPtr.Zero,
-                                out contentType,
-                                IntPtr.Zero,
-                                out certStore,
-                                IntPtr.Zero,
-                                IntPtr.Zero
-                            )
+                            !Interop
+                                .Crypt32
+                                .CryptQueryObject(
+                                    fromFile
+                                      ? Interop.Crypt32.CertQueryObjectType.CERT_QUERY_OBJECT_FILE
+                                      : Interop.Crypt32.CertQueryObjectType.CERT_QUERY_OBJECT_BLOB,
+                                    pvObject,
+                                    StoreExpectedContentFlags,
+                                    Interop
+                                        .Crypt32
+                                        .ExpectedFormatTypeFlags
+                                        .CERT_QUERY_FORMAT_FLAG_ALL,
+                                    0,
+                                    IntPtr.Zero,
+                                    out contentType,
+                                    IntPtr.Zero,
+                                    out certStore,
+                                    IntPtr.Zero,
+                                    IntPtr.Zero
+                                )
                         )
                         {
                             throw Marshal.GetLastWin32Error().ToCryptographicException();
@@ -97,11 +102,9 @@ namespace Internal.Cryptography.Pal
                                     new IntPtr(pRawData2),
                                     (uint)rawData!.Length
                                 );
-                                certStore = Interop.Crypt32.PFXImportCertStore(
-                                    ref blob2,
-                                    password,
-                                    certStoreFlags
-                                );
+                                certStore = Interop
+                                    .Crypt32
+                                    .PFXImportCertStore(ref blob2, password, certStoreFlags);
                                 if (certStore == null || certStore.IsInvalid)
                                     throw Marshal.GetLastWin32Error().ToCryptographicException();
                             }
@@ -115,21 +118,28 @@ namespace Internal.Cryptography.Pal
                                 //
                                 SafeCertContextHandle? pCertContext = null;
                                 while (
-                                    Interop.crypt32.CertEnumCertificatesInStore(
-                                        certStore,
-                                        ref pCertContext
-                                    )
+                                    Interop
+                                        .crypt32
+                                        .CertEnumCertificatesInStore(certStore, ref pCertContext)
                                 )
                                 {
                                     Interop.Crypt32.DATA_BLOB nullBlob =
                                         new Interop.Crypt32.DATA_BLOB(IntPtr.Zero, 0);
                                     if (
-                                        !Interop.Crypt32.CertSetCertificateContextProperty(
-                                            pCertContext,
-                                            Interop.Crypt32.CertContextPropId.CERT_CLR_DELETE_KEY_PROP_ID,
-                                            Interop.Crypt32.CertSetPropertyFlags.CERT_SET_PROPERTY_INHIBIT_PERSIST_FLAG,
-                                            &nullBlob
-                                        )
+                                        !Interop
+                                            .Crypt32
+                                            .CertSetCertificateContextProperty(
+                                                pCertContext,
+                                                Interop
+                                                    .Crypt32
+                                                    .CertContextPropId
+                                                    .CERT_CLR_DELETE_KEY_PROP_ID,
+                                                Interop
+                                                    .Crypt32
+                                                    .CertSetPropertyFlags
+                                                    .CERT_SET_PROPERTY_INHIBIT_PERSIST_FLAG,
+                                                &nullBlob
+                                            )
                                     )
                                         throw Marshal
                                             .GetLastWin32Error()
@@ -148,24 +158,31 @@ namespace Internal.Cryptography.Pal
         {
             CertificatePal certificatePal = (CertificatePal)cert;
 
-            SafeCertStoreHandle certStore = Interop.crypt32.CertOpenStore(
-                CertStoreProvider.CERT_STORE_PROV_MEMORY,
-                Interop.Crypt32.CertEncodingType.All,
-                IntPtr.Zero,
-                Interop.Crypt32.CertStoreFlags.CERT_STORE_ENUM_ARCHIVED_FLAG
-                    | Interop.Crypt32.CertStoreFlags.CERT_STORE_CREATE_NEW_FLAG
-                    | Interop.Crypt32.CertStoreFlags.CERT_STORE_DEFER_CLOSE_UNTIL_LAST_FREE_FLAG,
-                null
-            );
+            SafeCertStoreHandle certStore = Interop
+                .crypt32
+                .CertOpenStore(
+                    CertStoreProvider.CERT_STORE_PROV_MEMORY,
+                    Interop.Crypt32.CertEncodingType.All,
+                    IntPtr.Zero,
+                    Interop.Crypt32.CertStoreFlags.CERT_STORE_ENUM_ARCHIVED_FLAG
+                        | Interop.Crypt32.CertStoreFlags.CERT_STORE_CREATE_NEW_FLAG
+                        | Interop
+                            .Crypt32
+                            .CertStoreFlags
+                            .CERT_STORE_DEFER_CLOSE_UNTIL_LAST_FREE_FLAG,
+                    null
+                );
             if (certStore.IsInvalid)
                 throw Marshal.GetHRForLastWin32Error().ToCryptographicException();
             if (
-                !Interop.Crypt32.CertAddCertificateLinkToStore(
-                    certStore,
-                    certificatePal.CertContext,
-                    Interop.Crypt32.CertStoreAddDisposition.CERT_STORE_ADD_ALWAYS,
-                    IntPtr.Zero
-                )
+                !Interop
+                    .Crypt32
+                    .CertAddCertificateLinkToStore(
+                        certStore,
+                        certificatePal.CertContext,
+                        Interop.Crypt32.CertStoreAddDisposition.CERT_STORE_ADD_ALWAYS,
+                        IntPtr.Zero
+                    )
             )
                 throw Marshal.GetHRForLastWin32Error().ToCryptographicException();
             return new StorePal(certStore);
@@ -182,14 +199,16 @@ namespace Internal.Cryptography.Pal
             // we always want to use CERT_STORE_ENUM_ARCHIVED_FLAG since we want to preserve the collection in this operation.
             // By default, Archived certificates will not be included.
 
-            SafeCertStoreHandle certStore = Interop.crypt32.CertOpenStore(
-                CertStoreProvider.CERT_STORE_PROV_MEMORY,
-                Interop.Crypt32.CertEncodingType.All,
-                IntPtr.Zero,
-                Interop.Crypt32.CertStoreFlags.CERT_STORE_ENUM_ARCHIVED_FLAG
-                    | Interop.Crypt32.CertStoreFlags.CERT_STORE_CREATE_NEW_FLAG,
-                null
-            );
+            SafeCertStoreHandle certStore = Interop
+                .crypt32
+                .CertOpenStore(
+                    CertStoreProvider.CERT_STORE_PROV_MEMORY,
+                    Interop.Crypt32.CertEncodingType.All,
+                    IntPtr.Zero,
+                    Interop.Crypt32.CertStoreFlags.CERT_STORE_ENUM_ARCHIVED_FLAG
+                        | Interop.Crypt32.CertStoreFlags.CERT_STORE_CREATE_NEW_FLAG,
+                    null
+                );
             if (certStore.IsInvalid)
                 throw Marshal.GetHRForLastWin32Error().ToCryptographicException();
 
@@ -203,12 +222,14 @@ namespace Internal.Cryptography.Pal
                 SafeCertContextHandle certContext =
                     ((CertificatePal)certificates[i].Pal!).CertContext;
                 if (
-                    !Interop.Crypt32.CertAddCertificateLinkToStore(
-                        certStore,
-                        certContext,
-                        Interop.Crypt32.CertStoreAddDisposition.CERT_STORE_ADD_ALWAYS,
-                        IntPtr.Zero
-                    )
+                    !Interop
+                        .Crypt32
+                        .CertAddCertificateLinkToStore(
+                            certStore,
+                            certContext,
+                            Interop.Crypt32.CertStoreAddDisposition.CERT_STORE_ADD_ALWAYS,
+                            IntPtr.Zero
+                        )
                 )
                     throw Marshal.GetLastWin32Error().ToCryptographicException();
             }
@@ -227,13 +248,15 @@ namespace Internal.Cryptography.Pal
                 openFlags
             );
 
-            SafeCertStoreHandle certStore = Interop.crypt32.CertOpenStore(
-                CertStoreProvider.CERT_STORE_PROV_SYSTEM_W,
-                Interop.Crypt32.CertEncodingType.All,
-                IntPtr.Zero,
-                certStoreFlags,
-                storeName
-            );
+            SafeCertStoreHandle certStore = Interop
+                .crypt32
+                .CertOpenStore(
+                    CertStoreProvider.CERT_STORE_PROV_SYSTEM_W,
+                    Interop.Crypt32.CertEncodingType.All,
+                    IntPtr.Zero,
+                    certStoreFlags,
+                    storeName
+                );
             if (certStore.IsInvalid)
                 throw Marshal.GetLastWin32Error().ToCryptographicException();
 
@@ -243,12 +266,14 @@ namespace Internal.Cryptography.Pal
             //
             // For compat with desktop, ignoring any failures from this call. (It is pretty unlikely to fail, in any case.)
             //
-            _ = Interop.crypt32.CertControlStore(
-                certStore,
-                CertControlStoreFlags.None,
-                CertControlStoreType.CERT_STORE_CTRL_AUTO_RESYNC,
-                IntPtr.Zero
-            );
+            _ = Interop
+                .crypt32
+                .CertControlStore(
+                    certStore,
+                    CertControlStoreFlags.None,
+                    CertControlStoreType.CERT_STORE_CTRL_AUTO_RESYNC,
+                    IntPtr.Zero
+                );
 
             return new StorePal(certStore);
         }

@@ -70,9 +70,9 @@ public class Program
 
                             var hostingEnvironment =
                                 app.ApplicationServices.GetRequiredService<IHostEnvironment>();
-                            return context.Response.WriteAsync(
-                                responseMessage ?? hostingEnvironment.ApplicationName
-                            );
+                            return context
+                                .Response
+                                .WriteAsync(responseMessage ?? hostingEnvironment.ApplicationName);
                         }
                     )
             )

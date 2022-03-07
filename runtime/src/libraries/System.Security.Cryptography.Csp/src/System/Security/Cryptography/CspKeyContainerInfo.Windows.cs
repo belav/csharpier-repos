@@ -221,8 +221,10 @@ namespace System.Security.Cryptography
             // In order to ask about the device, instead of a key, we need to ensure that no key is named.
             parameters.KeyContainerName = null;
 
-            const uint OpenDeviceFlags =
-                (uint)Interop.Advapi32.CryptAcquireContextFlags.CRYPT_VERIFYCONTEXT;
+            const uint OpenDeviceFlags = (uint)Interop
+                .Advapi32
+                .CryptAcquireContextFlags
+                .CRYPT_VERIFYCONTEXT;
 
             SafeProvHandle safeProvHandle;
             int hr = CapiHelper.OpenCSP(parameters, OpenDeviceFlags, out safeProvHandle);

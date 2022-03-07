@@ -415,9 +415,9 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedMembers
             private void AnalyzeInvocationOperation(OperationAnalysisContext operationContext)
             {
                 var targetMethod =
-                    (
-                        (IInvocationOperation)operationContext.Operation
-                    ).TargetMethod.OriginalDefinition;
+                    ((IInvocationOperation)operationContext.Operation)
+                        .TargetMethod
+                        .OriginalDefinition;
 
                 // A method invocation is considered as a read reference to the symbol
                 // to ensure that we consider the method as "used".
@@ -452,10 +452,9 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedMembers
                 // Workaround for https://github.com/dotnet/roslyn/issues/19965
                 // IOperation API does not expose potential references to methods/properties within
                 // a bound method group/property group.
-                var symbolInfo = nameofArgument.SemanticModel.GetSymbolInfo(
-                    nameofArgument.Syntax,
-                    operationContext.CancellationToken
-                );
+                var symbolInfo = nameofArgument
+                    .SemanticModel
+                    .GetSymbolInfo(nameofArgument.Syntax, operationContext.CancellationToken);
                 foreach (var symbol in symbolInfo.GetAllSymbols())
                 {
                     switch (symbol.Kind)
@@ -473,9 +472,9 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedMembers
             private void AnalyzeObjectCreationOperation(OperationAnalysisContext operationContext)
             {
                 var constructor =
-                    (
-                        (IObjectCreationOperation)operationContext.Operation
-                    ).Constructor.OriginalDefinition;
+                    ((IObjectCreationOperation)operationContext.Operation)
+                        .Constructor
+                        .OriginalDefinition;
 
                 // An object creation is considered as a read reference to the constructor
                 // to ensure that we consider the constructor as "used".
@@ -493,7 +492,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedMembers
                 }
 
                 if (
-                    symbolEndContext.Symbol
+                    symbolEndContext
+                        .Symbol
                         .GetAttributes()
                         .Any(a => a.AttributeClass == _structLayoutAttributeType)
                 )
@@ -509,9 +509,9 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedMembers
                 ArrayBuilder<string> debuggerDisplayAttributeArguments = null;
                 try
                 {
-                    var entryPoint = symbolEndContext.Compilation.GetEntryPoint(
-                        symbolEndContext.CancellationToken
-                    );
+                    var entryPoint = symbolEndContext
+                        .Compilation
+                        .GetEntryPoint(symbolEndContext.CancellationToken);
 
                     var namedType = (INamedTypeSymbol)symbolEndContext.Symbol;
                     foreach (var member in namedType.GetMembers())
@@ -672,9 +672,9 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedMembers
             {
                 var builder = PooledHashSet<ISymbol>.GetInstance();
                 foreach (
-                    var root in namedTypeSymbol.Locations.Select(
-                        l => l.SourceTree.GetRoot(cancellationToken)
-                    )
+                    var root in namedTypeSymbol
+                        .Locations
+                        .Select(l => l.SourceTree.GetRoot(cancellationToken))
                 )
                 {
                     SemanticModel lazyModel = null;
@@ -869,14 +869,14 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedMembers
                             return ((IFieldSymbol)memberSymbol).AssociatedSymbol == null;
 
                         case SymbolKind.Property:
-                            return (
-                                (IPropertySymbol)memberSymbol
-                            ).ExplicitInterfaceImplementations.IsEmpty;
+                            return ((IPropertySymbol)memberSymbol)
+                                .ExplicitInterfaceImplementations
+                                .IsEmpty;
 
                         case SymbolKind.Event:
-                            return (
-                                (IEventSymbol)memberSymbol
-                            ).ExplicitInterfaceImplementations.IsEmpty;
+                            return ((IEventSymbol)memberSymbol)
+                                .ExplicitInterfaceImplementations
+                                .IsEmpty;
                     }
                 }
 
@@ -909,7 +909,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedMembers
                     {
                         var suffix = methodSymbol.Name[prefix.Length..];
                         return suffix.Length > 0
-                            && methodSymbol.ContainingType
+                            && methodSymbol
+                                .ContainingType
                                 .GetMembers(suffix)
                                 .Any(m => m is IPropertySymbol);
                     }

@@ -62,12 +62,9 @@ namespace System.IO.Tests
                 CancellationToken token = cts.Token;
 
                 Assert.True(
-                    RandomAccess.ReadAsync(
-                        handle,
-                        new Memory<byte>[] { new byte[1] },
-                        0,
-                        token
-                    ).IsCanceled
+                    RandomAccess
+                        .ReadAsync(handle, new Memory<byte>[] { new byte[1] }, 0, token)
+                        .IsCanceled
                 );
 
                 TaskCanceledException ex = await Assert.ThrowsAsync<TaskCanceledException>(

@@ -50,8 +50,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.LanguageServer.Handler
             }
 
             var document = context.Document;
-            var formattingService =
-                document?.Project.LanguageServices.GetService<IXamlFormattingService>();
+            var formattingService = document
+                ?.Project
+                .LanguageServices
+                .GetService<IXamlFormattingService>();
             if (document != null && formattingService != null)
             {
                 var position = await document

@@ -62,8 +62,10 @@ public class TargetPickerUi
         }
         catch (Exception ex)
         {
-            await context.Response.WriteAsync(
-                $@"
+            await context
+                .Response
+                .WriteAsync(
+                    $@"
 <h1>Unable to find debuggable browser tab</h1>
 <p>
     Could not get a list of browser tabs from <code>{debuggerTabsListUrl}</code>.
@@ -82,7 +84,7 @@ public class TargetPickerUi
 <h2>Underlying exception:</h2>
 <pre>{ex}</pre>
                 "
-            );
+                );
 
             return;
         }
@@ -106,18 +108,22 @@ public class TargetPickerUi
             var suffix = string.IsNullOrEmpty(targetApplicationUrl)
               ? string.Empty
               : $" matching the URL {WebUtility.HtmlEncode(targetApplicationUrl)}";
-            await context.Response.WriteAsync(
-                $"<p>The list of targets returned by {WebUtility.HtmlEncode(debuggerTabsListUrl)} contains no entries{suffix}.</p>"
-            );
-            await context.Response.WriteAsync(
-                "<p>Make sure your browser is displaying the target application.</p>"
-            );
+            await context
+                .Response
+                .WriteAsync(
+                    $"<p>The list of targets returned by {WebUtility.HtmlEncode(debuggerTabsListUrl)} contains no entries{suffix}.</p>"
+                );
+            await context
+                .Response
+                .WriteAsync("<p>Make sure your browser is displaying the target application.</p>");
         }
         else
         {
             await context.Response.WriteAsync("<h1>Inspectable pages</h1>");
-            await context.Response.WriteAsync(
-                @"
+            await context
+                .Response
+                .WriteAsync(
+                    @"
                     <style type='text/css'>
                         body {
                             font-family: Helvetica, Arial, sans-serif;
@@ -145,16 +151,18 @@ public class TargetPickerUi
                         }
                     </style>
                 "
-            );
+                );
 
             foreach (var tab in matchingTabs)
             {
                 var devToolsUrlWithProxy = GetDevToolsUrlWithProxy(request, tab);
-                await context.Response.WriteAsync(
-                    $"<a class='inspectable-page' href='{WebUtility.HtmlEncode(devToolsUrlWithProxy)}'>"
-                        + $"<h3>{WebUtility.HtmlEncode(tab.Title)}</h3>{WebUtility.HtmlEncode(tab.Url)}"
-                        + $"</a>"
-                );
+                await context
+                    .Response
+                    .WriteAsync(
+                        $"<a class='inspectable-page' href='{WebUtility.HtmlEncode(devToolsUrlWithProxy)}'>"
+                            + $"<h3>{WebUtility.HtmlEncode(tab.Title)}</h3>{WebUtility.HtmlEncode(tab.Url)}"
+                            + $"</a>"
+                    );
             }
         }
     }

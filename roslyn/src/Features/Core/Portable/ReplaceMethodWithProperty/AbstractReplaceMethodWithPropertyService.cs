@@ -53,7 +53,8 @@ namespace Microsoft.CodeAnalysis.ReplaceMethodWithProperty
         {
             var getMethodDeclaration = getAndSetMethods.GetMethodDeclaration;
             var setMethodDeclaration = getAndSetMethods.SetMethodDeclaration;
-            var finalLeadingTrivia = getAndSetMethods.GetMethodDeclaration
+            var finalLeadingTrivia = getAndSetMethods
+                .GetMethodDeclaration
                 .GetLeadingTrivia()
                 .ToList();
 

@@ -76,13 +76,18 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
                 var syntaxTree = await _document
                     .GetSyntaxTreeAsync(cancellationToken)
                     .ConfigureAwait(false);
-                var syntaxFactory = _document.Project.Solution.Workspace.Services
+                var syntaxFactory = _document
+                    .Project
+                    .Solution
+                    .Workspace
+                    .Services
                     .GetLanguageServices(_state.TypeToGenerateIn.Language)
                     .GetService<SyntaxGenerator>();
 
                 if (_generateProperty)
                 {
-                    var property = await _state.SignatureInfo
+                    var property = await _state
+                        .SignatureInfo
                         .GeneratePropertyAsync(
                             syntaxFactory,
                             _isAbstract,
@@ -109,7 +114,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
                 }
                 else
                 {
-                    var method = await _state.SignatureInfo
+                    var method = await _state
+                        .SignatureInfo
                         .GenerateMethodAsync(syntaxFactory, _isAbstract, cancellationToken)
                         .ConfigureAwait(false);
 

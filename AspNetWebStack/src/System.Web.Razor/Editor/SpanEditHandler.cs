@@ -129,9 +129,9 @@ namespace System.Web.Razor.Editor
 
         protected internal static bool IsAtEndOfFirstLine(Span target, TextChange change)
         {
-            int endOfFirstLine = target.Content.IndexOfAny(
-                new char[] { (char)0x000d, (char)0x000a, (char)0x2028, (char)0x2029 }
-            );
+            int endOfFirstLine = target
+                .Content
+                .IndexOfAny(new char[] { (char)0x000d, (char)0x000a, (char)0x2028, (char)0x2029 });
             return (
                 endOfFirstLine == -1
                 || (change.OldPosition - target.Start.AbsoluteIndex) <= endOfFirstLine
@@ -181,10 +181,9 @@ namespace System.Web.Razor.Editor
         /// </remarks>
         protected internal static string GetOldText(Span target, TextChange change)
         {
-            return target.Content.Substring(
-                change.OldPosition - target.Start.AbsoluteIndex,
-                change.OldLength
-            );
+            return target
+                .Content
+                .Substring(change.OldPosition - target.Start.AbsoluteIndex, change.OldLength);
         }
 
         // Is the specified span to the right of this span and immediately adjacent?

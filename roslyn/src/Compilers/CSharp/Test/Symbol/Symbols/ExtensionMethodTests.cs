@@ -57,9 +57,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols
             CompileAndVerify(
                 source,
                 validator: validator,
-                options: TestOptions.ReleaseDll.WithMetadataImportOptions(
-                    MetadataImportOptions.Internal
-                )
+                options: TestOptions
+                    .ReleaseDll
+                    .WithMetadataImportOptions(MetadataImportOptions.Internal)
             );
         }
 
@@ -247,7 +247,8 @@ static class S
                         .DescendantNodes()
                         .OfType<MemberAccessExpressionSyntax>()
                         .Single()
-                ).Symbol;
+                )
+                .Symbol;
             Assert.True(gooSymbol.IsExtensionMethod);
             Assert.Equal(MethodKind.ReducedExtension, gooSymbol.MethodKind);
             var gooOriginal = gooSymbol.ReducedFrom;
@@ -2722,9 +2723,9 @@ B"
                 source: source,
                 sourceSymbolValidator: validator(true),
                 symbolValidator: validator(false),
-                options: TestOptions.ReleaseDll.WithMetadataImportOptions(
-                    MetadataImportOptions.Internal
-                )
+                options: TestOptions
+                    .ReleaseDll
+                    .WithMetadataImportOptions(MetadataImportOptions.Internal)
             );
         }
 
@@ -2778,9 +2779,9 @@ static class S
 }";
             var compilation = CreateCompilation(
                 source,
-                options: TestOptions.ReleaseDll.WithMetadataImportOptions(
-                    MetadataImportOptions.Internal
-                )
+                options: TestOptions
+                    .ReleaseDll
+                    .WithMetadataImportOptions(MetadataImportOptions.Internal)
             );
             Action<ModuleSymbol> validator = module =>
             {
@@ -2893,7 +2894,8 @@ internal static class C
                 comp,
                 symbolValidator: module =>
                 {
-                    var method = module.GlobalNamespace
+                    var method = module
+                        .GlobalNamespace
                         .GetMember<NamedTypeSymbol>("C")
                         .GetMember<PEMethodSymbol>("M1");
                     Assert.True(method.IsExtensionMethod);
@@ -3057,7 +3059,8 @@ class Program
 
             var node =
                 tree.GetCompilationUnitRoot()
-                    .FindToken(code.IndexOf("GetHashCode", StringComparison.Ordinal)).Parent;
+                    .FindToken(code.IndexOf("GetHashCode", StringComparison.Ordinal))
+                    .Parent;
             var symbolInfo = model.GetSymbolInfo((SimpleNameSyntax)node);
             var methodSymbol = symbolInfo.Symbol.GetSymbol<MethodSymbol>();
             Assert.False(methodSymbol.IsFromCompilation(compilation));
@@ -3069,7 +3072,8 @@ class Program
             // Get the GenericNameSyntax node Cast<T1> for binding
             node =
                 tree.GetCompilationUnitRoot()
-                    .FindToken(code.IndexOf("Cast<T1>", StringComparison.Ordinal)).Parent;
+                    .FindToken(code.IndexOf("Cast<T1>", StringComparison.Ordinal))
+                    .Parent;
             symbolInfo = model.GetSymbolInfo((GenericNameSyntax)node);
             methodSymbol = (MethodSymbol)symbolInfo.Symbol.GetSymbol<MethodSymbol>();
             Assert.False(methodSymbol.IsFromCompilation(compilation));
@@ -3142,7 +3146,8 @@ class Program
             var compilation = CreateCompilationWithMscorlib40AndSystemCore(source);
             compilation.VerifyDiagnostics();
 
-            var extensionMethod = compilation.GlobalNamespace
+            var extensionMethod = compilation
+                .GlobalNamespace
                 .GetMember<NamedTypeSymbol>("C")
                 .GetMember<MethodSymbol>("M");
             Assert.True(extensionMethod.IsExtensionMethod);
@@ -3196,14 +3201,15 @@ public struct MyStruct<T>
             );
             compilation2.VerifyDiagnostics();
 
-            var extensionMethod = compilation2.GlobalNamespace
+            var extensionMethod = compilation2
+                .GlobalNamespace
                 .GetMember<NamedTypeSymbol>("C")
                 .GetMember<MethodSymbol>("M");
             Assert.True(extensionMethod.IsExtensionMethod);
 
-            var myStruct = (NamedTypeSymbol)compilation2.GlobalNamespace.GetMember<NamedTypeSymbol>(
-                "MyStruct"
-            );
+            var myStruct = (NamedTypeSymbol)compilation2
+                .GlobalNamespace
+                .GetMember<NamedTypeSymbol>("MyStruct");
             var int32Type = compilation2.GetSpecialType(SpecialType.System_Int32);
             var msi = myStruct.Construct(int32Type);
 
@@ -3231,14 +3237,15 @@ public struct MyStruct<T>
                     .WithLocation(5, 9)
             );
 
-            extensionMethod = compilation2.GlobalNamespace
+            extensionMethod = compilation2
+                .GlobalNamespace
                 .GetMember<NamedTypeSymbol>("C")
                 .GetMember<MethodSymbol>("M");
             Assert.True(extensionMethod.IsExtensionMethod);
 
-            myStruct = (NamedTypeSymbol)compilation2.GlobalNamespace.GetMember<NamedTypeSymbol>(
-                "MyStruct"
-            );
+            myStruct = (NamedTypeSymbol)compilation2
+                .GlobalNamespace
+                .GetMember<NamedTypeSymbol>("MyStruct");
             int32Type = compilation2.GetSpecialType(SpecialType.System_Int32);
             msi = myStruct.Construct(int32Type);
 
@@ -4242,7 +4249,8 @@ namespace ConsoleApplication22
                 .GetRoot()
                 .DescendantNodes()
                 .OfType<InvocationExpressionSyntax>()
-                .Single().Expression;
+                .Single()
+                .Expression;
             Assert.Equal("other.GetEnumerableDisposable1<T, TEnumerator>", member.ToString());
 
             var type = model.GetTypeInfo(member.Expression).Type;

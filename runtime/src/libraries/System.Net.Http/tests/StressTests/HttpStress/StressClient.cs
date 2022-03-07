@@ -62,9 +62,9 @@ namespace HttpStress
                 {
                     return new SocketsHttpHandler()
                     {
-                        PooledConnectionLifetime = _config.ConnectionLifetime.GetValueOrDefault(
-                            Timeout.InfiniteTimeSpan
-                        ),
+                        PooledConnectionLifetime = _config
+                            .ConnectionLifetime
+                            .GetValueOrDefault(Timeout.InfiniteTimeSpan),
                         SslOptions = new SslClientAuthenticationOptions
                         {
                             RemoteCertificateValidationCallback = delegate
@@ -368,10 +368,12 @@ namespace HttpStress
                     lock (failureType)
                     {
                         if (
-                            !failureType.Failures.TryGetValue(
-                                operationIndex,
-                                out List<(DateTime timestamp, TimeSpan duration, bool isCancelled)>? details
-                            )
+                            !failureType
+                                .Failures
+                                .TryGetValue(
+                                    operationIndex,
+                                    out List<(DateTime timestamp, TimeSpan duration, bool isCancelled)>? details
+                                )
                         )
                         {
                             details =
@@ -534,9 +536,9 @@ namespace HttpStress
 
                 int i = 0;
                 foreach (
-                    StressFailureType failure in _failureTypes.Values.OrderByDescending(
-                        x => x.FailureCount
-                    )
+                    StressFailureType failure in _failureTypes
+                        .Values
+                        .OrderByDescending(x => x.FailureCount)
                 )
                 {
                     Console.ForegroundColor = ConsoleColor.Yellow;

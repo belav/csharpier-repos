@@ -64,7 +64,8 @@ namespace System.Text.Json.Serialization.Tests
                     properties
                         .Where(prop => prop.Name == "MyBooleanTrue")
                         .First()
-                        .Value.GetBoolean()
+                        .Value
+                        .GetBoolean()
                 );
             }
         }
@@ -120,7 +121,8 @@ namespace System.Text.Json.Serialization.Tests
                     properties
                         .Where(prop => prop.Name == "MyBooleanTrue")
                         .First()
-                        .Value.GetBoolean()
+                        .Value
+                        .GetBoolean()
                 );
             }
         }
@@ -976,20 +978,24 @@ namespace System.Text.Json.Serialization.Tests
         public static void NestedClassWithJsonElementExtensionDataProperty()
         {
             var child = new ChildClassWithJsonElement { Number = 4 };
-            child.ExtensionData.Add(
-                "SpecialInformation",
-                JsonDocument.Parse(
-                    JsonSerializer.SerializeToUtf8Bytes("I am child class")
-                ).RootElement
-            );
+            child
+                .ExtensionData
+                .Add(
+                    "SpecialInformation",
+                    JsonDocument
+                        .Parse(JsonSerializer.SerializeToUtf8Bytes("I am child class"))
+                        .RootElement
+                );
 
             var parent = new ParentClassWithJsonElement { Text = "Hello World" };
-            parent.ExtensionData.Add(
-                "SpecialInformation",
-                JsonDocument.Parse(
-                    JsonSerializer.SerializeToUtf8Bytes("I am parent class")
-                ).RootElement
-            );
+            parent
+                .ExtensionData
+                .Add(
+                    "SpecialInformation",
+                    JsonDocument
+                        .Parse(JsonSerializer.SerializeToUtf8Bytes("I am parent class"))
+                        .RootElement
+                );
             parent.Children.Add(child);
 
             Verify();
@@ -1039,7 +1045,8 @@ namespace System.Text.Json.Serialization.Tests
                 ((JsonElement)obj.MyOverflow["MyOverflow"])
                     .EnumerateObject()
                     .First()
-                    .Value.GetInt32()
+                    .Value
+                    .GetInt32()
             );
 
             // Attempt to deserialize null into the overflow property. This is also treated as a missing property.
@@ -1079,7 +1086,8 @@ namespace System.Text.Json.Serialization.Tests
                 ((JsonElement)obj.ActualDictionary["Key"])
                     .EnumerateObject()
                     .First()
-                    .Value.GetInt32()
+                    .Value
+                    .GetInt32()
             );
 
             // Attempt to deserialize null into the dictionary and overflow property. This is also treated as a missing property.

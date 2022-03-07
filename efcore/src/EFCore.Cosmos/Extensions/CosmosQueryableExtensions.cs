@@ -46,7 +46,9 @@ namespace Microsoft.EntityFrameworkCore
             Check.NotNull(partitionKey, nameof(partitionKey));
 
             return source.Provider is EntityQueryProvider
-              ? source.Provider.CreateQuery<TEntity>(
+              ? source
+                .Provider
+                .CreateQuery<TEntity>(
                     Expression.Call(
                         instance: null,
                         method: WithPartitionKeyMethodInfo.MakeGenericMethod(typeof(TEntity)),

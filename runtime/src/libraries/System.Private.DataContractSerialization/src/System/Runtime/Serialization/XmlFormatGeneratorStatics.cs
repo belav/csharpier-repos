@@ -154,10 +154,9 @@ namespace System.Runtime.Serialization
                 if (s_getItemContractMethod == null)
                 {
                     s_getItemContractMethod =
-                        typeof(CollectionDataContract).GetProperty(
-                            "ItemContract",
-                            Globals.ScanAllMembers
-                        )!.GetMethod;
+                        typeof(CollectionDataContract)
+                            .GetProperty("ItemContract", Globals.ScanAllMembers)!
+                            .GetMethod;
                     Debug.Assert(s_getItemContractMethod != null);
                 }
                 return s_getItemContractMethod;
@@ -270,10 +269,9 @@ namespace System.Runtime.Serialization
             {
                 if (s_hashtableCtor == null)
                 {
-                    s_hashtableCtor = Globals.TypeOfHashtable.GetConstructor(
-                        Globals.ScanAllMembers,
-                        Type.EmptyTypes
-                    );
+                    s_hashtableCtor = Globals
+                        .TypeOfHashtable
+                        .GetConstructor(Globals.ScanAllMembers, Type.EmptyTypes);
                     Debug.Assert(s_hashtableCtor != null);
                 }
                 return s_hashtableCtor;

@@ -78,10 +78,9 @@ namespace Microsoft.EntityFrameworkCore
                     return 1;
                 }
 
-                var result = StringComparer.InvariantCulture.Compare(
-                    x.EntityType.Name,
-                    y.EntityType.Name
-                );
+                var result = StringComparer
+                    .InvariantCulture
+                    .Compare(x.EntityType.Name, y.EntityType.Name);
                 if (result != 0)
                 {
                     return result;

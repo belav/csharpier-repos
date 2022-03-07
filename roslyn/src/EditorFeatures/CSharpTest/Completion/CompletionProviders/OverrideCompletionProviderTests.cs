@@ -2796,9 +2796,9 @@ End Class
                 position,
                 triggerInfo
             );
-            var completionItem = completionList.Items.First(
-                i => CompareItems(i.DisplayText, "Bar[int bay]")
-            );
+            var completionItem = completionList
+                .Items
+                .First(i => CompareItems(i.DisplayText, "Bar[int bay]"));
 
             if (
                 service.GetProvider(completionItem)
@@ -3120,9 +3120,9 @@ int bar;
                 position,
                 triggerInfo
             );
-            var completionItem = completionList.Items.First(
-                i => CompareItems(i.DisplayText, "Equals(object obj)")
-            );
+            var completionItem = completionList
+                .Items
+                .First(i => CompareItems(i.DisplayText, "Equals(object obj)"));
 
             if (
                 service.GetProvider(completionItem)
@@ -3207,9 +3207,9 @@ int bar;
                 cursorPosition,
                 triggerInfo
             );
-            var completionItem = completionList.Items.First(
-                i => CompareItems(i.DisplayText, "Equals(object obj)")
-            );
+            var completionItem = completionList
+                .Items
+                .First(i => CompareItems(i.DisplayText, "Equals(object obj)"));
 
             if (
                 service.GetProvider(completionItem)
@@ -3482,7 +3482,9 @@ namespace ClassLibrary7
             // reference to P2. If we try to override Goo, the missing "Missing" type will
             // prevent round tripping the symbolkey.
             using var workspace = TestWorkspace.Create(text, exportProvider: ExportProvider);
-            var compilation = await workspace.CurrentSolution.Projects
+            var compilation = await workspace
+                .CurrentSolution
+                .Projects
                 .First(p => p.Name == "P3")
                 .GetCompilationAsync();
 
@@ -3547,7 +3549,9 @@ public class SomeClass : Base
 }
 ";
 
-            var origComp = await workspace.CurrentSolution.Projects
+            var origComp = await workspace
+                .CurrentSolution
+                .Projects
                 .Single()
                 .GetRequiredCompilationAsync(CancellationToken.None);
             var options = CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.Latest);
@@ -3573,7 +3577,8 @@ public class SomeClass : Base
                 testDocument.CursorPosition.Value,
                 CompletionTrigger.Invoke
             );
-            var completionItem = completionList.Items
+            var completionItem = completionList
+                .Items
                 .Where(c => c.DisplayText == "M(in int x)")
                 .Single();
 

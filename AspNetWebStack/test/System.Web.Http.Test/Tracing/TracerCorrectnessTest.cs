@@ -339,7 +339,8 @@ namespace System.Web.Http.Tracing
         public void All_Tracers_Are_Tested()
         {
             // Arrange & Act
-            Type[] allTracerTypes = typeof(ITraceWriter).Assembly
+            Type[] allTracerTypes = typeof(ITraceWriter)
+                .Assembly
                 .GetTypes()
                 .Where(t => !t.IsAbstract && t.Name.EndsWith("Tracer"))
                 .ToArray();

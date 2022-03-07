@@ -974,9 +974,11 @@ namespace Microsoft.EntityFrameworkCore
                             loadedRoot.RequiredChildrenAk.OrderBy(c => c.Id).First().Children
                         );
                         Assert.Single(
-                            loadedRoot.RequiredChildrenAk
+                            loadedRoot
+                                .RequiredChildrenAk
                                 .OrderBy(c => c.Id)
-                                .First().CompositeChildren
+                                .First()
+                                .CompositeChildren
                         );
                     }
                 }
@@ -1370,7 +1372,8 @@ namespace Microsoft.EntityFrameworkCore
             ExecuteWithStrategyInTransaction(
                 context =>
                 {
-                    var removed = LoadOptionalAkGraph(context).OptionalChildrenAk
+                    var removed = LoadOptionalAkGraph(context)
+                        .OptionalChildrenAk
                         .OrderBy(c => c.Id)
                         .First();
 

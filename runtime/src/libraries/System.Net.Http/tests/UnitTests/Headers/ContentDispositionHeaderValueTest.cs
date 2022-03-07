@@ -442,9 +442,9 @@ namespace System.Net.Http.Tests
                 contentDisposition.ToString()
             );
 
-            contentDisposition.Parameters.Add(
-                new NameValueHeaderValue("custom", "\"custom value\"")
-            );
+            contentDisposition
+                .Parameters
+                .Add(new NameValueHeaderValue("custom", "\"custom value\""));
             Assert.Equal(
                 "inline; name=myname; filename=\"my File Name\"; creation-date="
                     + "\"Tue, 15 Feb 2011 08:00:00 GMT\"; custom=\"custom value\"",
@@ -743,9 +743,9 @@ namespace System.Net.Http.Tests
             expected.Name = null;
             expected.DispositionType = "attachment";
             expected.FileName = "foo-ae.html";
-            expected.Parameters.Add(
-                new NameValueHeaderValue("filename*", "UTF-8''foo-%c3%a4.html")
-            );
+            expected
+                .Parameters
+                .Add(new NameValueHeaderValue("filename*", "UTF-8''foo-%c3%a4.html"));
             CheckValidParse(
                 @"attachment; filename*=UTF-8''foo-%c3%a4.html; filename=foo-ae.html",
                 expected

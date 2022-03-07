@@ -16,7 +16,8 @@ public sealed class SectionTargetExtension : ISectionTargetExtension
 
     public void WriteSection(CodeRenderingContext context, SectionIntermediateNode node)
     {
-        context.CodeWriter
+        context
+            .CodeWriter
             .WriteStartMethodInvocation(SectionMethodName)
             .Write("\"")
             .Write(node.SectionName)

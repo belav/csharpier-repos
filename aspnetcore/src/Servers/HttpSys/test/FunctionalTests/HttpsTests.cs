@@ -251,8 +251,9 @@ public class HttpsTests
                     try
                     {
                         var tlsFeature = httpContext.Features.Get<ITlsHandshakeFeature>();
-                        var requestInfoFeature =
-                            httpContext.Features.Get<IHttpSysRequestInfoFeature>();
+                        var requestInfoFeature = httpContext
+                            .Features
+                            .Get<IHttpSysRequestInfoFeature>();
                         Assert.NotNull(tlsFeature);
                         Assert.NotNull(requestInfoFeature);
                         Assert.True(requestInfoFeature.RequestInfo.Count > 0);

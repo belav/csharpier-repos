@@ -49,8 +49,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.LanguageServer.Handler
                 return null;
             }
 
-            var insertService =
-                document.Project.LanguageServices.GetService<IXamlAutoInsertService>();
+            var insertService = document
+                .Project
+                .LanguageServices
+                .GetService<IXamlAutoInsertService>();
             if (insertService == null)
             {
                 return null;

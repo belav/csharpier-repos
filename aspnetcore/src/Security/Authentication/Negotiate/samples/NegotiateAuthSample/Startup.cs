@@ -67,8 +67,10 @@ public class Startup
     public async Task HandleRequest(HttpContext context)
     {
         var user = context.User.Identity;
-        await context.Response.WriteAsync(
-            $"Authenticated? {user.IsAuthenticated}, Name: {user.Name}, Protocol: {context.Request.Protocol}"
-        );
+        await context
+            .Response
+            .WriteAsync(
+                $"Authenticated? {user.IsAuthenticated}, Name: {user.Name}, Protocol: {context.Request.Protocol}"
+            );
     }
 }

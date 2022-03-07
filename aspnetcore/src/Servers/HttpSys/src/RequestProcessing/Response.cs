@@ -574,8 +574,10 @@ internal sealed class Response
         try
         {
             fixed (
-                HttpApiTypes.HTTP_KNOWN_HEADER* pKnownHeaders =
-                    &_nativeResponse.Response_V1.Headers.KnownHeaders
+                HttpApiTypes.HTTP_KNOWN_HEADER* pKnownHeaders = &_nativeResponse
+                    .Response_V1
+                    .Headers
+                    .KnownHeaders
             )
             {
                 foreach (var headerPair in Headers)
@@ -594,7 +596,10 @@ internal sealed class Response
                         || (
                             isOpaqueUpgrade
                             && lookup
-                                == (int)HttpApiTypes.HTTP_RESPONSE_HEADER_ID.Enum.HttpHeaderConnection
+                                == (int)HttpApiTypes
+                                    .HTTP_RESPONSE_HEADER_ID
+                                    .Enum
+                                    .HttpHeaderConnection
                         )
                     )
                     {
@@ -663,7 +668,9 @@ internal sealed class Response
                         }
 
                         knownHeaderInfo[_nativeResponse.ResponseInfoCount].Type =
-                            HttpApiTypes.HTTP_RESPONSE_INFO_TYPE.HttpResponseInfoTypeMultipleKnownHeaders;
+                            HttpApiTypes
+                                .HTTP_RESPONSE_INFO_TYPE
+                                .HttpResponseInfoTypeMultipleKnownHeaders;
                         knownHeaderInfo[_nativeResponse.ResponseInfoCount].Length =
                             (uint)Marshal.SizeOf<HttpApiTypes.HTTP_MULTIPLE_KNOWN_HEADERS>();
 

@@ -202,9 +202,9 @@ internal static class ReasonPhrases
     private static byte[] CreateStatusBytes(int statusCode, string? reasonPhrase)
     {
         // https://tools.ietf.org/html/rfc7230#section-3.1.2 requires trailing whitespace regardless of reason phrase
-        return Encoding.ASCII.GetBytes(
-            statusCode.ToString(CultureInfo.InvariantCulture) + " " + reasonPhrase
-        );
+        return Encoding
+            .ASCII
+            .GetBytes(statusCode.ToString(CultureInfo.InvariantCulture) + " " + reasonPhrase);
     }
 
     public static byte[] ToStatusBytes(int statusCode, string? reasonPhrase = null)

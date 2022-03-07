@@ -120,9 +120,10 @@ namespace Microsoft.CodeAnalysis.CSharp.MakeLocalFunctionStatic
                     (node, generator) =>
                     {
                         var currentInvocation = (InvocationExpressionSyntax)node;
-                        var seenNamedArgument = currentInvocation.ArgumentList.Arguments.Any(
-                            a => a.NameColon != null
-                        );
+                        var seenNamedArgument = currentInvocation
+                            .ArgumentList
+                            .Arguments
+                            .Any(a => a.NameColon != null);
                         var seenDefaultArgumentValue =
                             currentInvocation.ArgumentList.Arguments.Count
                             < localFunction.ParameterList.Parameters.Count;
@@ -138,9 +139,11 @@ namespace Microsoft.CodeAnalysis.CSharp.MakeLocalFunctionStatic
                                 )
                         );
 
-                        var newArgList = currentInvocation.ArgumentList.WithArguments(
-                            currentInvocation.ArgumentList.Arguments.AddRange(newArguments)
-                        );
+                        var newArgList = currentInvocation
+                            .ArgumentList
+                            .WithArguments(
+                                currentInvocation.ArgumentList.Arguments.AddRange(newArguments)
+                            );
                         return currentInvocation.WithArgumentList(newArgList);
                     }
                 );

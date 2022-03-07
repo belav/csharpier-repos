@@ -64,9 +64,9 @@ namespace Microsoft.EntityFrameworkCore
 
             Assert.Equal(
                 RelationalStrings.RelationalNotInUse,
-                Assert.Throws<InvalidOperationException>(
-                    () => context.Database.GetDbConnection()
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(() => context.Database.GetDbConnection())
+                    .Message
             );
         }
 
@@ -162,12 +162,14 @@ namespace Microsoft.EntityFrameworkCore
             bool async
         )
         {
-            var context = InMemoryTestHelpers.Instance.CreateContext(
-                new ServiceCollection().AddScoped<
-                    IDbContextTransactionManager,
-                    FakeDbContextTransactionManager
-                >()
-            );
+            var context = InMemoryTestHelpers
+                .Instance
+                .CreateContext(
+                    new ServiceCollection().AddScoped<
+                        IDbContextTransactionManager,
+                        FakeDbContextTransactionManager
+                    >()
+                );
 
             var transactionManager =
                 (FakeDbContextTransactionManager)context.GetService<IDbContextTransactionManager>();
@@ -233,9 +235,11 @@ namespace Microsoft.EntityFrameworkCore
 
             Assert.Equal(
                 RelationalStrings.RelationalNotInUse,
-                Assert.Throws<InvalidOperationException>(
-                    () => context.Database.UseTransaction(transaction)
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(
+                        () => context.Database.UseTransaction(transaction)
+                    )
+                    .Message
             );
         }
 
@@ -254,9 +258,11 @@ namespace Microsoft.EntityFrameworkCore
                 Migrations = migrations.ToDictionary(x => x, x => default(TypeInfo))
             };
 
-            var db = RelationalTestHelpers.Instance.CreateContext(
-                new ServiceCollection().AddSingleton<IMigrationsAssembly>(migrationsAssembly)
-            );
+            var db = RelationalTestHelpers
+                .Instance
+                .CreateContext(
+                    new ServiceCollection().AddSingleton<IMigrationsAssembly>(migrationsAssembly)
+                );
 
             Assert.Equal(migrations, db.Database.GetMigrations());
         }
@@ -285,9 +291,11 @@ namespace Microsoft.EntityFrameworkCore
                 AppliedMigrations = migrations.Select(id => new HistoryRow(id, "1.1.0")).ToList()
             };
 
-            var context = RelationalTestHelpers.Instance.CreateContext(
-                new ServiceCollection().AddSingleton<IHistoryRepository>(repository)
-            );
+            var context = RelationalTestHelpers
+                .Instance
+                .CreateContext(
+                    new ServiceCollection().AddSingleton<IHistoryRepository>(repository)
+                );
 
             Assert.Equal(
                 migrations,
@@ -356,11 +364,13 @@ namespace Microsoft.EntityFrameworkCore
                     .ToList()
             };
 
-            var context = RelationalTestHelpers.Instance.CreateContext(
-                new ServiceCollection()
-                    .AddSingleton<IHistoryRepository>(repository)
-                    .AddSingleton<IMigrationsAssembly>(migrationsAssembly)
-            );
+            var context = RelationalTestHelpers
+                .Instance
+                .CreateContext(
+                    new ServiceCollection()
+                        .AddSingleton<IHistoryRepository>(repository)
+                        .AddSingleton<IMigrationsAssembly>(migrationsAssembly)
+                );
 
             Assert.Equal(
                 new[] { "00000000000003_Three" },

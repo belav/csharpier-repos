@@ -187,7 +187,11 @@ namespace System.Runtime.Serialization
         public static object GetSafeUninitializedObject(
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.NonPublicConstructors
-                    | System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicConstructors
+                    | System
+                        .Diagnostics
+                        .CodeAnalysis
+                        .DynamicallyAccessedMemberTypes
+                        .PublicConstructors
             )]
                 System.Type type
         )
@@ -237,7 +241,11 @@ namespace System.Runtime.Serialization
         public static object GetUninitializedObject(
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.NonPublicConstructors
-                    | System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicConstructors
+                    | System
+                        .Diagnostics
+                        .CodeAnalysis
+                        .DynamicallyAccessedMemberTypes
+                        .PublicConstructors
             )]
                 System.Type type
         )

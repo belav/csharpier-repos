@@ -1683,17 +1683,17 @@ namespace System.Tests
             // ordinal ignore case
             Assert.Equal(
                 "abc".GetHashCode(StringComparison.OrdinalIgnoreCase),
-                CultureInfo.InvariantCulture.CompareInfo.GetHashCode(
-                    "abc",
-                    CompareOptions.OrdinalIgnoreCase
-                )
+                CultureInfo
+                    .InvariantCulture
+                    .CompareInfo
+                    .GetHashCode("abc", CompareOptions.OrdinalIgnoreCase)
             );
             Assert.Equal(
                 "abc".GetHashCode(StringComparison.OrdinalIgnoreCase),
-                CultureInfo.InvariantCulture.CompareInfo.GetHashCode(
-                    "ABC",
-                    CompareOptions.OrdinalIgnoreCase
-                )
+                CultureInfo
+                    .InvariantCulture
+                    .CompareInfo
+                    .GetHashCode("ABC", CompareOptions.OrdinalIgnoreCase)
             );
 
             // culture-aware
@@ -1703,26 +1703,26 @@ namespace System.Tests
             );
             Assert.Equal(
                 "aeiXXabc".GetHashCode(StringComparison.CurrentCultureIgnoreCase),
-                CultureInfo.CurrentCulture.CompareInfo.GetHashCode(
-                    "aeiXXabc",
-                    CompareOptions.IgnoreCase
-                )
+                CultureInfo
+                    .CurrentCulture
+                    .CompareInfo
+                    .GetHashCode("aeiXXabc", CompareOptions.IgnoreCase)
             );
 
             // invariant culture
             Assert.Equal(
                 "aeiXXabc".GetHashCode(StringComparison.InvariantCulture),
-                CultureInfo.InvariantCulture.CompareInfo.GetHashCode(
-                    "aeiXXabc",
-                    CompareOptions.None
-                )
+                CultureInfo
+                    .InvariantCulture
+                    .CompareInfo
+                    .GetHashCode("aeiXXabc", CompareOptions.None)
             );
             Assert.Equal(
                 "aeiXXabc".GetHashCode(StringComparison.InvariantCultureIgnoreCase),
-                CultureInfo.InvariantCulture.CompareInfo.GetHashCode(
-                    "aeiXXabc",
-                    CompareOptions.IgnoreCase
-                )
+                CultureInfo
+                    .InvariantCulture
+                    .CompareInfo
+                    .GetHashCode("aeiXXabc", CompareOptions.IgnoreCase)
             );
         }
 
@@ -1732,65 +1732,65 @@ namespace System.Tests
             // ordinal
             Assert.Equal(
                 "abc".GetHashCode(),
-                CultureInfo.InvariantCulture.CompareInfo.GetHashCode(
-                    "abc".AsSpan(),
-                    CompareOptions.Ordinal
-                )
+                CultureInfo
+                    .InvariantCulture
+                    .CompareInfo
+                    .GetHashCode("abc".AsSpan(), CompareOptions.Ordinal)
             );
             Assert.NotEqual(
                 "abc".GetHashCode(),
-                CultureInfo.InvariantCulture.CompareInfo.GetHashCode(
-                    "ABC".AsSpan(),
-                    CompareOptions.Ordinal
-                )
+                CultureInfo
+                    .InvariantCulture
+                    .CompareInfo
+                    .GetHashCode("ABC".AsSpan(), CompareOptions.Ordinal)
             );
 
             // ordinal ignore case
             Assert.Equal(
                 "abc".GetHashCode(StringComparison.OrdinalIgnoreCase),
-                CultureInfo.InvariantCulture.CompareInfo.GetHashCode(
-                    "abc".AsSpan(),
-                    CompareOptions.OrdinalIgnoreCase
-                )
+                CultureInfo
+                    .InvariantCulture
+                    .CompareInfo
+                    .GetHashCode("abc".AsSpan(), CompareOptions.OrdinalIgnoreCase)
             );
             Assert.Equal(
                 "abc".GetHashCode(StringComparison.OrdinalIgnoreCase),
-                CultureInfo.InvariantCulture.CompareInfo.GetHashCode(
-                    "ABC".AsSpan(),
-                    CompareOptions.OrdinalIgnoreCase
-                )
+                CultureInfo
+                    .InvariantCulture
+                    .CompareInfo
+                    .GetHashCode("ABC".AsSpan(), CompareOptions.OrdinalIgnoreCase)
             );
 
             // culture-aware
             Assert.Equal(
                 "aeiXXabc".GetHashCode(StringComparison.CurrentCulture),
-                CultureInfo.CurrentCulture.CompareInfo.GetHashCode(
-                    "aeiXXabc".AsSpan(),
-                    CompareOptions.None
-                )
+                CultureInfo
+                    .CurrentCulture
+                    .CompareInfo
+                    .GetHashCode("aeiXXabc".AsSpan(), CompareOptions.None)
             );
             Assert.Equal(
                 "aeiXXabc".GetHashCode(StringComparison.CurrentCultureIgnoreCase),
-                CultureInfo.CurrentCulture.CompareInfo.GetHashCode(
-                    "aeiXXabc".AsSpan(),
-                    CompareOptions.IgnoreCase
-                )
+                CultureInfo
+                    .CurrentCulture
+                    .CompareInfo
+                    .GetHashCode("aeiXXabc".AsSpan(), CompareOptions.IgnoreCase)
             );
 
             // invariant culture
             Assert.Equal(
                 "aeiXXabc".GetHashCode(StringComparison.InvariantCulture),
-                CultureInfo.InvariantCulture.CompareInfo.GetHashCode(
-                    "aeiXXabc".AsSpan(),
-                    CompareOptions.None
-                )
+                CultureInfo
+                    .InvariantCulture
+                    .CompareInfo
+                    .GetHashCode("aeiXXabc".AsSpan(), CompareOptions.None)
             );
             Assert.Equal(
                 "aeiXXabc".GetHashCode(StringComparison.InvariantCultureIgnoreCase),
-                CultureInfo.InvariantCulture.CompareInfo.GetHashCode(
-                    "aeiXXabc".AsSpan(),
-                    CompareOptions.IgnoreCase
-                )
+                CultureInfo
+                    .InvariantCulture
+                    .CompareInfo
+                    .GetHashCode("aeiXXabc".AsSpan(), CompareOptions.IgnoreCase)
             );
         }
 

@@ -49,10 +49,11 @@ namespace System.Net.Http
 
         public static IntPtr UnsafeAddrOfPinnedArrayElement<T>(T[] arr, int index)
         {
-            return System.Runtime.InteropServices.Marshal.UnsafeAddrOfPinnedArrayElement<T>(
-                arr,
-                index
-            );
+            return System
+                .Runtime
+                .InteropServices
+                .Marshal
+                .UnsafeAddrOfPinnedArrayElement<T>(arr, index);
         }
 
         public static T PtrToStructure<T>(IntPtr ptr)

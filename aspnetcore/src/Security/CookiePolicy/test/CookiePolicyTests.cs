@@ -41,26 +41,22 @@ public class CookiePolicyTests
     {
         context.Response.Cookies.Append("A", "A");
         context.Response.Cookies.Append("B", "B", new CookieOptions());
-        context.Response.Cookies.Append(
-            "C",
-            "C",
-            new CookieOptions { SameSite = Http.SameSiteMode.None }
-        );
-        context.Response.Cookies.Append(
-            "D",
-            "D",
-            new CookieOptions { SameSite = Http.SameSiteMode.Lax }
-        );
-        context.Response.Cookies.Append(
-            "E",
-            "E",
-            new CookieOptions { SameSite = Http.SameSiteMode.Strict }
-        );
-        context.Response.Cookies.Append(
-            "F",
-            "F",
-            new CookieOptions { SameSite = (Http.SameSiteMode)(-1) }
-        );
+        context
+            .Response
+            .Cookies
+            .Append("C", "C", new CookieOptions { SameSite = Http.SameSiteMode.None });
+        context
+            .Response
+            .Cookies
+            .Append("D", "D", new CookieOptions { SameSite = Http.SameSiteMode.Lax });
+        context
+            .Response
+            .Cookies
+            .Append("E", "E", new CookieOptions { SameSite = Http.SameSiteMode.Strict });
+        context
+            .Response
+            .Cookies
+            .Append("F", "F", new CookieOptions { SameSite = (Http.SameSiteMode)(-1) });
         return Task.FromResult(0);
     };
 
@@ -291,24 +287,25 @@ public class CookiePolicyTests
                                     context =>
                                     {
                                         context.Response.Cookies.Append("A", "A");
-                                        context.Response.Cookies.Append(
-                                            "B",
-                                            "B",
-                                            new CookieOptions { Secure = false }
-                                        );
-                                        context.Response.Cookies.Append(
-                                            "C",
-                                            "C",
-                                            new CookieOptions()
-                                            {
-                                                SameSite = Http.SameSiteMode.Strict
-                                            }
-                                        );
-                                        context.Response.Cookies.Append(
-                                            "D",
-                                            "D",
-                                            new CookieOptions { Secure = true }
-                                        );
+                                        context
+                                            .Response
+                                            .Cookies
+                                            .Append("B", "B", new CookieOptions { Secure = false });
+                                        context
+                                            .Response
+                                            .Cookies
+                                            .Append(
+                                                "C",
+                                                "C",
+                                                new CookieOptions()
+                                                {
+                                                    SameSite = Http.SameSiteMode.Strict
+                                                }
+                                            );
+                                        context
+                                            .Response
+                                            .Cookies
+                                            .Append("D", "D", new CookieOptions { Secure = true });
                                         return Task.FromResult(0);
                                     }
                                 );
@@ -353,15 +350,15 @@ public class CookiePolicyTests
                                     context =>
                                     {
                                         context.Response.Cookies.Delete("A");
-                                        context.Response.Cookies.Delete(
-                                            "B",
-                                            new CookieOptions { Secure = false }
-                                        );
+                                        context
+                                            .Response
+                                            .Cookies
+                                            .Delete("B", new CookieOptions { Secure = false });
                                         context.Response.Cookies.Delete("C", new CookieOptions());
-                                        context.Response.Cookies.Delete(
-                                            "D",
-                                            new CookieOptions { Secure = true }
-                                        );
+                                        context
+                                            .Response
+                                            .Cookies
+                                            .Delete("D", new CookieOptions { Secure = true });
                                         return Task.FromResult(0);
                                     }
                                 );
@@ -401,9 +398,11 @@ public class CookiePolicyTests
                                     next =>
                                         context =>
                                         {
-                                            context.Features.Set<IResponseCookiesFeature>(
-                                                new TestCookieFeature()
-                                            );
+                                            context
+                                                .Features
+                                                .Set<IResponseCookiesFeature>(
+                                                    new TestCookieFeature()
+                                                );
                                             return next(context);
                                         }
                                 );
@@ -421,21 +420,20 @@ public class CookiePolicyTests
                                         );
                                         Assert.Throws<NotImplementedException>(
                                             () =>
-                                                context.Response.Cookies.Delete(
-                                                    "A",
-                                                    new CookieOptions()
-                                                )
+                                                context
+                                                    .Response
+                                                    .Cookies
+                                                    .Delete("A", new CookieOptions())
                                         );
                                         Assert.Throws<NotImplementedException>(
                                             () => context.Response.Cookies.Append("A", "A")
                                         );
                                         Assert.Throws<NotImplementedException>(
                                             () =>
-                                                context.Response.Cookies.Append(
-                                                    "A",
-                                                    "A",
-                                                    new CookieOptions()
-                                                )
+                                                context
+                                                    .Response
+                                                    .Cookies
+                                                    .Append("A", "A", new CookieOptions())
                                         );
                                         return context.Response.WriteAsync("Done");
                                     }

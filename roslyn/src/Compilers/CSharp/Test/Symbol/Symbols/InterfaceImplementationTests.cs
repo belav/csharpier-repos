@@ -356,9 +356,9 @@ class Class : Interface
 
             var @class = (NamedTypeSymbol)global.GetMembers("Class").Single();
             var classImplicitImplementation = @class.Indexers.Single(p => p.Parameters.Length == 2);
-            var classImplicitImplementationBase = @class.Indexers.Single(
-                p => p.Parameters.Length == 1
-            );
+            var classImplicitImplementationBase = @class
+                .Indexers
+                .Single(p => p.Parameters.Length == 1);
 
             var implementingIndexer = @class.FindImplementationForInterfaceMember(interfaceIndexer);
             Assert.Same(classImplicitImplementation, implementingIndexer);
@@ -937,26 +937,26 @@ class DeclaringClass2 : NonDeclaringClass2, Interface
 
             var nonDeclaring1 = (NamedTypeSymbol)global.GetMembers("NonDeclaringClass1").Single();
             Assert.False(
-                nonDeclaring1.InterfacesAndTheirBaseInterfacesNoUseSiteDiagnostics.ContainsKey(
-                    @interface
-                )
+                nonDeclaring1
+                    .InterfacesAndTheirBaseInterfacesNoUseSiteDiagnostics
+                    .ContainsKey(@interface)
             );
 
             var nonDeclaring1Method = nonDeclaring1.GetMembers("Method").Single();
 
             var declaring1 = (NamedTypeSymbol)global.GetMembers("DeclaringClass1").Single();
             Assert.True(
-                declaring1.InterfacesAndTheirBaseInterfacesNoUseSiteDiagnostics.ContainsKey(
-                    @interface
-                )
+                declaring1
+                    .InterfacesAndTheirBaseInterfacesNoUseSiteDiagnostics
+                    .ContainsKey(@interface)
             );
             Assert.Equal(nonDeclaring1, declaring1.BaseType());
 
             var nonDeclaring2 = (NamedTypeSymbol)global.GetMembers("NonDeclaringClass2").Single();
             Assert.False(
-                nonDeclaring2.InterfacesAndTheirBaseInterfacesNoUseSiteDiagnostics.ContainsKey(
-                    @interface
-                )
+                nonDeclaring2
+                    .InterfacesAndTheirBaseInterfacesNoUseSiteDiagnostics
+                    .ContainsKey(@interface)
             );
             Assert.Equal(declaring1, nonDeclaring2.BaseType());
 
@@ -964,9 +964,9 @@ class DeclaringClass2 : NonDeclaringClass2, Interface
 
             var declaring2 = (NamedTypeSymbol)global.GetMembers("DeclaringClass2").Single();
             Assert.True(
-                declaring2.InterfacesAndTheirBaseInterfacesNoUseSiteDiagnostics.ContainsKey(
-                    @interface
-                )
+                declaring2
+                    .InterfacesAndTheirBaseInterfacesNoUseSiteDiagnostics
+                    .ContainsKey(@interface)
             );
             Assert.Equal(nonDeclaring2, declaring2.BaseType());
 
@@ -1013,9 +1013,9 @@ class DeclaringClass2 : NonDeclaringClass2, Interface
                 .GetMembers("DerivedExplicitlyImplementsInterface")
                 .Single();
             Assert.False(
-                derivedClass.InterfacesAndTheirBaseInterfacesNoUseSiteDiagnostics.ContainsKey(
-                    @interface
-                )
+                derivedClass
+                    .InterfacesAndTheirBaseInterfacesNoUseSiteDiagnostics
+                    .ContainsKey(@interface)
             );
             Assert.True(derivedClass.AllInterfaces().Contains(@interface));
 
@@ -1098,7 +1098,8 @@ public class Derived : Base, Interface
             Assert.False(
                 derivedClass
                     .GetSynthesizedExplicitImplementations(CancellationToken.None)
-                    .ForwardingMethods.Any()
+                    .ForwardingMethods
+                    .Any()
             );
         }
 
@@ -1193,9 +1194,9 @@ public class Derived : Base, Interface
             // GetSynthesizedExplicitImplementations doesn't guarantee order, so sort to make the asserts easier to write.
 
             var synthesizedExplicitImpls = (
-                from m in derivedClass.GetSynthesizedExplicitImplementations(
-                    CancellationToken.None
-                ).ForwardingMethods
+                from m in derivedClass
+                    .GetSynthesizedExplicitImplementations(CancellationToken.None)
+                    .ForwardingMethods
                 orderby m.MethodKind
                 select m
             ).ToArray();
@@ -1280,9 +1281,9 @@ class Class : CustomModifierOverridingD, Interface
             // GetSynthesizedExplicitImplementations doesn't guarantee order, so sort to make the asserts easier to write.
 
             var synthesizedExplicitImpls = (
-                from m in @class.GetSynthesizedExplicitImplementations(
-                    CancellationToken.None
-                ).ForwardingMethods
+                from m in @class
+                    .GetSynthesizedExplicitImplementations(CancellationToken.None)
+                    .ForwardingMethods
                 orderby m.Name
                 select m
             ).ToArray();
@@ -1935,7 +1936,8 @@ class C : B, I { }
 
             var synthesizedExplicitImpl = classC
                 .GetSynthesizedExplicitImplementations(CancellationToken.None)
-                .ForwardingMethods.Single();
+                .ForwardingMethods
+                .Single();
             Assert.Equal(classC, synthesizedExplicitImpl.ContainingType);
             Assert.Equal(
                 interfaceMethod,
@@ -2007,9 +2009,10 @@ class C : B, I { }
 
             Assert.Equal(
                 0,
-                classC.GetSynthesizedExplicitImplementations(
-                    CancellationToken.None
-                ).ForwardingMethods.Length
+                classC
+                    .GetSynthesizedExplicitImplementations(CancellationToken.None)
+                    .ForwardingMethods
+                    .Length
             );
         }
 
@@ -2174,9 +2177,9 @@ class Base
 
             // Force completion of destructor symbol.  Calls IsMetadataVirtual on Base.Finalize.
             var returnType =
-                derived.GetMember<MethodSymbol>(
-                    WellKnownMemberNames.DestructorName
-                ).ReturnTypeWithAnnotations;
+                derived
+                    .GetMember<MethodSymbol>(WellKnownMemberNames.DestructorName)
+                    .ReturnTypeWithAnnotations;
             Assert.Equal(SpecialType.System_Void, returnType.SpecialType);
 
             // Force completion of entire symbol.  Calls EnsureMetadataVirtual on Base.Finalize.
@@ -2226,7 +2229,8 @@ class D : B, I
             var derivedType = comp2.GlobalNamespace.GetMember<SourceNamedTypeSymbol>("D");
             var bridgeMethod = derivedType
                 .GetSynthesizedExplicitImplementations(CancellationToken.None)
-                .ForwardingMethods.Single();
+                .ForwardingMethods
+                .Single();
             Assert.Equal("NonVirtual", bridgeMethod.ImplementingMethod.Name);
         }
 
@@ -2381,7 +2385,8 @@ public class D : B, I
 
             var synthesized = derivedType
                 .GetSynthesizedExplicitImplementations(CancellationToken.None)
-                .ForwardingMethods.Single();
+                .ForwardingMethods
+                .Single();
             Assert.Equal(baseMethod, synthesized.ImplementingMethod);
             Assert.Equal(interfaceMethod, synthesized.ExplicitInterfaceImplementations.Single());
 
@@ -3206,9 +3211,10 @@ public interface I
 
             var derivedType = comp.GetMember<SourceNamedTypeSymbol>(derivedTypeName);
             Assert.True(
-                derivedType.GetSynthesizedExplicitImplementations(
-                    cancellationToken: default
-                ).ForwardingMethods.IsEmpty
+                derivedType
+                    .GetSynthesizedExplicitImplementations(cancellationToken: default)
+                    .ForwardingMethods
+                    .IsEmpty
             );
 
             var interfaceMember = comp.GetMember<MethodSymbol>(interfaceMemberName);

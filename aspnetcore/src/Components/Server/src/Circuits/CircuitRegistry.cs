@@ -93,9 +93,10 @@ internal partial class CircuitRegistry
         {
             if (DisconnectCore(circuitHost, connectionId))
             {
-                circuitHandlerTask = circuitHost.Renderer.Dispatcher.InvokeAsync(
-                    () => circuitHost.OnConnectionDownAsync(default)
-                );
+                circuitHandlerTask = circuitHost
+                    .Renderer
+                    .Dispatcher
+                    .InvokeAsync(() => circuitHost.OnConnectionDownAsync(default));
             }
             else
             {
@@ -209,19 +210,22 @@ internal partial class CircuitRegistry
 
             // Dispatch the circuit handlers inside the sync context to ensure the order of execution. CircuitHost executes circuit handlers inside of
             // the sync context.
-            circuitHandlerTask = circuitHost.Renderer.Dispatcher.InvokeAsync(
-                async () =>
-                {
-                    if (previouslyConnected)
+            circuitHandlerTask = circuitHost
+                .Renderer
+                .Dispatcher
+                .InvokeAsync(
+                    async () =>
                     {
-                        // During reconnects, we may transition from Connect->Connect i.e.without ever having invoking OnConnectionDownAsync during
-                        // a formal client disconnect. To allow authors of CircuitHandlers to have reasonable expectations will pair the connection up with a connection down.
-                        await circuitHost.OnConnectionDownAsync(cancellationToken);
-                    }
+                        if (previouslyConnected)
+                        {
+                            // During reconnects, we may transition from Connect->Connect i.e.without ever having invoking OnConnectionDownAsync during
+                            // a formal client disconnect. To allow authors of CircuitHandlers to have reasonable expectations will pair the connection up with a connection down.
+                            await circuitHost.OnConnectionDownAsync(cancellationToken);
+                        }
 
-                    await circuitHost.OnConnectionUpAsync(cancellationToken);
-                }
-            );
+                        await circuitHost.OnConnectionUpAsync(cancellationToken);
+                    }
+                );
         }
 
         try

@@ -36,7 +36,8 @@ namespace Microsoft.EntityFrameworkCore.Design
                 new DbContextOptionsBuilder<MyContext>()
                     .UseSqlServer()
                     .ReplaceService<IMigrationsIdGenerator, ContextMigrationsIdGenerator>()
-                    .ReplaceService<IHistoryRepository, ContextHistoryRepository>().Options
+                    .ReplaceService<IHistoryRepository, ContextHistoryRepository>()
+                    .Options
             );
 
             var serviceProvider =
@@ -87,7 +88,8 @@ public class UserMigrationsIdGenerator : IMigrationsIdGenerator
 ",
                         useContext ? context : null
                     )
-                    .CreateScope().ServiceProvider;
+                    .CreateScope()
+                    .ServiceProvider;
 
             // Base design-time services are resolved
             Assert.Equal(
@@ -256,7 +258,8 @@ public class UserMigrationsIdGenerator : IMigrationsIdGenerator
                 "UserProviderConfigurationCodeGenerator",
                 serviceProvider
                     .GetRequiredService<IProviderConfigurationCodeGenerator>()
-                    .GetType().Name
+                    .GetType()
+                    .Name
             );
         }
 

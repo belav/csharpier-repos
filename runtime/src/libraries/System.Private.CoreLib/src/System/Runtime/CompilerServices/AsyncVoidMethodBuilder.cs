@@ -118,10 +118,11 @@ namespace System.Runtime.CompilerServices
                 // and decrement its outstanding operation count.
                 try
                 {
-                    System.Threading.Tasks.Task.ThrowAsync(
-                        exception,
-                        targetContext: _synchronizationContext
-                    );
+                    System
+                        .Threading
+                        .Tasks
+                        .Task
+                        .ThrowAsync(exception, targetContext: _synchronizationContext);
                 }
                 finally
                 {

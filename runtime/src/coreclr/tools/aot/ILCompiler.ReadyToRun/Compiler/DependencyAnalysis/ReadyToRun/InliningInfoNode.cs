@@ -189,9 +189,11 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
         public override int CompareToImpl(ISortableNode other, CompilerComparer comparer)
         {
             InliningInfoNode otherInliningInfo = (InliningInfoNode)other;
-            return _module.Assembly
+            return _module
+                .Assembly
                 .GetName()
-                .Name.CompareTo(otherInliningInfo._module.Assembly.GetName().Name);
+                .Name
+                .CompareTo(otherInliningInfo._module.Assembly.GetName().Name);
         }
 
         public override int ClassCode => -87382891;

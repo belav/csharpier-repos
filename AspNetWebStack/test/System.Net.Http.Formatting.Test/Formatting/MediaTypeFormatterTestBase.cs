@@ -42,9 +42,11 @@ namespace System.Net.Http.Formatting
         [Fact]
         public void TypeIsCorrect()
         {
-            Assert.Type.HasProperties<TFormatter, MediaTypeFormatter>(
-                TypeAssert.TypeProperties.IsPublicVisibleClass
-            );
+            Assert
+                .Type
+                .HasProperties<TFormatter, MediaTypeFormatter>(
+                    TypeAssert.TypeProperties.IsPublicVisibleClass
+                );
         }
 
         [Fact]
@@ -55,9 +57,9 @@ namespace System.Net.Http.Formatting
 
             foreach (MediaTypeHeaderValue mediaType1 in formatter1.SupportedMediaTypes)
             {
-                MediaTypeHeaderValue mediaType2 = formatter2.SupportedMediaTypes.Single(
-                    m => m.Equals(mediaType1)
-                );
+                MediaTypeHeaderValue mediaType2 = formatter2
+                    .SupportedMediaTypes
+                    .Single(m => m.Equals(mediaType1));
                 Assert.NotSame(mediaType1, mediaType2);
             }
         }
@@ -70,9 +72,9 @@ namespace System.Net.Http.Formatting
 
             foreach (Encoding mediaType1 in formatter1.SupportedEncodings)
             {
-                Encoding mediaType2 = formatter2.SupportedEncodings.Single(
-                    m => m.Equals(mediaType1)
-                );
+                Encoding mediaType2 = formatter2
+                    .SupportedEncodings
+                    .Single(m => m.Equals(mediaType1));
                 Assert.NotSame(mediaType1, mediaType2);
             }
         }
@@ -395,9 +397,10 @@ namespace System.Net.Http.Formatting
             // Arrange
             Stream stream = new MemoryStream();
             Mock<TFormatter> formatter = CreateMockFormatter();
-            formatter.Object.SupportedMediaTypes.Add(
-                MediaTypeHeaderValue.Parse("application/test")
-            );
+            formatter
+                .Object
+                .SupportedMediaTypes
+                .Add(MediaTypeHeaderValue.Parse("application/test"));
             StringContent content = new StringContent(" ", Encoding.Default, "application/test");
             CancellationTokenSource cts = new CancellationTokenSource();
 
@@ -427,9 +430,10 @@ namespace System.Net.Http.Formatting
             // Arrange
             Stream stream = new MemoryStream();
             Mock<TFormatter> formatter = CreateMockFormatter();
-            formatter.Object.SupportedMediaTypes.Add(
-                MediaTypeHeaderValue.Parse("application/test")
-            );
+            formatter
+                .Object
+                .SupportedMediaTypes
+                .Add(MediaTypeHeaderValue.Parse("application/test"));
             StringContent content = new StringContent(" ", Encoding.Default, "application/test");
             CancellationTokenSource cts = new CancellationTokenSource();
 
@@ -502,30 +506,36 @@ namespace System.Net.Http.Formatting
             object readObj = null;
 
             // Act & Assert
-            await Assert.Stream.WriteAndReadAsync(
-                async stream =>
-                {
-                    await Assert.Task.SucceedsAsync(
-                        formatter.WriteToStreamAsync(
-                            variationType,
-                            testData,
-                            stream,
-                            content,
-                            transportContext: null
-                        )
-                    );
-                    contentHeaders.ContentLength = stream.Length;
-                },
-                async stream =>
-                    readObj = await Assert.Task.SucceedsWithResultAsync(
-                        formatter.ReadFromStreamAsync(
-                            variationType,
-                            stream,
-                            content,
-                            formatterLogger: null
-                        )
-                    )
-            );
+            await Assert
+                .Stream
+                .WriteAndReadAsync(
+                    async stream =>
+                    {
+                        await Assert
+                            .Task
+                            .SucceedsAsync(
+                                formatter.WriteToStreamAsync(
+                                    variationType,
+                                    testData,
+                                    stream,
+                                    content,
+                                    transportContext: null
+                                )
+                            );
+                        contentHeaders.ContentLength = stream.Length;
+                    },
+                    async stream =>
+                        readObj = await Assert
+                            .Task
+                            .SucceedsWithResultAsync(
+                                formatter.ReadFromStreamAsync(
+                                    variationType,
+                                    stream,
+                                    content,
+                                    formatterLogger: null
+                                )
+                            )
+                );
 
             return readObj;
         }
@@ -543,9 +553,9 @@ namespace System.Net.Http.Formatting
             Encoding enc = null;
             if (isDefaultEncoding)
             {
-                enc = formatter.SupportedEncodings.First(
-                    (e) => e.WebName.Equals(encoding, StringComparison.OrdinalIgnoreCase)
-                );
+                enc = formatter
+                    .SupportedEncodings
+                    .First((e) => e.WebName.Equals(encoding, StringComparison.OrdinalIgnoreCase));
             }
             else
             {
@@ -592,9 +602,9 @@ namespace System.Net.Http.Formatting
             Encoding enc = null;
             if (isDefaultEncoding)
             {
-                enc = formatter.SupportedEncodings.First(
-                    (e) => e.WebName.Equals(encoding, StringComparison.OrdinalIgnoreCase)
-                );
+                enc = formatter
+                    .SupportedEncodings
+                    .First((e) => e.WebName.Equals(encoding, StringComparison.OrdinalIgnoreCase));
             }
             else
             {
@@ -641,9 +651,9 @@ namespace System.Net.Http.Formatting
             Encoding enc = null;
             if (isDefaultEncoding)
             {
-                enc = formatter.SupportedEncodings.First(
-                    (e) => e.WebName.Equals(encoding, StringComparison.OrdinalIgnoreCase)
-                );
+                enc = formatter
+                    .SupportedEncodings
+                    .First((e) => e.WebName.Equals(encoding, StringComparison.OrdinalIgnoreCase));
             }
             else
             {

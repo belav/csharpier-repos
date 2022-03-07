@@ -289,9 +289,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                 return;
             }
 
-            UnaryOperatorSignature signature = this.Compilation.builtInOperators.GetSignature(
-                easyOut
-            );
+            UnaryOperatorSignature signature = this.Compilation
+                .builtInOperators
+                .GetSignature(easyOut);
 
             Conversion? conversion = Conversions.FastClassifyConversion(
                 operandType,

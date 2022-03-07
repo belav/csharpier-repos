@@ -295,11 +295,9 @@ namespace System.Diagnostics
                 EnsureState(State.HaveNonExitedId);
 
                 int pri = 0;
-                int errno = Interop.Sys.GetPriority(
-                    Interop.Sys.PriorityWhich.PRIO_PROCESS,
-                    _processId,
-                    out pri
-                );
+                int errno = Interop
+                    .Sys
+                    .GetPriority(Interop.Sys.PriorityWhich.PRIO_PROCESS, _processId, out pri);
                 if (errno != 0) // Interop.Sys.GetPriority returns GetLastWin32Error()
                 {
                     throw new Win32Exception(errno); // match Windows exception
@@ -348,11 +346,9 @@ namespace System.Diagnostics
                         break;
                 }
 
-                int result = Interop.Sys.SetPriority(
-                    Interop.Sys.PriorityWhich.PRIO_PROCESS,
-                    _processId,
-                    pri
-                );
+                int result = Interop
+                    .Sys
+                    .SetPriority(Interop.Sys.PriorityWhich.PRIO_PROCESS, _processId, pri);
                 if (result == -1)
                 {
                     throw new Win32Exception(); // match Windows exception
@@ -648,23 +644,25 @@ namespace System.Diagnostics
                 // descriptors, and execve to execute the requested process.  The shim implementation
                 // is used to fork/execve as executing managed code in a forked process is not safe (only
                 // the calling thread will transfer, thread IDs aren't stable across the fork, etc.)
-                int errno = Interop.Sys.ForkAndExecProcess(
-                    resolvedFilename,
-                    argv,
-                    envp,
-                    cwd,
-                    startInfo.RedirectStandardInput,
-                    startInfo.RedirectStandardOutput,
-                    startInfo.RedirectStandardError,
-                    setCredentials,
-                    userId,
-                    groupId,
-                    groups,
-                    out childPid,
-                    out stdinFd,
-                    out stdoutFd,
-                    out stderrFd
-                );
+                int errno = Interop
+                    .Sys
+                    .ForkAndExecProcess(
+                        resolvedFilename,
+                        argv,
+                        envp,
+                        cwd,
+                        startInfo.RedirectStandardInput,
+                        startInfo.RedirectStandardOutput,
+                        startInfo.RedirectStandardError,
+                        setCredentials,
+                        userId,
+                        groupId,
+                        groups,
+                        out childPid,
+                        out stdinFd,
+                        out stdoutFd,
+                        out stderrFd
+                    );
 
                 if (errno == 0)
                 {

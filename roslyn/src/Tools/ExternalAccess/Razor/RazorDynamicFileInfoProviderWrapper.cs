@@ -47,14 +47,16 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Razor
                 return null;
             }
 
-            var result = await _innerDynamicFileInfoProvider.Value
+            var result = await _innerDynamicFileInfoProvider
+                .Value
                 .GetDynamicFileInfoAsync(projectId, projectFilePath, filePath, cancellationToken)
                 .ConfigureAwait(false);
             var serviceProvider = new RazorDocumentServiceProviderWrapper(
                 result.DocumentServiceProvider
             );
-            var razorDocumentPropertiesService =
-                result.DocumentServiceProvider.GetService<IRazorDocumentPropertiesService>();
+            var razorDocumentPropertiesService = result
+                .DocumentServiceProvider
+                .GetService<IRazorDocumentPropertiesService>();
             var designTimeOnly = razorDocumentPropertiesService?.DesignTimeOnly ?? false;
             var dynamicFileInfo = new DynamicFileInfo(
                 result.FilePath,
@@ -80,12 +82,14 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Razor
                 return Task.CompletedTask;
             }
 
-            return _innerDynamicFileInfoProvider.Value.RemoveDynamicFileInfoAsync(
-                projectId,
-                projectFilePath,
-                filePath,
-                cancellationToken
-            );
+            return _innerDynamicFileInfoProvider
+                .Value
+                .RemoveDynamicFileInfoAsync(
+                    projectId,
+                    projectFilePath,
+                    filePath,
+                    cancellationToken
+                );
         }
 
         private void InnerDynamiFileInfoProvider_Updated(object sender, string e)

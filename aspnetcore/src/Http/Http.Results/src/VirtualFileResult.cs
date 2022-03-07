@@ -42,8 +42,9 @@ internal sealed class VirtualFileResult : FileResult, IResult
     /// <inheritdoc/>
     public Task ExecuteAsync(HttpContext httpContext)
     {
-        var hostingEnvironment =
-            httpContext.RequestServices.GetRequiredService<IWebHostEnvironment>();
+        var hostingEnvironment = httpContext
+            .RequestServices
+            .GetRequiredService<IWebHostEnvironment>();
         var logger = httpContext.RequestServices.GetRequiredService<ILogger<VirtualFileResult>>();
 
         var fileInfo = GetFileInformation(hostingEnvironment.WebRootFileProvider);

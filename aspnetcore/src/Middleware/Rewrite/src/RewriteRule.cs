@@ -100,9 +100,9 @@ internal class RewriteRule : IRule
                     {
                         request.Path = PathString.FromUriComponent('/' + newPath);
                     }
-                    request.QueryString = request.QueryString.Add(
-                        QueryString.FromUriComponent(result.Substring(split))
-                    );
+                    request.QueryString = request
+                        .QueryString
+                        .Add(QueryString.FromUriComponent(result.Substring(split)));
                 }
                 else
                 {

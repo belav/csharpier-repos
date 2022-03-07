@@ -62,22 +62,28 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
             switch (builder)
             {
                 case IInfrastructure<EntityTypeBuilder<TEntity>> genericBuilder:
-                    genericBuilder.Instance.ToTable(
-                        b =>
-                            buildAction(
-                                new RelationalModelBuilderTest.GenericTestTableBuilder<TEntity>(b)
-                            )
-                    );
+                    genericBuilder
+                        .Instance
+                        .ToTable(
+                            b =>
+                                buildAction(
+                                    new RelationalModelBuilderTest.GenericTestTableBuilder<TEntity>(
+                                        b
+                                    )
+                                )
+                        );
                     break;
                 case IInfrastructure<EntityTypeBuilder> nongenericBuilder:
-                    nongenericBuilder.Instance.ToTable(
-                        b =>
-                            buildAction(
-                                new RelationalModelBuilderTest.NonGenericTestTableBuilder<TEntity>(
-                                    b
+                    nongenericBuilder
+                        .Instance
+                        .ToTable(
+                            b =>
+                                buildAction(
+                                    new RelationalModelBuilderTest.NonGenericTestTableBuilder<TEntity>(
+                                        b
+                                    )
                                 )
-                            )
-                    );
+                        );
                     break;
             }
 
@@ -110,24 +116,28 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
             switch (builder)
             {
                 case IInfrastructure<TableBuilder<TEntity>> genericBuilder:
-                    genericBuilder.Instance.IsTemporal(
-                        b =>
-                            buildAction(
-                                new SqlServerModelBuilderGenericTest.GenericTestTemporalTableBuilder<TEntity>(
-                                    b
+                    genericBuilder
+                        .Instance
+                        .IsTemporal(
+                            b =>
+                                buildAction(
+                                    new SqlServerModelBuilderGenericTest.GenericTestTemporalTableBuilder<TEntity>(
+                                        b
+                                    )
                                 )
-                            )
-                    );
+                        );
                     break;
                 case IInfrastructure<TableBuilder> nongenericBuilder:
-                    nongenericBuilder.Instance.IsTemporal(
-                        b =>
-                            buildAction(
-                                new SqlServerModelBuilderGenericTest.NonGenericTestTemporalTableBuilder<TEntity>(
-                                    b
+                    nongenericBuilder
+                        .Instance
+                        .IsTemporal(
+                            b =>
+                                buildAction(
+                                    new SqlServerModelBuilderGenericTest.NonGenericTestTemporalTableBuilder<TEntity>(
+                                        b
+                                    )
                                 )
-                            )
-                    );
+                        );
                     break;
             }
 

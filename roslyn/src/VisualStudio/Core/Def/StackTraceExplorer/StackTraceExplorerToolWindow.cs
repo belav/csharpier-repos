@@ -33,15 +33,17 @@ namespace Microsoft.VisualStudio.LanguageServices.StackTraceExplorer
             Caption = ServicesVSResources.Stack_Trace_Explorer;
             var dockPanel = new DockPanel { LastChildFill = true };
 
-            dockPanel.CommandBindings.Add(
-                new CommandBinding(
-                    ApplicationCommands.Paste,
-                    (s, e) =>
-                    {
-                        Root?.OnPaste();
-                    }
-                )
-            );
+            dockPanel
+                .CommandBindings
+                .Add(
+                    new CommandBinding(
+                        ApplicationCommands.Paste,
+                        (s, e) =>
+                        {
+                            Root?.OnPaste();
+                        }
+                    )
+                );
 
             Content = dockPanel;
         }
@@ -54,15 +56,17 @@ namespace Microsoft.VisualStudio.LanguageServices.StackTraceExplorer
             }
 
             var workspace = roslynPackage.ComponentModel.GetService<VisualStudioWorkspace>();
-            var formatMapService =
-                roslynPackage.ComponentModel.GetService<IClassificationFormatMapService>();
+            var formatMapService = roslynPackage
+                .ComponentModel
+                .GetService<IClassificationFormatMapService>();
             var formatMap = formatMapService.GetClassificationFormatMap(
                 StandardContentTypeNames.Text
             );
             var typeMap = roslynPackage.ComponentModel.GetService<ClassificationTypeMap>();
             var threadingContext = roslynPackage.ComponentModel.GetService<IThreadingContext>();
-            var streamingFindUsagesPresenter =
-                roslynPackage.ComponentModel.GetService<IStreamingFindUsagesPresenter>();
+            var streamingFindUsagesPresenter = roslynPackage
+                .ComponentModel
+                .GetService<IStreamingFindUsagesPresenter>();
 
             Root = new StackTraceExplorerRoot(
                 new StackTraceExplorerRootViewModel(
@@ -82,23 +86,27 @@ namespace Microsoft.VisualStudio.LanguageServices.StackTraceExplorer
             contentRoot.Children.Add(Root);
 
             var contextMenu = new ThemedContextMenu();
-            contextMenu.Items.Add(
-                new MenuItem()
-                {
-                    Header = ServicesVSResources.Paste,
-                    Command = new DelegateCommand(_ => Root.OnPaste()),
-                    Icon = new CrispImage() { Moniker = KnownMonikers.Paste }
-                }
-            );
+            contextMenu
+                .Items
+                .Add(
+                    new MenuItem()
+                    {
+                        Header = ServicesVSResources.Paste,
+                        Command = new DelegateCommand(_ => Root.OnPaste()),
+                        Icon = new CrispImage() { Moniker = KnownMonikers.Paste }
+                    }
+                );
 
-            contextMenu.Items.Add(
-                new MenuItem()
-                {
-                    Header = ServicesVSResources.Clear,
-                    Command = new DelegateCommand(_ => Root.OnClear()),
-                    Icon = new CrispImage() { Moniker = KnownMonikers.ClearCollection }
-                }
-            );
+            contextMenu
+                .Items
+                .Add(
+                    new MenuItem()
+                    {
+                        Header = ServicesVSResources.Clear,
+                        Command = new DelegateCommand(_ => Root.OnClear()),
+                        Icon = new CrispImage() { Moniker = KnownMonikers.ClearCollection }
+                    }
+                );
 
             contentRoot.ContextMenu = contextMenu;
 

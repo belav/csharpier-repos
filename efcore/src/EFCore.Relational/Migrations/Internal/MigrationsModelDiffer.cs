@@ -209,9 +209,9 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
                 {
                     if (
                         string.IsNullOrWhiteSpace(
-                            diffContext.FindColumn(
-                                (DropColumnOperation)operation
-                            )!.ComputedColumnSql
+                            diffContext
+                                .FindColumn((DropColumnOperation)operation)!
+                                .ComputedColumnSql
                         )
                     )
                     {
@@ -332,9 +332,9 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
                     {
                         foreach (var cyclicAddForeignKeyOperation in cyclicAddForeignKeyOperations)
                         {
-                            var removed = createTableOperation.ForeignKeys.Remove(
-                                cyclicAddForeignKeyOperation
-                            );
+                            var removed = createTableOperation
+                                .ForeignKeys
+                                .Remove(cyclicAddForeignKeyOperation);
                             if (removed)
                             {
                                 constraintOperations.Add(cyclicAddForeignKeyOperation);
@@ -500,9 +500,9 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
                 if (sourceMigrationsAnnotationsForRemoved.Count > 0)
                 {
                     var alterDatabaseOperation = new AlterDatabaseOperation();
-                    alterDatabaseOperation.OldDatabase.AddAnnotations(
-                        sourceMigrationsAnnotationsForRemoved
-                    );
+                    alterDatabaseOperation
+                        .OldDatabase
+                        .AddAnnotations(sourceMigrationsAnnotationsForRemoved);
                     yield return alterDatabaseOperation;
                 }
 
@@ -534,7 +534,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
                 .Concat(target.Tables.SelectMany(t => Add(t, diffContext)))
                 .Concat(target.Sequences.SelectMany(t => Add(t, diffContext)))
                 .Concat(
-                    target.Tables
+                    target
+                        .Tables
                         .SelectMany(t => t.ForeignKeyConstraints)
                         .SelectMany(k => Add(k, diffContext))
                 );
@@ -744,11 +745,13 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
             };
             createTableOperation.AddAnnotations(target.GetAnnotations());
 
-            createTableOperation.Columns.AddRange(
-                GetSortedColumns(target)
-                    .SelectMany(p => Add(p, diffContext, inline: true))
-                    .Cast<AddColumnOperation>()
-            );
+            createTableOperation
+                .Columns
+                .AddRange(
+                    GetSortedColumns(target)
+                        .SelectMany(p => Add(p, diffContext, inline: true))
+                        .Cast<AddColumnOperation>()
+                );
             var primaryKey = target.PrimaryKey;
             if (primaryKey != null)
             {
@@ -757,17 +760,23 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
                     .Single();
             }
 
-            createTableOperation.UniqueConstraints.AddRange(
-                target.UniqueConstraints
-                    .Where(c => !c.GetIsPrimaryKey())
-                    .SelectMany(c => Add(c, diffContext))
-                    .Cast<AddUniqueConstraintOperation>()
-            );
-            createTableOperation.CheckConstraints.AddRange(
-                target.CheckConstraints
-                    .SelectMany(c => Add(c, diffContext))
-                    .Cast<AddCheckConstraintOperation>()
-            );
+            createTableOperation
+                .UniqueConstraints
+                .AddRange(
+                    target
+                        .UniqueConstraints
+                        .Where(c => !c.GetIsPrimaryKey())
+                        .SelectMany(c => Add(c, diffContext))
+                        .Cast<AddUniqueConstraintOperation>()
+                );
+            createTableOperation
+                .CheckConstraints
+                .AddRange(
+                    target
+                        .CheckConstraints
+                        .SelectMany(c => Add(c, diffContext))
+                        .Cast<AddCheckConstraintOperation>()
+                );
 
             diffContext.AddCreate(target, createTableOperation);
 
@@ -877,7 +886,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
                 var clrType = clrProperty.DeclaringType!;
                 var index = clrType
                     .GetTypeInfo()
-                    .DeclaredProperties.IndexOf(clrProperty, PropertyInfoEqualityComparer.Instance);
+                    .DeclaredProperties
+                    .IndexOf(clrProperty, PropertyInfoEqualityComparer.Instance);
 
                 Check.DebugAssert(clrType != null, "clrType is null");
                 types.GetOrAddNew(clrType)[index] = clrProperty;
@@ -894,8 +904,9 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
                     var linkingForeignKey in table.GetReferencingRowInternalForeignKeys(entityType)
                 )
                 {
-                    var linkingNavigationProperty =
-                        linkingForeignKey.PrincipalToDependent?.PropertyInfo;
+                    var linkingNavigationProperty = linkingForeignKey
+                        .PrincipalToDependent
+                        ?.PropertyInfo;
                     var properties = GetSortedProperties(
                             linkingForeignKey.DeclaringEntityType,
                             table
@@ -913,10 +924,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
                     var clrType = linkingNavigationProperty.DeclaringType!;
                     var index = clrType
                         .GetTypeInfo()
-                        .DeclaredProperties.IndexOf(
-                            linkingNavigationProperty,
-                            PropertyInfoEqualityComparer.Instance
-                        );
+                        .DeclaredProperties
+                        .IndexOf(linkingNavigationProperty, PropertyInfoEqualityComparer.Instance);
 
                     Check.DebugAssert(clrType != null, "clrType is null");
                     types.GetOrAddNew(clrType)[index] = linkingNavigationProperty;
@@ -1238,10 +1247,12 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
                 {
                     if (source.Order.HasValue)
                     {
-                        alterColumnOperation.OldColumn.AddAnnotation(
-                            RelationalAnnotationNames.ColumnOrder,
-                            source.Order.Value
-                        );
+                        alterColumnOperation
+                            .OldColumn
+                            .AddAnnotation(
+                                RelationalAnnotationNames.ColumnOrder,
+                                source.Order.Value
+                            );
                     }
 
                     if (target.Order.HasValue)
@@ -1641,7 +1652,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
             source.IsUnique == target.IsUnique
             && source.Filter == target.Filter
             && !HasDifferences(source.GetAnnotations(), target.GetAnnotations())
-            && source.Columns
+            && source
+                .Columns
                 .Select(p => p.Name)
                 .SequenceEqual(target.Columns.Select(p => diffContext.FindSource(p)?.Name));
 
@@ -2054,15 +2066,16 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
                             }
 
                             foreach (
-                                var sourceProperty in sourceColumn.PropertyMappings
+                                var sourceProperty in sourceColumn
+                                    .PropertyMappings
                                     .Select(m => m.Property)
                                     .Distinct()
                             )
                             {
                                 if (
-                                    !sourceProperty.DeclaringEntityType.IsAssignableFrom(
-                                        sourceEntityType
-                                    )
+                                    !sourceProperty
+                                        .DeclaringEntityType
+                                        .IsAssignableFrom(sourceEntityType)
                                 )
                                 {
                                     continue;
@@ -2180,12 +2193,17 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
                         var removedMapping = true;
                         if (
                             targetTable != null
-                            && targetKeyMap.Keys.Any(
-                                k =>
-                                    k.Item2 == targetTable
-                                    && k.Item1.DeclaringEntityType.GetTableMappings().First().Table
-                                        == firstTargetTable
-                            )
+                            && targetKeyMap
+                                .Keys
+                                .Any(
+                                    k =>
+                                        k.Item2 == targetTable
+                                        && k.Item1
+                                            .DeclaringEntityType
+                                            .GetTableMappings()
+                                            .First()
+                                            .Table == firstTargetTable
+                                )
                         )
                         {
                             removedMapping = false;
@@ -2225,9 +2243,10 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
                 while (firstSourceTable.GetRowInternalForeignKeys(mainSourceEntityType).Any())
                 {
                     mainSourceEntityType =
-                        principalSourceTable.EntityTypeMappings.First(
-                            m => m.IsSharedTablePrincipal
-                        ).EntityType;
+                        principalSourceTable
+                            .EntityTypeMappings
+                            .First(m => m.IsSharedTablePrincipal)
+                            .EntityType;
                     principalSourceTable = mainSourceEntityType.GetTableMappings().First().Table;
                 }
 
@@ -2339,7 +2358,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
                             var targetColumn = targetTable.FindColumn(targetProperty);
                             var sourceColumn = diffContext.FindSource(targetColumn);
                             var sourceProperty = sourceColumn
-                                ?.PropertyMappings.Select(m => m.Property)
+                                ?.PropertyMappings
+                                .Select(m => m.Property)
                                 .FirstOrDefault(
                                     p => p.DeclaringEntityType.IsAssignableFrom(sourceEntityType)
                                 );
@@ -2492,7 +2512,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
                             sourceEntry.EntityState = EntityState.Deleted;
                             _sourceUpdateAdapter!.CascadeDelete(
                                 sourceEntry,
-                                sourceEntry.EntityType
+                                sourceEntry
+                                    .EntityType
                                     .GetReferencingForeignKeys()
                                     .Where(
                                         fk =>
@@ -2528,9 +2549,9 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
                         }
                     }
                     else if (
-                        entryMapping.SourceEntries.Any(
-                            en => changedTableMappings!.ContainsKey(en.EntityType)
-                        )
+                        entryMapping
+                            .SourceEntries
+                            .Any(en => changedTableMappings!.ContainsKey(en.EntityType))
                     )
                     {
                         foreach (var sourceEntry in entryMapping.SourceEntries)
@@ -2609,15 +2630,19 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
                                 if (
                                     batchInsertOperation.Table == command.TableName
                                     && batchInsertOperation.Schema == command.Schema
-                                    && batchInsertOperation.Columns.SequenceEqual(
-                                        command.ColumnModifications
-                                            .Where(col => col.IsKey || col.IsWrite)
-                                            .Select(col => col.ColumnName)
-                                    )
+                                    && batchInsertOperation
+                                        .Columns
+                                        .SequenceEqual(
+                                            command
+                                                .ColumnModifications
+                                                .Where(col => col.IsKey || col.IsWrite)
+                                                .Select(col => col.ColumnName)
+                                        )
                                 )
                                 {
                                     batchInsertOperation.Values = AddToMultidimensionalArray(
-                                        command.ColumnModifications
+                                        command
+                                            .ColumnModifications
                                             .Where(col => col.IsKey || col.IsWrite)
                                             .Select(GetValue)
                                             .ToList(),
@@ -2639,12 +2664,14 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
                             {
                                 Schema = command.Schema,
                                 Table = command.TableName,
-                                Columns = command.ColumnModifications
+                                Columns = command
+                                    .ColumnModifications
                                     .Where(col => col.IsKey || col.IsWrite)
                                     .Select(col => col.ColumnName)
                                     .ToArray(),
                                 Values = ToMultidimensionalArray(
-                                    command.ColumnModifications
+                                    command
+                                        .ColumnModifications
                                         .Where(col => col.IsKey || col.IsWrite)
                                         .Select(GetValue)
                                         .ToList()
@@ -2665,18 +2692,20 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
                             }
 
                             if (
-                                command.Entries.Any(
-                                    en =>
-                                        changedTableMappings!.TryGetValue(
-                                            en.EntityType,
-                                            out var newTables
-                                        )
-                                        && newTables.Any(
-                                            t =>
-                                                t.Name == command.TableName
-                                                && t.Schema == command.Schema
-                                        )
-                                )
+                                command
+                                    .Entries
+                                    .Any(
+                                        en =>
+                                            changedTableMappings!.TryGetValue(
+                                                en.EntityType,
+                                                out var newTables
+                                            )
+                                            && newTables.Any(
+                                                t =>
+                                                    t.Name == command.TableName
+                                                    && t.Schema == command.Schema
+                                            )
+                                    )
                             )
                             {
                                 // If the entity type uses TPT add the rows to the new tables to which the entity has been mapped
@@ -2687,22 +2716,26 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
                             {
                                 Schema = command.Schema,
                                 Table = command.TableName,
-                                KeyColumns = command.ColumnModifications
+                                KeyColumns = command
+                                    .ColumnModifications
                                     .Where(col => col.IsKey)
                                     .Select(col => col.ColumnName)
                                     .ToArray(),
                                 KeyValues = ToMultidimensionalArray(
-                                    command.ColumnModifications
+                                    command
+                                        .ColumnModifications
                                         .Where(col => col.IsKey)
                                         .Select(GetValue)
                                         .ToList()
                                 ),
-                                Columns = command.ColumnModifications
+                                Columns = command
+                                    .ColumnModifications
                                     .Where(col => col.IsWrite)
                                     .Select(col => col.ColumnName)
                                     .ToArray(),
                                 Values = ToMultidimensionalArray(
-                                    command.ColumnModifications
+                                    command
+                                        .ColumnModifications
                                         .Where(col => col.IsWrite)
                                         .Select(GetValue)
                                         .ToList()
@@ -2723,24 +2756,27 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
                             // If the entity type used TPT delete the rows in the tables to which the entity is no longer mapped
                             if (
                                 command.Entries.Any(en => entriesWithRemovedMappings.Contains(en))
-                                && !command.Entries.Any(
-                                    en =>
-                                        changedTableMappings!.TryGetValue(
-                                            en.EntityType,
-                                            out var removedTables
-                                        )
-                                        && removedTables.Any(
-                                            t =>
-                                                t.Name == command.TableName
-                                                && t.Schema == command.Schema
-                                        )
-                                )
+                                && !command
+                                    .Entries
+                                    .Any(
+                                        en =>
+                                            changedTableMappings!.TryGetValue(
+                                                en.EntityType,
+                                                out var removedTables
+                                            )
+                                            && removedTables.Any(
+                                                t =>
+                                                    t.Name == command.TableName
+                                                    && t.Schema == command.Schema
+                                            )
+                                    )
                             )
                             {
                                 break;
                             }
 
-                            var keyColumns = command.ColumnModifications
+                            var keyColumns = command
+                                .ColumnModifications
                                 .Where(col => col.IsKey)
                                 .Select(c => table.FindColumn(c.ColumnName)!);
                             var anyKeyColumnDropped = keyColumns.Any(
@@ -2751,7 +2787,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
                             {
                                 Schema = command.Schema,
                                 Table = command.TableName,
-                                KeyColumns = command.ColumnModifications
+                                KeyColumns = command
+                                    .ColumnModifications
                                     .Where(col => col.IsKey)
                                     .Select(col => col.ColumnName)
                                     .ToArray(),
@@ -2759,7 +2796,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
                                     ? keyColumns.Select(col => col.StoreType).ToArray()
                                     : null,
                                 KeyValues = ToMultidimensionalArray(
-                                    command.ColumnModifications
+                                    command
+                                        .ColumnModifications
                                         .Where(col => col.IsKey)
                                         .Select(GetValue)
                                         .ToArray()
@@ -2877,10 +2915,9 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
                 var index = unmatched.FindIndex(
                     a =>
                         a.Name == annotation.Name
-                        && StructuralComparisons.StructuralEqualityComparer.Equals(
-                            a.Value,
-                            annotation.Value
-                        )
+                        && StructuralComparisons
+                            .StructuralEqualityComparer
+                            .Equals(a.Value, annotation.Value)
                 );
                 if (index == -1)
                 {
@@ -2900,7 +2937,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
         protected virtual IEnumerable<string> GetSchemas(IRelationalModel model) =>
-            model.Tables
+            model
+                .Tables
                 .Where(t => !t.IsExcludedFromMigrations)
                 .Select(t => t.Schema)
                 .Concat(model.Views.Where(t => t.ViewDefinitionSql != null).Select(s => s.Schema))
@@ -3056,9 +3094,11 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
                 }
 
                 var mainTable =
-                    entry.EntityType
+                    entry
+                        .EntityType
                         .GetTableMappings()
-                        .First(m => m.IsSplitEntityTypePrincipal).Table;
+                        .First(m => m.IsSplitEntityTypePrincipal)
+                        .Table;
                 if (mainTable != table)
                 {
                     return GetMainEntry(entry, mainTable);

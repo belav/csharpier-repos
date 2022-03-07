@@ -22,19 +22,24 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
 
         private void InvokeFix(string version = "latest")
         {
-            VisualStudio.Editor.SetText(
-                @$"
+            VisualStudio
+                .Editor
+                .SetText(
+                    @$"
 #error version:{version}
 "
-            );
+                );
             VisualStudio.Editor.Activate();
 
             VisualStudio.Editor.PlaceCaret($"version:{version}");
             VisualStudio.Editor.InvokeCodeActionList();
-            VisualStudio.Editor.Verify.CodeAction(
-                $"Upgrade this project to C# language version '{version}'",
-                applyFix: true
-            );
+            VisualStudio
+                .Editor
+                .Verify
+                .CodeAction(
+                    $"Upgrade this project to C# language version '{version}'",
+                    applyFix: true
+                );
         }
 
         [
@@ -46,11 +51,13 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
             var project = new ProjectUtils.Project(ProjectName);
 
             VisualStudio.SolutionExplorer.CreateSolution(SolutionName);
-            VisualStudio.SolutionExplorer.AddProject(
-                project,
-                WellKnownProjectTemplates.CSharpNetStandardClassLibrary,
-                LanguageNames.CSharp
-            );
+            VisualStudio
+                .SolutionExplorer
+                .AddProject(
+                    project,
+                    WellKnownProjectTemplates.CSharpNetStandardClassLibrary,
+                    LanguageNames.CSharp
+                );
             VisualStudio.SolutionExplorer.RestoreNuGetPackages(project);
 
             InvokeFix();
@@ -67,10 +74,12 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
             var project = new ProjectUtils.Project(ProjectName);
 
             VisualStudio.SolutionExplorer.CreateSolution(SolutionName);
-            VisualStudio.SolutionExplorer.AddCustomProject(
-                project,
-                ".csproj",
-                $@"<?xml version=""1.0"" encoding=""utf-8""?>
+            VisualStudio
+                .SolutionExplorer
+                .AddCustomProject(
+                    project,
+                    ".csproj",
+                    $@"<?xml version=""1.0"" encoding=""utf-8""?>
 <Project ToolsVersion=""15.0"" xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
   <Import Project=""$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props"" Condition=""Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')"" />
   <PropertyGroup>
@@ -103,7 +112,7 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
   </ItemGroup>
   <Import Project=""$(MSBuildToolsPath)\Microsoft.CSharp.targets"" />
 </Project>"
-            );
+                );
             VisualStudio.SolutionExplorer.AddFile(project, "C.cs", open: true);
 
             InvokeFix(version: "7.3");
@@ -117,10 +126,12 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
             var project = new ProjectUtils.Project(ProjectName);
 
             VisualStudio.SolutionExplorer.CreateSolution(SolutionName);
-            VisualStudio.SolutionExplorer.AddCustomProject(
-                project,
-                ".csproj",
-                $@"<?xml version=""1.0"" encoding=""utf-8""?>
+            VisualStudio
+                .SolutionExplorer
+                .AddCustomProject(
+                    project,
+                    ".csproj",
+                    $@"<?xml version=""1.0"" encoding=""utf-8""?>
 <Project ToolsVersion=""15.0"" xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
   <Import Project=""$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props"" Condition=""Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')"" />
   <PropertyGroup>
@@ -156,7 +167,7 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
   </ItemGroup>
   <Import Project=""$(MSBuildToolsPath)\Microsoft.CSharp.targets"" />
 </Project>"
-            );
+                );
 
             VisualStudio.SolutionExplorer.AddFile(project, "C.cs", open: true);
 

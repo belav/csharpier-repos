@@ -517,10 +517,9 @@ namespace ILCompiler.Reflection.ReadyToRun
             }
 
             if (
-                ReadyToRunHeader.Sections.TryGetValue(
-                    ReadyToRunSectionType.PgoInstrumentationData,
-                    out _
-                )
+                ReadyToRunHeader
+                    .Sections
+                    .TryGetValue(ReadyToRunSectionType.PgoInstrumentationData, out _)
             )
             {
                 ParsePgoMethods();
@@ -533,10 +532,12 @@ namespace ILCompiler.Reflection.ReadyToRun
             }
 
             if (
-                ReadyToRunHeader.Sections.TryGetValue(
-                    ReadyToRunSectionType.RuntimeFunctions,
-                    out ReadyToRunSection runtimeFunctionSection
-                )
+                ReadyToRunHeader
+                    .Sections
+                    .TryGetValue(
+                        ReadyToRunSectionType.RuntimeFunctions,
+                        out ReadyToRunSection runtimeFunctionSection
+                    )
             )
             {
                 int runtimeFunctionSize = CalculateRuntimeFunctionSize();
@@ -582,10 +583,12 @@ namespace ILCompiler.Reflection.ReadyToRun
             Dictionary<TMethod, ReadyToRunMethod> customMethods =
                 new Dictionary<TMethod, ReadyToRunMethod>();
             if (
-                ReadyToRunHeader.Sections.TryGetValue(
-                    ReadyToRunSectionType.RuntimeFunctions,
-                    out ReadyToRunSection runtimeFunctionSection
-                )
+                ReadyToRunHeader
+                    .Sections
+                    .TryGetValue(
+                        ReadyToRunSectionType.RuntimeFunctions,
+                        out ReadyToRunSection runtimeFunctionSection
+                    )
             )
             {
                 ParseMethodDefEntrypoints(
@@ -726,10 +729,12 @@ namespace ILCompiler.Reflection.ReadyToRun
             }
             _runtimeFunctionIdToDebugOffset = new Dictionary<int, int>();
             if (
-                !ReadyToRunHeader.Sections.TryGetValue(
-                    ReadyToRunSectionType.DebugInfo,
-                    out ReadyToRunSection debugInfoSection
-                )
+                !ReadyToRunHeader
+                    .Sections
+                    .TryGetValue(
+                        ReadyToRunSectionType.DebugInfo,
+                        out ReadyToRunSection debugInfoSection
+                    )
             )
             {
                 return;
@@ -758,10 +763,12 @@ namespace ILCompiler.Reflection.ReadyToRun
             }
             _manifestReferences = new List<AssemblyReferenceHandle>();
             if (
-                ReadyToRunHeader.Sections.TryGetValue(
-                    ReadyToRunSectionType.ManifestMetadata,
-                    out ReadyToRunSection manifestMetadata
-                )
+                ReadyToRunHeader
+                    .Sections
+                    .TryGetValue(
+                        ReadyToRunSectionType.ManifestMetadata,
+                        out ReadyToRunSection manifestMetadata
+                    )
             )
             {
                 fixed (byte* image = Image)
@@ -810,10 +817,12 @@ namespace ILCompiler.Reflection.ReadyToRun
             }
             _runtimeFunctionToEHInfo = new Dictionary<int, EHInfo>();
             if (
-                ReadyToRunHeader.Sections.TryGetValue(
-                    ReadyToRunSectionType.ExceptionInfo,
-                    out ReadyToRunSection exceptionInfoSection
-                )
+                ReadyToRunHeader
+                    .Sections
+                    .TryGetValue(
+                        ReadyToRunSectionType.ExceptionInfo,
+                        out ReadyToRunSection exceptionInfoSection
+                    )
             )
             {
                 int offset = GetOffset(exceptionInfoSection.RelativeVirtualAddress);
@@ -862,10 +871,12 @@ namespace ILCompiler.Reflection.ReadyToRun
         {
             ReadyToRunSection methodEntryPointSection;
             if (
-                ReadyToRunHeader.Sections.TryGetValue(
-                    ReadyToRunSectionType.MethodDefEntryPoints,
-                    out methodEntryPointSection
-                )
+                ReadyToRunHeader
+                    .Sections
+                    .TryGetValue(
+                        ReadyToRunSectionType.MethodDefEntryPoints,
+                        out methodEntryPointSection
+                    )
             )
             {
                 methodDefSectionReader(methodEntryPointSection, GetGlobalMetadata());
@@ -879,10 +890,12 @@ namespace ILCompiler.Reflection.ReadyToRun
                 )
                 {
                     if (
-                        ReadyToRunAssemblyHeaders[assemblyIndex].Sections.TryGetValue(
-                            ReadyToRunSectionType.MethodDefEntryPoints,
-                            out methodEntryPointSection
-                        )
+                        ReadyToRunAssemblyHeaders[assemblyIndex]
+                            .Sections
+                            .TryGetValue(
+                                ReadyToRunSectionType.MethodDefEntryPoints,
+                                out methodEntryPointSection
+                            )
                     )
                     {
                         methodDefSectionReader(
@@ -1013,10 +1026,12 @@ namespace ILCompiler.Reflection.ReadyToRun
         )
         {
             if (
-                !ReadyToRunHeader.Sections.TryGetValue(
-                    ReadyToRunSectionType.InstanceMethodEntryPoints,
-                    out ReadyToRunSection instMethodEntryPointSection
-                )
+                !ReadyToRunHeader
+                    .Sections
+                    .TryGetValue(
+                        ReadyToRunSectionType.InstanceMethodEntryPoints,
+                        out ReadyToRunSection instMethodEntryPointSection
+                    )
             )
             {
                 return;
@@ -1069,10 +1084,12 @@ namespace ILCompiler.Reflection.ReadyToRun
         private void ParseInstanceMethodEntrypoints(bool[] isEntryPoint)
         {
             if (
-                !ReadyToRunHeader.Sections.TryGetValue(
-                    ReadyToRunSectionType.InstanceMethodEntryPoints,
-                    out ReadyToRunSection instMethodEntryPointSection
-                )
+                !ReadyToRunHeader
+                    .Sections
+                    .TryGetValue(
+                        ReadyToRunSectionType.InstanceMethodEntryPoints,
+                        out ReadyToRunSection instMethodEntryPointSection
+                    )
             )
             {
                 return;
@@ -1238,10 +1255,12 @@ namespace ILCompiler.Reflection.ReadyToRun
         {
             _pgoInfos = new Dictionary<PgoInfoKey, PgoInfo>();
             if (
-                !ReadyToRunHeader.Sections.TryGetValue(
-                    ReadyToRunSectionType.PgoInstrumentationData,
-                    out ReadyToRunSection pgoInstrumentationDataSection
-                )
+                !ReadyToRunHeader
+                    .Sections
+                    .TryGetValue(
+                        ReadyToRunSectionType.PgoInstrumentationData,
+                        out ReadyToRunSection pgoInstrumentationDataSection
+                    )
             )
             {
                 return;
@@ -1404,10 +1423,9 @@ namespace ILCompiler.Reflection.ReadyToRun
                 {
                     ReadyToRunSection toMatch;
                     if (
-                        _readyToRunAssemblyHeaders[assemblyIndex].Sections.TryGetValue(
-                            section.Type,
-                            out toMatch
-                        )
+                        _readyToRunAssemblyHeaders[assemblyIndex]
+                            .Sections
+                            .TryGetValue(section.Type, out toMatch)
                         && section.RelativeVirtualAddress == toMatch.RelativeVirtualAddress
                     )
                     {
@@ -1428,10 +1446,12 @@ namespace ILCompiler.Reflection.ReadyToRun
             if (_composite)
             {
                 if (
-                    !ReadyToRunHeader.Sections.TryGetValue(
-                        ReadyToRunSectionType.ManifestAssemblyMvids,
-                        out ReadyToRunSection mvidSection
-                    )
+                    !ReadyToRunHeader
+                        .Sections
+                        .TryGetValue(
+                            ReadyToRunSectionType.ManifestAssemblyMvids,
+                            out ReadyToRunSection mvidSection
+                        )
                 )
                 {
                     return Guid.Empty;
@@ -1465,10 +1485,9 @@ namespace ILCompiler.Reflection.ReadyToRun
             }
             ReadyToRunSection availableTypesSection;
             if (
-                ReadyToRunHeader.Sections.TryGetValue(
-                    ReadyToRunSectionType.AvailableTypes,
-                    out availableTypesSection
-                )
+                ReadyToRunHeader
+                    .Sections
+                    .TryGetValue(ReadyToRunSectionType.AvailableTypes, out availableTypesSection)
             )
             {
                 ParseAvailableTypesSection(0, availableTypesSection, GetGlobalMetadata());
@@ -1482,10 +1501,12 @@ namespace ILCompiler.Reflection.ReadyToRun
                 )
                 {
                     if (
-                        _readyToRunAssemblyHeaders[assemblyIndex].Sections.TryGetValue(
-                            ReadyToRunSectionType.AvailableTypes,
-                            out availableTypesSection
-                        )
+                        _readyToRunAssemblyHeaders[assemblyIndex]
+                            .Sections
+                            .TryGetValue(
+                                ReadyToRunSectionType.AvailableTypes,
+                                out availableTypesSection
+                            )
                     )
                     {
                         ParseAvailableTypesSection(
@@ -1537,9 +1558,9 @@ namespace ILCompiler.Reflection.ReadyToRun
                         exportedTypeHandle
                     );
 
-                    _readyToRunAssemblies[assemblyIndex]._availableTypes.Add(
-                        "exported " + exportedTypeName
-                    );
+                    _readyToRunAssemblies[assemblyIndex]
+                        ._availableTypes
+                        .Add("exported " + exportedTypeName);
                 }
                 else
                 {
@@ -1567,10 +1588,12 @@ namespace ILCompiler.Reflection.ReadyToRun
                 return;
             }
             if (
-                !ReadyToRunHeader.Sections.TryGetValue(
-                    ReadyToRunSectionType.CompilerIdentifier,
-                    out ReadyToRunSection compilerIdentifierSection
-                )
+                !ReadyToRunHeader
+                    .Sections
+                    .TryGetValue(
+                        ReadyToRunSectionType.CompilerIdentifier,
+                        out ReadyToRunSection compilerIdentifierSection
+                    )
             )
             {
                 return;
@@ -1589,10 +1612,12 @@ namespace ILCompiler.Reflection.ReadyToRun
         {
             ReadyToRunSection componentAssembliesSection;
             if (
-                !ReadyToRunHeader.Sections.TryGetValue(
-                    ReadyToRunSectionType.ComponentAssemblies,
-                    out componentAssembliesSection
-                )
+                !ReadyToRunHeader
+                    .Sections
+                    .TryGetValue(
+                        ReadyToRunSectionType.ComponentAssemblies,
+                        out componentAssembliesSection
+                    )
             )
             {
                 return;
@@ -1630,10 +1655,12 @@ namespace ILCompiler.Reflection.ReadyToRun
             _importSections = new List<ReadyToRunImportSection>();
             _importSignatures = new Dictionary<int, ReadyToRunSignature>();
             if (
-                !ReadyToRunHeader.Sections.TryGetValue(
-                    ReadyToRunSectionType.ImportSections,
-                    out ReadyToRunSection importSectionsSection
-                )
+                !ReadyToRunHeader
+                    .Sections
+                    .TryGetValue(
+                        ReadyToRunSectionType.ImportSections,
+                        out ReadyToRunSection importSectionsSection
+                    )
             )
             {
                 return;

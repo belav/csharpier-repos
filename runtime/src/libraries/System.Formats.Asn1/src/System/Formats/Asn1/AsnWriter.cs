@@ -681,10 +681,12 @@ namespace System.Formats.Asn1
                 (int xOffset, int xLength) = x;
                 (int yOffset, int yLength) = y;
 
-                int value = SetOfValueComparer.Instance.Compare(
-                    new ReadOnlyMemory<byte>(_data, xOffset, xLength),
-                    new ReadOnlyMemory<byte>(_data, yOffset, yLength)
-                );
+                int value = SetOfValueComparer
+                    .Instance
+                    .Compare(
+                        new ReadOnlyMemory<byte>(_data, xOffset, xLength),
+                        new ReadOnlyMemory<byte>(_data, yOffset, yLength)
+                    );
 
                 if (value == 0)
                 {

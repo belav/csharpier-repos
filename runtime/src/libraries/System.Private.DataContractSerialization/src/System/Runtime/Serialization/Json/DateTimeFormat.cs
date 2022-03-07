@@ -34,16 +34,16 @@ namespace System.Runtime.Serialization
         {
             if (formatString == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    nameof(formatString)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNull(nameof(formatString));
             }
 
             if (formatProvider == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    nameof(formatProvider)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNull(nameof(formatProvider));
             }
 
             _formatString = formatString;

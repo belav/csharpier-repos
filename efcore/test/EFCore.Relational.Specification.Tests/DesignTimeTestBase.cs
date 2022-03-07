@@ -29,7 +29,9 @@ namespace Microsoft.EntityFrameworkCore
             (
                 (IDesignTimeServices)Activator.CreateInstance(
                     ProviderAssembly.GetType(
-                        ProviderAssembly.GetCustomAttribute<DesignTimeProviderServicesAttribute>().TypeName,
+                        ProviderAssembly
+                            .GetCustomAttribute<DesignTimeProviderServicesAttribute>()
+                            .TypeName,
                         throwOnError: true
                     )
                 )!
@@ -38,7 +40,8 @@ namespace Microsoft.EntityFrameworkCore
 
             var reverseEngineerScaffolder = services
                 .CreateScope()
-                .ServiceProvider.GetService<IReverseEngineerScaffolder>();
+                .ServiceProvider
+                .GetService<IReverseEngineerScaffolder>();
 
             Assert.NotNull(reverseEngineerScaffolder);
         }
@@ -53,7 +56,9 @@ namespace Microsoft.EntityFrameworkCore
             (
                 (IDesignTimeServices)Activator.CreateInstance(
                     ProviderAssembly.GetType(
-                        ProviderAssembly.GetCustomAttribute<DesignTimeProviderServicesAttribute>().TypeName,
+                        ProviderAssembly
+                            .GetCustomAttribute<DesignTimeProviderServicesAttribute>()
+                            .TypeName,
                         throwOnError: true
                     )
                 )!
@@ -62,7 +67,8 @@ namespace Microsoft.EntityFrameworkCore
 
             var migrationsScaffolder = services
                 .CreateScope()
-                .ServiceProvider.GetService<IMigrationsScaffolder>();
+                .ServiceProvider
+                .GetService<IMigrationsScaffolder>();
 
             Assert.NotNull(migrationsScaffolder);
         }

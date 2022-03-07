@@ -91,12 +91,14 @@ public class PersistComponentStateTagHelper : TagHelper
         if (store != null)
         {
             await manager.PersistStateAsync(store, renderer);
-            output.Content.SetHtmlContent(
-                new HtmlContentBuilder()
-                    .AppendHtml("<!--Blazor-Component-State:")
-                    .AppendHtml(new ComponentStateHtmlContent(store))
-                    .AppendHtml("-->")
-            );
+            output
+                .Content
+                .SetHtmlContent(
+                    new HtmlContentBuilder()
+                        .AppendHtml("<!--Blazor-Component-State:")
+                        .AppendHtml(new ComponentStateHtmlContent(store))
+                        .AppendHtml("-->")
+                );
         }
     }
 

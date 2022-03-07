@@ -22,11 +22,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.EventHookup
 {
     internal sealed class EventHookupTestState : AbstractCommandHandlerTestState
     {
-        private static readonly TestComposition s_composition =
-            EditorTestCompositions.EditorFeaturesWpf.AddParts(
-                typeof(EventHookupCommandHandler),
-                typeof(EventHookupSessionManager)
-            );
+        private static readonly TestComposition s_composition = EditorTestCompositions
+            .EditorFeaturesWpf
+            .AddParts(typeof(EventHookupCommandHandler), typeof(EventHookupSessionManager));
 
         private readonly EventHookupCommandHandler _commandHandler;
         private readonly Mutex _testSessionHookupMutex;
@@ -70,8 +68,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.EventHookup
             Assert.NotNull(_commandHandler.EventHookupSessionManager.TEST_MostRecentToolTipContent);
             Assert.Single(_commandHandler.EventHookupSessionManager.TEST_MostRecentToolTipContent);
 
-            var textElement =
-                _commandHandler.EventHookupSessionManager.TEST_MostRecentToolTipContent.First();
+            var textElement = _commandHandler
+                .EventHookupSessionManager
+                .TEST_MostRecentToolTipContent
+                .First();
             Assert.Equal(3, textElement.Runs.Count());
             Assert.Equal(expectedText, textElement.Runs.First().Text);
         }

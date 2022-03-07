@@ -24,8 +24,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.ArgumentProv
         [Fact]
         public void TestArgumentProviderOrder()
         {
-            var exportProvider =
-                EditorTestCompositions.EditorFeaturesWpf.ExportProviderFactory.CreateExportProvider();
+            var exportProvider = EditorTestCompositions
+                .EditorFeaturesWpf
+                .ExportProviderFactory
+                .CreateExportProvider();
             var argumentProviderExports = exportProvider.GetExports<
                 ArgumentProvider,
                 CompletionProviderMetadata
@@ -65,8 +67,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.ArgumentProv
         [Fact]
         public void TestArgumentProviderOrderMetadata()
         {
-            var exportProvider =
-                EditorTestCompositions.EditorFeatures.ExportProviderFactory.CreateExportProvider();
+            var exportProvider = EditorTestCompositions
+                .EditorFeatures
+                .ExportProviderFactory
+                .CreateExportProvider();
             var argumentProviderExports = exportProvider.GetExports<
                 ArgumentProvider,
                 CompletionProviderMetadata
@@ -92,9 +96,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.ArgumentProv
                     // The last argument marker should be last; this is ensured by either the last "real" provider saying it comes before the
                     // marker, or the last argument marker comes after the last "real" provider.
                     if (
-                        !orderedCSharpArgumentProviders[i].Metadata.AfterTyped.Contains(
-                            orderedCSharpArgumentProviders[i - 1].Metadata.Name
-                        )
+                        !orderedCSharpArgumentProviders[i]
+                            .Metadata
+                            .AfterTyped
+                            .Contains(orderedCSharpArgumentProviders[i - 1].Metadata.Name)
                     )
                     {
                         // Make sure the last built-in provider comes before the marker
@@ -125,8 +130,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.ArgumentProv
         [Fact]
         public void TestArgumentProviderFirstNameMetadata()
         {
-            var exportProvider =
-                EditorTestCompositions.EditorFeatures.ExportProviderFactory.CreateExportProvider();
+            var exportProvider = EditorTestCompositions
+                .EditorFeatures
+                .ExportProviderFactory
+                .CreateExportProvider();
             var argumentProviderExports = exportProvider.GetExports<
                 ArgumentProvider,
                 CompletionProviderMetadata
@@ -144,8 +151,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.ArgumentProv
         [Fact]
         public void TestArgumentProviderLastNameMetadata()
         {
-            var exportProvider =
-                EditorTestCompositions.EditorFeatures.ExportProviderFactory.CreateExportProvider();
+            var exportProvider = EditorTestCompositions
+                .EditorFeatures
+                .ExportProviderFactory
+                .CreateExportProvider();
             var argumentProviderExports = exportProvider.GetExports<
                 ArgumentProvider,
                 CompletionProviderMetadata
@@ -163,8 +172,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.ArgumentProv
         [Fact]
         public void TestArgumentProviderNameMetadata()
         {
-            var exportProvider =
-                EditorTestCompositions.EditorFeatures.ExportProviderFactory.CreateExportProvider();
+            var exportProvider = EditorTestCompositions
+                .EditorFeatures
+                .ExportProviderFactory
+                .CreateExportProvider();
             var argumentProviderExports = exportProvider.GetExports<
                 ArgumentProvider,
                 CompletionProviderMetadata

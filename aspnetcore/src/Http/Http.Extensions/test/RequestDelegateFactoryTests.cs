@@ -1352,12 +1352,12 @@ public class RequestDelegateFactoryTests : LoggedTest
         httpContext.Request.Body = stream;
 
         httpContext.Request.Headers["Content-Type"] = "application/json";
-        httpContext.Request.Headers["Content-Length"] = stream.Length.ToString(
-            CultureInfo.InvariantCulture
-        );
-        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(
-            new RequestBodyDetectionFeature(true)
-        );
+        httpContext.Request.Headers["Content-Length"] = stream
+            .Length
+            .ToString(CultureInfo.InvariantCulture);
+        httpContext
+            .Features
+            .Set<IHttpRequestBodyDetectionFeature>(new RequestBodyDetectionFeature(true));
 
         var jsonOptions = new JsonOptions();
         jsonOptions.SerializerOptions.Converters.Add(new TodoJsonConverter());
@@ -1414,12 +1414,12 @@ public class RequestDelegateFactoryTests : LoggedTest
         httpContext.Request.Body = stream;
 
         httpContext.Request.Headers["Content-Type"] = "application/json";
-        httpContext.Request.Headers["Content-Length"] = stream.Length.ToString(
-            CultureInfo.InvariantCulture
-        );
-        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(
-            new RequestBodyDetectionFeature(true)
-        );
+        httpContext.Request.Headers["Content-Length"] = stream
+            .Length
+            .ToString(CultureInfo.InvariantCulture);
+        httpContext
+            .Features
+            .Set<IHttpRequestBodyDetectionFeature>(new RequestBodyDetectionFeature(true));
 
         var jsonOptions = new JsonOptions();
         jsonOptions.SerializerOptions.Converters.Add(new TodoJsonConverter());
@@ -1580,12 +1580,12 @@ public class RequestDelegateFactoryTests : LoggedTest
         httpContext.Request.Body = stream;
 
         httpContext.Request.Headers["Content-Type"] = "application/json";
-        httpContext.Request.Headers["Content-Length"] = stream.Length.ToString(
-            CultureInfo.InvariantCulture
-        );
-        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(
-            new RequestBodyDetectionFeature(true)
-        );
+        httpContext.Request.Headers["Content-Length"] = stream
+            .Length
+            .ToString(CultureInfo.InvariantCulture);
+        httpContext
+            .Features
+            .Set<IHttpRequestBodyDetectionFeature>(new RequestBodyDetectionFeature(true));
 
         var jsonOptions = new JsonOptions();
         jsonOptions.SerializerOptions.Converters.Add(new TodoJsonConverter());
@@ -1621,9 +1621,9 @@ public class RequestDelegateFactoryTests : LoggedTest
         var httpContext = CreateHttpContext();
         httpContext.Request.Headers["Content-Type"] = "application/json";
         httpContext.Request.Headers["Content-Length"] = "0";
-        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(
-            new RequestBodyDetectionFeature(false)
-        );
+        httpContext
+            .Features
+            .Set<IHttpRequestBodyDetectionFeature>(new RequestBodyDetectionFeature(false));
 
         var factoryResult = RequestDelegateFactory.Create(action);
         var requestDelegate = factoryResult.RequestDelegate;
@@ -1640,9 +1640,9 @@ public class RequestDelegateFactoryTests : LoggedTest
         var httpContext = new DefaultHttpContext();
         httpContext.Request.Headers["Content-Type"] = "application/json";
         httpContext.Request.Headers["Content-Length"] = "0";
-        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(
-            new RequestBodyDetectionFeature(false)
-        );
+        httpContext
+            .Features
+            .Set<IHttpRequestBodyDetectionFeature>(new RequestBodyDetectionFeature(false));
 
         var serviceCollection = new ServiceCollection();
         serviceCollection.AddSingleton(LoggerFactory);
@@ -1728,9 +1728,9 @@ public class RequestDelegateFactoryTests : LoggedTest
         httpContext.Request.Headers["Content-Type"] = "application/json";
         httpContext.Request.Headers["Content-Length"] = "1";
         httpContext.Request.Body = new ExceptionThrowingRequestBodyStream(ioException);
-        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(
-            new RequestBodyDetectionFeature(true)
-        );
+        httpContext
+            .Features
+            .Set<IHttpRequestBodyDetectionFeature>(new RequestBodyDetectionFeature(true));
 
         var factoryResult = RequestDelegateFactory.Create(
             TestAction,
@@ -1766,9 +1766,9 @@ public class RequestDelegateFactoryTests : LoggedTest
         httpContext.Request.Headers["Content-Type"] = "application/json";
         httpContext.Request.Headers["Content-Length"] = "1";
         httpContext.Request.Body = new ExceptionThrowingRequestBodyStream(jsonException);
-        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(
-            new RequestBodyDetectionFeature(true)
-        );
+        httpContext
+            .Features
+            .Set<IHttpRequestBodyDetectionFeature>(new RequestBodyDetectionFeature(true));
 
         var factoryResult = RequestDelegateFactory.Create(TestAction);
         var requestDelegate = factoryResult.RequestDelegate;
@@ -1806,9 +1806,9 @@ public class RequestDelegateFactoryTests : LoggedTest
         httpContext.Request.Headers["Content-Type"] = "application/json";
         httpContext.Request.Headers["Content-Length"] = "1";
         httpContext.Request.Body = new ExceptionThrowingRequestBodyStream(jsonException);
-        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(
-            new RequestBodyDetectionFeature(true)
-        );
+        httpContext
+            .Features
+            .Set<IHttpRequestBodyDetectionFeature>(new RequestBodyDetectionFeature(true));
 
         var factoryResult = RequestDelegateFactory.Create(
             TestAction,
@@ -1852,9 +1852,9 @@ public class RequestDelegateFactoryTests : LoggedTest
         httpContext.Request.Headers["Content-Type"] = "application/json";
         httpContext.Request.Headers["Content-Length"] = "1";
         httpContext.Request.Body = new MemoryStream(Encoding.UTF8.GetBytes("{"));
-        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(
-            new RequestBodyDetectionFeature(true)
-        );
+        httpContext
+            .Features
+            .Set<IHttpRequestBodyDetectionFeature>(new RequestBodyDetectionFeature(true));
 
         var factoryResult = RequestDelegateFactory.Create(TestAction);
         var requestDelegate = factoryResult.RequestDelegate;
@@ -1890,9 +1890,9 @@ public class RequestDelegateFactoryTests : LoggedTest
         httpContext.Request.Headers["Content-Type"] = "application/json";
         httpContext.Request.Headers["Content-Length"] = "1";
         httpContext.Request.Body = new MemoryStream(Encoding.UTF8.GetBytes("{"));
-        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(
-            new RequestBodyDetectionFeature(true)
-        );
+        httpContext
+            .Features
+            .Set<IHttpRequestBodyDetectionFeature>(new RequestBodyDetectionFeature(true));
 
         var factoryResult = RequestDelegateFactory.Create(
             TestAction,
@@ -2111,10 +2111,10 @@ public class RequestDelegateFactoryTests : LoggedTest
     {
         // IEnumerable<T> always resolves from DI but is empty and throws from test method
         if (
-            action.Method.Name.Contains(
-                "TestExplicitFromIEnumerableService",
-                StringComparison.Ordinal
-            )
+            action
+                .Method
+                .Name
+                .Contains("TestExplicitFromIEnumerableService", StringComparison.Ordinal)
         )
         {
             return;
@@ -3073,9 +3073,9 @@ public class RequestDelegateFactoryTests : LoggedTest
             httpContext.Request.Body = stream;
             httpContext.Request.Headers["Content-Type"] = "application/json";
             httpContext.Request.ContentLength = stream.Length;
-            httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(
-                new RequestBodyDetectionFeature(true)
-            );
+            httpContext
+                .Features
+                .Set<IHttpRequestBodyDetectionFeature>(new RequestBodyDetectionFeature(true));
         }
 
         var jsonOptions = new JsonOptions();
@@ -3598,9 +3598,9 @@ public class RequestDelegateFactoryTests : LoggedTest
         var httpContext = new DefaultHttpContext();
         httpContext.Request.Headers["Content-Type"] = "application/xml";
         httpContext.Request.Headers["Content-Length"] = "1";
-        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(
-            new RequestBodyDetectionFeature(true)
-        );
+        httpContext
+            .Features
+            .Set<IHttpRequestBodyDetectionFeature>(new RequestBodyDetectionFeature(true));
 
         var serviceCollection = new ServiceCollection();
         serviceCollection.AddSingleton(LoggerFactory);
@@ -3651,12 +3651,12 @@ public class RequestDelegateFactoryTests : LoggedTest
         var stream = new MemoryStream(requestBodyBytes);
         httpContext.Request.Body = stream;
         httpContext.Request.Headers["Content-Type"] = "application/xml";
-        httpContext.Request.Headers["Content-Length"] = stream.Length.ToString(
-            CultureInfo.InvariantCulture
-        );
-        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(
-            new RequestBodyDetectionFeature(true)
-        );
+        httpContext.Request.Headers["Content-Length"] = stream
+            .Length
+            .ToString(CultureInfo.InvariantCulture);
+        httpContext
+            .Features
+            .Set<IHttpRequestBodyDetectionFeature>(new RequestBodyDetectionFeature(true));
 
         var serviceCollection = new ServiceCollection();
         serviceCollection.AddSingleton(LoggerFactory);

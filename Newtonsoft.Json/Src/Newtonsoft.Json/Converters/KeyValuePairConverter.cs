@@ -133,12 +133,12 @@ namespace Newtonsoft.Json.Converters
               : objectType;
 
             ReflectionObject reflectionObject = ReflectionObjectPerType.Get(t);
-            JsonContract keyContract = serializer.ContractResolver.ResolveContract(
-                reflectionObject.GetType(KeyName)
-            );
-            JsonContract valueContract = serializer.ContractResolver.ResolveContract(
-                reflectionObject.GetType(ValueName)
-            );
+            JsonContract keyContract = serializer
+                .ContractResolver
+                .ResolveContract(reflectionObject.GetType(KeyName));
+            JsonContract valueContract = serializer
+                .ContractResolver
+                .ResolveContract(reflectionObject.GetType(ValueName));
 
             while (reader.TokenType == JsonToken.PropertyName)
             {

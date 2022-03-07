@@ -40,7 +40,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var dictionary = new ConcurrentDictionary<int, int>();
             dictionary.Clear();
 
-            var log = typeof(ConcurrentDictionary<int, int>).Assembly
+            var log = typeof(ConcurrentDictionary<int, int>)
+                .Assembly
                 .GetType("System.Collections.Concurrent.CDSCollectionETWBCLProvider")
                 .GetField(
                     "Log",

@@ -153,18 +153,18 @@ public class NginxDeployer : SelfHostDeployer
             );
             var errorLog = Path.Combine(DeploymentParameters.ApplicationPath, "nginx.error.log");
             var accessLog = Path.Combine(DeploymentParameters.ApplicationPath, "nginx.access.log");
-            DeploymentParameters.ServerConfigTemplateContent =
-                DeploymentParameters.ServerConfigTemplateContent
-                    .Replace("[user]", userName)
-                    .Replace("[errorlog]", errorLog)
-                    .Replace("[accesslog]", accessLog)
-                    .Replace(
-                        "[listenPort]",
-                        originalUri.Port.ToString(CultureInfo.InvariantCulture)
-                            + (_portSelector != null ? " reuseport" : "")
-                    )
-                    .Replace("[redirectUri]", redirectUri)
-                    .Replace("[pidFile]", pidFile);
+            DeploymentParameters.ServerConfigTemplateContent = DeploymentParameters
+                .ServerConfigTemplateContent
+                .Replace("[user]", userName)
+                .Replace("[errorlog]", errorLog)
+                .Replace("[accesslog]", accessLog)
+                .Replace(
+                    "[listenPort]",
+                    originalUri.Port.ToString(CultureInfo.InvariantCulture)
+                        + (_portSelector != null ? " reuseport" : "")
+                )
+                .Replace("[redirectUri]", redirectUri)
+                .Replace("[pidFile]", pidFile);
             Logger.LogDebug("Using PID file: {pidFile}", pidFile);
             Logger.LogDebug("Using Error Log file: {errorLog}", pidFile);
             Logger.LogDebug("Using Access Log file: {accessLog}", pidFile);

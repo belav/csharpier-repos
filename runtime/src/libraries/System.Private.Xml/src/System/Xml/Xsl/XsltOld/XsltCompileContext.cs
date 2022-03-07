@@ -88,9 +88,9 @@ namespace System.Xml.Xsl.XsltOld
             if (result == null && !variable.IsGlobal)
             {
                 // This was uninitialized local variable. May be we have sutable global var too?
-                VariableAction? global = _manager!.VariableScope.ResolveGlobalVariable(
-                    variable.Name!
-                );
+                VariableAction? global = _manager!
+                    .VariableScope
+                    .ResolveGlobalVariable(variable.Name!);
                 if (global != null)
                 {
                     result = _processor.GetVariableValue(global);
@@ -481,9 +481,9 @@ namespace System.Xml.Xsl.XsltOld
                 PrefixQName.ParseQualifiedName(formatName, out prefix, out local);
                 ns = LookupNamespace(prefix);
             }
-            DecimalFormat? formatInfo = _processor!.RootAction!.GetDecimalFormat(
-                new XmlQualifiedName(local, ns)
-            );
+            DecimalFormat? formatInfo = _processor!
+                .RootAction!
+                .GetDecimalFormat(new XmlQualifiedName(local, ns));
             if (formatInfo == null)
             {
                 if (formatName != null)

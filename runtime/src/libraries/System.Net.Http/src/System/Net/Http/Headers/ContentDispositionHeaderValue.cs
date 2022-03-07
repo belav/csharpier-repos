@@ -199,11 +199,9 @@ namespace System.Net.Http.Headers
         public static ContentDispositionHeaderValue Parse(string? input)
         {
             int index = 0;
-            return (ContentDispositionHeaderValue)GenericHeaderParser.ContentDispositionParser.ParseValue(
-                input,
-                null,
-                ref index
-            );
+            return (ContentDispositionHeaderValue)GenericHeaderParser
+                .ContentDispositionParser
+                .ParseValue(input, null, ref index);
         }
 
         public static bool TryParse(
@@ -215,12 +213,9 @@ namespace System.Net.Http.Headers
             parsedValue = null;
 
             if (
-                GenericHeaderParser.ContentDispositionParser.TryParseValue(
-                    input,
-                    null,
-                    ref index,
-                    out object? output
-                )
+                GenericHeaderParser
+                    .ContentDispositionParser
+                    .TryParseValue(input, null, ref index, out object? output)
             )
             {
                 parsedValue = (ContentDispositionHeaderValue)output!;

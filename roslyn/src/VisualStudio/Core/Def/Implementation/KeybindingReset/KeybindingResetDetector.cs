@@ -354,9 +354,9 @@ namespace Microsoft.VisualStudio.LanguageServices.KeybindingReset
                 cmds[0].cmdID = cmdId;
                 cmds[0].cmdf = 0;
 
-                await ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
-                    cancellationToken
-                );
+                await ThreadingContext
+                    .JoinableTaskFactory
+                    .SwitchToMainThreadAsync(cancellationToken);
 
                 var hr = _oleCommandTarget.QueryStatus(
                     s_resharperCommandGroup,
@@ -382,9 +382,9 @@ namespace Microsoft.VisualStudio.LanguageServices.KeybindingReset
                     return;
                 }
 
-                await ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
-                    cancellationToken
-                );
+                await ThreadingContext
+                    .JoinableTaskFactory
+                    .SwitchToMainThreadAsync(cancellationToken);
 
                 _oleCommandTarget = IServiceProviderExtensions.GetService<
                     SUIHostCommandDispatcher,

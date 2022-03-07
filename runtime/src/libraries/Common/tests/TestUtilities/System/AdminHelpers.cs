@@ -42,11 +42,13 @@ namespace System
 
             SafeAccessTokenHandle token;
             if (
-                !Interop.Advapi32.OpenProcessToken(
-                    Interop.Kernel32.GetCurrentProcess(),
-                    TokenAccessLevels.Read,
-                    out token
-                )
+                !Interop
+                    .Advapi32
+                    .OpenProcessToken(
+                        Interop.Kernel32.GetCurrentProcess(),
+                        TokenAccessLevels.Read,
+                        out token
+                    )
             )
             {
                 throw new Win32Exception(Marshal.GetLastWin32Error(), "Open process token failed");
@@ -57,13 +59,15 @@ namespace System
                 Interop.Advapi32.TOKEN_ELEVATION elevation = new Interop.Advapi32.TOKEN_ELEVATION();
                 uint ignore;
                 if (
-                    !Interop.Advapi32.GetTokenInformation(
-                        token,
-                        Interop.Advapi32.TOKEN_INFORMATION_CLASS.TokenElevation,
-                        &elevation,
-                        (uint)sizeof(Interop.Advapi32.TOKEN_ELEVATION),
-                        out ignore
-                    )
+                    !Interop
+                        .Advapi32
+                        .GetTokenInformation(
+                            token,
+                            Interop.Advapi32.TOKEN_INFORMATION_CLASS.TokenElevation,
+                            &elevation,
+                            (uint)sizeof(Interop.Advapi32.TOKEN_ELEVATION),
+                            out ignore
+                        )
                 )
                 {
                     throw new Win32Exception(

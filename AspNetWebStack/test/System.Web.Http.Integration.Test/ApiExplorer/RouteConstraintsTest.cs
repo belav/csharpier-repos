@@ -118,12 +118,17 @@ namespace System.Web.Http.ApiExplorer
         )
         {
             HttpConfiguration config = new HttpConfiguration();
-            config.Routes.MapHttpRoute(
-                "Default",
-                "{controller}/{id}",
-                new { id = RouteParameter.Optional },
-                new { routeConstraint = new HttpMethodConstraint(HttpMethod.Get, HttpMethod.Put) }
-            );
+            config
+                .Routes
+                .MapHttpRoute(
+                    "Default",
+                    "{controller}/{id}",
+                    new { id = RouteParameter.Optional },
+                    new
+                    {
+                        routeConstraint = new HttpMethodConstraint(HttpMethod.Get, HttpMethod.Put)
+                    }
+                );
 
             DefaultHttpControllerSelector controllerSelector =
                 ApiExplorerHelper.GetStrictControllerSelector(config, controllerType);
@@ -189,12 +194,14 @@ namespace System.Web.Http.ApiExplorer
         )
         {
             HttpConfiguration config = new HttpConfiguration();
-            config.Routes.MapHttpRoute(
-                "Default",
-                "{controller}/{id}",
-                new { id = RouteParameter.Optional },
-                new { controller = "It.*" }
-            ); // controllers that start with "It"
+            config
+                .Routes
+                .MapHttpRoute(
+                    "Default",
+                    "{controller}/{id}",
+                    new { id = RouteParameter.Optional },
+                    new { controller = "It.*" }
+                ); // controllers that start with "It"
 
             DefaultHttpControllerSelector controllerSelector =
                 ApiExplorerHelper.GetStrictControllerSelector(config, controllerTypes);
@@ -276,12 +283,14 @@ namespace System.Web.Http.ApiExplorer
         )
         {
             HttpConfiguration config = new HttpConfiguration();
-            config.Routes.MapHttpRoute(
-                "Default",
-                "{controller}/{action}/{id}",
-                new { id = RouteParameter.Optional },
-                new { action = "Get.+" }
-            ); // actions that start with "Get" and at least one extra character
+            config
+                .Routes
+                .MapHttpRoute(
+                    "Default",
+                    "{controller}/{action}/{id}",
+                    new { id = RouteParameter.Optional },
+                    new { action = "Get.+" }
+                ); // actions that start with "Get" and at least one extra character
 
             DefaultHttpControllerSelector controllerSelector =
                 ApiExplorerHelper.GetStrictControllerSelector(config, controllerTypes);

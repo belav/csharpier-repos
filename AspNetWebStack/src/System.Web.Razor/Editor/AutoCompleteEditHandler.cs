@@ -80,7 +80,8 @@ namespace System.Web.Razor.Parser.SyntaxTree
             return HashCodeCombiner
                 .Start()
                 .Add(base.GetHashCode())
-                .Add(AutoCompleteString).CombinedHash;
+                .Add(AutoCompleteString)
+                .CombinedHash;
         }
     }
 }

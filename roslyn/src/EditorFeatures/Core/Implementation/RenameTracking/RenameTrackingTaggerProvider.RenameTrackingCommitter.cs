@@ -165,10 +165,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.RenameTracking
                 // text changes caused by undo and redo actions as potential renames, so carefully
                 // update the state machine after undo/redo actions.
 
-                var changedDocuments =
-                    renameTrackingSolutionSet.RenamedSolution.GetChangedDocuments(
-                        renameTrackingSolutionSet.OriginalSolution
-                    );
+                var changedDocuments = renameTrackingSolutionSet
+                    .RenamedSolution
+                    .GetChangedDocuments(renameTrackingSolutionSet.OriginalSolution);
 
                 // When this action is undone (the user has undone twice), restore the state
                 // machine to so that they can continue their original rename tracking session.
@@ -209,7 +208,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.RenameTracking
                 {
                     // because changes have already been made to the workspace (UpdateWorkspaceForResetOfTypedIdentifier() above),
                     // these calls can't be cancelled and must be allowed to complete.
-                    var root = renameTrackingSolutionSet.RenamedSolution
+                    var root = renameTrackingSolutionSet
+                        .RenamedSolution
                         .GetDocument(docId)
                         .GetSyntaxRootSynchronously(CancellationToken.None);
                     finalSolution = finalSolution.WithDocumentSyntaxRoot(docId, root);

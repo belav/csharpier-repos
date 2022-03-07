@@ -34,10 +34,9 @@ namespace System.Web.Http.Validation.Providers
                 foreach (PropertyInfo nonPublicProperty in nonPublicProperties)
                 {
                     if (
-                        nonPublicProperty.GetCustomAttributes(
-                            typeof(ValidationAttribute),
-                            inherit: true
-                        ).Length > 0
+                        nonPublicProperty
+                            .GetCustomAttributes(typeof(ValidationAttribute), inherit: true)
+                            .Length > 0
                     )
                     {
                         yield return new ErrorModelValidator(
@@ -51,9 +50,11 @@ namespace System.Web.Http.Validation.Providers
                     }
                 }
 
-                FieldInfo[] allFields = metadata.ModelType.GetFields(
-                    BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance
-                );
+                FieldInfo[] allFields = metadata
+                    .ModelType
+                    .GetFields(
+                        BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance
+                    );
                 foreach (FieldInfo field in allFields)
                 {
                     if (

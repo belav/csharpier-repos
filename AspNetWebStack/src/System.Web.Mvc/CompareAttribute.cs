@@ -50,9 +50,9 @@ namespace System.Web.Mvc
             ValidationContext validationContext
         )
         {
-            PropertyInfo otherPropertyInfo = validationContext.ObjectType.GetProperty(
-                OtherProperty
-            );
+            PropertyInfo otherPropertyInfo = validationContext
+                .ObjectType
+                .GetProperty(OtherProperty);
             if (otherPropertyInfo == null)
             {
                 return new ValidationResult(
@@ -72,7 +72,8 @@ namespace System.Web.Mvc
             {
                 if (OtherPropertyDisplayName == null)
                 {
-                    OtherPropertyDisplayName = ModelMetadataProviders.Current
+                    OtherPropertyDisplayName = ModelMetadataProviders
+                        .Current
                         .GetMetadataForProperty(
                             () => validationContext.ObjectInstance,
                             validationContext.ObjectType,
@@ -103,7 +104,8 @@ namespace System.Web.Mvc
             {
                 if (OtherPropertyDisplayName == null)
                 {
-                    OtherPropertyDisplayName = ModelMetadataProviders.Current
+                    OtherPropertyDisplayName = ModelMetadataProviders
+                        .Current
                         .GetMetadataForProperty(
                             () => metadata.Model,
                             metadata.ContainerType,

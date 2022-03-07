@@ -162,10 +162,12 @@ namespace System.Threading
                 _numThreadsAddedDueToBlocking -= toSubtract;
                 numThreadsGoal -= toSubtract;
                 _separated.counts.InterlockedSetNumThreadsGoal(numThreadsGoal);
-                HillClimbing.ThreadPoolHillClimber.ForceChange(
-                    numThreadsGoal,
-                    HillClimbing.StateOrTransition.CooperativeBlocking
-                );
+                HillClimbing
+                    .ThreadPoolHillClimber
+                    .ForceChange(
+                        numThreadsGoal,
+                        HillClimbing.StateOrTransition.CooperativeBlocking
+                    );
                 return 0;
             }
 
@@ -254,10 +256,12 @@ namespace System.Threading
 
                 _numThreadsAddedDueToBlocking += (short)(newNumThreadsGoal - numThreadsGoal);
                 counts = _separated.counts.InterlockedSetNumThreadsGoal(newNumThreadsGoal);
-                HillClimbing.ThreadPoolHillClimber.ForceChange(
-                    newNumThreadsGoal,
-                    HillClimbing.StateOrTransition.CooperativeBlocking
-                );
+                HillClimbing
+                    .ThreadPoolHillClimber
+                    .ForceChange(
+                        newNumThreadsGoal,
+                        HillClimbing.StateOrTransition.CooperativeBlocking
+                    );
                 if (
                     counts.NumProcessingWork >= numThreadsGoal && _separated.numRequestedWorkers > 0
                 )

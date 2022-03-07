@@ -49,8 +49,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                         this
                     );
                     _info = info;
-                    _projectCacheService =
-                        service.LanguageServices.WorkspaceServices.GetService<IProjectCacheHostService>();
+                    _projectCacheService = service
+                        .LanguageServices
+                        .WorkspaceServices
+                        .GetService<IProjectCacheHostService>();
                     _cacheKey = cacheKey;
                 }
 

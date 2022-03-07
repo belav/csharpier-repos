@@ -194,7 +194,8 @@ namespace Microsoft.EntityFrameworkCore
                                 )
                         )
                     )
-                    .EnableDetailedErrors().Options;
+                    .EnableDetailedErrors()
+                    .Options;
 
             protected virtual IServiceCollection InjectInterceptors(
                 IServiceCollection serviceCollection,

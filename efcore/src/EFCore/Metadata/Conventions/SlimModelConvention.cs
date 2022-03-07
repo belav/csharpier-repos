@@ -196,9 +196,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 {
                     var slimNavigation = Create(navigation, slimEntityType);
 
-                    var inverse = slimNavigation.TargetEntityType.FindSkipNavigation(
-                        navigation.Inverse.Name
-                    );
+                    var inverse = slimNavigation
+                        .TargetEntityType
+                        .FindSkipNavigation(navigation.Inverse.Name);
                     if (inverse != null)
                     {
                         slimNavigation.Inverse = inverse;
@@ -315,7 +315,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             SlimEntityType entityType
         ) =>
             parameterBinding.With(
-                parameterBinding.ConsumedProperties
+                parameterBinding
+                    .ConsumedProperties
                     .Select(
                         property =>
                             (
@@ -333,7 +334,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             SlimEntityType entityType
         ) =>
             instantiationBinding?.With(
-                instantiationBinding.ParameterBindings
+                instantiationBinding
+                    .ParameterBindings
                     .Select(binding => Create(binding, entityType))
                     .ToList()
             );
@@ -509,9 +511,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
         private SlimForeignKey Create(IForeignKey foreignKey, SlimEntityType slimEntityType)
         {
-            var principalEntityType = slimEntityType.Model.FindEntityType(
-                foreignKey.PrincipalEntityType.Name
-            )!;
+            var principalEntityType = slimEntityType
+                .Model
+                .FindEntityType(foreignKey.PrincipalEntityType.Name)!;
             return slimEntityType.AddForeignKey(
                 slimEntityType.FindProperties(foreignKey.Properties.Select(p => p.Name))!,
                 GetKey(foreignKey.PrincipalKey, principalEntityType),
@@ -587,9 +589,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 slimEntityType.Model.FindEntityType(navigation.TargetEntityType.Name)!,
                 GetForeignKey(
                     navigation.ForeignKey,
-                    slimEntityType.Model.FindEntityType(
-                        navigation.ForeignKey.DeclaringEntityType.Name
-                    )!
+                    slimEntityType
+                        .Model
+                        .FindEntityType(navigation.ForeignKey.DeclaringEntityType.Name)!
                 ),
                 navigation.IsCollection,
                 navigation.IsOnDependent,
@@ -614,7 +616,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 .Single(
                     fk =>
                         fk.PrincipalEntityType.Name == foreignKey.PrincipalEntityType.Name
-                        && fk.PrincipalKey.Properties
+                        && fk.PrincipalKey
+                            .Properties
                             .Select(p => p.Name)
                             .SequenceEqual(foreignKey.PrincipalKey.Properties.Select(p => p.Name))
                 );

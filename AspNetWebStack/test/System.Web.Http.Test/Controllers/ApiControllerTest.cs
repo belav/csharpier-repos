@@ -71,10 +71,10 @@ namespace System.Web.Http
                         return tcs.Task;
                     }
                 );
-            controllerDescriptor.Configuration.Services.Replace(
-                typeof(IHttpActionInvoker),
-                mockInvoker.Object
-            );
+            controllerDescriptor
+                .Configuration
+                .Services
+                .Replace(typeof(IHttpActionInvoker), mockInvoker.Object);
 
             // Act
             HttpResponseMessage message = await api.ExecuteAsync(
@@ -117,10 +117,10 @@ namespace System.Web.Http
                         };
                     }
                 );
-            controllerDescriptor.Configuration.Services.Replace(
-                typeof(IHttpActionSelector),
-                mockSelector.Object
-            );
+            controllerDescriptor
+                .Configuration
+                .Services
+                .Replace(typeof(IHttpActionSelector), mockSelector.Object);
 
             // Act
             HttpResponseMessage message = await api.ExecuteAsync(
@@ -563,18 +563,18 @@ namespace System.Web.Http
                             }
                         )
                 );
-            controllerContext.Configuration.Services.Replace(
-                typeof(IHttpActionInvoker),
-                invokerMock.Object
-            );
-            controllerContext.Configuration.Services.Replace(
-                typeof(IHttpActionSelector),
-                selectorMock.Object
-            );
-            controllerContext.Configuration.Services.Replace(
-                typeof(IActionValueBinder),
-                binderMock.Object
-            );
+            controllerContext
+                .Configuration
+                .Services
+                .Replace(typeof(IHttpActionInvoker), invokerMock.Object);
+            controllerContext
+                .Configuration
+                .Services
+                .Replace(typeof(IHttpActionSelector), selectorMock.Object);
+            controllerContext
+                .Configuration
+                .Services
+                .Replace(typeof(IActionValueBinder), binderMock.Object);
 
             await controller.ExecuteAsync(controllerContext, CancellationToken.None);
 
@@ -642,25 +642,29 @@ namespace System.Web.Http
         [Fact]
         public void RequestPropertyGetterSetterWorks()
         {
-            Assert.Reflection.Property(
-                new Mock<ApiController>().Object,
-                c => c.Request,
-                expectedDefaultValue: null,
-                allowNull: false,
-                roundTripTestValue: new HttpRequestMessage()
-            );
+            Assert
+                .Reflection
+                .Property(
+                    new Mock<ApiController>().Object,
+                    c => c.Request,
+                    expectedDefaultValue: null,
+                    allowNull: false,
+                    roundTripTestValue: new HttpRequestMessage()
+                );
         }
 
         [Fact]
         public void ConfigurationPropertyGetterSetterWorks()
         {
-            Assert.Reflection.Property(
-                new Mock<ApiController>().Object,
-                c => c.Configuration,
-                expectedDefaultValue: null,
-                allowNull: false,
-                roundTripTestValue: new HttpConfiguration()
-            );
+            Assert
+                .Reflection
+                .Property(
+                    new Mock<ApiController>().Object,
+                    c => c.Configuration,
+                    expectedDefaultValue: null,
+                    allowNull: false,
+                    roundTripTestValue: new HttpConfiguration()
+                );
         }
 
         [Fact]
@@ -683,17 +687,19 @@ namespace System.Web.Http
                 }
             );
 
-            controller.ModelState.Add(
-                "a",
-                new ModelState()
-                {
-                    Value = new ValueProviders.ValueProviderResult(
-                        "result",
-                        "attempted",
-                        CultureInfo.InvariantCulture
-                    )
-                }
-            );
+            controller
+                .ModelState
+                .Add(
+                    "a",
+                    new ModelState()
+                    {
+                        Value = new ValueProviders.ValueProviderResult(
+                            "result",
+                            "attempted",
+                            CultureInfo.InvariantCulture
+                        )
+                    }
+                );
 
             // Assert
             Assert.Equal(expected.Count, controller.ModelState.Count);
@@ -1039,10 +1045,10 @@ namespace System.Web.Http
             controllerContext.ControllerDescriptor = controllerDescriptor;
             controllerContext.Controller = controller;
             controllerContext.Configuration.Services.Add(typeof(IExceptionLogger), exceptionLogger);
-            controllerContext.Configuration.Services.Replace(
-                typeof(IExceptionHandler),
-                exceptionHandler
-            );
+            controllerContext
+                .Configuration
+                .Services
+                .Replace(typeof(IExceptionHandler), exceptionHandler);
             controllerContext.Configuration.Filters.Add(CreateStubExceptionFilter());
 
             // Act & Assert

@@ -233,7 +233,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Emit
     public static void Main(string[] args) {}
     CHANGE
 }";
-            var emitRefAssembly = EmitOptions.Default
+            var emitRefAssembly = EmitOptions
+                .Default
                 .WithEmitMetadataOnly(true)
                 .WithIncludePrivateMembers(false);
 

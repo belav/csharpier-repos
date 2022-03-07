@@ -362,7 +362,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.WorkspaceServices
         [Fact, WorkItem(43788, "https://github.com/dotnet/roslyn/issues/43788")]
         public void TestChangedTodoCommentOptions()
         {
-            var hostServices = FeaturesTestCompositions.Features
+            var hostServices = FeaturesTestCompositions
+                .Features
                 .AddParts(typeof(TestOptionsServiceFactory))
                 .GetHostServices();
 
@@ -395,7 +396,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.WorkspaceServices
         [Fact, WorkItem(1128126, "https://dev.azure.com/devdiv/DevDiv/_workitems/edit/1128126")]
         public void TestPersistedTodoCommentOptions()
         {
-            var hostServices = FeaturesTestCompositions.Features
+            var hostServices = FeaturesTestCompositions
+                .Features
                 .AddParts(typeof(TestOptionsServiceFactory))
                 .GetHostServices();
 

@@ -47,12 +47,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Highlighting
                 )
                 {
                     cancellationToken.ThrowIfCancellationRequested();
-                    highlighter.Value.AddHighlights(
-                        root,
-                        position,
-                        tempHighlights,
-                        cancellationToken
-                    );
+                    highlighter
+                        .Value
+                        .AddHighlights(root, position, tempHighlights, cancellationToken);
                 }
 
                 tempHighlights.Sort();

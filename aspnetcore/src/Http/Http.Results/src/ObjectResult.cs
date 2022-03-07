@@ -66,12 +66,9 @@ internal partial class ObjectResult : IResult
         }
 
         OnFormatting(httpContext);
-        return httpContext.Response.WriteAsJsonAsync(
-            Value,
-            Value.GetType(),
-            options: null,
-            contentType: ContentType
-        );
+        return httpContext
+            .Response
+            .WriteAsJsonAsync(Value, Value.GetType(), options: null, contentType: ContentType);
     }
 
     protected virtual void OnFormatting(HttpContext httpContext) { }
@@ -104,10 +101,9 @@ internal partial class ObjectResult : IResult
         }
 
         if (
-            ProblemDetailsDefaults.Defaults.TryGetValue(
-                problemDetails.Status.Value,
-                out var defaults
-            )
+            ProblemDetailsDefaults
+                .Defaults
+                .TryGetValue(problemDetails.Status.Value, out var defaults)
         )
         {
             problemDetails.Title ??= defaults.Title;

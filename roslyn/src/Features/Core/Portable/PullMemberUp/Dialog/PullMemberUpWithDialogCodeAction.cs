@@ -40,7 +40,12 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.PullMemberUp
             {
                 var pullMemberUpOptionService =
                     _service
-                    ?? _document.Project.Solution.Workspace.Services.GetRequiredService<IPullMemberUpOptionsService>();
+                    ?? _document
+                        .Project
+                        .Solution
+                        .Workspace
+                        .Services
+                        .GetRequiredService<IPullMemberUpOptionsService>();
                 return pullMemberUpOptionService.GetPullMemberUpOptions(_document, _selectedMember);
             }
 

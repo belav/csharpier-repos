@@ -19,10 +19,9 @@ namespace System.ConfigurationTests
         public void GetPropertyValues_NotStoredProperty_ValueEqualsNull()
         {
             var property = new SettingsProperty("PropertyName");
-            property.Attributes.Add(
-                typeof(UserScopedSettingAttribute),
-                new UserScopedSettingAttribute()
-            );
+            property
+                .Attributes
+                .Add(typeof(UserScopedSettingAttribute), new UserScopedSettingAttribute());
             var properties = new SettingsPropertyCollection();
             properties.Add(property);
             var localFileSettingsProvider = new LocalFileSettingsProvider();
@@ -40,14 +39,18 @@ namespace System.ConfigurationTests
         {
             var property = new SettingsProperty("PropertyName");
             property.PropertyType = typeof(string);
-            property.Attributes.Add(
-                typeof(ApplicationScopedSettingAttribute),
-                new ApplicationScopedSettingAttribute()
-            );
-            property.Attributes.Add(
-                typeof(SpecialSettingAttribute),
-                new SpecialSettingAttribute(SpecialSetting.ConnectionString)
-            );
+            property
+                .Attributes
+                .Add(
+                    typeof(ApplicationScopedSettingAttribute),
+                    new ApplicationScopedSettingAttribute()
+                );
+            property
+                .Attributes
+                .Add(
+                    typeof(SpecialSettingAttribute),
+                    new SpecialSettingAttribute(SpecialSetting.ConnectionString)
+                );
             var properties = new SettingsPropertyCollection();
             properties.Add(property);
             var localFileSettingsProvider = new LocalFileSettingsProvider();

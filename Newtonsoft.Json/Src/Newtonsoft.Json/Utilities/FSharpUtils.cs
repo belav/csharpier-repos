@@ -67,18 +67,18 @@ namespace Newtonsoft.Json.Utilities
                 "IsUnion",
                 BindingFlags.Public | BindingFlags.Static
             );
-            IsUnion = JsonTypeReflector.ReflectionDelegateFactory.CreateMethodCall<object?>(
-                isUnionMethodInfo
-            )!;
+            IsUnion = JsonTypeReflector
+                .ReflectionDelegateFactory
+                .CreateMethodCall<object?>(isUnionMethodInfo)!;
 
             MethodInfo getUnionCasesMethodInfo = GetMethodWithNonPublicFallback(
                 fsharpType,
                 "GetUnionCases",
                 BindingFlags.Public | BindingFlags.Static
             );
-            GetUnionCases = JsonTypeReflector.ReflectionDelegateFactory.CreateMethodCall<object?>(
-                getUnionCasesMethodInfo
-            )!;
+            GetUnionCases = JsonTypeReflector
+                .ReflectionDelegateFactory
+                .CreateMethodCall<object?>(getUnionCasesMethodInfo)!;
 
             Type fsharpValue = fsharpCoreAssembly.GetType(
                 "Microsoft.FSharp.Reflection.FSharpValue"
@@ -98,20 +98,18 @@ namespace Newtonsoft.Json.Utilities
                 "Microsoft.FSharp.Reflection.UnionCaseInfo"
             );
 
-            GetUnionCaseInfoName = JsonTypeReflector.ReflectionDelegateFactory.CreateGet<object>(
-                unionCaseInfo.GetProperty("Name")!
-            )!;
-            GetUnionCaseInfoTag = JsonTypeReflector.ReflectionDelegateFactory.CreateGet<object>(
-                unionCaseInfo.GetProperty("Tag")!
-            )!;
-            GetUnionCaseInfoDeclaringType =
-                JsonTypeReflector.ReflectionDelegateFactory.CreateGet<object>(
-                    unionCaseInfo.GetProperty("DeclaringType")!
-                )!;
-            GetUnionCaseInfoFields =
-                JsonTypeReflector.ReflectionDelegateFactory.CreateMethodCall<object>(
-                    unionCaseInfo.GetMethod("GetFields")
-                );
+            GetUnionCaseInfoName = JsonTypeReflector
+                .ReflectionDelegateFactory
+                .CreateGet<object>(unionCaseInfo.GetProperty("Name")!)!;
+            GetUnionCaseInfoTag = JsonTypeReflector
+                .ReflectionDelegateFactory
+                .CreateGet<object>(unionCaseInfo.GetProperty("Tag")!)!;
+            GetUnionCaseInfoDeclaringType = JsonTypeReflector
+                .ReflectionDelegateFactory
+                .CreateGet<object>(unionCaseInfo.GetProperty("DeclaringType")!)!;
+            GetUnionCaseInfoFields = JsonTypeReflector
+                .ReflectionDelegateFactory
+                .CreateMethodCall<object>(unionCaseInfo.GetMethod("GetFields"));
 
             Type listModule = fsharpCoreAssembly.GetType("Microsoft.FSharp.Collections.ListModule");
             _ofSeq = listModule.GetMethod("OfSeq");
@@ -196,17 +194,16 @@ namespace Newtonsoft.Json.Utilities
                 methodName,
                 BindingFlags.Public | BindingFlags.Static
             );
-            MethodInfo invokeFunc = innerMethodInfo.ReturnType.GetMethod(
-                "Invoke",
-                BindingFlags.Public | BindingFlags.Instance
-            );
+            MethodInfo invokeFunc = innerMethodInfo
+                .ReturnType
+                .GetMethod("Invoke", BindingFlags.Public | BindingFlags.Instance);
 
-            MethodCall<object?, object?> call =
-                JsonTypeReflector.ReflectionDelegateFactory.CreateMethodCall<object?>(
-                    innerMethodInfo
-                );
-            MethodCall<object?, object> invoke =
-                JsonTypeReflector.ReflectionDelegateFactory.CreateMethodCall<object?>(invokeFunc)!;
+            MethodCall<object?, object?> call = JsonTypeReflector
+                .ReflectionDelegateFactory
+                .CreateMethodCall<object?>(innerMethodInfo);
+            MethodCall<object?, object> invoke = JsonTypeReflector
+                .ReflectionDelegateFactory
+                .CreateMethodCall<object?>(invokeFunc)!;
 
             MethodCall<object?, object> createFunction = (target, args) =>
             {
@@ -223,9 +220,9 @@ namespace Newtonsoft.Json.Utilities
         {
             MethodInfo seqType = _ofSeq.MakeGenericMethod(t);
 
-            return JsonTypeReflector.ReflectionDelegateFactory.CreateParameterizedConstructor(
-                seqType
-            );
+            return JsonTypeReflector
+                .ReflectionDelegateFactory
+                .CreateParameterizedConstructor(seqType);
         }
 
         public ObjectConstructor<object> CreateMap(Type keyType, Type valueType)
@@ -243,8 +240,9 @@ namespace Newtonsoft.Json.Utilities
             ConstructorInfo ctor = genericMapType.GetConstructor(
                 new[] { typeof(IEnumerable<Tuple<TKey, TValue>>) }
             );
-            ObjectConstructor<object> ctorDelegate =
-                JsonTypeReflector.ReflectionDelegateFactory.CreateParameterizedConstructor(ctor);
+            ObjectConstructor<object> ctorDelegate = JsonTypeReflector
+                .ReflectionDelegateFactory
+                .CreateParameterizedConstructor(ctor);
 
             ObjectConstructor<object> creator = args =>
             {

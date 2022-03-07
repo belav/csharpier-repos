@@ -39,7 +39,8 @@ namespace System.CommandLine.Tests
 
             await result.InvokeAsync(console);
 
-            console.Out
+            console
+                .Out
                 .ToString()
                 .Should()
                 .Be(

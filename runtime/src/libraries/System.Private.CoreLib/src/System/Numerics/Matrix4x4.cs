@@ -478,18 +478,22 @@ namespace System.Numerics
                     M11,
                     1
                 );
-                Vector128<float> vZ = AdvSimd.Arm64.FusedMultiplyAddBySelectedScalar(
-                    vX,
-                    AdvSimd.LoadVector128(&value2.M31),
-                    M11,
-                    2
-                );
-                Vector128<float> vW = AdvSimd.Arm64.FusedMultiplyAddBySelectedScalar(
-                    vY,
-                    AdvSimd.LoadVector128(&value2.M41),
-                    M11,
-                    3
-                );
+                Vector128<float> vZ = AdvSimd
+                    .Arm64
+                    .FusedMultiplyAddBySelectedScalar(
+                        vX,
+                        AdvSimd.LoadVector128(&value2.M31),
+                        M11,
+                        2
+                    );
+                Vector128<float> vW = AdvSimd
+                    .Arm64
+                    .FusedMultiplyAddBySelectedScalar(
+                        vY,
+                        AdvSimd.LoadVector128(&value2.M41),
+                        M11,
+                        3
+                    );
 
                 AdvSimd.Store(&result.M11, AdvSimd.Add(vZ, vW));
 
@@ -499,18 +503,22 @@ namespace System.Numerics
 
                 vX = AdvSimd.MultiplyBySelectedScalar(AdvSimd.LoadVector128(&value2.M11), M21, 0);
                 vY = AdvSimd.MultiplyBySelectedScalar(AdvSimd.LoadVector128(&value2.M21), M21, 1);
-                vZ = AdvSimd.Arm64.FusedMultiplyAddBySelectedScalar(
-                    vX,
-                    AdvSimd.LoadVector128(&value2.M31),
-                    M21,
-                    2
-                );
-                vW = AdvSimd.Arm64.FusedMultiplyAddBySelectedScalar(
-                    vY,
-                    AdvSimd.LoadVector128(&value2.M41),
-                    M21,
-                    3
-                );
+                vZ = AdvSimd
+                    .Arm64
+                    .FusedMultiplyAddBySelectedScalar(
+                        vX,
+                        AdvSimd.LoadVector128(&value2.M31),
+                        M21,
+                        2
+                    );
+                vW = AdvSimd
+                    .Arm64
+                    .FusedMultiplyAddBySelectedScalar(
+                        vY,
+                        AdvSimd.LoadVector128(&value2.M41),
+                        M21,
+                        3
+                    );
 
                 AdvSimd.Store(&result.M21, AdvSimd.Add(vZ, vW));
 
@@ -518,18 +526,22 @@ namespace System.Numerics
 
                 vX = AdvSimd.MultiplyBySelectedScalar(AdvSimd.LoadVector128(&value2.M11), M31, 0);
                 vY = AdvSimd.MultiplyBySelectedScalar(AdvSimd.LoadVector128(&value2.M21), M31, 1);
-                vZ = AdvSimd.Arm64.FusedMultiplyAddBySelectedScalar(
-                    vX,
-                    AdvSimd.LoadVector128(&value2.M31),
-                    M31,
-                    2
-                );
-                vW = AdvSimd.Arm64.FusedMultiplyAddBySelectedScalar(
-                    vY,
-                    AdvSimd.LoadVector128(&value2.M41),
-                    M31,
-                    3
-                );
+                vZ = AdvSimd
+                    .Arm64
+                    .FusedMultiplyAddBySelectedScalar(
+                        vX,
+                        AdvSimd.LoadVector128(&value2.M31),
+                        M31,
+                        2
+                    );
+                vW = AdvSimd
+                    .Arm64
+                    .FusedMultiplyAddBySelectedScalar(
+                        vY,
+                        AdvSimd.LoadVector128(&value2.M41),
+                        M31,
+                        3
+                    );
 
                 AdvSimd.Store(&result.M31, AdvSimd.Add(vZ, vW));
 
@@ -537,18 +549,22 @@ namespace System.Numerics
 
                 vX = AdvSimd.MultiplyBySelectedScalar(AdvSimd.LoadVector128(&value2.M11), M41, 0);
                 vY = AdvSimd.MultiplyBySelectedScalar(AdvSimd.LoadVector128(&value2.M21), M41, 1);
-                vZ = AdvSimd.Arm64.FusedMultiplyAddBySelectedScalar(
-                    vX,
-                    AdvSimd.LoadVector128(&value2.M31),
-                    M41,
-                    2
-                );
-                vW = AdvSimd.Arm64.FusedMultiplyAddBySelectedScalar(
-                    vY,
-                    AdvSimd.LoadVector128(&value2.M41),
-                    M41,
-                    3
-                );
+                vZ = AdvSimd
+                    .Arm64
+                    .FusedMultiplyAddBySelectedScalar(
+                        vX,
+                        AdvSimd.LoadVector128(&value2.M31),
+                        M41,
+                        2
+                    );
+                vW = AdvSimd
+                    .Arm64
+                    .FusedMultiplyAddBySelectedScalar(
+                        vY,
+                        AdvSimd.LoadVector128(&value2.M41),
+                        M41,
+                        3
+                    );
 
                 AdvSimd.Store(&result.M41, AdvSimd.Add(vZ, vW));
 

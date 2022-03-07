@@ -44,11 +44,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.InlineRename
                 // if not, it's the keyword.
                 // see bugs 659683 (compiler API) and 659705 (rename/workspace api) for examples
                 var symbolForVar =
-                    semanticModel.GetSpeculativeSymbolInfo(
-                        triggerToken.SpanStart,
-                        triggerToken.Parent!,
-                        SpeculativeBindingOption.BindAsTypeOrNamespace
-                    ).Symbol;
+                    semanticModel
+                        .GetSpeculativeSymbolInfo(
+                            triggerToken.SpanStart,
+                            triggerToken.Parent!,
+                            SpeculativeBindingOption.BindAsTypeOrNamespace
+                        )
+                        .Symbol;
 
                 if (symbolForVar == null)
                 {

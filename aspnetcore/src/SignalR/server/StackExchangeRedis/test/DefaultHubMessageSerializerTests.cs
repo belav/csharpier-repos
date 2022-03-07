@@ -196,9 +196,9 @@ public class DefaultHubMessageSerializerTests
         new ProtocolTestData("No protocols", new List<IHubProtocol>(), 0)
     }.ToDictionary(t => t.Name);
 
-    public static IEnumerable<object[]> InvocationTestData = _invocationTestData.Keys.Select(
-        k => new object[] { k }
-    );
+    public static IEnumerable<object[]> InvocationTestData = _invocationTestData
+        .Keys
+        .Select(k => new object[] { k });
 
     public class ProtocolTestData
     {

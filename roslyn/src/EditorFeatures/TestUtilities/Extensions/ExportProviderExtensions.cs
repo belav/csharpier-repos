@@ -23,9 +23,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Extensions
                 OrderableMetadata
             >();
             return Assert.IsType<TCommandHandler>(
-                lazyCommandHandlers.Single(
-                    lazyCommandHandler => lazyCommandHandler.Metadata.Name == name
-                ).Value
+                lazyCommandHandlers
+                    .Single(lazyCommandHandler => lazyCommandHandler.Metadata.Name == name)
+                    .Value
             );
         }
 
@@ -40,11 +40,13 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Extensions
                 OrderableContentTypeMetadata
             >();
             return Assert.IsType<TCommandHandler>(
-                lazyCommandHandlers.Single(
-                    lazyCommandHandler =>
-                        lazyCommandHandler.Metadata.Name == name
-                        && lazyCommandHandler.Metadata.ContentTypes.Contains(contentType)
-                ).Value
+                lazyCommandHandlers
+                    .Single(
+                        lazyCommandHandler =>
+                            lazyCommandHandler.Metadata.Name == name
+                            && lazyCommandHandler.Metadata.ContentTypes.Contains(contentType)
+                    )
+                    .Value
             );
         }
     }

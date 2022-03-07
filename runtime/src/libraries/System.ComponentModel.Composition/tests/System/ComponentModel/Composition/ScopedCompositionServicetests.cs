@@ -160,8 +160,9 @@ namespace System.ComponentModel.Composition
 
             FromRoot fromRoot = container.GetExportedValue<FromRoot>();
 
-            ExportLifetimeContext<ClassRequiresICompositionService> requiredService =
-                fromRoot.Required.CreateExport();
+            ExportLifetimeContext<ClassRequiresICompositionService> requiredService = fromRoot
+                .Required
+                .CreateExport();
             Assert.NotNull(requiredService.Value.CompositionService);
 
             ExportLifetimeContext<ClassOptionallyImportsICompositionService> optionalService =

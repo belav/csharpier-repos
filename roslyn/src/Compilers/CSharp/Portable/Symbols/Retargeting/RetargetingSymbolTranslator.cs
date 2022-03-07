@@ -565,10 +565,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
                             type.MetadataName,
                             forcedArity: type.Arity
                         );
-                        result1 = destination.To.LookupTopLevelMetadataType(
-                            ref mdName,
-                            digThroughForwardedTypes: true
-                        );
+                        result1 = destination
+                            .To
+                            .LookupTopLevelMetadataType(ref mdName, digThroughForwardedTypes: true);
 
                         Debug.Assert(result1.Arity == type.Arity);
                     }

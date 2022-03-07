@@ -167,39 +167,43 @@ bar",
             if (keywordIsMetaCode)
             {
                 expected.Children.Add(Factory.MetaCode(keyword).Accepts(AcceptedCharacters.None));
-                expected.Children.Add(
-                    classifier(Factory.EmptyVB())
-                        .With(
-                            (SpanEditHandler)(
-                                autoComplete
-                                    ? new AutoCompleteEditHandler(
-                                          CSharpLanguageCharacteristics.Instance.TokenizeString
-                                      )
-                                      {
-                                          AutoCompleteString = expectedTerminator
-                                      }
-                                    : SpanEditHandler.CreateDefault()
+                expected
+                    .Children
+                    .Add(
+                        classifier(Factory.EmptyVB())
+                            .With(
+                                (SpanEditHandler)(
+                                    autoComplete
+                                        ? new AutoCompleteEditHandler(
+                                              CSharpLanguageCharacteristics.Instance.TokenizeString
+                                          )
+                                          {
+                                              AutoCompleteString = expectedTerminator
+                                          }
+                                        : SpanEditHandler.CreateDefault()
+                                )
                             )
-                        )
-                );
+                    );
             }
             else
             {
-                expected.Children.Add(
-                    classifier(Factory.Code(keyword))
-                        .With(
-                            (SpanEditHandler)(
-                                autoComplete
-                                    ? new AutoCompleteEditHandler(
-                                          CSharpLanguageCharacteristics.Instance.TokenizeString
-                                      )
-                                      {
-                                          AutoCompleteString = expectedTerminator
-                                      }
-                                    : SpanEditHandler.CreateDefault()
+                expected
+                    .Children
+                    .Add(
+                        classifier(Factory.Code(keyword))
+                            .With(
+                                (SpanEditHandler)(
+                                    autoComplete
+                                        ? new AutoCompleteEditHandler(
+                                              CSharpLanguageCharacteristics.Instance.TokenizeString
+                                          )
+                                          {
+                                              AutoCompleteString = expectedTerminator
+                                          }
+                                        : SpanEditHandler.CreateDefault()
+                                )
                             )
-                        )
-                );
+                    );
             }
 
             ParseBlockTest(

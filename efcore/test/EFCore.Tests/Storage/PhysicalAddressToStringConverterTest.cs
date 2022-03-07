@@ -53,8 +53,9 @@ namespace Microsoft.EntityFrameworkCore.Storage
         )]
         public void Can_convert_bytes_to_physical_address(byte[] bytesPhysicalAddressInvalid)
         {
-            var converter =
-                new PhysicalAddressToStringConverter().ConvertFromProviderExpression.Compile();
+            var converter = new PhysicalAddressToStringConverter()
+                .ConvertFromProviderExpression
+                .Compile();
             var physicalAddress = Encoding.UTF8.GetString(bytesPhysicalAddressInvalid);
 
             var exception = Assert.Throws<FormatException>(

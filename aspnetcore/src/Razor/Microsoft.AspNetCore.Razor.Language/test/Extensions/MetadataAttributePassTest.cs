@@ -422,11 +422,13 @@ public class MetadataAttributePassTest
 
     private static RazorEngine CreateEngine()
     {
-        return RazorProjectEngine.Create(
-            b =>
-            {
-                b.Features.Add(new DefaultMetadataIdentifierFeature());
-            }
-        ).Engine;
+        return RazorProjectEngine
+            .Create(
+                b =>
+                {
+                    b.Features.Add(new DefaultMetadataIdentifierFeature());
+                }
+            )
+            .Engine;
     }
 }

@@ -156,10 +156,12 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             {
                 // If the runtime doesn't support adding new types then we expect every row number for any type that is
                 // emitted will be less than or equal to the number of rows in the original metadata.
-                var highestEmittedTypeDefRow = emitResult.ChangedTypes.Max(
-                    t => MetadataTokens.GetRowNumber(t)
-                );
-                var highestExistingTypeDefRow = emitResult.Baseline.OriginalMetadata
+                var highestEmittedTypeDefRow = emitResult
+                    .ChangedTypes
+                    .Max(t => MetadataTokens.GetRowNumber(t));
+                var highestExistingTypeDefRow = emitResult
+                    .Baseline
+                    .OriginalMetadata
                     .GetMetadataReader()
                     .GetTableRowCount(TableIndex.TypeDef);
 
@@ -185,7 +187,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             CancellationToken cancellationToken
         )
         {
-            var availability = await DebuggingSession.DebuggerService
+            var availability = await DebuggingSession
+                .DebuggerService
                 .GetAvailabilityAsync(mvid, cancellationToken)
                 .ConfigureAwait(false);
             if (availability.Status == ManagedHotReloadAvailabilityStatus.ModuleNotLoaded)
@@ -216,7 +219,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         {
             try
             {
-                var capabilities = await DebuggingSession.DebuggerService
+                var capabilities = await DebuggingSession
+                    .DebuggerService
                     .GetCapabilitiesAsync(cancellationToken)
                     .ConfigureAwait(false);
                 return EditAndContinueCapabilitiesParser.Parse(capabilities);
@@ -234,7 +238,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             try
             {
                 // Last committed solution reflects the state of the source that is in sync with the binaries that are loaded in the debuggee.
-                var debugInfos = await DebuggingSession.DebuggerService
+                var debugInfos = await DebuggingSession
+                    .DebuggerService
                     .GetActiveStatementsAsync(cancellationToken)
                     .ConfigureAwait(false);
                 return ActiveStatementsMap.Create(debugInfos, NonRemappableRegions);
@@ -263,11 +268,13 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
 
             if (oldProject == null)
             {
-                EditAndContinueWorkspaceService.Log.Write(
-                    "EnC state of '{0}' [0x{1:X8}] queried: project not loaded",
-                    newProject.Id.DebugName,
-                    newProject.Id
-                );
+                EditAndContinueWorkspaceService
+                    .Log
+                    .Write(
+                        "EnC state of '{0}' [0x{1:X8}] queried: project not loaded",
+                        newProject.Id.DebugName,
+                        newProject.Id
+                    );
 
                 // TODO (https://github.com/dotnet/roslyn/issues/1204):
                 //
@@ -289,10 +296,13 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             }
 
             foreach (
-                var documentId in newProject.State.DocumentStates.GetChangedStateIds(
-                    oldProject.State.DocumentStates,
-                    ignoreUnchangedContent: true
-                )
+                var documentId in newProject
+                    .State
+                    .DocumentStates
+                    .GetChangedStateIds(
+                        oldProject.State.DocumentStates,
+                        ignoreUnchangedContent: true
+                    )
             )
             {
                 var document = newProject.GetRequiredDocument(documentId);
@@ -324,9 +334,10 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             }
 
             foreach (
-                var documentId in newProject.State.DocumentStates.GetAddedStateIds(
-                    oldProject.State.DocumentStates
-                )
+                var documentId in newProject
+                    .State
+                    .DocumentStates
+                    .GetAddedStateIds(oldProject.State.DocumentStates)
             )
             {
                 var document = newProject.GetRequiredDocument(documentId);
@@ -350,13 +361,17 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
 
             cancellationToken.ThrowIfCancellationRequested();
 
-            var oldSourceGeneratedDocumentStates = await oldProject.Solution.State
+            var oldSourceGeneratedDocumentStates = await oldProject
+                .Solution
+                .State
                 .GetSourceGeneratedDocumentStatesAsync(oldProject.State, cancellationToken)
                 .ConfigureAwait(false);
 
             cancellationToken.ThrowIfCancellationRequested();
 
-            var newSourceGeneratedDocumentStates = await newProject.Solution.State
+            var newSourceGeneratedDocumentStates = await newProject
+                .Solution
+                .State
                 .GetSourceGeneratedDocumentStatesAsync(newProject.State, cancellationToken)
                 .ConfigureAwait(false);
 
@@ -410,10 +425,13 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             }
 
             foreach (
-                var documentId in newProject.State.DocumentStates.GetChangedStateIds(
-                    oldProject.State.DocumentStates,
-                    ignoreUnchangedContent: true
-                )
+                var documentId in newProject
+                    .State
+                    .DocumentStates
+                    .GetChangedStateIds(
+                        oldProject.State.DocumentStates,
+                        ignoreUnchangedContent: true
+                    )
             )
             {
                 yield return documentId;
@@ -427,13 +445,17 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
 
             cancellationToken.ThrowIfCancellationRequested();
 
-            var oldSourceGeneratedDocumentStates = await oldProject.Solution.State
+            var oldSourceGeneratedDocumentStates = await oldProject
+                .Solution
+                .State
                 .GetSourceGeneratedDocumentStatesAsync(oldProject.State, cancellationToken)
                 .ConfigureAwait(false);
 
             cancellationToken.ThrowIfCancellationRequested();
 
-            var newSourceGeneratedDocumentStates = await newProject.Solution.State
+            var newSourceGeneratedDocumentStates = await newProject
+                .Solution
+                .State
                 .GetSourceGeneratedDocumentStatesAsync(newProject.State, cancellationToken)
                 .ConfigureAwait(false);
 
@@ -463,12 +485,12 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             ProjectState newProject
         ) =>
             newProject.DocumentStates.HasAnyStateChanges(oldProject.DocumentStates)
-            || newProject.AdditionalDocumentStates.HasAnyStateChanges(
-                oldProject.AdditionalDocumentStates
-            )
-            || newProject.AnalyzerConfigDocumentStates.HasAnyStateChanges(
-                oldProject.AnalyzerConfigDocumentStates
-            );
+            || newProject
+                .AdditionalDocumentStates
+                .HasAnyStateChanges(oldProject.AdditionalDocumentStates)
+            || newProject
+                .AnalyzerConfigDocumentStates
+                .HasAnyStateChanges(oldProject.AnalyzerConfigDocumentStates);
 
         private async Task<(ImmutableArray<DocumentAnalysisResults> results, ImmutableArray<Diagnostic> diagnostics)> AnalyzeDocumentsAsync(
             ArrayBuilder<Document> changedOrAddedDocuments,
@@ -483,7 +505,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
 
             foreach (var newDocument in changedOrAddedDocuments)
             {
-                var (oldDocument, oldDocumentState) = await DebuggingSession.LastCommittedSolution
+                var (oldDocument, oldDocumentState) = await DebuggingSession
+                    .LastCommittedSolution
                     .GetDocumentAndStateAsync(
                         newDocument.Id,
                         newDocument,
@@ -607,22 +630,26 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                     {
                         // Can't read MVID. This might be an intermittent failure, so don't report it here.
                         // Report the project as containing changes, so that we proceed to EmitSolutionUpdateAsync where we report the error if it still persists.
-                        EditAndContinueWorkspaceService.Log.Write(
-                            "EnC state of '{0}' [0x{1:X8}] queried: project not built",
-                            project.Id.DebugName,
-                            project.Id
-                        );
+                        EditAndContinueWorkspaceService
+                            .Log
+                            .Write(
+                                "EnC state of '{0}' [0x{1:X8}] queried: project not built",
+                                project.Id.DebugName,
+                                project.Id
+                            );
                         return true;
                     }
 
                     if (mvid == Guid.Empty)
                     {
                         // Project not built. We ignore any changes made in its sources.
-                        EditAndContinueWorkspaceService.Log.Write(
-                            "EnC state of '{0}' [0x{1:X8}] queried: project not built",
-                            project.Id.DebugName,
-                            project.Id
-                        );
+                        EditAndContinueWorkspaceService
+                            .Log
+                            .Write(
+                                "EnC state of '{0}' [0x{1:X8}] queried: project not built",
+                                project.Id.DebugName,
+                                project.Id
+                            );
                         continue;
                     }
 
@@ -635,12 +662,14 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                             .ConfigureAwait(false);
                     if (documentDiagnostics.Any())
                     {
-                        EditAndContinueWorkspaceService.Log.Write(
-                            "EnC state of '{0}' [0x{1:X8}] queried: out-of-sync documents present (diagnostic: '{2}')",
-                            project.Id.DebugName,
-                            project.Id,
-                            documentDiagnostics[0]
-                        );
+                        EditAndContinueWorkspaceService
+                            .Log
+                            .Write(
+                                "EnC state of '{0}' [0x{1:X8}] queried: out-of-sync documents present (diagnostic: '{2}')",
+                                project.Id.DebugName,
+                                project.Id,
+                                documentDiagnostics[0]
+                            );
 
                         // Although we do not apply changes in out-of-sync/indeterminate documents we report that changes are present,
                         // so that the debugger triggers emit of updates. There we check if these documents are still in a bad state and report warnings
@@ -651,12 +680,14 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                     var projectSummary = GetProjectAnalysisSymmary(changedDocumentAnalyses);
                     if (projectSummary != ProjectAnalysisSummary.NoChanges)
                     {
-                        EditAndContinueWorkspaceService.Log.Write(
-                            "EnC state of '{0}' [0x{1:X8}] queried: {2}",
-                            project.Id.DebugName,
-                            project.Id,
-                            projectSummary
-                        );
+                        EditAndContinueWorkspaceService
+                            .Log
+                            .Write(
+                                "EnC state of '{0}' [0x{1:X8}] queried: {2}",
+                                project.Id.DebugName,
+                                project.Id,
+                                projectSummary
+                            );
                         return true;
                     }
                 }
@@ -733,8 +764,9 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                     out var activeStatementsInChangedDocuments
                 );
 
-                var analyzer =
-                    newProject.LanguageServices.GetRequiredService<IEditAndContinueAnalyzer>();
+                var analyzer = newProject
+                    .LanguageServices
+                    .GetRequiredService<IEditAndContinueAnalyzer>();
 
                 foreach (var analysis in changedDocumentAnalyses)
                 {
@@ -1037,11 +1069,13 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
 
                     if (mvid == Guid.Empty)
                     {
-                        EditAndContinueWorkspaceService.Log.Write(
-                            "Emitting update of '{0}' [0x{1:X8}]: project not built",
-                            newProject.Id.DebugName,
-                            newProject.Id
-                        );
+                        EditAndContinueWorkspaceService
+                            .Log
+                            .Write(
+                                "Emitting update of '{0}' [0x{1:X8}]: project not built",
+                                newProject.Id.DebugName,
+                                newProject.Id
+                            );
                         continue;
                     }
 
@@ -1153,11 +1187,13 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                         continue;
                     }
 
-                    EditAndContinueWorkspaceService.Log.Write(
-                        "Emitting update of '{0}' [0x{1:X8}]",
-                        newProject.Id.DebugName,
-                        newProject.Id
-                    );
+                    EditAndContinueWorkspaceService
+                        .Log
+                        .Write(
+                            "Emitting update of '{0}' [0x{1:X8}]",
+                            newProject.Id.DebugName,
+                            newProject.Id
+                        );
 
                     // PopulateChangedAndAddedDocumentsAsync returns no changes if base project does not exist
                     var oldProject = oldSolution.GetProject(newProject.Id);
@@ -1231,12 +1267,12 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                         }
                         else
                         {
-                            var updatedMethodTokens = emitResult.UpdatedMethods.SelectAsArray(
-                                h => MetadataTokens.GetToken(h)
-                            );
-                            var changedTypeTokens = emitResult.ChangedTypes.SelectAsArray(
-                                h => MetadataTokens.GetToken(h)
-                            );
+                            var updatedMethodTokens = emitResult
+                                .UpdatedMethods
+                                .SelectAsArray(h => MetadataTokens.GetToken(h));
+                            var changedTypeTokens = emitResult
+                                .ChangedTypes
+                                .SelectAsArray(h => MetadataTokens.GetToken(h));
 
                             // Determine all active statements whose span changed and exception region span deltas.
                             GetActiveStatementAndExceptionRegionSpans(

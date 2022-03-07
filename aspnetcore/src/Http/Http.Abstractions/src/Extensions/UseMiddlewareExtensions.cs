@@ -183,9 +183,9 @@ public static class UseMiddlewareExtensions
             {
                 return async context =>
                 {
-                    var middlewareFactory = (IMiddlewareFactory?)context.RequestServices.GetService(
-                        typeof(IMiddlewareFactory)
-                    );
+                    var middlewareFactory = (IMiddlewareFactory?)context
+                        .RequestServices
+                        .GetService(typeof(IMiddlewareFactory));
                     if (middlewareFactory == null)
                     {
                         // No middleware factory

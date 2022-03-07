@@ -200,7 +200,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             new(
                 new DbContextOptionsBuilder()
                     .UseInternalServiceProvider(InMemoryFixture.DefaultServiceProvider)
-                    .UseInMemoryDatabase("D").Options
+                    .UseInMemoryDatabase("D")
+                    .Options
             );
 
         public IModel Model => throw new NotImplementedException();

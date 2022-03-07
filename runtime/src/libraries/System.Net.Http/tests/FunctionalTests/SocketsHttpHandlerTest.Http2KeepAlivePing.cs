@@ -415,7 +415,8 @@ namespace System.Net.Http.Functional.Tests
         )
         {
             // Receive HEADERS frame for request.
-            Frame frame = await _framesChannel.Reader
+            Frame frame = await _framesChannel
+                .Reader
                 .ReadAsync(cancellationToken)
                 .ConfigureAwait(false);
             if (frame == null)

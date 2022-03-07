@@ -471,9 +471,9 @@ namespace Microsoft.CodeAnalysis.AddParameter
                 var methodToUpdate = argumentInsertPositionData.MethodToUpdate;
                 var argumentToInsert = argumentInsertPositionData.ArgumentToInsert;
 
-                var cascadingFix = AddParameterService.Instance.HasCascadingDeclarations(
-                    methodToUpdate
-                )
+                var cascadingFix = AddParameterService
+                    .Instance
+                    .HasCascadingDeclarations(methodToUpdate)
                   ? new Func<CancellationToken, Task<Solution>>(
                         c =>
                             FixAsync(
@@ -556,7 +556,8 @@ namespace Microsoft.CodeAnalysis.AddParameter
                 .ConfigureAwait(false);
 
             var newParameterIndex = isNamedArgument ? (int?)null : argumentList.IndexOf(argument);
-            return await AddParameterService.Instance
+            return await AddParameterService
+                .Instance
                 .AddParameterAsync(
                     invocationDocument,
                     method,

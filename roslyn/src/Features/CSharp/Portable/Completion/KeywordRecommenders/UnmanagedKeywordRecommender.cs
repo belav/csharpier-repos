@@ -20,9 +20,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
         )
         {
             return context.SyntaxTree.IsTypeParameterConstraintContext(position, context.LeftToken)
-                || context.SyntaxTree.IsFunctionPointerCallingConventionContext(
-                    context.TargetToken
-                );
+                || context
+                    .SyntaxTree
+                    .IsFunctionPointerCallingConventionContext(context.TargetToken);
         }
     }
 }

@@ -182,22 +182,18 @@ public class RequestBodyTests
 
             var context = await server.AcceptAsync(Utilities.DefaultTimeout).Before(responseTask);
             byte[] input = new byte[10];
-            int read = await context.Request.Body.ReadAsync(
-                input,
-                0,
-                input.Length,
-                context.DisconnectToken
-            );
+            int read = await context
+                .Request
+                .Body
+                .ReadAsync(input, 0, input.Length, context.DisconnectToken);
             Assert.False(context.DisconnectToken.IsCancellationRequested);
             // The client should timeout and disconnect, making this read fail.
             var assertTask = Assert.ThrowsAsync<IOException>(
                 async () =>
-                    await context.Request.Body.ReadAsync(
-                        input,
-                        0,
-                        input.Length,
-                        context.DisconnectToken
-                    )
+                    await context
+                        .Request
+                        .Body
+                        .ReadAsync(input, 0, input.Length, context.DisconnectToken)
             );
             client.CancelPendingRequests();
             await assertTask;

@@ -68,7 +68,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.SyncNamespace
 
             if (namespaceDecls.Length == 0)
             {
-                var firstMemberDeclarationName = compilationUnit.Members
+                var firstMemberDeclarationName = compilationUnit
+                    .Members
                     .FirstOrDefault()
                     .GetNameToken();
 

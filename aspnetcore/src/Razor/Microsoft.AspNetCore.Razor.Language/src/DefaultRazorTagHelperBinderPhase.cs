@@ -360,11 +360,13 @@ internal class DefaultRazorTagHelperBinderPhase : RazorEnginePhaseBase, IRazorTa
                     // Make sure this node exists in the file we're parsing and not in its imports.
                     if (_filePath.Equals(_source.FilePath, StringComparison.Ordinal))
                     {
-                        addTagHelper.Diagnostics.Add(
-                            ComponentDiagnosticFactory.Create_UnsupportedTagHelperDirective(
-                                node.GetSourceSpan(_source)
-                            )
-                        );
+                        addTagHelper
+                            .Diagnostics
+                            .Add(
+                                ComponentDiagnosticFactory.Create_UnsupportedTagHelperDirective(
+                                    node.GetSourceSpan(_source)
+                                )
+                            );
                     }
                 }
                 else if (context.ChunkGenerator is RemoveTagHelperChunkGenerator removeTagHelper)
@@ -372,11 +374,13 @@ internal class DefaultRazorTagHelperBinderPhase : RazorEnginePhaseBase, IRazorTa
                     // Make sure this node exists in the file we're parsing and not in its imports.
                     if (_filePath.Equals(_source.FilePath, StringComparison.Ordinal))
                     {
-                        removeTagHelper.Diagnostics.Add(
-                            ComponentDiagnosticFactory.Create_UnsupportedTagHelperDirective(
-                                node.GetSourceSpan(_source)
-                            )
-                        );
+                        removeTagHelper
+                            .Diagnostics
+                            .Add(
+                                ComponentDiagnosticFactory.Create_UnsupportedTagHelperDirective(
+                                    node.GetSourceSpan(_source)
+                                )
+                            );
                     }
                 }
                 else if (
@@ -386,11 +390,13 @@ internal class DefaultRazorTagHelperBinderPhase : RazorEnginePhaseBase, IRazorTa
                     // Make sure this node exists in the file we're parsing and not in its imports.
                     if (_filePath.Equals(_source.FilePath, StringComparison.Ordinal))
                     {
-                        tagHelperPrefix.Diagnostics.Add(
-                            ComponentDiagnosticFactory.Create_UnsupportedTagHelperDirective(
-                                node.GetSourceSpan(_source)
-                            )
-                        );
+                        tagHelperPrefix
+                            .Diagnostics
+                            .Add(
+                                ComponentDiagnosticFactory.Create_UnsupportedTagHelperDirective(
+                                    node.GetSourceSpan(_source)
+                                )
+                            );
                     }
                 }
                 else if (

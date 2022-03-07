@@ -69,10 +69,13 @@ namespace WebServer
             }
             else
             {
-                context.Response.Headers.Add(
-                    "Location",
-                    string.Format("/Redirect.ashx?uri={0}&hops={1}", redirectUri, hops - 1)
-                );
+                context
+                    .Response
+                    .Headers
+                    .Add(
+                        "Location",
+                        string.Format("/Redirect.ashx?uri={0}&hops={1}", redirectUri, hops - 1)
+                    );
             }
 
             context.Response.StatusCode = statusCode;

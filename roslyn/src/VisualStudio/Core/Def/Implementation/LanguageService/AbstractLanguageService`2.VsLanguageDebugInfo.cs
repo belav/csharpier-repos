@@ -106,21 +106,20 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
                             action: waitContext =>
                             {
                                 var cancellationToken = waitContext.UserCancellationToken;
-                                var textBuffer =
-                                    _languageService.EditorAdaptersFactoryService.GetDataBuffer(
-                                        pBuffer
-                                    );
+                                var textBuffer = _languageService
+                                    .EditorAdaptersFactoryService
+                                    .GetDataBuffer(pBuffer);
                                 if (textBuffer != null)
                                 {
-                                    var nullablePoint = textBuffer.CurrentSnapshot.TryGetPoint(
-                                        iLine,
-                                        iCol
-                                    );
+                                    var nullablePoint = textBuffer
+                                        .CurrentSnapshot
+                                        .TryGetPoint(iLine, iCol);
                                     if (nullablePoint.HasValue)
                                     {
                                         var point = nullablePoint.Value;
-                                        var document =
-                                            point.Snapshot.GetOpenDocumentInCurrentContextWithChanges();
+                                        var document = point
+                                            .Snapshot
+                                            .GetOpenDocumentInCurrentContextWithChanges();
 
                                         if (document != null)
                                         {
@@ -189,10 +188,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
                             showProgress: false,
                             action: context =>
                             {
-                                var textBuffer =
-                                    _languageService.EditorAdaptersFactoryService.GetDataBuffer(
-                                        pBuffer
-                                    );
+                                var textBuffer = _languageService
+                                    .EditorAdaptersFactoryService
+                                    .GetDataBuffer(pBuffer);
 
                                 if (textBuffer != null)
                                 {
@@ -368,9 +366,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
                     return VSConstants.E_FAIL;
                 }
 
-                var textBuffer = _languageService.EditorAdaptersFactoryService.GetDataBuffer(
-                    pBuffer
-                );
+                var textBuffer = _languageService
+                    .EditorAdaptersFactoryService
+                    .GetDataBuffer(pBuffer);
                 if (textBuffer != null)
                 {
                     var snapshot = textBuffer.CurrentSnapshot;
@@ -466,7 +464,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
                         // There should be a breakpoint at the location passed back.
                         if (pCodeSpan != null && pCodeSpan.Length > 0)
                         {
-                            pCodeSpan[0] = breakpoint.TextSpan
+                            pCodeSpan[0] = breakpoint
+                                .TextSpan
                                 .ToSnapshotSpan(snapshot)
                                 .ToVsTextSpan();
                         }

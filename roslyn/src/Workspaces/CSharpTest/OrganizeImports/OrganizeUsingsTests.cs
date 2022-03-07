@@ -27,23 +27,23 @@ namespace Microsoft.CodeAnalysis.CSharp.Workspaces.UnitTests.OrganizeImports
         )
         {
             using var workspace = new AdhocWorkspace();
-            var project = workspace.CurrentSolution.AddProject(
-                "Project",
-                "Project.dll",
-                LanguageNames.CSharp
-            );
+            var project = workspace
+                .CurrentSolution
+                .AddProject("Project", "Project.dll", LanguageNames.CSharp);
             var document = project.AddDocument(
                 "Document",
                 initial.ReplaceLineEndings(endOfLine ?? Environment.NewLine)
             );
 
-            var newOptions = workspace.Options.WithChangedOption(
-                new OptionKey(
-                    GenerationOptions.PlaceSystemNamespaceFirst,
-                    document.Project.Language
-                ),
-                placeSystemNamespaceFirst
-            );
+            var newOptions = workspace
+                .Options
+                .WithChangedOption(
+                    new OptionKey(
+                        GenerationOptions.PlaceSystemNamespaceFirst,
+                        document.Project.Language
+                    ),
+                    placeSystemNamespaceFirst
+                );
             newOptions = newOptions.WithChangedOption(
                 new OptionKey(
                     GenerationOptions.SeparateImportDirectiveGroups,

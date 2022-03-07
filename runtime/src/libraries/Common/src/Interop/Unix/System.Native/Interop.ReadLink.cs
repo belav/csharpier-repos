@@ -45,11 +45,15 @@ internal static partial class Interop
                 byte[] buffer = ArrayPool<byte>.Shared.Rent(outputBufferSize);
                 try
                 {
-                    int resultLength = Interop.Sys.ReadLink(
-                        ref MemoryMarshal.GetReference(converter.ConvertAndTerminateString(path)),
-                        buffer,
-                        buffer.Length
-                    );
+                    int resultLength = Interop
+                        .Sys
+                        .ReadLink(
+                            ref MemoryMarshal.GetReference(
+                                converter.ConvertAndTerminateString(path)
+                            ),
+                            buffer,
+                            buffer.Length
+                        );
 
                     if (resultLength < 0)
                     {

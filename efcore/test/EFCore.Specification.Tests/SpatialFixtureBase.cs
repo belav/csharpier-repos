@@ -9,8 +9,9 @@ namespace Microsoft.EntityFrameworkCore
 {
     public abstract class SpatialFixtureBase : SharedStoreFixtureBase<SpatialContext>
     {
-        private readonly GeometryFactory _geometryFactory =
-            NtsGeometryServices.Instance.CreateGeometryFactory(srid: 0);
+        private readonly GeometryFactory _geometryFactory = NtsGeometryServices
+            .Instance
+            .CreateGeometryFactory(srid: 0);
 
         protected override string StoreName => "SpatialTest";
 

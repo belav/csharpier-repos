@@ -37,11 +37,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             byte defaultTransformFlag;
             ImmutableArray<byte> nullableTransformFlags;
             if (
-                !containingModule.Module.HasNullableAttribute(
-                    targetSymbolToken,
-                    out defaultTransformFlag,
-                    out nullableTransformFlags
-                )
+                !containingModule
+                    .Module
+                    .HasNullableAttribute(
+                        targetSymbolToken,
+                        out defaultTransformFlag,
+                        out nullableTransformFlags
+                    )
             )
             {
                 byte? value = nullableContext.GetNullableContextValue();

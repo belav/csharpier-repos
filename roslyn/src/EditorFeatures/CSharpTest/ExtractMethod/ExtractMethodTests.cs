@@ -10929,10 +10929,12 @@ namespace ClassLibrary9
 
             var textView = workspace.Documents.Single().GetTextView();
 
-            var handler = workspace.ExportProvider.GetCommandHandler<ExtractMethodCommandHandler>(
-                PredefinedCommandHandlerNames.ExtractMethod,
-                ContentTypeNames.CSharpContentType
-            );
+            var handler = workspace
+                .ExportProvider
+                .GetCommandHandler<ExtractMethodCommandHandler>(
+                    PredefinedCommandHandlerNames.ExtractMethod,
+                    ContentTypeNames.CSharpContentType
+                );
 
             var state = handler.GetCommandState(
                 new ExtractMethodCommandArgs(textView, textView.TextBuffer)

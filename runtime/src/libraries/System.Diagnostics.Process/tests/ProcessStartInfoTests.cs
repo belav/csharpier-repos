@@ -435,12 +435,14 @@ namespace System.Diagnostics.Tests
                     Console.Write(
                         string.Join(
                             ItemSeparator,
-                            new ProcessStartInfo().Environment.Select(
-                                e =>
-                                    Convert.ToBase64String(
-                                        Encoding.UTF8.GetBytes(e.Key + "=" + e.Value)
-                                    )
-                            )
+                            new ProcessStartInfo()
+                                .Environment
+                                .Select(
+                                    e =>
+                                        Convert.ToBase64String(
+                                            Encoding.UTF8.GetBytes(e.Key + "=" + e.Value)
+                                        )
+                                )
                         )
                     );
                     return RemoteExecutor.SuccessExitCode;
@@ -479,7 +481,8 @@ namespace System.Diagnostics.Tests
                     Console.Write(
                         string.Join(
                             ItemSeparator,
-                            new ProcessStartInfo().EnvironmentVariables
+                            new ProcessStartInfo()
+                                .EnvironmentVariables
                                 .Cast<DictionaryEntry>()
                                 .Select(
                                     e =>
@@ -525,7 +528,8 @@ namespace System.Diagnostics.Tests
             // To mimic this behaviour, we can't use Environment.SetEnvironmentVariable here as it's case-insenstive on Windows.
             // We also can't use p.StartInfo.Environment as it's comparer is set to OrdinalIgnoreCAse.
             // But we can overwrite it using reflection to mimic the CreateProcess behaviour and avoid having this test call CreateProcess directly.
-            p.StartInfo.Environment
+            p.StartInfo
+                .Environment
                 .GetType()
                 .GetField(
                     "_contents",

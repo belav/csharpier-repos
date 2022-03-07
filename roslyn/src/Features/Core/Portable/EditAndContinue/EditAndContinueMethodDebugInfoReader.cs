@@ -143,9 +143,9 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             public override StandaloneSignatureHandle GetLocalSignature(
                 MethodDefinitionHandle methodHandle
             ) =>
-                _pdbReader.GetMethodDebugInformation(
-                    methodHandle.ToDebugInformationHandle()
-                ).LocalSignature;
+                _pdbReader
+                    .GetMethodDebugInformation(methodHandle.ToDebugInformationHandle())
+                    .LocalSignature;
 
             public override EditAndContinueMethodDebugInformation GetDebugInfo(
                 MethodDefinitionHandle methodHandle

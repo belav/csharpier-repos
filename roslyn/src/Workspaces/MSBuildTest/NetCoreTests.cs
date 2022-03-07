@@ -365,16 +365,17 @@ namespace Microsoft.CodeAnalysis.MSBuild.UnitTests
                 );
 
                 // Verify that the projects reference the correct TFMs
-                var projects = workspace.CurrentSolution.Projects.Where(
-                    p => p.FilePath.EndsWith("Project.csproj")
-                );
+                var projects = workspace
+                    .CurrentSolution
+                    .Projects
+                    .Where(p => p.FilePath.EndsWith("Project.csproj"));
                 foreach (var project in projects)
                 {
                     var projectReference = Assert.Single(project.ProjectReferences);
 
-                    var referencedProject = workspace.CurrentSolution.GetProject(
-                        projectReference.ProjectId
-                    );
+                    var referencedProject = workspace
+                        .CurrentSolution
+                        .GetProject(projectReference.ProjectId);
 
                     if (project.OutputFilePath.Contains("netcoreapp2"))
                     {

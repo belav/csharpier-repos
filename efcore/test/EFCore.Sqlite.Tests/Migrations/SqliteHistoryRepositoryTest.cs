@@ -111,7 +111,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
         }
 
         private static IHistoryRepository CreateHistoryRepository() =>
-            SqliteTestHelpers.Instance
+            SqliteTestHelpers
+                .Instance
                 .CreateContextServices()
                 .GetRequiredService<IHistoryRepository>();
     }

@@ -454,11 +454,9 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             }
             catch (Exception e)
             {
-                EditAndContinueWorkspaceService.Log.Write(
-                    "Failed to create baseline for '{0}': {1}",
-                    projectId,
-                    e.Message
-                );
+                EditAndContinueWorkspaceService
+                    .Log
+                    .Write("Failed to create baseline for '{0}': {1}", projectId, e.Message);
 
                 var descriptor = EditAndContinueDiagnosticDescriptors.GetDescriptor(
                     EditAndContinueErrorCode.ErrorReadingFile
@@ -544,7 +542,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                     return ImmutableArray<Diagnostic>.Empty;
                 }
 
-                var analysis = await EditSession.Analyses
+                var analysis = await EditSession
+                    .Analyses
                     .GetDocumentAnalysisAsync(
                         LastCommittedSolution,
                         oldDocument,
@@ -624,47 +623,55 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
 
         private void LogSolutionUpdate(SolutionUpdate update)
         {
-            EditAndContinueWorkspaceService.Log.Write(
-                "Solution update status: {0}",
-                ((int)update.ModuleUpdates.Status, typeof(ManagedModuleUpdateStatus))
-            );
+            EditAndContinueWorkspaceService
+                .Log
+                .Write(
+                    "Solution update status: {0}",
+                    ((int)update.ModuleUpdates.Status, typeof(ManagedModuleUpdateStatus))
+                );
 
             if (update.ModuleUpdates.Updates.Length > 0)
             {
                 var firstUpdate = update.ModuleUpdates.Updates[0];
 
-                EditAndContinueWorkspaceService.Log.Write(
-                    "Solution update deltas: #{0} [types: #{1} (0x{2}:X8), methods: #{3} (0x{4}:X8)",
-                    update.ModuleUpdates.Updates.Length,
-                    firstUpdate.UpdatedTypes.Length,
-                    firstUpdate.UpdatedTypes.FirstOrDefault(),
-                    firstUpdate.UpdatedMethods.Length,
-                    firstUpdate.UpdatedMethods.FirstOrDefault()
-                );
+                EditAndContinueWorkspaceService
+                    .Log
+                    .Write(
+                        "Solution update deltas: #{0} [types: #{1} (0x{2}:X8), methods: #{3} (0x{4}:X8)",
+                        update.ModuleUpdates.Updates.Length,
+                        firstUpdate.UpdatedTypes.Length,
+                        firstUpdate.UpdatedTypes.FirstOrDefault(),
+                        firstUpdate.UpdatedMethods.Length,
+                        firstUpdate.UpdatedMethods.FirstOrDefault()
+                    );
             }
 
             if (update.Diagnostics.Length > 0)
             {
                 var firstProjectDiagnostic = update.Diagnostics[0];
 
-                EditAndContinueWorkspaceService.Log.Write(
-                    "Solution update diagnostics: #{0} [{1}: {2}, ...]",
-                    update.Diagnostics.Length,
-                    firstProjectDiagnostic.ProjectId,
-                    firstProjectDiagnostic.Diagnostics[0]
-                );
+                EditAndContinueWorkspaceService
+                    .Log
+                    .Write(
+                        "Solution update diagnostics: #{0} [{1}: {2}, ...]",
+                        update.Diagnostics.Length,
+                        firstProjectDiagnostic.ProjectId,
+                        firstProjectDiagnostic.Diagnostics[0]
+                    );
             }
 
             if (update.DocumentsWithRudeEdits.Length > 0)
             {
                 var firstDocumentWithRudeEdits = update.DocumentsWithRudeEdits[0];
 
-                EditAndContinueWorkspaceService.Log.Write(
-                    "Solution update documents with rude edits: #{0} [{1}: {2}, ...]",
-                    update.DocumentsWithRudeEdits.Length,
-                    firstDocumentWithRudeEdits.DocumentId,
-                    firstDocumentWithRudeEdits.Diagnostics[0].Kind
-                );
+                EditAndContinueWorkspaceService
+                    .Log
+                    .Write(
+                        "Solution update documents with rude edits: #{0} [{1}: {2}, ...]",
+                        update.DocumentsWithRudeEdits.Length,
+                        firstDocumentWithRudeEdits.DocumentId,
+                        firstDocumentWithRudeEdits.Diagnostics[0].Kind
+                    );
             }
 
             _lastModuleUpdatesLog = update.ModuleUpdates.Updates;
@@ -730,7 +737,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                     return default;
                 }
 
-                var baseActiveStatements = await EditSession.BaseActiveStatements
+                var baseActiveStatements = await EditSession
+                    .BaseActiveStatements
                     .GetValueAsync(cancellationToken)
                     .ConfigureAwait(false);
                 using var _1 = PooledDictionary<string, ArrayBuilder<(ProjectId, int)>>.GetInstance(
@@ -779,8 +787,9 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                     }
 
                     var newProject = solution.GetRequiredProject(projectId);
-                    var analyzer =
-                        newProject.LanguageServices.GetRequiredService<IEditAndContinueAnalyzer>();
+                    var analyzer = newProject
+                        .LanguageServices
+                        .GetRequiredService<IEditAndContinueAnalyzer>();
                     await foreach (
                         var documentId in EditSession
                             .GetChangedDocumentsAsync(oldProject, newProject, cancellationToken)
@@ -946,14 +955,17 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                     return ImmutableArray<ActiveStatementSpan>.Empty;
                 }
 
-                var baseActiveStatements = await EditSession.BaseActiveStatements
+                var baseActiveStatements = await EditSession
+                    .BaseActiveStatements
                     .GetValueAsync(cancellationToken)
                     .ConfigureAwait(false);
                 if (
-                    !baseActiveStatements.DocumentPathMap.TryGetValue(
-                        mappedDocument.FilePath,
-                        out var oldMappedDocumentActiveStatements
-                    )
+                    !baseActiveStatements
+                        .DocumentPathMap
+                        .TryGetValue(
+                            mappedDocument.FilePath,
+                            out var oldMappedDocumentActiveStatements
+                        )
                 )
                 {
                     // no active statements in this document
@@ -971,8 +983,9 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                     return ImmutableArray<ActiveStatementSpan>.Empty;
                 }
 
-                var analyzer =
-                    newProject.LanguageServices.GetRequiredService<IEditAndContinueAnalyzer>();
+                var analyzer = newProject
+                    .LanguageServices
+                    .GetRequiredService<IEditAndContinueAnalyzer>();
 
                 using var _ = ArrayBuilder<ActiveStatementSpan>.GetInstance(
                     out var adjustedMappedSpans
@@ -1009,7 +1022,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                         continue;
                     }
 
-                    var analysis = await EditSession.Analyses
+                    var analysis = await EditSession
+                        .Analyses
                         .GetDocumentAnalysisAsync(
                             LastCommittedSolution,
                             oldUnmappedDocument,
@@ -1068,14 +1082,14 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                     return null;
                 }
 
-                var baseActiveStatements = await EditSession.BaseActiveStatements
+                var baseActiveStatements = await EditSession
+                    .BaseActiveStatements
                     .GetValueAsync(cancellationToken)
                     .ConfigureAwait(false);
                 if (
-                    !baseActiveStatements.InstructionMap.TryGetValue(
-                        instructionId,
-                        out var baseActiveStatement
-                    )
+                    !baseActiveStatements
+                        .InstructionMap
+                        .TryGetValue(instructionId, out var baseActiveStatement)
                 )
                 {
                     return null;
@@ -1113,7 +1127,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                     return null;
                 }
 
-                var analysis = await EditSession.Analyses
+                var analysis = await EditSession
+                    .Analyses
                     .GetDocumentAnalysisAsync(
                         LastCommittedSolution,
                         oldDocument,
@@ -1173,14 +1188,14 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                 // their exception regions will be needed. Hence it's not necessary to scope this query down to just the instruction
                 // the debugger is interested at this point while not calculating the others.
 
-                var baseActiveStatements = await EditSession.BaseActiveStatements
+                var baseActiveStatements = await EditSession
+                    .BaseActiveStatements
                     .GetValueAsync(cancellationToken)
                     .ConfigureAwait(false);
                 if (
-                    !baseActiveStatements.InstructionMap.TryGetValue(
-                        instructionId,
-                        out var baseActiveStatement
-                    )
+                    !baseActiveStatements
+                        .InstructionMap
+                        .TryGetValue(instructionId, out var baseActiveStatement)
                 )
                 {
                     return null;
@@ -1210,14 +1225,17 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                     return null;
                 }
 
-                var analyzer =
-                    newDocument.Project.LanguageServices.GetRequiredService<IEditAndContinueAnalyzer>();
+                var analyzer = newDocument
+                    .Project
+                    .LanguageServices
+                    .GetRequiredService<IEditAndContinueAnalyzer>();
                 var oldDocumentActiveStatements = await baseActiveStatements
                     .GetOldActiveStatementsAsync(analyzer, oldDocument, cancellationToken)
                     .ConfigureAwait(false);
-                return oldDocumentActiveStatements.GetStatement(
-                    baseActiveStatement.Ordinal
-                ).ExceptionRegions.IsActiveStatementCovered;
+                return oldDocumentActiveStatements
+                    .GetStatement(baseActiveStatement.Ordinal)
+                    .ExceptionRegions
+                    .IsActiveStatementCovered;
             }
             catch (Exception e) when (FatalError.ReportAndCatchUnlessCanceled(e, cancellationToken))
             {
@@ -1336,8 +1354,9 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         )
         {
             Debug.Assert(oldProject.Id == newProject.Id);
-            var analyzer =
-                newProject.LanguageServices.GetRequiredService<IEditAndContinueAnalyzer>();
+            var analyzer = newProject
+                .LanguageServices
+                .GetRequiredService<IEditAndContinueAnalyzer>();
 
             await foreach (
                 var documentId in EditSession

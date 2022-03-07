@@ -260,14 +260,19 @@ namespace System.Runtime.Serialization
                 );
             if (this.IsGetOnlyCollection && dataContract.UnderlyingType != declaredType)
             {
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidDataContractException(
-                        SR.Format(
-                            SR.SurrogatesWithGetOnlyCollectionsNotSupportedSerDeser,
-                            DataContract.GetClrTypeFullName(declaredType)
+                throw System
+                    .Runtime
+                    .Serialization
+                    .DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidDataContractException(
+                            SR.Format(
+                                SR.SurrogatesWithGetOnlyCollectionsNotSupportedSerDeser,
+                                DataContract.GetClrTypeFullName(declaredType)
+                            )
                         )
-                    )
-                );
+                    );
             }
             ReadAttributes(xmlReader);
             string objectId = GetObjectId();
@@ -360,11 +365,16 @@ namespace System.Runtime.Serialization
                     memberType
                 );
                 if (!DataContract.IsTypeSerializable(memberType))
-                    throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidDataContractException(
-                            SR.Format(SR.TypeNotSerializable, memberType)
-                        )
-                    );
+                    throw System
+                        .Runtime
+                        .Serialization
+                        .DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidDataContractException(
+                                SR.Format(SR.TypeNotSerializable, memberType)
+                            )
+                        );
                 return;
             }
 
@@ -387,14 +397,19 @@ namespace System.Runtime.Serialization
                 );
                 if (this.IsGetOnlyCollection && surrogateType != type)
                 {
-                    throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidDataContractException(
-                            SR.Format(
-                                SR.SurrogatesWithGetOnlyCollectionsNotSupportedSerDeser,
-                                DataContract.GetClrTypeFullName(type)
+                    throw System
+                        .Runtime
+                        .Serialization
+                        .DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidDataContractException(
+                                SR.Format(
+                                    SR.SurrogatesWithGetOnlyCollectionsNotSupportedSerDeser,
+                                    DataContract.GetClrTypeFullName(type)
+                                )
                             )
-                        )
-                    );
+                        );
                 }
                 else
                 {

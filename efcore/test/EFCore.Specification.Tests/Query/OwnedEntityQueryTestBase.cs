@@ -31,7 +31,8 @@ namespace Microsoft.EntityFrameworkCore
 
             using (var context = contextFactory.CreateContext())
             {
-                var query = context.Entities
+                var query = context
+                    .Entities
                     .AsNoTracking()
                     .Select(
                         e =>
@@ -115,13 +116,15 @@ namespace Microsoft.EntityFrameworkCore
 
             using (var context = contextFactory.CreateContext())
             {
-                var results = await context.Contacts
+                var results = await context
+                    .Contacts
                     .Select(
                         contact =>
                             new ContactDto22089()
                             {
                                 Id = contact.Id,
-                                Names = contact.Names
+                                Names = contact
+                                    .Names
                                     .Select(name => new NameDto22089() { })
                                     .ToArray()
                             }
@@ -266,7 +269,8 @@ namespace Microsoft.EntityFrameworkCore
             var contextFactory = await InitializeAsync<MyContext18582>(seed: c => c.Seed());
 
             using var context = contextFactory.CreateContext();
-            var query = context.Warehouses
+            var query = context
+                .Warehouses
                 .Select(
                     x =>
                         new WarehouseModel

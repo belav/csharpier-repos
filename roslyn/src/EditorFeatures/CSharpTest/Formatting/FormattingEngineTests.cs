@@ -565,12 +565,16 @@ class Program
             var subjectDocument = workspace.Documents.Single();
             var spans = subjectDocument.SelectedSpans;
             workspace.TryApplyChanges(
-                workspace.CurrentSolution.WithOptions(
-                    workspace.Options.WithChangedOption(
-                        FormattingBehaviorOptions.AllowDisjointSpanMerging,
-                        true
+                workspace
+                    .CurrentSolution
+                    .WithOptions(
+                        workspace
+                            .Options
+                            .WithChangedOption(
+                                FormattingBehaviorOptions.AllowDisjointSpanMerging,
+                                true
+                            )
                     )
-                )
             );
 
             var document = workspace.CurrentSolution.Projects.Single().Documents.Single();
@@ -2525,7 +2529,8 @@ namespace TestApp
             var commandHandler = workspace.GetService<FormatCommandHandler>();
             var typedChar = subjectDocument
                 .GetTextBuffer()
-                .CurrentSnapshot.GetText(subjectDocument.CursorPosition.Value - 1, 1);
+                .CurrentSnapshot
+                .GetText(subjectDocument.CursorPosition.Value - 1, 1);
             commandHandler.ExecuteCommand(
                 new TypeCharCommandArgs(
                     subjectDocument.GetTextView(),

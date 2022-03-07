@@ -102,11 +102,9 @@ namespace System.Security.Cryptography
                 return false;
             }
 
-            bytesWritten = HashProviderDispenser.OneShotHashProvider.HashData(
-                HashAlgorithmNames.SHA512,
-                source,
-                destination
-            );
+            bytesWritten = HashProviderDispenser
+                .OneShotHashProvider
+                .HashData(HashAlgorithmNames.SHA512, source, destination);
             Debug.Assert(bytesWritten == HashSizeBytes);
 
             return true;

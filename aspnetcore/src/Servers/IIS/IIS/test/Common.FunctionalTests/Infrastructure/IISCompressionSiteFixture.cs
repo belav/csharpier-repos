@@ -19,22 +19,24 @@ public class IISCompressionSiteFixture : IISTestSiteFixture
     private static void Configure(IISDeploymentParameters deploymentParameters)
     {
         // Enable dynamic compression
-        deploymentParameters.ServerConfigActionList.Add(
-            (element, _) =>
-            {
-                var webServerElement = element.RequiredElement("system.webServer");
+        deploymentParameters
+            .ServerConfigActionList
+            .Add(
+                (element, _) =>
+                {
+                    var webServerElement = element.RequiredElement("system.webServer");
 
-                webServerElement
-                    .GetOrAdd("urlCompression")
-                    .SetAttributeValue("doDynamicCompression", "true");
+                    webServerElement
+                        .GetOrAdd("urlCompression")
+                        .SetAttributeValue("doDynamicCompression", "true");
 
-                webServerElement
-                    .GetOrAdd("httpCompression")
-                    .GetOrAdd("dynamicTypes")
-                    .GetOrAdd("add", "mimeType", "text/*")
-                    .SetAttributeValue("enabled", "true");
-            }
-        );
+                    webServerElement
+                        .GetOrAdd("httpCompression")
+                        .GetOrAdd("dynamicTypes")
+                        .GetOrAdd("add", "mimeType", "text/*")
+                        .SetAttributeValue("enabled", "true");
+                }
+            );
 
         deploymentParameters.EnableModule("DynamicCompressionModule", "%IIS_BIN%\\compdyn.dll");
     }

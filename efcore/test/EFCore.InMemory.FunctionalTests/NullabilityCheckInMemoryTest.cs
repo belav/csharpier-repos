@@ -25,27 +25,31 @@ namespace Microsoft.EntityFrameworkCore
                     $"{{'{nameof(SomeEntity.Property)}'}}",
                     nameof(SomeEntity)
                 ),
-                Assert.Throws<DbUpdateException>(
-                    () =>
-                    {
-                        var modelBuilder = InMemoryTestHelpers.Instance.CreateConventionBuilder();
-                        modelBuilder.Entity<SomeEntity>(
-                            eb => eb.Property(p => p.Property).IsRequired()
-                        );
+                Assert
+                    .Throws<DbUpdateException>(
+                        () =>
+                        {
+                            var modelBuilder = InMemoryTestHelpers
+                                .Instance
+                                .CreateConventionBuilder();
+                            modelBuilder.Entity<SomeEntity>(
+                                eb => eb.Property(p => p.Property).IsRequired()
+                            );
 
-                        var optionsBuilder = new DbContextOptionsBuilder()
-                            .UseModel(modelBuilder.FinalizeModel())
-                            .UseInMemoryDatabase(
-                                nameof(NullabilityCheckInMemoryTest),
-                                b => b.EnableNullChecks()
-                            )
-                            .UseInternalServiceProvider(Fixture.ServiceProvider);
+                            var optionsBuilder = new DbContextOptionsBuilder()
+                                .UseModel(modelBuilder.FinalizeModel())
+                                .UseInMemoryDatabase(
+                                    nameof(NullabilityCheckInMemoryTest),
+                                    b => b.EnableNullChecks()
+                                )
+                                .UseInternalServiceProvider(Fixture.ServiceProvider);
 
-                        using var context = new DbContext(optionsBuilder.Options);
-                        context.Add(new SomeEntity { Id = 1 });
-                        context.SaveChanges();
-                    }
-                ).Message
+                            using var context = new DbContext(optionsBuilder.Options);
+                            context.Add(new SomeEntity { Id = 1 });
+                            context.SaveChanges();
+                        }
+                    )
+                    .Message
             );
         }
 
@@ -58,30 +62,34 @@ namespace Microsoft.EntityFrameworkCore
                     nameof(SomeEntity),
                     "{Id: 1}"
                 ),
-                Assert.Throws<DbUpdateException>(
-                    () =>
-                    {
-                        var modelBuilder = InMemoryTestHelpers.Instance.CreateConventionBuilder();
-                        modelBuilder.Entity<SomeEntity>(
-                            eb => eb.Property(p => p.Property).IsRequired()
-                        );
+                Assert
+                    .Throws<DbUpdateException>(
+                        () =>
+                        {
+                            var modelBuilder = InMemoryTestHelpers
+                                .Instance
+                                .CreateConventionBuilder();
+                            modelBuilder.Entity<SomeEntity>(
+                                eb => eb.Property(p => p.Property).IsRequired()
+                            );
 
-                        var optionsBuilder = new DbContextOptionsBuilder()
-                            .UseModel(modelBuilder.FinalizeModel())
-                            .UseInMemoryDatabase(
-                                nameof(NullabilityCheckInMemoryTest),
-                                b => b.EnableNullChecks()
-                            )
-                            .UseInternalServiceProvider(
-                                InMemoryFixture.DefaultNullabilitySensitiveCheckProvider
-                            )
-                            .EnableSensitiveDataLogging();
+                            var optionsBuilder = new DbContextOptionsBuilder()
+                                .UseModel(modelBuilder.FinalizeModel())
+                                .UseInMemoryDatabase(
+                                    nameof(NullabilityCheckInMemoryTest),
+                                    b => b.EnableNullChecks()
+                                )
+                                .UseInternalServiceProvider(
+                                    InMemoryFixture.DefaultNullabilitySensitiveCheckProvider
+                                )
+                                .EnableSensitiveDataLogging();
 
-                        using var context = new DbContext(optionsBuilder.Options);
-                        context.Add(new SomeEntity { Id = 1 });
-                        context.SaveChanges();
-                    }
-                ).Message
+                            using var context = new DbContext(optionsBuilder.Options);
+                            context.Add(new SomeEntity { Id = 1 });
+                            context.SaveChanges();
+                        }
+                    )
+                    .Message
             );
         }
 
@@ -94,34 +102,40 @@ namespace Microsoft.EntityFrameworkCore
                     nameof(AnotherEntityWithCompositeKeys),
                     "{Id: 1, SecondId: 2}"
                 ),
-                Assert.Throws<DbUpdateException>(
-                    () =>
-                    {
-                        var modelBuilder = InMemoryTestHelpers.Instance.CreateConventionBuilder();
-                        modelBuilder.Entity<AnotherEntityWithCompositeKeys>(
-                            eb =>
-                            {
-                                eb.Property(p => p.Property).IsRequired();
-                                eb.HasKey(c => new { c.Id, c.SecondId });
-                            }
-                        );
+                Assert
+                    .Throws<DbUpdateException>(
+                        () =>
+                        {
+                            var modelBuilder = InMemoryTestHelpers
+                                .Instance
+                                .CreateConventionBuilder();
+                            modelBuilder.Entity<AnotherEntityWithCompositeKeys>(
+                                eb =>
+                                {
+                                    eb.Property(p => p.Property).IsRequired();
+                                    eb.HasKey(c => new { c.Id, c.SecondId });
+                                }
+                            );
 
-                        var optionsBuilder = new DbContextOptionsBuilder()
-                            .UseModel(modelBuilder.FinalizeModel())
-                            .UseInMemoryDatabase(
-                                nameof(NullabilityCheckInMemoryTest),
-                                b => b.EnableNullChecks()
-                            )
-                            .UseInternalServiceProvider(
-                                InMemoryFixture.DefaultNullabilitySensitiveCheckProvider
-                            )
-                            .EnableSensitiveDataLogging();
+                            var optionsBuilder = new DbContextOptionsBuilder()
+                                .UseModel(modelBuilder.FinalizeModel())
+                                .UseInMemoryDatabase(
+                                    nameof(NullabilityCheckInMemoryTest),
+                                    b => b.EnableNullChecks()
+                                )
+                                .UseInternalServiceProvider(
+                                    InMemoryFixture.DefaultNullabilitySensitiveCheckProvider
+                                )
+                                .EnableSensitiveDataLogging();
 
-                        using var context = new DbContext(optionsBuilder.Options);
-                        context.Add(new AnotherEntityWithCompositeKeys { Id = 1, SecondId = 2 });
-                        context.SaveChanges();
-                    }
-                ).Message
+                            using var context = new DbContext(optionsBuilder.Options);
+                            context.Add(
+                                new AnotherEntityWithCompositeKeys { Id = 1, SecondId = 2 }
+                            );
+                            context.SaveChanges();
+                        }
+                    )
+                    .Message
             );
         }
 
@@ -133,25 +147,29 @@ namespace Microsoft.EntityFrameworkCore
                     $"{{'{nameof(EntityWithRequiredAttribute.RequiredProperty)}'}}",
                     nameof(EntityWithRequiredAttribute)
                 ),
-                Assert.Throws<DbUpdateException>(
-                    () =>
-                    {
-                        var modelBuilder = InMemoryTestHelpers.Instance.CreateConventionBuilder();
-                        modelBuilder.Entity<EntityWithRequiredAttribute>();
+                Assert
+                    .Throws<DbUpdateException>(
+                        () =>
+                        {
+                            var modelBuilder = InMemoryTestHelpers
+                                .Instance
+                                .CreateConventionBuilder();
+                            modelBuilder.Entity<EntityWithRequiredAttribute>();
 
-                        var optionsBuilder = new DbContextOptionsBuilder()
-                            .UseModel(modelBuilder.FinalizeModel())
-                            .UseInMemoryDatabase(
-                                nameof(NullabilityCheckInMemoryTest),
-                                b => b.EnableNullChecks()
-                            )
-                            .UseInternalServiceProvider(Fixture.ServiceProvider);
+                            var optionsBuilder = new DbContextOptionsBuilder()
+                                .UseModel(modelBuilder.FinalizeModel())
+                                .UseInMemoryDatabase(
+                                    nameof(NullabilityCheckInMemoryTest),
+                                    b => b.EnableNullChecks()
+                                )
+                                .UseInternalServiceProvider(Fixture.ServiceProvider);
 
-                        using var context = new DbContext(optionsBuilder.Options);
-                        context.Add(new EntityWithRequiredAttribute { Id = 1 });
-                        context.SaveChanges();
-                    }
-                ).Message
+                            using var context = new DbContext(optionsBuilder.Options);
+                            context.Add(new EntityWithRequiredAttribute { Id = 1 });
+                            context.SaveChanges();
+                        }
+                    )
+                    .Message
             );
         }
 
@@ -163,27 +181,31 @@ namespace Microsoft.EntityFrameworkCore
                     $"{{'{nameof(AnotherEntityWithRequiredAttribute.Property)}', '{nameof(AnotherEntityWithRequiredAttribute.RequiredProperty)}'}}",
                     nameof(AnotherEntityWithRequiredAttribute)
                 ),
-                Assert.Throws<DbUpdateException>(
-                    () =>
-                    {
-                        var modelBuilder = InMemoryTestHelpers.Instance.CreateConventionBuilder();
-                        modelBuilder.Entity<AnotherEntityWithRequiredAttribute>(
-                            eb => eb.Property(p => p.Property).IsRequired()
-                        );
+                Assert
+                    .Throws<DbUpdateException>(
+                        () =>
+                        {
+                            var modelBuilder = InMemoryTestHelpers
+                                .Instance
+                                .CreateConventionBuilder();
+                            modelBuilder.Entity<AnotherEntityWithRequiredAttribute>(
+                                eb => eb.Property(p => p.Property).IsRequired()
+                            );
 
-                        var optionsBuilder = new DbContextOptionsBuilder()
-                            .UseModel(modelBuilder.FinalizeModel())
-                            .UseInMemoryDatabase(
-                                nameof(NullabilityCheckInMemoryTest),
-                                b => b.EnableNullChecks()
-                            )
-                            .UseInternalServiceProvider(Fixture.ServiceProvider);
+                            var optionsBuilder = new DbContextOptionsBuilder()
+                                .UseModel(modelBuilder.FinalizeModel())
+                                .UseInMemoryDatabase(
+                                    nameof(NullabilityCheckInMemoryTest),
+                                    b => b.EnableNullChecks()
+                                )
+                                .UseInternalServiceProvider(Fixture.ServiceProvider);
 
-                        using var context = new DbContext(optionsBuilder.Options);
-                        context.Add(new AnotherEntityWithRequiredAttribute { Id = 1 });
-                        context.SaveChanges();
-                    }
-                ).Message
+                            using var context = new DbContext(optionsBuilder.Options);
+                            context.Add(new AnotherEntityWithRequiredAttribute { Id = 1 });
+                            context.SaveChanges();
+                        }
+                    )
+                    .Message
             );
         }
 

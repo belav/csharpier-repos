@@ -166,10 +166,14 @@ namespace Microsoft.CodeAnalysis.UseObjectInitializer
                 }
 
                 var type =
-                    _semanticModel.GetSymbolInfo(
-                        _syntaxFacts.GetTypeOfObjectCreationExpression(_objectCreationExpression),
-                        _cancellationToken
-                    ).Symbol as INamedTypeSymbol;
+                    _semanticModel
+                        .GetSymbolInfo(
+                            _syntaxFacts.GetTypeOfObjectCreationExpression(
+                                _objectCreationExpression
+                            ),
+                            _cancellationToken
+                        )
+                        .Symbol as INamedTypeSymbol;
                 if (IsExplicitlyImplemented(type, leftSymbol, out var typeMember))
                 {
                     break;

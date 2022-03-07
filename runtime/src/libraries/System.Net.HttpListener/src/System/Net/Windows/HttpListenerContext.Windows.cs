@@ -164,11 +164,9 @@ namespace System.Net
         // The request is being aborted, but large writes may be in progress. Cancel them.
         internal void ForceCancelRequest(SafeHandle requestQueueHandle, ulong requestId)
         {
-            uint statusCode = Interop.HttpApi.HttpCancelHttpRequest(
-                requestQueueHandle,
-                requestId,
-                IntPtr.Zero
-            );
+            uint statusCode = Interop
+                .HttpApi
+                .HttpCancelHttpRequest(requestQueueHandle, requestId, IntPtr.Zero);
 
             // Either the connection has already dropped, or the last write is in progress.
             // The requestId becomes invalid as soon as the last Content-Length write starts.

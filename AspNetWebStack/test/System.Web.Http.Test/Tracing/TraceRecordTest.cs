@@ -10,25 +10,29 @@ namespace System.Web.Http.Tracing
         [Fact]
         public void TraceRecord_TraceKind_RoundTrips()
         {
-            Assert.Reflection.EnumProperty(
-                new TraceRecord(request: null, category: null, level: TraceLevel.Info),
-                r => r.Kind,
-                expectedDefaultValue: TraceKind.Trace,
-                illegalValue: (TraceKind)999,
-                roundTripTestValue: TraceKind.End
-            );
+            Assert
+                .Reflection
+                .EnumProperty(
+                    new TraceRecord(request: null, category: null, level: TraceLevel.Info),
+                    r => r.Kind,
+                    expectedDefaultValue: TraceKind.Trace,
+                    illegalValue: (TraceKind)999,
+                    roundTripTestValue: TraceKind.End
+                );
         }
 
         [Fact]
         public void TraceRecord_TraceLevel_RoundTrips()
         {
-            Assert.Reflection.EnumProperty(
-                new TraceRecord(request: null, category: null, level: TraceLevel.Info),
-                r => r.Level,
-                expectedDefaultValue: TraceLevel.Info,
-                illegalValue: (TraceLevel)999,
-                roundTripTestValue: TraceLevel.Fatal
-            );
+            Assert
+                .Reflection
+                .EnumProperty(
+                    new TraceRecord(request: null, category: null, level: TraceLevel.Info),
+                    r => r.Level,
+                    expectedDefaultValue: TraceLevel.Info,
+                    illegalValue: (TraceLevel)999,
+                    roundTripTestValue: TraceLevel.Fatal
+                );
         }
     }
 }

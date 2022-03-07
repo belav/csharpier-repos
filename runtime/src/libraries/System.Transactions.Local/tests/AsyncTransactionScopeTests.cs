@@ -824,9 +824,9 @@ namespace System.Transactions.Tests
             )
             {
                 txId1 = AssertAndGetCurrentTransactionId();
-                DependentTransaction dependentTx = Transaction.Current.DependentClone(
-                    DependentCloneOption.BlockCommitUntilComplete
-                );
+                DependentTransaction dependentTx = Transaction
+                    .Current
+                    .DependentClone(DependentCloneOption.BlockCommitUntilComplete);
                 Task task1 = Task.Run(
                     delegate
                     {

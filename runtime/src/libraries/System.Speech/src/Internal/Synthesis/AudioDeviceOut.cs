@@ -212,12 +212,15 @@ namespace System.Speech.Internal.Synthesis
                         MMSYSERR result = SafeNativeMethods.waveOutPause(_hwo);
                         if (result != MMSYSERR.NOERROR)
                         {
-                            System.Diagnostics.Debug.Assert(
-                                false,
-                                ((int)result).ToString(
-                                    System.Globalization.CultureInfo.InvariantCulture
-                                )
-                            );
+                            System
+                                .Diagnostics
+                                .Debug
+                                .Assert(
+                                    false,
+                                    ((int)result).ToString(
+                                        System.Globalization.CultureInfo.InvariantCulture
+                                    )
+                                );
                         }
                     }
                     _fPaused = true;

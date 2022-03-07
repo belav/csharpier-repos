@@ -1498,7 +1498,8 @@ class C
             syntaxTree =
                 syntaxTree
                     .GetCompilationUnitRoot()
-                    .ReplaceNode(rankSpecifierOld, rankSpecifierNew).SyntaxTree;
+                    .ReplaceNode(rankSpecifierOld, rankSpecifierNew)
+                    .SyntaxTree;
 
             string expectedOperationTree =
                 @"
@@ -2795,7 +2796,8 @@ class C
             syntaxTree =
                 syntaxTree
                     .GetCompilationUnitRoot()
-                    .ReplaceNode(rankSpecifierOld, rankSpecifierNew).SyntaxTree;
+                    .ReplaceNode(rankSpecifierOld, rankSpecifierNew)
+                    .SyntaxTree;
 
             string expectedOperationTree =
                 @"
@@ -2882,7 +2884,8 @@ class C
             syntaxTree =
                 syntaxTree
                     .GetCompilationUnitRoot()
-                    .ReplaceNode(rankSpecifierOld, rankSpecifierNew).SyntaxTree;
+                    .ReplaceNode(rankSpecifierOld, rankSpecifierNew)
+                    .SyntaxTree;
 
             string expectedOperationTree =
                 @"
@@ -3466,7 +3469,8 @@ class C
             syntaxTree =
                 syntaxTree
                     .GetCompilationUnitRoot()
-                    .ReplaceNode(rankSpecifierOld, rankSpecifierNew).SyntaxTree;
+                    .ReplaceNode(rankSpecifierOld, rankSpecifierNew)
+                    .SyntaxTree;
 
             string expectedOperationTree =
                 @"

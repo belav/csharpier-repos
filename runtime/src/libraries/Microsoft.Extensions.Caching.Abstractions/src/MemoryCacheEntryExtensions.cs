@@ -150,13 +150,15 @@ namespace Microsoft.Extensions.Caching.Memory
                 throw new ArgumentNullException(nameof(callback));
             }
 
-            options.PostEvictionCallbacks.Add(
-                new PostEvictionCallbackRegistration()
-                {
-                    EvictionCallback = callback,
-                    State = state
-                }
-            );
+            options
+                .PostEvictionCallbacks
+                .Add(
+                    new PostEvictionCallbackRegistration()
+                    {
+                        EvictionCallback = callback,
+                        State = state
+                    }
+                );
             return options;
         }
     }

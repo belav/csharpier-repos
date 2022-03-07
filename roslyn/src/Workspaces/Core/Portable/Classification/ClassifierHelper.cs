@@ -139,9 +139,9 @@ namespace Microsoft.CodeAnalysis.Classification
                 {
                     var isAdditiveClassification =
                         spans[i - 1].TextSpan == span.TextSpan
-                        && ClassificationTypeNames.AdditiveTypeNames.Contains(
-                            span.ClassificationType
-                        );
+                        && ClassificationTypeNames
+                            .AdditiveTypeNames
+                            .Contains(span.ClassificationType);
 
                     // Additive classifications are intended to overlap so do not ignore it.
                     if (

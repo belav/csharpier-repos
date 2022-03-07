@@ -99,11 +99,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             // NOTE: overrides can differ by object/dynamic, tuple element names, etc.
             // If they do, we'll need to tweak destinationType before we can use it in place of sourceType.
             // NOTE: refKind is irrelevant here since we are just encoding/decoding the type.
-            ImmutableArray<bool> flags =
-                CSharpCompilation.DynamicTransformsEncoder.EncodeWithoutCustomModifierFlags(
-                    destinationType,
-                    refKind
-                );
+            ImmutableArray<bool> flags = CSharpCompilation
+                .DynamicTransformsEncoder
+                .EncodeWithoutCustomModifierFlags(destinationType, refKind);
             TypeSymbol resultType = DynamicTypeDecoder.TransformTypeWithoutCustomModifierFlags(
                 sourceType,
                 containingAssembly,
@@ -129,9 +127,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             )
             {
                 // We also preserve tuple names, if present and different
-                ImmutableArray<string> names = CSharpCompilation.TupleNamesEncoder.Encode(
-                    destinationType
-                );
+                ImmutableArray<string> names = CSharpCompilation
+                    .TupleNamesEncoder
+                    .Encode(destinationType);
                 resultType = TupleTypeDecoder.DecodeTupleTypesIfApplicable(resultType, names);
             }
 
@@ -196,14 +194,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 if (
                     sourceParameter.TypeWithAnnotations.CustomModifiers.Any()
                     || sourceParameter.RefCustomModifiers.Any()
-                    || sourceParameter.Type.HasCustomModifiers(
-                        flagNonDefaultArraySizesOrLowerBounds: true
-                    )
+                    || sourceParameter
+                        .Type
+                        .HasCustomModifiers(flagNonDefaultArraySizesOrLowerBounds: true)
                     || destinationParameter.TypeWithAnnotations.CustomModifiers.Any()
                     || destinationParameter.RefCustomModifiers.Any()
-                    || destinationParameter.Type.HasCustomModifiers(
-                        flagNonDefaultArraySizesOrLowerBounds: true
-                    )
+                    || destinationParameter
+                        .Type
+                        .HasCustomModifiers(flagNonDefaultArraySizesOrLowerBounds: true)
                     || // Could happen if the associated property has custom modifiers.
                     (
                         alsoCopyParamsModifier
@@ -256,9 +254,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             return modifiers.Any(
                 modifier =>
                     !modifier.IsOptional
-                    && (
-                        (CSharpCustomModifier)modifier
-                    ).ModifierSymbol.IsWellKnownTypeIsExternalInit()
+                    && ((CSharpCustomModifier)modifier)
+                        .ModifierSymbol
+                        .IsWellKnownTypeIsExternalInit()
             );
         }
 

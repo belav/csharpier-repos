@@ -56,10 +56,9 @@ namespace Microsoft.CodeAnalysis.CSharp.GenerateMember.GenerateDefaultConstructo
             )
             {
                 classType =
-                    semanticDocument.SemanticModel.GetDeclaredSymbol(
-                        typeDeclaration,
-                        cancellationToken
-                    ) as INamedTypeSymbol;
+                    semanticDocument
+                        .SemanticModel
+                        .GetDeclaredSymbol(typeDeclaration, cancellationToken) as INamedTypeSymbol;
                 return classType?.TypeKind == TypeKind.Class;
             }
 

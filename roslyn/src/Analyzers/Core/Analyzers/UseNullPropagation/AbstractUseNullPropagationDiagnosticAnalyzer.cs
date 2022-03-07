@@ -83,13 +83,13 @@ namespace Microsoft.CodeAnalysis.UseNullPropagation
                         return;
                     }
 
-                    var expressionTypeOpt = startContext.Compilation.GetTypeByMetadataName(
-                        "System.Linq.Expressions.Expression`1"
-                    );
+                    var expressionTypeOpt = startContext
+                        .Compilation
+                        .GetTypeByMetadataName("System.Linq.Expressions.Expression`1");
 
-                    var objectType = startContext.Compilation.GetSpecialType(
-                        SpecialType.System_Object
-                    );
+                    var objectType = startContext
+                        .Compilation
+                        .GetSpecialType(SpecialType.System_Object);
                     var referenceEqualsMethodOpt = objectType
                         ?.GetMembers(nameof(ReferenceEquals))
                         .OfType<IMethodSymbol>()

@@ -171,10 +171,9 @@ namespace System.Net.Sockets
                     {
                         try
                         {
-                            bool canceled = Interop.Kernel32.CancelIoEx(
-                                handle,
-                                thisRef._pendingOverlappedForCancellation
-                            );
+                            bool canceled = Interop
+                                .Kernel32
+                                .CancelIoEx(handle, thisRef._pendingOverlappedForCancellation);
                             if (NetEventSource.Log.IsEnabled())
                             {
                                 NetEventSource.Info(
@@ -471,15 +470,17 @@ namespace System.Net.Sockets
                     };
 
                     SocketFlags flags = _socketFlags;
-                    SocketError socketError = Interop.Winsock.WSARecv(
-                        handle,
-                        &wsaBuffer,
-                        1,
-                        out int bytesTransferred,
-                        ref flags,
-                        overlapped,
-                        IntPtr.Zero
-                    );
+                    SocketError socketError = Interop
+                        .Winsock
+                        .WSARecv(
+                            handle,
+                            &wsaBuffer,
+                            1,
+                            out int bytesTransferred,
+                            ref flags,
+                            overlapped,
+                            IntPtr.Zero
+                        );
 
                     return ProcessIOCPResultWithDeferredAsyncHandling(
                         socketError == SocketError.Success,
@@ -504,15 +505,17 @@ namespace System.Net.Sockets
             try
             {
                 SocketFlags flags = _socketFlags;
-                SocketError socketError = Interop.Winsock.WSARecv(
-                    handle,
-                    _wsaBufferArrayPinned,
-                    _bufferListInternal!.Count,
-                    out int bytesTransferred,
-                    ref flags,
-                    overlapped,
-                    IntPtr.Zero
-                );
+                SocketError socketError = Interop
+                    .Winsock
+                    .WSARecv(
+                        handle,
+                        _wsaBufferArrayPinned,
+                        _bufferListInternal!.Count,
+                        out int bytesTransferred,
+                        ref flags,
+                        overlapped,
+                        IntPtr.Zero
+                    );
 
                 return ProcessIOCPResult(
                     socketError == SocketError.Success,
@@ -563,17 +566,19 @@ namespace System.Net.Sockets
                     };
 
                     SocketFlags flags = _socketFlags;
-                    SocketError socketError = Interop.Winsock.WSARecvFrom(
-                        handle,
-                        ref wsaBuffer,
-                        1,
-                        out int bytesTransferred,
-                        ref flags,
-                        PtrSocketAddressBuffer,
-                        PtrSocketAddressBufferSize,
-                        overlapped,
-                        IntPtr.Zero
-                    );
+                    SocketError socketError = Interop
+                        .Winsock
+                        .WSARecvFrom(
+                            handle,
+                            ref wsaBuffer,
+                            1,
+                            out int bytesTransferred,
+                            ref flags,
+                            PtrSocketAddressBuffer,
+                            PtrSocketAddressBufferSize,
+                            overlapped,
+                            IntPtr.Zero
+                        );
 
                     return ProcessIOCPResultWithDeferredAsyncHandling(
                         socketError == SocketError.Success,
@@ -598,17 +603,19 @@ namespace System.Net.Sockets
             try
             {
                 SocketFlags flags = _socketFlags;
-                SocketError socketError = Interop.Winsock.WSARecvFrom(
-                    handle,
-                    _wsaBufferArrayPinned!,
-                    _bufferListInternal!.Count,
-                    out int bytesTransferred,
-                    ref flags,
-                    PtrSocketAddressBuffer,
-                    PtrSocketAddressBufferSize,
-                    overlapped,
-                    IntPtr.Zero
-                );
+                SocketError socketError = Interop
+                    .Winsock
+                    .WSARecvFrom(
+                        handle,
+                        _wsaBufferArrayPinned!,
+                        _bufferListInternal!.Count,
+                        out int bytesTransferred,
+                        ref flags,
+                        PtrSocketAddressBuffer,
+                        PtrSocketAddressBufferSize,
+                        overlapped,
+                        IntPtr.Zero
+                    );
 
                 return ProcessIOCPResult(
                     socketError == SocketError.Success,
@@ -809,15 +816,17 @@ namespace System.Net.Sockets
                         Pointer = (IntPtr)(bufferPtr + _offset)
                     };
 
-                    SocketError socketError = Interop.Winsock.WSASend(
-                        handle,
-                        &wsaBuffer,
-                        1,
-                        out int bytesTransferred,
-                        _socketFlags,
-                        overlapped,
-                        IntPtr.Zero
-                    );
+                    SocketError socketError = Interop
+                        .Winsock
+                        .WSASend(
+                            handle,
+                            &wsaBuffer,
+                            1,
+                            out int bytesTransferred,
+                            _socketFlags,
+                            overlapped,
+                            IntPtr.Zero
+                        );
 
                     return ProcessIOCPResultWithDeferredAsyncHandling(
                         socketError == SocketError.Success,
@@ -841,15 +850,17 @@ namespace System.Net.Sockets
             NativeOverlapped* overlapped = AllocateNativeOverlapped();
             try
             {
-                SocketError socketError = Interop.Winsock.WSASend(
-                    handle,
-                    _wsaBufferArrayPinned,
-                    _bufferListInternal!.Count,
-                    out int bytesTransferred,
-                    _socketFlags,
-                    overlapped,
-                    IntPtr.Zero
-                );
+                SocketError socketError = Interop
+                    .Winsock
+                    .WSASend(
+                        handle,
+                        _wsaBufferArrayPinned,
+                        _bufferListInternal!.Count,
+                        out int bytesTransferred,
+                        _socketFlags,
+                        overlapped,
+                        IntPtr.Zero
+                    );
 
                 return ProcessIOCPResult(
                     socketError == SocketError.Success,
@@ -1027,17 +1038,19 @@ namespace System.Net.Sockets
                         Pointer = (IntPtr)(bufferPtr + _offset)
                     };
 
-                    SocketError socketError = Interop.Winsock.WSASendTo(
-                        handle,
-                        ref wsaBuffer,
-                        1,
-                        out int bytesTransferred,
-                        _socketFlags,
-                        PtrSocketAddressBuffer,
-                        _socketAddress!.Size,
-                        overlapped,
-                        IntPtr.Zero
-                    );
+                    SocketError socketError = Interop
+                        .Winsock
+                        .WSASendTo(
+                            handle,
+                            ref wsaBuffer,
+                            1,
+                            out int bytesTransferred,
+                            _socketFlags,
+                            PtrSocketAddressBuffer,
+                            _socketAddress!.Size,
+                            overlapped,
+                            IntPtr.Zero
+                        );
 
                     return ProcessIOCPResultWithDeferredAsyncHandling(
                         socketError == SocketError.Success,
@@ -1061,17 +1074,19 @@ namespace System.Net.Sockets
             NativeOverlapped* overlapped = AllocateNativeOverlapped();
             try
             {
-                SocketError socketError = Interop.Winsock.WSASendTo(
-                    handle,
-                    _wsaBufferArrayPinned!,
-                    _bufferListInternal!.Count,
-                    out int bytesTransferred,
-                    _socketFlags,
-                    PtrSocketAddressBuffer,
-                    _socketAddress!.Size,
-                    overlapped,
-                    IntPtr.Zero
-                );
+                SocketError socketError = Interop
+                    .Winsock
+                    .WSASendTo(
+                        handle,
+                        _wsaBufferArrayPinned!,
+                        _bufferListInternal!.Count,
+                        out int bytesTransferred,
+                        _socketFlags,
+                        PtrSocketAddressBuffer,
+                        _socketAddress!.Size,
+                        overlapped,
+                        IntPtr.Zero
+                    );
 
                 return ProcessIOCPResult(
                     socketError == SocketError.Success,
@@ -1118,7 +1133,8 @@ namespace System.Net.Sockets
                     // Pin the buffers.
                     for (int i = 0; i < bufferCount; i++)
                     {
-                        _multipleBufferMemoryHandles[i] = _bufferListInternal[i].Array
+                        _multipleBufferMemoryHandles[i] = _bufferListInternal[i]
+                            .Array
                             .AsMemory()
                             .Pin();
                     }
@@ -1319,8 +1335,9 @@ namespace System.Net.Sockets
                         // This element is a file stream. SendPacketsElement throws if the FileStream is not opened asynchronously;
                         // Synchronously opened FileStream can't be used concurrently (e.g. multiple SendPacketsElements with the same
                         // FileStream).
-                        sendPacketsDescriptorPinned[descriptorIndex].fileHandle =
-                            spe.FileStream.SafeFileHandle.DangerousGetHandle();
+                        sendPacketsDescriptorPinned[descriptorIndex].fileHandle = spe.FileStream
+                            .SafeFileHandle
+                            .DangerousGetHandle();
                         sendPacketsDescriptorPinned[descriptorIndex].fileOffset = spe.OffsetLong;
 
                         sendPacketsDescriptorPinned[descriptorIndex].length = (uint)spe.Count;
@@ -1413,13 +1430,15 @@ namespace System.Net.Sockets
                     );
                 }
 
-                socketError = Interop.Winsock.setsockopt(
-                    _acceptSocket!.SafeHandle,
-                    SocketOptionLevel.Socket,
-                    SocketOptionName.UpdateAcceptContext,
-                    ref handle,
-                    IntPtr.Size
-                );
+                socketError = Interop
+                    .Winsock
+                    .setsockopt(
+                        _acceptSocket!.SafeHandle,
+                        SocketOptionLevel.Socket,
+                        SocketOptionName.UpdateAcceptContext,
+                        ref handle,
+                        IntPtr.Size
+                    );
 
                 if (socketError == SocketError.SocketError)
                 {
@@ -1453,13 +1472,15 @@ namespace System.Net.Sockets
                 }
 
                 // Update the socket context.
-                SocketError socketError = Interop.Winsock.setsockopt(
-                    _currentSocket!.SafeHandle,
-                    SocketOptionLevel.Socket,
-                    SocketOptionName.UpdateConnectContext,
-                    null,
-                    0
-                );
+                SocketError socketError = Interop
+                    .Winsock
+                    .setsockopt(
+                        _currentSocket!.SafeHandle,
+                        SocketOptionLevel.Socket,
+                        SocketOptionName.UpdateConnectContext,
+                        null,
+                        0
+                    );
                 return socketError == SocketError.SocketError
                   ? SocketPal.GetLastSocketError()
                   : socketError;
@@ -1610,13 +1631,15 @@ namespace System.Net.Sockets
                     {
                         // The Async IO completed with a failure.
                         // here we need to call WSAGetOverlappedResult() just so GetLastSocketError() will return the correct error.
-                        Interop.Winsock.WSAGetOverlappedResult(
-                            _currentSocket.SafeHandle,
-                            nativeOverlapped,
-                            out numBytes,
-                            false,
-                            out socketFlags
-                        );
+                        Interop
+                            .Winsock
+                            .WSAGetOverlappedResult(
+                                _currentSocket.SafeHandle,
+                                nativeOverlapped,
+                                out numBytes,
+                                false,
+                                out socketFlags
+                            );
                         socketError = SocketPal.GetLastSocketError();
                     }
                     catch

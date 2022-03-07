@@ -125,24 +125,29 @@ namespace Microsoft.AspNetCore.SignalR.Tests
             var serviceProvider = serviceCollection.BuildServiceProvider();
             Assert.Equal(
                 1,
-                serviceProvider.GetRequiredService<
-                    IOptions<HubOptions>
-                >().Value.SupportedProtocols.Count
+                serviceProvider
+                    .GetRequiredService<IOptions<HubOptions>>()
+                    .Value
+                    .SupportedProtocols
+                    .Count
             );
             Assert.Equal(
                 0,
-                serviceProvider.GetRequiredService<
-                    IOptions<HubOptions<CustomHub>>
-                >().Value.SupportedProtocols.Count
+                serviceProvider
+                    .GetRequiredService<IOptions<HubOptions<CustomHub>>>()
+                    .Value
+                    .SupportedProtocols
+                    .Count
             );
 
             Assert.Null(
                 serviceProvider.GetRequiredService<IOptions<HubOptions>>().Value.HubFilters
             );
             Assert.Single(
-                serviceProvider.GetRequiredService<
-                    IOptions<HubOptions<CustomHub>>
-                >().Value.HubFilters
+                serviceProvider
+                    .GetRequiredService<IOptions<HubOptions<CustomHub>>>()
+                    .Value
+                    .HubFilters
             );
         }
 
@@ -192,9 +197,10 @@ namespace Microsoft.AspNetCore.SignalR.Tests
             var serviceProvider = serviceCollection.BuildServiceProvider();
             Assert.Equal(
                 42,
-                serviceProvider.GetRequiredService<
-                    IOptions<HubOptions<CustomHub>>
-                >().Value.StreamBufferCapacity
+                serviceProvider
+                    .GetRequiredService<IOptions<HubOptions<CustomHub>>>()
+                    .Value
+                    .StreamBufferCapacity
             );
         }
 
@@ -248,9 +254,10 @@ namespace Microsoft.AspNetCore.SignalR.Tests
 
             var serviceProvider = serviceCollection.BuildServiceProvider();
             Assert.Collection(
-                serviceProvider.GetRequiredService<
-                    IOptions<HubOptions<CustomHub>>
-                >().Value.SupportedProtocols,
+                serviceProvider
+                    .GetRequiredService<IOptions<HubOptions<CustomHub>>>()
+                    .Value
+                    .SupportedProtocols,
                 p =>
                 {
                     Assert.Equal("json", p);

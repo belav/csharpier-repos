@@ -2649,7 +2649,8 @@ namespace System.Runtime.Serialization.Formatters.Tests
             };
 
             // The JsonReaderException is internal.
-            Exception jsonReaderException = (Exception)typeof(JsonException).Assembly
+            Exception jsonReaderException = (Exception)typeof(JsonException)
+                .Assembly
                 .GetType("System.Text.Json.JsonReaderException", throwOnError: true)
                 .GetConstructor(
                     BindingFlags.Public | BindingFlags.Instance,
@@ -4610,11 +4611,9 @@ namespace System.Runtime.Serialization.Formatters.Tests
             };
             yield return new object[]
             {
-                TimeZoneInfo.TransitionTime.CreateFixedDateRule(
-                    new DateTime(1, 1, 1, 2, 0, 0),
-                    3,
-                    15
-                ),
+                TimeZoneInfo
+                    .TransitionTime
+                    .CreateFixedDateRule(new DateTime(1, 1, 1, 2, 0, 0), 3, 15),
                 new TypeSerializableValue[]
                 {
                     new TypeSerializableValue(
@@ -4628,21 +4627,19 @@ namespace System.Runtime.Serialization.Formatters.Tests
                 }
             };
 
-            var adjustmentRule = TimeZoneInfo.AdjustmentRule.CreateAdjustmentRule(
-                new DateTime(1900, 1, 1),
-                new DateTime(1955, 12, 31),
-                TimeSpan.FromHours(2),
-                TimeZoneInfo.TransitionTime.CreateFixedDateRule(
-                    new DateTime(1, 1, 1, 2, 0, 0),
-                    2,
-                    3
-                ),
-                TimeZoneInfo.TransitionTime.CreateFixedDateRule(
-                    new DateTime(1, 1, 1, 2, 0, 0),
-                    3,
-                    4
-                )
-            );
+            var adjustmentRule = TimeZoneInfo
+                .AdjustmentRule
+                .CreateAdjustmentRule(
+                    new DateTime(1900, 1, 1),
+                    new DateTime(1955, 12, 31),
+                    TimeSpan.FromHours(2),
+                    TimeZoneInfo
+                        .TransitionTime
+                        .CreateFixedDateRule(new DateTime(1, 1, 1, 2, 0, 0), 2, 3),
+                    TimeZoneInfo
+                        .TransitionTime
+                        .CreateFixedDateRule(new DateTime(1, 1, 1, 2, 0, 0), 3, 4)
+                );
             yield return new object[]
             {
                 adjustmentRule,

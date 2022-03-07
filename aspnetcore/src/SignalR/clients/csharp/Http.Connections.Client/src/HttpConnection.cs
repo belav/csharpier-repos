@@ -462,10 +462,9 @@ public partial class HttpConnection : ConnectionContext, IConnectionInherentKeep
                         );
                     }
                     else if (
-                        !transport.TransferFormats!.Contains(
-                            transferFormatString,
-                            StringComparer.Ordinal
-                        )
+                        !transport
+                            .TransferFormats!
+                            .Contains(transferFormatString, StringComparer.Ordinal)
                     )
                     {
                         Log.TransportDoesNotSupportTransferFormat(

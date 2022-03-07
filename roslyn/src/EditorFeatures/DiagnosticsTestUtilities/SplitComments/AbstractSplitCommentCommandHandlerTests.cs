@@ -79,10 +79,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.SplitComment
             view.SetMultiSelection(snapshotSpans);
 
             var undoHistoryRegistry = workspace.GetService<ITextUndoHistoryRegistry>();
-            var commandHandler =
-                workspace.ExportProvider.GetCommandHandler<SplitCommentCommandHandler>(
-                    nameof(SplitCommentCommandHandler)
-                );
+            var commandHandler = workspace
+                .ExportProvider
+                .GetCommandHandler<SplitCommentCommandHandler>(nameof(SplitCommentCommandHandler));
             if (
                 !commandHandler.ExecuteCommand(
                     new ReturnKeyCommandArgs(view, view.TextBuffer),

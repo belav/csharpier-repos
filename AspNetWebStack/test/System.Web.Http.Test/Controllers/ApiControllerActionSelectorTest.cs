@@ -22,17 +22,17 @@ namespace System.Web.Http
                 "Users",
                 typeof(UsersController)
             );
-            usersControllerDescriptor.Configuration.Services.Replace(
-                typeof(IHttpActionSelector),
-                actionSelector
-            );
+            usersControllerDescriptor
+                .Configuration
+                .Services
+                .Replace(typeof(IHttpActionSelector), actionSelector);
             GetContext.ControllerDescriptor = usersControllerDescriptor;
             GetContext.Request = new HttpRequestMessage { Method = HttpMethod.Get };
             HttpControllerContext PostContext = ContextUtil.CreateControllerContext();
-            usersControllerDescriptor.Configuration.Services.Replace(
-                typeof(IHttpActionSelector),
-                actionSelector
-            );
+            usersControllerDescriptor
+                .Configuration
+                .Services
+                .Replace(typeof(IHttpActionSelector), actionSelector);
             PostContext.ControllerDescriptor = usersControllerDescriptor;
             PostContext.Request = new HttpRequestMessage { Method = HttpMethod.Post };
 
@@ -59,10 +59,11 @@ namespace System.Web.Http
                 (ReflectedHttpActionDescriptor)actionSelector.GetActionMapping(
                     controllerDescriptor
                 )["Get"].First();
-            context.RouteData.Route.DataTokens.Add(
-                "actions",
-                new ReflectedHttpActionDescriptor[] { directRouteAction }
-            );
+            context
+                .RouteData
+                .Route
+                .DataTokens
+                .Add("actions", new ReflectedHttpActionDescriptor[] { directRouteAction });
 
             HttpActionDescriptor actionDescriptor = actionSelector.SelectAction(context);
 
@@ -90,19 +91,19 @@ namespace System.Web.Http
             subRouteData[0] = new HttpRouteData(new HttpRoute());
             subRouteData[1] = new HttpRouteData(new HttpRoute());
             context.RouteData.Values.Add(RouteCollectionRoute.SubRouteDataKey, subRouteData);
-            subRouteData[0].Route.DataTokens.Add(
-                "actions",
-                new ReflectedHttpActionDescriptor[] { firstDirectRouteAction }
-            );
+            subRouteData[0]
+                .Route
+                .DataTokens
+                .Add("actions", new ReflectedHttpActionDescriptor[] { firstDirectRouteAction });
             subRouteData[0].Route.DataTokens.Add("order", 1);
             ReflectedHttpActionDescriptor secondDirectRouteAction =
                 (ReflectedHttpActionDescriptor)actionSelector.GetActionMapping(
                     controllerDescriptor
                 )["GetB"].Single();
-            subRouteData[1].Route.DataTokens.Add(
-                "actions",
-                new ReflectedHttpActionDescriptor[] { secondDirectRouteAction }
-            );
+            subRouteData[1]
+                .Route
+                .DataTokens
+                .Add("actions", new ReflectedHttpActionDescriptor[] { secondDirectRouteAction });
             subRouteData[1].Route.DataTokens.Add("order", 2);
 
             // Act
@@ -133,19 +134,19 @@ namespace System.Web.Http
             subRouteData[0] = new HttpRouteData(new HttpRoute());
             subRouteData[1] = new HttpRouteData(new HttpRoute());
             context.RouteData.Values.Add(RouteCollectionRoute.SubRouteDataKey, subRouteData);
-            subRouteData[0].Route.DataTokens.Add(
-                "actions",
-                new ReflectedHttpActionDescriptor[] { firstDirectRouteAction }
-            );
+            subRouteData[0]
+                .Route
+                .DataTokens
+                .Add("actions", new ReflectedHttpActionDescriptor[] { firstDirectRouteAction });
             subRouteData[0].Route.DataTokens.Add("precedence", 2M);
             ReflectedHttpActionDescriptor secondDirectRouteAction =
                 (ReflectedHttpActionDescriptor)actionSelector.GetActionMapping(
                     controllerDescriptor
                 )["GetB"].Single();
-            subRouteData[1].Route.DataTokens.Add(
-                "actions",
-                new ReflectedHttpActionDescriptor[] { secondDirectRouteAction }
-            );
+            subRouteData[1]
+                .Route
+                .DataTokens
+                .Add("actions", new ReflectedHttpActionDescriptor[] { secondDirectRouteAction });
             subRouteData[1].Route.DataTokens.Add("precedence", 1M);
 
             // Act

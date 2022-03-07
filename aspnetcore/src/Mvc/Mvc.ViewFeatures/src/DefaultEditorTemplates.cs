@@ -325,14 +325,16 @@ internal static class DefaultEditorTemplates
 
                 valueDivTag.InnerHtml.AppendHtml(templateBuilderResult);
                 valueDivTag.InnerHtml.AppendHtml(" ");
-                valueDivTag.InnerHtml.AppendHtml(
-                    htmlHelper.ValidationMessage(
-                        propertyMetadata.PropertyName,
-                        message: null,
-                        htmlAttributes: null,
-                        tag: null
-                    )
-                );
+                valueDivTag
+                    .InnerHtml
+                    .AppendHtml(
+                        htmlHelper.ValidationMessage(
+                            propertyMetadata.PropertyName,
+                            message: null,
+                            htmlAttributes: null,
+                            tag: null
+                        )
+                    );
 
                 content.AppendLine(valueDivTag);
             }

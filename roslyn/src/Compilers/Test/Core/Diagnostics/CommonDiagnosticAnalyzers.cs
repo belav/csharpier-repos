@@ -69,7 +69,9 @@ namespace Microsoft.CodeAnalysis
                     compilationContext =>
                     {
                         // With location diagnostic.
-                        var location = compilationContext.Compilation.SyntaxTrees
+                        var location = compilationContext
+                            .Compilation
+                            .SyntaxTrees
                             .First()
                             .GetRoot()
                             .GetLocation();
@@ -1592,7 +1594,8 @@ namespace Microsoft.CodeAnalysis
             public ImmutableArray<(ControlFlowGraph Graph, ISymbol AssociatedSymbol)> GetControlFlowGraphs()
             {
                 Assert.True(_verifyGetControlFlowGraph);
-                return _controlFlowGraphMapOpt.Values
+                return _controlFlowGraphMapOpt
+                    .Values
                     .OrderBy(
                         flowGraphAndSymbol =>
                             flowGraphAndSymbol.Graph.OriginalOperation.Syntax.SpanStart
@@ -3242,7 +3245,8 @@ namespace Microsoft.CodeAnalysis
                     context.RegisterSyntaxTreeAction(
                         context =>
                         {
-                            var fields = context.Tree
+                            var fields = context
+                                .Tree
                                 .GetRoot()
                                 .DescendantNodes()
                                 .OfType<CSharp.Syntax.FieldDeclarationSyntax>();

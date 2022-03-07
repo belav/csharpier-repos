@@ -59,7 +59,9 @@ namespace Internal.TypeSystem
                 return false;
 
             foreach (
-                DefType defType in unmanagedCallConvAttribute.Value.EnumerateCallConvsFromAttribute()
+                DefType defType in unmanagedCallConvAttribute
+                    .Value
+                    .EnumerateCallConvsFromAttribute()
             )
             {
                 if (defType.Name == "CallConvSuppressGCTransition")

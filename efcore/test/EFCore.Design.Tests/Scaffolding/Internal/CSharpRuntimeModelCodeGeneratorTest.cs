@@ -197,8 +197,10 @@ namespace TestNamespace
                 assertModel: model =>
                 {
                     var lazyConstructorEntity = model.FindEntityType(typeof(LazyConstructorEntity));
-                    var lazyParameterBinding =
-                        lazyConstructorEntity.ConstructorBinding.ParameterBindings.Single();
+                    var lazyParameterBinding = lazyConstructorEntity
+                        .ConstructorBinding
+                        .ParameterBindings
+                        .Single();
                     Assert.Equal(typeof(ILazyLoader), lazyParameterBinding.ParameterType);
                     var lazyPropertyEntity = model.FindEntityType(typeof(LazyPropertyEntity));
                     var lazyServiceProperty = lazyPropertyEntity.GetServiceProperties().Single();
@@ -435,7 +437,8 @@ namespace TestNamespace
                     e =>
                     {
                         e.Property<int>("Id")
-                            .Metadata.SetTypeMapping(new InMemoryTypeMapping(typeof(int[])));
+                            .Metadata
+                            .SetTypeMapping(new InMemoryTypeMapping(typeof(int[])));
                         e.HasKey("Id");
                     }
                 );
@@ -493,9 +496,12 @@ namespace TestNamespace
             {
                 base.OnModelCreating(modelBuilder);
 
-                modelBuilder.HasDbFunction(
-                    typeof(FunctionTypeMappingContext).GetMethod(nameof(GetSqlFragmentStatic))
-                ).Metadata.TypeMapping = new StringTypeMapping("varchar", DbType.AnsiString);
+                modelBuilder
+                    .HasDbFunction(
+                        typeof(FunctionTypeMappingContext).GetMethod(nameof(GetSqlFragmentStatic))
+                    )
+                    .Metadata
+                    .TypeMapping = new StringTypeMapping("varchar", DbType.AnsiString);
             }
         }
 
@@ -529,10 +535,9 @@ namespace TestNamespace
                             nameof(GetSqlFragmentStatic)
                         )
                     )
-                    .HasParameter("param").Metadata.TypeMapping = new StringTypeMapping(
-                    "varchar",
-                    DbType.AnsiString
-                );
+                    .HasParameter("param")
+                    .Metadata
+                    .TypeMapping = new StringTypeMapping("varchar", DbType.AnsiString);
             }
         }
 
@@ -1744,44 +1749,44 @@ namespace TestNamespace
                     Assert.Null(model[CoreAnnotationNames.PropertyAccessMode]);
                     Assert.Equal(
                         CoreStrings.RuntimeModelMissingData,
-                        Assert.Throws<InvalidOperationException>(
-                            () => model.GetPropertyAccessMode()
-                        ).Message
+                        Assert
+                            .Throws<InvalidOperationException>(() => model.GetPropertyAccessMode())
+                            .Message
                     );
                     Assert.Null(model[SqlServerAnnotationNames.MaxDatabaseSize]);
                     Assert.Equal(
                         CoreStrings.RuntimeModelMissingData,
-                        Assert.Throws<InvalidOperationException>(
-                            () => model.GetDatabaseMaxSize()
-                        ).Message
+                        Assert
+                            .Throws<InvalidOperationException>(() => model.GetDatabaseMaxSize())
+                            .Message
                     );
                     Assert.Null(model[SqlServerAnnotationNames.PerformanceLevelSql]);
                     Assert.Equal(
                         CoreStrings.RuntimeModelMissingData,
-                        Assert.Throws<InvalidOperationException>(
-                            () => model.GetPerformanceLevelSql()
-                        ).Message
+                        Assert
+                            .Throws<InvalidOperationException>(() => model.GetPerformanceLevelSql())
+                            .Message
                     );
                     Assert.Null(model[SqlServerAnnotationNames.ServiceTierSql]);
                     Assert.Equal(
                         CoreStrings.RuntimeModelMissingData,
-                        Assert.Throws<InvalidOperationException>(
-                            () => model.GetServiceTierSql()
-                        ).Message
+                        Assert
+                            .Throws<InvalidOperationException>(() => model.GetServiceTierSql())
+                            .Message
                     );
                     Assert.Null(model[SqlServerAnnotationNames.IdentitySeed]);
                     Assert.Equal(
                         CoreStrings.RuntimeModelMissingData,
-                        Assert.Throws<InvalidOperationException>(
-                            () => model.GetIdentitySeed()
-                        ).Message
+                        Assert
+                            .Throws<InvalidOperationException>(() => model.GetIdentitySeed())
+                            .Message
                     );
                     Assert.Null(model[SqlServerAnnotationNames.IdentityIncrement]);
                     Assert.Equal(
                         CoreStrings.RuntimeModelMissingData,
-                        Assert.Throws<InvalidOperationException>(
-                            () => model.GetIdentityIncrement()
-                        ).Message
+                        Assert
+                            .Throws<InvalidOperationException>(() => model.GetIdentityIncrement())
+                            .Message
                     );
 
                     Assert.Null(model.FindEntityType(typeof(AbstractBase)));
@@ -1802,9 +1807,9 @@ namespace TestNamespace
                     Assert.Equal("mySchema", principalBase.GetSchema());
                     Assert.Equal(
                         CoreStrings.RuntimeModelMissingData,
-                        Assert.Throws<InvalidOperationException>(
-                            () => principalBase.GetSeedData()
-                        ).Message
+                        Assert
+                            .Throws<InvalidOperationException>(() => principalBase.GetSeedData())
+                            .Message
                     );
 
                     var principalId = principalBase.FindProperty(nameof(PrincipalBase.Id));
@@ -1839,23 +1844,25 @@ namespace TestNamespace
                     Assert.Null(principalId[SqlServerAnnotationNames.IdentitySeed]);
                     Assert.Equal(
                         CoreStrings.RuntimeModelMissingData,
-                        Assert.Throws<InvalidOperationException>(
-                            () => principalId.GetIdentitySeed()
-                        ).Message
+                        Assert
+                            .Throws<InvalidOperationException>(() => principalId.GetIdentitySeed())
+                            .Message
                     );
                     Assert.Null(principalId[SqlServerAnnotationNames.IdentityIncrement]);
                     Assert.Equal(
                         CoreStrings.RuntimeModelMissingData,
-                        Assert.Throws<InvalidOperationException>(
-                            () => principalId.GetIdentityIncrement()
-                        ).Message
+                        Assert
+                            .Throws<InvalidOperationException>(
+                                () => principalId.GetIdentityIncrement()
+                            )
+                            .Message
                     );
                     Assert.Null(principalId[SqlServerAnnotationNames.Sparse]);
                     Assert.Equal(
                         CoreStrings.RuntimeModelMissingData,
-                        Assert.Throws<InvalidOperationException>(
-                            () => principalId.IsSparse()
-                        ).Message
+                        Assert
+                            .Throws<InvalidOperationException>(() => principalId.IsSparse())
+                            .Message
                     );
 
                     var principalAlternateId = principalBase.FindProperty(
@@ -1904,30 +1911,34 @@ namespace TestNamespace
                     Assert.Null(compositeIndex[SqlServerAnnotationNames.Clustered]);
                     Assert.Equal(
                         CoreStrings.RuntimeModelMissingData,
-                        Assert.Throws<InvalidOperationException>(
-                            () => compositeIndex.IsClustered()
-                        ).Message
+                        Assert
+                            .Throws<InvalidOperationException>(() => compositeIndex.IsClustered())
+                            .Message
                     );
                     Assert.Null(compositeIndex[SqlServerAnnotationNames.CreatedOnline]);
                     Assert.Equal(
                         CoreStrings.RuntimeModelMissingData,
-                        Assert.Throws<InvalidOperationException>(
-                            () => compositeIndex.IsCreatedOnline()
-                        ).Message
+                        Assert
+                            .Throws<InvalidOperationException>(
+                                () => compositeIndex.IsCreatedOnline()
+                            )
+                            .Message
                     );
                     Assert.Null(compositeIndex[SqlServerAnnotationNames.FillFactor]);
                     Assert.Equal(
                         CoreStrings.RuntimeModelMissingData,
-                        Assert.Throws<InvalidOperationException>(
-                            () => compositeIndex.GetFillFactor()
-                        ).Message
+                        Assert
+                            .Throws<InvalidOperationException>(() => compositeIndex.GetFillFactor())
+                            .Message
                     );
                     Assert.Null(compositeIndex[SqlServerAnnotationNames.Include]);
                     Assert.Equal(
                         CoreStrings.RuntimeModelMissingData,
-                        Assert.Throws<InvalidOperationException>(
-                            () => compositeIndex.GetIncludeProperties()
-                        ).Message
+                        Assert
+                            .Throws<InvalidOperationException>(
+                                () => compositeIndex.GetIncludeProperties()
+                            )
+                            .Message
                     );
 
                     var alternateIndex = principalBase.GetIndexes().Last();
@@ -1938,9 +1949,9 @@ namespace TestNamespace
                     Assert.Null(alternateIndex[RelationalAnnotationNames.Filter]);
                     Assert.Equal(
                         CoreStrings.RuntimeModelMissingData,
-                        Assert.Throws<InvalidOperationException>(
-                            () => alternateIndex.GetFilter()
-                        ).Message
+                        Assert
+                            .Throws<InvalidOperationException>(() => alternateIndex.GetFilter())
+                            .Message
                     );
 
                     Assert.Equal(
@@ -1965,9 +1976,9 @@ namespace TestNamespace
                     Assert.Null(principalKey[SqlServerAnnotationNames.Clustered]);
                     Assert.Equal(
                         CoreStrings.RuntimeModelMissingData,
-                        Assert.Throws<InvalidOperationException>(
-                            () => principalKey.IsClustered()
-                        ).Message
+                        Assert
+                            .Throws<InvalidOperationException>(() => principalKey.IsClustered())
+                            .Message
                     );
 
                     Assert.Equal(
@@ -2016,15 +2027,19 @@ namespace TestNamespace
                     Assert.Null(referenceOwnedType[CoreAnnotationNames.NavigationAccessMode]);
                     Assert.Equal(
                         CoreStrings.RuntimeModelMissingData,
-                        Assert.Throws<InvalidOperationException>(
-                            () => referenceOwnedType.GetPropertyAccessMode()
-                        ).Message
+                        Assert
+                            .Throws<InvalidOperationException>(
+                                () => referenceOwnedType.GetPropertyAccessMode()
+                            )
+                            .Message
                     );
                     Assert.Equal(
                         CoreStrings.RuntimeModelMissingData,
-                        Assert.Throws<InvalidOperationException>(
-                            () => referenceOwnedType.GetNavigationAccessMode()
-                        ).Message
+                        Assert
+                            .Throws<InvalidOperationException>(
+                                () => referenceOwnedType.GetNavigationAccessMode()
+                            )
+                            .Message
                     );
 
                     var referenceOwnership = referenceOwnedNavigation.ForeignKey;
@@ -2133,9 +2148,11 @@ namespace TestNamespace
                     );
                     Assert.Equal(
                         CoreStrings.RuntimeModelMissingData,
-                        Assert.Throws<InvalidOperationException>(
-                            () => collectionOwnedType.IsTableExcludedFromMigrations()
-                        ).Message
+                        Assert
+                            .Throws<InvalidOperationException>(
+                                () => collectionOwnedType.IsTableExcludedFromMigrations()
+                            )
+                            .Message
                     );
                     Assert.Null(collectionOwnedType.BaseType);
                     Assert.IsType<ConstructorBinding>(collectionOwnedType.ConstructorBinding);
@@ -2184,7 +2201,9 @@ namespace TestNamespace
                     );
                     Assert.Same(
                         derivedSkipNavigation.Inverse,
-                        derivedSkipNavigation.Inverse.ForeignKey
+                        derivedSkipNavigation
+                            .Inverse
+                            .ForeignKey
                             .GetReferencingSkipNavigations()
                             .Single()
                     );
@@ -2214,9 +2233,9 @@ namespace TestNamespace
                     Assert.Null(joinType[RelationalAnnotationNames.Comment]);
                     Assert.Equal(
                         CoreStrings.RuntimeModelMissingData,
-                        Assert.Throws<InvalidOperationException>(
-                            () => joinType.GetComment()
-                        ).Message
+                        Assert
+                            .Throws<InvalidOperationException>(() => joinType.GetComment())
+                            .Message
                     );
                     Assert.Null(joinType.GetQueryFilter());
 
@@ -2244,9 +2263,9 @@ namespace TestNamespace
                     Assert.Null(rowid[RelationalAnnotationNames.ColumnOrder]);
                     Assert.Equal(
                         CoreStrings.RuntimeModelMissingData,
-                        Assert.Throws<InvalidOperationException>(
-                            () => rowid.GetColumnOrder()
-                        ).Message
+                        Assert
+                            .Throws<InvalidOperationException>(() => rowid.GetColumnOrder())
+                            .Message
                     );
                     Assert.Null(rowid.GetValueConverter());
                     Assert.NotNull(rowid.GetValueComparer());
@@ -2405,7 +2424,8 @@ namespace TestNamespace
                         eb.Property(e => e.Id)
                             .UseIdentityColumn(2, 3)
                             .IsSparse()
-                            .Metadata.SetColumnName(
+                            .Metadata
+                            .SetColumnName(
                                 "DerivedId",
                                 StoreObjectIdentifier.Table("PrincipalDerived")
                             );
@@ -2414,7 +2434,8 @@ namespace TestNamespace
                             .UsePropertyAccessMode(PropertyAccessMode.FieldDuringConstruction)
                             .HasColumnType("geometry")
                             .HasDefaultValue(
-                                NtsGeometryServices.Instance
+                                NtsGeometryServices
+                                    .Instance
                                     .CreateGeometryFactory(srid: 0)
                                     .CreatePoint(new CoordinateZM(0, 0, 0, 0))
                             )
@@ -3043,7 +3064,12 @@ namespace TestNamespace
                     Assert.False(getDataParameterless.StoreFunction.IsBuiltIn);
                     Assert.Equal(
                         typeof(Data),
-                        getDataParameterless.StoreFunction.EntityTypeMappings.Single().EntityType.ClrType
+                        getDataParameterless
+                            .StoreFunction
+                            .EntityTypeMappings
+                            .Single()
+                            .EntityType
+                            .ClrType
                     );
                     Assert.Equal(0, getDataParameterless.Parameters.Count);
 
@@ -3137,13 +3163,15 @@ namespace TestNamespace
                     .IsNullable(false)
                     .HasParameter("id")
                     .PropagatesNullability()
-                    .Metadata.SetAnnotation("MyAnnotation", new[] { 1L });
+                    .Metadata
+                    .SetAnnotation("MyAnnotation", new[] { 1L });
 
                 modelBuilder
                     .HasDbFunction(typeof(DbFunctionContext).GetMethod(nameof(IsDateStatic)))
                     .HasName("IsDate")
                     .IsBuiltIn()
-                    .Metadata.SetAnnotation("MyGuid", new Guid());
+                    .Metadata
+                    .SetAnnotation("MyGuid", new Guid());
 
                 modelBuilder.HasDbFunction(
                     typeof(DbFunctionContext).GetMethod(nameof(GetData), new Type[] { typeof(int) })
@@ -3532,9 +3560,11 @@ namespace TestNamespace
 
                     Assert.Equal(
                         CoreStrings.RuntimeModelMissingData,
-                        Assert.Throws<InvalidOperationException>(
-                            () => dataEntity.GetCheckConstraints()
-                        ).Message
+                        Assert
+                            .Throws<InvalidOperationException>(
+                                () => dataEntity.GetCheckConstraints()
+                            )
+                            .Message
                     );
                 }
             );
@@ -4114,7 +4144,8 @@ namespace TestNamespace
             options.ModelNamespace ??= "TestNamespace";
             options.ContextType = context.GetType();
 
-            var generator = DesignTestHelpers.Instance
+            var generator = DesignTestHelpers
+                .Instance
                 .CreateDesignServiceProvider(
                     context.GetService<IDatabaseProvider>().Name,
                     additionalDesignTimeServices: additionalDesignTimeServices
@@ -4126,9 +4157,11 @@ namespace TestNamespace
             {
                 Assert.Equal(
                     expectedExceptionMessage,
-                    Assert.Throws<InvalidOperationException>(
-                        () => generator.GenerateModel(model, options)
-                    ).Message
+                    Assert
+                        .Throws<InvalidOperationException>(
+                            () => generator.GenerateModel(model, options)
+                        )
+                        .Message
                 );
                 return;
             }

@@ -186,10 +186,12 @@ namespace System
         {
             if (!s_consoleInitialized)
             {
-                s_console =
-                    (JSObject)System.Runtime.InteropServices.JavaScript.Runtime.GetGlobalObject(
-                        "console"
-                    );
+                s_console = (JSObject)System
+                    .Runtime
+                    .InteropServices
+                    .JavaScript
+                    .Runtime
+                    .GetGlobalObject("console");
                 s_consoleInitialized = true;
             }
 

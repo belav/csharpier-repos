@@ -233,12 +233,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UseDeconstruction
                 typeNode,
                 SyntaxFactory.ParenthesizedVariableDesignation(
                     SyntaxFactory.SeparatedList<VariableDesignationSyntax>(
-                        tupleType.TupleElements.Select(
-                            e =>
-                                SyntaxFactory.SingleVariableDesignation(
-                                    SyntaxFactory.Identifier(e.Name.EscapeIdentifier())
-                                )
-                        )
+                        tupleType
+                            .TupleElements
+                            .Select(
+                                e =>
+                                    SyntaxFactory.SingleVariableDesignation(
+                                        SyntaxFactory.Identifier(e.Name.EscapeIdentifier())
+                                    )
+                            )
                     )
                 )
             );
@@ -248,7 +250,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseDeconstruction
                 typeNode.OpenParenToken,
                 SyntaxFactory.SeparatedList<ArgumentSyntax>(
                     new SyntaxNodeOrTokenList(
-                        typeNode.Elements
+                        typeNode
+                            .Elements
                             .GetWithSeparators()
                             .Select(ConvertTupleTypeElementComponent)
                     )

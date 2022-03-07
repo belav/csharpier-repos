@@ -60,8 +60,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
 
                 foreach (var item in items.OfType<SourceGeneratedFileItem>())
                 {
-                    var documentNavigationService =
-                        item.Workspace.Services.GetService<IDocumentNavigationService>();
+                    var documentNavigationService = item.Workspace
+                        .Services
+                        .GetService<IDocumentNavigationService>();
                     if (documentNavigationService != null)
                     {
                         // TODO: we're navigating back to the top of the file, do we have a way to just bring it to the focus and that's it?

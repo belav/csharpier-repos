@@ -51,7 +51,9 @@ namespace System.CommandLine.Tests
                 .Invoking(a => a.GetDefaultValue())
                 .Should()
                 .Throw<InvalidOperationException>()
-                .Which.Message.Should()
+                .Which
+                .Message
+                .Should()
                 .Be("Argument \"the-arg\" does not have a default value");
         }
 
@@ -134,9 +136,12 @@ namespace System.CommandLine.Tests
 
                 argument
                     .Parse("x")
-                    .Errors.Should()
+                    .Errors
+                    .Should()
                     .ContainSingle(e => e.SymbolResult.Symbol == argument)
-                    .Which.Message.Should()
+                    .Which
+                    .Message
+                    .Should()
                     .Be("oops!");
             }
 
@@ -154,9 +159,12 @@ namespace System.CommandLine.Tests
 
                 argument
                     .Parse("")
-                    .Errors.Should()
+                    .Errors
+                    .Should()
                     .ContainSingle(e => e.SymbolResult.Symbol == argument)
-                    .Which.Message.Should()
+                    .Which
+                    .Message
+                    .Should()
                     .Be("oops!");
             }
 
@@ -300,7 +308,9 @@ namespace System.CommandLine.Tests
                 resultForOptionX
                     .Should()
                     .BeOfType<OptionResult>()
-                    .Which.Option.Should()
+                    .Which
+                    .Option
+                    .Should()
                     .BeSameAs(optionX);
             }
 
@@ -455,7 +465,9 @@ namespace System.CommandLine.Tests
                 getValue
                     .Should()
                     .Throw<InvalidOperationException>()
-                    .Which.Message.Should()
+                    .Which
+                    .Message
+                    .Should()
                     .Be("'not-an-int' is not an integer");
             }
 
@@ -579,7 +591,8 @@ namespace System.CommandLine.Tests
 
                 var parseResult = command.Parse("1 2 3 4 5 6 7 8");
 
-                parseResult.UnparsedTokens
+                parseResult
+                    .UnparsedTokens
                     .Should()
                     .BeEquivalentTo(
                         new[] { "4", "5", "6", "7", "8" },
@@ -614,7 +627,8 @@ namespace System.CommandLine.Tests
 
                 parseResult
                     .FindResultFor(argument1)
-                    .Tokens.Select(t => t.Value)
+                    .Tokens
+                    .Select(t => t.Value)
                     .Should()
                     .BeEquivalentTo(
                         new[] { "1", "2", "3" },
@@ -623,7 +637,8 @@ namespace System.CommandLine.Tests
 
                 parseResult
                     .FindResultFor(argument2)
-                    .Tokens.Select(t => t.Value)
+                    .Tokens
+                    .Select(t => t.Value)
                     .Should()
                     .BeEquivalentTo(
                         new[] { "4", "5", "6", "7", "8" },
@@ -648,7 +663,9 @@ namespace System.CommandLine.Tests
                     .Invoking(a => a.Parse("1 2 3"))
                     .Should()
                     .Throw<ArgumentOutOfRangeException>()
-                    .Which.Message.Should()
+                    .Which
+                    .Message
+                    .Should()
                     .ContainAll("Value must be at least 1.", "Actual value was -1.");
             }
 
@@ -670,7 +687,9 @@ namespace System.CommandLine.Tests
                     .Invoking(a => a.Parse("1 2 3"))
                     .Should()
                     .Throw<InvalidOperationException>()
-                    .Which.Message.Should()
+                    .Which
+                    .Message
+                    .Should()
                     .Be("OnlyTake can only be called once.");
             }
         }

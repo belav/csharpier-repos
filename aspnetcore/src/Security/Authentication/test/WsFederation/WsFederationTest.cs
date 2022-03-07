@@ -341,10 +341,12 @@ public class WsFederationTest
         {
             if (cookie.Value.HasValue)
             {
-                request.Headers.Add(
-                    HeaderNames.Cookie,
-                    new CookieHeaderValue(cookie.Name, cookie.Value).ToString()
-                );
+                request
+                    .Headers
+                    .Add(
+                        HeaderNames.Cookie,
+                        new CookieHeaderValue(cookie.Name, cookie.Value).ToString()
+                    );
             }
         }
     }
@@ -394,16 +396,20 @@ public class WsFederationTest
                                                 OnMessageReceived = context =>
                                                 {
                                                     if (
-                                                        !context.ProtocolMessage.Parameters.TryGetValue(
-                                                            "suppressWctx",
-                                                            out var suppress
-                                                        )
+                                                        !context
+                                                            .ProtocolMessage
+                                                            .Parameters
+                                                            .TryGetValue(
+                                                                "suppressWctx",
+                                                                out var suppress
+                                                            )
                                                     )
                                                     {
                                                         Assert.True(
-                                                            context.ProtocolMessage.Wctx.Equals(
-                                                                "customValue"
-                                                            ),
+                                                            context
+                                                                .ProtocolMessage
+                                                                .Wctx
+                                                                .Equals("customValue"),
                                                             "wctx is not my custom value"
                                                         );
                                                     }
@@ -446,8 +452,10 @@ public class WsFederationTest
 
                                                     if (context.Principal != null)
                                                     {
-                                                        var identity =
-                                                            context.Principal.Identities.Single();
+                                                        var identity = context
+                                                            .Principal
+                                                            .Identities
+                                                            .Single();
                                                         identity.AddClaim(
                                                             new Claim("ReturnEndpoint", "true")
                                                         );
@@ -611,9 +619,9 @@ public class WsFederationTest
                     }
                     else
                     {
-                        await context.Response.WriteAsync(
-                            WsFederationDefaults.AuthenticationScheme
-                        );
+                        await context
+                            .Response
+                            .WriteAsync(WsFederationDefaults.AuthenticationScheme);
                     }
                 }
             }

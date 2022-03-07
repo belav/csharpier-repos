@@ -2924,11 +2924,9 @@ namespace System.Text.Json.Tests
                         string errorMessage =
                             $"expectedLineNumber: {expectedlineNumber} | actual: {ex.LineNumber} | index: {i} | option: {commentHandling}";
                         string firstSegmentString = Encoding.UTF8.GetString(dataUtf8, 0, i);
-                        string secondSegmentString = Encoding.UTF8.GetString(
-                            dataUtf8,
-                            i,
-                            dataUtf8.Length - i
-                        );
+                        string secondSegmentString = Encoding
+                            .UTF8
+                            .GetString(dataUtf8, i, dataUtf8.Length - i);
                         errorMessage += " | " + firstSegmentString + " | " + secondSegmentString;
                         Assert.True(expectedlineNumber == ex.LineNumber, errorMessage);
                         errorMessage =

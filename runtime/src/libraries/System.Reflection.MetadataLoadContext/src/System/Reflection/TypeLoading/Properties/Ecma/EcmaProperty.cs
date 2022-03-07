@@ -82,10 +82,9 @@ namespace System.Reflection.TypeLoading.Ecma
         private Type[] GetCustomModifiers(bool isRequired)
         {
             RoType type =
-                PropertyDefinition.DecodeSignature(
-                    new EcmaModifiedTypeProvider(_module),
-                    TypeContext
-                ).ReturnType;
+                PropertyDefinition
+                    .DecodeSignature(new EcmaModifiedTypeProvider(_module), TypeContext)
+                    .ReturnType;
             return type.ExtractCustomModifiers(isRequired);
         }
 
@@ -122,12 +121,14 @@ namespace System.Reflection.TypeLoading.Ecma
         protected sealed override RoMethod? ComputeGetterMethod() =>
             PropertyDefinition
                 .GetAccessors()
-                .Getter.ToMethodOrNull(GetRoDeclaringType(), ReflectedType);
+                .Getter
+                .ToMethodOrNull(GetRoDeclaringType(), ReflectedType);
 
         protected sealed override RoMethod? ComputeSetterMethod() =>
             PropertyDefinition
                 .GetAccessors()
-                .Setter.ToMethodOrNull(GetRoDeclaringType(), ReflectedType);
+                .Setter
+                .ToMethodOrNull(GetRoDeclaringType(), ReflectedType);
 
         private MetadataReader Reader => _module.Reader;
         private MetadataLoadContext Loader => GetRoModule().Loader;

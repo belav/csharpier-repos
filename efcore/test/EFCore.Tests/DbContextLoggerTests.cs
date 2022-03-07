@@ -260,9 +260,10 @@ namespace Microsoft.EntityFrameworkCore
                         eventData =>
                             stream.Write(
                                 "Initialized "
-                                    + (
-                                        (ContextInitializedEventData)eventData
-                                    ).Context.GetType().Name
+                                    + ((ContextInitializedEventData)eventData)
+                                        .Context
+                                        .GetType()
+                                        .Name
                             )
                     )
             );

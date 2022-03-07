@@ -557,7 +557,8 @@ namespace Microsoft.EntityFrameworkCore.Query
 
             customerID = "ALFKI";
 
-            var customers = context.Customers
+            var customers = context
+                .Customers
                 .Where(c => orders.Any(o => o.CustomerID == c.CustomerID))
                 .ToList();
 
@@ -565,7 +566,8 @@ namespace Microsoft.EntityFrameworkCore.Query
 
             customerID = "ANATR";
 
-            customers = context.Customers
+            customers = context
+                .Customers
                 .Where(c => orders.Any(o => o.CustomerID == c.CustomerID))
                 .ToList();
 
@@ -2208,10 +2210,12 @@ namespace Microsoft.EntityFrameworkCore.Query
         public virtual void Where_navigation_contains()
         {
             using var context = CreateContext();
-            var customer = context.Customers
+            var customer = context
+                .Customers
                 .Include(c => c.Orders)
                 .Single(c => c.CustomerID == "ALFKI");
-            var orderDetails = context.OrderDetails
+            var orderDetails = context
+                .OrderDetails
                 .Where(od => customer.Orders.Contains(od.Order))
                 .ToList();
 
@@ -2441,7 +2445,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                                 ss.Set<Order>()
                                     .Where(o => o.CustomerID == "John Doe")
                                     .Select(o => o.CustomerID)
-                                    .FirstOrDefault().Length == 0
+                                    .FirstOrDefault()
+                                    .Length == 0
                         ),
                 ss => ss.Set<Customer>().Where(c => false)
             );

@@ -42,9 +42,9 @@ internal class TestUtils
         var expires = context.Request.Query["Expires"];
         if (!string.IsNullOrEmpty(expires))
         {
-            headers.Expires = DateTimeOffset.Now.AddSeconds(
-                int.Parse(expires, CultureInfo.InvariantCulture)
-            );
+            headers.Expires = DateTimeOffset
+                .Now
+                .AddSeconds(int.Parse(expires, CultureInfo.InvariantCulture));
         }
 
         if (headers.CacheControl == null)

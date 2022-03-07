@@ -233,9 +233,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
 
             if (symbol != null)
             {
-                result.Builder.Append(
-                    symbol.ToDisplayString(SymbolDisplayFormat.ILVisualizationFormat)
-                );
+                result
+                    .Builder
+                    .Append(symbol.ToDisplayString(SymbolDisplayFormat.ILVisualizationFormat));
             }
             else
             {

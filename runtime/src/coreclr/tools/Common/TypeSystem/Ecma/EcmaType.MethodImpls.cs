@@ -37,9 +37,11 @@ namespace Internal.TypeSystem.Ecma
                 if (methodDeclHandleKind == HandleKind.MethodSpecification)
                 {
                     methodDeclCheckHandle =
-                        metadataReader.GetMethodSpecification(
-                            (MethodSpecificationHandle)methodDeclCheckHandle
-                        ).Method;
+                        metadataReader
+                            .GetMethodSpecification(
+                                (MethodSpecificationHandle)methodDeclCheckHandle
+                            )
+                            .Method;
                     methodDeclHandleKind = methodDeclCheckHandle.Kind;
                 }
 
@@ -50,9 +52,11 @@ namespace Internal.TypeSystem.Ecma
                     case HandleKind.MethodDefinition:
                         if (
                             stringComparer.Equals(
-                                metadataReader.GetMethodDefinition(
-                                    (MethodDefinitionHandle)methodDeclCheckHandle
-                                ).Name,
+                                metadataReader
+                                    .GetMethodDefinition(
+                                        (MethodDefinitionHandle)methodDeclCheckHandle
+                                    )
+                                    .Name,
                                 declName
                             )
                         )
@@ -64,9 +68,11 @@ namespace Internal.TypeSystem.Ecma
                     case HandleKind.MemberReference:
                         if (
                             stringComparer.Equals(
-                                metadataReader.GetMemberReference(
-                                    (MemberReferenceHandle)methodDeclCheckHandle
-                                ).Name,
+                                metadataReader
+                                    .GetMemberReference(
+                                        (MemberReferenceHandle)methodDeclCheckHandle
+                                    )
+                                    .Name,
                                 declName
                             )
                         )
@@ -118,9 +124,11 @@ namespace Internal.TypeSystem.Ecma
                 if (methodDeclHandleKind == HandleKind.MethodSpecification)
                 {
                     methodDeclCheckHandle =
-                        metadataReader.GetMethodSpecification(
-                            (MethodSpecificationHandle)methodDeclCheckHandle
-                        ).Method;
+                        metadataReader
+                            .GetMethodSpecification(
+                                (MethodSpecificationHandle)methodDeclCheckHandle
+                            )
+                            .Method;
                     methodDeclHandleKind = methodDeclCheckHandle.Kind;
                 }
 
@@ -135,9 +143,9 @@ namespace Internal.TypeSystem.Ecma
 
                     case HandleKind.MemberReference:
                         EntityHandle owningTypeHandle =
-                            metadataReader.GetMemberReference(
-                                (MemberReferenceHandle)methodDeclCheckHandle
-                            ).Parent;
+                            metadataReader
+                                .GetMemberReference((MemberReferenceHandle)methodDeclCheckHandle)
+                                .Parent;
                         owningType = _module.GetObject(owningTypeHandle) as MetadataType;
                         break;
 

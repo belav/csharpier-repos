@@ -57,10 +57,12 @@ namespace System.CommandLine.Rendering.Tests
         [Fact]
         public void FormattableString_can_contain_format_strings_that_reformat_the_input_value()
         {
-            _renderer.Formatter.AddFormatter<DateTime>(
-                d =>
-                    $"{d:d} {Color.Foreground.DarkGray.EscapeSequence}{d:t}{Color.Foreground.Default.EscapeSequence}"
-            );
+            _renderer
+                .Formatter
+                .AddFormatter<DateTime>(
+                    d =>
+                        $"{d:d} {Color.Foreground.DarkGray.EscapeSequence}{d:t}{Color.Foreground.Default.EscapeSequence}"
+                );
 
             var dateTime = DateTime.Parse("8/2/2018 6pm");
 

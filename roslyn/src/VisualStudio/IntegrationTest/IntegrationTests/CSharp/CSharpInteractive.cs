@@ -36,53 +36,63 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
         [WpfFact]
         public void ForStatement()
         {
-            VisualStudio.InteractiveWindow.SubmitText(
-                "for (int i = 0; i < 10; i++) Console.WriteLine(i * i);"
-            );
+            VisualStudio
+                .InteractiveWindow
+                .SubmitText("for (int i = 0; i < 10; i++) Console.WriteLine(i * i);");
             VisualStudio.InteractiveWindow.WaitForLastReplOutputContains($"{81}");
         }
 
         [WpfFact]
         public void ForEachStatement()
         {
-            VisualStudio.InteractiveWindow.SubmitText(
-                @"foreach (var f in System.IO.Directory.GetFiles(@""c:\windows"")) Console.WriteLine($""{f}"".ToLower());"
-            );
+            VisualStudio
+                .InteractiveWindow
+                .SubmitText(
+                    @"foreach (var f in System.IO.Directory.GetFiles(@""c:\windows"")) Console.WriteLine($""{f}"".ToLower());"
+                );
             VisualStudio.InteractiveWindow.WaitForLastReplOutputContains(@"c:\windows\win.ini");
         }
 
         [WpfFact]
         public void TopLevelMethod()
         {
-            VisualStudio.InteractiveWindow.SubmitText(
-                @"int Fac(int x)
+            VisualStudio
+                .InteractiveWindow
+                .SubmitText(
+                    @"int Fac(int x)
 {
     return x < 1 ? 1 : x * Fac(x - 1);
 }
 Fac(4)"
-            );
+                );
             VisualStudio.InteractiveWindow.WaitForLastReplOutput($"{24}");
         }
 
         [WpfFact]
         public async Task WpfInteractionAsync()
         {
-            VisualStudio.InteractiveWindow.SubmitText(
-                @"#r ""WindowsBase""
+            VisualStudio
+                .InteractiveWindow
+                .SubmitText(
+                    @"#r ""WindowsBase""
 #r ""PresentationCore""
 #r ""PresentationFramework""
 #r ""System.Xaml"""
-            );
+                );
 
-            VisualStudio.InteractiveWindow.SubmitText(
-                @"using System.Windows;
+            VisualStudio
+                .InteractiveWindow
+                .SubmitText(
+                    @"using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;"
-            );
+                );
 
-            VisualStudio.InteractiveWindow.SubmitText(
-                @"var w = new Window();
+            VisualStudio
+                .InteractiveWindow
+                .SubmitText(
+                    @"var w = new Window();
 w.Title = ""Hello World"";
 w.FontFamily = new FontFamily(""Calibri"");
 w.FontSize = 24;
@@ -90,12 +100,14 @@ w.Height = 300;
 w.Width = 300;
 w.Topmost = true;
 w.Visibility = Visibility.Visible;"
-            );
+                );
 
             var testValue = Guid.NewGuid();
 
-            VisualStudio.InteractiveWindow.SubmitText(
-                $@"var b = new Button();
+            VisualStudio
+                .InteractiveWindow
+                .SubmitText(
+                    $@"var b = new Button();
 b.Content = ""{testValue}"";
 b.Margin = new Thickness(40);
 b.Click += (sender, e) => Console.WriteLine(""Hello, World!"");
@@ -103,7 +115,7 @@ b.Click += (sender, e) => Console.WriteLine(""Hello, World!"");
 var g = new Grid();
 g.Children.Add(b);
 w.Content = g;"
-            );
+                );
 
             await AutomationElementHelper.ClickAutomationElementAsync(
                 testValue.ToString(),

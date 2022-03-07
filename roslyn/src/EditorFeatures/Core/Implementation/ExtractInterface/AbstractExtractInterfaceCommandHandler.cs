@@ -39,10 +39,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.ExtractInterface
         )
         {
             using (
-                context.OperationContext.AddScope(
-                    allowCancellation: true,
-                    EditorFeaturesResources.Extract_Interface
-                )
+                context
+                    .OperationContext
+                    .AddScope(allowCancellation: true, EditorFeaturesResources.Extract_Interface)
             )
             {
                 var subjectBuffer = args.SubjectBuffer;
@@ -57,8 +56,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.ExtractInterface
                     return false;
                 }
 
-                var document =
-                    subjectBuffer.CurrentSnapshot.GetFullyLoadedOpenDocumentInCurrentContextWithChanges(
+                var document = subjectBuffer
+                    .CurrentSnapshot
+                    .GetFullyLoadedOpenDocumentInCurrentContextWithChanges(
                         context.OperationContext,
                         _threadingContext
                     );
@@ -73,18 +73,21 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.ExtractInterface
                 context.OperationContext.TakeOwnership();
                 var extractInterfaceService =
                     document.GetLanguageService<AbstractExtractInterfaceService>();
-                var result = _threadingContext.JoinableTaskFactory.Run(
-                    () =>
-                        extractInterfaceService.ExtractInterfaceAsync(
-                            document,
-                            caretPoint.Value.Position,
-                            (errorMessage, severity) =>
-                                workspace.Services
-                                    .GetService<INotificationService>()
-                                    .SendNotification(errorMessage, severity: severity),
-                            CancellationToken.None
-                        )
-                );
+                var result = _threadingContext
+                    .JoinableTaskFactory
+                    .Run(
+                        () =>
+                            extractInterfaceService.ExtractInterfaceAsync(
+                                document,
+                                caretPoint.Value.Position,
+                                (errorMessage, severity) =>
+                                    workspace
+                                        .Services
+                                        .GetService<INotificationService>()
+                                        .SendNotification(errorMessage, severity: severity),
+                                CancellationToken.None
+                            )
+                    );
 
                 if (result == null || !result.Succeeded)
                 {

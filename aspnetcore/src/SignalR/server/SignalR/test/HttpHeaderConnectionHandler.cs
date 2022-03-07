@@ -28,7 +28,8 @@ public class HttpHeaderConnectionHandler : ConnectionHandler
                 .FirstOrDefault(
                     h => string.Equals(h.Key, headerName, StringComparison.OrdinalIgnoreCase)
                 )
-                .Value.ToArray();
+                .Value
+                .ToArray();
 
             var data = Encoding.UTF8.GetBytes(string.Join(",", headerValues));
 

@@ -98,9 +98,9 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Utilities
                 return Task.Factory.SafeStartNewFromAsync(
                     async () =>
                     {
-                        await ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
-                            cancellationToken
-                        );
+                        await ThreadingContext
+                            .JoinableTaskFactory
+                            .SwitchToMainThreadAsync(cancellationToken);
 
                         action();
                     },

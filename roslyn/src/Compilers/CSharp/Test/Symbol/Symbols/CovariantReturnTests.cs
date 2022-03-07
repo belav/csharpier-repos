@@ -313,10 +313,9 @@ namespace System.Runtime.CompilerServices
                 Assert.True(method.IsOverride);
                 Assert.False(method.IsVirtual);
                 Assert.True(method.IsMetadataVirtual(ignoreInterfaceImplementationChanges: true));
-                var isCovariant = !method.ReturnType.Equals(
-                    overriddenMethod.ReturnType,
-                    TypeCompareKind.AllIgnoreOptions
-                );
+                var isCovariant = !method
+                    .ReturnType
+                    .Equals(overriddenMethod.ReturnType, TypeCompareKind.AllIgnoreOptions);
                 var checkMetadata = hasReturnConversion(
                     method.ReturnType,
                     overriddenMethod.ReturnType
@@ -378,10 +377,9 @@ namespace System.Runtime.CompilerServices
                 && overriddenMember is PropertySymbol overriddenProperty
             )
             {
-                var isCovariant = !property.Type.Equals(
-                    overriddenProperty.Type,
-                    TypeCompareKind.AllIgnoreOptions
-                );
+                var isCovariant = !property
+                    .Type
+                    .Equals(overriddenProperty.Type, TypeCompareKind.AllIgnoreOptions);
                 if (
                     property.GetMethod is MethodSymbol getMethod
                     && overriddenProperty.GetMethod is MethodSymbol overriddenGetMethod
@@ -434,10 +432,9 @@ namespace System.Runtime.CompilerServices
                 member is EventSymbol eventSymbol && overriddenMember is EventSymbol overriddenEvent
             )
             {
-                var isCovariant = !eventSymbol.Type.Equals(
-                    overriddenEvent.Type,
-                    TypeCompareKind.AllIgnoreOptions
-                );
+                var isCovariant = !eventSymbol
+                    .Type
+                    .Equals(overriddenEvent.Type, TypeCompareKind.AllIgnoreOptions);
                 if (
                     eventSymbol.AddMethod is MethodSymbol addMethod
                     && overriddenEvent.AddMethod is MethodSymbol overriddenAddMethod
@@ -689,10 +686,9 @@ namespace System.Runtime.CompilerServices
                 assignments,
                 references: references,
                 targetFramework: TargetFramework.Empty,
-                options: TestOptions.ReleaseDll.WithSpecificDiagnosticOptions(
-                    "CS1701",
-                    ReportDiagnostic.Suppress
-                ),
+                options: TestOptions
+                    .ReleaseDll
+                    .WithSpecificDiagnosticOptions("CS1701", ReportDiagnostic.Suppress),
                 parseOptions: parseOptions
             );
 

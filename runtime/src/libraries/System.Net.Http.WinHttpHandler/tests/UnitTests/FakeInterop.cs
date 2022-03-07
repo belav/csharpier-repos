@@ -377,9 +377,9 @@ internal static partial class Interop
 
             if (infoLevel == Interop.WinHttp.WINHTTP_QUERY_CONTENT_ENCODING)
             {
-                string compression = TestServer.ResponseHeaders.Contains(
-                    "Content-Encoding: deflate"
-                )
+                string compression = TestServer
+                    .ResponseHeaders
+                    .Contains("Content-Encoding: deflate")
                   ? "deflate"
                   : TestServer.ResponseHeaders.Contains("Content-Encoding: gzip")
                       ? "gzip"
@@ -387,8 +387,9 @@ internal static partial class Interop
 
                 if (compression == null)
                 {
-                    TestControl.LastWin32Error =
-                        (int)Interop.WinHttp.ERROR_WINHTTP_HEADER_NOT_FOUND;
+                    TestControl.LastWin32Error = (int)Interop
+                        .WinHttp
+                        .ERROR_WINHTTP_HEADER_NOT_FOUND;
                     return false;
                 }
 
@@ -767,8 +768,9 @@ internal static partial class Interop
                 proxyInfo.Proxy = IntPtr.Zero;
                 proxyInfo.ProxyBypass = IntPtr.Zero;
 
-                TestControl.LastWin32Error =
-                    (int)Interop.WinHttp.ERROR_WINHTTP_AUTODETECTION_FAILED;
+                TestControl.LastWin32Error = (int)Interop
+                    .WinHttp
+                    .ERROR_WINHTTP_AUTODETECTION_FAILED;
                 return false;
             }
 

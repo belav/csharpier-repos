@@ -60,8 +60,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageClient
 
         protected internal override VSServerCapabilities GetCapabilities()
         {
-            var experimentationService =
-                Workspace.Services.GetRequiredService<IExperimentationService>();
+            var experimentationService = Workspace
+                .Services
+                .GetRequiredService<IExperimentationService>();
             var isLspEditorEnabled = experimentationService.IsExperimentEnabled(
                 VisualStudioWorkspaceContextService.LspEditorFeatureFlagName
             );

@@ -19,18 +19,18 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             private readonly CancellationToken _cancellationToken;
             private readonly int _position;
             private readonly AbstractOverrideCompletionProvider _provider;
-            private readonly SymbolDisplayFormat _overrideNameFormat =
-                SymbolDisplayFormats.NameFormat
-                    .WithParameterOptions(
-                        SymbolDisplayParameterOptions.IncludeDefaultValue
-                            | SymbolDisplayParameterOptions.IncludeExtensionThis
-                            | SymbolDisplayParameterOptions.IncludeType
-                            | SymbolDisplayParameterOptions.IncludeName
-                            | SymbolDisplayParameterOptions.IncludeParamsRefOut
-                    )
-                    .AddMiscellaneousOptions(
-                        SymbolDisplayMiscellaneousOptions.IncludeNullableReferenceTypeModifier
-                    );
+            private readonly SymbolDisplayFormat _overrideNameFormat = SymbolDisplayFormats
+                .NameFormat
+                .WithParameterOptions(
+                    SymbolDisplayParameterOptions.IncludeDefaultValue
+                        | SymbolDisplayParameterOptions.IncludeExtensionThis
+                        | SymbolDisplayParameterOptions.IncludeType
+                        | SymbolDisplayParameterOptions.IncludeName
+                        | SymbolDisplayParameterOptions.IncludeParamsRefOut
+                )
+                .AddMiscellaneousOptions(
+                    SymbolDisplayMiscellaneousOptions.IncludeNullableReferenceTypeModifier
+                );
 
             private readonly Document _document;
             private readonly SourceText _text;

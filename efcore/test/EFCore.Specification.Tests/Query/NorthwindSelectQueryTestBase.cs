@@ -523,7 +523,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         public virtual void Select_nested_collection_multi_level()
         {
             using var context = CreateContext();
-            var customers = context.Customers
+            var customers = context
+                .Customers
                 .Where(c => c.CustomerID.StartsWith("A"))
                 .Select(
                     c =>
@@ -545,7 +546,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         public virtual void Select_nested_collection_multi_level2()
         {
             using var context = CreateContext();
-            var customers = context.Customers
+            var customers = context
+                .Customers
                 .Where(c => c.CustomerID.StartsWith("A"))
                 .Select(
                     c =>
@@ -567,13 +569,15 @@ namespace Microsoft.EntityFrameworkCore.Query
         public virtual void Select_nested_collection_multi_level3()
         {
             using var context = CreateContext();
-            var customers = context.Customers
+            var customers = context
+                .Customers
                 .Where(c => c.CustomerID.StartsWith("A"))
                 .Select(
                     c =>
                         new
                         {
-                            OrderDates = context.Orders
+                            OrderDates = context
+                                .Orders
                                 .Where(o => o.OrderID < 10500)
                                 .Where(o => c.CustomerID == o.CustomerID)
                                 .Select(o => o.OrderDate)
@@ -590,7 +594,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         public virtual void Select_nested_collection_multi_level4()
         {
             using var context = CreateContext();
-            var customers = context.Customers
+            var customers = context
+                .Customers
                 .Where(c => c.CustomerID.StartsWith("A"))
                 .Select(
                     c =>
@@ -618,7 +623,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         public virtual void Select_nested_collection_multi_level5()
         {
             using var context = CreateContext();
-            var customers = context.Customers
+            var customers = context
+                .Customers
                 .Where(c => c.CustomerID.StartsWith("A"))
                 .Select(
                     c =>
@@ -646,7 +652,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         public virtual void Select_nested_collection_multi_level6()
         {
             using var context = CreateContext();
-            var customers = context.Customers
+            var customers = context
+                .Customers
                 .Where(c => c.CustomerID.StartsWith("A"))
                 .Select(
                     c =>
@@ -1508,7 +1515,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                                     .ThenByDescending(o => o.OrderDate)
                                     .Select(o => o.CustomerID)
                                     .Take(2)
-                                    .FirstOrDefault().Length
+                                    .FirstOrDefault()
+                                    .Length
                         )
             );
         }
@@ -2092,7 +2100,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                                 (int?)ss.Set<Order>()
                                     .Where(o => o.CustomerID == "John Doe")
                                     .Select(o => o.CustomerID)
-                                    .FirstOrDefault().Length
+                                    .FirstOrDefault()
+                                    .Length
                         ),
                 ss =>
                     ss.Set<Customer>()
@@ -2149,7 +2158,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         public virtual async Task Filtered_collection_projection_is_tracked(bool async)
         {
             using var context = CreateContext();
-            var query = context.Customers
+            var query = context
+                .Customers
                 .Where(c => c.CustomerID.StartsWith("A"))
                 .Select(
                     c =>
@@ -2174,7 +2184,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         public virtual async Task Filtered_collection_projection_with_to_list_is_tracked(bool async)
         {
             using var context = CreateContext();
-            var query = context.Customers
+            var query = context
+                .Customers
                 .Where(c => c.CustomerID.StartsWith("A"))
                 .Select(
                     c =>
@@ -2390,7 +2401,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                                     c,
                                     c.Orders
                                         .OrderByDescending(o => o.OrderID)
-                                        .LastOrDefault().OrderDate
+                                        .LastOrDefault()
+                                        .OrderDate
                                 }
                         ),
                 entryCount: 4
@@ -2863,7 +2875,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                                 (int?)c.Orders
                                     .OrderBy(o => o.OrderID)
                                     .Select(o => o.CustomerID)
-                                    .FirstOrDefault().Length
+                                    .FirstOrDefault()
+                                    .Length
                         ),
                 ss =>
                     ss.Set<Customer>()
@@ -3403,9 +3416,9 @@ namespace Microsoft.EntityFrameworkCore.Query
                                 new
                                 {
                                     c.CustomerID,
-                                    Order = c.Orders.FirstOrDefault(
-                                        o => o.OrderID < 11000
-                                    ).OrderDate,
+                                    Order = c.Orders
+                                        .FirstOrDefault(o => o.OrderID < 11000)
+                                        .OrderDate,
                                     InterpolatedString = $"test{c.City}",
                                     NonInterpolatedString = "test" + c.City,
                                     Collection = new List<string>

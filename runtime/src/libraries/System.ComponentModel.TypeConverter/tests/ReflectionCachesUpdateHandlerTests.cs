@@ -29,7 +29,8 @@ namespace System.ComponentModel.Tests
             Assert.Equal(2, ac1.Count);
             Assert.Same(ac1[0], ac2[0]);
 
-            MethodInfo clearCache = typeof(TypeDescriptionProvider).Assembly
+            MethodInfo clearCache = typeof(TypeDescriptionProvider)
+                .Assembly
                 .GetType("System.ComponentModel.ReflectionCachesUpdateHandler", throwOnError: true)
                 .GetMethod("ClearCache");
             Assert.NotNull(clearCache);

@@ -240,13 +240,15 @@ namespace MS.Internal.Xml.XPath
                 case XmlDataType.Text:
                     string? s1 = Convert.ToString(x, _cinfo);
                     string? s2 = Convert.ToString(y, _cinfo);
-                    int result = _cinfo.CompareInfo.Compare(
-                        s1,
-                        s2,
-                        _caseOrder != XmlCaseOrder.None
-                          ? CompareOptions.IgnoreCase
-                          : CompareOptions.None
-                    );
+                    int result = _cinfo
+                        .CompareInfo
+                        .Compare(
+                            s1,
+                            s2,
+                            _caseOrder != XmlCaseOrder.None
+                              ? CompareOptions.IgnoreCase
+                              : CompareOptions.None
+                        );
 
                     if (result != 0 || _caseOrder == XmlCaseOrder.None)
                         return (_order == XmlSortOrder.Ascending) ? result : -result;

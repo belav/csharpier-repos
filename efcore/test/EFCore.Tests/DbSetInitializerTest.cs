@@ -24,9 +24,9 @@ namespace Microsoft.EntityFrameworkCore
                 new DbSetInitializer(setFinder, setSource)
             );
 
-            var serviceProvider = InMemoryTestHelpers.Instance.CreateServiceProvider(
-                customServices
-            );
+            var serviceProvider = InMemoryTestHelpers
+                .Instance
+                .CreateServiceProvider(customServices);
 
             using var context = new JustAContext(
                 new DbContextOptionsBuilder().UseInternalServiceProvider(serviceProvider).Options

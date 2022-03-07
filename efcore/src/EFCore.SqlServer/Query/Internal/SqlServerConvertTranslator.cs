@@ -47,8 +47,9 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
                 typeof(string)
             };
 
-        private static readonly IEnumerable<MethodInfo> _supportedMethods =
-            _typeMapping.Keys.SelectMany(
+        private static readonly IEnumerable<MethodInfo> _supportedMethods = _typeMapping
+            .Keys
+            .SelectMany(
                 t =>
                     typeof(Convert)
                         .GetTypeInfo()

@@ -25,11 +25,10 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Pythia.Api
             bool hideAdvancedMembers,
             Compilation compilation
         ) where T : ISymbol =>
-            Shared.Extensions.ISymbolExtensions.FilterToVisibleAndBrowsableSymbols(
-                symbols,
-                hideAdvancedMembers,
-                compilation
-            );
+            Shared
+                .Extensions
+                .ISymbolExtensions
+                .FilterToVisibleAndBrowsableSymbols(symbols, hideAdvancedMembers, compilation);
 
         public static bool IsAccessibleWithin(
             this ISymbol symbol,
@@ -48,11 +47,10 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Pythia.Api
             SemanticModel semanticModel,
             int position
         ) =>
-            Shared.Extensions.ISymbolExtensions.IsAwaitableNonDynamic(
-                symbol,
-                semanticModel,
-                position
-            );
+            Shared
+                .Extensions
+                .ISymbolExtensions
+                .IsAwaitableNonDynamic(symbol, semanticModel, position);
 
         public static bool IsExtensionMethod(this ISymbol symbol) =>
             Shared.Extensions.ISymbolExtensions.IsExtensionMethod(symbol);

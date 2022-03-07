@@ -31,27 +31,31 @@ namespace System.Diagnostics.Tests
                 "System.Diagnostics.EventLog.Messages.dll"
             );
             Assert.True(File.Exists(messageDllPath));
-            using SafeLibraryHandle hMessageDll = Interop.Kernel32.LoadLibraryExW(
-                messageDllPath,
-                IntPtr.Zero,
-                Interop.Kernel32.LOAD_LIBRARY_AS_DATAFILE
-            );
+            using SafeLibraryHandle hMessageDll = Interop
+                .Kernel32
+                .LoadLibraryExW(
+                    messageDllPath,
+                    IntPtr.Zero,
+                    Interop.Kernel32.LOAD_LIBRARY_AS_DATAFILE
+                );
 
             string messageString = "hello message";
             char[] buffer = new char[1024];
             fixed (char* pMessageString = messageString)
             {
                 IntPtr[] insertion = new[] { (IntPtr)pMessageString };
-                int messageLength = Interop.Kernel32.FormatMessage(
-                    Interop.Kernel32.FORMAT_MESSAGE_FROM_HMODULE
-                        | Interop.Kernel32.FORMAT_MESSAGE_ARGUMENT_ARRAY,
-                    hMessageDll,
-                    messageId,
-                    0,
-                    buffer,
-                    buffer.Length,
-                    insertion
-                );
+                int messageLength = Interop
+                    .Kernel32
+                    .FormatMessage(
+                        Interop.Kernel32.FORMAT_MESSAGE_FROM_HMODULE
+                            | Interop.Kernel32.FORMAT_MESSAGE_ARGUMENT_ARRAY,
+                        hMessageDll,
+                        messageId,
+                        0,
+                        buffer,
+                        buffer.Length,
+                        insertion
+                    );
 
                 Assert.True(messageLength > 0);
                 string formattedMessage = new string(buffer, 0, messageLength);

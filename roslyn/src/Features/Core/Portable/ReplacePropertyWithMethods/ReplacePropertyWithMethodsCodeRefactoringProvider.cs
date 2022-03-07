@@ -182,7 +182,8 @@ namespace Microsoft.CodeAnalysis.ReplacePropertyWithMethods
         private static bool HasAnyMatchingGetMethods(IPropertySymbol property, string name)
         {
             return property.GetMethod != null
-                && property.ContainingType
+                && property
+                    .ContainingType
                     .GetMembers(GetPrefix + name)
                     .OfType<IMethodSymbol>()
                     .Any(m => m.Parameters.Length == 0);
@@ -192,7 +193,8 @@ namespace Microsoft.CodeAnalysis.ReplacePropertyWithMethods
         {
             var comparer = SymbolEquivalenceComparer.Instance.SignatureTypeEquivalenceComparer;
             return property.SetMethod != null
-                && property.ContainingType
+                && property
+                    .ContainingType
                     .GetMembers(SetPrefix + name)
                     .OfType<IMethodSymbol>()
                     .Any(

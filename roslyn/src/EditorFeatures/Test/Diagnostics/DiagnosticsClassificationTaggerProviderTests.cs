@@ -46,9 +46,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
                 DiagnosticsClassificationTaggerProvider,
                 ClassificationTag
             >(workspace, analyzerMap);
-            var tagger = wrapper.TaggerProvider.CreateTagger<ClassificationTag>(
-                workspace.Documents.First().GetTextBuffer()
-            );
+            var tagger = wrapper
+                .TaggerProvider
+                .CreateTagger<ClassificationTag>(workspace.Documents.First().GetTextBuffer());
             using var disposable = tagger as IDisposable;
             // test first update
             await wrapper.WaitForTags();

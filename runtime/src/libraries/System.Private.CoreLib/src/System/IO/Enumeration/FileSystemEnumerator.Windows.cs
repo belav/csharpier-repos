@@ -91,19 +91,24 @@ namespace System.IO.Enumeration
             );
 
             Interop.NtDll.IO_STATUS_BLOCK statusBlock;
-            int status = Interop.NtDll.NtQueryDirectoryFile(
-                FileHandle: _directoryHandle,
-                Event: IntPtr.Zero,
-                ApcRoutine: IntPtr.Zero,
-                ApcContext: IntPtr.Zero,
-                IoStatusBlock: &statusBlock,
-                FileInformation: _buffer,
-                Length: (uint)_bufferLength,
-                FileInformationClass: Interop.NtDll.FILE_INFORMATION_CLASS.FileFullDirectoryInformation,
-                ReturnSingleEntry: Interop.BOOLEAN.FALSE,
-                FileName: null,
-                RestartScan: Interop.BOOLEAN.FALSE
-            );
+            int status = Interop
+                .NtDll
+                .NtQueryDirectoryFile(
+                    FileHandle: _directoryHandle,
+                    Event: IntPtr.Zero,
+                    ApcRoutine: IntPtr.Zero,
+                    ApcContext: IntPtr.Zero,
+                    IoStatusBlock: &statusBlock,
+                    FileInformation: _buffer,
+                    Length: (uint)_bufferLength,
+                    FileInformationClass: Interop
+                        .NtDll
+                        .FILE_INFORMATION_CLASS
+                        .FileFullDirectoryInformation,
+                    ReturnSingleEntry: Interop.BOOLEAN.FALSE,
+                    FileName: null,
+                    RestartScan: Interop.BOOLEAN.FALSE
+                );
 
             switch ((uint)status)
             {
@@ -138,16 +143,18 @@ namespace System.IO.Enumeration
             string fullPath
         )
         {
-            (uint status, IntPtr handle) = Interop.NtDll.CreateFile(
-                relativePath,
-                _directoryHandle,
-                Interop.NtDll.CreateDisposition.FILE_OPEN,
-                Interop.NtDll.DesiredAccess.FILE_LIST_DIRECTORY
-                    | Interop.NtDll.DesiredAccess.SYNCHRONIZE,
-                createOptions: Interop.NtDll.CreateOptions.FILE_SYNCHRONOUS_IO_NONALERT
-                    | Interop.NtDll.CreateOptions.FILE_DIRECTORY_FILE
-                    | Interop.NtDll.CreateOptions.FILE_OPEN_FOR_BACKUP_INTENT
-            );
+            (uint status, IntPtr handle) = Interop
+                .NtDll
+                .CreateFile(
+                    relativePath,
+                    _directoryHandle,
+                    Interop.NtDll.CreateDisposition.FILE_OPEN,
+                    Interop.NtDll.DesiredAccess.FILE_LIST_DIRECTORY
+                        | Interop.NtDll.DesiredAccess.SYNCHRONIZE,
+                    createOptions: Interop.NtDll.CreateOptions.FILE_SYNCHRONOUS_IO_NONALERT
+                        | Interop.NtDll.CreateOptions.FILE_DIRECTORY_FILE
+                        | Interop.NtDll.CreateOptions.FILE_OPEN_FOR_BACKUP_INTENT
+                );
 
             switch (status)
             {
@@ -182,13 +189,15 @@ namespace System.IO.Enumeration
         /// </summary>
         private IntPtr CreateDirectoryHandle(string path, bool ignoreNotFound = false)
         {
-            IntPtr handle = Interop.Kernel32.CreateFile_IntPtr(
-                path,
-                Interop.Kernel32.FileOperations.FILE_LIST_DIRECTORY,
-                FileShare.ReadWrite | FileShare.Delete,
-                FileMode.Open,
-                Interop.Kernel32.FileOperations.FILE_FLAG_BACKUP_SEMANTICS
-            );
+            IntPtr handle = Interop
+                .Kernel32
+                .CreateFile_IntPtr(
+                    path,
+                    Interop.Kernel32.FileOperations.FILE_LIST_DIRECTORY,
+                    FileShare.ReadWrite | FileShare.Delete,
+                    FileMode.Open,
+                    Interop.Kernel32.FileOperations.FILE_FLAG_BACKUP_SEMANTICS
+                );
 
             if (handle == IntPtr.Zero || handle == (IntPtr)(-1))
             {

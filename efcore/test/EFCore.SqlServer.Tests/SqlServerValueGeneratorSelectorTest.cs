@@ -58,7 +58,8 @@ namespace Microsoft.EntityFrameworkCore
             var model = builder.FinalizeModel();
             var entityType = model.FindEntityType(typeof(AnEntity));
 
-            var selector = SqlServerTestHelpers.Instance
+            var selector = SqlServerTestHelpers
+                .Instance
                 .CreateContextServices(model)
                 .GetRequiredService<IValueGeneratorSelector>();
 
@@ -81,7 +82,8 @@ namespace Microsoft.EntityFrameworkCore
             var model = builder.FinalizeModel();
             var entityType = model.FindEntityType(typeof(AnEntity));
 
-            var selector = SqlServerTestHelpers.Instance
+            var selector = SqlServerTestHelpers
+                .Instance
                 .CreateContextServices(model)
                 .GetRequiredService<IValueGeneratorSelector>();
 
@@ -104,7 +106,8 @@ namespace Microsoft.EntityFrameworkCore
             var model = builder.FinalizeModel();
             var entityType = model.FindEntityType(typeof(AnEntity));
 
-            var selector = SqlServerTestHelpers.Instance
+            var selector = SqlServerTestHelpers
+                .Instance
                 .CreateContextServices(model)
                 .GetRequiredService<IValueGeneratorSelector>();
 
@@ -127,7 +130,8 @@ namespace Microsoft.EntityFrameworkCore
             var model = builder.FinalizeModel();
             var entityType = model.FindEntityType(typeof(AnEntity));
 
-            var selector = SqlServerTestHelpers.Instance
+            var selector = SqlServerTestHelpers
+                .Instance
                 .CreateContextServices(model)
                 .GetRequiredService<IValueGeneratorSelector>();
 
@@ -186,15 +190,18 @@ namespace Microsoft.EntityFrameworkCore
             var model = builder.FinalizeModel();
             var entityType = model.FindEntityType(typeof(AnEntity));
 
-            var selector = InMemoryTestHelpers.Instance
+            var selector = InMemoryTestHelpers
+                .Instance
                 .CreateContextServices(model)
                 .GetRequiredService<IValueGeneratorSelector>();
 
             Assert.Equal(
                 CoreStrings.NoValueGenerator("Random", "AnEntity", "Something"),
-                Assert.Throws<NotSupportedException>(
-                    () => selector.Select(entityType.FindProperty("Random"), entityType)
-                ).Message
+                Assert
+                    .Throws<NotSupportedException>(
+                        () => selector.Select(entityType.FindProperty("Random"), entityType)
+                    )
+                    .Message
             );
         }
 
@@ -210,7 +217,8 @@ namespace Microsoft.EntityFrameworkCore
             var model = builder.UseHiLo().FinalizeModel();
             var entityType = model.FindEntityType(typeof(AnEntity));
 
-            var selector = SqlServerTestHelpers.Instance
+            var selector = SqlServerTestHelpers
+                .Instance
                 .CreateContextServices(model)
                 .GetRequiredService<IValueGeneratorSelector>();
 

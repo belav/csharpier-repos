@@ -17,10 +17,12 @@ namespace System.Resources.Extensions
         {
             // our format?
             if (
-                TypeNameComparer.Instance.Equals(
-                    readerType,
-                    PreserializedResourceWriter.DeserializingResourceReaderFullyQualifiedName
-                )
+                TypeNameComparer
+                    .Instance
+                    .Equals(
+                        readerType,
+                        PreserializedResourceWriter.DeserializingResourceReaderFullyQualifiedName
+                    )
             )
             {
                 return true;
@@ -28,10 +30,12 @@ namespace System.Resources.Extensions
 
             // default format?
             if (
-                TypeNameComparer.Instance.Equals(
-                    readerType,
-                    PreserializedResourceWriter.ResourceReaderFullyQualifiedName
-                )
+                TypeNameComparer
+                    .Instance
+                    .Equals(
+                        readerType,
+                        PreserializedResourceWriter.ResourceReaderFullyQualifiedName
+                    )
             )
             {
                 // we can read the default format, we just assume BinaryFormatter and don't

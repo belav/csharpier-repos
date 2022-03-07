@@ -183,9 +183,9 @@ namespace System.Text.Json.Nodes.Tests
             );
             Assert.NotNull(jsonDictionaryField);
 
-            Type jsonPropertyDictionaryType = typeof(JsonObject).Assembly.GetType(
-                "System.Text.Json.JsonPropertyDictionary`1"
-            );
+            Type jsonPropertyDictionaryType = typeof(JsonObject)
+                .Assembly
+                .GetType("System.Text.Json.JsonPropertyDictionary`1");
             Assert.NotNull(jsonPropertyDictionaryType);
 
             jsonPropertyDictionaryType = jsonPropertyDictionaryType.MakeGenericType(
@@ -239,9 +239,9 @@ namespace System.Text.Json.Nodes.Tests
         [Fact]
         public static void ReadSimpleObjectWithTrailingTrivia()
         {
-            byte[] data = Encoding.UTF8.GetBytes(
-                SimpleTestClass.s_json + " /* Multi\r\nLine Comment */\t"
-            );
+            byte[] data = Encoding
+                .UTF8
+                .GetBytes(SimpleTestClass.s_json + " /* Multi\r\nLine Comment */\t");
             using (MemoryStream stream = new MemoryStream(data))
             {
                 var options = new JsonDocumentOptions

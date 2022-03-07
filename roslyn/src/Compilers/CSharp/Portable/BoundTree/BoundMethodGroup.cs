@@ -43,11 +43,14 @@ namespace Microsoft.CodeAnalysis.CSharp
             SyntaxNode syntax
         )
         {
-            return FunctionTypeSymbol.Lazy.CreateIfFeatureEnabled(
-                syntax,
-                binder,
-                static (binder, expr) => binder.GetMethodGroupDelegateType((BoundMethodGroup)expr)
-            );
+            return FunctionTypeSymbol
+                .Lazy
+                .CreateIfFeatureEnabled(
+                    syntax,
+                    binder,
+                    static (binder, expr) =>
+                        binder.GetMethodGroupDelegateType((BoundMethodGroup)expr)
+                );
         }
 
         public MemberAccessExpressionSyntax? MemberAccessExpressionSyntax

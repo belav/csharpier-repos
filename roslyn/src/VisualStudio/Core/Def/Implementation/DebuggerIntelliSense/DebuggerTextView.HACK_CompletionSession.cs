@@ -52,9 +52,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.DebuggerIntelli
         {
             var propertyList = _innerTextView.Properties.PropertyList;
             var shimController =
-                propertyList.Single(
-                    x => x.Value != null && x.Value.GetType().Name == "ShimCompletionController"
-                ).Value;
+                propertyList
+                    .Single(
+                        x => x.Value != null && x.Value.GetType().Name == "ShimCompletionController"
+                    )
+                    .Value;
             var shimControllerType = shimController.GetType();
             var sessionFieldInfo = shimControllerType.GetField(
                 "_session",

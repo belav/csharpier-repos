@@ -144,8 +144,10 @@ namespace Microsoft.CodeAnalysis
                         .Select(s => s.GetChecksumAsync(cancellationToken))
                         .ToArray();
 
-                    var serializer =
-                        _solutionServices.Workspace.Services.GetRequiredService<ISerializerService>();
+                    var serializer = _solutionServices
+                        .Workspace
+                        .Services
+                        .GetRequiredService<ISerializerService>();
                     var attributesChecksum = serializer.CreateChecksum(
                         SolutionAttributes,
                         cancellationToken

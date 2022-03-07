@@ -186,9 +186,9 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
 
             // CodeGenerationOptions containing before and after
             var options = new CodeGenerationOptions(
-                contextLocation: semanticModel.SyntaxTree.GetLocation(
-                    TextSpan.FromBounds(line.Start, line.Start)
-                ),
+                contextLocation: semanticModel
+                    .SyntaxTree
+                    .GetLocation(TextSpan.FromBounds(line.Start, line.Start)),
                 options: await document.GetOptionsAsync(cancellationToken).ConfigureAwait(false)
             );
 

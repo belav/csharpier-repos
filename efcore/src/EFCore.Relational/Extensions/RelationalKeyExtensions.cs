@@ -89,7 +89,8 @@ namespace Microsoft.EntityFrameworkCore
                     i++
                 )
                 {
-                    var linkingFk = rootKey!.DeclaringEntityType
+                    var linkingFk = rootKey!
+                        .DeclaringEntityType
                         .FindRowInternalForeignKeys(storeObject)
                         .FirstOrDefault();
                     if (linkingFk == null)
@@ -127,7 +128,8 @@ namespace Microsoft.EntityFrameworkCore
                 {
                     IReadOnlyKey? linkedKey = null;
                     foreach (
-                        var otherKey in rootKey.DeclaringEntityType
+                        var otherKey in rootKey
+                            .DeclaringEntityType
                             .FindRowInternalForeignKeys(storeObject)
                             .SelectMany(fk => fk.PrincipalEntityType.GetKeys())
                     )
@@ -251,7 +253,8 @@ namespace Microsoft.EntityFrameworkCore
             {
                 IReadOnlyKey? linkedKey = null;
                 foreach (
-                    var otherKey in rootKey.DeclaringEntityType
+                    var otherKey in rootKey
+                        .DeclaringEntityType
                         .FindRowInternalForeignKeys(storeObject)
                         .SelectMany(fk => fk.PrincipalEntityType.GetKeys())
                 )

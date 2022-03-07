@@ -112,10 +112,12 @@ namespace System.Web.Http.Tracing.Tracers
                     // but that's unavoidable unless we want to offer UnregisterForDispose.
                     IList<IDisposable> disposables;
                     if (
-                        _request.Properties.TryGetValue(
-                            HttpPropertyKeys.DisposableRequestResourcesKey,
-                            out disposables
-                        )
+                        _request
+                            .Properties
+                            .TryGetValue(
+                                HttpPropertyKeys.DisposableRequestResourcesKey,
+                                out disposables
+                            )
                     )
                     {
                         disposables.Remove(disposable);

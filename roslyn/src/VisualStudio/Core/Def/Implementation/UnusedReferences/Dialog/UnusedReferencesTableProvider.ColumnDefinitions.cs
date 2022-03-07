@@ -79,9 +79,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.UnusedReference
             };
 
             var block = new TextBlock { VerticalAlignment = VerticalAlignment.Center };
-            block.Inlines.Add(
-                new Run(text) { FontWeight = isBold ? FontWeights.Bold : FontWeights.Normal }
-            );
+            block
+                .Inlines
+                .Add(new Run(text) { FontWeight = isBold ? FontWeights.Bold : FontWeights.Normal });
 
             if (!imageMoniker.IsNullImage())
             {

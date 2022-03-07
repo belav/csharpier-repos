@@ -34,22 +34,28 @@ namespace System.Text.RegularExpressions.Tests
             );
             Assert.NotNull(s_regexCode);
 
-            s_regexCodeCodes = s_regexCode.FieldType.GetField(
-                "Codes",
-                BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance
-            );
+            s_regexCodeCodes = s_regexCode
+                .FieldType
+                .GetField(
+                    "Codes",
+                    BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance
+                );
             Assert.NotNull(s_regexCodeCodes);
 
-            s_regexCodeTree = s_regexCode.FieldType.GetField(
-                "Tree",
-                BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance
-            );
+            s_regexCodeTree = s_regexCode
+                .FieldType
+                .GetField(
+                    "Tree",
+                    BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance
+                );
             Assert.NotNull(s_regexCodeTree);
 
-            s_regexCodeTreeMinRequiredLength = s_regexCodeTree.FieldType.GetField(
-                "MinRequiredLength",
-                BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance
-            );
+            s_regexCodeTreeMinRequiredLength = s_regexCodeTree
+                .FieldType
+                .GetField(
+                    "MinRequiredLength",
+                    BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance
+                );
             Assert.NotNull(s_regexCodeTreeMinRequiredLength);
         }
 

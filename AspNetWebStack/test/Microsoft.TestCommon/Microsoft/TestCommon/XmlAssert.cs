@@ -23,10 +23,9 @@ namespace Microsoft.TestCommon
             {
                 for (int i = 0; i < regexReplacements.Length; i++)
                 {
-                    actual = regexReplacements[i].Regex.Replace(
-                        actual,
-                        regexReplacements[i].Replacement
-                    );
+                    actual = regexReplacements[i]
+                        .Regex
+                        .Replace(actual, regexReplacements[i].Replacement);
                 }
             }
 

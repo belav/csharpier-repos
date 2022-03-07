@@ -13,7 +13,8 @@ internal class DefaultRazorDirectiveClassifierPhase
 
     protected override void OnIntialized()
     {
-        Passes = Engine.Features
+        Passes = Engine
+            .Features
             .OfType<IRazorDirectiveClassifierPass>()
             .OrderBy(p => p.Order)
             .ToArray();

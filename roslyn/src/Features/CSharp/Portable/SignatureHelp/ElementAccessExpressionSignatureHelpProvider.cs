@@ -312,10 +312,9 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
 
             if (indexers.Any() && expression is MemberAccessExpressionSyntax memberAccessExpression)
             {
-                expressionType = semanticModel.GetTypeInfo(
-                    memberAccessExpression.Expression,
-                    cancellationToken
-                ).Type!;
+                expressionType = semanticModel
+                    .GetTypeInfo(memberAccessExpression.Expression, cancellationToken)
+                    .Type!;
                 return true;
             }
 
@@ -379,7 +378,8 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
                 GetPreambleParts(indexer, position, semanticModel),
                 GetSeparatorParts(),
                 GetPostambleParts(),
-                indexer.Parameters
+                indexer
+                    .Parameters
                     .Select(
                         p =>
                             Convert(

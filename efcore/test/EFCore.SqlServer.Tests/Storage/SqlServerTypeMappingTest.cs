@@ -511,6 +511,7 @@ namespace Microsoft.EntityFrameworkCore.Storage
         protected override DbContextOptions ContextOptions { get; } =
             new DbContextOptionsBuilder()
                 .UseInternalServiceProvider(SqlServerFixture.DefaultServiceProvider)
-                .UseSqlServer("Server=Dummy").Options;
+                .UseSqlServer("Server=Dummy")
+                .Options;
     }
 }

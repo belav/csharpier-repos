@@ -12,7 +12,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         public static INamedTypeSymbol? GetNamedTypeSymbolConstraint(
             this ITypeParameterSymbol typeParameter
         ) =>
-            typeParameter.ConstraintTypes
+            typeParameter
+                .ConstraintTypes
                 .Select(GetNamedTypeSymbol)
                 .WhereNotNull()
                 .FirstOrDefault();

@@ -133,15 +133,17 @@ namespace System.Drawing
                 pbmi.bmiHeader_biSize = sizeof(NativeMethods.BITMAPINFOHEADER);
 
                 // Call first time to fill in BITMAPINFO header.
-                Interop.Gdi32.GetDIBits(
-                    new HandleRef(null, hdc),
-                    new HandleRef(null, hbm),
-                    0,
-                    0,
-                    IntPtr.Zero,
-                    ref pbmi,
-                    NativeMethods.DIB_RGB_COLORS
-                );
+                Interop
+                    .Gdi32
+                    .GetDIBits(
+                        new HandleRef(null, hdc),
+                        new HandleRef(null, hbm),
+                        0,
+                        0,
+                        IntPtr.Zero,
+                        ref pbmi,
+                        NativeMethods.DIB_RGB_COLORS
+                    );
 
                 if (pbmi.bmiHeader_biBitCount <= 8)
                 {
@@ -152,15 +154,17 @@ namespace System.Drawing
                     if (pbmi.bmiHeader_biCompression == NativeMethods.BI_BITFIELDS)
                     {
                         // Call a second time to get the color masks.
-                        Interop.Gdi32.GetDIBits(
-                            new HandleRef(null, hdc),
-                            new HandleRef(null, hbm),
-                            0,
-                            pbmi.bmiHeader_biHeight,
-                            IntPtr.Zero,
-                            ref pbmi,
-                            NativeMethods.DIB_RGB_COLORS
-                        );
+                        Interop
+                            .Gdi32
+                            .GetDIBits(
+                                new HandleRef(null, hdc),
+                                new HandleRef(null, hbm),
+                                0,
+                                pbmi.bmiHeader_biHeight,
+                                IntPtr.Zero,
+                                ref pbmi,
+                                NativeMethods.DIB_RGB_COLORS
+                            );
                     }
                     bRet = true;
                 }
@@ -207,21 +211,20 @@ namespace System.Drawing
                         if (hpal == IntPtr.Zero)
                         {
                             palHalftone = Graphics.GetHalftonePalette();
-                            palRet = Interop.Gdi32.GetPaletteEntries(
-                                new HandleRef(null, palHalftone),
-                                0,
-                                cColors,
-                                aj
-                            );
+                            palRet = Interop
+                                .Gdi32
+                                .GetPaletteEntries(
+                                    new HandleRef(null, palHalftone),
+                                    0,
+                                    cColors,
+                                    aj
+                                );
                         }
                         else
                         {
-                            palRet = Interop.Gdi32.GetPaletteEntries(
-                                new HandleRef(null, hpal),
-                                0,
-                                cColors,
-                                aj
-                            );
+                            palRet = Interop
+                                .Gdi32
+                                .GetPaletteEntries(new HandleRef(null, hpal), 0, cColors, aj);
                         }
 
                         if (palRet != 0)
@@ -270,10 +273,9 @@ namespace System.Drawing
             }
 
             // Select the bitmap.
-            _oldBitmap = Interop.Kernel32.SelectObject(
-                new HandleRef(this, _compatDC),
-                new HandleRef(this, _dib)
-            );
+            _oldBitmap = Interop
+                .Kernel32
+                .SelectObject(new HandleRef(this, _compatDC), new HandleRef(this, _dib));
 
             // Create compat graphics.
             _compatGraphics = Graphics.FromHdcInternal(_compatDC);
@@ -355,14 +357,16 @@ namespace System.Drawing
 
                 // Create the DIB section. Let Win32 allocate the memory and return
                 // a pointer to the bitmap surface.
-                hbmRet = Interop.Gdi32.CreateDIBSection(
-                    new HandleRef(null, hdc),
-                    ref pbmi,
-                    NativeMethods.DIB_RGB_COLORS,
-                    ref ppvBits,
-                    IntPtr.Zero,
-                    0
-                );
+                hbmRet = Interop
+                    .Gdi32
+                    .CreateDIBSection(
+                        new HandleRef(null, hdc),
+                        ref pbmi,
+                        NativeMethods.DIB_RGB_COLORS,
+                        ref ppvBits,
+                        IntPtr.Zero,
+                        0
+                    );
                 Win32Exception? ex = null;
                 if (hbmRet == IntPtr.Zero)
                 {
@@ -385,10 +389,9 @@ namespace System.Drawing
         {
             if (_oldBitmap != IntPtr.Zero && _compatDC != IntPtr.Zero)
             {
-                Interop.Kernel32.SelectObject(
-                    new HandleRef(this, _compatDC),
-                    new HandleRef(this, _oldBitmap)
-                );
+                Interop
+                    .Kernel32
+                    .SelectObject(new HandleRef(this, _compatDC), new HandleRef(this, _oldBitmap));
                 _oldBitmap = IntPtr.Zero;
             }
 

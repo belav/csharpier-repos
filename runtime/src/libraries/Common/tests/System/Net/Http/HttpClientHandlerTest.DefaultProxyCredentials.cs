@@ -59,9 +59,9 @@ namespace System.Net.Http.Functional.Tests
             string expectCreds =
                 "Basic "
                 + Convert.ToBase64String(
-                    Encoding.UTF8.GetBytes(
-                        $"{explicitProxyCreds.UserName}:{explicitProxyCreds.Password}"
-                    )
+                    Encoding
+                        .UTF8
+                        .GetBytes($"{explicitProxyCreds.UserName}:{explicitProxyCreds.Password}")
                 );
 
             await LoopbackServer.CreateClientAndServerAsync(

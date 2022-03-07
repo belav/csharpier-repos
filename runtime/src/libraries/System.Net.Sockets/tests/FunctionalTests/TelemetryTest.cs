@@ -25,11 +25,13 @@ namespace System.Net.Sockets.Tests
         [Fact]
         public static void EventSource_ExistsWithCorrectId()
         {
-            Type esType = typeof(Socket).Assembly.GetType(
-                "System.Net.Sockets.SocketsTelemetry",
-                throwOnError: true,
-                ignoreCase: false
-            );
+            Type esType = typeof(Socket)
+                .Assembly
+                .GetType(
+                    "System.Net.Sockets.SocketsTelemetry",
+                    throwOnError: true,
+                    ignoreCase: false
+                );
             Assert.NotNull(esType);
 
             Assert.Equal("System.Net.Sockets", EventSource.GetName(esType));

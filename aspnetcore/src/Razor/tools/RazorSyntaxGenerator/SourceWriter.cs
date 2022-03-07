@@ -2667,10 +2667,12 @@ internal class SourceWriter : AbstractFileWriter
         {
             foreach (XmlElement element in comment.Body)
             {
-                string[] lines = element.OuterXml.Split(
-                    new string[] { "\r", "\n", "\r\n" },
-                    StringSplitOptions.RemoveEmptyEntries
-                );
+                string[] lines = element
+                    .OuterXml
+                    .Split(
+                        new string[] { "\r", "\n", "\r\n" },
+                        StringSplitOptions.RemoveEmptyEntries
+                    );
                 foreach (string line in lines.Where(l => !string.IsNullOrWhiteSpace(l)))
                 {
                     WriteLine("{0}/// {1}", indent, line.TrimStart());

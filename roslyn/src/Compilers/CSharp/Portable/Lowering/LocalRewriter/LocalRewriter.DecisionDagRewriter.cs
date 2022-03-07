@@ -371,11 +371,13 @@ namespace Microsoft.CodeAnalysis.CSharp
                 // of the when clauses to see if they are all simple enough to conclude that they do
                 // not mutate pattern variables.
                 var mightAssignWalker = new WhenClauseMightAssignPatternVariableWalker();
-                bool canShareTemps = !decisionDag.TopologicallySortedNodes.Any(
-                    node =>
-                        node is BoundWhenDecisionDagNode w
-                        && mightAssignWalker.MightAssignSomething(w.WhenExpression)
-                );
+                bool canShareTemps = !decisionDag
+                    .TopologicallySortedNodes
+                    .Any(
+                        node =>
+                            node is BoundWhenDecisionDagNode w
+                            && mightAssignWalker.MightAssignSomething(w.WhenExpression)
+                    );
 
                 if (canShareTemps)
                 {
@@ -666,13 +668,15 @@ namespace Microsoft.CodeAnalysis.CSharp
                             input,
                             fac
                         );
-                        return ValueDispatchNode.RelationalDispatch.CreateBalanced(
-                            testNode.Syntax,
-                            relational.Value,
-                            relational.OperatorKind,
-                            whenTrue: whenTrue,
-                            whenFalse: whenFalse
-                        );
+                        return ValueDispatchNode
+                            .RelationalDispatch
+                            .CreateBalanced(
+                                testNode.Syntax,
+                                relational.Value,
+                                relational.OperatorKind,
+                                whenTrue: whenTrue,
+                                whenFalse: whenFalse
+                            );
                     }
                     case BoundDagValueTest value:
                     {
@@ -1039,10 +1043,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                 // with each case label. We use the Dev10 Heuristic to determine this
                 // (see SwitchStringJumpTableEmitter.ShouldGenerateHashTableSwitch() for details).
                 if (
-                    !CodeAnalysis.CodeGen.SwitchStringJumpTableEmitter.ShouldGenerateHashTableSwitch(
-                        module,
-                        labelsCount
-                    )
+                    !CodeAnalysis
+                        .CodeGen
+                        .SwitchStringJumpTableEmitter
+                        .ShouldGenerateHashTableSwitch(module, labelsCount)
                 )
                 {
                     return;
@@ -1065,7 +1069,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                 );
                 if (
                     privateImplClass.GetMethod(
-                        CodeAnalysis.CodeGen.PrivateImplementationDetails.SynthesizedStringHashFunctionName
+                        CodeAnalysis
+                            .CodeGen
+                            .PrivateImplementationDetails
+                            .SynthesizedStringHashFunctionName
                     ) != null
                 )
                 {
@@ -1073,9 +1080,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                 }
 
                 // cannot emit hash method if have no access to Chars.
-                var charsMember = _localRewriter._compilation.GetSpecialTypeMember(
-                    SpecialMember.System_String__Chars
-                );
+                var charsMember = _localRewriter
+                    ._compilation
+                    .GetSpecialTypeMember(SpecialMember.System_String__Chars);
                 if ((object)charsMember == null || charsMember.HasUseSiteError)
                 {
                     return;
@@ -1319,8 +1326,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                     // Only add instrumentation (such as a sequence point) if the node is not compiler-generated.
                     if (GenerateInstrumentation && !whenExpression.WasCompilerGenerated)
                     {
-                        conditionalGoto =
-                            _localRewriter._instrumenter.InstrumentSwitchWhenClauseConditionalGotoBody(
+                        conditionalGoto = _localRewriter
+                            ._instrumenter
+                            .InstrumentSwitchWhenClauseConditionalGotoBody(
                                 whenExpression,
                                 conditionalGoto
                             );

@@ -300,7 +300,8 @@ public class ProtectedUserStoreTest : SqlStoreTestBase<IdentityUser, IdentityRol
             var dbOptions =
                 new DbContextOptionsBuilder()
                     .UseSqlite(scratch.Connection)
-                    .UseApplicationServiceProvider(services.BuildServiceProvider()).Options;
+                    .UseApplicationServiceProvider(services.BuildServiceProvider())
+                    .Options;
             var dbContext = new IdentityDbContext<InvalidUser>(dbOptions);
             var e = Assert.Throws<InvalidOperationException>(
                 () => dbContext.Database.EnsureCreated()

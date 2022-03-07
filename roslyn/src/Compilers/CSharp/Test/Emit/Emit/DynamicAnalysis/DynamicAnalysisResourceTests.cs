@@ -81,9 +81,11 @@ public class C
                 Parse(ExampleSource + InstrumentationHelperSource, @"C:\myproject\doc1.cs")
             );
             var peImage = c.EmitToArray(
-                EmitOptions.Default.WithInstrumentationKinds(
-                    ImmutableArray.Create(InstrumentationKind.TestCoverage)
-                )
+                EmitOptions
+                    .Default
+                    .WithInstrumentationKinds(
+                        ImmutableArray.Create(InstrumentationKind.TestCoverage)
+                    )
             );
 
             var peReader = new PEReader(peImage);
@@ -273,9 +275,11 @@ public class C
                 Parse(source + InstrumentationHelperSource, @"C:\myproject\doc1.cs")
             );
             var peImage = c.EmitToArray(
-                EmitOptions.Default.WithInstrumentationKinds(
-                    ImmutableArray.Create(InstrumentationKind.TestCoverage)
-                )
+                EmitOptions
+                    .Default
+                    .WithInstrumentationKinds(
+                        ImmutableArray.Create(InstrumentationKind.TestCoverage)
+                    )
             );
 
             var peReader = new PEReader(peImage);
@@ -413,9 +417,11 @@ public class C
                 Parse(source + InstrumentationHelperSource, @"C:\myproject\doc1.cs")
             );
             var peImage = c.EmitToArray(
-                EmitOptions.Default.WithInstrumentationKinds(
-                    ImmutableArray.Create(InstrumentationKind.TestCoverage)
-                )
+                EmitOptions
+                    .Default
+                    .WithInstrumentationKinds(
+                        ImmutableArray.Create(InstrumentationKind.TestCoverage)
+                    )
             );
 
             var peReader = new PEReader(peImage);
@@ -564,9 +570,11 @@ class Student : Person { public double GPA; }
                 Parse(source + InstrumentationHelperSource, @"C:\myproject\doc1.cs")
             );
             var peImage = c.EmitToArray(
-                EmitOptions.Default.WithInstrumentationKinds(
-                    ImmutableArray.Create(InstrumentationKind.TestCoverage)
-                )
+                EmitOptions
+                    .Default
+                    .WithInstrumentationKinds(
+                        ImmutableArray.Create(InstrumentationKind.TestCoverage)
+                    )
             );
 
             var peReader = new PEReader(peImage);
@@ -639,9 +647,11 @@ public class C
                 Parse(source + InstrumentationHelperSource, @"C:\myproject\doc1.cs")
             );
             var peImage = c.EmitToArray(
-                EmitOptions.Default.WithInstrumentationKinds(
-                    ImmutableArray.Create(InstrumentationKind.TestCoverage)
-                )
+                EmitOptions
+                    .Default
+                    .WithInstrumentationKinds(
+                        ImmutableArray.Create(InstrumentationKind.TestCoverage)
+                    )
             );
 
             var peReader = new PEReader(peImage);
@@ -692,9 +702,11 @@ public class C
                 Parse(source + InstrumentationHelperSource, @"C:\myproject\doc1.cs")
             );
             var peImage = c.EmitToArray(
-                EmitOptions.Default.WithInstrumentationKinds(
-                    ImmutableArray.Create(InstrumentationKind.TestCoverage)
-                )
+                EmitOptions
+                    .Default
+                    .WithInstrumentationKinds(
+                        ImmutableArray.Create(InstrumentationKind.TestCoverage)
+                    )
             );
 
             var peReader = new PEReader(peImage);
@@ -737,9 +749,11 @@ public class C
                 Parse(source + InstrumentationHelperSource, @"C:\myproject\doc1.cs")
             );
             var peImage = c.EmitToArray(
-                EmitOptions.Default.WithInstrumentationKinds(
-                    ImmutableArray.Create(InstrumentationKind.TestCoverage)
-                )
+                EmitOptions
+                    .Default
+                    .WithInstrumentationKinds(
+                        ImmutableArray.Create(InstrumentationKind.TestCoverage)
+                    )
             );
 
             var peReader = new PEReader(peImage);
@@ -790,9 +804,11 @@ public class C
                 Parse(source + InstrumentationHelperSource, @"C:\myproject\doc1.cs")
             );
             var peImage = c.EmitToArray(
-                EmitOptions.Default.WithInstrumentationKinds(
-                    ImmutableArray.Create(InstrumentationKind.TestCoverage)
-                )
+                EmitOptions
+                    .Default
+                    .WithInstrumentationKinds(
+                        ImmutableArray.Create(InstrumentationKind.TestCoverage)
+                    )
             );
 
             var peReader = new PEReader(peImage);
@@ -871,9 +887,11 @@ public class C
                 Parse(source + InstrumentationHelperSource, @"C:\myproject\doc1.cs")
             );
             var peImage = c.EmitToArray(
-                EmitOptions.Default.WithInstrumentationKinds(
-                    ImmutableArray.Create(InstrumentationKind.TestCoverage)
-                )
+                EmitOptions
+                    .Default
+                    .WithInstrumentationKinds(
+                        ImmutableArray.Create(InstrumentationKind.TestCoverage)
+                    )
             );
 
             var peReader = new PEReader(peImage);
@@ -990,9 +1008,11 @@ public class C
                 Parse(source + InstrumentationHelperSource, @"C:\myproject\doc1.cs")
             );
             var peImage = c.EmitToArray(
-                EmitOptions.Default.WithInstrumentationKinds(
-                    ImmutableArray.Create(InstrumentationKind.TestCoverage)
-                )
+                EmitOptions
+                    .Default
+                    .WithInstrumentationKinds(
+                        ImmutableArray.Create(InstrumentationKind.TestCoverage)
+                    )
             );
 
             var peReader = new PEReader(peImage);
@@ -1101,9 +1121,11 @@ partial struct E
                 Parse(source + InstrumentationHelperSource, @"C:\myproject\doc1.cs")
             );
             var peImage = c.EmitToArray(
-                EmitOptions.Default.WithInstrumentationKinds(
-                    ImmutableArray.Create(InstrumentationKind.TestCoverage)
-                )
+                EmitOptions
+                    .Default
+                    .WithInstrumentationKinds(
+                        ImmutableArray.Create(InstrumentationKind.TestCoverage)
+                    )
             );
 
             var peReader = new PEReader(peImage);
@@ -1233,9 +1255,11 @@ public class D
                 Parse(source + InstrumentationHelperSource, @"C:\myproject\doc1.cs")
             );
             var peImage = c.EmitToArray(
-                EmitOptions.Default.WithInstrumentationKinds(
-                    ImmutableArray.Create(InstrumentationKind.TestCoverage)
-                )
+                EmitOptions
+                    .Default
+                    .WithInstrumentationKinds(
+                        ImmutableArray.Create(InstrumentationKind.TestCoverage)
+                    )
             );
 
             var peReader = new PEReader(peImage);
@@ -1312,9 +1336,9 @@ class C
 
     static object obj = null!;
 }" + InstrumentationHelperSource;
-            var emitOptions = EmitOptions.Default.WithInstrumentationKinds(
-                ImmutableArray.Create(InstrumentationKind.TestCoverage)
-            );
+            var emitOptions = EmitOptions
+                .Default
+                .WithInstrumentationKinds(ImmutableArray.Create(InstrumentationKind.TestCoverage));
             CompileAndVerify(source, emitOptions: emitOptions)
                 .VerifyIL(
                     "C..cctor()",
@@ -1357,9 +1381,9 @@ class C
 {
     static object obj = null!;
 }" + InstrumentationHelperSource;
-            var emitOptions = EmitOptions.Default.WithInstrumentationKinds(
-                ImmutableArray.Create(InstrumentationKind.TestCoverage)
-            );
+            var emitOptions = EmitOptions
+                .Default
+                .WithInstrumentationKinds(ImmutableArray.Create(InstrumentationKind.TestCoverage));
             CompileAndVerify(
                 source,
                 options: TestOptions.DebugDll.WithMetadataImportOptions(MetadataImportOptions.All),

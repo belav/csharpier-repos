@@ -584,9 +584,9 @@ namespace System.Runtime.CompilerServices
             {
                 if (index < _entries.Length)
                 {
-                    object? oKey = _entries[index].depHnd.UnsafeGetTargetAndDependent(
-                        out object? oValue
-                    );
+                    object? oKey = _entries[index]
+                        .depHnd
+                        .UnsafeGetTargetAndDependent(out object? oValue);
 
                     GC.KeepAlive(this); // Ensure we don't get finalized while accessing DependentHandle
 

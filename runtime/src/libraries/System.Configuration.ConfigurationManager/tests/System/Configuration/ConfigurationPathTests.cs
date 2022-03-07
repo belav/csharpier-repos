@@ -105,10 +105,9 @@ namespace System.ConfigurationTests
                 .Invoke(
                     () =>
                     {
-                        AppDomain.CurrentDomain.SetData(
-                            "APP_CONFIG_FILE",
-                            "non-existing-file.config"
-                        );
+                        AppDomain
+                            .CurrentDomain
+                            .SetData("APP_CONFIG_FILE", "non-existing-file.config");
                         Assert.Null(ConfigurationManager.AppSettings["AnySetting"]);
                     }
                 )

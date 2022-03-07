@@ -190,11 +190,13 @@ namespace Microsoft.CodeAnalysis.ConvertNumericLiteral
         {
             // Match literal text and extract out base prefix, type suffix and the number itself.
             var groups =
-                Regex.Match(
-                    numericText,
-                    $"({hexPrefix}|{binaryPrefix})?([_0-9a-f]+)(.*)",
-                    RegexOptions.IgnoreCase
-                ).Groups;
+                Regex
+                    .Match(
+                        numericText,
+                        $"({hexPrefix}|{binaryPrefix})?([_0-9a-f]+)(.*)",
+                        RegexOptions.IgnoreCase
+                    )
+                    .Groups;
             return (prefix: groups[1].Value, number: groups[2].Value, suffix: groups[3].Value);
         }
 

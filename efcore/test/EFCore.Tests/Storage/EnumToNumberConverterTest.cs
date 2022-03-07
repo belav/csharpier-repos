@@ -288,9 +288,9 @@ namespace Microsoft.EntityFrameworkCore.Storage
                     "Guid",
                     "enum types"
                 ),
-                Assert.Throws<InvalidOperationException>(
-                    () => new EnumToNumberConverter<Guid, int>()
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(() => new EnumToNumberConverter<Guid, int>())
+                    .Message
             );
 
             Assert.Equal(
@@ -299,9 +299,11 @@ namespace Microsoft.EntityFrameworkCore.Storage
                     "Guid",
                     "'int', 'long', 'short', 'byte', 'uint', 'ulong', 'ushort', 'sbyte', 'double', 'float', 'decimal'"
                 ),
-                Assert.Throws<InvalidOperationException>(
-                    () => new EnumToNumberConverter<Beatles, Guid>()
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(
+                        () => new EnumToNumberConverter<Beatles, Guid>()
+                    )
+                    .Message
             );
         }
 

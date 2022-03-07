@@ -12,7 +12,8 @@ namespace Microsoft.EntityFrameworkCore
     {
         public DbContextOptions CreateOptions(TestStore testStore) =>
             AddOptions(testStore.AddProviderOptions(new DbContextOptionsBuilder()))
-                .UseInternalServiceProvider(testStore.ServiceProvider).Options;
+                .UseInternalServiceProvider(testStore.ServiceProvider)
+                .Options;
 
         public CrossStoreContext CreateContext(TestStore testStore) =>
             new(CreateOptions(testStore));

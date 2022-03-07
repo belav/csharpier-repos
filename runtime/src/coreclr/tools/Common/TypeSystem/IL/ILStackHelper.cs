@@ -322,8 +322,11 @@ namespace Internal.IL
                     case ILOpcode.ret:
 
                         {
-                            bool hasReturnValue =
-                                !methodIL.OwningMethod.Signature.ReturnType.IsVoid;
+                            bool hasReturnValue = !methodIL
+                                .OwningMethod
+                                .Signature
+                                .ReturnType
+                                .IsVoid;
                             if (hasReturnValue)
                                 stackHeight -= 1;
 

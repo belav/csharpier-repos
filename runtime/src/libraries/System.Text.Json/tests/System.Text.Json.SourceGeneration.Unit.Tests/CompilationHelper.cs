@@ -382,10 +382,10 @@ namespace System.Text.Json.SourceGeneration.UnitTests
             Array.Sort(expectedMessages);
 
             if (
-                CultureInfo.CurrentUICulture.Name.StartsWith(
-                    "en",
-                    StringComparison.OrdinalIgnoreCase
-                )
+                CultureInfo
+                    .CurrentUICulture
+                    .Name
+                    .StartsWith("en", StringComparison.OrdinalIgnoreCase)
             )
             {
                 Assert.Equal(expectedMessages, actualMessages);

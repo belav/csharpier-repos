@@ -74,10 +74,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                             );
                         }
 
-                        var removed = key.DeclaringEntityType.Builder.HasNoKey(
-                            key,
-                            configurationSource
-                        );
+                        var removed = key.DeclaringEntityType
+                            .Builder
+                            .HasNoKey(key, configurationSource);
                         Check.DebugAssert(removed != null, "removed is null");
                     }
 
@@ -105,9 +104,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             (
                 (
                     configurationSource.HasValue
-                    && configurationSource.Value.Overrides(
-                        Metadata.GetIsNullableConfigurationSource()
-                    )
+                    && configurationSource
+                        .Value
+                        .Overrides(Metadata.GetIsNullableConfigurationSource())
                 ) || (Metadata.IsNullable == !required)
             )
             && (

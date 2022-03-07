@@ -112,13 +112,9 @@ namespace System.Reflection.Internal
 
             try
             {
-                int result = Interop.Kernel32.ReadFile(
-                    handle,
-                    buffer,
-                    size,
-                    out int bytesRead,
-                    IntPtr.Zero
-                );
+                int result = Interop
+                    .Kernel32
+                    .ReadFile(handle, buffer, size, out int bytesRead, IntPtr.Zero);
                 return result == 0 ? 0 : bytesRead;
             }
             catch

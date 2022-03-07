@@ -24,13 +24,15 @@ public class StartupForLinkGenerator
             .AddRazorPagesOptions(
                 options =>
                 {
-                    options.Conventions.AddFolderRouteModelConvention(
-                        "/PageRouteTransformer",
-                        model =>
-                        {
-                            pageRouteTransformerConvention.Apply(model);
-                        }
-                    );
+                    options
+                        .Conventions
+                        .AddFolderRouteModelConvention(
+                            "/PageRouteTransformer",
+                            model =>
+                            {
+                                pageRouteTransformerConvention.Apply(model);
+                            }
+                        );
                 }
             );
         services.AddRouting(

@@ -25,10 +25,9 @@ namespace JitBench
             {
                 _output.WriteLine("Running Process: " + runner.ReplayCommand);
                 _output.WriteLine("Working Directory: " + runner.WorkingDirectory);
-                IEnumerable<KeyValuePair<string, string>> additionalEnvVars =
-                    runner.EnvironmentVariables.Where(
-                        kv => Environment.GetEnvironmentVariable(kv.Key) != kv.Value
-                    );
+                IEnumerable<KeyValuePair<string, string>> additionalEnvVars = runner
+                    .EnvironmentVariables
+                    .Where(kv => Environment.GetEnvironmentVariable(kv.Key) != kv.Value);
 
                 if (additionalEnvVars.Any())
                 {

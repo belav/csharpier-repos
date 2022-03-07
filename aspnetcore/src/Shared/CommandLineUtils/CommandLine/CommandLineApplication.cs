@@ -730,9 +730,9 @@ internal class CommandLineApplication
         else
         {
             // Store all remaining arguments for later use.
-            command.RemainingArguments.AddRange(
-                new ArraySegment<string>(args, index, args.Length - index)
-            );
+            command
+                .RemainingArguments
+                .AddRange(new ArraySegment<string>(args, index, args.Length - index));
             return false;
         }
     }

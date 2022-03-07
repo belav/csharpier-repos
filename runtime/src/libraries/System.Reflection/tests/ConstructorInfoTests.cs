@@ -109,13 +109,17 @@ namespace System.Reflection.Tests
             // The second to run it as a method which is invoked.
             Assert.Equal(
                 0,
-                ClassWithStaticConstructorThatIsCalledMultipleTimesViaReflection.VisibleStatics.s_cctorCallCount
+                ClassWithStaticConstructorThatIsCalledMultipleTimesViaReflection
+                    .VisibleStatics
+                    .s_cctorCallCount
             );
             object obj = constructors[0].Invoke(null, new object[] { });
             Assert.Null(obj);
             Assert.Equal(
                 1,
-                ClassWithStaticConstructorThatIsCalledMultipleTimesViaReflection.VisibleStatics.s_cctorCallCount
+                ClassWithStaticConstructorThatIsCalledMultipleTimesViaReflection
+                    .VisibleStatics
+                    .s_cctorCallCount
             );
 
             // Subsequent invocations of the static cctor should not run the cctor at all, as it has already executed
@@ -124,7 +128,9 @@ namespace System.Reflection.Tests
             Assert.Null(obj);
             Assert.Equal(
                 1,
-                ClassWithStaticConstructorThatIsCalledMultipleTimesViaReflection.VisibleStatics.s_cctorCallCount
+                ClassWithStaticConstructorThatIsCalledMultipleTimesViaReflection
+                    .VisibleStatics
+                    .s_cctorCallCount
             );
         }
 

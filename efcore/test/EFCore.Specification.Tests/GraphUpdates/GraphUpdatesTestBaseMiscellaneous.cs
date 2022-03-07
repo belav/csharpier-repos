@@ -85,9 +85,11 @@ namespace Microsoft.EntityFrameworkCore
                                 nameof(College),
                                 $"{{CityId: {city.Id}}}"
                             ),
-                            Assert.Throws<InvalidOperationException>(
-                                () => context.Entry(college).State = EntityState.Modified
-                            ).Message
+                            Assert
+                                .Throws<InvalidOperationException>(
+                                    () => context.Entry(college).State = EntityState.Modified
+                                )
+                                .Message
                         );
                     }
                     else
@@ -97,9 +99,11 @@ namespace Microsoft.EntityFrameworkCore
                                 nameof(College),
                                 $"{{Id: {college.Id}}}"
                             ),
-                            Assert.Throws<InvalidOperationException>(
-                                () => context.Entry(college).State = EntityState.Modified
-                            ).Message
+                            Assert
+                                .Throws<InvalidOperationException>(
+                                    () => context.Entry(college).State = EntityState.Modified
+                                )
+                                .Message
                         );
                     }
 
@@ -970,9 +974,9 @@ namespace Microsoft.EntityFrameworkCore
                             "Discriminator",
                             nameof(OptionalSingle1Derived)
                         ),
-                        Assert.Throws<InvalidOperationException>(
-                            () => context.SaveChanges()
-                        ).Message
+                        Assert
+                            .Throws<InvalidOperationException>(() => context.SaveChanges())
+                            .Message
                     );
                 }
             );
@@ -1497,7 +1501,9 @@ namespace Microsoft.EntityFrameworkCore
                     context.Entry(requieredChildAk).State = EntityState.Detached;
 
                     foreach (
-                        var overlappingEntry in context.ChangeTracker.Entries<OptionalOverlapping2>()
+                        var overlappingEntry in context
+                            .ChangeTracker
+                            .Entries<OptionalOverlapping2>()
                     )
                     {
                         overlappingEntry.State = EntityState.Detached;

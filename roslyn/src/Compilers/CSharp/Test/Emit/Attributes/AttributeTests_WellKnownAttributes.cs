@@ -606,10 +606,9 @@ public class Bar
 
                 long attributeValue;
                 Assert.True(
-                    peModule.Module.TryExtractLongValueFromAttribute(
-                        attributeInfo.Handle,
-                        out attributeValue
-                    )
+                    peModule
+                        .Module
+                        .TryExtractLongValueFromAttribute(attributeInfo.Handle, out attributeValue)
                 );
                 Assert.Equal(-1L, attributeValue); // check the attribute is constructed with a -1
 
@@ -2989,9 +2988,9 @@ public class C
 
                     // ModuleRef:
                     var moduleRefName =
-                        metadataReader.GetModuleReference(
-                            metadataReader.GetModuleReferences().Single()
-                        ).Name;
+                        metadataReader
+                            .GetModuleReference(metadataReader.GetModuleReferences().Single())
+                            .Name;
                     Assert.Equal("mscorlib", metadataReader.GetString(moduleRefName));
 
                     // FileRef:
@@ -3016,7 +3015,8 @@ public class C
                     );
 
                     // MethodDef:
-                    MethodDefinitionHandle[] methodDefs = metadataReader.MethodDefinitions
+                    MethodDefinitionHandle[] methodDefs = metadataReader
+                        .MethodDefinitions
                         .AsEnumerable()
                         .ToArray();
                     Assert.Equal(2, methodDefs.Length); // M, ctor
@@ -3948,10 +3948,9 @@ abstract class C
 
                     // the attribute is emitted:
                     Assert.False(
-                        MetadataValidation.FindCustomAttribute(
-                            metadataReader,
-                            "DefaultCharSetAttribute"
-                        ).IsNil
+                        MetadataValidation
+                            .FindCustomAttribute(metadataReader, "DefaultCharSetAttribute")
+                            .IsNil
                     );
 
                     var import = metadataReader.GetImportedMethods().Single().GetImport();
@@ -3992,10 +3991,9 @@ abstract class C
 
                     // the attribute is emitted:
                     Assert.False(
-                        MetadataValidation.FindCustomAttribute(
-                            metadataReader,
-                            "DefaultCharSetAttribute"
-                        ).IsNil
+                        MetadataValidation
+                            .FindCustomAttribute(metadataReader, "DefaultCharSetAttribute")
+                            .IsNil
                     );
 
                     var import = metadataReader.GetImportedMethods().Single().GetImport();
@@ -5864,14 +5862,16 @@ public class Unbound : Constructed<> { }
             var nestedSubstitutedError =
                 comp2
                     .GetTypeByMetadataName("MissingSubstitutedNested`2")
-                    .BaseType().ConstructedFrom;
+                    .BaseType()
+                    .ConstructedFrom;
             Assert.IsType<SubstitutedNestedErrorTypeSymbol>(nestedSubstitutedError);
             Assert.False(((NamedTypeSymbol)nestedSubstitutedError).IsSerializable);
 
             var unbound =
                 comp2
                     .GetTypeByMetadataName("Unbound")
-                    .BaseType().TypeArgumentsWithAnnotationsNoUseSiteDiagnostics[0].Type;
+                    .BaseType()
+                    .TypeArgumentsWithAnnotationsNoUseSiteDiagnostics[0].Type;
             Assert.IsType<UnboundArgumentErrorTypeSymbol>(unbound);
             Assert.False(((NamedTypeSymbol)unbound).IsSerializable);
 
@@ -10382,12 +10382,13 @@ class C2 : C1
 
             // WithSpecificDiagnosticOption for id TEST1
             verify(
-                TestOptions.DebugDll.WithSpecificDiagnosticOptions(
-                    ImmutableDictionary<string, ReportDiagnostic>.Empty.Add(
-                        "TEST1",
-                        ReportDiagnostic.Warn
-                    )
-                ),
+                TestOptions
+                    .DebugDll
+                    .WithSpecificDiagnosticOptions(
+                        ImmutableDictionary<string, ReportDiagnostic>
+                            .Empty
+                            .Add("TEST1", ReportDiagnostic.Warn)
+                    ),
                 // (6,9): warning TEST1: 'C1.M1()' is obsolete
                 //         M1(); // 1
                 Diagnostic("TEST1", "M1()", isSuppressed: false)
@@ -10396,12 +10397,13 @@ class C2 : C1
             );
 
             verify(
-                TestOptions.DebugDll.WithSpecificDiagnosticOptions(
-                    ImmutableDictionary<string, ReportDiagnostic>.Empty.Add(
-                        "TEST1",
-                        ReportDiagnostic.Error
-                    )
-                ),
+                TestOptions
+                    .DebugDll
+                    .WithSpecificDiagnosticOptions(
+                        ImmutableDictionary<string, ReportDiagnostic>
+                            .Empty
+                            .Add("TEST1", ReportDiagnostic.Error)
+                    ),
                 // (6,9): error TEST1: 'C1.M1()' is obsolete
                 //         M1(); // 1
                 Diagnostic("TEST1", "M1()", isSuppressed: false)
@@ -10411,12 +10413,13 @@ class C2 : C1
             );
 
             verify(
-                TestOptions.DebugDll.WithSpecificDiagnosticOptions(
-                    ImmutableDictionary<string, ReportDiagnostic>.Empty.Add(
-                        "TEST1",
-                        ReportDiagnostic.Hidden
-                    )
-                ),
+                TestOptions
+                    .DebugDll
+                    .WithSpecificDiagnosticOptions(
+                        ImmutableDictionary<string, ReportDiagnostic>
+                            .Empty
+                            .Add("TEST1", ReportDiagnostic.Hidden)
+                    ),
                 // (6,9): hidden TEST1: 'C1.M1()' is obsolete
                 //         M1(); // 1
                 Diagnostic("TEST1", "M1()", isSuppressed: false)
@@ -10425,22 +10428,24 @@ class C2 : C1
             );
 
             verify(
-                TestOptions.DebugDll.WithSpecificDiagnosticOptions(
-                    ImmutableDictionary<string, ReportDiagnostic>.Empty.Add(
-                        "TEST1",
-                        ReportDiagnostic.Suppress
+                TestOptions
+                    .DebugDll
+                    .WithSpecificDiagnosticOptions(
+                        ImmutableDictionary<string, ReportDiagnostic>
+                            .Empty
+                            .Add("TEST1", ReportDiagnostic.Suppress)
                     )
-                )
             );
 
             // WithSpecificDiagnosticOption for id CS0618
             verify(
-                TestOptions.DebugDll.WithSpecificDiagnosticOptions(
-                    ImmutableDictionary<string, ReportDiagnostic>.Empty.Add(
-                        "CS0618",
-                        ReportDiagnostic.Error
-                    )
-                ),
+                TestOptions
+                    .DebugDll
+                    .WithSpecificDiagnosticOptions(
+                        ImmutableDictionary<string, ReportDiagnostic>
+                            .Empty
+                            .Add("CS0618", ReportDiagnostic.Error)
+                    ),
                 // (6,9): warning TEST1: 'C1.M1()' is obsolete
                 //         M1(); // 1
                 Diagnostic("TEST1", "M1()", isSuppressed: false)
@@ -10449,12 +10454,13 @@ class C2 : C1
             );
 
             verify(
-                TestOptions.DebugDll.WithSpecificDiagnosticOptions(
-                    ImmutableDictionary<string, ReportDiagnostic>.Empty.Add(
-                        "CS0618",
-                        ReportDiagnostic.Suppress
-                    )
-                ),
+                TestOptions
+                    .DebugDll
+                    .WithSpecificDiagnosticOptions(
+                        ImmutableDictionary<string, ReportDiagnostic>
+                            .Empty
+                            .Add("CS0618", ReportDiagnostic.Suppress)
+                    ),
                 // (6,9): warning TEST1: 'C1.M1()' is obsolete
                 //         M1(); // 1
                 Diagnostic("TEST1", "M1()", isSuppressed: false)
@@ -11455,7 +11461,8 @@ public class C
 
             Action<ModuleSymbol> validator = module =>
             {
-                var method = module.GlobalNamespace
+                var method = module
+                    .GlobalNamespace
                     .GetMember<NamedTypeSymbol>("C")
                     .GetMember<MethodSymbol>("M");
                 var param = method.Parameters.Single();
@@ -15365,7 +15372,9 @@ class MyAttribute : System.Attribute
                                     "System.Runtime.CompilerServices",
                                     "AsyncStateMachineAttribute"
                                 )
-                                .ConstructorArguments.Single().ValueInternal
+                                .ConstructorArguments
+                                .Single()
+                                .ValueInternal
                         ).GetMember<MethodSymbol>("MoveNext")
                     )
                 );
@@ -15379,10 +15388,13 @@ class MyAttribute : System.Attribute
                                 "System.Runtime.CompilerServices",
                                 "AsyncStateMachineAttribute"
                             )
-                            .ConstructorArguments.Single().ValueInternal
+                            .ConstructorArguments
+                            .Single()
+                            .ValueInternal
                     )
                         .GetMember<MethodSymbol>("MoveNext")
-                        .GetAttributes().Length
+                        .GetAttributes()
+                        .Length
                 );
 
                 Assert.Equal(
@@ -15395,7 +15407,9 @@ class MyAttribute : System.Attribute
                                     "System.Runtime.CompilerServices",
                                     "IteratorStateMachineAttribute"
                                 )
-                                .ConstructorArguments.Single().ValueInternal
+                                .ConstructorArguments
+                                .Single()
+                                .ValueInternal
                         ).GetMember<MethodSymbol>("MoveNext")
                     )
                 );
@@ -15409,10 +15423,13 @@ class MyAttribute : System.Attribute
                                 "System.Runtime.CompilerServices",
                                 "IteratorStateMachineAttribute"
                             )
-                            .ConstructorArguments.Single().ValueInternal
+                            .ConstructorArguments
+                            .Single()
+                            .ValueInternal
                     )
                         .GetMember<MethodSymbol>("MoveNext")
-                        .GetAttributes().Length
+                        .GetAttributes()
+                        .Length
                 );
             };
 
@@ -15533,7 +15550,9 @@ class MyAttribute : System.Attribute
                                     "System.Runtime.CompilerServices",
                                     "AsyncStateMachineAttribute"
                                 )
-                                .ConstructorArguments.Single().ValueInternal
+                                .ConstructorArguments
+                                .Single()
+                                .ValueInternal
                         )
                     )
                 );
@@ -15548,7 +15567,9 @@ class MyAttribute : System.Attribute
                                     "System.Runtime.CompilerServices",
                                     "AsyncStateMachineAttribute"
                                 )
-                                .ConstructorArguments.Single().ValueInternal
+                                .ConstructorArguments
+                                .Single()
+                                .ValueInternal
                         )
                     )
                 );
@@ -15563,7 +15584,9 @@ class MyAttribute : System.Attribute
                                     "System.Runtime.CompilerServices",
                                     "IteratorStateMachineAttribute"
                                 )
-                                .ConstructorArguments.Single().ValueInternal
+                                .ConstructorArguments
+                                .Single()
+                                .ValueInternal
                         )
                     )
                 );
@@ -15578,7 +15601,9 @@ class MyAttribute : System.Attribute
                                     "System.Runtime.CompilerServices",
                                     "IteratorStateMachineAttribute"
                                 )
-                                .ConstructorArguments.Single().ValueInternal
+                                .ConstructorArguments
+                                .Single()
+                                .ValueInternal
                         )
                     )
                 );
@@ -15793,10 +15818,12 @@ first
 second",
                 symbolValidator: module =>
                 {
-                    var attribute = module.ContainingAssembly
+                    var attribute = module
+                        .ContainingAssembly
                         .GetTypeByMetadataName("Program")
                         .GetMethod("Test")
-                        .Parameters.Single()
+                        .Parameters
+                        .Single()
                         .GetAttributes()
                         .Single();
 

@@ -82,7 +82,8 @@ namespace ComWrappersTests.Common
             {
                 try
                 {
-                    ComWrappers.ComInterfaceDispatch
+                    ComWrappers
+                        .ComInterfaceDispatch
                         .GetInstance<ITest>((ComWrappers.ComInterfaceDispatch*)dispatchPtr)
                         .SetValue(i);
                 }

@@ -78,11 +78,9 @@ namespace System.Net.Test.Common
             {
                 store.Open(OpenFlags.ReadOnly);
 
-                X509Certificate2Collection certs = store.Certificates.Find(
-                    X509FindType.FindByThumbprint,
-                    CARootThumbprint,
-                    false
-                );
+                X509Certificate2Collection certs = store
+                    .Certificates
+                    .Find(X509FindType.FindByThumbprint, CARootThumbprint, false);
 
                 if (certs.Count == 1)
                 {

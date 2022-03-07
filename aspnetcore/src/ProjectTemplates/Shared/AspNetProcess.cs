@@ -160,7 +160,8 @@ public class AspNetProcess : IDisposable
             Assert.Equal("stylesheet", styleSheet.Relation);
             // Workaround for https://github.com/dotnet/aspnetcore/issues/31030#issuecomment-811334450
             // Cleans up incorrectly generated filename for scoped CSS files
-            var styleSheetHref = styleSheet.Href
+            var styleSheetHref = styleSheet
+                .Href
                 .Replace("_", string.Empty)
                 .Replace("about://", string.Empty);
             await AssertOk(styleSheetHref);

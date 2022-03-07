@@ -61,16 +61,16 @@ namespace Microsoft.CodeAnalysis.Remote.Testing
                 LazyWorkspace = new Lazy<RemoteWorkspace>(
                     () =>
                     {
-                        var hostServices = FeaturesTestCompositions.RemoteHost
+                        var hostServices = FeaturesTestCompositions
+                            .RemoteHost
                             .AddParts(additionalRemoteParts)
                             .GetHostServices();
 
                         // We want to allow references to source generators to be shared between the "in proc" and "remote" workspaces and
                         // MEF compositions, so tell the serializer service to use the same map for this "remote" workspace as the in-proc one.
-                        (
-                            (IMefHostExportProvider)hostServices
-                        ).GetExportedValue<TestSerializerService.Factory>().SharedTestGeneratorReferences =
-                            sharedTestGeneratorReferences;
+                        ((IMefHostExportProvider)hostServices)
+                            .GetExportedValue<TestSerializerService.Factory>()
+                            .SharedTestGeneratorReferences = sharedTestGeneratorReferences;
                         return new RemoteWorkspace(hostServices, WorkspaceKind.RemoteWorkspace);
                     }
                 );

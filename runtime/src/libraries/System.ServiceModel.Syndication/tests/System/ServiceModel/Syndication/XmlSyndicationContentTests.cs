@@ -28,16 +28,18 @@ namespace System.ServiceModel.Syndication.Tests
             Assert.Equal(0, content.ReadContent<ExtensionObject>().Value);
             Assert.Equal(
                 0,
-                content.ReadContent<ExtensionObject>(
-                    new DataContractSerializer(typeof(ExtensionObject))
-                ).Value
+                content
+                    .ReadContent<ExtensionObject>(
+                        new DataContractSerializer(typeof(ExtensionObject))
+                    )
+                    .Value
             );
             Assert.Equal(0, content.ReadContent<ExtensionObject>((XmlObjectSerializer)null).Value);
             Assert.Equal(
                 10,
-                content.ReadContent<ExtensionObject>(
-                    new XmlSerializer(typeof(ExtensionObject))
-                ).Value
+                content
+                    .ReadContent<ExtensionObject>(new XmlSerializer(typeof(ExtensionObject)))
+                    .Value
             );
             Assert.Equal(10, content.ReadContent<ExtensionObject>((XmlSerializer)null).Value);
         }
@@ -70,16 +72,18 @@ namespace System.ServiceModel.Syndication.Tests
             Assert.Equal(0, content.ReadContent<ExtensionObject>().Value);
             Assert.Equal(
                 0,
-                content.ReadContent<ExtensionObject>(
-                    new DataContractSerializer(typeof(ExtensionObject))
-                ).Value
+                content
+                    .ReadContent<ExtensionObject>(
+                        new DataContractSerializer(typeof(ExtensionObject))
+                    )
+                    .Value
             );
             Assert.Equal(0, content.ReadContent<ExtensionObject>((XmlObjectSerializer)null).Value);
             Assert.Equal(
                 10,
-                content.ReadContent<ExtensionObject>(
-                    new XmlSerializer(typeof(ExtensionObject))
-                ).Value
+                content
+                    .ReadContent<ExtensionObject>(new XmlSerializer(typeof(ExtensionObject)))
+                    .Value
             );
             Assert.Equal(10, content.ReadContent<ExtensionObject>((XmlSerializer)null).Value);
         }
@@ -107,16 +111,18 @@ namespace System.ServiceModel.Syndication.Tests
             Assert.Equal(10, content.ReadContent<ExtensionObject>().Value);
             Assert.Equal(
                 10,
-                content.ReadContent<ExtensionObject>(
-                    new DataContractSerializer(typeof(ExtensionObject))
-                ).Value
+                content
+                    .ReadContent<ExtensionObject>(
+                        new DataContractSerializer(typeof(ExtensionObject))
+                    )
+                    .Value
             );
             Assert.Equal(10, content.ReadContent<ExtensionObject>((XmlObjectSerializer)null).Value);
             Assert.Equal(
                 10,
-                content.ReadContent<ExtensionObject>(
-                    new XmlSerializer(typeof(ExtensionObject))
-                ).Value
+                content
+                    .ReadContent<ExtensionObject>(new XmlSerializer(typeof(ExtensionObject)))
+                    .Value
             );
             Assert.Equal(10, content.ReadContent<ExtensionObject>((XmlSerializer)null).Value);
         }
@@ -148,23 +154,26 @@ namespace System.ServiceModel.Syndication.Tests
             Assert.Equal(string.IsNullOrEmpty(type) ? "text/xml" : type, content.Type);
             Assert.Equal(
                 10,
-                content.Extension.GetObject<ExtensionObject>(
-                    new XmlSerializer(typeof(ExtensionObject))
-                ).Value
+                content
+                    .Extension
+                    .GetObject<ExtensionObject>(new XmlSerializer(typeof(ExtensionObject)))
+                    .Value
             );
             Assert.Equal(10, content.ReadContent<ExtensionObject>().Value);
             Assert.Equal(
                 10,
-                content.ReadContent<ExtensionObject>(
-                    new DataContractSerializer(typeof(ExtensionObject))
-                ).Value
+                content
+                    .ReadContent<ExtensionObject>(
+                        new DataContractSerializer(typeof(ExtensionObject))
+                    )
+                    .Value
             );
             Assert.Equal(10, content.ReadContent<ExtensionObject>((XmlObjectSerializer)null).Value);
             Assert.Equal(
                 10,
-                content.ReadContent<ExtensionObject>(
-                    new XmlSerializer(typeof(ExtensionObject))
-                ).Value
+                content
+                    .ReadContent<ExtensionObject>(new XmlSerializer(typeof(ExtensionObject)))
+                    .Value
             );
             Assert.Equal(10, content.ReadContent<ExtensionObject>((XmlSerializer)null).Value);
         }
@@ -192,23 +201,26 @@ namespace System.ServiceModel.Syndication.Tests
             Assert.Equal(string.IsNullOrEmpty(type) ? "text/xml" : type, content.Type);
             Assert.Equal(
                 10,
-                content.Extension.GetObject<ExtensionObject>(
-                    new XmlSerializer(typeof(ExtensionObject))
-                ).Value
+                content
+                    .Extension
+                    .GetObject<ExtensionObject>(new XmlSerializer(typeof(ExtensionObject)))
+                    .Value
             );
             Assert.Equal(10, content.ReadContent<ExtensionObject>().Value);
             Assert.Equal(
                 10,
-                content.ReadContent<ExtensionObject>(
-                    new DataContractSerializer(typeof(ExtensionObject))
-                ).Value
+                content
+                    .ReadContent<ExtensionObject>(
+                        new DataContractSerializer(typeof(ExtensionObject))
+                    )
+                    .Value
             );
             Assert.Equal(10, content.ReadContent<ExtensionObject>((XmlObjectSerializer)null).Value);
             Assert.Equal(
                 10,
-                content.ReadContent<ExtensionObject>(
-                    new XmlSerializer(typeof(ExtensionObject))
-                ).Value
+                content
+                    .ReadContent<ExtensionObject>(new XmlSerializer(typeof(ExtensionObject)))
+                    .Value
             );
             Assert.Equal(10, content.ReadContent<ExtensionObject>((XmlSerializer)null).Value);
         }

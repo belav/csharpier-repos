@@ -102,9 +102,9 @@ namespace System.Linq.Expressions.Tests
             );
             Assert.Contains(
                 labelName,
-                Assert.Throws<InvalidOperationException>(
-                    () => lambda.Compile(useInterpreter)
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(() => lambda.Compile(useInterpreter))
+                    .Message
             );
         }
 
@@ -120,9 +120,9 @@ namespace System.Linq.Expressions.Tests
             Assert.Throws<InvalidOperationException>(() => lambda.Compile());
             Assert.Contains(
                 labelName,
-                Assert.Throws<InvalidOperationException>(
-                    () => lambda.Compile(useInterpreter)
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(() => lambda.Compile(useInterpreter))
+                    .Message
             );
         }
 
@@ -140,9 +140,9 @@ namespace System.Linq.Expressions.Tests
             );
             Assert.Contains(
                 labelName,
-                Assert.Throws<InvalidOperationException>(
-                    () => lambda.Compile(useInterpreter)
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(() => lambda.Compile(useInterpreter))
+                    .Message
             );
         }
 
@@ -160,9 +160,9 @@ namespace System.Linq.Expressions.Tests
             );
             Assert.Contains(
                 labelName,
-                Assert.Throws<InvalidOperationException>(
-                    () => lambda.Compile(useInterpreter)
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(() => lambda.Compile(useInterpreter))
+                    .Message
             );
         }
 
@@ -177,9 +177,9 @@ namespace System.Linq.Expressions.Tests
             );
             Assert.Contains(
                 labelName,
-                Assert.Throws<InvalidOperationException>(
-                    () => lambda.Compile(useInterpreter)
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(() => lambda.Compile(useInterpreter))
+                    .Message
             );
         }
 

@@ -84,12 +84,15 @@ namespace System.Text.Json.Tests
         {
             Assert.Equal(
                 expectedValue,
-                Encoding.UTF8.GetString(
-                    buffer.WrittenSpan
+                Encoding
+                    .UTF8
+                    .GetString(
+                        buffer
+                            .WrittenSpan
 #if NETFRAMEWORK
-                    .ToArray()
+                            .ToArray()
 #endif
-                )
+                    )
             );
         }
 

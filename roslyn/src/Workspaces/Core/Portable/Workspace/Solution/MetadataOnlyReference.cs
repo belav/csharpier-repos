@@ -42,9 +42,11 @@ namespace Microsoft.CodeAnalysis
             CancellationToken cancellationToken
         )
         {
-            solution.Workspace.LogTestMessage(
-                $"Looking to see if we already have a skeleton assembly for {projectReference.ProjectId} before we build one..."
-            );
+            solution
+                .Workspace
+                .LogTestMessage(
+                    $"Looking to see if we already have a skeleton assembly for {projectReference.ProjectId} before we build one..."
+                );
             if (
                 TryGetReference(
                     solution,
@@ -55,9 +57,11 @@ namespace Microsoft.CodeAnalysis
                 )
             )
             {
-                solution.Workspace.LogTestMessage(
-                    $"A reference was found {projectReference.ProjectId} so we're skipping the build."
-                );
+                solution
+                    .Workspace
+                    .LogTestMessage(
+                        $"A reference was found {projectReference.ProjectId} so we're skipping the build."
+                    );
                 return reference;
             }
 
@@ -86,9 +90,11 @@ namespace Microsoft.CodeAnalysis
                     )
                 )
                 {
-                    solution.Workspace.LogTestMessage(
-                        $"We failed to create metadata so we're using the one we just found from an earlier version."
-                    );
+                    solution
+                        .Workspace
+                        .LogTestMessage(
+                            $"We failed to create metadata so we're using the one we just found from an earlier version."
+                        );
 
                     // we have one from previous compilation!!, it might be out-of-date big time, but better than nothing.
                     // re-use it
@@ -120,9 +126,11 @@ namespace Microsoft.CodeAnalysis
             }
             else
             {
-                solution.Workspace.LogTestMessage(
-                    $"Successfully stored the metadata generated for {projectReference.ProjectId}"
-                );
+                solution
+                    .Workspace
+                    .LogTestMessage(
+                        $"Successfully stored the metadata generated for {projectReference.ProjectId}"
+                    );
             }
 
             // record it to version based cache as well. snapshot cache always has a higher priority. we don't need to check returned set here
@@ -148,9 +156,11 @@ namespace Microsoft.CodeAnalysis
             // if we have one from snapshot cache, use it. it will make sure same compilation will get same metadata reference always.
             if (s_snapshotCache.TryGetValue(finalOrDeclarationCompilation, out var referenceSet))
             {
-                solution.Workspace.LogTestMessage(
-                    $"Found already cached metadata in {nameof(s_snapshotCache)} for the exact compilation"
-                );
+                solution
+                    .Workspace
+                    .LogTestMessage(
+                        $"Found already cached metadata in {nameof(s_snapshotCache)} for the exact compilation"
+                    );
                 reference = referenceSet.GetMetadataReference(
                     finalOrDeclarationCompilation,
                     projectReference.Aliases,
@@ -172,9 +182,11 @@ namespace Microsoft.CodeAnalysis
                 )
             )
             {
-                solution.Workspace.LogTestMessage(
-                    $"Found already cached metadata for the branch and version {version}"
-                );
+                solution
+                    .Workspace
+                    .LogTestMessage(
+                        $"Found already cached metadata for the branch and version {version}"
+                    );
                 return true;
             }
 
@@ -191,9 +203,11 @@ namespace Microsoft.CodeAnalysis
                 )
             )
             {
-                solution.Workspace.LogTestMessage(
-                    $"Found already cached metadata for the primary branch and version {version}"
-                );
+                solution
+                    .Workspace
+                    .LogTestMessage(
+                        $"Found already cached metadata for the primary branch and version {version}"
+                    );
                 return true;
             }
 

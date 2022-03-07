@@ -91,12 +91,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UseImplicitObjectCreation
                 var helper = CSharpUseImplicitTypeHelper.Instance;
                 if (
                     helper.ShouldAnalyzeVariableDeclaration(variableDeclaration, cancellationToken)
-                    && helper.AnalyzeTypeName(
-                        typeNode,
-                        semanticModel,
-                        optionSet,
-                        cancellationToken
-                    ).IsStylePreferred
+                    && helper
+                        .AnalyzeTypeName(typeNode, semanticModel, optionSet, cancellationToken)
+                        .IsStylePreferred
                 )
                 {
                     // this is a case where the user would prefer 'var'.  don't offer to use an implicit object here.

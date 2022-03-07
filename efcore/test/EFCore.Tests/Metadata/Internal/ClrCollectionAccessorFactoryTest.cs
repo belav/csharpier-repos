@@ -258,9 +258,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
             Assert.Equal(
                 CoreStrings.NoFieldOrGetter("WriteOnlyPropNoField", typeof(MyEntity).Name),
-                Assert.Throws<InvalidOperationException>(
-                    () => new ClrCollectionAccessorFactory().Create(navigation)
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(
+                        () => new ClrCollectionAccessorFactory().Create(navigation)
+                    )
+                    .Message
             );
         }
 
@@ -310,9 +312,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     typeof(MyEnumerable).Name,
                     typeof(MyOtherEntity).Name
                 ),
-                Assert.Throws<InvalidOperationException>(
-                    () => test(accessor, entity, value)
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(() => test(accessor, entity, value))
+                    .Message
             );
         }
 
@@ -327,9 +329,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     typeof(MyEntity).Name,
                     typeof(MyOtherEntity[]).Name
                 ),
-                Assert.Throws<InvalidOperationException>(
-                    () => new ClrCollectionAccessorFactory().Create(navigation)
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(
+                        () => new ClrCollectionAccessorFactory().Create(navigation)
+                    )
+                    .Message
             );
         }
 
@@ -342,14 +346,16 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
             Assert.Equal(
                 CoreStrings.NavigationNoSetter("NoBackingFound", typeof(MyEntity).Name),
-                Assert.Throws<InvalidOperationException>(
-                    () =>
-                        accessor.Add(
-                            new MyEntity(false),
-                            new MyOtherEntity(),
-                            forMaterialization: false
-                        )
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(
+                        () =>
+                            accessor.Add(
+                                new MyEntity(false),
+                                new MyOtherEntity(),
+                                forMaterialization: false
+                            )
+                    )
+                    .Message
             );
         }
 
@@ -362,14 +368,16 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
             Assert.Equal(
                 CoreStrings.NavigationNoSetter("ReadOnlyPropNoField", typeof(MyEntity).Name),
-                Assert.Throws<InvalidOperationException>(
-                    () =>
-                        accessor.Add(
-                            new MyEntity(false),
-                            new MyOtherEntity(),
-                            forMaterialization: false
-                        )
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(
+                        () =>
+                            accessor.Add(
+                                new MyEntity(false),
+                                new MyOtherEntity(),
+                                forMaterialization: false
+                            )
+                    )
+                    .Message
             );
         }
 
@@ -402,14 +410,16 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     typeof(MyEntity).Name,
                     typeof(MyPrivateCollection).Name
                 ),
-                Assert.Throws<InvalidOperationException>(
-                    () =>
-                        accessor.Add(
-                            new MyEntity(false),
-                            new MyOtherEntity(),
-                            forMaterialization: false
-                        )
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(
+                        () =>
+                            accessor.Add(
+                                new MyEntity(false),
+                                new MyOtherEntity(),
+                                forMaterialization: false
+                            )
+                    )
+                    .Message
             );
         }
 
@@ -426,14 +436,16 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     typeof(MyEntity).Name,
                     typeof(MyInternalCollection).Name
                 ),
-                Assert.Throws<InvalidOperationException>(
-                    () =>
-                        accessor.Add(
-                            new MyEntity(false),
-                            new MyOtherEntity(),
-                            forMaterialization: false
-                        )
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(
+                        () =>
+                            accessor.Add(
+                                new MyEntity(false),
+                                new MyOtherEntity(),
+                                forMaterialization: false
+                            )
+                    )
+                    .Message
             );
         }
 
@@ -450,14 +462,16 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     typeof(MyEntity).Name,
                     typeof(MyUnavailableCollection).Name
                 ),
-                Assert.Throws<InvalidOperationException>(
-                    () =>
-                        accessor.Add(
-                            new MyEntity(false),
-                            new MyOtherEntity(),
-                            forMaterialization: false
-                        )
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(
+                        () =>
+                            accessor.Add(
+                                new MyEntity(false),
+                                new MyOtherEntity(),
+                                forMaterialization: false
+                            )
+                    )
+                    .Message
             );
         }
 
@@ -497,7 +511,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         }
 
         private ProviderConventionSetBuilderDependencies CreateDependencies() =>
-            InMemoryTestHelpers.Instance
+            InMemoryTestHelpers
+                .Instance
                 .CreateContextServices()
                 .GetRequiredService<ProviderConventionSetBuilderDependencies>();
 

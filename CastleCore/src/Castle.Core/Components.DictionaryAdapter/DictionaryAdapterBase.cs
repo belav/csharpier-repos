@@ -152,7 +152,8 @@ namespace Castle.Components.DictionaryAdapter
         public bool ShouldClearProperty(PropertyDescriptor property, object value)
         {
             return property == null
-                || property.Setters
+                || property
+                    .Setters
                     .OfType<RemoveIfAttribute>()
                     .Where(remove => remove.ShouldRemove(value))
                     .Any();

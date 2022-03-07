@@ -18,43 +18,51 @@ public class AvoidHtmlPartialAnalyzer : ViewFeatureAnalyzerBase
 
     protected override void InitializeWorker(ViewFeaturesAnalyzerContext analyzerContext)
     {
-        analyzerContext.Context.RegisterOperationAction(
-            context =>
-            {
-                var method = ((IInvocationOperation)context.Operation).TargetMethod;
-                if (!analyzerContext.IsHtmlHelperExtensionMethod(method))
+        analyzerContext
+            .Context
+            .RegisterOperationAction(
+                context =>
                 {
-                    return;
-                }
+                    var method = ((IInvocationOperation)context.Operation).TargetMethod;
+                    if (!analyzerContext.IsHtmlHelperExtensionMethod(method))
+                    {
+                        return;
+                    }
 
-                if (string.Equals(SymbolNames.PartialMethod, method.Name, StringComparison.Ordinal))
-                {
-                    context.ReportDiagnostic(
-                        Diagnostic.Create(
-                            SupportedDiagnostic,
-                            context.Operation.Syntax.GetLocation(),
-                            new[] { SymbolNames.PartialMethod }
+                    if (
+                        string.Equals(
+                            SymbolNames.PartialMethod,
+                            method.Name,
+                            StringComparison.Ordinal
                         )
-                    );
-                }
-                else if (
-                    string.Equals(
-                        SymbolNames.RenderPartialMethod,
-                        method.Name,
-                        StringComparison.Ordinal
                     )
-                )
-                {
-                    context.ReportDiagnostic(
-                        Diagnostic.Create(
-                            SupportedDiagnostic,
-                            context.Operation.Syntax.GetLocation(),
-                            new[] { SymbolNames.RenderPartialMethod }
+                    {
+                        context.ReportDiagnostic(
+                            Diagnostic.Create(
+                                SupportedDiagnostic,
+                                context.Operation.Syntax.GetLocation(),
+                                new[] { SymbolNames.PartialMethod }
+                            )
+                        );
+                    }
+                    else if (
+                        string.Equals(
+                            SymbolNames.RenderPartialMethod,
+                            method.Name,
+                            StringComparison.Ordinal
                         )
-                    );
-                }
-            },
-            OperationKind.Invocation
-        );
+                    )
+                    {
+                        context.ReportDiagnostic(
+                            Diagnostic.Create(
+                                SupportedDiagnostic,
+                                context.Operation.Syntax.GetLocation(),
+                                new[] { SymbolNames.RenderPartialMethod }
+                            )
+                        );
+                    }
+                },
+                OperationKind.Invocation
+            );
     }
 }

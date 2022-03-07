@@ -204,15 +204,17 @@ namespace System.Net.Sockets.Tests
                     ExecutionContext.SuppressFlow();
                 try
                 {
-                    pending = !client.BeginConnect(
-                        listener.LocalEndPoint,
-                        iar =>
-                        {
-                            client.EndConnect(iar);
-                            tcs.SetResult(asyncLocal.Value);
-                        },
-                        null
-                    ).CompletedSynchronously;
+                    pending = !client
+                        .BeginConnect(
+                            listener.LocalEndPoint,
+                            iar =>
+                            {
+                                client.EndConnect(iar);
+                                tcs.SetResult(asyncLocal.Value);
+                            },
+                            null
+                        )
+                        .CompletedSynchronously;
                 }
                 finally
                 {
@@ -321,15 +323,17 @@ namespace System.Net.Sockets.Tests
                         ExecutionContext.SuppressFlow();
                     try
                     {
-                        pending = !client.BeginDisconnect(
-                            reuseSocket: false,
-                            iar =>
-                            {
-                                client.EndDisconnect(iar);
-                                tcs.SetResult(asyncLocal.Value);
-                            },
-                            null
-                        ).CompletedSynchronously;
+                        pending = !client
+                            .BeginDisconnect(
+                                reuseSocket: false,
+                                iar =>
+                                {
+                                    client.EndDisconnect(iar);
+                                    tcs.SetResult(asyncLocal.Value);
+                                },
+                                null
+                            )
+                            .CompletedSynchronously;
                     }
                     finally
                     {
@@ -448,7 +452,8 @@ namespace System.Net.Sockets.Tests
                         EndPoint ep = server.LocalEndPoint;
                         Assert.False(
                             receiveFrom
-                              ? client.BeginReceiveFrom(
+                              ? client
+                                .BeginReceiveFrom(
                                     new byte[1],
                                     0,
                                     1,
@@ -460,8 +465,10 @@ namespace System.Net.Sockets.Tests
                                         tcs.SetResult(asyncLocal.Value);
                                     },
                                     null
-                                ).CompletedSynchronously
-                              : client.BeginReceive(
+                                )
+                                .CompletedSynchronously
+                              : client
+                                .BeginReceive(
                                     new byte[1],
                                     0,
                                     1,
@@ -472,7 +479,8 @@ namespace System.Net.Sockets.Tests
                                         tcs.SetResult(asyncLocal.Value);
                                     },
                                     null
-                                ).CompletedSynchronously
+                                )
+                                .CompletedSynchronously
                         );
                     }
                     finally
@@ -608,31 +616,35 @@ namespace System.Net.Sockets.Tests
                     try
                     {
                         pending = sendTo
-                            ? !client.BeginSendTo(
-                                  buffer,
-                                  0,
-                                  buffer.Length,
-                                  SocketFlags.None,
-                                  server.LocalEndPoint,
-                                  iar =>
-                                  {
-                                      client.EndSendTo(iar);
-                                      tcs.SetResult(asyncLocal.Value);
-                                  },
-                                  null
-                              ).CompletedSynchronously
-                            : !client.BeginSend(
-                                  buffer,
-                                  0,
-                                  buffer.Length,
-                                  SocketFlags.None,
-                                  iar =>
-                                  {
-                                      client.EndSend(iar);
-                                      tcs.SetResult(asyncLocal.Value);
-                                  },
-                                  null
-                              ).CompletedSynchronously;
+                            ? !client
+                                  .BeginSendTo(
+                                      buffer,
+                                      0,
+                                      buffer.Length,
+                                      SocketFlags.None,
+                                      server.LocalEndPoint,
+                                      iar =>
+                                      {
+                                          client.EndSendTo(iar);
+                                          tcs.SetResult(asyncLocal.Value);
+                                      },
+                                      null
+                                  )
+                                  .CompletedSynchronously
+                            : !client
+                                  .BeginSend(
+                                      buffer,
+                                      0,
+                                      buffer.Length,
+                                      SocketFlags.None,
+                                      iar =>
+                                      {
+                                          client.EndSend(iar);
+                                          tcs.SetResult(asyncLocal.Value);
+                                      },
+                                      null
+                                  )
+                                  .CompletedSynchronously;
                     }
                     finally
                     {
@@ -702,15 +714,17 @@ namespace System.Net.Sockets.Tests
                         ExecutionContext.SuppressFlow();
                     try
                     {
-                        pending = !client.BeginSendFile(
-                            filePath,
-                            iar =>
-                            {
-                                client.EndSendFile(iar);
-                                tcs.SetResult(asyncLocal.Value);
-                            },
-                            null
-                        ).CompletedSynchronously;
+                        pending = !client
+                            .BeginSendFile(
+                                filePath,
+                                iar =>
+                                {
+                                    client.EndSendFile(iar);
+                                    tcs.SetResult(asyncLocal.Value);
+                                },
+                                null
+                            )
+                            .CompletedSynchronously;
                     }
                     finally
                     {

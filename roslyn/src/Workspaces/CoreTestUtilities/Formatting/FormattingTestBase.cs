@@ -54,11 +54,9 @@ namespace Microsoft.CodeAnalysis.UnitTests.Formatting
         {
             using (var workspace = new AdhocWorkspace())
             {
-                var project = workspace.CurrentSolution.AddProject(
-                    "Project",
-                    "Project.dll",
-                    language
-                );
+                var project = workspace
+                    .CurrentSolution
+                    .AddProject("Project", "Project.dll", language);
                 if (parseOptions != null)
                 {
                     project = project.WithParseOptions(parseOptions);

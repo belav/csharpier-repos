@@ -23,10 +23,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Squiggles
     public static class SquiggleUtilities
     {
         // Squiggle tests require solution crawler to run.
-        internal static TestComposition CompositionWithSolutionCrawler =
-            EditorTestCompositions.EditorFeatures.RemoveParts(
-                typeof(MockWorkspaceEventListenerProvider)
-            );
+        internal static TestComposition CompositionWithSolutionCrawler = EditorTestCompositions
+            .EditorFeatures
+            .RemoveParts(typeof(MockWorkspaceEventListenerProvider));
 
         internal static async Task<(ImmutableArray<DiagnosticData>, ImmutableArray<
                 ITagSpan<IErrorTag>
@@ -39,16 +38,16 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Squiggles
                 workspace,
                 analyzerMap
             );
-            var tagger = wrapper.TaggerProvider.CreateTagger<IErrorTag>(
-                workspace.Documents.First().GetTextBuffer()
-            );
+            var tagger = wrapper
+                .TaggerProvider
+                .CreateTagger<IErrorTag>(workspace.Documents.First().GetTextBuffer());
 
             using var disposable = tagger as IDisposable;
             await wrapper.WaitForTags();
 
-            var analyzerDiagnostics = await wrapper.AnalyzerService.GetDiagnosticsAsync(
-                workspace.CurrentSolution
-            );
+            var analyzerDiagnostics = await wrapper
+                .AnalyzerService
+                .GetDiagnosticsAsync(workspace.CurrentSolution);
 
             var snapshot = workspace.Documents.First().GetTextBuffer().CurrentSnapshot;
             var spans = tagger.GetTags(snapshot.GetSnapshotSpanCollection()).ToImmutableArray();

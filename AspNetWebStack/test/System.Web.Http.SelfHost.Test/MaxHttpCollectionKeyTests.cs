@@ -32,11 +32,13 @@ namespace System.Web.Http.SelfHost
             baseAddress = String.Format("http://localhost/");
 
             HttpConfiguration config = new HttpConfiguration();
-            config.Routes.MapHttpRoute(
-                "Default",
-                "{controller}/{action}",
-                new { controller = "MaxHttpCollectionKeyType" }
-            );
+            config
+                .Routes
+                .MapHttpRoute(
+                    "Default",
+                    "{controller}/{action}",
+                    new { controller = "MaxHttpCollectionKeyType" }
+                );
 
             server = new HttpServer(config);
 

@@ -63,9 +63,9 @@ namespace Microsoft.CodeAnalysis.ValueTracking
                     return ImmutableArray<ValueTrackedItem>.Empty;
                 }
 
-                using var _ = PooledObjects.ArrayBuilder<ValueTrackedItem>.GetInstance(
-                    out var builder
-                );
+                using var _ = PooledObjects
+                    .ArrayBuilder<ValueTrackedItem>
+                    .GetInstance(out var builder);
 
                 foreach (var item in result.Value)
                 {
@@ -131,9 +131,9 @@ namespace Microsoft.CodeAnalysis.ValueTracking
                     return ImmutableArray<ValueTrackedItem>.Empty;
                 }
 
-                using var _ = PooledObjects.ArrayBuilder<ValueTrackedItem>.GetInstance(
-                    out var builder
-                );
+                using var _ = PooledObjects
+                    .ArrayBuilder<ValueTrackedItem>
+                    .GetInstance(out var builder);
 
                 foreach (var item in result.Value)
                 {

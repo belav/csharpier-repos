@@ -707,9 +707,9 @@ namespace System.Net.WebSockets.Client.Tests
                             );
 
                             // Wait for client-side ConnectAsync to complete and for a pending ReceiveAsync to be posted.
-                            await pendingReceiveAsyncPosted.Task.WaitAsync(
-                                TimeSpan.FromMilliseconds(TimeOutMilliseconds)
-                            );
+                            await pendingReceiveAsyncPosted
+                                .Task
+                                .WaitAsync(TimeSpan.FromMilliseconds(TimeOutMilliseconds));
 
                             // Close the underlying connection prematurely (without sending a WebSocket Close frame).
                             connection.Socket.Shutdown(SocketShutdown.Both);

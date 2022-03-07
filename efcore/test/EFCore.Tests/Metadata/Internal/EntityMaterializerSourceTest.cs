@@ -36,9 +36,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
             Assert.Equal(
                 CoreStrings.CannotMaterializeAbstractType(nameof(SomeAbstractEntity)),
-                Assert.Throws<InvalidOperationException>(
-                    () => source.CreateMaterializeExpression((IEntityType)entityType, "", null!)
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(
+                        () => source.CreateMaterializeExpression((IEntityType)entityType, "", null!)
+                    )
+                    .Message
             );
         }
 
@@ -50,7 +52,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             entityType.ConstructorBinding = new ConstructorBinding(
                 typeof(SomeEntity)
                     .GetTypeInfo()
-                    .DeclaredConstructors.Single(c => c.GetParameters().Length == 2),
+                    .DeclaredConstructors
+                    .Single(c => c.GetParameters().Length == 2),
                 new List<ParameterBinding>
                 {
                     new PropertyParameterBinding(

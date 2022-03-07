@@ -157,9 +157,11 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunBasicScenario_UnsafeRead));
 
-            var result = AdvSimd.Arm64.DuplicateToVector128(
-                Unsafe.ReadUnaligned<Double>(ref Unsafe.As<Double, byte>(ref _data))
-            );
+            var result = AdvSimd
+                .Arm64
+                .DuplicateToVector128(
+                    Unsafe.ReadUnaligned<Double>(ref Unsafe.As<Double, byte>(ref _data))
+                );
 
             Unsafe.Write(_dataTable.outArrayPtr, result);
             ValidateResult(_data, _dataTable.outArrayPtr);
@@ -309,13 +311,15 @@ namespace JIT.HardwareIntrinsics.Arm
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation(
-                    $"{nameof(AdvSimd.Arm64)}.{nameof(AdvSimd.Arm64.DuplicateToVector128)}<Double>(Double): DuplicateToVector128 failed:"
-                );
+                TestLibrary
+                    .TestFramework
+                    .LogInformation(
+                        $"{nameof(AdvSimd.Arm64)}.{nameof(AdvSimd.Arm64.DuplicateToVector128)}<Double>(Double): DuplicateToVector128 failed:"
+                    );
                 TestLibrary.TestFramework.LogInformation($"    data: {data}");
-                TestLibrary.TestFramework.LogInformation(
-                    $"  result: ({string.Join(", ", result)})"
-                );
+                TestLibrary
+                    .TestFramework
+                    .LogInformation($"  result: ({string.Join(", ", result)})");
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;

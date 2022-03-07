@@ -110,11 +110,13 @@ namespace System.Net.NetworkInformation
             context._interfaceIndex = interfaceIndex;
             context._addressSet = new HashSet<IPAddress>();
             if (
-                Interop.Sys.EnumerateGatewayAddressesForInterface(
-                    Unsafe.AsPointer(ref context),
-                    (uint)interfaceIndex,
-                    &OnGatewayFound
-                ) == -1
+                Interop
+                    .Sys
+                    .EnumerateGatewayAddressesForInterface(
+                        Unsafe.AsPointer(ref context),
+                        (uint)interfaceIndex,
+                        &OnGatewayFound
+                    ) == -1
             )
             {
                 throw new NetworkInformationException(SR.net_PInvokeError);

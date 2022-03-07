@@ -80,12 +80,14 @@ namespace System.IO
             uint result;
             while (
                 (
-                    result = Interop.Kernel32.GetFullPathNameW(
-                        ref MemoryMarshal.GetReference(path),
-                        (uint)builder.Capacity,
-                        ref builder.GetPinnableReference(),
-                        IntPtr.Zero
-                    )
+                    result = Interop
+                        .Kernel32
+                        .GetFullPathNameW(
+                            ref MemoryMarshal.GetReference(path),
+                            (uint)builder.Capacity,
+                            ref builder.GetPinnableReference(),
+                            IntPtr.Zero
+                        )
                 ) > builder.Capacity
             )
             {
@@ -207,11 +209,13 @@ namespace System.IO
 
             while (!success)
             {
-                uint result = Interop.Kernel32.GetLongPathNameW(
-                    ref inputBuilder.GetPinnableReference(terminate: true),
-                    ref outputBuilder.GetPinnableReference(),
-                    (uint)outputBuilder.Capacity
-                );
+                uint result = Interop
+                    .Kernel32
+                    .GetLongPathNameW(
+                        ref inputBuilder.GetPinnableReference(terminate: true),
+                        ref outputBuilder.GetPinnableReference(),
+                        (uint)outputBuilder.Capacity
+                    );
 
                 // Replace any temporary null we added
                 if (inputBuilder[foundIndex] == '\0')

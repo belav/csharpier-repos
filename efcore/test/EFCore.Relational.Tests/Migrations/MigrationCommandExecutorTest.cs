@@ -155,13 +155,15 @@ namespace Microsoft.EntityFrameworkCore.Migrations
                 {
                     Assert.Equal(
                         RelationalStrings.TransactionSuppressedMigrationInUserTransaction,
-                        Assert.Throws<NotSupportedException>(
-                            () =>
-                                migrationCommandExecutor.ExecuteNonQuery(
-                                    commandList,
-                                    fakeConnection
-                                )
-                        ).Message
+                        Assert
+                            .Throws<NotSupportedException>(
+                                () =>
+                                    migrationCommandExecutor.ExecuteNonQuery(
+                                        commandList,
+                                        fakeConnection
+                                    )
+                            )
+                            .Message
                     );
                 }
 
@@ -441,7 +443,9 @@ namespace Microsoft.EntityFrameworkCore.Migrations
                 new RelationalCommandBuilderDependencies(
                     new TestRelationalTypeMappingSource(
                         TestServiceFactory.Instance.Create<TypeMappingSourceDependencies>(),
-                        TestServiceFactory.Instance.Create<RelationalTypeMappingSourceDependencies>()
+                        TestServiceFactory
+                            .Instance
+                            .Create<RelationalTypeMappingSourceDependencies>()
                     )
                 ),
                 commandText,

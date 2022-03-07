@@ -36,14 +36,16 @@ namespace AutoMapper.IntegrationTests.Net4
         {
             protected override void Seed(Context context)
             {
-                context.EntityA.AddRange(
-                    new[]
-                    {
-                        new DbEntityA { ID = 1, Name = "Alain Brito" },
-                        new DbEntityA { ID = 2, Name = "Jimmy Bogard" },
-                        new DbEntityA { ID = 3, Name = "Bill Gates" }
-                    }
-                );
+                context
+                    .EntityA
+                    .AddRange(
+                        new[]
+                        {
+                            new DbEntityA { ID = 1, Name = "Alain Brito" },
+                            new DbEntityA { ID = 2, Name = "Jimmy Bogard" },
+                            new DbEntityA { ID = 3, Name = "Bill Gates" }
+                        }
+                    );
                 base.Seed(context);
             }
         }

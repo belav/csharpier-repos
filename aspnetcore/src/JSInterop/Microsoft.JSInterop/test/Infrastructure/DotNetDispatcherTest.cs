@@ -220,9 +220,11 @@ public class DotNetDispatcherTest
             )
         );
         var resultDto2 =
-            Assert.IsType<DotNetObjectReference<TestDTO>>(
-                jsRuntime.GetObjectReference(property.GetInt64())
-            ).Value;
+            Assert
+                .IsType<DotNetObjectReference<TestDTO>>(
+                    jsRuntime.GetObjectReference(property.GetInt64())
+                )
+                .Value;
         Assert.Equal("MY STRING", resultDto2.StringVal);
         Assert.Equal(1299, resultDto2.IntVal);
     }

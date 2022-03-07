@@ -666,11 +666,13 @@ namespace System.Text.Json
                     // We have less than half the buffer available, double the buffer size.
                     byte[] oldBuffer = bufferState.Buffer;
                     int oldClearMax = bufferState.ClearMax;
-                    byte[] newBuffer = ArrayPool<byte>.Shared.Rent(
-                        (bufferState.Buffer.Length < (int.MaxValue / 2))
-                          ? bufferState.Buffer.Length * 2
-                          : int.MaxValue
-                    );
+                    byte[] newBuffer = ArrayPool<byte>
+                        .Shared
+                        .Rent(
+                            (bufferState.Buffer.Length < (int.MaxValue / 2))
+                              ? bufferState.Buffer.Length * 2
+                              : int.MaxValue
+                        );
 
                     // Copy the unprocessed data to the new buffer while shifting the processed bytes.
                     Buffer.BlockCopy(

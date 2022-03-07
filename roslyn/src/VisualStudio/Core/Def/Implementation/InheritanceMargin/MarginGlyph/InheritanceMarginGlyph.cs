@@ -202,9 +202,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.InheritanceMarg
                     {
                         DataContext: InheritanceMarginGlyphViewModel inheritanceMarginViewModel
                     }
-                && inheritanceMarginViewModel.MenuItemViewModels.Any(
-                    vm => vm is TargetMenuItemViewModel
-                )
+                && inheritanceMarginViewModel
+                    .MenuItemViewModels
+                    .Any(vm => vm is TargetMenuItemViewModel)
             )
             {
                 // We have two kinds of context menu. e.g.

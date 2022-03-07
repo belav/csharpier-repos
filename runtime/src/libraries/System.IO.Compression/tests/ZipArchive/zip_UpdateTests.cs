@@ -188,9 +188,9 @@ namespace System.IO.Compression.Tests
                 {
                     s.Seek(0, SeekOrigin.End);
 
-                    byte[] data = Encoding.ASCII.GetBytes(
-                        "\r\n\r\nThe answer my friend, is blowin' in the wind."
-                    );
+                    byte[] data = Encoding
+                        .ASCII
+                        .GetBytes("\r\n\r\nThe answer my friend, is blowin' in the wind.");
                     if (writeWithSpans)
                     {
                         s.Write(data, 0, data.Length);

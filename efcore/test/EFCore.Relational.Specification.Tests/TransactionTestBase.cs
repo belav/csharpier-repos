@@ -119,9 +119,9 @@ namespace Microsoft.EntityFrameworkCore
 
                     context.Add(new TransactionCustomer { Id = -77, Name = "Bobble" });
 
-                    context.Entry(
-                        context.Set<TransactionCustomer>().OrderBy(c => c.Id).Last()
-                    ).State = EntityState.Added;
+                    context
+                        .Entry(context.Set<TransactionCustomer>().OrderBy(c => c.Id).Last())
+                        .State = EntityState.Added;
 
                     if (async)
                     {
@@ -162,9 +162,9 @@ namespace Microsoft.EntityFrameworkCore
                     if (!autoTransactionsEnabled)
                     {
                         using var context = CreateContext();
-                        context.Entry(
-                            context.Set<TransactionCustomer>().Single(c => c.Id == -77)
-                        ).State = EntityState.Deleted;
+                        context
+                            .Entry(context.Set<TransactionCustomer>().Single(c => c.Id == -77))
+                            .State = EntityState.Deleted;
 
                         if (async)
                         {
@@ -205,9 +205,9 @@ namespace Microsoft.EntityFrameworkCore
 
                     context.Add(new TransactionCustomer { Id = 77, Name = "Bobble" });
 
-                    context.Entry(
-                        context.Set<TransactionCustomer>().OrderBy(c => c.Id).Last()
-                    ).State = EntityState.Added;
+                    context
+                        .Entry(context.Set<TransactionCustomer>().OrderBy(c => c.Id).Last())
+                        .State = EntityState.Added;
 
                     context.Database.AutoTransactionsEnabled = true;
                 }
@@ -301,9 +301,9 @@ namespace Microsoft.EntityFrameworkCore
 
                     context.Add(new TransactionCustomer { Id = -77, Name = "Bobble" });
 
-                    context.Entry(
-                        context.Set<TransactionCustomer>().OrderBy(c => c.Id).Last()
-                    ).State = EntityState.Added;
+                    context
+                        .Entry(context.Set<TransactionCustomer>().OrderBy(c => c.Id).Last())
+                        .State = EntityState.Added;
 
                     if (async)
                     {
@@ -342,9 +342,9 @@ namespace Microsoft.EntityFrameworkCore
                     );
 
                     using var context = CreateContext();
-                    context.Entry(
-                        context.Set<TransactionCustomer>().Single(c => c.Id == -77)
-                    ).State = EntityState.Deleted;
+                    context
+                        .Entry(context.Set<TransactionCustomer>().Single(c => c.Id == -77))
+                        .State = EntityState.Deleted;
 
                     if (async)
                     {
@@ -387,9 +387,9 @@ namespace Microsoft.EntityFrameworkCore
 
                     context.Add(new TransactionCustomer { Id = 77, Name = "Bobble" });
 
-                    context.Entry(
-                        context.Set<TransactionCustomer>().OrderBy(c => c.Id).Last()
-                    ).State = EntityState.Added;
+                    context
+                        .Entry(context.Set<TransactionCustomer>().OrderBy(c => c.Id).Last())
+                        .State = EntityState.Added;
 
                     if (async)
                     {
@@ -435,17 +435,17 @@ namespace Microsoft.EntityFrameworkCore
                 {
                     context.Add(new TransactionCustomer { Id = 77, Name = "Bobble" });
 
-                    context.Entry(
-                        context.Set<TransactionCustomer>().OrderBy(c => c.Id).Last()
-                    ).State = EntityState.Added;
+                    context
+                        .Entry(context.Set<TransactionCustomer>().OrderBy(c => c.Id).Last())
+                        .State = EntityState.Added;
 
                     using (new TransactionScope(TransactionScopeOption.Suppress))
                     {
                         Assert.Equal(
                             RelationalStrings.PendingAmbientTransaction,
-                            Assert.Throws<InvalidOperationException>(
-                                () => context.SaveChanges()
-                            ).Message
+                            Assert
+                                .Throws<InvalidOperationException>(() => context.SaveChanges())
+                                .Message
                         );
                     }
                 }
@@ -562,9 +562,9 @@ namespace Microsoft.EntityFrameworkCore
                 {
                     context.Add(new TransactionCustomer { Id = 77, Name = "Bobble" });
 
-                    context.Entry(
-                        context.Set<TransactionCustomer>().OrderBy(c => c.Id).Last()
-                    ).State = EntityState.Added;
+                    context
+                        .Entry(context.Set<TransactionCustomer>().OrderBy(c => c.Id).Last())
+                        .State = EntityState.Added;
                 }
 
                 using var transaction = new CommittableTransaction(TimeSpan.FromMinutes(10));
@@ -792,9 +792,9 @@ namespace Microsoft.EntityFrameworkCore
 
                 using (var transaction = await context.Database.BeginTransactionAsync())
                 {
-                    context.Entry(
-                        context.Set<TransactionCustomer>().OrderBy(c => c.Id).First()
-                    ).State = EntityState.Deleted;
+                    context
+                        .Entry(context.Set<TransactionCustomer>().OrderBy(c => c.Id).First())
+                        .State = EntityState.Deleted;
                     await context.SaveChangesAsync();
                     transaction.Commit();
                 }
@@ -821,9 +821,9 @@ namespace Microsoft.EntityFrameworkCore
 
                 using (await context.Database.BeginTransactionAsync())
                 {
-                    context.Entry(
-                        context.Set<TransactionCustomer>().OrderBy(c => c.Id).First()
-                    ).State = EntityState.Deleted;
+                    context
+                        .Entry(context.Set<TransactionCustomer>().OrderBy(c => c.Id).First())
+                        .State = EntityState.Deleted;
                     await context.SaveChangesAsync();
                     context.Database.CommitTransaction();
                 }
@@ -964,9 +964,9 @@ namespace Microsoft.EntityFrameworkCore
                     if (DirtyReadsOccur)
                     {
                         using (
-                            await innerContext.Database.BeginTransactionAsync(
-                                IsolationLevel.ReadUncommitted
-                            )
+                            await innerContext
+                                .Database
+                                .BeginTransactionAsync(IsolationLevel.ReadUncommitted)
                         )
                         {
                             Assert.Equal(
@@ -979,9 +979,9 @@ namespace Microsoft.EntityFrameworkCore
                     if (SnapshotSupported)
                     {
                         using (
-                            await innerContext.Database.BeginTransactionAsync(
-                                IsolationLevel.Snapshot
-                            )
+                            await innerContext
+                                .Database
+                                .BeginTransactionAsync(IsolationLevel.Snapshot)
                         )
                         {
                             Assert.Equal(
@@ -1190,11 +1190,13 @@ namespace Microsoft.EntityFrameworkCore
 
             var ex = Assert.Throws<InvalidOperationException>(
                 () =>
-                    context.Database.BeginTransaction(
-                        DirtyReadsOccur
-                          ? IsolationLevel.ReadUncommitted
-                          : IsolationLevel.Unspecified
-                    )
+                    context
+                        .Database
+                        .BeginTransaction(
+                            DirtyReadsOccur
+                              ? IsolationLevel.ReadUncommitted
+                              : IsolationLevel.Unspecified
+                        )
             );
             Assert.Equal(RelationalStrings.ConflictingEnlistedTransaction, ex.Message);
             context.Database.CloseConnection();

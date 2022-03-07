@@ -264,9 +264,11 @@ namespace JIT.HardwareIntrinsics.X86
 
             if (isUnexpectedResult)
             {
-                TestLibrary.TestFramework.LogInformation(
-                    $"{nameof(Bmi2)}.{nameof(Bmi2.MultiplyNoFlags)}<UInt32>(UInt32, UInt32, UInt32): MultiplyNoFlags failed:"
-                );
+                TestLibrary
+                    .TestFramework
+                    .LogInformation(
+                        $"{nameof(Bmi2)}.{nameof(Bmi2.MultiplyNoFlags)}<UInt32>(UInt32, UInt32, UInt32): MultiplyNoFlags failed:"
+                    );
                 TestLibrary.TestFramework.LogInformation($"   op1: {op1}");
                 TestLibrary.TestFramework.LogInformation($"   op2: {op2}");
                 TestLibrary.TestFramework.LogInformation($" lower: {lower}");

@@ -144,8 +144,12 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
             CancellationToken cancellationToken
         )
         {
-            var extensionManager =
-                document.Project.Solution.Workspace.Services.GetRequiredService<IExtensionManager>();
+            var extensionManager = document
+                .Project
+                .Solution
+                .Workspace
+                .Services
+                .GetRequiredService<IExtensionManager>();
 
             foreach (var provider in GetProviders(document))
             {
@@ -188,8 +192,12 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
                 )
             )
             {
-                var extensionManager =
-                    document.Project.Solution.Workspace.Services.GetRequiredService<IExtensionManager>();
+                var extensionManager = document
+                    .Project
+                    .Solution
+                    .Workspace
+                    .Services
+                    .GetRequiredService<IExtensionManager>();
                 using var _ = ArrayBuilder<Task<CodeRefactoring?>>.GetInstance(out var tasks);
 
                 foreach (var provider in GetProviders(document))
@@ -330,13 +338,15 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
             // Local functions
             ImmutableArray<CodeRefactoringProvider> GetProjectRefactoringsSlow(Project project)
             {
-                return _projectRefactoringsMap.GetValue(
-                    project.AnalyzerReferences,
-                    pId =>
-                        new StrongBox<ImmutableArray<CodeRefactoringProvider>>(
-                            ComputeProjectRefactorings(project)
-                        )
-                ).Value;
+                return _projectRefactoringsMap
+                    .GetValue(
+                        project.AnalyzerReferences,
+                        pId =>
+                            new StrongBox<ImmutableArray<CodeRefactoringProvider>>(
+                                ComputeProjectRefactorings(project)
+                            )
+                    )
+                    .Value;
             }
 
             ImmutableArray<CodeRefactoringProvider> ComputeProjectRefactorings(Project project)

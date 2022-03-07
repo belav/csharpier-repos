@@ -158,12 +158,12 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.Iterator
             out INamedTypeSymbol ienumerableGenericSymbol
         )
         {
-            ienumerableSymbol = model.Compilation.GetTypeByMetadataName(
-                typeof(IEnumerable).FullName
-            );
-            ienumerableGenericSymbol = model.Compilation.GetTypeByMetadataName(
-                typeof(IEnumerable<>).FullName
-            );
+            ienumerableSymbol = model
+                .Compilation
+                .GetTypeByMetadataName(typeof(IEnumerable).FullName);
+            ienumerableGenericSymbol = model
+                .Compilation
+                .GetTypeByMetadataName(typeof(IEnumerable<>).FullName);
 
             if (ienumerableGenericSymbol == null || ienumerableSymbol == null)
             {

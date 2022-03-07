@@ -72,9 +72,12 @@ namespace System.Xml
         private void WroteAttributeValue()
         {
             if (_wroteAttributeValue && !_inList)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(SR.XmlOnlySingleValue)
-                );
+                throw System
+                    .Runtime
+                    .Serialization
+                    .DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new InvalidOperationException(SR.XmlOnlySingleValue));
             _wroteAttributeValue = true;
         }
 
@@ -1029,11 +1032,9 @@ namespace System.Xml
                     ArraySegment<byte> arraySegment;
                     bool result = _captureStream.TryGetBuffer(out arraySegment);
                     DiagnosticUtility.DebugAssert(result, "");
-                    _captureText = XmlConverter.Base64Encoding.GetString(
-                        arraySegment.Array!,
-                        arraySegment.Offset,
-                        arraySegment.Count
-                    );
+                    _captureText = XmlConverter
+                        .Base64Encoding
+                        .GetString(arraySegment.Array!, arraySegment.Offset, arraySegment.Count);
                     _captureStream = null;
                 }
 
@@ -1143,9 +1144,12 @@ namespace System.Xml
         )
         {
             if (stream == null)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException(nameof(stream))
-                );
+                throw System
+                    .Runtime
+                    .Serialization
+                    .DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException(nameof(stream)));
             if (_writer == null)
                 _writer = new XmlBinaryNodeWriter();
             _writer.SetOutput(stream, dictionary, session, ownsStream);
@@ -1303,31 +1307,54 @@ namespace System.Xml
         private void CheckArray(Array array, int offset, int count)
         {
             if (array == null)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException(nameof(array))
-                );
+                throw System
+                    .Runtime
+                    .Serialization
+                    .DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException(nameof(array)));
             if (offset < 0)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException(nameof(offset), SR.ValueMustBeNonNegative)
-                );
+                throw System
+                    .Runtime
+                    .Serialization
+                    .DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentOutOfRangeException(nameof(offset), SR.ValueMustBeNonNegative)
+                    );
             if (offset > array.Length)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException(
-                        nameof(offset),
-                        SR.Format(SR.OffsetExceedsBufferSize, array.Length)
-                    )
-                );
+                throw System
+                    .Runtime
+                    .Serialization
+                    .DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            nameof(offset),
+                            SR.Format(SR.OffsetExceedsBufferSize, array.Length)
+                        )
+                    );
             if (count < 0)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException(nameof(count), SR.ValueMustBeNonNegative)
-                );
+                throw System
+                    .Runtime
+                    .Serialization
+                    .DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentOutOfRangeException(nameof(count), SR.ValueMustBeNonNegative)
+                    );
             if (count > array.Length - offset)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException(
-                        nameof(count),
-                        SR.Format(SR.SizeExceedsRemainingBufferSpace, array.Length - offset)
-                    )
-                );
+                throw System
+                    .Runtime
+                    .Serialization
+                    .DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            nameof(count),
+                            SR.Format(SR.SizeExceedsRemainingBufferSpace, array.Length - offset)
+                        )
+                    );
         }
 
         public unsafe override void WriteArray(

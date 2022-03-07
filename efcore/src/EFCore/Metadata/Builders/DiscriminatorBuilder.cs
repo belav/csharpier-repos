@@ -105,10 +105,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         /// <returns>The same builder so that multiple calls can be chained.</returns>
         public virtual DiscriminatorBuilder HasValue(Type entityType, object? value)
         {
-            var entityTypeBuilder = EntityTypeBuilder.ModelBuilder.Entity(
-                entityType,
-                ConfigurationSource.Explicit
-            );
+            var entityTypeBuilder = EntityTypeBuilder
+                .ModelBuilder
+                .Entity(entityType, ConfigurationSource.Explicit);
 
             return HasValue(entityTypeBuilder, value, ConfigurationSource.Explicit)!;
         }
@@ -121,10 +120,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         /// <returns>The same builder so that multiple calls can be chained.</returns>
         public virtual DiscriminatorBuilder HasValue(string entityTypeName, object? value)
         {
-            var entityTypeBuilder = EntityTypeBuilder.ModelBuilder.Entity(
-                entityTypeName,
-                ConfigurationSource.Explicit
-            );
+            var entityTypeBuilder = EntityTypeBuilder
+                .ModelBuilder
+                .Entity(entityTypeName, ConfigurationSource.Explicit);
 
             return HasValue(entityTypeBuilder, value, ConfigurationSource.Explicit)!;
         }
@@ -144,9 +142,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
             if (
                 !baseEntityTypeBuilder.Metadata.IsAssignableFrom(entityTypeBuilder.Metadata)
                 && (
-                    !baseEntityTypeBuilder.Metadata.ClrType.IsAssignableFrom(
-                        entityTypeBuilder.Metadata.ClrType
-                    )
+                    !baseEntityTypeBuilder
+                        .Metadata
+                        .ClrType
+                        .IsAssignableFrom(entityTypeBuilder.Metadata.ClrType)
                     || entityTypeBuilder.HasBaseType(
                         baseEntityTypeBuilder.Metadata,
                         configurationSource

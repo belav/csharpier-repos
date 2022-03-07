@@ -155,20 +155,24 @@ namespace Benchstone.BenchF
             {
                 x =
                     s_t
-                    * System.Math.Atan(
-                        s_t2
-                            * System.Math.Sin(x)
-                            * System.Math.Cos(x)
-                            / (System.Math.Cos(x + y) + System.Math.Cos(x - y) - 1.0)
-                    );
+                    * System
+                        .Math
+                        .Atan(
+                            s_t2
+                                * System.Math.Sin(x)
+                                * System.Math.Cos(x)
+                                / (System.Math.Cos(x + y) + System.Math.Cos(x - y) - 1.0)
+                        );
                 y =
                     s_t
-                    * System.Math.Atan(
-                        s_t2
-                            * System.Math.Sin(y)
-                            * System.Math.Cos(y)
-                            / (System.Math.Cos(x + y) + System.Math.Cos(x - y) - 1.0)
-                    );
+                    * System
+                        .Math
+                        .Atan(
+                            s_t2
+                                * System.Math.Sin(y)
+                                * System.Math.Cos(y)
+                                / (System.Math.Cos(x + y) + System.Math.Cos(x - y) - 1.0)
+                        );
             }
             Escape(n7, s_j, s_k, x, x, y, y);
 

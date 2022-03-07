@@ -71,10 +71,12 @@ namespace Microsoft.CodeAnalysis.Editor.Interactive
         {
             var window = OpenInteractiveWindow(focus: false);
             using (
-                context.OperationContext.AddScope(
-                    allowCancellation: true,
-                    EditorFeaturesWpfResources.Executing_selection_in_Interactive_Window
-                )
+                context
+                    .OperationContext
+                    .AddScope(
+                        allowCancellation: true,
+                        EditorFeaturesWpfResources.Executing_selection_in_Interactive_Window
+                    )
             )
             {
                 var submission = GetSelectedText(
@@ -134,19 +136,21 @@ namespace Microsoft.CodeAnalysis.Editor.Interactive
 
             using (var edit = buffer.CreateEdit())
             using (
-                var waitScope = context.OperationContext.AddScope(
-                    allowCancellation: true,
-                    EditorFeaturesWpfResources.Copying_selection_to_Interactive_Window
-                )
+                var waitScope = context
+                    .OperationContext
+                    .AddScope(
+                        allowCancellation: true,
+                        EditorFeaturesWpfResources.Copying_selection_to_Interactive_Window
+                    )
             )
             {
                 var text = GetSelectedText(args, context.OperationContext.UserCancellationToken);
 
                 // If the last line isn't empty in the existing submission buffer, we will prepend a
                 // newline
-                var lastLine = buffer.CurrentSnapshot.GetLineFromLineNumber(
-                    buffer.CurrentSnapshot.LineCount - 1
-                );
+                var lastLine = buffer
+                    .CurrentSnapshot
+                    .GetLineFromLineNumber(buffer.CurrentSnapshot.LineCount - 1);
                 if (lastLine.Extent.Length > 0)
                 {
                     var editorOptions = _editorOptionsFactoryService.GetOptions(args.SubjectBuffer);

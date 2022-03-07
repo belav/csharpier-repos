@@ -70,9 +70,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
             Assert.Equal(2, modelBuilder.Model.GetEntityTypes().Count());
             Assert.True(
-                modelBuilder.Model
+                modelBuilder
+                    .Model
                     .FindEntityType(typeof(Customer))
-                    .FindNavigation(nameof(Customer.Address)).ForeignKey.IsOwnership
+                    .FindNavigation(nameof(Customer.Address))
+                    .ForeignKey
+                    .IsOwnership
             );
         }
 
@@ -83,13 +86,15 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
             Assert.Equal(
                 CoreStrings.ClashingOwnedEntityType(nameof(Address)),
-                Assert.Throws<InvalidOperationException>(
-                    () =>
-                        modelBuilder
-                            .Entity<Customer>()
-                            .HasOne(e => e.Address)
-                            .WithOne(e => e.Customer)
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(
+                        () =>
+                            modelBuilder
+                                .Entity<Customer>()
+                                .HasOne(e => e.Address)
+                                .WithOne(e => e.Customer)
+                    )
+                    .Message
             );
         }
 
@@ -168,7 +173,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         }
 
         private ProviderConventionSetBuilderDependencies CreateDependencies() =>
-            InMemoryTestHelpers.Instance
+            InMemoryTestHelpers
+                .Instance
                 .CreateContextServices()
                 .GetRequiredService<ProviderConventionSetBuilderDependencies>();
 

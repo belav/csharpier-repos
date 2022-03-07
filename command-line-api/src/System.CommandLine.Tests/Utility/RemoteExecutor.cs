@@ -19,9 +19,11 @@ namespace System.CommandLine.Tests.Utility
         {
             if (args.Length < 3)
             {
-                Console.Error.WriteLine(
-                    "This is not the program you are looking for. Run 'dotnet test' instead."
-                );
+                Console
+                    .Error
+                    .WriteLine(
+                        "This is not the program you are looking for. Run 'dotnet test' instead."
+                    );
                 return -1;
             }
 

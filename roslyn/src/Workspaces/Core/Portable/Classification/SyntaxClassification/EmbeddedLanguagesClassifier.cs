@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis.Classification.Classifiers
         public EmbeddedLanguagesClassifier(IEmbeddedLanguagesProvider languagesProvider)
         {
             _languagesProvider = languagesProvider;
-            SyntaxTokenKinds = languagesProvider.Languages
+            SyntaxTokenKinds = languagesProvider
+                .Languages
                 .Where(p => p.Classifier != null)
                 .SelectMany(p => p.Classifier.SyntaxTokenKinds)
                 .Distinct()

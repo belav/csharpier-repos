@@ -1131,7 +1131,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                     // Should be in a WithCrefTypeParametersBinder.
                     Debug.Assert(
                         typeArgumentSyntax.ContainsDiagnostics
-                            || !typeArgumentSyntax.SyntaxTree.ReportDocumentationCommentDiagnostics()
+                            || !typeArgumentSyntax
+                                .SyntaxTree
+                                .ReportDocumentationCommentDiagnostics()
                             || (
                                 !unusedDiagnostics.HasAnyErrors()
                                 && typeArgument.Type is CrefTypeParameterSymbol
@@ -1221,8 +1223,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 !this.Compilation.ContainsSyntaxTree(typeSyntax.SyntaxTree)
                     || this.Compilation
                         .GetBinderFactory(typeSyntax.SyntaxTree)
-                        .GetBinder(typeSyntax).Flags
-                        == (parameterOrReturnTypeBinder.Flags & ~BinderFlags.SemanticModel)
+                        .GetBinder(typeSyntax)
+                        .Flags == (parameterOrReturnTypeBinder.Flags & ~BinderFlags.SemanticModel)
             );
 
             var localDiagnostics = new BindingDiagnosticBag(

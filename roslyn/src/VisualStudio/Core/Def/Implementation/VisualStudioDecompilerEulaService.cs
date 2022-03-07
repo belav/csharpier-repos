@@ -60,9 +60,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
         {
             if (_roslynPackage is null)
             {
-                await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
-                    cancellationToken
-                );
+                await _threadingContext
+                    .JoinableTaskFactory
+                    .SwitchToMainThreadAsync(cancellationToken);
 
                 var shell = (IVsShell7?)await _serviceProvider
                     .GetServiceAsync(typeof(SVsShell))

@@ -17,9 +17,14 @@ namespace Microsoft.CodeAnalysis.Tools.Tests.Utilities
                 // up to the repo root then down to the test projects folder.
                 var unitTestAssemblyPath = Assembly.GetExecutingAssembly().Location;
                 var repoRootPath =
-                    Directory.GetParent(
-                        unitTestAssemblyPath
-                    ).Parent.Parent.Parent.Parent.Parent.FullName;
+                    Directory
+                        .GetParent(unitTestAssemblyPath)
+                        .Parent
+                        .Parent
+                        .Parent
+                        .Parent
+                        .Parent
+                        .FullName;
                 s_projectsDirectory = Path.Combine(repoRootPath, "tests", "projects");
             }
 

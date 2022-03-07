@@ -75,26 +75,32 @@ public static class AzureADAuthenticationBuilderExtensions
 
         builder.Services.Configure(TryAddJwtBearerSchemeMapping(scheme, jwtBearerScheme));
 
-        builder.Services.TryAddEnumerable(
-            ServiceDescriptor.Singleton<
-                IConfigureOptions<AzureADOptions>,
-                AzureADOptionsConfiguration
-            >()
-        );
+        builder
+            .Services
+            .TryAddEnumerable(
+                ServiceDescriptor.Singleton<
+                    IConfigureOptions<AzureADOptions>,
+                    AzureADOptionsConfiguration
+                >()
+            );
 
-        builder.Services.TryAddEnumerable(
-            ServiceDescriptor.Singleton<
-                IValidateOptions<AzureADOptions>,
-                AzureADOptionsValidation
-            >()
-        );
+        builder
+            .Services
+            .TryAddEnumerable(
+                ServiceDescriptor.Singleton<
+                    IValidateOptions<AzureADOptions>,
+                    AzureADOptionsValidation
+                >()
+            );
 
-        builder.Services.TryAddEnumerable(
-            ServiceDescriptor.Singleton<
-                IConfigureOptions<JwtBearerOptions>,
-                AzureADJwtBearerOptionsConfiguration
-            >()
-        );
+        builder
+            .Services
+            .TryAddEnumerable(
+                ServiceDescriptor.Singleton<
+                    IConfigureOptions<JwtBearerOptions>,
+                    AzureADJwtBearerOptionsConfiguration
+                >()
+            );
 
         builder.Services.Configure(scheme, configureOptions);
         builder.AddJwtBearer(jwtBearerScheme, o => { });
@@ -160,37 +166,45 @@ public static class AzureADAuthenticationBuilderExtensions
             }
         );
 
-        builder.Services.Configure(
-            TryAddOpenIDCookieSchemeMappings(scheme, openIdConnectScheme, cookieScheme)
-        );
+        builder
+            .Services
+            .Configure(TryAddOpenIDCookieSchemeMappings(scheme, openIdConnectScheme, cookieScheme));
 
-        builder.Services.TryAddEnumerable(
-            ServiceDescriptor.Singleton<
-                IConfigureOptions<AzureADOptions>,
-                AzureADOptionsConfiguration
-            >()
-        );
+        builder
+            .Services
+            .TryAddEnumerable(
+                ServiceDescriptor.Singleton<
+                    IConfigureOptions<AzureADOptions>,
+                    AzureADOptionsConfiguration
+                >()
+            );
 
-        builder.Services.TryAddEnumerable(
-            ServiceDescriptor.Singleton<
-                IValidateOptions<AzureADOptions>,
-                AzureADOptionsValidation
-            >()
-        );
+        builder
+            .Services
+            .TryAddEnumerable(
+                ServiceDescriptor.Singleton<
+                    IValidateOptions<AzureADOptions>,
+                    AzureADOptionsValidation
+                >()
+            );
 
-        builder.Services.TryAddEnumerable(
-            ServiceDescriptor.Singleton<
-                IConfigureOptions<OpenIdConnectOptions>,
-                AzureADOpenIdConnectOptionsConfiguration
-            >()
-        );
+        builder
+            .Services
+            .TryAddEnumerable(
+                ServiceDescriptor.Singleton<
+                    IConfigureOptions<OpenIdConnectOptions>,
+                    AzureADOpenIdConnectOptionsConfiguration
+                >()
+            );
 
-        builder.Services.TryAddEnumerable(
-            ServiceDescriptor.Singleton<
-                IConfigureOptions<CookieAuthenticationOptions>,
-                AzureADCookieOptionsConfiguration
-            >()
-        );
+        builder
+            .Services
+            .TryAddEnumerable(
+                ServiceDescriptor.Singleton<
+                    IConfigureOptions<CookieAuthenticationOptions>,
+                    AzureADCookieOptionsConfiguration
+                >()
+            );
 
         builder.Services.Configure(scheme, configureOptions);
 

@@ -73,9 +73,9 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
                 return null;
             }
 
-            var orderingExpression = (
-                (SelectExpression)translation.QueryExpression
-            ).Orderings.Last();
+            var orderingExpression = ((SelectExpression)translation.QueryExpression)
+                .Orderings
+                .Last();
             var orderingExpressionType = GetProviderType(orderingExpression.Expression);
             if (
                 orderingExpressionType == typeof(DateTimeOffset)
@@ -113,9 +113,9 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
                 return null;
             }
 
-            var orderingExpression = (
-                (SelectExpression)translation.QueryExpression
-            ).Orderings.Last();
+            var orderingExpression = ((SelectExpression)translation.QueryExpression)
+                .Orderings
+                .Last();
             var orderingExpressionType = GetProviderType(orderingExpression.Expression);
             if (
                 orderingExpressionType == typeof(DateTimeOffset)

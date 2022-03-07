@@ -23,9 +23,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
             Assert.Equal(
                 CoreStrings.ModelReadOnly,
-                Assert.Throws<InvalidOperationException>(
-                    () => entityType.AddKey(new[] { property })
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(() => entityType.AddKey(new[] { property }))
+                    .Message
             );
 
             Assert.Equal(
@@ -62,9 +62,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     $"{{'{property1.Name}', '{property2.Name}'}}",
                     entityType1.DisplayName()
                 ),
-                Assert.Throws<InvalidOperationException>(
-                    () => entityType1.AddKey(new[] { property1, property2 })
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(
+                        () => entityType1.AddKey(new[] { property1, property2 })
+                    )
+                    .Message
             );
         }
 

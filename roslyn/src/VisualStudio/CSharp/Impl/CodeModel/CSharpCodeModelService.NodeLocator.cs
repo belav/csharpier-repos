@@ -487,9 +487,9 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                                     break;
                                 case SyntaxKind.ConversionOperatorDeclaration:
                                     startPosition =
-                                        (
-                                            (ConversionOperatorDeclarationSyntax)node
-                                        ).ImplicitOrExplicitKeyword.SpanStart;
+                                        ((ConversionOperatorDeclarationSyntax)node)
+                                            .ImplicitOrExplicitKeyword
+                                            .SpanStart;
                                     break;
                                 case SyntaxKind.OperatorDeclaration:
                                     startPosition =
@@ -1157,9 +1157,10 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                                     break;
                                 case SyntaxKind.ConversionOperatorDeclaration:
                                     endPosition =
-                                        (
-                                            (ConversionOperatorDeclarationSyntax)node
-                                        ).ImplicitOrExplicitKeyword.Span.End;
+                                        ((ConversionOperatorDeclarationSyntax)node)
+                                            .ImplicitOrExplicitKeyword
+                                            .Span
+                                            .End;
                                     break;
                                 case SyntaxKind.OperatorDeclaration:
                                     endPosition =

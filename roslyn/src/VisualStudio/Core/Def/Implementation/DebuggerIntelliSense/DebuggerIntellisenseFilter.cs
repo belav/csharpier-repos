@@ -134,9 +134,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.DebuggerIntelli
         {
             // We have to ask the buffer to make itself writable, if it isn't already
             _context.DebuggerTextLines.GetStateFlags(out var bufferFlags);
-            _context.DebuggerTextLines.SetStateFlags(
-                (uint)((BUFFERSTATEFLAGS)bufferFlags & ~BUFFERSTATEFLAGS.BSF_USER_READONLY)
-            );
+            _context
+                .DebuggerTextLines
+                .SetStateFlags(
+                    (uint)((BUFFERSTATEFLAGS)bufferFlags & ~BUFFERSTATEFLAGS.BSF_USER_READONLY)
+                );
 
             // If the caret is outside our projection, defer to the next command target.
             var caretPosition = _context.DebuggerTextView.GetCaretPoint(_context.Buffer);

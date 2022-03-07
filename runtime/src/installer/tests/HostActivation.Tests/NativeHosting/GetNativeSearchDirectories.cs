@@ -58,9 +58,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
             result
                 .Should()
                 .Pass()
-                .And.HaveStdOutContaining(
-                    $"Native search directories: '{expectedSearchDirectories}'"
-                );
+                .And
+                .HaveStdOutContaining($"Native search directories: '{expectedSearchDirectories}'");
         }
 
         [Fact]
@@ -79,12 +78,16 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
                 .Execute()
                 .Should()
                 .Fail()
-                .And.HaveStdOutContaining(
+                .And
+                .HaveStdOutContaining(
                     $"get_native_search_directories (null, 1) returned: 0x{Constants.ErrorCode.InvalidArgFailure:x}"
                 )
-                .And.HaveStdOutContaining("buffer_size: 0")
-                .And.HaveStdOutContaining("hostfxr reported errors:")
-                .And.HaveStdOutContaining(
+                .And
+                .HaveStdOutContaining("buffer_size: 0")
+                .And
+                .HaveStdOutContaining("hostfxr reported errors:")
+                .And
+                .HaveStdOutContaining(
                     "hostfxr_get_native_search_directories received an invalid argument."
                 );
         }
@@ -105,12 +108,16 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
                 .Execute()
                 .Should()
                 .Fail()
-                .And.HaveStdOutContaining(
+                .And
+                .HaveStdOutContaining(
                     $"get_native_search_directories (temp_buffer, -1) returned: 0x{Constants.ErrorCode.InvalidArgFailure:x}"
                 )
-                .And.HaveStdOutContaining("buffer_size: 0")
-                .And.HaveStdOutContaining("hostfxr reported errors:")
-                .And.HaveStdOutContaining(
+                .And
+                .HaveStdOutContaining("buffer_size: 0")
+                .And
+                .HaveStdOutContaining("hostfxr reported errors:")
+                .And
+                .HaveStdOutContaining(
                     "hostfxr_get_native_search_directories received an invalid argument."
                 );
         }
@@ -139,15 +146,20 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
                     .Execute()
                     .Should()
                     .Fail()
-                    .And.HaveStdOutContaining(
+                    .And
+                    .HaveStdOutContaining(
                         $"get_native_search_directories (null,0) returned unexpected error code 0x{Constants.ErrorCode.ResolverInitFailure:x} expected HostApiBufferTooSmall (0x80008098)."
                     )
-                    .And.HaveStdOutContaining("buffer_size: 0")
-                    .And.HaveStdOutContaining("hostfxr reported errors:")
-                    .And.HaveStdOutContaining(
+                    .And
+                    .HaveStdOutContaining("buffer_size: 0")
+                    .And
+                    .HaveStdOutContaining("hostfxr reported errors:")
+                    .And
+                    .HaveStdOutContaining(
                         $"A JSON parsing exception occurred in [{depsJsonFile}], offset 1 (line 1, column 2): Missing a name for object member."
                     )
-                    .And.HaveStdOutContaining(
+                    .And
+                    .HaveStdOutContaining(
                         $"Error initializing the dependency resolver: An error occurred while parsing: {depsJsonFile}"
                     );
             }
@@ -176,11 +188,14 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
             result
                 .Should()
                 .Fail()
-                .And.HaveStdOutContaining(
+                .And
+                .HaveStdOutContaining(
                     $"get_native_search_directories (null,0) returned unexpected error code 0x{Constants.ErrorCode.AppArgNotRunnable:x} expected HostApiBufferTooSmall (0x80008098)."
                 )
-                .And.HaveStdOutContaining("buffer_size: 0")
-                .And.HaveStdErrContaining("Application 'build' is not a managed executable.");
+                .And
+                .HaveStdOutContaining("buffer_size: 0")
+                .And
+                .HaveStdErrContaining("Application 'build' is not a managed executable.");
         }
 
         public class SharedTestState : SharedTestStateBase

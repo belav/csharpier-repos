@@ -600,11 +600,13 @@ Public Module M
 End Module
 ";
 
-            var vbProject = VisualBasic.VisualBasicCompilation.Create(
-                "VBProject",
-                references: new[] { MscorlibRef },
-                syntaxTrees: new[] { VisualBasic.VisualBasicSyntaxTree.ParseText(vbSource) }
-            );
+            var vbProject = VisualBasic
+                .VisualBasicCompilation
+                .Create(
+                    "VBProject",
+                    references: new[] { MscorlibRef },
+                    syntaxTrees: new[] { VisualBasic.VisualBasicSyntaxTree.ParseText(vbSource) }
+                );
 
             var csSource =
                 @"
@@ -657,11 +659,13 @@ Public Module M
 End Module
 ";
 
-            var vbProject = VisualBasic.VisualBasicCompilation.Create(
-                "VBProject",
-                references: new[] { MscorlibRef },
-                syntaxTrees: new[] { VisualBasic.VisualBasicSyntaxTree.ParseText(vbSource) }
-            );
+            var vbProject = VisualBasic
+                .VisualBasicCompilation
+                .Create(
+                    "VBProject",
+                    references: new[] { MscorlibRef },
+                    syntaxTrees: new[] { VisualBasic.VisualBasicSyntaxTree.ParseText(vbSource) }
+                );
 
             var csSource =
                 @"
@@ -1291,7 +1295,8 @@ class C
             var expr = (ExpressionSyntax)tree.GetCompilationUnitRoot()
                 .DescendantNodes()
                 .OfType<ParenthesizedLambdaExpressionSyntax>()
-                .Single().Body;
+                .Single()
+                .Body;
 
             var symbolInfo = model.GetSymbolInfo(expr);
 
@@ -1326,7 +1331,9 @@ class C
             var expr = (ExpressionSyntax)tree.GetCompilationUnitRoot()
                 .DescendantNodes()
                 .OfType<VariableDeclaratorSyntax>()
-                .Single().Initializer.Value;
+                .Single()
+                .Initializer
+                .Value;
 
             var symbolInfo = model.GetSymbolInfo(expr);
 
@@ -1365,7 +1372,8 @@ class C
             var expr = (ExpressionSyntax)tree.GetCompilationUnitRoot()
                 .DescendantNodes()
                 .OfType<ParenthesizedLambdaExpressionSyntax>()
-                .Single().Body;
+                .Single()
+                .Body;
 
             var symbolInfo = model.GetSymbolInfo(expr);
 
@@ -2215,7 +2223,8 @@ namespace RoslynAsyncDelegate
                 "void System.EventHandler.Invoke(System.Object sender, System.EventArgs e)",
                 model
                     .GetTypeInfo(node1)
-                    .ConvertedType.GetMembers("Invoke")
+                    .ConvertedType
+                    .GetMembers("Invoke")
                     .Single()
                     .ToTestDisplayString()
             );
@@ -2704,7 +2713,8 @@ public static class XThing
                 var lambda in tree.GetRoot().DescendantNodes().OfType<LambdaExpressionSyntax>()
             )
             {
-                var reference = lambda.Body
+                var reference = lambda
+                    .Body
                     .DescendantNodesAndSelf()
                     .OfType<IdentifierNameSyntax>()
                     .First();
@@ -2755,7 +2765,8 @@ public static class XThing
                 var lambda in tree.GetRoot().DescendantNodes().OfType<LambdaExpressionSyntax>()
             )
             {
-                var reference = lambda.Body
+                var reference = lambda
+                    .Body
                     .DescendantNodesAndSelf()
                     .OfType<IdentifierNameSyntax>()
                     .First();
@@ -2806,7 +2817,8 @@ public static class XThing
                 var lambda in tree.GetRoot().DescendantNodes().OfType<LambdaExpressionSyntax>()
             )
             {
-                var reference = lambda.Body
+                var reference = lambda
+                    .Body
                     .DescendantNodesAndSelf()
                     .OfType<IdentifierNameSyntax>()
                     .First();
@@ -2844,7 +2856,8 @@ class Program
                 var lambda in tree.GetRoot().DescendantNodes().OfType<LambdaExpressionSyntax>()
             )
             {
-                var reference = lambda.Body
+                var reference = lambda
+                    .Body
                     .DescendantNodesAndSelf()
                     .OfType<IdentifierNameSyntax>()
                     .First();
@@ -2882,7 +2895,8 @@ class Program
                 var lambda in tree.GetRoot().DescendantNodes().OfType<LambdaExpressionSyntax>()
             )
             {
-                var reference = lambda.Body
+                var reference = lambda
+                    .Body
                     .DescendantNodesAndSelf()
                     .OfType<IdentifierNameSyntax>()
                     .First();
@@ -2924,7 +2938,8 @@ class Program
                 var lambda in tree.GetRoot().DescendantNodes().OfType<LambdaExpressionSyntax>()
             )
             {
-                var reference = lambda.Body
+                var reference = lambda
+                    .Body
                     .DescendantNodesAndSelf()
                     .OfType<IdentifierNameSyntax>()
                     .First();
@@ -4551,7 +4566,8 @@ class Program
             var a = (IdentifierNameSyntax)tree.GetRoot()
                 .DescendantNodes()
                 .OfType<AttributeSyntax>()
-                .Single().Name;
+                .Single()
+                .Name;
             Assert.Equal("A", a.Identifier.Text);
             var attrInfo = model.GetSymbolInfo(a);
             var attrType = comp.GetMember<NamedTypeSymbol>("AAttribute").GetPublicSymbol();
@@ -4570,7 +4586,8 @@ class Program
                 .GetRoot()
                 .DescendantNodes()
                 .OfType<AttributeSyntax>()
-                .Single().Name;
+                .Single()
+                .Name;
             Assert.Equal("A", a.Identifier.Text);
 
             // If we aren't using the right binder here, the compiler crashes going through the binder factory

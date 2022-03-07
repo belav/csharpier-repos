@@ -51,10 +51,9 @@ namespace Microsoft.EntityFrameworkCore.Query
             var level1 = level1Builder.Metadata;
 
             ForeignKey level2Fk;
-            var level2 = level1.Model.AddEntityType(
-                "Level1.OneToOne_Required_PK1#Level2",
-                typeof(Level2)
-            );
+            var level2 = level1
+                .Model
+                .AddEntityType("Level1.OneToOne_Required_PK1#Level2", typeof(Level2));
             using (var batch = ((Model)modelBuilder.Model).ConventionDispatcher.DelayConventions())
             {
                 level2Fk = (ForeignKey)level2.AddForeignKey(
@@ -171,7 +170,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                     .Ignore(e => e.OneToMany_Required_Self2)
                     .Ignore(e => e.OneToMany_Required_Self_Inverse2)
                     .Ignore(e => e.OneToMany_Optional_Self2)
-                    .Ignore(e => e.OneToMany_Optional_Self_Inverse2).OwnedEntityType;
+                    .Ignore(e => e.OneToMany_Optional_Self_Inverse2)
+                    .OwnedEntityType;
 
             l2.Property(e => e.Id).ValueGeneratedNever();
 
@@ -201,10 +201,12 @@ namespace Microsoft.EntityFrameworkCore.Query
                 .IsRequired(false);
 
             ForeignKey level3Fk;
-            var level3 = level2.Model.AddEntityType(
-                "Level1.OneToOne_Required_PK1#Level2.OneToOne_Required_PK2#Level3",
-                typeof(Level3)
-            );
+            var level3 = level2
+                .Model
+                .AddEntityType(
+                    "Level1.OneToOne_Required_PK1#Level2.OneToOne_Required_PK2#Level3",
+                    typeof(Level3)
+                );
             using (var batch = ((Model)level2.Model).ConventionDispatcher.DelayConventions())
             {
                 level3Fk = (ForeignKey)level3.AddForeignKey(
@@ -235,7 +237,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                     .Ignore(e => e.OneToMany_Required_Self3)
                     .Ignore(e => e.OneToMany_Required_Self_Inverse3)
                     .Ignore(e => e.OneToMany_Optional_Self3)
-                    .Ignore(e => e.OneToMany_Optional_Self_Inverse3).OwnedEntityType;
+                    .Ignore(e => e.OneToMany_Optional_Self_Inverse3)
+                    .OwnedEntityType;
 
             l3.Property(e => e.Id).ValueGeneratedNever();
 
@@ -265,10 +268,12 @@ namespace Microsoft.EntityFrameworkCore.Query
                 .IsRequired(false);
 
             ForeignKey level4Fk;
-            var level4 = level3.Model.AddEntityType(
-                "Level1.OneToOne_Required_PK1#Level2.OneToOne_Required_PK2#Level3.OneToOne_Required_PK3#Level4",
-                typeof(Level4)
-            );
+            var level4 = level3
+                .Model
+                .AddEntityType(
+                    "Level1.OneToOne_Required_PK1#Level2.OneToOne_Required_PK2#Level3.OneToOne_Required_PK3#Level4",
+                    typeof(Level4)
+                );
             using (var batch = ((Model)level3.Model).ConventionDispatcher.DelayConventions())
             {
                 level4Fk = (ForeignKey)level4.AddForeignKey(

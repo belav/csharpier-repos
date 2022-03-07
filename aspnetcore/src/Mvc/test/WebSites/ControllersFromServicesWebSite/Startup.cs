@@ -28,13 +28,15 @@ public class Startup
             .ConfigureApplicationPartManager(
                 manager =>
                 {
-                    manager.ApplicationParts.Add(
-                        new TypesPart(
-                            typeof(AnotherController),
-                            typeof(ComponentFromServicesViewComponent),
-                            typeof(InServicesTagHelper)
-                        )
-                    );
+                    manager
+                        .ApplicationParts
+                        .Add(
+                            new TypesPart(
+                                typeof(AnotherController),
+                                typeof(ComponentFromServicesViewComponent),
+                                typeof(InServicesTagHelper)
+                            )
+                        );
 
                     foreach (
                         var part in CompiledRazorAssemblyApplicationPartFactory.GetDefaultApplicationParts(

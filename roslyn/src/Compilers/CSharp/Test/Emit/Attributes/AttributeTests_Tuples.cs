@@ -284,7 +284,8 @@ class C
             );
 
             var srcTypes = sourceModule.GlobalNamespace.GetTypeMembers();
-            var peTypes = peModule.GlobalNamespace
+            var peTypes = peModule
+                .GlobalNamespace
                 .GetTypeMembers()
                 .WhereAsArray(t => t.Name != "<Module>");
 
@@ -424,24 +425,26 @@ class C
                     expectedElementNames: expectedElementNames
                 );
 
-                AttributeTests_Dynamic.DynamicAttributeValidator.ValidateDynamicAttribute(
-                    args.GetAttributes(),
-                    expectedDynamicAttribute: true,
-                    expectedTransformFlags: new[]
-                    {
-                        false,
-                        false,
-                        false,
-                        false,
-                        true,
-                        true,
-                        false,
-                        true,
-                        false,
-                        true,
-                        false
-                    }
-                );
+                AttributeTests_Dynamic
+                    .DynamicAttributeValidator
+                    .ValidateDynamicAttribute(
+                        args.GetAttributes(),
+                        expectedDynamicAttribute: true,
+                        expectedTransformFlags: new[]
+                        {
+                            false,
+                            false,
+                            false,
+                            false,
+                            true,
+                            true,
+                            false,
+                            true,
+                            false,
+                            true,
+                            false
+                        }
+                    );
             }
 
             private void ValidateAttributesOnEvents()
@@ -456,21 +459,23 @@ class C
                     expectedTupleNamesAttribute: true,
                     expectedElementNames: new[] { "e1", "e4", null, "e2", "e3" }
                 );
-                AttributeTests_Dynamic.DynamicAttributeValidator.ValidateDynamicAttribute(
-                    event1.GetAttributes(),
-                    expectedDynamicAttribute: true,
-                    expectedTransformFlags: new[]
-                    {
-                        false,
-                        false,
-                        false,
-                        true,
-                        false,
-                        false,
-                        true,
-                        true
-                    }
-                );
+                AttributeTests_Dynamic
+                    .DynamicAttributeValidator
+                    .ValidateDynamicAttribute(
+                        event1.GetAttributes(),
+                        expectedDynamicAttribute: true,
+                        expectedTransformFlags: new[]
+                        {
+                            false,
+                            false,
+                            false,
+                            true,
+                            false,
+                            false,
+                            true,
+                            true
+                        }
+                    );
             }
 
             private void ValidateAttributesOnNamedTypes()
@@ -575,23 +580,25 @@ class C
                     expectedTupleNamesAttribute: true,
                     expectedElementNames: expectedElementNames
                 );
-                AttributeTests_Dynamic.DynamicAttributeValidator.ValidateDynamicAttribute(
-                    field4.GetAttributes(),
-                    expectedDynamicAttribute: true,
-                    expectedTransformFlags: new[]
-                    {
-                        false,
-                        false,
-                        false,
-                        false,
-                        false,
-                        false,
-                        false,
-                        true,
-                        true,
-                        false
-                    }
-                );
+                AttributeTests_Dynamic
+                    .DynamicAttributeValidator
+                    .ValidateDynamicAttribute(
+                        field4.GetAttributes(),
+                        expectedDynamicAttribute: true,
+                        expectedTransformFlags: new[]
+                        {
+                            false,
+                            false,
+                            false,
+                            false,
+                            false,
+                            false,
+                            false,
+                            true,
+                            true,
+                            false
+                        }
+                    );
 
                 // public static Outer<(object e1, dynamic e2)>
                 //     .Inner<(dynamic e3, object e4),
@@ -603,23 +610,25 @@ class C
                     expectedTupleNamesAttribute: true,
                     expectedElementNames: expectedElementNames
                 );
-                AttributeTests_Dynamic.DynamicAttributeValidator.ValidateDynamicAttribute(
-                    field5.GetAttributes(),
-                    expectedDynamicAttribute: true,
-                    expectedTransformFlags: new[]
-                    {
-                        false,
-                        false,
-                        false,
-                        true,
-                        false,
-                        true,
-                        false,
-                        false,
-                        true,
-                        true
-                    }
-                );
+                AttributeTests_Dynamic
+                    .DynamicAttributeValidator
+                    .ValidateDynamicAttribute(
+                        field5.GetAttributes(),
+                        expectedDynamicAttribute: true,
+                        expectedTransformFlags: new[]
+                        {
+                            false,
+                            false,
+                            false,
+                            true,
+                            false,
+                            true,
+                            false,
+                            false,
+                            true,
+                            true
+                        }
+                    );
 
                 // public static Base1<(int, ValueTuple<int, ValueTuple>)> Field6;
                 var field6 = _derivedClass.GetMember<FieldSymbol>("Field6");
@@ -850,9 +859,12 @@ class C
                     );
                     Assert.Equal(
                         "System.String[]",
-                        tupleAttr.AttributeConstructor.Parameters
+                        tupleAttr
+                            .AttributeConstructor
+                            .Parameters
                             .Single()
-                            .TypeWithAnnotations.ToTestDisplayString()
+                            .TypeWithAnnotations
+                            .ToTestDisplayString()
                     );
 
                     if (expectedElementNames == null)

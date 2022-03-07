@@ -235,9 +235,9 @@ namespace Microsoft.Extensions.Logging.Test
                 builder =>
                 {
                     builder.AddProvider(provider.Object);
-                    builder.Services.Configure<LoggerFilterOptions>(
-                        options => options.CaptureScopes = false
-                    );
+                    builder
+                        .Services
+                        .Configure<LoggerFilterOptions>(options => options.CaptureScopes = false);
                 }
             );
 
@@ -271,9 +271,9 @@ namespace Microsoft.Extensions.Logging.Test
                 builder =>
                 {
                     builder.AddProvider(provider.Object);
-                    builder.Services.Configure<LoggerFilterOptions>(
-                        options => options.CaptureScopes = false
-                    );
+                    builder
+                        .Services
+                        .Configure<LoggerFilterOptions>(options => options.CaptureScopes = false);
                 }
             );
 

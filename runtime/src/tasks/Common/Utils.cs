@@ -17,9 +17,11 @@ internal static class Utils
 
     public static string GetEmbeddedResource(string file)
     {
-        using Stream stream = typeof(Utils).Assembly.GetManifestResourceStream(
-            $"{typeof(Utils).Assembly.GetName().Name}.Templates.{file}"
-        )!;
+        using Stream stream = typeof(Utils)
+            .Assembly
+            .GetManifestResourceStream(
+                $"{typeof(Utils).Assembly.GetName().Name}.Templates.{file}"
+            )!;
         using var reader = new StreamReader(stream);
         return reader.ReadToEnd();
     }

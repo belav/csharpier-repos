@@ -57,9 +57,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             ThreadingContext.RunWithShutdownBlockAsync(
                 async cancellationToken =>
                 {
-                    await ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
-                        cancellationToken
-                    );
+                    await ThreadingContext
+                        .JoinableTaskFactory
+                        .SwitchToMainThreadAsync(cancellationToken);
 
                     var monitorSelectionService = (IVsMonitorSelection?)await asyncServiceProvider
                         .GetServiceAsync(typeof(SVsShellMonitorSelection))
@@ -264,10 +264,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                 {
                     if (docData is IVsTextBuffer bufferAdapter)
                     {
-                        _textBuffer =
-                            _documentTracker._editorAdaptersFactoryService.GetDocumentBuffer(
-                                bufferAdapter
-                            );
+                        _textBuffer = _documentTracker
+                            ._editorAdaptersFactoryService
+                            .GetDocumentBuffer(bufferAdapter);
 
                         if (
                             _textBuffer != null
@@ -284,10 +283,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                 object sender,
                 TextContentChangedEventArgs e
             ) =>
-                _documentTracker.NonRoslynBufferTextChanged?.Invoke(
-                    _documentTracker,
-                    EventArgs.Empty
-                );
+                _documentTracker
+                    .NonRoslynBufferTextChanged
+                    ?.Invoke(_documentTracker, EventArgs.Empty);
 
             /// <summary>
             /// Returns the current DocumentId for this window frame. Care must be made with this value, since "current" could change asynchronously as the document

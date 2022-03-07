@@ -223,11 +223,13 @@ namespace System.Net.Http
                         if (HttpTelemetry.Log.IsEnabled())
                             HttpTelemetry.Log.RequestContentStart();
 
-                        ValueTask vt = _request.Content.InternalCopyToAsync(
-                            writeStream,
-                            context: null,
-                            _requestBodyCancellationSource.Token
-                        );
+                        ValueTask vt = _request
+                            .Content
+                            .InternalCopyToAsync(
+                                writeStream,
+                                context: null,
+                                _requestBodyCancellationSource.Token
+                            );
                         if (vt.IsCompleted)
                         {
                             vt.GetAwaiter().GetResult();
@@ -784,11 +786,11 @@ namespace System.Net.Http
                         throw new HttpRequestException(SR.net_http_invalid_response);
                     }
 
-                    Encoding? valueEncoding =
-                        _connection._pool.Settings._responseHeaderEncodingSelector?.Invoke(
-                            descriptor.Name,
-                            _request
-                        );
+                    Encoding? valueEncoding = _connection
+                        ._pool
+                        .Settings
+                        ._responseHeaderEncodingSelector
+                        ?.Invoke(descriptor.Name, _request);
 
                     // Note we ignore the return value from TryAddWithoutValidation;
                     // if the header can't be added, we silently drop it.
@@ -820,13 +822,15 @@ namespace System.Net.Http
                             value,
                             valueEncoding
                         );
-                        _response.Headers.TryAddWithoutValidation(
-                            (descriptor.HeaderType & HttpHeaderType.Request)
-                                == HttpHeaderType.Request
-                              ? descriptor.AsCustomHeader()
-                              : descriptor,
-                            headerValue
-                        );
+                        _response
+                            .Headers
+                            .TryAddWithoutValidation(
+                                (descriptor.HeaderType & HttpHeaderType.Request)
+                                    == HttpHeaderType.Request
+                                  ? descriptor.AsCustomHeader()
+                                  : descriptor,
+                                headerValue
+                            );
                     }
                 }
             }
@@ -1644,14 +1648,16 @@ namespace System.Net.Http
                         if (signalWaiter)
                         {
                             // Wake up the wait.  It will then immediately check whether cancellation was requested and throw if it was.
-                            thisRef._waitSource.SetException(
-                                ExceptionDispatchInfo.SetCurrentStackTrace(
-                                    CancellationHelper.CreateOperationCanceledException(
-                                        null,
-                                        cancellationToken
+                            thisRef
+                                ._waitSource
+                                .SetException(
+                                    ExceptionDispatchInfo.SetCurrentStackTrace(
+                                        CancellationHelper.CreateOperationCanceledException(
+                                            null,
+                                            cancellationToken
+                                        )
                                     )
-                                )
-                            );
+                                );
                         }
                     },
                     this

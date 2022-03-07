@@ -204,9 +204,9 @@ public class WindowsIdentityTests
                         {
                             try
                             {
-                                Task<bool> task = testInfo.continueTask.WaitAsync(
-                                    ThreadTestHelpers.UnexpectedTimeoutMilliseconds
-                                );
+                                Task<bool> task = testInfo
+                                    .continueTask
+                                    .WaitAsync(ThreadTestHelpers.UnexpectedTimeoutMilliseconds);
                                 Assert.True(await task.ConfigureAwait(false));
                             }
                             catch (Exception ex)

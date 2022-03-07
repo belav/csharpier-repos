@@ -57,9 +57,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Structure
             )
             {
                 workspace.TryApplyChanges(
-                    workspace.CurrentSolution.WithOptions(
-                        UpdateOptions(workspace.CurrentSolution.Options)
-                    )
+                    workspace
+                        .CurrentSolution
+                        .WithOptions(UpdateOptions(workspace.CurrentSolution.Options))
                 );
 
                 var hostDocument = workspace.Documents.Single();

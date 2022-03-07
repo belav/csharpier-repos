@@ -1367,7 +1367,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         public virtual void Where_equal_using_relational_null_semantics()
         {
             using var context = CreateContext(useRelationalNulls: true);
-            context.Entities1
+            context
+                .Entities1
                 .Where(e => e.NullableBoolA == e.NullableBoolB)
                 .Select(e => e.Id)
                 .ToList();
@@ -1378,7 +1379,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         {
             using var context = CreateContext(useRelationalNulls: true);
             var names = new[] { "Foo", "Bar" };
-            var result = context.Entities1
+            var result = context
+                .Entities1
                 .Where(e => names.Contains(e.NullableStringA))
                 .Select(e => e.NullableStringA)
                 .ToList();
@@ -1392,10 +1394,12 @@ namespace Microsoft.EntityFrameworkCore.Query
             using var context = CreateContext(useRelationalNulls: true);
             var names = new string[0];
             var result =
-                context.Entities1
+                context
+                    .Entities1
                     .Where(e => names.Contains(e.NullableStringA))
                     .Select(e => e.NullableStringA)
-                    .ToList().Count;
+                    .ToList()
+                    .Count;
 
             Assert.Equal(0, result);
         }
@@ -1406,10 +1410,12 @@ namespace Microsoft.EntityFrameworkCore.Query
             using var context = CreateContext(useRelationalNulls: true);
             var names = new string[] { null };
             var result =
-                context.Entities1
+                context
+                    .Entities1
                     .Where(e => names.Contains(e.NullableStringA))
                     .Select(e => e.NullableStringA)
-                    .ToList().Count;
+                    .ToList()
+                    .Count;
 
             Assert.Equal(0, result);
         }
@@ -1470,7 +1476,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         {
             using var context = CreateContext(useRelationalNulls: true);
             var prm = false;
-            context.Entities1
+            context
+                .Entities1
                 .Where(e => e.NullableBoolA == e.NullableBoolB || prm)
                 .Select(e => e.Id)
                 .ToList();
@@ -1480,7 +1487,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         public virtual void Where_not_equal_using_relational_null_semantics()
         {
             using var context = CreateContext(useRelationalNulls: true);
-            context.Entities1
+            context
+                .Entities1
                 .Where(e => e.NullableBoolA != e.NullableBoolB)
                 .Select(e => e.Id)
                 .ToList();
@@ -1499,7 +1507,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         {
             using var context = CreateContext(useRelationalNulls: true);
             var prm = false;
-            context.Entities1
+            context
+                .Entities1
                 .Where(e => e.NullableBoolA != e.NullableBoolB || prm)
                 .Select(e => e.Id)
                 .ToList();
@@ -1577,7 +1586,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                 results2;
             using (var context = CreateContext())
             {
-                var query = context.Entities1
+                var query = context
+                    .Entities1
                     .Where(e => e.NullableBoolA == e.NullableBoolB)
                     .Select(e => e.Id);
 
@@ -1586,7 +1596,8 @@ namespace Microsoft.EntityFrameworkCore.Query
 
             using (var context = CreateContext(useRelationalNulls: true))
             {
-                var query = context.Entities1
+                var query = context
+                    .Entities1
                     .Where(e => e.NullableBoolA == e.NullableBoolB)
                     .Select(e => e.Id);
 
@@ -1616,7 +1627,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         public virtual void From_sql_composed_with_relational_null_comparison()
         {
             using var context = CreateContext(useRelationalNulls: true);
-            var actual = context.Entities1
+            var actual = context
+                .Entities1
                 .FromSqlRaw(NormalizeDelimitersInRawString("SELECT * FROM [Entities1]"))
                 .Where(c => c.StringA == c.StringB)
                 .ToArray();

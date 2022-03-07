@@ -143,9 +143,11 @@ namespace System.Media.Test
                             string line;
                             while (!string.IsNullOrEmpty(line = await reader.ReadLineAsync()))
                                 ;
-                            byte[] header = Encoding.UTF8.GetBytes(
-                                $"HTTP/1.1 200 OK\r\nContent-Length: {sourceStream.Length}\r\n\r\n"
-                            );
+                            byte[] header = Encoding
+                                .UTF8
+                                .GetBytes(
+                                    $"HTTP/1.1 200 OK\r\nContent-Length: {sourceStream.Length}\r\n\r\n"
+                                );
                             serverStream.Write(header, 0, header.Length);
                             await sourceStream.CopyToAsync(serverStream);
                             server.Shutdown(SocketShutdown.Both);

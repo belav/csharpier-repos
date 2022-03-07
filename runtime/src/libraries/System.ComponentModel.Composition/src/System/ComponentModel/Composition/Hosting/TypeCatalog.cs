@@ -332,9 +332,9 @@ namespace System.ComponentModel.Composition.Hosting
                 return PartsInternal;
             }
 
-            string? genericContractName = definition.Metadata.GetValue<string>(
-                CompositionConstants.GenericContractMetadataName
-            );
+            string? genericContractName = definition
+                .Metadata
+                .GetValue<string>(CompositionConstants.GenericContractMetadataName);
 
             List<ComposablePartDefinition>? nonGenericMatches = GetCandidateParts(contractName);
             List<ComposablePartDefinition>? genericMatches = GetCandidateParts(genericContractName);
@@ -349,10 +349,12 @@ namespace System.ComponentModel.Composition.Hosting
                 return null;
             }
 
-            _contractPartIndex.Value.TryGetValue(
-                contractName,
-                out List<ComposablePartDefinition>? contractCandidateParts
-            );
+            _contractPartIndex
+                .Value
+                .TryGetValue(
+                    contractName,
+                    out List<ComposablePartDefinition>? contractCandidateParts
+                );
             return contractCandidateParts;
         }
 

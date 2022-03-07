@@ -114,7 +114,9 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
                 var debuggerHostDte = GetDebuggerHostDte();
                 var targetProcessId = Process.GetCurrentProcess().Id;
                 var localProcess = debuggerHostDte
-                    ?.Debugger.LocalProcesses.OfType<EnvDTE80.Process2>()
+                    ?.Debugger
+                    .LocalProcesses
+                    .OfType<EnvDTE80.Process2>()
                     .FirstOrDefault(p => p.ProcessID == hostProcess.Id);
                 if (localProcess != null)
                 {
@@ -295,7 +297,9 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
             {
                 var dte = IntegrationHelper.TryLocateDteForProcess(process);
                 if (
-                    dte?.Debugger?.DebuggedProcesses?.OfType<EnvDTE.Process>()
+                    dte?.Debugger
+                        ?.DebuggedProcesses
+                        ?.OfType<EnvDTE.Process>()
                         .Any(p => p.ProcessID == currentProcessId) ?? false
                 )
                 {
@@ -340,9 +344,9 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
         {
             // We use DTE over RPC to start the integration service. All other DTE calls should happen in the host process.
             if (
-                dte.Commands.Item(
-                    WellKnownCommandNames.Test_IntegrationTestService_Start
-                ).IsAvailable
+                dte.Commands
+                    .Item(WellKnownCommandNames.Test_IntegrationTestService_Start)
+                    .IsAvailable
             )
             {
                 dte.ExecuteCommand(WellKnownCommandNames.Test_IntegrationTestService_Start);

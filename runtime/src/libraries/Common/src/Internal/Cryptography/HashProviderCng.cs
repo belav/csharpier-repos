@@ -32,25 +32,26 @@ namespace Internal.Cryptography
                 dwFlags |= BCryptOpenAlgorithmProviderFlags.BCRYPT_ALG_HANDLE_HMAC_FLAG;
             }
 
-            _hAlgorithm = Interop.BCrypt.BCryptAlgorithmCache.GetCachedBCryptAlgorithmHandle(
-                hashAlgId,
-                dwFlags,
-                out _hashSize
-            );
+            _hAlgorithm = Interop
+                .BCrypt
+                .BCryptAlgorithmCache
+                .GetCachedBCryptAlgorithmHandle(hashAlgId, dwFlags, out _hashSize);
 
             // Win7 won't set hHash to a valid handle, Win8+ will; and both will set _hHash.
             // So keep hHash trapped in this scope to prevent (mis-)use of it.
             {
                 SafeBCryptHashHandle hHash;
-                NTSTATUS ntStatus = Interop.BCrypt.BCryptCreateHash(
-                    _hAlgorithm,
-                    out hHash,
-                    IntPtr.Zero,
-                    0,
-                    key,
-                    key == null ? 0 : key.Length,
-                    BCryptCreateHashFlags.BCRYPT_HASH_REUSABLE_FLAG
-                );
+                NTSTATUS ntStatus = Interop
+                    .BCrypt
+                    .BCryptCreateHash(
+                        _hAlgorithm,
+                        out hHash,
+                        IntPtr.Zero,
+                        0,
+                        key,
+                        key == null ? 0 : key.Length,
+                        BCryptCreateHashFlags.BCRYPT_HASH_REUSABLE_FLAG
+                    );
                 if (ntStatus == NTSTATUS.STATUS_INVALID_PARAMETER)
                 {
                     hHash.Dispose();
@@ -107,12 +108,9 @@ namespace Internal.Cryptography
 
             using (SafeBCryptHashHandle tmpHash = Interop.BCrypt.BCryptDuplicateHash(_hHash))
             {
-                NTSTATUS ntStatus = Interop.BCrypt.BCryptFinishHash(
-                    tmpHash,
-                    destination,
-                    _hashSize,
-                    0
-                );
+                NTSTATUS ntStatus = Interop
+                    .BCrypt
+                    .BCryptFinishHash(tmpHash, destination, _hashSize, 0);
 
                 if (ntStatus != NTSTATUS.STATUS_SUCCESS)
                 {
@@ -146,15 +144,17 @@ namespace Internal.Cryptography
             DestroyHash();
 
             SafeBCryptHashHandle hHash;
-            NTSTATUS ntStatus = Interop.BCrypt.BCryptCreateHash(
-                _hAlgorithm,
-                out hHash,
-                IntPtr.Zero,
-                0,
-                _key,
-                _key == null ? 0 : _key.Length,
-                BCryptCreateHashFlags.None
-            );
+            NTSTATUS ntStatus = Interop
+                .BCrypt
+                .BCryptCreateHash(
+                    _hAlgorithm,
+                    out hHash,
+                    IntPtr.Zero,
+                    0,
+                    _key,
+                    _key == null ? 0 : _key.Length,
+                    BCryptCreateHashFlags.None
+                );
             if (ntStatus != NTSTATUS.STATUS_SUCCESS)
                 throw Interop.BCrypt.CreateCryptographicException(ntStatus);
 

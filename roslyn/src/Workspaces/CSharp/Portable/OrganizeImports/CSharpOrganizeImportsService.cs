@@ -37,9 +37,9 @@ namespace Microsoft.CodeAnalysis.CSharp.OrganizeImports
             var blankLineBetweenGroups = options.GetOption(
                 GenerationOptions.SeparateImportDirectiveGroups
             );
-            var newLineTrivia = CSharpSyntaxGeneratorInternal.Instance.EndOfLine(
-                options.GetOption(FormattingOptions2.NewLine)
-            );
+            var newLineTrivia = CSharpSyntaxGeneratorInternal
+                .Instance
+                .EndOfLine(options.GetOption(FormattingOptions2.NewLine));
 
             var rewriter = new Rewriter(
                 placeSystemNamespaceFirst,

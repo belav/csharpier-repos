@@ -20,10 +20,10 @@ namespace System.Globalization.Tests
                   : "ja-JP"
             );
             var newCurrentUICulture = new CultureInfo(
-                CultureInfo.CurrentUICulture.Name.Equals(
-                    "ja-JP",
-                    StringComparison.OrdinalIgnoreCase
-                )
+                CultureInfo
+                    .CurrentUICulture
+                    .Name
+                    .Equals("ja-JP", StringComparison.OrdinalIgnoreCase)
                   ? "en-US"
                   : "ja-JP"
             );
@@ -51,10 +51,10 @@ namespace System.Globalization.Tests
                   : "ja-JP"
             );
             var newCurrentUICulture = new CultureInfo(
-                CultureInfo.CurrentUICulture.Name.Equals(
-                    "ja-JP",
-                    StringComparison.OrdinalIgnoreCase
-                )
+                CultureInfo
+                    .CurrentUICulture
+                    .Name
+                    .Equals("ja-JP", StringComparison.OrdinalIgnoreCase)
                   ? "en-US"
                   : "ja-JP"
             );

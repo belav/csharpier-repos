@@ -19,8 +19,13 @@ namespace System.Net.Quic.Tests
                     new SslApplicationProtocol("quictest")
                 },
                 // TODO: use a cert. MsQuic currently only allows certs that are trusted.
-                ServerCertificate =
-                    System.Net.Test.Common.Configuration.Certificates.GetServerCertificate()
+                ServerCertificate = System
+                    .Net
+                    .Test
+                    .Common
+                    .Configuration
+                    .Certificates
+                    .GetServerCertificate()
             };
         }
 

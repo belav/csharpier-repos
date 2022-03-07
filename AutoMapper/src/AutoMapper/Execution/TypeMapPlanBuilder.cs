@@ -265,9 +265,9 @@ namespace AutoMapper.Execution
             return Block(includedMembersVariables, actions);
             IEnumerable<ParameterExpression> IncludedMembers(List<Expression> actions)
             {
-                var includedMembersVariables = _typeMap.IncludedMembersTypeMaps.Select(
-                    i => i.Variable
-                );
+                var includedMembersVariables = _typeMap
+                    .IncludedMembersTypeMaps
+                    .Select(i => i.Variable);
                 var assignIncludedMembers = includedMembersVariables.Zip(
                     _typeMap.IncludedMembersTypeMaps,
                     (v, i) => Assign(v, i.MemberExpression.ReplaceParameters(Source).NullCheck())
@@ -281,9 +281,9 @@ namespace AutoMapper.Execution
         {
             var destination =
                 (
-                    (MemberExpression)pathMap.DestinationExpression.ConvertReplaceParameters(
-                        _destination
-                    )
+                    (MemberExpression)pathMap
+                        .DestinationExpression
+                        .ConvertReplaceParameters(_destination)
                 ).Expression;
             var createInnerObjects = CreateInnerObjects(destination);
             var setFinalValue = CreatePropertyMapFunc(
@@ -392,7 +392,8 @@ namespace AutoMapper.Execution
         private Expression ConstructorMapping(ConstructorMap constructorMap)
         {
             var ctorArgs = constructorMap.CtorParams.Select(CreateConstructorParameterExpression);
-            var variables = constructorMap.Ctor
+            var variables = constructorMap
+                .Ctor
                 .GetParameters()
                 .Select(parameter => Variable(parameter.ParameterType, parameter.Name))
                 .ToArray();
@@ -490,13 +491,15 @@ namespace AutoMapper.Execution
             {
                 _propertyMapExpressions.Add(
                     IfThen(
-                        memberMap.Condition.ConvertReplaceParameters(
-                            GetCustomSource(memberMap),
-                            _destination,
-                            mappedMemberVariable,
-                            destinationMemberGetter,
-                            ContextParameter
-                        ),
+                        memberMap
+                            .Condition
+                            .ConvertReplaceParameters(
+                                GetCustomSource(memberMap),
+                                _destination,
+                                mappedMemberVariable,
+                                destinationMemberGetter,
+                                ContextParameter
+                            ),
                         mapperExpr
                     )
                 );
@@ -538,11 +541,13 @@ namespace AutoMapper.Execution
             }
             void Precondition(MemberMap memberMap)
             {
-                var preCondition = memberMap.PreCondition.ConvertReplaceParameters(
-                    GetCustomSource(memberMap),
-                    _destination,
-                    ContextParameter
-                );
+                var preCondition = memberMap
+                    .PreCondition
+                    .ConvertReplaceParameters(
+                        GetCustomSource(memberMap),
+                        _destination,
+                        ContextParameter
+                    );
                 var ifThen = IfThen(preCondition, Block(_propertyMapExpressions));
                 _propertyMapExpressions.Clear();
                 _propertyMapExpressions.Add(ifThen);

@@ -41,15 +41,17 @@ class C
     }
 }
 ";
-            var sourceLinkBlob = Encoding.UTF8.GetBytes(
-                @"
+            var sourceLinkBlob = Encoding
+                .UTF8
+                .GetBytes(
+                    @"
 {
   ""documents"": {
      ""f:/build/*"" : ""https://raw.githubusercontent.com/my-org/my-project/1111111111111111111111111111111111111111/*""
   }
 }
 "
-            );
+                );
 
             var c = CreateCompilation(
                 Parse(source, "f:/build/goo.cs"),
@@ -82,15 +84,17 @@ class C
     }
 }
 ";
-            var sourceLinkBlob = Encoding.UTF8.GetBytes(
-                @"
+            var sourceLinkBlob = Encoding
+                .UTF8
+                .GetBytes(
+                    @"
 {
   ""documents"": {
      ""f:/build/*"" : ""https://raw.githubusercontent.com/my-org/my-project/1111111111111111111111111111111111111111/*""
   }
 }
 "
-            );
+                );
             var c = CreateCompilation(
                 Parse(source, "f:/build/goo.cs"),
                 options: TestOptions.DebugDll
@@ -163,12 +167,14 @@ class C
                 options: EmitOptions.Default.WithDebugInformationFormat(format),
                 sourceLinkStream: sourceLinkStream
             );
-            result.Diagnostics.Verify(
-                // error CS0041: Unexpected error writing debug information -- 'Error!'
-                Diagnostic(ErrorCode.FTL_DebugEmitFailure)
-                    .WithArguments("Error!")
-                    .WithLocation(1, 1)
-            );
+            result
+                .Diagnostics
+                .Verify(
+                    // error CS0041: Unexpected error writing debug information -- 'Error!'
+                    Diagnostic(ErrorCode.FTL_DebugEmitFailure)
+                        .WithArguments("Error!")
+                        .WithLocation(1, 1)
+                );
         }
 
         [ConditionalFact(
@@ -214,16 +220,18 @@ class C
                 }
             );
 
-            result.Diagnostics.Verify(
-                // error CS0041: Unexpected error writing debug information -- 'Windows PDB writer doesn't support SourceLink feature: '<lib name>''
-                Diagnostic(ErrorCode.FTL_DebugEmitFailure)
-                    .WithArguments(
-                        string.Format(
-                            CodeAnalysisResources.SymWriterDoesNotSupportSourceLink,
-                            "<lib name>"
+            result
+                .Diagnostics
+                .Verify(
+                    // error CS0041: Unexpected error writing debug information -- 'Windows PDB writer doesn't support SourceLink feature: '<lib name>''
+                    Diagnostic(ErrorCode.FTL_DebugEmitFailure)
+                        .WithArguments(
+                            string.Format(
+                                CodeAnalysisResources.SymWriterDoesNotSupportSourceLink,
+                                "<lib name>"
+                            )
                         )
-                    )
-            );
+                );
         }
 
         [Theory]

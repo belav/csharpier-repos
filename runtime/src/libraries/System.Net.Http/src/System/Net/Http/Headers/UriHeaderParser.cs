@@ -96,11 +96,14 @@ namespace System.Net.Http.Headers
                 try
                 {
                     // We don't want '?' replacement characters, just fail.
-                    System.Text.Encoding decoder = System.Text.Encoding.GetEncoding(
-                        "utf-8",
-                        System.Text.EncoderFallback.ExceptionFallback,
-                        System.Text.DecoderFallback.ExceptionFallback
-                    );
+                    System.Text.Encoding decoder = System
+                        .Text
+                        .Encoding
+                        .GetEncoding(
+                            "utf-8",
+                            System.Text.EncoderFallback.ExceptionFallback,
+                            System.Text.DecoderFallback.ExceptionFallback
+                        );
                     return decoder.GetString(rawBytes, 0, rawBytes.Length);
                 }
                 catch (ArgumentException) { } // Not actually Utf-8

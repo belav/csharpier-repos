@@ -52,9 +52,11 @@ namespace System.Security.Cryptography.Xml.Tests
                 .Select(
                     elementName =>
                         Convert.FromBase64String(
-                            xmlkey.SelectSingleNode(
-                                $"*[local-name()='RSAKeyValue' and namespace-uri()='{schema}']/*[local-name()='{elementName}' and namespace-uri()='{schema}']"
-                            ).InnerText
+                            xmlkey
+                                .SelectSingleNode(
+                                    $"*[local-name()='RSAKeyValue' and namespace-uri()='{schema}']/*[local-name()='{elementName}' and namespace-uri()='{schema}']"
+                                )
+                                .InnerText
                         )
                 )
                 .ToArray();

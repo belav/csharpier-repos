@@ -819,9 +819,9 @@ namespace System.IO
             try
             {
                 cancellationToken.ThrowIfCancellationRequested();
-                buffer = ArrayPool<char>.Shared.Rent(
-                    sr.CurrentEncoding.GetMaxCharCount(DefaultBufferSize)
-                );
+                buffer = ArrayPool<char>
+                    .Shared
+                    .Rent(sr.CurrentEncoding.GetMaxCharCount(DefaultBufferSize));
                 StringBuilder sb = new StringBuilder();
                 while (true)
                 {

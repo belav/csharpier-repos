@@ -366,9 +366,9 @@ class Test
                         .GetTypeByMetadataName(attributeName);
                     Assert.NotNull(referenceAttribute);
 
-                    var generatedAttribute = module.ContainingAssembly.GetTypeByMetadataName(
-                        attributeName
-                    );
+                    var generatedAttribute = module
+                        .ContainingAssembly
+                        .GetTypeByMetadataName(attributeName);
                     Assert.NotNull(generatedAttribute);
 
                     Assert.False(referenceAttribute.Equals(generatedAttribute));

@@ -59,14 +59,15 @@ namespace Microsoft.Extensions.Http
                 HttpClientFactoryOptions options = _optionsMonitor.Get(builder.Name);
 
                 // The 'scope' handler goes first so it can surround everything.
-                builder.AdditionalHandlers.Insert(
-                    0,
-                    new LoggingScopeHttpMessageHandler(outerLogger, options)
-                );
+                builder
+                    .AdditionalHandlers
+                    .Insert(0, new LoggingScopeHttpMessageHandler(outerLogger, options));
 
                 // We want this handler to be last so we can log details about the request after
                 // service discovery and security happen.
-                builder.AdditionalHandlers.Add(new LoggingHttpMessageHandler(innerLogger, options));
+                builder
+                    .AdditionalHandlers
+                    .Add(new LoggingHttpMessageHandler(innerLogger, options));
             };
         }
     }

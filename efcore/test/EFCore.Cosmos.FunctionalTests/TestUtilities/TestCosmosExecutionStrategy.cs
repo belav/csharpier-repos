@@ -22,7 +22,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
                             TestEnvironment.DefaultConnection,
                             TestEnvironment.AuthToken,
                             "NonExistent"
-                        ).Options
+                        )
+                        .Options
                 ),
                 DefaultMaxRetryCount,
                 DefaultMaxDelay

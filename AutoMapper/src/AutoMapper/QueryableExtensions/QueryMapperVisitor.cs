@@ -265,12 +265,14 @@ namespace AutoMapper.QueryableExtensions.Impl
                 destinationMemberType
             );
 
-            var propertyMap = typeMap.PropertyMaps.FirstOrDefault(
-                pm =>
-                    pm.CanResolveValue
-                    && pm.SourceMember != null
-                    && pm.SourceMember.Name == sourceMemberInfo.Name
-            );
+            var propertyMap = typeMap
+                .PropertyMaps
+                .FirstOrDefault(
+                    pm =>
+                        pm.CanResolveValue
+                        && pm.SourceMember != null
+                        && pm.SourceMember.Name == sourceMemberInfo.Name
+                );
 
             if (propertyMap == null)
                 throw PropertyConfigurationException(typeMap, sourceMemberInfo.Name);

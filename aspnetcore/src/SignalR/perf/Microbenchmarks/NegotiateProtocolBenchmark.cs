@@ -39,16 +39,18 @@ public class NegotiateProtocolBenchmark
         };
         _stream = Stream.Null;
 
-        _responseData1 = Encoding.UTF8.GetBytes(
-            "{\"connectionId\":\"123\",\"availableTransports\":[]}"
-        );
+        _responseData1 = Encoding
+            .UTF8
+            .GetBytes("{\"connectionId\":\"123\",\"availableTransports\":[]}");
         _responseData2 = Encoding.UTF8.GetBytes("{\"url\": \"http://foo.com/chat\"}");
-        _responseData3 = Encoding.UTF8.GetBytes(
-            "{\"url\": \"http://foo.com/chat\", \"accessToken\": \"token\"}"
-        );
-        _responseData4 = Encoding.UTF8.GetBytes(
-            "{\"connectionId\":\"123\",\"availableTransports\":[{\"transport\":\"test\",\"transferFormats\":[]}]}"
-        );
+        _responseData3 = Encoding
+            .UTF8
+            .GetBytes("{\"url\": \"http://foo.com/chat\", \"accessToken\": \"token\"}");
+        _responseData4 = Encoding
+            .UTF8
+            .GetBytes(
+                "{\"connectionId\":\"123\",\"availableTransports\":[{\"transport\":\"test\",\"transferFormats\":[]}]}"
+            );
 
         var writer = new MemoryBufferWriter();
         NegotiateProtocol.WriteResponse(_negotiateResponse, writer);

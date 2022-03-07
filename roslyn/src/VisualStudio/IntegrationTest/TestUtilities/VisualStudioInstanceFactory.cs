@@ -122,7 +122,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
             Debug.WriteLine(
                 $"'{eventArgs.RequestingAssembly}' is attempting to resolve '{eventArgs.Name}'"
             );
-            var resolvedAssembly = AppDomain.CurrentDomain
+            var resolvedAssembly = AppDomain
+                .CurrentDomain
                 .GetAssemblies()
                 .Where((assembly) => assembly.FullName.Equals(eventArgs.Name))
                 .SingleOrDefault();
@@ -618,10 +619,9 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
 
             // The first element of the path in CI is a .dotnet used for the Roslyn build. Make sure to remove that.
             if (
-                processStartInfo.Environment.TryGetValue(
-                    "BUILD_SOURCESDIRECTORY",
-                    out var sourcesDirectory
-                )
+                processStartInfo
+                    .Environment
+                    .TryGetValue("BUILD_SOURCESDIRECTORY", out var sourcesDirectory)
             )
             {
                 var environmentPath = processStartInfo.Environment["PATH"];

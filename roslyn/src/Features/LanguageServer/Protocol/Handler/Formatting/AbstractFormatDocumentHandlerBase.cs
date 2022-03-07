@@ -34,8 +34,10 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
 
             var edits = new ArrayBuilder<LSP.TextEdit>();
 
-            var formattingService =
-                document.Project.LanguageServices.GetRequiredService<IFormattingInteractionService>();
+            var formattingService = document
+                .Project
+                .LanguageServices
+                .GetRequiredService<IFormattingInteractionService>();
             var text = await document.GetTextAsync(cancellationToken).ConfigureAwait(false);
             TextSpan? textSpan = null;
             if (range != null)

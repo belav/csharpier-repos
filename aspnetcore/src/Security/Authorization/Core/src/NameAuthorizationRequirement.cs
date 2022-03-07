@@ -47,9 +47,17 @@ public class NameAuthorizationRequirement
         if (context.User != null)
         {
             if (
-                context.User.Identities.Any(
-                    i => string.Equals(i.Name, requirement.RequiredName, StringComparison.Ordinal)
-                )
+                context
+                    .User
+                    .Identities
+                    .Any(
+                        i =>
+                            string.Equals(
+                                i.Name,
+                                requirement.RequiredName,
+                                StringComparison.Ordinal
+                            )
+                    )
             )
             {
                 context.Succeed(requirement);

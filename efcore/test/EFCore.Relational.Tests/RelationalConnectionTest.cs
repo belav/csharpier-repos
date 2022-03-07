@@ -21,15 +21,17 @@ namespace Microsoft.EntityFrameworkCore
         public void Throws_with_new_when_no_EF_services_use_Database()
         {
             var options =
-                new DbContextOptionsBuilder<ConstructorTestContext1A>().UseInternalServiceProvider(
-                    new ServiceCollection().BuildServiceProvider(validateScopes: true)
-                ).Options;
+                new DbContextOptionsBuilder<ConstructorTestContext1A>()
+                    .UseInternalServiceProvider(
+                        new ServiceCollection().BuildServiceProvider(validateScopes: true)
+                    )
+                    .Options;
 
             Assert.Equal(
                 CoreStrings.NoEfServices,
-                Assert.Throws<InvalidOperationException>(
-                    () => new ConstructorTestContext1A(options)
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(() => new ConstructorTestContext1A(options))
+                    .Message
             );
         }
 
@@ -45,9 +47,11 @@ namespace Microsoft.EntityFrameworkCore
                 .CreateScope();
             Assert.Equal(
                 CoreStrings.NoEfServices,
-                Assert.Throws<InvalidOperationException>(
-                    () => serviceScope.ServiceProvider.GetService<ConstructorTestContext1A>()
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(
+                        () => serviceScope.ServiceProvider.GetService<ConstructorTestContext1A>()
+                    )
+                    .Message
             );
         }
 
@@ -59,16 +63,16 @@ namespace Microsoft.EntityFrameworkCore
             var serviceProvider = serviceCollection.BuildServiceProvider(validateScopes: true);
 
             var options =
-                new DbContextOptionsBuilder<ConstructorTestContext1A>().UseInternalServiceProvider(
-                    serviceProvider
-                ).Options;
+                new DbContextOptionsBuilder<ConstructorTestContext1A>()
+                    .UseInternalServiceProvider(serviceProvider)
+                    .Options;
 
             using var context = new ConstructorTestContext1A(options);
             Assert.Equal(
                 CoreStrings.NoProviderConfigured,
-                Assert.Throws<InvalidOperationException>(
-                    () => context.Database.GetDbConnection()
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(() => context.Database.GetDbConnection())
+                    .Message
             );
         }
 
@@ -89,9 +93,9 @@ namespace Microsoft.EntityFrameworkCore
 
             Assert.Equal(
                 CoreStrings.NoProviderConfigured,
-                Assert.Throws<InvalidOperationException>(
-                    () => context.Database.GetDbConnection()
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(() => context.Database.GetDbConnection())
+                    .Message
             );
         }
 
@@ -101,9 +105,9 @@ namespace Microsoft.EntityFrameworkCore
             using var context = new ConstructorTestContextNoConfiguration();
             Assert.Equal(
                 CoreStrings.NoProviderConfigured,
-                Assert.Throws<InvalidOperationException>(
-                    () => context.Database.GetDbConnection()
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(() => context.Database.GetDbConnection())
+                    .Message
             );
         }
 
@@ -117,14 +121,15 @@ namespace Microsoft.EntityFrameworkCore
             using var serviceScope = appServiceProvider
                 .GetRequiredService<IServiceScopeFactory>()
                 .CreateScope();
-            var context =
-                serviceScope.ServiceProvider.GetService<ConstructorTestContextNoConfiguration>();
+            var context = serviceScope
+                .ServiceProvider
+                .GetService<ConstructorTestContextNoConfiguration>();
 
             Assert.Equal(
                 CoreStrings.NoProviderConfigured,
-                Assert.Throws<InvalidOperationException>(
-                    () => context.Database.GetDbConnection()
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(() => context.Database.GetDbConnection())
+                    .Message
             );
         }
 
@@ -929,9 +934,11 @@ namespace Microsoft.EntityFrameworkCore
         {
             Assert.Equal(
                 RelationalStrings.NoProviderConfigured,
-                Assert.Throws<InvalidOperationException>(
-                    () => new FakeRelationalConnection(CreateOptions())
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(
+                        () => new FakeRelationalConnection(CreateOptions())
+                    )
+                    .Message
             );
         }
 
@@ -940,15 +947,17 @@ namespace Microsoft.EntityFrameworkCore
         {
             Assert.Equal(
                 RelationalStrings.MultipleProvidersConfigured,
-                Assert.Throws<InvalidOperationException>(
-                    () =>
-                        new FakeRelationalConnection(
-                            CreateOptions(
-                                new FakeRelationalOptionsExtension(),
-                                new AnotherFakeRelationalOptionsExtension()
+                Assert
+                    .Throws<InvalidOperationException>(
+                        () =>
+                            new FakeRelationalConnection(
+                                CreateOptions(
+                                    new FakeRelationalOptionsExtension(),
+                                    new AnotherFakeRelationalOptionsExtension()
+                                )
                             )
-                        )
-                ).Message
+                    )
+                    .Message
             );
         }
 
@@ -1030,9 +1039,9 @@ namespace Microsoft.EntityFrameworkCore
 
             Assert.Equal(
                 RelationalStrings.NoActiveTransaction,
-                Assert.Throws<InvalidOperationException>(
-                    () => connection.CommitTransaction()
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(() => connection.CommitTransaction())
+                    .Message
             );
         }
 
@@ -1048,9 +1057,9 @@ namespace Microsoft.EntityFrameworkCore
 
             Assert.Equal(
                 RelationalStrings.NoActiveTransaction,
-                Assert.Throws<InvalidOperationException>(
-                    () => connection.RollbackTransaction()
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(() => connection.RollbackTransaction())
+                    .Message
             );
         }
 

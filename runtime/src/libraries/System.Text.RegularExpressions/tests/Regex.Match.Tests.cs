@@ -22,12 +22,14 @@ namespace System.Text.RegularExpressions.Tests
                 (string Pattern, string Input, RegexOptions Options, int Beginning, int Length, bool ExpectedSuccess, string ExpectedValue)[] cases =
                     Cases(engine).ToArray();
                 Regex[] regexes =
-                    RegexHelpers.GetRegexesAsync(
-                        engine,
-                        cases
-                            .Select(c => (c.Pattern, (RegexOptions?)c.Options, (TimeSpan?)null))
-                            .ToArray()
-                    ).Result;
+                    RegexHelpers
+                        .GetRegexesAsync(
+                            engine,
+                            cases
+                                .Select(c => (c.Pattern, (RegexOptions?)c.Options, (TimeSpan?)null))
+                                .ToArray()
+                        )
+                        .Result;
                 for (int i = 0; i < regexes.Length; i++)
                 {
                     yield return new object[]
@@ -2521,10 +2523,12 @@ namespace System.Text.RegularExpressions.Tests
                             @"^([0-9a-zA-Z]([-.\w]*[0-9a-zA-Z])*@(([0-9a-zA-Z])+([-\w]*[0-9a-zA-Z])*\.)+[a-zA-Z]{2,9})$";
                         string input = new string('a', 50) + "@a.a";
 
-                        AppDomain.CurrentDomain.SetData(
-                            RegexHelpers.DefaultMatchTimeout_ConfigKeyName,
-                            TimeSpan.FromMilliseconds(100)
-                        );
+                        AppDomain
+                            .CurrentDomain
+                            .SetData(
+                                RegexHelpers.DefaultMatchTimeout_ConfigKeyName,
+                                TimeSpan.FromMilliseconds(100)
+                            );
 
                         if (
                             (RegexOptions)int.Parse(optionsString, CultureInfo.InvariantCulture)
@@ -2580,7 +2584,9 @@ namespace System.Text.RegularExpressions.Tests
                                         optionsString,
                                         CultureInfo.InvariantCulture
                                     )
-                                ).Matches(input).Count
+                                )
+                                    .Matches(input)
+                                    .Count
                         );
 
                         Assert.Throws<RegexMatchTimeoutException>(
@@ -2607,14 +2613,16 @@ namespace System.Text.RegularExpressions.Tests
                         );
                         Assert.Throws<RegexMatchTimeoutException>(
                             () =>
-                                Regex.Matches(
-                                    input,
-                                    Pattern,
-                                    (RegexOptions)int.Parse(
-                                        optionsString,
-                                        CultureInfo.InvariantCulture
+                                Regex
+                                    .Matches(
+                                        input,
+                                        Pattern,
+                                        (RegexOptions)int.Parse(
+                                            optionsString,
+                                            CultureInfo.InvariantCulture
+                                        )
                                     )
-                                ).Count
+                                    .Count
                         );
                     },
                     ((int)options).ToString(CultureInfo.InvariantCulture)

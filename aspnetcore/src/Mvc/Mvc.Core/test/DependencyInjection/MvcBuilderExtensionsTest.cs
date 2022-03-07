@@ -128,9 +128,9 @@ namespace Microsoft.AspNetCore.Mvc
             // Arrange
             var services = new ServiceCollection();
             var manager = new ApplicationPartManager();
-            manager.ApplicationParts.Add(
-                new TestApplicationPart(typeof(ControllerOne), typeof(ControllerTwo))
-            );
+            manager
+                .ApplicationParts
+                .Add(new TestApplicationPart(typeof(ControllerOne), typeof(ControllerTwo)));
             manager.FeatureProviders.Add(new TestFeatureProvider());
             var builder = new MvcBuilder(services, manager);
 
@@ -168,7 +168,8 @@ namespace Microsoft.AspNetCore.Mvc
             var options =
                 serviceCollection
                     .BuildServiceProvider()
-                    .GetRequiredService<IOptions<ApiBehaviorOptions>>().Value;
+                    .GetRequiredService<IOptions<ApiBehaviorOptions>>()
+                    .Value;
             Assert.True(options.SuppressMapClientErrors);
         }
 

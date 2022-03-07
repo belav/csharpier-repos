@@ -22,14 +22,16 @@ namespace Microsoft.AspNetCore.HostFiltering;
 public class HostFilteringMiddleware
 {
     // Matches Http.Sys.
-    private static readonly byte[] DefaultResponse = Encoding.ASCII.GetBytes(
-        "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\"\"http://www.w3.org/TR/html4/strict.dtd\">\r\n"
-            + "<HTML><HEAD><TITLE>Bad Request</TITLE>\r\n"
-            + "<META HTTP-EQUIV=\"Content-Type\" Content=\"text/html; charset=us-ascii\"></ HEAD >\r\n"
-            + "<BODY><h2>Bad Request - Invalid Hostname</h2>\r\n"
-            + "<hr><p>HTTP Error 400. The request hostname is invalid.</p>\r\n"
-            + "</BODY></HTML>"
-    );
+    private static readonly byte[] DefaultResponse = Encoding
+        .ASCII
+        .GetBytes(
+            "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\"\"http://www.w3.org/TR/html4/strict.dtd\">\r\n"
+                + "<HTML><HEAD><TITLE>Bad Request</TITLE>\r\n"
+                + "<META HTTP-EQUIV=\"Content-Type\" Content=\"text/html; charset=us-ascii\"></ HEAD >\r\n"
+                + "<BODY><h2>Bad Request - Invalid Hostname</h2>\r\n"
+                + "<hr><p>HTTP Error 400. The request hostname is invalid.</p>\r\n"
+                + "</BODY></HTML>"
+        );
 
     private readonly RequestDelegate _next;
     private readonly ILogger<HostFilteringMiddleware> _logger;

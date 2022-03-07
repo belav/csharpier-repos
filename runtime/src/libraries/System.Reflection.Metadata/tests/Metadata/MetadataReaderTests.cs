@@ -551,10 +551,9 @@ namespace System.Reflection.Metadata.Tests
 
             Assert.Equal("NSTests.WithNestedType", reader.GetString(handle));
             Assert.True(
-                reader.StringComparer.Equals(
-                    handle.WithWinRTPrefix(),
-                    "<WinRT>NSTests.WithNestedType"
-                )
+                reader
+                    .StringComparer
+                    .Equals(handle.WithWinRTPrefix(), "<WinRT>NSTests.WithNestedType")
             );
             Assert.True(reader.StringComparer.StartsWith(handle.WithWinRTPrefix(), "<WinRT>N"));
 
@@ -584,10 +583,9 @@ namespace System.Reflection.Metadata.Tests
                 reader.StringComparer.StartsWith(handle.WithWinRTPrefix(), "<WinRT>\uFFFDS")
             );
             Assert.True(
-                reader.StringComparer.Equals(
-                    handle.WithWinRTPrefix(),
-                    "<WinRT>\uFFFDSTests.WithNestedType"
-                )
+                reader
+                    .StringComparer
+                    .Equals(handle.WithWinRTPrefix(), "<WinRT>\uFFFDSTests.WithNestedType")
             );
             ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -1604,7 +1602,9 @@ namespace System.Reflection.Metadata.Tests
                 /* 0x0102 */
                 TypeAttributes.Sealed | TypeAttributes.NestedPublic,
                 /* 0x00a2 */
-                TypeAttributes.Abstract | TypeAttributes.Interface | TypeAttributes.NestedPublic,
+                TypeAttributes.Abstract
+                    | TypeAttributes.Interface
+                    | TypeAttributes.NestedPublic,
             };
             var expExtends = new uint[]
             {
@@ -1849,10 +1849,12 @@ namespace System.Reflection.Metadata.Tests
                 Assert.True(reader.StringComparer.Equals(subNamespace.Name, subNamespaceName));
                 Assert.True(reader.StringComparer.StartsWith(subNamespace.Name, subNamespaceName));
                 Assert.True(
-                    reader.StringComparer.StartsWith(
-                        subNamespace.Name,
-                        subNamespaceName.Substring(0, subNamespaceName.Length - 1)
-                    )
+                    reader
+                        .StringComparer
+                        .StartsWith(
+                            subNamespace.Name,
+                            subNamespaceName.Substring(0, subNamespaceName.Length - 1)
+                        )
                 );
 
                 Assert.Equal(subNamespace.Parent, initHandle);
@@ -1963,10 +1965,9 @@ namespace System.Reflection.Metadata.Tests
                 Assert.NotNull(fullyQualifiedName);
                 Assert.Equal(fullyQualifiedName, expFullyQualifiedName);
                 Assert.False(reader.NamespaceCache.CacheIsRealized);
-                var comparisonResult = reader.StringComparer.Equals(
-                    namespaceHandle,
-                    fullyQualifiedName
-                );
+                var comparisonResult = reader
+                    .StringComparer
+                    .Equals(namespaceHandle, fullyQualifiedName);
                 Assert.True(comparisonResult);
                 Assert.False(reader.NamespaceCache.CacheIsRealized);
             }
@@ -3469,9 +3470,9 @@ namespace System.Reflection.Metadata.Tests
             for (int i = 0; i < reader.GetTableRowCount(TableIndex.StandAloneSig); i++)
             {
                 var signature =
-                    reader.GetStandaloneSignature(
-                        MetadataTokens.StandaloneSignatureHandle(i + 1)
-                    ).Signature;
+                    reader
+                        .GetStandaloneSignature(MetadataTokens.StandaloneSignatureHandle(i + 1))
+                        .Signature;
                 var sig = reader.GetBlobBytes(signature);
                 var exp = expSigs[i];
                 for (int j = 0; j < exp.Length; j++)
@@ -3488,9 +3489,9 @@ namespace System.Reflection.Metadata.Tests
             for (int i = 0; i < reader.GetTableRowCount(TableIndex.StandAloneSig); i++)
             {
                 var signature =
-                    reader.GetStandaloneSignature(
-                        MetadataTokens.StandaloneSignatureHandle(i + 1)
-                    ).Signature;
+                    reader
+                        .GetStandaloneSignature(MetadataTokens.StandaloneSignatureHandle(i + 1))
+                        .Signature;
                 var sig = reader.GetBlobBytes(signature);
                 var exp = modSigs[i];
                 for (int j = 0; j < exp.Length; j++)
@@ -4074,7 +4075,8 @@ namespace System.Reflection.Metadata.Tests
         {
             var reader = GetMetadataReader(Misc.Members);
             var typeC = reader.GetTypeDefinition(
-                reader.TypeDefinitions
+                reader
+                    .TypeDefinitions
                     .Where(t => reader.GetString(reader.GetTypeDefinition(t).Name) == "C")
                     .Single()
             );

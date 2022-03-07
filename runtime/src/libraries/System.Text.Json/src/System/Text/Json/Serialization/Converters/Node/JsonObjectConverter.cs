@@ -21,13 +21,9 @@ namespace System.Text.Json.Serialization.Converters
             ref ReadStack state
         )
         {
-            bool success = JsonNodeConverter.Instance.TryRead(
-                ref reader,
-                typeof(JsonNode),
-                options,
-                ref state,
-                out JsonNode? value
-            );
+            bool success = JsonNodeConverter
+                .Instance
+                .TryRead(ref reader, typeof(JsonNode), options, ref state, out JsonNode? value);
             Debug.Assert(success); // Node converters are not resumable.
 
             Debug.Assert(obj is JsonObject);

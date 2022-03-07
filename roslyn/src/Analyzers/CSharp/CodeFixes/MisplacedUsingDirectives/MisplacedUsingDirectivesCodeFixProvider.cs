@@ -73,10 +73,10 @@ namespace Microsoft.CodeAnalysis.CSharp.MisplacedUsingDirectives
             var compilationUnit = (CompilationUnitSyntax)syntaxRoot;
 
 #if CODE_STYLE
-            var options = document.Project.AnalyzerOptions.GetAnalyzerOptionSet(
-                syntaxRoot.SyntaxTree,
-                cancellationToken
-            );
+            var options = document
+                .Project
+                .AnalyzerOptions
+                .GetAnalyzerOptionSet(syntaxRoot.SyntaxTree, cancellationToken);
 #else
             var options = await document.GetOptionsAsync(cancellationToken).ConfigureAwait(false);
 #endif
@@ -117,10 +117,10 @@ namespace Microsoft.CodeAnalysis.CSharp.MisplacedUsingDirectives
             var compilationUnit = (CompilationUnitSyntax)syntaxRoot;
 
 #if CODE_STYLE
-            var options = document.Project.AnalyzerOptions.GetAnalyzerOptionSet(
-                syntaxRoot.SyntaxTree,
-                cancellationToken
-            );
+            var options = document
+                .Project
+                .AnalyzerOptions
+                .GetAnalyzerOptionSet(syntaxRoot.SyntaxTree, cancellationToken);
 #else
             var options = await document.GetOptionsAsync(cancellationToken).ConfigureAwait(false);
 #endif
@@ -250,10 +250,12 @@ namespace Microsoft.CodeAnalysis.CSharp.MisplacedUsingDirectives
         )
         {
             // Get the compilation unit usings and set them up to format when moved.
-            var usingsToAdd = compilationUnit.Usings.Select(
-                directive =>
-                    directive.WithAdditionalAnnotations(Formatter.Annotation, warningAnnotation)
-            );
+            var usingsToAdd = compilationUnit
+                .Usings
+                .Select(
+                    directive =>
+                        directive.WithAdditionalAnnotations(Formatter.Annotation, warningAnnotation)
+                );
 
             // Remove usings and fix leading trivia for compilation unit.
             var compilationUnitWithoutUsings = compilationUnit.WithUsings(default);
@@ -286,8 +288,9 @@ namespace Microsoft.CodeAnalysis.CSharp.MisplacedUsingDirectives
             SyntaxAnnotation warningAnnotation
         )
         {
-            var namespaceDeclarations =
-                compilationUnit.Members.OfType<BaseNamespaceDeclarationSyntax>();
+            var namespaceDeclarations = compilationUnit
+                .Members
+                .OfType<BaseNamespaceDeclarationSyntax>();
             var namespaceDeclarationMap = namespaceDeclarations.ToDictionary(
                 namespaceDeclaration => namespaceDeclaration,
                 namespaceDeclaration => RemoveUsingsFromNamespace(namespaceDeclaration)
@@ -300,7 +303,8 @@ namespace Microsoft.CodeAnalysis.CSharp.MisplacedUsingDirectives
             );
 
             // Get the using directives from the namespaces and set them up to format when moved.
-            var usingsToAdd = namespaceDeclarationMap.Values
+            var usingsToAdd = namespaceDeclarationMap
+                .Values
                 .SelectMany(result => result.usingsFromNamespace)
                 .Select(
                     directive =>
@@ -313,9 +317,9 @@ namespace Microsoft.CodeAnalysis.CSharp.MisplacedUsingDirectives
             );
 
             // Update the compilation unit with the usings from the namespace declaration.
-            var newUsings = compilationUnitWithReplacedNamespaces.Usings.AddRange(
-                deduplicatedUsings
-            );
+            var newUsings = compilationUnitWithReplacedNamespaces
+                .Usings
+                .AddRange(deduplicatedUsings);
             var compilationUnitWithUsings = compilationUnitWithReplacedNamespaces.WithUsings(
                 newUsings
             );
@@ -342,17 +346,18 @@ namespace Microsoft.CodeAnalysis.CSharp.MisplacedUsingDirectives
             BaseNamespaceDeclarationSyntax usingContainer
         )
         {
-            var namespaceDeclarations =
-                usingContainer.Members.OfType<BaseNamespaceDeclarationSyntax>();
+            var namespaceDeclarations = usingContainer
+                .Members
+                .OfType<BaseNamespaceDeclarationSyntax>();
             var namespaceDeclarationMap = namespaceDeclarations.ToDictionary(
                 namespaceDeclaration => namespaceDeclaration,
                 namespaceDeclaration => RemoveUsingsFromNamespace(namespaceDeclaration)
             );
 
             // Get the using directives from the namespaces.
-            var usingsFromNamespaces = namespaceDeclarationMap.Values.SelectMany(
-                result => result.usingsFromNamespace
-            );
+            var usingsFromNamespaces = namespaceDeclarationMap
+                .Values
+                .SelectMany(result => result.usingsFromNamespace);
             var allUsings = usingContainer.Usings.AsEnumerable().Concat(usingsFromNamespaces);
 
             // Replace the namespace declarations in the compilation with the ones without using directives.

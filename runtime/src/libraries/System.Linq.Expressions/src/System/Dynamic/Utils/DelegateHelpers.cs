@@ -22,10 +22,11 @@ namespace System.Dynamic.Utils
 #if !FEATURE_DYNAMIC_DELEGATE
             return CreateObjectArrayDelegateRefEmit(delegateType, handler);
 #else
-            return Internal.Runtime.Augments.DynamicDelegateAugments.CreateObjectArrayDelegate(
-                delegateType,
-                handler
-            );
+            return Internal
+                .Runtime
+                .Augments
+                .DynamicDelegateAugments
+                .CreateObjectArrayDelegate(delegateType, handler);
 #endif
         }
 

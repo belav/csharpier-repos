@@ -91,10 +91,9 @@ namespace ILCompiler
                 {
                     DefType[] implTypeRuntimeInterfaces = implType.RuntimeInterfaces;
                     int canonicallyMatchingInterfacesFound = 0;
-                    DefType canonicalInterfaceType =
-                        (DefType)declMethod.OwningType.ConvertToCanonForm(
-                            CanonicalFormKind.Specific
-                        );
+                    DefType canonicalInterfaceType = (DefType)declMethod
+                        .OwningType
+                        .ConvertToCanonForm(CanonicalFormKind.Specific);
                     for (int i = 0; i < implTypeRuntimeInterfaces.Length; i++)
                     {
                         DefType runtimeInterface = implTypeRuntimeInterfaces[i];

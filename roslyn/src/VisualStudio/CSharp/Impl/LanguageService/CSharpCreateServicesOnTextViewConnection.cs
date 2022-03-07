@@ -53,10 +53,12 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Snippets
         {
             // Only pre-populate cache if import completion is enabled
             if (
-                this.Workspace.Options.GetOption(
-                    CompletionOptions.Metadata.ShowItemsFromUnimportedNamespaces,
-                    LanguageNames.CSharp
-                ) != true
+                this.Workspace
+                    .Options
+                    .GetOption(
+                        CompletionOptions.Metadata.ShowItemsFromUnimportedNamespaces,
+                        LanguageNames.CSharp
+                    ) != true
             )
                 return Task.CompletedTask;
 

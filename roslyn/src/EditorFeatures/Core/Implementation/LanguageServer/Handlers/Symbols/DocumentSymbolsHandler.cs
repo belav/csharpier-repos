@@ -50,8 +50,10 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             var document = context.Document;
             Contract.ThrowIfNull(document);
 
-            var navBarService =
-                document.Project.LanguageServices.GetRequiredService<INavigationBarItemService>();
+            var navBarService = document
+                .Project
+                .LanguageServices
+                .GetRequiredService<INavigationBarItemService>();
             var navBarItems = await navBarService
                 .GetItemsAsync(document, supportsCodeGeneration: false, cancellationToken)
                 .ConfigureAwait(false);
@@ -64,8 +66,11 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             // https://github.com/dotnet/roslyn/projects/45#card-20033869
             using var _ = ArrayBuilder<object>.GetInstance(out var symbols);
             if (
-                context.ClientCapabilities?.TextDocument?.DocumentSymbol?.HierarchicalDocumentSymbolSupport
-                == true
+                context
+                    .ClientCapabilities
+                    ?.TextDocument
+                    ?.DocumentSymbol
+                    ?.HierarchicalDocumentSymbolSupport == true
             )
             {
                 // only top level ones

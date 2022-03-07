@@ -919,10 +919,22 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
 
         [Export(typeof(EditorFormatDefinition))]
         [ClassificationType(
-            ClassificationTypeNames = Microsoft.CodeAnalysis.Editor.Implementation.Diagnostics.ClassificationTypeDefinitions.UnnecessaryCode
+            ClassificationTypeNames = Microsoft
+                .CodeAnalysis
+                .Editor
+                .Implementation
+                .Diagnostics
+                .ClassificationTypeDefinitions
+                .UnnecessaryCode
         )]
         [Name(
-            Microsoft.CodeAnalysis.Editor.Implementation.Diagnostics.ClassificationTypeDefinitions.UnnecessaryCode
+            Microsoft
+                .CodeAnalysis
+                .Editor
+                .Implementation
+                .Diagnostics
+                .ClassificationTypeDefinitions
+                .UnnecessaryCode
         )]
         [Order(After = Priority.High)]
         [UserVisible(false)]

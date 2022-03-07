@@ -36,7 +36,8 @@ namespace Microsoft.EntityFrameworkCore
             var options =
                 new DbContextOptionsBuilder()
                     .UseInternalServiceProvider(serviceProvider)
-                    .UseInMemoryDatabase(nameof(DatabaseInMemoryTest)).Options;
+                    .UseInMemoryDatabase(nameof(DatabaseInMemoryTest))
+                    .Options;
 
             var customer = new Customer { Id = 42, Name = "Theon" };
 

@@ -1116,7 +1116,8 @@ public class FormsTest : ServerTestBase<ToggleExecutionModeServerFixture<Program
         Browser.True(
             () =>
                 FindRadioInputs()
-                    .First(input => input.GetAttribute("value") == "BestAirline").Selected
+                    .First(input => input.GetAttribute("value") == "BestAirline")
+                    .Selected
         );
         Browser.Equal("BestAirline", () => selectedInputText.Text);
 

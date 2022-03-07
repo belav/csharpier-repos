@@ -121,10 +121,10 @@ namespace Microsoft.CodeAnalysis.FindUsages
                         return service.TryNavigateToSymbol(
                             symbol,
                             project,
-                            project.Solution.Options.WithChangedOption(
-                                NavigationOptions.PreferProvisionalTab,
-                                true
-                            )
+                            project
+                                .Solution
+                                .Options
+                                .WithChangedOption(NavigationOptions.PreferProvisionalTab, true)
                         );
                     }
                 );
@@ -150,8 +150,9 @@ namespace Microsoft.CodeAnalysis.FindUsages
                     return false;
                 }
 
-                var navigationService =
-                    workspace.Services.GetRequiredService<ISymbolNavigationService>();
+                var navigationService = workspace
+                    .Services
+                    .GetRequiredService<ISymbolNavigationService>();
                 return action(symbol, project, navigationService);
             }
 
@@ -174,9 +175,11 @@ namespace Microsoft.CodeAnalysis.FindUsages
                     return default;
                 }
 
-                var project = workspace.CurrentSolution.GetProject(
-                    ProjectId.CreateFromSerialized(Guid.Parse(projectIdGuid), projectDebugName)
-                );
+                var project = workspace
+                    .CurrentSolution
+                    .GetProject(
+                        ProjectId.CreateFromSerialized(Guid.Parse(projectIdGuid), projectDebugName)
+                    );
                 if (project == null)
                     return default;
 

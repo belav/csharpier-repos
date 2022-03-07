@@ -372,10 +372,9 @@ namespace System.Web.Http.Owin
                 {
                     if (!request.Headers.TryAddWithoutValidation(header.Key, header.Value))
                     {
-                        bool success = requestContent.Headers.TryAddWithoutValidation(
-                            header.Key,
-                            header.Value
-                        );
+                        bool success = requestContent
+                            .Headers
+                            .TryAddWithoutValidation(header.Key, header.Value);
                         Contract.Assert(
                             success,
                             "Every header can be added either to the request headers or to the content headers"
@@ -416,10 +415,10 @@ namespace System.Web.Http.Owin
             {
                 bool routingFailure;
                 if (
-                    request.Properties.TryGetValue<bool>(
-                        HttpPropertyKeys.NoRouteMatched,
-                        out routingFailure
-                    ) && routingFailure
+                    request
+                        .Properties
+                        .TryGetValue<bool>(HttpPropertyKeys.NoRouteMatched, out routingFailure)
+                    && routingFailure
                 )
                 {
                     return true;

@@ -68,9 +68,10 @@ namespace System.Tests
             );
             if (
                 OperatingSystem.IsWindows()
-                && System.Tests.SetEnvironmentVariable.IsSupportedTarget(
-                    EnvironmentVariableTarget.User
-                )
+                && System
+                    .Tests
+                    .SetEnvironmentVariable
+                    .IsSupportedTarget(EnvironmentVariableTarget.User)
             )
             {
                 AssertExtensions.Throws<ArgumentException>(

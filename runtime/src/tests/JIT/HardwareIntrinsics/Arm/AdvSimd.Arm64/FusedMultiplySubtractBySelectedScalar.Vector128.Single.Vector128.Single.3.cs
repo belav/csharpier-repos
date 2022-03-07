@@ -246,12 +246,9 @@ namespace JIT.HardwareIntrinsics.Arm
                 SimpleTernaryOpTest__FusedMultiplySubtractBySelectedScalar_Vector128_Single_Vector128_Single_3 testClass
             )
             {
-                var result = AdvSimd.Arm64.FusedMultiplySubtractBySelectedScalar(
-                    _fld1,
-                    _fld2,
-                    _fld3,
-                    3
-                );
+                var result = AdvSimd
+                    .Arm64
+                    .FusedMultiplySubtractBySelectedScalar(_fld1, _fld2, _fld3, 3);
 
                 Unsafe.Write(testClass._dataTable.outArrayPtr, result);
                 testClass.ValidateResult(_fld1, _fld2, _fld3, testClass._dataTable.outArrayPtr);
@@ -265,12 +262,14 @@ namespace JIT.HardwareIntrinsics.Arm
                 fixed (Vector128<Single>* pFld2 = &_fld2)
                 fixed (Vector128<Single>* pFld3 = &_fld3)
                 {
-                    var result = AdvSimd.Arm64.FusedMultiplySubtractBySelectedScalar(
-                        AdvSimd.LoadVector128((Single*)(pFld1)),
-                        AdvSimd.LoadVector128((Single*)(pFld2)),
-                        AdvSimd.LoadVector128((Single*)(pFld3)),
-                        3
-                    );
+                    var result = AdvSimd
+                        .Arm64
+                        .FusedMultiplySubtractBySelectedScalar(
+                            AdvSimd.LoadVector128((Single*)(pFld1)),
+                            AdvSimd.LoadVector128((Single*)(pFld2)),
+                            AdvSimd.LoadVector128((Single*)(pFld3)),
+                            3
+                        );
 
                     Unsafe.Write(testClass._dataTable.outArrayPtr, result);
                     testClass.ValidateResult(_fld1, _fld2, _fld3, testClass._dataTable.outArrayPtr);
@@ -396,12 +395,14 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunBasicScenario_UnsafeRead));
 
-            var result = AdvSimd.Arm64.FusedMultiplySubtractBySelectedScalar(
-                Unsafe.Read<Vector128<Single>>(_dataTable.inArray1Ptr),
-                Unsafe.Read<Vector128<Single>>(_dataTable.inArray2Ptr),
-                Unsafe.Read<Vector128<Single>>(_dataTable.inArray3Ptr),
-                3
-            );
+            var result = AdvSimd
+                .Arm64
+                .FusedMultiplySubtractBySelectedScalar(
+                    Unsafe.Read<Vector128<Single>>(_dataTable.inArray1Ptr),
+                    Unsafe.Read<Vector128<Single>>(_dataTable.inArray2Ptr),
+                    Unsafe.Read<Vector128<Single>>(_dataTable.inArray3Ptr),
+                    3
+                );
 
             Unsafe.Write(_dataTable.outArrayPtr, result);
             ValidateResult(
@@ -416,12 +417,14 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunBasicScenario_Load));
 
-            var result = AdvSimd.Arm64.FusedMultiplySubtractBySelectedScalar(
-                AdvSimd.LoadVector128((Single*)(_dataTable.inArray1Ptr)),
-                AdvSimd.LoadVector128((Single*)(_dataTable.inArray2Ptr)),
-                AdvSimd.LoadVector128((Single*)(_dataTable.inArray3Ptr)),
-                3
-            );
+            var result = AdvSimd
+                .Arm64
+                .FusedMultiplySubtractBySelectedScalar(
+                    AdvSimd.LoadVector128((Single*)(_dataTable.inArray1Ptr)),
+                    AdvSimd.LoadVector128((Single*)(_dataTable.inArray2Ptr)),
+                    AdvSimd.LoadVector128((Single*)(_dataTable.inArray3Ptr)),
+                    3
+                );
 
             Unsafe.Write(_dataTable.outArrayPtr, result);
             ValidateResult(
@@ -506,12 +509,9 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunClsVarScenario));
 
-            var result = AdvSimd.Arm64.FusedMultiplySubtractBySelectedScalar(
-                _clsVar1,
-                _clsVar2,
-                _clsVar3,
-                3
-            );
+            var result = AdvSimd
+                .Arm64
+                .FusedMultiplySubtractBySelectedScalar(_clsVar1, _clsVar2, _clsVar3, 3);
 
             Unsafe.Write(_dataTable.outArrayPtr, result);
             ValidateResult(_clsVar1, _clsVar2, _clsVar3, _dataTable.outArrayPtr);
@@ -525,12 +525,14 @@ namespace JIT.HardwareIntrinsics.Arm
             fixed (Vector128<Single>* pClsVar2 = &_clsVar2)
             fixed (Vector128<Single>* pClsVar3 = &_clsVar3)
             {
-                var result = AdvSimd.Arm64.FusedMultiplySubtractBySelectedScalar(
-                    AdvSimd.LoadVector128((Single*)(pClsVar1)),
-                    AdvSimd.LoadVector128((Single*)(pClsVar2)),
-                    AdvSimd.LoadVector128((Single*)(pClsVar3)),
-                    3
-                );
+                var result = AdvSimd
+                    .Arm64
+                    .FusedMultiplySubtractBySelectedScalar(
+                        AdvSimd.LoadVector128((Single*)(pClsVar1)),
+                        AdvSimd.LoadVector128((Single*)(pClsVar2)),
+                        AdvSimd.LoadVector128((Single*)(pClsVar3)),
+                        3
+                    );
 
                 Unsafe.Write(_dataTable.outArrayPtr, result);
                 ValidateResult(_clsVar1, _clsVar2, _clsVar3, _dataTable.outArrayPtr);
@@ -569,12 +571,9 @@ namespace JIT.HardwareIntrinsics.Arm
 
             var test =
                 new SimpleTernaryOpTest__FusedMultiplySubtractBySelectedScalar_Vector128_Single_Vector128_Single_3();
-            var result = AdvSimd.Arm64.FusedMultiplySubtractBySelectedScalar(
-                test._fld1,
-                test._fld2,
-                test._fld3,
-                3
-            );
+            var result = AdvSimd
+                .Arm64
+                .FusedMultiplySubtractBySelectedScalar(test._fld1, test._fld2, test._fld3, 3);
 
             Unsafe.Write(_dataTable.outArrayPtr, result);
             ValidateResult(test._fld1, test._fld2, test._fld3, _dataTable.outArrayPtr);
@@ -591,12 +590,14 @@ namespace JIT.HardwareIntrinsics.Arm
             fixed (Vector128<Single>* pFld2 = &test._fld2)
             fixed (Vector128<Single>* pFld3 = &test._fld3)
             {
-                var result = AdvSimd.Arm64.FusedMultiplySubtractBySelectedScalar(
-                    AdvSimd.LoadVector128((Single*)(pFld1)),
-                    AdvSimd.LoadVector128((Single*)(pFld2)),
-                    AdvSimd.LoadVector128((Single*)(pFld3)),
-                    3
-                );
+                var result = AdvSimd
+                    .Arm64
+                    .FusedMultiplySubtractBySelectedScalar(
+                        AdvSimd.LoadVector128((Single*)(pFld1)),
+                        AdvSimd.LoadVector128((Single*)(pFld2)),
+                        AdvSimd.LoadVector128((Single*)(pFld3)),
+                        3
+                    );
 
                 Unsafe.Write(_dataTable.outArrayPtr, result);
                 ValidateResult(test._fld1, test._fld2, test._fld3, _dataTable.outArrayPtr);
@@ -607,12 +608,9 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunClassFldScenario));
 
-            var result = AdvSimd.Arm64.FusedMultiplySubtractBySelectedScalar(
-                _fld1,
-                _fld2,
-                _fld3,
-                3
-            );
+            var result = AdvSimd
+                .Arm64
+                .FusedMultiplySubtractBySelectedScalar(_fld1, _fld2, _fld3, 3);
 
             Unsafe.Write(_dataTable.outArrayPtr, result);
             ValidateResult(_fld1, _fld2, _fld3, _dataTable.outArrayPtr);
@@ -626,12 +624,14 @@ namespace JIT.HardwareIntrinsics.Arm
             fixed (Vector128<Single>* pFld2 = &_fld2)
             fixed (Vector128<Single>* pFld3 = &_fld3)
             {
-                var result = AdvSimd.Arm64.FusedMultiplySubtractBySelectedScalar(
-                    AdvSimd.LoadVector128((Single*)(pFld1)),
-                    AdvSimd.LoadVector128((Single*)(pFld2)),
-                    AdvSimd.LoadVector128((Single*)(pFld3)),
-                    3
-                );
+                var result = AdvSimd
+                    .Arm64
+                    .FusedMultiplySubtractBySelectedScalar(
+                        AdvSimd.LoadVector128((Single*)(pFld1)),
+                        AdvSimd.LoadVector128((Single*)(pFld2)),
+                        AdvSimd.LoadVector128((Single*)(pFld3)),
+                        3
+                    );
 
                 Unsafe.Write(_dataTable.outArrayPtr, result);
                 ValidateResult(_fld1, _fld2, _fld3, _dataTable.outArrayPtr);
@@ -643,12 +643,9 @@ namespace JIT.HardwareIntrinsics.Arm
             TestLibrary.TestFramework.BeginScenario(nameof(RunStructLclFldScenario));
 
             var test = TestStruct.Create();
-            var result = AdvSimd.Arm64.FusedMultiplySubtractBySelectedScalar(
-                test._fld1,
-                test._fld2,
-                test._fld3,
-                3
-            );
+            var result = AdvSimd
+                .Arm64
+                .FusedMultiplySubtractBySelectedScalar(test._fld1, test._fld2, test._fld3, 3);
 
             Unsafe.Write(_dataTable.outArrayPtr, result);
             ValidateResult(test._fld1, test._fld2, test._fld3, _dataTable.outArrayPtr);
@@ -659,12 +656,14 @@ namespace JIT.HardwareIntrinsics.Arm
             TestLibrary.TestFramework.BeginScenario(nameof(RunStructLclFldScenario_Load));
 
             var test = TestStruct.Create();
-            var result = AdvSimd.Arm64.FusedMultiplySubtractBySelectedScalar(
-                AdvSimd.LoadVector128((Single*)(&test._fld1)),
-                AdvSimd.LoadVector128((Single*)(&test._fld2)),
-                AdvSimd.LoadVector128((Single*)(&test._fld3)),
-                3
-            );
+            var result = AdvSimd
+                .Arm64
+                .FusedMultiplySubtractBySelectedScalar(
+                    AdvSimd.LoadVector128((Single*)(&test._fld1)),
+                    AdvSimd.LoadVector128((Single*)(&test._fld2)),
+                    AdvSimd.LoadVector128((Single*)(&test._fld3)),
+                    3
+                );
 
             Unsafe.Write(_dataTable.outArrayPtr, result);
             ValidateResult(test._fld1, test._fld2, test._fld3, _dataTable.outArrayPtr);
@@ -794,21 +793,23 @@ namespace JIT.HardwareIntrinsics.Arm
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation(
-                    $"{nameof(AdvSimd.Arm64)}.{nameof(AdvSimd.Arm64.FusedMultiplySubtractBySelectedScalar)}<Single>(Vector128<Single>, Vector128<Single>, Vector128<Single>): {method} failed:"
-                );
-                TestLibrary.TestFramework.LogInformation(
-                    $" firstOp: ({string.Join(", ", firstOp)})"
-                );
-                TestLibrary.TestFramework.LogInformation(
-                    $"secondOp: ({string.Join(", ", secondOp)})"
-                );
-                TestLibrary.TestFramework.LogInformation(
-                    $" thirdOp: ({string.Join(", ", thirdOp)})"
-                );
-                TestLibrary.TestFramework.LogInformation(
-                    $"  result: ({string.Join(", ", result)})"
-                );
+                TestLibrary
+                    .TestFramework
+                    .LogInformation(
+                        $"{nameof(AdvSimd.Arm64)}.{nameof(AdvSimd.Arm64.FusedMultiplySubtractBySelectedScalar)}<Single>(Vector128<Single>, Vector128<Single>, Vector128<Single>): {method} failed:"
+                    );
+                TestLibrary
+                    .TestFramework
+                    .LogInformation($" firstOp: ({string.Join(", ", firstOp)})");
+                TestLibrary
+                    .TestFramework
+                    .LogInformation($"secondOp: ({string.Join(", ", secondOp)})");
+                TestLibrary
+                    .TestFramework
+                    .LogInformation($" thirdOp: ({string.Join(", ", thirdOp)})");
+                TestLibrary
+                    .TestFramework
+                    .LogInformation($"  result: ({string.Join(", ", result)})");
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;

@@ -571,11 +571,13 @@ namespace System.Web.Http.ApiExplorer
         {
             HttpConfiguration config = new HttpConfiguration();
             config.MapHttpAttributeRoutes();
-            config.Routes.MapHttpRoute(
-                "Default",
-                "api/{controller}/{id}",
-                new { id = RouteParameter.Optional }
-            );
+            config
+                .Routes
+                .MapHttpRoute(
+                    "Default",
+                    "api/{controller}/{id}",
+                    new { id = RouteParameter.Optional }
+                );
 
             DefaultHttpControllerSelector controllerSelector =
                 ApiExplorerHelper.GetStrictControllerSelector(config, controllerType);
@@ -590,11 +592,9 @@ namespace System.Web.Http.ApiExplorer
         public void NoDescription_OnAttributeRoutedAction_UsingStandardControllerRoute()
         {
             HttpConfiguration config = new HttpConfiguration();
-            var route = config.Routes.MapHttpRoute(
-                "Default",
-                "api/someController",
-                new { controller = "DefaultRoute" }
-            );
+            var route = config
+                .Routes
+                .MapHttpRoute("Default", "api/someController", new { controller = "DefaultRoute" });
             config.MapHttpAttributeRoutes();
 
             DefaultHttpControllerSelector controllerSelector =
@@ -613,11 +613,13 @@ namespace System.Web.Http.ApiExplorer
         public void NoDescription_OnAttributeRoutedAction_UsingStandardRoute()
         {
             HttpConfiguration config = new HttpConfiguration();
-            var route = config.Routes.MapHttpRoute(
-                "Default",
-                "api/someAction/{id}",
-                new { controller = "Attributed", action = "Get" }
-            );
+            var route = config
+                .Routes
+                .MapHttpRoute(
+                    "Default",
+                    "api/someAction/{id}",
+                    new { controller = "Attributed", action = "Get" }
+                );
             config.MapHttpAttributeRoutes();
 
             DefaultHttpControllerSelector controllerSelector =

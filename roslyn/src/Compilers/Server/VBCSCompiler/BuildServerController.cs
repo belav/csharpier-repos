@@ -146,10 +146,12 @@ namespace Microsoft.CodeAnalysis.CompilerServer
                     return CommonCompiler.Failed;
                 }
 
-                compilerServerHost.Logger.Log(
-                    "Keep alive timeout is: {0} milliseconds.",
-                    keepAlive?.TotalMilliseconds ?? 0
-                );
+                compilerServerHost
+                    .Logger
+                    .Log(
+                        "Keep alive timeout is: {0} milliseconds.",
+                        keepAlive?.TotalMilliseconds ?? 0
+                    );
                 FatalError.Handler = FailFast.OnFatalException;
 
                 var dispatcher = new ServerDispatcher(

@@ -145,10 +145,9 @@ namespace CoreXml.Test.XLinq
                         );
                         filteredReader.MoveToAttribute(i);
                         TestLog.Compare(
-                            SAEqComparer.Instance.Equals(
-                                filteredReader.GetSAData(),
-                                filteredAttrs[i]
-                            ),
+                            SAEqComparer
+                                .Instance
+                                .Equals(filteredReader.GetSAData(), filteredAttrs[i]),
                             "Move to attribute int - wrong position"
                         );
                         VerifyNextFirstAttribute(
@@ -347,10 +346,12 @@ namespace CoreXml.Test.XLinq
                 "Move to next attribute :: " + message
             );
             TestLog.Compare(
-                SAEqComparer.Instance.Equals(
-                    shouldNAWork ? filteredAttrs[attrPosition + 1] : orig,
-                    filteredReader.GetSAData()
-                ),
+                SAEqComparer
+                    .Instance
+                    .Equals(
+                        shouldNAWork ? filteredAttrs[attrPosition + 1] : orig,
+                        filteredReader.GetSAData()
+                    ),
                 "MoveToNextAttribute moved to bad position :: " + message
             );
             // MoveToFirstAttribute works OK

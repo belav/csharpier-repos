@@ -48,7 +48,8 @@ namespace Microsoft.CodeAnalysis.UpgradeProject
             var result = new List<CodeAction>();
             var language = project.Language;
 
-            var upgradeableProjects = solution.Projects
+            var upgradeableProjects = solution
+                .Projects
                 .Where(p => CanUpgrade(p, language, newVersion))
                 .AsImmutable();
 

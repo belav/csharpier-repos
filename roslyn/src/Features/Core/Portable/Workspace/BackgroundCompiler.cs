@@ -33,12 +33,14 @@ namespace Microsoft.CodeAnalysis.Host
         public BackgroundCompiler(Workspace workspace)
         {
             _workspace = workspace;
-            _documentTrackingService =
-                _workspace.Services.GetRequiredService<IDocumentTrackingService>();
+            _documentTrackingService = _workspace
+                .Services
+                .GetRequiredService<IDocumentTrackingService>();
 
             // make a scheduler that runs on the thread pool
-            var listenerProvider =
-                workspace.Services.GetRequiredService<IWorkspaceAsynchronousOperationListenerProvider>();
+            var listenerProvider = workspace
+                .Services
+                .GetRequiredService<IWorkspaceAsynchronousOperationListenerProvider>();
             _taskQueue = new TaskQueue(listenerProvider.GetListener(), TaskScheduler.Default);
 
             _cancellationSource = new CancellationTokenSource();

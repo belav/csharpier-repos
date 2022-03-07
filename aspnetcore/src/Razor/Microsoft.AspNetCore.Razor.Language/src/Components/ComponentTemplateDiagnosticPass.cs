@@ -31,9 +31,12 @@ internal class ComponentTemplateDiagnosticPass
         for (var i = 0; i < visitor.Candidates.Count; i++)
         {
             var candidate = visitor.Candidates[i];
-            candidate.Parent.Diagnostics.Add(
-                ComponentDiagnosticFactory.Create_TemplateInvalidLocation(candidate.Node.Source)
-            );
+            candidate
+                .Parent
+                .Diagnostics
+                .Add(
+                    ComponentDiagnosticFactory.Create_TemplateInvalidLocation(candidate.Node.Source)
+                );
 
             // Remove the offending node since we don't know how to render it. This means that the user won't get C#
             // completion at this location, which is fine because it's inside an HTML attribute.

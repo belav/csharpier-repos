@@ -38,10 +38,12 @@ namespace System.Collections.Generic
         [Fact]
         public void IsCorrectType()
         {
-            Assert.Type.HasProperties(
-                typeof(DictionaryExtensions),
-                TypeAssert.TypeProperties.IsStatic | TypeAssert.TypeProperties.IsClass
-            );
+            Assert
+                .Type
+                .HasProperties(
+                    typeof(DictionaryExtensions),
+                    TypeAssert.TypeProperties.IsStatic | TypeAssert.TypeProperties.IsClass
+                );
         }
 
         [Fact]

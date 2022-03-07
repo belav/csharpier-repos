@@ -386,15 +386,17 @@ namespace System.IO
 
                 using (DisableMediaInsertionPrompt.Create())
                 {
-                    handle = Interop.Kernel32.CreateFile(
-                        fullPath,
-                        (int)rights,
-                        share,
-                        &secAttrs,
-                        mode,
-                        flagsAndAttributes,
-                        IntPtr.Zero
-                    );
+                    handle = Interop
+                        .Kernel32
+                        .CreateFile(
+                            fullPath,
+                            (int)rights,
+                            share,
+                            &secAttrs,
+                            mode,
+                            flagsAndAttributes,
+                            IntPtr.Zero
+                        );
                     ValidateFileHandle(handle, fullPath);
                 }
             }

@@ -82,10 +82,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Storage
         private CacheContainerKey? GetContainerKey(ProjectKey projectKey, Project? project)
         {
             return project != null
-              ? s_projectToContainerKeyCache.GetValue(
-                    project.State,
-                    _projectToContainerKeyCacheCallback
-                ).ProjectContainerKey
+              ? s_projectToContainerKeyCache
+                .GetValue(project.State, _projectToContainerKeyCacheCallback)
+                .ProjectContainerKey
               : ProjectContainerKeyCache.CreateProjectContainerKey(
                     this.SolutionFilePath,
                     projectKey

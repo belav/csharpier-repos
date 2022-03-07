@@ -670,9 +670,11 @@ namespace System.Diagnostics.Tests
                             {
                                 Assert.NotEqual(
                                     default,
-                                    activity.Tags.FirstOrDefault(
-                                        (p) => pair.Key == p.Key && pair.Value == pair.Value
-                                    )
+                                    activity
+                                        .Tags
+                                        .FirstOrDefault(
+                                            (p) => pair.Key == p.Key && pair.Value == pair.Value
+                                        )
                                 );
                             }
 

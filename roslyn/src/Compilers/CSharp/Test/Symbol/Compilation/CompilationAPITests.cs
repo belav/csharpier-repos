@@ -39,9 +39,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             SyntaxTree tree,
             params (string, ReportDiagnostic)[] options
         ) =>
-            TestOptions.DebugDll.WithSyntaxTreeOptionsProvider(
-                new TestSyntaxTreeOptionsProvider(tree, options)
-            );
+            TestOptions
+                .DebugDll
+                .WithSyntaxTreeOptionsProvider(new TestSyntaxTreeOptionsProvider(tree, options));
 
         [Fact]
         public void TreeDiagnosticOptionsDoNotAffectTreeDiagnostics()
@@ -71,9 +71,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void PerTreeVsGlobalSuppress()
         {
             var tree = SyntaxFactory.ParseSyntaxTree("class C { long _f = 0l;}");
-            var options = TestOptions.DebugDll.WithGeneralDiagnosticOption(
-                ReportDiagnostic.Suppress
-            );
+            var options = TestOptions
+                .DebugDll
+                .WithGeneralDiagnosticOption(ReportDiagnostic.Suppress);
             var comp = CreateCompilation(tree, options: options);
             comp.VerifyDiagnostics();
 
@@ -199,12 +199,14 @@ long _f = 0l;
         {
             var tree = SyntaxFactory.ParseSyntaxTree(@" class C { long _f = 0l; }");
             var newTree = SyntaxFactory.ParseSyntaxTree(@" class D { long _f = 0l; }");
-            var options = TestOptions.DebugDll.WithSyntaxTreeOptionsProvider(
-                new TestSyntaxTreeOptionsProvider(
-                    (tree, new[] { ("CS0078", ReportDiagnostic.Suppress) }),
-                    (newTree, new[] { ("CS0078", ReportDiagnostic.Error) })
-                )
-            );
+            var options = TestOptions
+                .DebugDll
+                .WithSyntaxTreeOptionsProvider(
+                    new TestSyntaxTreeOptionsProvider(
+                        (tree, new[] { ("CS0078", ReportDiagnostic.Suppress) }),
+                        (newTree, new[] { ("CS0078", ReportDiagnostic.Error) })
+                    )
+                );
 
             var comp = CreateCompilation(new[] { tree, newTree }, options: options);
             comp.VerifyDiagnostics(
@@ -232,11 +234,13 @@ long _f = 0l;
             var tree = SyntaxFactory.ParseSyntaxTree(@" class C { long _f = 0l; }");
 
             // Default options have case insensitivity
-            var options = TestOptions.DebugDll.WithSyntaxTreeOptionsProvider(
-                new TestSyntaxTreeOptionsProvider(
-                    (tree, new[] { ("cs0078", ReportDiagnostic.Suppress) })
-                )
-            );
+            var options = TestOptions
+                .DebugDll
+                .WithSyntaxTreeOptionsProvider(
+                    new TestSyntaxTreeOptionsProvider(
+                        (tree, new[] { ("cs0078", ReportDiagnostic.Suppress) })
+                    )
+                );
 
             CreateCompilation(tree, options: options)
                 .VerifyDiagnostics(
@@ -247,13 +251,15 @@ long _f = 0l;
                         .WithLocation(1, 17)
                 );
 
-            options = TestOptions.DebugDll.WithSyntaxTreeOptionsProvider(
-                new TestSyntaxTreeOptionsProvider(
-                    StringComparer.Ordinal,
-                    globalOption: default,
-                    (tree, new[] { ("cs0078", ReportDiagnostic.Suppress) })
-                )
-            );
+            options = TestOptions
+                .DebugDll
+                .WithSyntaxTreeOptionsProvider(
+                    new TestSyntaxTreeOptionsProvider(
+                        StringComparer.Ordinal,
+                        globalOption: default,
+                        (tree, new[] { ("cs0078", ReportDiagnostic.Suppress) })
+                    )
+                );
 
             CreateCompilation(tree, options: options)
                 .VerifyDiagnostics(
@@ -520,28 +526,30 @@ namespace A.B {
 
             EmitResult result = c.Emit(stream, options: options);
 
-            result.Diagnostics.Verify(
-                // error CS2042: Invalid debug information format: -1
-                Diagnostic(ErrorCode.ERR_InvalidDebugInformationFormat)
-                    .WithArguments("-1")
-                    .WithLocation(1, 1),
-                // error CS2041: Invalid output name: Name cannot start with whitespace.
-                Diagnostic(ErrorCode.ERR_InvalidOutputName)
-                    .WithArguments("Name cannot start with whitespace.")
-                    .WithLocation(1, 1),
-                // error CS2024: Invalid file section alignment '513'
-                Diagnostic(ErrorCode.ERR_InvalidFileAlignment)
-                    .WithArguments("513")
-                    .WithLocation(1, 1),
-                // error CS1773: Invalid version 1000000.-1000000 for /subsystemversion. The version must be 6.02 or greater for ARM or AppContainerExe, and 4.00 or greater otherwise
-                Diagnostic(ErrorCode.ERR_InvalidSubsystemVersion)
-                    .WithArguments("1000000.-1000000")
-                    .WithLocation(1, 1),
-                // error CS8113: Invalid hash algorithm name: 'invalid hash algorithm name'
-                Diagnostic(ErrorCode.ERR_InvalidHashAlgorithmName)
-                    .WithArguments("invalid hash algorithm name")
-                    .WithLocation(1, 1)
-            );
+            result
+                .Diagnostics
+                .Verify(
+                    // error CS2042: Invalid debug information format: -1
+                    Diagnostic(ErrorCode.ERR_InvalidDebugInformationFormat)
+                        .WithArguments("-1")
+                        .WithLocation(1, 1),
+                    // error CS2041: Invalid output name: Name cannot start with whitespace.
+                    Diagnostic(ErrorCode.ERR_InvalidOutputName)
+                        .WithArguments("Name cannot start with whitespace.")
+                        .WithLocation(1, 1),
+                    // error CS2024: Invalid file section alignment '513'
+                    Diagnostic(ErrorCode.ERR_InvalidFileAlignment)
+                        .WithArguments("513")
+                        .WithLocation(1, 1),
+                    // error CS1773: Invalid version 1000000.-1000000 for /subsystemversion. The version must be 6.02 or greater for ARM or AppContainerExe, and 4.00 or greater otherwise
+                    Diagnostic(ErrorCode.ERR_InvalidSubsystemVersion)
+                        .WithArguments("1000000.-1000000")
+                        .WithLocation(1, 1),
+                    // error CS8113: Invalid hash algorithm name: 'invalid hash algorithm name'
+                    Diagnostic(ErrorCode.ERR_InvalidHashAlgorithmName)
+                        .WithArguments("invalid hash algorithm name")
+                        .WithLocation(1, 1)
+                );
 
             Assert.False(result.Success);
         }
@@ -596,9 +604,9 @@ namespace A.B {
                     comp.Emit(
                         peStream: new MemoryStream(),
                         pdbStream: new MemoryStream(),
-                        options: EmitOptions.Default.WithDebugInformationFormat(
-                            DebugInformationFormat.Embedded
-                        )
+                        options: EmitOptions
+                            .Default
+                            .WithDebugInformationFormat(DebugInformationFormat.Embedded)
                     )
             );
 
@@ -608,9 +616,9 @@ namespace A.B {
                     comp.Emit(
                         peStream: new MemoryStream(),
                         pdbStream: new MemoryStream(),
-                        options: EmitOptions.Default.WithDebugInformationFormat(
-                            DebugInformationFormat.PortablePdb
-                        ),
+                        options: EmitOptions
+                            .Default
+                            .WithDebugInformationFormat(DebugInformationFormat.PortablePdb),
                         sourceLinkStream: new TestStream(
                             canRead: false,
                             canWrite: true,
@@ -636,9 +644,9 @@ namespace A.B {
                     comp.Emit(
                         peStream: new MemoryStream(),
                         pdbStream: null,
-                        options: EmitOptions.Default.WithDebugInformationFormat(
-                            DebugInformationFormat.PortablePdb
-                        ),
+                        options: EmitOptions
+                            .Default
+                            .WithDebugInformationFormat(DebugInformationFormat.PortablePdb),
                         embeddedTexts: new[] { EmbeddedText.FromStream("_", new MemoryStream()) }
                     )
             );
@@ -821,15 +829,17 @@ namespace A.B {
 
             var c = CreateCompilationWithMscorlib45(
                 new[] { t1, t2 },
-                options: TestOptions.ReleaseDll.WithMetadataReferenceResolver(
-                    new TestMetadataReferenceResolver(
-                        files: new Dictionary<string, PortableExecutableReference>()
-                        {
-                            { @"a.dll", Net451.MicrosoftCSharp },
-                            { @"b.dll", Net451.MicrosoftVisualBasic },
-                        }
+                options: TestOptions
+                    .ReleaseDll
+                    .WithMetadataReferenceResolver(
+                        new TestMetadataReferenceResolver(
+                            files: new Dictionary<string, PortableExecutableReference>()
+                            {
+                                { @"a.dll", Net451.MicrosoftCSharp },
+                                { @"b.dll", Net451.MicrosoftVisualBasic },
+                            }
+                        )
                     )
-                )
             );
 
             c.VerifyDiagnostics();
@@ -2079,7 +2089,8 @@ class A
             var compilation = CreateCompilation(source, options: TestOptions.ReleaseExe);
             compilation.VerifyDiagnostics();
 
-            var mainMethod = compilation.GlobalNamespace
+            var mainMethod = compilation
+                .GlobalNamespace
                 .GetMember<NamedTypeSymbol>("A")
                 .GetMember<MethodSymbol>("Main");
 
@@ -2238,9 +2249,9 @@ class A
             Assert.Same(firstCompilation.ObjectType, secondCompilation.ObjectType);
 
             Assert.Null(
-                new CSharpScriptCompilationInfo(null, null, null).WithPreviousScriptCompilation(
-                    firstCompilation
-                ).ReturnTypeOpt
+                new CSharpScriptCompilationInfo(null, null, null)
+                    .WithPreviousScriptCompilation(firstCompilation)
+                    .ReturnTypeOpt
             );
         }
 
@@ -2292,13 +2303,15 @@ class A
 
             var entryPoint = compilation.GetEntryPointAndDiagnostics(default(CancellationToken));
             Assert.Equal(entryPoint.MethodSymbol, scriptMethod);
-            entryPoint.Diagnostics.Verify(
-                // (4,17): warning CS7022: The entry point of the program is global script code; ignoring 'A.Main()' entry point.
-                //     static void Main() { }
-                Diagnostic(ErrorCode.WRN_MainIgnored, "Main")
-                    .WithArguments("A.Main()")
-                    .WithLocation(4, 17)
-            );
+            entryPoint
+                .Diagnostics
+                .Verify(
+                    // (4,17): warning CS7022: The entry point of the program is global script code; ignoring 'A.Main()' entry point.
+                    //     static void Main() { }
+                    Diagnostic(ErrorCode.WRN_MainIgnored, "Main")
+                        .WithArguments("A.Main()")
+                        .WithLocation(4, 17)
+                );
         }
 
         [Fact]
@@ -2352,13 +2365,15 @@ class A
 
             var entryPoint = compilation.GetEntryPointAndDiagnostics(default(CancellationToken));
             Assert.Equal(entryPoint.MethodSymbol, scriptMethod);
-            entryPoint.Diagnostics.Verify(
-                // (4,17): warning CS7022: The entry point of the program is global script code; ignoring 'A.Main()' entry point.
-                //     static void Main() { }
-                Diagnostic(ErrorCode.WRN_MainIgnored, "Main")
-                    .WithArguments("A.Main()")
-                    .WithLocation(4, 17)
-            );
+            entryPoint
+                .Diagnostics
+                .Verify(
+                    // (4,17): warning CS7022: The entry point of the program is global script code; ignoring 'A.Main()' entry point.
+                    //     static void Main() { }
+                    Diagnostic(ErrorCode.WRN_MainIgnored, "Main")
+                        .WithArguments("A.Main()")
+                        .WithLocation(4, 17)
+                );
         }
 
         [Fact]
@@ -2382,7 +2397,8 @@ class B
             );
             compilation.VerifyDiagnostics();
 
-            var mainMethod = compilation.GlobalNamespace
+            var mainMethod = compilation
+                .GlobalNamespace
                 .GetMember<NamedTypeSymbol>("B")
                 .GetMember<MethodSymbol>("Main");
 
@@ -2540,17 +2556,17 @@ public class TestClass
             var c1 = CSharpCompilation.Create("c", options: TestOptions.ReleaseDll);
 
             var c2 = c1.WithOptions(
-                TestOptions.ReleaseDll.WithMetadataReferenceResolver(
-                    new TestMetadataReferenceResolver()
-                )
+                TestOptions
+                    .ReleaseDll
+                    .WithMetadataReferenceResolver(new TestMetadataReferenceResolver())
             );
 
             Assert.False(c1.ReferenceManagerEquals(c2));
 
             var c3 = c1.WithOptions(
-                TestOptions.ReleaseDll.WithMetadataReferenceResolver(
-                    c1.Options.MetadataReferenceResolver
-                )
+                TestOptions
+                    .ReleaseDll
+                    .WithMetadataReferenceResolver(c1.Options.MetadataReferenceResolver)
             );
             Assert.True(c1.ReferenceManagerEquals(c3));
         }
@@ -2877,9 +2893,9 @@ class C { }",
             var compilation = CreateEmptyCompilation(
                 new[] { Parse("") },
                 references,
-                options: TestOptions.ReleaseDll.WithAssemblyIdentityComparer(
-                    DesktopAssemblyIdentityComparer.Default
-                )
+                options: TestOptions
+                    .ReleaseDll
+                    .WithAssemblyIdentityComparer(DesktopAssemblyIdentityComparer.Default)
             );
 
             compilation.VerifyDiagnostics(
@@ -2889,8 +2905,10 @@ class C { }",
             );
 
             var appConfig = new MemoryStream(
-                Encoding.UTF8.GetBytes(
-                    @"<?xml version=""1.0"" encoding=""utf-8"" ?>
+                Encoding
+                    .UTF8
+                    .GetBytes(
+                        @"<?xml version=""1.0"" encoding=""utf-8"" ?>
 <configuration>
   <runtime>
     <assemblyBinding xmlns=""urn:schemas-microsoft-com:asm.v1"">
@@ -2898,7 +2916,7 @@ class C { }",
     </assemblyBinding>
   </runtime>
 </configuration>"
-                )
+                    )
             );
 
             var comparer = DesktopAssemblyIdentityComparer.LoadFromXml(appConfig);
@@ -2945,9 +2963,9 @@ public class C { public static FrameworkName Goo() { return null; }}";
             var c1 = CreateEmptyCompilation(
                 new[] { Parse(src1) },
                 references,
-                options: TestOptions.ReleaseDll.WithAssemblyIdentityComparer(
-                    DesktopAssemblyIdentityComparer.Default
-                )
+                options: TestOptions
+                    .ReleaseDll
+                    .WithAssemblyIdentityComparer(DesktopAssemblyIdentityComparer.Default)
             );
 
             c1.VerifyDiagnostics(
@@ -2960,8 +2978,10 @@ public class C { public static FrameworkName Goo() { return null; }}";
             );
 
             var appConfig = new MemoryStream(
-                Encoding.UTF8.GetBytes(
-                    @"<?xml version=""1.0"" encoding=""utf-8"" ?>
+                Encoding
+                    .UTF8
+                    .GetBytes(
+                        @"<?xml version=""1.0"" encoding=""utf-8"" ?>
 <configuration>
   <runtime>
     <assemblyBinding xmlns=""urn:schemas-microsoft-com:asm.v1"">
@@ -2969,7 +2989,7 @@ public class C { public static FrameworkName Goo() { return null; }}";
     </assemblyBinding>
   </runtime>
 </configuration>"
-                )
+                    )
             );
 
             var comparer = DesktopAssemblyIdentityComparer.LoadFromXml(appConfig);
@@ -3014,7 +3034,8 @@ public class C { public static FrameworkName Goo() { return null; }}";
             var assembly = (IAssemblySymbol)vbComp
                 .GetBoundReferenceManager()
                 .GetReferencedAssemblies()
-                .First().Value;
+                .First()
+                .Value;
 
             Assert.Null(comp.GetMetadataReference(assembly));
             Assert.Null(comp.GetMetadataReference(vbComp.Assembly));
@@ -3127,27 +3148,27 @@ public class C { public static FrameworkName Goo() { return null; }}";
                 () =>
                     CSharpCompilation.CreateScriptCompilation(
                         "a",
-                        options: TestOptions.ReleaseDll.WithOutputKind(
-                            OutputKind.WindowsRuntimeMetadata
-                        )
+                        options: TestOptions
+                            .ReleaseDll
+                            .WithOutputKind(OutputKind.WindowsRuntimeMetadata)
                     )
             );
             Assert.Throws<ArgumentException>(
                 () =>
                     CSharpCompilation.CreateScriptCompilation(
                         "a",
-                        options: TestOptions.ReleaseDll.WithOutputKind(
-                            OutputKind.WindowsRuntimeApplication
-                        )
+                        options: TestOptions
+                            .ReleaseDll
+                            .WithOutputKind(OutputKind.WindowsRuntimeApplication)
                     )
             );
             Assert.Throws<ArgumentException>(
                 () =>
                     CSharpCompilation.CreateScriptCompilation(
                         "a",
-                        options: TestOptions.ReleaseDll.WithOutputKind(
-                            OutputKind.WindowsApplication
-                        )
+                        options: TestOptions
+                            .ReleaseDll
+                            .WithOutputKind(OutputKind.WindowsApplication)
                     )
             );
             Assert.Throws<ArgumentException>(
@@ -3304,7 +3325,9 @@ public class C { public static FrameworkName Goo() { return null; }}";
                 comp.CreateArrayTypeSymbol(
                     elementType,
                     elementNullableAnnotation: CodeAnalysis.NullableAnnotation.None
-                ).ElementType.NullableAnnotation
+                )
+                    .ElementType
+                    .NullableAnnotation
             );
             Assert.Equal(
                 CodeAnalysis.NullableAnnotation.None,
@@ -3318,7 +3341,9 @@ public class C { public static FrameworkName Goo() { return null; }}";
                 comp.CreateArrayTypeSymbol(
                     elementType,
                     elementNullableAnnotation: CodeAnalysis.NullableAnnotation.None
-                ).ElementType.NullableAnnotation
+                )
+                    .ElementType
+                    .NullableAnnotation
             );
             Assert.Equal(
                 CodeAnalysis.NullableAnnotation.NotAnnotated,
@@ -3332,7 +3357,9 @@ public class C { public static FrameworkName Goo() { return null; }}";
                 comp.CreateArrayTypeSymbol(
                     elementType,
                     elementNullableAnnotation: CodeAnalysis.NullableAnnotation.NotAnnotated
-                ).ElementType.NullableAnnotation
+                )
+                    .ElementType
+                    .NullableAnnotation
             );
             Assert.Equal(
                 CodeAnalysis.NullableAnnotation.Annotated,
@@ -3346,7 +3373,9 @@ public class C { public static FrameworkName Goo() { return null; }}";
                 comp.CreateArrayTypeSymbol(
                     elementType,
                     elementNullableAnnotation: CodeAnalysis.NullableAnnotation.Annotated
-                ).ElementType.NullableAnnotation
+                )
+                    .ElementType
+                    .NullableAnnotation
             );
         }
 

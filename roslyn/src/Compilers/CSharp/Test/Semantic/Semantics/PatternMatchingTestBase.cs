@@ -462,49 +462,42 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                     if (dataFlow.Succeeded)
                     {
                         Assert.False(
-                            dataFlow.VariablesDeclared.Contains(
-                                symbol,
-                                ReferenceEqualityComparer.Instance
-                            )
+                            dataFlow
+                                .VariablesDeclared
+                                .Contains(symbol, ReferenceEqualityComparer.Instance)
                         );
                         Assert.False(
-                            dataFlow.AlwaysAssigned.Contains(
-                                symbol,
-                                ReferenceEqualityComparer.Instance
-                            )
+                            dataFlow
+                                .AlwaysAssigned
+                                .Contains(symbol, ReferenceEqualityComparer.Instance)
                         );
                         Assert.False(
-                            dataFlow.WrittenInside.Contains(
-                                symbol,
-                                ReferenceEqualityComparer.Instance
-                            )
+                            dataFlow
+                                .WrittenInside
+                                .Contains(symbol, ReferenceEqualityComparer.Instance)
                         );
                         Assert.False(
-                            dataFlow.DataFlowsIn.Contains(
-                                symbol,
-                                ReferenceEqualityComparer.Instance
-                            )
+                            dataFlow
+                                .DataFlowsIn
+                                .Contains(symbol, ReferenceEqualityComparer.Instance)
                         );
                         Assert.False(
                             dataFlow.ReadInside.Contains(symbol, ReferenceEqualityComparer.Instance)
                         );
                         Assert.False(
-                            dataFlow.DataFlowsOut.Contains(
-                                symbol,
-                                ReferenceEqualityComparer.Instance
-                            )
+                            dataFlow
+                                .DataFlowsOut
+                                .Contains(symbol, ReferenceEqualityComparer.Instance)
                         );
                         Assert.False(
-                            dataFlow.ReadOutside.Contains(
-                                symbol,
-                                ReferenceEqualityComparer.Instance
-                            )
+                            dataFlow
+                                .ReadOutside
+                                .Contains(symbol, ReferenceEqualityComparer.Instance)
                         );
                         Assert.False(
-                            dataFlow.WrittenOutside.Contains(
-                                symbol,
-                                ReferenceEqualityComparer.Instance
-                            )
+                            dataFlow
+                                .WrittenOutside
+                                .Contains(symbol, ReferenceEqualityComparer.Instance)
                         );
                     }
                 }
@@ -519,7 +512,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 decl.Ancestors()
                     .OfType<VariableDeclaratorSyntax>()
                     .First()
-                    .ArgumentList.Contains(decl)
+                    .ArgumentList
+                    .Contains(decl)
             );
         }
 

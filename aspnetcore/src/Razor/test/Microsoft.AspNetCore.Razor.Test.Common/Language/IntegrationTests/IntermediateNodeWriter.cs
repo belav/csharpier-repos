@@ -404,9 +404,9 @@ public class IntermediateNodeWriter
 
         if (sourceRange.FilePath != null)
         {
-            var fileName = sourceRange.FilePath.Substring(
-                sourceRange.FilePath.LastIndexOf('/') + 1
-            );
+            var fileName = sourceRange
+                .FilePath
+                .Substring(sourceRange.FilePath.LastIndexOf('/') + 1);
             _writer.Write(fileName);
         }
 

@@ -112,10 +112,9 @@ namespace Microsoft.Interop
                 BoundGenerator generator = CreateGenerator(argType);
 
                 // Check each marshaler if the current target framework is supported or not.
-                SupportsTargetFramework &= generator.Generator.IsSupported(
-                    environment.TargetFramework,
-                    environment.TargetFrameworkVersion
-                );
+                SupportsTargetFramework &= generator
+                    .Generator
+                    .IsSupported(environment.TargetFramework, environment.TargetFrameworkVersion);
 
                 // Check if generator is either blittable or just a forwarder.
                 noMarshallingNeeded &=
@@ -190,10 +189,9 @@ namespace Microsoft.Interop
                 && noMarshallingNeeded;
 
             if (
-                managedRetMarshaller.Generator.UsesNativeIdentifier(
-                    managedRetMarshaller.TypeInfo,
-                    this
-                )
+                managedRetMarshaller
+                    .Generator
+                    .UsesNativeIdentifier(managedRetMarshaller.TypeInfo, this)
             )
             {
                 // Update the native identifier for the return value
@@ -453,10 +451,9 @@ namespace Microsoft.Interop
 
                 if (!invokeReturnsVoid && (stage is Stage.Setup or Stage.Cleanup))
                 {
-                    IEnumerable<StatementSyntax> retStatements = _retMarshaller.Generator.Generate(
-                        _retMarshaller.TypeInfo,
-                        this
-                    );
+                    IEnumerable<StatementSyntax> retStatements = _retMarshaller
+                        .Generator
+                        .Generate(_retMarshaller.TypeInfo, this);
                     statementsToUpdate.AddRange(retStatements);
                 }
 
@@ -477,8 +474,9 @@ namespace Microsoft.Interop
                     // Generate code for each parameter for the current stage in declaration order.
                     foreach (BoundGenerator marshaller in _paramMarshallers)
                     {
-                        IEnumerable<StatementSyntax> generatedStatements =
-                            marshaller.Generator.Generate(marshaller.TypeInfo, this);
+                        IEnumerable<StatementSyntax> generatedStatements = marshaller
+                            .Generator
+                            .Generate(marshaller.TypeInfo, this);
                         statementsToUpdate.AddRange(generatedStatements);
                     }
                 }
@@ -511,8 +509,9 @@ namespace Microsoft.Interop
                 // Generate code for each parameter for the current stage
                 foreach (BoundGenerator marshaller in _paramMarshallers)
                 {
-                    IEnumerable<StatementSyntax> generatedStatements =
-                        marshaller.Generator.Generate(marshaller.TypeInfo, this);
+                    IEnumerable<StatementSyntax> generatedStatements = marshaller
+                        .Generator
+                        .Generate(marshaller.TypeInfo, this);
                     // Collect all the fixed statements. These will be used in the Invoke stage.
                     foreach (StatementSyntax statement in generatedStatements)
                     {
@@ -528,10 +527,9 @@ namespace Microsoft.Interop
                 foreach (BoundGenerator marshaller in _paramMarshallers)
                 {
                     // Get arguments for invocation
-                    ArgumentSyntax argSyntax = marshaller.Generator.AsArgument(
-                        marshaller.TypeInfo,
-                        this
-                    );
+                    ArgumentSyntax argSyntax = marshaller
+                        .Generator
+                        .AsArgument(marshaller.TypeInfo, this);
                     invoke = invoke.AddArgumentListArguments(argSyntax);
                 }
 

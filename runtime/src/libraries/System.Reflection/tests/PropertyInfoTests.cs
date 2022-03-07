@@ -612,7 +612,8 @@ namespace System.Reflection.Tests
         public static PropertyInfo GetProperty(Type type, string name)
         {
             return type.GetTypeInfo()
-                .DeclaredProperties.First(propertyInfo => propertyInfo.Name.Equals(name));
+                .DeclaredProperties
+                .First(propertyInfo => propertyInfo.Name.Equals(name));
         }
 
         public interface InterfaceWithPropertyDeclaration

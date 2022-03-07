@@ -259,7 +259,8 @@ public struct var { }
             Assert.Null(semanticInfo.Symbol);
             Assert.Equal(CandidateReason.Ambiguous, semanticInfo.CandidateReason);
             Assert.Equal(2, semanticInfo.CandidateSymbols.Length);
-            var sortedCandidates = semanticInfo.CandidateSymbols
+            var sortedCandidates = semanticInfo
+                .CandidateSymbols
                 .OrderBy(s => s.ToTestDisplayString())
                 .ToArray();
             Assert.Equal("Script.var", sortedCandidates[0].ToTestDisplayString());

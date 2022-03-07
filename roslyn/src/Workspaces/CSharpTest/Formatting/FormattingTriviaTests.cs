@@ -1882,11 +1882,9 @@ class Program
             var formatted = Formatter.Format(
                 tree,
                 DefaultWorkspace,
-                DefaultWorkspace.Options.WithChangedOption(
-                    FormattingOptions.NewLine,
-                    LanguageNames.CSharp,
-                    "\n"
-                )
+                DefaultWorkspace
+                    .Options
+                    .WithChangedOption(FormattingOptions.NewLine, LanguageNames.CSharp, "\n")
             );
 
             var actual = formatted.ToFullString();
@@ -1939,11 +1937,9 @@ class F
             var formatted = Formatter.Format(
                 tree,
                 DefaultWorkspace,
-                DefaultWorkspace.Options.WithChangedOption(
-                    FormattingOptions.UseTabs,
-                    LanguageNames.CSharp,
-                    true
-                )
+                DefaultWorkspace
+                    .Options
+                    .WithChangedOption(FormattingOptions.UseTabs, LanguageNames.CSharp, true)
             );
 
             var actual = formatted.ToFullString();

@@ -29,8 +29,9 @@ namespace System.Net
 
                 while (true)
                 {
-                    Interop.Crypt32.CERT_CONTEXT* next =
-                        Interop.Crypt32.CertEnumCertificatesInStore(context.hCertStore, last);
+                    Interop.Crypt32.CERT_CONTEXT* next = Interop
+                        .Crypt32
+                        .CertEnumCertificatesInStore(context.hCertStore, last);
 
                     if (next == null)
                     {

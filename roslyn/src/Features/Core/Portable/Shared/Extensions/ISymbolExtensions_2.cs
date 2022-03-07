@@ -222,7 +222,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                   => GetParameterDocumentation(parameter, compilation, cancellationToken)
                       ?.GetParameterText(parameter.Name),
                 ITypeParameterSymbol typeParam
-                  => typeParam.ContainingSymbol
+                  => typeParam
+                      .ContainingSymbol
                       .GetDocumentationComment(
                           compilation,
                           expandIncludes: true,
@@ -233,19 +234,24 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 IMethodSymbol method
                   => GetMethodDocumentation(method, compilation, cancellationToken).SummaryText,
                 IAliasSymbol alias
-                  => alias.Target.GetDocumentationComment(
-                      compilation,
-                      expandIncludes: true,
-                      expandInheritdoc: true,
-                      cancellationToken: cancellationToken
-                  ).SummaryText,
+                  => alias
+                      .Target
+                      .GetDocumentationComment(
+                          compilation,
+                          expandIncludes: true,
+                          expandInheritdoc: true,
+                          cancellationToken: cancellationToken
+                      )
+                      .SummaryText,
                 _
-                  => symbol.GetDocumentationComment(
-                      compilation,
-                      expandIncludes: true,
-                      expandInheritdoc: true,
-                      cancellationToken: cancellationToken
-                  ).SummaryText,
+                  => symbol
+                      .GetDocumentationComment(
+                          compilation,
+                          expandIncludes: true,
+                          expandInheritdoc: true,
+                          cancellationToken: cancellationToken
+                      )
+                      .SummaryText,
             };
         }
 
@@ -288,12 +294,14 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             }
 
             // Get the comments from the original definition of the containing symbol.
-            return containingSymbol.OriginalDefinition.GetDocumentationComment(
-                compilation,
-                expandIncludes: true,
-                expandInheritdoc: true,
-                cancellationToken: cancellationToken
-            );
+            return containingSymbol
+                .OriginalDefinition
+                .GetDocumentationComment(
+                    compilation,
+                    expandIncludes: true,
+                    expandInheritdoc: true,
+                    cancellationToken: cancellationToken
+                );
         }
 
         public static Func<CancellationToken, IEnumerable<TaggedText>> GetDocumentationPartsFactory(
@@ -338,12 +346,14 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 case MethodKind.EventRemove:
                 case MethodKind.PropertyGet:
                 case MethodKind.PropertySet:
-                    return method.AssociatedSymbol?.GetDocumentationComment(
-                            compilation,
-                            expandIncludes: true,
-                            expandInheritdoc: true,
-                            cancellationToken: cancellationToken
-                        ) ?? DocumentationComment.Empty;
+                    return method
+                            .AssociatedSymbol
+                            ?.GetDocumentationComment(
+                                compilation,
+                                expandIncludes: true,
+                                expandInheritdoc: true,
+                                cancellationToken: cancellationToken
+                            ) ?? DocumentationComment.Empty;
                 default:
                     return method.GetDocumentationComment(
                         compilation,

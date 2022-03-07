@@ -322,12 +322,9 @@ namespace System.Xml.Xsl.Xslt
 
                 if (_compiler.Settings.EnableScript)
                 {
-                    XmlExtensionFunction? scrFunc = _compiler.Scripts.ResolveFunction(
-                        name,
-                        ns,
-                        args.Count,
-                        (IErrorHelper)this
-                    );
+                    XmlExtensionFunction? scrFunc = _compiler
+                        .Scripts
+                        .ResolveFunction(name, ns, args.Count, (IErrorHelper)this);
                     if (scrFunc != null)
                     {
                         return GenerateScriptCall(_f.QName(name, ns, prefix), scrFunc, args);

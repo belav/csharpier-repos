@@ -44,20 +44,20 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
             _base0Class = _assembly.Modules[0].GlobalNamespace.GetMember<NamedTypeSymbol>("Base0");
             _base1Class = _assembly.Modules[0].GlobalNamespace.GetMember<NamedTypeSymbol>("Base1");
             _base2Class = _assembly.Modules[0].GlobalNamespace.GetMember<NamedTypeSymbol>("Base2");
-            _derivedClass = _assembly.Modules[0].GlobalNamespace.GetMember<NamedTypeSymbol>(
-                "Derived"
-            );
+            _derivedClass = _assembly.Modules[0]
+                .GlobalNamespace
+                .GetMember<NamedTypeSymbol>("Derived");
             _outerClass = _assembly.Modules[0].GlobalNamespace.GetMember<NamedTypeSymbol>("Outer");
             _innerClass = _outerClass.GetTypeMember("Inner");
             _innerInnerClass = _innerClass.GetTypeMember("InnerInner");
-            _outer2Class = _assembly.Modules[0].GlobalNamespace.GetMember<NamedTypeSymbol>(
-                "Outer2"
-            );
+            _outer2Class = _assembly.Modules[0]
+                .GlobalNamespace
+                .GetMember<NamedTypeSymbol>("Outer2");
             _inner2Class = _outer2Class.GetTypeMember("Inner2");
             _innerInner2Class = _inner2Class.GetTypeMember("InnerInner2");
-            _outer3Class = _assembly.Modules[0].GlobalNamespace.GetMember<NamedTypeSymbol>(
-                "Outer3"
-            );
+            _outer3Class = _assembly.Modules[0]
+                .GlobalNamespace
+                .GetMember<NamedTypeSymbol>("Outer3");
             _inner3Class = _outer3Class.GetTypeMember("Inner3");
 
             _objectType = _assembly.CorLibrary.GetSpecialType(SpecialType.System_Object);
@@ -467,9 +467,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
             CommonTestInitialization();
 
             // public unsafe class UnsafeClass<T> : Base2<int*[], Outer<dynamic>.Inner<Outer<dynamic>.Inner<T[], dynamic>.InnerInner<int*[][]>[], dynamic>.InnerInner<dynamic>[][]> { }
-            var unsafeClass = _assembly.Modules[0].GlobalNamespace.GetMember<NamedTypeSymbol>(
-                "UnsafeClass"
-            );
+            var unsafeClass = _assembly.Modules[0]
+                .GlobalNamespace
+                .GetMember<NamedTypeSymbol>("UnsafeClass");
             Assert.False(unsafeClass.ContainsDynamic());
             Assert.True(unsafeClass.BaseType().ContainsDynamic());
 
@@ -542,16 +542,17 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
         {
             CommonTestInitialization();
 
-            var structType = _assembly.Modules[0].GlobalNamespace.GetMember<NamedTypeSymbol>(
-                "Struct"
-            );
+            var structType = _assembly.Modules[0]
+                .GlobalNamespace
+                .GetMember<NamedTypeSymbol>("Struct");
             Assert.False(structType.ContainsDynamic());
 
             // public static Outer<dynamic>.Inner<dynamic, Struct?> nullableField;
             var field = structType.GetMember<FieldSymbol>("nullableField");
             Assert.True(field.Type.ContainsDynamic());
 
-            var nullableStruct = _assembly.CorLibrary
+            var nullableStruct = _assembly
+                .CorLibrary
                 .GetSpecialType(SpecialType.System_Nullable_T)
                 .Construct(structType);
             // Outer<dynamic>

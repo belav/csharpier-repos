@@ -23,7 +23,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             CompletionItemRules rules
         )
         {
-            var props = ImmutableDictionary<string, string>.Empty
+            var props = ImmutableDictionary<string, string>
+                .Empty
                 .Add("Line", line.ToString())
                 .Add("Modifiers", modifiers.ToString())
                 .Add("TokenSpanEnd", token.Span.End.ToString());

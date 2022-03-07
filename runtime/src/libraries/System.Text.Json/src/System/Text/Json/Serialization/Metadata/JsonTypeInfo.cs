@@ -345,9 +345,9 @@ namespace System.Text.Json.Serialization.Metadata
 
                         if (propertyOrderSpecified)
                         {
-                            PropertyCache.List.Sort(
-                                (p1, p2) => p1.Value!.Order.CompareTo(p2.Value!.Order)
-                            );
+                            PropertyCache
+                                .List
+                                .Sort((p1, p2) => p1.Value!.Order.CompareTo(p2.Value!.Order));
                         }
 
                         if (converter.ConstructorIsParameterized)
@@ -370,9 +370,9 @@ namespace System.Text.Json.Serialization.Metadata
                 case ConverterStrategy.Enumerable:
 
                     {
-                        CreateObject = Options.MemberAccessorStrategy.CreateConstructor(
-                            runtimeType
-                        );
+                        CreateObject = Options
+                            .MemberAccessorStrategy
+                            .CreateConstructor(runtimeType);
 
                         if (converter.RequiresDynamicMemberAccessors)
                         {
@@ -384,9 +384,9 @@ namespace System.Text.Json.Serialization.Metadata
 
                     {
                         KeyType = converter.KeyType;
-                        CreateObject = Options.MemberAccessorStrategy.CreateConstructor(
-                            runtimeType
-                        );
+                        CreateObject = Options
+                            .MemberAccessorStrategy
+                            .CreateConstructor(runtimeType);
 
                         if (converter.RequiresDynamicMemberAccessors)
                         {
@@ -610,10 +610,9 @@ namespace System.Text.Json.Serialization.Metadata
                 // It is invalid for the extension data property to bind with a constructor argument.
                 else if (
                     DataExtensionProperty != null
-                    && StringComparer.OrdinalIgnoreCase.Equals(
-                        paramToCheck.Name,
-                        DataExtensionProperty.NameAsString
-                    )
+                    && StringComparer
+                        .OrdinalIgnoreCase
+                        .Equals(paramToCheck.Name, DataExtensionProperty.NameAsString)
                 )
                 {
                     ThrowHelper.ThrowInvalidOperationException_ExtensionDataCannotBindToCtorParam(

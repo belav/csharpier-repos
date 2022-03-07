@@ -15,11 +15,9 @@ namespace System.Net.Primitives.Functional.Tests
         [ActiveIssue("https://github.com/dotnet/runtime/issues/50571", TestPlatforms.Android)]
         public void EventSource_ExistsWithCorrectId()
         {
-            Type esType = typeof(IPAddress).Assembly.GetType(
-                "System.Net.NetEventSource",
-                throwOnError: true,
-                ignoreCase: false
-            );
+            Type esType = typeof(IPAddress)
+                .Assembly
+                .GetType("System.Net.NetEventSource", throwOnError: true, ignoreCase: false);
             Assert.NotNull(esType);
 
             Assert.Equal(

@@ -309,23 +309,27 @@ namespace System.Threading.Tests
                 {
                     m1.CheckedWait();
                     Assert.False(
-                        Task.Factory.StartNew(
-                            () => m2.WaitOne(0),
-                            CancellationToken.None,
-                            TaskCreationOptions.LongRunning,
-                            TaskScheduler.Default
-                        ).Result
+                        Task.Factory
+                            .StartNew(
+                                () => m2.WaitOne(0),
+                                CancellationToken.None,
+                                TaskCreationOptions.LongRunning,
+                                TaskScheduler.Default
+                            )
+                            .Result
                     );
                     m1.ReleaseMutex();
 
                     m2.CheckedWait();
                     Assert.False(
-                        Task.Factory.StartNew(
-                            () => m1.WaitOne(0),
-                            CancellationToken.None,
-                            TaskCreationOptions.LongRunning,
-                            TaskScheduler.Default
-                        ).Result
+                        Task.Factory
+                            .StartNew(
+                                () => m1.WaitOne(0),
+                                CancellationToken.None,
+                                TaskCreationOptions.LongRunning,
+                                TaskScheduler.Default
+                            )
+                            .Result
                     );
                     m2.ReleaseMutex();
                 }

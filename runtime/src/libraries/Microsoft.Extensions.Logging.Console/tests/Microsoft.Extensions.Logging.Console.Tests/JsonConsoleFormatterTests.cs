@@ -628,12 +628,14 @@ namespace Microsoft.Extensions.Logging.Console.Test
             string json = GetJson(rootException, indented);
 
             Assert.Contains(rootException.Message, json);
-            rootException.InnerExceptions
+            rootException
+                .InnerExceptions
                 .ToList()
                 .ForEach((inner) => Assert.Contains(inner.Message, json));
 
             Assert.Contains(GetContent(rootException, indented), json);
-            rootException.InnerExceptions
+            rootException
+                .InnerExceptions
                 .ToList()
                 .ForEach((inner) => Assert.Contains(GetContent(inner, indented), json));
         }

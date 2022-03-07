@@ -74,9 +74,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.AutomaticCompletion
                     if (editorSession != null)
                     {
                         var undoHistory =
-                            _undoManager.GetTextBufferUndoManager(
-                                textView.TextBuffer
-                            ).TextBufferUndoHistory;
+                            _undoManager
+                                .GetTextBufferUndoManager(textView.TextBuffer)
+                                .TextBufferUndoHistory;
                         session = new BraceCompletionSession(
                             textView,
                             openingPoint.Snapshot.TextBuffer,

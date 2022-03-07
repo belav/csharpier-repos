@@ -444,9 +444,9 @@ public class TestSubscriber : ISubscriber
     )
     {
         // Workaround for https://github.com/StackExchange/StackExchange.Redis/issues/969
-        var redisSubscriberType = typeof(RedisChannel).Assembly.GetType(
-            "StackExchange.Redis.RedisSubscriber"
-        );
+        var redisSubscriberType = typeof(RedisChannel)
+            .Assembly
+            .GetType("StackExchange.Redis.RedisSubscriber");
         var ctor = typeof(ChannelMessageQueue).GetConstructor(
             BindingFlags.Instance | BindingFlags.NonPublic,
             binder: null,

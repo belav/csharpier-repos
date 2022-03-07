@@ -681,10 +681,10 @@ public class ComplexTypeModelBinderTest
         // Arrange
         var bindingContext = CreateContext(GetMetadataForType(typeof(Person)), new Person());
         var originalModel = bindingContext.Model;
-        var binders = bindingContext.ModelMetadata.Properties.ToDictionary(
-            keySelector: item => item,
-            elementSelector: item => (IModelBinder)null
-        );
+        var binders = bindingContext
+            .ModelMetadata
+            .Properties
+            .ToDictionary(keySelector: item => item, elementSelector: item => (IModelBinder)null);
 
         var binder = new Mock<TestableComplexTypeModelBinder>(binders) { CallBase = true };
         binder.Setup(b => b.CreateModelPublic(It.IsAny<ModelBindingContext>())).Verifiable();
@@ -702,10 +702,10 @@ public class ComplexTypeModelBinderTest
     {
         // Arrange
         var bindingContext = CreateContext(GetMetadataForType(typeof(Person)), model: null);
-        var binders = bindingContext.ModelMetadata.Properties.ToDictionary(
-            keySelector: item => item,
-            elementSelector: item => (IModelBinder)null
-        );
+        var binders = bindingContext
+            .ModelMetadata
+            .Properties
+            .ToDictionary(keySelector: item => item, elementSelector: item => (IModelBinder)null);
 
         var testableBinder = new Mock<TestableComplexTypeModelBinder>(binders) { CallBase = true };
         testableBinder

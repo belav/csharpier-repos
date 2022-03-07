@@ -79,10 +79,14 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Preview
             Assert.True(previewWorkspace.TryApplyChanges(project.Solution));
 
             var addedSolution =
-                previewWorkspace.CurrentSolution.Projects
+                previewWorkspace
+                    .CurrentSolution
+                    .Projects
                     .First()
                     .AddMetadataReference(TestMetadata.Net451.mscorlib)
-                    .AddDocument("document", "").Project.Solution;
+                    .AddDocument("document", "")
+                    .Project
+                    .Solution;
             Assert.True(previewWorkspace.TryApplyChanges(addedSolution));
             Assert.Equal(
                 1,
@@ -92,29 +96,41 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Preview
 
             var text = "class C {}";
             var changedSolution =
-                previewWorkspace.CurrentSolution.Projects
+                previewWorkspace
+                    .CurrentSolution
+                    .Projects
                     .First()
-                    .Documents.First()
-                    .WithText(SourceText.From(text)).Project.Solution;
+                    .Documents
+                    .First()
+                    .WithText(SourceText.From(text))
+                    .Project
+                    .Solution;
             Assert.True(previewWorkspace.TryApplyChanges(changedSolution));
             Assert.Equal(
-                previewWorkspace.CurrentSolution.Projects
+                previewWorkspace
+                    .CurrentSolution
+                    .Projects
                     .First()
-                    .Documents.First()
+                    .Documents
+                    .First()
                     .GetTextAsync()
-                    .Result.ToString(),
+                    .Result
+                    .ToString(),
                 text
             );
 
             var removedSolution =
-                previewWorkspace.CurrentSolution.Projects
+                previewWorkspace
+                    .CurrentSolution
+                    .Projects
                     .First()
                     .RemoveMetadataReference(
                         previewWorkspace.CurrentSolution.Projects.First().MetadataReferences[0]
                     )
                     .RemoveDocument(
                         previewWorkspace.CurrentSolution.Projects.First().DocumentIds[0]
-                    ).Solution;
+                    )
+                    .Solution;
 
             Assert.True(previewWorkspace.TryApplyChanges(removedSolution));
             Assert.Equal(
@@ -151,13 +167,14 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Preview
             using var previewWorkspace = new PreviewWorkspace(
                 EditorTestCompositions.EditorFeatures.GetHostServices()
             );
-            var service =
-                previewWorkspace.Services.GetService<ISolutionCrawlerRegistrationService>();
+            var service = previewWorkspace
+                .Services
+                .GetService<ISolutionCrawlerRegistrationService>();
             Assert.IsType<PreviewSolutionCrawlerRegistrationServiceFactory.Service>(service);
 
-            var persistentService = previewWorkspace.Services.GetPersistentStorageService(
-                previewWorkspace.CurrentSolution.Options
-            );
+            var persistentService = previewWorkspace
+                .Services
+                .GetPersistentStorageService(previewWorkspace.CurrentSolution.Options);
 
             await using var storage = await persistentService.GetStorageAsync(
                 SolutionKey.ToSolutionKey(previewWorkspace.CurrentSolution),
@@ -184,7 +201,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Preview
             using var previewWorkspace = new PreviewWorkspace(hostServices);
 
             var solution =
-                previewWorkspace.CurrentSolution
+                previewWorkspace
+                    .CurrentSolution
                     .WithAnalyzerReferences(
                         new[]
                         {
@@ -194,7 +212,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Preview
                         }
                     )
                     .AddProject("project", "project.dll", LanguageNames.CSharp)
-                    .AddDocument("document", "class { }").Project.Solution;
+                    .AddDocument("document", "class { }")
+                    .Project
+                    .Solution;
 
             Assert.True(previewWorkspace.TryApplyChanges(solution));
 
@@ -229,14 +249,16 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Preview
             var hostDocument = workspace.Projects.First().Documents.First();
 
             previewWorkspace.TryApplyChanges(
-                previewWorkspace.CurrentSolution.WithAnalyzerReferences(
-                    new[]
-                    {
-                        DiagnosticExtensions.GetCompilerDiagnosticAnalyzerReference(
-                            LanguageNames.CSharp
-                        )
-                    }
-                )
+                previewWorkspace
+                    .CurrentSolution
+                    .WithAnalyzerReferences(
+                        new[]
+                        {
+                            DiagnosticExtensions.GetCompilerDiagnosticAnalyzerReference(
+                                LanguageNames.CSharp
+                            )
+                        }
+                    )
             );
 
             // enable preview diagnostics
@@ -266,14 +288,16 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Preview
             );
 
             workspace.TryApplyChanges(
-                workspace.CurrentSolution.WithAnalyzerReferences(
-                    new[]
-                    {
-                        DiagnosticExtensions.GetCompilerDiagnosticAnalyzerReference(
-                            LanguageNames.CSharp
-                        )
-                    }
-                )
+                workspace
+                    .CurrentSolution
+                    .WithAnalyzerReferences(
+                        new[]
+                        {
+                            DiagnosticExtensions.GetCompilerDiagnosticAnalyzerReference(
+                                LanguageNames.CSharp
+                            )
+                        }
+                    )
             );
 
             // set up listener to wait until diagnostic finish running
@@ -294,8 +318,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Preview
                 $"{nameof(TestPreviewDiagnosticTaggerInPreviewPane)} creates a {nameof(DifferenceViewerPreview)}"
             );
 
-            var previewFactoryService =
-                (PreviewFactoryService)workspace.ExportProvider.GetExportedValue<IPreviewFactoryService>();
+            var previewFactoryService = (PreviewFactoryService)workspace
+                .ExportProvider
+                .GetExportedValue<IPreviewFactoryService>();
             using var diffView = await previewFactoryService.CreateChangedDocumentPreviewViewAsync(
                 oldDocument,
                 newDocument,
@@ -303,20 +328,28 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Preview
             );
             AssertEx.NotNull(diffView);
 
-            var listenerProvider =
-                workspace.ExportProvider.GetExportedValue<AsynchronousOperationListenerProvider>();
+            var listenerProvider = workspace
+                .ExportProvider
+                .GetExportedValue<AsynchronousOperationListenerProvider>();
 
             // set up tagger for both buffers
-            var leftBuffer = diffView.Viewer.LeftView.BufferGraph
+            var leftBuffer = diffView
+                .Viewer
+                .LeftView
+                .BufferGraph
                 .GetTextBuffers(t => t.ContentType.IsOfType(ContentTypeNames.CSharpContentType))
                 .First();
-            var provider = workspace.ExportProvider
+            var provider = workspace
+                .ExportProvider
                 .GetExportedValues<ITaggerProvider>()
                 .OfType<DiagnosticsSquiggleTaggerProvider>()
                 .Single();
             var leftTagger = provider.CreateTagger<IErrorTag>(leftBuffer);
             using var leftDisposable = leftTagger as IDisposable;
-            var rightBuffer = diffView.Viewer.RightView.BufferGraph
+            var rightBuffer = diffView
+                .Viewer
+                .RightView
+                .BufferGraph
                 .GetTextBuffers(t => t.ContentType.IsOfType(ContentTypeNames.CSharpContentType))
                 .First();
             var rightTagger = provider.CreateTagger<IErrorTag>(rightBuffer);
@@ -350,11 +383,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Preview
 
             var previewWorkspace = new PreviewWorkspace();
             Assert.NotNull(previewWorkspace.CurrentSolution);
-            var project = previewWorkspace.CurrentSolution.AddProject(
-                "project",
-                "project.dll",
-                LanguageNames.CSharp
-            );
+            var project = previewWorkspace
+                .CurrentSolution
+                .AddProject("project", "project.dll", LanguageNames.CSharp);
             Assert.True(previewWorkspace.TryApplyChanges(project.Solution));
             var solutionObjectReference = ObjectReference.Create(previewWorkspace.CurrentSolution);
 

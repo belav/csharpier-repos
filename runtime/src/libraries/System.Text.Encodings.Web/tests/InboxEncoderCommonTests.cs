@@ -993,9 +993,9 @@ namespace System.Text.Encodings.Web.Tests
         protected void _RunEncodeUtf8_Battery(byte[][] inputs, string[] expectedOutputsAsUtf16)
         {
             byte[] accumInput = new byte[] { (byte)_disallowedChar };
-            byte[] accumExpectedOutput = Encoding.UTF8.GetBytes(
-                GetExpectedEscapedRepresentation(new Rune(_disallowedChar))
-            );
+            byte[] accumExpectedOutput = Encoding
+                .UTF8
+                .GetBytes(GetExpectedEscapedRepresentation(new Rune(_disallowedChar)));
             byte[][] expectedOutputs = expectedOutputsAsUtf16
                 .Select(Encoding.UTF8.GetBytes)
                 .ToArray();

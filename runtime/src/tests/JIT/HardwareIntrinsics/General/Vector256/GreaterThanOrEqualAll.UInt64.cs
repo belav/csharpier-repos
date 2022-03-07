@@ -397,9 +397,11 @@ namespace JIT.HardwareIntrinsics.General
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation(
-                    $"{nameof(Vector256)}.{nameof(Vector256.GreaterThanOrEqualAll)}<UInt64>(Vector256<UInt64>, Vector256<UInt64>): {method} failed:"
-                );
+                TestLibrary
+                    .TestFramework
+                    .LogInformation(
+                        $"{nameof(Vector256)}.{nameof(Vector256.GreaterThanOrEqualAll)}<UInt64>(Vector256<UInt64>, Vector256<UInt64>): {method} failed:"
+                    );
                 TestLibrary.TestFramework.LogInformation($"    left: ({string.Join(", ", left)})");
                 TestLibrary.TestFramework.LogInformation($"   right: ({string.Join(", ", right)})");
                 TestLibrary.TestFramework.LogInformation($"  result: ({result})");

@@ -49,10 +49,12 @@ namespace Roslyn.VisualStudio.Services.Implementation.ProjectSystem
 
                 try
                 {
-                    defaultNamespace =
-                        (string)envDTEProject.ProjectItems.ContainingProject.Properties.Item(
-                            "DefaultNamespace"
-                        ).Value; // Do not Localize
+                    defaultNamespace = (string)envDTEProject
+                        .ProjectItems
+                        .ContainingProject
+                        .Properties
+                        .Item("DefaultNamespace")
+                        .Value; // Do not Localize
                 }
                 catch (ArgumentException)
                 {
@@ -89,7 +91,8 @@ namespace Roslyn.VisualStudio.Services.Implementation.ProjectSystem
                     var folderPath = currentFolderPath + projectItem.Name + "\\";
 
                     folders.Add(folderPath);
-                    projectItem.ProjectItems
+                    projectItem
+                        .ProjectItems
                         .OfType<ProjectItem>()
                         .Where(n => n.IsFolder())
                         .Do(n => projectItemsStack.Push(Tuple.Create(n, folderPath)));

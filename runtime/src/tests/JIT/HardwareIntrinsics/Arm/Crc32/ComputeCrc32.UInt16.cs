@@ -239,9 +239,11 @@ namespace JIT.HardwareIntrinsics.Arm
 
             if (isUnexpectedResult)
             {
-                TestLibrary.TestFramework.LogInformation(
-                    $"{nameof(Crc32)}.{nameof(Crc32.ComputeCrc32)}<UInt32>(UInt32, UInt16): ComputeCrc32 failed:"
-                );
+                TestLibrary
+                    .TestFramework
+                    .LogInformation(
+                        $"{nameof(Crc32)}.{nameof(Crc32.ComputeCrc32)}<UInt32>(UInt32, UInt16): ComputeCrc32 failed:"
+                    );
                 TestLibrary.TestFramework.LogInformation($"    left: {left}");
                 TestLibrary.TestFramework.LogInformation($"   right: {right}");
                 TestLibrary.TestFramework.LogInformation($"  result: {result}");

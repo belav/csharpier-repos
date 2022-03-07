@@ -141,15 +141,17 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
                 {
                     // Our cache is not there, or is out of date.  We need to compute the up to date results.
                     var context = new TaggerContext<IClassificationTag>(document, snapshot);
-                    this.ThreadingContext.JoinableTaskFactory.Run(
-                        () =>
-                            ProduceTagsAsync(
-                                context,
-                                new DocumentSnapshotSpan(document, spanToTag),
-                                _owner._typeMap,
-                                cancellationToken
-                            )
-                    );
+                    this.ThreadingContext
+                        .JoinableTaskFactory
+                        .Run(
+                            () =>
+                                ProduceTagsAsync(
+                                    context,
+                                    new DocumentSnapshotSpan(document, spanToTag),
+                                    _owner._typeMap,
+                                    cancellationToken
+                                )
+                        );
 
                     cachedTaggedSpan = spanToTag;
                     cachedTags = new TagSpanIntervalTree<IClassificationTag>(
@@ -189,8 +191,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
                 CancellationToken cancellationToken
             )
             {
-                var classificationService =
-                    documentSpan.Document.GetLanguageService<IClassificationService>();
+                var classificationService = documentSpan
+                    .Document
+                    .GetLanguageService<IClassificationService>();
                 return classificationService != null
                   ? SemanticClassificationUtilities.ProduceTagsAsync(
                         context,

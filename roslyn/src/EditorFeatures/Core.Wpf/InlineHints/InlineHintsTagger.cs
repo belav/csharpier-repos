@@ -72,13 +72,12 @@ namespace Microsoft.CodeAnalysis.Editor.InlineHints
             _buffer = buffer;
 
             _tagAggregator = tagAggregator;
-            _formatMap = taggerProvider.ClassificationFormatMapService.GetClassificationFormatMap(
-                textView
-            );
-            _hintClassification =
-                taggerProvider.ClassificationTypeRegistryService.GetClassificationType(
-                    InlineHintsTag.TagId
-                );
+            _formatMap = taggerProvider
+                .ClassificationFormatMapService
+                .GetClassificationFormatMap(textView);
+            _hintClassification = taggerProvider
+                .ClassificationTypeRegistryService
+                .GetClassificationType(InlineHintsTag.TagId);
             _formatMap.ClassificationFormatMappingChanged +=
                 this.OnClassificationFormatMappingChanged;
             _tagAggregator.TagsChanged += OnTagAggregatorTagsChanged;
@@ -164,10 +163,9 @@ namespace Microsoft.CodeAnalysis.Editor.InlineHints
                 var document = snapshot.GetOpenDocumentInCurrentContextWithChanges();
                 var classify =
                     document != null
-                    && _taggerProvider.GlobalOptions.GetOption(
-                        InlineHintsViewOptions.ColorHints,
-                        document.Project.Language
-                    );
+                    && _taggerProvider
+                        .GlobalOptions
+                        .GetOption(InlineHintsViewOptions.ColorHints, document.Project.Language);
 
                 var selectedSpans = new List<ITagSpan<IntraTextAdornmentTag>>();
                 for (var i = 0; i < _cache.Count; i++)

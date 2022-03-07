@@ -189,18 +189,20 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
                             bodySyntax
                         );
 
-                        result = _builder.LocalSlotManager.DeclareLocal(
-                            type: _module.Translate(localSymbol.Type, bodySyntax, _diagnostics),
-                            symbol: localSymbol,
-                            name: null,
-                            kind: localSymbol.SynthesizedKind,
-                            id: new LocalDebugId(syntaxOffset, ordinal: 0),
-                            pdbAttributes: localSymbol.SynthesizedKind.PdbAttributes(),
-                            constraints: slotConstraints,
-                            dynamicTransformFlags: ImmutableArray<bool>.Empty,
-                            tupleElementNames: ImmutableArray<string>.Empty,
-                            isSlotReusable: false
-                        );
+                        result = _builder
+                            .LocalSlotManager
+                            .DeclareLocal(
+                                type: _module.Translate(localSymbol.Type, bodySyntax, _diagnostics),
+                                symbol: localSymbol,
+                                name: null,
+                                kind: localSymbol.SynthesizedKind,
+                                id: new LocalDebugId(syntaxOffset, ordinal: 0),
+                                pdbAttributes: localSymbol.SynthesizedKind.PdbAttributes(),
+                                constraints: slotConstraints,
+                                dynamicTransformFlags: ImmutableArray<bool>.Empty,
+                                tupleElementNames: ImmutableArray<string>.Empty,
+                                isSlotReusable: false
+                            );
                     }
                     else
                     {

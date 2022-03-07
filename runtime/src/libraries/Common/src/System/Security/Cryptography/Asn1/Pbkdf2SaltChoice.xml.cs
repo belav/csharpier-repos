@@ -126,11 +126,12 @@ namespace System.Security.Cryptography.Asn1
             else if (tag.HasSameClassAndValue(Asn1Tag.Sequence))
             {
                 System.Security.Cryptography.Asn1.AlgorithmIdentifierAsn tmpOtherSource;
-                System.Security.Cryptography.Asn1.AlgorithmIdentifierAsn.Decode(
-                    ref reader,
-                    rebind,
-                    out tmpOtherSource
-                );
+                System
+                    .Security
+                    .Cryptography
+                    .Asn1
+                    .AlgorithmIdentifierAsn
+                    .Decode(ref reader, rebind, out tmpOtherSource);
                 decoded.OtherSource = tmpOtherSource;
             }
             else

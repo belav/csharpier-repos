@@ -117,7 +117,8 @@ namespace System.Collections.Immutable.Tests
         [Fact]
         public void EnumerateBuilderWhileMutating()
         {
-            var builder = ImmutableSortedDictionary<int, string>.Empty
+            var builder = ImmutableSortedDictionary<int, string>
+                .Empty
                 .AddRange(
                     Enumerable.Range(1, 10).Select(n => new KeyValuePair<int, string>(n, null))
                 )

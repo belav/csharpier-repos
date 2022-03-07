@@ -141,13 +141,15 @@ class C
                     .GetRoot()
                     .DescendantNodes()
                     .OfType<ClassDeclarationSyntax>()
-                    .Single().SpanStart;
+                    .Single()
+                    .SpanStart;
             var methodDeclPosition =
                 syntaxTree
                     .GetRoot()
                     .DescendantNodes()
                     .OfType<MethodDeclarationSyntax>()
-                    .Single().SpanStart;
+                    .Single()
+                    .SpanStart;
 
             Assert.Equal(expectedContext, model.GetNullableContext(classDeclPosition));
 
@@ -189,13 +191,15 @@ partial class C
                     .GetRoot()
                     .DescendantNodes()
                     .OfType<ClassDeclarationSyntax>()
-                    .Single().SpanStart;
+                    .Single()
+                    .SpanStart;
             var classDecl2 =
                 syntaxTree2
                     .GetRoot()
                     .DescendantNodes()
                     .OfType<ClassDeclarationSyntax>()
-                    .Single().SpanStart;
+                    .Single()
+                    .SpanStart;
 
             Assert.Equal(NullableContext.Enabled, model1.GetNullableContext(classDecl1));
             Assert.Equal(
@@ -674,7 +678,8 @@ class Program
                         .GetRoot()
                         .DescendantNodes()
                         .OfType<EqualsValueClauseSyntax>()
-                        .First().Value;
+                        .First()
+                        .Value;
                 Assert.Equal("(F = null)", syntax.ToString());
                 var typeInfo = model.GetTypeInfo(syntax);
                 var expectedNullability = expectedFlowState
@@ -1473,9 +1478,9 @@ partial class Program
 #nullable restore
     object F4 = null;
 }";
-            var options = TestOptions.ReleaseDll.WithNullableContextOptions(
-                NullableContextOptions.Disable
-            );
+            var options = TestOptions
+                .ReleaseDll
+                .WithNullableContextOptions(NullableContextOptions.Disable);
 
             verify(new[] { source1, source2 }, options, new string[0]);
 
@@ -2511,7 +2516,8 @@ _ = x.ToString();
                         .GetRoot()
                         .DescendantNodes()
                         .OfType<AssignmentExpressionSyntax>()
-                        .Single().Right;
+                        .Single()
+                        .Right;
                 Assert.Equal("obj", syntax.ToString());
                 var typeInfo = model.GetTypeInfo(syntax);
                 Assert.Equal(expectedFlowState, typeInfo.Nullability.FlowState);
@@ -3076,7 +3082,8 @@ string";
             CSharpCompilation.NullableData nullableData,
             bool requiredAnalysis = false
         ) =>
-            nullableData.Data
+            nullableData
+                .Data
                 .Where(pair => !requiredAnalysis || pair.Value.RequiredAnalysis)
                 .Select(pair => GetNullableDataKeyAsString(pair.Key))
                 .OrderBy(key => key)
@@ -3088,7 +3095,8 @@ string";
         )
         {
             toString ??= GetNullableDataKeyAsString;
-            return nullableData.Data
+            return nullableData
+                .Data
                 .Where(
                     pair =>
                         pair.Value.RequiredAnalysis

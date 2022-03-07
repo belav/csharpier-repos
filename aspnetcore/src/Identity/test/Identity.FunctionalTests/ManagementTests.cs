@@ -187,9 +187,12 @@ public abstract class ManagementTests<TStartup, TContext>
 
         // Assert 1
         Assert.NotNull(
-            principals[1].Identities
+            principals[1]
+                .Identities
                 .Single()
-                .Claims.Single(c => c.Type == ClaimTypes.AuthenticationMethod).Value
+                .Claims
+                .Single(c => c.Type == ClaimTypes.AuthenticationMethod)
+                .Value
         );
 
         // Act 2

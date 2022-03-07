@@ -87,9 +87,10 @@ namespace Microsoft.CodeAnalysis.Remote
         )
         {
             var solution = document.Project.Solution;
-            var persistenceService = solution.Workspace.Services.GetPersistentStorageService(
-                solution.Options
-            );
+            var persistenceService = solution
+                .Workspace
+                .Services
+                .GetPersistentStorageService(solution.Options);
             var storage = await persistenceService
                 .GetStorageAsync(SolutionKey.ToSolutionKey(solution), cancellationToken)
                 .ConfigureAwait(false);
@@ -379,9 +380,10 @@ namespace Microsoft.CodeAnalysis.Remote
             catch
             {
                 // We're reading and interpreting arbitrary data from disk.  This may be invalid for any reason.
-                Internal.Log.Logger.Log(
-                    FunctionId.RemoteSemanticClassificationCacheService_ExceptionInCacheRead
-                );
+                Internal
+                    .Log
+                    .Logger
+                    .Log(FunctionId.RemoteSemanticClassificationCacheService_ExceptionInCacheRead);
                 return default;
             }
         }

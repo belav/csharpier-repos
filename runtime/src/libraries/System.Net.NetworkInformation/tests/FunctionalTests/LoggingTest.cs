@@ -11,11 +11,9 @@ namespace System.Net.NetworkInformation.Tests
         [Fact]
         public void EventSource_ExistsWithCorrectId()
         {
-            Type esType = typeof(NetworkChange).Assembly.GetType(
-                "System.Net.NetEventSource",
-                throwOnError: false,
-                ignoreCase: false
-            );
+            Type esType = typeof(NetworkChange)
+                .Assembly
+                .GetType("System.Net.NetEventSource", throwOnError: false, ignoreCase: false);
             if (esType != null)
             {
                 Assert.Equal(

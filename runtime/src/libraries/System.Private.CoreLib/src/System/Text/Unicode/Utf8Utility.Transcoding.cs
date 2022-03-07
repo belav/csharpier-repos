@@ -1094,7 +1094,8 @@ namespace System.Text.Unicode
                                     nonAsciiUtf16DataMask
                                 );
                                 bool hasNonAsciiDataInVector =
-                                    AdvSimd.Arm64
+                                    AdvSimd
+                                        .Arm64
                                         .MinPairwise(isUtf16DataNonAscii, isUtf16DataNonAscii)
                                         .AsUInt64()
                                         .ToScalar() != 0;

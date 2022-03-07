@@ -133,9 +133,9 @@ namespace System.Runtime.Serialization.Xml.Tests
             );
             reader.ReadToFollowing("data");
             byte[] bytes = reader.ReadElementContentAsBinHex();
-            byte[] expected = Encoding.Unicode.GetBytes(
-                "The quick brown fox jumps over the lazy dog."
-            );
+            byte[] expected = Encoding
+                .Unicode
+                .GetBytes("The quick brown fox jumps over the lazy dog.");
             Assert.Equal(expected, bytes);
         }
 

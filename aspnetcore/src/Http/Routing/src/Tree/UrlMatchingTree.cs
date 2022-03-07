@@ -104,9 +104,9 @@ public class UrlMatchingTree
             // for the purposes of route matching.
             if (part.IsParameter && RemainingSegmentsAreOptional(entry.RouteTemplate.Segments, i))
             {
-                current.Matches.Add(
-                    new InboundMatch() { Entry = entry, TemplateMatcher = matcher }
-                );
+                current
+                    .Matches
+                    .Add(new InboundMatch() { Entry = entry, TemplateMatcher = matcher });
             }
 
             if (part.IsParameter && part.InlineConstraints.Any() && !part.IsCatchAll)
@@ -160,19 +160,21 @@ public class UrlMatchingTree
         }
 
         current.Matches.Add(new InboundMatch() { Entry = entry, TemplateMatcher = matcher });
-        current.Matches.Sort(
-            (x, y) =>
-            {
-                var result = x.Entry.Precedence.CompareTo(y.Entry.Precedence);
-                return result == 0
-                  ? string.Compare(
-                        x.Entry.RouteTemplate.TemplateText,
-                        y.Entry.RouteTemplate.TemplateText,
-                        StringComparison.Ordinal
-                    )
-                  : result;
-            }
-        );
+        current
+            .Matches
+            .Sort(
+                (x, y) =>
+                {
+                    var result = x.Entry.Precedence.CompareTo(y.Entry.Precedence);
+                    return result == 0
+                      ? string.Compare(
+                            x.Entry.RouteTemplate.TemplateText,
+                            y.Entry.RouteTemplate.TemplateText,
+                            StringComparison.Ordinal
+                        )
+                      : result;
+                }
+            );
     }
 
     private static bool RemainingSegmentsAreOptional(

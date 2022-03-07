@@ -356,11 +356,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                         .GetResult();
                     if (generatedDocument != null)
                     {
-                        _sourceGeneratedFileManager.Value.NavigateToSourceGeneratedFile(
-                            generatedDocument,
-                            getTextSpanForMapping(generatedDocument),
-                            cancellationToken
-                        );
+                        _sourceGeneratedFileManager
+                            .Value
+                            .NavigateToSourceGeneratedFile(
+                                generatedDocument,
+                                getTextSpanForMapping(generatedDocument),
+                                cancellationToken
+                            );
                         return true;
                     }
 
@@ -499,14 +501,16 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             // Instead, we invoke this in JTF run which will mitigate deadlocks when the ConfigureAwait(true)
             // tries to switch back to the main thread in the LSP client.
             // Link to LSP client bug for ConfigureAwait(true) - https://devdiv.visualstudio.com/DevDiv/_workitems/edit/1216657
-            var results = _threadingContext.JoinableTaskFactory.Run(
-                () =>
-                    spanMappingService.MapSpansAsync(
-                        generatedDocument,
-                        SpecializedCollections.SingletonEnumerable(textSpan),
-                        cancellationToken
-                    )
-            );
+            var results = _threadingContext
+                .JoinableTaskFactory
+                .Run(
+                    () =>
+                        spanMappingService.MapSpansAsync(
+                            generatedDocument,
+                            SpecializedCollections.SingletonEnumerable(textSpan),
+                            cancellationToken
+                        )
+                );
 
             if (!results.IsDefaultOrEmpty)
             {

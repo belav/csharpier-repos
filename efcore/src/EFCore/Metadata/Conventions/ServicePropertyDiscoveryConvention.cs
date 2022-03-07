@@ -75,11 +75,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                     continue;
                 }
 
-                var factory =
-                    Dependencies.MemberClassifier.FindServicePropertyCandidateBindingFactory(
-                        propertyInfo,
-                        model
-                    );
+                var factory = Dependencies
+                    .MemberClassifier
+                    .FindServicePropertyCandidateBindingFactory(propertyInfo, model);
                 if (factory == null)
                 {
                     continue;

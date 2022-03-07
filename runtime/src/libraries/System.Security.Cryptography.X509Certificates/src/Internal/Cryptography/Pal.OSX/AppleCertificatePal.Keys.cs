@@ -24,17 +24,16 @@ namespace Internal.Cryptography.Pal
 
             Debug.Assert(!_identityHandle.IsInvalid);
             SafeSecKeyRefHandle publicKey = Interop.AppleCrypto.X509GetPublicKey(_certHandle);
-            SafeSecKeyRefHandle privateKey = Interop.AppleCrypto.X509GetPrivateKeyFromIdentity(
-                _identityHandle
-            );
+            SafeSecKeyRefHandle privateKey = Interop
+                .AppleCrypto
+                .X509GetPrivateKeyFromIdentity(_identityHandle);
 
             if (publicKey.IsInvalid)
             {
                 // SecCertificateCopyKey returns null for DSA, so fall back to manually building it.
-                publicKey = Interop.AppleCrypto.ImportEphemeralKey(
-                    _certData.SubjectPublicKeyInfo,
-                    false
-                );
+                publicKey = Interop
+                    .AppleCrypto
+                    .ImportEphemeralKey(_certData.SubjectPublicKeyInfo, false);
             }
 
             return new DSAImplementation.DSASecurityTransforms(publicKey, privateKey);
@@ -72,10 +71,9 @@ namespace Internal.Cryptography.Pal
 
             using (PinAndClear.Track(ecPrivateKey))
             using (
-                SafeSecKeyRefHandle privateSecKey = Interop.AppleCrypto.ImportEphemeralKey(
-                    ecPrivateKey,
-                    true
-                )
+                SafeSecKeyRefHandle privateSecKey = Interop
+                    .AppleCrypto
+                    .ImportEphemeralKey(ecPrivateKey, true)
             )
             {
                 return CopyWithPrivateKey(privateSecKey);
@@ -96,10 +94,9 @@ namespace Internal.Cryptography.Pal
 
             using (PinAndClear.Track(ecPrivateKey))
             using (
-                SafeSecKeyRefHandle privateSecKey = Interop.AppleCrypto.ImportEphemeralKey(
-                    ecPrivateKey,
-                    true
-                )
+                SafeSecKeyRefHandle privateSecKey = Interop
+                    .AppleCrypto
+                    .ImportEphemeralKey(ecPrivateKey, true)
             )
             {
                 return CopyWithPrivateKey(privateSecKey);
@@ -119,10 +116,9 @@ namespace Internal.Cryptography.Pal
 
             using (PinAndClear.Track(rsaPrivateKey))
             using (
-                SafeSecKeyRefHandle privateSecKey = Interop.AppleCrypto.ImportEphemeralKey(
-                    rsaPrivateKey,
-                    true
-                )
+                SafeSecKeyRefHandle privateSecKey = Interop
+                    .AppleCrypto
+                    .ImportEphemeralKey(rsaPrivateKey, true)
             )
             {
                 return CopyWithPrivateKey(privateSecKey);
@@ -138,9 +134,9 @@ namespace Internal.Cryptography.Pal
                 throw new CryptographicException(SR.Cryptography_CSP_NoPrivateKey);
             }
 
-            SafeKeychainHandle keychain = Interop.AppleCrypto.SecKeychainItemCopyKeychain(
-                privateKey
-            );
+            SafeKeychainHandle keychain = Interop
+                .AppleCrypto
+                .SecKeychainItemCopyKeychain(privateKey);
 
             // If we're using a key already in a keychain don't add the certificate to that keychain here,
             // do it in the temporary add/remove in the shim.
@@ -170,14 +166,16 @@ namespace Internal.Cryptography.Pal
                 byte[] export = RawData;
                 const bool exportable = false;
                 SafeSecIdentityHandle identityHandle;
-                tempHandle = Interop.AppleCrypto.X509ImportCertificate(
-                    export,
-                    X509ContentType.Cert,
-                    SafePasswordHandle.InvalidHandle,
-                    cloneKeychain,
-                    exportable,
-                    out identityHandle
-                );
+                tempHandle = Interop
+                    .AppleCrypto
+                    .X509ImportCertificate(
+                        export,
+                        X509ContentType.Cert,
+                        SafePasswordHandle.InvalidHandle,
+                        cloneKeychain,
+                        exportable,
+                        out identityHandle
+                    );
 
                 Debug.Assert(identityHandle.IsInvalid, "identityHandle should be IsInvalid");
                 identityHandle.Dispose();
@@ -188,11 +186,9 @@ namespace Internal.Cryptography.Pal
             using (keychain)
             using (tempHandle)
             {
-                SafeSecIdentityHandle identityHandle = Interop.AppleCrypto.X509CopyWithPrivateKey(
-                    tempHandle,
-                    privateKey,
-                    keychain
-                );
+                SafeSecIdentityHandle identityHandle = Interop
+                    .AppleCrypto
+                    .X509CopyWithPrivateKey(tempHandle, privateKey, keychain);
 
                 AppleCertificatePal newPal = new AppleCertificatePal(identityHandle);
                 return newPal;

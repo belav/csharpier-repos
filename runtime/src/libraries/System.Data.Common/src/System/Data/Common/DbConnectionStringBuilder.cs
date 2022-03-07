@@ -33,9 +33,10 @@ namespace System.Data.Common
         private readonly bool _useOdbcRules;
 
         private static int s_objectTypeCount; // Bid counter
-        internal readonly int _objectID = System.Threading.Interlocked.Increment(
-            ref s_objectTypeCount
-        );
+        internal readonly int _objectID = System
+            .Threading
+            .Interlocked
+            .Increment(ref s_objectTypeCount);
 
         public DbConnectionStringBuilder() { }
 
@@ -79,11 +80,13 @@ namespace System.Data.Common
         {
             get
             {
-                DataCommonEventSource.Log.Trace(
-                    "<comm.DbConnectionStringBuilder.get_Item|API> {0}, keyword='{1}'",
-                    ObjectID,
-                    keyword
-                );
+                DataCommonEventSource
+                    .Log
+                    .Trace(
+                        "<comm.DbConnectionStringBuilder.get_Item|API> {0}, keyword='{1}'",
+                        ObjectID,
+                        keyword
+                    );
                 ADP.CheckArgumentNull(keyword, nameof(keyword));
                 object? value;
                 if (CurrentValues.TryGetValue(keyword, out value))
@@ -138,10 +141,12 @@ namespace System.Data.Common
         {
             get
             {
-                DataCommonEventSource.Log.Trace(
-                    "<comm.DbConnectionStringBuilder.get_ConnectionString|API> {0}",
-                    ObjectID
-                );
+                DataCommonEventSource
+                    .Log
+                    .Trace(
+                        "<comm.DbConnectionStringBuilder.get_ConnectionString|API> {0}",
+                        ObjectID
+                    );
                 string? connectionString = _connectionString;
                 if (null == connectionString)
                 {
@@ -163,10 +168,12 @@ namespace System.Data.Common
             }
             set
             {
-                DataCommonEventSource.Log.Trace(
-                    "<comm.DbConnectionStringBuilder.set_ConnectionString|API> {0}",
-                    ObjectID
-                );
+                DataCommonEventSource
+                    .Log
+                    .Trace(
+                        "<comm.DbConnectionStringBuilder.set_ConnectionString|API> {0}",
+                        ObjectID
+                    );
                 DbConnectionOptions constr = new DbConnectionOptions(value, null, _useOdbcRules);
                 string originalValue = ConnectionString;
                 Clear();
@@ -224,10 +231,9 @@ namespace System.Data.Common
         {
             get
             {
-                DataCommonEventSource.Log.Trace(
-                    "<comm.DbConnectionStringBuilder.Keys|API> {0}",
-                    ObjectID
-                );
+                DataCommonEventSource
+                    .Log
+                    .Trace("<comm.DbConnectionStringBuilder.Keys|API> {0}", ObjectID);
                 return Dictionary.Keys;
             }
         }
@@ -247,10 +253,9 @@ namespace System.Data.Common
         {
             get
             {
-                DataCommonEventSource.Log.Trace(
-                    "<comm.DbConnectionStringBuilder.Values|API> {0}",
-                    ObjectID
-                );
+                DataCommonEventSource
+                    .Log
+                    .Trace("<comm.DbConnectionStringBuilder.Values|API> {0}", ObjectID);
                 ICollection<string> keys = (ICollection<string>)Keys;
                 IEnumerator<string> keylist = keys.GetEnumerator();
                 object[] values = new object[keys.Count];
@@ -321,10 +326,9 @@ namespace System.Data.Common
 
         void ICollection.CopyTo(Array array, int index)
         {
-            DataCommonEventSource.Log.Trace(
-                "<comm.DbConnectionStringBuilder.ICollection.CopyTo|API> {0}",
-                ObjectID
-            );
+            DataCommonEventSource
+                .Log
+                .Trace("<comm.DbConnectionStringBuilder.ICollection.CopyTo|API> {0}", ObjectID);
             Collection.CopyTo(array, index);
         }
 
@@ -332,11 +336,13 @@ namespace System.Data.Common
         {
             ADP.CheckArgumentNull(connectionStringBuilder, nameof(connectionStringBuilder));
 
-            DataCommonEventSource.Log.Trace(
-                "<comm.DbConnectionStringBuilder.EquivalentTo|API> {0}, connectionStringBuilder={1}",
-                ObjectID,
-                connectionStringBuilder.ObjectID
-            );
+            DataCommonEventSource
+                .Log
+                .Trace(
+                    "<comm.DbConnectionStringBuilder.EquivalentTo|API> {0}, connectionStringBuilder={1}",
+                    ObjectID,
+                    connectionStringBuilder.ObjectID
+                );
             if (
                 (GetType() != connectionStringBuilder.GetType())
                 || (CurrentValues.Count != connectionStringBuilder.CurrentValues.Count)
@@ -360,19 +366,23 @@ namespace System.Data.Common
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            DataCommonEventSource.Log.Trace(
-                "<comm.DbConnectionStringBuilder.IEnumerable.GetEnumerator|API> {0}",
-                ObjectID
-            );
+            DataCommonEventSource
+                .Log
+                .Trace(
+                    "<comm.DbConnectionStringBuilder.IEnumerable.GetEnumerator|API> {0}",
+                    ObjectID
+                );
             return Collection.GetEnumerator();
         }
 
         IDictionaryEnumerator IDictionary.GetEnumerator()
         {
-            DataCommonEventSource.Log.Trace(
-                "<comm.DbConnectionStringBuilder.IDictionary.GetEnumerator|API> {0}",
-                ObjectID
-            );
+            DataCommonEventSource
+                .Log
+                .Trace(
+                    "<comm.DbConnectionStringBuilder.IDictionary.GetEnumerator|API> {0}",
+                    ObjectID
+                );
             return Dictionary.GetEnumerator();
         }
 
@@ -396,11 +406,13 @@ namespace System.Data.Common
 
         public virtual bool Remove(string keyword)
         {
-            DataCommonEventSource.Log.Trace(
-                "<comm.DbConnectionStringBuilder.Remove|API> {0}, keyword='{1}'",
-                ObjectID,
-                keyword
-            );
+            DataCommonEventSource
+                .Log
+                .Trace(
+                    "<comm.DbConnectionStringBuilder.Remove|API> {0}, keyword='{1}'",
+                    ObjectID,
+                    keyword
+                );
             ADP.CheckArgumentNull(keyword, nameof(keyword));
             if (CurrentValues.Remove(keyword))
             {
@@ -450,10 +462,12 @@ namespace System.Data.Common
             PropertyDescriptorCollection? propertyDescriptors = _propertyDescriptors;
             if (null == propertyDescriptors)
             {
-                long logScopeId = DataCommonEventSource.Log.EnterScope(
-                    "<comm.DbConnectionStringBuilder.GetProperties|INFO> {0}",
-                    ObjectID
-                );
+                long logScopeId = DataCommonEventSource
+                    .Log
+                    .EnterScope(
+                        "<comm.DbConnectionStringBuilder.GetProperties|INFO> {0}",
+                        ObjectID
+                    );
                 try
                 {
                     Hashtable descriptors = new Hashtable(StringComparer.OrdinalIgnoreCase);
@@ -484,10 +498,9 @@ namespace System.Data.Common
         )]
         protected virtual void GetProperties(Hashtable propertyDescriptors)
         {
-            long logScopeId = DataCommonEventSource.Log.EnterScope(
-                "<comm.DbConnectionStringBuilder.GetProperties|API> {0}",
-                ObjectID
-            );
+            long logScopeId = DataCommonEventSource
+                .Log
+                .EnterScope("<comm.DbConnectionStringBuilder.GetProperties|API> {0}", ObjectID);
             try
             {
                 // Below call is necessary to tell the trimmer that it should mark derived types appropriately.
@@ -566,14 +579,12 @@ namespace System.Data.Common
 
                             Attribute[]? useAttributes = null;
                             if (
-                                StringComparer.OrdinalIgnoreCase.Equals(
-                                    DbConnectionStringKeywords.Password,
-                                    keyword
-                                )
-                                || StringComparer.OrdinalIgnoreCase.Equals(
-                                    DbConnectionStringSynonyms.Pwd,
-                                    keyword
-                                )
+                                StringComparer
+                                    .OrdinalIgnoreCase
+                                    .Equals(DbConnectionStringKeywords.Password, keyword)
+                                || StringComparer
+                                    .OrdinalIgnoreCase
+                                    .Equals(DbConnectionStringSynonyms.Pwd, keyword)
                             )
                             {
                                 useAttributes = new Attribute[]

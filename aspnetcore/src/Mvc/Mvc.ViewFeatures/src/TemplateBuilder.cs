@@ -146,9 +146,9 @@ internal class TemplateBuilder
         }
 
         viewData.TemplateInfo.FormattedModelValue = formattedModelValue;
-        viewData.TemplateInfo.HtmlFieldPrefix = _viewData.TemplateInfo.GetFullHtmlFieldName(
-            _htmlFieldName
-        );
+        viewData.TemplateInfo.HtmlFieldPrefix = _viewData
+            .TemplateInfo
+            .GetFullHtmlFieldName(_htmlFieldName);
 
         if (_additionalViewData != null)
         {

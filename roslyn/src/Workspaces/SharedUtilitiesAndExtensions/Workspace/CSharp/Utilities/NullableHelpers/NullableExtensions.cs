@@ -9,9 +9,9 @@ namespace Microsoft.CodeAnalysis
         public static ITypeSymbol? GetConvertedTypeWithAnnotatedNullability(
             this TypeInfo typeInfo
         ) =>
-            typeInfo.ConvertedType?.WithNullableAnnotation(
-                typeInfo.ConvertedNullability.Annotation
-            );
+            typeInfo
+                .ConvertedType
+                ?.WithNullableAnnotation(typeInfo.ConvertedNullability.Annotation);
 
         public static ITypeSymbol? GetTypeWithAnnotatedNullability(this TypeInfo typeInfo) =>
             typeInfo.Type?.WithNullableAnnotation(typeInfo.Nullability.Annotation);

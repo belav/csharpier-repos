@@ -145,12 +145,14 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
                         controlFlowGraph
                     );
                     Debug.Assert(
-                        LValueFlowCapturesInGraph.Values.All(
-                            kind =>
-                                kind
-                                    is FlowCaptureKind.LValueCapture
-                                        or FlowCaptureKind.LValueAndRValueCapture
-                        )
+                        LValueFlowCapturesInGraph
+                            .Values
+                            .All(
+                                kind =>
+                                    kind
+                                        is FlowCaptureKind.LValueCapture
+                                            or FlowCaptureKind.LValueAndRValueCapture
+                            )
                     );
 
                     _symbolWritesInsideBlockRangeMap = PooledDictionary<

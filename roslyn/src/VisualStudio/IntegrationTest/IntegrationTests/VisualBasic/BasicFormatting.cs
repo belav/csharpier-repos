@@ -36,13 +36,16 @@ namespace Roslyn.VisualStudio.IntegrationTests.VisualBasic
             SetUpEditor(testCode);
 
             VisualStudio.Editor.FormatDocument();
-            VisualStudio.Editor.Verify.TextContains(
-                @"Module A
+            VisualStudio
+                .Editor
+                .Verify
+                .TextContains(
+                    @"Module A
     Sub Main(args As String())
 
     End Sub
 End Module"
-            );
+                );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.Formatting)]
@@ -54,11 +57,14 @@ $$module A
 end module"
             );
             VisualStudio.Editor.FormatDocument();
-            VisualStudio.Editor.Verify.TextContains(
-                @"
+            VisualStudio
+                .Editor
+                .Verify
+                .TextContains(
+                    @"
 Module A
 End Module"
-            );
+                );
         }
 
         [
@@ -75,24 +81,24 @@ Module Program
     End Function
 End Module"
             );
-            VisualStudio.Workspace.WaitForAsyncOperations(
-                Helper.HangMitigatingTimeout,
-                FeatureAttribute.Workspace
-            );
-            VisualStudio.Editor.SendKeys(
-                "(o",
-                new KeyPress(VirtualKey.Enter, ShiftState.Shift),
-                "'comment"
-            );
-            VisualStudio.Editor.Verify.TextContains(
-                @"
+            VisualStudio
+                .Workspace
+                .WaitForAsyncOperations(Helper.HangMitigatingTimeout, FeatureAttribute.Workspace);
+            VisualStudio
+                .Editor
+                .SendKeys("(o", new KeyPress(VirtualKey.Enter, ShiftState.Shift), "'comment");
+            VisualStudio
+                .Editor
+                .Verify
+                .TextContains(
+                    @"
 Module Program
     Function Main(ooo As Object) As Object
         Return Main(ooo)
         'comment
     End Function
 End Module"
-            );
+                );
         }
     }
 }

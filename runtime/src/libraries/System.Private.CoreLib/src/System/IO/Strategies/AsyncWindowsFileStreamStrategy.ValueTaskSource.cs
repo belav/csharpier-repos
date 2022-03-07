@@ -42,9 +42,10 @@ namespace System.IO.Strategies
                 _result = TaskSourceCodes.NoResult;
 
                 _handle = memory.Pin();
-                _overlapped = _strategy._fileHandle.ThreadPoolBinding!.AllocateNativeOverlapped(
-                    _preallocatedOverlapped
-                );
+                _overlapped = _strategy
+                    ._fileHandle
+                    .ThreadPoolBinding!
+                    .AllocateNativeOverlapped(_preallocatedOverlapped);
 
                 return _overlapped;
             }

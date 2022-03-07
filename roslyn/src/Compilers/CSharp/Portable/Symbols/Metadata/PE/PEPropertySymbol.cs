@@ -111,9 +111,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
 
             if (propEx != null || isBad)
             {
-                result._lazyCachedUseSiteInfo.Initialize(
-                    new CSDiagnosticInfo(ErrorCode.ERR_BindToBogus, result)
-                );
+                result
+                    ._lazyCachedUseSiteInfo
+                    .Initialize(new CSDiagnosticInfo(ErrorCode.ERR_BindToBogus, result));
             }
 
             return result;
@@ -659,10 +659,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
         {
             get
             {
-                return _containingType.ContainingPEModule.MetadataLocation.Cast<
-                    MetadataLocation,
-                    Location
-                >();
+                return _containingType
+                    .ContainingPEModule
+                    .MetadataLocation
+                    .Cast<MetadataLocation, Location>();
             }
         }
 

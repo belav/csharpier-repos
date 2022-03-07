@@ -98,9 +98,9 @@ public class ApiActionsDoNotRequireExplicitModelValidationCheckAnalyzer : Diagno
                 }
 
 #pragma warning disable RS1030 // Do not invoke Compilation.GetSemanticModel() method within a diagnostic analyzer
-                var semanticModel = operationAnalysisContext.Compilation.GetSemanticModel(
-                    methodSyntax.SyntaxTree
-                );
+                var semanticModel = operationAnalysisContext
+                    .Compilation
+                    .GetSemanticModel(methodSyntax.SyntaxTree);
 #pragma warning restore RS1030 // Do not invoke Compilation.GetSemanticModel() method within a diagnostic analyzer
                 var methodSymbol = semanticModel.GetDeclaredSymbol(
                     methodSyntax,
@@ -252,10 +252,9 @@ public class ApiActionsDoNotRequireExplicitModelValidationCheckAnalyzer : Diagno
         }
 
         if (
-            !SymbolEqualityComparer.Default.Equals(
-                propertyReference.Member.ContainingType,
-                symbolCache.ModelStateDictionary
-            )
+            !SymbolEqualityComparer
+                .Default
+                .Equals(propertyReference.Member.ContainingType, symbolCache.ModelStateDictionary)
         )
         {
             return false;

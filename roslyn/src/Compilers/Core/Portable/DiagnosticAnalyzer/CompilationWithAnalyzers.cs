@@ -155,9 +155,11 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 
             compilation = compilation
                 .WithOptions(
-                    compilation.Options.WithReportSuppressedDiagnostics(
-                        analysisOptions.ReportSuppressedDiagnostics
-                    )
+                    compilation
+                        .Options
+                        .WithReportSuppressedDiagnostics(
+                            analysisOptions.ReportSuppressedDiagnostics
+                        )
                 )
                 .WithSemanticModelProvider(new CachingSemanticModelProvider())
                 .WithEventQueue(new AsyncQueue<CompilationEvent>());
@@ -1984,10 +1986,9 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             {
                 if (diagnostic != null)
                 {
-                    var effectiveDiagnostic = compilation.Options.FilterDiagnostic(
-                        diagnostic,
-                        CancellationToken.None
-                    );
+                    var effectiveDiagnostic = compilation
+                        .Options
+                        .FilterDiagnostic(diagnostic, CancellationToken.None);
                     if (effectiveDiagnostic != null)
                     {
                         yield return suppressMessageState.ApplySourceSuppressions(

@@ -431,9 +431,9 @@ namespace System.Data.Tests
 
                     try
                     {
-                        child.Constraints.Add(
-                            new ForeignKeyConstraint(parent.Columns[0], child.Columns[0])
-                        );
+                        child
+                            .Constraints
+                            .Add(new ForeignKeyConstraint(parent.Columns[0], child.Columns[0]));
                     }
                     finally
                     {
@@ -456,9 +456,9 @@ namespace System.Data.Tests
             try
             {
                 _ds.EnforceConstraints = false;
-                child.Constraints.Add(
-                    new ForeignKeyConstraint(parent.Columns[0], child.Columns[0])
-                );
+                child
+                    .Constraints
+                    .Add(new ForeignKeyConstraint(parent.Columns[0], child.Columns[0]));
             }
             finally
             {

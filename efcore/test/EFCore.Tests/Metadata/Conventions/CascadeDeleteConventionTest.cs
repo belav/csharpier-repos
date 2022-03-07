@@ -76,7 +76,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                     .Entity<Blog>()
                     .HasMany(e => e.Posts)
                     .WithOne(e => e.Blog)
-                    .OnDelete(DeleteBehavior.Cascade).Metadata;
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .Metadata;
 
             Assert.Equal(DeleteBehavior.Cascade, fk.DeleteBehavior);
         }
@@ -93,7 +94,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                     .Entity<Blog>()
                     .HasMany(e => e.Posts)
                     .WithOne(e => e.Blog)
-                    .OnDelete(DeleteBehavior.Cascade).Metadata;
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .Metadata;
 
             modelBuilder.Entity<Post>().Property(e => e.BlogId).IsRequired(false);
 

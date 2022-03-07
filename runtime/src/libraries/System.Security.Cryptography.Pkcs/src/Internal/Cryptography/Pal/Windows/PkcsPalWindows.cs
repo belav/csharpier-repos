@@ -43,39 +43,45 @@ namespace Internal.Cryptography.Pal.Windows
         public sealed override Oid GetEncodedMessageType(ReadOnlySpan<byte> encodedMessage)
         {
             using (
-                SafeCryptMsgHandle hCryptMsg = Interop.Crypt32.CryptMsgOpenToDecode(
-                    MsgEncodingType.All,
-                    0,
-                    0,
-                    IntPtr.Zero,
-                    IntPtr.Zero,
-                    IntPtr.Zero
-                )
+                SafeCryptMsgHandle hCryptMsg = Interop
+                    .Crypt32
+                    .CryptMsgOpenToDecode(
+                        MsgEncodingType.All,
+                        0,
+                        0,
+                        IntPtr.Zero,
+                        IntPtr.Zero,
+                        IntPtr.Zero
+                    )
             )
             {
                 if (hCryptMsg == null || hCryptMsg.IsInvalid)
                     throw Marshal.GetLastWin32Error().ToCryptographicException();
 
                 if (
-                    !Interop.Crypt32.CryptMsgUpdate(
-                        hCryptMsg,
-                        ref MemoryMarshal.GetReference(encodedMessage),
-                        encodedMessage.Length,
-                        fFinal: true
-                    )
+                    !Interop
+                        .Crypt32
+                        .CryptMsgUpdate(
+                            hCryptMsg,
+                            ref MemoryMarshal.GetReference(encodedMessage),
+                            encodedMessage.Length,
+                            fFinal: true
+                        )
                 )
                     throw Marshal.GetLastWin32Error().ToCryptographicException();
 
                 int msgTypeAsInt;
                 int cbSize = sizeof(int);
                 if (
-                    !Interop.Crypt32.CryptMsgGetParam(
-                        hCryptMsg,
-                        CryptMsgParamType.CMSG_TYPE_PARAM,
-                        0,
-                        out msgTypeAsInt,
-                        ref cbSize
-                    )
+                    !Interop
+                        .Crypt32
+                        .CryptMsgGetParam(
+                            hCryptMsg,
+                            CryptMsgParamType.CMSG_TYPE_PARAM,
+                            0,
+                            out msgTypeAsInt,
+                            ref cbSize
+                        )
                 )
                     throw Marshal.GetLastWin32Error().ToCryptographicException();
 
@@ -200,12 +206,14 @@ namespace Internal.Cryptography.Pal.Windows
                     {
                         CngKeyHandleOpenOptions options = CngKeyHandleOpenOptions.None;
                         byte clrIsEphemeral = 0;
-                        Interop.NCrypt.ErrorCode errorCode = Interop.NCrypt.NCryptGetByteProperty(
-                            keyHandle,
-                            "CLR IsEphemeral",
-                            ref clrIsEphemeral,
-                            CngPropertyOptions.CustomProperty
-                        );
+                        Interop.NCrypt.ErrorCode errorCode = Interop
+                            .NCrypt
+                            .NCryptGetByteProperty(
+                                keyHandle,
+                                "CLR IsEphemeral",
+                                ref clrIsEphemeral,
+                                CngPropertyOptions.CustomProperty
+                            );
 
                         if (
                             errorCode == Interop.NCrypt.ErrorCode.ERROR_SUCCESS
@@ -291,12 +299,14 @@ namespace Internal.Cryptography.Pal.Windows
                 int cbSize = IntPtr.Size;
 
                 if (
-                    Interop.Crypt32.CertGetCertificateContextProperty(
-                        hCertContext,
-                        CertContextPropId.CERT_NCRYPT_KEY_HANDLE_PROP_ID,
-                        out hKey,
-                        ref cbSize
-                    )
+                    Interop
+                        .Crypt32
+                        .CertGetCertificateContextProperty(
+                            hCertContext,
+                            CertContextPropId.CERT_NCRYPT_KEY_HANDLE_PROP_ID,
+                            out hKey,
+                            ref cbSize
+                        )
                 )
                 {
                     exception = null;
@@ -305,14 +315,16 @@ namespace Internal.Cryptography.Pal.Windows
                 }
 
                 if (
-                    !Interop.Crypt32.CryptAcquireCertificatePrivateKey(
-                        hCertContext,
-                        flags,
-                        IntPtr.Zero,
-                        out hKey,
-                        out keySpec,
-                        out mustFree
-                    )
+                    !Interop
+                        .Crypt32
+                        .CryptAcquireCertificatePrivateKey(
+                            hCertContext,
+                            flags,
+                            IntPtr.Zero,
+                            out hKey,
+                            out keySpec,
+                            out mustFree
+                        )
                 )
                 {
                     exception = Marshal.GetHRForLastWin32Error().ToCryptographicException();

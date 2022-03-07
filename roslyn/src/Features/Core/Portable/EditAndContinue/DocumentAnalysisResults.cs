@@ -134,11 +134,13 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                     Debug.Assert(
                         lineEditsOpt.All(
                             documentLineEdits =>
-                                documentLineEdits.LineUpdates.IsSorted(
-                                    Comparer<SourceLineUpdate>.Create(
-                                        (x, y) => x.OldLine.CompareTo(y.OldLine)
+                                documentLineEdits
+                                    .LineUpdates
+                                    .IsSorted(
+                                        Comparer<SourceLineUpdate>.Create(
+                                            (x, y) => x.OldLine.CompareTo(y.OldLine)
+                                        )
                                     )
-                                )
                         )
                     );
 

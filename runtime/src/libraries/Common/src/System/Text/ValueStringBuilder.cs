@@ -300,9 +300,14 @@ namespace System.Text
             );
 
             // Make sure to let Rent throw an exception if the caller has a bug and the desired capacity is negative
-            char[] poolArray = ArrayPool<char>.Shared.Rent(
-                (int)Math.Max((uint)(_pos + additionalCapacityBeyondPos), (uint)_chars.Length * 2)
-            );
+            char[] poolArray = ArrayPool<char>
+                .Shared
+                .Rent(
+                    (int)Math.Max(
+                        (uint)(_pos + additionalCapacityBeyondPos),
+                        (uint)_chars.Length * 2
+                    )
+                );
 
             _chars.Slice(0, _pos).CopyTo(poolArray);
 

@@ -181,7 +181,9 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Options
 
             BindToOption(
                 Show_guides_for_declaration_level_constructs,
-                BlockStructureOptions.Metadata.ShowBlockStructureGuidesForDeclarationLevelConstructs,
+                BlockStructureOptions
+                    .Metadata
+                    .ShowBlockStructureGuidesForDeclarationLevelConstructs,
                 LanguageNames.CSharp
             );
             BindToOption(

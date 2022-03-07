@@ -172,10 +172,12 @@ namespace System.Diagnostics.Tests
                                         )
                                         {
                                             Assert.True(
-                                                System.Enum.IsDefined(
-                                                    typeof(StandardEventLevel),
-                                                    eventLevel.Value
-                                                )
+                                                System
+                                                    .Enum
+                                                    .IsDefined(
+                                                        typeof(StandardEventLevel),
+                                                        eventLevel.Value
+                                                    )
                                             );
                                             Assert.Contains(
                                                 eventLevel.Name.Substring(4),
@@ -215,10 +217,12 @@ namespace System.Diagnostics.Tests
                                         if (keyword.Name != null && keyword.Name.StartsWith(Prefix))
                                         {
                                             Assert.True(
-                                                System.Enum.IsDefined(
-                                                    typeof(StandardEventKeywords),
-                                                    keyword.Value
-                                                )
+                                                System
+                                                    .Enum
+                                                    .IsDefined(
+                                                        typeof(StandardEventKeywords),
+                                                        keyword.Value
+                                                    )
                                             );
                                         }
                                     }

@@ -74,19 +74,24 @@ namespace System.Net.Http
                     eppStruct.pwszServerName = (ushort*)namePtr; // The native field is WCHAR*, so we can just cast to ushort in this case
                     cppStruct.dwFlags =
                         Interop.Crypt32.CertChainPolicyIgnoreFlags.CERT_CHAIN_POLICY_IGNORE_ALL
-                        & ~Interop.Crypt32.CertChainPolicyIgnoreFlags.CERT_CHAIN_POLICY_IGNORE_INVALID_NAME_FLAG;
+                        & ~Interop
+                            .Crypt32
+                            .CertChainPolicyIgnoreFlags
+                            .CERT_CHAIN_POLICY_IGNORE_INVALID_NAME_FLAG;
 
                     Debug.Assert(chain.SafeHandle != null);
 
                     Interop.Crypt32.CERT_CHAIN_POLICY_STATUS status = default;
                     status.cbSize = (uint)sizeof(Interop.Crypt32.CERT_CHAIN_POLICY_STATUS);
                     if (
-                        Interop.Crypt32.CertVerifyCertificateChainPolicy(
-                            (IntPtr)Interop.Crypt32.CertChainPolicy.CERT_CHAIN_POLICY_SSL,
-                            chain.SafeHandle,
-                            ref cppStruct,
-                            ref status
-                        )
+                        Interop
+                            .Crypt32
+                            .CertVerifyCertificateChainPolicy(
+                                (IntPtr)Interop.Crypt32.CertChainPolicy.CERT_CHAIN_POLICY_SSL,
+                                chain.SafeHandle,
+                                ref cppStruct,
+                                ref status
+                            )
                     )
                     {
                         if (

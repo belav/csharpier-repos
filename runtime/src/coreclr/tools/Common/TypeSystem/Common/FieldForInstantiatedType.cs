@@ -38,10 +38,9 @@ namespace Internal.TypeSystem
         {
             get
             {
-                return _fieldDef.FieldType.InstantiateSignature(
-                    _instantiatedType.Instantiation,
-                    new Instantiation()
-                );
+                return _fieldDef
+                    .FieldType
+                    .InstantiateSignature(_instantiatedType.Instantiation, new Instantiation());
             }
         }
 

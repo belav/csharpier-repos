@@ -241,7 +241,8 @@ namespace System.Web.Razor.Test.Generator
 
                     Assert.Equal(
                         expectedDesignTimePragmas.ToArray(),
-                        results.DesignTimeLineMappings
+                        results
+                            .DesignTimeLineMappings
                             .OrderBy(p => p.Key)
                             .Select(p => p.Value)
                             .ToArray()

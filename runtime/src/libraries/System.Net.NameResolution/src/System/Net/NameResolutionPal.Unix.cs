@@ -194,16 +194,18 @@ namespace System.Net
             addr.TryWriteBytes(new Span<byte>(rawAddress, rawAddressLength), out int bytesWritten);
             Debug.Assert(bytesWritten == rawAddressLength);
 
-            int error = Interop.Sys.GetNameInfo(
-                rawAddress,
-                (uint)rawAddressLength,
-                isIPv6,
-                buffer,
-                Interop.Sys.NI_MAXHOST,
-                null,
-                0,
-                Interop.Sys.GetNameInfoFlags.NI_NAMEREQD
-            );
+            int error = Interop
+                .Sys
+                .GetNameInfo(
+                    rawAddress,
+                    (uint)rawAddressLength,
+                    isIPv6,
+                    buffer,
+                    Interop.Sys.NI_MAXHOST,
+                    null,
+                    0,
+                    Interop.Sys.GetNameInfoFlags.NI_NAMEREQD
+                );
 
             socketError = GetSocketErrorForNativeError(error);
             nativeErrorCode = error;

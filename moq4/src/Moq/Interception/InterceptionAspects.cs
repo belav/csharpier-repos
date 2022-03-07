@@ -127,10 +127,11 @@ namespace Moq
                     && invocation.Method.IsEventAddAccessor()
                 )
                 {
-                    var implementingMethod = invocation.Method.GetImplementingMethod(
-                        invocation.ProxyType
-                    );
-                    var @event = implementingMethod.DeclaringType
+                    var implementingMethod = invocation
+                        .Method
+                        .GetImplementingMethod(invocation.ProxyType);
+                    var @event = implementingMethod
+                        .DeclaringType
                         .GetEvents(bindingFlags)
                         .SingleOrDefault(e => e.GetAddMethod(true) == implementingMethod);
                     if (@event != null)
@@ -157,10 +158,11 @@ namespace Moq
                     && invocation.Method.IsEventRemoveAccessor()
                 )
                 {
-                    var implementingMethod = invocation.Method.GetImplementingMethod(
-                        invocation.ProxyType
-                    );
-                    var @event = implementingMethod.DeclaringType
+                    var implementingMethod = invocation
+                        .Method
+                        .GetImplementingMethod(invocation.ProxyType);
+                    var @event = implementingMethod
+                        .DeclaringType
                         .GetEvents(bindingFlags)
                         .SingleOrDefault(e => e.GetRemoveMethod(true) == implementingMethod);
                     if (@event != null)
@@ -221,10 +223,9 @@ namespace Moq
             }
 
             string propertyName = invocationMethod.Name.Substring(AccessorPrefixLength);
-            PropertyInfo property = invocationMethod.DeclaringType.GetProperty(
-                propertyName,
-                Type.EmptyTypes
-            );
+            PropertyInfo property = invocationMethod
+                .DeclaringType
+                .GetProperty(propertyName, Type.EmptyTypes);
             Debug.Assert(property != null);
 
             bool accessorFound =

@@ -1557,18 +1557,15 @@ namespace System.Net.WebSockets
                     bool ownsCancellationTokenSource = false;
                     try
                     {
-                        ownsCancellationTokenSource =
-                            thisPtr._sendOutstandingOperationHelper.TryStartOperation(
-                                CancellationToken.None,
-                                out linkedCancellationToken
-                            );
+                        ownsCancellationTokenSource = thisPtr
+                            ._sendOutstandingOperationHelper
+                            .TryStartOperation(CancellationToken.None, out linkedCancellationToken);
                         if (ownsCancellationTokenSource)
                         {
                             thisPtr.EnsureKeepAliveOperation();
-                            thisPtr._keepAliveTask = thisPtr._keepAliveOperation!.Process(
-                                null,
-                                linkedCancellationToken
-                            );
+                            thisPtr._keepAliveTask = thisPtr
+                                ._keepAliveOperation!
+                                .Process(null, linkedCancellationToken);
                             ReleaseLock(thisPtr.SessionHandle, ref lockTaken);
                             await thisPtr._keepAliveTask!.SuppressContextFlow();
                         }
@@ -1579,9 +1576,9 @@ namespace System.Net.WebSockets
                         {
                             Monitor.Enter(thisPtr.SessionHandle, ref lockTaken);
                         }
-                        thisPtr._sendOutstandingOperationHelper.CompleteOperation(
-                            ownsCancellationTokenSource
-                        );
+                        thisPtr
+                            ._sendOutstandingOperationHelper
+                            .CompleteOperation(ownsCancellationTokenSource);
                         thisPtr._keepAliveTask = null;
                     }
 
@@ -1787,8 +1784,9 @@ namespace System.Net.WebSockets
                                     int count = 0;
                                     try
                                     {
-                                        ArraySegment<byte> payload =
-                                            _webSocket._internalBuffer.ConvertNativeBuffer(
+                                        ArraySegment<byte> payload = _webSocket
+                                            ._internalBuffer
+                                            .ConvertNativeBuffer(
                                                 action,
                                                 dataBuffers[0],
                                                 bufferType
@@ -1804,12 +1802,14 @@ namespace System.Net.WebSockets
                                         );
                                         try
                                         {
-                                            Task<int> readTask = _webSocket._innerStream.ReadAsync(
-                                                payload.Array!,
-                                                payload.Offset,
-                                                payload.Count,
-                                                cancellationToken
-                                            );
+                                            Task<int> readTask = _webSocket
+                                                ._innerStream
+                                                .ReadAsync(
+                                                    payload.Array!,
+                                                    payload.Offset,
+                                                    payload.Count,
+                                                    cancellationToken
+                                                );
                                             count = await readTask.SuppressContextFlow();
                                             _webSocket._keepAliveTracker.OnDataReceived();
                                         }
@@ -1860,7 +1860,8 @@ namespace System.Net.WebSockets
                                         _webSocket.SessionHandle,
                                         ref sessionHandleLockTaken
                                     );
-                                    await _webSocket._innerStream
+                                    await _webSocket
+                                        ._innerStream
                                         .FlushAsync(cancellationToken)
                                         .SuppressContextFlow();
                                     Monitor.Enter(
@@ -1876,9 +1877,13 @@ namespace System.Net.WebSockets
                                             _webSocket.State != WebSocketState.CloseSent
                                             || (
                                                 bufferType
-                                                    != WebSocketProtocolComponent.BufferType.PingPong
+                                                    != WebSocketProtocolComponent
+                                                        .BufferType
+                                                        .PingPong
                                                 && bufferType
-                                                    != WebSocketProtocolComponent.BufferType.UnsolicitedPong
+                                                    != WebSocketProtocolComponent
+                                                        .BufferType
+                                                        .UnsolicitedPong
                                             )
                                         )
                                         {
@@ -1891,8 +1896,9 @@ namespace System.Net.WebSockets
                                                 ArraySegment<byte>
                                             >((int)dataBufferCount);
                                             int sendBufferSize = 0;
-                                            ArraySegment<byte> framingBuffer =
-                                                _webSocket._internalBuffer.ConvertNativeBuffer(
+                                            ArraySegment<byte> framingBuffer = _webSocket
+                                                ._internalBuffer
+                                                .ConvertNativeBuffer(
                                                     action,
                                                     dataBuffers[0],
                                                     bufferType
@@ -1912,22 +1918,26 @@ namespace System.Net.WebSockets
                                                 // might be (1) only if no buffer copies were needed (in the case of no masking, for example).
                                                 // Or it might be (2).  So, we need to check.
                                                 if (
-                                                    _webSocket._internalBuffer.IsPinnedSendPayloadBuffer(
-                                                        dataBuffers[1],
-                                                        bufferType
-                                                    )
+                                                    _webSocket
+                                                        ._internalBuffer
+                                                        .IsPinnedSendPayloadBuffer(
+                                                            dataBuffers[1],
+                                                            bufferType
+                                                        )
                                                 )
                                                 {
-                                                    payload =
-                                                        _webSocket._internalBuffer.ConvertPinnedSendPayloadFromNative(
+                                                    payload = _webSocket
+                                                        ._internalBuffer
+                                                        .ConvertPinnedSendPayloadFromNative(
                                                             dataBuffers[1],
                                                             bufferType
                                                         );
                                                 }
                                                 else
                                                 {
-                                                    payload =
-                                                        _webSocket._internalBuffer.ConvertNativeBuffer(
+                                                    payload = _webSocket
+                                                        ._internalBuffer
+                                                        .ConvertNativeBuffer(
                                                             action,
                                                             dataBuffers[1],
                                                             bufferType
@@ -2051,10 +2061,9 @@ namespace System.Net.WebSockets
                         case ReceiveState.PayloadAvailable:
                             WebSocketReceiveResult receiveResult;
                             if (
-                                !_webSocket._internalBuffer.ReceiveFromBufferedPayload(
-                                    buffer.Value,
-                                    out receiveResult
-                                )
+                                !_webSocket
+                                    ._internalBuffer
+                                    .ReceiveFromBufferedPayload(buffer.Value, out receiveResult)
                             )
                             {
                                 _webSocket.UpdateReceiveState(
@@ -2145,12 +2154,14 @@ namespace System.Net.WebSockets
                         if (bufferType == WebSocketProtocolComponent.BufferType.Close)
                         {
                             payload = ArraySegment<byte>.Empty;
-                            _webSocket._internalBuffer.ConvertCloseBuffer(
-                                action,
-                                dataBuffers[0],
-                                out WebSocketCloseStatus closeStatus,
-                                out string? reason
-                            );
+                            _webSocket
+                                ._internalBuffer
+                                .ConvertCloseBuffer(
+                                    action,
+                                    dataBuffers[0],
+                                    out WebSocketCloseStatus closeStatus,
+                                    out string? reason
+                                );
 
                             receiveResult = new WebSocketReceiveResult(
                                 bytesTransferred,
@@ -2162,11 +2173,9 @@ namespace System.Net.WebSockets
                         }
                         else
                         {
-                            payload = _webSocket._internalBuffer.ConvertNativeBuffer(
-                                action,
-                                dataBuffers[0],
-                                bufferType
-                            );
+                            payload = _webSocket
+                                ._internalBuffer
+                                .ConvertNativeBuffer(action, dataBuffers[0], bufferType);
 
                             bool endOfMessage =
                                 bufferType == WebSocketProtocolComponent.BufferType.BinaryMessage
@@ -2175,12 +2184,14 @@ namespace System.Net.WebSockets
 
                             if (payload.Count > buffer.Value.Count)
                             {
-                                _webSocket._internalBuffer.BufferPayload(
-                                    payload,
-                                    buffer.Value.Count,
-                                    messageType,
-                                    endOfMessage
-                                );
+                                _webSocket
+                                    ._internalBuffer
+                                    .BufferPayload(
+                                        payload,
+                                        buffer.Value.Count,
+                                        messageType,
+                                        endOfMessage
+                                    );
                                 newReceiveState = ReceiveState.PayloadAvailable;
                                 endOfMessage = false;
                             }
@@ -2246,12 +2257,12 @@ namespace System.Net.WebSockets
 
                     Interop.WebSocket.Buffer payloadBuffer;
                     payloadBuffer = default;
-                    _webSocket._internalBuffer.PinSendBuffer(
-                        buffer.Value,
-                        out _BufferHasBeenPinned
-                    );
-                    payloadBuffer.Data.BufferData =
-                        _webSocket._internalBuffer.ConvertPinnedSendPayloadToNative(buffer.Value);
+                    _webSocket
+                        ._internalBuffer
+                        .PinSendBuffer(buffer.Value, out _BufferHasBeenPinned);
+                    payloadBuffer.Data.BufferData = _webSocket
+                        ._internalBuffer
+                        .ConvertPinnedSendPayloadToNative(buffer.Value);
                     payloadBuffer.Data.BufferLength = (uint)buffer.Value.Count;
                     return payloadBuffer;
                 }
@@ -2348,14 +2359,12 @@ namespace System.Net.WebSockets
                             0,
                             Math.Min(WebSocketValidate.MaxControlFramePayloadLength, blob.Length)
                         );
-                        _webSocket._internalBuffer.PinSendBuffer(
-                            closeBuffer,
-                            out _BufferHasBeenPinned
-                        );
-                        payloadBuffer.CloseStatus.ReasonData =
-                            _webSocket._internalBuffer.ConvertPinnedSendPayloadToNative(
-                                closeBuffer
-                            );
+                        _webSocket
+                            ._internalBuffer
+                            .PinSendBuffer(closeBuffer, out _BufferHasBeenPinned);
+                        payloadBuffer.CloseStatus.ReasonData = _webSocket
+                            ._internalBuffer
+                            .ConvertPinnedSendPayloadToNative(closeBuffer);
                         payloadBuffer.CloseStatus.ReasonLength = (uint)closeBuffer.Count;
                     }
 

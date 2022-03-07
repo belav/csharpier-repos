@@ -234,10 +234,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 parameterCount,
                 refKinds
             );
-            return this.SynthesizedDelegates.GetOrAdd(
-                key,
-                new SynthesizedDelegateValue(this, synthesizedDelegate)
-            ).Delegate;
+            return this.SynthesizedDelegates
+                .GetOrAdd(key, new SynthesizedDelegateValue(this, synthesizedDelegate))
+                .Delegate;
         }
 
         private NamedTypeSymbol ConstructAnonymousDelegateImplementationSymbol(

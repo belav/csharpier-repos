@@ -29,10 +29,14 @@ namespace System.Web.Http.ModelBinding.Binders
                 ValueProvider = new SimpleHttpValueProvider()
             };
             HttpActionContext context = ContextUtil.CreateActionContext();
-            context.ControllerContext.Configuration.Services.Replace(
-                typeof(ModelBinderProvider),
-                new SimpleModelBinderProvider(typeof(KeyValuePair<int, string>), binder)
-            );
+            context
+                .ControllerContext
+                .Configuration
+                .Services
+                .Replace(
+                    typeof(ModelBinderProvider),
+                    new SimpleModelBinderProvider(typeof(KeyValuePair<int, string>), binder)
+                );
 
             // Act
             bool retVal = binder.BindModel(context, bindingContext);
@@ -58,13 +62,17 @@ namespace System.Web.Http.ModelBinding.Binders
                 ValueProvider = new SimpleHttpValueProvider()
             };
             HttpActionContext context = ContextUtil.CreateActionContext();
-            context.ControllerContext.Configuration.Services.Replace(
-                typeof(ModelBinderProvider),
-                new SimpleModelBinderProvider(typeof(int), mockIntBinder.Object)
-                {
-                    SuppressPrefixCheck = true
-                }
-            );
+            context
+                .ControllerContext
+                .Configuration
+                .Services
+                .Replace(
+                    typeof(ModelBinderProvider),
+                    new SimpleModelBinderProvider(typeof(int), mockIntBinder.Object)
+                    {
+                        SuppressPrefixCheck = true
+                    }
+                );
 
             mockIntBinder
                 .Setup(o => o.BindModel(context, It.IsAny<ModelBindingContext>()))
@@ -106,20 +114,24 @@ namespace System.Web.Http.ModelBinding.Binders
                 ValueProvider = new SimpleHttpValueProvider()
             };
             HttpActionContext context = ContextUtil.CreateActionContext();
-            context.ControllerContext.Configuration.Services.ReplaceRange(
-                typeof(ModelBinderProvider),
-                new ModelBinderProvider[]
-                {
-                    new SimpleModelBinderProvider(typeof(int), mockIntBinder.Object)
+            context
+                .ControllerContext
+                .Configuration
+                .Services
+                .ReplaceRange(
+                    typeof(ModelBinderProvider),
+                    new ModelBinderProvider[]
                     {
-                        SuppressPrefixCheck = true
-                    },
-                    new SimpleModelBinderProvider(typeof(string), mockStringBinder.Object)
-                    {
-                        SuppressPrefixCheck = true
+                        new SimpleModelBinderProvider(typeof(int), mockIntBinder.Object)
+                        {
+                            SuppressPrefixCheck = true
+                        },
+                        new SimpleModelBinderProvider(typeof(string), mockStringBinder.Object)
+                        {
+                            SuppressPrefixCheck = true
+                        }
                     }
-                }
-            );
+                );
 
             mockIntBinder
                 .Setup(o => o.BindModel(context, It.IsAny<ModelBindingContext>()))

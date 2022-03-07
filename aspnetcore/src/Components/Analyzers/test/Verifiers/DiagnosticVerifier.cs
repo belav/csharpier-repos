@@ -365,9 +365,11 @@ public abstract partial class DiagnosticVerifier
                             $"Test base does not currently handle diagnostics in metadata locations. Diagnostic in metadata: {diagnostics[i]}\r\n"
                         );
 
-                        string resultMethodName = diagnostics[
-                            i
-                        ].Location.SourceTree.FilePath.EndsWith(".cs", StringComparison.Ordinal)
+                        string resultMethodName = diagnostics[i]
+                            .Location
+                            .SourceTree
+                            .FilePath
+                            .EndsWith(".cs", StringComparison.Ordinal)
                           ? "GetCSharpResultAt"
                           : "GetBasicResultAt";
                         var linePosition = diagnostics[i].Location.GetLineSpan().StartLinePosition;

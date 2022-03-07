@@ -549,9 +549,13 @@ public class DefaultHealthCheckServiceTest
         var results = await service.CheckHealthAsync();
 
         // Assert
-        var healthCheck = (DisposableDependeciesCheck)results.Entries
+        var healthCheck = (DisposableDependeciesCheck)results
+            .Entries
             .Single()
-            .Value.Data.Single().Value;
+            .Value
+            .Data
+            .Single()
+            .Value;
 
         Assert.True(healthCheck.SynchronousDisposable.IsDisposed);
         Assert.True(healthCheck.AsyncOnlyDisposable.IsAsyncDisposed);

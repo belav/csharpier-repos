@@ -190,15 +190,17 @@ namespace Internal.Cryptography
                 fixed (byte* pSrc = &MemoryMarshal.GetReference(source))
                 fixed (byte* pDest = &MemoryMarshal.GetReference(destination))
                 {
-                    NTSTATUS ntStatus = Interop.BCrypt.BCryptHash(
-                        (uint)algHandle,
-                        pKey,
-                        key.Length,
-                        pSrc,
-                        source.Length,
-                        pDest,
-                        digestSizeInBytes
-                    );
+                    NTSTATUS ntStatus = Interop
+                        .BCrypt
+                        .BCryptHash(
+                            (uint)algHandle,
+                            pKey,
+                            key.Length,
+                            pSrc,
+                            source.Length,
+                            pDest,
+                            digestSizeInBytes
+                        );
 
                     if (ntStatus != NTSTATUS.STATUS_SUCCESS)
                     {
@@ -217,15 +219,17 @@ namespace Internal.Cryptography
                 Span<byte> destination
             )
             {
-                NTSTATUS ntStatus = Interop.BCrypt.BCryptCreateHash(
-                    algHandle,
-                    out SafeBCryptHashHandle hHash,
-                    IntPtr.Zero,
-                    0,
-                    key,
-                    key.Length,
-                    BCryptCreateHashFlags.None
-                );
+                NTSTATUS ntStatus = Interop
+                    .BCrypt
+                    .BCryptCreateHash(
+                        algHandle,
+                        out SafeBCryptHashHandle hHash,
+                        IntPtr.Zero,
+                        0,
+                        key,
+                        key.Length,
+                        BCryptCreateHashFlags.None
+                    );
 
                 if (ntStatus != NTSTATUS.STATUS_SUCCESS)
                 {

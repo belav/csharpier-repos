@@ -646,10 +646,9 @@ namespace Microsoft.CodeAnalysis.Emit
                 var previousTypeDef = symbolChanges.DefinitionMap.MapDefinition(typeDef);
                 if (
                     previousTypeDef != null
-                    && PreviousGeneration.GenerationOrdinals.TryGetValue(
-                        previousTypeDef,
-                        out int lastEmittedOrdinal
-                    )
+                    && PreviousGeneration
+                        .GenerationOrdinals
+                        .TryGetValue(previousTypeDef, out int lastEmittedOrdinal)
                 )
                 {
                     // Type previously emitted with Replace semantics is now updated in-place. Use the ordinal used to emit the last version of the type.

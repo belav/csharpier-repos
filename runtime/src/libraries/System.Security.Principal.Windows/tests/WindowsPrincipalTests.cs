@@ -40,9 +40,9 @@ public class WindowsPrincipalTests
         {
             WindowsPrincipal principal = new WindowsPrincipal(id);
 
-            int manualCount = principal.Claims.Count(
-                c => c.Properties.ContainsKey(ClaimTypes.WindowsDeviceClaim)
-            );
+            int manualCount = principal
+                .Claims
+                .Count(c => c.Properties.ContainsKey(ClaimTypes.WindowsDeviceClaim));
             int autoCount = principal.DeviceClaims.Count();
 
             Assert.Equal(manualCount, autoCount);

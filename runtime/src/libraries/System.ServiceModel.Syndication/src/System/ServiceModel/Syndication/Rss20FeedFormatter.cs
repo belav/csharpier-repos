@@ -414,14 +414,16 @@ namespace System.ServiceModel.Syndication
                                 )
                             )
                             {
-                                result.Links.Add(
-                                    ReadAlternateLink(
-                                        reader,
-                                        result.BaseUri,
-                                        UriParser,
-                                        PreserveAttributeExtensions
-                                    )
-                                );
+                                result
+                                    .Links
+                                    .Add(
+                                        ReadAlternateLink(
+                                            reader,
+                                            result.BaseUri,
+                                            UriParser,
+                                            PreserveAttributeExtensions
+                                        )
+                                    );
                                 readAlternateLink = true;
                             }
                             else if (
@@ -606,17 +608,19 @@ namespace System.ServiceModel.Syndication
                     reader.ReadEndElement(); // item
                     if (!readAlternateLink && fallbackAlternateLink != null)
                     {
-                        result.Links.Add(
-                            SyndicationLink.CreateAlternateLink(
-                                UriFromString(
-                                    fallbackAlternateLink,
-                                    UriKind.RelativeOrAbsolute,
-                                    fallbackAlternateLinkLocalName,
-                                    fallbackAlternateLinkNamespace,
-                                    reader
+                        result
+                            .Links
+                            .Add(
+                                SyndicationLink.CreateAlternateLink(
+                                    UriFromString(
+                                        fallbackAlternateLink,
+                                        UriKind.RelativeOrAbsolute,
+                                        fallbackAlternateLinkLocalName,
+                                        fallbackAlternateLinkNamespace,
+                                        reader
+                                    )
                                 )
-                            )
-                        );
+                            );
                         readAlternateLink = true;
                     }
 
@@ -850,14 +854,16 @@ namespace System.ServiceModel.Syndication
                             )
                         )
                         {
-                            result.Links.Add(
-                                ReadAlternateLink(
-                                    reader,
-                                    result.BaseUri,
-                                    UriParser,
-                                    PreserveAttributeExtensions
-                                )
-                            );
+                            result
+                                .Links
+                                .Add(
+                                    ReadAlternateLink(
+                                        reader,
+                                        result.BaseUri,
+                                        UriParser,
+                                        PreserveAttributeExtensions
+                                    )
+                                );
                         }
                         else if (
                             reader.IsStartElement(

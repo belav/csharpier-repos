@@ -43,7 +43,8 @@ namespace OLEDB.Test.ModuleCore
             if (reflectionTypeInfo != null)
                 return reflectionTypeInfo.Type;
 
-            Assembly assembly = AppDomain.CurrentDomain
+            Assembly assembly = AppDomain
+                .CurrentDomain
                 .GetAssemblies()
                 .FirstOrDefault(a => a.FullName == typeInfo.Assembly.Name);
             if (assembly != null)

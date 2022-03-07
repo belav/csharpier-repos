@@ -30,9 +30,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         {
             if (_lazyType == null)
             {
-                var type = _containingType.TypeSubstitution.SubstituteType(
-                    OriginalDefinition.GetFieldType(fieldsBeingBound)
-                );
+                var type = _containingType
+                    .TypeSubstitution
+                    .SubstituteType(OriginalDefinition.GetFieldType(fieldsBeingBound));
                 Interlocked.CompareExchange(
                     ref _lazyType,
                     new TypeWithAnnotations.Boxed(type),
@@ -99,9 +99,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             // containing a fixed-size buffer.  Given the rarity there would be little
             // benefit to "optimizing" the performance of this by caching the
             // translated implementation type.
-            return (NamedTypeSymbol)_containingType.TypeSubstitution.SubstituteType(
-                OriginalDefinition.FixedImplementationType(emitModule)
-            ).Type;
+            return (NamedTypeSymbol)_containingType
+                .TypeSubstitution
+                .SubstituteType(OriginalDefinition.FixedImplementationType(emitModule))
+                .Type;
         }
 
         public override bool Equals(Symbol obj, TypeCompareKind compareKind)

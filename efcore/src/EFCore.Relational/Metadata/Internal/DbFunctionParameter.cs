@@ -158,7 +158,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                           {
                               var relationalTypeMappingSource = (IRelationalTypeMappingSource)(
                                   (IModel)parameter.Function.Model
-                              ).GetModelDependencies().TypeMappingSource;
+                              )
+                                  .GetModelDependencies()
+                                  .TypeMappingSource;
                               return !string.IsNullOrEmpty(parameter._storeType)
                                 ? relationalTypeMappingSource.FindMapping(parameter._storeType)!
                                 : relationalTypeMappingSource.FindMapping(

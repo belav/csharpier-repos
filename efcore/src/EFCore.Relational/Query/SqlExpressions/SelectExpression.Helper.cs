@@ -406,14 +406,16 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
             }
 
             public TableExpressionBase Table =>
-                _selectExpression.Tables.Single(
-                    e =>
-                        string.Equals(
-                            (e as JoinExpressionBase)?.Table.Alias ?? e.Alias,
-                            Alias,
-                            StringComparison.OrdinalIgnoreCase
-                        )
-                );
+                _selectExpression
+                    .Tables
+                    .Single(
+                        e =>
+                            string.Equals(
+                                (e as JoinExpressionBase)?.Table.Alias ?? e.Alias,
+                                Alias,
+                                StringComparison.OrdinalIgnoreCase
+                            )
+                    );
 
             public string Alias { get; internal set; }
 
@@ -842,17 +844,20 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
                         newProjectionMappings[keyValuePair.Key] = Visit(keyValuePair.Value);
                     }
 
-                    var newProjections = selectExpression._projection
+                    var newProjections = selectExpression
+                        ._projection
                         .Select(Visit)
                         .ToList<ProjectionExpression>();
 
-                    var newTables = selectExpression._tables
+                    var newTables = selectExpression
+                        ._tables
                         .Select(Visit)
                         .ToList<TableExpressionBase>();
                     // Since we are cloning we need to generate new table references
                     // In other cases (like VisitChildren), we just reuse the same table references and update the SelectExpression inside it.
                     // We initially assign old SelectExpression in table references and later update it once we construct clone
-                    var newTableReferences = selectExpression._tableReferences
+                    var newTableReferences = selectExpression
+                        ._tableReferences
                         .Select(e => new TableReferenceExpression(selectExpression, e.Alias))
                         .ToList();
                     Check.DebugAssert(
@@ -863,12 +868,14 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
                     );
 
                     var predicate = (SqlExpression?)Visit(selectExpression.Predicate);
-                    var newGroupBy = selectExpression._groupBy
+                    var newGroupBy = selectExpression
+                        ._groupBy
                         .Select(Visit)
                         .Where(e => !(e is SqlConstantExpression || e is SqlParameterExpression))
                         .ToList<SqlExpression>();
                     var havingExpression = (SqlExpression?)Visit(selectExpression.Having);
-                    var newOrderings = selectExpression._orderings
+                    var newOrderings = selectExpression
+                        ._orderings
                         .Select(Visit)
                         .ToList<OrderingExpression>();
                     var offset = (SqlExpression?)Visit(selectExpression.Offset);
@@ -893,14 +900,14 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
                         _projectionMapping = newProjectionMappings
                     };
 
-                    newSelectExpression._tptLeftJoinTables.AddRange(
-                        selectExpression._tptLeftJoinTables
-                    );
+                    newSelectExpression
+                        ._tptLeftJoinTables
+                        .AddRange(selectExpression._tptLeftJoinTables);
                     // Since identifiers are ColumnExpression, they are not visited since they don't contain SelectExpression inside it.
                     newSelectExpression._identifier.AddRange(selectExpression._identifier);
-                    newSelectExpression._childIdentifiers.AddRange(
-                        selectExpression._childIdentifiers
-                    );
+                    newSelectExpression
+                        ._childIdentifiers
+                        .AddRange(selectExpression._childIdentifiers);
 
                     // Remap tableReferences in new select expression
                     foreach (var tableReference in newTableReferences)
@@ -935,9 +942,9 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
             )
             {
                 _oldSelectExpression = oldSelectExpression;
-                _newTableReferences = newSelectExpression._tableReferences.ToDictionary(
-                    e => e.Alias
-                );
+                _newTableReferences = newSelectExpression
+                    ._tableReferences
+                    .ToDictionary(e => e.Alias);
             }
 
             [return: NotNullIfNotNull("expression")]
@@ -1111,25 +1118,28 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
                                     projectionToCopy
                                 );
                             if (
-                                target._projection.FindIndex(
-                                    e => e.Expression.Equals(transformedProjection)
-                                ) == -1
+                                target
+                                    ._projection
+                                    .FindIndex(e => e.Expression.Equals(transformedProjection))
+                                == -1
                             )
                             {
-                                target._projection.Add(
-                                    new ProjectionExpression(
-                                        transformedProjection,
-                                        transformedProjection.Name
-                                    )
-                                );
+                                target
+                                    ._projection
+                                    .Add(
+                                        new ProjectionExpression(
+                                            transformedProjection,
+                                            transformedProjection.Name
+                                        )
+                                    );
                                 if (
                                     UnwrapJoinExpression(columnToCopy.Table)
                                     is SelectExpression innerSelectExpression
                                 )
                                 {
-                                    var tableIndex = source._tableReferences.FindIndex(
-                                        e => e.Alias == columnToCopy.TableAlias
-                                    );
+                                    var tableIndex = source
+                                        ._tableReferences
+                                        .FindIndex(e => e.Alias == columnToCopy.TableAlias);
                                     CopyOverOwnedJoinInSameTable(
                                         (SelectExpression)UnwrapJoinExpression(
                                             target._tables[tableIndex]

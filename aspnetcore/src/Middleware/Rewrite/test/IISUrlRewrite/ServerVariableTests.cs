@@ -84,26 +84,28 @@ public class ServerVariableTests
             false
         );
         var httpContext = CreateTestHttpContext();
-        httpContext.Features.Set<IServerVariablesFeature>(
-            new TestServerVariablesFeature(
-                new Dictionary<string, string>
-                {
-                    ["CONTENT_LENGTH"] = "20",
-                    ["CONTENT_TYPE"] = "text/xml",
-                    ["HTTP_ACCEPT"] = "other-accept",
-                    ["HTTP_COOKIE"] = "other-cookie",
-                    ["HTTP_HOST"] = "otherexample.com",
-                    ["HTTP_REFERER"] = "other-referer",
-                    ["HTTP_USER_AGENT"] = "other-useragent",
-                    ["HTTP_CONNECTION"] = "other-connection",
-                    ["HTTP_URL"] = "http://otherexample.com/other-foo?bar=2",
-                    ["QUERY_STRING"] = "bar=2",
-                    ["REQUEST_FILENAME"] = "/other-foo",
-                    ["REQUEST_URI"] = "/other-foo",
-                    ["REQUEST_METHOD"] = "POST"
-                }
-            )
-        );
+        httpContext
+            .Features
+            .Set<IServerVariablesFeature>(
+                new TestServerVariablesFeature(
+                    new Dictionary<string, string>
+                    {
+                        ["CONTENT_LENGTH"] = "20",
+                        ["CONTENT_TYPE"] = "text/xml",
+                        ["HTTP_ACCEPT"] = "other-accept",
+                        ["HTTP_COOKIE"] = "other-cookie",
+                        ["HTTP_HOST"] = "otherexample.com",
+                        ["HTTP_REFERER"] = "other-referer",
+                        ["HTTP_USER_AGENT"] = "other-useragent",
+                        ["HTTP_CONNECTION"] = "other-connection",
+                        ["HTTP_URL"] = "http://otherexample.com/other-foo?bar=2",
+                        ["QUERY_STRING"] = "bar=2",
+                        ["REQUEST_FILENAME"] = "/other-foo",
+                        ["REQUEST_URI"] = "/other-foo",
+                        ["REQUEST_METHOD"] = "POST"
+                    }
+                )
+            );
 
         var rewriteContext = CreateTestRewriteContext(httpContext);
         var lookup = serverVar.Evaluate(
@@ -147,26 +149,28 @@ public class ServerVariableTests
             true
         );
         var httpContext = CreateTestHttpContext();
-        httpContext.Features.Set<IServerVariablesFeature>(
-            new TestServerVariablesFeature(
-                new Dictionary<string, string>
-                {
-                    ["CONTENT_LENGTH"] = "20",
-                    ["CONTENT_TYPE"] = "text/xml",
-                    ["HTTP_ACCEPT"] = "other-accept",
-                    ["HTTP_COOKIE"] = "other-cookie",
-                    ["HTTP_HOST"] = "otherexample.com",
-                    ["HTTP_REFERER"] = "other-referer",
-                    ["HTTP_USER_AGENT"] = "other-useragent",
-                    ["HTTP_CONNECTION"] = "other-connection",
-                    ["HTTP_URL"] = "http://otherexample.com/other-foo?bar=2",
-                    ["QUERY_STRING"] = "bar=2",
-                    ["REQUEST_FILENAME"] = "/other-foo",
-                    ["REQUEST_URI"] = "/other-foo",
-                    ["REQUEST_METHOD"] = "POST"
-                }
-            )
-        );
+        httpContext
+            .Features
+            .Set<IServerVariablesFeature>(
+                new TestServerVariablesFeature(
+                    new Dictionary<string, string>
+                    {
+                        ["CONTENT_LENGTH"] = "20",
+                        ["CONTENT_TYPE"] = "text/xml",
+                        ["HTTP_ACCEPT"] = "other-accept",
+                        ["HTTP_COOKIE"] = "other-cookie",
+                        ["HTTP_HOST"] = "otherexample.com",
+                        ["HTTP_REFERER"] = "other-referer",
+                        ["HTTP_USER_AGENT"] = "other-useragent",
+                        ["HTTP_CONNECTION"] = "other-connection",
+                        ["HTTP_URL"] = "http://otherexample.com/other-foo?bar=2",
+                        ["QUERY_STRING"] = "bar=2",
+                        ["REQUEST_FILENAME"] = "/other-foo",
+                        ["REQUEST_URI"] = "/other-foo",
+                        ["REQUEST_METHOD"] = "POST"
+                    }
+                )
+            );
 
         var rewriteContext = CreateTestRewriteContext(httpContext);
         var lookup = serverVar.Evaluate(

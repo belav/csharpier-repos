@@ -98,10 +98,9 @@ namespace Microsoft.CodeAnalysis.AddImport
             {
                 var reference = obj as MetadataSymbolReference;
                 return base.Equals(reference)
-                    && StringComparer.OrdinalIgnoreCase.Equals(
-                        _reference.FilePath,
-                        reference._reference.FilePath
-                    );
+                    && StringComparer
+                        .OrdinalIgnoreCase
+                        .Equals(_reference.FilePath, reference._reference.FilePath);
             }
 
             public override int GetHashCode() =>

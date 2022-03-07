@@ -35,7 +35,8 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
         {
             await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
-            var serviceProvider = (IAsyncServiceProvider2?)await AsyncServiceProvider.GlobalProvider
+            var serviceProvider = (IAsyncServiceProvider2?)await AsyncServiceProvider
+                .GlobalProvider
                 .GetServiceAsync(typeof(SAsyncServiceProvider))
                 .WithCancellation(cancellationToken);
             Assumes.Present(serviceProvider);

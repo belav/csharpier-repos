@@ -7509,9 +7509,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
                         long? d3 = a3;
                         if ((d1 ? d2 : d3) != (a1 ? a2 : a3))
                         {
-                            System.Console.WriteLine(
-                                "Failed -- bool ? Nullable<long> : Nullable<long>"
-                            );
+                            System
+                                .Console
+                                .WriteLine("Failed -- bool ? Nullable<long> : Nullable<long>");
                             return false;
                         }
                     }
@@ -7561,9 +7561,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
                         dynamic d3 = a3;
                         if ((d1 ? d2 : d3) != (a1 ? a2 : a3))
                         {
-                            System.Console.WriteLine(
-                                "Failed -- bool ? Nullable<Guid> : Nullable<Guid>"
-                            );
+                            System
+                                .Console
+                                .WriteLine("Failed -- bool ? Nullable<Guid> : Nullable<Guid>");
                             return false;
                         }
                     }
@@ -7750,9 +7750,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
                     dynamic d2 = a2;
                     if ((d1 ? d2 : 10L) != (a1 ? a2 : 10L))
                     {
-                        System.Console.WriteLine(
-                            "Failed -- bool ? Nullable<long> : Nullable<long>"
-                        );
+                        System
+                            .Console
+                            .WriteLine("Failed -- bool ? Nullable<long> : Nullable<long>");
                         return false;
                     }
                 }
@@ -7794,9 +7794,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
                     dynamic d2 = a2;
                     if ((d1 ? d2 : null) != (a1 ? a2 : null))
                     {
-                        System.Console.WriteLine(
-                            "Failed -- bool ? Nullable<Guid> : Nullable<Guid>"
-                        );
+                        System
+                            .Console
+                            .WriteLine("Failed -- bool ? Nullable<Guid> : Nullable<Guid>");
                         return false;
                     }
                 }
@@ -9893,14 +9893,16 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
 
             if (!(isCallFalse && isCallOpAnd && !isCallTrue && !isCallConvert && !isCallOpOr))
             {
-                System.Console.WriteLine(
-                    "Failed -- executed error ops. isCallConvert[{0}, isCallTrue[{1}], isCallFalse[{2}], isCallOpAnd[{3}], isCallOpOr[{4}], ",
-                    isCallConvert,
-                    isCallTrue,
-                    isCallFalse,
-                    isCallOpAnd,
-                    isCallOpOr
-                );
+                System
+                    .Console
+                    .WriteLine(
+                        "Failed -- executed error ops. isCallConvert[{0}, isCallTrue[{1}], isCallFalse[{2}], isCallOpAnd[{3}], isCallOpOr[{4}], ",
+                        isCallConvert,
+                        isCallTrue,
+                        isCallFalse,
+                        isCallOpAnd,
+                        isCallOpOr
+                    );
                 return false;
             }
 
@@ -9952,14 +9954,16 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
 
             if (!(isCallFalse && !isCallOpAnd && !isCallTrue && !isCallConvert && !isCallOpOr))
             {
-                System.Console.WriteLine(
-                    "Failed -- executed error ops. isCallConvert[{0}, isCallTrue[{1}], isCallFalse[{2}], isCallOpAnd[{3}], isCallOpOr[{4}], ",
-                    isCallConvert,
-                    isCallTrue,
-                    isCallFalse,
-                    isCallOpAnd,
-                    isCallOpOr
-                );
+                System
+                    .Console
+                    .WriteLine(
+                        "Failed -- executed error ops. isCallConvert[{0}, isCallTrue[{1}], isCallFalse[{2}], isCallOpAnd[{3}], isCallOpOr[{4}], ",
+                        isCallConvert,
+                        isCallTrue,
+                        isCallFalse,
+                        isCallOpAnd,
+                        isCallOpOr
+                    );
                 return false;
             }
 
@@ -10011,14 +10015,16 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
 
             if (!(isCallFalse && !isCallOpAnd && !isCallTrue && !isCallConvert && !isCallOpOr))
             {
-                System.Console.WriteLine(
-                    "Failed -- executed error ops. isCallConvert[{0}, isCallTrue[{1}], isCallFalse[{2}], isCallOpAnd[{3}], isCallOpOr[{4}], ",
-                    isCallConvert,
-                    isCallTrue,
-                    isCallFalse,
-                    isCallOpAnd,
-                    isCallOpOr
-                );
+                System
+                    .Console
+                    .WriteLine(
+                        "Failed -- executed error ops. isCallConvert[{0}, isCallTrue[{1}], isCallFalse[{2}], isCallOpAnd[{3}], isCallOpOr[{4}], ",
+                        isCallConvert,
+                        isCallTrue,
+                        isCallFalse,
+                        isCallOpAnd,
+                        isCallOpOr
+                    );
                 return false;
             }
 
@@ -10047,14 +10053,16 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
 
             if (!(isCallTrue && isCallOpOr && !isCallFalse && !isCallConvert && !isCallOpAnd))
             {
-                System.Console.WriteLine(
-                    "Failed -- executed error ops. isCallConvert[{0}, isCallTrue[{1}], isCallFalse[{2}], isCallOpAnd[{3}], isCallOpOr[{4}], ",
-                    isCallConvert,
-                    isCallTrue,
-                    isCallFalse,
-                    isCallOpAnd,
-                    isCallOpOr
-                );
+                System
+                    .Console
+                    .WriteLine(
+                        "Failed -- executed error ops. isCallConvert[{0}, isCallTrue[{1}], isCallFalse[{2}], isCallOpAnd[{3}], isCallOpOr[{4}], ",
+                        isCallConvert,
+                        isCallTrue,
+                        isCallFalse,
+                        isCallOpAnd,
+                        isCallOpOr
+                    );
                 return false;
             }
 
@@ -10119,14 +10127,16 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
 
             if (!(isCallTrue && !isCallOpOr && !isCallFalse && !isCallConvert && !isCallOpAnd))
             {
-                System.Console.WriteLine(
-                    "Failed -- executed error ops. isCallConvert[{0}, isCallTrue[{1}], isCallFalse[{2}], isCallOpAnd[{3}], isCallOpOr[{4}], ",
-                    isCallConvert,
-                    isCallTrue,
-                    isCallFalse,
-                    isCallOpAnd,
-                    isCallOpOr
-                );
+                System
+                    .Console
+                    .WriteLine(
+                        "Failed -- executed error ops. isCallConvert[{0}, isCallTrue[{1}], isCallFalse[{2}], isCallOpAnd[{3}], isCallOpOr[{4}], ",
+                        isCallConvert,
+                        isCallTrue,
+                        isCallFalse,
+                        isCallOpAnd,
+                        isCallOpOr
+                    );
                 return false;
             }
 

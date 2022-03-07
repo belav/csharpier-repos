@@ -223,7 +223,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         public virtual void Multi_level_include_with_short_circuiting()
         {
             using var context = CreateContext();
-            var query = context.Fields
+            var query = context
+                .Fields
                 .Include(x => x.Label.Globalizations)
                 .ThenInclude(x => x.Language)
                 .Include(x => x.Placeholder.Globalizations)
@@ -240,7 +241,9 @@ namespace Microsoft.EntityFrameworkCore.Query
             Assert.Null(result[0].Placeholder);
             Assert.Equal("MLS4", result[1].Placeholder.DefaultText);
 
-            var globalizations_0_label = result[0].Label.Globalizations
+            var globalizations_0_label = result[0]
+                .Label
+                .Globalizations
                 .OrderBy(g => g.Text)
                 .ToList();
             Assert.Equal(3, globalizations_0_label.Count);
@@ -251,7 +254,9 @@ namespace Microsoft.EntityFrameworkCore.Query
             Assert.Equal("Globalization2", globalizations_0_label[2].Text);
             Assert.Equal("Language2", globalizations_0_label[2].Language.Name);
 
-            var globalizations_1_label = result[1].Label.Globalizations
+            var globalizations_1_label = result[1]
+                .Label
+                .Globalizations
                 .OrderBy(g => g.Text)
                 .ToList();
             Assert.Equal(3, globalizations_1_label.Count);
@@ -262,7 +267,9 @@ namespace Microsoft.EntityFrameworkCore.Query
             Assert.Equal("Globalization8", globalizations_1_label[2].Text);
             Assert.Equal("Language8", globalizations_1_label[2].Language.Name);
 
-            var globalizations_1_placeholder = result[1].Placeholder.Globalizations
+            var globalizations_1_placeholder = result[1]
+                .Placeholder
+                .Globalizations
                 .OrderBy(g => g.Text)
                 .ToList();
             Assert.Single(globalizations_1_placeholder);
@@ -554,7 +561,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                 ss =>
                     from e1 in ss.Set<Level1>()
                     where
-                        e1.OneToOne_Optional_FK1.Date
+                        e1.OneToOne_Optional_FK1
+                            .Date
                             .AddDays(15)
                             .AddDays(e1.OneToOne_Optional_FK1.Id) > new DateTime(2002, 2, 1)
                     select e1,
@@ -609,7 +617,9 @@ namespace Microsoft.EntityFrameworkCore.Query
                 ss =>
                     from e3 in ss.Set<Level3>()
                     join e1 in ss.Set<Level1>()
-                        on e3.OneToOne_Required_FK_Inverse3.OneToOne_Optional_FK_Inverse2.Id equals e1.Id
+                        on e3.OneToOne_Required_FK_Inverse3
+                            .OneToOne_Optional_FK_Inverse2
+                            .Id equals e1.Id
                     select new { Id3 = e3.Id, Id1 = e1.Id },
                 e => (e.Id1, e.Id3)
             );
@@ -729,7 +739,10 @@ namespace Microsoft.EntityFrameworkCore.Query
                 ss =>
                     from e4 in ss.Set<Level4>()
                     join e1 in ss.Set<Level1>()
-                        on e4.Name equals e1.OneToOne_Required_FK1.OneToOne_Optional_FK2.OneToOne_Required_PK3.Name
+                        on e4.Name equals e1.OneToOne_Required_FK1
+                            .OneToOne_Optional_FK2
+                            .OneToOne_Required_PK3
+                            .Name
                     select new { Id4 = e4.Id, Name4 = e4.Name, Id1 = e1.Id, Name1 = e1.Name },
                 e => (e.Id4, e.Name4, e.Id1, e.Name1)
             );
@@ -744,7 +757,10 @@ namespace Microsoft.EntityFrameworkCore.Query
                 ss =>
                     from e1 in ss.Set<Level1>()
                     join e4 in ss.Set<Level4>()
-                        on e1.Name equals e4.OneToOne_Required_FK_Inverse4.OneToOne_Required_FK_Inverse3.OneToOne_Required_PK_Inverse2.Name
+                        on e1.Name equals e4.OneToOne_Required_FK_Inverse4
+                            .OneToOne_Required_FK_Inverse3
+                            .OneToOne_Required_PK_Inverse2
+                            .Name
                     select new { Id4 = e4.Id, Name4 = e4.Name, Id1 = e1.Id, Name1 = e1.Name },
                 e => (e.Id4, e.Name4, e.Id1, e.Name1)
             );
@@ -1613,9 +1629,9 @@ namespace Microsoft.EntityFrameworkCore.Query
                     ss.Set<Level1>()
                         .Where(
                             l1 =>
-                                l1.OneToOne_Required_FK1.OneToMany_Optional2.MaybeScalar(
-                                    x => x.Count
-                                ) > 0
+                                l1.OneToOne_Required_FK1
+                                    .OneToMany_Optional2
+                                    .MaybeScalar(x => x.Count) > 0
                         )
             );
         }
@@ -1635,9 +1651,9 @@ namespace Microsoft.EntityFrameworkCore.Query
                     ss.Set<Level3>()
                         .Where(
                             l3 =>
-                                l3.OneToOne_Required_FK_Inverse3.OneToMany_Optional2.MaybeScalar(
-                                    x => x.Count
-                                ) > 0
+                                l3.OneToOne_Required_FK_Inverse3
+                                    .OneToMany_Optional2
+                                    .MaybeScalar(x => x.Count) > 0
                         )
             );
         }
@@ -1659,9 +1675,9 @@ namespace Microsoft.EntityFrameworkCore.Query
                     ss.Set<Level2>()
                         .Where(
                             l2 =>
-                                l2.OneToMany_Required_Inverse2.OneToMany_Optional1.MaybeScalar(
-                                    x => x.Count()
-                                ) > 0
+                                l2.OneToMany_Required_Inverse2
+                                    .OneToMany_Optional1
+                                    .MaybeScalar(x => x.Count()) > 0
                         )
             );
         }
@@ -2143,14 +2159,16 @@ namespace Microsoft.EntityFrameworkCore.Query
                 async,
                 ss =>
                     from l1 in ss.Set<Level1>()
-                    from l3 in l1.OneToOne_Optional_FK1.OneToMany_Optional2
+                    from l3 in l1.OneToOne_Optional_FK1
+                        .OneToMany_Optional2
                         .Where(l => l.Id > 5)
                         .DefaultIfEmpty()
                     where l3 != null
                     select l1,
                 ss =>
                     from l1 in ss.Set<Level1>().Where(l => l.OneToOne_Optional_FK1 != null)
-                    from l3 in l1.OneToOne_Optional_FK1.OneToMany_Optional2
+                    from l3 in l1.OneToOne_Optional_FK1
+                        .OneToMany_Optional2
                         .Where(l => l.Id > 5)
                         .DefaultIfEmpty()
                     where l3 != null
@@ -2168,14 +2186,16 @@ namespace Microsoft.EntityFrameworkCore.Query
                 async,
                 ss =>
                     from l1 in ss.Set<Level1>()
-                    from l3 in l1.OneToOne_Required_FK1.OneToMany_Required2
+                    from l3 in l1.OneToOne_Required_FK1
+                        .OneToMany_Required2
                         .Where(l => l.Id > 5)
                         .DefaultIfEmpty()
                     where l3 != null
                     select l1,
                 ss =>
                     from l1 in ss.Set<Level1>().Where(l => l.OneToOne_Required_FK1 != null)
-                    from l3 in l1.OneToOne_Required_FK1.OneToMany_Required2
+                    from l3 in l1.OneToOne_Required_FK1
+                        .OneToMany_Required2
                         .Where(l => l.Id > 5)
                         .DefaultIfEmpty()
                     where l3 != null
@@ -2196,7 +2216,9 @@ namespace Microsoft.EntityFrameworkCore.Query
                     join l2 in ss.Set<Level4>()
                         .SelectMany(
                             l4 =>
-                                l4.OneToOne_Required_FK_Inverse4.OneToOne_Optional_FK_Inverse3.OneToMany_Required_Self2
+                                l4.OneToOne_Required_FK_Inverse4
+                                    .OneToOne_Optional_FK_Inverse3
+                                    .OneToMany_Required_Self2
                         )
                         on l1.Id equals l2.Level1_Optional_Id
                     select new { l1, l2 },
@@ -2205,8 +2227,9 @@ namespace Microsoft.EntityFrameworkCore.Query
                     join l2 in ss.Set<Level4>()
                         .SelectMany(
                             l4 =>
-                                l4.OneToOne_Required_FK_Inverse4.OneToOne_Optional_FK_Inverse3.OneToMany_Required_Self2
-                                ?? new List<Level2>()
+                                l4.OneToOne_Required_FK_Inverse4
+                                    .OneToOne_Optional_FK_Inverse3
+                                    .OneToMany_Required_Self2 ?? new List<Level2>()
                         )
                         on l1.Id equals l2.Level1_Optional_Id
                     select new { l1, l2 },
@@ -2232,7 +2255,10 @@ namespace Microsoft.EntityFrameworkCore.Query
                     join l2 in ss.Set<Level4>()
                         .SelectMany(
                             l4 =>
-                                l4.OneToOne_Required_FK_Inverse4.OneToOne_Optional_FK_Inverse3.OneToMany_Required_Self2.DefaultIfEmpty()
+                                l4.OneToOne_Required_FK_Inverse4
+                                    .OneToOne_Optional_FK_Inverse3
+                                    .OneToMany_Required_Self2
+                                    .DefaultIfEmpty()
                         )
                         on l1.Id equals l2.Level1_Optional_Id
                     select new { l1, l2 },
@@ -2257,7 +2283,10 @@ namespace Microsoft.EntityFrameworkCore.Query
                     from l2 in ss.Set<Level4>()
                         .SelectMany(
                             l4 =>
-                                l4.OneToOne_Required_FK_Inverse4.OneToOne_Optional_FK_Inverse3.OneToMany_Required_Self2.DefaultIfEmpty()
+                                l4.OneToOne_Required_FK_Inverse4
+                                    .OneToOne_Optional_FK_Inverse3
+                                    .OneToMany_Required_Self2
+                                    .DefaultIfEmpty()
                         )
                     join l1 in ss.Set<Level1>() on l2.Level1_Optional_Id equals l1.Id
                     select new { l2, l1 },
@@ -2282,7 +2311,10 @@ namespace Microsoft.EntityFrameworkCore.Query
                     from l4 in ss.Set<Level1>()
                         .SelectMany(
                             l1 =>
-                                l1.OneToOne_Required_FK1.OneToOne_Optional_FK2.OneToMany_Required3.DefaultIfEmpty()
+                                l1.OneToOne_Required_FK1
+                                    .OneToOne_Optional_FK2
+                                    .OneToMany_Required3
+                                    .DefaultIfEmpty()
                         )
                     join l2 in ss.Set<Level2>() on l4.Id equals l2.Id
                     select new { l4, l2 },
@@ -2307,7 +2339,10 @@ namespace Microsoft.EntityFrameworkCore.Query
                     from l4 in ss.Set<Level1>()
                         .SelectMany(
                             l1 =>
-                                l1.OneToOne_Required_FK1.OneToOne_Optional_FK2.OneToMany_Required3.DefaultIfEmpty()
+                                l1.OneToOne_Required_FK1
+                                    .OneToOne_Optional_FK2
+                                    .OneToMany_Required3
+                                    .DefaultIfEmpty()
                         )
                     join l2 in ss.Set<Level2>() on l4.Id equals l2.Id into grouping
                     from l2 in grouping.DefaultIfEmpty()
@@ -2333,12 +2368,18 @@ namespace Microsoft.EntityFrameworkCore.Query
                     from l4 in ss.Set<Level1>()
                         .SelectMany(
                             l1 =>
-                                l1.OneToOne_Required_FK1.OneToOne_Optional_FK2.OneToMany_Required3.DefaultIfEmpty()
+                                l1.OneToOne_Required_FK1
+                                    .OneToOne_Optional_FK2
+                                    .OneToMany_Required3
+                                    .DefaultIfEmpty()
                         )
                     join l2 in ss.Set<Level4>()
                         .SelectMany(
                             l4 =>
-                                l4.OneToOne_Required_FK_Inverse4.OneToOne_Optional_FK_Inverse3.OneToMany_Required_Self2.DefaultIfEmpty()
+                                l4.OneToOne_Required_FK_Inverse4
+                                    .OneToOne_Optional_FK_Inverse3
+                                    .OneToMany_Required_Self2
+                                    .DefaultIfEmpty()
                         )
                         on l4.Id equals l2.Id
                     select new { l4, l2 },
@@ -2363,7 +2404,10 @@ namespace Microsoft.EntityFrameworkCore.Query
                     from l3 in ss.Set<Level4>()
                         .SelectMany(
                             l4 =>
-                                l4.OneToOne_Required_FK_Inverse4.OneToOne_Required_FK_Inverse3.OneToMany_Required2.DefaultIfEmpty()
+                                l4.OneToOne_Required_FK_Inverse4
+                                    .OneToOne_Required_FK_Inverse3
+                                    .OneToMany_Required2
+                                    .DefaultIfEmpty()
                         )
                     select l3.OneToOne_Required_FK_Inverse3.OneToOne_Required_PK_Inverse2
             );
@@ -2476,7 +2520,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                     ss.Set<Level1>()
                         .Where(
                             l1 =>
-                                l1.OneToOne_Optional_FK1.OneToMany_Optional2
+                                l1.OneToOne_Optional_FK1
+                                    .OneToMany_Optional2
                                     .Distinct()
                                     .Select(l3 => l3.Id)
                                     .Contains(1)
@@ -2485,9 +2530,10 @@ namespace Microsoft.EntityFrameworkCore.Query
                     ss.Set<Level1>()
                         .Where(
                             l1 =>
-                                l1.OneToOne_Optional_FK1.OneToMany_Optional2.MaybeScalar(
-                                    x => x.Distinct().Select(l3 => l3.Id).Contains(1)
-                                ) == true
+                                l1.OneToOne_Optional_FK1
+                                    .OneToMany_Optional2
+                                    .MaybeScalar(x => x.Distinct().Select(l3 => l3.Id).Contains(1))
+                                == true
                         )
             );
         }
@@ -2504,7 +2550,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                     ss.Set<Level1>()
                         .Where(
                             l1 =>
-                                l1.OneToOne_Optional_FK1.OneToMany_Optional2
+                                l1.OneToOne_Optional_FK1
+                                    .OneToMany_Optional2
                                     .Select(l3 => l3.Name.Length)
                                     .Distinct()
                                     .Contains(1)
@@ -2513,9 +2560,11 @@ namespace Microsoft.EntityFrameworkCore.Query
                     ss.Set<Level1>()
                         .Where(
                             l1 =>
-                                l1.OneToOne_Optional_FK1.OneToMany_Optional2.MaybeScalar(
-                                    x => x.Select(l3 => l3.Name.Length).Distinct().Contains(1)
-                                ) == true
+                                l1.OneToOne_Optional_FK1
+                                    .OneToMany_Optional2
+                                    .MaybeScalar(
+                                        x => x.Select(l3 => l3.Name.Length).Distinct().Contains(1)
+                                    ) == true
                         )
             );
         }
@@ -2545,9 +2594,9 @@ namespace Microsoft.EntityFrameworkCore.Query
                                 && !l1.OneToMany_Optional1
                                     .Select(
                                         l2 =>
-                                            l2.OneToOne_Optional_FK2.OneToOne_Optional_FK3.MaybeScalar(
-                                                x => x.Id
-                                            )
+                                            l2.OneToOne_Optional_FK2
+                                                .OneToOne_Optional_FK3
+                                                .MaybeScalar(x => x.Id)
                                     )
                                     .All(a => true)
                         )
@@ -2567,7 +2616,9 @@ namespace Microsoft.EntityFrameworkCore.Query
                             l2o =>
                                 ss.Set<Level2>()
                                     .OrderBy(l2i => l2i.Id)
-                                    .First().OneToOne_Required_FK_Inverse2.Name
+                                    .First()
+                                    .OneToOne_Required_FK_Inverse2
+                                    .Name
                         )
             );
         }
@@ -2588,7 +2639,10 @@ namespace Microsoft.EntityFrameworkCore.Query
                         join l1i in ss.Set<Level1>() on l2i.Level1_Required_Id equals l1i.Id
                         orderby l2i.Id
                         select new { Navigation = l2i.OneToOne_Required_FK_Inverse2, Constant = 7 }
-                    ).First().Navigation.Name
+                    )
+                        .First()
+                        .Navigation
+                        .Name
             );
         }
 
@@ -2606,7 +2660,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                                 EF.Property<string>(
                                     ss.Set<Level2>()
                                         .OrderBy(l2i => l2i.Id)
-                                        .First().OneToOne_Required_FK_Inverse2,
+                                        .First()
+                                        .OneToOne_Required_FK_Inverse2,
                                     "Name"
                                 ) == "L1 02"
                         )
@@ -3496,7 +3551,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                 ss =>
                     from l2 in ss.Set<Level2>()
                     where
-                        l2.OneToOne_Required_FK2.OneToMany_Optional3
+                        l2.OneToOne_Required_FK2
+                            .OneToMany_Optional3
                             .Select(
                                 i => i.OneToOne_Optional_PK_Inverse4 == l2.OneToOne_Required_FK2
                             )
@@ -3505,15 +3561,17 @@ namespace Microsoft.EntityFrameworkCore.Query
                 ss =>
                     from l2 in ss.Set<Level2>()
                     where
-                        l2.OneToOne_Required_FK2.OneToMany_Optional3.MaybeScalar(
-                            x =>
-                                x.Select(
-                                        i =>
-                                            i.OneToOne_Optional_PK_Inverse4
-                                            == l2.OneToOne_Required_FK2
-                                    )
-                                    .Any()
-                        ) == true
+                        l2.OneToOne_Required_FK2
+                            .OneToMany_Optional3
+                            .MaybeScalar(
+                                x =>
+                                    x.Select(
+                                            i =>
+                                                i.OneToOne_Optional_PK_Inverse4
+                                                == l2.OneToOne_Required_FK2
+                                        )
+                                        .Any()
+                            ) == true
                     select l2.Name
             );
         }
@@ -3527,7 +3585,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                 ss =>
                     from l2 in ss.Set<Level2>()
                     where
-                        l2.OneToOne_Required_FK2.OneToMany_Optional3
+                        l2.OneToOne_Required_FK2
+                            .OneToMany_Optional3
                             .Select(
                                 i => i.OneToOne_Optional_PK_Inverse4 == l2.OneToOne_Optional_PK2
                             )
@@ -3536,15 +3595,17 @@ namespace Microsoft.EntityFrameworkCore.Query
                 ss =>
                     from l2 in ss.Set<Level2>()
                     where
-                        l2.OneToOne_Required_FK2.OneToMany_Optional3.MaybeScalar(
-                            x =>
-                                x.Select(
-                                        i =>
-                                            i.OneToOne_Optional_PK_Inverse4
-                                            == l2.OneToOne_Optional_PK2
-                                    )
-                                    .Any()
-                        ) == true
+                        l2.OneToOne_Required_FK2
+                            .OneToMany_Optional3
+                            .MaybeScalar(
+                                x =>
+                                    x.Select(
+                                            i =>
+                                                i.OneToOne_Optional_PK_Inverse4
+                                                == l2.OneToOne_Optional_PK2
+                                        )
+                                        .Any()
+                            ) == true
                     select l2.Name
             );
         }
@@ -3604,7 +3665,9 @@ namespace Microsoft.EntityFrameworkCore.Query
                             l2 =>
                                 ss.Set<Level2>()
                                     .OrderBy(l => l.Id)
-                                    .First().OneToOne_Required_FK_Inverse2.Name
+                                    .First()
+                                    .OneToOne_Required_FK_Inverse2
+                                    .Name
                         )
             );
         }
@@ -3621,7 +3684,9 @@ namespace Microsoft.EntityFrameworkCore.Query
                             l2 =>
                                 ss.Set<Level2>()
                                     .OrderBy(l => l.Id)
-                                    .First().OneToOne_Required_FK_Inverse2.Name == "L1 02"
+                                    .First()
+                                    .OneToOne_Required_FK_Inverse2
+                                    .Name == "L1 02"
                         )
             );
         }
@@ -3638,7 +3703,10 @@ namespace Microsoft.EntityFrameworkCore.Query
                             l3 =>
                                 ss.Set<Level3>()
                                     .OrderBy(l => l.Id)
-                                    .First().OneToOne_Required_FK_Inverse3.OneToOne_Required_FK_Inverse2.Name
+                                    .First()
+                                    .OneToOne_Required_FK_Inverse3
+                                    .OneToOne_Required_FK_Inverse2
+                                    .Name
                         )
             );
         }
@@ -3658,7 +3726,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                         .Distinct()
                         .OrderBy(l => l.Id)
                         .Skip(1)
-                        .FirstOrDefault().Name
+                        .FirstOrDefault()
+                        .Name
             );
         }
 
@@ -3677,7 +3746,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                         Subquery = (from l3 in ss.Set<Level3>() orderby l3.Id  select l3)
                             .Distinct()
                             .Skip(1)
-                            .FirstOrDefault().Name
+                            .FirstOrDefault()
+                            .Name
                     },
                 elementSorter: e => e.Key,
                 elementAsserter: (e, a) => Assert.Equal(e.Key, a.Key)
@@ -3698,9 +3768,9 @@ namespace Microsoft.EntityFrameworkCore.Query
                     select new
                     {
                         l1.Id,
-                        Count = l1.OneToOne_Optional_FK1.OneToMany_Optional2.MaybeScalar(
-                            x => x.Count
-                        ) ?? 0
+                        Count = l1.OneToOne_Optional_FK1
+                            .OneToMany_Optional2
+                            .MaybeScalar(x => x.Count) ?? 0
                     },
                 elementSorter: e => e.Id
             );
@@ -4548,7 +4618,9 @@ namespace Microsoft.EntityFrameworkCore.Query
                                 select l4
                             ).FirstOrDefault()
                         ).FirstOrDefault()
-                    ).FirstOrDefault().Name != "Foo"
+                    )
+                        .FirstOrDefault()
+                        .Name != "Foo"
                 select l1;
 
             var result = query.ToList();
@@ -4603,7 +4675,9 @@ namespace Microsoft.EntityFrameworkCore.Query
                                 ).FirstOrDefault()
                         )
                         .FirstOrDefault()
-                ).FirstOrDefault().Name;
+                )
+                    .FirstOrDefault()
+                    .Name;
 
             var result = query.ToList();
         }
@@ -4621,8 +4695,10 @@ namespace Microsoft.EntityFrameworkCore.Query
                                 l1.OneToMany_Optional1
                                     .OrderBy(l2 => l2.Id)
                                     .FirstOrDefault()
-                                    .OneToMany_Optional2.OrderBy(l3 => l3.Id)
-                                    .FirstOrDefault().Name
+                                    .OneToMany_Optional2
+                                    .OrderBy(l3 => l3.Id)
+                                    .FirstOrDefault()
+                                    .Name
                         ),
                 ss =>
                     ss.Set<Level1>()
@@ -4681,10 +4757,15 @@ namespace Microsoft.EntityFrameworkCore.Query
                                                 : l1.OneToOne_Optional_FK1.OneToOne_Optional_FK2
                                         ) == null
                                             ? null
-                                            : l1.OneToOne_Optional_FK1.OneToOne_Optional_FK2.OneToOne_Optional_FK3
+                                            : l1.OneToOne_Optional_FK1
+                                              .OneToOne_Optional_FK2
+                                              .OneToOne_Optional_FK3
                                     ) == null
                                         ? null
-                                        : l1.OneToOne_Optional_FK1.OneToOne_Optional_FK2.OneToOne_Optional_FK3.Name
+                                        : l1.OneToOne_Optional_FK1
+                                          .OneToOne_Optional_FK2
+                                          .OneToOne_Optional_FK3
+                                          .Name
                                 ) == "L4 01"
                         )
             );
@@ -4705,10 +4786,14 @@ namespace Microsoft.EntityFrameworkCore.Query
                                         ? null
                                         : l1.OneToOne_Optional_FK1.OneToOne_Optional_FK2 == null
                                             ? null
-                                            : l1.OneToOne_Optional_FK1.OneToOne_Optional_FK2.OneToOne_Optional_FK3
-                                              == null
+                                            : l1.OneToOne_Optional_FK1
+                                                  .OneToOne_Optional_FK2
+                                                  .OneToOne_Optional_FK3 == null
                                                 ? null
-                                                : l1.OneToOne_Optional_FK1.OneToOne_Optional_FK2.OneToOne_Optional_FK3.Name
+                                                : l1.OneToOne_Optional_FK1
+                                                  .OneToOne_Optional_FK2
+                                                  .OneToOne_Optional_FK3
+                                                  .Name
                                 ) == "L4 01"
                         )
             );
@@ -4810,9 +4895,9 @@ namespace Microsoft.EntityFrameworkCore.Query
                     ss.Set<Level1>()
                         .OrderBy(
                             l1 =>
-                                l1.OneToOne_Required_FK1.OneToMany_Required2.MaybeScalar(
-                                    x => x.Count()
-                                ) ?? 0
+                                l1.OneToOne_Required_FK1
+                                    .OneToMany_Required2
+                                    .MaybeScalar(x => x.Count()) ?? 0
                         )
                         .ThenBy(l1 => l1.OneToOne_Required_FK1.OneToOne_Required_FK2.Name),
                 assertOrder: true
@@ -4904,7 +4989,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                                     .DefaultIfEmpty()
                                     .SelectMany(
                                         l2 =>
-                                            l2.OneToOne_Required_PK2.OneToMany_Optional3
+                                            l2.OneToOne_Required_PK2
+                                                .OneToMany_Optional3
                                                 .DefaultIfEmpty()
                                                 .Select(
                                                     l4 =>
@@ -5169,8 +5255,12 @@ namespace Microsoft.EntityFrameworkCore.Query
                                                   ? null
                                                   : new
                                                     {
-                                                        l1.OneToOne_Optional_FK1.OneToOne_Optional_FK2.Id,
-                                                        l1.OneToOne_Optional_FK1.OneToOne_Optional_FK2.Name
+                                                        l1.OneToOne_Optional_FK1
+                                                            .OneToOne_Optional_FK2
+                                                            .Id,
+                                                        l1.OneToOne_Optional_FK1
+                                                            .OneToOne_Optional_FK2
+                                                            .Name
                                                     }
                                           }
                                 }
@@ -5208,7 +5298,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                         .Distinct()
                         .Skip(1)
                         .OrderBy(e => e.Id)
-                        .FirstOrDefault().Name
+                        .FirstOrDefault()
+                        .Name
             );
         }
 
@@ -5225,7 +5316,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                         .Distinct()
                         .Take(1)
                         .OrderBy(e => e.Id)
-                        .FirstOrDefault().Name
+                        .FirstOrDefault()
+                        .Name
             );
         }
 
@@ -5359,7 +5451,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                                     l1.Id,
                                     Pushdown = l1.OneToMany_Optional1
                                         .Where(x => x.Name == "L2 02")
-                                        .FirstOrDefault().Name
+                                        .FirstOrDefault()
+                                        .Name
                                 }
                         )
             );
@@ -5385,7 +5478,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                                     l1.Id,
                                     Pushdown = l1.OneToMany_Optional1
                                         .Where(x => x.Name == "L2 02")
-                                        .FirstOrDefault().OneToOne_Optional_FK2
+                                        .FirstOrDefault()
+                                        .OneToOne_Optional_FK2
                                 }
                         )
             );
@@ -5410,7 +5504,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                                     Pushdown = l1.OneToMany_Optional1
                                         .Where(x => x.Name == "L2 02")
                                         .FirstOrDefault()
-                                        .OneToMany_Optional2.ToList()
+                                        .OneToMany_Optional2
+                                        .ToList()
                                 }
                         ),
                 elementSorter: e => e.Id,
@@ -5441,8 +5536,10 @@ namespace Microsoft.EntityFrameworkCore.Query
                                     Pushdown = l1.OneToMany_Optional1
                                         .Where(x => x.Name == "L2 02")
                                         .FirstOrDefault()
-                                        .OneToMany_Optional2.OrderBy(x => x.Id)
-                                        .FirstOrDefault().Name
+                                        .OneToMany_Optional2
+                                        .OrderBy(x => x.Id)
+                                        .FirstOrDefault()
+                                        .Name
                                 }
                         )
             );

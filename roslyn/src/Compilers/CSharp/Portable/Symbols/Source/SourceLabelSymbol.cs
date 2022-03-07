@@ -91,8 +91,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 if (_identifierNodeOrToken.IsToken)
                 {
                     if (_identifierNodeOrToken.Parent != null)
-                        node =
-                            _identifierNodeOrToken.Parent.FirstAncestorOrSelf<LabeledStatementSyntax>();
+                        node = _identifierNodeOrToken
+                            .Parent
+                            .FirstAncestorOrSelf<LabeledStatementSyntax>();
                 }
                 else
                 {

@@ -170,9 +170,9 @@ internal class Http2Utilities : IHttpHeadersHandler
     public static readonly byte[] _worldBytes = Encoding.ASCII.GetBytes("world");
     public static readonly byte[] _helloWorldBytes = Encoding.ASCII.GetBytes("hello, world");
     public static readonly byte[] _noData = Array.Empty<byte>();
-    public static readonly byte[] _maxData = Encoding.ASCII.GetBytes(
-        new string('a', Http2PeerSettings.MinAllowedMaxFrameSize)
-    );
+    public static readonly byte[] _maxData = Encoding
+        .ASCII
+        .GetBytes(new string('a', Http2PeerSettings.MinAllowedMaxFrameSize));
 
     internal readonly Http2PeerSettings _clientSettings = new Http2PeerSettings();
     internal readonly HPackDecoder _hpackDecoder;

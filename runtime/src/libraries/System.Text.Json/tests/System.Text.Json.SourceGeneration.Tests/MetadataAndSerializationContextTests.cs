@@ -96,7 +96,10 @@ namespace System.Text.Json.SourceGeneration.Tests
             Assert.Null(MetadataAndSerializationContext.Default.SampleEnum.SerializeHandler);
             Assert.Null(MetadataAndSerializationContext.Default.String.SerializeHandler);
             Assert.NotNull(
-                MetadataAndSerializationContext.Default.ValueTupleStringInt32Boolean.SerializeHandler
+                MetadataAndSerializationContext
+                    .Default
+                    .ValueTupleStringInt32Boolean
+                    .SerializeHandler
             );
             Assert.NotNull(
                 MetadataAndSerializationContext.Default.ClassWithEnumAndNullable.SerializeHandler

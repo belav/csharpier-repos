@@ -83,18 +83,20 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternCombinators
                 return;
 
             var cancellationToken = context.CancellationToken;
-            var styleOption = context.Options.GetOption(
-                CSharpCodeStyleOptions.PreferPatternMatching,
-                syntaxTree,
-                cancellationToken
-            );
+            var styleOption = context
+                .Options
+                .GetOption(
+                    CSharpCodeStyleOptions.PreferPatternMatching,
+                    syntaxTree,
+                    cancellationToken
+                );
             if (!styleOption.Value)
                 return;
 
             var semanticModel = context.SemanticModel;
-            var expressionType = semanticModel.Compilation.GetTypeByMetadataName(
-                "System.Linq.Expressions.Expression`1"
-            );
+            var expressionType = semanticModel
+                .Compilation
+                .GetTypeByMetadataName("System.Linq.Expressions.Expression`1");
             if (expression.IsInExpressionTree(semanticModel, expressionType, cancellationToken))
                 return;
 

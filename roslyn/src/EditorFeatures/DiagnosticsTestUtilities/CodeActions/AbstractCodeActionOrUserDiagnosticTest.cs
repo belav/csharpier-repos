@@ -231,7 +231,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
         private protected virtual IDocumentServiceProvider GetDocumentServiceProvider() => null;
 
         protected virtual TestComposition GetComposition() =>
-            EditorTestCompositions.EditorFeatures
+            EditorTestCompositions
+                .EditorFeatures
                 .AddExcludedPartTypes(typeof(IDiagnosticUpdateSourceRegistrationService))
                 .AddParts(typeof(MockDiagnosticUpdateSourceRegistrationService));
 
@@ -274,8 +275,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
 #if !CODE_STYLE
             if (parameters.testHost == TestHost.OutOfProcess && _logger != null)
             {
-                var remoteHostProvider =
-                    (InProcRemoteHostClientProvider)workspace.Services.GetRequiredService<IRemoteHostClientProvider>();
+                var remoteHostProvider = (InProcRemoteHostClientProvider)workspace
+                    .Services
+                    .GetRequiredService<IRemoteHostClientProvider>();
                 remoteHostProvider.TraceListener = new XunitTraceListener(_logger);
             }
 #endif
@@ -731,17 +733,20 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
             static IEnumerable<Location> GetUnnecessaryLocations(Diagnostic diagnostic)
             {
                 if (
-                    diagnostic.Descriptor
+                    diagnostic
+                        .Descriptor
                         .ImmutableCustomTags()
                         .Contains(WellKnownDiagnosticTags.Unnecessary)
                 )
                     yield return diagnostic.Location;
 
                 if (
-                    !diagnostic.Properties.TryGetValue(
-                        WellKnownDiagnosticTags.Unnecessary,
-                        out var additionalUnnecessaryLocationsString
-                    )
+                    !diagnostic
+                        .Properties
+                        .TryGetValue(
+                            WellKnownDiagnosticTags.Unnecessary,
+                            out var additionalUnnecessaryLocationsString
+                        )
                 )
                     yield break;
 
@@ -981,9 +986,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
                     foreach (var doc in project.Documents)
                     {
                         var root = await doc.GetSyntaxRootAsync();
-                        var expectedDocuments = expectedProject.Documents.Where(
-                            d => d.Name == doc.Name
-                        );
+                        var expectedDocuments = expectedProject
+                            .Documents
+                            .Where(d => d.Name == doc.Name);
 
                         if (expectedDocuments.Any())
                         {
@@ -1006,9 +1011,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
                     foreach (var additionalDoc in project.AdditionalDocuments)
                     {
                         var root = await additionalDoc.GetTextAsync();
-                        var expectedDocument = expectedProject.AdditionalDocuments.Single(
-                            d => d.Name == additionalDoc.Name
-                        );
+                        var expectedDocument = expectedProject
+                            .AdditionalDocuments
+                            .Single(d => d.Name == additionalDoc.Name);
                         var expectedRoot = await expectedDocument.GetTextAsync();
                         VerifyExpectedDocumentText(expectedRoot.ToString(), root.ToString());
                     }
@@ -1024,9 +1029,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
                             continue;
                         }
 
-                        var expectedDocument = expectedProject.AnalyzerConfigDocuments.Single(
-                            d => d.FilePath == analyzerConfigDoc.FilePath
-                        );
+                        var expectedDocument = expectedProject
+                            .AnalyzerConfigDocuments
+                            .Single(d => d.FilePath == analyzerConfigDoc.FilePath);
                         var expectedRoot = await expectedDocument.GetTextAsync();
                         VerifyExpectedDocumentText(expectedRoot.ToString(), actualString);
                     }

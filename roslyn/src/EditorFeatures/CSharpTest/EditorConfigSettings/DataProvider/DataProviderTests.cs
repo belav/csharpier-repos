@@ -27,7 +27,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.EditorConfigSettings.Da
             );
             Assert.True(
                 workspace.TryApplyChanges(
-                    workspace.CurrentSolution
+                    workspace
+                        .CurrentSolution
                         .AddProject(projectId, "proj1", "proj1.dll", LanguageNames.CSharp)
                         .AddDocument(
                             DocumentId.CreateNewId(projectId),
@@ -53,7 +54,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.EditorConfigSettings.Da
         private static ILanguageSettingsProviderFactory<T> GettingSettingsProviderFactoryFromLanguageService<T>(
             string languageName
         ) =>
-            GetWorkspace().Services
+            GetWorkspace()
+                .Services
                 .GetLanguageServices(languageName)
                 .GetRequiredService<ILanguageSettingsProviderFactory<T>>();
 

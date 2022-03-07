@@ -130,35 +130,39 @@ public static class IISDeploymentParameterExtensions
         params string[] path
     )
     {
-        parameters.ServerConfigActionList.Add(
-            (config, _) =>
-            {
-                var element = config.RequiredElement("configSections");
-
-                foreach (var s in path)
+        parameters
+            .ServerConfigActionList
+            .Add(
+                (config, _) =>
                 {
-                    element = element.GetOrAdd("sectionGroup", "name", s);
-                }
+                    var element = config.RequiredElement("configSections");
 
-                element
-                    .GetOrAdd("section", "name", "applicationInitialization")
-                    .SetAttributeValue("overrideModeDefault", "Allow");
-            }
-        );
+                    foreach (var s in path)
+                    {
+                        element = element.GetOrAdd("sectionGroup", "name", s);
+                    }
+
+                    element
+                        .GetOrAdd("section", "name", "applicationInitialization")
+                        .SetAttributeValue("overrideModeDefault", "Allow");
+                }
+            );
     }
 
     public static void EnableLogging(this IISDeploymentParameters deploymentParameters, string path)
     {
-        deploymentParameters.WebConfigActionList.Add(
-            WebConfigHelpers.AddOrModifyAspNetCoreSection("stdoutLogEnabled", "true")
-        );
+        deploymentParameters
+            .WebConfigActionList
+            .Add(WebConfigHelpers.AddOrModifyAspNetCoreSection("stdoutLogEnabled", "true"));
 
-        deploymentParameters.WebConfigActionList.Add(
-            WebConfigHelpers.AddOrModifyAspNetCoreSection(
-                "stdoutLogFile",
-                Path.Combine(path, "std")
-            )
-        );
+        deploymentParameters
+            .WebConfigActionList
+            .Add(
+                WebConfigHelpers.AddOrModifyAspNetCoreSection(
+                    "stdoutLogFile",
+                    Path.Combine(path, "std")
+                )
+            );
     }
 
     public static void EnableFreb(
@@ -175,70 +179,83 @@ public static class IISDeploymentParameterExtensions
         deploymentParameters.EnableModule("FailedRequestsTracingModule", "%IIS_BIN%\\iisfreb.dll");
 
         // Set the TraceFailedRequestsSection to listend to ANCM events
-        deploymentParameters.ServerConfigActionList.Add(
-            (element, _) =>
-            {
-                var webServerElement = element.RequiredElement("system.webServer");
+        deploymentParameters
+            .ServerConfigActionList
+            .Add(
+                (element, _) =>
+                {
+                    var webServerElement = element.RequiredElement("system.webServer");
 
-                var addElement = webServerElement
-                    .GetOrAdd("tracing")
-                    .GetOrAdd("traceFailedRequests")
-                    .GetOrAdd("add");
+                    var addElement = webServerElement
+                        .GetOrAdd("tracing")
+                        .GetOrAdd("traceFailedRequests")
+                        .GetOrAdd("add");
 
-                addElement.SetAttributeValue("path", "*");
+                    addElement.SetAttributeValue("path", "*");
 
-                addElement
-                    .GetOrAdd("failureDefinitions")
-                    .SetAttributeValue("statusCodes", "200-999");
+                    addElement
+                        .GetOrAdd("failureDefinitions")
+                        .SetAttributeValue("statusCodes", "200-999");
 
-                var traceAreasElement = addElement.GetOrAdd("traceAreas");
-                var innerAddElement = traceAreasElement.GetOrAdd("add", "provider", "WWW Server");
+                    var traceAreasElement = addElement.GetOrAdd("traceAreas");
+                    var innerAddElement = traceAreasElement.GetOrAdd(
+                        "add",
+                        "provider",
+                        "WWW Server"
+                    );
 
-                innerAddElement.SetAttributeValue("areas", "ANCM");
-                innerAddElement.SetAttributeValue("verbosity", verbosity);
-            }
-        );
+                    innerAddElement.SetAttributeValue("areas", "ANCM");
+                    innerAddElement.SetAttributeValue("verbosity", verbosity);
+                }
+            );
 
         // Set the ANCM traceProviderDefinition to 65536
-        deploymentParameters.ServerConfigActionList.Add(
-            (element, _) =>
-            {
-                var webServerElement = element.RequiredElement("system.webServer");
+        deploymentParameters
+            .ServerConfigActionList
+            .Add(
+                (element, _) =>
+                {
+                    var webServerElement = element.RequiredElement("system.webServer");
 
-                var traceProviderDefinitionsElement = webServerElement
-                    .GetOrAdd("tracing")
-                    .GetOrAdd("traceProviderDefinitions");
+                    var traceProviderDefinitionsElement = webServerElement
+                        .GetOrAdd("tracing")
+                        .GetOrAdd("traceProviderDefinitions");
 
-                var innerAddElement = traceProviderDefinitionsElement.GetOrAdd(
-                    "add",
-                    "name",
-                    "WWW Server"
-                );
+                    var innerAddElement = traceProviderDefinitionsElement.GetOrAdd(
+                        "add",
+                        "name",
+                        "WWW Server"
+                    );
 
-                innerAddElement.SetAttributeValue("name", "WWW Server");
-                innerAddElement.SetAttributeValue("guid", "{3a2a4e84-4c21-4981-ae10-3fda0d9b0f83}");
+                    innerAddElement.SetAttributeValue("name", "WWW Server");
+                    innerAddElement.SetAttributeValue(
+                        "guid",
+                        "{3a2a4e84-4c21-4981-ae10-3fda0d9b0f83}"
+                    );
 
-                var areasElement = innerAddElement.GetOrAdd("areas");
-                var iae = areasElement.GetOrAdd("add", "name", "ANCM");
+                    var areasElement = innerAddElement.GetOrAdd("areas");
+                    var iae = areasElement.GetOrAdd("add", "name", "ANCM");
 
-                iae.SetAttributeValue("value", "65536");
-            }
-        );
+                    iae.SetAttributeValue("value", "65536");
+                }
+            );
 
         // Set the freb directory to the published app directory.
-        deploymentParameters.ServerConfigActionList.Add(
-            (element, contentRoot) =>
-            {
-                var traceFailedRequestsElement = element
-                    .RequiredElement("system.applicationHost")
-                    .Element("sites")
-                    .Element("siteDefaults")
-                    .Element("traceFailedRequestsLogging");
-                traceFailedRequestsElement.SetAttributeValue("directory", folderPath);
-                traceFailedRequestsElement.SetAttributeValue("enabled", "true");
-                traceFailedRequestsElement.SetAttributeValue("maxLogFileSizeKB", "1024");
-            }
-        );
+        deploymentParameters
+            .ServerConfigActionList
+            .Add(
+                (element, contentRoot) =>
+                {
+                    var traceFailedRequestsElement = element
+                        .RequiredElement("system.applicationHost")
+                        .Element("sites")
+                        .Element("siteDefaults")
+                        .Element("traceFailedRequestsLogging");
+                    traceFailedRequestsElement.SetAttributeValue("directory", folderPath);
+                    traceFailedRequestsElement.SetAttributeValue("enabled", "true");
+                    traceFailedRequestsElement.SetAttributeValue("maxLogFileSizeKB", "1024");
+                }
+            );
     }
 
     public static void TransformPath(
@@ -246,16 +263,21 @@ public static class IISDeploymentParameterExtensions
         Func<string, string, string> transformation
     )
     {
-        parameters.WebConfigActionList.Add(
-            (config, contentRoot) =>
-            {
-                var aspNetCoreElement = config.Descendants("aspNetCore").Single();
-                aspNetCoreElement.SetAttributeValue(
-                    "processPath",
-                    transformation((string)aspNetCoreElement.Attribute("processPath"), contentRoot)
-                );
-            }
-        );
+        parameters
+            .WebConfigActionList
+            .Add(
+                (config, contentRoot) =>
+                {
+                    var aspNetCoreElement = config.Descendants("aspNetCore").Single();
+                    aspNetCoreElement.SetAttributeValue(
+                        "processPath",
+                        transformation(
+                            (string)aspNetCoreElement.Attribute("processPath"),
+                            contentRoot
+                        )
+                    );
+                }
+            );
     }
 
     public static void TransformArguments(
@@ -263,16 +285,21 @@ public static class IISDeploymentParameterExtensions
         Func<string, string, string> transformation
     )
     {
-        parameters.WebConfigActionList.Add(
-            (config, contentRoot) =>
-            {
-                var aspNetCoreElement = config.Descendants("aspNetCore").Single();
-                aspNetCoreElement.SetAttributeValue(
-                    "arguments",
-                    transformation((string)aspNetCoreElement.Attribute("arguments"), contentRoot)
-                );
-            }
-        );
+        parameters
+            .WebConfigActionList
+            .Add(
+                (config, contentRoot) =>
+                {
+                    var aspNetCoreElement = config.Descendants("aspNetCore").Single();
+                    aspNetCoreElement.SetAttributeValue(
+                        "arguments",
+                        transformation(
+                            (string)aspNetCoreElement.Attribute("arguments"),
+                            contentRoot
+                        )
+                    );
+                }
+            );
     }
 
     public static void EnableModule(
@@ -286,24 +313,26 @@ public static class IISDeploymentParameterExtensions
             modulePath = modulePath.Replace("%IIS_BIN%", "%windir%\\System32\\inetsrv");
         }
 
-        parameters.ServerConfigActionList.Add(
-            (element, _) =>
-            {
-                var webServerElement = element.RequiredElement("system.webServer");
+        parameters
+            .ServerConfigActionList
+            .Add(
+                (element, _) =>
+                {
+                    var webServerElement = element.RequiredElement("system.webServer");
 
-                webServerElement
-                    .RequiredElement("globalModules")
-                    .GetOrAdd("add", "name", moduleName)
-                    .SetAttributeValue("image", modulePath);
+                    webServerElement
+                        .RequiredElement("globalModules")
+                        .GetOrAdd("add", "name", moduleName)
+                        .SetAttributeValue("image", modulePath);
 
-                (
-                    webServerElement.Element("modules")
-                    ?? element
-                        .Element("location")
-                        .RequiredElement("system.webServer")
-                        .RequiredElement("modules")
-                ).GetOrAdd("add", "name", moduleName);
-            }
-        );
+                    (
+                        webServerElement.Element("modules")
+                        ?? element
+                            .Element("location")
+                            .RequiredElement("system.webServer")
+                            .RequiredElement("modules")
+                    ).GetOrAdd("add", "name", moduleName);
+                }
+            );
     }
 }

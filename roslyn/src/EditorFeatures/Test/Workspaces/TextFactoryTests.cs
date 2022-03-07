@@ -80,7 +80,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
         public void TestCreateTextUsesByteOrderMarkIfPresent()
         {
             TestCreateTextInferredEncoding(
-                Encoding.UTF8
+                Encoding
+                    .UTF8
                     .GetPreamble()
                     .Concat(
                         new UTF8Encoding(

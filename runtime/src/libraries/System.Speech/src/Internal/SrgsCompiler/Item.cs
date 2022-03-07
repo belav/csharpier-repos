@@ -104,10 +104,14 @@ namespace System.Speech.Internal.SrgsCompiler
                             _endArc.End = newStartState;
 
                             // reset the _endArc
-                            System.Diagnostics.Debug.Assert(
-                                newEndState.OutArcs.CountIsOne
-                                    && Arc.CompareContent(_endArc, newEndState.OutArcs.First) == 0
-                            );
+                            System
+                                .Diagnostics
+                                .Debug
+                                .Assert(
+                                    newEndState.OutArcs.CountIsOne
+                                        && Arc.CompareContent(_endArc, newEndState.OutArcs.First)
+                                            == 0
+                                );
                             _endArc = newEndState.OutArcs.First;
 
                             if (_maxRepeat == int.MaxValue)

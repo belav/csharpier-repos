@@ -93,11 +93,14 @@ namespace System.Buffers.ArrayPool.Tests
                     Assert.Same(buffer, ArrayPool<byte>.Shared.Rent(BufferSize));
 
                     // Return it and put memory pressure on to get it cleared
-                    ArrayPool<byte>.Shared.Return(buffer);
+                    ArrayPool<byte>
+                        .Shared
+                        .Return(buffer);
 
                     const int AllocSize = 1024 * 1024 * 64;
                     int PageSize = Environment.SystemPageSize;
-                    var pressureMethod = ArrayPool<byte>.Shared
+                    var pressureMethod = ArrayPool<byte>
+                        .Shared
                         .GetType()
                         .GetMethod(
                             "GetMemoryPressure",
@@ -143,7 +146,9 @@ namespace System.Buffers.ArrayPool.Tests
                     Assert.Same(buffer, ArrayPool<byte>.Shared.Rent(BufferSize));
 
                     // Return it and put memory pressure on to get it cleared
-                    ArrayPool<byte>.Shared.Return(buffer);
+                    ArrayPool<byte>
+                        .Shared
+                        .Return(buffer);
 
                     // Make sure buffer gets time stamped
                     for (int i = 0; i < 2; i++)

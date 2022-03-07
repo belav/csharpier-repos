@@ -4896,11 +4896,13 @@ ALTER TABLE [Customers] ALTER COLUMN [Name] nvarchar(450) NULL;",
                     Assert.Equal(2, model.Tables.Count);
                     Assert.True(model.Tables.All(x => x.Schema == "mySchema"));
                     Assert.True(
-                        model.Tables.All(
-                            x =>
-                                x[SqlServerAnnotationNames.TemporalHistoryTableSchema] as string
-                                == "mySchema"
-                        )
+                        model
+                            .Tables
+                            .All(
+                                x =>
+                                    x[SqlServerAnnotationNames.TemporalHistoryTableSchema] as string
+                                    == "mySchema"
+                            )
                     );
                 }
             );
@@ -4995,11 +4997,13 @@ ALTER TABLE [Customers] ALTER COLUMN [Name] nvarchar(450) NULL;",
                     Assert.Equal(2, model.Tables.Count);
                     Assert.True(model.Tables.All(x => x.Schema == "mySchema"));
                     Assert.True(
-                        model.Tables.All(
-                            x =>
-                                x[SqlServerAnnotationNames.TemporalHistoryTableSchema] as string
-                                == "mySchema2"
-                        )
+                        model
+                            .Tables
+                            .All(
+                                x =>
+                                    x[SqlServerAnnotationNames.TemporalHistoryTableSchema] as string
+                                    == "mySchema2"
+                            )
                     );
                 }
             );

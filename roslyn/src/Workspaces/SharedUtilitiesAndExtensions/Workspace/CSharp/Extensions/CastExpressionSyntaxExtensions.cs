@@ -14,7 +14,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
     {
         public static ExpressionSyntax Uncast(this CastExpressionSyntax node)
         {
-            var leadingTrivia = node.OpenParenToken.LeadingTrivia
+            var leadingTrivia = node.OpenParenToken
+                .LeadingTrivia
                 .Concat(node.OpenParenToken.TrailingTrivia)
                 .Concat(node.Type.GetLeadingTrivia())
                 .Concat(node.Type.GetTrailingTrivia())

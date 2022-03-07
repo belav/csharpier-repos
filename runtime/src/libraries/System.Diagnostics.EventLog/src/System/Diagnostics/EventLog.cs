@@ -753,10 +753,9 @@ namespace System.Diagnostics
             for (int i = 0; i < logNames.Length; i++)
             {
                 EventLog log = new EventLog(logNames[i], machineName);
-                SafeEventLogReadHandle handle = Interop.Advapi32.OpenEventLog(
-                    machineName,
-                    logNames[i]
-                );
+                SafeEventLogReadHandle handle = Interop
+                    .Advapi32
+                    .OpenEventLog(machineName, logNames[i]);
 
                 if (!handle.IsInvalid)
                 {
@@ -1069,15 +1068,9 @@ namespace System.Diagnostics
                 int lastError = Interop.Errors.ERROR_INSUFFICIENT_BUFFER;
                 while (msgLen == 0 && lastError == Interop.Errors.ERROR_INSUFFICIENT_BUFFER)
                 {
-                    msgLen = Interop.Kernel32.FormatMessage(
-                        flags,
-                        hModule,
-                        messageNum,
-                        0,
-                        buf,
-                        buf.Length,
-                        addresses
-                    );
+                    msgLen = Interop
+                        .Kernel32
+                        .FormatMessage(flags, hModule, messageNum, 0, buf, buf.Length, addresses);
 
                     if (msgLen == 0)
                     {

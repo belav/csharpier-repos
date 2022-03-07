@@ -137,7 +137,8 @@ namespace Microsoft.CodeAnalysis.CSharp.AssignOutParameters
                 var container = group.Key;
 
                 var parameterList = container.GetParameterList();
-                var outParameters = parameterList.Parameters
+                var outParameters = parameterList
+                    .Parameters
                     .Select(p => semanticModel.GetDeclaredSymbol(p, cancellationToken))
                     .Where(p => p?.RefKind == RefKind.Out)
                     .ToImmutableArray();

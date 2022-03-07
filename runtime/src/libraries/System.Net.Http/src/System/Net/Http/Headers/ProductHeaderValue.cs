@@ -82,11 +82,9 @@ namespace System.Net.Http.Headers
         public static ProductHeaderValue Parse(string? input)
         {
             int index = 0;
-            return (ProductHeaderValue)GenericHeaderParser.SingleValueProductParser.ParseValue(
-                input,
-                null,
-                ref index
-            );
+            return (ProductHeaderValue)GenericHeaderParser
+                .SingleValueProductParser
+                .ParseValue(input, null, ref index);
         }
 
         public static bool TryParse(
@@ -98,12 +96,9 @@ namespace System.Net.Http.Headers
             parsedValue = null;
 
             if (
-                GenericHeaderParser.SingleValueProductParser.TryParseValue(
-                    input,
-                    null,
-                    ref index,
-                    out object? output
-                )
+                GenericHeaderParser
+                    .SingleValueProductParser
+                    .TryParseValue(input, null, ref index, out object? output)
             )
             {
                 parsedValue = (ProductHeaderValue)output!;

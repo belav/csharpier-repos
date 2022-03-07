@@ -170,7 +170,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq
                     case SyntaxKind.WhereClause:
                         return SyntaxFactory.Block(
                             SyntaxFactory.IfStatement(
-                                ((WhereClauseSyntax)node).Condition
+                                ((WhereClauseSyntax)node)
+                                    .Condition
                                     .WithAdditionalAnnotations(Simplifier.Annotation)
                                     .WithoutTrivia(),
                                 statement
@@ -298,7 +299,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq
                                                                     joinClause.LeftExpression
                                                                 ),
                                                                 SyntaxFactory.Argument(
-                                                                    joinClause.RightExpression.WithoutTrailingTrivia()
+                                                                    joinClause
+                                                                        .RightExpression
+                                                                        .WithoutTrailingTrivia()
                                                                 )
                                                             }
                                                         )
@@ -619,10 +622,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq
                     // Check that we can re-use the local variable or parameter
                     if (
                         typeCheckMethod(
-                            _semanticModel.GetTypeInfo(
-                                expressionToVerifyType,
-                                _cancellationToken
-                            ).Type
+                            _semanticModel
+                                .GetTypeInfo(expressionToVerifyType, _cancellationToken)
+                                .Type
                         )
                         && (
                             !checkForLocalOrParameter
@@ -684,9 +686,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq
                             )
                             &&
                             // Avoid int i = (from x in a select x).Count(), j = i;
-                            (
-                                (VariableDeclarationSyntax)invocationParent.Parent.Parent
-                            ).Variables.Count == 1
+                            ((VariableDeclarationSyntax)invocationParent.Parent.Parent)
+                                .Variables
+                                .Count == 1
                         )
                         {
                             var variableDeclarator = (
@@ -763,7 +765,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq
                 var typeSyntax = generateTypeFromExpression
                     ? _semanticModel
                       .GetTypeInfo(expression, _cancellationToken)
-                      .ConvertedType.GenerateTypeSyntax()
+                      .ConvertedType
+                      .GenerateTypeSyntax()
                     : VarNameIdentifier;
                 return SyntaxFactory
                     .LocalDeclarationStatement(
@@ -913,14 +916,16 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq
                     if (forEachStatement.Identifier.ValueText != identifierName)
                     {
                         if (
-                            _semanticFacts.GenerateUniqueName(
-                                _semanticModel,
-                                location: forEachStatement.Statement,
-                                containerOpt: forEachStatement.Statement,
-                                baseName: identifierName,
-                                usedNames: Enumerable.Empty<string>(),
-                                _cancellationToken
-                            ).ValueText != identifierName
+                            _semanticFacts
+                                .GenerateUniqueName(
+                                    _semanticModel,
+                                    location: forEachStatement.Statement,
+                                    containerOpt: forEachStatement.Statement,
+                                    baseName: identifierName,
+                                    usedNames: Enumerable.Empty<string>(),
+                                    _cancellationToken
+                                )
+                                .ValueText != identifierName
                         )
                         {
                             documentUpdateInfo = null;
@@ -954,16 +959,15 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq
                         lastSelectExpression is IdentifierNameSyntax identifierName
                         && forEachStatement.Identifier.ValueText
                             == identifierName.Identifier.ValueText
-                        && queryExpressionProcessingInfo.IdentifierNames.Contains(
-                            identifierName.Identifier.ValueText
-                        )
+                        && queryExpressionProcessingInfo
+                            .IdentifierNames
+                            .Contains(identifierName.Identifier.ValueText)
                     )
                     {
                         var forEachStatementTypeSymbolType =
-                            _semanticModel.GetTypeInfo(
-                                forEachStatement.Type,
-                                _cancellationToken
-                            ).Type;
+                            _semanticModel
+                                .GetTypeInfo(forEachStatement.Type, _cancellationToken)
+                                .Type;
                         var lastSelectExpressionTypeInfo = _semanticModel.GetTypeInfo(
                             lastSelectExpression,
                             _cancellationToken
@@ -1266,7 +1270,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq
                     if (
                         _semanticModel
                             .GetTypeInfo(selectClause.Expression, _cancellationToken)
-                            .Type.ContainsAnonymousType()
+                            .Type
+                            .ContainsAnonymousType()
                     )
                     {
                         return false;

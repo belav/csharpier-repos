@@ -106,7 +106,9 @@ namespace Microsoft.Extensions.DependencyModel
                         rented = ArrayPool<byte>.Shared.Rent(checked(toReturn.Length * 2));
                         Buffer.BlockCopy(toReturn, 0, rented, 0, toReturn.Length);
                         // Holds document content, clear it.
-                        ArrayPool<byte>.Shared.Return(toReturn, clearArray: true);
+                        ArrayPool<byte>
+                            .Shared
+                            .Return(toReturn, clearArray: true);
                     }
 
                     lastRead = stream.Read(rented, written, rented.Length - written);
@@ -846,10 +848,9 @@ namespace Microsoft.Extensions.DependencyModel
                 if (targetLibrary.RuntimeTargets != null)
                 {
                     foreach (
-                        IGrouping<
-                            string?,
-                            RuntimeTargetEntryStub
-                        > ridGroup in targetLibrary.RuntimeTargets.GroupBy(e => e.Rid)
+                        IGrouping<string?, RuntimeTargetEntryStub> ridGroup in targetLibrary
+                            .RuntimeTargets
+                            .GroupBy(e => e.Rid)
                     )
                     {
                         RuntimeFile[] groupRuntimeAssemblies = ridGroup

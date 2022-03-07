@@ -34,7 +34,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities.PullMemberUp
             ISymbol selectedNodeSymbol
         )
         {
-            var members = selectedNodeSymbol.ContainingType
+            var members = selectedNodeSymbol
+                .ContainingType
                 .GetMembers()
                 .Where(member => MemberAndDestinationValidator.IsMemberValid(member));
 

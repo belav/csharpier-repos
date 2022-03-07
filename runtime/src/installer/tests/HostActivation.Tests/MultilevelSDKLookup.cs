@@ -133,9 +133,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .Execute(fExpectedToFail: true)
                 .Should()
                 .Fail()
-                .And.HaveStdErrContaining(
-                    "A compatible installed .NET SDK for global.json version"
-                );
+                .And
+                .HaveStdErrContaining("A compatible installed .NET SDK for global.json version");
 
             // Add SDK versions
             AddAvailableSdkVersions(_exeSdkBaseDir, "9999.4.1", "9999.3.4-dummy");
@@ -161,9 +160,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .Execute(fExpectedToFail: true)
                 .Should()
                 .Fail()
-                .And.HaveStdErrContaining(
-                    "A compatible installed .NET SDK for global.json version"
-                );
+                .And
+                .HaveStdErrContaining("A compatible installed .NET SDK for global.json version");
 
             // Add SDK versions
             AddAvailableSdkVersions(_regSdkBaseDir, "9999.3.3");
@@ -189,9 +187,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .Execute(fExpectedToFail: true)
                 .Should()
                 .Fail()
-                .And.HaveStdErrContaining(
-                    "A compatible installed .NET SDK for global.json version"
-                );
+                .And
+                .HaveStdErrContaining("A compatible installed .NET SDK for global.json version");
 
             // Add SDK versions
             AddAvailableSdkVersions(_exeSdkBaseDir, "9999.3.4");
@@ -217,7 +214,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .Execute()
                 .Should()
                 .Pass()
-                .And.HaveStdErrContaining(
+                .And
+                .HaveStdErrContaining(
                     Path.Combine(_exeSelectedMessage, "9999.3.4", _dotnetSdkDllMessageTerminator)
                 );
 
@@ -245,7 +243,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .Execute()
                 .Should()
                 .Pass()
-                .And.HaveStdErrContaining(
+                .And
+                .HaveStdErrContaining(
                     Path.Combine(
                         _regSelectedMessage,
                         "9999.3.5-dummy",
@@ -277,7 +276,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .Execute()
                 .Should()
                 .Pass()
-                .And.HaveStdErrContaining(
+                .And
+                .HaveStdErrContaining(
                     Path.Combine(
                         _regSelectedMessage,
                         "9999.3.5-dummy",
@@ -309,7 +309,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .Execute()
                 .Should()
                 .Pass()
-                .And.HaveStdErrContaining(
+                .And
+                .HaveStdErrContaining(
                     Path.Combine(
                         _exeSelectedMessage,
                         "9999.3.4-global-dummy",
@@ -332,13 +333,20 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .Execute()
                 .Should()
                 .Pass()
-                .And.HaveStdOutContaining("9999.3.4-dummy")
-                .And.HaveStdOutContaining("9999.3.4-global-dummy")
-                .And.HaveStdOutContaining("9999.4.1")
-                .And.HaveStdOutContaining("9999.3.3")
-                .And.HaveStdOutContaining("9999.3.4")
-                .And.HaveStdOutContaining("9999.3.600")
-                .And.HaveStdOutContaining("9999.3.5-dummy");
+                .And
+                .HaveStdOutContaining("9999.3.4-dummy")
+                .And
+                .HaveStdOutContaining("9999.3.4-global-dummy")
+                .And
+                .HaveStdOutContaining("9999.4.1")
+                .And
+                .HaveStdOutContaining("9999.3.3")
+                .And
+                .HaveStdOutContaining("9999.3.4")
+                .And
+                .HaveStdOutContaining("9999.3.600")
+                .And
+                .HaveStdOutContaining("9999.3.5-dummy");
         }
 
         [Fact]
@@ -369,9 +377,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .Execute(fExpectedToFail: true)
                 .Should()
                 .Fail()
-                .And.HaveStdErrContaining(
-                    "A compatible installed .NET SDK for global.json version"
-                );
+                .And
+                .HaveStdErrContaining("A compatible installed .NET SDK for global.json version");
 
             // Add SDK versions
             AddAvailableSdkVersions(_regSdkBaseDir, "9999.3.57", "9999.3.4-dummy");
@@ -397,9 +404,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .Execute(fExpectedToFail: true)
                 .Should()
                 .Fail()
-                .And.HaveStdErrContaining(
-                    "A compatible installed .NET SDK for global.json version"
-                );
+                .And
+                .HaveStdErrContaining("A compatible installed .NET SDK for global.json version");
 
             // Add SDK versions
             AddAvailableSdkVersions(_exeSdkBaseDir, "9999.3.300", "9999.7.304-global-dummy");
@@ -425,9 +431,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .Execute(fExpectedToFail: true)
                 .Should()
                 .Fail()
-                .And.HaveStdErrContaining(
-                    "A compatible installed .NET SDK for global.json version"
-                );
+                .And
+                .HaveStdErrContaining("A compatible installed .NET SDK for global.json version");
 
             // Add SDK versions
             AddAvailableSdkVersions(_regSdkBaseDir, "9999.3.304");
@@ -453,7 +458,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .Execute()
                 .Should()
                 .Pass()
-                .And.HaveStdErrContaining(
+                .And
+                .HaveStdErrContaining(
                     Path.Combine(_regSelectedMessage, "9999.3.304", _dotnetSdkDllMessageTerminator)
                 );
 
@@ -481,7 +487,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .Execute()
                 .Should()
                 .Pass()
-                .And.HaveStdErrContaining(
+                .And
+                .HaveStdErrContaining(
                     Path.Combine(_exeSelectedMessage, "9999.3.399", _dotnetSdkDllMessageTerminator)
                 );
 
@@ -510,7 +517,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .Execute()
                 .Should()
                 .Pass()
-                .And.HaveStdErrContaining(
+                .And
+                .HaveStdErrContaining(
                     Path.Combine(_exeSelectedMessage, "9999.3.399", _dotnetSdkDllMessageTerminator)
                 );
 
@@ -538,7 +546,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .Execute()
                 .Should()
                 .Pass()
-                .And.HaveStdErrContaining(
+                .And
+                .HaveStdErrContaining(
                     Path.Combine(
                         _regSelectedMessage,
                         "9999.3.304-global-dummy",
@@ -561,17 +570,28 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .Execute()
                 .Should()
                 .Pass()
-                .And.HaveStdOutContaining("9999.3.57")
-                .And.HaveStdOutContaining("9999.3.4-dummy")
-                .And.HaveStdOutContaining("9999.3.300")
-                .And.HaveStdOutContaining("9999.7.304-global-dummy")
-                .And.HaveStdOutContaining("9999.3.399")
-                .And.HaveStdOutContaining("9999.3.399-dummy")
-                .And.HaveStdOutContaining("9999.3.400")
-                .And.HaveStdOutContaining("9999.3.2400")
-                .And.HaveStdOutContaining("9999.3.3004")
-                .And.HaveStdOutContaining("9999.3.304")
-                .And.HaveStdOutContaining("9999.3.304-global-dummy");
+                .And
+                .HaveStdOutContaining("9999.3.57")
+                .And
+                .HaveStdOutContaining("9999.3.4-dummy")
+                .And
+                .HaveStdOutContaining("9999.3.300")
+                .And
+                .HaveStdOutContaining("9999.7.304-global-dummy")
+                .And
+                .HaveStdOutContaining("9999.3.399")
+                .And
+                .HaveStdOutContaining("9999.3.399-dummy")
+                .And
+                .HaveStdOutContaining("9999.3.400")
+                .And
+                .HaveStdOutContaining("9999.3.2400")
+                .And
+                .HaveStdOutContaining("9999.3.3004")
+                .And
+                .HaveStdOutContaining("9999.3.304")
+                .And
+                .HaveStdOutContaining("9999.3.304-global-dummy");
         }
 
         [Fact]
@@ -604,7 +624,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .Execute()
                 .Should()
                 .Pass()
-                .And.HaveStdErrContaining(
+                .And
+                .HaveStdErrContaining(
                     Path.Combine(_regSelectedMessage, "9999.0.4", _dotnetSdkDllMessageTerminator)
                 );
 
@@ -632,7 +653,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .Execute()
                 .Should()
                 .Pass()
-                .And.HaveStdErrContaining(
+                .And
+                .HaveStdErrContaining(
                     Path.Combine(_exeSelectedMessage, "9999.0.4", _dotnetSdkDllMessageTerminator)
                 );
         }
@@ -685,7 +707,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                     .Execute()
                     .Should()
                     .Pass()
-                    .And.HaveStdErrContaining(
+                    .And
+                    .HaveStdErrContaining(
                         Path.Combine(
                             _regSelectedMessage,
                             "9999.0.4",
@@ -725,7 +748,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .Execute()
                 .Should()
                 .Pass()
-                .And.HaveStdErrContaining(
+                .And
+                .HaveStdErrContaining(
                     Path.Combine(
                         _regSelectedMessage,
                         "9999.0.3-dummy",
@@ -757,7 +781,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .Execute()
                 .Should()
                 .Pass()
-                .And.HaveStdErrContaining(
+                .And
+                .HaveStdErrContaining(
                     Path.Combine(_exeSelectedMessage, "9999.0.3", _dotnetSdkDllMessageTerminator)
                 );
 
@@ -787,7 +812,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .Execute()
                 .Should()
                 .Pass()
-                .And.HaveStdErrContaining(
+                .And
+                .HaveStdErrContaining(
                     Path.Combine(_regSelectedMessage, "9999.0.100", _dotnetSdkDllMessageTerminator)
                 );
 
@@ -815,7 +841,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .Execute()
                 .Should()
                 .Pass()
-                .And.HaveStdErrContaining(
+                .And
+                .HaveStdErrContaining(
                     Path.Combine(_regSelectedMessage, "9999.0.100", _dotnetSdkDllMessageTerminator)
                 );
 
@@ -843,7 +870,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .Execute()
                 .Should()
                 .Pass()
-                .And.HaveStdErrContaining(
+                .And
+                .HaveStdErrContaining(
                     Path.Combine(
                         _exeSelectedMessage,
                         "9999.0.5500000",
@@ -875,7 +903,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .Execute()
                 .Should()
                 .Pass()
-                .And.HaveStdErrContaining(
+                .And
+                .HaveStdErrContaining(
                     Path.Combine(
                         _regSelectedMessage,
                         "9999.0.52000000",
@@ -898,13 +927,20 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .Execute()
                 .Should()
                 .Pass()
-                .And.HaveStdOutContaining("9999.0.0")
-                .And.HaveStdOutContaining("9999.0.3-dummy")
-                .And.HaveStdOutContaining("9999.0.3")
-                .And.HaveStdOutContaining("9999.0.100")
-                .And.HaveStdOutContaining("9999.0.80")
-                .And.HaveStdOutContaining("9999.0.5500000")
-                .And.HaveStdOutContaining("9999.0.52000000");
+                .And
+                .HaveStdOutContaining("9999.0.0")
+                .And
+                .HaveStdOutContaining("9999.0.3-dummy")
+                .And
+                .HaveStdOutContaining("9999.0.3")
+                .And
+                .HaveStdOutContaining("9999.0.100")
+                .And
+                .HaveStdOutContaining("9999.0.80")
+                .And
+                .HaveStdOutContaining("9999.0.5500000")
+                .And
+                .HaveStdOutContaining("9999.0.52000000");
         }
 
         // This method adds a list of new sdk version folders in the specified directory.

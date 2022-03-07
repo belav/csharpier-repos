@@ -279,14 +279,16 @@ namespace System.IO.Compression
 
                 fixed (ZStream* stream = &_zStream)
                 {
-                    ErrorCode errC = Interop.zlib.DeflateInit2_(
-                        stream,
-                        level,
-                        CompressionMethod.Deflated,
-                        windowBits,
-                        memLevel,
-                        strategy
-                    );
+                    ErrorCode errC = Interop
+                        .zlib
+                        .DeflateInit2_(
+                            stream,
+                            level,
+                            CompressionMethod.Deflated,
+                            windowBits,
+                            memLevel,
+                            strategy
+                        );
                     _initializationState = State.InitializedForDeflate;
 
                     return errC;

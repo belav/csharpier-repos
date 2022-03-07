@@ -108,11 +108,13 @@ namespace System.Web.Mvc
             )
             {
                 result =
-                    controllerContext.HttpContext.GetGlobalResourceObject(
-                        ResourceClassKey,
-                        resourceName,
-                        CultureInfo.CurrentUICulture
-                    ) as string;
+                    controllerContext
+                        .HttpContext
+                        .GetGlobalResourceObject(
+                            ResourceClassKey,
+                            resourceName,
+                            CultureInfo.CurrentUICulture
+                        ) as string;
             }
 
             return result;

@@ -203,9 +203,9 @@ namespace JIT.HardwareIntrinsics.Arm
             {
                 fixed (Vector128<Single>* pFld1 = &_fld1)
                 {
-                    var result = AdvSimd.Arm64.MinNumberAcross(
-                        AdvSimd.LoadVector128((Single*)(pFld1))
-                    );
+                    var result = AdvSimd
+                        .Arm64
+                        .MinNumberAcross(AdvSimd.LoadVector128((Single*)(pFld1)));
 
                     Unsafe.Write(testClass._dataTable.outArrayPtr, result);
                     testClass.ValidateResult(_fld1, testClass._dataTable.outArrayPtr);
@@ -270,9 +270,9 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunBasicScenario_UnsafeRead));
 
-            var result = AdvSimd.Arm64.MinNumberAcross(
-                Unsafe.Read<Vector128<Single>>(_dataTable.inArray1Ptr)
-            );
+            var result = AdvSimd
+                .Arm64
+                .MinNumberAcross(Unsafe.Read<Vector128<Single>>(_dataTable.inArray1Ptr));
 
             Unsafe.Write(_dataTable.outArrayPtr, result);
             ValidateResult(_dataTable.inArray1Ptr, _dataTable.outArrayPtr);
@@ -282,9 +282,9 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunBasicScenario_Load));
 
-            var result = AdvSimd.Arm64.MinNumberAcross(
-                AdvSimd.LoadVector128((Single*)(_dataTable.inArray1Ptr))
-            );
+            var result = AdvSimd
+                .Arm64
+                .MinNumberAcross(AdvSimd.LoadVector128((Single*)(_dataTable.inArray1Ptr)));
 
             Unsafe.Write(_dataTable.outArrayPtr, result);
             ValidateResult(_dataTable.inArray1Ptr, _dataTable.outArrayPtr);
@@ -342,9 +342,9 @@ namespace JIT.HardwareIntrinsics.Arm
 
             fixed (Vector128<Single>* pClsVar1 = &_clsVar1)
             {
-                var result = AdvSimd.Arm64.MinNumberAcross(
-                    AdvSimd.LoadVector128((Single*)(pClsVar1))
-                );
+                var result = AdvSimd
+                    .Arm64
+                    .MinNumberAcross(AdvSimd.LoadVector128((Single*)(pClsVar1)));
 
                 Unsafe.Write(_dataTable.outArrayPtr, result);
                 ValidateResult(_clsVar1, _dataTable.outArrayPtr);
@@ -438,9 +438,9 @@ namespace JIT.HardwareIntrinsics.Arm
             TestLibrary.TestFramework.BeginScenario(nameof(RunStructLclFldScenario_Load));
 
             var test = TestStruct.Create();
-            var result = AdvSimd.Arm64.MinNumberAcross(
-                AdvSimd.LoadVector128((Single*)(&test._fld1))
-            );
+            var result = AdvSimd
+                .Arm64
+                .MinNumberAcross(AdvSimd.LoadVector128((Single*)(&test._fld1)));
 
             Unsafe.Write(_dataTable.outArrayPtr, result);
             ValidateResult(test._fld1, _dataTable.outArrayPtr);
@@ -550,15 +550,17 @@ namespace JIT.HardwareIntrinsics.Arm
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation(
-                    $"{nameof(AdvSimd.Arm64)}.{nameof(AdvSimd.Arm64.MinNumberAcross)}<Single>(Vector128<Single>): {method} failed:"
-                );
-                TestLibrary.TestFramework.LogInformation(
-                    $" firstOp: ({string.Join(", ", firstOp)})"
-                );
-                TestLibrary.TestFramework.LogInformation(
-                    $"  result: ({string.Join(", ", result)})"
-                );
+                TestLibrary
+                    .TestFramework
+                    .LogInformation(
+                        $"{nameof(AdvSimd.Arm64)}.{nameof(AdvSimd.Arm64.MinNumberAcross)}<Single>(Vector128<Single>): {method} failed:"
+                    );
+                TestLibrary
+                    .TestFramework
+                    .LogInformation($" firstOp: ({string.Join(", ", firstOp)})");
+                TestLibrary
+                    .TestFramework
+                    .LogInformation($"  result: ({string.Join(", ", result)})");
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;

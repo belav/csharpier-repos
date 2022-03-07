@@ -318,11 +318,13 @@ public class LocalTypes3
             Assert.Equal(0, localTypes1.GlobalNamespace.GetTypeMembers("S1", 0).Length);
             Assert.Equal(
                 0,
-                localTypes1.GlobalNamespace
+                localTypes1
+                    .GlobalNamespace
                     .GetMembers("NS1")
                     .OfType<NamespaceSymbol>()
                     .Single()
-                    .GetTypeMembers().Length
+                    .GetTypeMembers()
+                    .Length
             );
 
             Assert.Equal(2, localTypes2.GlobalNamespace.GetMembers().Length);
@@ -336,11 +338,13 @@ public class LocalTypes3
             Assert.Equal(0, localTypes2.GlobalNamespace.GetTypeMembers("S1", 0).Length);
             Assert.Equal(
                 0,
-                localTypes2.GlobalNamespace
+                localTypes2
+                    .GlobalNamespace
                     .GetMembers("NS1")
                     .OfType<NamespaceSymbol>()
                     .Single()
-                    .GetTypeMembers().Length
+                    .GetTypeMembers()
+                    .Length
             );
 
             var fullName_I1 = MetadataTypeName.FromFullName("I1");
@@ -420,7 +424,8 @@ public class LocalTypes3
 
             var varI1 = pia1_1.GlobalNamespace.GetTypeMembers("I1").Single();
             var varS1 = pia1_1.GlobalNamespace.GetTypeMembers("S1").Single();
-            var varNS1 = pia1_1.GlobalNamespace
+            var varNS1 = pia1_1
+                .GlobalNamespace
                 .GetMembers("NS1")
                 .OfType<NamespaceSymbol>()
                 .Single();
@@ -508,7 +513,8 @@ public class LocalTypes3
 
             Assert.Same(pia1_3.GlobalNamespace.GetTypeMembers("I1").Single(), param[0].Type);
             Assert.Same(
-                pia1_3.GlobalNamespace
+                pia1_3
+                    .GlobalNamespace
                     .GetMembers("NS1")
                     .OfType<NamespaceSymbol>()
                     .Single()
@@ -768,7 +774,8 @@ public class LocalTypes3
 
             var varI1 = pia1_1.GlobalNamespace.GetTypeMembers("I1").Single();
             var varS1 = pia1_1.GlobalNamespace.GetTypeMembers("S1").Single();
-            var varNS1 = pia1_1.GlobalNamespace
+            var varNS1 = pia1_1
+                .GlobalNamespace
                 .GetMembers("NS1")
                 .OfType<NamespaceSymbol>()
                 .Single();
@@ -856,7 +863,8 @@ public class LocalTypes3
 
             Assert.Same(pia1_3.GlobalNamespace.GetTypeMembers("I1").Single(), param[0].Type);
             Assert.Same(
-                pia1_3.GlobalNamespace
+                pia1_3
+                    .GlobalNamespace
                     .GetMembers("NS1")
                     .OfType<NamespaceSymbol>()
                     .Single()
@@ -1125,7 +1133,8 @@ public class LocalTypes3
 
             var varI1 = pia1_1.GlobalNamespace.GetTypeMembers("I1").Single();
             var varS1 = pia1_1.GlobalNamespace.GetTypeMembers("S1").Single();
-            var varNS1 = pia1_1.GlobalNamespace
+            var varNS1 = pia1_1
+                .GlobalNamespace
                 .GetMembers("NS1")
                 .OfType<NamespaceSymbol>()
                 .Single();
@@ -1213,7 +1222,8 @@ public class LocalTypes3
 
             Assert.Same(pia1_3.GlobalNamespace.GetTypeMembers("I1").Single(), param[0].Type);
             Assert.Same(
-                pia1_3.GlobalNamespace
+                pia1_3
+                    .GlobalNamespace
                     .GetMembers("NS1")
                     .OfType<NamespaceSymbol>()
                     .Single()
@@ -1629,7 +1639,8 @@ public class LocalTypes3
                 (NoPiaIllegalGenericInstantiationSymbol)localTypes3
                     .GetMembers("Test3")
                     .OfType<MethodSymbol>()
-                    .Single().ReturnType;
+                    .Single()
+                    .ReturnType;
             Assert.Equal("C31<I1>.I31<C33>", illegal.UnderlyingSymbol.ToTestDisplayString());
 
             Assert.NotEqual(
@@ -2420,7 +2431,8 @@ namespace System
                 (NoPiaIllegalGenericInstantiationSymbol)localTypes3
                     .GetMembers("Test3")
                     .OfType<MethodSymbol>()
-                    .Single().ReturnType;
+                    .Single()
+                    .ReturnType;
             Assert.Equal("C31<I1>.I31<C33>", illegal.UnderlyingSymbol.ToTestDisplayString());
 
             Assert.NotEqual(
@@ -2511,7 +2523,8 @@ namespace System
                 (NoPiaIllegalGenericInstantiationSymbol)localTypes3
                     .GetMembers("Test3")
                     .OfType<MethodSymbol>()
-                    .Single().ReturnType;
+                    .Single()
+                    .ReturnType;
             Assert.Equal("C31<I1>.I31<C33>", illegal.UnderlyingSymbol.ToTestDisplayString());
 
             Assert.NotEqual(

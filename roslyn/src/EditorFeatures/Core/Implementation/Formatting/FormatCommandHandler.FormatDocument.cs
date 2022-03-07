@@ -22,8 +22,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Formatting
                 return false;
             }
 
-            var document =
-                args.SubjectBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
+            var document = args.SubjectBuffer
+                .CurrentSnapshot
+                .GetOpenDocumentInCurrentContextWithChanges();
             if (document == null)
             {
                 return false;
@@ -36,10 +37,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Formatting
             }
 
             using (
-                context.OperationContext.AddScope(
-                    allowCancellation: true,
-                    EditorFeaturesResources.Formatting_document
-                )
+                context
+                    .OperationContext
+                    .AddScope(allowCancellation: true, EditorFeaturesResources.Formatting_document)
             )
             {
                 Format(

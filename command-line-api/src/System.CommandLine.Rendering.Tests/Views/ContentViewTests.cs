@@ -115,7 +115,8 @@ namespace System.CommandLine.Rendering.Tests.Views
 
             contentView.Render(_renderer, new Region(0, 0, 4, 1));
 
-            _terminal.Events
+            _terminal
+                .Events
                 .Should()
                 .BeEquivalentSequenceTo(
                     new CursorPositionChanged(new Point(0, 0)),
@@ -163,7 +164,8 @@ namespace System.CommandLine.Rendering.Tests.Views
 
             view.Render(_renderer, new Region(0, 0, 6, 2));
 
-            _terminal.Events
+            _terminal
+                .Events
                 .Should()
                 .BeEquivalentSequenceTo(
                     new CursorPositionChanged(new Point(0, 0)),

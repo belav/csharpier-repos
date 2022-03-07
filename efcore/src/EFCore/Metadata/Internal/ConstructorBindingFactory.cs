@@ -112,9 +112,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             var bindingFailures = new List<IEnumerable<ParameterInfo>>();
 
             foreach (
-                var constructor in entityType.ClrType
+                var constructor in entityType
+                    .ClrType
                     .GetTypeInfo()
-                    .DeclaredConstructors.Where(c => !c.IsStatic)
+                    .DeclaredConstructors
+                    .Where(c => !c.IsStatic)
             )
             {
                 // Trying to find the constructor with the most service properties
@@ -129,7 +131,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     )
                 )
                 {
-                    var serviceParamCount = binding.ParameterBindings
+                    var serviceParamCount = binding
+                        .ParameterBindings
                         .OfType<ServiceParameterBinding>()
                         .Count();
                     var propertyParamCount = binding.ParameterBindings.Count - serviceParamCount;
@@ -196,7 +199,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 IEnumerable<string> ConstructConstructor(
                     IGrouping<ConstructorInfo, ParameterInfo> parameters
                 ) =>
-                    parameters.Key
+                    parameters
+                        .Key
                         .GetParameters()
                         .Select(y => $"{y.ParameterType.ShortDisplayName()} {y.Name}");
 

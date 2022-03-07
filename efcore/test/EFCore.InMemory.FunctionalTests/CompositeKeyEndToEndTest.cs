@@ -37,9 +37,9 @@ namespace Microsoft.EntityFrameworkCore
 
             using (var context = new BronieContext(serviceProvider))
             {
-                var pegasus = context.Pegasuses.Single(
-                    e => (e.Id1 == ticks) && (e.Id2 == ticks + 1)
-                );
+                var pegasus = context
+                    .Pegasuses
+                    .Single(e => (e.Id1 == ticks) && (e.Id2 == ticks + 1));
 
                 pegasus.Name = "Rainbow Crash";
 
@@ -48,9 +48,9 @@ namespace Microsoft.EntityFrameworkCore
 
             using (var context = new BronieContext(serviceProvider))
             {
-                var pegasus = context.Pegasuses.Single(
-                    e => (e.Id1 == ticks) && (e.Id2 == ticks + 1)
-                );
+                var pegasus = context
+                    .Pegasuses
+                    .Single(e => (e.Id1 == ticks) && (e.Id2 == ticks + 1));
 
                 Assert.Equal("Rainbow Crash", pegasus.Name);
 
@@ -102,9 +102,9 @@ namespace Microsoft.EntityFrameworkCore
 
             using (var context = new BronieContext(serviceProvider))
             {
-                var unicorn = context.Unicorns.Single(
-                    e => (e.Id1 == id1) && (e.Id2 == id2) && (e.Id3 == id3)
-                );
+                var unicorn = context
+                    .Unicorns
+                    .Single(e => (e.Id1 == id1) && (e.Id2 == id2) && (e.Id3 == id3));
 
                 unicorn.Name = "Bad Hair Day";
 
@@ -113,9 +113,9 @@ namespace Microsoft.EntityFrameworkCore
 
             using (var context = new BronieContext(serviceProvider))
             {
-                var unicorn = context.Unicorns.Single(
-                    e => (e.Id1 == id1) && (e.Id2 == id2) && (e.Id3 == id3)
-                );
+                var unicorn = context
+                    .Unicorns
+                    .Single(e => (e.Id1 == id1) && (e.Id2 == id2) && (e.Id3 == id3));
 
                 Assert.Equal("Bad Hair Day", unicorn.Name);
 

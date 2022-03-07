@@ -112,7 +112,8 @@ namespace Newtonsoft.Json.Schema
                 {
                     if (locationReference)
                     {
-                        string[] escapedParts = schema.DeferredReference
+                        string[] escapedParts = schema
+                            .DeferredReference
                             .TrimStart('#')
                             .Split(new[] { '/' }, StringSplitOptions.RemoveEmptyEntries);
                         JToken currentToken = _rootSchema;
@@ -200,10 +201,9 @@ namespace Newtonsoft.Json.Schema
             if (schema.PatternProperties != null)
             {
                 foreach (
-                    KeyValuePair<
-                        string,
-                        JsonSchema
-                    > patternProperty in schema.PatternProperties.ToList()
+                    KeyValuePair<string, JsonSchema> patternProperty in schema
+                        .PatternProperties
+                        .ToList()
                 )
                 {
                     schema.PatternProperties[patternProperty.Key] = ResolveReferences(
@@ -255,7 +255,8 @@ namespace Newtonsoft.Json.Schema
                 return deferredSchema;
             }
 
-            string location = token.Path
+            string location = token
+                .Path
                 .Replace(".", "/")
                 .Replace("[", "/")
                 .Replace("]", string.Empty);
@@ -552,10 +553,9 @@ namespace Newtonsoft.Json.Schema
         internal static JsonSchemaType MapType(string type)
         {
             if (
-                !JsonSchemaConstants.JsonSchemaTypeMapping.TryGetValue(
-                    type,
-                    out JsonSchemaType mappedType
-                )
+                !JsonSchemaConstants
+                    .JsonSchemaTypeMapping
+                    .TryGetValue(type, out JsonSchemaType mappedType)
             )
             {
                 throw new JsonException(

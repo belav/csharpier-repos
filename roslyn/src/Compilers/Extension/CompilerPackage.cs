@@ -57,17 +57,27 @@ namespace Roslyn.Compilers.Extension
 
                 try
                 {
-                    Microsoft.Build.Evaluation.ProjectCollection.GlobalProjectCollection.DisableMarkDirty =
-                        true;
-                    Microsoft.Build.Evaluation.ProjectCollection.GlobalProjectCollection.SetGlobalProperty(
-                        "RoslynHive",
-                        RoslynHive
-                    );
+                    Microsoft
+                        .Build
+                        .Evaluation
+                        .ProjectCollection
+                        .GlobalProjectCollection
+                        .DisableMarkDirty = true;
+                    Microsoft
+                        .Build
+                        .Evaluation
+                        .ProjectCollection
+                        .GlobalProjectCollection
+                        .SetGlobalProperty("RoslynHive", RoslynHive);
                 }
                 finally
                 {
-                    Microsoft.Build.Evaluation.ProjectCollection.GlobalProjectCollection.DisableMarkDirty =
-                        false;
+                    Microsoft
+                        .Build
+                        .Evaluation
+                        .ProjectCollection
+                        .GlobalProjectCollection
+                        .DisableMarkDirty = false;
                 }
             }
         }

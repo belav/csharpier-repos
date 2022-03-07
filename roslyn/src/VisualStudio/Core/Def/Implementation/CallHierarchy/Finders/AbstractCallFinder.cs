@@ -156,8 +156,11 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CallHierarchy.Finders
                     or CallHierarchySearchScope.CurrentProject
             )
             {
-                var documentTrackingService =
-                    project.Solution.Workspace.Services.GetRequiredService<IDocumentTrackingService>();
+                var documentTrackingService = project
+                    .Solution
+                    .Workspace
+                    .Services
+                    .GetRequiredService<IDocumentTrackingService>();
                 var activeDocument = documentTrackingService.TryGetActiveDocument();
                 if (activeDocument != null)
                 {
@@ -205,17 +208,16 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CallHierarchy.Finders
                     if (caller.CallingSymbol.Kind == SymbolKind.Field)
                     {
                         initializerLocations.AddRange(
-                            caller.Locations.Select(
-                                l => new CallHierarchyDetail(l, project.Solution.Workspace)
-                            )
+                            caller
+                                .Locations
+                                .Select(l => new CallHierarchyDetail(l, project.Solution.Workspace))
                         );
                     }
                     else
                     {
-                        var callingProject = project.Solution.GetProject(
-                            caller.CallingSymbol.ContainingAssembly,
-                            cancellationToken
-                        );
+                        var callingProject = project
+                            .Solution
+                            .GetProject(caller.CallingSymbol.ContainingAssembly, cancellationToken);
                         var item = await Provider
                             .CreateItemAsync(
                                 caller.CallingSymbol,

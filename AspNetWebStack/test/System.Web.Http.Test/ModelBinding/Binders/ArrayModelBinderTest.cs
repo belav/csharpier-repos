@@ -17,10 +17,14 @@ namespace System.Web.Http.ModelBinding.Binders
             // Arrange
             Mock<IModelBinder> mockIntBinder = new Mock<IModelBinder>();
             HttpActionContext context = ContextUtil.CreateActionContext();
-            context.ControllerContext.Configuration.Services.Replace(
-                typeof(ModelBinderProvider),
-                new SimpleModelBinderProvider(typeof(int), mockIntBinder.Object)
-            );
+            context
+                .ControllerContext
+                .Configuration
+                .Services
+                .Replace(
+                    typeof(ModelBinderProvider),
+                    new SimpleModelBinderProvider(typeof(int), mockIntBinder.Object)
+                );
 
             ModelBindingContext bindingContext = new ModelBindingContext
             {

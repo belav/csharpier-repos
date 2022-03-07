@@ -303,10 +303,10 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
 
                 if (
                     !string.IsNullOrEmpty(symbolToVerify)
-                    && !declaration.DeclaredSymbol.Name.Equals(
-                        symbolToVerify,
-                        StringComparison.Ordinal
-                    )
+                    && !declaration
+                        .DeclaredSymbol
+                        .Name
+                        .Equals(symbolToVerify, StringComparison.Ordinal)
                 )
                 {
                     continue;

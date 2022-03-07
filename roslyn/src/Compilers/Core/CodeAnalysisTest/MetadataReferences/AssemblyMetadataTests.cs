@@ -89,7 +89,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var dir = Temp.CreateDirectory();
             var mm =
                 dir.CreateFile("MultiModule.dll")
-                    .WriteAllBytes(TestResources.SymbolsTests.MultiModule.MultiModuleDll).Path;
+                    .WriteAllBytes(TestResources.SymbolsTests.MultiModule.MultiModuleDll)
+                    .Path;
             dir.CreateFile("mod2.netmodule")
                 .WriteAllBytes(TestResources.SymbolsTests.MultiModule.mod2);
             dir.CreateFile("mod3.netmodule")
@@ -193,7 +194,10 @@ namespace Microsoft.CodeAnalysis.UnitTests
         public void IncorrectCustomAssemblyTableSize_TooManyMethodSpecs()
         {
             var metadata = AssemblyMetadata.CreateFromImage(
-                TestResources.MetadataTests.Invalid.IncorrectCustomAssemblyTableSize_TooManyMethodSpecs
+                TestResources
+                    .MetadataTests
+                    .Invalid
+                    .IncorrectCustomAssemblyTableSize_TooManyMethodSpecs
             );
             Assert.Throws<BadImageFormatException>(() => metadata.GetModules());
         }

@@ -24,8 +24,10 @@ internal class ApiBehaviorOptionsSetup : IConfigureOptions<ApiBehaviorOptions>
         {
             // ProblemDetailsFactory depends on the ApiBehaviorOptions instance. We intentionally avoid constructor injecting
             // it in this options setup to to avoid a DI cycle.
-            _problemDetailsFactory ??=
-                context.HttpContext.RequestServices.GetRequiredService<ProblemDetailsFactory>();
+            _problemDetailsFactory ??= context
+                .HttpContext
+                .RequestServices
+                .GetRequiredService<ProblemDetailsFactory>();
             return ProblemDetailsInvalidModelStateResponse(_problemDetailsFactory, context);
         };
 

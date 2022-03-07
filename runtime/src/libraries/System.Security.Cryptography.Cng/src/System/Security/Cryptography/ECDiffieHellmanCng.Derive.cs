@@ -65,22 +65,26 @@ namespace System.Security.Cryptography
                 switch (KeyDerivationFunction)
                 {
                     case ECDiffieHellmanKeyDerivationFunction.Hash:
-                        return Interop.NCrypt.DeriveKeyMaterialHash(
-                            handle,
-                            HashAlgorithm.Algorithm,
-                            _secretPrepend,
-                            _secretAppend,
-                            flags
-                        );
+                        return Interop
+                            .NCrypt
+                            .DeriveKeyMaterialHash(
+                                handle,
+                                HashAlgorithm.Algorithm,
+                                _secretPrepend,
+                                _secretAppend,
+                                flags
+                            );
                     case ECDiffieHellmanKeyDerivationFunction.Hmac:
-                        return Interop.NCrypt.DeriveKeyMaterialHmac(
-                            handle,
-                            HashAlgorithm.Algorithm,
-                            _hmacKey,
-                            _secretPrepend,
-                            _secretAppend,
-                            flags
-                        );
+                        return Interop
+                            .NCrypt
+                            .DeriveKeyMaterialHmac(
+                                handle,
+                                HashAlgorithm.Algorithm,
+                                _hmacKey,
+                                _secretPrepend,
+                                _secretAppend,
+                                flags
+                            );
                     case ECDiffieHellmanKeyDerivationFunction.Tls:
                         if (_label == null || _seed == null)
                         {

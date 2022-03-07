@@ -1271,10 +1271,12 @@ namespace System.Net.Http
             HttpConfiguration config = CreateAndAddConfiguration(request);
             config.IncludeErrorDetailPolicy = errorDetail;
             request.Properties.Add(HttpPropertyKeys.IsLocalKey, new Lazy<bool>(() => isLocal));
-            request.Properties.Add(
-                HttpPropertyKeys.IncludeErrorDetailKey,
-                new Lazy<bool>(() => includeErrorDetail)
-            );
+            request
+                .Properties
+                .Add(
+                    HttpPropertyKeys.IncludeErrorDetailKey,
+                    new Lazy<bool>(() => includeErrorDetail)
+                );
 
             // Act
             bool includeError = request.ShouldIncludeErrorDetail();
@@ -1301,10 +1303,9 @@ namespace System.Net.Http
         {
             // Arrange
             HttpRequestMessage request = CreateRequest();
-            request.Properties.Add(
-                HttpPropertyKeys.IncludeErrorDetailKey,
-                new Lazy<bool>(() => true)
-            );
+            request
+                .Properties
+                .Add(HttpPropertyKeys.IncludeErrorDetailKey, new Lazy<bool>(() => true));
 
             // Act
             bool includeError = request.ShouldIncludeErrorDetail();
@@ -1363,10 +1364,12 @@ namespace System.Net.Http
             // Assert
             IEnumerable<KeyValuePair<string, string>> cached;
             Assert.True(
-                request.Properties.TryGetValue<IEnumerable<KeyValuePair<string, string>>>(
-                    HttpPropertyKeys.RequestQueryNameValuePairsKey,
-                    out cached
-                )
+                request
+                    .Properties
+                    .TryGetValue<IEnumerable<KeyValuePair<string, string>>>(
+                        HttpPropertyKeys.RequestQueryNameValuePairsKey,
+                        out cached
+                    )
             );
 
             Assert.Same(returned, cached);
@@ -1390,16 +1393,17 @@ namespace System.Net.Http
             string queryString;
 
             Assert.True(
-                request.Properties.TryGetValue<IEnumerable<KeyValuePair<string, string>>>(
-                    HttpPropertyKeys.RequestQueryNameValuePairsKey,
-                    out cached
-                )
+                request
+                    .Properties
+                    .TryGetValue<IEnumerable<KeyValuePair<string, string>>>(
+                        HttpPropertyKeys.RequestQueryNameValuePairsKey,
+                        out cached
+                    )
             );
             Assert.True(
-                request.Properties.TryGetValue<string>(
-                    HttpPropertyKeys.CachedRequestQueryKey,
-                    out queryString
-                )
+                request
+                    .Properties
+                    .TryGetValue<string>(HttpPropertyKeys.CachedRequestQueryKey, out queryString)
             );
 
             Assert.Same(returned, cached);
@@ -1435,16 +1439,17 @@ namespace System.Net.Http
             string queryString;
 
             Assert.True(
-                request.Properties.TryGetValue<IEnumerable<KeyValuePair<string, string>>>(
-                    HttpPropertyKeys.RequestQueryNameValuePairsKey,
-                    out cached
-                )
+                request
+                    .Properties
+                    .TryGetValue<IEnumerable<KeyValuePair<string, string>>>(
+                        HttpPropertyKeys.RequestQueryNameValuePairsKey,
+                        out cached
+                    )
             );
             Assert.True(
-                request.Properties.TryGetValue<string>(
-                    HttpPropertyKeys.CachedRequestQueryKey,
-                    out queryString
-                )
+                request
+                    .Properties
+                    .TryGetValue<string>(HttpPropertyKeys.CachedRequestQueryKey, out queryString)
             );
 
             Assert.Same(returned, cached);
@@ -1481,16 +1486,17 @@ namespace System.Net.Http
 
             // Cache is not cleared when the query is empty, but it is when the query is ?.
             Assert.True(
-                request.Properties.TryGetValue<IEnumerable<KeyValuePair<string, string>>>(
-                    HttpPropertyKeys.RequestQueryNameValuePairsKey,
-                    out cached
-                )
+                request
+                    .Properties
+                    .TryGetValue<IEnumerable<KeyValuePair<string, string>>>(
+                        HttpPropertyKeys.RequestQueryNameValuePairsKey,
+                        out cached
+                    )
             );
             Assert.True(
-                request.Properties.TryGetValue<string>(
-                    HttpPropertyKeys.CachedRequestQueryKey,
-                    out queryString
-                )
+                request
+                    .Properties
+                    .TryGetValue<string>(HttpPropertyKeys.CachedRequestQueryKey, out queryString)
             );
 
             if (request.RequestUri.Query == "?")
@@ -1535,16 +1541,17 @@ namespace System.Net.Http
             string queryString;
 
             Assert.True(
-                request.Properties.TryGetValue<IEnumerable<KeyValuePair<string, string>>>(
-                    HttpPropertyKeys.RequestQueryNameValuePairsKey,
-                    out cached
-                )
+                request
+                    .Properties
+                    .TryGetValue<IEnumerable<KeyValuePair<string, string>>>(
+                        HttpPropertyKeys.RequestQueryNameValuePairsKey,
+                        out cached
+                    )
             );
             Assert.True(
-                request.Properties.TryGetValue<string>(
-                    HttpPropertyKeys.CachedRequestQueryKey,
-                    out queryString
-                )
+                request
+                    .Properties
+                    .TryGetValue<string>(HttpPropertyKeys.CachedRequestQueryKey, out queryString)
             );
 
             Assert.Same(returned, cached);
@@ -1577,16 +1584,17 @@ namespace System.Net.Http
             string queryString;
 
             Assert.False(
-                request.Properties.TryGetValue<IEnumerable<KeyValuePair<string, string>>>(
-                    HttpPropertyKeys.RequestQueryNameValuePairsKey,
-                    out cached
-                )
+                request
+                    .Properties
+                    .TryGetValue<IEnumerable<KeyValuePair<string, string>>>(
+                        HttpPropertyKeys.RequestQueryNameValuePairsKey,
+                        out cached
+                    )
             );
             Assert.True(
-                request.Properties.TryGetValue<string>(
-                    HttpPropertyKeys.CachedRequestQueryKey,
-                    out queryString
-                )
+                request
+                    .Properties
+                    .TryGetValue<string>(HttpPropertyKeys.CachedRequestQueryKey, out queryString)
             ); // this will not get cleared.
 
             Assert.Same(returned, Enumerable.Empty<KeyValuePair<string, string>>());
@@ -1619,16 +1627,17 @@ namespace System.Net.Http
             string queryString;
 
             Assert.True(
-                request.Properties.TryGetValue<IEnumerable<KeyValuePair<string, string>>>(
-                    HttpPropertyKeys.RequestQueryNameValuePairsKey,
-                    out cached
-                )
+                request
+                    .Properties
+                    .TryGetValue<IEnumerable<KeyValuePair<string, string>>>(
+                        HttpPropertyKeys.RequestQueryNameValuePairsKey,
+                        out cached
+                    )
             );
             Assert.True(
-                request.Properties.TryGetValue<string>(
-                    HttpPropertyKeys.CachedRequestQueryKey,
-                    out queryString
-                )
+                request
+                    .Properties
+                    .TryGetValue<string>(HttpPropertyKeys.CachedRequestQueryKey, out queryString)
             );
 
             Assert.Same(returned, cached);

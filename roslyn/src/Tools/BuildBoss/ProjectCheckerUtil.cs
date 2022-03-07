@@ -217,9 +217,12 @@ namespace BuildBoss
                     continue;
                 }
 
-                var builtByThisRepository = _solutionMap.Values.Any(
-                    projectData => GetAssemblyName(projectData) == internalsVisibleTo.TargetAssembly
-                );
+                var builtByThisRepository = _solutionMap
+                    .Values
+                    .Any(
+                        projectData =>
+                            GetAssemblyName(projectData) == internalsVisibleTo.TargetAssembly
+                    );
                 if (!builtByThisRepository)
                 {
                     textWriter.WriteLine(

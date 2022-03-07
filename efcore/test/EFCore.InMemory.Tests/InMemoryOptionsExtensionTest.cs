@@ -14,7 +14,8 @@ namespace Microsoft.EntityFrameworkCore
     {
         private static readonly MethodInfo _applyServices = typeof(InMemoryOptionsExtension)
             .GetTypeInfo()
-            .DeclaredMethods.Single(m => m.Name == "ApplyServices");
+            .DeclaredMethods
+            .Single(m => m.Name == "ApplyServices");
 
         [ConditionalFact]
         public void Adds_in_memory_services()

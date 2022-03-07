@@ -64,10 +64,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
             var leftSkipNavigation = (SkipNavigation)leftNavigation;
             var rightSkipNavigation = (SkipNavigation)rightNavigation;
 
-            leftSkipNavigation.Builder.HasInverse(
-                rightSkipNavigation,
-                ConfigurationSource.Explicit
-            );
+            leftSkipNavigation
+                .Builder
+                .HasInverse(rightSkipNavigation, ConfigurationSource.Explicit);
 
             // We delayed setting the ConfigurationSource of SkipNavigation in HasMany().
             // But now we know that both navigations are skip navigations.
@@ -495,16 +494,20 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
 
                     newJoinEntityType =
                         joinEntityName == null
-                            ? ModelBuilder.Entity(
+                            ? ModelBuilder
+                              .Entity(
                                   joinEntityType,
                                   ConfigurationSource.Explicit,
                                   shouldBeOwned: false
-                              )!.Metadata
-                            : ModelBuilder.SharedTypeEntity(
+                              )!
+                              .Metadata
+                            : ModelBuilder
+                              .SharedTypeEntity(
                                   joinEntityName,
                                   joinEntityType,
                                   ConfigurationSource.Explicit
-                              )!.Metadata;
+                              )!
+                              .Metadata;
                 }
             }
 
@@ -523,14 +526,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
                           newJoinEntityType
                       );
 
-            ((SkipNavigation)RightNavigation).Builder.HasForeignKey(
-                (ForeignKey)rightForeignKey,
-                ConfigurationSource.Explicit
-            );
-            ((SkipNavigation)LeftNavigation).Builder.HasForeignKey(
-                (ForeignKey)leftForeignKey,
-                ConfigurationSource.Explicit
-            );
+            ((SkipNavigation)RightNavigation)
+                .Builder
+                .HasForeignKey((ForeignKey)rightForeignKey, ConfigurationSource.Explicit);
+            ((SkipNavigation)LeftNavigation)
+                .Builder
+                .HasForeignKey((ForeignKey)leftForeignKey, ConfigurationSource.Explicit);
 
             return newJoinEntityType;
 
@@ -561,14 +562,16 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
                     return compatibleFk;
                 }
 
-                return joinEntityType.Builder
+                return joinEntityType
+                    .Builder
                     .HasRelationship(
                         skipNavigation.DeclaringEntityType,
                         ConfigurationSource.Convention,
                         required: true,
                         skipNavigation.Inverse!.Name
                     )!
-                    .IsUnique(false, ConfigurationSource.Convention)!.Metadata;
+                    .IsUnique(false, ConfigurationSource.Convention)!
+                    .Metadata;
             }
         }
 

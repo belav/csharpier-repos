@@ -1109,9 +1109,13 @@ namespace System.Speech.Internal.Synthesis
                     if (_pendingSpeakQueue.Count == 0)
                     {
                         _currentPrompt = null;
-                        System.Diagnostics.Debug.Assert(
-                            State == SynthesizerState.Speaking || State == SynthesizerState.Paused
-                        );
+                        System
+                            .Diagnostics
+                            .Debug
+                            .Assert(
+                                State == SynthesizerState.Speaking
+                                    || State == SynthesizerState.Paused
+                            );
 
                         if (State != SynthesizerState.Paused)
                         {

@@ -2606,9 +2606,9 @@ namespace Microsoft.CodeAnalysis
                 var interfaceImplHandle in Module.GetInterfaceImplementationsOrThrow(searchTypeDef)
             )
             {
-                var interfaceImpl = Module.MetadataReader.GetInterfaceImplementation(
-                    interfaceImplHandle
-                );
+                var interfaceImpl = Module
+                    .MetadataReader
+                    .GetInterfaceImplementation(interfaceImplHandle);
                 EnqueueTypeToken(typeDefsToSearch, typeSymbolsToSearch, interfaceImpl.Interface);
             }
 

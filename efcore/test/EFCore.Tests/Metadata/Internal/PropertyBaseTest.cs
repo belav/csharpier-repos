@@ -1927,7 +1927,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     .Entity<TEntity>()
                     .Ignore("Reference")
                     .Ignore("Collection")
-                    .Property<int>(propertyName).Metadata;
+                    .Property<int>(propertyName)
+                    .Metadata;
 
             property.SetField(fieldName);
             Assert.False(property.IsShadowProperty());

@@ -351,7 +351,8 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
                 // Empty strings for elements not explicitly declared
                 var elementName = element.IsImplicitlyDeclared ? string.Empty : element.Name;
 
-                var typeParts = element.Type
+                var typeParts = element
+                    .Type
                     .ToMinimalDisplayParts(semanticModel, position)
                     .ToList();
                 if (!string.IsNullOrEmpty(elementName))

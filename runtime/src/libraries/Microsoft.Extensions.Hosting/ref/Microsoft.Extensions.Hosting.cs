@@ -10,7 +10,11 @@ namespace Microsoft.Extensions.DependencyInjection
     {
         public static Microsoft.Extensions.Options.OptionsBuilder<TOptions> ValidateOnStart<
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembers(
-                System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
+                System
+                    .Diagnostics
+                    .CodeAnalysis
+                    .DynamicallyAccessedMemberTypes
+                    .PublicParameterlessConstructor
             )]
                 TOptions
         >(this Microsoft.Extensions.Options.OptionsBuilder<TOptions> optionsBuilder)

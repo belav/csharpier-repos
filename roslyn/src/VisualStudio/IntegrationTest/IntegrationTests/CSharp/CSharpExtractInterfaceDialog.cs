@@ -37,23 +37,25 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
 "
             );
             VisualStudio.Editor.InvokeCodeActionList();
-            VisualStudio.Editor.Verify.CodeAction(
-                "Extract interface...",
-                applyFix: true,
-                blockUntilComplete: false
-            );
+            VisualStudio
+                .Editor
+                .Verify
+                .CodeAction("Extract interface...", applyFix: true, blockUntilComplete: false);
 
             ExtractInterfaceDialog.VerifyOpen();
             ExtractInterfaceDialog.ClickCancel();
             ExtractInterfaceDialog.VerifyClosed();
 
-            VisualStudio.Editor.Verify.TextContains(
-                @"class C
+            VisualStudio
+                .Editor
+                .Verify
+                .TextContains(
+                    @"class C
 {
     public void M() { }
 }
 "
-            );
+                );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.CodeActionsExtractInterface)]
@@ -67,11 +69,10 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
 "
             );
             VisualStudio.Editor.InvokeCodeActionList();
-            VisualStudio.Editor.Verify.CodeAction(
-                "Extract interface...",
-                applyFix: true,
-                blockUntilComplete: false
-            );
+            VisualStudio
+                .Editor
+                .Verify
+                .CodeAction("Extract interface...", applyFix: true, blockUntilComplete: false);
 
             ExtractInterfaceDialog.VerifyOpen();
 
@@ -95,11 +96,10 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
             );
 
             VisualStudio.Editor.InvokeCodeActionList();
-            VisualStudio.Editor.Verify.CodeAction(
-                "Extract interface...",
-                applyFix: true,
-                blockUntilComplete: false
-            );
+            VisualStudio
+                .Editor
+                .Verify
+                .CodeAction("Extract interface...", applyFix: true, blockUntilComplete: false);
 
             ExtractInterfaceDialog.VerifyOpen();
 
@@ -133,11 +133,10 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
             );
 
             VisualStudio.Editor.InvokeCodeActionList();
-            VisualStudio.Editor.Verify.CodeAction(
-                "Extract interface...",
-                applyFix: true,
-                blockUntilComplete: false
-            );
+            VisualStudio
+                .Editor
+                .Verify
+                .CodeAction("Extract interface...", applyFix: true, blockUntilComplete: false);
 
             ExtractInterfaceDialog.VerifyOpen();
             ExtractInterfaceDialog.ClickDeselectAll();
@@ -147,22 +146,28 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
 
             var project = new ProjectUtils.Project(ProjectName);
             VisualStudio.SolutionExplorer.OpenFile(project, "Class1.cs");
-            VisualStudio.Editor.Verify.TextContains(
-                @"class C : IC
+            VisualStudio
+                .Editor
+                .Verify
+                .TextContains(
+                    @"class C : IC
 {
     public void M1() { }
     public void M2() { }
 }
 "
-            );
+                );
 
             VisualStudio.SolutionExplorer.OpenFile(project, "IC.cs");
-            VisualStudio.Editor.Verify.TextContains(
-                @"interface IC
+            VisualStudio
+                .Editor
+                .Verify
+                .TextContains(
+                    @"interface IC
 {
     void M2();
 }"
-            );
+                );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.CodeActionsExtractInterface)]
@@ -176,11 +181,10 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
 "
             );
             VisualStudio.Editor.InvokeCodeActionList();
-            VisualStudio.Editor.Verify.CodeAction(
-                "Extract interface...",
-                applyFix: true,
-                blockUntilComplete: false
-            );
+            VisualStudio
+                .Editor
+                .Verify
+                .CodeAction("Extract interface...", applyFix: true, blockUntilComplete: false);
 
             ExtractInterfaceDialog.VerifyOpen();
 
@@ -190,8 +194,11 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
             ExtractInterfaceDialog.VerifyClosed();
 
             _ = new ProjectUtils.Project(ProjectName);
-            VisualStudio.Editor.Verify.TextContains(
-                @"interface IC
+            VisualStudio
+                .Editor
+                .Verify
+                .TextContains(
+                    @"interface IC
 {
     void M();
 }
@@ -201,7 +208,7 @@ class C : IC
     public void M() { }
 }
 "
-            );
+                );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.CodeActionsExtractInterface)]
@@ -217,11 +224,10 @@ class C : IC
             );
 
             VisualStudio.Editor.InvokeCodeActionList();
-            VisualStudio.Editor.Verify.CodeAction(
-                "Extract interface...",
-                applyFix: true,
-                blockUntilComplete: false
-            );
+            VisualStudio
+                .Editor
+                .Verify
+                .CodeAction("Extract interface...", applyFix: true, blockUntilComplete: false);
 
             ExtractInterfaceDialog.VerifyOpen();
             ExtractInterfaceDialog.ClickDeselectAll();
@@ -230,8 +236,11 @@ class C : IC
             ExtractInterfaceDialog.ClickOK();
             ExtractInterfaceDialog.VerifyClosed();
 
-            VisualStudio.Editor.Verify.TextContains(
-                @"interface IC
+            VisualStudio
+                .Editor
+                .Verify
+                .TextContains(
+                    @"interface IC
 {
     void M2();
 }
@@ -242,7 +251,7 @@ class C : IC
     public void M2() { }
 }
 "
-            );
+                );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.CodeActionsExtractInterface)]
@@ -259,11 +268,10 @@ class C : IC
 "
             );
             VisualStudio.Editor.InvokeCodeActionList();
-            VisualStudio.Editor.Verify.CodeAction(
-                "Extract interface...",
-                applyFix: true,
-                blockUntilComplete: false
-            );
+            VisualStudio
+                .Editor
+                .Verify
+                .CodeAction("Extract interface...", applyFix: true, blockUntilComplete: false);
 
             ExtractInterfaceDialog.VerifyOpen();
 
@@ -273,8 +281,11 @@ class C : IC
             ExtractInterfaceDialog.VerifyClosed();
 
             _ = new ProjectUtils.Project(ProjectName);
-            VisualStudio.Editor.Verify.TextContains(
-                @"namespace A
+            VisualStudio
+                .Editor
+                .Verify
+                .TextContains(
+                    @"namespace A
 {
     interface IC
     {
@@ -287,7 +298,7 @@ class C : IC
     }
 }
 "
-            );
+                );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.CodeActionsExtractInterface)]
@@ -301,11 +312,10 @@ class C : IC
 "
             );
             VisualStudio.Editor.InvokeCodeActionList();
-            VisualStudio.Editor.Verify.CodeAction(
-                "Extract interface...",
-                applyFix: true,
-                blockUntilComplete: false
-            );
+            VisualStudio
+                .Editor
+                .Verify
+                .CodeAction("Extract interface...", applyFix: true, blockUntilComplete: false);
 
             ExtractInterfaceDialog.VerifyOpen();
 
@@ -315,8 +325,11 @@ class C : IC
             ExtractInterfaceDialog.VerifyClosed();
 
             _ = new ProjectUtils.Project(ProjectName);
-            VisualStudio.Editor.Verify.TextContains(
-                @"interface IC
+            VisualStudio
+                .Editor
+                .Verify
+                .TextContains(
+                    @"interface IC
 {
     bool M();
 }
@@ -326,7 +339,7 @@ class C : IC
     public bool M() => false;
 }
 "
-            );
+                );
         }
     }
 }

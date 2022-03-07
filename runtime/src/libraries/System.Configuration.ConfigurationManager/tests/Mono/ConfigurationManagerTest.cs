@@ -483,9 +483,11 @@ namespace MonoTests.System.Configuration
                 var fileMap = new ConfigurationFileMap(file);
                 Assert.Equal(
                     file,
-                    Assert.Throws<ConfigurationErrorsException>(
-                        () => ConfigurationManager.OpenMappedMachineConfiguration(fileMap)
-                    ).Filename
+                    Assert
+                        .Throws<ConfigurationErrorsException>(
+                            () => ConfigurationManager.OpenMappedMachineConfiguration(fileMap)
+                        )
+                        .Filename
                 );
             }
         }

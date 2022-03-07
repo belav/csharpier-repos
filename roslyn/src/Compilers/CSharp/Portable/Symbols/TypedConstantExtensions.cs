@@ -63,9 +63,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             Debug.Assert(constant.ValueInternal is object);
             ConstantValue valueConstant = ConstantValue.Create(constant.ValueInternal, splType);
 
-            string typeName = constant.Type.ToDisplayString(
-                SymbolDisplayFormat.QualifiedNameOnlyFormat
-            );
+            string typeName = constant
+                .Type
+                .ToDisplayString(SymbolDisplayFormat.QualifiedNameOnlyFormat);
             if (valueConstant.IsUnsigned)
             {
                 return DisplayUnsignedEnumConstant(

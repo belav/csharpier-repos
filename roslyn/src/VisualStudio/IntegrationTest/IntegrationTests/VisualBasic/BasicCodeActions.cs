@@ -31,14 +31,16 @@ namespace Roslyn.VisualStudio.IntegrationTests.VisualBasic
                 new Microsoft.VisualStudio.IntegrationTest.Utilities.Common.ProjectUtils.Project(
                     ProjectName
                 );
-            VisualStudio.SolutionExplorer.AddFile(
-                project,
-                "Goo.vb",
-                @"
+            VisualStudio
+                .SolutionExplorer
+                .AddFile(
+                    project,
+                    "Goo.vb",
+                    @"
 Class Goo
 End Class
 "
-            );
+                );
 
             SetUpEditor(
                 @"
@@ -55,17 +57,20 @@ End Class
 
             VisualStudio.Editor.InvokeCodeActionList();
             VisualStudio.Editor.Verify.CodeAction("Generate method 'Goo.Bar'", applyFix: true);
-            VisualStudio.SolutionExplorer.Verify.FileContents(
-                project,
-                "Goo.vb",
-                @"
+            VisualStudio
+                .SolutionExplorer
+                .Verify
+                .FileContents(
+                    project,
+                    "Goo.vb",
+                    @"
 Class Goo
     Friend Sub Bar()
         Throw New NotImplementedException()
     End Sub
 End Class
 "
-            );
+                );
         }
     }
 }

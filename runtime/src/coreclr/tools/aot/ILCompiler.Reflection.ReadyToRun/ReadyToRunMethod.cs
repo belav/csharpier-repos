@@ -152,10 +152,9 @@ namespace ILCompiler.Reflection.ReadyToRun
             {
                 if (_ehInfo == null)
                 {
-                    _readyToRunReader.RuntimeFunctionToEHInfo.TryGetValue(
-                        StartAddress,
-                        out _ehInfo
-                    );
+                    _readyToRunReader
+                        .RuntimeFunctionToEHInfo
+                        .TryGetValue(StartAddress, out _ehInfo);
                 }
                 return _ehInfo;
             }
@@ -401,21 +400,19 @@ namespace ILCompiler.Reflection.ReadyToRun
                 case HandleKind.MethodDefinition:
 
                     {
-                        MethodDefinition methodDef =
-                            ComponentReader.MetadataReader.GetMethodDefinition(
-                                (MethodDefinitionHandle)MethodHandle
-                            );
+                        MethodDefinition methodDef = ComponentReader
+                            .MetadataReader
+                            .GetMethodDefinition((MethodDefinitionHandle)MethodHandle);
                         if (methodDef.RelativeVirtualAddress != 0)
                         {
-                            MethodBodyBlock mbb = ComponentReader.ImageReader.GetMethodBody(
-                                methodDef.RelativeVirtualAddress
-                            );
+                            MethodBodyBlock mbb = ComponentReader
+                                .ImageReader
+                                .GetMethodBody(methodDef.RelativeVirtualAddress);
                             if (!mbb.LocalSignature.IsNil)
                             {
-                                StandaloneSignature ss =
-                                    ComponentReader.MetadataReader.GetStandaloneSignature(
-                                        mbb.LocalSignature
-                                    );
+                                StandaloneSignature ss = ComponentReader
+                                    .MetadataReader
+                                    .GetStandaloneSignature(mbb.LocalSignature);
                                 LocalSignature = ss.DecodeLocalSignature(
                                     typeProvider,
                                     genericContext
@@ -435,10 +432,9 @@ namespace ILCompiler.Reflection.ReadyToRun
                 case HandleKind.MemberReference:
 
                     {
-                        MemberReference memberRef =
-                            ComponentReader.MetadataReader.GetMemberReference(
-                                (MemberReferenceHandle)MethodHandle
-                            );
+                        MemberReference memberRef = ComponentReader
+                            .MetadataReader
+                            .GetMemberReference((MemberReferenceHandle)MethodHandle);
                         Name = ComponentReader.MetadataReader.GetString(memberRef.Name);
                         Signature = memberRef.DecodeMethodSignature<
                             string,
@@ -605,11 +601,13 @@ namespace ILCompiler.Reflection.ReadyToRun
         {
             int runtimeFunctionId = EntryPointRuntimeFunctionId;
             int runtimeFunctionSize = _readyToRunReader.CalculateRuntimeFunctionSize();
-            int runtimeFunctionOffset = _readyToRunReader.CompositeReader.GetOffset(
-                _readyToRunReader.ReadyToRunHeader.Sections[
-                    ReadyToRunSectionType.RuntimeFunctions
-                ].RelativeVirtualAddress
-            );
+            int runtimeFunctionOffset = _readyToRunReader
+                .CompositeReader
+                .GetOffset(
+                    _readyToRunReader.ReadyToRunHeader.Sections[
+                        ReadyToRunSectionType.RuntimeFunctions
+                    ].RelativeVirtualAddress
+                );
             int curOffset = runtimeFunctionOffset + runtimeFunctionId * runtimeFunctionSize;
             int codeOffset = 0;
 

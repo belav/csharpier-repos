@@ -173,11 +173,13 @@ namespace Microsoft.CodeAnalysis.BraceCompletion
             CancellationToken cancellationToken
         )
         {
-            var tree = await context.Document
+            var tree = await context
+                .Document
                 .GetRequiredSyntaxTreeAsync(cancellationToken)
                 .ConfigureAwait(false);
-            var syntaxFactsService =
-                context.Document.GetRequiredLanguageService<ISyntaxFactsService>();
+            var syntaxFactsService = context
+                .Document
+                .GetRequiredLanguageService<ISyntaxFactsService>();
 
             return !syntaxFactsService.IsInNonUserCode(
                     tree,

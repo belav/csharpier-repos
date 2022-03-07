@@ -104,12 +104,14 @@ namespace Microsoft.Diagnostics.Tools.Pgo
 
                 int pidLocal = 0;
                 if (
-                    syntax.DefineOption(
-                        name: "pid",
-                        value: ref pidLocal,
-                        help: "The pid within the trace of the process to examine. If this is a multi-process trace, at least one of --pid or --process-name must be specified",
-                        requireValue: true
-                    ).IsSpecified
+                    syntax
+                        .DefineOption(
+                            name: "pid",
+                            value: ref pidLocal,
+                            help: "The pid within the trace of the process to examine. If this is a multi-process trace, at least one of --pid or --process-name must be specified",
+                            requireValue: true
+                        )
+                        .IsSpecified
                 )
                     Pid = pidLocal;
 
@@ -122,12 +124,14 @@ namespace Microsoft.Diagnostics.Tools.Pgo
 
                 int clrInstanceIdLocal = 0;
                 if (
-                    syntax.DefineOption(
-                        name: "clr-instance-id",
-                        value: ref clrInstanceIdLocal,
-                        help: "If the process contains multiple .NET runtimes, the instance ID must be specified.",
-                        requireValue: true
-                    ).IsSpecified
+                    syntax
+                        .DefineOption(
+                            name: "clr-instance-id",
+                            value: ref clrInstanceIdLocal,
+                            help: "If the process contains multiple .NET runtimes, the instance ID must be specified.",
+                            requireValue: true
+                        )
+                        .IsSpecified
                 )
                 {
                     ClrInstanceId = clrInstanceIdLocal;
@@ -509,10 +513,9 @@ Example tracing commands used to generate the input to this tool:
             {
                 ConsoleColor oldColor = Console.ForegroundColor;
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.Error.WriteLine(
-                    Internal.CommandLine.Strings.ErrorWithMessageFmt,
-                    e.Message
-                );
+                Console
+                    .Error
+                    .WriteLine(Internal.CommandLine.Strings.ErrorWithMessageFmt, e.Message);
                 Console.ForegroundColor = oldColor;
 
                 CommandLineOptions helpParse = new CommandLineOptions();

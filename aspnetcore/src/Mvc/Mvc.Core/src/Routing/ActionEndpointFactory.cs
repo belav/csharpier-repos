@@ -409,7 +409,8 @@ internal class ActionEndpointFactory
         if (action.FilterDescriptors != null && action.FilterDescriptors.Count > 0)
         {
             foreach (
-                var filter in action.FilterDescriptors
+                var filter in action
+                    .FilterDescriptors
                     .OrderBy(f => f, FilterDescriptorOrderComparer.Comparer)
                     .Select(f => f.Filter)
             )
@@ -432,18 +433,18 @@ internal class ActionEndpointFactory
                     && !builder.Metadata.OfType<HttpMethodMetadata>().Any()
                 )
                 {
-                    builder.Metadata.Add(
-                        new HttpMethodMetadata(httpMethodActionConstraint.HttpMethods)
-                    );
+                    builder
+                        .Metadata
+                        .Add(new HttpMethodMetadata(httpMethodActionConstraint.HttpMethods));
                 }
                 else if (
                     actionConstraint is ConsumesAttribute consumesAttribute
                     && !builder.Metadata.OfType<AcceptsMetadata>().Any()
                 )
                 {
-                    builder.Metadata.Add(
-                        new AcceptsMetadata(consumesAttribute.ContentTypes.ToArray())
-                    );
+                    builder
+                        .Metadata
+                        .Add(new AcceptsMetadata(consumesAttribute.ContentTypes.ToArray()));
                 }
                 else if (!builder.Metadata.Contains(actionConstraint))
                 {
@@ -520,8 +521,9 @@ internal class ActionEndpointFactory
 
             if (invokerFactory == null)
             {
-                invokerFactory =
-                    context.RequestServices.GetRequiredService<IActionInvokerFactory>();
+                invokerFactory = context
+                    .RequestServices
+                    .GetRequiredService<IActionInvokerFactory>();
             }
 
             var invoker = invokerFactory.CreateInvoker(actionContext);

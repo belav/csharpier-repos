@@ -54,9 +54,9 @@ namespace System.Text
             const int DefaultArraySize = 256;
             int newSize = array.Length == 0 ? DefaultArraySize : array.Length * 2;
 
-            ReadOnlyMemory<char>[] newArray = _array = ArrayPool<ReadOnlyMemory<char>>.Shared.Rent(
-                newSize
-            );
+            ReadOnlyMemory<char>[] newArray = _array = ArrayPool<ReadOnlyMemory<char>>
+                .Shared
+                .Rent(newSize);
             Array.Copy(array, newArray, _count);
             ArrayPool<ReadOnlyMemory<char>>.Shared.Return(array, clearArray: true);
             newArray[_count++] = segment;

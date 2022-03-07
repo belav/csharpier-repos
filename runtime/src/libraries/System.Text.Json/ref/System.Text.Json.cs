@@ -3304,13 +3304,21 @@ namespace System.Text.Json.Serialization
 
         public JsonConverterAttribute(
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
-                System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
+                System
+                    .Diagnostics
+                    .CodeAnalysis
+                    .DynamicallyAccessedMemberTypes
+                    .PublicParameterlessConstructor
             )]
                 System.Type converterType
         ) { }
 
         [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
-            System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
+            System
+                .Diagnostics
+                .CodeAnalysis
+                .DynamicallyAccessedMemberTypes
+                .PublicParameterlessConstructor
         )]
         public System.Type? ConverterType
         {

@@ -114,7 +114,8 @@ internal class AspNetTestInvoker : XunitTestInvoker
         }
 
         foreach (
-            var attribute in testClass.Assembly
+            var attribute in testClass
+                .Assembly
                 .GetCustomAttributes(inherit: true)
                 .OfType<ITestMethodLifecycle>()
         )

@@ -40,33 +40,37 @@ public class InstrumentationPass : IntermediateNodePassBase, IRazorOptimizationP
         var endContextMethodName = "EndContext"; // ORIGINAL: EndContextMethodName
 
         var beginNode = new CSharpCodeIntermediateNode();
-        beginNode.Children.Add(
-            new IntermediateToken()
-            {
-                Kind = TokenKind.CSharp,
-                Content = string.Format(
-                    CultureInfo.InvariantCulture,
-                    "{0}({1}, {2}, {3});",
-                    beginContextMethodName,
-                    item.Source.AbsoluteIndex.ToString(CultureInfo.InvariantCulture),
-                    item.Source.Length.ToString(CultureInfo.InvariantCulture),
-                    item.IsLiteral ? "true" : "false"
-                )
-            }
-        );
+        beginNode
+            .Children
+            .Add(
+                new IntermediateToken()
+                {
+                    Kind = TokenKind.CSharp,
+                    Content = string.Format(
+                        CultureInfo.InvariantCulture,
+                        "{0}({1}, {2}, {3});",
+                        beginContextMethodName,
+                        item.Source.AbsoluteIndex.ToString(CultureInfo.InvariantCulture),
+                        item.Source.Length.ToString(CultureInfo.InvariantCulture),
+                        item.IsLiteral ? "true" : "false"
+                    )
+                }
+            );
 
         var endNode = new CSharpCodeIntermediateNode();
-        endNode.Children.Add(
-            new IntermediateToken()
-            {
-                Kind = TokenKind.CSharp,
-                Content = string.Format(
-                    CultureInfo.InvariantCulture,
-                    "{0}();",
-                    endContextMethodName
-                )
-            }
-        );
+        endNode
+            .Children
+            .Add(
+                new IntermediateToken()
+                {
+                    Kind = TokenKind.CSharp,
+                    Content = string.Format(
+                        CultureInfo.InvariantCulture,
+                        "{0}();",
+                        endContextMethodName
+                    )
+                }
+            );
 
         var nodeIndex = item.Parent.Children.IndexOf(item.Node);
         item.Parent.Children.Insert(nodeIndex, beginNode);

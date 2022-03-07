@@ -769,18 +769,20 @@ namespace System.Threading.Channels.Tests
             );
 
             int expectedId = Environment.CurrentManagedThreadId;
-            Task r = c.Reader.Completion.ContinueWith(
-                _ =>
-                {
-                    Assert.Equal(
-                        allowSynchronousContinuations,
-                        expectedId == Environment.CurrentManagedThreadId
-                    );
-                },
-                CancellationToken.None,
-                TaskContinuationOptions.ExecuteSynchronously,
-                TaskScheduler.Default
-            );
+            Task r = c.Reader
+                .Completion
+                .ContinueWith(
+                    _ =>
+                    {
+                        Assert.Equal(
+                            allowSynchronousContinuations,
+                            expectedId == Environment.CurrentManagedThreadId
+                        );
+                    },
+                    CancellationToken.None,
+                    TaskContinuationOptions.ExecuteSynchronously,
+                    TaskScheduler.Default
+                );
 
             Assert.True(c.Writer.TryComplete());
             ((IAsyncResult)r).AsyncWaitHandle.WaitOne(); // avoid inlining the continuation

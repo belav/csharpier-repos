@@ -91,9 +91,9 @@ public class ViewComponentTagHelperPassTest
         );
         Assert.Equal(
             "Foo",
-            Assert.IsType<DefaultTagHelperPropertyIntermediateNode>(
-                tagHelper.Children[2]
-            ).PropertyName
+            Assert
+                .IsType<DefaultTagHelperPropertyIntermediateNode>(tagHelper.Children[2])
+                .PropertyName
         );
 
         var @class = FindClassNode(irDocument);
@@ -201,15 +201,15 @@ public class ViewComponentTagHelperPassTest
         var outerTagHelper = FindTagHelperNode(irDocument);
         Assert.Equal(
             "PTestTagHelper",
-            Assert.IsType<DefaultTagHelperCreateIntermediateNode>(
-                outerTagHelper.Children[1]
-            ).TypeName
+            Assert
+                .IsType<DefaultTagHelperCreateIntermediateNode>(outerTagHelper.Children[1])
+                .TypeName
         );
         Assert.Equal(
             "Foo",
-            Assert.IsType<DefaultTagHelperPropertyIntermediateNode>(
-                outerTagHelper.Children[2]
-            ).PropertyName
+            Assert
+                .IsType<DefaultTagHelperPropertyIntermediateNode>(outerTagHelper.Children[2])
+                .PropertyName
         );
 
         var vcth = FindTagHelperNode(outerTagHelper.Children[0]);
@@ -236,14 +236,16 @@ public class ViewComponentTagHelperPassTest
 
     private RazorEngine CreateEngine(params TagHelperDescriptor[] tagHelpers)
     {
-        return RazorProjectEngine.Create(
-            b =>
-            {
-                b.Features.Add(new MvcViewDocumentClassifierPass());
+        return RazorProjectEngine
+            .Create(
+                b =>
+                {
+                    b.Features.Add(new MvcViewDocumentClassifierPass());
 
-                b.Features.Add(new TestTagHelperFeature(tagHelpers));
-            }
-        ).Engine;
+                    b.Features.Add(new TestTagHelperFeature(tagHelpers));
+                }
+            )
+            .Engine;
     }
 
     private DocumentIntermediateNode CreateIRDocument(
@@ -265,7 +267,8 @@ public class ViewComponentTagHelperPassTest
         // We also expect the default tag helper pass to run first.
         var documentNode = codeDocument.GetDocumentIntermediateNode();
 
-        var defaultTagHelperPass = engine.Features
+        var defaultTagHelperPass = engine
+            .Features
             .OfType<DefaultTagHelperOptimizationPass>()
             .Single();
         defaultTagHelperPass.Execute(codeDocument, documentNode);

@@ -185,11 +185,15 @@ namespace System.Text.Json.Reflection
         public override string Namespace =>
             IsArray
                 ? GetElementType().Namespace
-                : _typeSymbol.ContainingNamespace?.ToDisplayString(
-                      SymbolDisplayFormat.FullyQualifiedFormat.WithGlobalNamespaceStyle(
-                          SymbolDisplayGlobalNamespaceStyle.OmittedAsContaining
-                      )
-                  )!;
+                : _typeSymbol
+                      .ContainingNamespace
+                      ?.ToDisplayString(
+                          SymbolDisplayFormat
+                              .FullyQualifiedFormat
+                              .WithGlobalNamespaceStyle(
+                                  SymbolDisplayGlobalNamespaceStyle.OmittedAsContaining
+                              )
+                      )!;
 
         public override Type UnderlyingSystemType => this;
 
@@ -306,7 +310,8 @@ namespace System.Text.Json.Reflection
 
         public override Type MakeArrayType()
         {
-            return _metadataLoadContext.Compilation
+            return _metadataLoadContext
+                .Compilation
                 .CreateArrayTypeSymbol(_typeSymbol)
                 .AsType(_metadataLoadContext);
         }
@@ -626,10 +631,9 @@ namespace System.Text.Json.Reflection
         {
             if (c is TypeWrapper tr)
             {
-                return tr._typeSymbol.AllInterfaces.Contains(
-                        _typeSymbol,
-                        SymbolEqualityComparer.Default
-                    )
+                return tr._typeSymbol
+                        .AllInterfaces
+                        .Contains(_typeSymbol, SymbolEqualityComparer.Default)
                     || (
                         tr._namedTypeSymbol != null
                         && tr._namedTypeSymbol
@@ -639,10 +643,9 @@ namespace System.Text.Json.Reflection
             }
             else if (_metadataLoadContext.Resolve(c) is TypeWrapper trr)
             {
-                return trr._typeSymbol.AllInterfaces.Contains(
-                        _typeSymbol,
-                        SymbolEqualityComparer.Default
-                    )
+                return trr._typeSymbol
+                        .AllInterfaces
+                        .Contains(_typeSymbol, SymbolEqualityComparer.Default)
                     || (
                         trr._namedTypeSymbol != null
                         && trr._namedTypeSymbol

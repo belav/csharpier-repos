@@ -556,12 +556,9 @@ namespace System.Text.RegularExpressions
                 }
 
                 case FindFirstCharMode.BoyerMoore:
-                    runtextpos = _code.BoyerMoorePrefix!.Scan(
-                        runtext!,
-                        runtextpos,
-                        runtextbeg,
-                        runtextend
-                    );
+                    runtextpos = _code
+                        .BoyerMoorePrefix!
+                        .Scan(runtext!, runtextpos, runtextbeg, runtextend);
                     if (runtextpos >= 0)
                     {
                         return true;

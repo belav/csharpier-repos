@@ -154,8 +154,9 @@ namespace BasicViews
             )
             {
                 using (
-                    var dbContext =
-                        serviceScope.ServiceProvider.GetRequiredService<BasicViewsContext>()
+                    var dbContext = serviceScope
+                        .ServiceProvider
+                        .GetRequiredService<BasicViewsContext>()
                 )
                 {
 #if GENERATE_SQL_SCRIPTS
@@ -168,7 +169,9 @@ namespace BasicViews
                     Console.WriteLine(script);
 #endif
 
-                    dbContext.Database.Migrate();
+                    dbContext
+                        .Database
+                        .Migrate();
                 }
             }
         }
@@ -181,8 +184,9 @@ namespace BasicViews
             )
             {
                 using (
-                    var dbContext =
-                        serviceScope.ServiceProvider.GetRequiredService<BasicViewsContext>()
+                    var dbContext = serviceScope
+                        .ServiceProvider
+                        .GetRequiredService<BasicViewsContext>()
                 )
                 {
 #if GENERATE_SQL_SCRIPTS
@@ -195,7 +199,9 @@ namespace BasicViews
                     Console.WriteLine(script);
 #endif
 
-                    dbContext.Database.EnsureDeleted();
+                    dbContext
+                        .Database
+                        .EnsureDeleted();
                 }
             }
         }
@@ -207,8 +213,9 @@ namespace BasicViews
             )
             {
                 using (
-                    var dbContext =
-                        serviceScope.ServiceProvider.GetRequiredService<BasicViewsContext>()
+                    var dbContext = serviceScope
+                        .ServiceProvider
+                        .GetRequiredService<BasicViewsContext>()
                 )
                 {
                     var migrator = dbContext.GetService<IMigrator>();

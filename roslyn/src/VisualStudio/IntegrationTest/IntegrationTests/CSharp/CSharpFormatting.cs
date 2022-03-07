@@ -43,15 +43,18 @@ $$class C
                 );
 
                 VisualStudio.Editor.FormatDocument();
-                VisualStudio.Editor.Verify.TextContains(
-                    @"
+                VisualStudio
+                    .Editor
+                    .Verify
+                    .TextContains(
+                        @"
 class C
 {
     void Main()
     {
     }
 }"
-                );
+                    );
                 telemetry.VerifyFired("vs/ide/vbcs/commandhandler/formatcommand");
             }
         }
@@ -73,8 +76,11 @@ public class C
             );
 
             VisualStudio.Editor.SendKeys(VirtualKey.Backspace, ";");
-            VisualStudio.Editor.Verify.TextContains(
-                @"
+            VisualStudio
+                .Editor
+                .Verify
+                .TextContains(
+                    @"
 public class C
 {
     void Goo()
@@ -84,7 +90,7 @@ public class C
                 select x;
     }
 }"
-            );
+                );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.Formatting)]
@@ -100,14 +106,17 @@ public class C {
 
             VisualStudio.Editor.SelectTextInCurrentDocument("public void M( ) {");
             VisualStudio.Editor.FormatSelection();
-            VisualStudio.Editor.Verify.TextContains(
-                @"
+            VisualStudio
+                .Editor
+                .Verify
+                .TextContains(
+                    @"
 public class C {
     public void M()
     {
     }
 }"
-            );
+                );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.Formatting)]
@@ -130,15 +139,20 @@ class Program
     }
 }"
             );
-            VisualStudio.Editor.Paste(
-                @"        Action b = () =>
+            VisualStudio
+                .Editor
+                .Paste(
+                    @"        Action b = () =>
         {
 
             };"
-            );
+                );
 
-            VisualStudio.Editor.Verify.TextContains(
-                @"
+            VisualStudio
+                .Editor
+                .Verify
+                .TextContains(
+                    @"
 using System;
 class Program
 {
@@ -156,11 +170,14 @@ class Program
         };
     }
 }"
-            );
+                );
             // Undo should only undo the formatting
             VisualStudio.Editor.Undo();
-            VisualStudio.Editor.Verify.TextContains(
-                @"
+            VisualStudio
+                .Editor
+                .Verify
+                .TextContains(
+                    @"
 using System;
 class Program
 {
@@ -178,7 +195,7 @@ class Program
         };
     }
 }"
-            );
+                );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.Formatting)]
@@ -201,15 +218,20 @@ class Program
     }
 }"
             );
-            VisualStudio.Editor.Paste(
-                @"        Action<int> b = n =>
+            VisualStudio
+                .Editor
+                .Paste(
+                    @"        Action<int> b = n =>
         {
             Console.Writeline(n);
         };"
-            );
+                );
 
-            VisualStudio.Editor.Verify.TextContains(
-                @"
+            VisualStudio
+                .Editor
+                .Verify
+                .TextContains(
+                    @"
 using System;
 class Program
 {
@@ -227,7 +249,7 @@ class Program
         };
     }
 }"
-            );
+                );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.Formatting)]
@@ -250,15 +272,20 @@ class Program
     }
 }"
             );
-            VisualStudio.Editor.Paste(
-                @"        D d = delegate(int x)
+            VisualStudio
+                .Editor
+                .Paste(
+                    @"        D d = delegate(int x)
 {
     return 2 * x;
 };"
-            );
+                );
 
-            VisualStudio.Editor.Verify.TextContains(
-                @"
+            VisualStudio
+                .Editor
+                .Verify
+                .TextContains(
+                    @"
 using System;
 class Program
 {
@@ -276,7 +303,7 @@ class Program
         };
     }
 }"
-            );
+                );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.Formatting)]
@@ -292,17 +319,17 @@ class Program
     }
 }"
             );
-            VisualStudio.Workspace.WaitForAsyncOperations(
-                Helper.HangMitigatingTimeout,
-                FeatureAttribute.Workspace
-            );
-            VisualStudio.Editor.SendKeys(
-                "(ba",
-                new KeyPress(VirtualKey.Enter, ShiftState.Shift),
-                "// comment"
-            );
-            VisualStudio.Editor.Verify.TextContains(
-                @"
+            VisualStudio
+                .Workspace
+                .WaitForAsyncOperations(Helper.HangMitigatingTimeout, FeatureAttribute.Workspace);
+            VisualStudio
+                .Editor
+                .SendKeys("(ba", new KeyPress(VirtualKey.Enter, ShiftState.Shift), "// comment");
+            VisualStudio
+                .Editor
+                .Verify
+                .TextContains(
+                    @"
 class Program
 {
     object M(object bar)
@@ -311,7 +338,7 @@ class Program
         // comment
     }
 }"
-            );
+                );
         }
 
         [WpfFact]
@@ -345,10 +372,9 @@ class C
   }
 }";
 
-            VisualStudio.SolutionExplorer.OpenFile(
-                new ProjectUtils.Project(ProjectName),
-                "Class1.cs"
-            );
+            VisualStudio
+                .SolutionExplorer
+                .OpenFile(new ProjectUtils.Project(ProjectName), "Class1.cs");
 
             MarkupTestFile.GetSpans(
                 markup,
@@ -362,13 +388,15 @@ class C
              * no .editorconfig is available.
              */
 
-            VisualStudio.Workspace.WaitForAllAsyncOperations(
-                Helper.HangMitigatingTimeout,
-                FeatureAttribute.Workspace,
-                FeatureAttribute.SolutionCrawler,
-                FeatureAttribute.DiagnosticService,
-                FeatureAttribute.ErrorSquiggles
-            );
+            VisualStudio
+                .Workspace
+                .WaitForAllAsyncOperations(
+                    Helper.HangMitigatingTimeout,
+                    FeatureAttribute.Workspace,
+                    FeatureAttribute.SolutionCrawler,
+                    FeatureAttribute.DiagnosticService,
+                    FeatureAttribute.ErrorSquiggles
+                );
             VisualStudio.Editor.FormatDocumentViaCommand();
 
             Assert.Equal(expectedTextFourSpaceIndent, VisualStudio.Editor.GetText());
@@ -385,20 +413,24 @@ class C
 indent_size = 2
 ";
 
-            VisualStudio.SolutionExplorer.AddFile(
-                new ProjectUtils.Project(ProjectName),
-                ".editorconfig",
-                editorConfig,
-                open: false
-            );
+            VisualStudio
+                .SolutionExplorer
+                .AddFile(
+                    new ProjectUtils.Project(ProjectName),
+                    ".editorconfig",
+                    editorConfig,
+                    open: false
+                );
 
-            VisualStudio.Workspace.WaitForAllAsyncOperations(
-                Helper.HangMitigatingTimeout,
-                FeatureAttribute.Workspace,
-                FeatureAttribute.SolutionCrawler,
-                FeatureAttribute.DiagnosticService,
-                FeatureAttribute.ErrorSquiggles
-            );
+            VisualStudio
+                .Workspace
+                .WaitForAllAsyncOperations(
+                    Helper.HangMitigatingTimeout,
+                    FeatureAttribute.Workspace,
+                    FeatureAttribute.SolutionCrawler,
+                    FeatureAttribute.DiagnosticService,
+                    FeatureAttribute.ErrorSquiggles
+                );
             VisualStudio.Editor.FormatDocumentViaCommand();
 
             Assert.Equal(expectedTextTwoSpaceIndent, VisualStudio.Editor.GetText());
@@ -408,19 +440,23 @@ indent_size = 2
              * and verifies that the next Format Document operation adheres to the updated formatting.
              */
 
-            VisualStudio.SolutionExplorer.SetFileContents(
-                new ProjectUtils.Project(ProjectName),
-                ".editorconfig",
-                editorConfig.Replace("2", "4")
-            );
+            VisualStudio
+                .SolutionExplorer
+                .SetFileContents(
+                    new ProjectUtils.Project(ProjectName),
+                    ".editorconfig",
+                    editorConfig.Replace("2", "4")
+                );
 
-            VisualStudio.Workspace.WaitForAllAsyncOperations(
-                Helper.HangMitigatingTimeout,
-                FeatureAttribute.Workspace,
-                FeatureAttribute.SolutionCrawler,
-                FeatureAttribute.DiagnosticService,
-                FeatureAttribute.ErrorSquiggles
-            );
+            VisualStudio
+                .Workspace
+                .WaitForAllAsyncOperations(
+                    Helper.HangMitigatingTimeout,
+                    FeatureAttribute.Workspace,
+                    FeatureAttribute.SolutionCrawler,
+                    FeatureAttribute.DiagnosticService,
+                    FeatureAttribute.ErrorSquiggles
+                );
             VisualStudio.Editor.FormatDocumentViaCommand();
 
             Assert.Equal(expectedTextFourSpaceIndent, VisualStudio.Editor.GetText());

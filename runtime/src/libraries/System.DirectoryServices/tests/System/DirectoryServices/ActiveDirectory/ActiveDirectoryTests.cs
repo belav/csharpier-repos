@@ -88,17 +88,21 @@ namespace System.DirectoryServices.Tests
                 Assert.False(orgClass.IsDefunct);
 
                 Assert.True(
-                    orgClass.AuxiliaryClasses.Contains(
-                        ActiveDirectorySchemaClass.FindByName(
-                            ActiveDirectoryContext,
-                            "samDomainBase"
+                    orgClass
+                        .AuxiliaryClasses
+                        .Contains(
+                            ActiveDirectorySchemaClass.FindByName(
+                                ActiveDirectoryContext,
+                                "samDomainBase"
+                            )
                         )
-                    )
                 );
                 Assert.True(
-                    orgClass.PossibleInferiors.Contains(
-                        ActiveDirectorySchemaClass.FindByName(ActiveDirectoryContext, "user")
-                    )
+                    orgClass
+                        .PossibleInferiors
+                        .Contains(
+                            ActiveDirectorySchemaClass.FindByName(ActiveDirectoryContext, "user")
+                        )
                 );
 
                 ActiveDirectorySchemaClass country = ActiveDirectorySchemaClass.FindByName(
@@ -110,28 +114,34 @@ namespace System.DirectoryServices.Tests
                 Assert.Equal(country.Name, orgClass.PossibleSuperiors[index].Name);
 
                 Assert.True(
-                    orgClass.MandatoryProperties.Contains(
-                        ActiveDirectorySchemaProperty.FindByName(
-                            ActiveDirectoryContext,
-                            "ntSecurityDescriptor"
+                    orgClass
+                        .MandatoryProperties
+                        .Contains(
+                            ActiveDirectorySchemaProperty.FindByName(
+                                ActiveDirectoryContext,
+                                "ntSecurityDescriptor"
+                            )
                         )
-                    )
                 );
                 Assert.True(
-                    orgClass.OptionalProperties.Contains(
-                        ActiveDirectorySchemaProperty.FindByName(
-                            ActiveDirectoryContext,
-                            "description"
+                    orgClass
+                        .OptionalProperties
+                        .Contains(
+                            ActiveDirectorySchemaProperty.FindByName(
+                                ActiveDirectoryContext,
+                                "description"
+                            )
                         )
-                    )
                 );
                 Assert.True(
-                    orgClass.MandatoryProperties.Contains(
-                        ActiveDirectorySchemaProperty.FindByName(
-                            ActiveDirectoryContext,
-                            "objectClass"
+                    orgClass
+                        .MandatoryProperties
+                        .Contains(
+                            ActiveDirectorySchemaProperty.FindByName(
+                                ActiveDirectoryContext,
+                                "objectClass"
+                            )
                         )
-                    )
                 );
 
                 using (DirectoryEntry de = orgClass.GetDirectoryEntry())

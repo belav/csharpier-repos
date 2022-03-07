@@ -36,10 +36,12 @@ namespace Microsoft.Win32.RegistryTests
             TestRegistryKey.SetValue(name, 42);
             TestRegistryKey.CreateSubKey(name);
             using (
-                var rk = Registry.CurrentUser.OpenSubKey(
-                    name: TestRegistryKeyName,
-                    permissionCheck: RegistryKeyPermissionCheck.Default
-                )
+                var rk = Registry
+                    .CurrentUser
+                    .OpenSubKey(
+                        name: TestRegistryKeyName,
+                        permissionCheck: RegistryKeyPermissionCheck.Default
+                    )
             )
             {
                 Assert.Throws<UnauthorizedAccessException>(() => rk.CreateSubKey(name));
@@ -51,10 +53,12 @@ namespace Microsoft.Win32.RegistryTests
 
             // Should throw when opened with read permission check
             using (
-                var rk = Registry.CurrentUser.OpenSubKey(
-                    name: TestRegistryKeyName,
-                    permissionCheck: RegistryKeyPermissionCheck.ReadSubTree
-                )
+                var rk = Registry
+                    .CurrentUser
+                    .OpenSubKey(
+                        name: TestRegistryKeyName,
+                        permissionCheck: RegistryKeyPermissionCheck.ReadSubTree
+                    )
             )
             {
                 Assert.Throws<UnauthorizedAccessException>(() => rk.CreateSubKey(name));

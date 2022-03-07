@@ -48,12 +48,15 @@ public class EnumTypeModelBinder : SimpleTypeModelBinder
         }
         else
         {
-            bindingContext.ModelState.TryAddModelError(
-                bindingContext.ModelName,
-                bindingContext.ModelMetadata.ModelBindingMessageProvider.ValueIsInvalidAccessor(
-                    valueProviderResult.ToString()
-                )
-            );
+            bindingContext
+                .ModelState
+                .TryAddModelError(
+                    bindingContext.ModelName,
+                    bindingContext
+                        .ModelMetadata
+                        .ModelBindingMessageProvider
+                        .ValueIsInvalidAccessor(valueProviderResult.ToString())
+                );
         }
     }
 

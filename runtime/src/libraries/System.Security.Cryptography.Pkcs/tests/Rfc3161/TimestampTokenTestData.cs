@@ -437,9 +437,9 @@ DgUIrLjqguolBSdvPJ2io9O0rTi7+IQr2jb8JEgpH1WNwC3R4A=="
                             + "9DA4C01214D4FA24"
                     );
 
-                    data.MessageContent = Encoding.UTF8.GetBytes(
-                        "My TST signer attributes are sorted incorrectly."
-                    );
+                    data.MessageContent = Encoding
+                        .UTF8
+                        .GetBytes("My TST signer attributes are sorted incorrectly.");
 
                     data.EmbeddedSigningCertificate = data.FullTokenBytes.Slice(188, 1670);
 

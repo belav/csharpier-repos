@@ -394,17 +394,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             ConsList<TypeSymbol>? basesBeingResolved
         )
         {
-            var declarationBinder = ContainingSymbol!.DeclaringCompilation
+            var declarationBinder = ContainingSymbol!
+                .DeclaringCompilation
                 .GetBinderFactory(syntax.SyntaxTree)
                 .GetBinder(syntax)
                 .WithAdditionalFlags(
                     BinderFlags.SuppressConstraintChecks | BinderFlags.SuppressObsoleteChecks
                 );
-            return declarationBinder.BindNamespaceOrTypeSymbol(
-                syntax,
-                diagnostics,
-                basesBeingResolved
-            ).NamespaceOrTypeSymbol;
+            return declarationBinder
+                .BindNamespaceOrTypeSymbol(syntax, diagnostics, basesBeingResolved)
+                .NamespaceOrTypeSymbol;
         }
 
         internal override bool RequiresCompletion

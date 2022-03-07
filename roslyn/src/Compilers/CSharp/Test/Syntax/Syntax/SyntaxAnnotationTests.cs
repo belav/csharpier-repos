@@ -471,9 +471,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 )
                 {
                     Assert.True(
-                        sourceNodeOrTokenEnumerator.Current.IsEquivalentTo(
-                            destNodeOrTokenEnumerator.Current
-                        )
+                        sourceNodeOrTokenEnumerator
+                            .Current
+                            .IsEquivalentTo(destNodeOrTokenEnumerator.Current)
                     );
                 }
 
@@ -513,7 +513,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 if (sourceTreeNodeOrTokenEnumerator.Current.IsNode)
                 {
                     var oldNode = destTreeNodeOrTokenEnumerator.Current.AsNode();
-                    var newNode = sourceTreeNodeOrTokenEnumerator.Current
+                    var newNode = sourceTreeNodeOrTokenEnumerator
+                        .Current
                         .AsNode()
                         .CopyAnnotationsTo(oldNode);
                     nodeOrTokenMap.Add(oldNode, newNode);
@@ -521,7 +522,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 else if (sourceTreeNodeOrTokenEnumerator.Current.IsToken)
                 {
                     var oldToken = destTreeNodeOrTokenEnumerator.Current.AsToken();
-                    var newToken = sourceTreeNodeOrTokenEnumerator.Current
+                    var newToken = sourceTreeNodeOrTokenEnumerator
+                        .Current
                         .AsToken()
                         .CopyAnnotationsTo(oldToken);
                     nodeOrTokenMap.Add(oldToken, newToken);

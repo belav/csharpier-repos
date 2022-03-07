@@ -285,7 +285,9 @@ namespace System.Net.NetworkInformation.Tests
                         Assert.NotNull(loopback);
 
                         foreach (
-                            UnicastIPAddressInformation unicast in loopback.GetIPProperties().UnicastAddresses
+                            UnicastIPAddressInformation unicast in loopback
+                                .GetIPProperties()
+                                .UnicastAddresses
                         )
                         {
                             if (unicast.Address.Equals(IPAddress.Loopback))
@@ -319,7 +321,9 @@ namespace System.Net.NetworkInformation.Tests
                         Assert.NotNull(loopback);
 
                         foreach (
-                            UnicastIPAddressInformation unicast in loopback.GetIPProperties().UnicastAddresses
+                            UnicastIPAddressInformation unicast in loopback
+                                .GetIPProperties()
+                                .UnicastAddresses
                         )
                         {
                             if (unicast.Address.Equals(IPAddress.IPv6Loopback))

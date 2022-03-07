@@ -63,11 +63,12 @@ namespace System.Net.Quic.Tests
         [ActiveIssue("https://github.com/dotnet/runtime/issues/46837", TestPlatforms.OSX)]
         public async Task ConnectWithCertificateChain()
         {
-            (X509Certificate2 certificate, X509Certificate2Collection chain) =
-                System.Net.Security.Tests.TestHelper.GenerateCertificates(
-                    "localhost",
-                    longChain: true
-                );
+            (X509Certificate2 certificate, X509Certificate2Collection chain) = System
+                .Net
+                .Security
+                .Tests
+                .TestHelper
+                .GenerateCertificates("localhost", longChain: true);
             X509Certificate2 rootCA = chain[chain.Count - 1];
 
             var listenerOptions = new QuicListenerOptions();
@@ -235,10 +236,20 @@ namespace System.Net.Quic.Tests
         [Fact]
         public async Task ConnectWithCertificateCallback()
         {
-            X509Certificate2 c1 =
-                System.Net.Test.Common.Configuration.Certificates.GetServerCertificate();
-            X509Certificate2 c2 =
-                System.Net.Test.Common.Configuration.Certificates.GetClientCertificate(); // This 'wrong' certificate but should be sufficient
+            X509Certificate2 c1 = System
+                .Net
+                .Test
+                .Common
+                .Configuration
+                .Certificates
+                .GetServerCertificate();
+            X509Certificate2 c2 = System
+                .Net
+                .Test
+                .Common
+                .Configuration
+                .Certificates
+                .GetClientCertificate(); // This 'wrong' certificate but should be sufficient
             X509Certificate2 expectedCertificate = c1;
 
             using CancellationTokenSource cts = new CancellationTokenSource();
@@ -324,8 +335,13 @@ namespace System.Net.Quic.Tests
         [Fact]
         public async Task ConnectWithIpSetsSni()
         {
-            X509Certificate2 certificate =
-                System.Net.Test.Common.Configuration.Certificates.GetServerCertificate();
+            X509Certificate2 certificate = System
+                .Net
+                .Test
+                .Common
+                .Configuration
+                .Certificates
+                .GetServerCertificate();
             string expectedName = "foobar";
             string? receivedHostName = null;
 
@@ -362,8 +378,12 @@ namespace System.Net.Quic.Tests
         [Fact]
         public async Task ConnectWithCertificateForDifferentName_Throws()
         {
-            (X509Certificate2 certificate, _) =
-                System.Net.Security.Tests.TestHelper.GenerateCertificates("localhost");
+            (X509Certificate2 certificate, _) = System
+                .Net
+                .Security
+                .Tests
+                .TestHelper
+                .GenerateCertificates("localhost");
 
             var quicOptions = new QuicListenerOptions();
             quicOptions.ListenEndPoint = new IPEndPoint(IPAddress.Loopback, 0);
@@ -414,10 +434,12 @@ namespace System.Net.Quic.Tests
         )
         {
             var ipAddress = IPAddress.Parse(ipString);
-            (X509Certificate2 certificate, _) =
-                System.Net.Security.Tests.TestHelper.GenerateCertificates(
-                    expectsError ? "badhost" : "localhost"
-                );
+            (X509Certificate2 certificate, _) = System
+                .Net
+                .Security
+                .Tests
+                .TestHelper
+                .GenerateCertificates(expectsError ? "badhost" : "localhost");
 
             var listenerOptions = new QuicListenerOptions();
             listenerOptions.ListenEndPoint = new IPEndPoint(ipAddress, 0);
@@ -510,7 +532,9 @@ namespace System.Net.Quic.Tests
 
             // No stream opened yet, should return immediately.
             Assert.True(
-                clientConnection.WaitForAvailableUnidirectionalStreamsAsync().IsCompletedSuccessfully
+                clientConnection
+                    .WaitForAvailableUnidirectionalStreamsAsync()
+                    .IsCompletedSuccessfully
             );
 
             // Open one stream, should wait till it closes.

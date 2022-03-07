@@ -120,11 +120,13 @@ internal class ComponentLoweringPass : ComponentIntermediateNodePassBase, IRazor
     )
     {
         if (
-            intermediateNode.Children.Any(
-                c =>
-                    c is TagHelperDirectiveAttributeIntermediateNode node
-                    && (node.TagHelper?.IsSplatTagHelper() ?? false)
-            )
+            intermediateNode
+                .Children
+                .Any(
+                    c =>
+                        c is TagHelperDirectiveAttributeIntermediateNode node
+                        && (node.TagHelper?.IsSplatTagHelper() ?? false)
+                )
         )
         {
             // If there are any splat attributes, assume the user may have provided all values.
@@ -136,13 +138,15 @@ internal class ComponentLoweringPass : ComponentIntermediateNodePassBase, IRazor
         {
             if (!IsPresentAsAttribute(requiredAttribute.Name, intermediateNode))
             {
-                intermediateNode.Diagnostics.Add(
-                    RazorDiagnosticFactory.CreateComponent_EditorRequiredParameterNotSpecified(
-                        node.Source ?? SourceSpan.Undefined,
-                        intermediateNode.TagName,
-                        requiredAttribute.Name
-                    )
-                );
+                intermediateNode
+                    .Diagnostics
+                    .Add(
+                        RazorDiagnosticFactory.CreateComponent_EditorRequiredParameterNotSpecified(
+                            node.Source ?? SourceSpan.Undefined,
+                            intermediateNode.TagName,
+                            requiredAttribute.Name
+                        )
+                    );
             }
         }
 
@@ -253,7 +257,9 @@ internal class ComponentLoweringPass : ComponentIntermediateNodePassBase, IRazor
             )
             {
                 // This node has implicit child content. It may or may not have an attribute that matches.
-                var attribute = _component.Component.BoundAttributes
+                var attribute = _component
+                    .Component
+                    .BoundAttributes
                     .Where(
                         a =>
                             string.Equals(
@@ -285,7 +291,9 @@ internal class ComponentLoweringPass : ComponentIntermediateNodePassBase, IRazor
                 )
                 {
                     // This is a child content element
-                    var attribute = _component.Component.BoundAttributes
+                    var attribute = _component
+                        .Component
+                        .BoundAttributes
                         .Where(
                             a =>
                                 string.Equals(
@@ -300,12 +308,14 @@ internal class ComponentLoweringPass : ComponentIntermediateNodePassBase, IRazor
                 }
 
                 // If we get here then this is significant content inside a component with explicit child content.
-                child.Diagnostics.Add(
-                    ComponentDiagnosticFactory.Create_ChildContentMixedWithExplicitChildContent(
-                        child.Source,
-                        _component
-                    )
-                );
+                child
+                    .Diagnostics
+                    .Add(
+                        ComponentDiagnosticFactory.Create_ChildContentMixedWithExplicitChildContent(
+                            child.Source,
+                            _component
+                        )
+                    );
                 _children.Add(child);
             }
 
@@ -368,46 +378,54 @@ internal class ComponentLoweringPass : ComponentIntermediateNodePassBase, IRazor
                         }
 
                         // The parameter name is invalid.
-                        childContent.Diagnostics.Add(
-                            ComponentDiagnosticFactory.Create_ChildContentHasInvalidParameter(
+                        childContent
+                            .Diagnostics
+                            .Add(
+                                ComponentDiagnosticFactory.Create_ChildContentHasInvalidParameter(
+                                    property.Source,
+                                    property.AttributeName,
+                                    attribute.Name
+                                )
+                            );
+                        continue;
+                    }
+
+                    // This is an unrecognized tag helper bound attribute. This will practically never happen unless the child content descriptor was misconfigured.
+                    childContent
+                        .Diagnostics
+                        .Add(
+                            ComponentDiagnosticFactory.Create_ChildContentHasInvalidAttribute(
                                 property.Source,
                                 property.AttributeName,
                                 attribute.Name
                             )
                         );
-                        continue;
-                    }
-
-                    // This is an unrecognized tag helper bound attribute. This will practically never happen unless the child content descriptor was misconfigured.
-                    childContent.Diagnostics.Add(
-                        ComponentDiagnosticFactory.Create_ChildContentHasInvalidAttribute(
-                            property.Source,
-                            property.AttributeName,
-                            attribute.Name
-                        )
-                    );
                 }
                 else if (child is TagHelperHtmlAttributeIntermediateNode a)
                 {
                     // This is an HTML attribute on a child content.
-                    childContent.Diagnostics.Add(
-                        ComponentDiagnosticFactory.Create_ChildContentHasInvalidAttribute(
-                            a.Source,
-                            a.AttributeName,
-                            attribute.Name
-                        )
-                    );
+                    childContent
+                        .Diagnostics
+                        .Add(
+                            ComponentDiagnosticFactory.Create_ChildContentHasInvalidAttribute(
+                                a.Source,
+                                a.AttributeName,
+                                attribute.Name
+                            )
+                        );
                 }
                 else if (child is TagHelperDirectiveAttributeIntermediateNode directiveAttribute)
                 {
                     // We don't support directive attributes inside child content, this is possible if you try to do something like put '@ref' on a child content.
-                    childContent.Diagnostics.Add(
-                        ComponentDiagnosticFactory.Create_ChildContentHasInvalidAttribute(
-                            directiveAttribute.Source,
-                            directiveAttribute.OriginalAttributeName,
-                            attribute.Name
-                        )
-                    );
+                    childContent
+                        .Diagnostics
+                        .Add(
+                            ComponentDiagnosticFactory.Create_ChildContentHasInvalidAttribute(
+                                directiveAttribute.Source,
+                                directiveAttribute.OriginalAttributeName,
+                                attribute.Name
+                            )
+                        );
                 }
                 else
                 {
@@ -533,13 +551,15 @@ internal class ComponentLoweringPass : ComponentIntermediateNodePassBase, IRazor
                 }
 
                 // The parameter name is invalid.
-                _component.Diagnostics.Add(
-                    ComponentDiagnosticFactory.Create_ChildContentHasInvalidParameterOnComponent(
-                        node.Source,
-                        node.AttributeName,
-                        _component.TagName
-                    )
-                );
+                _component
+                    .Diagnostics
+                    .Add(
+                        ComponentDiagnosticFactory.Create_ChildContentHasInvalidParameterOnComponent(
+                            node.Source,
+                            node.AttributeName,
+                            _component.TagName
+                        )
+                    );
                 return;
             }
 

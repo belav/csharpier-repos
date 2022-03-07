@@ -54,11 +54,14 @@ public static class TestStartup
                 foreach (var requestDelegate in delegates)
                 {
                     if (
-                        context.Request.Path.StartsWithSegments(
-                            requestDelegate.Key,
-                            out var matchedPath,
-                            out var remainingPath
-                        )
+                        context
+                            .Request
+                            .Path
+                            .StartsWithSegments(
+                                requestDelegate.Key,
+                                out var matchedPath,
+                                out var remainingPath
+                            )
                     )
                     {
                         var pathBase = context.Request.PathBase;

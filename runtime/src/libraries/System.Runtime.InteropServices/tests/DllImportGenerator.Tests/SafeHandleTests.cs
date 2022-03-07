@@ -61,8 +61,9 @@ namespace DllImportGenerator.IntegrationTests
         [Fact]
         public void ReturnValue_CreatesSafeHandle_DirectConstructorCall()
         {
-            using NativeExportsNE.NativeExportsSafeHandle handle =
-                NativeExportsNE.NativeExportsSafeHandle.CreateNewHandle();
+            using NativeExportsNE.NativeExportsSafeHandle handle = NativeExportsNE
+                .NativeExportsSafeHandle
+                .CreateNewHandle();
             Assert.False(handle.IsClosed);
             Assert.False(handle.IsInvalid);
         }

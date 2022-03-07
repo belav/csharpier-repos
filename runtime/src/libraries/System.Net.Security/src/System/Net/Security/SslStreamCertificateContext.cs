@@ -88,7 +88,9 @@ namespace System.Net.Security
                     }
 
                     // Dispose the copy of the target cert.
-                    chain.ChainElements[0].Certificate.Dispose();
+                    chain.ChainElements[0]
+                        .Certificate
+                        .Dispose();
 
                     // Dispose the last cert, if we didn't include it.
                     for (int i = count + 1; i < chain.ChainElements.Count; i++)

@@ -23,9 +23,11 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
             {
                 Assert.Equal(
                     CosmosStrings.NonETagConcurrencyToken(nameof(Quarks), "Charm"),
-                    Assert.Throws<InvalidOperationException>(
-                        () => base.Properties_can_set_row_version()
-                    ).Message
+                    Assert
+                        .Throws<InvalidOperationException>(
+                            () => base.Properties_can_set_row_version()
+                        )
+                        .Message
                 );
             }
 
@@ -33,9 +35,11 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
             {
                 Assert.Equal(
                     CosmosStrings.NonETagConcurrencyToken(nameof(Quarks), "Charm"),
-                    Assert.Throws<InvalidOperationException>(
-                        () => base.Properties_can_be_made_concurrency_tokens()
-                    ).Message
+                    Assert
+                        .Throws<InvalidOperationException>(
+                            () => base.Properties_can_be_made_concurrency_tokens()
+                        )
+                        .Message
                 );
             }
 
@@ -159,7 +163,8 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                     entity
                         .GetKeys()
                         .First(k => k != entity.FindPrimaryKey())
-                        .Properties.Select(p => p.Name)
+                        .Properties
+                        .Select(p => p.Name)
                 );
 
                 var idProperty = entity.FindProperty(StoreKeyConvention.DefaultIdPropertyName);
@@ -198,7 +203,8 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                     entity
                         .GetKeys()
                         .First(k => k != entity.FindPrimaryKey())
-                        .Properties.Select(p => p.Name)
+                        .Properties
+                        .Select(p => p.Name)
                 );
             }
 
@@ -393,9 +399,9 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
 
                 var principal = model.FindEntityType(typeof(CollectionNavigationToSharedType));
                 var owned =
-                    principal.FindNavigation(
-                        nameof(CollectionNavigationToSharedType.Navigation)
-                    ).TargetEntityType;
+                    principal
+                        .FindNavigation(nameof(CollectionNavigationToSharedType.Navigation))
+                        .TargetEntityType;
                 Assert.True(owned.IsOwned());
                 Assert.True(owned.HasSharedClrType);
                 Assert.Equal(
@@ -428,9 +434,9 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
 
                 var principal = model.FindEntityType(typeof(ReferenceNavigationToSharedType));
                 var owned =
-                    principal.FindNavigation(
-                        nameof(ReferenceNavigationToSharedType.Navigation)
-                    ).TargetEntityType;
+                    principal
+                        .FindNavigation(nameof(ReferenceNavigationToSharedType.Navigation))
+                        .TargetEntityType;
                 Assert.True(owned.IsOwned());
                 Assert.True(owned.HasSharedClrType);
                 Assert.Equal(
@@ -619,9 +625,11 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                         nameof(ImplicitManyToManyA.Bs),
                         "List<ImplicitManyToManyB>"
                     ),
-                    Assert.Throws<InvalidOperationException>(
-                        () => base.Join_type_is_automatically_configured_by_convention()
-                    ).Message
+                    Assert
+                        .Throws<InvalidOperationException>(
+                            () => base.Join_type_is_automatically_configured_by_convention()
+                        )
+                        .Message
                 );
             }
 
@@ -634,9 +642,11 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                         nameof(CategoryWithAttribute.Products),
                         "ICollection<ProductWithAttribute>"
                     ),
-                    Assert.Throws<InvalidOperationException>(
-                        () => base.ForeignKeyAttribute_configures_the_properties()
-                    ).Message
+                    Assert
+                        .Throws<InvalidOperationException>(
+                            () => base.ForeignKeyAttribute_configures_the_properties()
+                        )
+                        .Message
                 );
             }
 
@@ -652,9 +662,9 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                 // On Cosmos the base type starts as owned
                 Assert.Contains(
                     "(No exception was thrown)",
-                    Assert.Throws<ThrowsException>(
-                        () => base.Deriving_from_owned_type_throws()
-                    ).Message
+                    Assert
+                        .Throws<ThrowsException>(() => base.Deriving_from_owned_type_throws())
+                        .Message
                 );
             }
 
@@ -663,9 +673,9 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                 // On Cosmos the base type starts as owned
                 Assert.Contains(
                     "(No exception was thrown)",
-                    Assert.Throws<ThrowsException>(
-                        () => base.Deriving_from_owned_type_throws()
-                    ).Message
+                    Assert
+                        .Throws<ThrowsException>(() => base.Deriving_from_owned_type_throws())
+                        .Message
                 );
             }
 

@@ -55,8 +55,9 @@ namespace Microsoft.CodeAnalysis.QuickInfo
             CancellationToken cancellationToken
         )
         {
-            var extensionManager =
-                _services.WorkspaceServices.GetRequiredService<IExtensionManager>();
+            var extensionManager = _services
+                .WorkspaceServices
+                .GetRequiredService<IExtensionManager>();
             var options = SymbolDescriptionOptions.From(document.Project);
 
             // returns the first non-empty quick info found (based on provider order)
@@ -100,8 +101,9 @@ namespace Microsoft.CodeAnalysis.QuickInfo
             CancellationToken cancellationToken
         )
         {
-            var extensionManager =
-                _services.WorkspaceServices.GetRequiredService<IExtensionManager>();
+            var extensionManager = _services
+                .WorkspaceServices
+                .GetRequiredService<IExtensionManager>();
 
             // returns the first non-empty quick info found (based on provider order)
             foreach (var provider in GetProviders().OfType<CommonQuickInfoProvider>())

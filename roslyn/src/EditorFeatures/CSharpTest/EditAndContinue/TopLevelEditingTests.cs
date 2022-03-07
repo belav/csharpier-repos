@@ -2839,7 +2839,8 @@ class C
                                 SemanticEditKind.Update,
                                 c =>
                                     c.GetMember<INamedTypeSymbol>("C")
-                                        .InstanceConstructors.Single(),
+                                        .InstanceConstructors
+                                        .Single(),
                                 preserveLocalVariables: true
                             ),
                         }
@@ -2897,7 +2898,8 @@ partial class C
                                 SemanticEditKind.Update,
                                 c =>
                                     c.GetMember<INamedTypeSymbol>("C")
-                                        .InstanceConstructors.Single(),
+                                        .InstanceConstructors
+                                        .Single(),
                                 partialType: "C",
                                 preserveLocalVariables: true
                             ),
@@ -2958,7 +2960,8 @@ class C
                                 SemanticEditKind.Update,
                                 c =>
                                     c.GetMember<INamedTypeSymbol>("C")
-                                        .InstanceConstructors.Single(),
+                                        .InstanceConstructors
+                                        .Single(),
                                 partialType: "C",
                                 preserveLocalVariables: true
                             ),
@@ -3239,7 +3242,8 @@ record C
                     SemanticEditKind.Update,
                     c =>
                         c.GetMember<INamedTypeSymbol>("C")
-                            .InstanceConstructors.First(c => c.ToString() == "C.C()"),
+                            .InstanceConstructors
+                            .First(c => c.ToString() == "C.C()"),
                     preserveLocalVariables: true
                 )
             );
@@ -3267,7 +3271,8 @@ record struct C
                     SemanticEditKind.Update,
                     c =>
                         c.GetMember<INamedTypeSymbol>("C")
-                            .InstanceConstructors.First(c => c.ToString() == "C.C()"),
+                            .InstanceConstructors
+                            .First(c => c.ToString() == "C.C()"),
                     preserveLocalVariables: true
                 )
             );
@@ -3377,17 +3382,17 @@ record C
                                 .OfType<IMethodSymbol>()
                                 .First(
                                     m =>
-                                        SymbolEqualityComparer.Default.Equals(
-                                            m.Parameters[0].Type,
-                                            m.ContainingType
-                                        )
+                                        SymbolEqualityComparer
+                                            .Default
+                                            .Equals(m.Parameters[0].Type, m.ContainingType)
                                 )
                     ),
                     SemanticEdit(
                         SemanticEditKind.Update,
                         c =>
                             c.GetMember<INamedTypeSymbol>("C")
-                                .Constructors.Single(
+                                .Constructors
+                                .Single(
                                     c =>
                                         c.Parameters.FirstOrDefault()?.Type.ToDisplayString() == "C"
                                 ),
@@ -3397,7 +3402,8 @@ record C
                         SemanticEditKind.Update,
                         c =>
                             c.GetMember<INamedTypeSymbol>("C")
-                                .Constructors.Single(c => c.Parameters.Length == 0),
+                                .Constructors
+                                .Single(c => c.Parameters.Length == 0),
                         preserveLocalVariables: true
                     ),
                 },
@@ -3484,7 +3490,8 @@ record C
                     SemanticEditKind.Update,
                     c =>
                         c.GetMember<INamedTypeSymbol>("C")
-                            .InstanceConstructors.First(c => c.ToString() == "C.C()"),
+                            .InstanceConstructors
+                            .First(c => c.ToString() == "C.C()"),
                     preserveLocalVariables: true
                 )
             );
@@ -3512,7 +3519,8 @@ record struct C
                     SemanticEditKind.Update,
                     c =>
                         c.GetMember<INamedTypeSymbol>("C")
-                            .InstanceConstructors.First(c => c.ToString() == "C.C()"),
+                            .InstanceConstructors
+                            .First(c => c.ToString() == "C.C()"),
                     preserveLocalVariables: true
                 )
             );
@@ -3543,10 +3551,9 @@ record C(int X)
                             .OfType<IMethodSymbol>()
                             .First(
                                 m =>
-                                    SymbolEqualityComparer.Default.Equals(
-                                        m.Parameters[0].Type,
-                                        m.ContainingType
-                                    )
+                                    SymbolEqualityComparer
+                                        .Default
+                                        .Equals(m.Parameters[0].Type, m.ContainingType)
                             )
                 ),
                 SemanticEdit(SemanticEditKind.Update, c => c.GetMember("C.GetHashCode")),
@@ -3555,16 +3562,16 @@ record C(int X)
                     SemanticEditKind.Update,
                     c =>
                         c.GetMember<INamedTypeSymbol>("C")
-                            .Constructors.Single(
-                                c => c.Parameters[0].Type.ToDisplayString() == "int"
-                            ),
+                            .Constructors
+                            .Single(c => c.Parameters[0].Type.ToDisplayString() == "int"),
                     preserveLocalVariables: true
                 ),
                 SemanticEdit(
                     SemanticEditKind.Update,
                     c =>
                         c.GetMember<INamedTypeSymbol>("C")
-                            .Constructors.Single(c => c.Parameters[0].Type.ToDisplayString() == "C")
+                            .Constructors
+                            .Single(c => c.Parameters[0].Type.ToDisplayString() == "C")
                 )
             );
 
@@ -3605,10 +3612,9 @@ record C(int X)
                             .OfType<IMethodSymbol>()
                             .First(
                                 m =>
-                                    SymbolEqualityComparer.Default.Equals(
-                                        m.Parameters[0].Type,
-                                        m.ContainingType
-                                    )
+                                    SymbolEqualityComparer
+                                        .Default
+                                        .Equals(m.Parameters[0].Type, m.ContainingType)
                             )
                 ),
                 SemanticEdit(SemanticEditKind.Update, c => c.GetMember("C.GetHashCode")),
@@ -3617,16 +3623,16 @@ record C(int X)
                     SemanticEditKind.Update,
                     c =>
                         c.GetMember<INamedTypeSymbol>("C")
-                            .Constructors.Single(
-                                c => c.Parameters[0].Type.ToDisplayString() == "int"
-                            ),
+                            .Constructors
+                            .Single(c => c.Parameters[0].Type.ToDisplayString() == "int"),
                     preserveLocalVariables: true
                 ),
                 SemanticEdit(
                     SemanticEditKind.Update,
                     c =>
                         c.GetMember<INamedTypeSymbol>("C")
-                            .Constructors.Single(c => c.Parameters[0].Type.ToDisplayString() == "C")
+                            .Constructors
+                            .Single(c => c.Parameters[0].Type.ToDisplayString() == "C")
                 )
             );
 
@@ -3693,9 +3699,8 @@ record C(int X)
                     SemanticEditKind.Update,
                     c =>
                         c.GetMember<INamedTypeSymbol>("C")
-                            .Constructors.Single(
-                                c => c.Parameters[0].Type.ToDisplayString() == "int"
-                            ),
+                            .Constructors
+                            .Single(c => c.Parameters[0].Type.ToDisplayString() == "int"),
                     preserveLocalVariables: true
                 )
             );
@@ -3727,10 +3732,9 @@ record C(int X)
                             .OfType<IMethodSymbol>()
                             .First(
                                 m =>
-                                    SymbolEqualityComparer.Default.Equals(
-                                        m.Parameters[0].Type,
-                                        m.ContainingType
-                                    )
+                                    SymbolEqualityComparer
+                                        .Default
+                                        .Equals(m.Parameters[0].Type, m.ContainingType)
                             )
                 ),
                 SemanticEdit(SemanticEditKind.Update, c => c.GetMember("C.GetHashCode")),
@@ -3739,16 +3743,16 @@ record C(int X)
                     SemanticEditKind.Update,
                     c =>
                         c.GetMember<INamedTypeSymbol>("C")
-                            .Constructors.Single(
-                                c => c.Parameters[0].Type.ToDisplayString() == "int"
-                            ),
+                            .Constructors
+                            .Single(c => c.Parameters[0].Type.ToDisplayString() == "int"),
                     preserveLocalVariables: true
                 ),
                 SemanticEdit(
                     SemanticEditKind.Update,
                     c =>
                         c.GetMember<INamedTypeSymbol>("C")
-                            .Constructors.Single(c => c.Parameters[0].Type.ToDisplayString() == "C")
+                            .Constructors
+                            .Single(c => c.Parameters[0].Type.ToDisplayString() == "C")
                 )
             );
 
@@ -3773,10 +3777,9 @@ record C(int X)
                             .OfType<IMethodSymbol>()
                             .First(
                                 m =>
-                                    SymbolEqualityComparer.Default.Equals(
-                                        m.Parameters[0].Type,
-                                        m.ContainingType
-                                    )
+                                    SymbolEqualityComparer
+                                        .Default
+                                        .Equals(m.Parameters[0].Type, m.ContainingType)
                             )
                 ),
                 SemanticEdit(SemanticEditKind.Update, c => c.GetMember("C.GetHashCode")),
@@ -3785,16 +3788,16 @@ record C(int X)
                     SemanticEditKind.Update,
                     c =>
                         c.GetMember<INamedTypeSymbol>("C")
-                            .Constructors.Single(
-                                c => c.Parameters[0].Type.ToDisplayString() == "int"
-                            ),
+                            .Constructors
+                            .Single(c => c.Parameters[0].Type.ToDisplayString() == "int"),
                     preserveLocalVariables: true
                 ),
                 SemanticEdit(
                     SemanticEditKind.Update,
                     c =>
                         c.GetMember<INamedTypeSymbol>("C")
-                            .Constructors.Single(c => c.Parameters[0].Type.ToDisplayString() == "C")
+                            .Constructors
+                            .Single(c => c.Parameters[0].Type.ToDisplayString() == "C")
                 )
             );
 
@@ -3835,10 +3838,9 @@ record C(int X)
                             .OfType<IMethodSymbol>()
                             .First(
                                 m =>
-                                    SymbolEqualityComparer.Default.Equals(
-                                        m.Parameters[0].Type,
-                                        m.ContainingType
-                                    )
+                                    SymbolEqualityComparer
+                                        .Default
+                                        .Equals(m.Parameters[0].Type, m.ContainingType)
                             )
                 ),
                 SemanticEdit(SemanticEditKind.Update, c => c.GetMember("C.GetHashCode")),
@@ -3847,9 +3849,8 @@ record C(int X)
                     SemanticEditKind.Update,
                     c =>
                         c.GetMember<INamedTypeSymbol>("C")
-                            .Constructors.Single(
-                                c => c.Parameters[0].Type.ToDisplayString() == "int"
-                            ),
+                            .Constructors
+                            .Single(c => c.Parameters[0].Type.ToDisplayString() == "int"),
                     preserveLocalVariables: true
                 )
             );
@@ -3876,10 +3877,9 @@ record C(int X)
                             .OfType<IMethodSymbol>()
                             .First(
                                 m =>
-                                    SymbolEqualityComparer.Default.Equals(
-                                        m.Parameters[0].Type,
-                                        m.ContainingType
-                                    )
+                                    SymbolEqualityComparer
+                                        .Default
+                                        .Equals(m.Parameters[0].Type, m.ContainingType)
                             )
                 ),
                 SemanticEdit(SemanticEditKind.Update, c => c.GetMember("C.GetHashCode")),
@@ -3888,16 +3888,16 @@ record C(int X)
                     SemanticEditKind.Update,
                     c =>
                         c.GetMember<INamedTypeSymbol>("C")
-                            .Constructors.Single(
-                                c => c.Parameters[0].Type.ToDisplayString() == "int"
-                            ),
+                            .Constructors
+                            .Single(c => c.Parameters[0].Type.ToDisplayString() == "int"),
                     preserveLocalVariables: true
                 ),
                 SemanticEdit(
                     SemanticEditKind.Update,
                     c =>
                         c.GetMember<INamedTypeSymbol>("C")
-                            .Constructors.Single(c => c.Parameters[0].Type.ToDisplayString() == "C")
+                            .Constructors
+                            .Single(c => c.Parameters[0].Type.ToDisplayString() == "C")
                 )
             );
 
@@ -3923,10 +3923,9 @@ record C(int X)
                             .OfType<IMethodSymbol>()
                             .First(
                                 m =>
-                                    SymbolEqualityComparer.Default.Equals(
-                                        m.Parameters[0].Type,
-                                        m.ContainingType
-                                    )
+                                    SymbolEqualityComparer
+                                        .Default
+                                        .Equals(m.Parameters[0].Type, m.ContainingType)
                             )
                 ),
                 SemanticEdit(SemanticEditKind.Update, c => c.GetMember("C.GetHashCode")),
@@ -3935,16 +3934,16 @@ record C(int X)
                     SemanticEditKind.Update,
                     c =>
                         c.GetMember<INamedTypeSymbol>("C")
-                            .Constructors.Single(
-                                c => c.Parameters[0].Type.ToDisplayString() == "int"
-                            ),
+                            .Constructors
+                            .Single(c => c.Parameters[0].Type.ToDisplayString() == "int"),
                     syntaxMap[0]
                 ),
                 SemanticEdit(
                     SemanticEditKind.Update,
                     c =>
                         c.GetMember<INamedTypeSymbol>("C")
-                            .Constructors.Single(c => c.Parameters[0].Type.ToDisplayString() == "C")
+                            .Constructors
+                            .Single(c => c.Parameters[0].Type.ToDisplayString() == "C")
                 )
             );
 
@@ -3970,10 +3969,9 @@ record C(int X)
                             .OfType<IMethodSymbol>()
                             .First(
                                 m =>
-                                    SymbolEqualityComparer.Default.Equals(
-                                        m.Parameters[0].Type,
-                                        m.ContainingType
-                                    )
+                                    SymbolEqualityComparer
+                                        .Default
+                                        .Equals(m.Parameters[0].Type, m.ContainingType)
                             )
                 ),
                 SemanticEdit(SemanticEditKind.Update, c => c.GetMember("C.GetHashCode")),
@@ -3982,16 +3980,16 @@ record C(int X)
                     SemanticEditKind.Update,
                     c =>
                         c.GetMember<INamedTypeSymbol>("C")
-                            .Constructors.Single(
-                                c => c.Parameters[0].Type.ToDisplayString() == "int"
-                            ),
+                            .Constructors
+                            .Single(c => c.Parameters[0].Type.ToDisplayString() == "int"),
                     syntaxMap[0]
                 ),
                 SemanticEdit(
                     SemanticEditKind.Update,
                     c =>
                         c.GetMember<INamedTypeSymbol>("C")
-                            .Constructors.Single(c => c.Parameters[0].Type.ToDisplayString() == "C")
+                            .Constructors
+                            .Single(c => c.Parameters[0].Type.ToDisplayString() == "C")
                 )
             );
 
@@ -4067,9 +4065,8 @@ record C(int X)
                     SemanticEditKind.Update,
                     c =>
                         c.GetMember<INamedTypeSymbol>("C")
-                            .Constructors.Single(
-                                c => c.Parameters[0].Type.ToDisplayString() == "int"
-                            ),
+                            .Constructors
+                            .Single(c => c.Parameters[0].Type.ToDisplayString() == "int"),
                     preserveLocalVariables: true
                 )
             );
@@ -4110,10 +4107,9 @@ record C(int X)
                             .OfType<IMethodSymbol>()
                             .First(
                                 m =>
-                                    SymbolEqualityComparer.Default.Equals(
-                                        m.Parameters[0].Type,
-                                        m.ContainingType
-                                    )
+                                    SymbolEqualityComparer
+                                        .Default
+                                        .Equals(m.Parameters[0].Type, m.ContainingType)
                             )
                 ),
                 SemanticEdit(SemanticEditKind.Update, c => c.GetMember("C.GetHashCode")),
@@ -4129,16 +4125,16 @@ record C(int X)
                     SemanticEditKind.Update,
                     c =>
                         c.GetMember<INamedTypeSymbol>("C")
-                            .Constructors.Single(
-                                c => c.Parameters[0].Type.ToDisplayString() == "int"
-                            ),
+                            .Constructors
+                            .Single(c => c.Parameters[0].Type.ToDisplayString() == "int"),
                     preserveLocalVariables: true
                 ),
                 SemanticEdit(
                     SemanticEditKind.Update,
                     c =>
                         c.GetMember<INamedTypeSymbol>("C")
-                            .Constructors.Single(c => c.Parameters[0].Type.ToDisplayString() == "C")
+                            .Constructors
+                            .Single(c => c.Parameters[0].Type.ToDisplayString() == "C")
                 )
             );
 
@@ -4168,10 +4164,9 @@ record C(int X)
                             .OfType<IMethodSymbol>()
                             .First(
                                 m =>
-                                    SymbolEqualityComparer.Default.Equals(
-                                        m.Parameters[0].Type,
-                                        m.ContainingType
-                                    )
+                                    SymbolEqualityComparer
+                                        .Default
+                                        .Equals(m.Parameters[0].Type, m.ContainingType)
                             )
                 ),
                 SemanticEdit(SemanticEditKind.Update, c => c.GetMember("C.GetHashCode")),
@@ -4187,16 +4182,16 @@ record C(int X)
                     SemanticEditKind.Update,
                     c =>
                         c.GetMember<INamedTypeSymbol>("C")
-                            .Constructors.Single(
-                                c => c.Parameters[0].Type.ToDisplayString() == "int"
-                            ),
+                            .Constructors
+                            .Single(c => c.Parameters[0].Type.ToDisplayString() == "int"),
                     preserveLocalVariables: true
                 ),
                 SemanticEdit(
                     SemanticEditKind.Update,
                     c =>
                         c.GetMember<INamedTypeSymbol>("C")
-                            .Constructors.Single(c => c.Parameters[0].Type.ToDisplayString() == "C")
+                            .Constructors
+                            .Single(c => c.Parameters[0].Type.ToDisplayString() == "C")
                 )
             );
 
@@ -4257,9 +4252,8 @@ record C(int X)
                     SemanticEditKind.Update,
                     c =>
                         c.GetMember<INamedTypeSymbol>("C")
-                            .Constructors.Single(
-                                c => c.Parameters[0].Type.ToDisplayString() == "int"
-                            ),
+                            .Constructors
+                            .Single(c => c.Parameters[0].Type.ToDisplayString() == "int"),
                     preserveLocalVariables: true
                 )
             );
@@ -4290,10 +4284,9 @@ record C(int X)
                             .OfType<IMethodSymbol>()
                             .First(
                                 m =>
-                                    SymbolEqualityComparer.Default.Equals(
-                                        m.Parameters[0].Type,
-                                        m.ContainingType
-                                    )
+                                    SymbolEqualityComparer
+                                        .Default
+                                        .Equals(m.Parameters[0].Type, m.ContainingType)
                             )
                 ),
                 SemanticEdit(SemanticEditKind.Update, c => c.GetMember("C.GetHashCode")),
@@ -4309,16 +4302,16 @@ record C(int X)
                     SemanticEditKind.Update,
                     c =>
                         c.GetMember<INamedTypeSymbol>("C")
-                            .Constructors.Single(
-                                c => c.Parameters[0].Type.ToDisplayString() == "int"
-                            ),
+                            .Constructors
+                            .Single(c => c.Parameters[0].Type.ToDisplayString() == "int"),
                     preserveLocalVariables: true
                 ),
                 SemanticEdit(
                     SemanticEditKind.Update,
                     c =>
                         c.GetMember<INamedTypeSymbol>("C")
-                            .Constructors.Single(c => c.Parameters[0].Type.ToDisplayString() == "C")
+                            .Constructors
+                            .Single(c => c.Parameters[0].Type.ToDisplayString() == "C")
                 )
             );
 
@@ -4348,10 +4341,9 @@ record C(int X)
                             .OfType<IMethodSymbol>()
                             .First(
                                 m =>
-                                    SymbolEqualityComparer.Default.Equals(
-                                        m.Parameters[0].Type,
-                                        m.ContainingType
-                                    )
+                                    SymbolEqualityComparer
+                                        .Default
+                                        .Equals(m.Parameters[0].Type, m.ContainingType)
                             )
                 ),
                 SemanticEdit(SemanticEditKind.Update, c => c.GetMember("C.GetHashCode")),
@@ -4367,16 +4359,16 @@ record C(int X)
                     SemanticEditKind.Update,
                     c =>
                         c.GetMember<INamedTypeSymbol>("C")
-                            .Constructors.Single(
-                                c => c.Parameters[0].Type.ToDisplayString() == "int"
-                            ),
+                            .Constructors
+                            .Single(c => c.Parameters[0].Type.ToDisplayString() == "int"),
                     preserveLocalVariables: true
                 ),
                 SemanticEdit(
                     SemanticEditKind.Update,
                     c =>
                         c.GetMember<INamedTypeSymbol>("C")
-                            .Constructors.Single(c => c.Parameters[0].Type.ToDisplayString() == "C")
+                            .Constructors
+                            .Single(c => c.Parameters[0].Type.ToDisplayString() == "C")
                 )
             );
 
@@ -4408,7 +4400,8 @@ partial record C
                                 SemanticEditKind.Update,
                                 c =>
                                     c.GetMember<INamedTypeSymbol>("C")
-                                        .Constructors.Single(
+                                        .Constructors
+                                        .Single(
                                             c => c.Parameters[0].Type.ToDisplayString() == "int"
                                         ),
                                 partialType: "C",
@@ -4445,7 +4438,8 @@ partial record C
                                 SemanticEditKind.Update,
                                 c =>
                                     c.GetMember<INamedTypeSymbol>("C")
-                                        .Constructors.Single(
+                                        .Constructors
+                                        .Single(
                                             c => c.Parameters[0].Type.ToDisplayString() == "int"
                                         ),
                                 partialType: "C",
@@ -4500,10 +4494,9 @@ partial record C
                                         .OfType<IMethodSymbol>()
                                         .First(
                                             m =>
-                                                SymbolEqualityComparer.Default.Equals(
-                                                    m.Parameters[0].Type,
-                                                    m.ContainingType
-                                                )
+                                                SymbolEqualityComparer
+                                                    .Default
+                                                    .Equals(m.Parameters[0].Type, m.ContainingType)
                                         )
                             ),
                             SemanticEdit(
@@ -4522,7 +4515,8 @@ partial record C
                                 SemanticEditKind.Update,
                                 c =>
                                     c.GetMember<INamedTypeSymbol>("C")
-                                        .Constructors.Single(
+                                        .Constructors
+                                        .Single(
                                             c => c.Parameters[0].Type.ToDisplayString() == "int"
                                         ),
                                 partialType: "C",
@@ -4532,9 +4526,8 @@ partial record C
                                 SemanticEditKind.Update,
                                 c =>
                                     c.GetMember<INamedTypeSymbol>("C")
-                                        .Constructors.Single(
-                                            c => c.Parameters[0].Type.ToDisplayString() == "C"
-                                        )
+                                        .Constructors
+                                        .Single(c => c.Parameters[0].Type.ToDisplayString() == "C")
                             )
                         }
                     )
@@ -4585,10 +4578,9 @@ partial record C
                                         .OfType<IMethodSymbol>()
                                         .First(
                                             m =>
-                                                SymbolEqualityComparer.Default.Equals(
-                                                    m.Parameters[0].Type,
-                                                    m.ContainingType
-                                                )
+                                                SymbolEqualityComparer
+                                                    .Default
+                                                    .Equals(m.Parameters[0].Type, m.ContainingType)
                                         )
                             ),
                             SemanticEdit(
@@ -4607,7 +4599,8 @@ partial record C
                                 SemanticEditKind.Update,
                                 c =>
                                     c.GetMember<INamedTypeSymbol>("C")
-                                        .Constructors.Single(
+                                        .Constructors
+                                        .Single(
                                             c => c.Parameters[0].Type.ToDisplayString() == "int"
                                         ),
                                 partialType: "C",
@@ -4617,9 +4610,8 @@ partial record C
                                 SemanticEditKind.Update,
                                 c =>
                                     c.GetMember<INamedTypeSymbol>("C")
-                                        .Constructors.Single(
-                                            c => c.Parameters[0].Type.ToDisplayString() == "C"
-                                        )
+                                        .Constructors
+                                        .Single(c => c.Parameters[0].Type.ToDisplayString() == "C")
                             )
                         }
                     )
@@ -4693,9 +4685,8 @@ record C(int X)
                     SemanticEditKind.Update,
                     c =>
                         c.GetMember<INamedTypeSymbol>("C")
-                            .Constructors.Single(
-                                c => c.Parameters[0].Type.ToDisplayString() == "int"
-                            ),
+                            .Constructors
+                            .Single(c => c.Parameters[0].Type.ToDisplayString() == "int"),
                     preserveLocalVariables: true
                 )
             );
@@ -4721,9 +4712,8 @@ record C(int X)
                     SemanticEditKind.Update,
                     c =>
                         c.GetMember<INamedTypeSymbol>("C")
-                            .Constructors.Single(
-                                c => c.Parameters[0].Type.ToDisplayString() == "int"
-                            ),
+                            .Constructors
+                            .Single(c => c.Parameters[0].Type.ToDisplayString() == "int"),
                     preserveLocalVariables: true
                 )
             );
@@ -4766,7 +4756,8 @@ record C(int X)
                     SemanticEditKind.Update,
                     c =>
                         c.GetMember<INamedTypeSymbol>("C")
-                            .Constructors.Single(c => c.Parameters.Length == 0),
+                            .Constructors
+                            .Single(c => c.Parameters.Length == 0),
                     preserveLocalVariables: true
                 )
             );
@@ -4785,9 +4776,8 @@ record C(int X)
                     SemanticEditKind.Update,
                     c =>
                         c.GetMember<INamedTypeSymbol>("C")
-                            .Constructors.Single(
-                                c => c.Parameters[0].Type.ToDisplayString() == "int"
-                            ),
+                            .Constructors
+                            .Single(c => c.Parameters[0].Type.ToDisplayString() == "int"),
                     preserveLocalVariables: true
                 )
             );
@@ -7314,39 +7304,32 @@ partial class C
                                 SemanticEditKind.Update,
                                 c =>
                                     c.GetMember<INamedTypeSymbol>("C")
-                                        .GetMember<IPropertySymbol>("P1").GetMethod,
+                                        .GetMember<IPropertySymbol>("P1")
+                                        .GetMethod,
                                 preserveLocalVariables: false
                             ),
                             SemanticEdit(
                                 SemanticEditKind.Update,
                                 c =>
                                     c.GetMember<INamedTypeSymbol>("C")
-                                        .GetMember<IPropertySymbol>("P1").SetMethod,
+                                        .GetMember<IPropertySymbol>("P1")
+                                        .SetMethod,
                                 preserveLocalVariables: false
                             ),
                             SemanticEdit(
                                 SemanticEditKind.Update,
                                 c =>
                                     c.GetMember<INamedTypeSymbol>("C")
-                                        .GetMember<IPropertySymbol>("P2").GetMethod,
+                                        .GetMember<IPropertySymbol>("P2")
+                                        .GetMethod,
                                 preserveLocalVariables: false
                             ),
                             SemanticEdit(
                                 SemanticEditKind.Update,
                                 c =>
                                     c.GetMember<INamedTypeSymbol>("C")
-                                        .GetMember<IPropertySymbol>("P2").SetMethod,
-                                preserveLocalVariables: false
-                            ),
-                            SemanticEdit(
-                                SemanticEditKind.Update,
-                                c =>
-                                    c.GetMember<INamedTypeSymbol>("C")
-                                        .GetMembers("this[]")
-                                        .Cast<IPropertySymbol>()
-                                        .Single(
-                                            m => m.GetParameters().Single().Type.Name == "Int32"
-                                        ).GetMethod,
+                                        .GetMember<IPropertySymbol>("P2")
+                                        .SetMethod,
                                 preserveLocalVariables: false
                             ),
                             SemanticEdit(
@@ -7357,7 +7340,8 @@ partial class C
                                         .Cast<IPropertySymbol>()
                                         .Single(
                                             m => m.GetParameters().Single().Type.Name == "Int32"
-                                        ).SetMethod,
+                                        )
+                                        .GetMethod,
                                 preserveLocalVariables: false
                             ),
                             SemanticEdit(
@@ -7367,8 +7351,9 @@ partial class C
                                         .GetMembers("this[]")
                                         .Cast<IPropertySymbol>()
                                         .Single(
-                                            m => m.GetParameters().Single().Type.Name == "Byte"
-                                        ).GetMethod,
+                                            m => m.GetParameters().Single().Type.Name == "Int32"
+                                        )
+                                        .SetMethod,
                                 preserveLocalVariables: false
                             ),
                             SemanticEdit(
@@ -7377,23 +7362,34 @@ partial class C
                                     c.GetMember<INamedTypeSymbol>("C")
                                         .GetMembers("this[]")
                                         .Cast<IPropertySymbol>()
-                                        .Single(
-                                            m => m.GetParameters().Single().Type.Name == "Byte"
-                                        ).SetMethod,
+                                        .Single(m => m.GetParameters().Single().Type.Name == "Byte")
+                                        .GetMethod,
                                 preserveLocalVariables: false
                             ),
                             SemanticEdit(
                                 SemanticEditKind.Update,
                                 c =>
                                     c.GetMember<INamedTypeSymbol>("C")
-                                        .GetMember<IEventSymbol>("E").AddMethod,
+                                        .GetMembers("this[]")
+                                        .Cast<IPropertySymbol>()
+                                        .Single(m => m.GetParameters().Single().Type.Name == "Byte")
+                                        .SetMethod,
                                 preserveLocalVariables: false
                             ),
                             SemanticEdit(
                                 SemanticEditKind.Update,
                                 c =>
                                     c.GetMember<INamedTypeSymbol>("C")
-                                        .GetMember<IEventSymbol>("E").RemoveMethod,
+                                        .GetMember<IEventSymbol>("E")
+                                        .AddMethod,
+                                preserveLocalVariables: false
+                            ),
+                            SemanticEdit(
+                                SemanticEditKind.Update,
+                                c =>
+                                    c.GetMember<INamedTypeSymbol>("C")
+                                        .GetMember<IEventSymbol>("E")
+                                        .RemoveMethod,
                                 preserveLocalVariables: false
                             ),
                         }
@@ -7678,13 +7674,15 @@ partial class C
                                 SemanticEditKind.Update,
                                 c =>
                                     c.GetMember<INamedTypeSymbol>("C")
-                                        .GetMember<IPropertySymbol>("P").GetMethod
+                                        .GetMember<IPropertySymbol>("P")
+                                        .GetMethod
                             ),
                             SemanticEdit(
                                 SemanticEditKind.Update,
                                 c =>
                                     c.GetMember<INamedTypeSymbol>("C")
-                                        .GetMember<IPropertySymbol>("P").SetMethod
+                                        .GetMember<IPropertySymbol>("P")
+                                        .SetMethod
                             )
                         }
                     )
@@ -7713,7 +7711,8 @@ partial class C
                                 SemanticEditKind.Update,
                                 c =>
                                     c.GetMember<INamedTypeSymbol>("C")
-                                        .GetMember<IPropertySymbol>("P").GetMethod
+                                        .GetMember<IPropertySymbol>("P")
+                                        .GetMethod
                             )
                         }
                     )
@@ -7742,7 +7741,8 @@ partial class C
                                 SemanticEditKind.Update,
                                 c =>
                                     c.GetMember<INamedTypeSymbol>("C")
-                                        .InstanceConstructors.Single(),
+                                        .InstanceConstructors
+                                        .Single(),
                                 partialType: "C",
                                 preserveLocalVariables: true
                             )
@@ -7773,7 +7773,8 @@ partial class C
                                 SemanticEditKind.Update,
                                 c =>
                                     c.GetMember<INamedTypeSymbol>("C")
-                                        .InstanceConstructors.Single(),
+                                        .InstanceConstructors
+                                        .Single(),
                                 partialType: "C",
                                 preserveLocalVariables: true
                             )
@@ -7804,7 +7805,8 @@ partial class C
                                 SemanticEditKind.Update,
                                 c =>
                                     c.GetMember<INamedTypeSymbol>("C")
-                                        .InstanceConstructors.Single(),
+                                        .InstanceConstructors
+                                        .Single(),
                                 partialType: "C",
                                 preserveLocalVariables: true
                             )
@@ -10324,7 +10326,8 @@ public class SubClass : BaseClass, IConflict
                                 SemanticEditKind.Update,
                                 c =>
                                     c.GetMember<INamedTypeSymbol>("C")
-                                        .GetMember<IMethodSymbol>("F").PartialImplementationPart
+                                        .GetMember<IMethodSymbol>("F")
+                                        .PartialImplementationPart
                             )
                         }
                     ),
@@ -10352,7 +10355,8 @@ public class SubClass : BaseClass, IConflict
                                 SemanticEditKind.Update,
                                 c =>
                                     c.GetMember<INamedTypeSymbol>("C")
-                                        .GetMember<IMethodSymbol>("F").PartialImplementationPart
+                                        .GetMember<IMethodSymbol>("F")
+                                        .PartialImplementationPart
                             )
                         }
                     ),
@@ -10450,7 +10454,8 @@ public class SubClass : BaseClass, IConflict
                                 SemanticEditKind.Update,
                                 c =>
                                     c.GetMember<INamedTypeSymbol>("C")
-                                        .GetMember<IMethodSymbol>("F").PartialImplementationPart
+                                        .GetMember<IMethodSymbol>("F")
+                                        .PartialImplementationPart
                             )
                         }
                     )
@@ -10479,7 +10484,8 @@ public class SubClass : BaseClass, IConflict
                                 SemanticEditKind.Insert,
                                 c =>
                                     c.GetMember<INamedTypeSymbol>("C")
-                                        .GetMember<IMethodSymbol>("F").PartialImplementationPart
+                                        .GetMember<IMethodSymbol>("F")
+                                        .PartialImplementationPart
                             )
                         }
                     ),
@@ -11290,7 +11296,8 @@ class C
                                 SemanticEditKind.Update,
                                 c =>
                                     c.GetMember<INamedTypeSymbol>("C")
-                                        .InstanceConstructors.Single(),
+                                        .InstanceConstructors
+                                        .Single(),
                                 partialType: "C",
                                 preserveLocalVariables: true
                             )
@@ -11303,7 +11310,8 @@ class C
                                 SemanticEditKind.Update,
                                 c =>
                                     c.GetMember<INamedTypeSymbol>("C")
-                                        .InstanceConstructors.Single(),
+                                        .InstanceConstructors
+                                        .Single(),
                                 partialType: "C",
                                 preserveLocalVariables: true
                             )
@@ -11356,7 +11364,8 @@ class C
                                 SemanticEditKind.Update,
                                 c =>
                                     c.GetMember<INamedTypeSymbol>("C")
-                                        .InstanceConstructors.Single(),
+                                        .InstanceConstructors
+                                        .Single(),
                                 partialType: "C",
                                 preserveLocalVariables: true
                             )
@@ -11382,7 +11391,8 @@ class C
                         SemanticEditKind.Insert,
                         c =>
                             c.GetMember<INamedTypeSymbol>("C")
-                                .InstanceConstructors.Single(c => c.Parameters.IsEmpty)
+                                .InstanceConstructors
+                                .Single(c => c.Parameters.IsEmpty)
                     )
                 }
             );
@@ -11408,7 +11418,8 @@ class C
                                 SemanticEditKind.Insert,
                                 c =>
                                     c.GetMember<INamedTypeSymbol>("C")
-                                        .InstanceConstructors.Single(c => c.Parameters.IsEmpty)
+                                        .InstanceConstructors
+                                        .Single(c => c.Parameters.IsEmpty)
                             )
                         }
                     ),
@@ -11536,9 +11547,8 @@ class C
                         SemanticEditKind.Insert,
                         c =>
                             c.GetMember<INamedTypeSymbol>("C")
-                                .InstanceConstructors.Single(
-                                    ctor => ctor.DeclaredAccessibility == Accessibility.Private
-                                )
+                                .InstanceConstructors
+                                .Single(ctor => ctor.DeclaredAccessibility == Accessibility.Private)
                     )
                 }
             );
@@ -11629,7 +11639,8 @@ class C
                                 SemanticEditKind.Update,
                                 c =>
                                     c.GetMember<INamedTypeSymbol>("C")
-                                        .InstanceConstructors.Single(),
+                                        .InstanceConstructors
+                                        .Single(),
                                 partialType: "C",
                                 preserveLocalVariables: true
                             )
@@ -11661,7 +11672,8 @@ class C
                                 SemanticEditKind.Update,
                                 c =>
                                     c.GetMember<INamedTypeSymbol>("C")
-                                        .InstanceConstructors.Single(),
+                                        .InstanceConstructors
+                                        .Single(),
                                 partialType: "C",
                                 preserveLocalVariables: true
                             )
@@ -11750,7 +11762,8 @@ class C
                                 SemanticEditKind.Update,
                                 c =>
                                     c.GetMember<INamedTypeSymbol>("C")
-                                        .InstanceConstructors.Single(),
+                                        .InstanceConstructors
+                                        .Single(),
                                 partialType: "C",
                                 preserveLocalVariables: true
                             )
@@ -11782,7 +11795,8 @@ class C
                                 SemanticEditKind.Update,
                                 c =>
                                     c.GetMember<INamedTypeSymbol>("C")
-                                        .InstanceConstructors.Single(),
+                                        .InstanceConstructors
+                                        .Single(),
                                 partialType: "C",
                                 preserveLocalVariables: true
                             )
@@ -11814,7 +11828,8 @@ class C
                                 SemanticEditKind.Update,
                                 c =>
                                     c.GetMember<INamedTypeSymbol>("C")
-                                        .InstanceConstructors.Single(),
+                                        .InstanceConstructors
+                                        .Single(),
                                 partialType: "C",
                                 preserveLocalVariables: true
                             )
@@ -11846,7 +11861,8 @@ class C
                                 SemanticEditKind.Update,
                                 c =>
                                     c.GetMember<INamedTypeSymbol>("C")
-                                        .InstanceConstructors.Single(),
+                                        .InstanceConstructors
+                                        .Single(),
                                 partialType: "C",
                                 preserveLocalVariables: true
                             )
@@ -12275,9 +12291,8 @@ partial class C
                                 SemanticEditKind.Update,
                                 c =>
                                     c.GetMember<INamedTypeSymbol>("C")
-                                        .Constructors.Single(
-                                            c => c.Parameters.Single().Type.Name == "Int32"
-                                        ),
+                                        .Constructors
+                                        .Single(c => c.Parameters.Single().Type.Name == "Int32"),
                                 partialType: "C",
                                 syntaxMap: syntaxMapB
                             ),
@@ -12285,9 +12300,8 @@ partial class C
                                 SemanticEditKind.Update,
                                 c =>
                                     c.GetMember<INamedTypeSymbol>("C")
-                                        .Constructors.Single(
-                                            c => c.Parameters.Single().Type.Name == "Boolean"
-                                        ),
+                                        .Constructors
+                                        .Single(c => c.Parameters.Single().Type.Name == "Boolean"),
                                 partialType: "C",
                                 syntaxMap: syntaxMapB
                             ),
@@ -12295,9 +12309,8 @@ partial class C
                                 SemanticEditKind.Update,
                                 c =>
                                     c.GetMember<INamedTypeSymbol>("C")
-                                        .Constructors.Single(
-                                            c => c.Parameters.Single().Type.Name == "UInt32"
-                                        ),
+                                        .Constructors
+                                        .Single(c => c.Parameters.Single().Type.Name == "UInt32"),
                                 partialType: "C",
                                 syntaxMap: syntaxMapB
                             ),
@@ -12305,9 +12318,8 @@ partial class C
                                 SemanticEditKind.Insert,
                                 c =>
                                     c.GetMember<INamedTypeSymbol>("C")
-                                        .Constructors.Single(
-                                            c => c.Parameters.Single().Type.Name == "Byte"
-                                        ),
+                                        .Constructors
+                                        .Single(c => c.Parameters.Single().Type.Name == "Byte"),
                                 syntaxMap: null
                             ),
                         }
@@ -12394,7 +12406,8 @@ partial class C
                                 SemanticEditKind.Update,
                                 c =>
                                     c.GetMember<INamedTypeSymbol>("C")
-                                        .InstanceConstructors.Single(),
+                                        .InstanceConstructors
+                                        .Single(),
                                 partialType: "C",
                                 preserveLocalVariables: true
                             )
@@ -12407,7 +12420,8 @@ partial class C
                                 SemanticEditKind.Update,
                                 c =>
                                     c.GetMember<INamedTypeSymbol>("C")
-                                        .InstanceConstructors.Single(),
+                                        .InstanceConstructors
+                                        .Single(),
                                 partialType: "C",
                                 preserveLocalVariables: true
                             )
@@ -12488,7 +12502,8 @@ partial class C
                         SemanticEditKind.Update,
                         c =>
                             c.GetMember<INamedTypeSymbol>("C")
-                                .GetMember<IMethodSymbol>("C").PartialImplementationPart
+                                .GetMember<IMethodSymbol>("C")
+                                .PartialImplementationPart
                     )
                 }
             );
@@ -12514,7 +12529,8 @@ partial class C
                                 SemanticEditKind.Update,
                                 c =>
                                     c.GetMember<INamedTypeSymbol>("C")
-                                        .InstanceConstructors.Single(),
+                                        .InstanceConstructors
+                                        .Single(),
                                 partialType: "C",
                                 preserveLocalVariables: true
                             )
@@ -12532,7 +12548,8 @@ partial class C
                                 SemanticEditKind.Update,
                                 c =>
                                     c.GetMember<INamedTypeSymbol>("C")
-                                        .InstanceConstructors.Single(),
+                                        .InstanceConstructors
+                                        .Single(),
                                 partialType: "C",
                                 preserveLocalVariables: true
                             )
@@ -12567,7 +12584,8 @@ partial class C
                                 SemanticEditKind.Update,
                                 c =>
                                     c.GetMember<INamedTypeSymbol>("C")
-                                        .InstanceConstructors.Single(),
+                                        .InstanceConstructors
+                                        .Single(),
                                 partialType: "C",
                                 preserveLocalVariables: true
                             )
@@ -12580,7 +12598,8 @@ partial class C
                                 SemanticEditKind.Update,
                                 c =>
                                     c.GetMember<INamedTypeSymbol>("C")
-                                        .InstanceConstructors.Single(),
+                                        .InstanceConstructors
+                                        .Single(),
                                 partialType: "C",
                                 preserveLocalVariables: true
                             )
@@ -13490,14 +13509,16 @@ public class C
                         SemanticEditKind.Update,
                         c =>
                             c.GetMember<INamedTypeSymbol>("C")
-                                .InstanceConstructors.Single(m => m.ToString() == "C.C(int)"),
+                                .InstanceConstructors
+                                .Single(m => m.ToString() == "C.C(int)"),
                         preserveLocalVariables: true
                     ),
                     SemanticEdit(
                         SemanticEditKind.Update,
                         c =>
                             c.GetMember<INamedTypeSymbol>("C")
-                                .InstanceConstructors.Single(m => m.ToString() == "C.C(bool)"),
+                                .InstanceConstructors
+                                .Single(m => m.ToString() == "C.C(bool)"),
                         preserveLocalVariables: true
                     ),
                 }
@@ -13522,21 +13543,24 @@ public class C
                         SemanticEditKind.Update,
                         c =>
                             c.GetMember<INamedTypeSymbol>("C")
-                                .InstanceConstructors.Single(m => m.ToString() == "C.C(int)"),
+                                .InstanceConstructors
+                                .Single(m => m.ToString() == "C.C(int)"),
                         preserveLocalVariables: true
                     ),
                     SemanticEdit(
                         SemanticEditKind.Update,
                         c =>
                             c.GetMember<INamedTypeSymbol>("C")
-                                .InstanceConstructors.Single(m => m.ToString() == "C.C(bool)"),
+                                .InstanceConstructors
+                                .Single(m => m.ToString() == "C.C(bool)"),
                         preserveLocalVariables: true
                     ),
                     SemanticEdit(
                         SemanticEditKind.Update,
                         c =>
                             c.GetMember<INamedTypeSymbol>("C")
-                                .InstanceConstructors.Single(m => m.ToString() == "C.C()"),
+                                .InstanceConstructors
+                                .Single(m => m.ToString() == "C.C()"),
                         preserveLocalVariables: true
                     ),
                 }
@@ -13561,14 +13585,16 @@ public class C
                         SemanticEditKind.Update,
                         c =>
                             c.GetMember<INamedTypeSymbol>("C")
-                                .InstanceConstructors.Single(m => m.ToString() == "C.C(int)"),
+                                .InstanceConstructors
+                                .Single(m => m.ToString() == "C.C(int)"),
                         preserveLocalVariables: true
                     ),
                     SemanticEdit(
                         SemanticEditKind.Update,
                         c =>
                             c.GetMember<INamedTypeSymbol>("C")
-                                .InstanceConstructors.Single(m => m.ToString() == "C.C(bool)"),
+                                .InstanceConstructors
+                                .Single(m => m.ToString() == "C.C(bool)"),
                         preserveLocalVariables: true
                     ),
                 }
@@ -13593,21 +13619,24 @@ public class C
                         SemanticEditKind.Update,
                         c =>
                             c.GetMember<INamedTypeSymbol>("C")
-                                .InstanceConstructors.Single(m => m.ToString() == "C.C(int)"),
+                                .InstanceConstructors
+                                .Single(m => m.ToString() == "C.C(int)"),
                         preserveLocalVariables: true
                     ),
                     SemanticEdit(
                         SemanticEditKind.Update,
                         c =>
                             c.GetMember<INamedTypeSymbol>("C")
-                                .InstanceConstructors.Single(m => m.ToString() == "C.C(bool)"),
+                                .InstanceConstructors
+                                .Single(m => m.ToString() == "C.C(bool)"),
                         preserveLocalVariables: true
                     ),
                     SemanticEdit(
                         SemanticEditKind.Update,
                         c =>
                             c.GetMember<INamedTypeSymbol>("C")
-                                .InstanceConstructors.Single(m => m.ToString() == "C.C()"),
+                                .InstanceConstructors
+                                .Single(m => m.ToString() == "C.C()"),
                         preserveLocalVariables: true
                     ),
                 }
@@ -13634,7 +13663,8 @@ public class C
                         SemanticEditKind.Update,
                         c =>
                             c.GetMember<INamedTypeSymbol>("C")
-                                .InstanceConstructors.Single(m => m.ToString() == "C.C(bool)"),
+                                .InstanceConstructors
+                                .Single(m => m.ToString() == "C.C(bool)"),
                         preserveLocalVariables: true
                     )
                 }
@@ -14538,7 +14568,8 @@ class C
                         SemanticEditKind.Update,
                         c =>
                             c.GetMember<INamedTypeSymbol>("C")
-                                .Constructors.Single(
+                                .Constructors
+                                .Single(
                                     ctor => ctor.ToTestDisplayString() == "C..ctor(System.Int32 a)"
                                 ),
                         syntaxMap[0]
@@ -14591,7 +14622,8 @@ class C
                         SemanticEditKind.Update,
                         c =>
                             c.GetMember<INamedTypeSymbol>("C")
-                                .Constructors.Single(
+                                .Constructors
+                                .Single(
                                     ctor => ctor.ToTestDisplayString() == "C..ctor(System.Int32 a)"
                                 ),
                         syntaxMap[0]
@@ -14644,7 +14676,8 @@ class C
                         SemanticEditKind.Update,
                         c =>
                             c.GetMember<INamedTypeSymbol>("C")
-                                .Constructors.Single(
+                                .Constructors
+                                .Single(
                                     ctor =>
                                         ctor.ToTestDisplayString() == "C..ctor(System.Boolean b)"
                                 ),
@@ -14698,7 +14731,8 @@ class C
                         SemanticEditKind.Update,
                         c =>
                             c.GetMember<INamedTypeSymbol>("C")
-                                .Constructors.Single(
+                                .Constructors
+                                .Single(
                                     ctor =>
                                         ctor.ToTestDisplayString() == "C..ctor(System.Boolean b)"
                                 )
@@ -14751,7 +14785,8 @@ class C
                         SemanticEditKind.Update,
                         c =>
                             c.GetMember<INamedTypeSymbol>("C")
-                                .Constructors.Single(
+                                .Constructors
+                                .Single(
                                     ctor =>
                                         ctor.ToTestDisplayString() == "C..ctor(System.Boolean b)"
                                 ),
@@ -14804,7 +14839,8 @@ class C
                         SemanticEditKind.Update,
                         c =>
                             c.GetMember<INamedTypeSymbol>("C")
-                                .Constructors.Single(
+                                .Constructors
+                                .Single(
                                     ctor =>
                                         ctor.ToTestDisplayString() == "C..ctor(System.Boolean b)"
                                 )
@@ -14873,7 +14909,8 @@ class C : B
                         SemanticEditKind.Update,
                         c =>
                             c.GetMember<INamedTypeSymbol>("C")
-                                .Constructors.Single(
+                                .Constructors
+                                .Single(
                                     ctor =>
                                         ctor.ToTestDisplayString() == "C..ctor(System.Boolean b)"
                                 ),
@@ -15065,7 +15102,8 @@ partial class C
                                 SemanticEditKind.Update,
                                 c =>
                                     c.GetMember<INamedTypeSymbol>("C")
-                                        .InstanceConstructors.Single(),
+                                        .InstanceConstructors
+                                        .Single(),
                                 partialType: "C",
                                 preserveLocalVariables: true
                             )
@@ -15096,7 +15134,8 @@ partial class C
                                 SemanticEditKind.Update,
                                 c =>
                                     c.GetMember<INamedTypeSymbol>("C")
-                                        .InstanceConstructors.Single(),
+                                        .InstanceConstructors
+                                        .Single(),
                                 partialType: "C",
                                 preserveLocalVariables: true
                             )
@@ -15928,7 +15967,8 @@ class C
                                 SemanticEditKind.Update,
                                 c =>
                                     c.GetMember<INamedTypeSymbol>("C")
-                                        .InstanceConstructors.Single(),
+                                        .InstanceConstructors
+                                        .Single(),
                                 partialType: "C",
                                 preserveLocalVariables: true
                             )
@@ -16137,7 +16177,8 @@ class C
                                 SemanticEditKind.Update,
                                 c =>
                                     c.GetMember<INamedTypeSymbol>("C")
-                                        .InstanceConstructors.Single(),
+                                        .InstanceConstructors
+                                        .Single(),
                                 partialType: "C",
                                 preserveLocalVariables: true
                             )
@@ -16454,7 +16495,8 @@ class C
                         SemanticEditKind.Update,
                         c =>
                             c.GetMember<INamedTypeSymbol>("C")
-                                .GetMember<IPropertySymbol>("P").SetMethod
+                                .GetMember<IPropertySymbol>("P")
+                                .SetMethod
                     ),
                 }
             );
@@ -16478,7 +16520,8 @@ class C
                         SemanticEditKind.Update,
                         c =>
                             c.GetMember<INamedTypeSymbol>("C")
-                                .GetMember<IPropertySymbol>("P").SetMethod,
+                                .GetMember<IPropertySymbol>("P")
+                                .SetMethod,
                         preserveLocalVariables: false
                     ),
                 }
@@ -16769,7 +16812,8 @@ class C
                         SemanticEditKind.Update,
                         c =>
                             c.GetMember<INamedTypeSymbol>("C")
-                                .GetMember<IPropertySymbol>("P").GetMethod
+                                .GetMember<IPropertySymbol>("P")
+                                .GetMethod
                     )
                 },
                 capabilities: EditAndContinueTestHelpers.Net6RuntimeCapabilities
@@ -16792,7 +16836,8 @@ class C
                         SemanticEditKind.Update,
                         c =>
                             c.GetMember<INamedTypeSymbol>("C")
-                                .GetMember<IPropertySymbol>("P").SetMethod
+                                .GetMember<IPropertySymbol>("P")
+                                .SetMethod
                     )
                 },
                 capabilities: EditAndContinueTestHelpers.Net6RuntimeCapabilities
@@ -17305,13 +17350,15 @@ class C
                                 SemanticEditKind.Update,
                                 c =>
                                     c.GetMember<INamedTypeSymbol>("C")
-                                        .GetMember<IPropertySymbol>("P").GetMethod
+                                        .GetMember<IPropertySymbol>("P")
+                                        .GetMethod
                             ),
                             SemanticEdit(
                                 SemanticEditKind.Update,
                                 c =>
                                     c.GetMember<INamedTypeSymbol>("C")
-                                        .GetMember<IPropertySymbol>("P").SetMethod
+                                        .GetMember<IPropertySymbol>("P")
+                                        .SetMethod
                             )
                         }
                     ),
@@ -17340,13 +17387,15 @@ class C
                                 SemanticEditKind.Update,
                                 c =>
                                     c.GetMember<INamedTypeSymbol>("C")
-                                        .GetMember<IPropertySymbol>("Q").GetMethod
+                                        .GetMember<IPropertySymbol>("Q")
+                                        .GetMethod
                             ),
                             SemanticEdit(
                                 SemanticEditKind.Update,
                                 c =>
                                     c.GetMember<INamedTypeSymbol>("C")
-                                        .GetMember<IPropertySymbol>("Q").SetMethod
+                                        .GetMember<IPropertySymbol>("Q")
+                                        .SetMethod
                             )
                         }
                     ),
@@ -17377,25 +17426,29 @@ class C
                                 SemanticEditKind.Update,
                                 c =>
                                     c.GetMember<INamedTypeSymbol>("C")
-                                        .GetMember<IPropertySymbol>("P").GetMethod
+                                        .GetMember<IPropertySymbol>("P")
+                                        .GetMethod
                             ),
                             SemanticEdit(
                                 SemanticEditKind.Update,
                                 c =>
                                     c.GetMember<INamedTypeSymbol>("C")
-                                        .GetMember<IPropertySymbol>("P").SetMethod
+                                        .GetMember<IPropertySymbol>("P")
+                                        .SetMethod
                             ),
                             SemanticEdit(
                                 SemanticEditKind.Update,
                                 c =>
                                     c.GetMember<INamedTypeSymbol>("C")
-                                        .GetMember<IPropertySymbol>("Q").GetMethod
+                                        .GetMember<IPropertySymbol>("Q")
+                                        .GetMethod
                             ),
                             SemanticEdit(
                                 SemanticEditKind.Update,
                                 c =>
                                     c.GetMember<INamedTypeSymbol>("C")
-                                        .GetMember<IPropertySymbol>("Q").SetMethod
+                                        .GetMember<IPropertySymbol>("Q")
+                                        .SetMethod
                             ),
                         }
                     ),
@@ -17426,19 +17479,22 @@ class C
                                 SemanticEditKind.Update,
                                 c =>
                                     c.GetMember<INamedTypeSymbol>("C")
-                                        .GetMember<IPropertySymbol>("P").GetMethod
+                                        .GetMember<IPropertySymbol>("P")
+                                        .GetMethod
                             ),
                             SemanticEdit(
                                 SemanticEditKind.Update,
                                 c =>
                                     c.GetMember<INamedTypeSymbol>("C")
-                                        .GetMember<IPropertySymbol>("P").SetMethod
+                                        .GetMember<IPropertySymbol>("P")
+                                        .SetMethod
                             ),
                             SemanticEdit(
                                 SemanticEditKind.Update,
                                 c =>
                                     c.GetMember<INamedTypeSymbol>("C")
-                                        .InstanceConstructors.Single(),
+                                        .InstanceConstructors
+                                        .Single(),
                                 partialType: "C",
                                 preserveLocalVariables: true
                             )
@@ -17469,7 +17525,8 @@ class C
                                 SemanticEditKind.Update,
                                 c =>
                                     c.GetMember<INamedTypeSymbol>("C")
-                                        .GetMember<IPropertySymbol>("P").GetMethod
+                                        .GetMember<IPropertySymbol>("P")
+                                        .GetMethod
                             )
                         }
                     ),
@@ -17581,14 +17638,16 @@ readonly struct S
                         SemanticEditKind.Update,
                         c =>
                             c.GetMember<INamedTypeSymbol>("S")
-                                .GetMember<IPropertySymbol>("P2").GetMethod,
+                                .GetMember<IPropertySymbol>("P2")
+                                .GetMethod,
                         preserveLocalVariables: false
                     ),
                     SemanticEdit(
                         SemanticEditKind.Update,
                         c =>
                             c.GetMember<INamedTypeSymbol>("S")
-                                .GetMember<IPropertySymbol>("P3").SetMethod,
+                                .GetMember<IPropertySymbol>("P3")
+                                .SetMethod,
                         preserveLocalVariables: false
                     )
                 }
@@ -18377,7 +18436,8 @@ class C
                     SemanticEditKind.Insert,
                     c =>
                         c.GetMember<INamedTypeSymbol>("C")
-                            .GetMember<IPropertySymbol>("this[]").SetMethod
+                            .GetMember<IPropertySymbol>("this[]")
+                            .SetMethod
                 )
             );
         }
@@ -18576,13 +18636,15 @@ class C
                                 SemanticEditKind.Update,
                                 c =>
                                     c.GetMember<INamedTypeSymbol>("C")
-                                        .GetMember<IPropertySymbol>("this[]").GetMethod
+                                        .GetMember<IPropertySymbol>("this[]")
+                                        .GetMethod
                             ),
                             SemanticEdit(
                                 SemanticEditKind.Update,
                                 c =>
                                     c.GetMember<INamedTypeSymbol>("C")
-                                        .GetMember<IPropertySymbol>("this[]").SetMethod
+                                        .GetMember<IPropertySymbol>("this[]")
+                                        .SetMethod
                             )
                         }
                     ),
@@ -18611,13 +18673,15 @@ class C
                                 SemanticEditKind.Update,
                                 c =>
                                     c.GetMember<INamedTypeSymbol>("C")
-                                        .GetMember<IPropertySymbol>("this[]").GetMethod
+                                        .GetMember<IPropertySymbol>("this[]")
+                                        .GetMethod
                             ),
                             SemanticEdit(
                                 SemanticEditKind.Update,
                                 c =>
                                     c.GetMember<INamedTypeSymbol>("C")
-                                        .GetMember<IPropertySymbol>("this[]").SetMethod
+                                        .GetMember<IPropertySymbol>("this[]")
+                                        .SetMethod
                             )
                         }
                     ),
@@ -18648,13 +18712,15 @@ class C
                                 SemanticEditKind.Update,
                                 c =>
                                     c.GetMember<INamedTypeSymbol>("C")
-                                        .GetMember<IPropertySymbol>("this[]").GetMethod
+                                        .GetMember<IPropertySymbol>("this[]")
+                                        .GetMethod
                             ),
                             SemanticEdit(
                                 SemanticEditKind.Update,
                                 c =>
                                     c.GetMember<INamedTypeSymbol>("C")
-                                        .GetMember<IPropertySymbol>("this[]").SetMethod
+                                        .GetMember<IPropertySymbol>("this[]")
+                                        .SetMethod
                             ),
                         }
                     ),
@@ -18816,7 +18882,8 @@ readonly struct S
                             c.GetMember<INamedTypeSymbol>("S")
                                 .GetMembers("this[]")
                                 .Cast<IPropertySymbol>()
-                                .Single(m => m.Parameters.Single().Type.Name == "UInt32").GetMethod,
+                                .Single(m => m.Parameters.Single().Type.Name == "UInt32")
+                                .GetMethod,
                         preserveLocalVariables: false
                     ),
                     SemanticEdit(
@@ -18825,7 +18892,8 @@ readonly struct S
                             c.GetMember<INamedTypeSymbol>("S")
                                 .GetMembers("this[]")
                                 .Cast<IPropertySymbol>()
-                                .Single(m => m.Parameters.Single().Type.Name == "Byte").SetMethod,
+                                .Single(m => m.Parameters.Single().Type.Name == "Byte")
+                                .SetMethod,
                         preserveLocalVariables: false
                     )
                 }
@@ -19065,13 +19133,15 @@ public class C
                                 SemanticEditKind.Update,
                                 c =>
                                     c.GetMember<INamedTypeSymbol>("C")
-                                        .GetMember<IEventSymbol>("E").AddMethod
+                                        .GetMember<IEventSymbol>("E")
+                                        .AddMethod
                             ),
                             SemanticEdit(
                                 SemanticEditKind.Update,
                                 c =>
                                     c.GetMember<INamedTypeSymbol>("C")
-                                        .GetMember<IEventSymbol>("E").RemoveMethod
+                                        .GetMember<IEventSymbol>("E")
+                                        .RemoveMethod
                             )
                         }
                     ),

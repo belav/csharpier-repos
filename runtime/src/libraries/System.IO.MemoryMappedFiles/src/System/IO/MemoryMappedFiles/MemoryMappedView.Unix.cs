@@ -109,14 +109,16 @@ namespace System.IO.MemoryMappedFiles
             IntPtr addr = IntPtr.Zero;
             if (nativeSize > 0)
             {
-                addr = Interop.Sys.MMap(
-                    IntPtr.Zero, // don't specify an address; let the system choose one
-                    nativeSize, // specify the rounded-size we computed so as to page align; size + extraMemNeeded
-                    viewProtForCreation,
-                    flags,
-                    fd, // mmap adds a ref count to the fd, so there's no need to dup it.
-                    nativeOffset
-                ); // specify the rounded-offset we computed so as to page align; offset - extraMemNeeded
+                addr = Interop
+                    .Sys
+                    .MMap(
+                        IntPtr.Zero, // don't specify an address; let the system choose one
+                        nativeSize, // specify the rounded-size we computed so as to page align; size + extraMemNeeded
+                        viewProtForCreation,
+                        flags,
+                        fd, // mmap adds a ref count to the fd, so there's no need to dup it.
+                        nativeOffset
+                    ); // specify the rounded-offset we computed so as to page align; offset - extraMemNeeded
             }
             else
             {
@@ -125,14 +127,16 @@ namespace System.IO.MemoryMappedFiles
                 // we create a map that extends beyond the end of the underlying file, as that'll fail on some platforms at the
                 // time of the map's creation.  Instead, since there's no data to be read/written, it doesn't actually matter
                 // what backs the view, so we just create an anonymous mapping.
-                addr = Interop.Sys.MMap(
-                    IntPtr.Zero,
-                    1, // any length that's greater than zero will suffice
-                    viewProtForCreation,
-                    flags | Interop.Sys.MemoryMappedFlags.MAP_ANONYMOUS,
-                    new SafeFileHandle(new IntPtr(-1), false), // ignore the actual fd even if there was one
-                    0
-                );
+                addr = Interop
+                    .Sys
+                    .MMap(
+                        IntPtr.Zero,
+                        1, // any length that's greater than zero will suffice
+                        viewProtForCreation,
+                        flags | Interop.Sys.MemoryMappedFlags.MAP_ANONYMOUS,
+                        new SafeFileHandle(new IntPtr(-1), false), // ignore the actual fd even if there was one
+                        0
+                    );
                 requestedSize = 0;
                 extraMemNeeded = 0;
             }
@@ -168,12 +172,14 @@ namespace System.IO.MemoryMappedFiles
             try
             {
                 _viewHandle.AcquirePointer(ref ptr);
-                int result = Interop.Sys.MSync(
-                    (IntPtr)ptr,
-                    (ulong)capacity,
-                    Interop.Sys.MemoryMappedSyncFlags.MS_SYNC
-                        | Interop.Sys.MemoryMappedSyncFlags.MS_INVALIDATE
-                );
+                int result = Interop
+                    .Sys
+                    .MSync(
+                        (IntPtr)ptr,
+                        (ulong)capacity,
+                        Interop.Sys.MemoryMappedSyncFlags.MS_SYNC
+                            | Interop.Sys.MemoryMappedSyncFlags.MS_INVALIDATE
+                    );
                 if (result < 0)
                 {
                     throw Interop.GetExceptionForIoErrno(Interop.Sys.GetLastErrorInfo());

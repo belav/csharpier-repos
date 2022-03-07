@@ -37,9 +37,10 @@ namespace System.Web.Http.ContentNegotiation
             };
             request.RequestUri = new Uri(baseAddress + "/CustomFormatterTests/EchoOrder");
             request.Method = HttpMethod.Post;
-            request.Headers.Accept.Add(
-                new MediaTypeWithQualityHeaderValue("text/plainwithversioninfo")
-            );
+            request
+                .Headers
+                .Accept
+                .Add(new MediaTypeWithQualityHeaderValue("text/plainwithversioninfo"));
 
             HttpResponseMessage response = await httpClient.SendAsync(request);
 
@@ -118,11 +119,13 @@ namespace System.Web.Http.ContentNegotiation
         {
             baseAddress = "http://localhost/";
             config = new HttpSelfHostConfiguration(baseAddress);
-            config.Routes.MapHttpRoute(
-                "Default",
-                "{controller}/{action}",
-                new { controller = "CustomFormatterTests", action = "EchoOrder" }
-            );
+            config
+                .Routes
+                .MapHttpRoute(
+                    "Default",
+                    "{controller}/{action}",
+                    new { controller = "CustomFormatterTests", action = "EchoOrder" }
+                );
             config.MessageHandlers.Add(new ConvertToStreamMessageHandler());
             config.Formatters.Add(new PlainTextFormatterWithVersionInfo());
             config.Formatters.Add(new PlainTextFormatter());

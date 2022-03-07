@@ -92,9 +92,9 @@ public class AuthTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>
         Browser.Equal(
             "You're not authorized, anonymous",
             () =>
-                appElement.FindElement(
-                    By.CssSelector("#no-authorization-rule .not-authorized")
-                ).Text
+                appElement
+                    .FindElement(By.CssSelector("#no-authorization-rule .not-authorized"))
+                    .Text
         );
         AssertExpectedLayoutUsed();
     }

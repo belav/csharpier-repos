@@ -144,7 +144,9 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
             var topLevelNamedType = MetadataAsSourceHelpers.GetTopLevelContainingNamedType(symbol);
 
             var canImplementImplicitly =
-                document.GetLanguageService<ISemanticFactsService>().SupportsImplicitInterfaceImplementation;
+                document
+                    .GetLanguageService<ISemanticFactsService>()
+                    .SupportsImplicitInterfaceImplementation;
             var docCommentFormattingService =
                 document.GetLanguageService<IDocumentationCommentFormattingService>();
 

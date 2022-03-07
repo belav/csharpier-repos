@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.EditorConfigSettings.Da
             );
             Assert.True(
                 workspace.TryApplyChanges(
-                    workspace.CurrentSolution
+                    workspace
+                        .CurrentSolution
                         .AddProject(
                             ProjectInfo.Create(
                                 projectId,
@@ -59,14 +60,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.EditorConfigSettings.Da
         }
 
         private static IWorkspaceSettingsProviderFactory<T> GettingSettingsProviderFactoryFromWorkspace<T>() =>
-            GetWorkspace("/a/b/proj1.csproj").Services.GetRequiredService<
-                IWorkspaceSettingsProviderFactory<T>
-            >();
+            GetWorkspace("/a/b/proj1.csproj")
+                .Services
+                .GetRequiredService<IWorkspaceSettingsProviderFactory<T>>();
 
         private static ILanguageSettingsProviderFactory<T> GettingSettingsProviderFactoryFromLanguageService<T>(
             string languageName
         ) =>
-            GetWorkspace("/a/b/proj1.csproj").Services
+            GetWorkspace("/a/b/proj1.csproj")
+                .Services
                 .GetLanguageServices(languageName)
                 .GetRequiredService<ILanguageSettingsProviderFactory<T>>();
 
@@ -76,7 +78,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.EditorConfigSettings.Da
         private static ILanguageSettingsProviderFactory<T> GettingSettingsProviderFactoryFromLanguageServiceWithNullProjectPath<T>(
             string languageName
         ) =>
-            GetWorkspace().Services
+            GetWorkspace()
+                .Services
                 .GetLanguageServices(languageName)
                 .GetRequiredService<ILanguageSettingsProviderFactory<T>>();
 
@@ -148,7 +151,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.EditorConfigSettings.Da
             // We do not yet support the following options as they are strings and we need to build a UI to show arbitrary strings:
             // CodeStyleOptions2.FileHeaderTemplate
             var optionsCount =
-                CodeStyleOptions2.AllOptions
+                CodeStyleOptions2
+                    .AllOptions
                     .Where(x => x.StorageLocations.Any(y => y is IEditorConfigStorageLocation2))
                     .Count() - 2;
             Assert.Equal(optionsCount, dataSnapShot.Length);
@@ -167,7 +171,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.EditorConfigSettings.Da
             var dataSnapShot = settingsProvider.GetCurrentDataSnapshot();
             // We don't support PreferredModifierOrder yet so we subtract by one
             var optionsCount =
-                CSharpCodeStyleOptions.AllOptions
+                CSharpCodeStyleOptions
+                    .AllOptions
                     .Where(x => x.StorageLocations.Any(y => y is IEditorConfigStorageLocation2))
                     .Count() - 1;
             Assert.Equal(optionsCount, dataSnapShot.Length);
@@ -199,7 +204,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.EditorConfigSettings.Da
             var model = new TestViewModel();
             settingsProvider.RegisterViewModel(model);
             var dataSnapShot = settingsProvider.GetCurrentDataSnapshot();
-            var optionsCount = CSharpFormattingOptions2.AllOptions
+            var optionsCount = CSharpFormattingOptions2
+                .AllOptions
                 .Where(x => x.StorageLocations.Any(y => y is IEditorConfigStorageLocation2))
                 .Count();
             Assert.Equal(optionsCount, dataSnapShot.Length);

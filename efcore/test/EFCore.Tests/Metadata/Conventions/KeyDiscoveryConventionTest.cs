@@ -184,7 +184,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         private KeyDiscoveryConvention CreateKeyDiscoveryConvention() => new(CreateDependencies());
 
         private ProviderConventionSetBuilderDependencies CreateDependencies() =>
-            InMemoryTestHelpers.Instance
+            InMemoryTestHelpers
+                .Instance
                 .CreateContextServices()
                 .GetRequiredService<ProviderConventionSetBuilderDependencies>() with
             {

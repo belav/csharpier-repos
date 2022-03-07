@@ -160,11 +160,13 @@ public class RuntimePerformanceBenchmarkBase
         var services = new ServiceCollection();
         var listener = new DiagnosticListener(GetType().Assembly.FullName);
         var partManager = new ApplicationPartManager();
-        partManager.ApplicationParts.Add(
-            CompiledRazorAssemblyApplicationPartFactory
-                .GetDefaultApplicationParts(viewsAssembly)
-                .Single()
-        );
+        partManager
+            .ApplicationParts
+            .Add(
+                CompiledRazorAssemblyApplicationPartFactory
+                    .GetDefaultApplicationParts(viewsAssembly)
+                    .Single()
+            );
         var builder = services
             .AddSingleton<ILoggerFactory, NullLoggerFactory>()
             .AddSingleton<ObjectPoolProvider, DefaultObjectPoolProvider>()

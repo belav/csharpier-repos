@@ -36,7 +36,9 @@ public class ApiActionsDoNotRequireExplicitModelValidationCheckCodeFixProvider :
         var diagnostic = context.Diagnostics[0];
         if (
             diagnostic.Id
-            != ApiDiagnosticDescriptors.API1003_ApiActionsDoNotRequireExplicitModelValidationCheck.Id
+            != ApiDiagnosticDescriptors
+                .API1003_ApiActionsDoNotRequireExplicitModelValidationCheck
+                .Id
         )
         {
             return Task.CompletedTask;

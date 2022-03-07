@@ -186,12 +186,14 @@ public abstract class JsonResultExecutorTestBase
     public async Task ExecuteAsync_UsesPassedInSerializerSettings()
     {
         // Arrange
-        var expected = Encoding.UTF8.GetBytes(
-            JsonSerializer.Serialize(
-                new { foo = "abcd" },
-                new JsonSerializerOptions { WriteIndented = true }
-            )
-        );
+        var expected = Encoding
+            .UTF8
+            .GetBytes(
+                JsonSerializer.Serialize(
+                    new { foo = "abcd" },
+                    new JsonSerializerOptions { WriteIndented = true }
+                )
+            );
 
         var context = GetActionContext();
 

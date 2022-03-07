@@ -86,12 +86,14 @@ namespace System.Security.Cryptography
                     throw new CryptographicException(SR.Cryptography_CSP_NoPrivateKey);
                 }
 
-                byte[] derFormatSignature = Interop.AppleCrypto.CreateSignature(
-                    keys.PrivateKey,
-                    rgbHash,
-                    Interop.AppleCrypto.PAL_HashAlgorithm.Unknown,
-                    Interop.AppleCrypto.PAL_SignatureAlgorithm.DSA
-                );
+                byte[] derFormatSignature = Interop
+                    .AppleCrypto
+                    .CreateSignature(
+                        keys.PrivateKey,
+                        rgbHash,
+                        Interop.AppleCrypto.PAL_HashAlgorithm.Unknown,
+                        Interop.AppleCrypto.PAL_SignatureAlgorithm.DSA
+                    );
 
                 // Since the AppleCrypto implementation is limited to FIPS 186-2, signature field sizes
                 // are always 160 bits / 20 bytes (the size of SHA-1, and the only legal length for Q).
@@ -122,13 +124,15 @@ namespace System.Security.Cryptography
                     signature
                 );
 
-                return Interop.AppleCrypto.VerifySignature(
-                    GetKeys().PublicKey,
-                    hash,
-                    derFormatSignature,
-                    Interop.AppleCrypto.PAL_HashAlgorithm.Unknown,
-                    Interop.AppleCrypto.PAL_SignatureAlgorithm.DSA
-                );
+                return Interop
+                    .AppleCrypto
+                    .VerifySignature(
+                        GetKeys().PublicKey,
+                        hash,
+                        derFormatSignature,
+                        Interop.AppleCrypto.PAL_HashAlgorithm.Unknown,
+                        Interop.AppleCrypto.PAL_SignatureAlgorithm.DSA
+                    );
             }
 
             protected override byte[] HashData(

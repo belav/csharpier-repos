@@ -169,9 +169,9 @@ namespace R2RTest
                     string issuesProjectPath = issuesProject.FullName;
                     XDocument issuesXml = XDocument.Load(issuesProjectPath);
                     foreach (
-                        XElement itemGroupElement in issuesXml.Root.Elements(
-                            s_xmlNamespace + "ItemGroup"
-                        )
+                        XElement itemGroupElement in issuesXml
+                            .Root
+                            .Elements(s_xmlNamespace + "ItemGroup")
                     )
                     {
                         string condition = itemGroupElement.Attribute("Condition")?.Value ?? "";
@@ -236,9 +236,9 @@ namespace R2RTest
                 )
                 {
                     string conditionValue =
-                        project.GetProperty(
-                            "Condition_" + exclusionListIndex.ToString()
-                        ).EvaluatedValue;
+                        project
+                            .GetProperty("Condition_" + exclusionListIndex.ToString())
+                            .EvaluatedValue;
                     if (conditionValue.Equals("true", StringComparison.OrdinalIgnoreCase))
                     {
                         foreach (TestExclusion exclusion in testExclusionLists[exclusionListIndex])

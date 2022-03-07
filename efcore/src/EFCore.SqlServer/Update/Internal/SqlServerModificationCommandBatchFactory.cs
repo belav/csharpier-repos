@@ -46,7 +46,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Update.Internal
         /// </summary>
         public virtual ModificationCommandBatch Create()
         {
-            var optionsExtension = _options.Extensions
+            var optionsExtension = _options
+                .Extensions
                 .OfType<SqlServerOptionsExtension>()
                 .FirstOrDefault();
 

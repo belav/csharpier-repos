@@ -116,10 +116,9 @@ public class ServerSentEventsTransportTests : VerifiableLoggedTest
                                     return 0;
                                 }
 
-                                int count = Encoding.ASCII.GetBytes(
-                                    "data: 3:abc\r\n\r\n",
-                                    data.Span
-                                );
+                                int count = Encoding
+                                    .ASCII
+                                    .GetBytes("data: 3:abc\r\n\r\n", data.Span);
                                 await Task.Delay(100);
                                 return count;
                             }
@@ -254,9 +253,11 @@ public class ServerSentEventsTransportTests : VerifiableLoggedTest
                     await Task.Yield();
 
                     if (
-                        request.Headers.Accept?.Contains(
-                            new MediaTypeWithQualityHeaderValue("text/event-stream")
-                        ) == true
+                        request
+                            .Headers
+                            .Accept
+                            ?.Contains(new MediaTypeWithQualityHeaderValue("text/event-stream"))
+                        == true
                     )
                     {
                         // Receive loop started - allow stopping the transport
@@ -446,9 +447,11 @@ public class ServerSentEventsTransportTests : VerifiableLoggedTest
                     await Task.Yield();
 
                     if (
-                        request.Headers.Accept?.Contains(
-                            new MediaTypeWithQualityHeaderValue("text/event-stream")
-                        ) == true
+                        request
+                            .Headers
+                            .Accept
+                            ?.Contains(new MediaTypeWithQualityHeaderValue("text/event-stream"))
+                        == true
                     )
                     {
                         // Receive loop started - allow stopping the transport

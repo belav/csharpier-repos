@@ -23,7 +23,8 @@ public class Program
                 .AddLogging(o => o.AddConsole().SetMinimumLevel(LogLevel.Debug))
                 .AddDataProtection()
                 .PersistKeysToStackExchangeRedis(redis, "DataProtection-Keys")
-                .Services.BuildServiceProvider()
+                .Services
+                .BuildServiceProvider()
         )
         {
             // Run a sample payload

@@ -1321,10 +1321,11 @@ public partial class HubConnection : IAsyncDisposable
             startingConnectionState.Connection.Transport.Output
         );
 
-        var sendHandshakeResult =
-            await startingConnectionState.Connection.Transport.Output.FlushAsync(
-                CancellationToken.None
-            );
+        var sendHandshakeResult = await startingConnectionState
+            .Connection
+            .Transport
+            .Output
+            .FlushAsync(CancellationToken.None);
 
         if (sendHandshakeResult.IsCompleted)
         {

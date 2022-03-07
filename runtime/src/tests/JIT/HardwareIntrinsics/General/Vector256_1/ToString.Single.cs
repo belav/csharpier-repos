@@ -54,9 +54,11 @@ namespace JIT.HardwareIntrinsics.General
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation(
-                    $"Vector256SingleToString: Vector256<Single>.ToString() returned an unexpected result."
-                );
+                TestLibrary
+                    .TestFramework
+                    .LogInformation(
+                        $"Vector256SingleToString: Vector256<Single>.ToString() returned an unexpected result."
+                    );
                 TestLibrary.TestFramework.LogInformation($"Expected: {expected}");
                 TestLibrary.TestFramework.LogInformation($"Actual: {actual}");
                 TestLibrary.TestFramework.LogInformation(string.Empty);

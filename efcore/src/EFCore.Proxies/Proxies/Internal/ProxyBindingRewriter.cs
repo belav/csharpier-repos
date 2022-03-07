@@ -282,9 +282,9 @@ namespace Microsoft.EntityFrameworkCore.Proxies.Internal
                         .ToList()
                 )
                 {
-                    conflictingProperty.DeclaringEntityType.RemoveServiceProperty(
-                        conflictingProperty.Name
-                    );
+                    conflictingProperty
+                        .DeclaringEntityType
+                        .RemoveServiceProperty(conflictingProperty.Name);
                 }
 
                 var serviceProperty = entityType

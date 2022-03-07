@@ -57,9 +57,9 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
 
             DirectoryEntry resourcesDirectory =
                 _module.PEReader.PEHeaders.CorHeader.ResourcesDirectory;
-            PEMemoryBlock block = _module.PEReader.GetSectionData(
-                resourcesDirectory.RelativeVirtualAddress
-            );
+            PEMemoryBlock block = _module
+                .PEReader
+                .GetSectionData(resourcesDirectory.RelativeVirtualAddress);
             builder.EmitBytes(block.GetReader().ReadBytes(resourcesDirectory.Size));
 
             return builder.ToObjectData();

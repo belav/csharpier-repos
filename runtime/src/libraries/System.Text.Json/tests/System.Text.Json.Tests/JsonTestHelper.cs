@@ -770,12 +770,14 @@ namespace System.Text.Json
             bool skipSpecialRules = false
         )
         {
-            string value = Encoding.UTF8.GetString(
-                buffer.WrittenSpan
+            string value = Encoding
+                .UTF8
+                .GetString(
+                    buffer.WrittenSpan
 #if NETFRAMEWORK
-                .ToArray()
+                        .ToArray()
 #endif
-            );
+                );
 
             AssertContentsAgainstJsonNet(expectedValue, value, skipSpecialRules);
         }
@@ -797,12 +799,14 @@ namespace System.Text.Json
             bool skipSpecialRules = false
         )
         {
-            string value = Encoding.UTF8.GetString(
-                buffer.WrittenSpan
+            string value = Encoding
+                .UTF8
+                .GetString(
+                    buffer.WrittenSpan
 #if NETFRAMEWORK
-                .ToArray()
+                        .ToArray()
 #endif
-            );
+                );
 
             AssertContentsNotEqualAgainstJsonNet(expectedValue, value, skipSpecialRules);
         }
@@ -901,10 +905,9 @@ namespace System.Text.Json
             @"
 ";
 
-        private static readonly bool s_replaceNewlines = !StringComparer.Ordinal.Equals(
-            CompiledNewline,
-            Environment.NewLine
-        );
+        private static readonly bool s_replaceNewlines = !StringComparer
+            .Ordinal
+            .Equals(CompiledNewline, Environment.NewLine);
 
         // Should be called only on compile-time strings
         // This is needed due to the fact that git might normalize line endings when checking-out files

@@ -50,49 +50,61 @@ public class Test7685
 
         if (!RectangleF.Equals(ref passedFloatStruct, ref rF))
         {
-            TestLibrary.Logging.WriteLine(
-                $"Error: passing struct with floats via reflection. Callee received {passedFloatStruct} instead of {rF}"
-            );
+            TestLibrary
+                .Logging
+                .WriteLine(
+                    $"Error: passing struct with floats via reflection. Callee received {passedFloatStruct} instead of {rF}"
+                );
             iRetVal = 0;
         }
 
         if (!RectangleD.Equals(ref passedDoubleStruct, ref rD))
         {
-            TestLibrary.Logging.WriteLine(
-                $"Error: passing struct with doubles via reflection. Callee received {passedDoubleStruct} instead of {rD}"
-            );
+            TestLibrary
+                .Logging
+                .WriteLine(
+                    $"Error: passing struct with doubles via reflection. Callee received {passedDoubleStruct} instead of {rD}"
+                );
             iRetVal = 1;
         }
 
         if (!RectangleI.Equals(ref passedIntStruct, ref rI))
         {
-            TestLibrary.Logging.WriteLine(
-                $"Error: passing struct with ints via reflection. Callee received {passedIntStruct} instead of {rI}"
-            );
+            TestLibrary
+                .Logging
+                .WriteLine(
+                    $"Error: passing struct with ints via reflection. Callee received {passedIntStruct} instead of {rI}"
+                );
             iRetVal = 2;
         }
 
         if (!RectangleLSmall.Equals(ref passedLongSmallStruct, ref rLSmall))
         {
-            TestLibrary.Logging.WriteLine(
-                $"Error: passing struct with a long via reflection. Callee received {passedLongSmallStruct} instead of {rLSmall}"
-            );
+            TestLibrary
+                .Logging
+                .WriteLine(
+                    $"Error: passing struct with a long via reflection. Callee received {passedLongSmallStruct} instead of {rLSmall}"
+                );
             iRetVal = 3;
         }
 
         if (!RectangleLLarge.Equals(ref passedLongLargeStruct, ref rLLarge))
         {
-            TestLibrary.Logging.WriteLine(
-                $"Error: passing struct with longs via reflection. Callee received {passedLongLargeStruct} instead of {rLLarge}"
-            );
+            TestLibrary
+                .Logging
+                .WriteLine(
+                    $"Error: passing struct with longs via reflection. Callee received {passedLongLargeStruct} instead of {rLLarge}"
+                );
             iRetVal = 4;
         }
 
         if (!RectangleNestedF.Equals(ref passedNestedSmallFStruct, ref rNestedFSmall))
         {
-            TestLibrary.Logging.WriteLine(
-                $"Error: passing struct with longs via reflection. Callee received {passedNestedSmallFStruct} instead of {rNestedFSmall}"
-            );
+            TestLibrary
+                .Logging
+                .WriteLine(
+                    $"Error: passing struct with longs via reflection. Callee received {passedNestedSmallFStruct} instead of {rNestedFSmall}"
+                );
             iRetVal = 5;
         }
 

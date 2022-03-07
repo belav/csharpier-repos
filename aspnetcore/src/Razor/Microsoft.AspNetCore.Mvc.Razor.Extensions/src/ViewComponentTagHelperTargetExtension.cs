@@ -78,21 +78,25 @@ internal class ViewComponentTagHelperTargetExtension : IViewComponentTagHelperTa
 
         // Initialize declaration.
         using (
-            context.CodeWriter.BuildClassDeclaration(
-                PublicModifiers,
-                node.ClassName,
-                TagHelperTypeName,
-                interfaces: null,
-                typeParameters: null
-            )
+            context
+                .CodeWriter
+                .BuildClassDeclaration(
+                    PublicModifiers,
+                    node.ClassName,
+                    TagHelperTypeName,
+                    interfaces: null,
+                    typeParameters: null
+                )
         )
         {
             // Add view component helper.
-            context.CodeWriter.WriteVariableDeclaration(
-                $"private readonly {ViewComponentHelperTypeName}",
-                ViewComponentHelperVariableName,
-                value: null
-            );
+            context
+                .CodeWriter
+                .WriteVariableDeclaration(
+                    $"private readonly {ViewComponentHelperTypeName}",
+                    ViewComponentHelperVariableName,
+                    value: null
+                );
 
             // Add constructor.
             WriteConstructorString(context.CodeWriter, node.ClassName);

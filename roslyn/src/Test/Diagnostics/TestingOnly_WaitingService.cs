@@ -107,11 +107,9 @@ namespace Roslyn.Hosting.Diagnostics.Waiters
 
                 // make sure pending task that require UI threads to finish as well.
 #pragma warning disable VSTHRD001 // Avoid legacy thread switching APIs
-                Dispatcher.CurrentDispatcher.Invoke(
-                    () => { },
-                    DispatcherPriority.ApplicationIdle,
-                    cancellationToken
-                );
+                Dispatcher
+                    .CurrentDispatcher
+                    .Invoke(() => { }, DispatcherPriority.ApplicationIdle, cancellationToken);
 #pragma warning restore VSTHRD001 // Avoid legacy thread switching APIs
             }
         }

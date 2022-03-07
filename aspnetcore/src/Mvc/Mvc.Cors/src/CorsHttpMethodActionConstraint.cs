@@ -34,10 +34,9 @@ internal class CorsHttpMethodActionConstraint : HttpMethodActionConstraint
         if (
             Http.HttpMethods.IsOptions(request.Method)
             && request.Headers.ContainsKey(OriginHeader)
-            && request.Headers.TryGetValue(
-                AccessControlRequestMethod,
-                out var accessControlRequestMethod
-            )
+            && request
+                .Headers
+                .TryGetValue(AccessControlRequestMethod, out var accessControlRequestMethod)
             && !StringValues.IsNullOrEmpty(accessControlRequestMethod)
         )
         {

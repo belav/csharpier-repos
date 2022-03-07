@@ -77,10 +77,9 @@ public class SafeHandleHandle
 
             if (null == msf)
             {
-                TestLibrary.TestFramework.LogError(
-                    "001.1",
-                    "Failed to allocate a new safe handle instance"
-                );
+                TestLibrary
+                    .TestFramework
+                    .LogError("001.1", "Failed to allocate a new safe handle instance");
                 retVal = false;
             }
         }
@@ -99,9 +98,9 @@ public class SafeHandleHandle
     {
         bool retVal = true;
 
-        TestLibrary.TestFramework.BeginScenario(
-            "PosTest2: Verify the handle is a protected value, and can set a value"
-        );
+        TestLibrary
+            .TestFramework
+            .BeginScenario("PosTest2: Verify the handle is a protected value, and can set a value");
 
         try
         {
@@ -111,13 +110,12 @@ public class SafeHandleHandle
 
             if (null == msf)
             {
-                TestLibrary.TestFramework.LogError(
-                    "002.1",
-                    "Failed to allocate a new safe handle instance"
-                );
-                TestLibrary.TestFramework.LogInformation(
-                    "[LOCAL VARIABLES] randValue = " + randValue
-                );
+                TestLibrary
+                    .TestFramework
+                    .LogError("002.1", "Failed to allocate a new safe handle instance");
+                TestLibrary
+                    .TestFramework
+                    .LogInformation("[LOCAL VARIABLES] randValue = " + randValue);
                 retVal = false;
             }
         }

@@ -81,7 +81,10 @@ namespace System.Xml
             /*  C (.) */
             CharType.None,
             /*  D (.) */
-            CharType.None | CharType.Comment | CharType.Comment | CharType.Whitespace,
+            CharType.None
+                | CharType.Comment
+                | CharType.Comment
+                | CharType.Whitespace,
             /*  E (.) */
             CharType.None,
             /*  F (.) */
@@ -126,29 +129,60 @@ namespace System.Xml
                 | CharType.AttributeText
                 | CharType.SpecialWhitespace,
             /* 21 (!) */
-            CharType.None | CharType.Comment | CharType.Text | CharType.AttributeText,
+            CharType.None
+                | CharType.Comment
+                | CharType.Text
+                | CharType.AttributeText,
             /* 22 (") */
-            CharType.None | CharType.Comment | CharType.Text,
+            CharType.None
+                | CharType.Comment
+                | CharType.Text,
             /* 23 (#) */
-            CharType.None | CharType.Comment | CharType.Text | CharType.AttributeText,
+            CharType.None
+                | CharType.Comment
+                | CharType.Text
+                | CharType.AttributeText,
             /* 24 ($) */
-            CharType.None | CharType.Comment | CharType.Text | CharType.AttributeText,
+            CharType.None
+                | CharType.Comment
+                | CharType.Text
+                | CharType.AttributeText,
             /* 25 (%) */
-            CharType.None | CharType.Comment | CharType.Text | CharType.AttributeText,
+            CharType.None
+                | CharType.Comment
+                | CharType.Text
+                | CharType.AttributeText,
             /* 26 (&) */
             CharType.None | CharType.Comment,
             /* 27 (') */
-            CharType.None | CharType.Comment | CharType.Text,
+            CharType.None
+                | CharType.Comment
+                | CharType.Text,
             /* 28 (() */
-            CharType.None | CharType.Comment | CharType.Text | CharType.AttributeText,
+            CharType.None
+                | CharType.Comment
+                | CharType.Text
+                | CharType.AttributeText,
             /* 29 ()) */
-            CharType.None | CharType.Comment | CharType.Text | CharType.AttributeText,
+            CharType.None
+                | CharType.Comment
+                | CharType.Text
+                | CharType.AttributeText,
             /* 2A (*) */
-            CharType.None | CharType.Comment | CharType.Text | CharType.AttributeText,
+            CharType.None
+                | CharType.Comment
+                | CharType.Text
+                | CharType.AttributeText,
             /* 2B (+) */
-            CharType.None | CharType.Comment | CharType.Text | CharType.AttributeText,
+            CharType.None
+                | CharType.Comment
+                | CharType.Text
+                | CharType.AttributeText,
             /* 2C (,) */
-            CharType.None | CharType.Comment | CharType.Text | CharType.AttributeText,
+            CharType.None
+                | CharType.Comment
+                | CharType.Text
+                | CharType.AttributeText,
             /* 2D (-) */
             CharType.None
                 | CharType.Comment
@@ -162,7 +196,10 @@ namespace System.Xml
                 | CharType.Text
                 | CharType.AttributeText,
             /* 2F (/) */
-            CharType.None | CharType.Comment | CharType.Text | CharType.AttributeText,
+            CharType.None
+                | CharType.Comment
+                | CharType.Text
+                | CharType.AttributeText,
             /* 30 (0) */
             CharType.None
                 | CharType.Comment
@@ -224,19 +261,37 @@ namespace System.Xml
                 | CharType.Text
                 | CharType.AttributeText,
             /* 3A (:) */
-            CharType.None | CharType.Comment | CharType.Text | CharType.AttributeText,
+            CharType.None
+                | CharType.Comment
+                | CharType.Text
+                | CharType.AttributeText,
             /* 3B (;) */
-            CharType.None | CharType.Comment | CharType.Text | CharType.AttributeText,
+            CharType.None
+                | CharType.Comment
+                | CharType.Text
+                | CharType.AttributeText,
             /* 3C (<) */
             CharType.None | CharType.Comment,
             /* 3D (=) */
-            CharType.None | CharType.Comment | CharType.Text | CharType.AttributeText,
+            CharType.None
+                | CharType.Comment
+                | CharType.Text
+                | CharType.AttributeText,
             /* 3E (>) */
-            CharType.None | CharType.Comment | CharType.Text | CharType.AttributeText,
+            CharType.None
+                | CharType.Comment
+                | CharType.Text
+                | CharType.AttributeText,
             /* 3F (?) */
-            CharType.None | CharType.Comment | CharType.Text | CharType.AttributeText,
+            CharType.None
+                | CharType.Comment
+                | CharType.Text
+                | CharType.AttributeText,
             /* 40 (@) */
-            CharType.None | CharType.Comment | CharType.Text | CharType.AttributeText,
+            CharType.None
+                | CharType.Comment
+                | CharType.Text
+                | CharType.AttributeText,
             /* 41 (A) */
             CharType.None
                 | CharType.Comment
@@ -420,13 +475,24 @@ namespace System.Xml
                 | CharType.Text
                 | CharType.AttributeText,
             /* 5B ([) */
-            CharType.None | CharType.Comment | CharType.Text | CharType.AttributeText,
+            CharType.None
+                | CharType.Comment
+                | CharType.Text
+                | CharType.AttributeText,
             /* 5C (\) */
-            CharType.None | CharType.Comment | CharType.Text | CharType.AttributeText,
+            CharType.None
+                | CharType.Comment
+                | CharType.Text
+                | CharType.AttributeText,
             /* 5D (]) */
-            CharType.None | CharType.Comment | CharType.AttributeText,
+            CharType.None
+                | CharType.Comment
+                | CharType.AttributeText,
             /* 5E (^) */
-            CharType.None | CharType.Comment | CharType.Text | CharType.AttributeText,
+            CharType.None
+                | CharType.Comment
+                | CharType.Text
+                | CharType.AttributeText,
             /* 5F (_) */
             CharType.None
                 | CharType.Comment
@@ -435,7 +501,10 @@ namespace System.Xml
                 | CharType.Text
                 | CharType.AttributeText,
             /* 60 (`) */
-            CharType.None | CharType.Comment | CharType.Text | CharType.AttributeText,
+            CharType.None
+                | CharType.Comment
+                | CharType.Text
+                | CharType.AttributeText,
             /* 61 (a) */
             CharType.None
                 | CharType.Comment
@@ -619,15 +688,30 @@ namespace System.Xml
                 | CharType.Text
                 | CharType.AttributeText,
             /* 7B ({) */
-            CharType.None | CharType.Comment | CharType.Text | CharType.AttributeText,
+            CharType.None
+                | CharType.Comment
+                | CharType.Text
+                | CharType.AttributeText,
             /* 7C (|) */
-            CharType.None | CharType.Comment | CharType.Text | CharType.AttributeText,
+            CharType.None
+                | CharType.Comment
+                | CharType.Text
+                | CharType.AttributeText,
             /* 7D (}) */
-            CharType.None | CharType.Comment | CharType.Text | CharType.AttributeText,
+            CharType.None
+                | CharType.Comment
+                | CharType.Text
+                | CharType.AttributeText,
             /* 7E (~) */
-            CharType.None | CharType.Comment | CharType.Text | CharType.AttributeText,
+            CharType.None
+                | CharType.Comment
+                | CharType.Text
+                | CharType.AttributeText,
             /* 7F (.) */
-            CharType.None | CharType.Comment | CharType.Text | CharType.AttributeText,
+            CharType.None
+                | CharType.Comment
+                | CharType.Text
+                | CharType.AttributeText,
             /* 80 (.) */
             CharType.None
                 | CharType.Comment
@@ -1406,7 +1490,9 @@ namespace System.Xml
                 | CharType.Text
                 | CharType.AttributeText,
             /* EF (?) */
-            CharType.None | CharType.FirstName | CharType.Name,
+            CharType.None
+                | CharType.FirstName
+                | CharType.Name,
             /* F0 (?) */
             CharType.None
                 | CharType.Comment
@@ -1537,31 +1623,54 @@ namespace System.Xml
         )
         {
             if (buffer == null)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException(nameof(buffer))
-                );
+                throw System
+                    .Runtime
+                    .Serialization
+                    .DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException(nameof(buffer)));
             if (offset < 0)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException(nameof(offset), SR.ValueMustBeNonNegative)
-                );
+                throw System
+                    .Runtime
+                    .Serialization
+                    .DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentOutOfRangeException(nameof(offset), SR.ValueMustBeNonNegative)
+                    );
             if (offset > buffer.Length)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException(
-                        nameof(offset),
-                        SR.Format(SR.OffsetExceedsBufferSize, buffer.Length)
-                    )
-                );
+                throw System
+                    .Runtime
+                    .Serialization
+                    .DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            nameof(offset),
+                            SR.Format(SR.OffsetExceedsBufferSize, buffer.Length)
+                        )
+                    );
             if (count < 0)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException(nameof(count), SR.ValueMustBeNonNegative)
-                );
+                throw System
+                    .Runtime
+                    .Serialization
+                    .DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentOutOfRangeException(nameof(count), SR.ValueMustBeNonNegative)
+                    );
             if (count > buffer.Length - offset)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException(
-                        nameof(count),
-                        SR.Format(SR.SizeExceedsRemainingBufferSpace, buffer.Length - offset)
-                    )
-                );
+                throw System
+                    .Runtime
+                    .Serialization
+                    .DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            nameof(count),
+                            SR.Format(SR.SizeExceedsRemainingBufferSpace, buffer.Length - offset)
+                        )
+                    );
             MoveToInitial(quotas, onClose);
             ArraySegment<byte> seg = EncodingStreamWrapper.ProcessBuffer(
                 buffer,
@@ -1581,9 +1690,12 @@ namespace System.Xml
         )
         {
             if (stream == null)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    nameof(stream)
-                );
+                throw System
+                    .Runtime
+                    .Serialization
+                    .DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNull(nameof(stream));
             MoveToInitial(quotas, onClose);
             stream = new EncodingStreamWrapper(stream, encoding);
             BufferReader.SetBuffer(stream, null, null);
@@ -1881,11 +1993,13 @@ namespace System.Xml
                     attributeNode = AddXmlAttribute();
                     attributeNode.Prefix.SetValue(_prefix);
                     attributeNode.LocalName.SetValue(_localName);
-                    attributeNode.Value.SetValue(
-                        (escaped ? ValueHandleType.EscapedUTF8 : ValueHandleType.UTF8),
-                        valueOffset,
-                        valueLength
-                    );
+                    attributeNode
+                        .Value
+                        .SetValue(
+                            (escaped ? ValueHandleType.EscapedUTF8 : ValueHandleType.UTF8),
+                            valueOffset,
+                            valueLength
+                        );
                     FixXmlAttribute(attributeNode);
                 }
                 else
@@ -1893,11 +2007,13 @@ namespace System.Xml
                     attributeNode = AddAttribute();
                     attributeNode.Prefix.SetValue(_prefix);
                     attributeNode.LocalName.SetValue(_localName);
-                    attributeNode.Value.SetValue(
-                        (escaped ? ValueHandleType.EscapedUTF8 : ValueHandleType.UTF8),
-                        valueOffset,
-                        valueLength
-                    );
+                    attributeNode
+                        .Value
+                        .SetValue(
+                            (escaped ? ValueHandleType.EscapedUTF8 : ValueHandleType.UTF8),
+                            valueOffset,
+                            valueLength
+                        );
                 }
 
                 attributeNode.QuoteChar = (char)quoteChar;

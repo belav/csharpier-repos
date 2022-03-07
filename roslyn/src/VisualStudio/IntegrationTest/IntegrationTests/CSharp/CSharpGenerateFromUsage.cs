@@ -34,8 +34,11 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
 }"
             );
             VisualStudio.Editor.Verify.CodeAction("Generate local 'xyz'", applyFix: true);
-            VisualStudio.Editor.Verify.TextContains(
-                @"class Program
+            VisualStudio
+                .Editor
+                .Verify
+                .TextContains(
+                    @"class Program
 {
     static void Main(string[] args)
     {
@@ -43,7 +46,7 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
         string s = xyz;
     }
 }"
-            );
+                );
         }
     }
 }

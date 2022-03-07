@@ -140,12 +140,12 @@ namespace Moq.Tests.Regressions
         {
             public void TestMethod(IIssue78Interface intOne)
             {
-                Task<Issue78TypeOne> getTypeOneTask = Task<Issue78TypeOne>.Factory.StartNew(
-                    () => intOne.GetTypeOne()
-                );
-                Task<Issue78TypeTwo> getTypeTwoTask = Task<Issue78TypeTwo>.Factory.StartNew(
-                    () => intOne.GetTypeTwo()
-                );
+                Task<Issue78TypeOne> getTypeOneTask = Task<Issue78TypeOne>
+                    .Factory
+                    .StartNew(() => intOne.GetTypeOne());
+                Task<Issue78TypeTwo> getTypeTwoTask = Task<Issue78TypeTwo>
+                    .Factory
+                    .StartNew(() => intOne.GetTypeTwo());
 
                 Issue78TypeOne objOne = getTypeOneTask.Result;
                 Issue78TypeTwo objTwo = getTypeTwoTask.Result;
@@ -308,7 +308,8 @@ namespace Moq.Tests.Regressions
                 var actualTypeMethod = typeof(ConcreteClass).GetMethod("Method");
                 Assert.True(actualTypeMethod.IsVirtual && actualTypeMethod.IsFinal);
 
-                var mockedTypeMethod = new Mock<ConcreteClass>().Object
+                var mockedTypeMethod = new Mock<ConcreteClass>()
+                    .Object
                     .GetType()
                     .GetMethod("Method");
                 Assert.True(mockedTypeMethod.IsVirtual && mockedTypeMethod.IsFinal);
@@ -3390,7 +3391,8 @@ namespace Moq.Tests.Regressions
                     x => x.QueryOverExpression<IItem>(item => item.Id == originalItemId).List()
                 );
 
-                _ = session.Object
+                _ = session
+                    .Object
                     .QueryOverExpression<IItem>(item => item.Id == originalItemId)
                     .List();
             }
@@ -3405,7 +3407,8 @@ namespace Moq.Tests.Regressions
                 );
 
                 var copiedItemId = originalItemId;
-                _ = session.Object
+                _ = session
+                    .Object
                     .QueryOverExpression<IItem>(item => item.Id == copiedItemId)
                     .List();
                 //                                                               ^^^^^^^^^^^^

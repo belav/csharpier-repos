@@ -203,13 +203,15 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.OutOfProcess
 
             public void ErrorTags(params string[] expectedTags)
             {
-                _instance.Workspace.WaitForAllAsyncOperations(
-                    Helper.HangMitigatingTimeout,
-                    FeatureAttribute.Workspace,
-                    FeatureAttribute.SolutionCrawler,
-                    FeatureAttribute.DiagnosticService,
-                    FeatureAttribute.ErrorSquiggles
-                );
+                _instance
+                    .Workspace
+                    .WaitForAllAsyncOperations(
+                        Helper.HangMitigatingTimeout,
+                        FeatureAttribute.Workspace,
+                        FeatureAttribute.SolutionCrawler,
+                        FeatureAttribute.DiagnosticService,
+                        FeatureAttribute.ErrorSquiggles
+                    );
                 var actualTags = _textViewWindow.GetErrorTags();
                 AssertEx.EqualOrDiff(
                     string.Join(Environment.NewLine, expectedTags),

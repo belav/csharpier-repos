@@ -36,16 +36,20 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
             }
 
             return InMemberDeclarationContext(position, context, cancellationToken)
-                || context.SyntaxTree.IsLambdaDeclarationContext(
-                    position,
-                    otherModifier: SyntaxKind.StaticKeyword,
-                    cancellationToken
-                )
-                || context.SyntaxTree.IsLocalFunctionDeclarationContext(
-                    position,
-                    s_validLocalFunctionModifiers,
-                    cancellationToken
-                );
+                || context
+                    .SyntaxTree
+                    .IsLambdaDeclarationContext(
+                        position,
+                        otherModifier: SyntaxKind.StaticKeyword,
+                        cancellationToken
+                    )
+                || context
+                    .SyntaxTree
+                    .IsLocalFunctionDeclarationContext(
+                        position,
+                        s_validLocalFunctionModifiers,
+                        cancellationToken
+                    );
         }
 
         private static bool InMemberDeclarationContext(
@@ -55,11 +59,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
         )
         {
             return context.IsGlobalStatementContext
-                || context.SyntaxTree.IsGlobalMemberDeclarationContext(
-                    position,
-                    SyntaxKindSet.AllGlobalMemberModifiers,
-                    cancellationToken
-                )
+                || context
+                    .SyntaxTree
+                    .IsGlobalMemberDeclarationContext(
+                        position,
+                        SyntaxKindSet.AllGlobalMemberModifiers,
+                        cancellationToken
+                    )
                 || context.IsMemberDeclarationContext(
                     validModifiers: SyntaxKindSet.AllMemberModifiers,
                     validTypeDeclarations: SyntaxKindSet.ClassInterfaceStructRecordTypeDeclarations,

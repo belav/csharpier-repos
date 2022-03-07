@@ -313,10 +313,9 @@ namespace System.Text.Json
 
                         if (sequence.IsEmpty)
                         {
-                            valueSpan = reader.OriginalSpan.Slice(
-                                checked((int)startingOffset),
-                                checked((int)totalLength)
-                            );
+                            valueSpan = reader
+                                .OriginalSpan
+                                .Slice(checked((int)startingOffset), checked((int)totalLength));
                         }
                         else
                         {

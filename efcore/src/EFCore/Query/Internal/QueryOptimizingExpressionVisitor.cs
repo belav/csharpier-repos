@@ -301,9 +301,9 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
 
                 if (methodInfo.Equals(EnumerableMethods.AnyWithPredicate) && !negated)
                 {
-                    var containsMethod = EnumerableMethods.Contains.MakeGenericMethod(
-                        methodCallExpression.Method.GetGenericArguments()[0]
-                    );
+                    var containsMethod = EnumerableMethods
+                        .Contains
+                        .MakeGenericMethod(methodCallExpression.Method.GetGenericArguments()[0]);
                     return Expression.Call(
                         null,
                         containsMethod,
@@ -314,9 +314,9 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
 
                 if (methodInfo.Equals(EnumerableMethods.All) && negated)
                 {
-                    var containsMethod = EnumerableMethods.Contains.MakeGenericMethod(
-                        methodCallExpression.Method.GetGenericArguments()[0]
-                    );
+                    var containsMethod = EnumerableMethods
+                        .Contains
+                        .MakeGenericMethod(methodCallExpression.Method.GetGenericArguments()[0]);
                     return Expression.Not(
                         Expression.Call(
                             null,

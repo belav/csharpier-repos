@@ -92,7 +92,8 @@ namespace System.CommandLine.DragonFruit.Tests
 
             var rootCommandArgument = parser.Configuration.RootCommand.Arguments.Single();
 
-            rootCommandArgument.Arity
+            rootCommandArgument
+                .Arity
                 .Should()
                 .BeEquivalentTo(new ArgumentArity(minNumberOfValues, maxNumberOfValues));
         }

@@ -67,22 +67,27 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateDefaultConstructors
                     return false;
                 }
 
-                var semanticFacts =
-                    semanticDocument.Document.GetLanguageService<ISemanticFactsService>();
+                var semanticFacts = semanticDocument
+                    .Document
+                    .GetLanguageService<ISemanticFactsService>();
                 var classConstructors = ClassType.InstanceConstructors;
 
-                var destinationProvider =
-                    semanticDocument.Project.Solution.Workspace.Services.GetLanguageServices(
-                        ClassType.Language
-                    );
+                var destinationProvider = semanticDocument
+                    .Project
+                    .Solution
+                    .Workspace
+                    .Services
+                    .GetLanguageServices(ClassType.Language);
                 var syntaxFacts = destinationProvider.GetService<ISyntaxFactsService>();
                 var isCaseSensitive = syntaxFacts.IsCaseSensitive;
 
-                UnimplementedConstructors = baseType.InstanceConstructors.WhereAsArray(
-                    c =>
-                        c.IsAccessibleWithin(ClassType)
-                        && IsMissing(c, classConstructors, isCaseSensitive)
-                );
+                UnimplementedConstructors = baseType
+                    .InstanceConstructors
+                    .WhereAsArray(
+                        c =>
+                            c.IsAccessibleWithin(ClassType)
+                            && IsMissing(c, classConstructors, isCaseSensitive)
+                    );
 
                 return UnimplementedConstructors.Length > 0;
             }
@@ -95,12 +100,14 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateDefaultConstructors
             {
                 var matchingConstructor = classConstructors.FirstOrDefault(
                     c =>
-                        SignatureComparer.Instance.HaveSameSignature(
-                            constructor.Parameters,
-                            c.Parameters,
-                            compareParameterName: true,
-                            isCaseSensitive: isCaseSensitive
-                        )
+                        SignatureComparer
+                            .Instance
+                            .HaveSameSignature(
+                                constructor.Parameters,
+                                c.Parameters,
+                                compareParameterName: true,
+                                isCaseSensitive: isCaseSensitive
+                            )
                 );
 
                 if (matchingConstructor == null)

@@ -33,7 +33,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         int? MaxLength =>
             PropertyMappings
                 .First()
-                .Property.GetMaxLength(StoreObjectIdentifier.Table(Table.Name, Table.Schema));
+                .Property
+                .GetMaxLength(StoreObjectIdentifier.Table(Table.Name, Table.Schema));
 
         /// <summary>
         ///     Gets the precision of data that is allowed in this column. For example, if the property is a <see cref="decimal" /> '
@@ -42,7 +43,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         int? Precision =>
             PropertyMappings
                 .First()
-                .Property.GetPrecision(StoreObjectIdentifier.Table(Table.Name, Table.Schema));
+                .Property
+                .GetPrecision(StoreObjectIdentifier.Table(Table.Name, Table.Schema));
 
         /// <summary>
         ///     Gets the scale of data that is allowed in this column. For example, if the property is a <see cref="decimal" /> '
@@ -51,7 +53,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         int? Scale =>
             PropertyMappings
                 .First()
-                .Property.GetScale(StoreObjectIdentifier.Table(Table.Name, Table.Schema));
+                .Property
+                .GetScale(StoreObjectIdentifier.Table(Table.Name, Table.Schema));
 
         /// <summary>
         ///     Gets a value indicating whether or not the property can persist Unicode characters.
@@ -59,7 +62,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         bool? IsUnicode =>
             PropertyMappings
                 .First()
-                .Property.IsUnicode(StoreObjectIdentifier.Table(Table.Name, Table.Schema));
+                .Property
+                .IsUnicode(StoreObjectIdentifier.Table(Table.Name, Table.Schema));
 
         /// <summary>
         ///     Returns a flag indicating whether the property is capable of storing only fixed-length data, such as strings.
@@ -67,7 +71,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         bool? IsFixedLength =>
             PropertyMappings
                 .First()
-                .Property.IsFixedLength(StoreObjectIdentifier.Table(Table.Name, Table.Schema));
+                .Property
+                .IsFixedLength(StoreObjectIdentifier.Table(Table.Name, Table.Schema));
 
         /// <summary>
         ///     Indicates whether or not this column acts as an automatic concurrency token by generating a different value
@@ -84,7 +89,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         public virtual int? Order =>
             PropertyMappings
                 .First()
-                .Property.GetColumnOrder(StoreObjectIdentifier.Table(Table.Name, Table.Schema));
+                .Property
+                .GetColumnOrder(StoreObjectIdentifier.Table(Table.Name, Table.Schema));
 
         /// <summary>
         ///     Returns the object that is used as the default value for this column.
@@ -139,7 +145,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         public virtual string? DefaultValueSql =>
             PropertyMappings
                 .First()
-                .Property.GetDefaultValueSql(StoreObjectIdentifier.Table(Table.Name, Table.Schema));
+                .Property
+                .GetDefaultValueSql(StoreObjectIdentifier.Table(Table.Name, Table.Schema));
 
         /// <summary>
         ///     Returns the SQL expression that is used as the computed value for this column.
@@ -147,9 +154,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         public virtual string? ComputedColumnSql =>
             PropertyMappings
                 .First()
-                .Property.GetComputedColumnSql(
-                    StoreObjectIdentifier.Table(Table.Name, Table.Schema)
-                );
+                .Property
+                .GetComputedColumnSql(StoreObjectIdentifier.Table(Table.Name, Table.Schema));
 
         /// <summary>
         ///     Returns whether the value of the computed column this property is mapped to is stored in the database, or calculated when
@@ -158,7 +164,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         public virtual bool? IsStored =>
             PropertyMappings
                 .First()
-                .Property.GetIsStored(StoreObjectIdentifier.Table(Table.Name, Table.Schema));
+                .Property
+                .GetIsStored(StoreObjectIdentifier.Table(Table.Name, Table.Schema));
 
         /// <summary>
         ///     Comment for this column
@@ -166,7 +173,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         public virtual string? Comment =>
             PropertyMappings
                 .First()
-                .Property.GetComment(StoreObjectIdentifier.Table(Table.Name, Table.Schema));
+                .Property
+                .GetComment(StoreObjectIdentifier.Table(Table.Name, Table.Schema));
 
         /// <summary>
         ///     Collation for this column
@@ -174,7 +182,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         public virtual string? Collation =>
             PropertyMappings
                 .First()
-                .Property.GetCollation(StoreObjectIdentifier.Table(Table.Name, Table.Schema));
+                .Property
+                .GetCollation(StoreObjectIdentifier.Table(Table.Name, Table.Schema));
 
         /// <summary>
         ///     <para>

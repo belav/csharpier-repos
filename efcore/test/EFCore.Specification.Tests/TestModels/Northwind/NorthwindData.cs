@@ -191,7 +191,8 @@ namespace Microsoft.EntityFrameworkCore.TestModels.Northwind
         {
             context.Set<Customer>().AddRange(CreateCustomers());
 
-            var titleProperty = context.Model
+            var titleProperty = context
+                .Model
                 .FindEntityType(typeof(Employee))
                 .FindProperty("Title");
             foreach (var employee in CreateEmployees())

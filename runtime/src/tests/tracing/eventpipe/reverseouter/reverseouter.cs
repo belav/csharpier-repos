@@ -46,29 +46,31 @@ namespace Tracing.Tests.ReverseValidation
                                         new Provider("Microsoft-DotNETCore-SampleProfiler")
                                     }
                                 );
-                                Logger.logger.Log(
-                                    "Starting EventPipeSession over standard connection"
-                                );
+                                Logger
+                                    .logger
+                                    .Log("Starting EventPipeSession over standard connection");
                                 using Stream stream = EventPipeClient.CollectTracing(
                                     pid,
                                     config,
                                     out var sessionId
                                 );
-                                Logger.logger.Log(
-                                    $"Started EventPipeSession over standard connection with session id: 0x{sessionId:x}"
-                                );
+                                Logger
+                                    .logger
+                                    .Log(
+                                        $"Started EventPipeSession over standard connection with session id: 0x{sessionId:x}"
+                                    );
                                 // using var source = new EventPipeEventSource(stream);
                                 using var memroyStream = new MemoryStream();
                                 Task readerTask = stream.CopyToAsync(memroyStream); //Task.Run(() => source.Process());
                                 await Task.Delay(500);
-                                Logger.logger.Log(
-                                    "Stopping EventPipeSession over standard connection"
-                                );
+                                Logger
+                                    .logger
+                                    .Log("Stopping EventPipeSession over standard connection");
                                 EventPipeClient.StopTracing(pid, sessionId);
                                 await readerTask;
-                                Logger.logger.Log(
-                                    "Stopped EventPipeSession over standard connection"
-                                );
+                                Logger
+                                    .logger
+                                    .Log("Stopped EventPipeSession over standard connection");
                             }
                             catch (Exception e)
                             {

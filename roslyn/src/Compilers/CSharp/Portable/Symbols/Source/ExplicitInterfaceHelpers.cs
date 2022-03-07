@@ -368,10 +368,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     }
 
                     if (
-                        MemberSignatureComparer.ExplicitImplementationComparer.Equals(
-                            implementingMember,
-                            interfaceMember
-                        )
+                        MemberSignatureComparer
+                            .ExplicitImplementationComparer
+                            .Equals(implementingMember, interfaceMember)
                     )
                     {
                         foundMatchingMember = true;
@@ -530,7 +529,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             if (
                 implementedMember.IsStatic
-                && !implementingMember.ContainingAssembly.RuntimeSupportsStaticAbstractMembersInInterfaces
+                && !implementingMember
+                    .ContainingAssembly
+                    .RuntimeSupportsStaticAbstractMembersInInterfaces
             )
             {
                 diagnostics.Add(
@@ -573,10 +574,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     // because that is enough to distinguish them in the runtime.
                     if (
                         !explicitInterfaceTypeIsDefinition
-                        && MemberSignatureComparer.RuntimeSignatureComparer.Equals(
-                            implementedMember,
-                            collisionCandidateMember
-                        )
+                        && MemberSignatureComparer
+                            .RuntimeSignatureComparer
+                            .Equals(implementedMember, collisionCandidateMember)
                     )
                     {
                         bool foundMismatchedRefKind = false;
@@ -620,10 +620,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     else
                     {
                         if (
-                            MemberSignatureComparer.ExplicitImplementationComparer.Equals(
-                                implementedMember,
-                                collisionCandidateMember
-                            )
+                            MemberSignatureComparer
+                                .ExplicitImplementationComparer
+                                .Equals(implementedMember, collisionCandidateMember)
                         )
                         {
                             // NOTE: this is different from the same error code above.  Above, the diagnostic means that

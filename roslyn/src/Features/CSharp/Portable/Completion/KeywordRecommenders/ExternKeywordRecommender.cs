@@ -69,11 +69,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
                     canBePartial: false,
                     cancellationToken: cancellationToken
                 )
-                || context.SyntaxTree.IsLocalFunctionDeclarationContext(
-                    position,
-                    s_validLocalFunctionModifiers,
-                    cancellationToken
-                );
+                || context
+                    .SyntaxTree
+                    .IsLocalFunctionDeclarationContext(
+                        position,
+                        s_validLocalFunctionModifiers,
+                        cancellationToken
+                    );
         }
 
         private static bool IsExternAliasContext(CSharpSyntaxContext context)

@@ -63,7 +63,9 @@ public class PublishedApplicationPublisher : ApplicationPublisher
         var configuration =
             this.GetType()
                 .GetTypeInfo()
-                .Assembly.GetCustomAttribute<AssemblyConfigurationAttribute>().Configuration;
+                .Assembly
+                .GetCustomAttribute<AssemblyConfigurationAttribute>()
+                .Configuration;
         var path = Path.Combine(
             testAssetsBasePath,
             "bin",

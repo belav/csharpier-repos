@@ -64,10 +64,9 @@ namespace System.Linq.Expressions.Tests
         {
             Assert.Equal(
                 typeof(object),
-                Expression.Label(
-                    Expression.Label(typeof(object)),
-                    Expression.Constant("hello")
-                ).Type
+                Expression
+                    .Label(Expression.Label(typeof(object)), Expression.Constant("hello"))
+                    .Type
             );
         }
 

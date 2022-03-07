@@ -889,15 +889,19 @@ partial class Bar
 
             var workspace = workspaceFixture.Target.GetWorkspace(ExportProvider);
             workspace.TryApplyChanges(
-                workspace.CurrentSolution.WithOptions(
-                    workspace.Options.WithChangedOption(
-                        CSharpCodeStyleOptions.PreferExpressionBodiedMethods,
-                        new CodeStyleOption2<ExpressionBodyPreference>(
-                            ExpressionBodyPreference.WhenPossible,
-                            NotificationOption2.Silent
-                        )
+                workspace
+                    .CurrentSolution
+                    .WithOptions(
+                        workspace
+                            .Options
+                            .WithChangedOption(
+                                CSharpCodeStyleOptions.PreferExpressionBodiedMethods,
+                                new CodeStyleOption2<ExpressionBodyPreference>(
+                                    ExpressionBodyPreference.WhenPossible,
+                                    NotificationOption2.Silent
+                                )
+                            )
                     )
-                )
             );
 
             var text =
@@ -928,15 +932,19 @@ partial class Bar
 
             var workspace = workspaceFixture.Target.GetWorkspace(ExportProvider);
             workspace.TryApplyChanges(
-                workspace.CurrentSolution.WithOptions(
-                    workspace.Options.WithChangedOption(
-                        CSharpCodeStyleOptions.PreferExpressionBodiedMethods,
-                        new CodeStyleOption2<ExpressionBodyPreference>(
-                            ExpressionBodyPreference.WhenPossible,
-                            NotificationOption2.Silent
-                        )
+                workspace
+                    .CurrentSolution
+                    .WithOptions(
+                        workspace
+                            .Options
+                            .WithChangedOption(
+                                CSharpCodeStyleOptions.PreferExpressionBodiedMethods,
+                                new CodeStyleOption2<ExpressionBodyPreference>(
+                                    ExpressionBodyPreference.WhenPossible,
+                                    NotificationOption2.Silent
+                                )
+                            )
                     )
-                )
             );
 
             var text =

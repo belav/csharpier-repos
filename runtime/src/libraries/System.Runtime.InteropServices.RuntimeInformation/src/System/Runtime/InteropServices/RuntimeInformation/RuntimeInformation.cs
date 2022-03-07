@@ -17,7 +17,8 @@ namespace System.Runtime.InteropServices
             {
                 if (s_frameworkDescription == null)
                 {
-                    ReadOnlySpan<char> versionString = typeof(object).Assembly
+                    ReadOnlySpan<char> versionString = typeof(object)
+                        .Assembly
                         .GetCustomAttribute<AssemblyInformationalVersionAttribute>()
                         ?.InformationalVersion;
 

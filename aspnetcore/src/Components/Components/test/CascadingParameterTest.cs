@@ -516,9 +516,11 @@ public class CascadingParameterTest
 
     private static T FindComponent<T>(CapturedBatch batch, out int componentId)
     {
-        var componentFrame = batch.ReferenceFrames.Single(
-            frame => frame.FrameType == RenderTreeFrameType.Component && frame.Component is T
-        );
+        var componentFrame = batch
+            .ReferenceFrames
+            .Single(
+                frame => frame.FrameType == RenderTreeFrameType.Component && frame.Component is T
+            );
         componentId = componentFrame.ComponentId;
         return (T)componentFrame.Component;
     }

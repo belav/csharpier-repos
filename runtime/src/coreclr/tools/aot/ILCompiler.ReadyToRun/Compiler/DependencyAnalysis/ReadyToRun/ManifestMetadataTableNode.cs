@@ -92,7 +92,11 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             if (!_nodeFactory.CompilationModuleGroup.IsCompositeBuildMode)
             {
                 MetadataReader mdReader =
-                    _nodeFactory.CompilationModuleGroup.CompilationModuleSet.Single().MetadataReader;
+                    _nodeFactory
+                        .CompilationModuleGroup
+                        .CompilationModuleSet
+                        .Single()
+                        .MetadataReader;
                 _assemblyRefCount = mdReader.GetTableRowCount(TableIndex.AssemblyRef) + 1;
 
                 if (!_nodeFactory.CompilationModuleGroup.IsInputBubble)
@@ -122,7 +126,9 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                 // Fill in entries for all input modules right away to make sure they have parallel indices
                 int nextExpectedId = 1;
                 foreach (
-                    EcmaModule inputModule in _nodeFactory.CompilationModuleGroup.CompilationModuleSet
+                    EcmaModule inputModule in _nodeFactory
+                        .CompilationModuleGroup
+                        .CompilationModuleSet
                 )
                 {
                     int acquiredId = ModuleToIndexInternal(inputModule);

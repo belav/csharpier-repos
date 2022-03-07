@@ -901,9 +901,10 @@ public class JsonPatchDocument<TModel> : IJsonPatchDocument where TModel : class
             as JsonObjectContract;
         if (jsonObjectContract != null)
         {
-            return jsonObjectContract.Properties.First(
-                jsonProperty => jsonProperty.UnderlyingName == memberExpression.Member.Name
-            ).PropertyName;
+            return jsonObjectContract
+                .Properties
+                .First(jsonProperty => jsonProperty.UnderlyingName == memberExpression.Member.Name)
+                .PropertyName;
         }
 
         return null;

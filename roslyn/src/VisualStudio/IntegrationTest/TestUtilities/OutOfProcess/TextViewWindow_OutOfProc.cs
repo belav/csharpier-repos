@@ -88,29 +88,34 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.OutOfProcess
         public void InvokeCompletionList()
         {
             _instance.ExecuteCommand(WellKnownCommandNames.Edit_ListMembers);
-            _instance.Workspace.WaitForAsyncOperations(
-                Helper.HangMitigatingTimeout,
-                FeatureAttribute.CompletionSet
-            );
+            _instance
+                .Workspace
+                .WaitForAsyncOperations(
+                    Helper.HangMitigatingTimeout,
+                    FeatureAttribute.CompletionSet
+                );
         }
 
         public void InvokeCodeActionList()
         {
-            _instance.Workspace.WaitForAsyncOperations(
-                Helper.HangMitigatingTimeout,
-                FeatureAttribute.SolutionCrawler
-            );
-            _instance.Workspace.WaitForAsyncOperations(
-                Helper.HangMitigatingTimeout,
-                FeatureAttribute.DiagnosticService
-            );
+            _instance
+                .Workspace
+                .WaitForAsyncOperations(
+                    Helper.HangMitigatingTimeout,
+                    FeatureAttribute.SolutionCrawler
+                );
+            _instance
+                .Workspace
+                .WaitForAsyncOperations(
+                    Helper.HangMitigatingTimeout,
+                    FeatureAttribute.DiagnosticService
+                );
 
             ShowLightBulb();
             WaitForLightBulbSession();
-            _instance.Workspace.WaitForAsyncOperations(
-                Helper.HangMitigatingTimeout,
-                FeatureAttribute.LightBulb
-            );
+            _instance
+                .Workspace
+                .WaitForAsyncOperations(Helper.HangMitigatingTimeout, FeatureAttribute.LightBulb);
         }
 
         /// <summary>

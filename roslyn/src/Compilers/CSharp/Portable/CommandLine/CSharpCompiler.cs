@@ -243,7 +243,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 Arguments.CompilationName,
                 trees.WhereNotNull(),
                 resolvedReferences,
-                Arguments.CompilationOptions
+                Arguments
+                    .CompilationOptions
                     .WithMetadataReferenceResolver(referenceDirectiveResolver)
                     .WithAssemblyIdentityComparer(assemblyIdentityComparer)
                     .WithXmlReferenceResolver(xmlFileResolver)

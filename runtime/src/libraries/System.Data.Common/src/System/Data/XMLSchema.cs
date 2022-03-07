@@ -462,10 +462,9 @@ namespace System.Data
         internal void HandleRefTableProperties(ArrayList RefTables, XmlSchemaElement element)
         {
             string typeName = GetInstanceName(element);
-            DataTable? table = _ds!.Tables.GetTable(
-                XmlConvert.DecodeName(typeName),
-                element.QualifiedName.Namespace
-            );
+            DataTable? table = _ds!
+                .Tables
+                .GetTable(XmlConvert.DecodeName(typeName), element.QualifiedName.Namespace);
             Debug.Assert(table != null, "ref table should have been already created");
 
             SetProperties(table, element.UnhandledAttributes);
@@ -1631,9 +1630,10 @@ namespace System.Data
 
             if (0 < key.Length)
             {
-                UniqueConstraint? found = (UniqueConstraint?)key[
-                    0
-                ].Table!.Constraints.FindConstraint(new UniqueConstraint(name, key));
+                UniqueConstraint? found = (UniqueConstraint?)key[0]
+                    .Table!
+                    .Constraints
+                    .FindConstraint(new UniqueConstraint(name, key));
 
                 if (found == null)
                 {

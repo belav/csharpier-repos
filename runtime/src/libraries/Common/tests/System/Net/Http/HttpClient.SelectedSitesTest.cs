@@ -117,16 +117,20 @@ namespace System.Net.Http.Functional.Tests
             HttpClient httpClient = CreateHttpClient(CreateHttpClientHandler());
 
             // Some extra headers since some sites only give proper responses when they are present.
-            httpClient.DefaultRequestHeaders.Add(
-                "User-Agent",
-                "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.186 Safari/537.36"
-            );
+            httpClient
+                .DefaultRequestHeaders
+                .Add(
+                    "User-Agent",
+                    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.186 Safari/537.36"
+                );
             httpClient.DefaultRequestHeaders.Add("Accept-Language", "en-US,en;q=0.9");
             httpClient.DefaultRequestHeaders.Add("Accept-Encoding", "gzip, deflate, br");
-            httpClient.DefaultRequestHeaders.Add(
-                "Accept",
-                "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8"
-            );
+            httpClient
+                .DefaultRequestHeaders
+                .Add(
+                    "Accept",
+                    "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8"
+                );
 
             return httpClient;
         }

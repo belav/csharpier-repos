@@ -35,7 +35,8 @@ namespace Microsoft.EntityFrameworkCore
                     base.OnModelCreating(modelBuilder, context);
 
                     foreach (
-                        var foreignKey in modelBuilder.Model
+                        var foreignKey in modelBuilder
+                            .Model
                             .GetEntityTypes()
                             .SelectMany(e => e.GetDeclaredForeignKeys())
                             .Where(e => e.DeleteBehavior == DeleteBehavior.Cascade)
@@ -70,7 +71,8 @@ namespace Microsoft.EntityFrameworkCore
                     base.OnModelCreating(modelBuilder, context);
 
                     foreach (
-                        var foreignKey in modelBuilder.Model
+                        var foreignKey in modelBuilder
+                            .Model
                             .GetEntityTypes()
                             .SelectMany(e => e.GetDeclaredForeignKeys())
                     )
@@ -532,7 +534,8 @@ namespace Microsoft.EntityFrameworkCore
                                         v => new MyDiscriminator(v.Value)
                                     )
                                 )
-                                .Metadata.SetAfterSaveBehavior(PropertySaveBehavior.Save);
+                                .Metadata
+                                .SetAfterSaveBehavior(PropertySaveBehavior.Save);
                         }
                     );
 

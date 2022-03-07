@@ -30,10 +30,12 @@ namespace Microsoft.CodeAnalysis.UnitTests
         [Fact]
         public void CreateFromAssembly_NoMetadata()
         {
-            var dynamicAssembly = AppDomain.CurrentDomain.DefineDynamicAssembly(
-                new AssemblyName { Name = "A" },
-                System.Reflection.Emit.AssemblyBuilderAccess.Run
-            );
+            var dynamicAssembly = AppDomain
+                .CurrentDomain
+                .DefineDynamicAssembly(
+                    new AssemblyName { Name = "A" },
+                    System.Reflection.Emit.AssemblyBuilderAccess.Run
+                );
             Assert.Throws<NotSupportedException>(
                 () => MetadataReference.CreateFromAssemblyInternal(dynamicAssembly)
             );
@@ -69,10 +71,12 @@ namespace Microsoft.CodeAnalysis.UnitTests
                     )
             );
 
-            var dynamicAssembly = AppDomain.CurrentDomain.DefineDynamicAssembly(
-                new AssemblyName { Name = "Goo" },
-                System.Reflection.Emit.AssemblyBuilderAccess.Run
-            );
+            var dynamicAssembly = AppDomain
+                .CurrentDomain
+                .DefineDynamicAssembly(
+                    new AssemblyName { Name = "Goo" },
+                    System.Reflection.Emit.AssemblyBuilderAccess.Run
+                );
             Assert.Throws<NotSupportedException>(
                 () => MetadataReference.CreateFromAssemblyInternal(dynamicAssembly)
             );
@@ -570,10 +574,9 @@ namespace Microsoft.CodeAnalysis.UnitTests
         public void Equivalence()
         {
             var comparer =
-                CommonReferenceManager<
-                    CS.CSharpCompilation,
-                    IAssemblySymbolInternal
-                >.MetadataReferenceEqualityComparer.Instance;
+                CommonReferenceManager<CS.CSharpCompilation, IAssemblySymbolInternal>
+                    .MetadataReferenceEqualityComparer
+                    .Instance;
 
             var f1 = MscorlibRef;
             var f2 = SystemCoreRef;
@@ -631,10 +634,9 @@ namespace Microsoft.CodeAnalysis.UnitTests
         public void PortableReference_Display()
         {
             var comparer =
-                CommonReferenceManager<
-                    CS.CSharpCompilation,
-                    IAssemblySymbolInternal
-                >.MetadataReferenceEqualityComparer.Instance;
+                CommonReferenceManager<CS.CSharpCompilation, IAssemblySymbolInternal>
+                    .MetadataReferenceEqualityComparer
+                    .Instance;
 
             var f1 = MscorlibRef;
             var f2 = SystemCoreRef;

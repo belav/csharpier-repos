@@ -139,13 +139,13 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
             string language
         )
             : base(
-                ImmutableDictionary<DiagnosticDescriptor, ILanguageSpecificOption>.Empty
+                ImmutableDictionary<DiagnosticDescriptor, ILanguageSpecificOption>
+                    .Empty
                     .Add(s_expressionValueIsUnusedRule, unusedValueExpressionStatementOption)
                     .Add(s_valueAssignedIsUnusedRule, unusedValueAssignmentOption),
-                ImmutableDictionary<DiagnosticDescriptor, IPerLanguageOption>.Empty.Add(
-                    s_unusedParameterRule,
-                    CodeStyleOptions2.UnusedParameters
-                ),
+                ImmutableDictionary<DiagnosticDescriptor, IPerLanguageOption>
+                    .Empty
+                    .Add(s_unusedParameterRule, CodeStyleOptions2.UnusedParameters),
                 language
             )
         {
@@ -403,10 +403,9 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
         {
             if (
                 diagnostic.Properties != null
-                && diagnostic.Properties.TryGetValue(
-                    UnusedValuePreferenceKey,
-                    out var preferenceString
-                )
+                && diagnostic
+                    .Properties
+                    .TryGetValue(UnusedValuePreferenceKey, out var preferenceString)
             )
             {
                 switch (preferenceString)

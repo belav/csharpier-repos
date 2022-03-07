@@ -31,13 +31,15 @@ namespace Internal.Cryptography.Pal
                     nameBlob.cbData = (uint)encodedDistinguishedName.Length;
                     nameBlob.pbData = new IntPtr(pbEncoded);
 
-                    int cchDecoded = Interop.Crypt32.CertNameToStr(
-                        (int)Interop.Crypt32.CertEncodingType.All,
-                        &nameBlob,
-                        dwStrType,
-                        null,
-                        0
-                    );
+                    int cchDecoded = Interop
+                        .Crypt32
+                        .CertNameToStr(
+                            (int)Interop.Crypt32.CertEncodingType.All,
+                            &nameBlob,
+                            dwStrType,
+                            null,
+                            0
+                        );
                     if (cchDecoded == 0)
                         throw ErrorCode.CERT_E_INVALID_NAME.ToCryptographicException();
 
@@ -46,13 +48,15 @@ namespace Internal.Cryptography.Pal
                     fixed (char* ptr = buffer)
                     {
                         if (
-                            Interop.Crypt32.CertNameToStr(
-                                (int)Interop.Crypt32.CertEncodingType.All,
-                                &nameBlob,
-                                dwStrType,
-                                ptr,
-                                cchDecoded
-                            ) == 0
+                            Interop
+                                .Crypt32
+                                .CertNameToStr(
+                                    (int)Interop.Crypt32.CertEncodingType.All,
+                                    &nameBlob,
+                                    dwStrType,
+                                    ptr,
+                                    cchDecoded
+                                ) == 0
                         )
                             throw ErrorCode.CERT_E_INVALID_NAME.ToCryptographicException();
                     }
@@ -74,29 +78,33 @@ namespace Internal.Cryptography.Pal
 
             int cbEncoded = 0;
             if (
-                !Interop.Crypt32.CertStrToName(
-                    Interop.Crypt32.CertEncodingType.All,
-                    distinguishedName,
-                    dwStrType,
-                    IntPtr.Zero,
-                    null,
-                    ref cbEncoded,
-                    IntPtr.Zero
-                )
+                !Interop
+                    .Crypt32
+                    .CertStrToName(
+                        Interop.Crypt32.CertEncodingType.All,
+                        distinguishedName,
+                        dwStrType,
+                        IntPtr.Zero,
+                        null,
+                        ref cbEncoded,
+                        IntPtr.Zero
+                    )
             )
                 throw Marshal.GetLastWin32Error().ToCryptographicException();
 
             byte[] encodedName = new byte[cbEncoded];
             if (
-                !Interop.Crypt32.CertStrToName(
-                    Interop.Crypt32.CertEncodingType.All,
-                    distinguishedName,
-                    dwStrType,
-                    IntPtr.Zero,
-                    encodedName,
-                    ref cbEncoded,
-                    IntPtr.Zero
-                )
+                !Interop
+                    .Crypt32
+                    .CertStrToName(
+                        Interop.Crypt32.CertEncodingType.All,
+                        distinguishedName,
+                        dwStrType,
+                        IntPtr.Zero,
+                        encodedName,
+                        ref cbEncoded,
+                        IntPtr.Zero
+                    )
             )
                 throw Marshal.GetLastWin32Error().ToCryptographicException();
 
@@ -117,17 +125,19 @@ namespace Internal.Cryptography.Pal
 
             int cbFormat = 0;
             if (
-                !Interop.Crypt32.CryptFormatObject(
-                    (int)Interop.Crypt32.CertEncodingType.X509_ASN_ENCODING,
-                    (int)FormatObjectType.None,
-                    stringType,
-                    IntPtr.Zero,
-                    (byte*)(int)FormatObjectStructType.X509_NAME,
-                    encodedDistinguishedName,
-                    encodedDistinguishedName.Length,
-                    null,
-                    ref cbFormat
-                )
+                !Interop
+                    .Crypt32
+                    .CryptFormatObject(
+                        (int)Interop.Crypt32.CertEncodingType.X509_ASN_ENCODING,
+                        (int)FormatObjectType.None,
+                        stringType,
+                        IntPtr.Zero,
+                        (byte*)(int)FormatObjectStructType.X509_NAME,
+                        encodedDistinguishedName,
+                        encodedDistinguishedName.Length,
+                        null,
+                        ref cbFormat
+                    )
             )
             {
                 return encodedDistinguishedName.ToHexStringUpper();
@@ -139,17 +149,19 @@ namespace Internal.Cryptography.Pal
             fixed (char* ptr = buffer)
             {
                 if (
-                    !Interop.Crypt32.CryptFormatObject(
-                        (int)Interop.Crypt32.CertEncodingType.X509_ASN_ENCODING,
-                        (int)FormatObjectType.None,
-                        stringType,
-                        IntPtr.Zero,
-                        (byte*)(int)FormatObjectStructType.X509_NAME,
-                        encodedDistinguishedName,
-                        encodedDistinguishedName.Length,
-                        (byte*)ptr,
-                        ref cbFormat
-                    )
+                    !Interop
+                        .Crypt32
+                        .CryptFormatObject(
+                            (int)Interop.Crypt32.CertEncodingType.X509_ASN_ENCODING,
+                            (int)FormatObjectType.None,
+                            stringType,
+                            IntPtr.Zero,
+                            (byte*)(int)FormatObjectStructType.X509_NAME,
+                            encodedDistinguishedName,
+                            encodedDistinguishedName.Length,
+                            (byte*)ptr,
+                            ref cbFormat
+                        )
                 )
                 {
                     return encodedDistinguishedName.ToHexStringUpper();
@@ -211,20 +223,29 @@ namespace Internal.Cryptography.Pal
                     == X500DistinguishedNameFlags.ForceUTF8Encoding
                 )
                     dwStrType |=
-                        Interop.Crypt32.CertNameStrTypeAndFlags.CERT_NAME_STR_FORCE_UTF8_DIR_STR_FLAG;
+                        Interop
+                            .Crypt32
+                            .CertNameStrTypeAndFlags
+                            .CERT_NAME_STR_FORCE_UTF8_DIR_STR_FLAG;
 
                 if (
                     (flag & X500DistinguishedNameFlags.UseUTF8Encoding)
                     == X500DistinguishedNameFlags.UseUTF8Encoding
                 )
                     dwStrType |=
-                        Interop.Crypt32.CertNameStrTypeAndFlags.CERT_NAME_STR_ENABLE_UTF8_UNICODE_FLAG;
+                        Interop
+                            .Crypt32
+                            .CertNameStrTypeAndFlags
+                            .CERT_NAME_STR_ENABLE_UTF8_UNICODE_FLAG;
                 else if (
                     (flag & X500DistinguishedNameFlags.UseT61Encoding)
                     == X500DistinguishedNameFlags.UseT61Encoding
                 )
                     dwStrType |=
-                        Interop.Crypt32.CertNameStrTypeAndFlags.CERT_NAME_STR_ENABLE_T61_UNICODE_FLAG;
+                        Interop
+                            .Crypt32
+                            .CertNameStrTypeAndFlags
+                            .CERT_NAME_STR_ENABLE_T61_UNICODE_FLAG;
             }
             return dwStrType;
         }

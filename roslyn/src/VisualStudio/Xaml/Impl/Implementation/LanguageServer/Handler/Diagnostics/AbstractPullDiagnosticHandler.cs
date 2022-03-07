@@ -87,10 +87,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.Implementation.LanguageSe
                 {
                     if (previousResult.TextDocument != null)
                     {
-                        var document = context.Solution.GetDocument(
-                            previousResult.TextDocument,
-                            context.ClientName
-                        );
+                        var document = context
+                            .Solution
+                            .GetDocument(previousResult.TextDocument, context.ClientName);
                         if (document == null)
                         {
                             // We can no longer get this document, return null for both diagnostics and resultId
@@ -156,7 +155,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.Implementation.LanguageSe
             }
 
             var project = document.Project;
-            return xamlDiagnostics.Value
+            return xamlDiagnostics
+                .Value
                 .Select(
                     d =>
                         new VSDiagnostic()
@@ -194,7 +194,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.Implementation.LanguageSe
             {
                 // Hidden is translated in ConvertTags to pass along appropriate _ms tags
                 // that will hide the item in a client that knows about those tags.
-                XamlDiagnosticSeverity.Hidden => LSP.DiagnosticSeverity.Hint,
+                XamlDiagnosticSeverity.Hidden
+                  => LSP.DiagnosticSeverity.Hint,
                 XamlDiagnosticSeverity.HintedSuggestion => LSP.DiagnosticSeverity.Hint,
                 XamlDiagnosticSeverity.Message => LSP.DiagnosticSeverity.Information,
                 XamlDiagnosticSeverity.Warning => LSP.DiagnosticSeverity.Warning,

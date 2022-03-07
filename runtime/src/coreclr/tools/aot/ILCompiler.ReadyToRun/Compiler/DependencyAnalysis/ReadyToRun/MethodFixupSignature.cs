@@ -32,8 +32,9 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             IsInstantiatingStub = isInstantiatingStub;
 
             // Ensure types in signature are loadable and resolvable, otherwise we'll fail later while emitting the signature
-            CompilerTypeSystemContext compilerContext =
-                (CompilerTypeSystemContext)method.Method.Context;
+            CompilerTypeSystemContext compilerContext = (CompilerTypeSystemContext)method
+                .Method
+                .Context;
             compilerContext.EnsureLoadableMethod(method.Method);
             compilerContext.EnsureLoadableType(_method.OwningType);
 
@@ -104,10 +105,9 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                 {
                     method = new MethodWithToken(
                         method.Method,
-                        factory.SignatureContext.GetModuleTokenForMethod(
-                            method.Method,
-                            throwIfNotFound: false
-                        ),
+                        factory
+                            .SignatureContext
+                            .GetModuleTokenForMethod(method.Method, throwIfNotFound: false),
                         method.ConstrainedType,
                         unboxing: _method.Unboxing,
                         null
@@ -119,10 +119,9 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                     {
                         method = new MethodWithToken(
                             method.Method,
-                            factory.SignatureContext.GetModuleTokenForMethod(
-                                method.Method,
-                                throwIfNotFound: false
-                            ),
+                            factory
+                                .SignatureContext
+                                .GetModuleTokenForMethod(method.Method, throwIfNotFound: false),
                             method.ConstrainedType,
                             unboxing: _method.Unboxing,
                             null

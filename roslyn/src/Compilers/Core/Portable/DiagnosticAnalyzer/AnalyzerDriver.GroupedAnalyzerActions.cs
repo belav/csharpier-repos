@@ -62,9 +62,9 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                     analyzerActionsNeedFiltering: false
                 );
                 var groupedActionsAndAnalyzers =
-                    ImmutableArray<(DiagnosticAnalyzer, GroupedAnalyzerActionsForAnalyzer)>.Empty.Add(
-                        (analyzer, groupedActions)
-                    );
+                    ImmutableArray<(DiagnosticAnalyzer, GroupedAnalyzerActionsForAnalyzer)>
+                        .Empty
+                        .Add((analyzer, groupedActions));
                 return new GroupedAnalyzerActions(groupedActionsAndAnalyzers, in analyzerActions);
             }
 
@@ -97,9 +97,9 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 var groupedAnalyzerActions = (GroupedAnalyzerActions)igroupedAnalyzerActions;
 
 #if DEBUG
-                var inputAnalyzers = groupedAnalyzerActions.GroupedActionsByAnalyzer.Select(
-                    a => a.analyzer
-                );
+                var inputAnalyzers = groupedAnalyzerActions
+                    .GroupedActionsByAnalyzer
+                    .Select(a => a.analyzer);
                 var myAnalyzers = GroupedActionsByAnalyzer.Select(a => a.analyzer);
                 var intersected = inputAnalyzers.Intersect(myAnalyzers);
                 Debug.Assert(intersected.IsEmpty());

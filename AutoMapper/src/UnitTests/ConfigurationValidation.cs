@@ -361,11 +361,9 @@ namespace AutoMapper.UnitTests.ConfigurationValidation
 
         [Fact]
         public void Should_be_ignored() =>
-            new Action(
-                Configuration.AssertConfigurationIsValid
-            ).ShouldThrow<AutoMapperConfigurationException>().Errors[0].UnmappedPropertyNames[
-                0
-            ].ShouldBe(nameof(Source.Value));
+            new Action(Configuration.AssertConfigurationIsValid)
+                .ShouldThrow<AutoMapperConfigurationException>()
+                .Errors[0].UnmappedPropertyNames[0].ShouldBe(nameof(Source.Value));
     }
 
     public class When_testing_a_dto_with_fully_mapped_and_custom_matchers : NonValidatingSpecBase
@@ -870,7 +868,8 @@ namespace AutoMapper.UnitTests.ConfigurationValidation
                 ResolutionContext context
             )
             {
-                return source.Details
+                return source
+                    .Details
                     .Select(d => new KeyValuePair<string, string>(d.ToString(), d.ToString()))
                     .ToList();
             }

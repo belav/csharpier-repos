@@ -22,9 +22,9 @@ namespace Microsoft.NET.HostModel.AppHost
         /// </summary>
         private const string AppBinaryPathPlaceholder =
             "c3ab8ff13720e8ad9047dd39466b3c8974e592c2fa383d4a3960714caef0c4f2";
-        private static readonly byte[] AppBinaryPathPlaceholderSearchValue = Encoding.UTF8.GetBytes(
-            AppBinaryPathPlaceholder
-        );
+        private static readonly byte[] AppBinaryPathPlaceholderSearchValue = Encoding
+            .UTF8
+            .GetBytes(AppBinaryPathPlaceholder);
 
         /// <summary>
         /// Create an AppHost with embedded configuration of app binary location

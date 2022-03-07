@@ -93,7 +93,9 @@ namespace Internal.CommandLine
             try
             {
                 details.Add(
-                    System.Diagnostics.FileVersionInfo
+                    System
+                        .Diagnostics
+                        .FileVersionInfo
                         .GetVersionInfo(Environment.GetCommandLineArgs()[0])
                         .ToString()
                 );

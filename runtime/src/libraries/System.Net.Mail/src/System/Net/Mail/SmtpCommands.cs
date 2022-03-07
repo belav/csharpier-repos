@@ -227,10 +227,13 @@ namespace System.Net.Mail
             {
                 throw new SmtpException(SR.SmtpAuthResponseInvalid);
             }
-            System.Diagnostics.Debug.Assert(
-                lines.Length == 1,
-                "Did not expect more than one line response for auth command"
-            );
+            System
+                .Diagnostics
+                .Debug
+                .Assert(
+                    lines.Length == 1,
+                    "Did not expect more than one line response for auth command"
+                );
             return lines[0];
         }
 

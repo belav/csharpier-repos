@@ -416,9 +416,9 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 }
 
                 return declarationDataMap?.Count == declarationsCount
-                    && declarationDataMap.Values.All(
-                        state => state.StateKind == StateKind.FullyProcessed
-                    );
+                    && declarationDataMap
+                        .Values
+                        .All(state => state.StateKind == StateKind.FullyProcessed);
             }
 
             public bool TryStartProcessingEvent(

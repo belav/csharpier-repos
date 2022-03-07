@@ -149,7 +149,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
 
                     // Check if there is another TypeParameterConstraintClause before
                     if (
-                        previousToken.Parent
+                        previousToken
+                            .Parent
                             .Ancestors()
                             .OfType<TypeParameterConstraintClauseSyntax>()
                             .Any()
@@ -159,10 +160,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                     }
 
                     // Check if there is another TypeParameterConstraintClause after
-                    var firstTokenAfterTypeConstraint = currentToken.Parent
+                    var firstTokenAfterTypeConstraint = currentToken
+                        .Parent
                         .GetLastToken()
                         .GetNextToken();
-                    var lastTokenForTypeConstraint = currentToken.Parent
+                    var lastTokenForTypeConstraint = currentToken
+                        .Parent
                         .GetLastToken()
                         .GetNextToken();
                     if (
@@ -171,9 +174,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                             firstTokenAfterTypeConstraint
                         )
                         && firstTokenAfterTypeConstraint.IsKind(SyntaxKind.WhereKeyword)
-                        && firstTokenAfterTypeConstraint.Parent.IsKind(
-                            SyntaxKind.TypeParameterConstraintClause
-                        )
+                        && firstTokenAfterTypeConstraint
+                            .Parent
+                            .IsKind(SyntaxKind.TypeParameterConstraintClause)
                     )
                     {
                         return CreateAdjustNewLinesOperation(1, AdjustNewLinesOption.PreserveLines);
@@ -419,12 +422,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                         if (
                             parent.Target != null
                             && (
-                                parent.Target.Identifier.IsKindOrHasMatchingText(
-                                    SyntaxKind.AssemblyKeyword
-                                )
-                                || parent.Target.Identifier.IsKindOrHasMatchingText(
-                                    SyntaxKind.ModuleKeyword
-                                )
+                                parent
+                                    .Target
+                                    .Identifier
+                                    .IsKindOrHasMatchingText(SyntaxKind.AssemblyKeyword)
+                                || parent
+                                    .Target
+                                    .Identifier
+                                    .IsKindOrHasMatchingText(SyntaxKind.ModuleKeyword)
                             )
                         )
                         {

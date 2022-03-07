@@ -1377,10 +1377,9 @@ internal partial class Http2Connection
             throw;
         }
 
-        KestrelEventSource.Log.RequestQueuedStart(
-            _currentHeadersStream,
-            AspNetCore.Http.HttpProtocol.Http2
-        );
+        KestrelEventSource
+            .Log
+            .RequestQueuedStart(_currentHeadersStream, AspNetCore.Http.HttpProtocol.Http2);
 
         // _scheduleInline is only true in tests
         if (!_scheduleInline)

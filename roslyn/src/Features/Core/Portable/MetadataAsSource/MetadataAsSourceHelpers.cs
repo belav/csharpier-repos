@@ -72,7 +72,8 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
         )
         {
             var resolution = symbolId.Resolve(
-                await generatedDocument.Project
+                await generatedDocument
+                    .Project
                     .GetCompilationAsync(cancellationToken)
                     .ConfigureAwait(false),
                 ignoreAssemblyKey: true,

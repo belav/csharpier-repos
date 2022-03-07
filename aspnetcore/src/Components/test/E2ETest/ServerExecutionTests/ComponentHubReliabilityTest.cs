@@ -64,13 +64,9 @@ namespace Microsoft.AspNetCore.Components.E2ETest.ServerExecutionTests
             // Act
             await Client.ExpectCircuitErrorAndDisconnect(
                 () =>
-                    Client.HubConnection.SendAsync(
-                        "StartCircuit",
-                        baseUri,
-                        baseUri + "/home",
-                        descriptors,
-                        null
-                    )
+                    Client
+                        .HubConnection
+                        .SendAsync("StartCircuit", baseUri, baseUri + "/home", descriptors, null)
             );
 
             // Assert
@@ -124,13 +120,9 @@ namespace Microsoft.AspNetCore.Components.E2ETest.ServerExecutionTests
             // These are valid URIs by the BaseUri doesn't contain the Uri - so it fails to initialize.
             await Client.ExpectCircuitErrorAndDisconnect(
                 () =>
-                    Client.HubConnection.SendAsync(
-                        "StartCircuit",
-                        uri,
-                        "http://example.com",
-                        descriptors,
-                        null
-                    ),
+                    Client
+                        .HubConnection
+                        .SendAsync("StartCircuit", uri, "http://example.com", descriptors, null),
                 Timeout
             );
 
@@ -348,11 +340,13 @@ namespace Microsoft.AspNetCore.Components.E2ETest.ServerExecutionTests
             // Act
             await Client.ExpectCircuitError(
                 () =>
-                    Client.HubConnection.SendAsync(
-                        "OnLocationChanged",
-                        new Uri(baseUri, "/test").AbsoluteUri,
-                        false
-                    )
+                    Client
+                        .HubConnection
+                        .SendAsync(
+                            "OnLocationChanged",
+                            new Uri(baseUri, "/test").AbsoluteUri,
+                            false
+                        )
             );
 
             // Assert

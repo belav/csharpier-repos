@@ -30,10 +30,12 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .Execute()
                 .Should()
                 .Pass()
-                .And.HaveStdErrContaining(
+                .And
+                .HaveStdErrContaining(
                     $"Property {sharedState.AppTestPropertyName} = {sharedState.AppTestPropertyValue}"
                 )
-                .And.HaveStdOutContaining(
+                .And
+                .HaveStdOutContaining(
                     $"AppContext.GetData({sharedState.AppTestPropertyName}) = {sharedState.AppTestPropertyValue}"
                 );
         }
@@ -51,10 +53,12 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .Execute()
                 .Should()
                 .Pass()
-                .And.HaveStdErrContaining(
+                .And
+                .HaveStdErrContaining(
                     $"Property {sharedState.FrameworkTestPropertyName} = {sharedState.FrameworkTestPropertyValue}"
                 )
-                .And.HaveStdOutContaining(
+                .And
+                .HaveStdOutContaining(
                     $"AppContext.GetData({sharedState.FrameworkTestPropertyName}) = {sharedState.FrameworkTestPropertyValue}"
                 );
         }
@@ -80,10 +84,12 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .Execute()
                 .Should()
                 .Pass()
-                .And.HaveStdErrContaining(
+                .And
+                .HaveStdErrContaining(
                     $"Property {sharedState.FrameworkTestPropertyName} = {sharedState.AppTestPropertyValue}"
                 )
-                .And.HaveStdOutContaining(
+                .And
+                .HaveStdOutContaining(
                     $"AppContext.GetData({sharedState.FrameworkTestPropertyName}) = {sharedState.AppTestPropertyValue}"
                 );
         }
@@ -98,7 +104,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .Execute()
                 .Should()
                 .Pass()
-                .And.HaveStdErrContaining(
+                .And
+                .HaveStdErrContaining(
                     $"Property {sharedState.HostFxrPathPropertyName} = {dotnet.GreatestVersionHostFxrFilePath}"
                 );
         }
@@ -116,7 +123,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .Execute()
                 .Should()
                 .Pass()
-                .And.HaveStdOutContaining(
+                .And
+                .HaveStdOutContaining(
                     $"Property '{sharedState.HostFxrPathPropertyName}' was not found."
                 );
         }
@@ -140,7 +148,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .Execute()
                 .Should()
                 .Fail()
-                .And.HaveStdErrContaining($"Duplicate runtime property found: {name}");
+                .And
+                .HaveStdErrContaining($"Duplicate runtime property found: {name}");
         }
 
         public class SharedTestState : IDisposable

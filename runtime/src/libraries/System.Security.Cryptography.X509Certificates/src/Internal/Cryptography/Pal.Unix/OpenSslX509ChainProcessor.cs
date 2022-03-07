@@ -117,14 +117,12 @@ namespace Internal.Cryptography.Pal
             try
             {
                 untrusted = Interop.Crypto.NewX509Stack();
-                Interop.Crypto.X509StackAddMultiple(
-                    untrusted,
-                    s_userIntermediateStore.GetNativeCollection()
-                );
-                Interop.Crypto.X509StackAddMultiple(
-                    untrusted,
-                    s_userPersonalStore.GetNativeCollection()
-                );
+                Interop
+                    .Crypto
+                    .X509StackAddMultiple(untrusted, s_userIntermediateStore.GetNativeCollection());
+                Interop
+                    .Crypto
+                    .X509StackAddMultiple(untrusted, s_userPersonalStore.GetNativeCollection());
 
                 store = GetTrustStore(trustMode, customTrustStore, untrusted, systemTrust);
 
@@ -169,9 +167,9 @@ namespace Internal.Cryptography.Pal
                 {
                     foreach (X509Certificate2 cert in customTrustStore)
                     {
-                        SafeX509StackHandle toAdd = cert.SubjectName.RawData.ContentsEqual(
-                            cert.IssuerName.RawData
-                        )
+                        SafeX509StackHandle toAdd = cert.SubjectName
+                            .RawData
+                            .ContentsEqual(cert.IssuerName.RawData)
                           ? customTrust
                           : untrusted;
                         AddToStackAndUpRef(
@@ -180,10 +178,9 @@ namespace Internal.Cryptography.Pal
                         );
                     }
 
-                    return Interop.Crypto.X509ChainNew(
-                        customTrust,
-                        SafeX509StackHandle.InvalidHandle
-                    );
+                    return Interop
+                        .Crypto
+                        .X509ChainNew(customTrust, SafeX509StackHandle.InvalidHandle);
                 }
             }
 
@@ -198,9 +195,9 @@ namespace Internal.Cryptography.Pal
 
             // While this returns true/false, at this stage we care more about the detailed error code.
             Interop.Crypto.X509VerifyCert(storeCtx);
-            Interop.Crypto.X509VerifyStatusCode statusCode = Interop.Crypto.X509StoreCtxGetError(
-                storeCtx
-            );
+            Interop.Crypto.X509VerifyStatusCode statusCode = Interop
+                .Crypto
+                .X509StoreCtxGetError(storeCtx);
 
             if (IsCompleteChain(statusCode))
             {
@@ -416,9 +413,9 @@ namespace Internal.Cryptography.Pal
                 for (int i = 0; i < revocationSize; i++)
                 {
                     using (
-                        SafeX509Handle cert = Interop.Crypto.X509UpRef(
-                            Interop.Crypto.GetX509StackField(chainStack, i)
-                        )
+                        SafeX509Handle cert = Interop
+                            .Crypto
+                            .X509UpRef(Interop.Crypto.GetX509StackField(chainStack, i))
                     )
                     {
                         CrlCache.AddCrlForCertificate(
@@ -538,8 +535,9 @@ namespace Internal.Cryptography.Pal
                         if (chainSize == 1)
                         {
                             using (
-                                SafeSharedX509StackHandle untrusted =
-                                    Interop.Crypto.X509StoreCtxGetSharedUntrusted(_storeCtx)
+                                SafeSharedX509StackHandle untrusted = Interop
+                                    .Crypto
+                                    .X509StoreCtxGetSharedUntrusted(_storeCtx)
                             )
                             using (SafeX509Handle upref = Interop.Crypto.X509UpRef(_leafHandle))
                             {
@@ -725,8 +723,9 @@ namespace Internal.Cryptography.Pal
         )
         {
             string ocspCache = CrlCache.GetCachedOcspResponseDirectory();
-            Interop.Crypto.X509VerifyStatusCode status =
-                Interop.Crypto.X509ChainGetCachedOcspStatus(_storeCtx, ocspCache, chainDepth);
+            Interop.Crypto.X509VerifyStatusCode status = Interop
+                .Crypto
+                .X509ChainGetCachedOcspStatus(_storeCtx, ocspCache, chainDepth);
 
             if (status != X509VerifyStatusCodeUniversal.X509_V_ERR_UNABLE_TO_GET_CRL)
             {
@@ -746,17 +745,18 @@ namespace Internal.Cryptography.Pal
             }
 
             using (
-                SafeOcspRequestHandle req = Interop.Crypto.X509ChainBuildOcspRequest(
-                    _storeCtx,
-                    chainDepth
-                )
+                SafeOcspRequestHandle req = Interop
+                    .Crypto
+                    .X509ChainBuildOcspRequest(_storeCtx, chainDepth)
             )
             {
-                ArraySegment<byte> encoded = Interop.Crypto.OpenSslRentEncode(
-                    handle => Interop.Crypto.GetOcspRequestDerSize(handle),
-                    (handle, buf) => Interop.Crypto.EncodeOcspRequest(handle, buf),
-                    req
-                );
+                ArraySegment<byte> encoded = Interop
+                    .Crypto
+                    .OpenSslRentEncode(
+                        handle => Interop.Crypto.GetOcspRequestDerSize(handle),
+                        (handle, buf) => Interop.Crypto.EncodeOcspRequest(handle, buf),
+                        req
+                    );
 
                 ArraySegment<char> urlEncoded = Base64UrlEncode(encoded);
                 string requestUrl = UrlPathAppend(baseUri, urlEncoded);
@@ -794,13 +794,9 @@ namespace Internal.Cryptography.Pal
                         // Opportunistic create, suppress all errors.
                     }
 
-                    return Interop.Crypto.X509ChainVerifyOcsp(
-                        _storeCtx,
-                        req,
-                        resp,
-                        ocspCache,
-                        chainDepth
-                    );
+                    return Interop
+                        .Crypto
+                        .X509ChainVerifyOcsp(_storeCtx, req, resp, ocspCache, chainDepth);
                 }
             }
         }
@@ -1395,8 +1391,9 @@ namespace Internal.Cryptography.Pal
                 {
                     using (var storeCtx = new SafeX509StoreCtxHandle(ctx, ownsHandle: false))
                     {
-                        Interop.Crypto.X509VerifyStatusCode errorCode =
-                            Interop.Crypto.X509StoreCtxGetError(storeCtx);
+                        Interop.Crypto.X509VerifyStatusCode errorCode = Interop
+                            .Crypto
+                            .X509StoreCtxGetError(storeCtx);
                         int errorDepth = Interop.Crypto.X509StoreCtxGetErrorDepth(storeCtx);
 
                         if (

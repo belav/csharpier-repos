@@ -31,23 +31,26 @@ namespace Microsoft.CodeAnalysis.CSharp
             // Declaration and Initializers are mutually exclusive.
             if (_syntax.Declaration != null)
             {
-                _syntax.Declaration.Type.VisitRankSpecifiers(
-                    (rankSpecifier, args) =>
-                    {
-                        foreach (var size in rankSpecifier.Sizes)
+                _syntax
+                    .Declaration
+                    .Type
+                    .VisitRankSpecifiers(
+                        (rankSpecifier, args) =>
                         {
-                            if (size.Kind() != SyntaxKind.OmittedArraySizeExpression)
+                            foreach (var size in rankSpecifier.Sizes)
                             {
-                                ExpressionVariableFinder.FindExpressionVariables(
-                                    args.binder,
-                                    args.locals,
-                                    size
-                                );
+                                if (size.Kind() != SyntaxKind.OmittedArraySizeExpression)
+                                {
+                                    ExpressionVariableFinder.FindExpressionVariables(
+                                        args.binder,
+                                        args.locals,
+                                        size
+                                    );
+                                }
                             }
-                        }
-                    },
-                    (binder: this, locals: locals)
-                );
+                        },
+                        (binder: this, locals: locals)
+                    );
 
                 foreach (var vdecl in _syntax.Declaration.Variables)
                 {

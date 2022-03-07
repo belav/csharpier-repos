@@ -695,9 +695,9 @@ namespace MyNamespace
                 ignoreLineEndingDifferences: true
             );
 
-            var modelBuilder = SqlServerTestHelpers.Instance.CreateConventionBuilder(
-                configure: c => c.RemoveAllConventions()
-            );
+            var modelBuilder = SqlServerTestHelpers
+                .Instance
+                .CreateConventionBuilder(configure: c => c.RemoveAllConventions());
             modelBuilder.HasAnnotation("Some:EnumValue", RegexOptions.Multiline);
             modelBuilder.HasAnnotation(
                 RelationalAnnotationNames.DbFunctions,

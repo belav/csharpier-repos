@@ -25,7 +25,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
 
             foreach (string value in values)
             {
-                Execute.Assertion
+                Execute
+                    .Assertion
                     .ForCondition(propertyValue != null && propertyValue.Contains(value))
                     .FailWith(
                         "The property {0} doesn't contain expected value: {1}\n{2}\n{3}",
@@ -49,7 +50,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
 
             foreach (string value in values)
             {
-                Execute.Assertion
+                Execute
+                    .Assertion
                     .ForCondition(propertyValue != null && !propertyValue.Contains(value))
                     .FailWith(
                         "The property {0} contains unexpected value: {1}\n{2}\n{3}",
@@ -134,7 +136,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
 
             foreach (string value in values)
             {
-                Execute.Assertion
+                Execute
+                    .Assertion
                     .ForCondition(propertyValue != null && propertyValue.Contains(value))
                     .FailWith(
                         "The resolved {0} doesn't contain expected value: {1}\n{2}\n{3}",
@@ -158,7 +161,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
 
             foreach (string value in values)
             {
-                Execute.Assertion
+                Execute
+                    .Assertion
                     .ForCondition(propertyValue != null && !propertyValue.Contains(value))
                     .FailWith(
                         "The resolved {0} contains unexpected value: {1}\n{2}\n{3}",

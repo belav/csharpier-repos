@@ -1293,9 +1293,9 @@ True"
 
             Assert.Equal(
                 "System.Int32",
-                (
-                    (ILocalSymbol)compilation.GetSemanticModel(tree).GetDeclaredSymbol(x1Decl[0])
-                ).Type.ToTestDisplayString()
+                ((ILocalSymbol)compilation.GetSemanticModel(tree).GetDeclaredSymbol(x1Decl[0]))
+                    .Type
+                    .ToTestDisplayString()
             );
 
             CreateCompilationWithMscorlib45(

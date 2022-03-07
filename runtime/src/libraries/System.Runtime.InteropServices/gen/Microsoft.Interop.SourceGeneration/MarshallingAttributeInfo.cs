@@ -276,12 +276,14 @@ namespace Microsoft.Interop
 
                 if (
                     indirectionLevel == 0
-                    && SymbolEqualityComparer.Default.Equals(
-                        _compilation.GetTypeByMetadataName(
-                            TypeNames.System_Runtime_InteropServices_MarshalAsAttribute
-                        ),
-                        attributeClass
-                    )
+                    && SymbolEqualityComparer
+                        .Default
+                        .Equals(
+                            _compilation.GetTypeByMetadataName(
+                                TypeNames.System_Runtime_InteropServices_MarshalAsAttribute
+                            ),
+                            attributeClass
+                        )
                 )
                 {
                     // https://docs.microsoft.com/dotnet/api/system.runtime.interopservices.marshalasattribute
@@ -293,10 +295,12 @@ namespace Microsoft.Interop
                     );
                 }
                 else if (
-                    SymbolEqualityComparer.Default.Equals(
-                        _compilation.GetTypeByMetadataName(TypeNames.MarshalUsingAttribute),
-                        attributeClass
-                    )
+                    SymbolEqualityComparer
+                        .Default
+                        .Equals(
+                            _compilation.GetTypeByMetadataName(TypeNames.MarshalUsingAttribute),
+                            attributeClass
+                        )
                 )
                 {
                     if (parsedCountInfo != NoCountInfo.Instance)
@@ -331,10 +335,12 @@ namespace Microsoft.Interop
                 INamedTypeSymbol attributeClass = typeAttribute.AttributeClass!;
 
                 if (
-                    SymbolEqualityComparer.Default.Equals(
-                        _compilation.GetTypeByMetadataName(TypeNames.BlittableTypeAttribute),
-                        attributeClass
-                    )
+                    SymbolEqualityComparer
+                        .Default
+                        .Equals(
+                            _compilation.GetTypeByMetadataName(TypeNames.BlittableTypeAttribute),
+                            attributeClass
+                        )
                 )
                 {
                     // If type is generic, then we need to re-evaluate that it is blittable at usage time.
@@ -348,10 +354,14 @@ namespace Microsoft.Interop
                     break;
                 }
                 else if (
-                    SymbolEqualityComparer.Default.Equals(
-                        _compilation.GetTypeByMetadataName(TypeNames.NativeMarshallingAttribute),
-                        attributeClass
-                    )
+                    SymbolEqualityComparer
+                        .Default
+                        .Equals(
+                            _compilation.GetTypeByMetadataName(
+                                TypeNames.NativeMarshallingAttribute
+                            ),
+                            attributeClass
+                        )
                 )
                 {
                     return CreateNativeMarshallingInfo(
@@ -366,10 +376,14 @@ namespace Microsoft.Interop
                     );
                 }
                 else if (
-                    SymbolEqualityComparer.Default.Equals(
-                        _compilation.GetTypeByMetadataName(TypeNames.GeneratedMarshallingAttribute),
-                        attributeClass
-                    )
+                    SymbolEqualityComparer
+                        .Default
+                        .Equals(
+                            _compilation.GetTypeByMetadataName(
+                                TypeNames.GeneratedMarshallingAttribute
+                            ),
+                            attributeClass
+                        )
                 )
                 {
                     return type.IsConsideredBlittable()
@@ -826,9 +840,9 @@ namespace Microsoft.Interop
                     }
                     else
                     {
-                        nativeType = nativeType.ConstructedFrom.Construct(
-                            namedType.TypeArguments.ToArray()
-                        );
+                        nativeType = nativeType
+                            .ConstructedFrom
+                            .Construct(namedType.TypeArguments.ToArray());
                     }
                 }
                 else
@@ -850,10 +864,9 @@ namespace Microsoft.Interop
                 .GetAttributes()
                 .Any(
                     attr =>
-                        SymbolEqualityComparer.Default.Equals(
-                            attr.AttributeClass,
-                            contiguousCollectionMarshalerAttribute
-                        )
+                        SymbolEqualityComparer
+                            .Default
+                            .Equals(attr.AttributeClass, contiguousCollectionMarshalerAttribute)
                 );
             IPropertySymbol? valueProperty = ManualTypeMarshallingHelper.FindValueProperty(
                 nativeType
@@ -1130,10 +1143,9 @@ namespace Microsoft.Interop
             }
 
             if (
-                !SymbolEqualityComparer.Default.Equals(
-                    attrData.AttributeClass,
-                    _marshalUsingAttribute
-                )
+                !SymbolEqualityComparer
+                    .Default
+                    .Equals(attrData.AttributeClass, _marshalUsingAttribute)
             )
             {
                 indirectionLevel = 0;

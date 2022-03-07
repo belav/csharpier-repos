@@ -83,10 +83,9 @@ public class AuthorizationApplicationModelProviderTest
     {
         // Arrange
         var options = Options.Create(new AuthorizationOptions());
-        options.Value.AddPolicy(
-            "Base",
-            policy => policy.RequireClaim("Basic").RequireClaim("Basic2")
-        );
+        options
+            .Value
+            .AddPolicy("Base", policy => policy.RequireClaim("Basic").RequireClaim("Basic2"));
         options.Value.AddPolicy("Derived", policy => policy.RequireClaim("Derived"));
 
         var provider = new AuthorizationApplicationModelProvider(

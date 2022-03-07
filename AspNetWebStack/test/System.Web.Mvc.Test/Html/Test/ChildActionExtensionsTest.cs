@@ -364,7 +364,9 @@ namespace System.Web.Mvc.Html.Test
                 (
                     routeData.Values[ChildActionValueProvider.ChildActionValuesKey]
                     as DictionaryValueProvider<object>
-                ).GetValue("name2").RawValue
+                )
+                    .GetValue("name2")
+                    .RawValue
             );
         }
 
@@ -488,7 +490,9 @@ namespace System.Web.Mvc.Html.Test
                 (
                     routeData.Values[ChildActionValueProvider.ChildActionValuesKey]
                     as DictionaryValueProvider<object>
-                ).GetValue("area").RawValue
+                )
+                    .GetValue("area")
+                    .RawValue
             );
         }
 

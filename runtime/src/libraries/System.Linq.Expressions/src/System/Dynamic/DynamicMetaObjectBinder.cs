@@ -78,11 +78,11 @@ namespace System.Dynamic
                     && !TypeUtils.AreReferenceAssignable(returnLabel.Type, expectedResult)
                 )
                 {
-                    throw System.Linq.Expressions.Error.BinderNotCompatibleWithCallSite(
-                        expectedResult,
-                        this,
-                        returnLabel.Type
-                    );
+                    throw System
+                        .Linq
+                        .Expressions
+                        .Error
+                        .BinderNotCompatibleWithCallSite(expectedResult, this, returnLabel.Type);
                 }
             }
             else
@@ -117,20 +117,24 @@ namespace System.Dynamic
                 //
                 if (target.Value is IDynamicMetaObjectProvider)
                 {
-                    throw System.Linq.Expressions.Error.DynamicObjectResultNotAssignable(
-                        body.Type,
-                        target.Value.GetType(),
-                        this,
-                        expectedResult
-                    );
+                    throw System
+                        .Linq
+                        .Expressions
+                        .Error
+                        .DynamicObjectResultNotAssignable(
+                            body.Type,
+                            target.Value.GetType(),
+                            this,
+                            expectedResult
+                        );
                 }
                 else
                 {
-                    throw System.Linq.Expressions.Error.DynamicBinderResultNotAssignable(
-                        body.Type,
-                        this,
-                        expectedResult
-                    );
+                    throw System
+                        .Linq
+                        .Expressions
+                        .Error
+                        .DynamicBinderResultNotAssignable(body.Type, this, expectedResult);
                 }
             }
 
@@ -141,10 +145,11 @@ namespace System.Dynamic
             {
                 if (restrictions == BindingRestrictions.Empty)
                 {
-                    throw System.Linq.Expressions.Error.DynamicBindingNeedsRestrictions(
-                        target.Value!.GetType(),
-                        this
-                    );
+                    throw System
+                        .Linq
+                        .Expressions
+                        .Error
+                        .DynamicBindingNeedsRestrictions(target.Value!.GetType(), this);
                 }
             }
 

@@ -229,10 +229,12 @@ namespace JIT.HardwareIntrinsics.Arm
                 fixed (Vector64<Int16>* pFld1 = &_fld1)
                 fixed (Vector64<Int16>* pFld2 = &_fld2)
                 {
-                    var result = AdvSimd.Arm64.ShiftArithmeticRoundedSaturateScalar(
-                        AdvSimd.LoadVector64((Int16*)(pFld1)),
-                        AdvSimd.LoadVector64((Int16*)(pFld2))
-                    );
+                    var result = AdvSimd
+                        .Arm64
+                        .ShiftArithmeticRoundedSaturateScalar(
+                            AdvSimd.LoadVector64((Int16*)(pFld1)),
+                            AdvSimd.LoadVector64((Int16*)(pFld2))
+                        );
 
                     Unsafe.Write(testClass._dataTable.outArrayPtr, result);
                     testClass.ValidateResult(_fld1, _fld2, testClass._dataTable.outArrayPtr);
@@ -329,10 +331,12 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunBasicScenario_UnsafeRead));
 
-            var result = AdvSimd.Arm64.ShiftArithmeticRoundedSaturateScalar(
-                Unsafe.Read<Vector64<Int16>>(_dataTable.inArray1Ptr),
-                Unsafe.Read<Vector64<Int16>>(_dataTable.inArray2Ptr)
-            );
+            var result = AdvSimd
+                .Arm64
+                .ShiftArithmeticRoundedSaturateScalar(
+                    Unsafe.Read<Vector64<Int16>>(_dataTable.inArray1Ptr),
+                    Unsafe.Read<Vector64<Int16>>(_dataTable.inArray2Ptr)
+                );
 
             Unsafe.Write(_dataTable.outArrayPtr, result);
             ValidateResult(_dataTable.inArray1Ptr, _dataTable.inArray2Ptr, _dataTable.outArrayPtr);
@@ -342,10 +346,12 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunBasicScenario_Load));
 
-            var result = AdvSimd.Arm64.ShiftArithmeticRoundedSaturateScalar(
-                AdvSimd.LoadVector64((Int16*)(_dataTable.inArray1Ptr)),
-                AdvSimd.LoadVector64((Int16*)(_dataTable.inArray2Ptr))
-            );
+            var result = AdvSimd
+                .Arm64
+                .ShiftArithmeticRoundedSaturateScalar(
+                    AdvSimd.LoadVector64((Int16*)(_dataTable.inArray1Ptr)),
+                    AdvSimd.LoadVector64((Int16*)(_dataTable.inArray2Ptr))
+                );
 
             Unsafe.Write(_dataTable.outArrayPtr, result);
             ValidateResult(_dataTable.inArray1Ptr, _dataTable.inArray2Ptr, _dataTable.outArrayPtr);
@@ -412,10 +418,12 @@ namespace JIT.HardwareIntrinsics.Arm
             fixed (Vector64<Int16>* pClsVar1 = &_clsVar1)
             fixed (Vector64<Int16>* pClsVar2 = &_clsVar2)
             {
-                var result = AdvSimd.Arm64.ShiftArithmeticRoundedSaturateScalar(
-                    AdvSimd.LoadVector64((Int16*)(pClsVar1)),
-                    AdvSimd.LoadVector64((Int16*)(pClsVar2))
-                );
+                var result = AdvSimd
+                    .Arm64
+                    .ShiftArithmeticRoundedSaturateScalar(
+                        AdvSimd.LoadVector64((Int16*)(pClsVar1)),
+                        AdvSimd.LoadVector64((Int16*)(pClsVar2))
+                    );
 
                 Unsafe.Write(_dataTable.outArrayPtr, result);
                 ValidateResult(_clsVar1, _clsVar2, _dataTable.outArrayPtr);
@@ -468,10 +476,12 @@ namespace JIT.HardwareIntrinsics.Arm
             fixed (Vector64<Int16>* pFld1 = &test._fld1)
             fixed (Vector64<Int16>* pFld2 = &test._fld2)
             {
-                var result = AdvSimd.Arm64.ShiftArithmeticRoundedSaturateScalar(
-                    AdvSimd.LoadVector64((Int16*)(pFld1)),
-                    AdvSimd.LoadVector64((Int16*)(pFld2))
-                );
+                var result = AdvSimd
+                    .Arm64
+                    .ShiftArithmeticRoundedSaturateScalar(
+                        AdvSimd.LoadVector64((Int16*)(pFld1)),
+                        AdvSimd.LoadVector64((Int16*)(pFld2))
+                    );
 
                 Unsafe.Write(_dataTable.outArrayPtr, result);
                 ValidateResult(test._fld1, test._fld2, _dataTable.outArrayPtr);
@@ -495,10 +505,12 @@ namespace JIT.HardwareIntrinsics.Arm
             fixed (Vector64<Int16>* pFld1 = &_fld1)
             fixed (Vector64<Int16>* pFld2 = &_fld2)
             {
-                var result = AdvSimd.Arm64.ShiftArithmeticRoundedSaturateScalar(
-                    AdvSimd.LoadVector64((Int16*)(pFld1)),
-                    AdvSimd.LoadVector64((Int16*)(pFld2))
-                );
+                var result = AdvSimd
+                    .Arm64
+                    .ShiftArithmeticRoundedSaturateScalar(
+                        AdvSimd.LoadVector64((Int16*)(pFld1)),
+                        AdvSimd.LoadVector64((Int16*)(pFld2))
+                    );
 
                 Unsafe.Write(_dataTable.outArrayPtr, result);
                 ValidateResult(_fld1, _fld2, _dataTable.outArrayPtr);
@@ -521,10 +533,12 @@ namespace JIT.HardwareIntrinsics.Arm
             TestLibrary.TestFramework.BeginScenario(nameof(RunStructLclFldScenario_Load));
 
             var test = TestStruct.Create();
-            var result = AdvSimd.Arm64.ShiftArithmeticRoundedSaturateScalar(
-                AdvSimd.LoadVector64((Int16*)(&test._fld1)),
-                AdvSimd.LoadVector64((Int16*)(&test._fld2))
-            );
+            var result = AdvSimd
+                .Arm64
+                .ShiftArithmeticRoundedSaturateScalar(
+                    AdvSimd.LoadVector64((Int16*)(&test._fld1)),
+                    AdvSimd.LoadVector64((Int16*)(&test._fld2))
+                );
 
             Unsafe.Write(_dataTable.outArrayPtr, result);
             ValidateResult(test._fld1, test._fld2, _dataTable.outArrayPtr);
@@ -646,14 +660,16 @@ namespace JIT.HardwareIntrinsics.Arm
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation(
-                    $"{nameof(AdvSimd.Arm64)}.{nameof(AdvSimd.Arm64.ShiftArithmeticRoundedSaturateScalar)}<Int16>(Vector64<Int16>, Vector64<Int16>): {method} failed:"
-                );
+                TestLibrary
+                    .TestFramework
+                    .LogInformation(
+                        $"{nameof(AdvSimd.Arm64)}.{nameof(AdvSimd.Arm64.ShiftArithmeticRoundedSaturateScalar)}<Int16>(Vector64<Int16>, Vector64<Int16>): {method} failed:"
+                    );
                 TestLibrary.TestFramework.LogInformation($"    left: ({string.Join(", ", left)})");
                 TestLibrary.TestFramework.LogInformation($"   right: ({string.Join(", ", right)})");
-                TestLibrary.TestFramework.LogInformation(
-                    $"  result: ({string.Join(", ", result)})"
-                );
+                TestLibrary
+                    .TestFramework
+                    .LogInformation($"  result: ({string.Join(", ", result)})");
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;

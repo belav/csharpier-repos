@@ -82,9 +82,11 @@ public class SafeHandleDangerousGetHandle
     {
         bool retVal = true;
 
-        TestLibrary.TestFramework.BeginScenario(
-            "PosTest1: DangerousGetHandle should return handle value for valid safe handle"
-        );
+        TestLibrary
+            .TestFramework
+            .BeginScenario(
+                "PosTest1: DangerousGetHandle should return handle value for valid safe handle"
+            );
 
         try
         {
@@ -93,15 +95,19 @@ public class SafeHandleDangerousGetHandle
 
             if (handleValue != IntPtr.Zero)
             {
-                TestLibrary.TestFramework.LogError(
-                    "001.1",
-                    "DangerousGetHandle returns wrong handle value for valid safe handle"
-                );
-                TestLibrary.TestFramework.LogInformation(
-                    "WARNING: [LOCAL VARIABLES] handleValue = "
-                        + handleValue.ToString()
-                        + ", desiredValue = IntPtr.Zero"
-                );
+                TestLibrary
+                    .TestFramework
+                    .LogError(
+                        "001.1",
+                        "DangerousGetHandle returns wrong handle value for valid safe handle"
+                    );
+                TestLibrary
+                    .TestFramework
+                    .LogInformation(
+                        "WARNING: [LOCAL VARIABLES] handleValue = "
+                            + handleValue.ToString()
+                            + ", desiredValue = IntPtr.Zero"
+                    );
                 retVal = false;
             }
 
@@ -110,15 +116,19 @@ public class SafeHandleDangerousGetHandle
 
             if (handleValue != IntPtr.Zero)
             {
-                TestLibrary.TestFramework.LogError(
-                    "001.2",
-                    "DangerousGetHandle returns wrong handle value for valid safe handle"
-                );
-                TestLibrary.TestFramework.LogInformation(
-                    "WARNING: [LOCAL VARIABLES] handleValue = "
-                        + handleValue.ToString()
-                        + ", desiredValue = IntPtr.Zero"
-                );
+                TestLibrary
+                    .TestFramework
+                    .LogError(
+                        "001.2",
+                        "DangerousGetHandle returns wrong handle value for valid safe handle"
+                    );
+                TestLibrary
+                    .TestFramework
+                    .LogInformation(
+                        "WARNING: [LOCAL VARIABLES] handleValue = "
+                            + handleValue.ToString()
+                            + ", desiredValue = IntPtr.Zero"
+                    );
                 retVal = false;
             }
         }
@@ -137,9 +147,11 @@ public class SafeHandleDangerousGetHandle
     {
         bool retVal = true;
 
-        TestLibrary.TestFramework.BeginScenario(
-            "PosTest2: DangerousGetHandle should return handle value for valid safe handle"
-        );
+        TestLibrary
+            .TestFramework
+            .BeginScenario(
+                "PosTest2: DangerousGetHandle should return handle value for valid safe handle"
+            );
 
         try
         {
@@ -150,16 +162,20 @@ public class SafeHandleDangerousGetHandle
 
             if (handleValue != desiredValue)
             {
-                TestLibrary.TestFramework.LogError(
-                    "002.1",
-                    "DangerousGetHandle returns wrong handle value for valid safe handle"
-                );
-                TestLibrary.TestFramework.LogInformation(
-                    "WARNING: [LOCAL VARIABLES] handleValue = "
-                        + handleValue.ToString()
-                        + ", desiredValue = "
-                        + desiredValue.ToString()
-                );
+                TestLibrary
+                    .TestFramework
+                    .LogError(
+                        "002.1",
+                        "DangerousGetHandle returns wrong handle value for valid safe handle"
+                    );
+                TestLibrary
+                    .TestFramework
+                    .LogInformation(
+                        "WARNING: [LOCAL VARIABLES] handleValue = "
+                            + handleValue.ToString()
+                            + ", desiredValue = "
+                            + desiredValue.ToString()
+                    );
                 retVal = false;
             }
 
@@ -167,16 +183,20 @@ public class SafeHandleDangerousGetHandle
 
             if (handleValue != desiredValue)
             {
-                TestLibrary.TestFramework.LogError(
-                    "002.2",
-                    "DangerousGetHandle returns wrong handle value for valid safe handle"
-                );
-                TestLibrary.TestFramework.LogInformation(
-                    "WARNING: [LOCAL VARIABLES] handleValue = "
-                        + handleValue.ToString()
-                        + ", desiredValue = "
-                        + desiredValue.ToString()
-                );
+                TestLibrary
+                    .TestFramework
+                    .LogError(
+                        "002.2",
+                        "DangerousGetHandle returns wrong handle value for valid safe handle"
+                    );
+                TestLibrary
+                    .TestFramework
+                    .LogInformation(
+                        "WARNING: [LOCAL VARIABLES] handleValue = "
+                            + handleValue.ToString()
+                            + ", desiredValue = "
+                            + desiredValue.ToString()
+                    );
                 retVal = false;
             }
         }
@@ -195,9 +215,11 @@ public class SafeHandleDangerousGetHandle
     {
         bool retVal = true;
 
-        TestLibrary.TestFramework.BeginScenario(
-            "PosTest3: DangerousGetHandle should return handle value for invalid safe handle"
-        );
+        TestLibrary
+            .TestFramework
+            .BeginScenario(
+                "PosTest3: DangerousGetHandle should return handle value for invalid safe handle"
+            );
 
         try
         {
@@ -206,15 +228,19 @@ public class SafeHandleDangerousGetHandle
 
             if (handleValue != IntPtr.Zero)
             {
-                TestLibrary.TestFramework.LogError(
-                    "003.1",
-                    "DangerousGetHandle returns wrong handle value for invalid safe handle"
-                );
-                TestLibrary.TestFramework.LogInformation(
-                    "WARNING: [LOCAL VARIABLES] handleValue = "
-                        + handleValue.ToString()
-                        + ", desiredValue = IntPtr.Zero"
-                );
+                TestLibrary
+                    .TestFramework
+                    .LogError(
+                        "003.1",
+                        "DangerousGetHandle returns wrong handle value for invalid safe handle"
+                    );
+                TestLibrary
+                    .TestFramework
+                    .LogInformation(
+                        "WARNING: [LOCAL VARIABLES] handleValue = "
+                            + handleValue.ToString()
+                            + ", desiredValue = IntPtr.Zero"
+                    );
                 retVal = false;
             }
 
@@ -222,15 +248,19 @@ public class SafeHandleDangerousGetHandle
 
             if (handleValue != IntPtr.Zero)
             {
-                TestLibrary.TestFramework.LogError(
-                    "003.2",
-                    "DangerousGetHandle returns wrong handle value for invalid safe handle"
-                );
-                TestLibrary.TestFramework.LogInformation(
-                    "WARNING: [LOCAL VARIABLES] handleValue = "
-                        + handleValue.ToString()
-                        + ", desiredValue = IntPtr.Zero"
-                );
+                TestLibrary
+                    .TestFramework
+                    .LogError(
+                        "003.2",
+                        "DangerousGetHandle returns wrong handle value for invalid safe handle"
+                    );
+                TestLibrary
+                    .TestFramework
+                    .LogInformation(
+                        "WARNING: [LOCAL VARIABLES] handleValue = "
+                            + handleValue.ToString()
+                            + ", desiredValue = IntPtr.Zero"
+                    );
                 retVal = false;
             }
         }
@@ -249,9 +279,11 @@ public class SafeHandleDangerousGetHandle
     {
         bool retVal = true;
 
-        TestLibrary.TestFramework.BeginScenario(
-            "PosTest4: DangerousGetHandle should return handle value for valid safe handle"
-        );
+        TestLibrary
+            .TestFramework
+            .BeginScenario(
+                "PosTest4: DangerousGetHandle should return handle value for valid safe handle"
+            );
 
         try
         {
@@ -262,16 +294,20 @@ public class SafeHandleDangerousGetHandle
 
             if (handleValue != desiredValue)
             {
-                TestLibrary.TestFramework.LogError(
-                    "004.1",
-                    "DangerousGetHandle returns wrong handle value for valid safe handle"
-                );
-                TestLibrary.TestFramework.LogInformation(
-                    "WARNING: [LOCAL VARIABLES] handleValue = "
-                        + handleValue.ToString()
-                        + ", desiredValue = "
-                        + desiredValue.ToString()
-                );
+                TestLibrary
+                    .TestFramework
+                    .LogError(
+                        "004.1",
+                        "DangerousGetHandle returns wrong handle value for valid safe handle"
+                    );
+                TestLibrary
+                    .TestFramework
+                    .LogInformation(
+                        "WARNING: [LOCAL VARIABLES] handleValue = "
+                            + handleValue.ToString()
+                            + ", desiredValue = "
+                            + desiredValue.ToString()
+                    );
                 retVal = false;
             }
 
@@ -279,16 +315,20 @@ public class SafeHandleDangerousGetHandle
 
             if (handleValue != desiredValue)
             {
-                TestLibrary.TestFramework.LogError(
-                    "004.2",
-                    "DangerousGetHandle returns wrong handle value for valid safe handle"
-                );
-                TestLibrary.TestFramework.LogInformation(
-                    "WARNING: [LOCAL VARIABLES] handleValue = "
-                        + handleValue.ToString()
-                        + ", desiredValue = "
-                        + desiredValue.ToString()
-                );
+                TestLibrary
+                    .TestFramework
+                    .LogError(
+                        "004.2",
+                        "DangerousGetHandle returns wrong handle value for valid safe handle"
+                    );
+                TestLibrary
+                    .TestFramework
+                    .LogInformation(
+                        "WARNING: [LOCAL VARIABLES] handleValue = "
+                            + handleValue.ToString()
+                            + ", desiredValue = "
+                            + desiredValue.ToString()
+                    );
                 retVal = false;
             }
         }

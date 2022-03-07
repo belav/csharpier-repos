@@ -102,12 +102,15 @@ internal class ComponentBindLoweringPass : ComponentIntermediateNodePassBase, IR
                 )
                 {
                     // There is no corresponding bind node. Add a diagnostic and move on.
-                    parameterReference.Parent.Diagnostics.Add(
-                        ComponentDiagnosticFactory.CreateBindAttributeParameter_MissingBind(
-                            node.Source,
-                            node.AttributeName
-                        )
-                    );
+                    parameterReference
+                        .Parent
+                        .Diagnostics
+                        .Add(
+                            ComponentDiagnosticFactory.CreateBindAttributeParameter_MissingBind(
+                                node.Source,
+                                node.AttributeName
+                            )
+                        );
                 }
                 else if (node.BoundAttributeParameter.Name == "event")
                 {
@@ -525,13 +528,15 @@ internal class ComponentBindLoweringPass : ComponentIntermediateNodePassBase, IR
 
                 expressionNode.Children.Clear();
                 expressionNode.Children.Add(new CSharpExpressionIntermediateNode());
-                expressionNode.Children[0].Children.Add(
-                    new IntermediateToken()
-                    {
-                        Content = $"() => {original.Content}",
-                        Kind = TokenKind.CSharp
-                    }
-                );
+                expressionNode.Children[0]
+                    .Children
+                    .Add(
+                        new IntermediateToken()
+                        {
+                            Content = $"() => {original.Content}",
+                            Kind = TokenKind.CSharp
+                        }
+                    );
             }
 
             return expressionNode == null

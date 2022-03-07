@@ -41,9 +41,11 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.OmniSharp.Internal.ExtractClass
                     result.FileName,
                     result.TypeName,
                     result.SameFile,
-                    result.MemberAnalysisResults.SelectAsArray(
-                        m => new ExtractClassMemberAnalysisResult(m.Member, m.MakeAbstract)
-                    )
+                    result
+                        .MemberAnalysisResults
+                        .SelectAsArray(
+                            m => new ExtractClassMemberAnalysisResult(m.Member, m.MakeAbstract)
+                        )
                 );
         }
     }

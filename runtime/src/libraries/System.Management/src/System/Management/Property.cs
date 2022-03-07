@@ -102,13 +102,9 @@ namespace System.Management
         {
             propertyValue = null; // Needed so we don't leak this in/out parameter...
 
-            int status = parent.wbemObject.Get_(
-                propertyName,
-                0,
-                ref propertyValue,
-                ref propertyType,
-                ref propertyFlavor
-            );
+            int status = parent
+                .wbemObject
+                .Get_(propertyName, 0, ref propertyValue, ref propertyType, ref propertyFlavor);
 
             if (status < 0)
             {
@@ -324,9 +320,9 @@ namespace System.Management
                             for (int i = 0; i < length; i++)
                                 ((ulong[])val)[i] = Convert.ToUInt64(
                                     (string)(wmiValueArray.GetValue(i)),
-                                    (IFormatProvider)CultureInfo.CurrentCulture.GetFormat(
-                                        typeof(ulong)
-                                    )
+                                    (IFormatProvider)CultureInfo
+                                        .CurrentCulture
+                                        .GetFormat(typeof(ulong))
                                 );
                             break;
 
@@ -343,9 +339,9 @@ namespace System.Management
                             for (int i = 0; i < length; i++)
                                 ((long[])val)[i] = Convert.ToInt64(
                                     (string)(wmiValueArray.GetValue(i)),
-                                    (IFormatProvider)CultureInfo.CurrentCulture.GetFormat(
-                                        typeof(long)
-                                    )
+                                    (IFormatProvider)CultureInfo
+                                        .CurrentCulture
+                                        .GetFormat(typeof(long))
                                 );
                             break;
 

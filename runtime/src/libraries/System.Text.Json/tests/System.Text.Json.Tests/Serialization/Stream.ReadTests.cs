@@ -45,9 +45,9 @@ namespace System.Text.Json.Serialization.Tests
         [Fact]
         public async Task ReadSimpleObjectWithTrailingTriviaAsync()
         {
-            byte[] data = Encoding.UTF8.GetBytes(
-                SimpleTestClass.s_json + " /* Multi\r\nLine Comment */\t"
-            );
+            byte[] data = Encoding
+                .UTF8
+                .GetBytes(SimpleTestClass.s_json + " /* Multi\r\nLine Comment */\t");
             using (MemoryStream stream = new MemoryStream(data))
             {
                 JsonSerializerOptions options = new JsonSerializerOptions
@@ -314,9 +314,11 @@ namespace System.Text.Json.Serialization.Tests
 
                 static Stream CreateStream(int count)
                 {
-                    byte[] objBytes = Encoding.UTF8.GetBytes(
-                        @"{""Test"":{},""Test2"":[],""Test3"":{""Value"":{}},""PersonType"":0,""Id"":2}"
-                    );
+                    byte[] objBytes = Encoding
+                        .UTF8
+                        .GetBytes(
+                            @"{""Test"":{},""Test2"":[],""Test3"":{""Value"":{}},""PersonType"":0,""Id"":2}"
+                        );
 
                     byte[] utf8Bom = Encoding.UTF8.GetPreamble();
 

@@ -51,8 +51,10 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
                 return Array.Empty<SymbolInformation>();
             }
 
-            var navBarService =
-                document.Project.LanguageServices.GetRequiredService<INavigationBarItemService>();
+            var navBarService = document
+                .Project
+                .LanguageServices
+                .GetRequiredService<INavigationBarItemService>();
             var navBarItems = await navBarService
                 .GetItemsAsync(document, supportsCodeGeneration: false, cancellationToken)
                 .ConfigureAwait(false);
@@ -61,7 +63,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
                 return Array.Empty<object>();
             }
 
-            var compilation = await document.Project
+            var compilation = await document
+                .Project
                 .GetRequiredCompilationAsync(cancellationToken)
                 .ConfigureAwait(false);
             var tree = await document
@@ -73,8 +76,11 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             // https://github.com/dotnet/roslyn/projects/45#card-20033869
             using var _ = ArrayBuilder<object>.GetInstance(out var symbols);
             if (
-                context.ClientCapabilities?.TextDocument?.DocumentSymbol?.HierarchicalDocumentSymbolSupport
-                == true
+                context
+                    .ClientCapabilities
+                    ?.TextDocument
+                    ?.DocumentSymbol
+                    ?.HierarchicalDocumentSymbolSupport == true
             )
             {
                 foreach (var item in navBarItems)
@@ -255,7 +261,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             )
             {
                 var model = compilation.GetSemanticModel(location.SourceTree);
-                var root = await model.SyntaxTree
+                var root = await model
+                    .SyntaxTree
                     .GetRootAsync(cancellationToken)
                     .ConfigureAwait(false);
                 var node = root.FindNode(location.SourceSpan);
@@ -288,10 +295,9 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             if (item is not RoslynNavigationBarItem.SymbolItem symbolItem)
                 return null;
 
-            var symbols = symbolItem.NavigationSymbolId.Resolve(
-                compilation,
-                cancellationToken: cancellationToken
-            );
+            var symbols = symbolItem
+                .NavigationSymbolId
+                .Resolve(compilation, cancellationToken: cancellationToken);
             var symbol = symbols.Symbol;
 
             if (symbol == null)

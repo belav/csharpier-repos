@@ -265,10 +265,9 @@ public abstract class TempDataTestBase
             {
                 if (cookie.Expires == null || cookie.Expires >= DateTimeOffset.UtcNow)
                 {
-                    request.Headers.Add(
-                        "Cookie",
-                        new CookieHeaderValue(cookie.Name, cookie.Value).ToString()
-                    );
+                    request
+                        .Headers
+                        .Add("Cookie", new CookieHeaderValue(cookie.Name, cookie.Value).ToString());
                 }
             }
         }

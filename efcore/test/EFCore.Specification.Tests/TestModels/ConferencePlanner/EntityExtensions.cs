@@ -15,7 +15,8 @@ namespace Microsoft.EntityFrameworkCore.TestModels.ConferencePlanner
                 Title = session.Title,
                 StartTime = session.StartTime,
                 EndTime = session.EndTime,
-                Speakers = session.SessionSpeakers
+                Speakers = session
+                    .SessionSpeakers
                     ?.Select(
                         ss =>
                             new ConferenceDTO.Speaker { Id = ss.SpeakerId, Name = ss.Speaker.Name }
@@ -37,7 +38,8 @@ namespace Microsoft.EntityFrameworkCore.TestModels.ConferencePlanner
                 Name = speaker.Name,
                 Bio = speaker.Bio,
                 WebSite = speaker.WebSite,
-                Sessions = speaker.SessionSpeakers
+                Sessions = speaker
+                    .SessionSpeakers
                     ?.Select(
                         ss =>
                             new ConferenceDTO.Session
@@ -57,7 +59,8 @@ namespace Microsoft.EntityFrameworkCore.TestModels.ConferencePlanner
                 LastName = attendee.LastName,
                 UserName = attendee.UserName,
                 EmailAddress = attendee.EmailAddress,
-                Sessions = attendee.SessionsAttendees
+                Sessions = attendee
+                    .SessionsAttendees
                     ?.Select(
                         sa =>
                             new ConferenceDTO.Session

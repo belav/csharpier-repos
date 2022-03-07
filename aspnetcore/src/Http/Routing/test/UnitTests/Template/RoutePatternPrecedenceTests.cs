@@ -31,12 +31,14 @@ public class RoutePatternPrecedenceTests : RoutePrecedenceTestsBase
         var parameterPrecedence = RoutePatternFactory.Parse("{controller}").InboundPrecedence;
 
         var requiredValueParameterPrecedence =
-            RoutePatternFactory.Parse(
-                "{controller}",
-                defaults: null,
-                parameterPolicies: null,
-                requiredValues: new { controller = "Home" }
-            ).InboundPrecedence;
+            RoutePatternFactory
+                .Parse(
+                    "{controller}",
+                    defaults: null,
+                    parameterPolicies: null,
+                    requiredValues: new { controller = "Home" }
+                )
+                .InboundPrecedence;
 
         Assert.True(requiredValueParameterPrecedence < parameterPrecedence);
     }

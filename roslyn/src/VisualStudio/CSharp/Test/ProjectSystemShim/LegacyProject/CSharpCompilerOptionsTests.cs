@@ -121,9 +121,12 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.ProjectSystemShim.LegacyProject
             Assert.Equal(initialPath, project.GetOutputFileName());
 
             string getCurrentCompilationOutputAssemblyPath() =>
-                environment.Workspace.CurrentSolution.GetRequiredProject(
-                    project.Test_VisualStudioProject.Id
-                ).CompilationOutputInfo.AssemblyPath;
+                environment
+                    .Workspace
+                    .CurrentSolution
+                    .GetRequiredProject(project.Test_VisualStudioProject.Id)
+                    .CompilationOutputInfo
+                    .AssemblyPath;
 
             Assert.Equal(initialPath, getCurrentCompilationOutputAssemblyPath());
 
@@ -156,9 +159,12 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.ProjectSystemShim.LegacyProject
             var project = CSharpHelpers.CreateCSharpProject(environment, "Test");
 
             string getCurrentCompilationOutputAssemblyPath() =>
-                environment.Workspace.CurrentSolution.GetRequiredProject(
-                    project.Test_VisualStudioProject.Id
-                ).CompilationOutputInfo.AssemblyPath;
+                environment
+                    .Workspace
+                    .CurrentSolution
+                    .GetRequiredProject(project.Test_VisualStudioProject.Id)
+                    .CompilationOutputInfo
+                    .AssemblyPath;
 
             Assert.Null(getCurrentCompilationOutputAssemblyPath());
 
@@ -237,11 +243,13 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.ProjectSystemShim.LegacyProject
 
             const LanguageVersion attemptedVersion = LanguageVersion.CSharp8;
 
-            var canApply = environment.Workspace.CanApplyParseOptionChange(
-                oldParseOptions,
-                oldParseOptions.WithLanguageVersion(attemptedVersion),
-                project
-            );
+            var canApply = environment
+                .Workspace
+                .CanApplyParseOptionChange(
+                    oldParseOptions,
+                    oldParseOptions.WithLanguageVersion(attemptedVersion),
+                    project
+                );
 
             if (maxSupportedLangVersion.HasValue)
             {
@@ -274,11 +282,13 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.ProjectSystemShim.LegacyProject
 
             const LanguageVersion attemptedVersion = LanguageVersion.CSharp8;
 
-            var canApply = environment.Workspace.CanApplyParseOptionChange(
-                oldParseOptions,
-                oldParseOptions.WithLanguageVersion(attemptedVersion),
-                project
-            );
+            var canApply = environment
+                .Workspace
+                .CanApplyParseOptionChange(
+                    oldParseOptions,
+                    oldParseOptions.WithLanguageVersion(attemptedVersion),
+                    project
+                );
 
             Assert.True(canApply);
         }

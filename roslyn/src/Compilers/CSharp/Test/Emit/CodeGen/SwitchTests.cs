@@ -3168,9 +3168,9 @@ class Test
             var comp = CSharpCompilation.Create(
                 "Name",
                 references: new[] { reference },
-                options: TestOptions.ReleaseDll.WithMetadataImportOptions(
-                    MetadataImportOptions.Internal
-                )
+                options: TestOptions
+                    .ReleaseDll
+                    .WithMetadataImportOptions(MetadataImportOptions.Internal)
             );
 
             var pid = (
@@ -9506,7 +9506,8 @@ public class Program
                 source,
                 expectedOutput: "",
                 symbolValidator: validator,
-                options: TestOptions.DebugDll
+                options: TestOptions
+                    .DebugDll
                     .WithOutputKind(OutputKind.ConsoleApplication)
                     .WithMetadataImportOptions(MetadataImportOptions.All)
             );

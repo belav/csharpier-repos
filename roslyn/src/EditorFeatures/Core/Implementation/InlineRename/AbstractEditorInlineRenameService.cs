@@ -103,7 +103,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
             // If rename is invoked on a member group reference in a nameof expression, then the
             // RenameOverloads option should be forced on.
             var forceRenameOverloads = tokenRenameInfo.IsMemberGroup;
-            var symbol = await RenameLocations.ReferenceProcessing
+            var symbol = await RenameLocations
+                .ReferenceProcessing
                 .TryGetRenamableSymbolAsync(
                     document,
                     triggerToken.SpanStart,
@@ -215,13 +216,15 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
                         var projectIdOfLocation = sourceDocument.Project.Id;
 
                         if (
-                            solution.Projects.Any(
-                                p =>
-                                    p.IsSubmission
-                                    && p.ProjectReferences.Any(
-                                        r => r.ProjectId == projectIdOfLocation
-                                    )
-                            )
+                            solution
+                                .Projects
+                                .Any(
+                                    p =>
+                                        p.IsSubmission
+                                        && p.ProjectReferences.Any(
+                                            r => r.ProjectId == projectIdOfLocation
+                                        )
+                                )
                         )
                             return new FailureInlineRenameInfo(
                                 EditorFeaturesResources.You_cannot_rename_elements_from_previous_submissions

@@ -50,10 +50,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                     // BindType for AttributeSyntax's name is handled specially during lookup, see Binder.LookupAttributeType.
                     // When looking up a name in attribute type context, we generate a diagnostic + error type if it is not an attribute type, i.e. named type deriving from System.Attribute.
                     // Hence we can assume here that BindType returns a NamedTypeSymbol.
-                    boundAttributeTypes[i] = (NamedTypeSymbol)binder.BindType(
-                        attributesToBind[i].Name,
-                        diagnostics
-                    ).Type;
+                    boundAttributeTypes[i] = (NamedTypeSymbol)binder
+                        .BindType(attributesToBind[i].Name, diagnostics)
+                        .Type;
                 }
             }
         }
@@ -230,8 +229,10 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
             else
             {
-                boundConstructorArguments =
-                    analyzedArguments.ConstructorArguments.Arguments.SelectAsArray(
+                boundConstructorArguments = analyzedArguments
+                    .ConstructorArguments
+                    .Arguments
+                    .SelectAsArray(
                         static (arg, attributeArgumentBinder) =>
                             attributeArgumentBinder.BindToTypeForErrorRecovery(arg),
                         attributeArgumentBinder
@@ -262,8 +263,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                 }
             }
 
-            ImmutableArray<string?> boundConstructorArgumentNamesOpt =
-                analyzedArguments.ConstructorArguments.GetNames();
+            ImmutableArray<string?> boundConstructorArgumentNamesOpt = analyzedArguments
+                .ConstructorArguments
+                .GetNames();
             ImmutableArray<BoundAssignmentOperator> boundNamedArguments =
                 analyzedArguments.NamedArguments?.ToImmutableAndFree()
                 ?? ImmutableArray<BoundAssignmentOperator>.Empty;
@@ -1138,10 +1140,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 parameterType = GetSpecialType(SpecialType.System_String, diagnostics, syntax);
                 kind = TypedConstantKind.Primitive;
-                defaultValue = syntax.SyntaxTree.GetDisplayPath(
-                    syntax.Name.Span,
-                    Compilation.Options.SourceReferenceResolver
-                );
+                defaultValue = syntax
+                    .SyntaxTree
+                    .GetDisplayPath(syntax.Name.Span, Compilation.Options.SourceReferenceResolver);
             }
             else if (
                 !IsEarlyAttributeBinder
@@ -1151,9 +1152,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 parameterType = GetSpecialType(SpecialType.System_String, diagnostics, syntax);
                 kind = TypedConstantKind.Primitive;
-                defaultValue = (
-                    (ContextualAttributeBinder)this
-                ).AttributedMember.GetMemberCallerName();
+                defaultValue = ((ContextualAttributeBinder)this)
+                    .AttributedMember
+                    .GetMemberCallerName();
             }
             // We check IsCallerMemberName here since the above if can be reached with AttributedMember == null, in which case,
             // We shouldn't be checking CallerArgumentExpression

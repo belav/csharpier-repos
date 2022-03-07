@@ -104,10 +104,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 keyProperties = DiscoverKeyProperties(entityType, candidateProperties).ToList();
                 if (keyProperties.Count > 1)
                 {
-                    Dependencies.Logger.MultiplePrimaryKeyCandidates(
-                        keyProperties[0],
-                        keyProperties[1]
-                    );
+                    Dependencies
+                        .Logger
+                        .MultiplePrimaryKeyCandidates(keyProperties[0], keyProperties[1]);
                     return;
                 }
             }
@@ -127,11 +126,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                     )
                     {
                         shadowProperty =
-                            entityTypeBuilder.CreateUniqueProperty(
-                                typeof(int),
-                                "Id",
-                                required: true
-                            )!.Metadata;
+                            entityTypeBuilder
+                                .CreateUniqueProperty(typeof(int), "Id", required: true)!
+                                .Metadata;
                     }
 
                     keyProperties.Clear();
@@ -365,8 +362,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             IConventionContext<IConventionForeignKey> context
         )
         {
-            var joinEntityTypeBuilder =
-                skipNavigationBuilder.Metadata.ForeignKey?.DeclaringEntityType.Builder;
+            var joinEntityTypeBuilder = skipNavigationBuilder
+                .Metadata
+                .ForeignKey
+                ?.DeclaringEntityType
+                .Builder;
             if (joinEntityTypeBuilder != null && skipNavigationBuilder.Metadata.IsCollection)
             {
                 TryConfigurePrimaryKey(joinEntityTypeBuilder);

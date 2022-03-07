@@ -54,7 +54,10 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.ExtractMethod
             }
 
             var activeInlineRenameSession =
-                workspace.Services.GetService<ICodeRefactoringHelpersService>().ActiveInlineRenameSession;
+                workspace
+                    .Services
+                    .GetService<ICodeRefactoringHelpersService>()
+                    .ActiveInlineRenameSession;
             if (activeInlineRenameSession)
             {
                 return;

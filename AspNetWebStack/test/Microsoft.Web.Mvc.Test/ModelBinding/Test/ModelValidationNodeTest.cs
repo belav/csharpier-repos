@@ -433,10 +433,11 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
                 ValidateAllProperties = true
             };
 
-            controllerContext.Controller.ViewData.ModelState.AddModelError(
-                "theKey.RequiredString.Dummy",
-                "existing Error Text"
-            );
+            controllerContext
+                .Controller
+                .ViewData
+                .ModelState
+                .AddModelError("theKey.RequiredString.Dummy", "existing Error Text");
 
             // Act
             node.Validate(controllerContext);

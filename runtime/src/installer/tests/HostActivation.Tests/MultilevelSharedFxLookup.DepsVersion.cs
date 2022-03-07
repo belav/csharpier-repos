@@ -38,9 +38,12 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .Should()
                 .Pass()
                 // Verify final selection in TRUSTED_PLATFORM_ASSEMBLIES
-                .And.HaveStdErrContaining($"{appAssembly}{Path.PathSeparator}")
-                .And.NotHaveStdErrContaining($"{netcoreAssembly}{Path.PathSeparator}")
-                .And.NotHaveStdErrContaining($"{uberAssembly}{Path.PathSeparator}");
+                .And
+                .HaveStdErrContaining($"{appAssembly}{Path.PathSeparator}")
+                .And
+                .NotHaveStdErrContaining($"{netcoreAssembly}{Path.PathSeparator}")
+                .And
+                .NotHaveStdErrContaining($"{uberAssembly}{Path.PathSeparator}");
         }
 
         [Theory]
@@ -80,11 +83,15 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .Execute()
                 .Should()
                 .Pass()
-                .And.HaveStdErrContaining(Path.Combine(_exeFoundUberFxMessage, uberProductVersion))
+                .And
+                .HaveStdErrContaining(Path.Combine(_exeFoundUberFxMessage, uberProductVersion))
                 // Verify final selection in TRUSTED_PLATFORM_ASSEMBLIES
-                .And.HaveStdErrContaining($"{uberAssembly}{Path.PathSeparator}")
-                .And.NotHaveStdErrContaining($"{netcoreAssembly}{Path.PathSeparator}")
-                .And.NotHaveStdErrContaining($"{appAssembly}{Path.PathSeparator}");
+                .And
+                .HaveStdErrContaining($"{uberAssembly}{Path.PathSeparator}")
+                .And
+                .NotHaveStdErrContaining($"{netcoreAssembly}{Path.PathSeparator}")
+                .And
+                .NotHaveStdErrContaining($"{appAssembly}{Path.PathSeparator}");
         }
 
         [Fact]
@@ -116,9 +123,12 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .Should()
                 .Pass()
                 // Verify final selection in TRUSTED_PLATFORM_ASSEMBLIES
-                .And.HaveStdErrContaining($"{netcoreAssembly}{Path.PathSeparator}")
-                .And.NotHaveStdErrContaining($"{appAssembly}{Path.PathSeparator}")
-                .And.NotHaveStdErrContaining($"{uberAssembly}{Path.PathSeparator}");
+                .And
+                .HaveStdErrContaining($"{netcoreAssembly}{Path.PathSeparator}")
+                .And
+                .NotHaveStdErrContaining($"{appAssembly}{Path.PathSeparator}")
+                .And
+                .NotHaveStdErrContaining($"{uberAssembly}{Path.PathSeparator}");
         }
 
         private TestProjectFixture ConfigureAppAndFrameworks(

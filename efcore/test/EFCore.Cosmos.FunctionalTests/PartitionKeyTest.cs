@@ -154,9 +154,9 @@ OFFSET 0 LIMIT 1";
 
                 Assert.Equal(
                     CoreStrings.KeyReadOnly(nameof(Customer.PartitionKey), nameof(Customer)),
-                    Assert.Throws<InvalidOperationException>(
-                        () => innerContext.SaveChanges()
-                    ).Message
+                    Assert
+                        .Throws<InvalidOperationException>(() => innerContext.SaveChanges())
+                        .Message
                 );
             }
 

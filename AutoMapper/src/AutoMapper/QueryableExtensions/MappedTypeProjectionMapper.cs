@@ -25,11 +25,9 @@ namespace AutoMapper.QueryableExtensions.Impl
             LetPropertyMaps letPropertyMaps
         )
         {
-            var transformedExpression = configuration.ProjectionBuilder.CreateInnerProjection(
-                request,
-                resolvedSource,
-                letPropertyMaps
-            );
+            var transformedExpression = configuration
+                .ProjectionBuilder
+                .CreateInnerProjection(request, resolvedSource, letPropertyMaps);
             if (transformedExpression == null)
             {
                 return null;

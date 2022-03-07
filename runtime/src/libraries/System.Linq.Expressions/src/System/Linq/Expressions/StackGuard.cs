@@ -99,7 +99,9 @@ namespace System.Linq.Expressions
                 if (!task.IsCompleted)
                 {
                     // Task.Wait has the potential of inlining the task's execution on the current thread; avoid this.
-                    ((IAsyncResult)task).AsyncWaitHandle.WaitOne();
+                    ((IAsyncResult)task)
+                        .AsyncWaitHandle
+                        .WaitOne();
                 }
 
                 // Using awaiter here to propagate original exception

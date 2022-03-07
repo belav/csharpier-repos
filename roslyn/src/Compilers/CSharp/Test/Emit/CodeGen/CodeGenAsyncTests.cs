@@ -89,7 +89,8 @@ class Test
                 c.WithOptions(options),
                 symbolValidator: module =>
                 {
-                    var stateMachine = module.GlobalNamespace
+                    var stateMachine = module
+                        .GlobalNamespace
                         .GetMember<NamedTypeSymbol>("Test")
                         .GetMember<NamedTypeSymbol>("<F>d__0");
                     Assert.Equal(TypeKind.Struct, stateMachine.TypeKind);
@@ -104,7 +105,8 @@ class Test
                 c.WithOptions(options),
                 symbolValidator: module =>
                 {
-                    var stateMachine = module.GlobalNamespace
+                    var stateMachine = module
+                        .GlobalNamespace
                         .GetMember<NamedTypeSymbol>("Test")
                         .GetMember<NamedTypeSymbol>("<F>d__0");
                     Assert.Equal(TypeKind.Struct, stateMachine.TypeKind);
@@ -119,7 +121,8 @@ class Test
                 c.WithOptions(options),
                 symbolValidator: module =>
                 {
-                    var stateMachine = module.GlobalNamespace
+                    var stateMachine = module
+                        .GlobalNamespace
                         .GetMember<NamedTypeSymbol>("Test")
                         .GetMember<NamedTypeSymbol>("<F>d__0");
                     Assert.Equal(TypeKind.Class, stateMachine.TypeKind);

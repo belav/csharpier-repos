@@ -1015,10 +1015,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                         // If one incoming edge does not have a set of possible values for the temp,
                         // that means the temp can take on any value of its type.
                         if (
-                            existingState.RemainingValues.TryGetValue(
-                                dagTemp,
-                                out var existingValuesForTemp
-                            )
+                            existingState
+                                .RemainingValues
+                                .TryGetValue(dagTemp, out var existingValuesForTemp)
                         )
                         {
                             var newExistingValuesForTemp = existingValuesForTemp.Union(
@@ -1030,11 +1029,13 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                     if (
                         existingState.RemainingValues.Count != newRemainingValues.Count
-                        || !existingState.RemainingValues.All(
-                            kv =>
-                                newRemainingValues.TryGetValue(kv.Key, out IValueSet? values)
-                                && kv.Value.Equals(values)
-                        )
+                        || !existingState
+                            .RemainingValues
+                            .All(
+                                kv =>
+                                    newRemainingValues.TryGetValue(kv.Key, out IValueSet? values)
+                                    && kv.Value.Equals(values)
+                            )
                     )
                     {
                         existingState.UpdateRemainingValues(newRemainingValues.ToImmutable());
@@ -1302,15 +1303,17 @@ namespace Microsoft.CodeAnalysis.CSharp
             ref bool foundExplicitNullTest
         )
         {
-            stateForCase.RemainingTests.Filter(
-                this,
-                test,
-                whenTrueValues,
-                whenFalseValues,
-                out Tests whenTrueTests,
-                out Tests whenFalseTests,
-                ref foundExplicitNullTest
-            );
+            stateForCase
+                .RemainingTests
+                .Filter(
+                    this,
+                    test,
+                    whenTrueValues,
+                    whenFalseValues,
+                    out Tests whenTrueTests,
+                    out Tests whenFalseTests,
+                    ref foundExplicitNullTest
+                );
             whenTrue = makeNext(whenTrueTests);
             whenFalse = makeNext(whenFalseTests);
             return;
@@ -1916,9 +1919,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                             + stateIdentifierMap[state]
                             + (isFail ? " FAIL" : "")
                     );
-                    var remainingValues = state.RemainingValues.Select(
-                        kvp => $"{tempName(kvp.Key)}:{kvp.Value}"
-                    );
+                    var remainingValues = state
+                        .RemainingValues
+                        .Select(kvp => $"{tempName(kvp.Key)}:{kvp.Value}");
                     result.AppendLine(
                         $"{(remainingValues.Any() ? " REMAINING " + string.Join(" ", remainingValues) : "")}"
                     );

@@ -47,7 +47,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .Execute()
                 .Should()
                 .Pass()
-                .And.HaveStdOutContaining("Microsoft.NETCore.App 9999.0.0");
+                .And
+                .HaveStdOutContaining("Microsoft.NETCore.App 9999.0.0");
         }
 
         [Fact]
@@ -64,17 +65,26 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .Execute()
                 .Should()
                 .Pass()
-                .And.HaveStdOutContaining("mock coreclr_initialize() called")
-                .And.HaveStdOutContaining("mock property[TRUSTED_PLATFORM_ASSEMBLIES]")
-                .And.HaveStdOutContaining(
+                .And
+                .HaveStdOutContaining("mock coreclr_initialize() called")
+                .And
+                .HaveStdOutContaining("mock property[TRUSTED_PLATFORM_ASSEMBLIES]")
+                .And
+                .HaveStdOutContaining(
                     $"Microsoft.NETCore.App{sep}9999.0.0{sep}Microsoft.NETCore.App.deps.json"
                 )
-                .And.HaveStdOutContaining("mock coreclr_execute_assembly() called")
-                .And.HaveStdOutContaining("mock argc:2")
-                .And.HaveStdOutContaining($"mock managedAssemblyPath:{appDll}")
-                .And.HaveStdOutContaining("mock argv[0] = argumentOne")
-                .And.HaveStdOutContaining("mock argv[1] = arg2")
-                .And.HaveStdOutContaining("mock coreclr_shutdown_2() called");
+                .And
+                .HaveStdOutContaining("mock coreclr_execute_assembly() called")
+                .And
+                .HaveStdOutContaining("mock argc:2")
+                .And
+                .HaveStdOutContaining($"mock managedAssemblyPath:{appDll}")
+                .And
+                .HaveStdOutContaining("mock argv[0] = argumentOne")
+                .And
+                .HaveStdOutContaining("mock argv[1] = arg2")
+                .And
+                .HaveStdOutContaining("mock coreclr_shutdown_2() called");
         }
     }
 }

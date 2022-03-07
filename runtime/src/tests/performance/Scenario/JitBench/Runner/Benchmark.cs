@@ -196,12 +196,10 @@ namespace JitBench
                     startInfo.WorkingDirectory = WorkingDirPath;
                     startInfo.RedirectStandardError = true;
                     startInfo.RedirectStandardOutput = true;
-                    IEnumerable<KeyValuePair<string, string>> extraEnvVars =
-                        config.EnvironmentVariables
-                            .Concat(EnvironmentVariables)
-                            .Append(
-                                new KeyValuePair<string, string>("DOTNET_MULTILEVEL_LOOKUP", "0")
-                            );
+                    IEnumerable<KeyValuePair<string, string>> extraEnvVars = config
+                        .EnvironmentVariables
+                        .Concat(EnvironmentVariables)
+                        .Append(new KeyValuePair<string, string>("DOTNET_MULTILEVEL_LOOKUP", "0"));
                     foreach (KeyValuePair<string, string> kv in extraEnvVars)
                     {
                         startInfo.Environment[kv.Key] = kv.Value;
@@ -255,14 +253,16 @@ namespace JitBench
                         },
                         PostIterationDelegate = scenarioResult =>
                         {
-                            result.IterationResults.Add(
-                                RecordIterationMetrics(
-                                    scenarioResult,
-                                    stdout.ToString(),
-                                    stderr.ToString(),
-                                    redirector
-                                )
-                            );
+                            result
+                                .IterationResults
+                                .Add(
+                                    RecordIterationMetrics(
+                                        scenarioResult,
+                                        stdout.ToString(),
+                                        stderr.ToString(),
+                                        redirector
+                                    )
+                                );
                         }
                     };
                     harness.RunScenario(
@@ -333,17 +333,24 @@ namespace JitBench
                     if (process.Id != scenarioExecutionResult.ProcessExitInfo.ProcessId)
                         continue;
 
-                    iteration.Measurements.Add(
-                        new Metric($"PMC/{process.Name}/Duration", "ms"),
-                        process.LifeSpan.Duration.TotalMilliseconds
-                    );
+                    iteration
+                        .Measurements
+                        .Add(
+                            new Metric($"PMC/{process.Name}/Duration", "ms"),
+                            process.LifeSpan.Duration.TotalMilliseconds
+                        );
 
                     // Add process metrics values.
                     foreach (var pmcData in process.PerformanceMonitorCounterData)
-                        iteration.Measurements.Add(
-                            new Metric($"PMC/{process.Name}/{pmcData.Key.Name}", pmcData.Key.Unit),
-                            pmcData.Value
-                        );
+                        iteration
+                            .Measurements
+                            .Add(
+                                new Metric(
+                                    $"PMC/{process.Name}/{pmcData.Key.Name}",
+                                    pmcData.Key.Unit
+                                ),
+                                pmcData.Value
+                            );
 
                     foreach (var module in process.Modules)
                     {
@@ -395,10 +402,9 @@ namespace JitBench
             {
                 int prefixLength = "PMC/".Length;
                 int secondSlash = originalMetric.Name.IndexOf('/', prefixLength);
-                newScenarioModelName = originalMetric.Name.Substring(
-                    prefixLength,
-                    secondSlash - prefixLength
-                );
+                newScenarioModelName = originalMetric
+                    .Name
+                    .Substring(prefixLength, secondSlash - prefixLength);
                 string newMetricName = originalMetric.Name.Substring(secondSlash + 1);
                 newMetric = new Metric(newMetricName, originalMetric.Unit);
                 return true;

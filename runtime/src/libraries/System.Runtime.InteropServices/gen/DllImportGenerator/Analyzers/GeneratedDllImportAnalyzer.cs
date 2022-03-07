@@ -62,10 +62,9 @@ namespace Microsoft.Interop.Analyzers
             context.RegisterCompilationStartAction(
                 compilationContext =>
                 {
-                    INamedTypeSymbol? generatedDllImportAttributeType =
-                        compilationContext.Compilation.GetTypeByMetadataName(
-                            TypeNames.GeneratedDllImportAttribute
-                        );
+                    INamedTypeSymbol? generatedDllImportAttributeType = compilationContext
+                        .Compilation
+                        .GetTypeByMetadataName(TypeNames.GeneratedDllImportAttribute);
                     if (generatedDllImportAttributeType == null)
                         return;
 
@@ -90,10 +89,9 @@ namespace Microsoft.Interop.Analyzers
             if (
                 !attributes.Any(
                     attr =>
-                        SymbolEqualityComparer.Default.Equals(
-                            attr.AttributeClass,
-                            generatedDllImportAttributeType
-                        )
+                        SymbolEqualityComparer
+                            .Default
+                            .Equals(attr.AttributeClass, generatedDllImportAttributeType)
                 )
             )
                 return;

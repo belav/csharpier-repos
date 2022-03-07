@@ -172,11 +172,9 @@ namespace System.Configuration
             ConfigurationSection configSection = (ConfigurationSection)ctor.Invoke(null);
 
             // Attach the ConfigurationSection to this record
-            configSection.SectionInformation.AttachToConfigurationRecord(
-                this,
-                factoryRecord,
-                sectionRecord
-            );
+            configSection
+                .SectionInformation
+                .AttachToConfigurationRecord(this, factoryRecord, sectionRecord);
             configSection.CallInit();
 
             // Initialize the ConfigurationSection with XML or just its parent.
@@ -552,8 +550,9 @@ namespace System.Configuration
                 try
                 {
                     bool wasPresent = configSection.ElementPresent;
-                    PropertySourceInfo saveInfo =
-                        configSection.ElementInformation.PropertyInfoInternal();
+                    PropertySourceInfo saveInfo = configSection
+                        .ElementInformation
+                        .PropertyInfoInternal();
 
                     configSection.Reset(parentConfigSection);
                     configSection.DeserializeSection(reader);
@@ -870,11 +869,9 @@ namespace System.Configuration
             _removedSections?.Remove(configKey);
 
             // Attach the section to the configuration record.
-            configSection.SectionInformation.AttachToConfigurationRecord(
-                this,
-                factoryRecord,
-                sectionRecord
-            );
+            configSection
+                .SectionInformation
+                .AttachToConfigurationRecord(this, factoryRecord, sectionRecord);
 
             // If there is rawXml, set it now. Note this will override any other changes to the section
             // definition made after the call to SetXml.
@@ -2076,7 +2073,9 @@ namespace System.Configuration
                                         !string.IsNullOrEmpty(
                                             configSection.SectionInformation.ConfigSource
                                         )
-                                        || !configSection.SectionInformation.LocationAttributesAreDefault
+                                        || !configSection
+                                            .SectionInformation
+                                            .LocationAttributesAreDefault
                                         || (
                                             configSection.SectionInformation.ProtectionProvider
                                             != null
@@ -2135,7 +2134,10 @@ namespace System.Configuration
                                                 ProtectedConfigurationSection.FormatEncryptedSection(
                                                     encryptedSection,
                                                     configSection.SectionInformation.Name,
-                                                    configSection.SectionInformation.ProtectionProvider.Name
+                                                    configSection
+                                                        .SectionInformation
+                                                        .ProtectionProvider
+                                                        .Name
                                                 );
                                         }
                                         catch (Exception e)
@@ -2144,7 +2146,10 @@ namespace System.Configuration
                                                 SR.Format(
                                                     SR.Encryption_failed,
                                                     configSection.SectionInformation.SectionName,
-                                                    configSection.SectionInformation.ProtectionProvider.Name,
+                                                    configSection
+                                                        .SectionInformation
+                                                        .ProtectionProvider
+                                                        .Name,
                                                     e.Message
                                                 ),
                                                 e
@@ -2393,8 +2398,9 @@ namespace System.Configuration
                                     configSection.SectionInformation.ProtectionProviderName;
                                 sectionXmlInfo.OverrideModeSetting =
                                     configSection.SectionInformation.OverrideModeSetting;
-                                sectionXmlInfo.SkipInChildApps =
-                                    !configSection.SectionInformation.InheritInChildApplications;
+                                sectionXmlInfo.SkipInChildApps = !configSection
+                                    .SectionInformation
+                                    .InheritInChildApplications;
                             }
 
                             fileInput.ProtectionProvider =
@@ -3743,8 +3749,9 @@ namespace System.Configuration
                             skip = false;
                             if (update.UpdatedXml != null)
                             {
-                                ConfigurationSection configSection =
-                                    (ConfigurationSection)update.SectionRecord.Result;
+                                ConfigurationSection configSection = (ConfigurationSection)update
+                                    .SectionRecord
+                                    .Result;
                                 if (
                                     string.IsNullOrEmpty(
                                         configSection.SectionInformation.ConfigSource
@@ -3850,8 +3857,9 @@ namespace System.Configuration
 
             if (update.SectionRecord.HasResult)
             {
-                ConfigurationSection configSection =
-                    (ConfigurationSection)update.SectionRecord.Result;
+                ConfigurationSection configSection = (ConfigurationSection)update
+                    .SectionRecord
+                    .Result;
                 configSourceStreamName = configSection.SectionInformation.ConfigSourceStreamName;
             }
             else

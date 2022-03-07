@@ -119,8 +119,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Experimentation
             AssertIsForeground();
 
             // Ensure one of the flights is enabled, otherwise bail
-            _experimentationService =
-                _workspace.Services.GetRequiredService<IExperimentationService>();
+            _experimentationService = _workspace
+                .Services
+                .GetRequiredService<IExperimentationService>();
             if (
                 !_experimentationService.IsExperimentEnabled(ExternalFlightName)
                 && !_experimentationService.IsExperimentEnabled(InternalFlightName)
@@ -372,9 +373,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Experimentation
                 cmds[0].cmdID = cmdId;
                 cmds[0].cmdf = 0;
 
-                await ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
-                    cancellationToken
-                );
+                await ThreadingContext
+                    .JoinableTaskFactory
+                    .SwitchToMainThreadAsync(cancellationToken);
 
                 var hr = _oleCommandTarget.QueryStatus(
                     ReSharperCommandGroup,
@@ -400,9 +401,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Experimentation
                     return;
                 }
 
-                await ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
-                    cancellationToken
-                );
+                await ThreadingContext
+                    .JoinableTaskFactory
+                    .SwitchToMainThreadAsync(cancellationToken);
 
                 _oleCommandTarget = IServiceProviderExtensions.GetService<
                     SUIHostCommandDispatcher,
@@ -434,9 +435,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Experimentation
             KeybindingsResetLogger.Log("KeybindingsReset");
 
             _workspace.TryApplyChanges(
-                _workspace.CurrentSolution.WithOptions(
-                    _workspace.Options.WithChangedOption(KeybindingResetOptions.NeedsReset, false)
-                )
+                _workspace
+                    .CurrentSolution
+                    .WithOptions(
+                        _workspace
+                            .Options
+                            .WithChangedOption(KeybindingResetOptions.NeedsReset, false)
+                    )
             );
         }
 
@@ -448,20 +453,27 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Experimentation
 
             KeybindingsResetLogger.Log("ExtensionsLink");
             _workspace.TryApplyChanges(
-                _workspace.CurrentSolution.WithOptions(
-                    _workspace.Options.WithChangedOption(KeybindingResetOptions.NeedsReset, false)
-                )
+                _workspace
+                    .CurrentSolution
+                    .WithOptions(
+                        _workspace
+                            .Options
+                            .WithChangedOption(KeybindingResetOptions.NeedsReset, false)
+                    )
             );
         }
 
         private void NeverShowAgain()
         {
             _workspace.TryApplyChanges(
-                _workspace.CurrentSolution.WithOptions(
-                    _workspace.Options
-                        .WithChangedOption(KeybindingResetOptions.NeverShowAgain, true)
-                        .WithChangedOption(KeybindingResetOptions.NeedsReset, false)
-                )
+                _workspace
+                    .CurrentSolution
+                    .WithOptions(
+                        _workspace
+                            .Options
+                            .WithChangedOption(KeybindingResetOptions.NeverShowAgain, true)
+                            .WithChangedOption(KeybindingResetOptions.NeedsReset, false)
+                    )
             );
             KeybindingsResetLogger.Log("NeverShowAgain");
 

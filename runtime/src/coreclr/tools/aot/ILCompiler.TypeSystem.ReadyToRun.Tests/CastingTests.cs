@@ -102,10 +102,9 @@ namespace TypeSystemTests
         {
             TypeDesc intType = _context.GetWellKnownType(WellKnownType.Int32);
             MetadataType iListType = _context.SystemModule.GetType("System.Collections", "IList");
-            MetadataType iListOfTType = _context.SystemModule.GetType(
-                "System.Collections.Generic",
-                "IList`1"
-            );
+            MetadataType iListOfTType = _context
+                .SystemModule
+                .GetType("System.Collections.Generic", "IList`1");
 
             InstantiatedType iListOfIntType = iListOfTType.MakeInstantiatedType(intType);
             TypeDesc intSzArrayType = intType.MakeArrayType();
@@ -146,18 +145,15 @@ namespace TypeSystemTests
         [Fact]
         public void TestGenericParameterCasting()
         {
-            TypeDesc paramWithNoConstraint = _testModule.GetType(
-                "Casting",
-                "ClassWithNoConstraint`1"
-            ).Instantiation[0];
-            TypeDesc paramWithValueTypeConstraint = _testModule.GetType(
-                "Casting",
-                "ClassWithValueTypeConstraint`1"
-            ).Instantiation[0];
-            TypeDesc paramWithInterfaceConstraint = _testModule.GetType(
-                "Casting",
-                "ClassWithInterfaceConstraint`1"
-            ).Instantiation[0];
+            TypeDesc paramWithNoConstraint = _testModule
+                .GetType("Casting", "ClassWithNoConstraint`1")
+                .Instantiation[0];
+            TypeDesc paramWithValueTypeConstraint = _testModule
+                .GetType("Casting", "ClassWithValueTypeConstraint`1")
+                .Instantiation[0];
+            TypeDesc paramWithInterfaceConstraint = _testModule
+                .GetType("Casting", "ClassWithInterfaceConstraint`1")
+                .Instantiation[0];
 
             TypeDesc objectType = _context.GetWellKnownType(WellKnownType.Object);
             TypeDesc valueTypeType = _context.GetWellKnownType(WellKnownType.ValueType);
@@ -196,10 +192,9 @@ namespace TypeSystemTests
 
             TypeDesc stringSzArrayType = stringType.MakeArrayType();
 
-            MetadataType iEnumerableOfTType = _context.SystemModule.GetType(
-                "System.Collections.Generic",
-                "IEnumerable`1"
-            );
+            MetadataType iEnumerableOfTType = _context
+                .SystemModule
+                .GetType("System.Collections.Generic", "IEnumerable`1");
             InstantiatedType iEnumerableOfObjectType = iEnumerableOfTType.MakeInstantiatedType(
                 objectType
             );

@@ -177,10 +177,12 @@ namespace System.Diagnostics.Metrics
 
         // Called from MeterListener.DisableMeasurementEvents
         internal object? DisableMeasurements(MeterListener listener) =>
-            _subscriptions.Remove(
-                new ListenerSubscription(listener),
-                (s1, s2) => object.ReferenceEquals(s1.Listener, s2.Listener)
-            ).State;
+            _subscriptions
+                .Remove(
+                    new ListenerSubscription(listener),
+                    (s1, s2) => object.ReferenceEquals(s1.Listener, s2.Listener)
+                )
+                .State;
 
         internal virtual void Observe(MeterListener listener)
         {

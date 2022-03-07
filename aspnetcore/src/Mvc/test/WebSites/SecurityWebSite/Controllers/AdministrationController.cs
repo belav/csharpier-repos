@@ -24,8 +24,9 @@ public class AdministrationController : Controller
     [Authorize(AuthenticationSchemes = "Cookie2")]
     public IActionResult EitherCookie()
     {
-        var countEvaluator =
-            (CountingPolicyEvaluator)HttpContext.RequestServices.GetRequiredService<IPolicyEvaluator>();
+        var countEvaluator = (CountingPolicyEvaluator)HttpContext
+            .RequestServices
+            .GetRequiredService<IPolicyEvaluator>();
         return Content(
             "Administration.EitherCookie:AuthorizeCount=" + countEvaluator.AuthorizeCount
         );

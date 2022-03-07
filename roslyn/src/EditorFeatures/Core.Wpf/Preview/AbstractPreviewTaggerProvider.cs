@@ -43,10 +43,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
             public IEnumerable<ITagSpan<TTag>> GetTags(NormalizedSnapshotSpanCollection spans)
             {
                 if (
-                    _buffer.Properties.TryGetProperty(
-                        _key,
-                        out NormalizedSnapshotSpanCollection matchingSpans
-                    )
+                    _buffer
+                        .Properties
+                        .TryGetProperty(_key, out NormalizedSnapshotSpanCollection matchingSpans)
                 )
                 {
                     var intersection = NormalizedSnapshotSpanCollection.Intersection(

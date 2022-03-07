@@ -219,9 +219,9 @@ namespace System.IO.Pipelines.Tests
             ValueTask<FlushResult> flushAsync = writableBuffer.FlushAsync();
             Assert.False(flushAsync.IsCompleted);
 
-            ValueTask<ReadResult> readAsync = _pipe.Reader.ReadAtLeastAsync(
-                PauseWriterThreshold * 3
-            );
+            ValueTask<ReadResult> readAsync = _pipe
+                .Reader
+                .ReadAtLeastAsync(PauseWriterThreshold * 3);
 
             Assert.False(readAsync.IsCompleted);
 

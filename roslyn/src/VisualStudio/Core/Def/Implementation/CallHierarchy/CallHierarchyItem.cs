@@ -42,9 +42,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CallHierarchy
             _projectId = projectId;
             _finders = finders;
             _containingTypeName = symbol.ContainingType.ToDisplayString(ContainingTypeFormat);
-            _containingNamespaceName = symbol.ContainingNamespace.ToDisplayString(
-                ContainingNamespaceFormat
-            );
+            _containingNamespaceName = symbol
+                .ContainingNamespace
+                .ToDisplayString(ContainingNamespaceFormat);
             _glyphCreator = glyphCreator;
             _name = symbol.ToDisplayString(MemberNameFormat);
             _provider = provider;

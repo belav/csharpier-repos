@@ -108,9 +108,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.RenameTracking
 
             _hostDocument = Workspace.Documents.First();
             _view = _hostDocument.GetTextView();
-            _view.Caret.MoveTo(
-                new SnapshotPoint(_view.TextSnapshot, _hostDocument.CursorPosition.Value)
-            );
+            _view
+                .Caret
+                .MoveTo(new SnapshotPoint(_view.TextSnapshot, _hostDocument.CursorPosition.Value));
             _editorOperations = Workspace
                 .GetService<IEditorOperationsFactoryService>()
                 .GetEditorOperations(_view);
@@ -122,8 +122,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.RenameTracking
             };
 
             // Mock the action taken by the workspace INotificationService
-            var notificationService =
-                (INotificationServiceCallback)Workspace.Services.GetRequiredService<INotificationService>();
+            var notificationService = (INotificationServiceCallback)Workspace
+                .Services
+                .GetRequiredService<INotificationService>();
             var callback = new Action<string, string, NotificationSeverity>(
                 (message, title, severity) => _notificationMessage = message
             );
@@ -279,8 +280,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.RenameTracking
 
         private async Task WaitForAsyncOperationsAsync()
         {
-            var provider =
-                Workspace.ExportProvider.GetExportedValue<AsynchronousOperationListenerProvider>();
+            var provider = Workspace
+                .ExportProvider
+                .GetExportedValue<AsynchronousOperationListenerProvider>();
             await provider.WaitAllDispatcherOperationAndTasksAsync(
                 Workspace,
                 FeatureAttribute.RenameTracking,

@@ -55,9 +55,9 @@ namespace Microsoft.CodeAnalysis.Host.Mef
                 typeof(MSBuildMefHostServices).Assembly.GetName().Name,
             };
 
-            return MefHostServices.DefaultAssemblies.Concat(
-                MefHostServicesHelpers.LoadNearbyAssemblies(assemblyNames)
-            );
+            return MefHostServices
+                .DefaultAssemblies
+                .Concat(MefHostServicesHelpers.LoadNearbyAssemblies(assemblyNames));
         }
 
         internal readonly struct TestAccessor

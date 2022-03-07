@@ -290,9 +290,9 @@ namespace System.Reflection.Emit.Tests
             };
             int token0 = dynamicILInfo.GetTokenFor("Bill");
             int token1 = dynamicILInfo.GetTokenFor(
-                typeof(Person).GetConstructor(
-                    new Type[] { typeof(string), typeof(int), typeof(float) }
-                ).MethodHandle
+                typeof(Person)
+                    .GetConstructor(new Type[] { typeof(string), typeof(int), typeof(float) })
+                    .MethodHandle
             );
             int token2 = dynamicILInfo.GetTokenFor("Bill Gates");
             int token3 = dynamicILInfo.GetTokenFor(typeof(Person).GetField("m_name").FieldHandle);
@@ -505,9 +505,9 @@ namespace System.Reflection.Emit.Tests
                 typeof(MyList<int>).TypeHandle
             );
             int token3 = dynamicILInfo.GetTokenFor(
-                typeof(System.Collections.Generic.IEnumerator<int>).GetMethod(
-                    "get_Current"
-                ).MethodHandle,
+                typeof(System.Collections.Generic.IEnumerator<int>)
+                    .GetMethod("get_Current")
+                    .MethodHandle,
                 typeof(System.Collections.Generic.IEnumerator<int>).TypeHandle
             );
             int token4 = dynamicILInfo.GetTokenFor(
@@ -725,16 +725,15 @@ namespace System.Reflection.Emit.Tests
                 typeof(MyList<string>).TypeHandle
             );
             int token6 = dynamicILInfo.GetTokenFor(
-                typeof(System.Collections.Generic.IEnumerator<string>).GetMethod(
-                    "get_Current"
-                ).MethodHandle,
+                typeof(System.Collections.Generic.IEnumerator<string>)
+                    .GetMethod("get_Current")
+                    .MethodHandle,
                 typeof(System.Collections.Generic.IEnumerator<string>).TypeHandle
             );
             int token7 = dynamicILInfo.GetTokenFor(
-                typeof(string).GetMethod(
-                    "Concat",
-                    new Type[] { typeof(string), typeof(string) }
-                ).MethodHandle
+                typeof(string)
+                    .GetMethod("Concat", new Type[] { typeof(string), typeof(string) })
+                    .MethodHandle
             );
             int token8 = dynamicILInfo.GetTokenFor(
                 typeof(System.Collections.IEnumerator).GetMethod("MoveNext").MethodHandle
@@ -946,10 +945,9 @@ namespace System.Reflection.Emit.Tests
             };
             int token0 = dynamicILInfo.GetTokenFor("A.B");
             int token1 = dynamicILInfo.GetTokenFor(
-                typeof(System.Type).GetMethod(
-                    "GetType",
-                    new Type[] { typeof(string), typeof(bool) }
-                ).MethodHandle
+                typeof(System.Type)
+                    .GetMethod("GetType", new Type[] { typeof(string), typeof(bool) })
+                    .MethodHandle
             );
             int token2 = dynamicILInfo.GetTokenFor(
                 typeof(string).GetMethod("ToUpper", Type.EmptyTypes).MethodHandle
@@ -1302,15 +1300,14 @@ namespace System.Reflection.Emit.Tests
             };
             int token0 = dynamicILInfo.GetTokenFor(typeof(int).TypeHandle);
             int token1 = dynamicILInfo.GetTokenFor(
-                typeof(DynamicILInfoTests).GetMethod(
-                    "MyRule",
-                    BindingFlags.NonPublic | BindingFlags.Static
-                ).MethodHandle
+                typeof(DynamicILInfoTests)
+                    .GetMethod("MyRule", BindingFlags.NonPublic | BindingFlags.Static)
+                    .MethodHandle
             );
             int token2 = dynamicILInfo.GetTokenFor(
-                typeof(Satisfy<int>).GetConstructor(
-                    new Type[] { typeof(System.Object), typeof(System.IntPtr) }
-                ).MethodHandle,
+                typeof(Satisfy<int>)
+                    .GetConstructor(new Type[] { typeof(System.Object), typeof(System.IntPtr) })
+                    .MethodHandle,
                 typeof(Satisfy<int>).TypeHandle
             );
             int token3 = dynamicILInfo.GetTokenFor(
@@ -1326,15 +1323,14 @@ namespace System.Reflection.Emit.Tests
                 typeof(DynamicILInfoTests).GetConstructor(Type.EmptyTypes).MethodHandle
             );
             int token11 = dynamicILInfo.GetTokenFor(
-                typeof(DynamicILInfoTests).GetMethod(
-                    "MyRule",
-                    BindingFlags.NonPublic | BindingFlags.Instance
-                ).MethodHandle
+                typeof(DynamicILInfoTests)
+                    .GetMethod("MyRule", BindingFlags.NonPublic | BindingFlags.Instance)
+                    .MethodHandle
             );
             int token12 = dynamicILInfo.GetTokenFor(
-                typeof(Satisfy<string>).GetConstructor(
-                    new Type[] { typeof(System.Object), typeof(System.IntPtr) }
-                ).MethodHandle,
+                typeof(Satisfy<string>)
+                    .GetConstructor(new Type[] { typeof(System.Object), typeof(System.IntPtr) })
+                    .MethodHandle,
                 typeof(Satisfy<string>).TypeHandle
             );
             int token13 = dynamicILInfo.GetTokenFor(
@@ -1567,9 +1563,9 @@ namespace System.Reflection.Emit.Tests
                 0x2a
             };
             int token0 = dynamicILInfo.GetTokenFor(
-                typeof(System.Int32[,]).GetConstructor(
-                    new Type[] { typeof(int), typeof(int) }
-                ).MethodHandle
+                typeof(System.Int32[,])
+                    .GetConstructor(new Type[] { typeof(int), typeof(int) })
+                    .MethodHandle
             );
             int token1 = dynamicILInfo.GetTokenFor(
                 typeof(System.Int32[,]).GetMethod("Set").MethodHandle
@@ -1783,10 +1779,9 @@ namespace System.Reflection.Emit.Tests
                 typeof(G<int>).TypeHandle
             );
             int token2 = dynamicILInfo.GetTokenFor(
-                typeof(string).GetMethod(
-                    "Concat",
-                    new Type[] { typeof(string), typeof(string) }
-                ).MethodHandle
+                typeof(string)
+                    .GetMethod("Concat", new Type[] { typeof(string), typeof(string) })
+                    .MethodHandle
             );
             int token3 = dynamicILInfo.GetTokenFor("hello");
             int token4 = dynamicILInfo.GetTokenFor(
@@ -1820,7 +1815,8 @@ namespace System.Reflection.Emit.Tests
             int token12 = dynamicILInfo.GetTokenFor(
                 typeof(G<System.Type>)
                     .GetMethod("M")
-                    .MakeGenericMethod(typeof(System.Object)).MethodHandle,
+                    .MakeGenericMethod(typeof(System.Object))
+                    .MethodHandle,
                 typeof(G<System.Type>).TypeHandle
             );
             PutInteger4(token0, 0x0004, code);

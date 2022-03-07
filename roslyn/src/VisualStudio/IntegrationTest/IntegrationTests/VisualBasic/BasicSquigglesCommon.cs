@@ -18,30 +18,36 @@ namespace Roslyn.VisualStudio.IntegrationTests.VisualBasic
 
         public virtual void VerifySyntaxErrorSquiggles()
         {
-            VisualStudio.Editor.SetText(
-                @"Class A
+            VisualStudio
+                .Editor
+                .SetText(
+                    @"Class A
       Shared Sub S()
         Dim x = 1 +
       End Sub
 End Class"
-            );
-            VisualStudio.Editor.Verify.ErrorTags(
-                "Microsoft.VisualStudio.Text.Tagging.ErrorTag:'\\r'[50-51]"
-            );
+                );
+            VisualStudio
+                .Editor
+                .Verify
+                .ErrorTags("Microsoft.VisualStudio.Text.Tagging.ErrorTag:'\\r'[50-51]");
         }
 
         public virtual void VerifySemanticErrorSquiggles()
         {
-            VisualStudio.Editor.SetText(
-                @"Class A
+            VisualStudio
+                .Editor
+                .SetText(
+                    @"Class A
       Shared Sub S(b as Bar)
         Console.WriteLine(b)
       End Sub
 End Class"
-            );
-            VisualStudio.Editor.Verify.ErrorTags(
-                "Microsoft.VisualStudio.Text.Tagging.ErrorTag:'Bar'[33-36]"
-            );
+                );
+            VisualStudio
+                .Editor
+                .Verify
+                .ErrorTags("Microsoft.VisualStudio.Text.Tagging.ErrorTag:'Bar'[33-36]");
         }
     }
 }

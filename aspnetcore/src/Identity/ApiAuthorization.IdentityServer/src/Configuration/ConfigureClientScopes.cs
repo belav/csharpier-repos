@@ -30,10 +30,9 @@ internal class ConfigureClientScopes : IPostConfigureOptions<ApiAuthorizationOpt
         foreach (var identityResource in options.IdentityResources)
         {
             if (
-                !identityResource.Properties.TryGetValue(
-                    ApplicationProfilesPropertyNames.Clients,
-                    out var clientList
-                )
+                !identityResource
+                    .Properties
+                    .TryGetValue(ApplicationProfilesPropertyNames.Clients, out var clientList)
             )
             {
                 _logger.LogInformation(
@@ -100,10 +99,9 @@ internal class ConfigureClientScopes : IPostConfigureOptions<ApiAuthorizationOpt
         foreach (var resource in options.ApiResources)
         {
             if (
-                !resource.Properties.TryGetValue(
-                    ApplicationProfilesPropertyNames.Clients,
-                    out var clientList
-                )
+                !resource
+                    .Properties
+                    .TryGetValue(ApplicationProfilesPropertyNames.Clients, out var clientList)
             )
             {
                 _logger.LogInformation(

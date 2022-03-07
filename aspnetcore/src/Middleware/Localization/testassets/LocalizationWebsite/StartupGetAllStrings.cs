@@ -41,9 +41,9 @@ public class StartupGetAllStrings
             {
                 var strings = customerStringLocalizer.GetAllStrings();
 
-                await context.Response.WriteAsync(
-                    strings.Count().ToString(CultureInfo.InvariantCulture)
-                );
+                await context
+                    .Response
+                    .WriteAsync(strings.Count().ToString(CultureInfo.InvariantCulture));
                 await context.Response.WriteAsync(" ");
                 await context.Response.WriteAsync(string.Join(" ", strings));
             }

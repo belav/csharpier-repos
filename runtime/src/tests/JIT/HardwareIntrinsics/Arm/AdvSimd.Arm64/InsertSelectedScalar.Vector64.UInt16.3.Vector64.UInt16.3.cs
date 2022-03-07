@@ -229,12 +229,14 @@ namespace JIT.HardwareIntrinsics.Arm
                 fixed (Vector64<UInt16>* pFld1 = &_fld1)
                 fixed (Vector64<UInt16>* pFld2 = &_fld3)
                 {
-                    var result = AdvSimd.Arm64.InsertSelectedScalar(
-                        AdvSimd.LoadVector64((UInt16*)pFld1),
-                        3,
-                        AdvSimd.LoadVector64((UInt16*)pFld2),
-                        3
-                    );
+                    var result = AdvSimd
+                        .Arm64
+                        .InsertSelectedScalar(
+                            AdvSimd.LoadVector64((UInt16*)pFld1),
+                            3,
+                            AdvSimd.LoadVector64((UInt16*)pFld2),
+                            3
+                        );
 
                     Unsafe.Write(testClass._dataTable.outArrayPtr, result);
                     testClass.ValidateResult(_fld1, _fld3, testClass._dataTable.outArrayPtr);
@@ -333,12 +335,14 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunBasicScenario_UnsafeRead));
 
-            var result = AdvSimd.Arm64.InsertSelectedScalar(
-                Unsafe.Read<Vector64<UInt16>>(_dataTable.inArray1Ptr),
-                3,
-                Unsafe.Read<Vector64<UInt16>>(_dataTable.inArray3Ptr),
-                3
-            );
+            var result = AdvSimd
+                .Arm64
+                .InsertSelectedScalar(
+                    Unsafe.Read<Vector64<UInt16>>(_dataTable.inArray1Ptr),
+                    3,
+                    Unsafe.Read<Vector64<UInt16>>(_dataTable.inArray3Ptr),
+                    3
+                );
 
             Unsafe.Write(_dataTable.outArrayPtr, result);
             ValidateResult(_dataTable.inArray1Ptr, _dataTable.inArray3Ptr, _dataTable.outArrayPtr);
@@ -348,12 +352,14 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunBasicScenario_Load));
 
-            var result = AdvSimd.Arm64.InsertSelectedScalar(
-                AdvSimd.LoadVector64((UInt16*)(_dataTable.inArray1Ptr)),
-                3,
-                AdvSimd.LoadVector64((UInt16*)(_dataTable.inArray3Ptr)),
-                3
-            );
+            var result = AdvSimd
+                .Arm64
+                .InsertSelectedScalar(
+                    AdvSimd.LoadVector64((UInt16*)(_dataTable.inArray1Ptr)),
+                    3,
+                    AdvSimd.LoadVector64((UInt16*)(_dataTable.inArray3Ptr)),
+                    3
+                );
 
             Unsafe.Write(_dataTable.outArrayPtr, result);
             ValidateResult(_dataTable.inArray1Ptr, _dataTable.inArray3Ptr, _dataTable.outArrayPtr);
@@ -436,12 +442,14 @@ namespace JIT.HardwareIntrinsics.Arm
             fixed (Vector64<UInt16>* pClsVar1 = &_clsVar1)
             fixed (Vector64<UInt16>* pClsVar3 = &_clsVar3)
             {
-                var result = AdvSimd.Arm64.InsertSelectedScalar(
-                    AdvSimd.LoadVector64((UInt16*)(pClsVar1)),
-                    3,
-                    AdvSimd.LoadVector64((UInt16*)(pClsVar3)),
-                    3
-                );
+                var result = AdvSimd
+                    .Arm64
+                    .InsertSelectedScalar(
+                        AdvSimd.LoadVector64((UInt16*)(pClsVar1)),
+                        3,
+                        AdvSimd.LoadVector64((UInt16*)(pClsVar3)),
+                        3
+                    );
 
                 Unsafe.Write(_dataTable.outArrayPtr, result);
                 ValidateResult(_clsVar1, _clsVar3, _dataTable.outArrayPtr);
@@ -494,12 +502,14 @@ namespace JIT.HardwareIntrinsics.Arm
             fixed (Vector64<UInt16>* pFld1 = &test._fld1)
             fixed (Vector64<UInt16>* pFld2 = &test._fld3)
             {
-                var result = AdvSimd.Arm64.InsertSelectedScalar(
-                    AdvSimd.LoadVector64((UInt16*)pFld1),
-                    3,
-                    AdvSimd.LoadVector64((UInt16*)pFld2),
-                    3
-                );
+                var result = AdvSimd
+                    .Arm64
+                    .InsertSelectedScalar(
+                        AdvSimd.LoadVector64((UInt16*)pFld1),
+                        3,
+                        AdvSimd.LoadVector64((UInt16*)pFld2),
+                        3
+                    );
 
                 Unsafe.Write(_dataTable.outArrayPtr, result);
                 ValidateResult(test._fld1, test._fld3, _dataTable.outArrayPtr);
@@ -523,12 +533,14 @@ namespace JIT.HardwareIntrinsics.Arm
             fixed (Vector64<UInt16>* pFld1 = &_fld1)
             fixed (Vector64<UInt16>* pFld2 = &_fld3)
             {
-                var result = AdvSimd.Arm64.InsertSelectedScalar(
-                    AdvSimd.LoadVector64((UInt16*)pFld1),
-                    3,
-                    AdvSimd.LoadVector64((UInt16*)pFld2),
-                    3
-                );
+                var result = AdvSimd
+                    .Arm64
+                    .InsertSelectedScalar(
+                        AdvSimd.LoadVector64((UInt16*)pFld1),
+                        3,
+                        AdvSimd.LoadVector64((UInt16*)pFld2),
+                        3
+                    );
 
                 Unsafe.Write(_dataTable.outArrayPtr, result);
                 ValidateResult(_fld1, _fld3, _dataTable.outArrayPtr);
@@ -551,12 +563,14 @@ namespace JIT.HardwareIntrinsics.Arm
             TestLibrary.TestFramework.BeginScenario(nameof(RunStructLclFldScenario_Load));
 
             var test = TestStruct.Create();
-            var result = AdvSimd.Arm64.InsertSelectedScalar(
-                AdvSimd.LoadVector64((UInt16*)(&test._fld1)),
-                3,
-                AdvSimd.LoadVector64((UInt16*)(&test._fld3)),
-                3
-            );
+            var result = AdvSimd
+                .Arm64
+                .InsertSelectedScalar(
+                    AdvSimd.LoadVector64((UInt16*)(&test._fld1)),
+                    3,
+                    AdvSimd.LoadVector64((UInt16*)(&test._fld3)),
+                    3
+                );
 
             Unsafe.Write(_dataTable.outArrayPtr, result);
             ValidateResult(test._fld1, test._fld3, _dataTable.outArrayPtr);
@@ -671,18 +685,20 @@ namespace JIT.HardwareIntrinsics.Arm
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation(
-                    $"{nameof(AdvSimd.Arm64)}.{nameof(AdvSimd.Arm64.InsertSelectedScalar)}<UInt16>(Vector64<UInt16>, {3}, Vector64<UInt16>, {3}): {method} failed:"
-                );
-                TestLibrary.TestFramework.LogInformation(
-                    $" firstOp: ({string.Join(", ", firstOp)})"
-                );
-                TestLibrary.TestFramework.LogInformation(
-                    $" thirdOp: ({string.Join(", ", thirdOp)})"
-                );
-                TestLibrary.TestFramework.LogInformation(
-                    $"  result: ({string.Join(", ", result)})"
-                );
+                TestLibrary
+                    .TestFramework
+                    .LogInformation(
+                        $"{nameof(AdvSimd.Arm64)}.{nameof(AdvSimd.Arm64.InsertSelectedScalar)}<UInt16>(Vector64<UInt16>, {3}, Vector64<UInt16>, {3}): {method} failed:"
+                    );
+                TestLibrary
+                    .TestFramework
+                    .LogInformation($" firstOp: ({string.Join(", ", firstOp)})");
+                TestLibrary
+                    .TestFramework
+                    .LogInformation($" thirdOp: ({string.Join(", ", thirdOp)})");
+                TestLibrary
+                    .TestFramework
+                    .LogInformation($"  result: ({string.Join(", ", result)})");
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;

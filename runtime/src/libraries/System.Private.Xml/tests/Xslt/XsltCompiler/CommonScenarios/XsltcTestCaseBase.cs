@@ -380,9 +380,9 @@ namespace System.Xml.Tests
                 try
                 {
                     var xslt = new XslCompiledTransform();
-                    Assembly xsltasm = AssemblyLoadContext.Default.LoadFromAssemblyPath(
-                        Path.GetFullPath(asmName)
-                    );
+                    Assembly xsltasm = AssemblyLoadContext
+                        .Default
+                        .LoadFromAssemblyPath(Path.GetFullPath(asmName));
 
                     if (xsltasm == null)
                     {

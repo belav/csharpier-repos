@@ -2749,9 +2749,9 @@ public static class Program
 
             CreateCompilationWithMscorlib40AndSystemCore(
                     code,
-                    parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
-                        LanguageVersion.CSharp7_1
-                    )
+                    parseOptions: CSharpParseOptions
+                        .Default
+                        .WithLanguageVersion(LanguageVersion.CSharp7_1)
                 )
                 .VerifyDiagnostics(
                     // (4,30): error CS8302: Feature 'ref extension methods' is not available in C# 7.1. Please use language version 7.2 or greater.
@@ -2796,9 +2796,9 @@ public static class Program
 
             CreateCompilationWithMscorlib40AndSystemCore(
                     source: code,
-                    parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
-                        LanguageVersion.CSharp7_1
-                    ),
+                    parseOptions: CSharpParseOptions
+                        .Default
+                        .WithLanguageVersion(LanguageVersion.CSharp7_1),
                     references: new[] { reference.ToMetadataReference() }
                 )
                 .VerifyDiagnostics(
@@ -2811,9 +2811,9 @@ public static class Program
 
             CreateCompilationWithMscorlib40AndSystemCore(
                     source: code,
-                    parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
-                        LanguageVersion.CSharp7_1
-                    ),
+                    parseOptions: CSharpParseOptions
+                        .Default
+                        .WithLanguageVersion(LanguageVersion.CSharp7_1),
                     references: new[] { reference.EmitToImageReference() }
                 )
                 .VerifyDiagnostics(
@@ -2866,9 +2866,9 @@ public static class Program
 
             CreateCompilationWithMscorlib40AndSystemCore(
                     code,
-                    parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
-                        LanguageVersion.CSharp7_1
-                    )
+                    parseOptions: CSharpParseOptions
+                        .Default
+                        .WithLanguageVersion(LanguageVersion.CSharp7_1)
                 )
                 .VerifyDiagnostics(
                     // (4,31): error CS8302: Feature 'readonly references' is not available in C# 7.1. Please use language version 7.2 or greater.
@@ -2953,9 +2953,9 @@ public static class Program
 
             CreateCompilationWithMscorlib40AndSystemCore(
                     source: code,
-                    parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
-                        LanguageVersion.CSharp7_1
-                    ),
+                    parseOptions: CSharpParseOptions
+                        .Default
+                        .WithLanguageVersion(LanguageVersion.CSharp7_1),
                     references: new[] { reference.ToMetadataReference() }
                 )
                 .VerifyDiagnostics(
@@ -2968,9 +2968,9 @@ public static class Program
 
             CreateCompilationWithMscorlib40AndSystemCore(
                     source: code,
-                    parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
-                        LanguageVersion.CSharp7_1
-                    ),
+                    parseOptions: CSharpParseOptions
+                        .Default
+                        .WithLanguageVersion(LanguageVersion.CSharp7_1),
                     references: new[] { reference.EmitToImageReference() }
                 )
                 .VerifyDiagnostics(

@@ -402,11 +402,9 @@ namespace Microsoft.EntityFrameworkCore
             property.SetIsFixedLength(fixedLength);
             var fkProperty = property.DeclaringEntityType.AddProperty("FK", typeof(string));
             var pk = property.DeclaringEntityType.SetPrimaryKey(property);
-            property.DeclaringEntityType.AddForeignKey(
-                fkProperty,
-                pk,
-                property.DeclaringEntityType
-            );
+            property
+                .DeclaringEntityType
+                .AddForeignKey(fkProperty, pk, property.DeclaringEntityType);
 
             var typeMapping = CreateRelationalTypeMappingSource().GetMapping((IProperty)fkProperty);
 
@@ -434,11 +432,9 @@ namespace Microsoft.EntityFrameworkCore
             property.SetIsFixedLength(fixedLength);
             var fkProperty = property.DeclaringEntityType.AddProperty("FK", typeof(string));
             var pk = property.DeclaringEntityType.SetPrimaryKey(property);
-            property.DeclaringEntityType.AddForeignKey(
-                fkProperty,
-                pk,
-                property.DeclaringEntityType
-            );
+            property
+                .DeclaringEntityType
+                .AddForeignKey(fkProperty, pk, property.DeclaringEntityType);
             fkProperty.IsNullable = false;
 
             var typeMapping = CreateRelationalTypeMappingSource().GetMapping((IProperty)fkProperty);
@@ -738,11 +734,9 @@ namespace Microsoft.EntityFrameworkCore
             property.IsNullable = false;
             var fkProperty = property.DeclaringEntityType.AddProperty("FK", typeof(string));
             var pk = property.DeclaringEntityType.SetPrimaryKey(property);
-            property.DeclaringEntityType.AddForeignKey(
-                fkProperty,
-                pk,
-                property.DeclaringEntityType
-            );
+            property
+                .DeclaringEntityType
+                .AddForeignKey(fkProperty, pk, property.DeclaringEntityType);
 
             var typeMapping = CreateRelationalTypeMappingSource().GetMapping((IProperty)fkProperty);
 
@@ -765,11 +759,9 @@ namespace Microsoft.EntityFrameworkCore
             property.IsNullable = false;
             var fkProperty = property.DeclaringEntityType.AddProperty("FK", typeof(string));
             var pk = property.DeclaringEntityType.SetPrimaryKey(property);
-            property.DeclaringEntityType.AddForeignKey(
-                fkProperty,
-                pk,
-                property.DeclaringEntityType
-            );
+            property
+                .DeclaringEntityType
+                .AddForeignKey(fkProperty, pk, property.DeclaringEntityType);
             fkProperty.IsNullable = false;
 
             var typeMapping = CreateRelationalTypeMappingSource().GetMapping((IProperty)fkProperty);
@@ -1051,11 +1043,9 @@ namespace Microsoft.EntityFrameworkCore
             property.SetIsFixedLength(fixedLength);
             var fkProperty = property.DeclaringEntityType.AddProperty("FK", typeof(byte[]));
             var pk = property.DeclaringEntityType.SetPrimaryKey(property);
-            property.DeclaringEntityType.AddForeignKey(
-                fkProperty,
-                pk,
-                property.DeclaringEntityType
-            );
+            property
+                .DeclaringEntityType
+                .AddForeignKey(fkProperty, pk, property.DeclaringEntityType);
 
             var typeMapping = CreateRelationalTypeMappingSource().GetMapping((IProperty)fkProperty);
             Assert.False(typeMapping.IsFixedLength);
@@ -1078,11 +1068,9 @@ namespace Microsoft.EntityFrameworkCore
             property.SetIsFixedLength(fixedLength);
             var fkProperty = property.DeclaringEntityType.AddProperty("FK", typeof(byte[]));
             var pk = property.DeclaringEntityType.SetPrimaryKey(property);
-            property.DeclaringEntityType.AddForeignKey(
-                fkProperty,
-                pk,
-                property.DeclaringEntityType
-            );
+            property
+                .DeclaringEntityType
+                .AddForeignKey(fkProperty, pk, property.DeclaringEntityType);
             fkProperty.IsNullable = false;
 
             var typeMapping = CreateRelationalTypeMappingSource().GetMapping((IProperty)fkProperty);
@@ -1113,11 +1101,9 @@ namespace Microsoft.EntityFrameworkCore
             Assert.Equal("varbinary(900)", typeMapping.StoreType);
             Assert.Equal(
                 900,
-                typeMapping.CreateParameter(
-                    new TestCommand(),
-                    "Name",
-                    new byte[] { 0, 1, 2, 3 }
-                ).Size
+                typeMapping
+                    .CreateParameter(new TestCommand(), "Name", new byte[] { 0, 1, 2, 3 })
+                    .Size
             );
         }
 
@@ -1257,16 +1243,20 @@ namespace Microsoft.EntityFrameworkCore
 
             Assert.Equal(
                 RelationalStrings.UnsupportedType("object"),
-                Assert.Throws<InvalidOperationException>(
-                    () => CreateRelationalTypeMappingSource().GetMapping(typeof(object))
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(
+                        () => CreateRelationalTypeMappingSource().GetMapping(typeof(object))
+                    )
+                    .Message
             );
 
             Assert.Equal(
                 RelationalStrings.UnsupportedStoreType("object"),
-                Assert.Throws<InvalidOperationException>(
-                    () => CreateRelationalTypeMappingSource().GetMapping("object")
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(
+                        () => CreateRelationalTypeMappingSource().GetMapping("object")
+                    )
+                    .Message
             );
         }
 
@@ -1359,7 +1349,8 @@ namespace Microsoft.EntityFrameworkCore
                     .Entity<StringCheese>()
                     .Property(e => e.StringWithSize)
                     .HasColumnType(typeName)
-                    .HasMaxLength(2018).Metadata;
+                    .HasMaxLength(2018)
+                    .Metadata;
 
             var mapping = CreateRelationalTypeMappingSource().FindMapping((IProperty)property);
 
@@ -1389,7 +1380,8 @@ namespace Microsoft.EntityFrameworkCore
                     .Entity<StringCheese>()
                     .Property(e => e.BinaryWithSize)
                     .HasColumnType(typeName)
-                    .HasMaxLength(2018).Metadata;
+                    .HasMaxLength(2018)
+                    .Metadata;
 
             var mapping = CreateRelationalTypeMappingSource().FindMapping((IProperty)property);
 
@@ -1422,9 +1414,11 @@ namespace Microsoft.EntityFrameworkCore
 
             Assert.Equal(
                 "money",
-                mapper.GetMapping(
-                    model.FindEntityType(typeof(MyRelatedType1)).FindProperty("Relationship1Id")
-                ).StoreType
+                mapper
+                    .GetMapping(
+                        model.FindEntityType(typeof(MyRelatedType1)).FindProperty("Relationship1Id")
+                    )
+                    .StoreType
             );
         }
 
@@ -1436,16 +1430,18 @@ namespace Microsoft.EntityFrameworkCore
 
             Assert.Equal(
                 "nchar(200)",
-                mapper.GetMapping(
-                    model.FindEntityType(typeof(MyRelatedType1)).FindProperty("Id")
-                ).StoreType
+                mapper
+                    .GetMapping(model.FindEntityType(typeof(MyRelatedType1)).FindProperty("Id"))
+                    .StoreType
             );
 
             Assert.Equal(
                 "nchar(200)",
-                mapper.GetMapping(
-                    model.FindEntityType(typeof(MyRelatedType2)).FindProperty("Relationship1Id")
-                ).StoreType
+                mapper
+                    .GetMapping(
+                        model.FindEntityType(typeof(MyRelatedType2)).FindProperty("Relationship1Id")
+                    )
+                    .StoreType
             );
         }
 
@@ -1457,16 +1453,18 @@ namespace Microsoft.EntityFrameworkCore
 
             Assert.Equal(
                 "binary(100)",
-                mapper.GetMapping(
-                    model.FindEntityType(typeof(MyRelatedType2)).FindProperty("Id")
-                ).StoreType
+                mapper
+                    .GetMapping(model.FindEntityType(typeof(MyRelatedType2)).FindProperty("Id"))
+                    .StoreType
             );
 
             Assert.Equal(
                 "binary(100)",
-                mapper.GetMapping(
-                    model.FindEntityType(typeof(MyRelatedType3)).FindProperty("Relationship1Id")
-                ).StoreType
+                mapper
+                    .GetMapping(
+                        model.FindEntityType(typeof(MyRelatedType3)).FindProperty("Relationship1Id")
+                    )
+                    .StoreType
             );
         }
 
@@ -1478,16 +1476,18 @@ namespace Microsoft.EntityFrameworkCore
 
             Assert.Equal(
                 "varchar(900)",
-                mapper.GetMapping(
-                    model.FindEntityType(typeof(MyRelatedType3)).FindProperty("Id")
-                ).StoreType
+                mapper
+                    .GetMapping(model.FindEntityType(typeof(MyRelatedType3)).FindProperty("Id"))
+                    .StoreType
             );
 
             Assert.Equal(
                 "varchar(900)",
-                mapper.GetMapping(
-                    model.FindEntityType(typeof(MyRelatedType4)).FindProperty("Relationship1Id")
-                ).StoreType
+                mapper
+                    .GetMapping(
+                        model.FindEntityType(typeof(MyRelatedType4)).FindProperty("Relationship1Id")
+                    )
+                    .StoreType
             );
         }
 
@@ -1504,9 +1504,11 @@ namespace Microsoft.EntityFrameworkCore
 
             Assert.Equal(
                 "dec(6,1)",
-                mapper.GetMapping(
-                    model.FindEntityType(typeof(MyRelatedType1)).FindProperty("Relationship2Id")
-                ).StoreType
+                mapper
+                    .GetMapping(
+                        model.FindEntityType(typeof(MyRelatedType1)).FindProperty("Relationship2Id")
+                    )
+                    .StoreType
             );
         }
 
@@ -1518,16 +1520,18 @@ namespace Microsoft.EntityFrameworkCore
 
             Assert.Equal(
                 "nchar(200)",
-                mapper.GetMapping(
-                    model.FindEntityType(typeof(MyRelatedType1)).FindProperty("Id")
-                ).StoreType
+                mapper
+                    .GetMapping(model.FindEntityType(typeof(MyRelatedType1)).FindProperty("Id"))
+                    .StoreType
             );
 
             Assert.Equal(
                 "nchar(787)",
-                mapper.GetMapping(
-                    model.FindEntityType(typeof(MyRelatedType2)).FindProperty("Relationship2Id")
-                ).StoreType
+                mapper
+                    .GetMapping(
+                        model.FindEntityType(typeof(MyRelatedType2)).FindProperty("Relationship2Id")
+                    )
+                    .StoreType
             );
         }
 
@@ -1539,16 +1543,18 @@ namespace Microsoft.EntityFrameworkCore
 
             Assert.Equal(
                 "binary(100)",
-                mapper.GetMapping(
-                    model.FindEntityType(typeof(MyRelatedType2)).FindProperty("Id")
-                ).StoreType
+                mapper
+                    .GetMapping(model.FindEntityType(typeof(MyRelatedType2)).FindProperty("Id"))
+                    .StoreType
             );
 
             Assert.Equal(
                 "binary(767)",
-                mapper.GetMapping(
-                    model.FindEntityType(typeof(MyRelatedType3)).FindProperty("Relationship2Id")
-                ).StoreType
+                mapper
+                    .GetMapping(
+                        model.FindEntityType(typeof(MyRelatedType3)).FindProperty("Relationship2Id")
+                    )
+                    .StoreType
             );
         }
 
@@ -1560,16 +1566,18 @@ namespace Microsoft.EntityFrameworkCore
 
             Assert.Equal(
                 "varchar(900)",
-                mapper.GetMapping(
-                    model.FindEntityType(typeof(MyRelatedType3)).FindProperty("Id")
-                ).StoreType
+                mapper
+                    .GetMapping(model.FindEntityType(typeof(MyRelatedType3)).FindProperty("Id"))
+                    .StoreType
             );
 
             Assert.Equal(
                 "nvarchar(450)",
-                mapper.GetMapping(
-                    model.FindEntityType(typeof(MyRelatedType4)).FindProperty("Relationship2Id")
-                ).StoreType
+                mapper
+                    .GetMapping(
+                        model.FindEntityType(typeof(MyRelatedType4)).FindProperty("Relationship2Id")
+                    )
+                    .StoreType
             );
         }
 

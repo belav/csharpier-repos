@@ -29,10 +29,12 @@ namespace System.Web.Mvc.Test
 
         private static void CreateMvcTestAssembly1()
         {
-            AssemblyBuilder assemblyBuilder = AppDomain.CurrentDomain.DefineDynamicAssembly(
-                new AssemblyName("MvcAssembly1"),
-                AssemblyBuilderAccess.Save
-            );
+            AssemblyBuilder assemblyBuilder = AppDomain
+                .CurrentDomain
+                .DefineDynamicAssembly(
+                    new AssemblyName("MvcAssembly1"),
+                    AssemblyBuilderAccess.Save
+                );
             ModuleBuilder moduleBuilder = assemblyBuilder.DefineDynamicModule(
                 "MvcAssembly1",
                 "MvcAssembly1.dll"
@@ -46,10 +48,12 @@ namespace System.Web.Mvc.Test
 
         private static void CreateMvcTestAssembly2()
         {
-            AssemblyBuilder assemblyBuilder = AppDomain.CurrentDomain.DefineDynamicAssembly(
-                new AssemblyName("MvcAssembly2"),
-                AssemblyBuilderAccess.Save
-            );
+            AssemblyBuilder assemblyBuilder = AppDomain
+                .CurrentDomain
+                .DefineDynamicAssembly(
+                    new AssemblyName("MvcAssembly2"),
+                    AssemblyBuilderAccess.Save
+                );
             ModuleBuilder moduleBuilder = assemblyBuilder.DefineDynamicModule(
                 "MvcAssembly2",
                 "MvcAssembly2.dll"
@@ -63,10 +67,12 @@ namespace System.Web.Mvc.Test
 
         private static void CreateMvcTestAssembly3()
         {
-            AssemblyBuilder assemblyBuilder = AppDomain.CurrentDomain.DefineDynamicAssembly(
-                new AssemblyName("MvcAssembly3"),
-                AssemblyBuilderAccess.Save
-            );
+            AssemblyBuilder assemblyBuilder = AppDomain
+                .CurrentDomain
+                .DefineDynamicAssembly(
+                    new AssemblyName("MvcAssembly3"),
+                    AssemblyBuilderAccess.Save
+                );
             ModuleBuilder moduleBuilder = assemblyBuilder.DefineDynamicModule(
                 "MvcAssembly3",
                 "MvcAssembly3.dll"
@@ -81,10 +87,12 @@ namespace System.Web.Mvc.Test
 
         private static void CreateMvcTestAssembly4()
         {
-            AssemblyBuilder assemblyBuilder = AppDomain.CurrentDomain.DefineDynamicAssembly(
-                new AssemblyName("MvcAssembly4"),
-                AssemblyBuilderAccess.Save
-            );
+            AssemblyBuilder assemblyBuilder = AppDomain
+                .CurrentDomain
+                .DefineDynamicAssembly(
+                    new AssemblyName("MvcAssembly4"),
+                    AssemblyBuilderAccess.Save
+                );
             ModuleBuilder moduleBuilder = assemblyBuilder.DefineDynamicModule(
                 "MvcAssembly4",
                 "MvcAssembly4.dll"

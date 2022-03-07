@@ -57,7 +57,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.AutomaticCompletion
             var nextCaretPosition =
                 formattedNewRoot
                     .GetAnnotatedTokens(s_openBracePositionAnnotation)
-                    .Single().Span.End;
+                    .Single()
+                    .Span
+                    .End;
             return (formattedNewRoot, nextCaretPosition);
         }
 
@@ -400,7 +402,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.AutomaticCompletion
             var nextCaretPosition =
                 formattedNewRoot
                     .GetAnnotatedTokens(s_openBracePositionAnnotation)
-                    .Single().Span.End;
+                    .Single()
+                    .Span
+                    .End;
             return (formattedNewRoot, nextCaretPosition);
         }
 
@@ -659,7 +663,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.AutomaticCompletion
                     && parentOfParent is PropertyDeclarationSyntax
                 )
                 {
-                    var otherAccessors = accessorListNode.Accessors
+                    var otherAccessors = accessorListNode
+                        .Accessors
                         .Except(new[] { accessorDeclarationNode })
                         .ToImmutableArray();
                     if (!otherAccessors.IsEmpty)

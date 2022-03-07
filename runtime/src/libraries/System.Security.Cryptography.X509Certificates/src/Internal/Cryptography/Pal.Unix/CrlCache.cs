@@ -293,7 +293,10 @@ namespace Internal.Cryptography.Pal
                     )
                     {
                         foreach (
-                            GeneralNameAsn name in distributionPoint.DistributionPoint.Value.FullName
+                            GeneralNameAsn name in distributionPoint
+                                .DistributionPoint
+                                .Value
+                                .FullName
                         )
                         {
                             if (

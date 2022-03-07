@@ -67,10 +67,9 @@ internal static partial class Interop
                         // Note that CFDataGetLength(cfData).ToInt32() will throw on
                         // too large of an input. Since a >2GB string is pretty unlikely,
                         // that's considered a good thing here.
-                        return Encoding.UTF8.GetString(
-                            CFDataGetBytePtr(cfData),
-                            CFDataGetLength(cfData).ToInt32()
-                        );
+                        return Encoding
+                            .UTF8
+                            .GetString(CFDataGetBytePtr(cfData), CFDataGetLength(cfData).ToInt32());
                     }
                 }
                 finally

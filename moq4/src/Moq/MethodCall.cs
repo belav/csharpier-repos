@@ -217,10 +217,9 @@ namespace Moq
         {
             Guard.NotNull(eventExpression, nameof(eventExpression));
 
-            var expression = ExpressionReconstructor.Instance.ReconstructExpression(
-                eventExpression,
-                this.Mock.ConstructorArguments
-            );
+            var expression = ExpressionReconstructor
+                .Instance
+                .ReconstructExpression(eventExpression, this.Mock.ConstructorArguments);
 
             // TODO: validate that expression is for event subscription or unsubscription
 
@@ -234,10 +233,9 @@ namespace Moq
         {
             Guard.NotNull(eventExpression, nameof(eventExpression));
 
-            var expression = ExpressionReconstructor.Instance.ReconstructExpression(
-                eventExpression,
-                this.Mock.ConstructorArguments
-            );
+            var expression = ExpressionReconstructor
+                .Instance
+                .ReconstructExpression(eventExpression, this.Mock.ConstructorArguments);
 
             // TODO: validate that expression is for event subscription or unsubscription
 

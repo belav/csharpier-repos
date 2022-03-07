@@ -34,7 +34,8 @@ namespace System.Web.Http.Filters
                 attributeType,
                 type =>
                     type.GetCustomAttributes<AttributeUsageAttribute>(inherit: true)
-                        .First().AllowMultiple
+                        .First()
+                        .AllowMultiple
             );
         }
     }

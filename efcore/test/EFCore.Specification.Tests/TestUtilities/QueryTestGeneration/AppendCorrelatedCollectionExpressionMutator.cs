@@ -24,7 +24,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities.QueryTestGeneration
         public override Expression Apply(Expression expression, Random random)
         {
             var typeArgument = expression.Type.GetGenericArguments()[0];
-            var navigations = Context.Model
+            var navigations = Context
+                .Model
                 .FindEntityType(typeArgument)
                 .GetNavigations()
                 .Where(n => n.IsCollection)

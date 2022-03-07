@@ -43,10 +43,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 return new NintValueSet(
                     hasSmall: random.NextDouble() < 0.25,
-                    values: (IValueSet<int>)NumericValueSetFactory<int, IntTC>.Instance.Random(
-                        expectedSize,
-                        random
-                    ),
+                    values: (IValueSet<int>)NumericValueSetFactory<int, IntTC>
+                        .Instance
+                        .Random(expectedSize, random),
                     hasLarge: random.NextDouble() < 0.25
                 );
             }

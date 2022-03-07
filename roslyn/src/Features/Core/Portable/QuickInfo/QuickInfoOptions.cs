@@ -55,7 +55,9 @@ namespace Microsoft.CodeAnalysis.QuickInfo
         public static readonly QuickInfoOptions Default =
             new(
                 ShowRemarksInQuickInfo: Metadata.ShowRemarksInQuickInfo.DefaultValue,
-                IncludeNavigationHintsInQuickInfo: Metadata.IncludeNavigationHintsInQuickInfo.DefaultValue
+                IncludeNavigationHintsInQuickInfo: Metadata
+                    .IncludeNavigationHintsInQuickInfo
+                    .DefaultValue
             );
 
         public static QuickInfoOptions From(Project project) =>

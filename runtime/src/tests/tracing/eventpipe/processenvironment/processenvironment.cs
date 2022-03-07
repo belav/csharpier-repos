@@ -107,7 +107,10 @@ namespace Tracing.Tests.ProcessEnvironmentValidation
                             end <= envBlock.Length,
                             $"String end can't exceed payload size. Expected: <{envBlock.Length}, Received: {end} (decoded length: {pairLength})"
                         );
-                        string envPair = System.Text.Encoding.Unicode
+                        string envPair = System
+                            .Text
+                            .Encoding
+                            .Unicode
                             .GetString(envBlock[start..end])
                             .TrimEnd('\0');
                         int equalsIndex = envPair.IndexOf('=');

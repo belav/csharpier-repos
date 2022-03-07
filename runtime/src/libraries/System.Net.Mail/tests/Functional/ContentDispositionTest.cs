@@ -14,9 +14,9 @@ namespace System.Net.Mime.Tests
         private const string ValidDateTimeLocal = "Sun, 17 May 2009 15:34:07 -0800";
         private const string ValidDateTimeNotLocal = "Sun, 17 May 2009 15:34:07 -0200";
         private const string InvalidDate = "Sun, 32 Say 2009 25:15:15 7m-gte";
-        private static readonly TimeSpan s_localTimeOffset = TimeZoneInfo.Local.GetUtcOffset(
-            new DateTime(2009, 5, 17, 15, 34, 07, DateTimeKind.Local)
-        );
+        private static readonly TimeSpan s_localTimeOffset = TimeZoneInfo
+            .Local
+            .GetUtcOffset(new DateTime(2009, 5, 17, 15, 34, 07, DateTimeKind.Local));
 
         [Fact]
         public static void DefaultCtor_ExpectedDefaultPropertyValues()
@@ -202,14 +202,12 @@ namespace System.Net.Mime.Tests
             );
 
             var contentDisposition2 = new ContentDisposition();
-            contentDisposition2.Parameters.Add(
-                "creation-date",
-                contentDisposition.Parameters["creation-date"]
-            );
-            contentDisposition2.Parameters.Add(
-                "modification-date",
-                contentDisposition.Parameters["modification-date"]
-            );
+            contentDisposition2
+                .Parameters
+                .Add("creation-date", contentDisposition.Parameters["creation-date"]);
+            contentDisposition2
+                .Parameters
+                .Add("modification-date", contentDisposition.Parameters["modification-date"]);
 
             Assert.Equal(contentDisposition.CreationDate, contentDisposition2.CreationDate);
             Assert.Equal(contentDisposition.ModificationDate, contentDisposition2.ModificationDate);
@@ -227,14 +225,12 @@ namespace System.Net.Mime.Tests
             try
             {
                 ContentDisposition contentDisposition2 = new ContentDisposition();
-                contentDisposition2.Parameters.Add(
-                    "creation-date",
-                    contentDisposition.Parameters["creation-date"]
-                );
-                contentDisposition2.Parameters.Add(
-                    "modification-date",
-                    contentDisposition.Parameters["modification-date"]
-                );
+                contentDisposition2
+                    .Parameters
+                    .Add("creation-date", contentDisposition.Parameters["creation-date"]);
+                contentDisposition2
+                    .Parameters
+                    .Add("modification-date", contentDisposition.Parameters["modification-date"]);
 
                 Assert.Equal(contentDisposition.CreationDate, contentDisposition2.CreationDate);
                 Assert.Equal(

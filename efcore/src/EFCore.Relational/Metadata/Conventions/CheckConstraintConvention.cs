@@ -173,9 +173,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 {
                     foreach (var checkConstraintToBeRemoved in checkConstraintsToBeRemoved)
                     {
-                        checkConstraintToBeRemoved.EntityType.RemoveCheckConstraint(
-                            checkConstraintToBeRemoved.ModelName
-                        );
+                        checkConstraintToBeRemoved
+                            .EntityType
+                            .RemoveCheckConstraint(checkConstraintToBeRemoved.ModelName);
                     }
                 }
 
@@ -188,9 +188,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                         ];
                         CheckConstraint.Attach(checkConstraintToBeDetached, baseCheckConstraint);
 
-                        checkConstraintToBeDetached.EntityType.RemoveCheckConstraint(
-                            checkConstraintToBeDetached.ModelName
-                        );
+                        checkConstraintToBeDetached
+                            .EntityType
+                            .RemoveCheckConstraint(checkConstraintToBeDetached.ModelName);
                     }
                 }
             }

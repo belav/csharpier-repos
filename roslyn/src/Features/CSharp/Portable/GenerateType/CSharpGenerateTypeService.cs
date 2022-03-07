@@ -232,9 +232,10 @@ namespace Microsoft.CodeAnalysis.CSharp.GenerateType
                 && nameOrMemberAccessExpression.Parent.IsParentKind(SyntaxKind.BaseList)
                 && ((BaseTypeSyntax)nameOrMemberAccessExpression.Parent).Type
                     == nameOrMemberAccessExpression
-                && nameOrMemberAccessExpression.Parent.Parent.IsParentKind(
-                    SyntaxKind.EnumDeclaration
-                )
+                && nameOrMemberAccessExpression
+                    .Parent
+                    .Parent
+                    .IsParentKind(SyntaxKind.EnumDeclaration)
             )
             {
                 return false;
@@ -293,10 +294,14 @@ namespace Microsoft.CodeAnalysis.CSharp.GenerateType
                     }
 
                     var leftSymbol =
-                        semanticModel.GetSymbolInfo(
-                            ((MemberAccessExpressionSyntax)nameOrMemberAccessExpression).Expression,
-                            cancellationToken
-                        ).Symbol;
+                        semanticModel
+                            .GetSymbolInfo(
+                                (
+                                    (MemberAccessExpressionSyntax)nameOrMemberAccessExpression
+                                ).Expression,
+                                cancellationToken
+                            )
+                            .Symbol;
                     var token = simpleName.GetLastToken().GetNextToken();
 
                     // We let only the Namespace to be left of the Dot
@@ -542,16 +547,20 @@ namespace Microsoft.CodeAnalysis.CSharp.GenerateType
             {
                 // MyD1 z1 = goo;
                 if (
-                    nameOrMemberAccessExpression.Parent.IsKind(
-                        SyntaxKind.VariableDeclaration,
-                        out VariableDeclarationSyntax variableDeclaration
-                    )
+                    nameOrMemberAccessExpression
+                        .Parent
+                        .IsKind(
+                            SyntaxKind.VariableDeclaration,
+                            out VariableDeclarationSyntax variableDeclaration
+                        )
                     && variableDeclaration.Variables.Count != 0
                 )
                 {
-                    var firstVarDeclWithInitializer = variableDeclaration.Variables.FirstOrDefault(
-                        var => var.Initializer != null && var.Initializer.Value != null
-                    );
+                    var firstVarDeclWithInitializer = variableDeclaration
+                        .Variables
+                        .FirstOrDefault(
+                            var => var.Initializer != null && var.Initializer.Value != null
+                        );
                     if (
                         firstVarDeclWithInitializer != null
                         && firstVarDeclWithInitializer.Initializer != null
@@ -569,10 +578,9 @@ namespace Microsoft.CodeAnalysis.CSharp.GenerateType
 
                 // var w1 = (MyD1)goo;
                 if (
-                    nameOrMemberAccessExpression.Parent.IsKind(
-                        SyntaxKind.CastExpression,
-                        out CastExpressionSyntax castExpression
-                    )
+                    nameOrMemberAccessExpression
+                        .Parent
+                        .IsKind(SyntaxKind.CastExpression, out CastExpressionSyntax castExpression)
                     && castExpression.Expression != null
                 )
                 {
@@ -1056,7 +1064,8 @@ namespace Microsoft.CodeAnalysis.CSharp.GenerateType
 
                 // Check if the usings is already present
                 if (
-                    compilationRoot.Usings
+                    compilationRoot
+                        .Usings
                         .Where(n => n != null && n.Alias == null)
                         .Select(n => n.Name.ToString())
                         .Any(n => n.Equals(includeUsingsOrImports))

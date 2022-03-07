@@ -50,13 +50,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitStringLiteral
 
             // TODO: set SmartIndent to textView.Options (https://devdiv.visualstudio.com/DevDiv/_workitems/edit/1412138)
             workspace.TryApplyChanges(
-                workspace.CurrentSolution.WithOptions(
-                    workspace.Options.WithChangedOption(
-                        FormattingBehaviorOptions.SmartIndent,
-                        LanguageNames.CSharp,
-                        indentStyle
+                workspace
+                    .CurrentSolution
+                    .WithOptions(
+                        workspace
+                            .Options
+                            .WithChangedOption(
+                                FormattingBehaviorOptions.SmartIndent,
+                                LanguageNames.CSharp,
+                                indentStyle
+                            )
                     )
-                )
             );
 
             if (useTabs && expectedOutputMarkup != null)
@@ -82,8 +86,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitStringLiteral
             view.SetMultiSelection(snapshotSpans);
 
             var undoHistoryRegistry = workspace.GetService<ITextUndoHistoryRegistry>();
-            var commandHandler =
-                workspace.ExportProvider.GetCommandHandler<SplitStringLiteralCommandHandler>(
+            var commandHandler = workspace
+                .ExportProvider
+                .GetCommandHandler<SplitStringLiteralCommandHandler>(
                     nameof(SplitStringLiteralCommandHandler)
                 );
 

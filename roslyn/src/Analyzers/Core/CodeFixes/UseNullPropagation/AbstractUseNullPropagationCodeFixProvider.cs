@@ -51,7 +51,8 @@ namespace Microsoft.CodeAnalysis.UseNullPropagation
         internal sealed override CodeFixCategory CodeFixCategory => CodeFixCategory.CodeStyle;
 
         protected override bool IncludeDiagnosticDuringFixAll(Diagnostic diagnostic) =>
-            !diagnostic.Descriptor
+            !diagnostic
+                .Descriptor
                 .ImmutableCustomTags()
                 .Contains(WellKnownDiagnosticTags.Unnecessary);
 
@@ -101,9 +102,9 @@ namespace Microsoft.CodeAnalysis.UseNullPropagation
                 whenTrue = syntaxFacts.WalkDownParentheses(whenTrue);
                 whenFalse = syntaxFacts.WalkDownParentheses(whenFalse);
 
-                var whenPartIsNullable = diagnostic.Properties.ContainsKey(
-                    UseNullPropagationConstants.WhenPartIsNullable
-                );
+                var whenPartIsNullable = diagnostic
+                    .Properties
+                    .ContainsKey(UseNullPropagationConstants.WhenPartIsNullable);
                 editor.ReplaceNode(
                     conditionalExpression,
                     (c, _) =>

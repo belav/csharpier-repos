@@ -54,10 +54,9 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.OutOfProcess
         )
         {
             _inProc.AddProject(projectName.Name, projectTemplate, languageName);
-            _instance.Workspace.WaitForAsyncOperations(
-                Helper.HangMitigatingTimeout,
-                FeatureAttribute.Workspace
-            );
+            _instance
+                .Workspace
+                .WaitForAsyncOperations(Helper.HangMitigatingTimeout, FeatureAttribute.Workspace);
         }
 
         public void AddCustomProject(
@@ -67,10 +66,9 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.OutOfProcess
         )
         {
             _inProc.AddCustomProject(projectName.Name, projectFileExtension, projectFileContent);
-            _instance.Workspace.WaitForAsyncOperations(
-                Helper.HangMitigatingTimeout,
-                FeatureAttribute.Workspace
-            );
+            _instance
+                .Workspace
+                .WaitForAsyncOperations(Helper.HangMitigatingTimeout, FeatureAttribute.Workspace);
         }
 
         public void AddProjectReference(
@@ -79,10 +77,9 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.OutOfProcess
         )
         {
             _inProc.AddProjectReference(fromProjectName.Name, toProjectName.Name);
-            _instance.Workspace.WaitForAsyncOperations(
-                Helper.HangMitigatingTimeout,
-                FeatureAttribute.Workspace
-            );
+            _instance
+                .Workspace
+                .WaitForAsyncOperations(Helper.HangMitigatingTimeout, FeatureAttribute.Workspace);
         }
 
         public void RemoveProjectReference(
@@ -91,10 +88,9 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.OutOfProcess
         )
         {
             _inProc.RemoveProjectReference(projectName.Name, projectReferenceName.Name);
-            _instance.Workspace.WaitForAsyncOperations(
-                Helper.HangMitigatingTimeout,
-                FeatureAttribute.Workspace
-            );
+            _instance
+                .Workspace
+                .WaitForAsyncOperations(Helper.HangMitigatingTimeout, FeatureAttribute.Workspace);
         }
 
         public void AddMetadataReference(
@@ -103,10 +99,9 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.OutOfProcess
         )
         {
             _inProc.AddMetadataReference(fullyQualifiedAssemblyName.Name, projectName.Name);
-            _instance.Workspace.WaitForAsyncOperations(
-                Helper.HangMitigatingTimeout,
-                FeatureAttribute.Workspace
-            );
+            _instance
+                .Workspace
+                .WaitForAsyncOperations(Helper.HangMitigatingTimeout, FeatureAttribute.Workspace);
         }
 
         public void RemoveMetadataReference(
@@ -115,37 +110,33 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.OutOfProcess
         )
         {
             _inProc.RemoveMetadataReference(assemblyName.Name, projectName.Name);
-            _instance.Workspace.WaitForAsyncOperations(
-                Helper.HangMitigatingTimeout,
-                FeatureAttribute.Workspace
-            );
+            _instance
+                .Workspace
+                .WaitForAsyncOperations(Helper.HangMitigatingTimeout, FeatureAttribute.Workspace);
         }
 
         public void AddAnalyzerReference(string filePath, ProjectUtils.Project projectName)
         {
             _inProc.AddAnalyzerReference(filePath, projectName.Name);
-            _instance.Workspace.WaitForAsyncOperations(
-                Helper.HangMitigatingTimeout,
-                FeatureAttribute.Workspace
-            );
+            _instance
+                .Workspace
+                .WaitForAsyncOperations(Helper.HangMitigatingTimeout, FeatureAttribute.Workspace);
         }
 
         public void RemoveAnalyzerReference(string filePath, ProjectUtils.Project projectName)
         {
             _inProc.RemoveAnalyzerReference(filePath, projectName.Name);
-            _instance.Workspace.WaitForAsyncOperations(
-                Helper.HangMitigatingTimeout,
-                FeatureAttribute.Workspace
-            );
+            _instance
+                .Workspace
+                .WaitForAsyncOperations(Helper.HangMitigatingTimeout, FeatureAttribute.Workspace);
         }
 
         public void SetLanguageVersion(ProjectUtils.Project projectName, string languageVersion)
         {
             _inProc.SetLanguageVersion(projectName.Name, languageVersion);
-            _instance.Workspace.WaitForAsyncOperations(
-                Helper.HangMitigatingTimeout,
-                FeatureAttribute.Workspace
-            );
+            _instance
+                .Workspace
+                .WaitForAsyncOperations(Helper.HangMitigatingTimeout, FeatureAttribute.Workspace);
         }
 
         /// <summary>
@@ -193,10 +184,9 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.OutOfProcess
         {
             // Wireup to open files can happen asynchronously in the case we're being notified of changes on background threads.
             _inProc.OpenFile(project.Name, fileName);
-            _instance.Workspace.WaitForAsyncOperations(
-                Helper.HangMitigatingTimeout,
-                FeatureAttribute.Workspace
-            );
+            _instance
+                .Workspace
+                .WaitForAsyncOperations(Helper.HangMitigatingTimeout, FeatureAttribute.Workspace);
         }
 
         public void UpdateFile(
@@ -210,10 +200,9 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.OutOfProcess
         {
             // Wireup to open files can happen asynchronously in the case we're being notified of changes on background threads.
             _inProc.RenameFile(project.Name, oldFileName, newFileName);
-            _instance.Workspace.WaitForAsyncOperations(
-                Helper.HangMitigatingTimeout,
-                FeatureAttribute.Workspace
-            );
+            _instance
+                .Workspace
+                .WaitForAsyncOperations(Helper.HangMitigatingTimeout, FeatureAttribute.Workspace);
         }
 
         public void RenameFileViaDTE(
@@ -224,10 +213,9 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.OutOfProcess
         {
             // Wireup to open files can happen asynchronously in the case we're being notified of changes on background threads.
             _inProc.RenameFileViaDTE(project.Name, oldFileName, newFileName);
-            _instance.Workspace.WaitForAsyncOperations(
-                Helper.HangMitigatingTimeout,
-                FeatureAttribute.Workspace
-            );
+            _instance
+                .Workspace
+                .WaitForAsyncOperations(Helper.HangMitigatingTimeout, FeatureAttribute.Workspace);
         }
 
         public void CloseDesignerFile(

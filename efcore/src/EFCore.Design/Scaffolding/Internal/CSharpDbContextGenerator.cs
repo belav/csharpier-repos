@@ -463,7 +463,8 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
                 if (
                     skipNavigation.JoinEntityType.FindPrimaryKey()!.Properties[0]
                         .GetContainingForeignKeys()
-                        .Single().PrincipalEntityType == entityType
+                        .Single()
+                        .PrincipalEntityType == entityType
                 )
                 {
                     // We generate UsingEntity for entityType from first property's FK.
@@ -526,12 +527,14 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
             {
                 if (
                     key is IConventionKey conventionKey
-                    && conventionKey.Properties.SequenceEqual(
-                        KeyDiscoveryConvention.DiscoverKeyProperties(
-                            conventionKey.DeclaringEntityType,
-                            conventionKey.DeclaringEntityType.GetProperties()
+                    && conventionKey
+                        .Properties
+                        .SequenceEqual(
+                            KeyDiscoveryConvention.DiscoverKeyProperties(
+                                conventionKey.DeclaringEntityType,
+                                conventionKey.DeclaringEntityType.GetProperties()
+                            )
                         )
-                    )
                 )
                 {
                     return;
@@ -1300,9 +1303,12 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
             }
 
             lines.AddRange(
-                annotations.Values.Select(
-                    a => $".HasAnnotation({_code.Literal(a.Name)}, {_code.UnknownLiteral(a.Value)})"
-                )
+                annotations
+                    .Values
+                    .Select(
+                        a =>
+                            $".HasAnnotation({_code.Literal(a.Name)}, {_code.UnknownLiteral(a.Value)})"
+                    )
             );
         }
 

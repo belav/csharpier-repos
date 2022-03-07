@@ -217,9 +217,11 @@ public static class HttpRequestJsonExtensions
     private static JsonSerializerOptions ResolveSerializerOptions(HttpContext httpContext)
     {
         // Attempt to resolve options from DI then fallback to default options
-        return httpContext.RequestServices
+        return httpContext
+                .RequestServices
                 ?.GetService<IOptions<JsonOptions>>()
-                ?.Value?.SerializerOptions ?? JsonOptions.DefaultSerializerOptions;
+                ?.Value
+                ?.SerializerOptions ?? JsonOptions.DefaultSerializerOptions;
     }
 
     private static InvalidOperationException CreateContentTypeError(HttpRequest request)

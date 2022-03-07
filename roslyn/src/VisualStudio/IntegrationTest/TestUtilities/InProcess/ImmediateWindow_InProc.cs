@@ -16,9 +16,9 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
 
         public string GetText()
         {
-            var vsUIShell = (IVsUIShell)ServiceProvider.GlobalProvider.GetService(
-                typeof(SVsUIShell)
-            );
+            var vsUIShell = (IVsUIShell)ServiceProvider
+                .GlobalProvider
+                .GetService(typeof(SVsUIShell));
             var immediateWindowGuid = VSConstants.StandardToolWindows.Immediate;
             IVsWindowFrame immediateWindowFrame;
             ErrorHandler.ThrowOnFailure(

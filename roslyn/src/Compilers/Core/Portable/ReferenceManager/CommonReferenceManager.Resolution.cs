@@ -1061,8 +1061,9 @@ namespace Microsoft.CodeAnalysis
                 referencesBuilder.AddRange(compilation.ExternalReferences);
 
                 // Add all explicit references of the previous script compilation.
-                var previousScriptCompilation =
-                    compilation.ScriptCompilationInfo?.PreviousScriptCompilation;
+                var previousScriptCompilation = compilation
+                    .ScriptCompilationInfo
+                    ?.PreviousScriptCompilation;
                 if (previousScriptCompilation != null)
                 {
                     referencesBuilder.AddRange(
@@ -1108,11 +1109,14 @@ namespace Microsoft.CodeAnalysis
             // checked earlier:
             Debug.Assert(compilation.Options.MetadataReferenceResolver != null);
 
-            var references = compilation.Options.MetadataReferenceResolver.ResolveReference(
-                reference,
-                basePath,
-                MetadataReferenceProperties.Assembly.WithRecursiveAliases(true)
-            );
+            var references = compilation
+                .Options
+                .MetadataReferenceResolver
+                .ResolveReference(
+                    reference,
+                    basePath,
+                    MetadataReferenceProperties.Assembly.WithRecursiveAliases(true)
+                );
             if (references.IsDefaultOrEmpty)
             {
                 return null;
@@ -1277,16 +1281,14 @@ namespace Microsoft.CodeAnalysis
                         definition.ContentType == AssemblyContentType.Default
                         && sourceCompilation?.Options.OutputKind
                             == OutputKind.WindowsRuntimeMetadata
-                        && AssemblyIdentityComparer.SimpleNameComparer.Equals(
-                            reference.Name,
-                            definition.Name
-                        )
+                        && AssemblyIdentityComparer
+                            .SimpleNameComparer
+                            .Equals(reference.Name, definition.Name)
                         && reference.Version.Equals(definition.Version)
                         && reference.IsRetargetable == definition.IsRetargetable
-                        && AssemblyIdentityComparer.CultureComparer.Equals(
-                            reference.CultureName,
-                            definition.CultureName
-                        )
+                        && AssemblyIdentityComparer
+                            .CultureComparer
+                            .Equals(reference.CultureName, definition.CultureName)
                         && AssemblyIdentity.KeysEqual(reference, definition)
                     )
                     {
@@ -1300,10 +1302,9 @@ namespace Microsoft.CodeAnalysis
             // skipping the public key comparison since we have yet to compute it.
             if (
                 resolveAgainstAssemblyBeingBuilt
-                && AssemblyIdentityComparer.SimpleNameComparer.Equals(
-                    reference.Name,
-                    definitions[0].Identity.Name
-                )
+                && AssemblyIdentityComparer
+                    .SimpleNameComparer
+                    .Equals(reference.Name, definitions[0].Identity.Name)
             )
             {
                 Debug.Assert(definitions[0].Identity.PublicKeyToken.IsEmpty);

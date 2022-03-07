@@ -86,9 +86,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.SignatureHel
                         var comparer = isCaseSensitive
                             ? StringComparer.Ordinal
                             : StringComparer.OrdinalIgnoreCase;
-                        var index = bestItem.Parameters.IndexOf(
-                            p => comparer.Equals(p.Name, parameterName)
-                        );
+                        var index = bestItem
+                            .Parameters
+                            .IndexOf(p => comparer.Equals(p.Name, parameterName));
                         if (index >= 0)
                         {
                             return index;

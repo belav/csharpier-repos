@@ -845,9 +845,9 @@ class C
             var editor = await DocumentEditor
                 .CreateAsync(document, CancellationToken.None)
                 .ConfigureAwait(false);
-            var attributeSyntax = editor.Generator.Attribute(
-                editor.Generator.TypeExpression(attribute)
-            );
+            var attributeSyntax = editor
+                .Generator
+                .Attribute(editor.Generator.TypeExpression(attribute));
 
             editor.AddAttribute(p1SyntaxNode, attributeSyntax);
             var documentWithAttribute = editor.GetChangedDocument();

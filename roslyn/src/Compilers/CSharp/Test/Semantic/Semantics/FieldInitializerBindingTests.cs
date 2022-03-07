@@ -296,7 +296,8 @@ class C
         {
             var compilation = CreateCompilation(source);
             var syntaxTree = compilation.SyntaxTrees.First();
-            var typeSymbol = (SourceNamedTypeSymbol)compilation.GlobalNamespace
+            var typeSymbol = (SourceNamedTypeSymbol)compilation
+                .GlobalNamespace
                 .GetMembers("C")
                 .Single();
 

@@ -101,7 +101,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.C
 
             // If we have a command line parser service for this language, also set up our ability to process options if they come in
             if (
-                visualStudioWorkspace.Services
+                visualStudioWorkspace
+                    .Services
                     .GetLanguageServices(visualStudioProject.Language)
                     .GetService<ICommandLineParserService>() != null
             )

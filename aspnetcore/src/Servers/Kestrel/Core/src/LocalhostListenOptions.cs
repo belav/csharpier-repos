@@ -46,13 +46,15 @@ internal sealed class LocalhostListenOptions : ListenOptions
         }
         catch (Exception ex) when (!(ex is IOException or OperationCanceledException))
         {
-            context.Logger.LogInformation(
-                0,
-                CoreStrings.NetworkInterfaceBindingFailed,
-                GetDisplayName(),
-                "IPv4 loopback",
-                ex.Message
-            );
+            context
+                .Logger
+                .LogInformation(
+                    0,
+                    CoreStrings.NetworkInterfaceBindingFailed,
+                    GetDisplayName(),
+                    "IPv4 loopback",
+                    ex.Message
+                );
             exceptions.Add(ex);
         }
 
@@ -65,13 +67,15 @@ internal sealed class LocalhostListenOptions : ListenOptions
         }
         catch (Exception ex) when (!(ex is IOException or OperationCanceledException))
         {
-            context.Logger.LogInformation(
-                0,
-                CoreStrings.NetworkInterfaceBindingFailed,
-                GetDisplayName(),
-                "IPv6 loopback",
-                ex.Message
-            );
+            context
+                .Logger
+                .LogInformation(
+                    0,
+                    CoreStrings.NetworkInterfaceBindingFailed,
+                    GetDisplayName(),
+                    "IPv6 loopback",
+                    ex.Message
+                );
             exceptions.Add(ex);
         }
 

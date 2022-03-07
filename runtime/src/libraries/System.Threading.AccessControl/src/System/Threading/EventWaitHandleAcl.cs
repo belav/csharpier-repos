@@ -58,12 +58,14 @@ namespace System.Threading
                     lpSecurityDescriptor = (IntPtr)pSecurityDescriptor
                 };
 
-                SafeWaitHandle handle = Interop.Kernel32.CreateEventEx(
-                    (IntPtr)(&secAttrs),
-                    name,
-                    eventFlags,
-                    (uint)EventWaitHandleRights.FullControl
-                );
+                SafeWaitHandle handle = Interop
+                    .Kernel32
+                    .CreateEventEx(
+                        (IntPtr)(&secAttrs),
+                        name,
+                        eventFlags,
+                        (uint)EventWaitHandleRights.FullControl
+                    );
 
                 int errorCode = Marshal.GetLastWin32Error();
 

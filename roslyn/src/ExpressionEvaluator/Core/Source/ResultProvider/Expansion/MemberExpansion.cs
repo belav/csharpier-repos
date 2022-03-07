@@ -518,11 +518,13 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                 Expansion expansion
             )
             {
-                var fullName = resultProvider.FullNameProvider.GetClrTypeName(
-                    inspectionContext,
-                    declaredTypeAndInfo.ClrType,
-                    declaredTypeAndInfo.Info
-                );
+                var fullName = resultProvider
+                    .FullNameProvider
+                    .GetClrTypeName(
+                        inspectionContext,
+                        declaredTypeAndInfo.ClrType,
+                        declaredTypeAndInfo.Info
+                    );
                 return new EvalResult(
                     ExpansionKind.StaticMembers,
                     name: resultProvider.StaticMembersString,

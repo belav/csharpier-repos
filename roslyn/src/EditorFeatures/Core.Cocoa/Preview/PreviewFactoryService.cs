@@ -68,9 +68,11 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
             const string DiffOverviewMarginName = "deltadifferenceViewerOverview";
             if (mode == DifferenceViewMode.RightViewOnly)
             {
-                diffViewer.RightHost.GetTextViewMargin(
-                    DiffOverviewMarginName
-                ).VisualElement.Hidden = true;
+                diffViewer
+                    .RightHost
+                    .GetTextViewMargin(DiffOverviewMarginName)
+                    .VisualElement
+                    .Hidden = true;
             }
             else if (mode == DifferenceViewMode.LeftViewOnly)
             {
@@ -80,9 +82,11 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
             else
             {
                 Contract.ThrowIfFalse(mode == DifferenceViewMode.Inline);
-                diffViewer.InlineHost.GetTextViewMargin(
-                    DiffOverviewMarginName
-                ).VisualElement.Hidden = true;
+                diffViewer
+                    .InlineHost
+                    .GetTextViewMargin(DiffOverviewMarginName)
+                    .VisualElement
+                    .Hidden = true;
             }
 
             // We use ConfigureAwait(true) to stay on the UI thread.

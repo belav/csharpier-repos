@@ -62,16 +62,18 @@ namespace Microsoft.EntityFrameworkCore
 
             Assert.Equal(
                 CoreStrings.TransactionsNotSupported,
-                Assert.Throws<NotSupportedException>(
-                    () => context.Database.EnlistTransaction(Transaction.Current)
-                ).Message
+                Assert
+                    .Throws<NotSupportedException>(
+                        () => context.Database.EnlistTransaction(Transaction.Current)
+                    )
+                    .Message
             );
 
             Assert.Equal(
                 CoreStrings.TransactionsNotSupported,
-                Assert.Throws<NotSupportedException>(
-                    () => context.Database.GetEnlistedTransaction()
-                ).Message
+                Assert
+                    .Throws<NotSupportedException>(() => context.Database.GetEnlistedTransaction())
+                    .Message
             );
         }
 
@@ -145,9 +147,9 @@ namespace Microsoft.EntityFrameworkCore
         {
             var options = new LoggingOptions();
             options.Initialize(
-                new DbContextOptionsBuilder().ConfigureWarnings(
-                    w => w.Default(WarningBehavior.Throw)
-                ).Options
+                new DbContextOptionsBuilder()
+                    .ConfigureWarnings(w => w.Default(WarningBehavior.Throw))
+                    .Options
             );
             var logger = new DiagnosticsLogger<DbLoggerCategory.Database.Transaction>(
                 new ListLoggerFactory(l => false),

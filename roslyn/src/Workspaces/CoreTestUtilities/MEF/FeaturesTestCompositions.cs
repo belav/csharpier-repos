@@ -12,7 +12,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
 {
     public static class FeaturesTestCompositions
     {
-        public static readonly TestComposition Features = TestComposition.Empty
+        public static readonly TestComposition Features = TestComposition
+            .Empty
             .AddAssemblies(MefHostServices.DefaultAssemblies)
             .AddParts(
                 typeof(TestSerializerService.Factory),
@@ -20,7 +21,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                 typeof(TestErrorReportingService)
             ); // mocks the info-bar error reporting
 
-        public static readonly TestComposition RemoteHost = TestComposition.Empty
+        public static readonly TestComposition RemoteHost = TestComposition
+            .Empty
             .AddAssemblies(RemoteWorkspaceManager.RemoteHostAssemblies)
             .AddParts(typeof(TestSerializerService.Factory));
 

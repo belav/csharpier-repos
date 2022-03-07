@@ -59,9 +59,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
     private static string Goo => s_goo [||]?? (s_goo = new string('c', 42));
 }",
                 new TestParameters(
-                    parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
-                        LanguageVersion.CSharp7_3
-                    )
+                    parseOptions: CSharpParseOptions
+                        .Default
+                        .WithLanguageVersion(LanguageVersion.CSharp7_3)
                 )
             );
         }

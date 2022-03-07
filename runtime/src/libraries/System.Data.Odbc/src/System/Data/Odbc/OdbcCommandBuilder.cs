@@ -251,9 +251,9 @@ namespace System.Data.Odbc
                             break;
                     }
                     parameter.OdbcType =
-                        TypeMap.FromSqlType(
-                            (ODBC32.SQL_TYPE)reader.GetInt16(ODBC32.DATA_TYPE - 1)
-                        )._odbcType;
+                        TypeMap
+                            .FromSqlType((ODBC32.SQL_TYPE)reader.GetInt16(ODBC32.DATA_TYPE - 1))
+                            ._odbcType;
                     parameter.Size = (int)reader.GetInt32(ODBC32.COLUMN_SIZE - 1);
                     switch (parameter.OdbcType)
                     {

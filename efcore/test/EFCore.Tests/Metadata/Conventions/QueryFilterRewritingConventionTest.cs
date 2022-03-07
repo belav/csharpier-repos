@@ -112,7 +112,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         }
 
         private ProviderConventionSetBuilderDependencies CreateDependencies() =>
-            InMemoryTestHelpers.Instance
+            InMemoryTestHelpers
+                .Instance
                 .CreateContextServices()
                 .GetRequiredService<ProviderConventionSetBuilderDependencies>();
 

@@ -16,11 +16,9 @@ namespace System.IO.Compression
 
         internal void InitializeDecoder()
         {
-            _state = Interop.Brotli.BrotliDecoderCreateInstance(
-                IntPtr.Zero,
-                IntPtr.Zero,
-                IntPtr.Zero
-            );
+            _state = Interop
+                .Brotli
+                .BrotliDecoderCreateInstance(IntPtr.Zero, IntPtr.Zero, IntPtr.Zero);
             if (_state.IsInvalid)
                 throw new IOException(SR.BrotliDecoder_Create);
         }
@@ -82,14 +80,16 @@ namespace System.IO.Compression
                     fixed (byte* inBytes = &MemoryMarshal.GetReference(source))
                     fixed (byte* outBytes = &MemoryMarshal.GetReference(destination))
                     {
-                        int brotliResult = Interop.Brotli.BrotliDecoderDecompressStream(
-                            _state,
-                            ref availableInput,
-                            &inBytes,
-                            ref availableOutput,
-                            &outBytes,
-                            out _
-                        );
+                        int brotliResult = Interop
+                            .Brotli
+                            .BrotliDecoderDecompressStream(
+                                _state,
+                                ref availableInput,
+                                &inBytes,
+                                ref availableOutput,
+                                &outBytes,
+                                out _
+                            );
                         if (brotliResult == 0) // Error
                         {
                             return OperationStatus.InvalidData;
@@ -140,12 +140,14 @@ namespace System.IO.Compression
             {
                 nuint availableOutput = (nuint)destination.Length;
                 bool success =
-                    Interop.Brotli.BrotliDecoderDecompress(
-                        (nuint)source.Length,
-                        inBytes,
-                        &availableOutput,
-                        outBytes
-                    ) != Interop.BOOL.FALSE;
+                    Interop
+                        .Brotli
+                        .BrotliDecoderDecompress(
+                            (nuint)source.Length,
+                            inBytes,
+                            &availableOutput,
+                            outBytes
+                        ) != Interop.BOOL.FALSE;
 
                 Debug.Assert(
                     success ? availableOutput <= (nuint)destination.Length : availableOutput == 0

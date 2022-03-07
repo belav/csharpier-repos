@@ -50,9 +50,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 switch (entityType.GetIsKeylessConfigurationSource())
                 {
                     case ConfigurationSource.DataAnnotation:
-                        Dependencies.Logger.ConflictingKeylessAndKeyAttributesWarning(
-                            propertyBuilder.Metadata
-                        );
+                        Dependencies
+                            .Logger
+                            .ConflictingKeylessAndKeyAttributesWarning(propertyBuilder.Metadata);
                         return;
 
                     case ConfigurationSource.Explicit:
@@ -89,7 +89,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             )
             {
                 properties.AddRange(
-                    currentKey.Properties
+                    currentKey
+                        .Properties
                         .Where(
                             p =>
                                 !p.Name.Equals(

@@ -560,9 +560,9 @@ namespace System.Data.Tests
             // Setting MaxLength on SimpleContent -> exception
             DataSet ds = new DataSet("Example");
             ds.Tables.Add("MyType");
-            ds.Tables["MyType"].Columns.Add(
-                new DataColumn("Desc", typeof(string), "", MappingType.SimpleContent)
-            );
+            ds.Tables["MyType"]
+                .Columns
+                .Add(new DataColumn("Desc", typeof(string), "", MappingType.SimpleContent));
             Assert.Throws<ArgumentException>(
                 () => ds.Tables["MyType"].Columns["Desc"].MaxLength = 32
             );
@@ -574,9 +574,9 @@ namespace System.Data.Tests
             // however setting MaxLength on SimpleContent is OK
             DataSet ds = new DataSet("Example");
             ds.Tables.Add("MyType");
-            ds.Tables["MyType"].Columns.Add(
-                new DataColumn("Desc", typeof(string), "", MappingType.SimpleContent)
-            );
+            ds.Tables["MyType"]
+                .Columns
+                .Add(new DataColumn("Desc", typeof(string), "", MappingType.SimpleContent));
             ds.Tables["MyType"].Columns["Desc"].MaxLength = -1;
         }
 

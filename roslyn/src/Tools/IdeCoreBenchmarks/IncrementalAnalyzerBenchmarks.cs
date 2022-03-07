@@ -76,11 +76,9 @@ namespace IdeCoreBenchmarks
             _incrementalAnalyzerRunner = new IncrementalAnalyzerRunner(_workspace, _options);
 
             _ =
-                _workspace.OpenSolutionAsync(
-                    _solutionPath,
-                    progress: null,
-                    CancellationToken.None
-                ).Result;
+                _workspace
+                    .OpenSolutionAsync(_solutionPath, progress: null, CancellationToken.None)
+                    .Result;
         }
 
         [IterationCleanup]

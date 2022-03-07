@@ -41,8 +41,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.QuickInfo
 
         private void OpenLink()
         {
-            var navigateToLinkService =
-                _workspace.Services.GetRequiredService<INavigateToLinkService>();
+            var navigateToLinkService = _workspace
+                .Services
+                .GetRequiredService<INavigateToLinkService>();
             _ = navigateToLinkService.TryNavigateToLinkAsync(Uri, CancellationToken.None);
         }
 

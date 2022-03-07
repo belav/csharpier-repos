@@ -67,7 +67,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             if (!shouldPreselectInferredTypes)
                 return recommendedSymbols.NamedSymbols.SelectAsArray(s => (s, preselect: false));
 
-            var inferredTypes = context.InferredTypes
+            var inferredTypes = context
+                .InferredTypes
                 .Where(t => t.SpecialType != SpecialType.System_Void)
                 .ToSet();
 

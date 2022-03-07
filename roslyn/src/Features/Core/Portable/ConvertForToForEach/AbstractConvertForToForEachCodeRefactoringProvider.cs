@@ -159,12 +159,12 @@ namespace Microsoft.CodeAnalysis.ConvertForToForEach
                 return;
             }
 
-            var ienumerableType = semanticModel.Compilation.GetSpecialType(
-                SpecialType.System_Collections_Generic_IEnumerable_T
-            );
-            var ienumeratorType = semanticModel.Compilation.GetSpecialType(
-                SpecialType.System_Collections_Generic_IEnumerator_T
-            );
+            var ienumerableType = semanticModel
+                .Compilation
+                .GetSpecialType(SpecialType.System_Collections_Generic_IEnumerable_T);
+            var ienumeratorType = semanticModel
+                .Compilation
+                .GetSpecialType(SpecialType.System_Collections_Generic_IEnumerator_T);
 
             // make sure the collection can be iterated.
             if (

@@ -3050,9 +3050,9 @@ namespace Microsoft.WebAssembly.Diagnostics
             if (accessorPropertiesOnly)
                 return valueTypes[valueTypeId].valueTypeJsonProps;
             var ret = new JArray(
-                valueTypes[valueTypeId].valueTypeJson.Union(
-                    valueTypes[valueTypeId].valueTypeJsonProps
-                )
+                valueTypes[valueTypeId]
+                    .valueTypeJson
+                    .Union(valueTypes[valueTypeId].valueTypeJsonProps)
             );
             return ret;
         }
@@ -3094,25 +3094,27 @@ namespace Microsoft.WebAssembly.Diagnostics
                 command_params_writer_to_proxy.Write(getMethodId);
                 command_params_writer_to_proxy.Write(valueTypes[valueTypeId].valueTypeBuffer);
                 command_params_writer_to_proxy.Write(0);
-                valueTypes[valueTypeId].valueTypeProxy.Add(
-                    JObject.FromObject(
-                        new
-                        {
-                            get = JObject.FromObject(
-                                new
-                                {
-                                    commandSet = CommandSet.Vm,
-                                    command = CmdVM.InvokeMethod,
-                                    buffer = Convert.ToBase64String(
-                                        command_params_to_proxy.ToArray()
-                                    ),
-                                    length = command_params_to_proxy.ToArray().Length
-                                }
-                            ),
-                            name = propertyNameStr
-                        }
-                    )
-                );
+                valueTypes[valueTypeId]
+                    .valueTypeProxy
+                    .Add(
+                        JObject.FromObject(
+                            new
+                            {
+                                get = JObject.FromObject(
+                                    new
+                                    {
+                                        commandSet = CommandSet.Vm,
+                                        command = CmdVM.InvokeMethod,
+                                        buffer = Convert.ToBase64String(
+                                            command_params_to_proxy.ToArray()
+                                        ),
+                                        length = command_params_to_proxy.ToArray().Length
+                                    }
+                                ),
+                                name = propertyNameStr
+                            }
+                        )
+                    );
             }
             return valueTypes[valueTypeId].valueTypeProxy;
         }

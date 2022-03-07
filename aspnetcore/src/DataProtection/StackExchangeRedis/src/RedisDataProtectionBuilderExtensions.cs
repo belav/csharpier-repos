@@ -92,12 +92,14 @@ public static class StackExchangeRedisDataProtectionBuilderExtensions
         RedisKey key
     )
     {
-        builder.Services.Configure<KeyManagementOptions>(
-            options =>
-            {
-                options.XmlRepository = new RedisXmlRepository(databaseFactory, key);
-            }
-        );
+        builder
+            .Services
+            .Configure<KeyManagementOptions>(
+                options =>
+                {
+                    options.XmlRepository = new RedisXmlRepository(databaseFactory, key);
+                }
+            );
         return builder;
     }
 }

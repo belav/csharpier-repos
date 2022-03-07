@@ -116,10 +116,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Workspaces
             );
 
             var buffer = CreateTextBuffer(reader);
-            return buffer.CurrentSnapshot.AsRoslynText(
-                _textBufferCloneService,
-                reader.CurrentEncoding ?? Encoding.UTF8
-            );
+            return buffer
+                .CurrentSnapshot
+                .AsRoslynText(_textBufferCloneService, reader.CurrentEncoding ?? Encoding.UTF8);
         }
     }
 }

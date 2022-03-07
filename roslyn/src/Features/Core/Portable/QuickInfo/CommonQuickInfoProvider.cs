@@ -23,7 +23,8 @@ namespace Microsoft.CodeAnalysis.QuickInfo
         public override async Task<QuickInfoItem?> GetQuickInfoAsync(QuickInfoContext context)
         {
             var cancellationToken = context.CancellationToken;
-            var tree = await context.Document
+            var tree = await context
+                .Document
                 .GetRequiredSyntaxTreeAsync(cancellationToken)
                 .ConfigureAwait(false);
             var tokens = await GetTokensAsync(tree, context.Position, context.CancellationToken)

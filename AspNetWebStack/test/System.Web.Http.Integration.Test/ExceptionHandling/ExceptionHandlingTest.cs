@@ -157,10 +157,12 @@ namespace System.Web.Http
                 actionName
             );
             HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, requestUrl);
-            request.Headers.Add(
-                ExceptionController.ResponseExceptionHeaderKey,
-                responseExceptionStatusCode.ToString()
-            );
+            request
+                .Headers
+                .Add(
+                    ExceptionController.ResponseExceptionHeaderKey,
+                    responseExceptionStatusCode.ToString()
+                );
 
             await ScenarioHelper.RunTestAsync(
                 controllerName,
@@ -339,11 +341,9 @@ namespace System.Web.Http
             {
                 IncludeErrorDetailPolicy = IncludeErrorDetailPolicy.Always
             };
-            config.Routes.MapHttpRoute(
-                "Default",
-                "Exception/{action}",
-                new { controller = "Exception" }
-            );
+            config
+                .Routes
+                .MapHttpRoute("Default", "Exception/{action}", new { controller = "Exception" });
             HttpServer server = new HttpServer(config);
             HttpClient client = new HttpClient(server);
 

@@ -288,10 +288,12 @@ class c { }";
         internal override IChainedCommandHandler<TypeCharCommandArgs> CreateCommandHandler(
             TestWorkspace workspace
         ) =>
-            workspace.ExportProvider.GetCommandHandler<XmlTagCompletionCommandHandler>(
-                nameof(XmlTagCompletionCommandHandler),
-                ContentTypeNames.CSharpContentType
-            );
+            workspace
+                .ExportProvider
+                .GetCommandHandler<XmlTagCompletionCommandHandler>(
+                    nameof(XmlTagCompletionCommandHandler),
+                    ContentTypeNames.CSharpContentType
+                );
 
         protected override TestWorkspace CreateTestWorkspace(string initialMarkup) =>
             TestWorkspace.CreateCSharp(initialMarkup);

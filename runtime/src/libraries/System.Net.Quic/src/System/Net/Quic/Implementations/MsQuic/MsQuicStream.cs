@@ -133,11 +133,13 @@ namespace System.Net.Quic.Implementations.MsQuic
             _state.StateGCHandle = GCHandle.Alloc(_state);
             try
             {
-                MsQuicApi.Api.SetCallbackHandlerDelegate(
-                    _state.Handle,
-                    s_streamDelegate,
-                    GCHandle.ToIntPtr(_state.StateGCHandle)
-                );
+                MsQuicApi
+                    .Api
+                    .SetCallbackHandlerDelegate(
+                        _state.Handle,
+                        s_streamDelegate,
+                        GCHandle.ToIntPtr(_state.StateGCHandle)
+                    );
             }
             catch
             {
@@ -180,20 +182,21 @@ namespace System.Net.Quic.Implementations.MsQuic
 
             try
             {
-                uint status = MsQuicApi.Api.StreamOpenDelegate(
-                    connectionState.Handle,
-                    flags,
-                    s_streamDelegate,
-                    GCHandle.ToIntPtr(_state.StateGCHandle),
-                    out _state.Handle
-                );
+                uint status = MsQuicApi
+                    .Api
+                    .StreamOpenDelegate(
+                        connectionState.Handle,
+                        flags,
+                        s_streamDelegate,
+                        GCHandle.ToIntPtr(_state.StateGCHandle),
+                        out _state.Handle
+                    );
 
                 QuicExceptionHelpers.ThrowIfFailed(status, "Failed to open stream to peer.");
 
-                status = MsQuicApi.Api.StreamStartDelegate(
-                    _state.Handle,
-                    QUIC_STREAM_START_FLAGS.FAIL_BLOCKED
-                );
+                status = MsQuicApi
+                    .Api
+                    .StreamStartDelegate(_state.Handle, QUIC_STREAM_START_FLAGS.FAIL_BLOCKED);
                 QuicExceptionHelpers.ThrowIfFailed(status, "Could not start stream.");
             }
             catch
@@ -425,11 +428,13 @@ namespace System.Net.Quic.Implementations.MsQuic
 
                     if (shouldComplete)
                     {
-                        state.SendResettableCompletionSource.CompleteException(
-                            ExceptionDispatchInfo.SetCurrentStackTrace(
-                                new OperationCanceledException("Write was canceled", token)
-                            )
-                        );
+                        state
+                            .SendResettableCompletionSource
+                            .CompleteException(
+                                ExceptionDispatchInfo.SetCurrentStackTrace(
+                                    new OperationCanceledException("Write was canceled", token)
+                                )
+                            );
                     }
                 },
                 _state
@@ -558,11 +563,13 @@ namespace System.Net.Quic.Implementations.MsQuic
 
                                 if (completePendingRead)
                                 {
-                                    state.ReceiveResettableCompletionSource.CompleteException(
-                                        ExceptionDispatchInfo.SetCurrentStackTrace(
-                                            new OperationCanceledException(token)
-                                        )
-                                    );
+                                    state
+                                        .ReceiveResettableCompletionSource
+                                        .CompleteException(
+                                            ExceptionDispatchInfo.SetCurrentStackTrace(
+                                                new OperationCanceledException(token)
+                                            )
+                                        );
                                 }
                             },
                             _state
@@ -674,11 +681,13 @@ namespace System.Net.Quic.Implementations.MsQuic
 
             if (shouldComplete)
             {
-                _state.ReceiveResettableCompletionSource.CompleteException(
-                    ExceptionDispatchInfo.SetCurrentStackTrace(
-                        new QuicOperationAbortedException("Read was aborted")
-                    )
-                );
+                _state
+                    .ReceiveResettableCompletionSource
+                    .CompleteException(
+                        ExceptionDispatchInfo.SetCurrentStackTrace(
+                            new QuicOperationAbortedException("Read was aborted")
+                        )
+                    );
             }
 
             StartShutdown(QUIC_STREAM_SHUTDOWN_FLAGS.ABORT_RECEIVE, errorCode);
@@ -712,11 +721,13 @@ namespace System.Net.Quic.Implementations.MsQuic
 
             if (shouldComplete)
             {
-                _state.ShutdownWriteCompletionSource.SetException(
-                    ExceptionDispatchInfo.SetCurrentStackTrace(
-                        new QuicOperationAbortedException("Write was aborted.")
-                    )
-                );
+                _state
+                    .ShutdownWriteCompletionSource
+                    .SetException(
+                        ExceptionDispatchInfo.SetCurrentStackTrace(
+                            new QuicOperationAbortedException("Write was aborted.")
+                        )
+                    );
             }
 
             StartShutdown(QUIC_STREAM_SHUTDOWN_FLAGS.ABORT_SEND, errorCode);
@@ -758,14 +769,16 @@ namespace System.Net.Quic.Implementations.MsQuic
 
                     if (shouldComplete)
                     {
-                        state.ShutdownCompletionSource.SetException(
-                            ExceptionDispatchInfo.SetCurrentStackTrace(
-                                new OperationCanceledException(
-                                    "Wait for shutdown was canceled",
-                                    token
+                        state
+                            .ShutdownCompletionSource
+                            .SetException(
+                                ExceptionDispatchInfo.SetCurrentStackTrace(
+                                    new OperationCanceledException(
+                                        "Wait for shutdown was canceled",
+                                        token
+                                    )
                                 )
-                            )
-                        );
+                            );
                     }
                 },
                 _state
@@ -973,11 +986,13 @@ namespace System.Net.Quic.Implementations.MsQuic
 
             if (completeRead)
             {
-                _state.ReceiveResettableCompletionSource.CompleteException(
-                    ExceptionDispatchInfo.SetCurrentStackTrace(
-                        new QuicOperationAbortedException("Read was canceled")
-                    )
-                );
+                _state
+                    .ReceiveResettableCompletionSource
+                    .CompleteException(
+                        ExceptionDispatchInfo.SetCurrentStackTrace(
+                            new QuicOperationAbortedException("Read was canceled")
+                        )
+                    );
             }
 
             if (releaseHandles)
@@ -991,10 +1006,9 @@ namespace System.Net.Quic.Implementations.MsQuic
 
         private void EnableReceive()
         {
-            uint status = MsQuicApi.Api.StreamReceiveSetEnabledDelegate(
-                _state.Handle,
-                enabled: true
-            );
+            uint status = MsQuicApi
+                .Api
+                .StreamReceiveSetEnabledDelegate(_state.Handle, enabled: true);
             QuicExceptionHelpers.ThrowIfFailed(status, "StreamReceiveSetEnabled failed.");
         }
 
@@ -1108,9 +1122,9 @@ namespace System.Net.Quic.Implementations.MsQuic
                         if ((uint)state.ReceiveQuicBuffers.Length < receiveEvent.BufferCount)
                         {
                             QuicBuffer[] oldReceiveBuffers = state.ReceiveQuicBuffers;
-                            state.ReceiveQuicBuffers = ArrayPool<QuicBuffer>.Shared.Rent(
-                                (int)receiveEvent.BufferCount
-                            );
+                            state.ReceiveQuicBuffers = ArrayPool<QuicBuffer>
+                                .Shared
+                                .Rent((int)receiveEvent.BufferCount);
 
                             if (oldReceiveBuffers.Length != 0) // don't return Array.Empty.
                             {
@@ -1230,20 +1244,24 @@ namespace System.Net.Quic.Implementations.MsQuic
 
             if (shouldSendComplete)
             {
-                state.SendResettableCompletionSource.CompleteException(
-                    ExceptionDispatchInfo.SetCurrentStackTrace(
-                        new QuicStreamAbortedException(state.SendErrorCode)
-                    )
-                );
+                state
+                    .SendResettableCompletionSource
+                    .CompleteException(
+                        ExceptionDispatchInfo.SetCurrentStackTrace(
+                            new QuicStreamAbortedException(state.SendErrorCode)
+                        )
+                    );
             }
 
             if (shouldShutdownWriteComplete)
             {
-                state.ShutdownWriteCompletionSource.SetException(
-                    ExceptionDispatchInfo.SetCurrentStackTrace(
-                        new QuicStreamAbortedException(state.SendErrorCode)
-                    )
-                );
+                state
+                    .ShutdownWriteCompletionSource
+                    .SetException(
+                        ExceptionDispatchInfo.SetCurrentStackTrace(
+                            new QuicStreamAbortedException(state.SendErrorCode)
+                        )
+                    );
             }
 
             return MsQuicStatusCodes.Success;
@@ -1368,11 +1386,13 @@ namespace System.Net.Quic.Implementations.MsQuic
 
             if (shouldComplete)
             {
-                state.ReceiveResettableCompletionSource.CompleteException(
-                    ExceptionDispatchInfo.SetCurrentStackTrace(
-                        new QuicStreamAbortedException(state.ReadErrorCode)
-                    )
-                );
+                state
+                    .ReceiveResettableCompletionSource
+                    .CompleteException(
+                        ExceptionDispatchInfo.SetCurrentStackTrace(
+                            new QuicStreamAbortedException(state.ReadErrorCode)
+                        )
+                    );
             }
 
             return MsQuicStatusCodes.Success;
@@ -1433,11 +1453,13 @@ namespace System.Net.Quic.Implementations.MsQuic
                 }
                 else
                 {
-                    state.SendResettableCompletionSource.CompleteException(
-                        ExceptionDispatchInfo.SetCurrentStackTrace(
-                            new OperationCanceledException("Write was canceled")
-                        )
-                    );
+                    state
+                        .SendResettableCompletionSource
+                        .CompleteException(
+                            ExceptionDispatchInfo.SetCurrentStackTrace(
+                                new OperationCanceledException("Write was canceled")
+                            )
+                        );
                 }
             }
 
@@ -1488,13 +1510,9 @@ namespace System.Net.Quic.Implementations.MsQuic
             _state.BufferArrays[0] = handle;
             _state.SendBufferCount = 1;
 
-            uint status = MsQuicApi.Api.StreamSendDelegate(
-                _state.Handle,
-                quicBuffers,
-                bufferCount: 1,
-                flags,
-                IntPtr.Zero
-            );
+            uint status = MsQuicApi
+                .Api
+                .StreamSendDelegate(_state.Handle, quicBuffers, bufferCount: 1, flags, IntPtr.Zero);
 
             if (!MsQuicStatusHelper.SuccessfulStatusCode(status))
             {
@@ -1552,13 +1570,9 @@ namespace System.Net.Quic.Implementations.MsQuic
                 ++count;
             }
 
-            uint status = MsQuicApi.Api.StreamSendDelegate(
-                _state.Handle,
-                quicBuffers,
-                (uint)count,
-                flags,
-                IntPtr.Zero
-            );
+            uint status = MsQuicApi
+                .Api
+                .StreamSendDelegate(_state.Handle, quicBuffers, (uint)count, flags, IntPtr.Zero);
 
             if (!MsQuicStatusHelper.SuccessfulStatusCode(status))
             {
@@ -1613,13 +1627,9 @@ namespace System.Net.Quic.Implementations.MsQuic
                 _state.BufferArrays[i] = handle;
             }
 
-            uint status = MsQuicApi.Api.StreamSendDelegate(
-                _state.Handle,
-                quicBuffers,
-                length,
-                flags,
-                IntPtr.Zero
-            );
+            uint status = MsQuicApi
+                .Api
+                .StreamSendDelegate(_state.Handle, quicBuffers, length, flags, IntPtr.Zero);
 
             if (!MsQuicStatusHelper.SuccessfulStatusCode(status))
             {
@@ -1635,10 +1645,9 @@ namespace System.Net.Quic.Implementations.MsQuic
 
         private void ReceiveComplete(int bufferLength)
         {
-            uint status = MsQuicApi.Api.StreamReceiveCompleteDelegate(
-                _state.Handle,
-                (ulong)bufferLength
-            );
+            uint status = MsQuicApi
+                .Api
+                .StreamReceiveCompleteDelegate(_state.Handle, (ulong)bufferLength);
             QuicExceptionHelpers.ThrowIfFailed(status, "Could not complete receive call.");
         }
 
@@ -1706,30 +1715,46 @@ namespace System.Net.Quic.Implementations.MsQuic
 
             if (shouldCompleteRead)
             {
-                state.ReceiveResettableCompletionSource.CompleteException(
-                    ExceptionDispatchInfo.SetCurrentStackTrace(GetConnectionAbortedException(state))
-                );
+                state
+                    .ReceiveResettableCompletionSource
+                    .CompleteException(
+                        ExceptionDispatchInfo.SetCurrentStackTrace(
+                            GetConnectionAbortedException(state)
+                        )
+                    );
             }
 
             if (shouldCompleteSend)
             {
-                state.SendResettableCompletionSource.CompleteException(
-                    ExceptionDispatchInfo.SetCurrentStackTrace(GetConnectionAbortedException(state))
-                );
+                state
+                    .SendResettableCompletionSource
+                    .CompleteException(
+                        ExceptionDispatchInfo.SetCurrentStackTrace(
+                            GetConnectionAbortedException(state)
+                        )
+                    );
             }
 
             if (shouldCompleteShutdownWrite)
             {
-                state.ShutdownWriteCompletionSource.SetException(
-                    ExceptionDispatchInfo.SetCurrentStackTrace(GetConnectionAbortedException(state))
-                );
+                state
+                    .ShutdownWriteCompletionSource
+                    .SetException(
+                        ExceptionDispatchInfo.SetCurrentStackTrace(
+                            GetConnectionAbortedException(state)
+                        )
+                    );
             }
 
             if (shouldCompleteShutdown)
             {
-                state.ShutdownCompletionSource.SetException(
-                    ExceptionDispatchInfo.SetCurrentStackTrace(GetConnectionAbortedException(state))
-                );
+                state
+                    .ShutdownCompletionSource
+                    .SetException(
+                        ExceptionDispatchInfo.SetCurrentStackTrace(
+                            GetConnectionAbortedException(state)
+                        )
+                    );
             }
 
             // Dispose was called before complete event.

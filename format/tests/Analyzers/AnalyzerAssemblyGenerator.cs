@@ -30,10 +30,10 @@ namespace Microsoft.CodeAnalysis.Tools.Tests.Analyzers
                 MetadataReference.CreateFromFile(typeof(CodeFixProvider).Assembly.Location),
             };
 
-            var netcoreMetadataReferences = await ReferenceAssemblies.Net.Net60.ResolveAsync(
-                LanguageNames.CSharp,
-                CancellationToken.None
-            );
+            var netcoreMetadataReferences = await ReferenceAssemblies
+                .Net
+                .Net60
+                .ResolveAsync(LanguageNames.CSharp, CancellationToken.None);
             references.AddRange(
                 netcoreMetadataReferences.Where(
                     reference =>
@@ -114,7 +114,8 @@ public class {typeName} : DiagnosticAnalyzer
             var result = compilation.Emit(ms);
             if (!result.Success)
             {
-                var failures = result.Diagnostics
+                var failures = result
+                    .Diagnostics
                     .Where(
                         diagnostic =>
                             diagnostic.IsWarningAsError

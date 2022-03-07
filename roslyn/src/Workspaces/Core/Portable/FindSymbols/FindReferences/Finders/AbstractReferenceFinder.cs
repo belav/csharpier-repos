@@ -334,7 +334,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
             if (syntaxFacts == null)
                 return ImmutableArray<SyntaxToken>.Empty;
 
-            var root = await semanticModel.SyntaxTree
+            var root = await semanticModel
+                .SyntaxTree
                 .GetRootAsync(cancellationToken)
                 .ConfigureAwait(false);
 
@@ -1101,10 +1102,12 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
                     .Equals(notNullOriginalUnreducedSymbol2)
             );
             return symbol1 != null
-                && SymbolEquivalenceComparer.Instance.Equals(
-                    symbol1.GetOriginalUnreducedDefinition(),
-                    notNullOriginalUnreducedSymbol2
-                );
+                && SymbolEquivalenceComparer
+                    .Instance
+                    .Equals(
+                        symbol1.GetOriginalUnreducedDefinition(),
+                        notNullOriginalUnreducedSymbol2
+                    );
         }
 
         protected static SymbolUsageInfo GetSymbolUsageInfo(

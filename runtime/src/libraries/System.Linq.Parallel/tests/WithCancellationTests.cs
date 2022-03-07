@@ -133,7 +133,8 @@ namespace System.Linq.Parallel.Tests
         {
             //the failure was an ODE coming out due to an ephemeral disposed merged cancellation token source.
             _ = count;
-            ParallelQuery<int> left = labeled.Item
+            ParallelQuery<int> left = labeled
+                .Item
                 .AsUnordered()
                 .WithExecutionMode(ParallelExecutionMode.ForceParallelism);
             ParallelQuery<int> right = Enumerable
@@ -195,7 +196,8 @@ namespace System.Linq.Parallel.Tests
         {
             _ = count;
             CancellationTokenSource cancel = new CancellationTokenSource();
-            IEnumerator<int> enumerator = labeled.Item
+            IEnumerator<int> enumerator = labeled
+                .Item
                 .WithCancellation(cancel.Token)
                 .GetEnumerator();
             enumerator.MoveNext();

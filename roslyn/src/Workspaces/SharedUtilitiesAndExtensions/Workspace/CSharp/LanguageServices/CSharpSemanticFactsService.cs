@@ -45,9 +45,9 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             // Local function parameter is allowed to shadow variables since C# 8.
             if (
-                (
-                    (CSharpCompilation)semanticModel.Compilation
-                ).LanguageVersion.MapSpecifiedToEffectiveVersion() >= LanguageVersion.CSharp8
+                ((CSharpCompilation)semanticModel.Compilation)
+                    .LanguageVersion
+                    .MapSpecifiedToEffectiveVersion() >= LanguageVersion.CSharp8
             )
             {
                 if (
@@ -93,13 +93,15 @@ namespace Microsoft.CodeAnalysis.CSharp
             CancellationToken cancellationToken
         )
         {
-            return semanticModel.SyntaxTree.IsExpressionContext(
-                position,
-                semanticModel.SyntaxTree.FindTokenOnLeftOfPosition(position, cancellationToken),
-                attributes: true,
-                cancellationToken: cancellationToken,
-                semanticModelOpt: semanticModel
-            );
+            return semanticModel
+                .SyntaxTree
+                .IsExpressionContext(
+                    position,
+                    semanticModel.SyntaxTree.FindTokenOnLeftOfPosition(position, cancellationToken),
+                    attributes: true,
+                    cancellationToken: cancellationToken,
+                    semanticModelOpt: semanticModel
+                );
         }
 
         public bool IsInExpressionTree(
@@ -115,11 +117,13 @@ namespace Microsoft.CodeAnalysis.CSharp
             CancellationToken cancellationToken
         )
         {
-            return semanticModel.SyntaxTree.IsStatementContext(
-                position,
-                semanticModel.SyntaxTree.FindTokenOnLeftOfPosition(position, cancellationToken),
-                cancellationToken
-            );
+            return semanticModel
+                .SyntaxTree
+                .IsStatementContext(
+                    position,
+                    semanticModel.SyntaxTree.FindTokenOnLeftOfPosition(position, cancellationToken),
+                    cancellationToken
+                );
         }
 
         public bool IsTypeContext(
@@ -148,11 +152,13 @@ namespace Microsoft.CodeAnalysis.CSharp
             CancellationToken cancellationToken
         )
         {
-            return semanticModel.SyntaxTree.IsTypeDeclarationContext(
-                position,
-                semanticModel.SyntaxTree.FindTokenOnLeftOfPosition(position, cancellationToken),
-                cancellationToken
-            );
+            return semanticModel
+                .SyntaxTree
+                .IsTypeDeclarationContext(
+                    position,
+                    semanticModel.SyntaxTree.FindTokenOnLeftOfPosition(position, cancellationToken),
+                    cancellationToken
+                );
         }
 
         public bool IsMemberDeclarationContext(
@@ -161,10 +167,12 @@ namespace Microsoft.CodeAnalysis.CSharp
             CancellationToken cancellationToken
         )
         {
-            return semanticModel.SyntaxTree.IsMemberDeclarationContext(
-                position,
-                semanticModel.SyntaxTree.FindTokenOnLeftOfPosition(position, cancellationToken)
-            );
+            return semanticModel
+                .SyntaxTree
+                .IsMemberDeclarationContext(
+                    position,
+                    semanticModel.SyntaxTree.FindTokenOnLeftOfPosition(position, cancellationToken)
+                );
         }
 
         public bool IsGlobalStatementContext(

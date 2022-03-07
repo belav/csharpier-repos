@@ -154,9 +154,10 @@ public static partial class XmlSerializerTests
     {
         // Assume that UTC offset doesn't change more often than once in the day 2013-01-02
         // DO NOT USE TimeZoneInfo.Local.BaseUtcOffset !
-        var offsetMinutes = (int)TimeZoneInfo.Local.GetUtcOffset(
-            new DateTime(2013, 1, 2)
-        ).TotalMinutes;
+        var offsetMinutes = (int)TimeZoneInfo
+            .Local
+            .GetUtcOffset(new DateTime(2013, 1, 2))
+            .TotalMinutes;
         var timeZoneString = string.Format(
             "{0:+;-}{1}",
             offsetMinutes,
@@ -3719,16 +3720,18 @@ public static partial class XmlSerializerTests
             TextColor = System.Drawing.Color.FromArgb(3, 4, 5, 6)
         };
         value.LocalReadingPositionState = new List<LocalReadingPosition>();
-        value.LocalReadingPositionState.Add(
-            new LocalReadingPosition()
-            {
-                Ean = "Ean",
-                LastReadTime = new DateTime(2013, 1, 2),
-                PageCount = 1,
-                PageNumber = "1",
-                PlatformOffset = "offset"
-            }
-        );
+        value
+            .LocalReadingPositionState
+            .Add(
+                new LocalReadingPosition()
+                {
+                    Ean = "Ean",
+                    LastReadTime = new DateTime(2013, 1, 2),
+                    PageCount = 1,
+                    PageNumber = "1",
+                    PlatformOffset = "offset"
+                }
+            );
 
         var deserializedValue = SerializeAndDeserialize<NookAppLocalState>(
             value,

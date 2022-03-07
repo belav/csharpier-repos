@@ -112,7 +112,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
                                 runtimeConfig =>
                                     runtimeConfig
                                         .GetFramework(MicrosoftNETCoreApp)
-                                        .WithRollForward(rollForward).Version = versionReference
+                                        .WithRollForward(rollForward)
+                                        .Version = versionReference
                             )
                 )
                 .ShouldHaveResolvedFrameworkOrFailedToReconcileFrameworkReference(
@@ -173,7 +174,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
                                 runtimeConfig =>
                                     runtimeConfig
                                         .GetFramework(MicrosoftNETCoreApp)
-                                        .WithRollForward(rollForward).Version = versionReference
+                                        .WithRollForward(rollForward)
+                                        .Version = versionReference
                             )
                 )
                 .ShouldHaveResolvedFrameworkOrFailedToReconcileFrameworkReference(
@@ -258,7 +260,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
                                 runtimeConfig =>
                                     runtimeConfig
                                         .GetFramework(MicrosoftNETCoreApp)
-                                        .WithRollForward(rollForward).Version = versionReference
+                                        .WithRollForward(rollForward)
+                                        .Version = versionReference
                             ),
                     rollForwardToPreRelease
                 )
@@ -315,7 +318,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
                                 runtimeConfig =>
                                     runtimeConfig
                                         .GetFramework(MicrosoftNETCoreApp)
-                                        .WithRollForward(rollForward).Version = versionReference
+                                        .WithRollForward(rollForward)
+                                        .Version = versionReference
                             )
                 )
                 .ShouldHaveResolvedFrameworkOrFail(
@@ -450,7 +454,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
                                 runtimeConfig =>
                                     runtimeConfig
                                         .GetFramework(MicrosoftNETCoreApp)
-                                        .WithRollForward(rollForward).Version = versionReference
+                                        .WithRollForward(rollForward)
+                                        .Version = versionReference
                             ),
                     rollForwardToPreRelease
                 )
@@ -563,7 +568,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
                                 runtimeConfig =>
                                     runtimeConfig
                                         .GetFramework(MicrosoftNETCoreApp)
-                                        .WithRollForward(rollForward).Version = versionReference
+                                        .WithRollForward(rollForward)
+                                        .Version = versionReference
                             ),
                     rollForwardToPreRelease
                 )
@@ -856,7 +862,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
                                 runtimeConfig =>
                                     runtimeConfig
                                         .GetFramework(MicrosoftNETCoreApp)
-                                        .WithRollForward(rollForward).Version = versionReference
+                                        .WithRollForward(rollForward)
+                                        .Version = versionReference
                             );
                     }
                 )
@@ -912,7 +919,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
                                 runtimeConfig =>
                                     runtimeConfig
                                         .GetFramework(MicrosoftNETCoreApp)
-                                        .WithRollForward(rollForward).Version = versionReference
+                                        .WithRollForward(rollForward)
+                                        .Version = versionReference
                             );
                     }
                 )
@@ -959,9 +967,12 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
                 )
                 .Should()
                 .Pass()
-                .And.RestartedFrameworkResolution("5.1.1", "5.4.1")
-                .And.RestartedFrameworkResolution("5.4.1", "5.6.0")
-                .And.HaveResolvedFramework(MicrosoftNETCoreApp, "5.6.0");
+                .And
+                .RestartedFrameworkResolution("5.1.1", "5.4.1")
+                .And
+                .RestartedFrameworkResolution("5.4.1", "5.6.0")
+                .And
+                .HaveResolvedFramework(MicrosoftNETCoreApp, "5.6.0");
         }
 
         // This test:
@@ -1000,9 +1011,12 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
                 )
                 .Should()
                 .Pass()
-                .And.RestartedFrameworkResolution("5.1.1", "5.4.1")
-                .And.RestartedFrameworkResolution("5.4.1", "5.6.0")
-                .And.HaveResolvedFramework(MicrosoftNETCoreApp, "5.6.0");
+                .And
+                .RestartedFrameworkResolution("5.1.1", "5.4.1")
+                .And
+                .RestartedFrameworkResolution("5.4.1", "5.6.0")
+                .And
+                .HaveResolvedFramework(MicrosoftNETCoreApp, "5.6.0");
         }
 
         // Verifies that reconciling framework references correctly remembers whether it should prefer release versions or not.
@@ -1200,7 +1214,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
                                 runtimeConfig =>
                                     runtimeConfig
                                         .GetFramework(MicrosoftNETCoreApp)
-                                        .WithRollForward(fxRollForward).Version = fxVersionReference
+                                        .WithRollForward(fxRollForward)
+                                        .Version = fxVersionReference
                             )
                 )
                 .ShouldHaveResolvedFrameworkOrFailToFind(MicrosoftNETCoreApp, resolvedFramework);
@@ -1222,8 +1237,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
                                 runtimeConfig =>
                                     runtimeConfig
                                         .GetFramework(MicrosoftNETCoreApp)
-                                        .WithRollForward(appRollForward).Version =
-                                        appVersionReference
+                                        .WithRollForward(appRollForward)
+                                        .Version = appVersionReference
                             )
                 )
                 .ShouldHaveResolvedFrameworkOrFailToFind(MicrosoftNETCoreApp, resolvedFramework);
@@ -1439,7 +1454,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
                                 runtimeConfig =>
                                     runtimeConfig
                                         .GetFramework(MicrosoftNETCoreApp)
-                                        .WithRollForward(fxRollForward).Version = fxRefVersion
+                                        .WithRollForward(fxRollForward)
+                                        .Version = fxRefVersion
                             )
                 )
                 .ShouldHaveResolvedFrameworkOrFailToFind(MicrosoftNETCoreApp, resolvedFramework);
@@ -1519,7 +1535,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
                                 runtimeConfig =>
                                     runtimeConfig
                                         .GetFramework(MicrosoftNETCoreApp)
-                                        .WithRollForward(lowerFxRollForward).Version = fxRefVersion
+                                        .WithRollForward(lowerFxRollForward)
+                                        .Version = fxRefVersion
                             );
                     }
                 )

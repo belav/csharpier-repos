@@ -22,8 +22,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternCombinators
     public class CSharpUsePatternCombinatorsDiagnosticAnalyzerTests
         : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
-        private static readonly ParseOptions CSharp9 =
-            TestOptions.RegularPreview.WithLanguageVersion(LanguageVersion.CSharp9);
+        private static readonly ParseOptions CSharp9 = TestOptions
+            .RegularPreview
+            .WithLanguageVersion(LanguageVersion.CSharp9);
 
         private static readonly OptionsCollection s_disabled = new OptionsCollection(
             LanguageNames.CSharp

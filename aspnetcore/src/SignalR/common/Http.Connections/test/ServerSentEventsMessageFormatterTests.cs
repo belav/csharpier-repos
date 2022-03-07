@@ -29,9 +29,9 @@ public class ServerSentEventsMessageFormatterTests
     [MemberData(nameof(PayloadData))]
     public async Task WriteTextMessageFromMultipleSegments(string encoded, string payload)
     {
-        var buffer = ReadOnlySequenceFactory.SegmentPerByteFactory.CreateWithContent(
-            Encoding.UTF8.GetBytes(payload)
-        );
+        var buffer = ReadOnlySequenceFactory
+            .SegmentPerByteFactory
+            .CreateWithContent(Encoding.UTF8.GetBytes(payload));
 
         var output = new MemoryStream();
         await ServerSentEventsMessageFormatter.WriteMessageAsync(buffer, output, default);

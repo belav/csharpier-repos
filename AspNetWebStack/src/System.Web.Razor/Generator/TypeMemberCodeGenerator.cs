@@ -28,12 +28,15 @@ namespace System.Web.Razor.Generator
 
             Contract.Assert(paddingCharCount > 0);
 
-            context.GeneratedClass.Members.Add(
-                new CodeSnippetTypeMember(paddedCode)
-                {
-                    LinePragma = context.GenerateLinePragma(target, paddingCharCount)
-                }
-            );
+            context
+                .GeneratedClass
+                .Members
+                .Add(
+                    new CodeSnippetTypeMember(paddedCode)
+                    {
+                        LinePragma = context.GenerateLinePragma(target, paddingCharCount)
+                    }
+                );
         }
 
         public override string ToString()

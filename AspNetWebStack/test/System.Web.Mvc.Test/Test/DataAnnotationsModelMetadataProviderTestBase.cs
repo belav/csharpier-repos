@@ -111,11 +111,9 @@ namespace System.Web.Mvc.Test
             // [UIHint] overrides the template hint from [Hidden]
             Assert.Equal(
                 "CustomUIHint",
-                provider.GetMetadataForProperty(
-                    null,
-                    typeof(HiddenModel),
-                    "HiddenAndUIHint"
-                ).TemplateHint
+                provider
+                    .GetMetadataForProperty(null, typeof(HiddenModel), "HiddenAndUIHint")
+                    .TemplateHint
             );
         }
 
@@ -148,39 +146,31 @@ namespace System.Web.Mvc.Test
 
             // Act & Assert
             Assert.Null(
-                provider.GetMetadataForProperty(
-                    null,
-                    typeof(UIHintModel),
-                    "NoAttribute"
-                ).TemplateHint
+                provider
+                    .GetMetadataForProperty(null, typeof(UIHintModel), "NoAttribute")
+                    .TemplateHint
             );
             Assert.Equal(
                 "MyCustomTemplate",
-                provider.GetMetadataForProperty(
-                    null,
-                    typeof(UIHintModel),
-                    "DefaultUIHint"
-                ).TemplateHint
+                provider
+                    .GetMetadataForProperty(null, typeof(UIHintModel), "DefaultUIHint")
+                    .TemplateHint
             );
             Assert.Equal(
                 "MyMvcTemplate",
                 provider.GetMetadataForProperty(null, typeof(UIHintModel), "MvcUIHint").TemplateHint
             );
             Assert.Null(
-                provider.GetMetadataForProperty(
-                    null,
-                    typeof(UIHintModel),
-                    "NoMvcUIHint"
-                ).TemplateHint
+                provider
+                    .GetMetadataForProperty(null, typeof(UIHintModel), "NoMvcUIHint")
+                    .TemplateHint
             );
 
             Assert.Equal(
                 "MyMvcTemplate",
-                provider.GetMetadataForProperty(
-                    null,
-                    typeof(UIHintModel),
-                    "MultipleUIHint"
-                ).TemplateHint
+                provider
+                    .GetMetadataForProperty(null, typeof(UIHintModel), "MultipleUIHint")
+                    .TemplateHint
             );
         }
 
@@ -225,43 +215,33 @@ namespace System.Web.Mvc.Test
 
             // Act & Assert
             Assert.Null(
-                provider.GetMetadataForProperty(
-                    null,
-                    typeof(DataTypeModel),
-                    "NoAttribute"
-                ).DataTypeName
+                provider
+                    .GetMetadataForProperty(null, typeof(DataTypeModel), "NoAttribute")
+                    .DataTypeName
             );
             Assert.Equal(
                 "EmailAddress",
-                provider.GetMetadataForProperty(
-                    null,
-                    typeof(DataTypeModel),
-                    "EmailAddressProperty"
-                ).DataTypeName
+                provider
+                    .GetMetadataForProperty(null, typeof(DataTypeModel), "EmailAddressProperty")
+                    .DataTypeName
             );
             Assert.Equal(
                 "CustomDataType",
-                provider.GetMetadataForProperty(
-                    null,
-                    typeof(DataTypeModel),
-                    "CustomDataTypeProperty"
-                ).DataTypeName
+                provider
+                    .GetMetadataForProperty(null, typeof(DataTypeModel), "CustomDataTypeProperty")
+                    .DataTypeName
             );
             Assert.Equal(
                 "Date",
-                provider.GetMetadataForProperty(
-                    null,
-                    typeof(DataTypeModel),
-                    "DateProperty"
-                ).DataTypeName
+                provider
+                    .GetMetadataForProperty(null, typeof(DataTypeModel), "DateProperty")
+                    .DataTypeName
             );
             Assert.Equal(
                 "Time",
-                provider.GetMetadataForProperty(
-                    null,
-                    typeof(DataTypeModel),
-                    "TimeProperty"
-                ).DataTypeName
+                provider
+                    .GetMetadataForProperty(null, typeof(DataTypeModel), "TimeProperty")
+                    .DataTypeName
             );
         }
 
@@ -278,17 +258,13 @@ namespace System.Web.Mvc.Test
 
             // Act
             string displayFormat =
-                provider.GetMetadataForProperty(
-                    null,
-                    typeof(DataTypeModel),
-                    propertyName
-                ).DisplayFormatString;
+                provider
+                    .GetMetadataForProperty(null, typeof(DataTypeModel), propertyName)
+                    .DisplayFormatString;
             string editFormat =
-                provider.GetMetadataForProperty(
-                    null,
-                    typeof(DataTypeModel),
-                    propertyName
-                ).EditFormatString;
+                provider
+                    .GetMetadataForProperty(null, typeof(DataTypeModel), propertyName)
+                    .EditFormatString;
 
             // Assert
             Assert.Equal(formatString, displayFormat);
@@ -311,11 +287,9 @@ namespace System.Web.Mvc.Test
 
             // Act
             bool hasNonDefaultEditFormat =
-                provider.GetMetadataForProperty(
-                    null,
-                    typeof(DataTypeModel),
-                    propertyName
-                ).HasNonDefaultEditFormat;
+                provider
+                    .GetMetadataForProperty(null, typeof(DataTypeModel), propertyName)
+                    .HasNonDefaultEditFormat;
 
             // Assert
             Assert.Equal(expectedNonDefaultEditFormat, hasNonDefaultEditFormat);
@@ -348,32 +322,24 @@ namespace System.Web.Mvc.Test
 
             // Act & Assert
             Assert.False(
-                provider.GetMetadataForProperty(
-                    null,
-                    typeof(ReadOnlyModel),
-                    "NoAttributes"
-                ).IsReadOnly
+                provider
+                    .GetMetadataForProperty(null, typeof(ReadOnlyModel), "NoAttributes")
+                    .IsReadOnly
             );
             Assert.True(
-                provider.GetMetadataForProperty(
-                    null,
-                    typeof(ReadOnlyModel),
-                    "ReadOnlyAttribute"
-                ).IsReadOnly
+                provider
+                    .GetMetadataForProperty(null, typeof(ReadOnlyModel), "ReadOnlyAttribute")
+                    .IsReadOnly
             );
             Assert.True(
-                provider.GetMetadataForProperty(
-                    null,
-                    typeof(ReadOnlyModel),
-                    "EditableAttribute"
-                ).IsReadOnly
+                provider
+                    .GetMetadataForProperty(null, typeof(ReadOnlyModel), "EditableAttribute")
+                    .IsReadOnly
             );
             Assert.False(
-                provider.GetMetadataForProperty(
-                    null,
-                    typeof(ReadOnlyModel),
-                    "BothAttributes"
-                ).IsReadOnly
+                provider
+                    .GetMetadataForProperty(null, typeof(ReadOnlyModel), "BothAttributes")
+                    .IsReadOnly
             );
         }
 
@@ -426,19 +392,15 @@ namespace System.Web.Mvc.Test
 
             // Act & Assert
             Assert.Null(
-                provider.GetMetadataForProperty(
-                    null,
-                    typeof(DisplayFormatModel),
-                    "NoAttribute"
-                ).NullDisplayText
+                provider
+                    .GetMetadataForProperty(null, typeof(DisplayFormatModel), "NoAttribute")
+                    .NullDisplayText
             );
             Assert.Equal(
                 "(null value)",
-                provider.GetMetadataForProperty(
-                    null,
-                    typeof(DisplayFormatModel),
-                    "NullDisplayText"
-                ).NullDisplayText
+                provider
+                    .GetMetadataForProperty(null, typeof(DisplayFormatModel), "NullDisplayText")
+                    .NullDisplayText
             );
         }
 
@@ -450,27 +412,25 @@ namespace System.Web.Mvc.Test
 
             // Act & Assert
             Assert.Null(
-                provider.GetMetadataForProperty(
-                    null,
-                    typeof(DisplayFormatModel),
-                    "NoAttribute"
-                ).DisplayFormatString
+                provider
+                    .GetMetadataForProperty(null, typeof(DisplayFormatModel), "NoAttribute")
+                    .DisplayFormatString
             );
             Assert.Equal(
                 "Data {0} format",
-                provider.GetMetadataForProperty(
-                    null,
-                    typeof(DisplayFormatModel),
-                    "DisplayFormatString"
-                ).DisplayFormatString
+                provider
+                    .GetMetadataForProperty(null, typeof(DisplayFormatModel), "DisplayFormatString")
+                    .DisplayFormatString
             );
             Assert.Equal(
                 "Data {0} format",
-                provider.GetMetadataForProperty(
-                    null,
-                    typeof(DisplayFormatModel),
-                    "DisplayAndEditFormatString"
-                ).DisplayFormatString
+                provider
+                    .GetMetadataForProperty(
+                        null,
+                        typeof(DisplayFormatModel),
+                        "DisplayAndEditFormatString"
+                    )
+                    .DisplayFormatString
             );
         }
 
@@ -482,26 +442,24 @@ namespace System.Web.Mvc.Test
 
             // Act & Assert
             Assert.Null(
-                provider.GetMetadataForProperty(
-                    null,
-                    typeof(DisplayFormatModel),
-                    "NoAttribute"
-                ).EditFormatString
+                provider
+                    .GetMetadataForProperty(null, typeof(DisplayFormatModel), "NoAttribute")
+                    .EditFormatString
             );
             Assert.Null(
-                provider.GetMetadataForProperty(
-                    null,
-                    typeof(DisplayFormatModel),
-                    "DisplayFormatString"
-                ).EditFormatString
+                provider
+                    .GetMetadataForProperty(null, typeof(DisplayFormatModel), "DisplayFormatString")
+                    .EditFormatString
             );
             Assert.Equal(
                 "Data {0} format",
-                provider.GetMetadataForProperty(
-                    null,
-                    typeof(DisplayFormatModel),
-                    "DisplayAndEditFormatString"
-                ).EditFormatString
+                provider
+                    .GetMetadataForProperty(
+                        null,
+                        typeof(DisplayFormatModel),
+                        "DisplayAndEditFormatString"
+                    )
+                    .EditFormatString
             );
         }
 
@@ -513,25 +471,27 @@ namespace System.Web.Mvc.Test
 
             // Act & Assert
             Assert.True(
-                provider.GetMetadataForProperty(
-                    null,
-                    typeof(DisplayFormatModel),
-                    "NoAttribute"
-                ).ConvertEmptyStringToNull
+                provider
+                    .GetMetadataForProperty(null, typeof(DisplayFormatModel), "NoAttribute")
+                    .ConvertEmptyStringToNull
             );
             Assert.True(
-                provider.GetMetadataForProperty(
-                    null,
-                    typeof(DisplayFormatModel),
-                    "ConvertEmptyStringToNullTrue"
-                ).ConvertEmptyStringToNull
+                provider
+                    .GetMetadataForProperty(
+                        null,
+                        typeof(DisplayFormatModel),
+                        "ConvertEmptyStringToNullTrue"
+                    )
+                    .ConvertEmptyStringToNull
             );
             Assert.False(
-                provider.GetMetadataForProperty(
-                    null,
-                    typeof(DisplayFormatModel),
-                    "ConvertEmptyStringToNullFalse"
-                ).ConvertEmptyStringToNull
+                provider
+                    .GetMetadataForProperty(
+                        null,
+                        typeof(DisplayFormatModel),
+                        "ConvertEmptyStringToNullFalse"
+                    )
+                    .ConvertEmptyStringToNull
             );
         }
 
@@ -543,11 +503,13 @@ namespace System.Web.Mvc.Test
 
             // Act
             string result =
-                provider.GetMetadataForProperty(
-                    null,
-                    typeof(DisplayFormatModel),
-                    "DataTypeWithoutDisplayFormatOverride"
-                ).DisplayFormatString;
+                provider
+                    .GetMetadataForProperty(
+                        null,
+                        typeof(DisplayFormatModel),
+                        "DataTypeWithoutDisplayFormatOverride"
+                    )
+                    .DisplayFormatString;
 
             // Assert
             Assert.Equal("{0:C}", result); // Currency's default format string
@@ -561,11 +523,13 @@ namespace System.Web.Mvc.Test
 
             // Act
             string result =
-                provider.GetMetadataForProperty(
-                    null,
-                    typeof(DisplayFormatModel),
-                    "DataTypeWithDisplayFormatOverride"
-                ).DisplayFormatString;
+                provider
+                    .GetMetadataForProperty(
+                        null,
+                        typeof(DisplayFormatModel),
+                        "DataTypeWithDisplayFormatOverride"
+                    )
+                    .DisplayFormatString;
 
             // Assert
             Assert.Equal("format override", result);
@@ -579,34 +543,30 @@ namespace System.Web.Mvc.Test
 
             // Act & Assert
             Assert.Null(
-                provider.GetMetadataForProperty(
-                    null,
-                    typeof(DisplayFormatModel),
-                    "NoAttribute"
-                ).DataTypeName
+                provider
+                    .GetMetadataForProperty(null, typeof(DisplayFormatModel), "NoAttribute")
+                    .DataTypeName
             );
             Assert.Null(
-                provider.GetMetadataForProperty(
-                    null,
-                    typeof(DisplayFormatModel),
-                    "HtmlEncodeTrue"
-                ).DataTypeName
+                provider
+                    .GetMetadataForProperty(null, typeof(DisplayFormatModel), "HtmlEncodeTrue")
+                    .DataTypeName
             );
             Assert.Equal(
                 "Html",
-                provider.GetMetadataForProperty(
-                    null,
-                    typeof(DisplayFormatModel),
-                    "HtmlEncodeFalse"
-                ).DataTypeName
+                provider
+                    .GetMetadataForProperty(null, typeof(DisplayFormatModel), "HtmlEncodeFalse")
+                    .DataTypeName
             );
             Assert.Equal(
                 "Currency",
-                provider.GetMetadataForProperty(
-                    null,
-                    typeof(DisplayFormatModel),
-                    "HtmlEncodeFalseWithDataType"
-                ).DataTypeName
+                provider
+                    .GetMetadataForProperty(
+                        null,
+                        typeof(DisplayFormatModel),
+                        "HtmlEncodeFalseWithDataType"
+                    )
+                    .DataTypeName
             );
         }
 
@@ -632,11 +592,9 @@ namespace System.Web.Mvc.Test
 
             // Act
             bool hasNonDefaultEditFormat =
-                provider.GetMetadataForProperty(
-                    null,
-                    typeof(DisplayFormatModel),
-                    propertyName
-                ).HasNonDefaultEditFormat;
+                provider
+                    .GetMetadataForProperty(null, typeof(DisplayFormatModel), propertyName)
+                    .HasNonDefaultEditFormat;
 
             // Assert
             Assert.Equal(expectedHasNonDefaultEditFormat, hasNonDefaultEditFormat);
@@ -654,11 +612,9 @@ namespace System.Web.Mvc.Test
 
             // Act
             bool htmlEncode =
-                provider.GetMetadataForProperty(
-                    null,
-                    typeof(DisplayFormatModel),
-                    propertyName
-                ).HtmlEncode;
+                provider
+                    .GetMetadataForProperty(null, typeof(DisplayFormatModel), propertyName)
+                    .HtmlEncode;
 
             // Assert
             Assert.Equal(expectedHtmlEncode, htmlEncode);
@@ -685,25 +641,23 @@ namespace System.Web.Mvc.Test
 
             // Act & Assert
             Assert.True(
-                provider.GetMetadataForProperty(
-                    null,
-                    typeof(ScaffoldColumnModel),
-                    "NoAttribute"
-                ).ShowForDisplay
+                provider
+                    .GetMetadataForProperty(null, typeof(ScaffoldColumnModel), "NoAttribute")
+                    .ShowForDisplay
             );
             Assert.True(
-                provider.GetMetadataForProperty(
-                    null,
-                    typeof(ScaffoldColumnModel),
-                    "ScaffoldColumnTrue"
-                ).ShowForDisplay
+                provider
+                    .GetMetadataForProperty(null, typeof(ScaffoldColumnModel), "ScaffoldColumnTrue")
+                    .ShowForDisplay
             );
             Assert.False(
-                provider.GetMetadataForProperty(
-                    null,
-                    typeof(ScaffoldColumnModel),
-                    "ScaffoldColumnFalse"
-                ).ShowForDisplay
+                provider
+                    .GetMetadataForProperty(
+                        null,
+                        typeof(ScaffoldColumnModel),
+                        "ScaffoldColumnFalse"
+                    )
+                    .ShowForDisplay
             );
         }
 
@@ -715,25 +669,23 @@ namespace System.Web.Mvc.Test
 
             // Act & Assert
             Assert.True(
-                provider.GetMetadataForProperty(
-                    null,
-                    typeof(ScaffoldColumnModel),
-                    "NoAttribute"
-                ).ShowForEdit
+                provider
+                    .GetMetadataForProperty(null, typeof(ScaffoldColumnModel), "NoAttribute")
+                    .ShowForEdit
             );
             Assert.True(
-                provider.GetMetadataForProperty(
-                    null,
-                    typeof(ScaffoldColumnModel),
-                    "ScaffoldColumnTrue"
-                ).ShowForEdit
+                provider
+                    .GetMetadataForProperty(null, typeof(ScaffoldColumnModel), "ScaffoldColumnTrue")
+                    .ShowForEdit
             );
             Assert.False(
-                provider.GetMetadataForProperty(
-                    null,
-                    typeof(ScaffoldColumnModel),
-                    "ScaffoldColumnFalse"
-                ).ShowForEdit
+                provider
+                    .GetMetadataForProperty(
+                        null,
+                        typeof(ScaffoldColumnModel),
+                        "ScaffoldColumnFalse"
+                    )
+                    .ShowForEdit
             );
         }
 
@@ -751,10 +703,12 @@ namespace System.Web.Mvc.Test
             // Act & Assert
             Assert.Throws<InvalidOperationException>(
                 () =>
-                    provider.GetMetadataForType(
-                        () => new UnknownDisplayColumnModel(),
-                        typeof(UnknownDisplayColumnModel)
-                    ).SimpleDisplayText,
+                    provider
+                        .GetMetadataForType(
+                            () => new UnknownDisplayColumnModel(),
+                            typeof(UnknownDisplayColumnModel)
+                        )
+                        .SimpleDisplayText,
                 typeof(UnknownDisplayColumnModel).FullName
                     + " has a DisplayColumn attribute for NoPropertyWithThisName, but property NoPropertyWithThisName does not exist."
             );
@@ -784,20 +738,24 @@ namespace System.Web.Mvc.Test
             // Act & Assert
             Assert.Throws<InvalidOperationException>(
                 () =>
-                    provider.GetMetadataForType(
-                        () => new WriteOnlyDisplayColumnModel(),
-                        typeof(WriteOnlyDisplayColumnModel)
-                    ).SimpleDisplayText,
+                    provider
+                        .GetMetadataForType(
+                            () => new WriteOnlyDisplayColumnModel(),
+                            typeof(WriteOnlyDisplayColumnModel)
+                        )
+                        .SimpleDisplayText,
                 typeof(WriteOnlyDisplayColumnModel).FullName
                     + " has a DisplayColumn attribute for WriteOnlyProperty, but property WriteOnlyProperty does not have a public getter."
             );
 
             Assert.Throws<InvalidOperationException>(
                 () =>
-                    provider.GetMetadataForType(
-                        () => new PrivateReadPublicWriteDisplayColumnModel(),
-                        typeof(PrivateReadPublicWriteDisplayColumnModel)
-                    ).SimpleDisplayText,
+                    provider
+                        .GetMetadataForType(
+                            () => new PrivateReadPublicWriteDisplayColumnModel(),
+                            typeof(PrivateReadPublicWriteDisplayColumnModel)
+                        )
+                        .SimpleDisplayText,
                 typeof(PrivateReadPublicWriteDisplayColumnModel).FullName
                     + " has a DisplayColumn attribute for PrivateReadPublicWriteProperty, but property PrivateReadPublicWriteProperty does not have a public getter."
             );
@@ -896,25 +854,19 @@ namespace System.Web.Mvc.Test
 
             // Act & Assert
             Assert.True(
-                provider.GetMetadataForProperty(
-                    null,
-                    typeof(IsRequiredModel),
-                    "NonNullableWithout"
-                ).IsRequired
+                provider
+                    .GetMetadataForProperty(null, typeof(IsRequiredModel), "NonNullableWithout")
+                    .IsRequired
             );
             Assert.False(
-                provider.GetMetadataForProperty(
-                    null,
-                    typeof(IsRequiredModel),
-                    "NullableWithout"
-                ).IsRequired
+                provider
+                    .GetMetadataForProperty(null, typeof(IsRequiredModel), "NullableWithout")
+                    .IsRequired
             );
             Assert.True(
-                provider.GetMetadataForProperty(
-                    null,
-                    typeof(IsRequiredModel),
-                    "NullableWith"
-                ).IsRequired
+                provider
+                    .GetMetadataForProperty(null, typeof(IsRequiredModel), "NullableWith")
+                    .IsRequired
             );
         }
 
@@ -986,26 +938,20 @@ namespace System.Web.Mvc.Test
 
             // Act & Assert
             Assert.Null(
-                provider.GetMetadataForProperty(
-                    null,
-                    typeof(DisplayModel),
-                    "NoAttribute"
-                ).Description
+                provider
+                    .GetMetadataForProperty(null, typeof(DisplayModel), "NoAttribute")
+                    .Description
             );
             Assert.Null(
-                provider.GetMetadataForProperty(
-                    null,
-                    typeof(DisplayModel),
-                    "DescriptionNotSet"
-                ).Description
+                provider
+                    .GetMetadataForProperty(null, typeof(DisplayModel), "DescriptionNotSet")
+                    .Description
             );
             Assert.Equal(
                 "Description text",
-                provider.GetMetadataForProperty(
-                    null,
-                    typeof(DisplayModel),
-                    "DescriptionSet"
-                ).Description
+                provider
+                    .GetMetadataForProperty(null, typeof(DisplayModel), "DescriptionSet")
+                    .Description
             );
         }
 
@@ -1017,50 +963,50 @@ namespace System.Web.Mvc.Test
 
             // Act & Assert
             Assert.Null(
-                provider.GetMetadataForProperty(
-                    null,
-                    typeof(DisplayModel),
-                    "NoAttribute"
-                ).DisplayName
+                provider
+                    .GetMetadataForProperty(null, typeof(DisplayModel), "NoAttribute")
+                    .DisplayName
             );
             Assert.Equal(
                 "Value from DisplayName",
-                provider.GetMetadataForProperty(
-                    null,
-                    typeof(DisplayModel),
-                    "DisplayNameAttributeNoDisplayAttribute"
-                ).DisplayName
+                provider
+                    .GetMetadataForProperty(
+                        null,
+                        typeof(DisplayModel),
+                        "DisplayNameAttributeNoDisplayAttribute"
+                    )
+                    .DisplayName
             );
             Assert.Null(
-                provider.GetMetadataForProperty(
-                    null,
-                    typeof(DisplayModel),
-                    "DisplayAttributeNameNotSet"
-                ).DisplayName
+                provider
+                    .GetMetadataForProperty(
+                        null,
+                        typeof(DisplayModel),
+                        "DisplayAttributeNameNotSet"
+                    )
+                    .DisplayName
             );
             Assert.Equal(
                 "Non empty name",
-                provider.GetMetadataForProperty(
-                    null,
-                    typeof(DisplayModel),
-                    "DisplayAttributeNonEmptyName"
-                ).DisplayName
+                provider
+                    .GetMetadataForProperty(
+                        null,
+                        typeof(DisplayModel),
+                        "DisplayAttributeNonEmptyName"
+                    )
+                    .DisplayName
             );
             Assert.Equal(
                 "Value from DisplayName",
-                provider.GetMetadataForProperty(
-                    null,
-                    typeof(DisplayModel),
-                    "BothAttributesNameNotSet"
-                ).DisplayName
+                provider
+                    .GetMetadataForProperty(null, typeof(DisplayModel), "BothAttributesNameNotSet")
+                    .DisplayName
             );
             Assert.Equal(
                 "Value from Display",
-                provider.GetMetadataForProperty(
-                    null,
-                    typeof(DisplayModel),
-                    "BothAttributes"
-                ).DisplayName
+                provider
+                    .GetMetadataForProperty(null, typeof(DisplayModel), "BothAttributes")
+                    .DisplayName
             );
         }
 
@@ -1093,26 +1039,20 @@ namespace System.Web.Mvc.Test
 
             // Act & Assert
             Assert.Null(
-                provider.GetMetadataForProperty(
-                    null,
-                    typeof(DisplayModel),
-                    "NoAttribute"
-                ).ShortDisplayName
+                provider
+                    .GetMetadataForProperty(null, typeof(DisplayModel), "NoAttribute")
+                    .ShortDisplayName
             );
             Assert.Null(
-                provider.GetMetadataForProperty(
-                    null,
-                    typeof(DisplayModel),
-                    "ShortNameNotSet"
-                ).ShortDisplayName
+                provider
+                    .GetMetadataForProperty(null, typeof(DisplayModel), "ShortNameNotSet")
+                    .ShortDisplayName
             );
             Assert.Equal(
                 "Short name",
-                provider.GetMetadataForProperty(
-                    null,
-                    typeof(DisplayModel),
-                    "ShortNameSet"
-                ).ShortDisplayName
+                provider
+                    .GetMetadataForProperty(null, typeof(DisplayModel), "ShortNameSet")
+                    .ShortDisplayName
             );
         }
 
@@ -1127,11 +1067,9 @@ namespace System.Web.Mvc.Test
                 provider.GetMetadataForProperty(null, typeof(DisplayModel), "NoAttribute").Watermark
             );
             Assert.Null(
-                provider.GetMetadataForProperty(
-                    null,
-                    typeof(DisplayModel),
-                    "PromptNotSet"
-                ).Watermark
+                provider
+                    .GetMetadataForProperty(null, typeof(DisplayModel), "PromptNotSet")
+                    .Watermark
             );
             Assert.Equal(
                 "Enter stuff here",

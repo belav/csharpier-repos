@@ -192,11 +192,13 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
                 }
 
                 // Track statistics about the scope (number of disposable objects and number of disposed services)
-                DependencyInjectionEventSource.Log.ScopeDisposed(
-                    RootProvider.GetHashCode(),
-                    ResolvedServices.Count,
-                    _disposables?.Count ?? 0
-                );
+                DependencyInjectionEventSource
+                    .Log
+                    .ScopeDisposed(
+                        RootProvider.GetHashCode(),
+                        ResolvedServices.Count,
+                        _disposables?.Count ?? 0
+                    );
 
                 // We've transitioned to the disposed state, so future calls to
                 // CaptureDisposable will immediately dispose the object.

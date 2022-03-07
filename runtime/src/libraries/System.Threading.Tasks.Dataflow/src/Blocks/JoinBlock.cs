@@ -106,21 +106,23 @@ namespace System.Threading.Tasks.Dataflow
             // In those cases we need to fault the target half to drop its buffered messages and to release its
             // reservations. This should not create an infinite loop, because all our implementations are designed
             // to handle multiple completion requests and to carry over only one.
-            _source.Completion.ContinueWith(
-                (completed, state) =>
-                {
-                    var thisBlock = ((JoinBlock<T1, T2>)state!) as IDataflowBlock;
-                    Debug.Assert(
-                        completed.IsFaulted,
-                        "The source must be faulted in order to trigger a target completion."
-                    );
-                    thisBlock.Fault(completed.Exception!);
-                },
-                this,
-                CancellationToken.None,
-                Common.GetContinuationOptions() | TaskContinuationOptions.OnlyOnFaulted,
-                TaskScheduler.Default
-            );
+            _source
+                .Completion
+                .ContinueWith(
+                    (completed, state) =>
+                    {
+                        var thisBlock = ((JoinBlock<T1, T2>)state!) as IDataflowBlock;
+                        Debug.Assert(
+                            completed.IsFaulted,
+                            "The source must be faulted in order to trigger a target completion."
+                        );
+                        thisBlock.Fault(completed.Exception!);
+                    },
+                    this,
+                    CancellationToken.None,
+                    Common.GetContinuationOptions() | TaskContinuationOptions.OnlyOnFaulted,
+                    TaskScheduler.Default
+                );
 
             // Handle async cancellation requests by declining on the target
             Common.WireCancellationToComplete(
@@ -473,21 +475,23 @@ namespace System.Threading.Tasks.Dataflow
             // In those cases we need to fault the target half to drop its buffered messages and to release its
             // reservations. This should not create an infinite loop, because all our implementations are designed
             // to handle multiple completion requests and to carry over only one.
-            _source.Completion.ContinueWith(
-                (completed, state) =>
-                {
-                    var thisBlock = ((JoinBlock<T1, T2, T3>)state!) as IDataflowBlock;
-                    Debug.Assert(
-                        completed.IsFaulted,
-                        "The source must be faulted in order to trigger a target completion."
-                    );
-                    thisBlock.Fault(completed.Exception!);
-                },
-                this,
-                CancellationToken.None,
-                Common.GetContinuationOptions() | TaskContinuationOptions.OnlyOnFaulted,
-                TaskScheduler.Default
-            );
+            _source
+                .Completion
+                .ContinueWith(
+                    (completed, state) =>
+                    {
+                        var thisBlock = ((JoinBlock<T1, T2, T3>)state!) as IDataflowBlock;
+                        Debug.Assert(
+                            completed.IsFaulted,
+                            "The source must be faulted in order to trigger a target completion."
+                        );
+                        thisBlock.Fault(completed.Exception!);
+                    },
+                    this,
+                    CancellationToken.None,
+                    Common.GetContinuationOptions() | TaskContinuationOptions.OnlyOnFaulted,
+                    TaskScheduler.Default
+                );
 
             // Handle async cancellation requests by declining on the target
             Common.WireCancellationToComplete(
@@ -983,11 +987,10 @@ namespace System.Threading.Tasks.Dataflow.Internal
             );
 
             bool consumed;
-            T? consumedValue = _nonGreedy.ReservedMessage.Key.ConsumeMessage(
-                _nonGreedy.ReservedMessage.Value,
-                this,
-                out consumed
-            );
+            T? consumedValue = _nonGreedy
+                .ReservedMessage
+                .Key
+                .ConsumeMessage(_nonGreedy.ReservedMessage.Value, this, out consumed);
 
             // Null out our reservation
             _nonGreedy.ReservedMessage = default(KeyValuePair<
@@ -1132,10 +1135,10 @@ namespace System.Threading.Tasks.Dataflow.Internal
                 // Release the reservation and null out our reservation flag even if an exception occurs
                 try
                 {
-                    _nonGreedy.ReservedMessage.Key.ReleaseReservation(
-                        _nonGreedy.ReservedMessage.Value,
-                        this
-                    );
+                    _nonGreedy
+                        .ReservedMessage
+                        .Key
+                        .ReleaseReservation(_nonGreedy.ReservedMessage.Value, this);
                 }
                 finally
                 {

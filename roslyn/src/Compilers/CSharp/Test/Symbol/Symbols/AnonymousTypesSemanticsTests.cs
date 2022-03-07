@@ -888,10 +888,9 @@ class ClassA
             var info0 = GetAnonymousTypeInfoSummary(
                 data,
                 0,
-                data.Tree.FindNodeOrTokenByKind(
-                    SyntaxKind.NewKeyword,
-                    NumberOfNewKeywords(LINQ) + 2
-                ).Span,
+                data.Tree
+                    .FindNodeOrTokenByKind(SyntaxKind.NewKeyword, NumberOfNewKeywords(LINQ) + 2)
+                    .Span,
                 1,
                 2
             );
@@ -975,10 +974,9 @@ class ClassA
             var info0 = GetAnonymousTypeInfoSummary(
                 data,
                 0,
-                data.Tree.FindNodeOrTokenByKind(
-                    SyntaxKind.NewKeyword,
-                    NumberOfNewKeywords(LINQ) + 2
-                ).Span,
+                data.Tree
+                    .FindNodeOrTokenByKind(SyntaxKind.NewKeyword, NumberOfNewKeywords(LINQ) + 2)
+                    .Span,
                 1,
                 2
             );

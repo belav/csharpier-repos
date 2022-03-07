@@ -66,10 +66,9 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedMembers
             foreach (var diagnostic in diagnostics)
             {
                 // Get symbol to be removed.
-                var diagnosticNode = diagnostic.Location.FindNode(
-                    getInnermostNodeForTie: true,
-                    cancellationToken
-                );
+                var diagnosticNode = diagnostic
+                    .Location
+                    .FindNode(getInnermostNodeForTie: true, cancellationToken);
                 var symbol = semanticModel.GetDeclaredSymbol(diagnosticNode, cancellationToken);
                 Contract.ThrowIfNull(symbol);
 

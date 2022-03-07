@@ -44,9 +44,11 @@ internal class AuthorizationPageApplicationModelProvider : IPageApplicationModel
         var authorizeData = pageModel.HandlerTypeAttributes.OfType<IAuthorizeData>().ToArray();
         if (authorizeData.Length > 0)
         {
-            pageModel.Filters.Add(
-                AuthorizationApplicationModelProvider.GetFilter(_policyProvider, authorizeData)
-            );
+            pageModel
+                .Filters
+                .Add(
+                    AuthorizationApplicationModelProvider.GetFilter(_policyProvider, authorizeData)
+                );
         }
         foreach (var attribute in pageModel.HandlerTypeAttributes.OfType<IAllowAnonymous>())
         {

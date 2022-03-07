@@ -257,10 +257,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             _ = _threadingContext.RunWithShutdownBlockAsync(
                 async cancellationToken =>
                 {
-                    await _threadingContext.JoinableTaskFactory.StartOnIdle(
-                        () => a(cancellationToken),
-                        VsTaskRunContext.UIThreadNormalPriority
-                    );
+                    await _threadingContext
+                        .JoinableTaskFactory
+                        .StartOnIdle(
+                            () => a(cancellationToken),
+                            VsTaskRunContext.UIThreadNormalPriority
+                        );
                 }
             );
         }

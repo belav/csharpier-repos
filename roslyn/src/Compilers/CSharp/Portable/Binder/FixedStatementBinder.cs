@@ -31,23 +31,26 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 var locals = new ArrayBuilder<LocalSymbol>(_syntax.Declaration.Variables.Count);
 
-                _syntax.Declaration.Type.VisitRankSpecifiers(
-                    (rankSpecifier, args) =>
-                    {
-                        foreach (var size in rankSpecifier.Sizes)
+                _syntax
+                    .Declaration
+                    .Type
+                    .VisitRankSpecifiers(
+                        (rankSpecifier, args) =>
                         {
-                            if (size.Kind() != SyntaxKind.OmittedArraySizeExpression)
+                            foreach (var size in rankSpecifier.Sizes)
                             {
-                                ExpressionVariableFinder.FindExpressionVariables(
-                                    args.binder,
-                                    args.locals,
-                                    size
-                                );
+                                if (size.Kind() != SyntaxKind.OmittedArraySizeExpression)
+                                {
+                                    ExpressionVariableFinder.FindExpressionVariables(
+                                        args.binder,
+                                        args.locals,
+                                        size
+                                    );
+                                }
                             }
-                        }
-                    },
-                    (binder: this, locals: locals)
-                );
+                        },
+                        (binder: this, locals: locals)
+                    );
 
                 foreach (VariableDeclaratorSyntax declarator in _syntax.Declaration.Variables)
                 {

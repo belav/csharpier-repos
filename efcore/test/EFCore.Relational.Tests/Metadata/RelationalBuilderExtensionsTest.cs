@@ -141,7 +141,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
 
             modelBuilder.Entity<Customer>().Property(e => e.SomeShort).HasDefaultValue(7);
 
-            var property = modelBuilder.Model
+            var property = modelBuilder
+                .Model
                 .FindEntityType(typeof(Customer))
                 .FindProperty("SomeShort");
 
@@ -174,7 +175,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
 
             modelBuilder.Entity<Customer>().Property(e => e.EnumValue).HasDefaultValue(MyEnum.Tue);
 
-            var property = modelBuilder.Model
+            var property = modelBuilder
+                .Model
                 .FindEntityType(typeof(Customer))
                 .FindProperty("EnumValue");
 
@@ -213,11 +215,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                 ConfigurationSource.Convention
             );
             var idProperty =
-                entityTypeBuilder.Property(
-                    typeof(int),
-                    "Id",
-                    ConfigurationSource.Convention
-                ).Metadata;
+                entityTypeBuilder
+                    .Property(typeof(int), "Id", ConfigurationSource.Convention)
+                    .Metadata;
             var keyBuilder = entityTypeBuilder.HasKey(
                 new[] { idProperty.Name },
                 ConfigurationSource.Convention
@@ -244,7 +244,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                 .WithOne(e => e.Customer)
                 .HasForeignKey(e => e.CustomerId);
 
-            var foreignKey = modelBuilder.Model
+            var foreignKey = modelBuilder
+                .Model
                 .FindEntityType(typeof(Order))
                 .GetForeignKeys()
                 .Single(fk => fk.PrincipalEntityType.ClrType == typeof(Customer));
@@ -267,7 +268,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                 .WithOne(e => e.Customer)
                 .HasConstraintName("LemonSupreme");
 
-            var foreignKey = modelBuilder.Model
+            var foreignKey = modelBuilder
+                .Model
                 .FindEntityType(typeof(Order))
                 .GetForeignKeys()
                 .Single(fk => fk.PrincipalEntityType.ClrType == typeof(Customer));
@@ -295,7 +297,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                 .HasForeignKey(e => e.CustomerId)
                 .HasConstraintName("LemonSupreme");
 
-            var foreignKey = modelBuilder.Model
+            var foreignKey = modelBuilder
+                .Model
                 .FindEntityType(typeof(Order))
                 .GetForeignKeys()
                 .Single(fk => fk.PrincipalEntityType.ClrType == typeof(Customer));
@@ -314,7 +317,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                 .WithMany(e => e.Orders)
                 .HasConstraintName("LemonSupreme");
 
-            var foreignKey = modelBuilder.Model
+            var foreignKey = modelBuilder
+                .Model
                 .FindEntityType(typeof(Order))
                 .GetForeignKeys()
                 .Single(fk => fk.PrincipalEntityType.ClrType == typeof(Customer));
@@ -342,7 +346,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                 .HasForeignKey(e => e.CustomerId)
                 .HasConstraintName("LemonSupreme");
 
-            var foreignKey = modelBuilder.Model
+            var foreignKey = modelBuilder
+                .Model
                 .FindEntityType(typeof(Order))
                 .GetForeignKeys()
                 .Single(fk => fk.PrincipalEntityType.ClrType == typeof(Customer));
@@ -362,7 +367,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                 .HasPrincipalKey<Order>(e => e.OrderId)
                 .HasConstraintName("LemonSupreme");
 
-            var foreignKey = modelBuilder.Model
+            var foreignKey = modelBuilder
+                .Model
                 .FindEntityType(typeof(OrderDetails))
                 .GetForeignKeys()
                 .Single();
@@ -390,7 +396,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                 .HasForeignKey<OrderDetails>(e => e.Id)
                 .HasConstraintName("LemonSupreme");
 
-            var foreignKey = modelBuilder.Model
+            var foreignKey = modelBuilder
+                .Model
                 .FindEntityType(typeof(OrderDetails))
                 .GetForeignKeys()
                 .Single();

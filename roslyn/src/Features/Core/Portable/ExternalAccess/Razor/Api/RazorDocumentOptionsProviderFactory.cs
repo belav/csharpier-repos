@@ -56,7 +56,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Razor.Api
                     return null;
                 }
 
-                var options = await RazorDocumentOptionsService.Value
+                var options = await RazorDocumentOptionsService
+                    .Value
                     .GetOptionsForDocumentAsync(document, cancellationToken)
                     .ConfigureAwait(false);
                 return new RazorDocumentOptions(options);

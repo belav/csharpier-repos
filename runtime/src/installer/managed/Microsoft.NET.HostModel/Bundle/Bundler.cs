@@ -281,7 +281,8 @@ namespace Microsoft.NET.HostModel.Bundle
                 hostSource =
                     fileSpecs
                         .Where(x => x.BundleRelativePath.Equals(_hostName))
-                        .Single().SourcePath;
+                        .Single()
+                        .SourcePath;
             }
             catch (InvalidOperationException)
             {

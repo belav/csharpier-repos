@@ -264,7 +264,8 @@ public int Goo(int i) { return i; }
 
 WriteLine(5);
 "
-                    ).Path;
+                    )
+                    .Path;
             var task = await Host.ExecuteFileAsync(file);
 
             var output = await ReadOutputToEnd();

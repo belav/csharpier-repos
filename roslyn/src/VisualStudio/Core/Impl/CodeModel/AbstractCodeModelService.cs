@@ -369,7 +369,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             {
                 var obj = project
                     .GetRequiredCompilationAsync(CancellationToken.None)
-                    .Result.GetSpecialType(SpecialType.System_Object);
+                    .Result
+                    .GetSpecialType(SpecialType.System_Object);
                 return (EnvDTE.CodeElement)ExternalCodeClass.Create(state, projectId, obj);
             }
 
@@ -447,9 +448,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
                 throw Exceptions.ThrowEFail();
             }
 
-            return symbolId.Resolve(
-                project.GetRequiredCompilationAsync(CancellationToken.None).Result
-            ).Symbol;
+            return symbolId
+                .Resolve(project.GetRequiredCompilationAsync(CancellationToken.None).Result)
+                .Symbol;
         }
 
         protected EnvDTE.CodeFunction CreateInternalCodeAccessorFunction(
@@ -682,9 +683,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
 
             // RenameSymbolAsync may be implemented using OOP, which has known cases for requiring the UI thread to do work. Use JTF
             // to keep the rename action from deadlocking.
-            var newSolution = _threadingContext.JoinableTaskFactory.Run(
-                () => Renamer.RenameSymbolAsync(oldSolution, symbol, newName, oldSolution.Options)
-            );
+            var newSolution = _threadingContext
+                .JoinableTaskFactory
+                .Run(
+                    () =>
+                        Renamer.RenameSymbolAsync(oldSolution, symbol, newName, oldSolution.Options)
+                );
             var changedDocuments = newSolution.GetChangedDocuments(oldSolution);
 
             // Notify third parties of the coming rename operation and let exceptions propagate out
@@ -1445,16 +1449,18 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
                 formattingRules = additionalRules.Concat(formattingRules);
             }
 
-            return _threadingContext.JoinableTaskFactory.Run(
-                () =>
-                    Formatter.FormatAsync(
-                        document,
-                        new TextSpan[] { formattingSpan },
-                        options: null,
-                        rules: formattingRules,
-                        cancellationToken: cancellationToken
-                    )
-            );
+            return _threadingContext
+                .JoinableTaskFactory
+                .Run(
+                    () =>
+                        Formatter.FormatAsync(
+                            document,
+                            new TextSpan[] { formattingSpan },
+                            options: null,
+                            rules: formattingRules,
+                            cancellationToken: cancellationToken
+                        )
+                );
         }
 
         private SyntaxNode InsertNode(
@@ -1488,15 +1494,17 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
 
             if (!batchMode)
             {
-                document = _threadingContext.JoinableTaskFactory.Run(
-                    () =>
-                        Simplifier.ReduceAsync(
-                            document,
-                            annotation,
-                            optionSet: null,
-                            cancellationToken: cancellationToken
-                        )
-                );
+                document = _threadingContext
+                    .JoinableTaskFactory
+                    .Run(
+                        () =>
+                            Simplifier.ReduceAsync(
+                                document,
+                                annotation,
+                                optionSet: null,
+                                cancellationToken: cancellationToken
+                            )
+                    );
             }
 
             document = FormatAnnotatedNode(

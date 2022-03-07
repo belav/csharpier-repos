@@ -715,11 +715,9 @@ public class HtmlHelperCheckBoxTest
 
         var viewData = GetTestModelViewData();
         var helper = DefaultTemplatesUtilities.GetHtmlHelper(viewData);
-        viewData.ModelState.SetModelValue(
-            "Property1",
-            new string[] { attemptedValue },
-            attemptedValue
-        );
+        viewData
+            .ModelState
+            .SetModelValue("Property1", new string[] { attemptedValue }, attemptedValue);
 
         // Act
         var html = helper.CheckBoxFor(m => m.Property1, htmlAttributes: null);

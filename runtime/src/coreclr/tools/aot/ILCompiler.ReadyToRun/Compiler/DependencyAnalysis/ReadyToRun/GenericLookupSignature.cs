@@ -159,9 +159,12 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                 {
                     sb.Append(" [");
                     sb.Append(
-                        _methodArgument.Token.MetadataReader.GetString(
-                            _methodArgument.Token.MetadataReader.GetAssemblyDefinition().Name
-                        )
+                        _methodArgument
+                            .Token
+                            .MetadataReader
+                            .GetString(
+                                _methodArgument.Token.MetadataReader.GetAssemblyDefinition().Name
+                            )
                     );
                     sb.Append(":");
                     sb.Append(((uint)_methodArgument.Token.Token).ToString("X8"));

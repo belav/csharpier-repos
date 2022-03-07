@@ -171,9 +171,10 @@ namespace System.Xml.Serialization
 
         internal LocalBuilder GetLocal(string name)
         {
-            System.Diagnostics.Debug.Assert(
-                _currentScope != null && _currentScope.ContainsKey(name)
-            );
+            System
+                .Diagnostics
+                .Debug
+                .Assert(_currentScope != null && _currentScope.ContainsKey(name));
             return _currentScope[name]!;
         }
 

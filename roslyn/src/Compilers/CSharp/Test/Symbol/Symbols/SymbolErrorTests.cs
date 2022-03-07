@@ -76,9 +76,9 @@ class C
 
             var comp = CreateCompilationWithILAndMscorlib40(source, il);
             var emitResult = comp.Emit(new System.IO.MemoryStream());
-            emitResult.Diagnostics.Verify(
-                Diagnostic(ErrorCode.ERR_BadDelegateConstructor, "Goo").WithArguments("F")
-            );
+            emitResult
+                .Diagnostics
+                .Verify(Diagnostic(ErrorCode.ERR_BadDelegateConstructor, "Goo").WithArguments("F"));
         }
 
         /// <summary>
@@ -127,17 +127,19 @@ class Test
             // use ref2 only
             var comp = CreateCompilation(
                 text,
-                options: TestOptions.ReleaseDll.WithSpecificDiagnosticOptions(
-                    new Dictionary<string, ReportDiagnostic>()
-                    {
+                options: TestOptions
+                    .ReleaseDll
+                    .WithSpecificDiagnosticOptions(
+                        new Dictionary<string, ReportDiagnostic>()
                         {
-                            MessageProvider.Instance.GetIdForErrorCode(
-                                (int)ErrorCode.WRN_UnreferencedField
-                            ),
-                            ReportDiagnostic.Suppress
+                            {
+                                MessageProvider
+                                    .Instance
+                                    .GetIdForErrorCode((int)ErrorCode.WRN_UnreferencedField),
+                                ReportDiagnostic.Suppress
+                            }
                         }
-                    }
-                ),
+                    ),
                 references: new[]
                 {
                     ModuleMetadata
@@ -6230,7 +6232,8 @@ public class A : IA
             );
 
             // Note: invalid attribute had no effect on metadata name.
-            var indexer = compilation.GlobalNamespace
+            var indexer = compilation
+                .GlobalNamespace
                 .GetMember<NamedTypeSymbol>("A")
                 .GetProperty("IA." + WellKnownMemberNames.Indexer);
             Assert.Equal("IA.Item", indexer.MetadataName);
@@ -8953,17 +8956,17 @@ public static int AT = (new { field = 2 }).field;
 
             Assert.Equal(
                 1,
-                comp.Assembly.Modules[1].GlobalNamespace.GetTypeMembers(
-                    "<ModuleA01>f__AnonymousType0",
-                    1
-                ).Length
+                comp.Assembly.Modules[1]
+                    .GlobalNamespace
+                    .GetTypeMembers("<ModuleA01>f__AnonymousType0", 1)
+                    .Length
             );
             Assert.Equal(
                 1,
-                comp.Assembly.Modules[2].GlobalNamespace.GetTypeMembers(
-                    "<ModuleB01>f__AnonymousType0",
-                    1
-                ).Length
+                comp.Assembly.Modules[2]
+                    .GlobalNamespace
+                    .GetTypeMembers("<ModuleB01>f__AnonymousType0", 1)
+                    .Length
             );
 
             CompileAndVerify(
@@ -20414,10 +20417,13 @@ class A
         return 1;
     }
 }";
-            var ref1 =
-                TestReferences.SymbolsTests.NoPia.Microsoft.VisualStudio.MissingPIAAttributes.WithEmbedInteropTypes(
-                    true
-                );
+            var ref1 = TestReferences
+                .SymbolsTests
+                .NoPia
+                .Microsoft
+                .VisualStudio
+                .MissingPIAAttributes
+                .WithEmbedInteropTypes(true);
 
             CreateCompilation(text, references: new[] { ref1 })
                 .VerifyDiagnostics(
@@ -20735,12 +20741,16 @@ End Structure";
         INestedDelegate.InnerDelegate s5 = null;
     }
 }";
-            var vbcomp = VisualBasic.VisualBasicCompilation.Create(
-                "Test",
-                new[] { VisualBasic.VisualBasicSyntaxTree.ParseText(textdll) },
-                new[] { MscorlibRef_v4_0_30316_17626 },
-                new VisualBasic.VisualBasicCompilationOptions(OutputKind.DynamicallyLinkedLibrary)
-            );
+            var vbcomp = VisualBasic
+                .VisualBasicCompilation
+                .Create(
+                    "Test",
+                    new[] { VisualBasic.VisualBasicSyntaxTree.ParseText(textdll) },
+                    new[] { MscorlibRef_v4_0_30316_17626 },
+                    new VisualBasic.VisualBasicCompilationOptions(
+                        OutputKind.DynamicallyLinkedLibrary
+                    )
+                );
 
             var ref1 = vbcomp.EmitToImageReference(embedInteropTypes: true);
 

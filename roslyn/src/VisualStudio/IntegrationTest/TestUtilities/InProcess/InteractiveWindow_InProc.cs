@@ -174,17 +174,19 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
 
         public void Reset(bool waitForPrompt = true)
         {
-            ThreadHelper.JoinableTaskFactory.Run(
-                async () =>
-                {
-                    await ThreadHelper.JoinableTaskFactory.SwitchToMainThreadAsync();
+            ThreadHelper
+                .JoinableTaskFactory
+                .Run(
+                    async () =>
+                    {
+                        await ThreadHelper.JoinableTaskFactory.SwitchToMainThreadAsync();
 
-                    var interactiveWindow = AcquireInteractiveWindow();
-                    var operations = (IInteractiveWindowOperations)interactiveWindow;
-                    var result = await operations.ResetAsync();
-                    Contract.ThrowIfFalse(result.IsSuccessful);
-                }
-            );
+                        var interactiveWindow = AcquireInteractiveWindow();
+                        var operations = (IInteractiveWindowOperations)interactiveWindow;
+                        var result = await operations.ResetAsync();
+                        Contract.ThrowIfFalse(result.IsSuccessful);
+                    }
+                );
 
             if (waitForPrompt)
             {

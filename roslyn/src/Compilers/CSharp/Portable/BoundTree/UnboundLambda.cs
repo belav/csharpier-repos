@@ -210,15 +210,17 @@ namespace Microsoft.CodeAnalysis.CSharp
             ImmutableArray<RefKind> parameterRefKinds,
             RefKind refKind
         ) =>
-            UnboundLambda.Data.CreateLambdaSymbol(
-                containingSymbol,
-                returnType,
-                parameterTypes,
-                parameterRefKinds.IsDefault
-                  ? Enumerable.Repeat(RefKind.None, parameterTypes.Length).ToImmutableArray()
-                  : parameterRefKinds,
-                refKind
-            );
+            UnboundLambda
+                .Data
+                .CreateLambdaSymbol(
+                    containingSymbol,
+                    returnType,
+                    parameterTypes,
+                    parameterRefKinds.IsDefault
+                      ? Enumerable.Repeat(RefKind.None, parameterTypes.Length).ToImmutableArray()
+                      : parameterRefKinds,
+                    refKind
+                );
 
         /// <summary>
         /// Indicates the type of return statement with no expression. Used in InferReturnType.
@@ -410,9 +412,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                 var resultType =
                     taskType?.Arity == 0
                         ? taskType
-                        : binder.Compilation.GetWellKnownType(
-                              WellKnownType.System_Threading_Tasks_Task
-                          );
+                        : binder
+                          .Compilation
+                          .GetWellKnownType(WellKnownType.System_Threading_Tasks_Task);
                 return TypeWithAnnotations.Create(resultType);
             }
 
@@ -428,9 +430,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             var taskTypeT =
                 taskType?.Arity == 1
                     ? taskType
-                    : binder.Compilation.GetWellKnownType(
-                          WellKnownType.System_Threading_Tasks_Task_T
-                      );
+                    : binder
+                      .Compilation
+                      .GetWellKnownType(WellKnownType.System_Threading_Tasks_Task_T);
             return TypeWithAnnotations.Create(
                 taskTypeT.Construct(ImmutableArray.Create(bestResultType))
             );
@@ -514,11 +516,13 @@ namespace Microsoft.CodeAnalysis.CSharp
             bool hasErrors =
                 !types.IsDefault && types.Any(t => t.Type?.Kind == SymbolKind.ErrorType);
 
-            var functionType = FunctionTypeSymbol.Lazy.CreateIfFeatureEnabled(
-                syntax,
-                binder,
-                static (binder, expr) => ((UnboundLambda)expr).Data.InferDelegateType()
-            );
+            var functionType = FunctionTypeSymbol
+                .Lazy
+                .CreateIfFeatureEnabled(
+                    syntax,
+                    binder,
+                    static (binder, expr) => ((UnboundLambda)expr).Data.InferDelegateType()
+                );
             var data = new PlainUnboundLambdaState(
                 binder,
                 returnRefKind,
@@ -725,7 +729,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                 _bindingCache = ImmutableDictionary<
                     (NamedTypeSymbol Type, bool IsExpressionLambda),
                     BoundLambda
-                >.Empty.WithComparers(BindingCacheComparer.Instance);
+                >
+                    .Empty
+                    .WithComparers(BindingCacheComparer.Instance);
                 _returnInferenceCache =
                     ImmutableDictionary<ReturnInferenceCacheKey, BoundLambda>.Empty;
             }
@@ -989,10 +995,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                 && GetLambdaExpressionBody(returnInferenceLambda.Body) is BoundExpression expression
                 && (lambdaSymbol = returnInferenceLambda.Symbol).RefKind == refKind
                 && (object)LambdaSymbol.InferenceFailureReturnType != lambdaSymbol.ReturnType
-                && lambdaSymbol.ReturnTypeWithAnnotations.Equals(
-                    returnType,
-                    TypeCompareKind.ConsiderEverything
-                )
+                && lambdaSymbol
+                    .ReturnTypeWithAnnotations
+                    .Equals(returnType, TypeCompareKind.ConsiderEverything)
             )
             {
                 lambdaBodyBinder = returnInferenceLambda.Binder;
@@ -1658,7 +1663,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     // It's not great, but it should be stable.
                     return minDiagnosticsGroup
                         .OrderBy(lambda => GetLambdaSortString(lambda.Value.Symbol))
-                        .FirstOrDefault().Value;
+                        .FirstOrDefault()
+                        .Value;
             }
         }
 
@@ -1668,18 +1674,22 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             foreach (var parameter in lambda.Parameters)
             {
-                builder.Builder.Append(
-                    parameter.ToDisplayString(SymbolDisplayFormat.CSharpErrorMessageFormat)
-                );
+                builder
+                    .Builder
+                    .Append(
+                        parameter.ToDisplayString(SymbolDisplayFormat.CSharpErrorMessageFormat)
+                    );
             }
 
             if (lambda.ReturnTypeWithAnnotations.HasType)
             {
-                builder.Builder.Append(
-                    lambda.ReturnTypeWithAnnotations.ToDisplayString(
-                        SymbolDisplayFormat.FullyQualifiedFormat
-                    )
-                );
+                builder
+                    .Builder
+                    .Append(
+                        lambda
+                            .ReturnTypeWithAnnotations
+                            .ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat)
+                    );
             }
 
             var result = builder.ToStringAndFree();
@@ -1943,17 +1953,22 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 default:
                 case SyntaxKind.SimpleLambdaExpression:
-                    return (
-                        (SimpleLambdaExpressionSyntax)syntax
-                    ).Parameter.Identifier.GetLocation();
+                    return ((SimpleLambdaExpressionSyntax)syntax)
+                        .Parameter
+                        .Identifier
+                        .GetLocation();
                 case SyntaxKind.ParenthesizedLambdaExpression:
                     return ((ParenthesizedLambdaExpressionSyntax)syntax).ParameterList.Parameters[
                         index
-                    ].Identifier.GetLocation();
+                    ]
+                        .Identifier
+                        .GetLocation();
                 case SyntaxKind.AnonymousMethodExpression:
                     return ((AnonymousMethodExpressionSyntax)syntax).ParameterList!.Parameters[
                         index
-                    ].Identifier.GetLocation();
+                    ]
+                        .Identifier
+                        .GetLocation();
             }
         }
 

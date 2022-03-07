@@ -114,12 +114,14 @@ namespace Microsoft.CodeAnalysis.Rename
                 ? null
                 : new SerializableSearchResult
                   {
-                      Locations = result.Locations
+                      Locations = result
+                          .Locations
                           .Select(loc => SerializableRenameLocation.Dehydrate(loc))
                           .ToArray(),
                       ImplicitLocations = result.ImplicitLocations.IsDefault
                           ? null
-                          : result.ImplicitLocations
+                          : result
+                            .ImplicitLocations
                             .Select(
                                 loc =>
                                     SerializableReferenceLocation.Dehydrate(loc, cancellationToken)
@@ -127,7 +129,8 @@ namespace Microsoft.CodeAnalysis.Rename
                             .ToArray(),
                       ReferencedSymbols = result.ReferencedSymbols.IsDefault
                           ? null
-                          : result.ReferencedSymbols
+                          : result
+                            .ReferencedSymbols
                             .Select(
                                 s =>
                                     SerializableSymbolAndProjectId.Dehydrate(
@@ -298,7 +301,8 @@ namespace Microsoft.CodeAnalysis.Rename
             if (locations.Symbol == null)
                 return null;
 
-            var symbol = await locations.Symbol
+            var symbol = await locations
+                .Symbol
                 .TryRehydrateAsync(solution, cancellationToken)
                 .ConfigureAwait(false);
             if (symbol == null)
@@ -310,7 +314,8 @@ namespace Microsoft.CodeAnalysis.Rename
                 symbol,
                 solution,
                 locations.Options.Rehydrate(),
-                await locations.Result
+                await locations
+                    .Result
                     .RehydrateAsync(solution, cancellationToken)
                     .ConfigureAwait(false)
             );

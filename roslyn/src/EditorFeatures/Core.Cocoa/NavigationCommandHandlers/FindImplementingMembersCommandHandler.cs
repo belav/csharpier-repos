@@ -126,7 +126,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigationCommandHandlers
 
                         // the parents should bring us to the class definition
                         var parentTypeNode = documentToken.Parent?.Parent?.Parent?.Parent;
-                        var compilation = await document.Project
+                        var compilation = await document
+                            .Project
                             .GetCompilationAsync(cancellationToken)
                             .ConfigureAwait(false);
 

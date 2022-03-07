@@ -55,7 +55,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageClient
                 new ServiceMoniker(typeof(LanguageServerTarget).FullName)
             );
 
-            var serviceContainer = await VSShell.ServiceExtensions
+            var serviceContainer = await VSShell
+                .ServiceExtensions
                 .GetServiceAsync<SVsBrokeredServiceContainer, IBrokeredServiceContainer>(
                     _asyncServiceProvider
                 )

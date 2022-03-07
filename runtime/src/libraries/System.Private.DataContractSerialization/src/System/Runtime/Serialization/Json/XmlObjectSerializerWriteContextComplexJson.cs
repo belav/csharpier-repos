@@ -464,15 +464,17 @@ namespace System.Runtime.Serialization.Json
                 && !Globals.TypeOfIXmlSerializable.IsAssignableFrom(declaredType)
             )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    XmlObjectSerializer.CreateSerializationException(
-                        SR.Format(
-                            SR.XmlObjectAssignedToIncompatibleInterface,
-                            graph.GetType(),
-                            declaredType
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        XmlObjectSerializer.CreateSerializationException(
+                            SR.Format(
+                                SR.XmlObjectAssignedToIncompatibleInterface,
+                                graph.GetType(),
+                                declaredType
+                            )
                         )
-                    )
-                );
+                    );
             }
 
             if (
@@ -480,15 +482,17 @@ namespace System.Runtime.Serialization.Json
                 && !CollectionDataContract.IsCollectionInterface(declaredType)
             )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    XmlObjectSerializer.CreateSerializationException(
-                        SR.Format(
-                            SR.CollectionAssignedToIncompatibleInterface,
-                            graph.GetType(),
-                            declaredType
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        XmlObjectSerializer.CreateSerializationException(
+                            SR.Format(
+                                SR.CollectionAssignedToIncompatibleInterface,
+                                graph.GetType(),
+                                declaredType
+                            )
                         )
-                    )
-                );
+                    );
             }
         }
 
@@ -500,15 +504,20 @@ namespace System.Runtime.Serialization.Json
             GetObjectData(obj, serInfo, GetStreamingContext());
             if (DataContract.GetClrTypeFullName(objType) != serInfo.FullTypeName)
             {
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    XmlObjectSerializer.CreateSerializationException(
-                        SR.Format(
-                            SR.ChangingFullTypeNameNotSupported,
-                            serInfo.FullTypeName,
-                            DataContract.GetClrTypeFullName(objType)
+                throw System
+                    .Runtime
+                    .Serialization
+                    .DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        XmlObjectSerializer.CreateSerializationException(
+                            SR.Format(
+                                SR.ChangingFullTypeNameNotSupported,
+                                serInfo.FullTypeName,
+                                DataContract.GetClrTypeFullName(objType)
+                            )
                         )
-                    )
-                );
+                    );
             }
             else
             {
@@ -599,9 +608,9 @@ namespace System.Runtime.Serialization.Json
                 )
                 {
                     itemContract = context.GetDataContract(
-                        Globals.TypeOfKeyValuePair.MakeGenericType(
-                            collectionContract.ItemType.GetGenericArguments()
-                        )
+                        Globals
+                            .TypeOfKeyValuePair
+                            .MakeGenericType(collectionContract.ItemType.GetGenericArguments())
                     );
                 }
                 else

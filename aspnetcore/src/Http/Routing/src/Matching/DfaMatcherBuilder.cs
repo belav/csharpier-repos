@@ -315,10 +315,10 @@ internal class DfaMatcherBuilder : MatcherBuilder
                         // For example, for a parameter in a route {lang:length(2)} and a parent literal "ABC", we can check that "ABC"
                         // doesn't meet the parameter constraint (length(2)) when building the tree, and avoid the extra nodes.
                         if (
-                            endpoint.RoutePattern.ParameterPolicies.TryGetValue(
-                                parameterPart.Name,
-                                out var parameterPolicyReferences
-                            )
+                            endpoint
+                                .RoutePattern
+                                .ParameterPolicies
+                                .TryGetValue(parameterPart.Name, out var parameterPolicyReferences)
                         )
                         {
                             // We filter out sibling literals that don't match one of the constraints in the segment to avoid adding nodes to the DFA
@@ -412,10 +412,10 @@ internal class DfaMatcherBuilder : MatcherBuilder
                         }
 
                         if (
-                            endpoint.RoutePattern.ParameterPolicies.TryGetValue(
-                                partParameter.Name,
-                                out var parameterPolicyReferences
-                            )
+                            endpoint
+                                .RoutePattern
+                                .ParameterPolicies
+                                .TryGetValue(partParameter.Name, out var parameterPolicyReferences)
                         )
                         {
                             for (var j = 0; j < parameterPolicyReferences.Count; j++)
@@ -517,10 +517,10 @@ internal class DfaMatcherBuilder : MatcherBuilder
         )
         {
             if (
-                endpoint.RoutePattern.ParameterPolicies.TryGetValue(
-                    parameterPart.Name,
-                    out var parameterPolicyReferences
-                )
+                endpoint
+                    .RoutePattern
+                    .ParameterPolicies
+                    .TryGetValue(parameterPart.Name, out var parameterPolicyReferences)
             )
             {
                 for (var k = 0; k < parameterPolicyReferences.Count; k++)

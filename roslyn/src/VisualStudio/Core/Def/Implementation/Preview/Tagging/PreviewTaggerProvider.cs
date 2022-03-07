@@ -29,10 +29,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Preview
         public ITagger<T> CreateTagger<T>(ITextView textView, ITextBuffer buffer) where T : ITag
         {
             if (
-                textView.Properties.TryGetProperty(
-                    typeof(PreviewUpdater.PreviewTagger),
-                    out PreviewUpdater.PreviewTagger tagger
-                )
+                textView
+                    .Properties
+                    .TryGetProperty(
+                        typeof(PreviewUpdater.PreviewTagger),
+                        out PreviewUpdater.PreviewTagger tagger
+                    )
             )
             {
                 return tagger as ITagger<T>;

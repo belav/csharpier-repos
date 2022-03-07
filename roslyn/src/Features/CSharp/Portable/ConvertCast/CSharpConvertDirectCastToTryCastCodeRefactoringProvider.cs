@@ -60,8 +60,10 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertCast
             // If #1 is present a new line is added after "as" because of elastic trivia on "as"
             // #3 is kept with the expression and moves
             typeNode = typeNode.WithLeadingTrivia(castExpression.OpenParenToken.TrailingTrivia);
-            var middleTrivia =
-                castExpression.CloseParenToken.TrailingTrivia.SkipInitialWhitespace();
+            var middleTrivia = castExpression
+                .CloseParenToken
+                .TrailingTrivia
+                .SkipInitialWhitespace();
             var newLeadingTrivia = castExpression.GetLeadingTrivia().AddRange(middleTrivia);
             var newTrailingTrivia = typeNode
                 .GetTrailingTrivia()

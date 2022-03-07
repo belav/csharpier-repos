@@ -55,9 +55,9 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
 
             Assert.Equal(
                 "ENC0087",
-                EditAndContinueDiagnosticDescriptors.GetDescriptor(
-                    RudeEditKind.ComplexQueryExpression
-                ).Id
+                EditAndContinueDiagnosticDescriptors
+                    .GetDescriptor(RudeEditKind.ComplexQueryExpression)
+                    .Id
             );
 
             d = EditAndContinueDiagnosticDescriptors.GetDescriptor(

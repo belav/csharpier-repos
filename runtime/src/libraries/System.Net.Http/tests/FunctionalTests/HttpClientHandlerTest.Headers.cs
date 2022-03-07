@@ -115,10 +115,9 @@ namespace System.Net.Http.Functional.Tests
                     };
                     for (int i = 0; i < count; i++)
                     {
-                        message.Headers.TryAddWithoutValidation(
-                            "large-header" + i,
-                            largeHeaderValue
-                        );
+                        message
+                            .Headers
+                            .TryAddWithoutValidation("large-header" + i, largeHeaderValue);
                     }
                     var response = await client.SendAsync(TestAsync, message).ConfigureAwait(false);
                 },
@@ -150,10 +149,9 @@ namespace System.Net.Http.Functional.Tests
                 {
                     using (HttpClient client = CreateHttpClient())
                     {
-                        client.DefaultRequestHeaders.TryAddWithoutValidation(
-                            "x-ms-version",
-                            Version
-                        );
+                        client
+                            .DefaultRequestHeaders
+                            .TryAddWithoutValidation("x-ms-version", Version);
                         client.DefaultRequestHeaders.Add("x-ms-blob-type", Blob);
                         var message = new HttpRequestMessage(HttpMethod.Get, uri)
                         {
@@ -250,10 +248,10 @@ namespace System.Net.Http.Functional.Tests
                         if (!message.Headers.TryAddWithoutValidation(key, value))
                         {
                             message.Content = new StringContent("");
-                            contentHeader = message.Content.Headers.TryAddWithoutValidation(
-                                key,
-                                value
-                            );
+                            contentHeader = message
+                                .Content
+                                .Headers
+                                .TryAddWithoutValidation(key, value);
                         }
                         (
                             await client.SendAsync(TestAsync, message).ConfigureAwait(false)
@@ -641,10 +639,12 @@ namespace System.Net.Http.Functional.Tests
                         Assert.NotNull(name);
                         Assert.Same(request, requestMessage);
                         seenHeaderNames.Add(name);
-                        return Assert.Single(
-                            s_nonAsciiHeaders,
-                            h => h.Name.Equals(name, StringComparison.OrdinalIgnoreCase)
-                        ).ValueEncoding;
+                        return Assert
+                            .Single(
+                                s_nonAsciiHeaders,
+                                h => h.Name.Equals(name, StringComparison.OrdinalIgnoreCase)
+                            )
+                            .ValueEncoding;
                     };
 
                     using HttpClient client = CreateHttpClient(handler);
@@ -716,10 +716,12 @@ namespace System.Net.Http.Functional.Tests
                             )
                         )
                         {
-                            return Assert.Single(
-                                s_nonAsciiHeaders,
-                                h => h.Name.Equals(name, StringComparison.OrdinalIgnoreCase)
-                            ).ValueEncoding;
+                            return Assert
+                                .Single(
+                                    s_nonAsciiHeaders,
+                                    h => h.Name.Equals(name, StringComparison.OrdinalIgnoreCase)
+                                )
+                                .ValueEncoding;
                         }
 
                         // Not one of our custom headers
@@ -739,10 +741,12 @@ namespace System.Net.Http.Functional.Tests
                     {
                         Assert.Contains(name, seenHeaderNames);
                         IEnumerable<string> receivedValues =
-                            Assert.Single(
-                                response.Headers,
-                                h => h.Key.Equals(name, StringComparison.OrdinalIgnoreCase)
-                            ).Value;
+                            Assert
+                                .Single(
+                                    response.Headers,
+                                    h => h.Key.Equals(name, StringComparison.OrdinalIgnoreCase)
+                                )
+                                .Value;
                         string value = Assert.Single(receivedValues);
 
                         string expected = valueEncoding.GetString(

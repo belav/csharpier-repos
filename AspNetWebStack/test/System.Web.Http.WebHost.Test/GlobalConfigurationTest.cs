@@ -62,7 +62,8 @@ namespace System.Web.Http
 
             using (HttpConfiguration standardConfiguration = new HttpConfiguration())
             {
-                defaultExceptionHandlerType = standardConfiguration.Services
+                defaultExceptionHandlerType = standardConfiguration
+                    .Services
                     .GetExceptionHandler()
                     .GetType();
             }

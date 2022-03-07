@@ -89,13 +89,15 @@ namespace System.Security.Cryptography
                     )
                 )
                 {
-                    return Interop.NCrypt.DeriveKeyMaterialHash(
-                        secretAgreement,
-                        hashAlgorithm.Name,
-                        secretPrepend,
-                        secretAppend,
-                        Interop.NCrypt.SecretAgreementFlags.None
-                    );
+                    return Interop
+                        .NCrypt
+                        .DeriveKeyMaterialHash(
+                            secretAgreement,
+                            hashAlgorithm.Name,
+                            secretPrepend,
+                            secretAppend,
+                            Interop.NCrypt.SecretAgreementFlags.None
+                        );
                 }
             }
 
@@ -126,14 +128,16 @@ namespace System.Security.Cryptography
                             ? Interop.NCrypt.SecretAgreementFlags.UseSecretAsHmacKey
                             : Interop.NCrypt.SecretAgreementFlags.None;
 
-                    return Interop.NCrypt.DeriveKeyMaterialHmac(
-                        secretAgreement,
-                        hashAlgorithm.Name,
-                        hmacKey,
-                        secretPrepend,
-                        secretAppend,
-                        flags
-                    );
+                    return Interop
+                        .NCrypt
+                        .DeriveKeyMaterialHmac(
+                            secretAgreement,
+                            hashAlgorithm.Name,
+                            hmacKey,
+                            secretPrepend,
+                            secretAppend,
+                            flags
+                        );
                 }
             }
 
@@ -156,12 +160,14 @@ namespace System.Security.Cryptography
                     )
                 )
                 {
-                    return Interop.NCrypt.DeriveKeyMaterialTls(
-                        secretAgreement,
-                        prfLabel,
-                        prfSeed,
-                        Interop.NCrypt.SecretAgreementFlags.None
-                    );
+                    return Interop
+                        .NCrypt
+                        .DeriveKeyMaterialTls(
+                            secretAgreement,
+                            prfLabel,
+                            prfSeed,
+                            Interop.NCrypt.SecretAgreementFlags.None
+                        );
                 }
             }
         }

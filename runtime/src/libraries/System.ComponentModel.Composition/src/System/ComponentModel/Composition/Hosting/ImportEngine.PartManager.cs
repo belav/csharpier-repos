@@ -204,8 +204,9 @@ namespace System.ComponentModel.Composition.Hosting
             {
                 if (_importedDisposableExports != null)
                 {
-                    IEnumerable<IDisposable> dependencies =
-                        _importedDisposableExports.Values.SelectMany(exports => exports);
+                    IEnumerable<IDisposable> dependencies = _importedDisposableExports
+                        .Values
+                        .SelectMany(exports => exports);
 
                     _importedDisposableExports = null;
 

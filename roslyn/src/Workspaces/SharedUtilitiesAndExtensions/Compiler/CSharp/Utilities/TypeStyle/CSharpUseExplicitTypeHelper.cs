@@ -104,15 +104,20 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
             }
 
             if (
-                typeName.Parent.IsKind(
-                    SyntaxKind.VariableDeclaration,
-                    out VariableDeclarationSyntax? variableDeclaration
-                )
-                && typeName.Parent.Parent.IsKind(
-                    SyntaxKind.LocalDeclarationStatement,
-                    SyntaxKind.ForStatement,
-                    SyntaxKind.UsingStatement
-                )
+                typeName
+                    .Parent
+                    .IsKind(
+                        SyntaxKind.VariableDeclaration,
+                        out VariableDeclarationSyntax? variableDeclaration
+                    )
+                && typeName
+                    .Parent
+                    .Parent
+                    .IsKind(
+                        SyntaxKind.LocalDeclarationStatement,
+                        SyntaxKind.ForStatement,
+                        SyntaxKind.UsingStatement
+                    )
             )
             {
                 // check assignment for variable declarations.

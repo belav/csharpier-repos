@@ -15,7 +15,8 @@ namespace System.Web.Razor.Generator
                 && context.ExpressionRenderingMode == ExpressionRenderingMode.WriteToOutput
             )
             {
-                Span contentSpan = target.Children
+                Span contentSpan = target
+                    .Children
                     .OfType<Span>()
                     .Where(s => s.Kind == SpanKind.Code || s.Kind == SpanKind.Markup)
                     .FirstOrDefault();
@@ -93,7 +94,8 @@ namespace System.Web.Razor.Generator
                 && context.ExpressionRenderingMode == ExpressionRenderingMode.WriteToOutput
             )
             {
-                Span contentSpan = target.Children
+                Span contentSpan = target
+                    .Children
                     .OfType<Span>()
                     .Where(s => s.Kind == SpanKind.Code || s.Kind == SpanKind.Markup)
                     .FirstOrDefault();

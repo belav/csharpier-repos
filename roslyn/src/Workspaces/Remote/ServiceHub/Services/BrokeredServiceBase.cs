@@ -57,15 +57,15 @@ namespace Microsoft.CodeAnalysis.Remote
 
         protected BrokeredServiceBase(in ServiceConstructionArguments arguments)
         {
-            var traceSource = (TraceSource?)arguments.ServiceProvider.GetService(
-                typeof(TraceSource)
-            );
+            var traceSource = (TraceSource?)arguments
+                .ServiceProvider
+                .GetService(typeof(TraceSource));
             Contract.ThrowIfNull(traceSource);
             TraceLogger = traceSource;
 
-            TestData = (RemoteHostTestData?)arguments.ServiceProvider.GetService(
-                typeof(RemoteHostTestData)
-            );
+            TestData = (RemoteHostTestData?)arguments
+                .ServiceProvider
+                .GetService(typeof(RemoteHostTestData));
             WorkspaceManager = TestData?.WorkspaceManager ?? RemoteWorkspaceManager.Default;
 
 #pragma warning disable VSTHRD012 // Provide JoinableTaskFactory where allowed

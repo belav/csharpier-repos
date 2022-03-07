@@ -199,25 +199,17 @@ namespace System.Net.Http
             int requestId,
             [CallerMemberName] string? memberName = null
         ) =>
-            NetEventSource.Log.HandlerMessage(
-                0,
-                0,
-                requestId,
-                memberName,
-                ToString() + ": " + message
-            );
+            NetEventSource
+                .Log
+                .HandlerMessage(0, 0, requestId, memberName, ToString() + ": " + message);
 
         internal void TraceError(
             string message,
             int requestId,
             [CallerMemberName] string? memberName = null
         ) =>
-            NetEventSource.Log.HandlerMessageError(
-                0,
-                0,
-                requestId,
-                memberName,
-                ToString() + ": " + message
-            );
+            NetEventSource
+                .Log
+                .HandlerMessageError(0, 0, requestId, memberName, ToString() + ": " + message);
     }
 }

@@ -499,9 +499,9 @@ public static class EndpointRouteBuilderExtensions
             routeParams.Add(part.Name);
         }
 
-        var routeHandlerOptions = endpoints.ServiceProvider?.GetService<
-            IOptions<RouteHandlerOptions>
-        >();
+        var routeHandlerOptions = endpoints
+            .ServiceProvider
+            ?.GetService<IOptions<RouteHandlerOptions>>();
 
         var options = new RequestDelegateFactoryOptions
         {

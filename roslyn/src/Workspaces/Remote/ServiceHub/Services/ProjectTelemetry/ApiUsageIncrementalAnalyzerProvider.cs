@@ -104,9 +104,11 @@ namespace Microsoft.CodeAnalysis.Remote.Telemetry
                 // solution since checking whether symbol is cross language symbol or not is expansive and
                 // we know that population of solution with both C# and VB are very tiny.
                 // so no reason to pay the cost for common cases.
-                var crossLanguageSolutionOpt = project.ProjectReferences.Any(
-                    p => project.Solution.GetProject(p.ProjectId)?.Language != project.Language
-                )
+                var crossLanguageSolutionOpt = project
+                    .ProjectReferences
+                    .Any(
+                        p => project.Solution.GetProject(p.ProjectId)?.Language != project.Language
+                    )
                   ? project.Solution
                   : null;
 

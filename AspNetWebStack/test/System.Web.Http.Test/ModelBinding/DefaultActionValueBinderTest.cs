@@ -337,10 +337,12 @@ namespace System.Web.Http.ModelBinding
         public void Check_CustomModelBinder_On_Parameter()
         {
             HttpConfiguration config = new HttpConfiguration();
-            config.Services.ReplaceRange(
-                typeof(ValueProviderFactory),
-                new ValueProviderFactory[] { new CustomValueProviderFactory(), }
-            );
+            config
+                .Services
+                .ReplaceRange(
+                    typeof(ValueProviderFactory),
+                    new ValueProviderFactory[] { new CustomValueProviderFactory(), }
+                );
 
             DefaultActionValueBinder binder = new DefaultActionValueBinder();
 

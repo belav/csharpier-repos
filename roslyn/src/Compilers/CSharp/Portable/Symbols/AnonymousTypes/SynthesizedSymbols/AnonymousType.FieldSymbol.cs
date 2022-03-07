@@ -147,16 +147,18 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
                 AddSynthesizedAttribute(
                     ref attributes,
-                    manager.Compilation.TrySynthesizeAttribute(
-                        WellKnownMember.System_Diagnostics_DebuggerBrowsableAttribute__ctor,
-                        ImmutableArray.Create(
-                            new TypedConstant(
-                                manager.System_Diagnostics_DebuggerBrowsableState,
-                                TypedConstantKind.Enum,
-                                DebuggerBrowsableState.Never
+                    manager
+                        .Compilation
+                        .TrySynthesizeAttribute(
+                            WellKnownMember.System_Diagnostics_DebuggerBrowsableAttribute__ctor,
+                            ImmutableArray.Create(
+                                new TypedConstant(
+                                    manager.System_Diagnostics_DebuggerBrowsableState,
+                                    TypedConstantKind.Enum,
+                                    DebuggerBrowsableState.Never
+                                )
                             )
                         )
-                    )
                 );
             }
         }

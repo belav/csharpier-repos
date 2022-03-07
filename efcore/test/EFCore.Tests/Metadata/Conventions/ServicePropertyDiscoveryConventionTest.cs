@@ -162,7 +162,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 owned: false,
                 ConfigurationSource.Explicit
             );
-            entityType!.Builder
+            entityType!
+                .Builder
                 .Property(
                     typeof(ILazyLoader),
                     nameof(BlogOneService.Loader),
@@ -185,15 +186,17 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 owned: false,
                 ConfigurationSource.Explicit
             );
-            entityType!.Builder.HasRelationship(
-                model.AddEntityType(
-                    typeof(LazyLoader),
-                    owned: false,
+            entityType!
+                .Builder
+                .HasRelationship(
+                    model.AddEntityType(
+                        typeof(LazyLoader),
+                        owned: false,
+                        ConfigurationSource.Explicit
+                    )!,
+                    nameof(BlogOneService.Loader),
                     ConfigurationSource.Explicit
-                )!,
-                nameof(BlogOneService.Loader),
-                ConfigurationSource.Explicit
-            );
+                );
 
             RunConvention(entityType);
 
@@ -206,10 +209,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         {
             var entityType = RunConvention<BlogDuplicateService>();
 
-            entityType.Builder.Ignore(
-                nameof(BlogDuplicateService.ContextTwo),
-                ConfigurationSource.Convention
-            );
+            entityType
+                .Builder
+                .Ignore(nameof(BlogDuplicateService.ContextTwo), ConfigurationSource.Convention);
 
             Assert.NotNull(entityType.FindServiceProperty(nameof(BlogDuplicateService.ContextOne)));
             Assert.Null(entityType.FindServiceProperty(nameof(BlogDuplicateService.ContextTwo)));
@@ -248,7 +250,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             new ServicePropertyDiscoveryConvention(CreateDependencies());
 
         private ProviderConventionSetBuilderDependencies CreateDependencies() =>
-            InMemoryTestHelpers.Instance
+            InMemoryTestHelpers
+                .Instance
                 .CreateContextServices()
                 .GetRequiredService<ProviderConventionSetBuilderDependencies>();
 

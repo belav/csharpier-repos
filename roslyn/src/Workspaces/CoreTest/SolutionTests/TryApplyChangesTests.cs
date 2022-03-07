@@ -104,9 +104,11 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
             Assert.True(
                 workspace.TryApplyChanges(
-                    project.WithCompilationOptions(
-                        project.CompilationOptions!.WithMainTypeName("Test")
-                    ).Solution
+                    project
+                        .WithCompilationOptions(
+                            project.CompilationOptions!.WithMainTypeName("Test")
+                        )
+                        .Solution
                 )
             );
         }
@@ -125,9 +127,11 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
             Assert.True(
                 workspace.TryApplyChanges(
-                    project.WithCompilationOptions(
-                        project.CompilationOptions!.WithMainTypeName("Test")
-                    ).Solution
+                    project
+                        .WithCompilationOptions(
+                            project.CompilationOptions!.WithMainTypeName("Test")
+                        )
+                        .Solution
                 )
             );
         }
@@ -147,9 +151,11 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var exception = Assert.Throws<NotSupportedException>(
                 () =>
                     workspace.TryApplyChanges(
-                        project.WithCompilationOptions(
-                            project.CompilationOptions!.WithMainTypeName("WrongThing")
-                        ).Solution
+                        project
+                            .WithCompilationOptions(
+                                project.CompilationOptions!.WithMainTypeName("WrongThing")
+                            )
+                            .Solution
                     )
             );
 
@@ -174,11 +180,13 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
             Assert.True(
                 workspace.TryApplyChanges(
-                    project.WithParseOptions(
-                        project.ParseOptions!.WithFeatures(
-                            new[] { KeyValuePairUtil.Create("Feature", "") }
+                    project
+                        .WithParseOptions(
+                            project
+                                .ParseOptions!
+                                .WithFeatures(new[] { KeyValuePairUtil.Create("Feature", "") })
                         )
-                    ).Solution
+                        .Solution
                 )
             );
         }
@@ -197,11 +205,15 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
             Assert.True(
                 workspace.TryApplyChanges(
-                    project.WithParseOptions(
-                        project.ParseOptions!.WithFeatures(
-                            new[] { KeyValuePairUtil.Create("Feature", "ExpectedValue") }
+                    project
+                        .WithParseOptions(
+                            project
+                                .ParseOptions!
+                                .WithFeatures(
+                                    new[] { KeyValuePairUtil.Create("Feature", "ExpectedValue") }
+                                )
                         )
-                    ).Solution
+                        .Solution
                 )
             );
         }
@@ -221,11 +233,15 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var exception = Assert.Throws<NotSupportedException>(
                 () =>
                     workspace.TryApplyChanges(
-                        project.WithParseOptions(
-                            project.ParseOptions!.WithFeatures(
-                                new[] { KeyValuePairUtil.Create("Feature", "WrongThing") }
+                        project
+                            .WithParseOptions(
+                                project
+                                    .ParseOptions!
+                                    .WithFeatures(
+                                        new[] { KeyValuePairUtil.Create("Feature", "WrongThing") }
+                                    )
                             )
-                        ).Solution
+                            .Solution
                     )
             );
 
@@ -246,10 +262,10 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
             Assert.True(
                 workspace.TryApplyChanges(
-                    project.AddAnalyzerConfigDocument(
-                        ".editorconfig",
-                        SourceText.From("")
-                    ).Project.Solution
+                    project
+                        .AddAnalyzerConfigDocument(".editorconfig", SourceText.From(""))
+                        .Project
+                        .Solution
                 )
             );
         }

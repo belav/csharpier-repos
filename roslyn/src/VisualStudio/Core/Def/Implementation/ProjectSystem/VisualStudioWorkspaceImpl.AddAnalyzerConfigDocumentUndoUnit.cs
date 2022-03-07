@@ -18,12 +18,14 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
             ) : base(workspace, docInfo, text) { }
 
             protected override Project AddDocument(Project fromProject) =>
-                fromProject.AddAnalyzerConfigDocument(
-                    DocumentInfo.Name,
-                    Text,
-                    DocumentInfo.Folders,
-                    DocumentInfo.FilePath
-                ).Project;
+                fromProject
+                    .AddAnalyzerConfigDocument(
+                        DocumentInfo.Name,
+                        Text,
+                        DocumentInfo.Folders,
+                        DocumentInfo.FilePath
+                    )
+                    .Project;
         }
     }
 }

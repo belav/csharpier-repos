@@ -36,12 +36,9 @@ public static class BrowserFileExtensions
     {
         if (browserFile is BrowserFile browserFileInternal)
         {
-            return browserFileInternal.Owner.ConvertToImageFileAsync(
-                browserFileInternal,
-                format,
-                maxWidth,
-                maxHeight
-            );
+            return browserFileInternal
+                .Owner
+                .ConvertToImageFileAsync(browserFileInternal, format, maxWidth, maxHeight);
         }
 
         throw new InvalidOperationException(

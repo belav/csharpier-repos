@@ -77,7 +77,8 @@ internal class HubMethodDescriptor
         }
 
         // Take out synthetic arguments that will be provided by the server, this list will be given to the protocol parsers
-        ParameterTypes = methodExecutor.MethodParameters
+        ParameterTypes = methodExecutor
+            .MethodParameters
             .Where(
                 p =>
                 {
@@ -108,7 +109,8 @@ internal class HubMethodDescriptor
 
         if (HasSyntheticArguments)
         {
-            OriginalParameterTypes = methodExecutor.MethodParameters
+            OriginalParameterTypes = methodExecutor
+                .MethodParameters
                 .Select(p => p.ParameterType)
                 .ToArray();
         }

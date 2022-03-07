@@ -33,9 +33,9 @@ public class Http2EndToEndTests : TestApplicationErrorLoggerLoggedTest
             {
                 connectionIdFromFeature = context.Features.Get<IConnectionIdFeature>().ConnectionId;
 
-                var logger = context.RequestServices.GetRequiredService<
-                    ILogger<Http2EndToEndTests>
-                >();
+                var logger = context
+                    .RequestServices
+                    .GetRequiredService<ILogger<Http2EndToEndTests>>();
                 logger.LogInformation(expectedLogMessage);
 
                 await context.Response.WriteAsync("hello, world");
@@ -138,13 +138,15 @@ public class Http2EndToEndTests : TestApplicationErrorLoggerLoggedTest
                     return;
                 }
 
-                _loggerProvider._scopeProvider?.ForEachScope(
-                    (scopeObject, loggerPovider) =>
-                    {
-                        loggerPovider.ConnectionLogScope ??= scopeObject as ConnectionLogScope;
-                    },
-                    _loggerProvider
-                );
+                _loggerProvider
+                    ._scopeProvider
+                    ?.ForEachScope(
+                        (scopeObject, loggerPovider) =>
+                        {
+                            loggerPovider.ConnectionLogScope ??= scopeObject as ConnectionLogScope;
+                        },
+                        _loggerProvider
+                    );
             }
         }
     }

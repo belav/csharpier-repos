@@ -125,11 +125,12 @@ namespace System.Security.Cryptography.Asn1.Pkcs12
             int offset;
             ReadOnlySpan<byte> tmpSpan;
 
-            System.Security.Cryptography.Asn1.DigestInfoAsn.Decode(
-                ref sequenceReader,
-                rebind,
-                out decoded.Mac
-            );
+            System
+                .Security
+                .Cryptography
+                .Asn1
+                .DigestInfoAsn
+                .Decode(ref sequenceReader, rebind, out decoded.Mac);
 
             if (sequenceReader.TryReadPrimitiveOctetString(out tmpSpan))
             {

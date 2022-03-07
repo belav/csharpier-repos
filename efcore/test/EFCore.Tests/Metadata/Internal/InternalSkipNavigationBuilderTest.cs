@@ -251,12 +251,15 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 metadata.GetForeignKeyConfigurationSource()
             );
 
-            var orderProductEntity = metadata.DeclaringEntityType.Model.Builder.Entity(
-                typeof(OrderProduct)
-            );
+            var orderProductEntity = metadata
+                .DeclaringEntityType
+                .Model
+                .Builder
+                .Entity(typeof(OrderProduct));
             var fk = (ForeignKey)orderProductEntity
                 .HasRelationship(metadata.DeclaringEntityType, nameof(OrderProduct.Order))
-                .IsUnique(false).Metadata;
+                .IsUnique(false)
+                .Metadata;
 
             Assert.NotSame(fk, metadata.ForeignKey);
             Assert.Same(originalFK, metadata.ForeignKey);
@@ -302,10 +305,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
             // the skip navigation is pointing to the automatically-generated
             // join entity type and so is its inverse
-            var inverse = (SkipNavigation)metadata.TargetEntityType.Builder.HasSkipNavigation(
-                Product.OrdersProperty,
-                metadata.DeclaringEntityType
-            ).Metadata;
+            var inverse = (SkipNavigation)metadata
+                .TargetEntityType
+                .Builder
+                .HasSkipNavigation(Product.OrdersProperty, metadata.DeclaringEntityType)
+                .Metadata;
 
             Assert.NotNull(metadata.Inverse);
             Assert.Equal(ConfigurationSource.Convention, metadata.GetInverseConfigurationSource());
@@ -411,7 +415,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
         private InternalSkipNavigationBuilder CreateInternalSkipNavigationBuilder()
         {
-            var modelBuilder = (InternalModelBuilder)InMemoryTestHelpers.Instance
+            var modelBuilder = (InternalModelBuilder)InMemoryTestHelpers
+                .Instance
                 .CreateConventionBuilder()
                 .GetInfrastructure();
 

@@ -163,14 +163,12 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
                     );
                 }
 
-                bool serviceHasNewConstraint =
-                    serviceGenericType.GenericParameterAttributes.HasFlag(
-                        GenericParameterAttributes.DefaultConstructorConstraint
-                    );
-                bool implementationHasNewConstraint =
-                    implementationGenericType.GenericParameterAttributes.HasFlag(
-                        GenericParameterAttributes.DefaultConstructorConstraint
-                    );
+                bool serviceHasNewConstraint = serviceGenericType
+                    .GenericParameterAttributes
+                    .HasFlag(GenericParameterAttributes.DefaultConstructorConstraint);
+                bool implementationHasNewConstraint = implementationGenericType
+                    .GenericParameterAttributes
+                    .HasFlag(GenericParameterAttributes.DefaultConstructorConstraint);
                 if (implementationHasNewConstraint && !serviceHasNewConstraint)
                 {
                     throw new ArgumentException(
@@ -545,9 +543,9 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
                 Type closedType;
                 try
                 {
-                    closedType = descriptor.ImplementationType.MakeGenericType(
-                        serviceType.GenericTypeArguments
-                    );
+                    closedType = descriptor
+                        .ImplementationType
+                        .MakeGenericType(serviceType.GenericTypeArguments);
                 }
                 catch (ArgumentException)
                 {

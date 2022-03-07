@@ -36,9 +36,11 @@ namespace System.Web.WebPages.ApplicationParts
         {
             get
             {
-                return _applicationParts.Values.FirstOrDefault(
-                    appPart => appPart.Name.Equals(name, StringComparison.OrdinalIgnoreCase)
-                );
+                return _applicationParts
+                    .Values
+                    .FirstOrDefault(
+                        appPart => appPart.Name.Equals(name, StringComparison.OrdinalIgnoreCase)
+                    );
             }
         }
 

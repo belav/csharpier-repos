@@ -75,8 +75,10 @@ namespace Microsoft.CodeAnalysis.AddMissingImports
                 document.GetRequiredLanguageService<IAddImportFeatureService>();
 
             var solution = document.Project.Solution;
-            var symbolSearchService =
-                solution.Workspace.Services.GetRequiredService<ISymbolSearchService>();
+            var symbolSearchService = solution
+                .Workspace
+                .Services
+                .GetRequiredService<ISymbolSearchService>();
 
             // Since we are not currently considering NuGet packages, pass an empty array
             var packageSources = ImmutableArray<PackageSource>.Empty;
@@ -130,10 +132,14 @@ namespace Microsoft.CodeAnalysis.AddMissingImports
 
             var solution = document.Project.Solution;
             var progressTracker = new ProgressTracker();
-            var textDiffingService =
-                solution.Workspace.Services.GetRequiredService<IDocumentTextDifferencingService>();
-            var packageInstallerService =
-                solution.Workspace.Services.GetService<IPackageInstallerService>();
+            var textDiffingService = solution
+                .Workspace
+                .Services
+                .GetRequiredService<IDocumentTextDifferencingService>();
+            var packageInstallerService = solution
+                .Workspace
+                .Services
+                .GetService<IPackageInstallerService>();
             var addImportService = document.GetRequiredLanguageService<IAddImportFeatureService>();
 
             // Do not limit the results since we plan to fix all the reported issues.
@@ -247,8 +253,12 @@ namespace Microsoft.CodeAnalysis.AddMissingImports
                 .GetRequiredSyntaxRootAsync(cancellationToken)
                 .ConfigureAwait(false);
             var text = await document.GetTextAsync(cancellationToken).ConfigureAwait(false);
-            var optionService =
-                document.Project.Solution.Workspace.Services.GetRequiredService<IOptionService>();
+            var optionService = document
+                .Project
+                .Solution
+                .Workspace
+                .Services
+                .GetRequiredService<IOptionService>();
             var shouldUseFormattingSpanCollapse = optionSet.GetOption(
                 FormattingBehaviorOptions.AllowDisjointSpanMerging
             );

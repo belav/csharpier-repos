@@ -70,11 +70,9 @@ namespace System.Web.Http.Metadata.Providers
 
             // Act
             var actual =
-                provider.GetMetadataForProperty(
-                    null,
-                    typeof(ReadOnlyModel),
-                    propertyName
-                ).IsReadOnly;
+                provider
+                    .GetMetadataForProperty(null, typeof(ReadOnlyModel), propertyName)
+                    .IsReadOnly;
 
             // Assert
             Assert.Equal(expected, actual);
@@ -138,11 +136,9 @@ namespace System.Web.Http.Metadata.Providers
 
             // Act
             var actual =
-                provider.GetMetadataForProperty(
-                    null,
-                    typeof(DisplayModel),
-                    propertyName
-                ).Description;
+                provider
+                    .GetMetadataForProperty(null, typeof(DisplayModel), propertyName)
+                    .Description;
 
             // Assert
             Assert.Equal(expected, actual);

@@ -322,11 +322,9 @@ namespace System.Xml.Xsl.Xslt
                 {
                     nodeFilter.Body = _f.And(nodeFilter.Body, predicate);
                 }
-                nodeFilter.Body = _predicateEnvironment.fixupVisitor.Fixup(
-                    nodeFilter.Body,
-                    current,
-                    null
-                );
+                nodeFilter.Body = _predicateEnvironment
+                    .fixupVisitor
+                    .Fixup(nodeFilter.Body, current, null);
             }
             //If any preidcate contains last() or position() node, then the current node is based on previous predicates,
             //for instance, a[...][2] is match second node after filter 'a[...]' instead of second 'a'.

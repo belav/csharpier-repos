@@ -181,7 +181,9 @@ namespace System.Security.Cryptography
                     if (rent != null)
                     {
                         // Already cleared
-                        ArrayPool<byte>.Shared.Return(rent);
+                        ArrayPool<byte>
+                            .Shared
+                            .Return(rent);
                     }
 
                     return ret;
@@ -240,13 +242,9 @@ namespace System.Security.Cryptography
 
                 try
                 {
-                    int returnValue = Interop.AndroidCrypto.RsaPrivateDecrypt(
-                        data.Length,
-                        data,
-                        decryptBuf,
-                        key,
-                        rsaPadding
-                    );
+                    int returnValue = Interop
+                        .AndroidCrypto
+                        .RsaPrivateDecrypt(data.Length, data, decryptBuf, key, rsaPadding);
                     CheckReturn(returnValue);
 
                     if (rsaPaddingProcessor != null)
@@ -372,13 +370,9 @@ namespace System.Security.Cryptography
                     try
                     {
                         rsaPaddingProcessor.PadOaep(data, tmp);
-                        returnValue = Interop.AndroidCrypto.RsaPublicEncrypt(
-                            tmp.Length,
-                            tmp,
-                            destination,
-                            key,
-                            rsaPadding
-                        );
+                        returnValue = Interop
+                            .AndroidCrypto
+                            .RsaPublicEncrypt(tmp.Length, tmp, destination, key, rsaPadding);
                     }
                     finally
                     {
@@ -390,13 +384,9 @@ namespace System.Security.Cryptography
                 {
                     Debug.Assert(rsaPadding != Interop.AndroidCrypto.RsaPadding.NoPadding);
 
-                    returnValue = Interop.AndroidCrypto.RsaPublicEncrypt(
-                        data.Length,
-                        data,
-                        destination,
-                        key,
-                        rsaPadding
-                    );
+                    returnValue = Interop
+                        .AndroidCrypto
+                        .RsaPublicEncrypt(data.Length, data, destination, key, rsaPadding);
                 }
 
                 CheckReturn(returnValue);
@@ -439,10 +429,9 @@ namespace System.Security.Cryptography
                 // It's entirely possible that this line will cause the key to be generated in the first place.
                 SafeRsaHandle key = GetKey();
 
-                RSAParameters rsaParameters = Interop.AndroidCrypto.ExportRsaParameters(
-                    key,
-                    includePrivateParameters
-                );
+                RSAParameters rsaParameters = Interop
+                    .AndroidCrypto
+                    .ExportRsaParameters(key, includePrivateParameters);
                 bool hasPrivateKey = rsaParameters.D != null;
 
                 if (
@@ -522,25 +511,27 @@ namespace System.Security.Cryptography
                 try
                 {
                     if (
-                        !Interop.AndroidCrypto.SetRsaParameters(
-                            key,
-                            parameters.Modulus,
-                            parameters.Modulus != null ? parameters.Modulus.Length : 0,
-                            parameters.Exponent,
-                            parameters.Exponent != null ? parameters.Exponent.Length : 0,
-                            parameters.D,
-                            parameters.D != null ? parameters.D.Length : 0,
-                            parameters.P,
-                            parameters.P != null ? parameters.P.Length : 0,
-                            parameters.DP,
-                            parameters.DP != null ? parameters.DP.Length : 0,
-                            parameters.Q,
-                            parameters.Q != null ? parameters.Q.Length : 0,
-                            parameters.DQ,
-                            parameters.DQ != null ? parameters.DQ.Length : 0,
-                            parameters.InverseQ,
-                            parameters.InverseQ != null ? parameters.InverseQ.Length : 0
-                        )
+                        !Interop
+                            .AndroidCrypto
+                            .SetRsaParameters(
+                                key,
+                                parameters.Modulus,
+                                parameters.Modulus != null ? parameters.Modulus.Length : 0,
+                                parameters.Exponent,
+                                parameters.Exponent != null ? parameters.Exponent.Length : 0,
+                                parameters.D,
+                                parameters.D != null ? parameters.D.Length : 0,
+                                parameters.P,
+                                parameters.P != null ? parameters.P.Length : 0,
+                                parameters.DP,
+                                parameters.DP != null ? parameters.DP.Length : 0,
+                                parameters.Q,
+                                parameters.Q != null ? parameters.Q.Length : 0,
+                                parameters.DQ,
+                                parameters.DQ != null ? parameters.DQ.Length : 0,
+                                parameters.InverseQ,
+                                parameters.InverseQ != null ? parameters.InverseQ.Length : 0
+                            )
                     )
                     {
                         throw new CryptographicException();
@@ -606,9 +597,9 @@ namespace System.Security.Cryptography
                         AsnWriter writer = new AsnWriter(AsnEncodingRules.DER);
                         spki.Encode(writer);
 
-                        SafeRsaHandle key = Interop.AndroidCrypto.DecodeRsaSubjectPublicKeyInfo(
-                            writer.Encode()
-                        );
+                        SafeRsaHandle key = Interop
+                            .AndroidCrypto
+                            .DecodeRsaSubjectPublicKeyInfo(writer.Encode());
                         if (key is null || key.IsInvalid)
                         {
                             throw new CryptographicException();
@@ -993,11 +984,9 @@ namespace System.Security.Cryptography
 
                 try
                 {
-                    int ret = Interop.AndroidCrypto.RsaVerificationPrimitive(
-                        signature,
-                        unwrapped,
-                        rsa
-                    );
+                    int ret = Interop
+                        .AndroidCrypto
+                        .RsaVerificationPrimitive(signature, unwrapped, rsa);
 
                     CheckReturn(ret);
                     if (ret == 0)

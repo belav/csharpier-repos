@@ -173,10 +173,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             modelBuilder.Entity<IndexedClass>().Property(e => e.Id);
             var propertyA = modelBuilder
                 .Entity<IndexedClass>()
-                .Metadata.AddIndexerProperty("PropertyA", typeof(string));
+                .Metadata
+                .AddIndexerProperty("PropertyA", typeof(string));
             var propertyB = modelBuilder
                 .Entity<IndexedClass>()
-                .Metadata.AddIndexerProperty("PropertyB", typeof(int));
+                .Metadata
+                .AddIndexerProperty("PropertyB", typeof(int));
             modelBuilder.FinalizeModel();
 
             Assert.Equal(

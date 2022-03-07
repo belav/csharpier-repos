@@ -175,16 +175,21 @@ namespace System.Speech.Internal.SrgsCompiler
         {
             get
             {
-                return System.Speech.Recognition.SrgsGrammar.SrgsDocument.GrammarOptions2TagFormat(
-                    _backend.GrammarOptions
-                );
+                return System
+                    .Speech
+                    .Recognition
+                    .SrgsGrammar
+                    .SrgsDocument
+                    .GrammarOptions2TagFormat(_backend.GrammarOptions);
             }
             set
             {
-                _backend.GrammarOptions =
-                    System.Speech.Recognition.SrgsGrammar.SrgsDocument.TagFormat2GrammarOptions(
-                        value
-                    );
+                _backend.GrammarOptions = System
+                    .Speech
+                    .Recognition
+                    .SrgsGrammar
+                    .SrgsDocument
+                    .TagFormat2GrammarOptions(value);
             }
         }
 

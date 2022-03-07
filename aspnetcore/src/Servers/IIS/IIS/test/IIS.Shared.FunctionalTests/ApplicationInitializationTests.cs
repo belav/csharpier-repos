@@ -77,15 +77,17 @@ public class ApplicationInitializationTests : IISFunctionalTestBase
             var baseDeploymentParameters = Fixture.GetBaseDeploymentParameters(hostingModel);
             EnablePreload(baseDeploymentParameters);
 
-            baseDeploymentParameters.ServerConfigActionList.Add(
-                (config, _) =>
-                {
-                    config
-                        .RequiredElement("system.webServer")
-                        .GetOrAdd("applicationInitialization")
-                        .GetOrAdd("add", "initializationPage", "/CreateFile");
-                }
-            );
+            baseDeploymentParameters
+                .ServerConfigActionList
+                .Add(
+                    (config, _) =>
+                    {
+                        config
+                            .RequiredElement("system.webServer")
+                            .GetOrAdd("applicationInitialization")
+                            .GetOrAdd("add", "initializationPage", "/CreateFile");
+                    }
+                );
 
             var result = await DeployAsync(baseDeploymentParameters);
 
@@ -102,17 +104,19 @@ public class ApplicationInitializationTests : IISFunctionalTestBase
     private static void EnablePreload(IISDeploymentParameters baseDeploymentParameters)
     {
         baseDeploymentParameters.EnsureSection("applicationInitialization", "system.webServer");
-        baseDeploymentParameters.ServerConfigActionList.Add(
-            (config, _) =>
-            {
-                config
-                    .RequiredElement("system.applicationHost")
-                    .RequiredElement("sites")
-                    .RequiredElement("site")
-                    .RequiredElement("application")
-                    .SetAttributeValue("preloadEnabled", true);
-            }
-        );
+        baseDeploymentParameters
+            .ServerConfigActionList
+            .Add(
+                (config, _) =>
+                {
+                    config
+                        .RequiredElement("system.applicationHost")
+                        .RequiredElement("sites")
+                        .RequiredElement("site")
+                        .RequiredElement("application")
+                        .SetAttributeValue("preloadEnabled", true);
+                }
+            );
 
         baseDeploymentParameters.EnableModule(
             "ApplicationInitializationModule",

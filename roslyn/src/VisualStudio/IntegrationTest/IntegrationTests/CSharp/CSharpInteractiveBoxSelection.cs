@@ -37,16 +37,16 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
             InsertInputWithXAtLeft();
 
             VisualStudio.InteractiveWindow.PlaceCaret(">", 1);
-            VisualStudio.InteractiveWindow.PlaceCaret(
-                "x",
-                0,
-                extendSelection: true,
-                selectBlock: true
-            );
+            VisualStudio
+                .InteractiveWindow
+                .PlaceCaret("x", 0, extendSelection: true, selectBlock: true);
             VisualStudio.SendKeys.Send("__", VirtualKey.Escape, "|");
 
-            VisualStudio.InteractiveWindow.Verify.LastReplInput(
-                @"__234567890ABCDEF
+            VisualStudio
+                .InteractiveWindow
+                .Verify
+                .LastReplInput(
+                    @"__234567890ABCDEF
 __234567890ABCDEF
 __234567890ABCDEF
 __234567890ABCDEF
@@ -54,7 +54,7 @@ __234567890ABCDEF
 __234567890ABCDEF
 __|234567890ABCDEF
 1234567890ABCDEF"
-            );
+                );
         }
 
         [WpfFact]
@@ -62,16 +62,16 @@ __|234567890ABCDEF
         {
             InsertInputWithXAtLeft();
             VisualStudio.InteractiveWindow.PlaceCaret("x", 0);
-            VisualStudio.InteractiveWindow.PlaceCaret(
-                ">",
-                1,
-                extendSelection: true,
-                selectBlock: true
-            );
+            VisualStudio
+                .InteractiveWindow
+                .PlaceCaret(">", 1, extendSelection: true, selectBlock: true);
             VisualStudio.SendKeys.Send("__", VirtualKey.Escape, "|");
 
-            VisualStudio.InteractiveWindow.Verify.LastReplInput(
-                @"__|234567890ABCDEF
+            VisualStudio
+                .InteractiveWindow
+                .Verify
+                .LastReplInput(
+                    @"__|234567890ABCDEF
 __234567890ABCDEF
 __234567890ABCDEF
 __234567890ABCDEF
@@ -79,7 +79,7 @@ __234567890ABCDEF
 __234567890ABCDEF
 __234567890ABCDEF
 1234567890ABCDEF"
-            );
+                );
         }
 
         [WpfFact]
@@ -87,16 +87,16 @@ __234567890ABCDEF
         {
             InsertInputWithXAtLeft();
             VisualStudio.InteractiveWindow.PlaceCaret(">", 3);
-            VisualStudio.InteractiveWindow.PlaceCaret(
-                "x",
-                -2,
-                extendSelection: true,
-                selectBlock: true
-            );
+            VisualStudio
+                .InteractiveWindow
+                .PlaceCaret("x", -2, extendSelection: true, selectBlock: true);
             VisualStudio.SendKeys.Send("__", VirtualKey.Escape, "|");
 
-            VisualStudio.InteractiveWindow.Verify.LastReplInput(
-                @"__234567890ABCDEF
+            VisualStudio
+                .InteractiveWindow
+                .Verify
+                .LastReplInput(
+                    @"__234567890ABCDEF
 __234567890ABCDEF
 __234567890ABCDEF
 __234567890ABCDEF
@@ -104,7 +104,7 @@ __234567890ABCDEF
 __234567890ABCDEF
 __|234567890ABCDEF
 1234567890ABCDEF"
-            );
+                );
         }
 
         [WpfFact]
@@ -112,16 +112,16 @@ __|234567890ABCDEF
         {
             InsertInputWithXAtLeft();
             VisualStudio.InteractiveWindow.PlaceCaret("x", -2);
-            VisualStudio.InteractiveWindow.PlaceCaret(
-                ">",
-                3,
-                extendSelection: true,
-                selectBlock: true
-            );
+            VisualStudio
+                .InteractiveWindow
+                .PlaceCaret(">", 3, extendSelection: true, selectBlock: true);
             VisualStudio.SendKeys.Send("__", VirtualKey.Escape, "|");
 
-            VisualStudio.InteractiveWindow.Verify.LastReplInput(
-                @"__|234567890ABCDEF
+            VisualStudio
+                .InteractiveWindow
+                .Verify
+                .LastReplInput(
+                    @"__|234567890ABCDEF
 __234567890ABCDEF
 __234567890ABCDEF
 __234567890ABCDEF
@@ -129,7 +129,7 @@ __234567890ABCDEF
 __234567890ABCDEF
 __234567890ABCDEF
 1234567890ABCDEF"
-            );
+                );
         }
 
         [WpfFact]
@@ -137,16 +137,16 @@ __234567890ABCDEF
         {
             InsertInputWithSAndEAtLeft();
             VisualStudio.InteractiveWindow.PlaceCaret("s", -1);
-            VisualStudio.InteractiveWindow.PlaceCaret(
-                "e",
-                1,
-                extendSelection: true,
-                selectBlock: true
-            );
+            VisualStudio
+                .InteractiveWindow
+                .PlaceCaret("e", 1, extendSelection: true, selectBlock: true);
             VisualStudio.SendKeys.Send("__", VirtualKey.Escape, "|");
 
-            VisualStudio.InteractiveWindow.Verify.LastReplInput(
-                @"1234567890ABCDEF
+            VisualStudio
+                .InteractiveWindow
+                .Verify
+                .LastReplInput(
+                    @"1234567890ABCDEF
 1234567890ABCDEF
 __234567890ABCDEF
 __234567890ABCDEF
@@ -154,7 +154,7 @@ __234567890ABCDEF
 __234567890ABCDEF
 __|234567890ABCDEF
 1234567890ABCDEF"
-            );
+                );
         }
 
         [WpfFact]
@@ -162,16 +162,16 @@ __|234567890ABCDEF
         {
             InsertInputWithSAndEAtLeft();
             VisualStudio.InteractiveWindow.PlaceCaret("e", 1);
-            VisualStudio.InteractiveWindow.PlaceCaret(
-                "s",
-                -1,
-                extendSelection: true,
-                selectBlock: true
-            );
+            VisualStudio
+                .InteractiveWindow
+                .PlaceCaret("s", -1, extendSelection: true, selectBlock: true);
             VisualStudio.SendKeys.Send("__", VirtualKey.Escape, "|");
 
-            VisualStudio.InteractiveWindow.Verify.LastReplInput(
-                @"1234567890ABCDEF
+            VisualStudio
+                .InteractiveWindow
+                .Verify
+                .LastReplInput(
+                    @"1234567890ABCDEF
 1234567890ABCDEF
 __|234567890ABCDEF
 __234567890ABCDEF
@@ -179,7 +179,7 @@ __234567890ABCDEF
 __234567890ABCDEF
 __234567890ABCDEF
 1234567890ABCDEF"
-            );
+                );
         }
 
         [WpfFact]
@@ -187,16 +187,16 @@ __234567890ABCDEF
         {
             InsertInputWithSAndEAtLeft();
             VisualStudio.InteractiveWindow.PlaceCaret("s", 1);
-            VisualStudio.InteractiveWindow.PlaceCaret(
-                "e",
-                -1,
-                extendSelection: true,
-                selectBlock: true
-            );
+            VisualStudio
+                .InteractiveWindow
+                .PlaceCaret("e", -1, extendSelection: true, selectBlock: true);
             VisualStudio.SendKeys.Send("__", VirtualKey.Escape, "|");
 
-            VisualStudio.InteractiveWindow.Verify.LastReplInput(
-                @"1234567890ABCDEF
+            VisualStudio
+                .InteractiveWindow
+                .Verify
+                .LastReplInput(
+                    @"1234567890ABCDEF
 1234567890ABCDEF
 __234567890ABCDEF
 __234567890ABCDEF
@@ -204,7 +204,7 @@ __234567890ABCDEF
 __234567890ABCDEF
 __|234567890ABCDEF
 1234567890ABCDEF"
-            );
+                );
         }
 
         [WpfFact]
@@ -212,16 +212,16 @@ __|234567890ABCDEF
         {
             InsertInputWithSAndEAtLeft();
             VisualStudio.InteractiveWindow.PlaceCaret("e", -1);
-            VisualStudio.InteractiveWindow.PlaceCaret(
-                "s",
-                1,
-                extendSelection: true,
-                selectBlock: true
-            );
+            VisualStudio
+                .InteractiveWindow
+                .PlaceCaret("s", 1, extendSelection: true, selectBlock: true);
             VisualStudio.SendKeys.Send("__", VirtualKey.Escape, "|");
 
-            VisualStudio.InteractiveWindow.Verify.LastReplInput(
-                @"1234567890ABCDEF
+            VisualStudio
+                .InteractiveWindow
+                .Verify
+                .LastReplInput(
+                    @"1234567890ABCDEF
 1234567890ABCDEF
 __|234567890ABCDEF
 __234567890ABCDEF
@@ -229,7 +229,7 @@ __234567890ABCDEF
 __234567890ABCDEF
 __234567890ABCDEF
 1234567890ABCDEF"
-            );
+                );
         }
 
         [WpfFact]
@@ -237,16 +237,16 @@ __234567890ABCDEF
         {
             InsertInputWithSAndEAtLeft();
             VisualStudio.InteractiveWindow.PlaceCaret("s", -3);
-            VisualStudio.InteractiveWindow.PlaceCaret(
-                "e",
-                2,
-                extendSelection: true,
-                selectBlock: true
-            );
+            VisualStudio
+                .InteractiveWindow
+                .PlaceCaret("e", 2, extendSelection: true, selectBlock: true);
             VisualStudio.SendKeys.Send("_");
 
-            VisualStudio.InteractiveWindow.Verify.LastReplInput(
-                @"1234567890ABCDEF
+            VisualStudio
+                .InteractiveWindow
+                .Verify
+                .LastReplInput(
+                    @"1234567890ABCDEF
 1234567890ABCDEF
 _34567890ABCDEF
 _34567890ABCDEF
@@ -254,7 +254,7 @@ _34567890ABCDEF
 _34567890ABCDEF
 _34567890ABCDEF
 1234567890ABCDEF"
-            );
+                );
         }
 
         [WpfFact]
@@ -262,12 +262,9 @@ _34567890ABCDEF
         {
             InsertInputWithSAndEAtLeft();
             VisualStudio.InteractiveWindow.PlaceCaret("e", -2);
-            VisualStudio.InteractiveWindow.PlaceCaret(
-                "s",
-                -3,
-                extendSelection: true,
-                selectBlock: true
-            );
+            VisualStudio
+                .InteractiveWindow
+                .PlaceCaret("s", -3, extendSelection: true, selectBlock: true);
             VisualStudio.SendKeys.Send("_");
 
             VerifyOriginalCodeWithSAndEAtLeft();
@@ -278,12 +275,9 @@ _34567890ABCDEF
         {
             InsertInputWithSAndEAtLeft();
             VisualStudio.InteractiveWindow.PlaceCaret("s", -2);
-            VisualStudio.InteractiveWindow.PlaceCaret(
-                "e",
-                -3,
-                extendSelection: true,
-                selectBlock: true
-            );
+            VisualStudio
+                .InteractiveWindow
+                .PlaceCaret("e", -3, extendSelection: true, selectBlock: true);
             VisualStudio.SendKeys.Send("_");
 
             VerifyOriginalCodeWithSAndEAtLeft();
@@ -294,12 +288,9 @@ _34567890ABCDEF
         {
             InsertInputWithSAndEAtLeft();
             VisualStudio.InteractiveWindow.PlaceCaret("e", -3);
-            VisualStudio.InteractiveWindow.PlaceCaret(
-                "s",
-                -2,
-                extendSelection: true,
-                selectBlock: true
-            );
+            VisualStudio
+                .InteractiveWindow
+                .PlaceCaret("s", -2, extendSelection: true, selectBlock: true);
             VisualStudio.SendKeys.Send("_");
 
             VerifyOriginalCodeWithSAndEAtLeft();
@@ -310,16 +301,16 @@ _34567890ABCDEF
         {
             InsertInputWithSAndEAtLeft();
             VisualStudio.InteractiveWindow.PlaceCaret("s", -2);
-            VisualStudio.InteractiveWindow.PlaceCaret(
-                "e",
-                -1,
-                extendSelection: true,
-                selectBlock: true
-            );
+            VisualStudio
+                .InteractiveWindow
+                .PlaceCaret("e", -1, extendSelection: true, selectBlock: true);
             VisualStudio.SendKeys.Send("__");
 
-            VisualStudio.InteractiveWindow.Verify.LastReplInput(
-                @"1234567890ABCDEF
+            VisualStudio
+                .InteractiveWindow
+                .Verify
+                .LastReplInput(
+                    @"1234567890ABCDEF
 1234567890ABCDEF
 __s234567890ABCDEF
 __1234567890ABCDEF
@@ -327,7 +318,7 @@ __1234567890ABCDEF
 __1234567890ABCDEF
 __e234567890ABCDEF
 1234567890ABCDEF"
-            );
+                );
         }
 
         [WpfFact]
@@ -335,16 +326,16 @@ __e234567890ABCDEF
         {
             InsertInputWithSAndEAtLeft();
             VisualStudio.InteractiveWindow.PlaceCaret("s", -1);
-            VisualStudio.InteractiveWindow.PlaceCaret(
-                "e",
-                -1,
-                extendSelection: true,
-                selectBlock: true
-            );
+            VisualStudio
+                .InteractiveWindow
+                .PlaceCaret("e", -1, extendSelection: true, selectBlock: true);
             VisualStudio.SendKeys.Send("__");
 
-            VisualStudio.InteractiveWindow.Verify.LastReplInput(
-                @"1234567890ABCDEF
+            VisualStudio
+                .InteractiveWindow
+                .Verify
+                .LastReplInput(
+                    @"1234567890ABCDEF
 1234567890ABCDEF
 __s234567890ABCDEF
 __1234567890ABCDEF
@@ -352,7 +343,7 @@ __1234567890ABCDEF
 __1234567890ABCDEF
 __e234567890ABCDEF
 1234567890ABCDEF"
-            );
+                );
         }
 
         [WpfFact]
@@ -360,16 +351,16 @@ __e234567890ABCDEF
         {
             InsertInputWithSAndEInTheMiddle();
             VisualStudio.InteractiveWindow.PlaceCaret("s", -1);
-            VisualStudio.InteractiveWindow.PlaceCaret(
-                "e",
-                0,
-                extendSelection: true,
-                selectBlock: true
-            );
+            VisualStudio
+                .InteractiveWindow
+                .PlaceCaret("e", 0, extendSelection: true, selectBlock: true);
             VisualStudio.SendKeys.Send(VirtualKey.Backspace, VirtualKey.Backspace);
 
-            VisualStudio.InteractiveWindow.Verify.LastReplInput(
-                @"1CDEF
+            VisualStudio
+                .InteractiveWindow
+                .Verify
+                .LastReplInput(
+                    @"1CDEF
 1CDEF
 1CDEF
 1CDEF
@@ -377,7 +368,7 @@ __e234567890ABCDEF
 1CDEF
 1CDEF
 1234567890ABCDEF"
-            );
+                );
         }
 
         [WpfFact]
@@ -385,16 +376,16 @@ __e234567890ABCDEF
         {
             InsertInputWithEInTheMiddle();
             VisualStudio.InteractiveWindow.PlaceCaret(">", 0);
-            VisualStudio.InteractiveWindow.PlaceCaret(
-                "e",
-                0,
-                extendSelection: true,
-                selectBlock: true
-            );
+            VisualStudio
+                .InteractiveWindow
+                .PlaceCaret("e", 0, extendSelection: true, selectBlock: true);
             VisualStudio.SendKeys.Send(VirtualKey.Backspace, VirtualKey.Backspace);
 
-            VisualStudio.InteractiveWindow.Verify.LastReplInput(
-                @"CDEF
+            VisualStudio
+                .InteractiveWindow
+                .Verify
+                .LastReplInput(
+                    @"CDEF
 CDEF
 CDEF
 CDEF
@@ -402,7 +393,7 @@ CDEF
 CDEF
 CDEF
 1234567890ABCDEF"
-            );
+                );
         }
 
         [WpfFact]
@@ -410,12 +401,9 @@ CDEF
         {
             VisualStudio.InteractiveWindow.InsertCode("1234567890ABCDEF");
             VisualStudio.InteractiveWindow.PlaceCaret("2", -5);
-            VisualStudio.InteractiveWindow.PlaceCaret(
-                ">",
-                8,
-                extendSelection: true,
-                selectBlock: true
-            );
+            VisualStudio
+                .InteractiveWindow
+                .PlaceCaret(">", 8, extendSelection: true, selectBlock: true);
             VisualStudio.SendKeys.Send(VirtualKey.Backspace);
 
             VisualStudio.InteractiveWindow.Verify.LastReplInput(@"7890ABCDEF");
@@ -426,12 +414,9 @@ CDEF
         {
             VisualStudio.InteractiveWindow.InsertCode("1234567890ABCDEF");
             VisualStudio.InteractiveWindow.PlaceCaret("1", -1);
-            VisualStudio.InteractiveWindow.PlaceCaret(
-                ">",
-                5,
-                extendSelection: true,
-                selectBlock: true
-            );
+            VisualStudio
+                .InteractiveWindow
+                .PlaceCaret(">", 5, extendSelection: true, selectBlock: true);
             VisualStudio.SendKeys.Send(VirtualKey.Delete);
 
             VisualStudio.InteractiveWindow.Verify.LastReplInput(@"4567890ABCDEF");
@@ -442,12 +427,9 @@ CDEF
         {
             VisualStudio.InteractiveWindow.InsertCode("1234567890ABCDEF");
             VisualStudio.InteractiveWindow.PlaceCaret("1", -1);
-            VisualStudio.InteractiveWindow.PlaceCaret(
-                ">",
-                5,
-                extendSelection: true,
-                selectBlock: true
-            );
+            VisualStudio
+                .InteractiveWindow
+                .PlaceCaret(">", 5, extendSelection: true, selectBlock: true);
             VisualStudio.SendKeys.Send("__");
 
             VisualStudio.InteractiveWindow.Verify.LastReplInput(@"__4567890ABCDEF");
@@ -455,8 +437,10 @@ CDEF
 
         private void InsertInputWithXAtLeft()
         {
-            VisualStudio.InteractiveWindow.InsertCode(
-                @"1234567890ABCDEF
+            VisualStudio
+                .InteractiveWindow
+                .InsertCode(
+                    @"1234567890ABCDEF
 1234567890ABCDEF
 1234567890ABCDEF
 1234567890ABCDEF
@@ -464,13 +448,15 @@ CDEF
 1234567890ABCDEF
 x234567890ABCDEF
 1234567890ABCDEF"
-            );
+                );
         }
 
         private void InsertInputWithSAndEAtLeft()
         {
-            VisualStudio.InteractiveWindow.InsertCode(
-                @"1234567890ABCDEF
+            VisualStudio
+                .InteractiveWindow
+                .InsertCode(
+                    @"1234567890ABCDEF
 1234567890ABCDEF
 s234567890ABCDEF
 1234567890ABCDEF
@@ -478,13 +464,15 @@ s234567890ABCDEF
 1234567890ABCDEF
 e234567890ABCDEF
 1234567890ABCDEF"
-            );
+                );
         }
 
         private void InsertInputWithSAndEInTheMiddle()
         {
-            VisualStudio.InteractiveWindow.InsertCode(
-                @"12s4567890ABCDEF
+            VisualStudio
+                .InteractiveWindow
+                .InsertCode(
+                    @"12s4567890ABCDEF
 1234567890ABCDEF
 1234567890ABCDEF
 1234567890ABCDEF
@@ -492,13 +480,15 @@ e234567890ABCDEF
 1234567890ABCDEF
 1234567890AeCDEF
 1234567890ABCDEF"
-            );
+                );
         }
 
         private void InsertInputWithEInTheMiddle()
         {
-            VisualStudio.InteractiveWindow.InsertCode(
-                @"1234567890ABCDEF
+            VisualStudio
+                .InteractiveWindow
+                .InsertCode(
+                    @"1234567890ABCDEF
 1234567890ABCDEF
 1234567890ABCDEF
 1234567890ABCDEF
@@ -506,13 +496,16 @@ e234567890ABCDEF
 1234567890ABCDEF
 1234567890AeCDEF
 1234567890ABCDEF"
-            );
+                );
         }
 
         private void VerifyOriginalCodeWithSAndEAtLeft()
         {
-            VisualStudio.InteractiveWindow.Verify.LastReplInput(
-                @"1234567890ABCDEF
+            VisualStudio
+                .InteractiveWindow
+                .Verify
+                .LastReplInput(
+                    @"1234567890ABCDEF
 1234567890ABCDEF
 s234567890ABCDEF
 1234567890ABCDEF
@@ -520,7 +513,7 @@ s234567890ABCDEF
 1234567890ABCDEF
 e234567890ABCDEF
 1234567890ABCDEF"
-            );
+                );
         }
     }
 }

@@ -106,14 +106,17 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
             }
 
             // We can't do anything special, so fall back to the expensive path
-            return hostWorkspaceServices.SupportedLanguages.ToDictionary(
-                l => l,
-                l =>
-                    hostWorkspaceServices
-                        .GetLanguageServices(l)
-                        .GetRequiredService<IContentTypeLanguageService>()
-                        .GetDefaultContentType().TypeName
-            );
+            return hostWorkspaceServices
+                .SupportedLanguages
+                .ToDictionary(
+                    l => l,
+                    l =>
+                        hostWorkspaceServices
+                            .GetLanguageServices(l)
+                            .GetRequiredService<IContentTypeLanguageService>()
+                            .GetDefaultContentType()
+                            .TypeName
+                );
         }
 
         internal static IList<T> SelectMatchingExtensionValues<T, TMetadata>(

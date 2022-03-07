@@ -57,8 +57,10 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .Execute()
                 .Should()
                 .Pass()
-                .And.HaveStdOutContaining("Hello World")
-                .And.HaveStdErrContaining(
+                .And
+                .HaveStdOutContaining("Hello World")
+                .And
+                .HaveStdErrContaining(
                     $"--- Invoked apphost [version: {fixture.RepoDirProvider.MicrosoftNETCoreAppVersion}"
                 );
 
@@ -79,8 +81,10 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .Execute()
                 .Should()
                 .Pass()
-                .And.HaveStdOutContaining("Hello World")
-                .And.HaveStdErrContaining(
+                .And
+                .HaveStdOutContaining("Hello World")
+                .And
+                .HaveStdErrContaining(
                     $"--- Invoked apphost [version: {sharedTestState.FixtureLatest.RepoDirProvider.MicrosoftNETCoreAppVersion}"
                 );
 
@@ -101,8 +105,10 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .Execute()
                 .Should()
                 .Pass()
-                .And.HaveStdOutContaining("Hello World")
-                .And.HaveStdErrContaining(
+                .And
+                .HaveStdOutContaining("Hello World")
+                .And
+                .HaveStdErrContaining(
                     $"--- Invoked apphost [version: {sharedTestState.FixtureLatest.RepoDirProvider.MicrosoftNETCoreAppVersion}"
                 );
         }
@@ -146,8 +152,10 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .Execute()
                 .Should()
                 .Pass()
-                .And.HaveStdOutContaining("Hello World")
-                .And.HaveStdErrContaining(
+                .And
+                .HaveStdOutContaining("Hello World")
+                .And
+                .HaveStdErrContaining(
                     $"--- Invoked apphost [version: {fixture.RepoDirProvider.MicrosoftNETCoreAppVersion}"
                 );
 
@@ -170,8 +178,10 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .Execute()
                 .Should()
                 .Pass()
-                .And.HaveStdOutContaining("Hello World")
-                .And.HaveStdErrContaining(
+                .And
+                .HaveStdOutContaining("Hello World")
+                .And
+                .HaveStdErrContaining(
                     $"--- Invoked apphost [version: {previousVersionFixture.RepoDirProvider.MicrosoftNETCoreAppVersion}"
                 );
         }

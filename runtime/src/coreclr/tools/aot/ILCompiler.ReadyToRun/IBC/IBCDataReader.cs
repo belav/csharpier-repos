@@ -351,9 +351,11 @@ namespace ILCompiler.IBC
             if (minified)
             {
                 uint firstBlockHitCount = reader.Read7BitEncodedUInt();
-                result.BasicBlocks.Add(
-                    new IBC.BasicBlockData { ILOffset = 0, ExecutionCount = firstBlockHitCount }
-                );
+                result
+                    .BasicBlocks
+                    .Add(
+                        new IBC.BasicBlockData { ILOffset = 0, ExecutionCount = firstBlockHitCount }
+                    );
             }
 
             uint numberOfBlocks = ReadSmallUInt();

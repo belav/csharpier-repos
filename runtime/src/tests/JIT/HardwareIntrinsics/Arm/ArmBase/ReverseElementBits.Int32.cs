@@ -217,9 +217,11 @@ namespace JIT.HardwareIntrinsics.Arm
 
             if (isUnexpectedResult)
             {
-                TestLibrary.TestFramework.LogInformation(
-                    $"{nameof(ArmBase)}.{nameof(ArmBase.ReverseElementBits)}<Int32>(Int32): ReverseElementBits failed:"
-                );
+                TestLibrary
+                    .TestFramework
+                    .LogInformation(
+                        $"{nameof(ArmBase)}.{nameof(ArmBase.ReverseElementBits)}<Int32>(Int32): ReverseElementBits failed:"
+                    );
                 TestLibrary.TestFramework.LogInformation($"    data: {data}");
                 TestLibrary.TestFramework.LogInformation($"  result: {result}");
                 TestLibrary.TestFramework.LogInformation(string.Empty);

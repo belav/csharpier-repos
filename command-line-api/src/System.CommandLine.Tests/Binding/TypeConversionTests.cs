@@ -191,7 +191,9 @@ namespace System.CommandLine.Tests.Binding
             getValue
                 .Should()
                 .Throw<InvalidOperationException>()
-                .Which.Message.Should()
+                .Which
+                .Message
+                .Should()
                 .Be("Required argument missing for option: -x");
         }
 
@@ -208,7 +210,8 @@ namespace System.CommandLine.Tests.Binding
                 .GetValueForOption(option)
                 .Should()
                 .BeAssignableTo<IReadOnlyCollection<string>>()
-                .Which.Should()
+                .Which
+                .Should()
                 .BeEmpty();
         }
 
@@ -229,7 +232,8 @@ namespace System.CommandLine.Tests.Binding
                 .GetValueForOption(option)
                 .Should()
                 .BeAssignableTo<IReadOnlyCollection<string>>()
-                .Which.Should()
+                .Which
+                .Should()
                 .BeEquivalentTo("the-default");
         }
 
@@ -247,7 +251,9 @@ namespace System.CommandLine.Tests.Binding
             getValue
                 .Should()
                 .Throw<InvalidOperationException>()
-                .Which.Message.Should()
+                .Which
+                .Message
+                .Should()
                 .Be("Required argument missing for option: -x");
         }
 
@@ -515,7 +521,8 @@ namespace System.CommandLine.Tests.Binding
 
             var value = option.Parse("-x Notaday");
 
-            value.Errors
+            value
+                .Errors
                 .Select(e => e.Message)
                 .Should()
                 .Contain(
@@ -535,7 +542,9 @@ namespace System.CommandLine.Tests.Binding
             getValue
                 .Should()
                 .Throw<InvalidOperationException>()
-                .Which.Message.Should()
+                .Which
+                .Message
+                .Should()
                 .Be(
                     "Cannot parse argument 'not-an-int' for option '-x' as expected type System.Int32."
                 );
@@ -553,7 +562,9 @@ namespace System.CommandLine.Tests.Binding
             getValue
                 .Should()
                 .Throw<InvalidOperationException>()
-                .Which.Message.Should()
+                .Which
+                .Message
+                .Should()
                 .Be(
                     "Cannot parse argument 'not-an-int' for option '-x' as expected type System.Int32."
                 );

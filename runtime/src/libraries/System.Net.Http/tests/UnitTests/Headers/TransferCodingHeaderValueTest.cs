@@ -76,9 +76,9 @@ namespace System.Net.Http.Tests
             transferCoding.Parameters.Add(new NameValueHeaderValue("paramName", "\"param value\""));
             Assert.Equal("custom; paramName=\"param value\"", transferCoding.ToString());
 
-            transferCoding.Parameters.Add(
-                new NameValueHeaderValue("paramName2", "\"param value2\"")
-            );
+            transferCoding
+                .Parameters
+                .Add(new NameValueHeaderValue("paramName2", "\"param value2\""));
             Assert.Equal(
                 "custom; paramName=\"param value\"; paramName2=\"param value2\"",
                 transferCoding.ToString()

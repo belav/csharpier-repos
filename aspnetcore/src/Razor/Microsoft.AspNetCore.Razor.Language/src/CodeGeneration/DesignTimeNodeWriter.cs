@@ -231,10 +231,9 @@ public class DesignTimeNodeWriter : IntermediateNodeWriter
                 {
                     if (!isWhitespaceStatement)
                     {
-                        linePragmaScope = context.CodeWriter.BuildLinePragma(
-                            token.Source.Value,
-                            context
-                        );
+                        linePragmaScope = context
+                            .CodeWriter
+                            .BuildLinePragma(token.Source.Value, context);
                     }
 
                     context.CodeWriter.WritePadding(0, token.Source.Value, context);

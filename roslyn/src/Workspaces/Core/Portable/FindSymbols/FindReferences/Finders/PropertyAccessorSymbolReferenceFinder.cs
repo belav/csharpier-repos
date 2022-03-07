@@ -63,7 +63,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
                 // we want to associate normal property references with the specific accessor being
                 // referenced.  So we also need to include documents with our property's name. Just
                 // defer to the Property finder to find these docs and combine them with the result.
-                propertyDocuments = await ReferenceFinders.Property
+                propertyDocuments = await ReferenceFinders
+                    .Property
                     .DetermineDocumentsToSearchAsync(
                         property,
                         globalAliases,
@@ -108,7 +109,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
                 && options.AssociatePropertyReferencesWithSpecificAccessor
             )
             {
-                var propertyReferences = await ReferenceFinders.Property
+                var propertyReferences = await ReferenceFinders
+                    .Property
                     .FindReferencesInDocumentAsync(
                         property,
                         globalAliases,

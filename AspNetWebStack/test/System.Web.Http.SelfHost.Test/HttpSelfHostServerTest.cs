@@ -505,11 +505,13 @@ namespace System.Web.Http.SelfHost
             if (ignoreRoute)
             {
                 config.Routes.IgnoreRoute("Ignore", "{controller}/{action}");
-                config.Routes.IgnoreRoute(
-                    "IgnoreWithConstraints",
-                    "constraint/values/{id}",
-                    constraints: new { constraint = new CustomConstraint() }
-                );
+                config
+                    .Routes
+                    .IgnoreRoute(
+                        "IgnoreWithConstraints",
+                        "constraint/values/{id}",
+                        constraints: new { constraint = new CustomConstraint() }
+                    );
             }
             config.Routes.MapHttpRoute("Default", "{controller}/{action}");
             config.Routes.MapHttpRoute("Other", "other/{controller}/{action}");

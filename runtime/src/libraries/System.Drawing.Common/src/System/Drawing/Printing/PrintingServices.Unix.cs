@@ -92,9 +92,12 @@ namespace System.Drawing.Printing
             }
             catch (DllNotFoundException)
             {
-                System.Diagnostics.Debug.WriteLine(
-                    "libcups not found. To have printing support, you need cups installed"
-                );
+                System
+                    .Diagnostics
+                    .Debug
+                    .WriteLine(
+                        "libcups not found. To have printing support, you need cups installed"
+                    );
                 return false;
             }
 
@@ -116,9 +119,12 @@ namespace System.Drawing.Printing
             }
             catch (Exception)
             {
-                System.Diagnostics.Debug.WriteLine(
-                    "There was an error opening the printer {0}. Please check your cups installation."
-                );
+                System
+                    .Diagnostics
+                    .Debug
+                    .WriteLine(
+                        "There was an error opening the printer {0}. Please check your cups installation."
+                    );
             }
             return IntPtr.Zero;
         }

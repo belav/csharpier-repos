@@ -450,9 +450,9 @@ namespace Microsoft.EntityFrameworkCore.Query
 
         protected virtual NorthwindContext CreateNoTrackingContext() =>
             new(
-                new DbContextOptionsBuilder(Fixture.CreateOptions()).UseQueryTrackingBehavior(
-                    QueryTrackingBehavior.NoTracking
-                ).Options
+                new DbContextOptionsBuilder(Fixture.CreateOptions())
+                    .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking)
+                    .Options
             );
     }
 }

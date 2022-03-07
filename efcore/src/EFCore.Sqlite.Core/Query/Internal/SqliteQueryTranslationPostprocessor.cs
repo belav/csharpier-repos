@@ -60,9 +60,9 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
 
                 if (
                     extensionExpression is SelectExpression selectExpression
-                    && selectExpression.Tables.Any(
-                        t => t is CrossApplyExpression || t is OuterApplyExpression
-                    )
+                    && selectExpression
+                        .Tables
+                        .Any(t => t is CrossApplyExpression || t is OuterApplyExpression)
                 )
                 {
                     throw new InvalidOperationException(SqliteStrings.ApplyNotSupported);

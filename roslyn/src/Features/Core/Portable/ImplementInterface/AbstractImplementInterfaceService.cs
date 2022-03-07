@@ -103,8 +103,9 @@ namespace Microsoft.CodeAnalysis.ImplementInterface
             }
 
             if (
-                state.MembersWithoutExplicitOrImplicitImplementationWhichCanBeImplicitlyImplemented.Length
-                > 0
+                state
+                    .MembersWithoutExplicitOrImplicitImplementationWhichCanBeImplicitlyImplemented
+                    .Length > 0
             )
             {
                 yield return ImplementInterfaceCodeAction.CreateImplementCodeAction(
@@ -201,7 +202,8 @@ namespace Microsoft.CodeAnalysis.ImplementInterface
 
         private static IList<ISymbol> GetDelegatableMembers(State state)
         {
-            var fields = state.ClassOrStructType
+            var fields = state
+                .ClassOrStructType
                 .GetMembers()
                 .OfType<IFieldSymbol>()
                 .Where(f => !f.IsImplicitlyDeclared)
@@ -214,7 +216,8 @@ namespace Microsoft.CodeAnalysis.ImplementInterface
                 .OfType<ISymbol>();
 
             // Select all properties with zero parameters that also have a getter
-            var properties = state.ClassOrStructType
+            var properties = state
+                .ClassOrStructType
                 .GetMembers()
                 .OfType<IPropertySymbol>()
                 .Where(

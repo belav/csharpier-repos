@@ -231,12 +231,14 @@ namespace System.Drawing.Primitives.Tests
             Assert.True(Color.AliceBlue.IsNamedColor);
             Assert.True(Color.FromName("AliceBlue").IsNamedColor);
             Assert.False(
-                Color.FromArgb(
-                    Color.AliceBlue.A,
-                    Color.AliceBlue.R,
-                    Color.AliceBlue.G,
-                    Color.AliceBlue.B
-                ).IsNamedColor
+                Color
+                    .FromArgb(
+                        Color.AliceBlue.A,
+                        Color.AliceBlue.R,
+                        Color.AliceBlue.G,
+                        Color.AliceBlue.B
+                    )
+                    .IsNamedColor
             );
         }
 

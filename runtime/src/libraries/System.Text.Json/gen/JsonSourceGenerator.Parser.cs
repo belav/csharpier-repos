@@ -503,8 +503,9 @@ namespace System.Text.Json.SourceGeneration
                 SemanticModel compilationSemanticModel
             )
             {
-                SeparatedSyntaxList<BaseTypeSyntax>? baseTypeSyntaxList =
-                    classDeclarationSyntax.BaseList?.Types;
+                SeparatedSyntaxList<BaseTypeSyntax>? baseTypeSyntaxList = classDeclarationSyntax
+                    .BaseList
+                    ?.Types;
                 if (baseTypeSyntaxList == null)
                 {
                     return false;
@@ -1654,14 +1655,14 @@ namespace System.Text.Json.SourceGeneration
                                         namedArgs.Count == 1
                                         && namedArgs[0].MemberInfo.MemberType
                                             == MemberTypes.Property
-                                        && (
-                                            (PropertyInfo)namedArgs[0].MemberInfo
-                                        ).PropertyType.FullName == JsonIgnoreConditionFullName
+                                        && ((PropertyInfo)namedArgs[0].MemberInfo)
+                                            .PropertyType
+                                            .FullName == JsonIgnoreConditionFullName
                                     )
                                     {
-                                        ignoreCondition = (JsonIgnoreCondition)namedArgs[
-                                            0
-                                        ].TypedValue.Value;
+                                        ignoreCondition = (JsonIgnoreCondition)namedArgs[0]
+                                            .TypedValue
+                                            .Value;
                                     }
                                 }
                                 break;

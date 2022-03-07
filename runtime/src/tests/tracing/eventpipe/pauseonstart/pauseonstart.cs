@@ -87,9 +87,11 @@ namespace Tracing.Tests.PauseOnStartValidation
                         config,
                         out var sessionId
                     );
-                    Logger.logger.Log(
-                        $"Started EventPipeSession over standard connection with session id: 0x{sessionId:x}"
-                    );
+                    Logger
+                        .logger
+                        .Log(
+                            $"Started EventPipeSession over standard connection with session id: 0x{sessionId:x}"
+                        );
                     Task readerTask = eventStream.CopyToAsync(memoryStream);
 
                     Logger.logger.Log($"Send ResumeRuntime Diagnostics IPC Command");
@@ -161,9 +163,11 @@ namespace Tracing.Tests.PauseOnStartValidation
                         config,
                         out var sessionId1
                     );
-                    Logger.logger.Log(
-                        $"Started EventPipeSession over standard connection with session id: 0x{sessionId1:x}"
-                    );
+                    Logger
+                        .logger
+                        .Log(
+                            $"Started EventPipeSession over standard connection with session id: 0x{sessionId1:x}"
+                        );
                     Task readerTask1 = eventStream1.CopyToAsync(memoryStream1);
 
                     Logger.logger.Log("Starting EventPipeSession over standard connection");
@@ -172,9 +176,11 @@ namespace Tracing.Tests.PauseOnStartValidation
                         config,
                         out var sessionId2
                     );
-                    Logger.logger.Log(
-                        $"Started EventPipeSession over standard connection with session id: 0x{sessionId2:x}"
-                    );
+                    Logger
+                        .logger
+                        .Log(
+                            $"Started EventPipeSession over standard connection with session id: 0x{sessionId2:x}"
+                        );
                     Task readerTask2 = eventStream2.CopyToAsync(memoryStream2);
 
                     Logger.logger.Log("Starting EventPipeSession over standard connection");
@@ -183,9 +189,11 @@ namespace Tracing.Tests.PauseOnStartValidation
                         config,
                         out var sessionId3
                     );
-                    Logger.logger.Log(
-                        $"Started EventPipeSession over standard connection with session id: 0x{sessionId3:x}"
-                    );
+                    Logger
+                        .logger
+                        .Log(
+                            $"Started EventPipeSession over standard connection with session id: 0x{sessionId3:x}"
+                        );
                     Task readerTask3 = eventStream3.CopyToAsync(memoryStream3);
 
                     Logger.logger.Log($"Send ResumeRuntime Diagnostics IPC Command");
@@ -280,9 +288,11 @@ namespace Tracing.Tests.PauseOnStartValidation
                         config,
                         out var sessionId1
                     );
-                    Logger.logger.Log(
-                        $"Started EventPipeSession over standard connection with session id: 0x{sessionId1:x}"
-                    );
+                    Logger
+                        .logger
+                        .Log(
+                            $"Started EventPipeSession over standard connection with session id: 0x{sessionId1:x}"
+                        );
                     Task readerTask1 = eventStream1.CopyToAsync(memoryStream1);
 
                     Logger.logger.Log("Starting EventPipeSession over standard connection");
@@ -291,9 +301,11 @@ namespace Tracing.Tests.PauseOnStartValidation
                         config,
                         out var sessionId2
                     );
-                    Logger.logger.Log(
-                        $"Started EventPipeSession over standard connection with session id: 0x{sessionId2:x}"
-                    );
+                    Logger
+                        .logger
+                        .Log(
+                            $"Started EventPipeSession over standard connection with session id: 0x{sessionId2:x}"
+                        );
                     Task readerTask2 = eventStream2.CopyToAsync(memoryStream2);
 
                     Logger.logger.Log("Starting EventPipeSession over standard connection");
@@ -302,9 +314,11 @@ namespace Tracing.Tests.PauseOnStartValidation
                         config,
                         out var sessionId3
                     );
-                    Logger.logger.Log(
-                        $"Started EventPipeSession over standard connection with session id: 0x{sessionId3:x}"
-                    );
+                    Logger
+                        .logger
+                        .Log(
+                            $"Started EventPipeSession over standard connection with session id: 0x{sessionId3:x}"
+                        );
                     Task readerTask3 = eventStream3.CopyToAsync(memoryStream3);
 
                     await Task.Delay(TimeSpan.FromSeconds(1));

@@ -65,22 +65,28 @@ namespace Microsoft.Web.Utility
         internal GacAssembly(string assemblyName)
         {
             _assemblyName = assemblyName;
-            int hResult = PInvoke.Fusion.NativeMethods.CreateAssemblyNameObject(
-                out _fusionName,
-                _assemblyName,
-                PInvoke.Fusion.CreateAssemblyNameObjectFlags.CANOF_PARSE_DISPLAY_NAME,
-                IntPtr.Zero
-            );
+            int hResult = PInvoke
+                .Fusion
+                .NativeMethods
+                .CreateAssemblyNameObject(
+                    out _fusionName,
+                    _assemblyName,
+                    PInvoke.Fusion.CreateAssemblyNameObjectFlags.CANOF_PARSE_DISPLAY_NAME,
+                    IntPtr.Zero
+                );
 
             if (hResult >= 0)
             {
-                hResult = PInvoke.Fusion.NativeMethods.CreateAssemblyEnum(
-                    out _assemblyEnum,
-                    IntPtr.Zero,
-                    _fusionName,
-                    PInvoke.Fusion.AssemblyCacheFlags.GAC,
-                    IntPtr.Zero
-                );
+                hResult = PInvoke
+                    .Fusion
+                    .NativeMethods
+                    .CreateAssemblyEnum(
+                        out _assemblyEnum,
+                        IntPtr.Zero,
+                        _fusionName,
+                        PInvoke.Fusion.AssemblyCacheFlags.GAC,
+                        IntPtr.Zero
+                    );
             }
 
             if (hResult < 0 || _assemblyEnum == null)

@@ -46,17 +46,23 @@ namespace Microsoft.Extensions.Configuration.UserSecrets
         public void GeneratesAssemblyAttributeFile(string projectExt, string sourceExt)
         {
             var testTfm =
-                typeof(MsBuildTargetTest).Assembly
+                typeof(MsBuildTargetTest)
+                    .Assembly
                     .GetCustomAttributes<AssemblyMetadataAttribute>()
-                    .First(f => f.Key == "TargetFramework").Value;
+                    .First(f => f.Key == "TargetFramework")
+                    .Value;
             var runtimeVersion =
-                typeof(MsBuildTargetTest).Assembly
+                typeof(MsBuildTargetTest)
+                    .Assembly
                     .GetCustomAttributes<AssemblyMetadataAttribute>()
-                    .First(f => f.Key == "MicrosoftNETCoreAppRuntimeVersion").Value;
+                    .First(f => f.Key == "MicrosoftNETCoreAppRuntimeVersion")
+                    .Value;
             var refPackVersion =
-                typeof(MsBuildTargetTest).Assembly
+                typeof(MsBuildTargetTest)
+                    .Assembly
                     .GetCustomAttributes<AssemblyMetadataAttribute>()
-                    .First(f => f.Key == "MicrosoftNETCoreAppRefPackageVersion").Value;
+                    .First(f => f.Key == "MicrosoftNETCoreAppRefPackageVersion")
+                    .Value;
             var target = Path.Combine(
                 _solutionRoot.FullName,
                 "src",

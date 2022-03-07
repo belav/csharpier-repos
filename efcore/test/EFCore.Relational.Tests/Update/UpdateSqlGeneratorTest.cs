@@ -17,7 +17,9 @@ namespace Microsoft.EntityFrameworkCore.Update
                     ),
                     new TestRelationalTypeMappingSource(
                         TestServiceFactory.Instance.Create<TypeMappingSourceDependencies>(),
-                        TestServiceFactory.Instance.Create<RelationalTypeMappingSourceDependencies>()
+                        TestServiceFactory
+                            .Instance
+                            .Create<RelationalTypeMappingSourceDependencies>()
                     )
                 )
             );

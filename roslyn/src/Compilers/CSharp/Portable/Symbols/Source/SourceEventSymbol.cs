@@ -268,8 +268,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             {
                 if (obsoleteData != null)
                 {
-                    arguments.GetOrCreateData<CommonEventEarlyWellKnownAttributeData>().ObsoleteAttributeData =
-                        obsoleteData;
+                    arguments
+                        .GetOrCreateData<CommonEventEarlyWellKnownAttributeData>()
+                        .ObsoleteAttributeData = obsoleteData;
                 }
 
                 return (attributeData, boundAttribute);
@@ -321,8 +322,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             if (attribute.IsTargetAttribute(this, AttributeDescription.SpecialNameAttribute))
             {
-                arguments.GetOrCreateData<CommonEventWellKnownAttributeData>().HasSpecialNameAttribute =
-                    true;
+                arguments
+                    .GetOrCreateData<CommonEventWellKnownAttributeData>()
+                    .HasSpecialNameAttribute = true;
             }
             else if (
                 ReportExplicitUseOfReservedAttributes(
@@ -339,8 +341,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 )
             )
             {
-                arguments.GetOrCreateData<CommonEventWellKnownAttributeData>().HasExcludeFromCodeCoverageAttribute =
-                    true;
+                arguments
+                    .GetOrCreateData<CommonEventWellKnownAttributeData>()
+                    .HasExcludeFromCodeCoverageAttribute = true;
             }
             else if (
                 attribute.IsTargetAttribute(this, AttributeDescription.SkipLocalsInitAttribute)
@@ -883,7 +886,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             // (see SourceMemberContainerTypeSymbol.ComputeInterfaceImplementations).
             bool sawImplicitImplementation = false;
             foreach (
-                NamedTypeSymbol @interface in this.containingType.InterfacesAndTheirBaseInterfacesNoUseSiteDiagnostics.Keys
+                NamedTypeSymbol @interface in this.containingType
+                    .InterfacesAndTheirBaseInterfacesNoUseSiteDiagnostics
+                    .Keys
             )
             {
                 foreach (Symbol interfaceMember in @interface.GetMembers(this.Name))

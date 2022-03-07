@@ -2484,9 +2484,9 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 
         private static string CreateDisablingMessage(DiagnosticAnalyzer analyzer)
         {
-            var diagnosticIds = ImmutableSortedSet<string>.Empty.WithComparer(
-                StringComparer.OrdinalIgnoreCase
-            );
+            var diagnosticIds = ImmutableSortedSet<string>
+                .Empty
+                .WithComparer(StringComparer.OrdinalIgnoreCase);
             try
             {
                 foreach (var diagnostic in analyzer.SupportedDiagnostics)

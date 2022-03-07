@@ -29,13 +29,16 @@ public class DefaultClientRequestParametersProviderTests
             );
 
         var options = Options.Create(new ApiAuthorizationOptions());
-        options.Value.Clients.AddIdentityServerSPA(
-            "SPA",
-            cb =>
-                cb.WithScopes("a/b", "c/d")
-                    .WithRedirectUri("authentication/login-callback")
-                    .WithLogoutRedirectUri("authentication/logout-callback")
-        );
+        options
+            .Value
+            .Clients
+            .AddIdentityServerSPA(
+                "SPA",
+                cb =>
+                    cb.WithScopes("a/b", "c/d")
+                        .WithRedirectUri("authentication/login-callback")
+                        .WithLogoutRedirectUri("authentication/logout-callback")
+            );
 
         var context = new DefaultHttpContext();
         context.Request.Scheme = "http";

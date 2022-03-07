@@ -239,10 +239,10 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
 
                 if (
                     expression is ExistsExpression existsExpression
-                    && existsExpression.Subquery.Tables.Contains(
-                        _mutatedExpression,
-                        ReferenceEqualityComparer.Instance
-                    )
+                    && existsExpression
+                        .Subquery
+                        .Tables
+                        .Contains(_mutatedExpression, ReferenceEqualityComparer.Instance)
                 )
                 {
                     _faulty = true;

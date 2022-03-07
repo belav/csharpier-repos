@@ -82,12 +82,14 @@ public class Startup
                         context.Response,
                         async res =>
                         {
-                            await context.Response.WriteAsync(
-                                $"<h1>Signed out {HtmlEncode(context.User.Identity.Name)}</h1>"
-                            );
-                            await context.Response.WriteAsync(
-                                "<a class=\"btn btn-link\" href=\"/\">Sign In</a>"
-                            );
+                            await context
+                                .Response
+                                .WriteAsync(
+                                    $"<h1>Signed out {HtmlEncode(context.User.Identity.Name)}</h1>"
+                                );
+                            await context
+                                .Response
+                                .WriteAsync("<a class=\"btn btn-link\" href=\"/\">Sign In</a>");
                         }
                     );
                     return;
@@ -110,12 +112,16 @@ public class Startup
                         context.Response,
                         async res =>
                         {
-                            await context.Response.WriteAsync(
-                                $"<h1>Access Denied for user {HtmlEncode(context.User.Identity.Name)} to resource '{HtmlEncode(context.Request.Query["ReturnUrl"])}'</h1>"
-                            );
-                            await context.Response.WriteAsync(
-                                "<a class=\"btn btn-link\" href=\"/signout\">Sign Out</a>"
-                            );
+                            await context
+                                .Response
+                                .WriteAsync(
+                                    $"<h1>Access Denied for user {HtmlEncode(context.User.Identity.Name)} to resource '{HtmlEncode(context.Request.Query["ReturnUrl"])}'</h1>"
+                                );
+                            await context
+                                .Response
+                                .WriteAsync(
+                                    "<a class=\"btn btn-link\" href=\"/signout\">Sign Out</a>"
+                                );
                         }
                     );
                     return;

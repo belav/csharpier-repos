@@ -2773,12 +2773,14 @@ public class HubConnectionTests : FunctionalTestBase
                 .WithUrl(server.Url + HubPaths.First(), HttpTransportType.WebSockets)
                 .WithAutomaticReconnect();
 
-            connectionBuilder.Services.Configure<HttpConnectionOptions>(
-                o =>
-                {
-                    o.SkipNegotiation = true;
-                }
-            );
+            connectionBuilder
+                .Services
+                .Configure<HttpConnectionOptions>(
+                    o =>
+                    {
+                        o.SkipNegotiation = true;
+                    }
+                );
 
             var connection = connectionBuilder.Build();
 

@@ -751,10 +751,9 @@ namespace System.Configuration
                             if (fileStreamInfo != null)
                             {
                                 streamInfos.Remove(ConfigStreamInfo.StreamName);
-                                ConfigStreamInfo.StreamInfos.Add(
-                                    ConfigStreamInfo.StreamName,
-                                    fileStreamInfo
-                                );
+                                ConfigStreamInfo
+                                    .StreamInfos
+                                    .Add(ConfigStreamInfo.StreamName, fileStreamInfo);
                             }
                         }
                     }
@@ -1679,9 +1678,9 @@ namespace System.Configuration
                             if (xmlUtil.Reader.Name == LocationTag)
                             {
                                 bool locationValid = false;
-                                string locationSubPathAttribute = xmlUtil.Reader.GetAttribute(
-                                    LocationPathAttribute
-                                );
+                                string locationSubPathAttribute = xmlUtil
+                                    .Reader
+                                    .GetAttribute(LocationPathAttribute);
 
                                 try
                                 {
@@ -1817,9 +1816,9 @@ namespace System.Configuration
                         );
 
                     // Check for protectionProvider
-                    string protectionProviderAttribute = xmlUtil.Reader.GetAttribute(
-                        ProtectionProviderAttibute
-                    );
+                    string protectionProviderAttribute = xmlUtil
+                        .Reader
+                        .GetAttribute(ProtectionProviderAttibute);
                     if (protectionProviderAttribute != null)
                     {
                         if (xmlUtil.Reader.AttributeCount != 1)
@@ -2285,16 +2284,18 @@ namespace System.Configuration
                             if (factoryRecord != null)
                             {
                                 // Error: duplicate <sectionGroup> declaration
-                                xmlUtil.SchemaErrors.AddError(
-                                    new ConfigurationErrorsException(
-                                        SR.Format(
-                                            SR.Config_tag_name_already_defined_at_this_level,
-                                            tagName
+                                xmlUtil
+                                    .SchemaErrors
+                                    .AddError(
+                                        new ConfigurationErrorsException(
+                                            SR.Format(
+                                                SR.Config_tag_name_already_defined_at_this_level,
+                                                tagName
+                                            ),
+                                            xmlUtil
                                         ),
-                                        xmlUtil
-                                    ),
-                                    ExceptionAction.Local
-                                );
+                                        ExceptionAction.Local
+                                    );
                             }
                             else
                             {
@@ -2319,16 +2320,18 @@ namespace System.Configuration
                                         )
                                     )
                                     {
-                                        xmlUtil.SchemaErrors.AddError(
-                                            new ConfigurationErrorsException(
-                                                SR.Format(
-                                                    SR.Config_tag_name_already_defined,
-                                                    tagName
+                                        xmlUtil
+                                            .SchemaErrors
+                                            .AddError(
+                                                new ConfigurationErrorsException(
+                                                    SR.Format(
+                                                        SR.Config_tag_name_already_defined,
+                                                        tagName
+                                                    ),
+                                                    xmlUtil
                                                 ),
-                                                xmlUtil
-                                            ),
-                                            ExceptionAction.Local
-                                        );
+                                                ExceptionAction.Local
+                                            );
                                         parentFactoryRecord = null;
                                     }
                                 }
@@ -2506,16 +2509,18 @@ namespace System.Configuration
                             if (factoryRecord != null)
                             {
                                 // Error: duplicate section declaration
-                                xmlUtil.SchemaErrors.AddError(
-                                    new ConfigurationErrorsException(
-                                        SR.Format(
-                                            SR.Config_tag_name_already_defined_at_this_level,
-                                            tagName
+                                xmlUtil
+                                    .SchemaErrors
+                                    .AddError(
+                                        new ConfigurationErrorsException(
+                                            SR.Format(
+                                                SR.Config_tag_name_already_defined_at_this_level,
+                                                tagName
+                                            ),
+                                            xmlUtil
                                         ),
-                                        xmlUtil
-                                    ),
-                                    ExceptionAction.Local
-                                );
+                                        ExceptionAction.Local
+                                    );
                             }
                             else
                             {
@@ -2532,16 +2537,18 @@ namespace System.Configuration
                                     if (parentFactoryRecord.IsGroup)
                                     {
                                         // Already a <sectionGroup> with this name
-                                        xmlUtil.SchemaErrors.AddError(
-                                            new ConfigurationErrorsException(
-                                                SR.Format(
-                                                    SR.Config_tag_name_already_defined,
-                                                    tagName
+                                        xmlUtil
+                                            .SchemaErrors
+                                            .AddError(
+                                                new ConfigurationErrorsException(
+                                                    SR.Format(
+                                                        SR.Config_tag_name_already_defined,
+                                                        tagName
+                                                    ),
+                                                    xmlUtil
                                                 ),
-                                                xmlUtil
-                                            ),
-                                            ExceptionAction.Local
-                                        );
+                                                ExceptionAction.Local
+                                            );
                                         parentFactoryRecord = null;
                                     }
                                     else if (
@@ -2557,16 +2564,18 @@ namespace System.Configuration
                                     )
                                     {
                                         // Already a <section> with the same name
-                                        xmlUtil.SchemaErrors.AddError(
-                                            new ConfigurationErrorsException(
-                                                SR.Format(
-                                                    SR.Config_tag_name_already_defined,
-                                                    tagName
+                                        xmlUtil
+                                            .SchemaErrors
+                                            .AddError(
+                                                new ConfigurationErrorsException(
+                                                    SR.Format(
+                                                        SR.Config_tag_name_already_defined,
+                                                        tagName
+                                                    ),
+                                                    xmlUtil
                                                 ),
-                                                xmlUtil
-                                            ),
-                                            ExceptionAction.Local
-                                        );
+                                                ExceptionAction.Local
+                                            );
                                         parentFactoryRecord = null;
                                     }
                                 }
@@ -2940,29 +2949,33 @@ namespace System.Configuration
                 {
                     case ConfigSectionsTag: // <configSections>
                         // Either a duplicate or not the first tag under <configuration>
-                        xmlUtil.SchemaErrors.AddError(
-                            new ConfigurationErrorsException(
-                                SR.Format(
-                                    SR.Config_client_config_too_many_configsections_elements,
-                                    tagName
+                        xmlUtil
+                            .SchemaErrors
+                            .AddError(
+                                new ConfigurationErrorsException(
+                                    SR.Format(
+                                        SR.Config_client_config_too_many_configsections_elements,
+                                        tagName
+                                    ),
+                                    xmlUtil
                                 ),
-                                xmlUtil
-                            ),
-                            ExceptionAction.NonSpecific
-                        );
+                                ExceptionAction.NonSpecific
+                            );
                         xmlUtil.StrictSkipToNextElement(ExceptionAction.NonSpecific);
                         continue;
                     case LocationTag: // <location>
                         if ((parentConfigKey.Length > 0) || inLocation)
                         {
                             // The section isn't at the top level
-                            xmlUtil.SchemaErrors.AddError(
-                                new ConfigurationErrorsException(
-                                    SR.Config_location_location_not_allowed,
-                                    xmlUtil
-                                ),
-                                ExceptionAction.Global
-                            );
+                            xmlUtil
+                                .SchemaErrors
+                                .AddError(
+                                    new ConfigurationErrorsException(
+                                        SR.Config_location_location_not_allowed,
+                                        xmlUtil
+                                    ),
+                                    ExceptionAction.Global
+                                );
                             xmlUtil.StrictSkipToNextElement(ExceptionAction.NonSpecific);
                         }
                         else
@@ -2992,13 +3005,18 @@ namespace System.Configuration
                     // version N+1 config files that may introduce new sections.
                     if (!ClassFlags[ClassIgnoreLocalErrors])
                     {
-                        xmlUtil.SchemaErrors.AddError(
-                            new ConfigurationErrorsException(
-                                SR.Format(SR.Config_unrecognized_configuration_section, configKey),
-                                xmlUtil
-                            ),
-                            ExceptionAction.Local
-                        );
+                        xmlUtil
+                            .SchemaErrors
+                            .AddError(
+                                new ConfigurationErrorsException(
+                                    SR.Format(
+                                        SR.Config_unrecognized_configuration_section,
+                                        configKey
+                                    ),
+                                    xmlUtil
+                                ),
+                                ExceptionAction.Local
+                            );
                     }
 
                     VerifySectionName(tagName, xmlUtil, ExceptionAction.Local, false);
@@ -3079,13 +3097,15 @@ namespace System.Configuration
                         // We have a valid factoryRecord for a section
                         if (inLocation && (factoryRecord.AllowLocation == false))
                         {
-                            xmlUtil.SchemaErrors.AddError(
-                                new ConfigurationErrorsException(
-                                    SR.Config_section_cannot_be_used_in_location,
-                                    xmlUtil
-                                ),
-                                ExceptionAction.Local
-                            );
+                            xmlUtil
+                                .SchemaErrors
+                                .AddError(
+                                    new ConfigurationErrorsException(
+                                        SR.Config_section_cannot_be_used_in_location,
+                                        xmlUtil
+                                    ),
+                                    ExceptionAction.Local
+                                );
                         }
 
                         // Verify correctness for file inputs.
@@ -3097,13 +3117,15 @@ namespace System.Configuration
                             {
                                 if (!factoryRecord.IsIgnorable())
                                 {
-                                    xmlUtil.SchemaErrors.AddError(
-                                        new ConfigurationErrorsException(
-                                            SR.Config_sections_must_be_unique,
-                                            xmlUtil
-                                        ),
-                                        ExceptionAction.Local
-                                    );
+                                    xmlUtil
+                                        .SchemaErrors
+                                        .AddError(
+                                            new ConfigurationErrorsException(
+                                                SR.Config_sections_must_be_unique,
+                                                xmlUtil
+                                            ),
+                                            ExceptionAction.Local
+                                        );
                                 }
                             }
 
@@ -3123,10 +3145,15 @@ namespace System.Configuration
 
                         if (sectionLockMode == OverrideMode.Deny)
                         {
-                            xmlUtil.SchemaErrors.AddError(
-                                new ConfigurationErrorsException(SR.Config_section_locked, xmlUtil),
-                                ExceptionAction.Local
-                            );
+                            xmlUtil
+                                .SchemaErrors
+                                .AddError(
+                                    new ConfigurationErrorsException(
+                                        SR.Config_section_locked,
+                                        xmlUtil
+                                    ),
+                                    ExceptionAction.Local
+                                );
                         }
 
                         // check for configSource or protectionProvider
@@ -3134,9 +3161,9 @@ namespace System.Configuration
                         {
                             // First do all the attributes reading without advancing the reader.
 
-                            string configSourceAttribute = xmlUtil.Reader.GetAttribute(
-                                ConfigSourceAttribute
-                            );
+                            string configSourceAttribute = xmlUtil
+                                .Reader
+                                .GetAttribute(ConfigSourceAttribute);
                             if (configSourceAttribute != null)
                             {
                                 try
@@ -3154,19 +3181,21 @@ namespace System.Configuration
                                 if (xmlUtil.Reader.AttributeCount != 1)
                                 {
                                     // Error: elements with configSource should not have other attributes
-                                    xmlUtil.SchemaErrors.AddError(
-                                        new ConfigurationErrorsException(
-                                            SR.Config_source_syntax_error,
-                                            xmlUtil
-                                        ),
-                                        ExceptionAction.Local
-                                    );
+                                    xmlUtil
+                                        .SchemaErrors
+                                        .AddError(
+                                            new ConfigurationErrorsException(
+                                                SR.Config_source_syntax_error,
+                                                xmlUtil
+                                            ),
+                                            ExceptionAction.Local
+                                        );
                                 }
                             }
 
-                            string protectionProviderAttribute = xmlUtil.Reader.GetAttribute(
-                                ProtectionProviderAttibute
-                            );
+                            string protectionProviderAttribute = xmlUtil
+                                .Reader
+                                .GetAttribute(ProtectionProviderAttibute);
                             if (protectionProviderAttribute != null)
                             {
                                 try
@@ -3184,13 +3213,15 @@ namespace System.Configuration
                                 if (xmlUtil.Reader.AttributeCount != 1)
                                 {
                                     // Error: elements with protectionProvider should not have other attributes
-                                    xmlUtil.SchemaErrors.AddError(
-                                        new ConfigurationErrorsException(
-                                            SR.Protection_provider_syntax_error,
-                                            xmlUtil
-                                        ),
-                                        ExceptionAction.Local
-                                    );
+                                    xmlUtil
+                                        .SchemaErrors
+                                        .AddError(
+                                            new ConfigurationErrorsException(
+                                                SR.Protection_provider_syntax_error,
+                                                xmlUtil
+                                            ),
+                                            ExceptionAction.Local
+                                        );
                                 }
                             }
 
@@ -3211,13 +3242,15 @@ namespace System.Configuration
                                             continue;
 
                                         // Error: elements with configSource should not subelements other than comments
-                                        xmlUtil.SchemaErrors.AddError(
-                                            new ConfigurationErrorsException(
-                                                SR.Config_source_syntax_error,
-                                                xmlUtil
-                                            ),
-                                            ExceptionAction.Local
-                                        );
+                                        xmlUtil
+                                            .SchemaErrors
+                                            .AddError(
+                                                new ConfigurationErrorsException(
+                                                    SR.Config_source_syntax_error,
+                                                    xmlUtil
+                                                ),
+                                                ExceptionAction.Local
+                                            );
 
                                         if (t == XmlNodeType.Element)
                                             xmlUtil.StrictSkipToOurParentsEndElement(
@@ -3292,8 +3325,9 @@ namespace System.Configuration
                     }
 
                     // Get the list of errors before advancing the reader
-                    List<ConfigurationException> localErrors =
-                        xmlUtil.SchemaErrors.RetrieveAndResetLocalErrors(isFileInput);
+                    List<ConfigurationException> localErrors = xmlUtil
+                        .SchemaErrors
+                        .RetrieveAndResetLocalErrors(isFileInput);
 
                     // advance the reader to the next element
                     if (!positionedAtNextElement)
@@ -3395,13 +3429,15 @@ namespace System.Configuration
                         // Check that allowOverride and OverrideMode werent specified at the same time
                         if (overrideModeInit)
                         {
-                            xmlUtil.SchemaErrors.AddError(
-                                new ConfigurationErrorsException(
-                                    SR.Invalid_override_mode_declaration,
-                                    xmlUtil
-                                ),
-                                ExceptionAction.Global
-                            );
+                            xmlUtil
+                                .SchemaErrors
+                                .AddError(
+                                    new ConfigurationErrorsException(
+                                        SR.Invalid_override_mode_declaration,
+                                        xmlUtil
+                                    ),
+                                    ExceptionAction.Global
+                                );
                         }
                         else
                         {
@@ -3421,13 +3457,15 @@ namespace System.Configuration
                     case LocationOverrideModeAttribute:
                         if (overrideModeInit)
                         {
-                            xmlUtil.SchemaErrors.AddError(
-                                new ConfigurationErrorsException(
-                                    SR.Invalid_override_mode_declaration,
-                                    xmlUtil
-                                ),
-                                ExceptionAction.Global
-                            );
+                            xmlUtil
+                                .SchemaErrors
+                                .AddError(
+                                    new ConfigurationErrorsException(
+                                        SR.Invalid_override_mode_declaration,
+                                        xmlUtil
+                                    ),
+                                    ExceptionAction.Global
+                                );
                         }
                         else
                         {
@@ -3714,10 +3752,15 @@ namespace System.Configuration
                                         )
                                         {
                                             string parentTargetConfigPath =
-                                                parentLocationSectionRecord.SectionXmlInfo.TargetConfigPath;
+                                                parentLocationSectionRecord
+                                                    .SectionXmlInfo
+                                                    .TargetConfigPath;
 
                                             if (
-                                                parentLocationSectionRecord.SectionXmlInfo.OverrideModeSetting.IsLocked
+                                                parentLocationSectionRecord
+                                                    .SectionXmlInfo
+                                                    .OverrideModeSetting
+                                                    .IsLocked
                                                 && (
                                                     locationSectionRecord.ConfigKey
                                                     == parentLocationSectionRecord.ConfigKey
@@ -4409,7 +4452,10 @@ namespace System.Configuration
                     if (configRecord.ConfigStreamInfo.HasStreamInfos)
                     {
                         foreach (
-                            StreamInfo streamInfo in configRecord.ConfigStreamInfo.StreamInfos.Values
+                            StreamInfo streamInfo in configRecord
+                                .ConfigStreamInfo
+                                .StreamInfos
+                                .Values
                         )
                             if (
                                 streamInfo.IsMonitored

@@ -445,10 +445,12 @@ namespace System.Diagnostics
                 info.handleOwner = new EventLogInternal(compLogName, compMachineName);
                 // tell the event log system about it
                 info.waitHandle = new AutoResetEvent(false);
-                bool success = Interop.Advapi32.NotifyChangeEventLog(
-                    info.handleOwner.ReadHandle,
-                    info.waitHandle.SafeWaitHandle
-                );
+                bool success = Interop
+                    .Advapi32
+                    .NotifyChangeEventLog(
+                        info.handleOwner.ReadHandle,
+                        info.waitHandle.SafeWaitHandle
+                    );
                 if (!success)
                     throw new InvalidOperationException(
                         SR.CantMonitorEventLog,
@@ -701,21 +703,25 @@ namespace System.Diagnostics
 
                     if (hModule == null || hModule.IsInvalid)
                     {
-                        hModule = Interop.Kernel32.LoadLibraryExW(
-                            dllName,
-                            IntPtr.Zero,
-                            Interop.Kernel32.LOAD_LIBRARY_AS_DATAFILE
-                        );
+                        hModule = Interop
+                            .Kernel32
+                            .LoadLibraryExW(
+                                dllName,
+                                IntPtr.Zero,
+                                Interop.Kernel32.LOAD_LIBRARY_AS_DATAFILE
+                            );
                         MessageLibraries[dllName] = hModule;
                     }
                 }
                 else
                 {
-                    hModule = Interop.Kernel32.LoadLibraryExW(
-                        dllName,
-                        IntPtr.Zero,
-                        Interop.Kernel32.LOAD_LIBRARY_AS_DATAFILE
-                    );
+                    hModule = Interop
+                        .Kernel32
+                        .LoadLibraryExW(
+                            dllName,
+                            IntPtr.Zero,
+                            Interop.Kernel32.LOAD_LIBRARY_AS_DATAFILE
+                        );
                 }
 
                 if (hModule.IsInvalid)
@@ -762,15 +768,17 @@ namespace System.Diagnostics
             while (idx < entries.Length)
             {
                 byte[] buf = new byte[BUF_SIZE];
-                bool success = Interop.Advapi32.ReadEventLog(
-                    readHandle,
-                    Interop.Advapi32.FORWARDS_READ | Interop.Advapi32.SEEK_READ,
-                    oldestEntry + idx,
-                    buf,
-                    buf.Length,
-                    out bytesRead,
-                    out minBytesNeeded
-                );
+                bool success = Interop
+                    .Advapi32
+                    .ReadEventLog(
+                        readHandle,
+                        Interop.Advapi32.FORWARDS_READ | Interop.Advapi32.SEEK_READ,
+                        oldestEntry + idx,
+                        buf,
+                        buf.Length,
+                        out bytesRead,
+                        out minBytesNeeded
+                    );
                 if (!success)
                 {
                     error = Marshal.GetLastWin32Error();
@@ -789,15 +797,17 @@ namespace System.Diagnostics
                         {
                             buf = new byte[minBytesNeeded];
                         }
-                        success = Interop.Advapi32.ReadEventLog(
-                            readHandle,
-                            Interop.Advapi32.FORWARDS_READ | Interop.Advapi32.SEEK_READ,
-                            oldestEntry + idx,
-                            buf,
-                            buf.Length,
-                            out bytesRead,
-                            out minBytesNeeded
-                        );
+                        success = Interop
+                            .Advapi32
+                            .ReadEventLog(
+                                readHandle,
+                                Interop.Advapi32.FORWARDS_READ | Interop.Advapi32.SEEK_READ,
+                                oldestEntry + idx,
+                                buf,
+                                buf.Length,
+                                out bytesRead,
+                                out minBytesNeeded
+                            );
                         if (!success)
                             break;
                     }
@@ -959,15 +969,17 @@ namespace System.Diagnostics
             cache = new byte[BUF_SIZE];
             int bytesRead;
             int minBytesNeeded;
-            bool success = Interop.Advapi32.ReadEventLog(
-                readHandle,
-                flags,
-                index,
-                cache,
-                cache.Length,
-                out bytesRead,
-                out minBytesNeeded
-            );
+            bool success = Interop
+                .Advapi32
+                .ReadEventLog(
+                    readHandle,
+                    flags,
+                    index,
+                    cache,
+                    cache.Length,
+                    out bytesRead,
+                    out minBytesNeeded
+                );
             if (!success)
             {
                 int error = Marshal.GetLastWin32Error();
@@ -990,15 +1002,17 @@ namespace System.Diagnostics
                             cache = new byte[minBytesNeeded];
                         }
                     }
-                    success = Interop.Advapi32.ReadEventLog(
-                        readHandle,
-                        Interop.Advapi32.FORWARDS_READ | Interop.Advapi32.SEEK_READ,
-                        index,
-                        cache,
-                        cache.Length,
-                        out bytesRead,
-                        out minBytesNeeded
-                    );
+                    success = Interop
+                        .Advapi32
+                        .ReadEventLog(
+                            readHandle,
+                            Interop.Advapi32.FORWARDS_READ | Interop.Advapi32.SEEK_READ,
+                            index,
+                            cache,
+                            cache.Length,
+                            out bytesRead,
+                            out minBytesNeeded
+                        );
                 }
 
                 if (!success)
@@ -1161,10 +1175,9 @@ namespace System.Diagnostics
             bytesCached = 0;
             firstCachedEntry = -1;
 
-            SafeEventLogReadHandle handle = Interop.Advapi32.OpenEventLog(
-                currentMachineName,
-                logname
-            );
+            SafeEventLogReadHandle handle = Interop
+                .Advapi32
+                .OpenEventLog(currentMachineName, logname);
             if (handle.IsInvalid)
             {
                 Win32Exception e = null;
@@ -1189,10 +1202,9 @@ namespace System.Diagnostics
             if (sourceName == null || sourceName.Length == 0)
                 throw new ArgumentException(SR.NeedSourceToOpen);
 
-            SafeEventLogWriteHandle handle = Interop.Advapi32.RegisterEventSource(
-                currentMachineName,
-                sourceName
-            );
+            SafeEventLogWriteHandle handle = Interop
+                .Advapi32
+                .RegisterEventSource(currentMachineName, sourceName);
             if (handle.IsInvalid)
             {
                 Win32Exception e = null;
@@ -1587,17 +1599,19 @@ namespace System.Diagnostics
 
                 byte[] sid = null;
                 // actually report the event
-                bool success = Interop.Advapi32.ReportEvent(
-                    writeHandle,
-                    (short)type,
-                    category,
-                    eventID,
-                    sid,
-                    (short)strings.Length,
-                    rawData.Length,
-                    stringsRootHandle.AddrOfPinnedObject(),
-                    rawData
-                );
+                bool success = Interop
+                    .Advapi32
+                    .ReportEvent(
+                        writeHandle,
+                        (short)type,
+                        category,
+                        eventID,
+                        sid,
+                        (short)strings.Length,
+                        rawData.Length,
+                        stringsRootHandle.AddrOfPinnedObject(),
+                        rawData
+                    );
                 if (!success)
                 {
                     throw new Win32Exception();

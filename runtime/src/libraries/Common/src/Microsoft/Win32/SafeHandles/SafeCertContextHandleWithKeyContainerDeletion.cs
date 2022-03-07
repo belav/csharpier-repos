@@ -16,9 +16,9 @@ namespace Microsoft.Win32.SafeHandles
         protected sealed override bool ReleaseHandle()
         {
             using (
-                SafeCertContextHandle certContext = Interop.Crypt32.CertDuplicateCertificateContext(
-                    handle
-                )
+                SafeCertContextHandle certContext = Interop
+                    .Crypt32
+                    .CertDuplicateCertificateContext(handle)
             )
             {
                 DeleteKeyContainer(certContext);
@@ -33,23 +33,27 @@ namespace Microsoft.Win32.SafeHandles
                 return;
 
             int cb = 0;
-            bool containsPrivateKey = Interop.Crypt32.CertGetCertificateContextProperty(
-                pCertContext,
-                Interop.Crypt32.CertContextPropId.CERT_KEY_PROV_INFO_PROP_ID,
-                null,
-                ref cb
-            );
+            bool containsPrivateKey = Interop
+                .Crypt32
+                .CertGetCertificateContextProperty(
+                    pCertContext,
+                    Interop.Crypt32.CertContextPropId.CERT_KEY_PROV_INFO_PROP_ID,
+                    null,
+                    ref cb
+                );
             if (!containsPrivateKey)
                 return;
 
             byte[] provInfoAsBytes = new byte[cb];
             if (
-                !Interop.Crypt32.CertGetCertificateContextProperty(
-                    pCertContext,
-                    Interop.Crypt32.CertContextPropId.CERT_KEY_PROV_INFO_PROP_ID,
-                    provInfoAsBytes,
-                    ref cb
-                )
+                !Interop
+                    .Crypt32
+                    .CertGetCertificateContextProperty(
+                        pCertContext,
+                        Interop.Crypt32.CertContextPropId.CERT_KEY_PROV_INFO_PROP_ID,
+                        provInfoAsBytes,
+                        ref cb
+                    )
             )
                 return;
             unsafe
@@ -97,13 +101,15 @@ namespace Microsoft.Win32.SafeHandles
                                 & Interop.Crypt32.CryptAcquireContextFlags.CRYPT_MACHINE_KEYSET
                             ) | Interop.Crypt32.CryptAcquireContextFlags.CRYPT_DELETEKEYSET;
                         IntPtr hProv;
-                        _ = Interop.cryptoapi.CryptAcquireContext(
-                            out hProv,
-                            pProvInfo->pwszContainerName,
-                            pProvInfo->pwszProvName,
-                            pProvInfo->dwProvType,
-                            flags
-                        );
+                        _ = Interop
+                            .cryptoapi
+                            .CryptAcquireContext(
+                                out hProv,
+                                pProvInfo->pwszContainerName,
+                                pProvInfo->pwszProvName,
+                                pProvInfo->dwProvType,
+                                flags
+                            );
 
                         // Called CryptAcquireContext solely for the side effect of deleting the key containers. When called with these flags, no actual
                         // hProv is returned (so there's nothing to clean up.)

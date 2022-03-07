@@ -36,7 +36,8 @@ namespace System.Collections.Immutable.Tests
         [Fact]
         public void ChangeUnorderedEqualityComparer()
         {
-            var ordinalSet = ImmutableHashSet<string>.Empty
+            var ordinalSet = ImmutableHashSet<string>
+                .Empty
                 .WithComparer(StringComparer.Ordinal)
                 .Add("apple")
                 .Add("APPLE");

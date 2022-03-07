@@ -89,16 +89,18 @@ internal static class DebugProxyLauncher
             PassThroughConsoleOutput(debugProxyProcess);
             CompleteTaskWhenServerIsReady(debugProxyProcess, tcs);
 
-            new CancellationTokenSource(DebugProxyLaunchTimeout).Token.Register(
-                () =>
-                {
-                    tcs.TrySetException(
-                        new TimeoutException(
-                            $"Failed to start the debug proxy within the timeout period of {DebugProxyLaunchTimeout.TotalSeconds} seconds."
-                        )
-                    );
-                }
-            );
+            new CancellationTokenSource(DebugProxyLaunchTimeout)
+                .Token
+                .Register(
+                    () =>
+                    {
+                        tcs.TrySetException(
+                            new TimeoutException(
+                                $"Failed to start the debug proxy within the timeout period of {DebugProxyLaunchTimeout.TotalSeconds} seconds."
+                            )
+                        );
+                    }
+                );
         }
 
         return await tcs.Task;
@@ -112,7 +114,8 @@ internal static class DebugProxyLauncher
         // shouldn't be trying to use the same port numbers, etc. In particular we need to break
         // the association with IISExpress and the MS-ASPNETCORE-TOKEN check.
         // For more context on this, see https://github.com/dotnet/aspnetcore/issues/20308.
-        var keysToRemove = environment.Keys
+        var keysToRemove = environment
+            .Keys
             .Where(key => key.StartsWith("ASPNETCORE_", StringComparison.Ordinal))
             .ToList();
         foreach (var key in keysToRemove)

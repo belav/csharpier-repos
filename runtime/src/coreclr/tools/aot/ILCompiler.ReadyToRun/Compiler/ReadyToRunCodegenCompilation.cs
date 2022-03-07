@@ -100,8 +100,9 @@ namespace ILCompiler
             // disallow inlining because getFunctionEntryPoint will do the right thing.
             if (callee.IsVirtual)
             {
-                MethodDesc calleeMethodImpl =
-                    callee.OwningType.FindVirtualFunctionTargetMethodOnObjectType(callee);
+                MethodDesc calleeMethodImpl = callee
+                    .OwningType
+                    .FindVirtualFunctionTargetMethodOnObjectType(callee);
                 if (calleeMethodImpl != callee)
                 {
                     return false;
@@ -506,11 +507,13 @@ namespace ILCompiler
                 componentGraph.AddRoot(componentFactory.Win32ResourcesNode, "Win32 resources");
             }
             componentGraph.ComputeMarkedNodes();
-            componentFactory.Header.Add(
-                Internal.Runtime.ReadyToRunSectionType.OwnerCompositeExecutable,
-                ownerExecutableNode,
-                ownerExecutableNode
-            );
+            componentFactory
+                .Header
+                .Add(
+                    Internal.Runtime.ReadyToRunSectionType.OwnerCompositeExecutable,
+                    ownerExecutableNode,
+                    ownerExecutableNode
+                );
             ReadyToRunObjectWriter.EmitObject(
                 outputFile,
                 componentModule: inputModule,
@@ -613,9 +616,9 @@ namespace ILCompiler
                 // If there are multiple inexact compilation units in the layout of the type, then the exact offset
                 // of a derived given field is unknown as there may or may not be alignment inserted between a type and its base
                 if (
-                    CompilationModuleGroup.TypeLayoutCompilationUnits(
-                        type
-                    ).HasMultipleInexactCompilationUnits
+                    CompilationModuleGroup
+                        .TypeLayoutCompilationUnits(type)
+                        .HasMultipleInexactCompilationUnits
                 )
                     return false;
 
@@ -655,9 +658,11 @@ namespace ILCompiler
                         if (dependency is DeferredTillPhaseNode deferredPhaseNode)
                         {
                             if (Logger.IsVerbose)
-                                _logger.Writer.WriteLine(
-                                    $"Moved to phase {_nodeFactory.CompilationCurrentPhase}"
-                                );
+                                _logger
+                                    .Writer
+                                    .WriteLine(
+                                        $"Moved to phase {_nodeFactory.CompilationCurrentPhase}"
+                                    );
                             deferredPhaseNode.NotifyCurrentPhase(
                                 _nodeFactory.CompilationCurrentPhase
                             );
@@ -683,9 +688,11 @@ namespace ILCompiler
 
                     if (_printReproInstructions != null)
                     {
-                        Logger.Writer.WriteLine(
-                            $"Single method repro args:{_printReproInstructions(method)}"
-                        );
+                        Logger
+                            .Writer
+                            .WriteLine(
+                                $"Single method repro args:{_printReproInstructions(method)}"
+                            );
                     }
 
                     try
@@ -705,23 +712,29 @@ namespace ILCompiler
                     {
                         // If compilation fails, don't emit code for this method. It will be Jitted at runtime
                         if (Logger.IsVerbose)
-                            Logger.Writer.WriteLine(
-                                $"Warning: Method `{method}` was not compiled because: {ex.Message}"
-                            );
+                            Logger
+                                .Writer
+                                .WriteLine(
+                                    $"Warning: Method `{method}` was not compiled because: {ex.Message}"
+                                );
                     }
                     catch (RequiresRuntimeJitException ex)
                     {
                         if (Logger.IsVerbose)
-                            Logger.Writer.WriteLine(
-                                $"Info: Method `{method}` was not compiled because `{ex.Message}` requires runtime JIT"
-                            );
+                            Logger
+                                .Writer
+                                .WriteLine(
+                                    $"Info: Method `{method}` was not compiled because `{ex.Message}` requires runtime JIT"
+                                );
                     }
                     catch (CodeGenerationFailedException ex) when (_resilient)
                     {
                         if (Logger.IsVerbose)
-                            Logger.Writer.WriteLine(
-                                $"Warning: Method `{method}` was not compiled because `{ex.Message}` requires runtime JIT"
-                            );
+                            Logger
+                                .Writer
+                                .WriteLine(
+                                    $"Warning: Method `{method}` was not compiled because `{ex.Message}` requires runtime JIT"
+                                );
                     }
                 };
 

@@ -89,10 +89,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Preview
             _helpString = helpString ?? throw new ArgumentNullException(nameof(helpString));
             _description = description ?? throw new ArgumentNullException(nameof(description));
             _newSolution =
-                newSolution.WithMergedLinkedFileChangesAsync(
-                    oldSolution,
-                    cancellationToken: CancellationToken.None
-                ).Result;
+                newSolution
+                    .WithMergedLinkedFileChangesAsync(
+                        oldSolution,
+                        cancellationToken: CancellationToken.None
+                    )
+                    .Result;
             _oldSolution = oldSolution;
             _editorFactory = componentModel.GetService<IVsEditorAdaptersFactoryService>();
             _componentModel = componentModel;
@@ -323,22 +325,25 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Preview
         private static void UpdateTextViewOptions(IWpfTextView textView)
         {
             // Do not show the IndentationCharacterMargin, which controls spaces vs. tabs etc.
-            textView.Options.SetOptionValue(
-                DefaultTextViewHostOptions.IndentationCharacterMarginOptionId,
-                false
-            );
+            textView
+                .Options
+                .SetOptionValue(
+                    DefaultTextViewHostOptions.IndentationCharacterMarginOptionId,
+                    false
+                );
 
             // Do not show LineEndingMargin, which determines EOL and EOF settings.
-            textView.Options.SetOptionValue(
-                DefaultTextViewHostOptions.LineEndingMarginOptionId,
-                false
-            );
+            textView
+                .Options
+                .SetOptionValue(DefaultTextViewHostOptions.LineEndingMarginOptionId, false);
 
             // Do not show the "no issues found" health indicator for previews.
-            textView.Options.SetOptionValue(
-                DefaultTextViewHostOptions.EnableFileHealthIndicatorOptionId,
-                false
-            );
+            textView
+                .Options
+                .SetOptionValue(
+                    DefaultTextViewHostOptions.EnableFileHealthIndicatorOptionId,
+                    false
+                );
         }
 
         // When the dialog is first instantiated, the IVsTextView it contains may

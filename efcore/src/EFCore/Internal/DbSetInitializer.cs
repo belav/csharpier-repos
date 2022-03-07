@@ -41,10 +41,12 @@ namespace Microsoft.EntityFrameworkCore.Internal
                 var setInfo in _setFinder.FindSets(context.GetType()).Where(p => p.Setter != null)
             )
             {
-                setInfo.Setter!.SetClrValue(
-                    context,
-                    ((IDbSetCache)context).GetOrAddSet(_setSource, setInfo.Type)
-                );
+                setInfo
+                    .Setter!
+                    .SetClrValue(
+                        context,
+                        ((IDbSetCache)context).GetOrAddSet(_setSource, setInfo.Type)
+                    );
             }
         }
     }

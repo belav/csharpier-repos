@@ -87,20 +87,24 @@ namespace System.Web.Mvc.Test
         public void NullViewLocationCacheReturnsNullLocations()
         {
             // Act
-            DefaultViewLocationCache.Null.InsertViewLocation(
-                null /* httpContext */
-                ,
-                "foo",
-                "fooPath"
-            );
+            DefaultViewLocationCache
+                .Null
+                .InsertViewLocation(
+                    null /* httpContext */
+                    ,
+                    "foo",
+                    "fooPath"
+                );
 
             // Assert
             Assert.Null(
-                DefaultViewLocationCache.Null.GetViewLocation(
-                    null /* httpContext */
-                    ,
-                    "foo"
-                )
+                DefaultViewLocationCache
+                    .Null
+                    .GetViewLocation(
+                        null /* httpContext */
+                        ,
+                        "foo"
+                    )
             );
         }
     }

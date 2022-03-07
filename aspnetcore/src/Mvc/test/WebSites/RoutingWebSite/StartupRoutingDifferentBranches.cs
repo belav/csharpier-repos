@@ -28,17 +28,21 @@ public class StartupRoutingDifferentBranches
             .AddRazorPagesOptions(
                 options =>
                 {
-                    options.Conventions.AddPageRoute(
-                        "/PageRouteTransformer/PageWithConfiguredRoute",
-                        "/PageRouteTransformer/NewConventionRoute/{id?}"
-                    );
-                    options.Conventions.AddFolderRouteModelConvention(
-                        "/PageRouteTransformer",
-                        model =>
-                        {
-                            pageRouteTransformerConvention.Apply(model);
-                        }
-                    );
+                    options
+                        .Conventions
+                        .AddPageRoute(
+                            "/PageRouteTransformer/PageWithConfiguredRoute",
+                            "/PageRouteTransformer/NewConventionRoute/{id?}"
+                        );
+                    options
+                        .Conventions
+                        .AddFolderRouteModelConvention(
+                            "/PageRouteTransformer",
+                            model =>
+                            {
+                                pageRouteTransformerConvention.Apply(model);
+                            }
+                        );
                 }
             );
 
@@ -118,12 +122,14 @@ public class StartupRoutingDifferentBranches
     protected virtual void ConfigureMvcOptions(MvcOptions options)
     {
         // Add route token transformer to one controller
-        options.Conventions.Add(
-            new ControllerRouteTokenTransformerConvention(
-                typeof(ParameterTransformerController),
-                new SlugifyParameterTransformer()
-            )
-        );
+        options
+            .Conventions
+            .Add(
+                new ControllerRouteTokenTransformerConvention(
+                    typeof(ParameterTransformerController),
+                    new SlugifyParameterTransformer()
+                )
+            );
     }
 
     protected virtual void ConfigureRoutingServices(IServiceCollection services)

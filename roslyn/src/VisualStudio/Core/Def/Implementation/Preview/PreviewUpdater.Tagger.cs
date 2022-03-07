@@ -43,9 +43,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Preview
                 NormalizedSnapshotSpanCollection spans
             )
             {
-                var lines = _textBuffer.CurrentSnapshot.Lines.Where(
-                    line => line.Extent.OverlapsWith(_span)
-                );
+                var lines = _textBuffer
+                    .CurrentSnapshot
+                    .Lines
+                    .Where(line => line.Extent.OverlapsWith(_span));
 
                 foreach (var line in lines)
                 {

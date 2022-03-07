@@ -127,7 +127,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal
         )
         {
             var (throughput, wrapper) = parameters;
-            var response = await wrapper.Client
+            var response = await wrapper
+                .Client
                 .CreateDatabaseIfNotExistsAsync(
                     wrapper._databaseId,
                     throughput,
@@ -167,7 +168,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal
             CancellationToken cancellationToken = default
         )
         {
-            using var response = await wrapper.Client
+            using var response = await wrapper
+                .Client
                 .GetDatabase(wrapper._databaseId)
                 .DeleteStreamAsync(cancellationToken: cancellationToken)
                 .ConfigureAwait(false);
@@ -219,7 +221,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal
         {
             var parameters = parametersTuple.Parameters;
             var wrapper = parametersTuple.Wrapper;
-            using var response = await wrapper.Client
+            using var response = await wrapper
+                .Client
                 .GetDatabase(wrapper._databaseId)
                 .CreateContainerStreamAsync(
                     new Azure.Cosmos.ContainerProperties(
@@ -297,7 +300,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal
 
             var entry = parameters.Entry;
             var wrapper = parameters.Wrapper;
-            var container = wrapper.Client
+            var container = wrapper
+                .Client
                 .GetDatabase(wrapper._databaseId)
                 .GetContainer(parameters.ContainerId);
             var itemRequestOptions = CreateItemRequestOptions(
@@ -315,14 +319,16 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal
                 )
                 .ConfigureAwait(false);
 
-            wrapper._commandLogger.ExecutedCreateItem(
-                response.Diagnostics.GetClientElapsedTime(),
-                response.Headers.RequestCharge,
-                response.Headers.ActivityId,
-                parameters.Document["id"].ToString(),
-                parameters.ContainerId,
-                partitionKey
-            );
+            wrapper
+                ._commandLogger
+                .ExecutedCreateItem(
+                    response.Diagnostics.GetClientElapsedTime(),
+                    response.Headers.RequestCharge,
+                    response.Headers.ActivityId,
+                    parameters.Document["id"].ToString(),
+                    parameters.ContainerId,
+                    partitionKey
+                );
 
             ProcessResponse(response, entry);
 
@@ -391,7 +397,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal
 
             var entry = parameters.Entry;
             var wrapper = parameters.Wrapper;
-            var container = wrapper.Client
+            var container = wrapper
+                .Client
                 .GetDatabase(wrapper._databaseId)
                 .GetContainer(parameters.ContainerId);
             var itemRequestOptions = CreateItemRequestOptions(
@@ -410,14 +417,16 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal
                 )
                 .ConfigureAwait(false);
 
-            wrapper._commandLogger.ExecutedReplaceItem(
-                response.Diagnostics.GetClientElapsedTime(),
-                response.Headers.RequestCharge,
-                response.Headers.ActivityId,
-                parameters.ResourceId,
-                parameters.ContainerId,
-                partitionKey
-            );
+            wrapper
+                ._commandLogger
+                .ExecutedReplaceItem(
+                    response.Diagnostics.GetClientElapsedTime(),
+                    response.Headers.RequestCharge,
+                    response.Headers.ActivityId,
+                    parameters.ResourceId,
+                    parameters.ContainerId,
+                    partitionKey
+                );
 
             ProcessResponse(response, entry);
 
@@ -469,7 +478,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal
         {
             var entry = parameters.Entry;
             var wrapper = parameters.Wrapper;
-            var items = wrapper.Client
+            var items = wrapper
+                .Client
                 .GetDatabase(wrapper._databaseId)
                 .GetContainer(parameters.ContainerId);
 
@@ -488,14 +498,16 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal
                 )
                 .ConfigureAwait(false);
 
-            wrapper._commandLogger.ExecutedDeleteItem(
-                response.Diagnostics.GetClientElapsedTime(),
-                response.Headers.RequestCharge,
-                response.Headers.ActivityId,
-                parameters.ResourceId,
-                parameters.ContainerId,
-                partitionKey
-            );
+            wrapper
+                ._commandLogger
+                .ExecutedDeleteItem(
+                    response.Diagnostics.GetClientElapsedTime(),
+                    response.Headers.RequestCharge,
+                    response.Headers.ActivityId,
+                    parameters.ResourceId,
+                    parameters.ContainerId,
+                    partitionKey
+                );
 
             ProcessResponse(response, entry);
 
@@ -531,9 +543,9 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal
                 {
                     case EntityState.Modified:
                     {
-                        var jObjectProperty = entry.EntityType.FindProperty(
-                            StoreKeyConvention.JObjectPropertyName
-                        );
+                        var jObjectProperty = entry
+                            .EntityType
+                            .FindProperty(StoreKeyConvention.JObjectPropertyName);
                         enabledContentResponse =
                             (jObjectProperty?.ValueGenerated & ValueGenerated.OnUpdate)
                             == ValueGenerated.OnUpdate;
@@ -541,9 +553,9 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal
                     }
                     case EntityState.Added:
                     {
-                        var jObjectProperty = entry.EntityType.FindProperty(
-                            StoreKeyConvention.JObjectPropertyName
-                        );
+                        var jObjectProperty = entry
+                            .EntityType
+                            .FindProperty(StoreKeyConvention.JObjectPropertyName);
                         enabledContentResponse =
                             (jObjectProperty?.ValueGenerated & ValueGenerated.OnAdd)
                             == ValueGenerated.OnAdd;
@@ -590,9 +602,9 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal
                 entry.SetStoreGeneratedValue(etagProperty, response.Headers.ETag);
             }
 
-            var jObjectProperty = entry.EntityType.FindProperty(
-                StoreKeyConvention.JObjectPropertyName
-            );
+            var jObjectProperty = entry
+                .EntityType
+                .FindProperty(StoreKeyConvention.JObjectPropertyName);
             if (
                 jObjectProperty != null
                 && jObjectProperty.ValueGenerated == ValueGenerated.OnAddOrUpdate
@@ -723,7 +735,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal
         )
         {
             var (containerId, partitionKey, resourceId, wrapper) = parameters;
-            var container = wrapper.Client
+            var container = wrapper
+                .Client
                 .GetDatabase(wrapper._databaseId)
                 .GetContainer(containerId);
 
@@ -769,10 +782,12 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal
             var container = Client.GetDatabase(_databaseId).GetContainer(containerId);
             var queryDefinition = new QueryDefinition(query.Query);
 
-            queryDefinition = query.Parameters.Aggregate(
-                queryDefinition,
-                (current, parameter) => current.WithParameter(parameter.Name, parameter.Value)
-            );
+            queryDefinition = query
+                .Parameters
+                .Aggregate(
+                    queryDefinition,
+                    (current, parameter) => current.WithParameter(parameter.Name, parameter.Value)
+                );
 
             if (string.IsNullOrEmpty(partitionKey))
             {
@@ -902,14 +917,16 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal
 
                         _responseMessage = _query.ReadNextAsync().GetAwaiter().GetResult();
 
-                        _cosmosClientWrapper._commandLogger.ExecutedReadNext(
-                            _responseMessage.Diagnostics.GetClientElapsedTime(),
-                            _responseMessage.Headers.RequestCharge,
-                            _responseMessage.Headers.ActivityId,
-                            _containerId,
-                            _partitionKey,
-                            _cosmosSqlQuery
-                        );
+                        _cosmosClientWrapper
+                            ._commandLogger
+                            .ExecutedReadNext(
+                                _responseMessage.Diagnostics.GetClientElapsedTime(),
+                                _responseMessage.Headers.RequestCharge,
+                                _responseMessage.Headers.ActivityId,
+                                _containerId,
+                                _partitionKey,
+                                _cosmosSqlQuery
+                            );
 
                         _responseMessage.EnsureSuccessStatusCode();
 
@@ -1029,14 +1046,16 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal
                             .ReadNextAsync(_cancellationToken)
                             .ConfigureAwait(false);
 
-                        _cosmosClientWrapper._commandLogger.ExecutedReadNext(
-                            _responseMessage.Diagnostics.GetClientElapsedTime(),
-                            _responseMessage.Headers.RequestCharge,
-                            _responseMessage.Headers.ActivityId,
-                            _containerId,
-                            _partitionKey,
-                            _cosmosSqlQuery
-                        );
+                        _cosmosClientWrapper
+                            ._commandLogger
+                            .ExecutedReadNext(
+                                _responseMessage.Diagnostics.GetClientElapsedTime(),
+                                _responseMessage.Headers.RequestCharge,
+                                _responseMessage.Headers.ActivityId,
+                                _containerId,
+                                _partitionKey,
+                                _cosmosSqlQuery
+                            );
 
                         _responseMessage.EnsureSuccessStatusCode();
 

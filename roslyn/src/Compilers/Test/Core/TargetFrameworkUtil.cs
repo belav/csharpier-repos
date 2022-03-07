@@ -272,7 +272,8 @@ namespace Roslyn.Test.Utilities
             targetFramework switch
             {
                 // Primary
-                TargetFramework.Empty => ImmutableArray<MetadataReference>.Empty,
+                TargetFramework.Empty
+                  => ImmutableArray<MetadataReference>.Empty,
                 TargetFramework.NetStandard20 => NetStandard20References,
                 TargetFramework.NetCoreApp
                 or TargetFramework.Net50
@@ -283,7 +284,8 @@ namespace Roslyn.Test.Utilities
                 TargetFramework.NetFramework => NetFramework.StandardReferences,
 
                 // Legacy we should be phasing out
-                TargetFramework.Mscorlib40 => Mscorlib40References,
+                TargetFramework.Mscorlib40
+                  => Mscorlib40References,
                 TargetFramework.Mscorlib40Extended => Mscorlib40ExtendedReferences,
                 TargetFramework.Mscorlib40AndSystemCore => Mscorlib40andSystemCoreReferences,
                 TargetFramework.Mscorlib40AndVBRuntime => Mscorlib40andVBRuntimeReferences,

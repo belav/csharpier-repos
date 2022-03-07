@@ -355,16 +355,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             switch (symbol.Kind)
             {
                 case SymbolKind.Method:
-                    return ((MethodSymbol)symbol).TypeArgumentsWithAnnotations.SelectAsArray(
-                        TypeMap.AsTypeSymbol
-                    );
+                    return ((MethodSymbol)symbol)
+                        .TypeArgumentsWithAnnotations
+                        .SelectAsArray(TypeMap.AsTypeSymbol);
                 case SymbolKind.NamedType:
                 case SymbolKind.ErrorType:
-                    return (
-                        (NamedTypeSymbol)symbol
-                    ).TypeArgumentsWithAnnotationsNoUseSiteDiagnostics.SelectAsArray(
-                        TypeMap.AsTypeSymbol
-                    );
+                    return ((NamedTypeSymbol)symbol)
+                        .TypeArgumentsWithAnnotationsNoUseSiteDiagnostics
+                        .SelectAsArray(TypeMap.AsTypeSymbol);
                 case SymbolKind.Field:
                 case SymbolKind.Property:
                 case SymbolKind.Event:
@@ -638,20 +636,17 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             switch (member.Kind)
             {
                 case SymbolKind.Method:
-                    return ((MethodSymbol)member).ExplicitInterfaceImplementations.Cast<
-                        MethodSymbol,
-                        Symbol
-                    >();
+                    return ((MethodSymbol)member)
+                        .ExplicitInterfaceImplementations
+                        .Cast<MethodSymbol, Symbol>();
                 case SymbolKind.Property:
-                    return ((PropertySymbol)member).ExplicitInterfaceImplementations.Cast<
-                        PropertySymbol,
-                        Symbol
-                    >();
+                    return ((PropertySymbol)member)
+                        .ExplicitInterfaceImplementations
+                        .Cast<PropertySymbol, Symbol>();
                 case SymbolKind.Event:
-                    return ((EventSymbol)member).ExplicitInterfaceImplementations.Cast<
-                        EventSymbol,
-                        Symbol
-                    >();
+                    return ((EventSymbol)member)
+                        .ExplicitInterfaceImplementations
+                        .Cast<EventSymbol, Symbol>();
                 default:
                     return ImmutableArray<Symbol>.Empty;
             }

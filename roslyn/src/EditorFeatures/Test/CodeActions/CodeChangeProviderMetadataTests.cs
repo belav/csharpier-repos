@@ -224,9 +224,11 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
         {
             foreach (var part in configuration.Parts)
             {
-                var export = part.Definition.ExportedTypes.FirstOrDefault(
-                    exportedType => exportedTypeName.Equals(exportedType.ContractName)
-                );
+                var export = part.Definition
+                    .ExportedTypes
+                    .FirstOrDefault(
+                        exportedType => exportedTypeName.Equals(exportedType.ContractName)
+                    );
 
                 if (export != null)
                 {

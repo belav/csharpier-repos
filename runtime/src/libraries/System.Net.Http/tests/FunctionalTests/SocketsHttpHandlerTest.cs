@@ -142,14 +142,12 @@ namespace System.Net.Http.Functional.Tests
                 {
                     using (HttpClient client = CreateHttpClient())
                     {
-                        client.DefaultRequestHeaders.TryAddWithoutValidation(
-                            "Accept-Language",
-                            "en-US,en;q=0.5"
-                        ); // validation would add spaces
-                        client.DefaultRequestHeaders.TryAddWithoutValidation(
-                            "From",
-                            "invalidemail"
-                        ); // would fail to parse if validated
+                        client
+                            .DefaultRequestHeaders
+                            .TryAddWithoutValidation("Accept-Language", "en-US,en;q=0.5"); // validation would add spaces
+                        client
+                            .DefaultRequestHeaders
+                            .TryAddWithoutValidation("From", "invalidemail"); // would fail to parse if validated
 
                         var m = new HttpRequestMessage(HttpMethod.Get, uri)
                         {
@@ -491,9 +489,9 @@ namespace System.Net.Http.Functional.Tests
                         ValidateResponseHeaders(response1, totalSize, mode);
 
                         // Read part but not all of response
-                        Stream responseStream = await response1.Content.ReadAsStreamAsync(
-                            TestAsync
-                        );
+                        Stream responseStream = await response1
+                            .Content
+                            .ReadAsStreamAsync(TestAsync);
                         await ReadToByteCount(responseStream, readSize);
 
                         response1.Dispose();
@@ -988,10 +986,9 @@ namespace System.Net.Http.Functional.Tests
                             response.TrailingHeaders.GetValues("MyCoolTrailerHeader")
                         );
                         Assert.False(
-                            response.TrailingHeaders.TryGetValues(
-                                name,
-                                out IEnumerable<string> values
-                            )
+                            response
+                                .TrailingHeaders
+                                .TryGetValues(name, out IEnumerable<string> values)
                         );
                         Assert.Contains("Loopback", response.TrailingHeaders.GetValues("Server"));
                     }
@@ -1497,9 +1494,9 @@ namespace System.Net.Http.Functional.Tests
                                 );
 
                                 using (
-                                    Stream clientStream = await (
-                                        await getResponseTask
-                                    ).Content.ReadAsStreamAsync(TestAsync)
+                                    Stream clientStream = await (await getResponseTask)
+                                        .Content
+                                        .ReadAsStreamAsync(TestAsync)
                                 )
                                 {
                                     // Boolean properties returning correct values
@@ -1708,9 +1705,11 @@ namespace System.Net.Http.Functional.Tests
                                     await clientStream.FlushAsync();
 
                                     // Validate reading APIs on clientStream
-                                    await connection.Stream.WriteAsync(
-                                        Encoding.ASCII.GetBytes("abcdefghijklmnopqrstuvwxyz")
-                                    );
+                                    await connection
+                                        .Stream
+                                        .WriteAsync(
+                                            Encoding.ASCII.GetBytes("abcdefghijklmnopqrstuvwxyz")
+                                        );
                                     var buffer = new byte[1];
 
                                     Assert.Equal('a', clientStream.ReadByte());
@@ -2754,16 +2753,18 @@ namespace System.Net.Http.Functional.Tests
     [SkipOnPlatform(TestPlatforms.Browser, "Headers.Location are not supported on Browser")]
     public sealed class SocketsHttpHandlerTest_LocationHeader
     {
-        private static readonly byte[] s_redirectResponseBefore = Encoding.ASCII.GetBytes(
-            "HTTP/1.1 301 Moved Permanently\r\n"
-                + "Connection: close\r\n"
-                + "Transfer-Encoding: chunked\r\n"
-                + "Location: "
-        );
+        private static readonly byte[] s_redirectResponseBefore = Encoding
+            .ASCII
+            .GetBytes(
+                "HTTP/1.1 301 Moved Permanently\r\n"
+                    + "Connection: close\r\n"
+                    + "Transfer-Encoding: chunked\r\n"
+                    + "Location: "
+            );
 
-        private static readonly byte[] s_redirectResponseAfter = Encoding.ASCII.GetBytes(
-            "\r\n" + "Server: Loopback\r\n" + "\r\n" + "0\r\n\r\n"
-        );
+        private static readonly byte[] s_redirectResponseAfter = Encoding
+            .ASCII
+            .GetBytes("\r\n" + "Server: Loopback\r\n" + "\r\n" + "0\r\n\r\n");
 
         [Theory]
         // US-ASCII only
@@ -4095,8 +4096,13 @@ namespace System.Net.Http.Functional.Tests
                         );
 
                         using (
-                            X509Certificate2 cert =
-                                System.Net.Test.Common.Configuration.Certificates.GetServerCertificate()
+                            X509Certificate2 cert = System
+                                .Net
+                                .Test
+                                .Common
+                                .Configuration
+                                .Certificates
+                                .GetServerCertificate()
                         )
                         {
                             SslServerAuthenticationOptions options =
@@ -4262,9 +4268,9 @@ namespace System.Net.Http.Functional.Tests
 
                         MemoryStream memoryStream = new MemoryStream();
                         memoryStream.Write(
-                            Encoding.UTF8.GetBytes(
-                                "HTTP/1.1 200 OK\r\nContent-Length: 3\r\n\r\nfoo"
-                            )
+                            Encoding
+                                .UTF8
+                                .GetBytes("HTTP/1.1 200 OK\r\nContent-Length: 3\r\n\r\nfoo")
                         );
                         memoryStream.Seek(0, SeekOrigin.Begin);
 

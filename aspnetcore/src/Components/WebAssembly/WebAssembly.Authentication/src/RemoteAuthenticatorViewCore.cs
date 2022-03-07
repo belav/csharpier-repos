@@ -412,9 +412,11 @@ public class RemoteAuthenticatorViewCore<TAuthenticationState> : ComponentBase
     {
         var loginUrl = Navigation.ToAbsoluteUri(ApplicationPaths.LogInPath).PathAndQuery;
         var registerUrl =
-            Navigation.ToAbsoluteUri(
-                $"{ApplicationPaths.RemoteRegisterPath}?returnUrl={Uri.EscapeDataString(loginUrl)}"
-            ).PathAndQuery;
+            Navigation
+                .ToAbsoluteUri(
+                    $"{ApplicationPaths.RemoteRegisterPath}?returnUrl={Uri.EscapeDataString(loginUrl)}"
+                )
+                .PathAndQuery;
 
         return JS.InvokeVoidAsync("location.replace", registerUrl);
     }

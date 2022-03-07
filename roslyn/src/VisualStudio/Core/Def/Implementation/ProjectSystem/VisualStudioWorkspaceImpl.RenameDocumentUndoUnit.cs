@@ -34,15 +34,15 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
             {
                 // Using FirstOrDefault because we only need to rename one document, as that will get
                 // applied to linked files.
-                var documentId = _workspace.CurrentSolution
+                var documentId = _workspace
+                    .CurrentSolution
                     .GetDocumentIdsWithFilePath(_filePath)
                     .FirstOrDefault();
                 if (documentId != null)
                 {
-                    var updatedSolution = _workspace.CurrentSolution.WithDocumentName(
-                        documentId,
-                        _toName
-                    );
+                    var updatedSolution = _workspace
+                        .CurrentSolution
+                        .WithDocumentName(documentId, _toName);
                     _workspace.TryApplyChanges(updatedSolution);
                 }
             }

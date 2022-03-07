@@ -133,19 +133,29 @@ namespace DependencyLogViewer
             conditionalNode.Dependencies.Add(new KeyValuePair<Node, string>(dependee, reason));
             dependee.Dependents.Add(new KeyValuePair<Node, string>(conditionalNode, reason));
 
-            reason1Node.Dependencies.Add(
-                new KeyValuePair<Node, string>(conditionalNode, "Reason1Conditional - " + reason)
-            );
-            conditionalNode.Dependents.Add(
-                new KeyValuePair<Node, string>(reason1Node, "Reason1Conditional - " + reason)
-            );
+            reason1Node
+                .Dependencies
+                .Add(
+                    new KeyValuePair<Node, string>(
+                        conditionalNode,
+                        "Reason1Conditional - " + reason
+                    )
+                );
+            conditionalNode
+                .Dependents
+                .Add(new KeyValuePair<Node, string>(reason1Node, "Reason1Conditional - " + reason));
 
-            reason2Node.Dependencies.Add(
-                new KeyValuePair<Node, string>(conditionalNode, "Reason2Conditional - " + reason)
-            );
-            conditionalNode.Dependents.Add(
-                new KeyValuePair<Node, string>(reason2Node, "Reason2Conditional - " + reason)
-            );
+            reason2Node
+                .Dependencies
+                .Add(
+                    new KeyValuePair<Node, string>(
+                        conditionalNode,
+                        "Reason2Conditional - " + reason
+                    )
+                );
+            conditionalNode
+                .Dependents
+                .Add(new KeyValuePair<Node, string>(reason2Node, "Reason2Conditional - " + reason));
         }
     }
 
@@ -252,64 +262,76 @@ namespace DependencyLogViewer
             using (session)
             {
                 session.BufferSizeMB = 1024;
-                session.Source.Dynamic.AddCallbackForProviderEvent(
-                    "Microsoft-ILCompiler-DependencyGraph",
-                    "Graph",
-                    delegate(TraceEvent data)
-                    {
-                        GraphEvent ge = new GraphEvent();
-                        ge.EventType = GraphEventType.NewGraph;
-                        ge.Pid = data.ProcessID;
-                        ge.Id = (int)data.PayloadValue(0);
-                        ge.Str = (string)data.PayloadValue(1);
-                        events.Enqueue(ge);
-                    }
-                );
-                session.Source.Dynamic.AddCallbackForProviderEvent(
-                    "Microsoft-ILCompiler-DependencyGraph",
-                    "Node",
-                    delegate(TraceEvent data)
-                    {
-                        GraphEvent ge = new GraphEvent();
-                        ge.EventType = GraphEventType.NewNode;
-                        ge.Pid = data.ProcessID;
-                        ge.Id = (int)data.PayloadValue(0);
-                        ge.Num1 = (int)data.PayloadValue(1);
-                        ge.Str = (string)data.PayloadValue(2);
-                        events.Enqueue(ge);
-                    }
-                );
-                session.Source.Dynamic.AddCallbackForProviderEvent(
-                    "Microsoft-ILCompiler-DependencyGraph",
-                    "Edge",
-                    delegate(TraceEvent data)
-                    {
-                        GraphEvent ge = new GraphEvent();
-                        ge.EventType = GraphEventType.NewEdge;
-                        ge.Pid = data.ProcessID;
-                        ge.Id = (int)data.PayloadValue(0);
-                        ge.Num1 = (int)data.PayloadValue(1);
-                        ge.Num2 = (int)data.PayloadValue(2);
-                        ge.Str = (string)data.PayloadValue(3);
-                        events.Enqueue(ge);
-                    }
-                );
-                session.Source.Dynamic.AddCallbackForProviderEvent(
-                    "Microsoft-ILCompiler-DependencyGraph",
-                    "ConditionalEdge",
-                    delegate(TraceEvent data)
-                    {
-                        GraphEvent ge = new GraphEvent();
-                        ge.EventType = GraphEventType.NewConditionalEdge;
-                        ge.Pid = data.ProcessID;
-                        ge.Id = (int)data.PayloadValue(0);
-                        ge.Num1 = (int)data.PayloadValue(1);
-                        ge.Num2 = (int)data.PayloadValue(2);
-                        ge.Num3 = (int)data.PayloadValue(3);
-                        ge.Str = (string)data.PayloadValue(4);
-                        events.Enqueue(ge);
-                    }
-                );
+                session
+                    .Source
+                    .Dynamic
+                    .AddCallbackForProviderEvent(
+                        "Microsoft-ILCompiler-DependencyGraph",
+                        "Graph",
+                        delegate(TraceEvent data)
+                        {
+                            GraphEvent ge = new GraphEvent();
+                            ge.EventType = GraphEventType.NewGraph;
+                            ge.Pid = data.ProcessID;
+                            ge.Id = (int)data.PayloadValue(0);
+                            ge.Str = (string)data.PayloadValue(1);
+                            events.Enqueue(ge);
+                        }
+                    );
+                session
+                    .Source
+                    .Dynamic
+                    .AddCallbackForProviderEvent(
+                        "Microsoft-ILCompiler-DependencyGraph",
+                        "Node",
+                        delegate(TraceEvent data)
+                        {
+                            GraphEvent ge = new GraphEvent();
+                            ge.EventType = GraphEventType.NewNode;
+                            ge.Pid = data.ProcessID;
+                            ge.Id = (int)data.PayloadValue(0);
+                            ge.Num1 = (int)data.PayloadValue(1);
+                            ge.Str = (string)data.PayloadValue(2);
+                            events.Enqueue(ge);
+                        }
+                    );
+                session
+                    .Source
+                    .Dynamic
+                    .AddCallbackForProviderEvent(
+                        "Microsoft-ILCompiler-DependencyGraph",
+                        "Edge",
+                        delegate(TraceEvent data)
+                        {
+                            GraphEvent ge = new GraphEvent();
+                            ge.EventType = GraphEventType.NewEdge;
+                            ge.Pid = data.ProcessID;
+                            ge.Id = (int)data.PayloadValue(0);
+                            ge.Num1 = (int)data.PayloadValue(1);
+                            ge.Num2 = (int)data.PayloadValue(2);
+                            ge.Str = (string)data.PayloadValue(3);
+                            events.Enqueue(ge);
+                        }
+                    );
+                session
+                    .Source
+                    .Dynamic
+                    .AddCallbackForProviderEvent(
+                        "Microsoft-ILCompiler-DependencyGraph",
+                        "ConditionalEdge",
+                        delegate(TraceEvent data)
+                        {
+                            GraphEvent ge = new GraphEvent();
+                            ge.EventType = GraphEventType.NewConditionalEdge;
+                            ge.Pid = data.ProcessID;
+                            ge.Id = (int)data.PayloadValue(0);
+                            ge.Num1 = (int)data.PayloadValue(1);
+                            ge.Num2 = (int)data.PayloadValue(2);
+                            ge.Num3 = (int)data.PayloadValue(3);
+                            ge.Str = (string)data.PayloadValue(4);
+                            events.Enqueue(ge);
+                        }
+                    );
 
                 var restarted = session.EnableProvider("Microsoft-ILCompiler-DependencyGraph");
                 session.Source.Process();

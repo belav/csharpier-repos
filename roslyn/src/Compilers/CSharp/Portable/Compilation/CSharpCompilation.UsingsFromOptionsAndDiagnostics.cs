@@ -69,17 +69,18 @@ namespace Microsoft.CodeAnalysis.CSharp
                     Debug.Assert(directiveDiagnostics.DependenciesBag is object);
 
                     var imported =
-                        usingsBinder.BindNamespaceOrTypeSymbol(
-                            qualifiedName,
-                            directiveDiagnostics
-                        ).NamespaceOrTypeSymbol;
+                        usingsBinder
+                            .BindNamespaceOrTypeSymbol(qualifiedName, directiveDiagnostics)
+                            .NamespaceOrTypeSymbol;
                     if (uniqueUsings.Add(imported))
                     {
                         boundUsings.Add(
                             new NamespaceOrTypeAndUsingDirective(
                                 imported,
                                 null,
-                                dependencies: directiveDiagnostics.DependenciesBag.ToImmutableArray()
+                                dependencies: directiveDiagnostics
+                                    .DependenciesBag
+                                    .ToImmutableArray()
                             )
                         );
                     }

@@ -218,10 +218,9 @@ namespace System.Web.Http.SelfHost
             // Submit request up the stack
             try
             {
-                HttpResponseMessage response = await channelContext.Server.SendAsync(
-                    request,
-                    channelContext.Server._cancellationTokenSource.Token
-                );
+                HttpResponseMessage response = await channelContext
+                    .Server
+                    .SendAsync(request, channelContext.Server._cancellationTokenSource.Token);
 
                 if (response == null)
                 {
@@ -266,16 +265,20 @@ namespace System.Web.Http.SelfHost
             // behavior for all cases except when accessing the property directly by key.
 
             // Add the retrieve client certificate delegate to the property bag to enable lookup later on
-            request.Properties.Add(
-                HttpPropertyKeys.RetrieveClientCertificateDelegateKey,
-                _retrieveClientCertificate
-            );
+            request
+                .Properties
+                .Add(
+                    HttpPropertyKeys.RetrieveClientCertificateDelegateKey,
+                    _retrieveClientCertificate
+                );
 
             // Add information about whether the request is local or not
-            request.Properties.Add(
-                HttpPropertyKeys.IsLocalKey,
-                new Lazy<bool>(() => IsLocal(requestContext.RequestMessage))
-            );
+            request
+                .Properties
+                .Add(
+                    HttpPropertyKeys.IsLocalKey,
+                    new Lazy<bool>(() => IsLocal(requestContext.RequestMessage))
+                );
             return request;
         }
 
@@ -283,10 +286,9 @@ namespace System.Web.Http.SelfHost
         {
             RemoteEndpointMessageProperty remoteEndpointProperty;
             if (
-                message.Properties.TryGetValue(
-                    RemoteEndpointMessageProperty.Name,
-                    out remoteEndpointProperty
-                )
+                message
+                    .Properties
+                    .TryGetValue(RemoteEndpointMessageProperty.Name, out remoteEndpointProperty)
             )
             {
                 IPAddress remoteAddress;
@@ -334,7 +336,10 @@ namespace System.Web.Http.SelfHost
             {
                 X509CertificateClaimSet certClaimSet = null;
                 foreach (
-                    ClaimSet claimSet in property.ServiceSecurityContext.AuthorizationContext.ClaimSets
+                    ClaimSet claimSet in property
+                        .ServiceSecurityContext
+                        .AuthorizationContext
+                        .ClaimSets
                 )
                 {
                     certClaimSet = claimSet as X509CertificateClaimSet;
@@ -386,8 +391,9 @@ namespace System.Web.Http.SelfHost
                 HttpBinding binding = new HttpBinding();
 
                 // Get it configured
-                BindingParameterCollection bindingParameters =
-                    server._configuration.ConfigureBinding(binding);
+                BindingParameterCollection bindingParameters = server
+                    ._configuration
+                    .ConfigureBinding(binding);
                 if (bindingParameters == null)
                 {
                     bindingParameters = new BindingParameterCollection();
@@ -611,10 +617,9 @@ namespace System.Web.Http.SelfHost
 
             try
             {
-                IAsyncResult result = channelContext.Channel.BeginOpen(
-                    _onOpenChannelComplete,
-                    channelContext
-                );
+                IAsyncResult result = channelContext
+                    .Channel
+                    .BeginOpen(_onOpenChannelComplete, channelContext);
                 if (result.CompletedSynchronously)
                 {
                     OpenChannelComplete(result);
@@ -743,11 +748,9 @@ namespace System.Web.Http.SelfHost
 
             try
             {
-                return channelContext.Channel.BeginTryReceiveRequest(
-                    _receiveTimeout,
-                    callback,
-                    channelContext
-                );
+                return channelContext
+                    .Channel
+                    .BeginTryReceiveRequest(_receiveTimeout, callback, channelContext);
             }
             catch (CommunicationObjectAbortedException)
             {
@@ -836,11 +839,9 @@ namespace System.Web.Http.SelfHost
 
             try
             {
-                IAsyncResult result = replyContext.RequestContext.BeginReply(
-                    replyContext.Reply,
-                    _onReplyComplete,
-                    replyContext
-                );
+                IAsyncResult result = replyContext
+                    .RequestContext
+                    .BeginReply(replyContext.Reply, _onReplyComplete, replyContext);
                 if (result.CompletedSynchronously)
                 {
                     ReplyComplete(result);
@@ -980,10 +981,9 @@ namespace System.Web.Http.SelfHost
             {
                 if (server._listener != null)
                 {
-                    IAsyncResult result = server._listener.BeginClose(
-                        _onCloseListenerComplete,
-                        server
-                    );
+                    IAsyncResult result = server
+                        ._listener
+                        .BeginClose(_onCloseListenerComplete, server);
                     if (result.CompletedSynchronously)
                     {
                         CloseListenerComplete(result);
@@ -1056,10 +1056,9 @@ namespace System.Web.Http.SelfHost
 
             try
             {
-                IAsyncResult result = channelContext.Channel.BeginClose(
-                    _onCloseChannelComplete,
-                    channelContext
-                );
+                IAsyncResult result = channelContext
+                    .Channel
+                    .BeginClose(_onCloseChannelComplete, channelContext);
                 if (result.CompletedSynchronously)
                 {
                     CloseChannelComplete(result);

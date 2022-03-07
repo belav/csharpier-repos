@@ -211,10 +211,9 @@ internal static class RouteTableFactory
             // If they are both literals we can disambiguate
             if ((xRank, yRank) == (0, 0))
             {
-                currentResult = StringComparer.OrdinalIgnoreCase.Compare(
-                    xSegment.Value,
-                    ySegment.Value
-                );
+                currentResult = StringComparer
+                    .OrdinalIgnoreCase
+                    .Compare(xSegment.Value, ySegment.Value);
             }
 
             if (currentResult != 0)

@@ -44,10 +44,13 @@ namespace System.CommandLine.Benchmarks
                 result.Any(
                     summary =>
                         summary.HasCriticalValidationErrors
-                        || summary.Reports.Any(
-                            report =>
-                                !report.BuildResult.IsBuildSuccess || !report.ExecuteResults.Any()
-                        )
+                        || summary
+                            .Reports
+                            .Any(
+                                report =>
+                                    !report.BuildResult.IsBuildSuccess
+                                    || !report.ExecuteResults.Any()
+                            )
                 )
             )
                 return 1;

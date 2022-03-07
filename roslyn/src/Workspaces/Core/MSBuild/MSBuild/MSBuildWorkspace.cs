@@ -371,11 +371,13 @@ namespace Microsoft.CodeAnalysis.MSBuild
                         {
                             var buildManager = new ProjectBuildManager(_loader.Properties);
                             _applyChangesProjectFile =
-                                fileLoader.LoadProjectFileAsync(
-                                    projectPath,
-                                    buildManager,
-                                    CancellationToken.None
-                                ).Result;
+                                fileLoader
+                                    .LoadProjectFileAsync(
+                                        projectPath,
+                                        buildManager,
+                                        CancellationToken.None
+                                    )
+                                    .Result;
                         }
                         catch (IOException exception)
                         {

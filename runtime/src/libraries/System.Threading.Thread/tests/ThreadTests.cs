@@ -1381,9 +1381,9 @@ namespace System.Threading.Threads.Tests
                 .Invoke(
                     () =>
                     {
-                        AppDomain.CurrentDomain.SetPrincipalPolicy(
-                            PrincipalPolicy.WindowsPrincipal
-                        );
+                        AppDomain
+                            .CurrentDomain
+                            .SetPrincipalPolicy(PrincipalPolicy.WindowsPrincipal);
                         Assert.Equal(
                             Environment.UserDomainName + @"\" + Environment.UserName,
                             Thread.CurrentPrincipal.Identity.Name
@@ -1407,9 +1407,9 @@ namespace System.Threading.Threads.Tests
                 .Invoke(
                     () =>
                     {
-                        AppDomain.CurrentDomain.SetPrincipalPolicy(
-                            PrincipalPolicy.WindowsPrincipal
-                        );
+                        AppDomain
+                            .CurrentDomain
+                            .SetPrincipalPolicy(PrincipalPolicy.WindowsPrincipal);
 
                         IPrincipal currentPrincipal = Thread.CurrentPrincipal;
 
@@ -1480,9 +1480,9 @@ namespace System.Threading.Threads.Tests
                         first.Start();
                         first.Join();
 
-                        AppDomain.CurrentDomain.SetPrincipalPolicy(
-                            PrincipalPolicy.WindowsPrincipal
-                        );
+                        AppDomain
+                            .CurrentDomain
+                            .SetPrincipalPolicy(PrincipalPolicy.WindowsPrincipal);
 
                         var second = new Thread(CheckPrincipal);
                         second.Start(Thread.CurrentPrincipal);
@@ -1507,9 +1507,9 @@ namespace System.Threading.Threads.Tests
                 .Invoke(
                     () =>
                     {
-                        AppDomain.CurrentDomain.SetPrincipalPolicy(
-                            PrincipalPolicy.WindowsPrincipal
-                        );
+                        AppDomain
+                            .CurrentDomain
+                            .SetPrincipalPolicy(PrincipalPolicy.WindowsPrincipal);
                         Assert.Throws<PlatformNotSupportedException>(() => Thread.CurrentPrincipal);
                     }
                 )
@@ -1523,9 +1523,9 @@ namespace System.Threading.Threads.Tests
                 .Invoke(
                     () =>
                     {
-                        AppDomain.CurrentDomain.SetPrincipalPolicy(
-                            PrincipalPolicy.UnauthenticatedPrincipal
-                        );
+                        AppDomain
+                            .CurrentDomain
+                            .SetPrincipalPolicy(PrincipalPolicy.UnauthenticatedPrincipal);
                         Assert.Equal(string.Empty, Thread.CurrentPrincipal.Identity.Name);
                     }
                 )

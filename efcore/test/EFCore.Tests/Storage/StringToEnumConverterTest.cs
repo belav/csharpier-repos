@@ -93,9 +93,9 @@ namespace Microsoft.EntityFrameworkCore.Storage
                     "Guid",
                     "enum types"
                 ),
-                Assert.Throws<InvalidOperationException>(
-                    () => new StringToEnumConverter<Guid>()
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(() => new StringToEnumConverter<Guid>())
+                    .Message
             );
         }
 

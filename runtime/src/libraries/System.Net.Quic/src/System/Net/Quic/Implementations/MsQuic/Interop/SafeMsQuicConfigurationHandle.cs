@@ -237,15 +237,17 @@ namespace System.Net.Quic.Implementations.MsQuic.Internal
             try
             {
                 MsQuicAlpnHelper.Prepare(alpnProtocols, out handles, out buffers);
-                status = MsQuicApi.Api.ConfigurationOpenDelegate(
-                    MsQuicApi.Api.Registration,
-                    (QuicBuffer*)Marshal.UnsafeAddrOfPinnedArrayElement(buffers, 0),
-                    (uint)alpnProtocols.Count,
-                    ref settings,
-                    (uint)sizeof(QuicSettings),
-                    context: IntPtr.Zero,
-                    out configurationHandle
-                );
+                status = MsQuicApi
+                    .Api
+                    .ConfigurationOpenDelegate(
+                        MsQuicApi.Api.Registration,
+                        (QuicBuffer*)Marshal.UnsafeAddrOfPinnedArrayElement(buffers, 0),
+                        (uint)alpnProtocols.Count,
+                        ref settings,
+                        (uint)sizeof(QuicSettings),
+                        context: IntPtr.Zero,
+                        out configurationHandle
+                    );
             }
             finally
             {
@@ -278,10 +280,9 @@ namespace System.Net.Quic.Implementations.MsQuic.Internal
                     {
                         config.Type = QUIC_CREDENTIAL_TYPE.CONTEXT;
                         config.Certificate = certificate.Handle;
-                        status = MsQuicApi.Api.ConfigurationLoadCredentialDelegate(
-                            configurationHandle,
-                            ref config
-                        );
+                        status = MsQuicApi
+                            .Api
+                            .ConfigurationLoadCredentialDelegate(configurationHandle, ref config);
                     }
                     else
                     {
@@ -313,20 +314,21 @@ namespace System.Net.Quic.Implementations.MsQuic.Internal
 
                             config.Type = QUIC_CREDENTIAL_TYPE.PKCS12;
                             config.Certificate = (IntPtr)(&pkcs12Config);
-                            status = MsQuicApi.Api.ConfigurationLoadCredentialDelegate(
-                                configurationHandle,
-                                ref config
-                            );
+                            status = MsQuicApi
+                                .Api
+                                .ConfigurationLoadCredentialDelegate(
+                                    configurationHandle,
+                                    ref config
+                                );
                         }
                     }
                 }
                 else
                 {
                     config.Type = QUIC_CREDENTIAL_TYPE.NONE;
-                    status = MsQuicApi.Api.ConfigurationLoadCredentialDelegate(
-                        configurationHandle,
-                        ref config
-                    );
+                    status = MsQuicApi
+                        .Api
+                        .ConfigurationLoadCredentialDelegate(configurationHandle, ref config);
                 }
 
                 QuicExceptionHelpers.ThrowIfFailed(status, "ConfigurationLoadCredential failed.");

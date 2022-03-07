@@ -37,10 +37,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
         {
             get
             {
-                return this.RetargetingModule.RetargetingTranslator.Retarget(
-                    _underlyingParameter.TypeWithAnnotations,
-                    RetargetOptions.RetargetPrimitiveTypesByTypeCode
-                );
+                return this.RetargetingModule
+                    .RetargetingTranslator
+                    .Retarget(
+                        _underlyingParameter.TypeWithAnnotations,
+                        RetargetOptions.RetargetPrimitiveTypesByTypeCode
+                    );
             }
         }
 
@@ -48,10 +50,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
         {
             get
             {
-                return RetargetingModule.RetargetingTranslator.RetargetModifiers(
-                    _underlyingParameter.RefCustomModifiers,
-                    ref _lazyRefCustomModifiers
-                );
+                return RetargetingModule
+                    .RetargetingTranslator
+                    .RetargetModifiers(
+                        _underlyingParameter.RefCustomModifiers,
+                        ref _lazyRefCustomModifiers
+                    );
             }
         }
 
@@ -59,27 +63,29 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
         {
             get
             {
-                return this.RetargetingModule.RetargetingTranslator.Retarget(
-                    _underlyingParameter.ContainingSymbol
-                );
+                return this.RetargetingModule
+                    .RetargetingTranslator
+                    .Retarget(_underlyingParameter.ContainingSymbol);
             }
         }
 
         public sealed override ImmutableArray<CSharpAttributeData> GetAttributes()
         {
-            return this.RetargetingModule.RetargetingTranslator.GetRetargetedAttributes(
-                _underlyingParameter.GetAttributes(),
-                ref _lazyCustomAttributes
-            );
+            return this.RetargetingModule
+                .RetargetingTranslator
+                .GetRetargetedAttributes(
+                    _underlyingParameter.GetAttributes(),
+                    ref _lazyCustomAttributes
+                );
         }
 
         internal sealed override IEnumerable<CSharpAttributeData> GetCustomAttributesToEmit(
             PEModuleBuilder moduleBuilder
         )
         {
-            return this.RetargetingModule.RetargetingTranslator.RetargetAttributes(
-                _underlyingParameter.GetCustomAttributesToEmit(moduleBuilder)
-            );
+            return this.RetargetingModule
+                .RetargetingTranslator
+                .RetargetAttributes(_underlyingParameter.GetCustomAttributesToEmit(moduleBuilder));
         }
 
         public sealed override AssemblySymbol ContainingAssembly
@@ -106,9 +112,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
         {
             get
             {
-                return this.RetargetingModule.RetargetingTranslator.Retarget(
-                    _underlyingParameter.MarshallingInformation
-                );
+                return this.RetargetingModule
+                    .RetargetingTranslator
+                    .Retarget(_underlyingParameter.MarshallingInformation);
             }
         }
 

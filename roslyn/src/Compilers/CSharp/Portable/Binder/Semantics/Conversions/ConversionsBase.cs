@@ -1821,10 +1821,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 if (
                     invokeMethod.RefKind != refKind
-                    || !invokeMethod.ReturnType.Equals(
-                        returnType.Type,
-                        TypeCompareKind.AllIgnoreOptions
-                    )
+                    || !invokeMethod
+                        .ReturnType
+                        .Equals(returnType.Type, TypeCompareKind.AllIgnoreOptions)
                 )
                 {
                     return LambdaConversionResult.MismatchedReturnType;
@@ -1854,10 +1853,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                     {
                         if (
                             delegateParameters[p].RefKind != anonymousFunction.RefKind(p)
-                            || !delegateParameters[p].Type.Equals(
-                                anonymousFunction.ParameterType(p),
-                                TypeCompareKind.AllIgnoreOptions
-                            )
+                            || !delegateParameters[p]
+                                .Type
+                                .Equals(
+                                    anonymousFunction.ParameterType(p),
+                                    TypeCompareKind.AllIgnoreOptions
+                                )
                         )
                         {
                             return LambdaConversionResult.MismatchedParameterType;
@@ -4667,10 +4668,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                 if (
                     HasExplicitReferenceConversion(
                         sourceArray.ElementType,
-                        ((NamedTypeSymbol)destination).TypeArgumentWithDefinitionUseSiteDiagnostics(
-                            0,
-                            ref useSiteInfo
-                        ).Type,
+                        ((NamedTypeSymbol)destination)
+                            .TypeArgumentWithDefinitionUseSiteDiagnostics(0, ref useSiteInfo)
+                            .Type,
                         ref useSiteInfo
                     )
                 )
@@ -4697,10 +4697,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                 )
                 {
                     var sourceElement =
-                        ((NamedTypeSymbol)source).TypeArgumentWithDefinitionUseSiteDiagnostics(
-                            0,
-                            ref useSiteInfo
-                        ).Type;
+                        ((NamedTypeSymbol)source)
+                            .TypeArgumentWithDefinitionUseSiteDiagnostics(0, ref useSiteInfo)
+                            .Type;
                     var destinationElement = destinationArray.ElementType;
 
                     if (HasIdentityConversionInternal(sourceElement, destinationElement))

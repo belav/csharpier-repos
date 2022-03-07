@@ -1034,7 +1034,9 @@ class Program
                 tree.GetRoot()
                     .DescendantNodes()
                     .OfType<VariableDeclaratorSyntax>()
-                    .Single().Initializer!.Value;
+                    .Single()
+                    .Initializer!
+                    .Value;
             var typeInfo = model.GetTypeInfo(expr);
             Assert.Null(typeInfo.Type);
             Assert.Equal(SpecialType.System_Delegate, typeInfo.ConvertedType!.SpecialType);
@@ -1101,7 +1103,9 @@ class Program
                     (CastExpressionSyntax)tree.GetRoot()
                         .DescendantNodes()
                         .OfType<VariableDeclaratorSyntax>()
-                        .Single().Initializer!.Value
+                        .Single()
+                        .Initializer!
+                        .Value
                 ).Expression;
             var typeInfo = model.GetTypeInfo(expr);
             // https://github.com/dotnet/roslyn/issues/52874: GetTypeInfo() for method group should return inferred delegate type.
@@ -1379,7 +1383,9 @@ class Program
                     (CastExpressionSyntax)tree.GetRoot()
                         .DescendantNodes()
                         .OfType<VariableDeclaratorSyntax>()
-                        .Single().Initializer!.Value
+                        .Single()
+                        .Initializer!
+                        .Value
                 ).Expression;
             var typeInfo = model.GetTypeInfo(expr);
             Assert.Null(typeInfo.Type);
@@ -1401,10 +1407,9 @@ class Program
 
         private static bool HaveMatchingSignatures(IMethodSymbol methodA, IMethodSymbol methodB)
         {
-            return MemberSignatureComparer.MethodGroupSignatureComparer.Equals(
-                methodA.GetSymbol<MethodSymbol>(),
-                methodB.GetSymbol<MethodSymbol>()
-            );
+            return MemberSignatureComparer
+                .MethodGroupSignatureComparer
+                .Equals(methodA.GetSymbol<MethodSymbol>(), methodB.GetSymbol<MethodSymbol>());
         }
 
         public static IEnumerable<object?[]> GetExpressionData()
@@ -1510,7 +1515,9 @@ class Program
                     (CastExpressionSyntax)tree.GetRoot()
                         .DescendantNodes()
                         .OfType<VariableDeclaratorSyntax>()
-                        .Single().Initializer!.Value
+                        .Single()
+                        .Initializer!
+                        .Value
                 ).Expression;
             var typeInfo = model.GetTypeInfo(expr);
             Assert.Null(typeInfo.Type);
@@ -2063,7 +2070,9 @@ partial class B : A
                 tree.GetRoot()
                     .DescendantNodes()
                     .OfType<VariableDeclaratorSyntax>()
-                    .Single().Initializer!.Value;
+                    .Single()
+                    .Initializer!
+                    .Value;
             var typeInfo = model.GetTypeInfo(expr);
             Assert.Null(typeInfo.Type);
             Assert.Equal(SpecialType.System_Delegate, typeInfo.ConvertedType!.SpecialType);
@@ -2277,7 +2286,9 @@ static class B
                 tree.GetRoot()
                     .DescendantNodes()
                     .OfType<VariableDeclaratorSyntax>()
-                    .Single().Initializer!.Value;
+                    .Single()
+                    .Initializer!
+                    .Value;
             var typeInfo = model.GetTypeInfo(expr);
             Assert.Null(typeInfo.Type);
             Assert.Equal(SpecialType.System_Delegate, typeInfo.ConvertedType!.SpecialType);
@@ -2525,7 +2536,9 @@ namespace N
                 tree.GetRoot()
                     .DescendantNodes()
                     .OfType<VariableDeclaratorSyntax>()
-                    .Single().Initializer!.Value;
+                    .Single()
+                    .Initializer!
+                    .Value;
             var typeInfo = model.GetTypeInfo(expr);
             Assert.Null(typeInfo.Type);
             Assert.Equal(SpecialType.System_Delegate, typeInfo.ConvertedType!.SpecialType);
@@ -6994,7 +7007,9 @@ System.Action"
                 tree.GetRoot()
                     .DescendantNodes()
                     .OfType<VariableDeclaratorSyntax>()
-                    .Single().Initializer!.Value;
+                    .Single()
+                    .Initializer!
+                    .Value;
             var typeInfo = model.GetTypeInfo(expr);
             Assert.Null(typeInfo.Type);
             Assert.Equal(SpecialType.System_Delegate, typeInfo.ConvertedType!.SpecialType);

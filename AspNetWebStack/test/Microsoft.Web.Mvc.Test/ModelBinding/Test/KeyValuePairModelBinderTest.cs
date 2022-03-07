@@ -68,11 +68,13 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
                         return true;
                     }
                 );
-            bindingContext.ModelBinderProviders.RegisterBinderForType(
-                typeof(int),
-                mockIntBinder.Object,
-                true /* suppressPrefixCheck */
-            );
+            bindingContext
+                .ModelBinderProviders
+                .RegisterBinderForType(
+                    typeof(int),
+                    mockIntBinder.Object,
+                    true /* suppressPrefixCheck */
+                );
 
             KeyValuePairModelBinder<int, string> binder =
                 new KeyValuePairModelBinder<int, string>();
@@ -117,11 +119,13 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
                         return true;
                     }
                 );
-            bindingContext.ModelBinderProviders.RegisterBinderForType(
-                typeof(int),
-                mockIntBinder.Object,
-                true /* suppressPrefixCheck */
-            );
+            bindingContext
+                .ModelBinderProviders
+                .RegisterBinderForType(
+                    typeof(int),
+                    mockIntBinder.Object,
+                    true /* suppressPrefixCheck */
+                );
             Mock<IExtensibleModelBinder> mockStringBinder = new Mock<IExtensibleModelBinder>();
             mockStringBinder
                 .Setup(
@@ -134,11 +138,13 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
                         return true;
                     }
                 );
-            bindingContext.ModelBinderProviders.RegisterBinderForType(
-                typeof(string),
-                mockStringBinder.Object,
-                true /* suppressPrefixCheck */
-            );
+            bindingContext
+                .ModelBinderProviders
+                .RegisterBinderForType(
+                    typeof(string),
+                    mockStringBinder.Object,
+                    true /* suppressPrefixCheck */
+                );
 
             KeyValuePairModelBinder<int, string> binder =
                 new KeyValuePairModelBinder<int, string>();

@@ -505,12 +505,9 @@ public class ResponseCachingTests
                         CultureInfo.InvariantCulture
                     );
                     httpContext.Response.Headers["Cache-Control"] = "public, max-age=10";
-                    await httpContext.Response.SendFileAsync(
-                        _absoluteFilePath,
-                        0,
-                        null,
-                        CancellationToken.None
-                    );
+                    await httpContext
+                        .Response
+                        .SendFileAsync(_absoluteFilePath, 0, null, CancellationToken.None);
                 }
             )
         )
@@ -537,12 +534,9 @@ public class ResponseCachingTests
                     );
                     httpContext.Response.Headers["Cache-Control"] = "public, max-age=30";
                     httpContext.Response.ContentLength = _fileLength;
-                    await httpContext.Response.SendFileAsync(
-                        _absoluteFilePath,
-                        0,
-                        null,
-                        CancellationToken.None
-                    );
+                    await httpContext
+                        .Response
+                        .SendFileAsync(_absoluteFilePath, 0, null, CancellationToken.None);
                 }
             )
         )

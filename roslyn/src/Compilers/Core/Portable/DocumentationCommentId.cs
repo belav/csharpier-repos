@@ -1374,10 +1374,9 @@ namespace Microsoft.CodeAnalysis
                                     // if return type is specified, then it must match
                                     if (
                                         returnType != null
-                                        && methodSymbol.ReturnType.Equals(
-                                            returnType,
-                                            SymbolEqualityComparer.CLRSignature
-                                        )
+                                        && methodSymbol
+                                            .ReturnType
+                                            .Equals(returnType, SymbolEqualityComparer.CLRSignature)
                                     )
                                     {
                                         // return type matches

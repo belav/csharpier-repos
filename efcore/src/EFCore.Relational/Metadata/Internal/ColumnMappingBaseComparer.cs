@@ -67,10 +67,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 return result;
             }
 
-            result = EntityTypeFullNameComparer.Instance.Compare(
-                x.TableMapping.EntityType,
-                y.TableMapping.EntityType
-            );
+            result = EntityTypeFullNameComparer
+                .Instance
+                .Compare(x.TableMapping.EntityType, y.TableMapping.EntityType);
             if (result != 0)
             {
                 return result;

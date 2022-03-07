@@ -975,9 +975,10 @@ namespace Microsoft.CodeAnalysis
                 if (document != null)
                 {
                     newSolution =
-                        document.WithText(
-                            this.GetOpenDocumentText(oldSolution, docId)
-                        ).Project.Solution;
+                        document
+                            .WithText(this.GetOpenDocumentText(oldSolution, docId))
+                            .Project
+                            .Solution;
                 }
             }
 
@@ -996,9 +997,10 @@ namespace Microsoft.CodeAnalysis
                 if (document != null)
                 {
                     newSolution =
-                        document.WithText(
-                            this.GetOpenDocumentText(oldSolution, docId)
-                        ).Project.Solution;
+                        document
+                            .WithText(this.GetOpenDocumentText(oldSolution, docId))
+                            .Project
+                            .Solution;
                 }
             }
 

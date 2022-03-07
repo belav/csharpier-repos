@@ -97,10 +97,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.DocumentationComments
 
                 if (
                     token.Parent.IsKind(SyntaxKind.XmlElementEndTag)
-                    && token.Parent.IsParentKind(
-                        SyntaxKind.XmlElement,
-                        out XmlElementSyntax parentElement
-                    )
+                    && token
+                        .Parent
+                        .IsParentKind(SyntaxKind.XmlElement, out XmlElementSyntax parentElement)
                     && !HasFollowingEndTagTrivia(parentElement, token)
                 )
                 {

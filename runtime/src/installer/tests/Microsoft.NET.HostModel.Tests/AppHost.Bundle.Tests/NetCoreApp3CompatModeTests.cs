@@ -45,13 +45,14 @@ namespace AppHost.Bundle.Tests
                 .Should()
                 .Pass()
                 // Validate that the main assembly is running from disk (and not from bundle)
-                .And.HaveStdOutContaining(
-                    "ExecutingAssembly.Location: " + extractionBaseDir.FullName
-                )
+                .And
+                .HaveStdOutContaining("ExecutingAssembly.Location: " + extractionBaseDir.FullName)
                 // Validate that TPA contains at least one framework assembly from the extraction directory
-                .And.HaveStdOutContaining("System.Runtime.dll")
+                .And
+                .HaveStdOutContaining("System.Runtime.dll")
                 // Validate that framework assembly is actually loaded from the extraction directory
-                .And.HaveStdOutContaining("System.Console location: " + extractionBaseDir.FullName);
+                .And
+                .HaveStdOutContaining("System.Console location: " + extractionBaseDir.FullName);
 
             var extractionDir = BundleHelper.GetExtractionDir(fixture, bundler);
             var bundleFiles = BundleHelper

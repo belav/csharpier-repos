@@ -1015,7 +1015,9 @@ namespace Microsoft.EntityFrameworkCore.Query
                         .Select(
                             c =>
                                 ss.Set<Order>()
-                                    .FirstOrDefault(o => o.CustomerID == "ALFKI").Customer.City
+                                    .FirstOrDefault(o => o.CustomerID == "ALFKI")
+                                    .Customer
+                                    .City
                         )
             );
         }
@@ -1034,7 +1036,9 @@ namespace Microsoft.EntityFrameworkCore.Query
                         .Select(
                             c =>
                                 ss.Set<Order>()
-                                    .SingleOrDefault(o => o.OrderID == 10643).Customer.City
+                                    .SingleOrDefault(o => o.OrderID == 10643)
+                                    .Customer
+                                    .City
                         )
             );
         }
@@ -1067,11 +1071,12 @@ namespace Microsoft.EntityFrameworkCore.Query
                         .Select(
                             c =>
                                 ss.Set<Order>()
-                                    .FirstOrDefault(o => o.CustomerID == "ALFKI").Customer != null
+                                    .FirstOrDefault(o => o.CustomerID == "ALFKI")
+                                    .Customer != null
                                     ? ss.Set<Order>()
-                                          .FirstOrDefault(
-                                              o => o.CustomerID == "ALFKI"
-                                          ).Customer.City
+                                      .FirstOrDefault(o => o.CustomerID == "ALFKI")
+                                      .Customer
+                                      .City
                                     : null
                         )
             );
@@ -1092,7 +1097,9 @@ namespace Microsoft.EntityFrameworkCore.Query
                             c =>
                                 ss.Set<Order>()
                                     .OrderBy(o => o.CustomerID)
-                                    .FirstOrDefault(o => o.CustomerID == "ALFKI").Customer.City
+                                    .FirstOrDefault(o => o.CustomerID == "ALFKI")
+                                    .Customer
+                                    .City
                         )
             );
         }

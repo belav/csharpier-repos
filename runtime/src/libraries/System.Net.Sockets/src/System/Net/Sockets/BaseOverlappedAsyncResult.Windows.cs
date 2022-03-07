@@ -120,13 +120,15 @@ namespace System.Net.Sockets
                         // The async IO completed with a failure.
                         // Here we need to call WSAGetOverlappedResult() just so GetLastSocketError() will return the correct error.
                         SocketFlags ignore;
-                        bool success = Interop.Winsock.WSAGetOverlappedResult(
-                            socket.SafeHandle,
-                            nativeOverlapped,
-                            out numBytes,
-                            false,
-                            out ignore
-                        );
+                        bool success = Interop
+                            .Winsock
+                            .WSAGetOverlappedResult(
+                                socket.SafeHandle,
+                                nativeOverlapped,
+                                out numBytes,
+                                false,
+                                out ignore
+                            );
                         Debug.Assert(
                             !success,
                             $"Unexpectedly succeeded. errorCode:{errorCode} numBytes:{numBytes}"

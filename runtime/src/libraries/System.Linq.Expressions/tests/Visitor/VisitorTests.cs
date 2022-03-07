@@ -350,9 +350,12 @@ namespace System.Linq.Expressions.Tests
         {
             string slug = "Won't be found by chance 3f8d0006-32f9-4622-9ff4-c88e95c9babc";
             string errMsg =
-                Assert.Throws<InvalidOperationException>(
-                    () => new DefaultVisitor().VisitAndConvert(new NullBecomingExpression(), slug)
-                ).Message;
+                Assert
+                    .Throws<InvalidOperationException>(
+                        () =>
+                            new DefaultVisitor().VisitAndConvert(new NullBecomingExpression(), slug)
+                    )
+                    .Message;
             Assert.Contains(slug, errMsg);
         }
 
@@ -361,9 +364,11 @@ namespace System.Linq.Expressions.Tests
         {
             string slug = "Won't be found by chance 5154E15C-A475-49B0-B596-8F822D7ACFC4";
             string errMsg =
-                Assert.Throws<InvalidOperationException>(
-                    () => new DefaultVisitor().VisitAndConvert(new SourceExpression(), slug)
-                ).Message;
+                Assert
+                    .Throws<InvalidOperationException>(
+                        () => new DefaultVisitor().VisitAndConvert(new SourceExpression(), slug)
+                    )
+                    .Message;
             Assert.Contains(slug, errMsg);
         }
 

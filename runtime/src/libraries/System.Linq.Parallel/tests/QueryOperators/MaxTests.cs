@@ -353,7 +353,8 @@ namespace System.Linq.Parallel.Tests
                 0,
                 query
                     .Select(x => DelgatedComparable.Delegate(x, ReverseComparer.Instance))
-                    .Max().Value
+                    .Max()
+                    .Value
             );
         }
 
@@ -399,21 +400,25 @@ namespace System.Linq.Parallel.Tests
             ParallelQuery<int> query = labeled.Item;
             Assert.Equal(
                 max,
-                query.Max(
-                    x =>
-                        x >= count / 2
-                            ? DelgatedComparable.Delegate(x, Comparer<int>.Default)
-                            : null
-                ).Value
+                query
+                    .Max(
+                        x =>
+                            x >= count / 2
+                                ? DelgatedComparable.Delegate(x, Comparer<int>.Default)
+                                : null
+                    )
+                    .Value
             );
             Assert.Equal(
                 count / 2,
-                query.Max(
-                    x =>
-                        x >= count / 2
-                            ? DelgatedComparable.Delegate(x, ReverseComparer.Instance)
-                            : null
-                ).Value
+                query
+                    .Max(
+                        x =>
+                            x >= count / 2
+                                ? DelgatedComparable.Delegate(x, ReverseComparer.Instance)
+                                : null
+                    )
+                    .Value
             );
         }
 

@@ -66,9 +66,9 @@ namespace Microsoft.EntityFrameworkCore
                 entityType,
                 ConfigurationSource.Convention
             );
-            var contextServices = RelationalTestHelpers.Instance.CreateContextServices(
-                model.FinalizeModel()
-            );
+            var contextServices = RelationalTestHelpers
+                .Instance
+                .CreateContextServices(model.FinalizeModel());
             var updateEntry = new InternalEntityEntry(
                 contextServices.GetRequiredService<IStateManager>(),
                 entityType,

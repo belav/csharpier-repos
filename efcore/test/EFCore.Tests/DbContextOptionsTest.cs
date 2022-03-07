@@ -51,7 +51,10 @@ namespace Microsoft.EntityFrameworkCore
 
             Assert.Same(model, optionsBuilder.Options.FindExtension<CoreOptionsExtension>().Model);
             Assert.True(
-                optionsBuilder.Options.FindExtension<CoreOptionsExtension>().IsSensitiveDataLoggingEnabled
+                optionsBuilder
+                    .Options
+                    .FindExtension<CoreOptionsExtension>()
+                    .IsSensitiveDataLoggingEnabled
             );
         }
 
@@ -62,9 +65,11 @@ namespace Microsoft.EntityFrameworkCore
 
             Assert.Equal(
                 CoreStrings.OptionsExtensionNotFound(nameof(FakeDbContextOptionsExtension1)),
-                Assert.Throws<InvalidOperationException>(
-                    () => optionsBuilder.Options.GetExtension<FakeDbContextOptionsExtension1>()
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(
+                        () => optionsBuilder.Options.GetExtension<FakeDbContextOptionsExtension1>()
+                    )
+                    .Message
             );
 
             var extension = new FakeDbContextOptionsExtension1();

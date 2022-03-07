@@ -76,9 +76,11 @@ internal sealed class Request
         }
         else
         {
-            var prefix = requestContext.Server.Options.UrlPrefixes.GetPrefix(
-                (int)requestContext.UrlContext
-            );
+            var prefix = requestContext
+                .Server
+                .Options
+                .UrlPrefixes
+                .GetPrefix((int)requestContext.UrlContext);
             // Prefix may be null if the requested has been transfered to our queue
             if (!(prefix is null))
             {
@@ -97,13 +99,17 @@ internal sealed class Request
                 }
             }
             else if (
-                requestContext.Server.Options.UrlPrefixes.TryMatchLongestPrefix(
-                    IsHttps,
-                    cookedUrl.GetHost()!,
-                    originalPath,
-                    out var pathBase,
-                    out var path
-                )
+                requestContext
+                    .Server
+                    .Options
+                    .UrlPrefixes
+                    .TryMatchLongestPrefix(
+                        IsHttps,
+                        cookedUrl.GetHost()!,
+                        originalPath,
+                        out var pathBase,
+                        out var path
+                    )
             )
             {
                 PathBase = pathBase;

@@ -149,11 +149,9 @@ namespace System.Net.Security
 
                 securityContext.Write(buffer);
 
-                PAL_SSLStreamStatus ret = Interop.AndroidCrypto.SSLStreamRead(
-                    sslHandle,
-                    buffer,
-                    out int read
-                );
+                PAL_SSLStreamStatus ret = Interop
+                    .AndroidCrypto
+                    .SSLStreamRead(sslHandle, buffer, out int read);
                 if (ret == PAL_SSLStreamStatus.Error)
                     return new SecurityStatusPal(SecurityStatusPalErrorCode.InternalError);
 

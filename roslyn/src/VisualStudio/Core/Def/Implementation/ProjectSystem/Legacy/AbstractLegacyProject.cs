@@ -108,23 +108,25 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.L
             }
 
             var projectFactory = componentModel.GetService<VisualStudioProjectFactory>();
-            VisualStudioProject = threadingContext.JoinableTaskFactory.Run(
-                () =>
-                    projectFactory.CreateAndAddToWorkspaceAsync(
-                        projectSystemName,
-                        language,
-                        new VisualStudioProjectCreationInfo
-                        {
-                            // The workspace requires an assembly name so we can make compilations. We'll use
-                            // projectSystemName because they'll have a better one eventually.
-                            AssemblyName = projectSystemName,
-                            FilePath = projectFilePath,
-                            Hierarchy = hierarchy,
-                            ProjectGuid = GetProjectIDGuid(hierarchy),
-                        },
-                        CancellationToken.None
-                    )
-            );
+            VisualStudioProject = threadingContext
+                .JoinableTaskFactory
+                .Run(
+                    () =>
+                        projectFactory.CreateAndAddToWorkspaceAsync(
+                            projectSystemName,
+                            language,
+                            new VisualStudioProjectCreationInfo
+                            {
+                                // The workspace requires an assembly name so we can make compilations. We'll use
+                                // projectSystemName because they'll have a better one eventually.
+                                AssemblyName = projectSystemName,
+                                FilePath = projectFilePath,
+                                Hierarchy = hierarchy,
+                                ProjectGuid = GetProjectIDGuid(hierarchy),
+                            },
+                            CancellationToken.None
+                        )
+                );
 
             workspaceImpl.AddProjectRuleSetFileToInternalMaps(
                 VisualStudioProject,

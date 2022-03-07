@@ -51,12 +51,15 @@ namespace Microsoft.CodeAnalysis.CSharp.ImplementInterface
                 )
                 {
                     if (
-                        interfaceNode.Parent.Parent.IsParentKind(
-                            SyntaxKind.ClassDeclaration,
-                            SyntaxKind.StructDeclaration,
-                            SyntaxKind.RecordDeclaration,
-                            SyntaxKind.RecordStructDeclaration
-                        )
+                        interfaceNode
+                            .Parent
+                            .Parent
+                            .IsParentKind(
+                                SyntaxKind.ClassDeclaration,
+                                SyntaxKind.StructDeclaration,
+                                SyntaxKind.RecordDeclaration,
+                                SyntaxKind.RecordStructDeclaration
+                            )
                     )
                     {
                         var interfaceSymbolInfo = model.GetSymbolInfo(

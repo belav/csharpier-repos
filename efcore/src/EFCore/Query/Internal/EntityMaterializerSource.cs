@@ -78,9 +78,9 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
             );
 
             foreach (
-                var consumedProperty in constructorBinding.ParameterBindings.SelectMany(
-                    p => p.ConsumedProperties
-                )
+                var consumedProperty in constructorBinding
+                    .ParameterBindings
+                    .SelectMany(p => p.ConsumedProperties)
             )
             {
                 properties.Remove(consumedProperty);

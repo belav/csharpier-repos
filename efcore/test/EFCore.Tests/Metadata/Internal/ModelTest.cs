@@ -34,44 +34,50 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
             Assert.Equal(
                 CoreStrings.ModelReadOnly,
-                Assert.Throws<InvalidOperationException>(
-                    () => model.AddAnnotation("foo", "bar")
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(() => model.AddAnnotation("foo", "bar"))
+                    .Message
             );
 
             Assert.Equal(
                 CoreStrings.ModelReadOnly,
-                Assert.Throws<InvalidOperationException>(
-                    () => model.RemoveOwned(typeof(SpecialCustomer))
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(
+                        () => model.RemoveOwned(typeof(SpecialCustomer))
+                    )
+                    .Message
             );
 
             Assert.Equal(
                 CoreStrings.ModelReadOnly,
-                Assert.Throws<InvalidOperationException>(
-                    () => model.AddOwned(typeof(Order))
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(() => model.AddOwned(typeof(Order)))
+                    .Message
             );
 
             Assert.Equal(
                 CoreStrings.ModelReadOnly,
-                Assert.Throws<InvalidOperationException>(
-                    () => model.AddShared(typeof(Order))
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(() => model.AddShared(typeof(Order)))
+                    .Message
             );
 
             Assert.Equal(
                 CoreStrings.ModelReadOnly,
-                Assert.Throws<InvalidOperationException>(
-                    () => model.SetChangeTrackingStrategy(ChangeTrackingStrategy.Snapshot)
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(
+                        () => model.SetChangeTrackingStrategy(ChangeTrackingStrategy.Snapshot)
+                    )
+                    .Message
             );
 
             Assert.Equal(
                 CoreStrings.ModelReadOnly,
-                Assert.Throws<InvalidOperationException>(
-                    () => ((Model)model).SkipDetectChanges = false
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(
+                        () => ((Model)model).SkipDetectChanges = false
+                    )
+                    .Message
             );
         }
 
@@ -187,9 +193,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
             Assert.Equal(
                 CoreStrings.AmbiguousSharedTypeEntityTypeName(typeof(Customer).DisplayName()),
-                Assert.Throws<InvalidOperationException>(
-                    () => model.AddEntityType(typeof(Customer).DisplayName(), typeof(Customer))
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(
+                        () => model.AddEntityType(typeof(Customer).DisplayName(), typeof(Customer))
+                    )
+                    .Message
             );
         }
 
@@ -211,9 +219,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     "{'" + Order.CustomerIdProperty.Name + "'}",
                     typeof(Order).Name
                 ),
-                Assert.Throws<InvalidOperationException>(
-                    () => model.RemoveEntityType(customerType.Name)
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(
+                        () => model.RemoveEntityType(customerType.Name)
+                    )
+                    .Message
             );
         }
 
@@ -231,9 +241,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     typeof(Customer).Name,
                     typeof(SpecialCustomer).Name
                 ),
-                Assert.Throws<InvalidOperationException>(
-                    () => model.RemoveEntityType(customerType.Name)
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(
+                        () => model.RemoveEntityType(customerType.Name)
+                    )
+                    .Message
             );
         }
 
@@ -244,9 +256,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
             Assert.Equal(
                 CoreStrings.InvalidEntityType(typeof(IReadOnlyList<int>)),
-                Assert.Throws<ArgumentException>(
-                    () => model.AddEntityType(typeof(IReadOnlyList<int>))
-                ).Message
+                Assert
+                    .Throws<ArgumentException>(
+                        () => model.AddEntityType(typeof(IReadOnlyList<int>))
+                    )
+                    .Message
             );
         }
 
@@ -260,9 +274,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
             Assert.Equal(
                 CoreStrings.DuplicateEntityType(nameof(Customer)),
-                Assert.Throws<InvalidOperationException>(
-                    () => model.AddEntityType(typeof(Customer))
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(() => model.AddEntityType(typeof(Customer)))
+                    .Message
             );
         }
 
@@ -278,9 +292,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 CoreStrings.DuplicateEntityType(
                     typeof(Customer).FullName + " (Dictionary<string, object>)"
                 ),
-                Assert.Throws<InvalidOperationException>(
-                    () => model.AddEntityType(typeof(Customer).FullName)
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(
+                        () => model.AddEntityType(typeof(Customer).FullName)
+                    )
+                    .Message
             );
         }
 
@@ -294,9 +310,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
             Assert.Equal(
                 CoreStrings.CannotMarkShared(nameof(Customer)),
-                Assert.Throws<InvalidOperationException>(
-                    () => model.AddShared(typeof(Customer), ConfigurationSource.Explicit)
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(
+                        () => model.AddShared(typeof(Customer), ConfigurationSource.Explicit)
+                    )
+                    .Message
             );
         }
 

@@ -70,7 +70,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
 
             private ITypeParameterSymbol MassageTypeParameter(ITypeParameterSymbol typeParameter)
             {
-                var constraints = typeParameter.ConstraintTypes
+                var constraints = typeParameter
+                    .ConstraintTypes
                     .Where(ts => !ts.IsUnexpressibleTypeParameterConstraint())
                     .ToList();
                 var classTypes = constraints.Where(ts => ts.TypeKind == TypeKind.Class).ToList();

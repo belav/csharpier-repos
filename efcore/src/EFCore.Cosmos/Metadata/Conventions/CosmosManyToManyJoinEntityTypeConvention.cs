@@ -87,10 +87,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             if (ShouldSharePartitionKey(skipNavigation))
             {
                 var model = skipNavigation.DeclaringEntityType.Model;
-                var joinEntityTypeBuilder = model.Builder.SharedTypeEntity(
-                    joinEntityTypeName,
-                    typeof(Dictionary<string, object>)
-                )!;
+                var joinEntityTypeBuilder = model
+                    .Builder
+                    .SharedTypeEntity(joinEntityTypeName, typeof(Dictionary<string, object>))!;
                 ConfigurePartitionKeyJoinEntityType(skipNavigation, joinEntityTypeBuilder);
             }
             else
@@ -104,13 +103,13 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             IConventionEntityTypeBuilder joinEntityTypeBuilder
         )
         {
-            var principalPartitionKey =
-                skipNavigation.DeclaringEntityType.GetPartitionKeyProperty()!;
+            var principalPartitionKey = skipNavigation
+                .DeclaringEntityType
+                .GetPartitionKeyProperty()!;
             var partitionKey =
-                joinEntityTypeBuilder.Property(
-                    principalPartitionKey.ClrType,
-                    principalPartitionKey.Name
-                )!.Metadata;
+                joinEntityTypeBuilder
+                    .Property(principalPartitionKey.ClrType, principalPartitionKey.Name)!
+                    .Metadata;
             joinEntityTypeBuilder.HasPartitionKey(partitionKey.Name);
 
             CreateSkipNavigationForeignKey(skipNavigation, joinEntityTypeBuilder, partitionKey);
@@ -157,11 +156,13 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 else
                 {
                     dependentProperties[i] =
-                        joinEntityTypeBuilder.CreateUniqueProperty(
-                            principalProperty.ClrType,
-                            principalProperty.Name,
-                            required: true
-                        )!.Metadata;
+                        joinEntityTypeBuilder
+                            .CreateUniqueProperty(
+                                principalProperty.ClrType,
+                                principalProperty.Name,
+                                required: true
+                            )!
+                            .Metadata;
                 }
             }
 
@@ -172,7 +173,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                         dependentProperties,
                         principalKey
                     )!
-                    .IsUnique(false)!.Metadata;
+                    .IsUnique(false)!
+                    .Metadata;
 
             skipNavigation.Builder.HasForeignKey(foreignKey);
 
@@ -194,8 +196,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 var joinEntityTypeBuilder = joinEntityType.Builder;
                 if (ShouldSharePartitionKey(skipNavigation))
                 {
-                    var principalPartitionKey =
-                        skipNavigation.DeclaringEntityType.GetPartitionKeyProperty()!;
+                    var principalPartitionKey = skipNavigation
+                        .DeclaringEntityType
+                        .GetPartitionKeyProperty()!;
                     var partitionKey = joinEntityType.GetPartitionKeyProperty();
                     if (
                         (
@@ -206,9 +209,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                                 )
                                 || (
                                     skipNavigation.ForeignKey!.Properties.Contains(partitionKey)
-                                    && inverseSkipNavigation.ForeignKey!.Properties.Contains(
-                                        partitionKey
-                                    )
+                                    && inverseSkipNavigation
+                                        .ForeignKey!
+                                        .Properties
+                                        .Contains(partitionKey)
                                 )
                             )
                         )

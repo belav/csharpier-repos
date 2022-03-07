@@ -159,7 +159,8 @@ namespace Microsoft.EntityFrameworkCore.Update
                     }
                 } while (
                     commandIndex < CommandResultSet.Count
-                    && await reader.DbDataReader
+                    && await reader
+                        .DbDataReader
                         .NextResultAsync(cancellationToken)
                         .ConfigureAwait(false)
                 );

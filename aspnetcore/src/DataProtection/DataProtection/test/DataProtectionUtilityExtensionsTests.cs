@@ -27,7 +27,8 @@ public class DataProtectionUtilityExtensionsTests
         var services = new ServiceCollection()
             .AddSingleton(mockEnvironment.Object)
             .AddDataProtection()
-            .Services.BuildServiceProvider();
+            .Services
+            .BuildServiceProvider();
 
         // Act
         var actual = services.GetApplicationUniqueIdentifier();
@@ -59,7 +60,8 @@ public class DataProtectionUtilityExtensionsTests
             .AddSingleton(mockEnvironment.Object)
             .AddSingleton(mockAppDiscriminator.Object)
             .AddDataProtection()
-            .Services.BuildServiceProvider();
+            .Services
+            .BuildServiceProvider();
 
         // Act
         var actual = services.GetApplicationUniqueIdentifier();

@@ -164,20 +164,22 @@ namespace Systen.Net.Mail.Tests
                             if (parts.Length == 2)
                             {
                                 await SendMessageAsync("334 VXNlcm5hbWU6");
-                                Username = Encoding.UTF8.GetString(
-                                    Convert.FromBase64String(await ReceiveMessageAsync())
-                                );
+                                Username = Encoding
+                                    .UTF8
+                                    .GetString(
+                                        Convert.FromBase64String(await ReceiveMessageAsync())
+                                    );
                             }
                             else
                             {
-                                Username = Encoding.UTF8.GetString(
-                                    Convert.FromBase64String(parts[2])
-                                );
+                                Username = Encoding
+                                    .UTF8
+                                    .GetString(Convert.FromBase64String(parts[2]));
                             }
                             await SendMessageAsync("334 UGFzc3dvcmQ6");
-                            Password = Encoding.UTF8.GetString(
-                                Convert.FromBase64String(await ReceiveMessageAsync())
-                            );
+                            Password = Encoding
+                                .UTF8
+                                .GetString(Convert.FromBase64String(await ReceiveMessageAsync()));
                             UsernamePassword = Username + Password;
                             await SendMessageAsync("235 Authentication successful");
                         }

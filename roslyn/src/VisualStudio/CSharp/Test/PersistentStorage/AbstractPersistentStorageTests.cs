@@ -1587,8 +1587,9 @@ namespace Microsoft.CodeAnalysis.UnitTests.WorkspaceServices
                 )
             );
 
-            var configuration =
-                workspace.Services.GetRequiredService<IPersistentStorageConfiguration>();
+            var configuration = workspace
+                .Services
+                .GetRequiredService<IPersistentStorageConfiguration>();
             var location = configuration.TryGetStorageLocation(
                 SolutionKey.ToSolutionKey(workspace.CurrentSolution)
             );

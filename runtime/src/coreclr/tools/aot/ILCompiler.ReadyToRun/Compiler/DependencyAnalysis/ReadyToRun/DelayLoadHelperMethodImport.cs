@@ -54,9 +54,9 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             if (_useInstantiatingStub)
             {
                 // Require compilation of the canonical version for instantiating stubs
-                MethodDesc canonMethod = _method.Method.GetCanonMethodTarget(
-                    CanonicalFormKind.Specific
-                );
+                MethodDesc canonMethod = _method
+                    .Method
+                    .GetCanonMethodTarget(CanonicalFormKind.Specific);
                 if (factory.CompilationModuleGroup.ContainsMethodBody(canonMethod, false))
                 {
                     ISymbolNode canonMethodNode = factory.CompiledMethodNode(canonMethod);

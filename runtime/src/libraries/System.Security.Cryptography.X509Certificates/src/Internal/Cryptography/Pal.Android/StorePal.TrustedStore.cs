@@ -44,11 +44,13 @@ namespace Internal.Cryptography.Pal
                 bool systemOnly = _location == StoreLocation.LocalMachine;
                 unsafe
                 {
-                    bool success = Interop.AndroidCrypto.X509StoreEnumerateTrustedCertificates(
-                        (byte)(systemOnly ? 1 : 0),
-                        &EnumCertificatesCallback,
-                        Unsafe.AsPointer(ref context)
-                    );
+                    bool success = Interop
+                        .AndroidCrypto
+                        .X509StoreEnumerateTrustedCertificates(
+                            (byte)(systemOnly ? 1 : 0),
+                            &EnumCertificatesCallback,
+                            Unsafe.AsPointer(ref context)
+                        );
                     if (!success)
                     {
                         throw new CryptographicException(

@@ -141,7 +141,9 @@ public class FormFileModelBinder : IModelBinder
 
         // We need to add a ValidationState entry because the modelName might be non-standard. Otherwise
         // the entry we create in model state might not be marked as valid.
-        bindingContext.ValidationState.Add(value, new ValidationStateEntry() { Key = modelName, });
+        bindingContext
+            .ValidationState
+            .Add(value, new ValidationStateEntry() { Key = modelName, });
 
         bindingContext.ModelState.SetModelValue(modelName, rawValue: null, attemptedValue: null);
 

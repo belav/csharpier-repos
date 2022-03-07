@@ -14,7 +14,8 @@ internal class DefaultRazorParserOptionsFactoryProjectFeature
 
     protected override void OnInitialized()
     {
-        _configureOptions = ProjectEngine.EngineFeatures
+        _configureOptions = ProjectEngine
+            .EngineFeatures
             .OfType<IConfigureRazorParserOptionsFeature>()
             .ToArray();
     }

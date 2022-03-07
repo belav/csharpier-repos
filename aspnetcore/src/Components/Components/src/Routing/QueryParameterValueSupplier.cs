@@ -116,10 +116,9 @@ internal sealed class QueryParameterValueSupplier
                     ? destination.Parser.ParseMultiple(values, destination.ComponentParameterName)
                     : values.Count == 0
                         ? default
-                        : destination.Parser.Parse(
-                              values[0].Span,
-                              destination.ComponentParameterName
-                          );
+                        : destination
+                          .Parser
+                          .Parse(values[0].Span, destination.ComponentParameterName);
 
                 builder.AddAttribute(0, destination.ComponentParameterName, parsedValue);
             }
@@ -203,10 +202,9 @@ internal sealed class QueryParameterValueSupplier
 
         mappings?.Sort(
             (a, b) =>
-                QueryParameterNameComparer.Instance.Compare(
-                    a.QueryParameterName,
-                    b.QueryParameterName
-                )
+                QueryParameterNameComparer
+                    .Instance
+                    .Compare(a.QueryParameterName, b.QueryParameterName)
         );
         return mappings?.ToArray();
     }

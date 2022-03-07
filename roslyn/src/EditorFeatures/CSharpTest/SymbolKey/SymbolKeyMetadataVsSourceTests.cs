@@ -308,7 +308,9 @@ class Test
             var mtsym20_3 = mem20_2.Parameters[1].Type;
 
             // ====================
-            var typeTest = comp40.SourceModule.GlobalNamespace
+            var typeTest = comp40
+                .SourceModule
+                .GlobalNamespace
                 .GetTypeMembers("Test")
                 .FirstOrDefault();
             var mem40 = typeTest.GetMembers("Main").Single() as IMethodSymbol;

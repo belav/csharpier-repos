@@ -402,9 +402,11 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                     var graph = solution.GetProjectDependencyGraph();
 
                     if (
-                        solution.Options.GetOption(
-                            InternalSolutionCrawlerOptions.DirectDependencyPropagationOnly
-                        )
+                        solution
+                            .Options
+                            .GetOption(
+                                InternalSolutionCrawlerOptions.DirectDependencyPropagationOnly
+                            )
                     )
                     {
                         return graph

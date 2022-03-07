@@ -107,17 +107,20 @@ namespace System.Reflection.TypeLoading.Ecma
         protected sealed override RoMethod? ComputeEventAddMethod() =>
             EventDefinition
                 .GetAccessors()
-                .Adder.ToMethodOrNull(GetRoDeclaringType(), ReflectedType);
+                .Adder
+                .ToMethodOrNull(GetRoDeclaringType(), ReflectedType);
 
         protected sealed override RoMethod? ComputeEventRemoveMethod() =>
             EventDefinition
                 .GetAccessors()
-                .Remover.ToMethodOrNull(GetRoDeclaringType(), ReflectedType);
+                .Remover
+                .ToMethodOrNull(GetRoDeclaringType(), ReflectedType);
 
         protected sealed override RoMethod? ComputeEventRaiseMethod() =>
             EventDefinition
                 .GetAccessors()
-                .Raiser.ToMethodOrNull(GetRoDeclaringType(), ReflectedType);
+                .Raiser
+                .ToMethodOrNull(GetRoDeclaringType(), ReflectedType);
 
         private MetadataReader Reader => _module.Reader;
         private MetadataLoadContext Loader => GetRoModule().Loader;

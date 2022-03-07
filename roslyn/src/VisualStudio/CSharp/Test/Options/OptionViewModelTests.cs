@@ -83,16 +83,16 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.Options
         public void TestOptionLoading()
         {
             using var workspace = TestWorkspace.CreateCSharp("");
-            var optionSet = workspace.Options.WithChangedOption(
-                CSharpFormattingOptions.SpacingAfterMethodDeclarationName,
-                true
-            );
+            var optionSet = workspace
+                .Options
+                .WithChangedOption(CSharpFormattingOptions.SpacingAfterMethodDeclarationName, true);
             var optionStore = new OptionStore(optionSet, Enumerable.Empty<IOption>());
 
             var serviceProvider = new MockServiceProvider(workspace.ExportProvider);
             using var viewModel = new SpacingViewModel(optionStore, serviceProvider);
             // Use the first item's preview.
-            var checkbox = viewModel.Items
+            var checkbox = viewModel
+                .Items
                 .OfType<CheckBoxOptionViewModel>()
                 .Where(c => c.Option == CSharpFormattingOptions.SpacingAfterMethodDeclarationName)
                 .First();
@@ -107,7 +107,8 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.Options
             var optionStore = new OptionStore(workspace.Options, Enumerable.Empty<IOption>());
             using var viewModel = new SpacingViewModel(optionStore, serviceProvider);
             // Use the first item's preview.
-            var checkbox = viewModel.Items
+            var checkbox = viewModel
+                .Items
                 .OfType<CheckBoxOptionViewModel>()
                 .Where(c => c.Option == CSharpFormattingOptions.SpacingAfterMethodDeclarationName)
                 .First();

@@ -139,9 +139,9 @@ namespace Newtonsoft.Json.Tests.Schema
             );
             Assert.AreEqual(
                 2,
-                model.Properties["thirdproperty"].Properties[
-                    "thirdproperty_firstproperty"
-                ].Patterns.Count
+                model.Properties["thirdproperty"].Properties["thirdproperty_firstproperty"]
+                    .Patterns
+                    .Count
             );
             Assert.AreEqual(
                 "hi",

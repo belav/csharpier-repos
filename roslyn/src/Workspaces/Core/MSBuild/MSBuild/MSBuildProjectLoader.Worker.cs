@@ -464,7 +464,8 @@ namespace Microsoft.CodeAnalysis.MSBuild
 
                         // add all the extra options that are really behavior overrides
                         var metadataService = GetWorkspaceService<IMetadataService>();
-                        var compilationOptions = commandLineArgs.CompilationOptions
+                        var compilationOptions = commandLineArgs
+                            .CompilationOptions
                             .WithXmlReferenceResolver(new XmlFileResolver(projectDirectory))
                             .WithSourceReferenceResolver(
                                 new SourceFileResolver(

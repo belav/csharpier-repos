@@ -67,7 +67,8 @@ namespace Microsoft.CodeAnalysis.Formatting
                 throw new ArgumentNullException(nameof(language));
             }
 
-            var service = workspace.Services
+            var service = workspace
+                .Services
                 .GetLanguageServices(language)
                 .GetService<ISyntaxFormattingService>();
             if (service != null)
@@ -399,7 +400,8 @@ namespace Microsoft.CodeAnalysis.Formatting
                 throw new ArgumentNullException(nameof(node));
             }
 
-            var languageFormatter = workspace.Services
+            var languageFormatter = workspace
+                .Services
                 .GetLanguageServices(node.Language)
                 .GetService<ISyntaxFormattingService>();
             if (languageFormatter == null)

@@ -267,12 +267,14 @@ namespace System.Dynamic.Tests
             )
             {
                 if (
-                    binder.Name.Equals(
-                        "Power",
-                        binder.IgnoreCase
-                          ? StringComparison.OrdinalIgnoreCase
-                          : StringComparison.Ordinal
-                    )
+                    binder
+                        .Name
+                        .Equals(
+                            "Power",
+                            binder.IgnoreCase
+                              ? StringComparison.OrdinalIgnoreCase
+                              : StringComparison.Ordinal
+                        )
                     && args.Length == 2
                 )
                 {

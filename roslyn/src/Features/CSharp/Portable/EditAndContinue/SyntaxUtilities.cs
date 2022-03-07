@@ -268,7 +268,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
             }
 
             var firstGetter = accessorList
-                ?.Accessors.Where(a => a.IsKind(SyntaxKind.GetAccessorDeclaration))
+                ?.Accessors
+                .Where(a => a.IsKind(SyntaxKind.GetAccessorDeclaration))
                 .FirstOrDefault();
             if (firstGetter == null)
             {
@@ -385,10 +386,12 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
             // each declarator in the declaration translates to a suspension point: await DisposeAsync
             if (
                 node.IsKind(SyntaxKind.VariableDeclarator)
-                && node.Parent.Parent.IsKind(
-                    SyntaxKind.LocalDeclarationStatement,
-                    out LocalDeclarationStatementSyntax localDecl
-                )
+                && node.Parent
+                    .Parent
+                    .IsKind(
+                        SyntaxKind.LocalDeclarationStatement,
+                        out LocalDeclarationStatementSyntax localDecl
+                    )
                 && localDecl.AwaitKeyword.IsKind(SyntaxKind.AwaitKeyword)
             )
             {

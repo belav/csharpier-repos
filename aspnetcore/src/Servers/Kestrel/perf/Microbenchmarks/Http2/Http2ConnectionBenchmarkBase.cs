@@ -90,9 +90,10 @@ public abstract class Http2ConnectionBenchmarkBase
         );
 
         _connectionPair.Application.Output.Write(Http2Connection.ClientPreface);
-        _connectionPair.Application.Output.WriteSettings(
-            new Http2PeerSettings { InitialWindowSize = 2147483647 }
-        );
+        _connectionPair
+            .Application
+            .Output
+            .WriteSettings(new Http2PeerSettings { InitialWindowSize = 2147483647 });
         _connectionPair.Application.Output.FlushAsync().GetAwaiter().GetResult();
 
         // Read past connection setup frames
@@ -109,14 +110,17 @@ public abstract class Http2ConnectionBenchmarkBase
     {
         _requestHeadersEnumerator.Initialize(_httpRequestHeaders);
         _requestHeadersEnumerator.MoveNext();
-        _connectionPair.Application.Output.WriteStartStream(
-            streamId: _currentStreamId,
-            _hpackEncoder,
-            _requestHeadersEnumerator,
-            _headersBuffer,
-            endStream: true,
-            frame: _httpFrame
-        );
+        _connectionPair
+            .Application
+            .Output
+            .WriteStartStream(
+                streamId: _currentStreamId,
+                _hpackEncoder,
+                _requestHeadersEnumerator,
+                _headersBuffer,
+                endStream: true,
+                frame: _httpFrame
+            );
         await _connectionPair.Application.Output.FlushAsync();
 
         while (true)
@@ -135,11 +139,10 @@ public abstract class Http2ConnectionBenchmarkBase
 
             if (_dataWritten > 1024 * 32)
             {
-                _connectionPair.Application.Output.WriteWindowUpdateAsync(
-                    streamId: 0,
-                    _dataWritten,
-                    _httpFrame
-                );
+                _connectionPair
+                    .Application
+                    .Output
+                    .WriteWindowUpdateAsync(streamId: 0, _dataWritten, _httpFrame);
                 await _connectionPair.Application.Output.FlushAsync();
 
                 _dataWritten = 0;

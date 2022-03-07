@@ -360,62 +360,71 @@ namespace System.Linq.Expressions.Tests
         public void NullParameters()
         {
             Assert.Empty(
-                Expression.Lambda<Func<int>>(
-                    Expression.Constant(0),
-                    default(ParameterExpression[])
-                ).Parameters
+                Expression
+                    .Lambda<Func<int>>(Expression.Constant(0), default(ParameterExpression[]))
+                    .Parameters
             );
             Assert.Empty(
-                Expression.Lambda<Func<int>>(
-                    Expression.Constant(0),
-                    true,
-                    default(ParameterExpression[])
-                ).Parameters
+                Expression
+                    .Lambda<Func<int>>(Expression.Constant(0), true, default(ParameterExpression[]))
+                    .Parameters
             );
             Assert.Empty(
-                Expression.Lambda<Func<int>>(
-                    Expression.Constant(0),
-                    true,
-                    default(IEnumerable<ParameterExpression>)
-                ).Parameters
+                Expression
+                    .Lambda<Func<int>>(
+                        Expression.Constant(0),
+                        true,
+                        default(IEnumerable<ParameterExpression>)
+                    )
+                    .Parameters
             );
             Assert.Empty(
-                Expression.Lambda<Func<int>>(
-                    Expression.Constant(0),
-                    "foo",
-                    default(IEnumerable<ParameterExpression>)
-                ).Parameters
+                Expression
+                    .Lambda<Func<int>>(
+                        Expression.Constant(0),
+                        "foo",
+                        default(IEnumerable<ParameterExpression>)
+                    )
+                    .Parameters
             );
             Assert.Empty(
-                Expression.Lambda(
-                    typeof(Func<int>),
-                    Expression.Constant(0),
-                    default(ParameterExpression[])
-                ).Parameters
+                Expression
+                    .Lambda(
+                        typeof(Func<int>),
+                        Expression.Constant(0),
+                        default(ParameterExpression[])
+                    )
+                    .Parameters
             );
             Assert.Empty(
-                Expression.Lambda(
-                    typeof(Func<int>),
-                    Expression.Constant(0),
-                    true,
-                    default(ParameterExpression[])
-                ).Parameters
+                Expression
+                    .Lambda(
+                        typeof(Func<int>),
+                        Expression.Constant(0),
+                        true,
+                        default(ParameterExpression[])
+                    )
+                    .Parameters
             );
             Assert.Empty(
-                Expression.Lambda(
-                    typeof(Func<int>),
-                    Expression.Constant(0),
-                    true,
-                    default(IEnumerable<ParameterExpression>)
-                ).Parameters
+                Expression
+                    .Lambda(
+                        typeof(Func<int>),
+                        Expression.Constant(0),
+                        true,
+                        default(IEnumerable<ParameterExpression>)
+                    )
+                    .Parameters
             );
             Assert.Empty(
-                Expression.Lambda(
-                    typeof(Func<int>),
-                    Expression.Constant(0),
-                    "foo",
-                    default(IEnumerable<ParameterExpression>)
-                ).Parameters
+                Expression
+                    .Lambda(
+                        typeof(Func<int>),
+                        Expression.Constant(0),
+                        "foo",
+                        default(IEnumerable<ParameterExpression>)
+                    )
+                    .Parameters
             );
         }
 
@@ -502,19 +511,23 @@ namespace System.Linq.Expressions.Tests
         public void ExplicitlyNullNameAllowed()
         {
             Assert.Null(
-                Expression.Lambda<Func<int>>(
-                    Expression.Constant(0),
-                    null,
-                    Enumerable.Empty<ParameterExpression>()
-                ).Name
+                Expression
+                    .Lambda<Func<int>>(
+                        Expression.Constant(0),
+                        null,
+                        Enumerable.Empty<ParameterExpression>()
+                    )
+                    .Name
             );
             Assert.Null(
-                Expression.Lambda(
-                    Expression.Constant(0),
-                    null,
-                    false,
-                    Enumerable.Empty<ParameterExpression>()
-                ).Name
+                Expression
+                    .Lambda(
+                        Expression.Constant(0),
+                        null,
+                        false,
+                        Enumerable.Empty<ParameterExpression>()
+                    )
+                    .Name
             );
         }
 
@@ -663,10 +676,12 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(typeof(int).MakeByRefType(), delMethod.GetParameters()[0].ParameterType);
             Assert.Same(
                 delType,
-                Expression.Lambda(
-                    Expression.Constant(3L),
-                    Expression.Parameter(typeof(int).MakeByRefType())
-                ).Type
+                Expression
+                    .Lambda(
+                        Expression.Constant(3L),
+                        Expression.Parameter(typeof(int).MakeByRefType())
+                    )
+                    .Type
             );
 #endif //FEATURE_COMPILE
         }

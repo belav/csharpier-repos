@@ -47,9 +47,9 @@ namespace Roslyn.VisualStudio.Next.UnitTests.EditAndContinue
         [Theory, CombinatorialData]
         public async Task Proxy(TestHost testHost)
         {
-            var localComposition = EditorTestCompositions.EditorFeatures.WithTestHostParts(
-                testHost
-            );
+            var localComposition = EditorTestCompositions
+                .EditorFeatures
+                .WithTestHostParts(testHost);
             if (testHost == TestHost.InProcess)
             {
                 localComposition = localComposition.AddParts(
@@ -62,14 +62,16 @@ namespace Roslyn.VisualStudio.Next.UnitTests.EditAndContinue
             var globalOptions = localWorkspace.GetService<IGlobalOptionService>();
 
             MockEditAndContinueWorkspaceService mockEncService;
-            var clientProvider =
-                (InProcRemoteHostClientProvider?)localWorkspace.Services.GetService<IRemoteHostClientProvider>();
+            var clientProvider = (InProcRemoteHostClientProvider?)localWorkspace
+                .Services
+                .GetService<IRemoteHostClientProvider>();
             if (testHost == TestHost.InProcess)
             {
                 Assert.Null(clientProvider);
 
-                mockEncService =
-                    (MockEditAndContinueWorkspaceService)localWorkspace.Services.GetRequiredService<IEditAndContinueWorkspaceService>();
+                mockEncService = (MockEditAndContinueWorkspaceService)localWorkspace
+                    .Services
+                    .GetRequiredService<IEditAndContinueWorkspaceService>();
             }
             else
             {
@@ -83,12 +85,14 @@ namespace Roslyn.VisualStudio.Next.UnitTests.EditAndContinue
                     .GetTestClientAsync(localWorkspace)
                     .ConfigureAwait(false);
                 var remoteWorkspace = client.TestData.WorkspaceManager.GetWorkspace();
-                mockEncService =
-                    (MockEditAndContinueWorkspaceService)remoteWorkspace.Services.GetRequiredService<IEditAndContinueWorkspaceService>();
+                mockEncService = (MockEditAndContinueWorkspaceService)remoteWorkspace
+                    .Services
+                    .GetRequiredService<IEditAndContinueWorkspaceService>();
             }
 
             localWorkspace.ChangeSolution(
-                localWorkspace.CurrentSolution
+                localWorkspace
+                    .CurrentSolution
                     .AddProject("proj", "proj", LanguageNames.CSharp)
                     .AddMetadataReferences(
                         TargetFrameworkUtil.GetReferences(TargetFramework.Mscorlib40)
@@ -97,7 +101,9 @@ namespace Roslyn.VisualStudio.Next.UnitTests.EditAndContinue
                         "test.cs",
                         SourceText.From("class C { }", Encoding.UTF8),
                         filePath: "test.cs"
-                    ).Project.Solution
+                    )
+                    .Project
+                    .Solution
             );
 
             var solution = localWorkspace.CurrentSolution;
@@ -259,7 +265,8 @@ namespace Roslyn.VisualStudio.Next.UnitTests.EditAndContinue
                 AssertEx.Equal(
                     activeSpans1,
                     activeStatementSpanProvider(document1.Id, "test.cs", CancellationToken.None)
-                        .AsTask().Result
+                        .AsTask()
+                        .Result
                 );
                 return true;
             };
@@ -288,7 +295,8 @@ namespace Roslyn.VisualStudio.Next.UnitTests.EditAndContinue
                 AssertEx.Equal(
                     activeSpans1,
                     activeStatementSpanProvider(document1.Id, "test.cs", CancellationToken.None)
-                        .AsTask().Result
+                        .AsTask()
+                        .Result
                 );
 
                 var deltas = ImmutableArray.Create(
@@ -316,7 +324,8 @@ namespace Roslyn.VisualStudio.Next.UnitTests.EditAndContinue
                     )
                 );
 
-                var syntaxTree = project.Documents
+                var syntaxTree = project
+                    .Documents
                     .Single()
                     .GetSyntaxTreeSynchronously(CancellationToken.None)!;
 
@@ -443,7 +452,8 @@ namespace Roslyn.VisualStudio.Next.UnitTests.EditAndContinue
                 AssertEx.Equal(
                     activeSpans1,
                     activeStatementSpanProvider(document1.Id, "test.cs", CancellationToken.None)
-                        .AsTask().Result
+                        .AsTask()
+                        .Result
                 );
                 return new LinePositionSpan(new LinePosition(1, 2), new LinePosition(1, 5));
             };
@@ -513,7 +523,8 @@ namespace Roslyn.VisualStudio.Next.UnitTests.EditAndContinue
                 AssertEx.Equal(
                     activeSpans1,
                     activeStatementSpanProvider(document.Id, "test.cs", CancellationToken.None)
-                        .AsTask().Result
+                        .AsTask()
+                        .Result
                 );
                 return ImmutableArray.Create(activeStatementSpan1);
             };

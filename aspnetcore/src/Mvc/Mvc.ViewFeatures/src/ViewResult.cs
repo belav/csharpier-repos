@@ -66,17 +66,20 @@ public class ViewResult : ActionResult, IStatusCodeActionResult
             throw new ArgumentNullException(nameof(context));
         }
 
-        var executor = context.HttpContext.RequestServices.GetService<
-            IActionResultExecutor<ViewResult>
-        >();
+        var executor = context
+            .HttpContext
+            .RequestServices
+            .GetService<IActionResultExecutor<ViewResult>>();
         if (executor == null)
         {
             throw new InvalidOperationException(
-                Mvc.Core.Resources.FormatUnableToFindServices(
-                    nameof(IServiceCollection),
-                    "AddControllersWithViews()",
-                    "ConfigureServices(...)"
-                )
+                Mvc.Core
+                    .Resources
+                    .FormatUnableToFindServices(
+                        nameof(IServiceCollection),
+                        "AddControllersWithViews()",
+                        "ConfigureServices(...)"
+                    )
             );
         }
 

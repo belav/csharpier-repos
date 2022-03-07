@@ -101,9 +101,9 @@ namespace System.Text.Tests
                 Assert.True(task.IsCanceled);
                 Assert.Equal(
                     expectedCancellationToken,
-                    Assert.Throws<TaskCanceledException>(
-                        () => task.GetAwaiter().GetResult()
-                    ).CancellationToken
+                    Assert
+                        .Throws<TaskCanceledException>(() => task.GetAwaiter().GetResult())
+                        .CancellationToken
                 );
             }
         }

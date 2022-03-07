@@ -46,12 +46,12 @@ namespace System.Linq.Parallel
             Debug.Assert(secondChild != null, "second child data source cannot be null");
             _outputOrdered = LeftChild.OutputOrdered || RightChild.OutputOrdered;
 
-            _prematureMergeLeft = LeftChild.OrdinalIndexState.IsWorseThan(
-                OrdinalIndexState.Increasing
-            );
-            _prematureMergeRight = RightChild.OrdinalIndexState.IsWorseThan(
-                OrdinalIndexState.Increasing
-            );
+            _prematureMergeLeft = LeftChild
+                .OrdinalIndexState
+                .IsWorseThan(OrdinalIndexState.Increasing);
+            _prematureMergeRight = RightChild
+                .OrdinalIndexState
+                .IsWorseThan(OrdinalIndexState.Increasing);
 
             if (
                 (LeftChild.OrdinalIndexState == OrdinalIndexState.Indexable)

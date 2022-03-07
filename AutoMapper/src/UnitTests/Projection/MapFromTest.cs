@@ -124,9 +124,9 @@ namespace AutoMapper.UnitTests.Projection.MapFromTest
 
         [Fact]
         public void Should_map_ok() =>
-            Map<Dto>(new Model { Inner = new InnerModel("mappedFrom") }).Value.ShouldBe(
-                "mappedFrom"
-            );
+            Map<Dto>(new Model { Inner = new InnerModel("mappedFrom") })
+                .Value
+                .ShouldBe("mappedFrom");
     }
 
     public class When_mapping_from_private_method : AutoMapperSpecBase
@@ -160,8 +160,8 @@ namespace AutoMapper.UnitTests.Projection.MapFromTest
 
         [Fact]
         public void Should_map_ok() =>
-            Map<Dto>(new Model { Inner = new InnerModel("mappedFrom") }).Value.ShouldBe(
-                "mappedFrom"
-            );
+            Map<Dto>(new Model { Inner = new InnerModel("mappedFrom") })
+                .Value
+                .ShouldBe("mappedFrom");
     }
 }

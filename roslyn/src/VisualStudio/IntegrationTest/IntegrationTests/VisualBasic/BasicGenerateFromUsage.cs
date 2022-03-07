@@ -31,14 +31,17 @@ namespace Roslyn.VisualStudio.IntegrationTests.VisualBasic
 End Module"
             );
             VisualStudio.Editor.Verify.CodeAction("Generate local 'xyz'", applyFix: true);
-            VisualStudio.Editor.Verify.TextContains(
-                @"Module Program
+            VisualStudio
+                .Editor
+                .Verify
+                .TextContains(
+                    @"Module Program
     Sub Main(args As String())
         Dim xyz As String = Nothing
         Dim x As String = xyz
     End Sub
 End Module"
-            );
+                );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateType)]
@@ -51,20 +54,22 @@ End Module"
     End Sub
 End Module"
             );
-            VisualStudio.Editor.Verify.CodeAction(
-                "Generate class 'ClassInNewFile' in new file",
-                applyFix: true
-            );
-            VisualStudio.SolutionExplorer.OpenFile(
-                new ProjectUtils.Project(ProjectName),
-                "ClassInNewFile.vb"
-            );
-            VisualStudio.Editor.Verify.TextContains(
-                @"Friend Class ClassInNewFile
+            VisualStudio
+                .Editor
+                .Verify
+                .CodeAction("Generate class 'ClassInNewFile' in new file", applyFix: true);
+            VisualStudio
+                .SolutionExplorer
+                .OpenFile(new ProjectUtils.Project(ProjectName), "ClassInNewFile.vb");
+            VisualStudio
+                .Editor
+                .Verify
+                .TextContains(
+                    @"Friend Class ClassInNewFile
     Public Sub New()
     End Sub
 End Class"
-            );
+                );
         }
     }
 }

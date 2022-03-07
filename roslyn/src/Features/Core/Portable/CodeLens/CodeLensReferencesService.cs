@@ -35,10 +35,9 @@ namespace Microsoft.CodeAnalysis.CodeLens
         /// never actually call into this member.
         /// </summary>
         private static readonly FindReferencesSearchOptions s_nonParallelSearch =
-            FindReferencesSearchOptions.Default.With(
-                @explicit: false,
-                unidirectionalHierarchyCascade: true
-            );
+            FindReferencesSearchOptions
+                .Default
+                .With(@explicit: false, unidirectionalHierarchyCascade: true);
 
         private static async Task<T?> FindAsync<T>(
             Solution solution,
@@ -310,7 +309,8 @@ namespace Microsoft.CodeAnalysis.CodeLens
                     syntaxNode,
                     async progress =>
                     {
-                        var referenceTasks = progress.Locations
+                        var referenceTasks = progress
+                            .Locations
                             .Select(
                                 location =>
                                     GetDescriptorOfEnclosingSymbolAsync(
@@ -407,7 +407,8 @@ namespace Microsoft.CodeAnalysis.CodeLens
                 syntaxNode,
                 async progress =>
                 {
-                    var descriptorTasks = progress.Locations
+                    var descriptorTasks = progress
+                        .Locations
                         .Select(
                             location =>
                                 TryGetMethodDescriptorAsync(location, solution, cancellationToken)

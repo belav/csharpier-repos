@@ -43,11 +43,12 @@ namespace System.Security.Cryptography.Asn1
             AsnValueReader reader;
 
             reader = new AsnValueReader(DefaultPrf, AsnEncodingRules.DER);
-            System.Security.Cryptography.Asn1.AlgorithmIdentifierAsn.Decode(
-                ref reader,
-                rebind,
-                out decoded.Prf
-            );
+            System
+                .Security
+                .Cryptography
+                .Asn1
+                .AlgorithmIdentifierAsn
+                .Decode(ref reader, rebind, out decoded.Prf);
             reader.ThrowIfNotEmpty();
         }
 #endif
@@ -145,11 +146,12 @@ namespace System.Security.Cryptography.Asn1
             AsnValueReader sequenceReader = reader.ReadSequence(expectedTag);
             AsnValueReader defaultReader;
 
-            System.Security.Cryptography.Asn1.Pbkdf2SaltChoice.Decode(
-                ref sequenceReader,
-                rebind,
-                out decoded.Salt
-            );
+            System
+                .Security
+                .Cryptography
+                .Asn1
+                .Pbkdf2SaltChoice
+                .Decode(ref sequenceReader, rebind, out decoded.Salt);
 
             if (!sequenceReader.TryReadInt32(out decoded.IterationCount))
             {
@@ -176,20 +178,22 @@ namespace System.Security.Cryptography.Asn1
                 && sequenceReader.PeekTag().HasSameClassAndValue(Asn1Tag.Sequence)
             )
             {
-                System.Security.Cryptography.Asn1.AlgorithmIdentifierAsn.Decode(
-                    ref sequenceReader,
-                    rebind,
-                    out decoded.Prf
-                );
+                System
+                    .Security
+                    .Cryptography
+                    .Asn1
+                    .AlgorithmIdentifierAsn
+                    .Decode(ref sequenceReader, rebind, out decoded.Prf);
             }
             else
             {
                 defaultReader = new AsnValueReader(DefaultPrf, AsnEncodingRules.DER);
-                System.Security.Cryptography.Asn1.AlgorithmIdentifierAsn.Decode(
-                    ref defaultReader,
-                    rebind,
-                    out decoded.Prf
-                );
+                System
+                    .Security
+                    .Cryptography
+                    .Asn1
+                    .AlgorithmIdentifierAsn
+                    .Decode(ref defaultReader, rebind, out decoded.Prf);
             }
 
             sequenceReader.ThrowIfNotEmpty();

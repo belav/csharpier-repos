@@ -209,7 +209,8 @@ namespace Microsoft.EntityFrameworkCore
                                     v => new MyDiscriminator(v.Value)
                                 )
                             )
-                            .Metadata.SetAfterSaveBehavior(PropertySaveBehavior.Save);
+                            .Metadata
+                            .SetAfterSaveBehavior(PropertySaveBehavior.Save);
                     }
                 );
 
@@ -752,10 +753,9 @@ namespace Microsoft.EntityFrameworkCore
             {
                 var tracker = new KeyValueEntityTracker();
 
-                context.ChangeTracker.TrackGraph(
-                    CreateFullGraph(),
-                    e => tracker.TrackEntity(e.Entry)
-                );
+                context
+                    .ChangeTracker
+                    .TrackGraph(CreateFullGraph(), e => tracker.TrackEntity(e.Entry));
 
                 context.Add(new BadOrder { BadCustomer = new BadCustomer() });
 
@@ -960,12 +960,14 @@ namespace Microsoft.EntityFrameworkCore
             );
 
             Assert.Equal(
-                expected.RequiredChildren
+                expected
+                    .RequiredChildren
                     .OrderBy(e => e.Id)
                     .SelectMany(e => e.Children)
                     .OrderBy(e => e.Id)
                     .Select(e => e.Id),
-                actual.RequiredChildren
+                actual
+                    .RequiredChildren
                     .OrderBy(e => e.Id)
                     .SelectMany(e => e.Children)
                     .OrderBy(e => e.Id)
@@ -983,12 +985,14 @@ namespace Microsoft.EntityFrameworkCore
             );
 
             Assert.Equal(
-                expected.OptionalChildren
+                expected
+                    .OptionalChildren
                     .OrderBy(e => e.Id)
                     .SelectMany(e => e.Children)
                     .OrderBy(e => e.Id)
                     .Select(e => e.Id),
-                actual.OptionalChildren
+                actual
+                    .OptionalChildren
                     .OrderBy(e => e.Id)
                     .SelectMany(e => e.Children)
                     .OrderBy(e => e.Id)
@@ -1048,12 +1052,14 @@ namespace Microsoft.EntityFrameworkCore
             );
 
             Assert.Equal(
-                expected.RequiredChildrenAk
+                expected
+                    .RequiredChildrenAk
                     .OrderBy(e => e.Id)
                     .SelectMany(e => e.Children)
                     .OrderBy(e => e.Id)
                     .Select(e => e.AlternateId),
-                actual.RequiredChildrenAk
+                actual
+                    .RequiredChildrenAk
                     .OrderBy(e => e.Id)
                     .SelectMany(e => e.Children)
                     .OrderBy(e => e.Id)
@@ -1061,12 +1067,14 @@ namespace Microsoft.EntityFrameworkCore
             );
 
             Assert.Equal(
-                expected.RequiredChildrenAk
+                expected
+                    .RequiredChildrenAk
                     .OrderBy(e => e.Id)
                     .SelectMany(e => e.CompositeChildren)
                     .OrderBy(e => e.Id)
                     .Select(e => e.Id),
-                actual.RequiredChildrenAk
+                actual
+                    .RequiredChildrenAk
                     .OrderBy(e => e.Id)
                     .SelectMany(e => e.CompositeChildren)
                     .OrderBy(e => e.Id)
@@ -1084,19 +1092,22 @@ namespace Microsoft.EntityFrameworkCore
             );
 
             Assert.Equal(
-                expected.OptionalChildrenAk
+                expected
+                    .OptionalChildrenAk
                     .OrderBy(e => e.Id)
                     .Select(e => e.CompositeChildren.Count),
                 actual.OptionalChildrenAk.OrderBy(e => e.Id).Select(e => e.CompositeChildren.Count)
             );
 
             Assert.Equal(
-                expected.OptionalChildrenAk
+                expected
+                    .OptionalChildrenAk
                     .OrderBy(e => e.Id)
                     .SelectMany(e => e.Children)
                     .OrderBy(e => e.Id)
                     .Select(e => e.AlternateId),
-                actual.OptionalChildrenAk
+                actual
+                    .OptionalChildrenAk
                     .OrderBy(e => e.Id)
                     .SelectMany(e => e.Children)
                     .OrderBy(e => e.Id)
@@ -1104,12 +1115,14 @@ namespace Microsoft.EntityFrameworkCore
             );
 
             Assert.Equal(
-                expected.OptionalChildrenAk
+                expected
+                    .OptionalChildrenAk
                     .OrderBy(e => e.Id)
                     .SelectMany(e => e.CompositeChildren)
                     .OrderBy(e => e.Id)
                     .Select(e => e.Id),
-                actual.OptionalChildrenAk
+                actual
+                    .OptionalChildrenAk
                     .OrderBy(e => e.Id)
                     .SelectMany(e => e.CompositeChildren)
                     .OrderBy(e => e.Id)
@@ -1183,30 +1196,36 @@ namespace Microsoft.EntityFrameworkCore
             );
 
             Assert.Equal(
-                expected.RequiredCompositeChildren
+                expected
+                    .RequiredCompositeChildren
                     .OrderBy(e => e.Id)
                     .Select(e => new { e.Id, e.ParentAlternateId }),
-                actual.RequiredCompositeChildren
+                actual
+                    .RequiredCompositeChildren
                     .OrderBy(e => e.Id)
                     .Select(e => new { e.Id, e.ParentAlternateId })
             );
 
             Assert.Equal(
-                expected.RequiredCompositeChildren
+                expected
+                    .RequiredCompositeChildren
                     .OrderBy(e => e.Id)
                     .Select(e => e.CompositeChildren.Count),
-                actual.RequiredCompositeChildren
+                actual
+                    .RequiredCompositeChildren
                     .OrderBy(e => e.Id)
                     .Select(e => e.CompositeChildren.Count)
             );
 
             Assert.Equal(
-                expected.RequiredCompositeChildren
+                expected
+                    .RequiredCompositeChildren
                     .OrderBy(e => e.Id)
                     .SelectMany(e => e.CompositeChildren)
                     .OrderBy(e => e.Id)
                     .Select(e => new { e.Id, e.ParentAlternateId }),
-                actual.RequiredCompositeChildren
+                actual
+                    .RequiredCompositeChildren
                     .OrderBy(e => e.Id)
                     .SelectMany(e => e.CompositeChildren)
                     .OrderBy(e => e.Id)

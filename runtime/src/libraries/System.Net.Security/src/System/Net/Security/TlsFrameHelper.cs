@@ -373,7 +373,8 @@ namespace System.Net.Security
                 SslProtocols.Tls11 => s_protocolMismatch11,
                 SslProtocols.Tls => s_protocolMismatch10,
 #pragma warning disable 0618
-                SslProtocols.Ssl3 => s_protocolMismatch30,
+                SslProtocols.Ssl3
+                  => s_protocolMismatch30,
 #pragma warning restore 0618
                 _ => Array.Empty<byte>(),
             };

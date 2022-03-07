@@ -156,7 +156,8 @@ namespace Microsoft.CodeAnalysis.ImplementInterface
                 CancellationToken cancellationToken
             )
             {
-                var compilation = await document.Project
+                var compilation = await document
+                    .Project
                     .GetRequiredCompilationAsync(cancellationToken)
                     .ConfigureAwait(false);
 
@@ -458,7 +459,8 @@ namespace Microsoft.CodeAnalysis.ImplementInterface
                     CodeStyleOptions2.RequireAccessibilityModifiers
                 );
 
-                var compilation = await document.Project
+                var compilation = await document
+                    .Project
                     .GetRequiredCompilationAsync(cancellationToken)
                     .ConfigureAwait(false);
                 var boolType = compilation.GetSpecialType(SpecialType.System_Boolean);

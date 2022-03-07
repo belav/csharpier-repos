@@ -48,16 +48,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
             var underlyingAssembly = (SourceAssemblySymbol)retargetingAssembly.UnderlyingAssembly;
 
             // Get the System.Type from the underlying assembly's Compilation
-            TypeSymbol systemType = underlyingAssembly.DeclaringCompilation.GetWellKnownType(
-                WellKnownType.System_Type
-            );
+            TypeSymbol systemType = underlyingAssembly
+                .DeclaringCompilation
+                .GetWellKnownType(WellKnownType.System_Type);
 
             // Retarget the type
             var retargetingModule = (RetargetingModuleSymbol)retargetingAssembly.Modules[0];
-            return retargetingModule.RetargetingTranslator.Retarget(
-                systemType,
-                RetargetOptions.RetargetPrimitiveTypesByTypeCode
-            );
+            return retargetingModule
+                .RetargetingTranslator
+                .Retarget(systemType, RetargetOptions.RetargetPrimitiveTypesByTypeCode);
         }
     }
 }

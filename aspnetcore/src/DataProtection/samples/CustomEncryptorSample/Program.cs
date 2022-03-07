@@ -20,7 +20,8 @@ public class Program
                 .AddDataProtection()
                 .PersistKeysToFileSystem(new DirectoryInfo(keysFolder))
                 .UseXmlEncryptor(s => new CustomXmlEncryptor(s))
-                .Services.BuildServiceProvider()
+                .Services
+                .BuildServiceProvider()
         )
         {
             var protector = services.GetDataProtector("SamplePurpose");

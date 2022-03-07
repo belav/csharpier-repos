@@ -29,10 +29,11 @@ namespace Microsoft.CodeAnalysis.AddImport
                 CancellationToken cancellationToken
             )
             {
-                var projectWithReference = project.Solution.GetRequiredProject(
-                    FixData.PortableExecutableReferenceProjectId
-                );
-                var reference = projectWithReference.MetadataReferences
+                var projectWithReference = project
+                    .Solution
+                    .GetRequiredProject(FixData.PortableExecutableReferenceProjectId);
+                var reference = projectWithReference
+                    .MetadataReferences
                     .OfType<PortableExecutableReference>()
                     .First(pe => pe.FilePath == FixData.PortableExecutableReferenceFilePathToAdd);
 

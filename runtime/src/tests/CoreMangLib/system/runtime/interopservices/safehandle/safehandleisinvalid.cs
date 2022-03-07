@@ -57,9 +57,11 @@ public class SafeHandleIsInvalid
     {
         bool retVal = true;
 
-        TestLibrary.TestFramework.BeginScenario(
-            "PosTest2: Check IsInvalid return false when  the handle value is Released. "
-        );
+        TestLibrary
+            .TestFramework
+            .BeginScenario(
+                "PosTest2: Check IsInvalid return false when  the handle value is Released. "
+            );
         try
         {
             MySafeHandle msh = new MySafeHandle();

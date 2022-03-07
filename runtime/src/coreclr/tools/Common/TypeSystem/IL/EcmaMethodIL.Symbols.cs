@@ -39,27 +39,31 @@ namespace Internal.IL
         }
 
         public override bool IsStateMachineMoveNextMethod =>
-            _method.Module.PdbReader.GetStateMachineKickoffMethod(
-                MetadataTokens.GetToken(_method.Handle)
-            ) != 0;
+            _method
+                .Module
+                .PdbReader
+                .GetStateMachineKickoffMethod(MetadataTokens.GetToken(_method.Handle)) != 0;
 
         public override IEnumerable<ILSequencePoint> GetSequencePoints()
         {
-            return _method.Module.PdbReader.GetSequencePointsForMethod(
-                MetadataTokens.GetToken(_method.Handle)
-            );
+            return _method
+                .Module
+                .PdbReader
+                .GetSequencePointsForMethod(MetadataTokens.GetToken(_method.Handle));
         }
 
         public override IEnumerable<ILLocalVariable> GetLocalVariables()
         {
-            return _method.Module.PdbReader.GetLocalVariableNamesForMethod(
-                MetadataTokens.GetToken(_method.Handle)
-            );
+            return _method
+                .Module
+                .PdbReader
+                .GetLocalVariableNamesForMethod(MetadataTokens.GetToken(_method.Handle));
         }
 
         public override IEnumerable<string> GetParameterNames()
         {
-            ParameterHandleCollection parameters = _method.MetadataReader
+            ParameterHandleCollection parameters = _method
+                .MetadataReader
                 .GetMethodDefinition(_method.Handle)
                 .GetParameters();
 

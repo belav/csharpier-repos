@@ -450,10 +450,9 @@ namespace XmlCoreTest.Common
             files.Sort(
                 (left, right) =>
                 {
-                    int comparison = Comparer<float>.Default.Compare(
-                        GetVersionFromSDKPath(left),
-                        GetVersionFromSDKPath(right)
-                    );
+                    int comparison = Comparer<float>
+                        .Default
+                        .Compare(GetVersionFromSDKPath(left), GetVersionFromSDKPath(right));
 
                     if (comparison == 0)
                         comparison = string.Compare(

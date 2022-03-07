@@ -83,12 +83,12 @@ namespace CoreclrTestLib
                 if (platformValueFlag && actionValueFlag)
                 {
                     int timeout = 240000; // Set timeout to 4 mins, because the installation on Android arm64/32 devices could take up to 10 mins on CI
-                    string dotnetCmd_raw = System.Environment.GetEnvironmentVariable(
-                        "__TestDotNetCmd"
-                    );
-                    string xharnessCmd_raw = System.Environment.GetEnvironmentVariable(
-                        "XHARNESS_CLI_PATH"
-                    );
+                    string dotnetCmd_raw = System
+                        .Environment
+                        .GetEnvironmentVariable("__TestDotNetCmd");
+                    string xharnessCmd_raw = System
+                        .Environment
+                        .GetEnvironmentVariable("XHARNESS_CLI_PATH");
                     string dotnetCmd = string.IsNullOrEmpty(dotnetCmd_raw)
                       ? "dotnet"
                       : dotnetCmd_raw;
@@ -149,16 +149,14 @@ namespace CoreclrTestLib
                         process.Start();
 
                         var cts = new CancellationTokenSource();
-                        Task copyOutput = process.StandardOutput.BaseStream.CopyToAsync(
-                            outputStream,
-                            4096,
-                            cts.Token
-                        );
-                        Task copyError = process.StandardError.BaseStream.CopyToAsync(
-                            errorStream,
-                            4096,
-                            cts.Token
-                        );
+                        Task copyOutput = process
+                            .StandardOutput
+                            .BaseStream
+                            .CopyToAsync(outputStream, 4096, cts.Token);
+                        Task copyError = process
+                            .StandardError
+                            .BaseStream
+                            .CopyToAsync(errorStream, 4096, cts.Token);
 
                         if (process.WaitForExit(timeout))
                         {

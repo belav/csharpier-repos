@@ -40,7 +40,8 @@ namespace Microsoft.CodeAnalysis.Tools.Analyzers
                     return solution;
                 }
 
-                var diagnostic = result.Diagnostics
+                var diagnostic = result
+                    .Diagnostics
                     .SelectMany(kvp => kvp.Value)
                     .Where(diagnostic => diagnostic.Location.SourceTree != null)
                     .FirstOrDefault();

@@ -114,7 +114,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
 
             private IClassificationService? TryGetClassificationService(ITextSnapshot snapshot) =>
                 _workspace
-                    ?.Services.GetLanguageServices(snapshot.ContentType)
+                    ?.Services
+                    .GetLanguageServices(snapshot.ContentType)
                     ?.GetService<IClassificationService>();
 
             #region Workspace Hookup
@@ -130,9 +131,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
             {
                 try
                 {
-                    await this.ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
-                        _disposalCancellationSource.Token
-                    );
+                    await this.ThreadingContext
+                        .JoinableTaskFactory
+                        .SwitchToMainThreadAsync(_disposalCancellationSource.Token);
 
                     // We both try to connect synchronously, and register for workspace registration events.
                     // It's possible (particularly in tests), to connect in the startup path, but then get a
@@ -568,9 +569,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
                     {
                         // 2) Translate those classifications forward so that they correspond to the true
                         //    requested snapshot.
-                        var lastSnapshotSpan = lastClassifiedSpan.TextSpan.ToSnapshotSpan(
-                            lastProcessedSnapshot
-                        );
+                        var lastSnapshotSpan = lastClassifiedSpan
+                            .TextSpan
+                            .ToSnapshotSpan(lastProcessedSnapshot);
                         var currentSnapshotSpan = lastSnapshotSpan.TranslateTo(
                             currentSnapshot,
                             SpanTrackingMode.EdgeInclusive

@@ -49,114 +49,141 @@ End Module"
             VisualStudio.SendKeys.Send("dim q as lis(");
             VisualStudio.Editor.Verify.CompletionItemsExist("Of");
 
-            VisualStudio.Editor.Verify.TextContains(
-                @"
+            VisualStudio
+                .Editor
+                .Verify
+                .TextContains(
+                    @"
 Module Module1
     Sub Main()
         Dim q As List($$)
     End Sub
 End Module",
-                assertCaretPosition: true
-            );
+                    assertCaretPosition: true
+                );
 
             VisualStudio.SendKeys.Send(VirtualKey.Down, VirtualKey.Tab);
 
-            VisualStudio.Editor.Verify.TextContains(
-                @"
+            VisualStudio
+                .Editor
+                .Verify
+                .TextContains(
+                    @"
 Module Module1
     Sub Main()
         Dim q As List(Of$$)
     End Sub
 End Module",
-                assertCaretPosition: true
-            );
+                    assertCaretPosition: true
+                );
 
             VisualStudio.SendKeys.Send(" inte");
             VisualStudio.Editor.Verify.CompletionItemsExist("Integer");
 
             VisualStudio.SendKeys.Send(')');
 
-            VisualStudio.Editor.Verify.TextContains(
-                @"
+            VisualStudio
+                .Editor
+                .Verify
+                .TextContains(
+                    @"
 Module Module1
     Sub Main()
         Dim q As List(Of Integer)$$
     End Sub
 End Module",
-                assertCaretPosition: true
-            );
+                    assertCaretPosition: true
+                );
 
             VisualStudio.SendKeys.Send(Ctrl(VirtualKey.Z));
 
-            VisualStudio.Editor.Verify.TextContains(
-                @"
+            VisualStudio
+                .Editor
+                .Verify
+                .TextContains(
+                    @"
 Module Module1
     Sub Main()
         Dim q As List(Of inte)$$
     End Sub
 End Module",
-                assertCaretPosition: true
-            );
+                    assertCaretPosition: true
+                );
 
             VisualStudio.SendKeys.Send(Ctrl(VirtualKey.Z));
 
-            VisualStudio.Editor.Verify.TextContains(
-                @"
+            VisualStudio
+                .Editor
+                .Verify
+                .TextContains(
+                    @"
 Module Module1
     Sub Main()
         Dim q As List(Of inte$$)
     End Sub
 End Module",
-                assertCaretPosition: true
-            );
+                    assertCaretPosition: true
+                );
 
             VisualStudio.SendKeys.Send(Ctrl(VirtualKey.Z));
 
-            VisualStudio.Editor.Verify.TextContains(
-                @"
+            VisualStudio
+                .Editor
+                .Verify
+                .TextContains(
+                    @"
 Module Module1
     Sub Main()
         Dim q As List(Of$$)
     End Sub
 End Module",
-                assertCaretPosition: true
-            );
+                    assertCaretPosition: true
+                );
 
             VisualStudio.SendKeys.Send(Ctrl(VirtualKey.Z));
 
-            VisualStudio.Editor.Verify.TextContains(
-                @"
+            VisualStudio
+                .Editor
+                .Verify
+                .TextContains(
+                    @"
 Module Module1
     Sub Main()
         Dim q As List($$)
     End Sub
 End Module",
-                assertCaretPosition: true
-            );
+                    assertCaretPosition: true
+                );
 
             VisualStudio.SendKeys.Send(Ctrl(VirtualKey.Z));
 
-            VisualStudio.Editor.Verify.TextContains(
-                @"
+            VisualStudio
+                .Editor
+                .Verify
+                .TextContains(
+                    @"
 Module Module1
     Sub Main()
         Dim q As lis($$)
     End Sub
 End Module",
-                assertCaretPosition: true
-            );
+                    assertCaretPosition: true
+                );
 
             VisualStudio.SendKeys.Send(Ctrl(VirtualKey.Z));
 
-            VisualStudio.Editor.Verify.TextContains(
-                @"
+            VisualStudio
+                .Editor
+                .Verify
+                .TextContains(
+                    @"
 Module Module1
     Sub Main()
         Dim q As lis($$
     End Sub
 End Module",
-                assertCaretPosition: true
-            );
+                    assertCaretPosition: true
+                );
         }
 
         [
@@ -285,15 +312,18 @@ End Module"
             VisualStudio.Editor.Verify.CompletionItemsExist("val");
 
             VisualStudio.SendKeys.Send(' ');
-            VisualStudio.Editor.Verify.TextContains(
-                @"
+            VisualStudio
+                .Editor
+                .Verify
+                .TextContains(
+                    @"
 Module Module1
     Function M(val As Integer) As Integer
         M=val $$
     End Function
 End Module",
-                assertCaretPosition: true
-            );
+                    assertCaretPosition: true
+                );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.Completion)]
@@ -302,16 +332,16 @@ End Module",
             VisualStudio.Editor.SetUseSuggestionMode(false);
 
             VisualStudio.SendKeys.Send("Nam Foo");
-            VisualStudio.Editor.Verify.CurrentLineText(
-                "Namespace Foo$$",
-                assertCaretPosition: true
-            );
+            VisualStudio
+                .Editor
+                .Verify
+                .CurrentLineText("Namespace Foo$$", assertCaretPosition: true);
 
             ClearEditor();
 
-            VisualStudio.Editor.SendKeys(
-                new KeyPress(VirtualKey.Space, ShiftState.Ctrl | ShiftState.Alt)
-            );
+            VisualStudio
+                .Editor
+                .SendKeys(new KeyPress(VirtualKey.Space, ShiftState.Ctrl | ShiftState.Alt));
 
             VisualStudio.SendKeys.Send("Nam Foo");
             VisualStudio.Editor.Verify.CurrentLineText("Nam Foo$$", assertCaretPosition: true);
@@ -323,10 +353,10 @@ End Module",
             VisualStudio.Editor.SetUseSuggestionMode(false);
 
             VisualStudio.SendKeys.Send("Nam Foo");
-            VisualStudio.Editor.Verify.CurrentLineText(
-                "Namespace Foo$$",
-                assertCaretPosition: true
-            );
+            VisualStudio
+                .Editor
+                .Verify
+                .CurrentLineText("Namespace Foo$$", assertCaretPosition: true);
 
             ClearEditor();
 

@@ -157,7 +157,8 @@ namespace Microsoft.EntityFrameworkCore
                         b.Property(e => e.Id).HasValueGenerator(factory.Create);
 
                         b.Property(e => e.SpecialId)
-                            .Metadata.SetValueGeneratorFactory(factory.Create);
+                            .Metadata
+                            .SetValueGeneratorFactory(factory.Create);
 
                         b.Property(e => e.SpecialId)
                             .HasAnnotation("SpecialGuid", true)

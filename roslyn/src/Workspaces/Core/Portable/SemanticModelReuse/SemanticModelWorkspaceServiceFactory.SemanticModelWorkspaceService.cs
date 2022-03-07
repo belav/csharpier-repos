@@ -171,7 +171,8 @@ namespace Microsoft.CodeAnalysis.SemanticModelReuse
                 // Get the current top level version for this document's project.  If it has changed, then we cannot
                 // reuse any existing cached data for it.  This also ensures that we can do things like find the same
                 // method body node prior to an edit just by counting it's top-level index in the file.
-                var topLevelSemanticVersion = await document.Project
+                var topLevelSemanticVersion = await document
+                    .Project
                     .GetDependentSemanticVersionAsync(cancellationToken)
                     .ConfigureAwait(false);
 

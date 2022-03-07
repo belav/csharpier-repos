@@ -462,9 +462,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                         if (
                             supportedInPriorityOrder[noCorrespondingNamedParameterPriority].IsNull
                             || result.Result.BadArgumentsOpt[0]
-                                > supportedInPriorityOrder[
-                                    noCorrespondingNamedParameterPriority
-                                ].Result.BadArgumentsOpt[0]
+                                > supportedInPriorityOrder[noCorrespondingNamedParameterPriority]
+                                    .Result
+                                    .BadArgumentsOpt[0]
                         )
                         {
                             supportedInPriorityOrder[noCorrespondingNamedParameterPriority] =
@@ -492,9 +492,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                         if (
                             supportedInPriorityOrder[nameUsedForPositionalPriority].IsNull
                             || result.Result.BadArgumentsOpt[0]
-                                > supportedInPriorityOrder[
-                                    nameUsedForPositionalPriority
-                                ].Result.BadArgumentsOpt[0]
+                                > supportedInPriorityOrder[nameUsedForPositionalPriority]
+                                    .Result
+                                    .BadArgumentsOpt[0]
                         )
                         {
                             supportedInPriorityOrder[nameUsedForPositionalPriority] = result;
@@ -504,9 +504,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                         if (
                             supportedInPriorityOrder[badNonTrailingNamedArgumentPriority].IsNull
                             || result.Result.BadArgumentsOpt[0]
-                                > supportedInPriorityOrder[
-                                    badNonTrailingNamedArgumentPriority
-                                ].Result.BadArgumentsOpt[0]
+                                > supportedInPriorityOrder[badNonTrailingNamedArgumentPriority]
+                                    .Result
+                                    .BadArgumentsOpt[0]
                         )
                         {
                             supportedInPriorityOrder[badNonTrailingNamedArgumentPriority] = result;
@@ -518,9 +518,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                             if (
                                 supportedInPriorityOrder[duplicateNamedArgumentPriority].IsNull
                                 || result.Result.BadArgumentsOpt[0]
-                                    > supportedInPriorityOrder[
-                                        duplicateNamedArgumentPriority
-                                    ].Result.BadArgumentsOpt[0]
+                                    > supportedInPriorityOrder[duplicateNamedArgumentPriority]
+                                        .Result
+                                        .BadArgumentsOpt[0]
                             )
                             {
                                 supportedInPriorityOrder[duplicateNamedArgumentPriority] = result;
@@ -1852,15 +1852,18 @@ namespace Microsoft.CodeAnalysis.CSharp
                 );
             }
             else if (
-                System.Linq.Enumerable.Any(
-                    ResultsBuilder,
-                    x =>
-                        (x.Result.Kind == MemberResolutionKind.TypeInferenceFailed)
-                        || (
-                            x.Result.Kind
-                            == MemberResolutionKind.TypeInferenceExtensionInstanceArgument
-                        )
-                )
+                System
+                    .Linq
+                    .Enumerable
+                    .Any(
+                        ResultsBuilder,
+                        x =>
+                            (x.Result.Kind == MemberResolutionKind.TypeInferenceFailed)
+                            || (
+                                x.Result.Kind
+                                == MemberResolutionKind.TypeInferenceExtensionInstanceArgument
+                            )
+                    )
             )
             {
                 sb.AppendLine(

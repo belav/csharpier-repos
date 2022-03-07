@@ -710,18 +710,15 @@ namespace System.Reflection
                     Type[] paramTypes = new Type[parameters.Length];
                     for (int i = 0; i < paramTypes.Length; i++)
                         paramTypes[i] = parameters[i].ParameterType;
-                    return baseMethod.DeclaringType!.GetProperty(
-                        property.Name,
-                        property.PropertyType,
-                        paramTypes
-                    );
+                    return baseMethod
+                        .DeclaringType!
+                        .GetProperty(property.Name, property.PropertyType, paramTypes);
                 }
                 else
                 {
-                    return baseMethod.DeclaringType!.GetProperty(
-                        property.Name,
-                        property.PropertyType
-                    );
+                    return baseMethod
+                        .DeclaringType!
+                        .GetProperty(property.Name, property.PropertyType);
                 }
             }
             return null;

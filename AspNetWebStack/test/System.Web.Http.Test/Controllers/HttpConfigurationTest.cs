@@ -18,10 +18,12 @@ namespace System.Web.Http
         [Fact]
         public void TypeIsCorrect()
         {
-            Assert.Type.HasProperties<HttpConfiguration>(
-                TypeAssert.TypeProperties.IsPublicVisibleClass
-                    | TypeAssert.TypeProperties.IsDisposable
-            );
+            Assert
+                .Type
+                .HasProperties<HttpConfiguration>(
+                    TypeAssert.TypeProperties.IsPublicVisibleClass
+                        | TypeAssert.TypeProperties.IsDisposable
+                );
         }
 
         [Fact]
@@ -299,7 +301,8 @@ namespace System.Web.Http
                 settings,
                 config
             );
-            clonedConfig.Services
+            clonedConfig
+                .Services
                 .GetContentNegotiator()
                 .Negotiate(
                     typeof(string),
@@ -395,7 +398,8 @@ namespace System.Web.Http
                 settings,
                 config
             );
-            clonedConfig.Services
+            clonedConfig
+                .Services
                 .GetContentNegotiator()
                 .Negotiate(
                     typeof(string),

@@ -170,18 +170,18 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
                     _eventSource.Changed += OnEventSourceChanged;
 
                     if (
-                        _dataSource.TextChangeBehavior.HasFlag(
-                            TaggerTextChangeBehavior.TrackTextChanges
-                        )
+                        _dataSource
+                            .TextChangeBehavior
+                            .HasFlag(TaggerTextChangeBehavior.TrackTextChanges)
                     )
                     {
                         _subjectBuffer.Changed += OnSubjectBufferChanged;
                     }
 
                     if (
-                        _dataSource.CaretChangeBehavior.HasFlag(
-                            TaggerCaretChangeBehavior.RemoveAllTagsOnCaretMoveOutsideOfTag
-                        )
+                        _dataSource
+                            .CaretChangeBehavior
+                            .HasFlag(TaggerCaretChangeBehavior.RemoveAllTagsOnCaretMoveOutsideOfTag)
                     )
                     {
                         if (_textViewOpt == null)
@@ -220,18 +220,18 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
                     _eventSource.Disconnect();
 
                     if (
-                        _dataSource.CaretChangeBehavior.HasFlag(
-                            TaggerCaretChangeBehavior.RemoveAllTagsOnCaretMoveOutsideOfTag
-                        )
+                        _dataSource
+                            .CaretChangeBehavior
+                            .HasFlag(TaggerCaretChangeBehavior.RemoveAllTagsOnCaretMoveOutsideOfTag)
                     )
                     {
                         _textViewOpt.Caret.PositionChanged -= OnCaretPositionChanged;
                     }
 
                     if (
-                        _dataSource.TextChangeBehavior.HasFlag(
-                            TaggerTextChangeBehavior.TrackTextChanges
-                        )
+                        _dataSource
+                            .TextChangeBehavior
+                            .HasFlag(TaggerTextChangeBehavior.TrackTextChanges)
                     )
                     {
                         _subjectBuffer.Changed -= OnSubjectBufferChanged;
@@ -247,7 +247,8 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
 
                 // If there are any options specified for this tagger, then also hook up event
                 // notifications for when those options change.
-                var optionChangedEventSources = _dataSource.Options
+                var optionChangedEventSources = _dataSource
+                    .Options
                     .Concat<IOption>(_dataSource.PerLanguageOptions)
                     .Select(o => TaggerEventSources.OnOptionChanged(_subjectBuffer, o))
                     .ToList();

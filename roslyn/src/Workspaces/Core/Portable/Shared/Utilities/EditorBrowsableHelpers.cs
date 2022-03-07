@@ -60,11 +60,13 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                 return null;
             }
 
-            var candidateConstructors = editorBrowsableAttributeType.Constructors.Where(
-                c =>
-                    c.Parameters.Length == 1
-                    && Equals(c.Parameters[0].Type, editorBrowsableStateType)
-            );
+            var candidateConstructors = editorBrowsableAttributeType
+                .Constructors
+                .Where(
+                    c =>
+                        c.Parameters.Length == 1
+                        && Equals(c.Parameters[0].Type, editorBrowsableStateType)
+                );
 
             // Ensure the constructor adheres to the expected EditorBrowsable pattern
             candidateConstructors = candidateConstructors.Where(
@@ -143,14 +145,16 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                 return ImmutableArray<IMethodSymbol>.Empty;
             }
 
-            var candidateConstructors = typeLibAttributeType.Constructors.Where(
-                c =>
-                    c.Parameters.Length == 1
-                    && (
-                        Equals(c.Parameters[0].Type, typeLibFlagsType)
-                        || Equals(c.Parameters[0].Type, shortType)
-                    )
-            );
+            var candidateConstructors = typeLibAttributeType
+                .Constructors
+                .Where(
+                    c =>
+                        c.Parameters.Length == 1
+                        && (
+                            Equals(c.Parameters[0].Type, typeLibFlagsType)
+                            || Equals(c.Parameters[0].Type, shortType)
+                        )
+                );
 
             candidateConstructors = candidateConstructors.Where(
                 c =>

@@ -24,18 +24,22 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
         {
             Assert.Equal(
                 RelationalStrings.FromSqlNonComposable,
-                Assert.Throws<InvalidOperationException>(
-                    () => CreateDummyQuerySqlGenerator().CheckComposableSql(sql)
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(
+                        () => CreateDummyQuerySqlGenerator().CheckComposableSql(sql)
+                    )
+                    .Message
             );
 
             Assert.Equal(
                 RelationalStrings.FromSqlNonComposable,
-                Assert.Throws<InvalidOperationException>(
-                    () =>
-                        CreateDummyQuerySqlGenerator()
-                            .CheckComposableSql(sql.Replace("SELECT", "WITH"))
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(
+                        () =>
+                            CreateDummyQuerySqlGenerator()
+                                .CheckComposableSql(sql.Replace("SELECT", "WITH"))
+                    )
+                    .Message
             );
         }
 
@@ -62,7 +66,9 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                         new RelationalCommandBuilderDependencies(
                             new TestRelationalTypeMappingSource(
                                 TestServiceFactory.Instance.Create<TypeMappingSourceDependencies>(),
-                                TestServiceFactory.Instance.Create<RelationalTypeMappingSourceDependencies>()
+                                TestServiceFactory
+                                    .Instance
+                                    .Create<RelationalTypeMappingSourceDependencies>()
                             )
                         )
                     ),

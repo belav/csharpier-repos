@@ -60,12 +60,13 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             var analyzer = CreateDiagnosticAnalyzer();
             var compilationWithAnalyzers = compilation
                 .WithOptions(
-                    compilation.Options.WithSpecificDiagnosticOptions(
-                        analyzer.SupportedDiagnostics.ToDictionary(
-                            d => d.Id,
-                            d => ReportDiagnostic.Default
+                    compilation
+                        .Options
+                        .WithSpecificDiagnosticOptions(
+                            analyzer
+                                .SupportedDiagnostics
+                                .ToDictionary(d => d.Id, d => ReportDiagnostic.Default)
                         )
-                    )
                 )
                 .WithAnalyzers(ImmutableArray.Create(analyzer));
 
@@ -85,12 +86,14 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
 
             var metadataReferences = DependencyContext
                 .Load(GetType().Assembly)
-                .CompileLibraries.SelectMany(c => c.ResolveReferencePaths())
+                .CompileLibraries
+                .SelectMany(c => c.ResolveReferencePaths())
                 .Select(path => MetadataReference.CreateFromFile(path))
                 .Cast<MetadataReference>()
                 .ToList();
 
-            var solution = new AdhocWorkspace().CurrentSolution
+            var solution = new AdhocWorkspace()
+                .CurrentSolution
                 .AddProject(projectId, "TestProject", "TestProject", LanguageNames.CSharp)
                 .AddMetadataReferences(projectId, metadataReferences)
                 .AddDocument(documentId, fileName, SourceText.From(source));

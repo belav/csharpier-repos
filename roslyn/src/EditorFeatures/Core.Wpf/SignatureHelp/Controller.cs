@@ -131,12 +131,14 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.SignatureHel
                         SpanTrackingMode.EdgeInclusive
                     );
 
-                    this.sessionOpt.PresenterSession.PresentItems(
-                        trackingSpan,
-                        modelOpt.Items,
-                        modelOpt.SelectedItem,
-                        modelOpt.SelectedParameter
-                    );
+                    this.sessionOpt
+                        .PresenterSession
+                        .PresentItems(
+                            trackingSpan,
+                            modelOpt.Items,
+                            modelOpt.SelectedItem,
+                            modelOpt.SelectedParameter
+                        );
                 }
             }
 
@@ -171,7 +173,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.SignatureHel
                 var document = snapshot.GetOpenDocumentInCurrentContextWithChanges();
                 if (document != null)
                 {
-                    _providers = document.Project.LanguageServices.WorkspaceServices
+                    _providers = document
+                        .Project
+                        .LanguageServices
+                        .WorkspaceServices
                         .SelectMatchingExtensionValues(
                             _allProviders,
                             this.SubjectBuffer.ContentType

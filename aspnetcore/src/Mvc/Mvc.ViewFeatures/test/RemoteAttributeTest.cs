@@ -90,10 +90,13 @@ public class RemoteAttributeTest
         Assert.Equal(2, attribute.RouteData.Count);
         Assert.Contains("controller", attribute.RouteData.Keys);
         var resultName =
-            Assert.Single(
-                attribute.RouteData,
-                keyValuePair => string.Equals(keyValuePair.Key, "action", StringComparison.Ordinal)
-            ).Value;
+            Assert
+                .Single(
+                    attribute.RouteData,
+                    keyValuePair =>
+                        string.Equals(keyValuePair.Key, "action", StringComparison.Ordinal)
+                )
+                .Value;
         Assert.Equal(action, resultName);
         Assert.Null(attribute.RouteName);
     }
@@ -109,11 +112,13 @@ public class RemoteAttributeTest
         Assert.Equal(2, attribute.RouteData.Count);
         Assert.Contains("action", attribute.RouteData.Keys);
         var resultName =
-            Assert.Single(
-                attribute.RouteData,
-                keyValuePair =>
-                    string.Equals(keyValuePair.Key, "controller", StringComparison.Ordinal)
-            ).Value;
+            Assert
+                .Single(
+                    attribute.RouteData,
+                    keyValuePair =>
+                        string.Equals(keyValuePair.Key, "controller", StringComparison.Ordinal)
+                )
+                .Value;
         Assert.Equal(controller, resultName);
         Assert.Null(attribute.RouteName);
     }
@@ -131,10 +136,13 @@ public class RemoteAttributeTest
         Assert.Contains("action", attribute.RouteData.Keys);
         Assert.Contains("controller", attribute.RouteData.Keys);
         var resultName =
-            Assert.Single(
-                attribute.RouteData,
-                keyValuePair => string.Equals(keyValuePair.Key, "area", StringComparison.Ordinal)
-            ).Value;
+            Assert
+                .Single(
+                    attribute.RouteData,
+                    keyValuePair =>
+                        string.Equals(keyValuePair.Key, "area", StringComparison.Ordinal)
+                )
+                .Value;
         Assert.Equal(areaName, resultName);
         Assert.Null(attribute.RouteName);
     }

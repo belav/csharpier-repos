@@ -90,10 +90,9 @@ namespace Microsoft.CodeAnalysis.Diagnostics.Analyzers.NamingStyles
 
             void SyntaxNodeAction(SyntaxNodeAnalysisContext syntaxContext)
             {
-                var symbol = syntaxContext.SemanticModel.GetDeclaredSymbol(
-                    syntaxContext.Node,
-                    syntaxContext.CancellationToken
-                );
+                var symbol = syntaxContext
+                    .SemanticModel
+                    .GetDeclaredSymbol(syntaxContext.Node, syntaxContext.CancellationToken);
                 if (symbol == null)
                 {
                     // Catch clauses don't need to have a declaration.

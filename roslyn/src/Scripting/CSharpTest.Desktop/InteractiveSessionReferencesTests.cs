@@ -132,22 +132,26 @@ Process.GetCurrentProcess()"
         [Fact]
         public void SearchPaths1()
         {
-            var options = ScriptOptions.Default.WithMetadataResolver(
-                ScriptMetadataResolver.Default.WithSearchPaths(
-                    RuntimeEnvironment.GetRuntimeDirectory()
-                )
-            );
+            var options = ScriptOptions
+                .Default
+                .WithMetadataResolver(
+                    ScriptMetadataResolver
+                        .Default
+                        .WithSearchPaths(RuntimeEnvironment.GetRuntimeDirectory())
+                );
 
             var result =
-                CSharpScript.EvaluateAsync(
-                    $@"
+                CSharpScript
+                    .EvaluateAsync(
+                        $@"
 #r ""System.Data.dll""
 #r ""System""
 #r ""{typeof(System.Xml.Serialization.IXmlSerializable).GetTypeInfo().Assembly.Location}""
 new System.Data.DataSet()
 ",
-                    options
-                ).Result;
+                        options
+                    )
+                    .Result;
 
             Assert.True(result is System.Data.DataSet, "Expected DataSet");
         }
@@ -186,18 +190,20 @@ new System.Data.DataSet()
         [Fact]
         public async Task SearchPaths_BaseDirectory()
         {
-            var options = ScriptOptions.Default.WithMetadataResolver(
-                new TestMetadataReferenceResolver(
-                    pathResolver: new VirtualizedRelativePathResolver(
-                        existingFullPaths: new[] { @"C:\dir\x.dll" },
-                        baseDirectory: @"C:\goo\bar"
-                    ),
-                    files: new Dictionary<string, PortableExecutableReference>
-                    {
-                        { @"C:\dir\x.dll", (PortableExecutableReference)SystemCoreRef }
-                    }
-                )
-            );
+            var options = ScriptOptions
+                .Default
+                .WithMetadataResolver(
+                    new TestMetadataReferenceResolver(
+                        pathResolver: new VirtualizedRelativePathResolver(
+                            existingFullPaths: new[] { @"C:\dir\x.dll" },
+                            baseDirectory: @"C:\goo\bar"
+                        ),
+                        files: new Dictionary<string, PortableExecutableReference>
+                        {
+                            { @"C:\dir\x.dll", (PortableExecutableReference)SystemCoreRef }
+                        }
+                    )
+                );
 
             var script = CSharpScript.Create(
                 @"
@@ -219,10 +225,12 @@ var x = from a in new[] { 1, 2 ,3 } select a + 1;
         [Fact]
         public async Task References1()
         {
-            var options0 = ScriptOptions.Default.AddReferences(
-                typeof(Process).Assembly,
-                typeof(System.Linq.Expressions.Expression).Assembly
-            );
+            var options0 = ScriptOptions
+                .Default
+                .AddReferences(
+                    typeof(Process).Assembly,
+                    typeof(System.Linq.Expressions.Expression).Assembly
+                );
 
             var s0 = await CSharpScript.RunAsync<Process>(
                 $@"
@@ -279,25 +287,28 @@ new System.Windows.Forms.Form()
         [Fact]
         public void References2()
         {
-            var options = ScriptOptions.Default
+            var options = ScriptOptions
+                .Default
                 .WithMetadataResolver(
-                    ScriptMetadataResolver.Default.WithSearchPaths(
-                        RuntimeEnvironment.GetRuntimeDirectory()
-                    )
+                    ScriptMetadataResolver
+                        .Default
+                        .WithSearchPaths(RuntimeEnvironment.GetRuntimeDirectory())
                 )
                 .AddReferences("System.Core", "System.dll")
                 .AddReferences(typeof(System.Data.DataSet).Assembly);
 
             var process =
-                CSharpScript.EvaluateAsync<Process>(
-                    $@"
+                CSharpScript
+                    .EvaluateAsync<Process>(
+                        $@"
 #r ""{typeof(System.Xml.Serialization.IXmlSerializable).Assembly.Location}""
 new System.Data.DataSet();
 System.Linq.Expressions.Expression.Constant(123);
 System.Diagnostics.Process.GetCurrentProcess()
 ",
-                    options
-                ).Result;
+                        options
+                    )
+                    .Result;
 
             Assert.NotNull(process);
         }
@@ -306,14 +317,18 @@ System.Diagnostics.Process.GetCurrentProcess()
             () =>
             {
                 string path;
-                return GlobalAssemblyCache.Instance.ResolvePartialName(
-                        "System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
-                        out path
-                    ) != null
-                    && GlobalAssemblyCache.Instance.ResolvePartialName(
-                        "System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
-                        out path
-                    ) != null;
+                return GlobalAssemblyCache
+                        .Instance
+                        .ResolvePartialName(
+                            "System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+                            out path
+                        ) != null
+                    && GlobalAssemblyCache
+                        .Instance
+                        .ResolvePartialName(
+                            "System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+                            out path
+                        ) != null;
             }
         );
 
@@ -437,14 +452,16 @@ System.Diagnostics.Process.GetCurrentProcess()
             var c2 = Temp.CreateFile(extension: ".dll").WriteAllBytes(TestResources.General.C2);
 
             var result =
-                CSharpScript.EvaluateAsync(
-                    $@"
+                CSharpScript
+                    .EvaluateAsync(
+                        $@"
 #r ""{c1.Path}""
 #r ""{c2.Path}""
 
 new C()
 "
-                ).Result;
+                    )
+                    .Result;
 
             Assert.NotNull(result);
         }
@@ -472,7 +489,8 @@ new C()
 new C()
 "
                     )
-                    .EvaluateAsync().Result;
+                    .EvaluateAsync()
+                    .Result;
 
             Assert.NotNull(result);
         }
@@ -501,14 +519,16 @@ new C()
                 );
 
             var result =
-                CSharpScript.EvaluateAsync(
-                    $@"
+                CSharpScript
+                    .EvaluateAsync(
+                        $@"
 #r ""{c1.Path}""
 #r ""{c2.Path}""
 
 new C()
 "
-                ).Result;
+                    )
+                    .Result;
 
             Assert.NotNull(result);
         }
@@ -553,7 +573,8 @@ new C()
 new C()
 "
                     )
-                    .EvaluateAsync().Result;
+                    .EvaluateAsync()
+                    .Result;
 
             Assert.NotNull(result);
         }
@@ -683,10 +704,9 @@ c1 = c2;
         [Fact]
         public async Task HostObjectBinding_DuplicateReferences()
         {
-            var options = ScriptOptions.Default.AddReferences(
-                typeof(C).Assembly,
-                typeof(C).Assembly
-            );
+            var options = ScriptOptions
+                .Default
+                .AddReferences(typeof(C).Assembly, typeof(C).Assembly);
 
             var s0 = await CSharpScript.RunAsync<int>("x", options, new C());
             var c0 = s0.Script.GetCompilation();

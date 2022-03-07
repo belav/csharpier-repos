@@ -187,12 +187,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Indentation
                         list.Add(
                             FormattingOperations.CreateRelativeIndentBlockOperation(
                                 constructorInitializer.ThisOrBaseKeyword,
-                                constructorInitializer.ArgumentList.OpenParenToken.GetNextToken(
-                                    includeZeroWidth: true
-                                ),
-                                constructorInitializer.ArgumentList.CloseParenToken.GetPreviousToken(
-                                    includeZeroWidth: true
-                                ),
+                                constructorInitializer
+                                    .ArgumentList
+                                    .OpenParenToken
+                                    .GetNextToken(includeZeroWidth: true),
+                                constructorInitializer
+                                    .ArgumentList
+                                    .CloseParenToken
+                                    .GetPreviousToken(includeZeroWidth: true),
                                 indentationDelta: 1,
                                 option: IndentBlockOption.RelativePosition
                             )

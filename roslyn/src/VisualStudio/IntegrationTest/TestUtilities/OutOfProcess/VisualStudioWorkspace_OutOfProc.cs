@@ -139,8 +139,18 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.OutOfProcess
         public void SetEnableOpeningSourceGeneratedFilesInWorkspaceExperiment(bool value)
         {
             SetOption(
-                optionName: LanguageServices.Implementation.SourceGeneratedFileManager.Options.EnableOpeningInWorkspace.Name,
-                feature: LanguageServices.Implementation.SourceGeneratedFileManager.Options.EnableOpeningInWorkspace.Feature,
+                optionName: LanguageServices
+                    .Implementation
+                    .SourceGeneratedFileManager
+                    .Options
+                    .EnableOpeningInWorkspace
+                    .Name,
+                feature: LanguageServices
+                    .Implementation
+                    .SourceGeneratedFileManager
+                    .Options
+                    .EnableOpeningInWorkspace
+                    .Feature,
                 value: value
             );
         }

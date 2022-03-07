@@ -137,9 +137,10 @@ namespace Microsoft.CodeAnalysis.SimplifyInterpolation
                         {
                             ConstantValue: { HasValue: true, Value: string value }
                         } literal
-                    && invocation.SemanticModel!.Compilation.GetTypeByMetadataName(
-                        typeof(System.IFormattable).FullName!
-                    )
+                    && invocation
+                        .SemanticModel!
+                        .Compilation
+                        .GetTypeByMetadataName(typeof(System.IFormattable).FullName!)
                         is { } systemIFormattable
                     && invocation.Instance.Type.Implements(systemIFormattable)
                 )
@@ -152,7 +153,9 @@ namespace Microsoft.CodeAnalysis.SimplifyInterpolation
                         TParenthesizedExpressionSyntax
                     >(unwrapped);
                     unnecessarySpans.AddRange(
-                        invocation.Syntax.Span
+                        invocation
+                            .Syntax
+                            .Span
                             .Subtract(unwrappedSyntax.FullSpan)
                             .Subtract(
                                 GetSpanWithinLiteralQuotes(
@@ -245,7 +248,9 @@ namespace Microsoft.CodeAnalysis.SimplifyInterpolation
                                     TParenthesizedExpressionSyntax
                                 >(unwrapped);
                                 unnecessarySpans.AddRange(
-                                    invocation.Syntax.Span
+                                    invocation
+                                        .Syntax
+                                        .Span
                                         .Subtract(unwrappedSyntax.FullSpan)
                                         .Subtract(alignmentSyntax.FullSpan)
                                 );

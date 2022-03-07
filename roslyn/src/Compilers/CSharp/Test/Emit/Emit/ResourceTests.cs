@@ -244,10 +244,12 @@ class C
                 }
             );
 
-            result.Diagnostics.Verify(
-                // error CS1566: Error reading resource 'file' -- 'bad stuff'
-                Diagnostic(ErrorCode.ERR_CantReadResource).WithArguments("file", "bad stuff")
-            );
+            result
+                .Diagnostics
+                .Verify(
+                    // error CS1566: Error reading resource 'file' -- 'bad stuff'
+                    Diagnostic(ErrorCode.ERR_CantReadResource).WithArguments("file", "bad stuff")
+                );
 
             result = c1.Emit(
                 new MemoryStream(),
@@ -257,14 +259,16 @@ class C
                 }
             );
 
-            result.Diagnostics.Verify(
-                // error CS1566: Error reading resource 'file' -- 'Resource data provider should return non-null stream'
-                Diagnostic(ErrorCode.ERR_CantReadResource)
-                    .WithArguments(
-                        "file",
-                        CodeAnalysisResources.ResourceDataProviderShouldReturnNonNullStream
-                    )
-            );
+            result
+                .Diagnostics
+                .Verify(
+                    // error CS1566: Error reading resource 'file' -- 'Resource data provider should return non-null stream'
+                    Diagnostic(ErrorCode.ERR_CantReadResource)
+                        .WithArguments(
+                            "file",
+                            CodeAnalysisResources.ResourceDataProviderShouldReturnNonNullStream
+                        )
+                );
         }
 
         [WorkItem(543501, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/543501")]
@@ -283,10 +287,12 @@ class C
                 }
             );
 
-            result.Diagnostics.Verify(
-                // error CS1508: Resource identifier 'A' has already been used in this assembly
-                Diagnostic(ErrorCode.ERR_ResourceNotUnique).WithArguments("A")
-            );
+            result
+                .Diagnostics
+                .Verify(
+                    // error CS1508: Resource identifier 'A' has already been used in this assembly
+                    Diagnostic(ErrorCode.ERR_ResourceNotUnique).WithArguments("A")
+                );
         }
 
         [WorkItem(543501, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/543501")]
@@ -312,10 +318,12 @@ class C
                 }
             );
 
-            result.Diagnostics.Verify(
-                // error CS1508: Resource identifier 'A' has already been used in this assembly
-                Diagnostic(ErrorCode.ERR_ResourceNotUnique).WithArguments("A")
-            );
+            result
+                .Diagnostics
+                .Verify(
+                    // error CS1508: Resource identifier 'A' has already been used in this assembly
+                    Diagnostic(ErrorCode.ERR_ResourceNotUnique).WithArguments("A")
+                );
 
             // file name ignored for embedded manifest resources
             result = c1.Emit(
@@ -341,10 +349,12 @@ class C
                 }
             );
 
-            result.Diagnostics.Verify(
-                // error CS1508: Resource identifier 'A' has already been used in this assembly
-                Diagnostic(ErrorCode.ERR_ResourceNotUnique).WithArguments("A")
-            );
+            result
+                .Diagnostics
+                .Verify(
+                    // error CS1508: Resource identifier 'A' has already been used in this assembly
+                    Diagnostic(ErrorCode.ERR_ResourceNotUnique).WithArguments("A")
+                );
         }
 
         [WorkItem(543501, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/543501")]
@@ -367,10 +377,12 @@ class C
                 }
             );
 
-            result.Diagnostics.Verify(
-                // error CS7041: Each linked resource and module must have a unique filename. Filename 'x.goo' is specified more than once in this assembly
-                Diagnostic(ErrorCode.ERR_ResourceFileNameNotUnique).WithArguments("x.goo")
-            );
+            result
+                .Diagnostics
+                .Verify(
+                    // error CS7041: Each linked resource and module must have a unique filename. Filename 'x.goo' is specified more than once in this assembly
+                    Diagnostic(ErrorCode.ERR_ResourceFileNameNotUnique).WithArguments("x.goo")
+                );
         }
 
         [WorkItem(543501, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/543501")]
@@ -444,12 +456,14 @@ class C
                 }
             );
 
-            result.Diagnostics.Verify(
-                // error CS1508: Resource identifier 'A' has already been used in this assembly
-                Diagnostic(ErrorCode.ERR_ResourceNotUnique).WithArguments("A"),
-                // error CS7041: Each linked resource and module must have a unique filename. Filename 'x.goo' is specified more than once in this assembly
-                Diagnostic(ErrorCode.ERR_ResourceFileNameNotUnique).WithArguments("x.goo")
-            );
+            result
+                .Diagnostics
+                .Verify(
+                    // error CS1508: Resource identifier 'A' has already been used in this assembly
+                    Diagnostic(ErrorCode.ERR_ResourceNotUnique).WithArguments("A"),
+                    // error CS7041: Each linked resource and module must have a unique filename. Filename 'x.goo' is specified more than once in this assembly
+                    Diagnostic(ErrorCode.ERR_ResourceFileNameNotUnique).WithArguments("x.goo")
+                );
 
             result = c1.Emit(
                 new MemoryStream(),
@@ -461,12 +475,14 @@ class C
                 }
             );
 
-            result.Diagnostics.Verify(
-                // error CS7041: Each linked resource and module must have a unique filename. Filename 'x.goo' is specified more than once in this assembly
-                Diagnostic(ErrorCode.ERR_ResourceFileNameNotUnique).WithArguments("x.goo"),
-                // error CS1508: Resource identifier 'B' has already been used in this assembly
-                Diagnostic(ErrorCode.ERR_ResourceNotUnique).WithArguments("B")
-            );
+            result
+                .Diagnostics
+                .Verify(
+                    // error CS7041: Each linked resource and module must have a unique filename. Filename 'x.goo' is specified more than once in this assembly
+                    Diagnostic(ErrorCode.ERR_ResourceFileNameNotUnique).WithArguments("x.goo"),
+                    // error CS1508: Resource identifier 'B' has already been used in this assembly
+                    Diagnostic(ErrorCode.ERR_ResourceNotUnique).WithArguments("B")
+                );
 
             result = c1.Emit(
                 new MemoryStream(),
@@ -492,11 +508,13 @@ class C
             );
 
             // Native compiler gives CS0013 (FTL_MetadataEmitFailure) at Emit stage
-            result.Diagnostics.Verify(
-                // error CS7041: Each linked resource and module must have a unique filename. Filename 'netmodule1.netmodule' is specified more than once in this assembly
-                Diagnostic(ErrorCode.ERR_ResourceFileNameNotUnique)
-                    .WithArguments("netModule1.netmodule")
-            );
+            result
+                .Diagnostics
+                .Verify(
+                    // error CS7041: Each linked resource and module must have a unique filename. Filename 'netmodule1.netmodule' is specified more than once in this assembly
+                    Diagnostic(ErrorCode.ERR_ResourceFileNameNotUnique)
+                        .WithArguments("netModule1.netmodule")
+                );
         }
 
 #if NET472
@@ -923,11 +941,13 @@ class C
                 else
                 {
                     Assert.False(result6.Success);
-                    result6.Diagnostics.Verify(
-                        // error CS1508: Resource identifier 'some.dotted.NAME' has already been used in this assembly
-                        Diagnostic(ErrorCode.ERR_ResourceNotUnique)
-                            .WithArguments("some.dotted.NAME")
-                    );
+                    result6
+                        .Diagnostics
+                        .Verify(
+                            // error CS1508: Resource identifier 'some.dotted.NAME' has already been used in this assembly
+                            Diagnostic(ErrorCode.ERR_ResourceNotUnique)
+                                .WithArguments("some.dotted.NAME")
+                        );
                 }
 
                 result6 = emit(
@@ -950,14 +970,16 @@ class C
                 else
                 {
                     Assert.False(result6.Success);
-                    result6.Diagnostics.Verify(
-                        // error CS1508: Resource identifier 'some.dotted.NAME' has already been used in this assembly
-                        Diagnostic(ErrorCode.ERR_ResourceNotUnique)
-                            .WithArguments("some.dotted.NAME"),
-                        // error CS1508: Resource identifier 'another.DoTtEd.NAME' has already been used in this assembly
-                        Diagnostic(ErrorCode.ERR_ResourceNotUnique)
-                            .WithArguments("another.DoTtEd.NAME")
-                    );
+                    result6
+                        .Diagnostics
+                        .Verify(
+                            // error CS1508: Resource identifier 'some.dotted.NAME' has already been used in this assembly
+                            Diagnostic(ErrorCode.ERR_ResourceNotUnique)
+                                .WithArguments("some.dotted.NAME"),
+                            // error CS1508: Resource identifier 'another.DoTtEd.NAME' has already been used in this assembly
+                            Diagnostic(ErrorCode.ERR_ResourceNotUnique)
+                                .WithArguments("another.DoTtEd.NAME")
+                        );
                 }
 
                 c6 = CreateCompilation(
@@ -1163,12 +1185,17 @@ public class Maine
                     manifestResources: new[] { new ResourceDescription("res", () => stream, false) }
                 );
 
-                result.Diagnostics.Verify(
-                    // error CS1566: Error reading resource 'res' -- 'Resource stream ended at 4 bytes, expected 6 bytes.'
-                    Diagnostic(ErrorCode.ERR_CantReadResource)
-                        .WithArguments("res", "Resource stream ended at 4 bytes, expected 6 bytes.")
-                        .WithLocation(1, 1)
-                );
+                result
+                    .Diagnostics
+                    .Verify(
+                        // error CS1566: Error reading resource 'res' -- 'Resource stream ended at 4 bytes, expected 6 bytes.'
+                        Diagnostic(ErrorCode.ERR_CantReadResource)
+                            .WithArguments(
+                                "res",
+                                "Resource stream ended at 4 bytes, expected 6 bytes."
+                            )
+                            .WithLocation(1, 1)
+                    );
             }
         }
     }

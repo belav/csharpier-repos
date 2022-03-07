@@ -128,27 +128,31 @@ namespace Internal.Cryptography
             {
                 fixed (byte* pSymmetricKeyMaterial = symmetricKeyMaterial)
                 {
-                    generateKeyStatus = Interop.BCrypt.BCryptGenerateSymmetricKey(
-                        (nuint)BCryptAlgPseudoHandle.BCRYPT_PBKDF2_ALG_HANDLE,
-                        out keyHandle,
-                        pbKeyObject: IntPtr.Zero,
-                        cbKeyObject: 0,
-                        pSymmetricKeyMaterial,
-                        symmetricKeyMaterialLength,
-                        dwFlags: 0
-                    );
+                    generateKeyStatus = Interop
+                        .BCrypt
+                        .BCryptGenerateSymmetricKey(
+                            (nuint)BCryptAlgPseudoHandle.BCRYPT_PBKDF2_ALG_HANDLE,
+                            out keyHandle,
+                            pbKeyObject: IntPtr.Zero,
+                            cbKeyObject: 0,
+                            pSymmetricKeyMaterial,
+                            symmetricKeyMaterialLength,
+                            dwFlags: 0
+                        );
                 }
             }
             else
             {
                 if (s_pbkdf2AlgorithmHandle is null)
                 {
-                    NTSTATUS openStatus = Interop.BCrypt.BCryptOpenAlgorithmProvider(
-                        out SafeBCryptAlgorithmHandle pbkdf2AlgorithmHandle,
-                        Internal.NativeCrypto.BCryptNative.AlgorithmName.Pbkdf2,
-                        null,
-                        BCryptOpenAlgorithmProviderFlags.None
-                    );
+                    NTSTATUS openStatus = Interop
+                        .BCrypt
+                        .BCryptOpenAlgorithmProvider(
+                            out SafeBCryptAlgorithmHandle pbkdf2AlgorithmHandle,
+                            Internal.NativeCrypto.BCryptNative.AlgorithmName.Pbkdf2,
+                            null,
+                            BCryptOpenAlgorithmProviderFlags.None
+                        );
 
                     if (openStatus != NTSTATUS.STATUS_SUCCESS)
                     {
@@ -168,15 +172,17 @@ namespace Internal.Cryptography
 
                 fixed (byte* pSymmetricKeyMaterial = symmetricKeyMaterial)
                 {
-                    generateKeyStatus = Interop.BCrypt.BCryptGenerateSymmetricKey(
-                        s_pbkdf2AlgorithmHandle,
-                        out keyHandle,
-                        pbKeyObject: IntPtr.Zero,
-                        cbKeyObject: 0,
-                        pSymmetricKeyMaterial,
-                        symmetricKeyMaterialLength,
-                        dwFlags: 0
-                    );
+                    generateKeyStatus = Interop
+                        .BCrypt
+                        .BCryptGenerateSymmetricKey(
+                            s_pbkdf2AlgorithmHandle,
+                            out keyHandle,
+                            pbKeyObject: IntPtr.Zero,
+                            cbKeyObject: 0,
+                            pSymmetricKeyMaterial,
+                            symmetricKeyMaterialLength,
+                            dwFlags: 0
+                        );
                 }
             }
 
@@ -219,14 +225,16 @@ namespace Internal.Cryptography
                         bufferDesc.cBuffers = buffers.Length;
                         bufferDesc.pBuffers = (IntPtr)pBuffers;
 
-                        NTSTATUS deriveStatus = Interop.BCrypt.BCryptKeyDerivation(
-                            keyHandle,
-                            &bufferDesc,
-                            pDestination,
-                            destination.Length,
-                            out uint resultLength,
-                            dwFlags: 0
-                        );
+                        NTSTATUS deriveStatus = Interop
+                            .BCrypt
+                            .BCryptKeyDerivation(
+                                keyHandle,
+                                &bufferDesc,
+                                pDestination,
+                                destination.Length,
+                                out uint resultLength,
+                                dwFlags: 0
+                            );
 
                         if (deriveStatus != NTSTATUS.STATUS_SUCCESS)
                         {
@@ -255,28 +263,28 @@ namespace Internal.Cryptography
 
             // This code path will only be taken on Windows 7, so we can assume pseudo handles are not supported.
             // Do not dispose handle since it is shared and cached.
-            SafeBCryptAlgorithmHandle handle =
-                Interop.BCrypt.BCryptAlgorithmCache.GetCachedBCryptAlgorithmHandle(
-                    hashAlgorithmName,
-                    OpenAlgorithmFlags,
-                    out _
-                );
+            SafeBCryptAlgorithmHandle handle = Interop
+                .BCrypt
+                .BCryptAlgorithmCache
+                .GetCachedBCryptAlgorithmHandle(hashAlgorithmName, OpenAlgorithmFlags, out _);
 
             fixed (byte* pPassword = password)
             fixed (byte* pSalt = salt)
             fixed (byte* pDestination = destination)
             {
-                NTSTATUS status = Interop.BCrypt.BCryptDeriveKeyPBKDF2(
-                    handle,
-                    pPassword,
-                    password.Length,
-                    pSalt,
-                    salt.Length,
-                    (ulong)iterations,
-                    pDestination,
-                    destination.Length,
-                    dwFlags: 0
-                );
+                NTSTATUS status = Interop
+                    .BCrypt
+                    .BCryptDeriveKeyPBKDF2(
+                        handle,
+                        pPassword,
+                        password.Length,
+                        pSalt,
+                        salt.Length,
+                        (ulong)iterations,
+                        pDestination,
+                        destination.Length,
+                        dwFlags: 0
+                    );
 
                 if (status != NTSTATUS.STATUS_SUCCESS)
                 {

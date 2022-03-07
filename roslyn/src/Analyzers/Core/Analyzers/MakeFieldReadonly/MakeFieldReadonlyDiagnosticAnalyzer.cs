@@ -53,8 +53,9 @@ namespace Microsoft.CodeAnalysis.MakeFieldReadonly
                     var fieldStateMap =
                         new ConcurrentDictionary<IFieldSymbol, (bool isCandidate, bool written)>();
 
-                    var threadStaticAttribute =
-                        compilationStartContext.Compilation.ThreadStaticAttributeType();
+                    var threadStaticAttribute = compilationStartContext
+                        .Compilation
+                        .ThreadStaticAttributeType();
 
                     // We register following actions in the compilation:
                     // 1. A symbol action for field symbols to ensure the field state is initialized for every field in
@@ -162,10 +163,9 @@ namespace Microsoft.CodeAnalysis.MakeFieldReadonly
                             .GetAttributes()
                             .Any(
                                 static (a, threadStaticAttribute) =>
-                                    SymbolEqualityComparer.Default.Equals(
-                                        a.AttributeClass,
-                                        threadStaticAttribute
-                                    ),
+                                    SymbolEqualityComparer
+                                        .Default
+                                        .Equals(a.AttributeClass, threadStaticAttribute),
                                 threadStaticAttribute
                             );
 

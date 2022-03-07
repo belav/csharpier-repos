@@ -67,8 +67,9 @@ namespace System.Web.Http.Tracing.Tracers
                         result == null
                           ? SRResources.TraceNoneObjectMessage
                           : MediaTypeFormatterTracer
-                                .ActualMediaTypeFormatter(result.Formatter)
-                                .GetType().Name,
+                            .ActualMediaTypeFormatter(result.Formatter)
+                            .GetType()
+                            .Name,
                         result == null || result.MediaType == null
                           ? SRResources.TraceNoneObjectMessage
                           : result.MediaType.ToString()

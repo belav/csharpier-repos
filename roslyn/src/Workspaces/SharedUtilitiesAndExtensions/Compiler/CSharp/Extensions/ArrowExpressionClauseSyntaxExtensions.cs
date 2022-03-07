@@ -43,11 +43,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
         )
         {
             if (
-                !arrowExpression.Expression.TryConvertToStatement(
-                    semicolonToken,
-                    createReturnStatementForExpression,
-                    out statement
-                )
+                !arrowExpression
+                    .Expression
+                    .TryConvertToStatement(
+                        semicolonToken,
+                        createReturnStatementForExpression,
+                        out statement
+                    )
             )
             {
                 return false;

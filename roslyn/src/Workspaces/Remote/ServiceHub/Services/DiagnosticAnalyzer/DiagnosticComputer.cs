@@ -58,8 +58,11 @@ namespace Microsoft.CodeAnalysis.Remote.Diagnostics
             _analysisKind = analysisKind;
             _analyzerInfoCache = analyzerInfoCache;
 
-            _performanceTracker =
-                project.Solution.Workspace.Services.GetService<IPerformanceTrackerService>();
+            _performanceTracker = project
+                .Solution
+                .Workspace
+                .Services
+                .GetService<IPerformanceTrackerService>();
         }
 
         public async Task<SerializableDiagnosticAnalysisResults> GetDiagnosticsAsync(
@@ -87,14 +90,16 @@ namespace Microsoft.CodeAnalysis.Remote.Diagnostics
             if (_document == null && analyzers.Length < compilationWithAnalyzers.Analyzers.Length)
             {
                 // PERF: Generate a new CompilationWithAnalyzers with trimmed analyzers for non-document analysis case.
-                compilationWithAnalyzers = compilationWithAnalyzers.Compilation.WithAnalyzers(
-                    analyzers,
-                    compilationWithAnalyzers.AnalysisOptions
-                );
+                compilationWithAnalyzers = compilationWithAnalyzers
+                    .Compilation
+                    .WithAnalyzers(analyzers, compilationWithAnalyzers.AnalysisOptions);
             }
 
-            var cacheService =
-                _project.Solution.Workspace.Services.GetRequiredService<IProjectCacheService>();
+            var cacheService = _project
+                .Solution
+                .Workspace
+                .Services
+                .GetRequiredService<IProjectCacheService>();
             using var cache = cacheService.EnableCaching(_project.Id);
             var skippedAnalyzersInfo = _project.GetSkippedAnalyzersInfo(_analyzerInfoCache);
 
@@ -152,9 +157,9 @@ namespace Microsoft.CodeAnalysis.Remote.Diagnostics
                 // +1 to include project itself
                 var unitCount = documentAnalysisScope != null ? 1 : _project.DocumentIds.Count + 1;
                 _performanceTracker.AddSnapshot(
-                    analysisResult.AnalyzerTelemetryInfo.ToAnalyzerPerformanceInfo(
-                        _analyzerInfoCache
-                    ),
+                    analysisResult
+                        .AnalyzerTelemetryInfo
+                        .ToAnalyzerPerformanceInfo(_analyzerInfoCache),
                     unitCount
                 );
             }
@@ -201,15 +206,15 @@ namespace Microsoft.CodeAnalysis.Remote.Diagnostics
                     (
                         analyzerId,
                         new SerializableDiagnosticMap(
-                            analyzerResults.SyntaxLocals.SelectAsArray(
-                                entry => (entry.Key, entry.Value)
-                            ),
-                            analyzerResults.SemanticLocals.SelectAsArray(
-                                entry => (entry.Key, entry.Value)
-                            ),
-                            analyzerResults.NonLocals.SelectAsArray(
-                                entry => (entry.Key, entry.Value)
-                            ),
+                            analyzerResults
+                                .SyntaxLocals
+                                .SelectAsArray(entry => (entry.Key, entry.Value)),
+                            analyzerResults
+                                .SemanticLocals
+                                .SelectAsArray(entry => (entry.Key, entry.Value)),
+                            analyzerResults
+                                .NonLocals
+                                .SelectAsArray(entry => (entry.Key, entry.Value)),
                             analyzerResults.Others
                         )
                     )
@@ -338,9 +343,10 @@ namespace Microsoft.CodeAnalysis.Remote.Diagnostics
             // This follows what we do in DiagnosticAnalyzerInfoCache.CheckAnalyzerReferenceIdentity
             using var _ = ArrayBuilder<DiagnosticAnalyzer>.GetInstance(out var analyzerBuilder);
             foreach (
-                var reference in project.Solution.AnalyzerReferences.Concat(
-                    project.AnalyzerReferences
-                )
+                var reference in project
+                    .Solution
+                    .AnalyzerReferences
+                    .Concat(project.AnalyzerReferences)
             )
             {
                 if (!referenceSet.Add(reference.Id))

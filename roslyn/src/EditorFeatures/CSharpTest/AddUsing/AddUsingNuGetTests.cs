@@ -41,19 +41,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddUsing
         )
         {
             workspace.TryApplyChanges(
-                workspace.CurrentSolution.WithOptions(
-                    workspace.Options
-                        .WithChangedOption(
-                            SymbolSearchOptions.SuggestForTypesInNuGetPackages,
-                            LanguageNames.CSharp,
-                            true
-                        )
-                        .WithChangedOption(
-                            SymbolSearchOptions.SuggestForTypesInReferenceAssemblies,
-                            LanguageNames.CSharp,
-                            true
-                        )
-                )
+                workspace
+                    .CurrentSolution
+                    .WithOptions(
+                        workspace
+                            .Options
+                            .WithChangedOption(
+                                SymbolSearchOptions.SuggestForTypesInNuGetPackages,
+                                LanguageNames.CSharp,
+                                true
+                            )
+                            .WithChangedOption(
+                                SymbolSearchOptions.SuggestForTypesInReferenceAssemblies,
+                                LanguageNames.CSharp,
+                                true
+                            )
+                    )
             );
         }
 

@@ -35,7 +35,8 @@ namespace Microsoft.CodeAnalysis.Xaml.Diagnostics.Analyzers
                 return ImmutableArray<Diagnostic>.Empty;
             }
 
-            return await XamlProjectService.AnalyzerService
+            return await XamlProjectService
+                .AnalyzerService
                 .AnalyzeSyntaxAsync(document, cancellationToken)
                 .ConfigureAwait(false);
         }
@@ -50,7 +51,8 @@ namespace Microsoft.CodeAnalysis.Xaml.Diagnostics.Analyzers
                 return ImmutableArray<Diagnostic>.Empty;
             }
 
-            return await XamlProjectService.AnalyzerService
+            return await XamlProjectService
+                .AnalyzerService
                 .AnalyzeSemanticsAsync(document, cancellationToken)
                 .ConfigureAwait(false);
         }

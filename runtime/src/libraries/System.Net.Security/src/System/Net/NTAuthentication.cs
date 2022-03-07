@@ -127,14 +127,16 @@ namespace System.Net
         private static void InitializeCallback(object state)
         {
             InitializeCallbackContext context = (InitializeCallbackContext)state;
-            context.ThisPtr.Initialize(
-                context.IsServer,
-                context.Package,
-                context.Credential,
-                context.Spn,
-                context.RequestedContextFlags,
-                context.ChannelBinding
-            );
+            context
+                .ThisPtr
+                .Initialize(
+                    context.IsServer,
+                    context.Package,
+                    context.Credential,
+                    context.Spn,
+                    context.RequestedContextFlags,
+                    context.ChannelBinding
+                );
         }
 
         internal int Encrypt(

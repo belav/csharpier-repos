@@ -121,23 +121,29 @@ namespace Microsoft.EntityFrameworkCore
 
             Assert.Equal(
                 ProxiesStrings.EntityTypeNotFoundShared(nameof(SharedTypeEntityType)),
-                Assert.Throws<InvalidOperationException>(
-                    () => context.CreateProxy<SharedTypeEntityType>()
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(
+                        () => context.CreateProxy<SharedTypeEntityType>()
+                    )
+                    .Message
             );
 
             Assert.Equal(
                 ProxiesStrings.EntityTypeNotFoundShared(nameof(SharedTypeEntityType)),
-                Assert.Throws<InvalidOperationException>(
-                    () => context.CreateProxy<SharedTypeEntityType>(_ => { })
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(
+                        () => context.CreateProxy<SharedTypeEntityType>(_ => { })
+                    )
+                    .Message
             );
 
             Assert.Equal(
                 ProxiesStrings.EntityTypeNotFoundShared(nameof(SharedTypeEntityType)),
-                Assert.Throws<InvalidOperationException>(
-                    () => context.CreateProxy(typeof(SharedTypeEntityType))
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(
+                        () => context.CreateProxy(typeof(SharedTypeEntityType))
+                    )
+                    .Message
             );
         }
 
@@ -337,9 +343,9 @@ namespace Microsoft.EntityFrameworkCore
             using var context = new NeweyContextN();
             Assert.Equal(
                 CoreStrings.EntityTypeNotFound(nameof(RedBullRb3)),
-                Assert.Throws<InvalidOperationException>(
-                    () => context.CreateProxy<RedBullRb3>()
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(() => context.CreateProxy<RedBullRb3>())
+                    .Message
             );
         }
 
@@ -349,9 +355,9 @@ namespace Microsoft.EntityFrameworkCore
             using var context = new NeweyContextN6();
             Assert.Equal(
                 ProxiesStrings.ProxiesNotEnabled(nameof(RedBullRb3)),
-                Assert.Throws<InvalidOperationException>(
-                    () => context.CreateProxy<RedBullRb3>()
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(() => context.CreateProxy<RedBullRb3>())
+                    .Message
             );
         }
 
@@ -361,9 +367,9 @@ namespace Microsoft.EntityFrameworkCore
             using var context = new NeweyContextN7();
             Assert.Equal(
                 ProxiesStrings.ProxiesNotEnabled(nameof(RedBullRb3)),
-                Assert.Throws<InvalidOperationException>(
-                    () => context.CreateProxy<RedBullRb3>()
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(() => context.CreateProxy<RedBullRb3>())
+                    .Message
             );
         }
 
@@ -376,15 +382,17 @@ namespace Microsoft.EntityFrameworkCore
 
             Assert.Equal(
                 CoreStrings.AddingProxyTypeAsEntityType("Castle.Proxies.ClassToBeProxiedProxy"),
-                Assert.Throws<ArgumentException>(
-                    () =>
-                        new EntityType(
-                            proxy.GetType(),
-                            model,
-                            owned: false,
-                            ConfigurationSource.Explicit
-                        )
-                ).Message
+                Assert
+                    .Throws<ArgumentException>(
+                        () =>
+                            new EntityType(
+                                proxy.GetType(),
+                                model,
+                                owned: false,
+                                ConfigurationSource.Explicit
+                            )
+                    )
+                    .Message
             );
         }
 
@@ -394,13 +402,15 @@ namespace Microsoft.EntityFrameworkCore
         {
             Assert.Equal(
                 CoreStrings.AddingProxyTypeAsEntityType("Castle.Proxies.ClassToBeProxiedProxy"),
-                Assert.Throws<ArgumentException>(
-                    () =>
-                    {
-                        var context = new CannotAddProxyTypeToModel();
-                        context.Set<ClassToBeProxied>().Add(new ClassToBeProxied { Id = 0 });
-                    }
-                ).Message
+                Assert
+                    .Throws<ArgumentException>(
+                        () =>
+                        {
+                            var context = new CannotAddProxyTypeToModel();
+                            context.Set<ClassToBeProxied>().Add(new ClassToBeProxied { Id = 0 });
+                        }
+                    )
+                    .Message
             );
         }
 

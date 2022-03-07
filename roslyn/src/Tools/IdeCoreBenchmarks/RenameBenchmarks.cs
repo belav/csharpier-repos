@@ -43,7 +43,8 @@ namespace IdeCoreBenchmarks
             var projectId = ProjectId.CreateNewId();
             var documentId = DocumentId.CreateNewId(projectId);
 
-            _solution = new AdhocWorkspace().CurrentSolution
+            _solution = new AdhocWorkspace()
+                .CurrentSolution
                 .AddProject(projectId, "ProjectName", "AssemblyName", LanguageNames.CSharp)
                 .AddDocument(documentId, "DocumentName", File.ReadAllText(_csFilePath));
 
@@ -55,12 +56,11 @@ namespace IdeCoreBenchmarks
         [Benchmark]
         public void RenameNodes()
         {
-            _ = Microsoft.CodeAnalysis.Rename.Renamer.RenameSymbolAsync(
-                _solution,
-                _symbol,
-                "NewName",
-                optionSet: null
-            );
+            _ = Microsoft
+                .CodeAnalysis
+                .Rename
+                .Renamer
+                .RenameSymbolAsync(_solution, _symbol, "NewName", optionSet: null);
         }
 
         [IterationCleanup]

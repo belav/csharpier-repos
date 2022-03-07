@@ -534,10 +534,9 @@ internal static class TagHelperParseTreeRewriter
         {
             if (
                 HasAllowedChildren()
-                && !CurrentTagHelperTracker.PrefixedAllowedChildren.Contains(
-                    tagName,
-                    StringComparer.OrdinalIgnoreCase
-                )
+                && !CurrentTagHelperTracker
+                    .PrefixedAllowedChildren
+                    .Contains(tagName, StringComparer.OrdinalIgnoreCase)
             )
             {
                 OnAllowedChildrenStartTagError(
@@ -907,12 +906,13 @@ internal static class TagHelperParseTreeRewriter
                 Info = info;
 
                 if (
-                    Info.BindingResult.Descriptors.Any(
-                        descriptor => descriptor.AllowedChildTags != null
-                    )
+                    Info.BindingResult
+                        .Descriptors
+                        .Any(descriptor => descriptor.AllowedChildTags != null)
                 )
                 {
-                    AllowedChildren = Info.BindingResult.Descriptors
+                    AllowedChildren = Info.BindingResult
+                        .Descriptors
                         .Where(descriptor => descriptor.AllowedChildTags != null)
                         .SelectMany(
                             descriptor =>

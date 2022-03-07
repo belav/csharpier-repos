@@ -445,12 +445,14 @@ namespace Microsoft.CodeAnalysis.SymbolSearch
                                 {
                                     await LogInfoAsync("Replacing database file", cancellationToken)
                                         .ConfigureAwait(false);
-                                    _service._ioService.Replace(
-                                        tempFilePath,
-                                        databaseFileInfo.FullName,
-                                        destinationBackupFileName: null,
-                                        ignoreMetadataErrors: true
-                                    );
+                                    _service
+                                        ._ioService
+                                        .Replace(
+                                            tempFilePath,
+                                            databaseFileInfo.FullName,
+                                            destinationBackupFileName: null,
+                                            ignoreMetadataErrors: true
+                                        );
                                     await LogInfoAsync(
                                             "Replace database file completed",
                                             cancellationToken
@@ -461,10 +463,9 @@ namespace Microsoft.CodeAnalysis.SymbolSearch
                                 {
                                     await LogInfoAsync("Moving database file", cancellationToken)
                                         .ConfigureAwait(false);
-                                    _service._ioService.Move(
-                                        tempFilePath,
-                                        databaseFileInfo.FullName
-                                    );
+                                    _service
+                                        ._ioService
+                                        .Move(tempFilePath, databaseFileInfo.FullName);
                                     await LogInfoAsync(
                                             "Moving database file completed",
                                             cancellationToken
@@ -747,11 +748,9 @@ namespace Microsoft.CodeAnalysis.SymbolSearch
                 //         minutes ago, then the client will attempt to download the file.
                 //         In the interim period null will be returned from client.ReadFile.
                 var pollingMinutes = (int)TimeSpan.FromDays(1).TotalMinutes;
-                using var client = _service._remoteControlService.CreateClient(
-                    HostId,
-                    serverPath,
-                    pollingMinutes
-                );
+                using var client = _service
+                    ._remoteControlService
+                    .CreateClient(HostId, serverPath, pollingMinutes);
 
                 await LogInfoAsync("Creating download client completed", cancellationToken)
                     .ConfigureAwait(false);

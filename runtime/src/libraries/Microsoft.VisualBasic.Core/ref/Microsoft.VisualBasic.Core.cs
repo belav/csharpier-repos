@@ -398,7 +398,11 @@ namespace Microsoft.VisualBasic
         public static object CTypeDynamic(
             object? Expression,
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
-                System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
+                System
+                    .Diagnostics
+                    .CodeAnalysis
+                    .DynamicallyAccessedMemberTypes
+                    .PublicParameterlessConstructor
             )]
                 System.Type TargetType
         )
@@ -2315,7 +2319,11 @@ namespace Microsoft.VisualBasic.CompilerServices
         public static object? ChangeType(
             object? Expression,
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
-                System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
+                System
+                    .Diagnostics
+                    .CodeAnalysis
+                    .DynamicallyAccessedMemberTypes
+                    .PublicParameterlessConstructor
             )]
                 System.Type TargetType
         )
@@ -2333,7 +2341,11 @@ namespace Microsoft.VisualBasic.CompilerServices
         public static object FallbackUserDefinedConversion(
             object Expression,
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
-                System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
+                System
+                    .Diagnostics
+                    .CodeAnalysis
+                    .DynamicallyAccessedMemberTypes
+                    .PublicParameterlessConstructor
             )]
                 System.Type TargetType
         )

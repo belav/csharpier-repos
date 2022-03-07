@@ -34,7 +34,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                         pi =>
                             pi.Name == "Item"
                             && pi.GetIndexParameters()[0].ParameterType == typeof(string)
-                    ).GetMethod;
+                    )
+                    .GetMethod;
 
             private static readonly PropertyInfo _jTokenTypePropertyInfo = typeof(JToken)
                 .GetRuntimeProperties()
@@ -150,7 +151,9 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                                         innerAccessExpression =
                                             innerObjectAccessExpression.AccessExpression;
                                         _ownerMappings[accessExpression] = (
-                                            innerObjectAccessExpression.Navigation.DeclaringEntityType,
+                                            innerObjectAccessExpression
+                                                .Navigation
+                                                .DeclaringEntityType,
                                             innerAccessExpression
                                         );
                                         break;
@@ -240,7 +243,10 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                     : null;
                 if (
                     genericMethod
-                    == EntityFrameworkCore.Infrastructure.ExpressionExtensions.ValueBufferTryReadValueMethod
+                    == EntityFrameworkCore
+                        .Infrastructure
+                        .ExpressionExtensions
+                        .ValueBufferTryReadValueMethod
                 )
                 {
                     var property = methodCallExpression.Arguments[2].GetConstantValue<IProperty>();
@@ -373,10 +379,9 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                         innerShaper = AddIncludes(innerShaper);
 
                         var entities = Expression.Call(
-                            EnumerableMethods.SelectWithOrdinal.MakeGenericMethod(
-                                typeof(JObject),
-                                innerShaper.Type
-                            ),
+                            EnumerableMethods
+                                .SelectWithOrdinal
+                                .MakeGenericMethod(typeof(JObject), innerShaper.Type),
                             Expression.Call(
                                 EnumerableMethods.Cast.MakeGenericMethod(typeof(JObject)),
                                 jArray
@@ -494,9 +499,9 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                     : (Expression)Expression.Constant(null, typeof(InternalEntityEntry));
 #pragma warning restore EF1001 // Internal EF Core API usage.
 
-                var concreteEntityTypeVariable = shaperBlock.Variables.Single(
-                    v => v.Type == typeof(IEntityType)
-                );
+                var concreteEntityTypeVariable = shaperBlock
+                    .Variables
+                    .Single(v => v.Type == typeof(IEntityType));
                 var inverseNavigation = navigation.Inverse;
                 var fixup = GenerateFixup(
                     includingClrType,
@@ -808,9 +813,9 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                             if (_ownerMappings.TryGetValue(jObjectExpression, out var ownerInfo))
                             {
                                 Check.DebugAssert(
-                                    principalProperty.DeclaringEntityType.IsAssignableFrom(
-                                        ownerInfo.EntityType
-                                    ),
+                                    principalProperty
+                                        .DeclaringEntityType
+                                        .IsAssignableFrom(ownerInfo.EntityType),
                                     $"{principalProperty.DeclaringEntityType} is not assignable from {ownerInfo.EntityType}"
                                 );
 

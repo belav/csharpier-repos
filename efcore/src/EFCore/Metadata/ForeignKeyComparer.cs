@@ -46,25 +46,22 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                 return result;
             }
 
-            result = PropertyListComparer.Instance.Compare(
-                x?.PrincipalKey.Properties,
-                y?.PrincipalKey.Properties
-            );
+            result = PropertyListComparer
+                .Instance
+                .Compare(x?.PrincipalKey.Properties, y?.PrincipalKey.Properties);
             if (result != 0)
             {
                 return result;
             }
 
-            result = EntityTypeFullNameComparer.Instance.Compare(
-                x?.PrincipalEntityType,
-                y?.PrincipalEntityType
-            );
+            result = EntityTypeFullNameComparer
+                .Instance
+                .Compare(x?.PrincipalEntityType, y?.PrincipalEntityType);
             return result != 0
               ? result
-              : EntityTypeFullNameComparer.Instance.Compare(
-                    x?.DeclaringEntityType,
-                    y?.DeclaringEntityType
-                );
+              : EntityTypeFullNameComparer
+                .Instance
+                .Compare(x?.DeclaringEntityType, y?.DeclaringEntityType);
         }
 
         /// <summary>

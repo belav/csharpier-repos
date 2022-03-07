@@ -597,9 +597,9 @@ public abstract class ComponentRenderingTestBase
         );
         Assert.Equal(
             "example",
-            appElement.FindElement(
-                By.CssSelector("#dynamic-markup-block strong#dynamic-element em")
-            ).Text
+            appElement
+                .FindElement(By.CssSelector("#dynamic-markup-block strong#dynamic-element em"))
+                .Text
         );
 
         // Dynamic markup (from a MarkupString)

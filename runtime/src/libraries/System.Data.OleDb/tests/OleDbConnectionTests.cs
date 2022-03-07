@@ -326,8 +326,9 @@ namespace System.Data.OleDb.Tests
         [ConditionalFact(Helpers.IsDriverAvailable)]
         public void OleDbConnectionStringBuilder_Success()
         {
-            var connectionStringBuilder =
-                (OleDbConnectionStringBuilder)OleDbFactory.Instance.CreateConnectionStringBuilder();
+            var connectionStringBuilder = (OleDbConnectionStringBuilder)OleDbFactory
+                .Instance
+                .CreateConnectionStringBuilder();
             Assert.Empty(connectionStringBuilder.Provider);
             Assert.True(connectionStringBuilder.ContainsKey("Provider"));
             Assert.Empty((string)connectionStringBuilder["Provider"]);

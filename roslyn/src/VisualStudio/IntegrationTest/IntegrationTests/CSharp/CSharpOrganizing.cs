@@ -40,8 +40,11 @@ namespace B { public class CB { } }
 namespace C { public class CC { } }"
             );
             VisualStudio.ExecuteCommand("Edit.RemoveAndSort");
-            VisualStudio.Editor.Verify.TextContains(
-                @"
+            VisualStudio
+                .Editor
+                .Verify
+                .TextContains(
+                    @"
 using A;
 using C;
 
@@ -53,7 +56,7 @@ class Test
 namespace A { public class CA { } }
 namespace B { public class CB { } }
 namespace C { public class CC { } }"
-            );
+                );
         }
     }
 }

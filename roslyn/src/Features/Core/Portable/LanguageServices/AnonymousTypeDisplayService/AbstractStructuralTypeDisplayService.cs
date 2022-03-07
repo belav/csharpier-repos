@@ -14,9 +14,9 @@ namespace Microsoft.CodeAnalysis.LanguageServices
         : IStructuralTypeDisplayService
     {
         protected static readonly SymbolDisplayFormat s_minimalWithoutExpandedTuples =
-            SymbolDisplayFormat.MinimallyQualifiedFormat.AddMiscellaneousOptions(
-                SymbolDisplayMiscellaneousOptions.CollapseTupleTypes
-            );
+            SymbolDisplayFormat
+                .MinimallyQualifiedFormat
+                .AddMiscellaneousOptions(SymbolDisplayMiscellaneousOptions.CollapseTupleTypes);
 
         public abstract ImmutableArray<SymbolDisplayPart> GetAnonymousTypeParts(
             INamedTypeSymbol anonymousType,

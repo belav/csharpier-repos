@@ -31,11 +31,13 @@ public class UnsupportedContentTypeFilterTest
 
         var modelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(typeof(int));
 
-        context.ModelState.AddModelError(
-            "person.body",
-            new UnsupportedContentTypeException("error"),
-            modelMetadata
-        );
+        context
+            .ModelState
+            .AddModelError(
+                "person.body",
+                new UnsupportedContentTypeException("error"),
+                modelMetadata
+            );
 
         var filter = new UnsupportedContentTypeFilter();
 

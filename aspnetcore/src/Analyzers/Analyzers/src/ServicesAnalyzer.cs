@@ -30,10 +30,12 @@ internal class ServicesAnalyzer
                     context.Operation is IInvocationOperation invocation
                     && invocation.Instance == null
                     && invocation.Arguments.Length >= 1
-                    && SymbolEqualityComparer.Default.Equals(
-                        invocation.Arguments[0].Parameter?.Type,
-                        _context.StartupSymbols.IServiceCollection
-                    )
+                    && SymbolEqualityComparer
+                        .Default
+                        .Equals(
+                            invocation.Arguments[0].Parameter?.Type,
+                            _context.StartupSymbols.IServiceCollection
+                        )
                 )
                 {
                     services.Add(new ServicesItem(invocation));

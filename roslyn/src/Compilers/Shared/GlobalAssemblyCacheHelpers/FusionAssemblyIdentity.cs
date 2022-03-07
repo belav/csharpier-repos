@@ -542,12 +542,19 @@ namespace Microsoft.CodeAnalysis
                     );
 #elif EDITOR_FEATURES
                     throw new ArgumentException(
-                        Microsoft.CodeAnalysis.Editor.EditorFeaturesResources.Invalid_characters_in_assembly_name,
+                        Microsoft
+                            .CodeAnalysis
+                            .Editor
+                            .EditorFeaturesResources
+                            .Invalid_characters_in_assembly_name,
                         nameof(name)
                     );
 #else
                     throw new ArgumentException(
-                        Microsoft.CodeAnalysis.CodeAnalysisResources.InvalidCharactersInAssemblyName,
+                        Microsoft
+                            .CodeAnalysis
+                            .CodeAnalysisResources
+                            .InvalidCharactersInAssemblyName,
                         nameof(name)
                     );
 #endif
@@ -583,17 +590,28 @@ namespace Microsoft.CodeAnalysis
                 {
 #if SCRIPTING
                     throw new ArgumentException(
-                        Microsoft.CodeAnalysis.Scripting.ScriptingResources.InvalidCharactersInAssemblyName,
+                        Microsoft
+                            .CodeAnalysis
+                            .Scripting
+                            .ScriptingResources
+                            .InvalidCharactersInAssemblyName,
                         nameof(name)
                     );
 #elif EDITOR_FEATURES
                     throw new ArgumentException(
-                        Microsoft.CodeAnalysis.Editor.EditorFeaturesResources.Invalid_characters_in_assembly_name,
+                        Microsoft
+                            .CodeAnalysis
+                            .Editor
+                            .EditorFeaturesResources
+                            .Invalid_characters_in_assembly_name,
                         nameof(name)
                     );
 #else
                     throw new ArgumentException(
-                        Microsoft.CodeAnalysis.CodeAnalysisResources.InvalidCharactersInAssemblyName,
+                        Microsoft
+                            .CodeAnalysis
+                            .CodeAnalysisResources
+                            .InvalidCharactersInAssemblyName,
                         nameof(name)
                     );
 #endif
@@ -687,15 +705,13 @@ namespace Microsoft.CodeAnalysis
                             // we have exactly the preferred culture or
                             // we have neutral culture and the best candidate's culture isn't the preferred one:
                             if (
-                                StringComparer.OrdinalIgnoreCase.Equals(
-                                    candidateCulture,
-                                    preferredCultureOpt
-                                )
+                                StringComparer
+                                    .OrdinalIgnoreCase
+                                    .Equals(candidateCulture, preferredCultureOpt)
                                 || candidateCulture.Length == 0
-                                    && !StringComparer.OrdinalIgnoreCase.Equals(
-                                        bestCulture,
-                                        preferredCultureOpt
-                                    )
+                                    && !StringComparer
+                                        .OrdinalIgnoreCase
+                                        .Equals(bestCulture, preferredCultureOpt)
                             )
                             {
                                 bestCandidate = candidate;

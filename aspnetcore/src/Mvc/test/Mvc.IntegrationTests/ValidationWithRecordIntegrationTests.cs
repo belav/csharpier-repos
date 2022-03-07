@@ -100,10 +100,12 @@ public class ValidationWithRecordIntegrationTests
         Assert.False(modelState.IsValid);
 
         var entry =
-            Assert.Single(
-                modelState,
-                e => string.Equals(e.Key, "AccountId", StringComparison.OrdinalIgnoreCase)
-            ).Value;
+            Assert
+                .Single(
+                    modelState,
+                    e => string.Equals(e.Key, "AccountId", StringComparison.OrdinalIgnoreCase)
+                )
+                .Value;
         var error = Assert.Single(entry.Errors);
         Assert.Equal(
             ValidationAttributeUtil.GetRangeErrorMessage(25, 50, "AccountId"),
@@ -1616,9 +1618,9 @@ public class ValidationWithRecordIntegrationTests
             },
             options =>
             {
-                options.ModelMetadataDetailsProviders.Add(
-                    new SuppressChildValidationMetadataProvider(typeof(Address))
-                );
+                options
+                    .ModelMetadataDetailsProviders
+                    .Add(new SuppressChildValidationMetadataProvider(typeof(Address)));
             }
         );
 

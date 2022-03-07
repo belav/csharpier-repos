@@ -588,13 +588,14 @@ class Program
         )
         {
             using var workspace = TestWorkspace.CreateCSharp(contents, options);
-            var document = workspace.CurrentSolution.GetRequiredDocument(
-                workspace.Documents.First().Id
-            );
+            var document = workspace
+                .CurrentSolution
+                .GetRequiredDocument(workspace.Documents.First().Id);
             var root = await document.GetRequiredSyntaxRootAsync(default);
 
             var lineSeparatorService = Assert.IsType<CSharpLineSeparatorService>(
-                workspace.Services
+                workspace
+                    .Services
                     .GetLanguageServices(LanguageNames.CSharp)
                     .GetRequiredService<ILineSeparatorService>()
             );

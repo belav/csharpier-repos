@@ -475,9 +475,9 @@ namespace System.Security.Cryptography
                         }
 
                         // Use ArrayPool.Shared instead of CryptoPool because the array is passed out.
-                        tempOutputBuffer = ArrayPool<byte>.Shared.Rent(
-                            numWholeReadBlocks * _outputBlockSize
-                        );
+                        tempOutputBuffer = ArrayPool<byte>
+                            .Shared
+                            .Rent(numWholeReadBlocks * _outputBlockSize);
                         numOutputBytes = _transform.TransformBlock(
                             tempInputBuffer,
                             0,
@@ -801,9 +801,9 @@ namespace System.Security.Cryptography
                         int numWholeBlocksInBytes = numWholeBlocks * _inputBlockSize;
 
                         // Use ArrayPool.Shared instead of CryptoPool because the array is passed out.
-                        byte[]? tempOutputBuffer = ArrayPool<byte>.Shared.Rent(
-                            numWholeBlocks * _outputBlockSize
-                        );
+                        byte[]? tempOutputBuffer = ArrayPool<byte>
+                            .Shared
+                            .Rent(numWholeBlocks * _outputBlockSize);
                         numOutputBytes = 0;
 
                         try

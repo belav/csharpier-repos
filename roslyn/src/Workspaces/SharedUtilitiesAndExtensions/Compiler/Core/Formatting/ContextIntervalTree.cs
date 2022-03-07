@@ -124,7 +124,9 @@ namespace Microsoft.CodeAnalysis.Formatting
                         // hold onto best answer
                         if (
                             EqualityComparer<T /*??*/
-                            >.Default.Equals(result!, default!)
+                            >
+                                .Default
+                                .Equals(result!, default!)
                             || (
                                 Introspector.GetStart(result!)
                                     <= Introspector.GetStart(currentNode.Value)
@@ -162,7 +164,9 @@ namespace Microsoft.CodeAnalysis.Formatting
                             // an answer but left side can have better answer then try left side
                             if (
                                 EqualityComparer<T /*??*/
-                                >.Default.Equals(result!, default!)
+                                >
+                                    .Default
+                                    .Equals(result!, default!)
                                 || Introspector.GetStart(parentNode.Value)
                                     == Introspector.GetStart(currentNode.Value)
                             )

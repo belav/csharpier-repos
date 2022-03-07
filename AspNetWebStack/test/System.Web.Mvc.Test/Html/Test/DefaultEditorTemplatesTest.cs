@@ -907,10 +907,9 @@ namespace System.Web.Mvc.Html.Test
         {
             // Arrange
             HtmlHelper html = MakeHtmlHelper<ObjectTemplateModel>(null);
-            ModelMetadata metadata = ModelMetadataProviders.Current.GetMetadataForType(
-                null,
-                typeof(ObjectTemplateModel)
-            );
+            ModelMetadata metadata = ModelMetadataProviders
+                .Current
+                .GetMetadataForType(null, typeof(ObjectTemplateModel));
             metadata.NullDisplayText = "Null Display Text";
             metadata.SimpleDisplayText = "Simple Display Text";
             html.ViewData.ModelMetadata = metadata;
@@ -935,10 +934,9 @@ namespace System.Web.Mvc.Html.Test
             // Arrange
             ObjectTemplateModel model = new ObjectTemplateModel();
             HtmlHelper html = MakeHtmlHelper<ObjectTemplateModel>(model);
-            ModelMetadata metadata = ModelMetadataProviders.Current.GetMetadataForType(
-                () => model,
-                typeof(ObjectTemplateModel)
-            );
+            ModelMetadata metadata = ModelMetadataProviders
+                .Current
+                .GetMetadataForType(() => model, typeof(ObjectTemplateModel));
             html.ViewData.ModelMetadata = metadata;
             metadata.NullDisplayText = "Null Display Text";
             metadata.SimpleDisplayText = simpleDisplayText;

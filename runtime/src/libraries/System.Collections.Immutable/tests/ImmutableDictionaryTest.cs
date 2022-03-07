@@ -526,10 +526,9 @@ namespace System.Collections.Immutable.Tests
             IEqualityComparer<TValue> valueComparer = null
         )
         {
-            return ImmutableDictionary<TKey, TValue>.Empty.WithComparers(
-                keyComparer,
-                valueComparer
-            );
+            return ImmutableDictionary<TKey, TValue>
+                .Empty
+                .WithComparers(keyComparer, valueComparer);
         }
 
         /// <summary>
@@ -567,10 +566,9 @@ namespace System.Collections.Immutable.Tests
 
             public override bool Equals(object obj)
             {
-                return StringComparer.OrdinalIgnoreCase.Equals(
-                    this.Value,
-                    ((CaseInsensitiveString)obj).Value
-                );
+                return StringComparer
+                    .OrdinalIgnoreCase
+                    .Equals(this.Value, ((CaseInsensitiveString)obj).Value);
             }
         }
     }

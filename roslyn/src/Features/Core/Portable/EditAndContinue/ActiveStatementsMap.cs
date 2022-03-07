@@ -117,15 +117,17 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             var byDocumentPath = updatedSpansByDocumentPath.ToImmutableDictionary(
                 keySelector: entry => entry.Key,
                 elementSelector: entry =>
-                    entry.Value.SelectAsArray(
-                        item =>
-                            new ActiveStatement(
-                                ordinal: item.ordinal,
-                                flags: item.info.Flags,
-                                span: item.span,
-                                instructionId: item.info.ActiveInstruction
-                            )
-                    )
+                    entry
+                        .Value
+                        .SelectAsArray(
+                            item =>
+                                new ActiveStatement(
+                                    ordinal: item.ordinal,
+                                    flags: item.info.Flags,
+                                    span: item.span,
+                                    instructionId: item.info.ActiveInstruction
+                                )
+                        )
             );
 
             using var _2 = PooledDictionary<ManagedInstructionId, ActiveStatement>.GetInstance(
@@ -206,7 +208,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             CancellationToken cancellationToken
         )
         {
-            var oldTree = await oldDocument.DocumentState
+            var oldTree = await oldDocument
+                .DocumentState
                 .GetSyntaxTreeAsync(cancellationToken)
                 .ConfigureAwait(false);
             var oldRoot = await oldTree.GetRootAsync(cancellationToken).ConfigureAwait(false);

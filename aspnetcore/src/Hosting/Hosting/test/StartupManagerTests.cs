@@ -188,9 +188,9 @@ public class StartupManagerTests
     {
         public void ConfigureContainer(MyContainer services)
         {
-            services.Services.TryAddSingleton(
-                new ServiceBefore { Message = "Configure container" }
-            );
+            services
+                .Services
+                .TryAddSingleton(new ServiceBefore { Message = "Configure container" });
             services.Services.TryAddSingleton(new ServiceAfter { Message = "Configure container" });
         }
 
@@ -207,9 +207,9 @@ public class StartupManagerTests
 
         public void ConfigureContainer(MyContainer services)
         {
-            services.Services.TryAddSingleton(
-                new ServiceBefore { Message = "Configure container" }
-            );
+            services
+                .Services
+                .TryAddSingleton(new ServiceBefore { Message = "Configure container" });
             services.Services.TryAddSingleton(new ServiceAfter { Message = "Configure container" });
         }
 
@@ -233,33 +233,39 @@ public class StartupManagerTests
         {
             return services =>
             {
-                services.Services.TryAddSingleton(
-                    new ServiceBefore
-                    {
-                        Message = $"ConfigureContainerFilter Before {AdditionalData}"
-                    }
-                );
+                services
+                    .Services
+                    .TryAddSingleton(
+                        new ServiceBefore
+                        {
+                            Message = $"ConfigureContainerFilter Before {AdditionalData}"
+                        }
+                    );
 
                 next(services);
 
                 // Ensures we can always override.
                 if (OverrideAfterService)
                 {
-                    services.Services.AddSingleton(
-                        new ServiceAfter
-                        {
-                            Message = $"ConfigureContainerFilter After {AdditionalData}"
-                        }
-                    );
+                    services
+                        .Services
+                        .AddSingleton(
+                            new ServiceAfter
+                            {
+                                Message = $"ConfigureContainerFilter After {AdditionalData}"
+                            }
+                        );
                 }
                 else
                 {
-                    services.Services.TryAddSingleton(
-                        new ServiceAfter
-                        {
-                            Message = $"ConfigureContainerFilter After {AdditionalData}"
-                        }
-                    );
+                    services
+                        .Services
+                        .TryAddSingleton(
+                            new ServiceAfter
+                            {
+                                Message = $"ConfigureContainerFilter After {AdditionalData}"
+                            }
+                        );
                 }
             };
         }

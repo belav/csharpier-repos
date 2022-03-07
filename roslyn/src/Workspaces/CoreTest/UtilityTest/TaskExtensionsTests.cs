@@ -29,9 +29,9 @@ namespace Microsoft.CodeAnalysis.UnitTests
             );
             Assert.Throws<OperationCanceledException>(
                 () =>
-                    new TaskCompletionSource<int>().Task.WaitAndGetResult_CanCallOnBackground(
-                        new CancellationToken(canceled: true)
-                    )
+                    new TaskCompletionSource<int>()
+                        .Task
+                        .WaitAndGetResult_CanCallOnBackground(new CancellationToken(canceled: true))
             );
             var ex = Assert.Throws<TestException>(
                 () =>

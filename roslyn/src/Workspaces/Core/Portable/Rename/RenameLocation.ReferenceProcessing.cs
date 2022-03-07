@@ -90,9 +90,9 @@ namespace Microsoft.CodeAnalysis.Rename
                         {
                             var associatedPropertyOrEvent =
                                 (IPropertySymbol)containingMethod.AssociatedSymbol;
-                            var ordinal = containingMethod.Parameters.IndexOf(
-                                (IParameterSymbol)symbol
-                            );
+                            var ordinal = containingMethod
+                                .Parameters
+                                .IndexOf((IParameterSymbol)symbol);
                             if (ordinal < associatedPropertyOrEvent.Parameters.Length)
                             {
                                 return associatedPropertyOrEvent.Parameters[ordinal];
@@ -607,7 +607,9 @@ namespace Microsoft.CodeAnalysis.Rename
                             new RenameLocation(
                                 location.Location,
                                 location.Document.Id,
-                                containingLocationForStringOrComment: location.ContainingStringLocation.SourceSpan
+                                containingLocationForStringOrComment: location
+                                    .ContainingStringLocation
+                                    .SourceSpan
                             )
                         );
                     }
@@ -657,7 +659,9 @@ namespace Microsoft.CodeAnalysis.Rename
                         .GroupBy(d => d.Project.Language)
                 )
                 {
-                    var syntaxFactsLanguageService = solution.Workspace.Services
+                    var syntaxFactsLanguageService = solution
+                        .Workspace
+                        .Services
                         .GetLanguageServices(documentsGroupedByLanguage.Key)
                         .GetService<ISyntaxFactsService>();
 

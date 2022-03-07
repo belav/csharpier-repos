@@ -512,11 +512,9 @@ namespace System.Net.WebSockets
 
                 // No need to wrap DecoderFallbackException for invalid UTF8 chacters, because
                 // Encoding.UTF8 will not throw but replace invalid characters instead.
-                reason = Encoding.UTF8.GetString(
-                    reasonBlob.Array!,
-                    reasonBlob.Offset,
-                    reasonBlob.Count
-                );
+                reason = Encoding
+                    .UTF8
+                    .GetString(reasonBlob.Array!, reasonBlob.Offset, reasonBlob.Count);
             }
         }
 

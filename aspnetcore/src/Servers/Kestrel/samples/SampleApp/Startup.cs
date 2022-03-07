@@ -121,7 +121,13 @@ public class Startup
                                     listenOptions =>
                                     {
                                         listenOptions.Protocols =
-                                            Microsoft.AspNetCore.Server.Kestrel.Core.HttpProtocols.Http1;
+                                            Microsoft
+                                                .AspNetCore
+                                                .Server
+                                                .Kestrel
+                                                .Core
+                                                .HttpProtocols
+                                                .Http1;
                                         listenOptions.UseHttps();
                                         listenOptions.UseConnectionLogging();
                                     }

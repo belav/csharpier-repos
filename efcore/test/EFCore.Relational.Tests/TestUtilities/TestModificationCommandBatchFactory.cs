@@ -28,7 +28,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
         {
             CreateCount++;
 
-            var optionsExtension = _options.Extensions
+            var optionsExtension = _options
+                .Extensions
                 .OfType<FakeRelationalOptionsExtension>()
                 .FirstOrDefault();
 

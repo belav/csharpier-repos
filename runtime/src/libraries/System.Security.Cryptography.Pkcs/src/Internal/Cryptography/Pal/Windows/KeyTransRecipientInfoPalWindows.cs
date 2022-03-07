@@ -46,8 +46,9 @@ namespace Internal.Cryptography.Pal.Windows
                     return WithCmsgCmsRecipientInfo(
                         delegate(CMSG_KEY_TRANS_RECIPIENT_INFO* recipient)
                         {
-                            SubjectIdentifier subjectIdentifier =
-                                recipient->RecipientId.ToSubjectIdentifier();
+                            SubjectIdentifier subjectIdentifier = recipient
+                                ->RecipientId
+                                .ToSubjectIdentifier();
                             return subjectIdentifier;
                         }
                     );
@@ -64,8 +65,9 @@ namespace Internal.Cryptography.Pal.Windows
                     return WithCmsgCmsRecipientInfo(
                         delegate(CMSG_KEY_TRANS_RECIPIENT_INFO* recipient)
                         {
-                            AlgorithmIdentifier algorithmIdentifier =
-                                recipient->KeyEncryptionAlgorithm.ToAlgorithmIdentifier();
+                            AlgorithmIdentifier algorithmIdentifier = recipient
+                                ->KeyEncryptionAlgorithm
+                                .ToAlgorithmIdentifier();
                             return algorithmIdentifier;
                         }
                     );

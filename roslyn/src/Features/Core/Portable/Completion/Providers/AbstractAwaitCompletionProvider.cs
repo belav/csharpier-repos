@@ -115,10 +115,9 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             var token = syntaxContext.TargetToken;
             var declaration = GetAsyncSupportingDeclaration(token);
 
-            var properties = ImmutableDictionary<string, string>.Empty.Add(
-                AwaitCompletionTargetTokenPosition,
-                token.SpanStart.ToString()
-            );
+            var properties = ImmutableDictionary<string, string>
+                .Empty
+                .Add(AwaitCompletionTargetTokenPosition, token.SpanStart.ToString());
 
             var makeContainerAsync =
                 declaration is not null

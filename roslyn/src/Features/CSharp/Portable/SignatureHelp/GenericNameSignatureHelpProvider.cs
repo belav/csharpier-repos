@@ -271,7 +271,8 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
                     GetPreambleParts(namedType, semanticModel, position),
                     GetSeparatorParts(),
                     GetPostambleParts(),
-                    namedType.TypeParameters
+                    namedType
+                        .TypeParameters
                         .Select(
                             p =>
                                 Convert(
@@ -303,7 +304,8 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
                     GetPreambleParts(method, semanticModel, position),
                     GetSeparatorParts(),
                     GetPostambleParts(method, semanticModel, position),
-                    method.TypeParameters
+                    method
+                        .TypeParameters
                         .Select(
                             p =>
                                 Convert(
@@ -320,8 +322,9 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
             return item;
         }
 
-        private static readonly SymbolDisplayFormat s_minimallyQualifiedFormat =
-            SymbolDisplayFormat.MinimallyQualifiedFormat.WithGenericsOptions(
+        private static readonly SymbolDisplayFormat s_minimallyQualifiedFormat = SymbolDisplayFormat
+            .MinimallyQualifiedFormat
+            .WithGenericsOptions(
                 SymbolDisplayFormat.MinimallyQualifiedFormat.GenericsOptions
                     | SymbolDisplayGenericsOptions.IncludeVariance
             );

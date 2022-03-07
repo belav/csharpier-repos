@@ -26,37 +26,41 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
             Assert.Equal(
                 CoreStrings.ModelReadOnly,
-                Assert.Throws<InvalidOperationException>(
-                    () => entityType.AddForeignKey(new[] { principalProp }, key, entityType)
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(
+                        () => entityType.AddForeignKey(new[] { principalProp }, key, entityType)
+                    )
+                    .Message
             );
 
             Assert.Equal(
                 CoreStrings.ModelReadOnly,
-                Assert.Throws<InvalidOperationException>(
-                    () => entityType.RemoveForeignKey(foreignKey)
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(
+                        () => entityType.RemoveForeignKey(foreignKey)
+                    )
+                    .Message
             );
 
             Assert.Equal(
                 CoreStrings.ModelReadOnly,
-                Assert.Throws<InvalidOperationException>(
-                    () => foreignKey.IsRequired = false
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(() => foreignKey.IsRequired = false)
+                    .Message
             );
 
             Assert.Equal(
                 CoreStrings.ModelReadOnly,
-                Assert.Throws<InvalidOperationException>(
-                    () => foreignKey.IsRequiredDependent = false
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(() => foreignKey.IsRequiredDependent = false)
+                    .Message
             );
 
             Assert.Equal(
                 CoreStrings.ModelReadOnly,
-                Assert.Throws<InvalidOperationException>(
-                    () => foreignKey.IsOwnership = false
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(() => foreignKey.IsOwnership = false)
+                    .Message
             );
 
             Assert.Equal(
@@ -66,23 +70,29 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
             Assert.Equal(
                 CoreStrings.ModelReadOnly,
-                Assert.Throws<InvalidOperationException>(
-                    () => foreignKey.SetDependentToPrincipal((string)null)
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(
+                        () => foreignKey.SetDependentToPrincipal((string)null)
+                    )
+                    .Message
             );
 
             Assert.Equal(
                 CoreStrings.ModelReadOnly,
-                Assert.Throws<InvalidOperationException>(
-                    () => foreignKey.SetPrincipalToDependent((string)null)
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(
+                        () => foreignKey.SetPrincipalToDependent((string)null)
+                    )
+                    .Message
             );
 
             Assert.Equal(
                 CoreStrings.ModelReadOnly,
-                Assert.Throws<InvalidOperationException>(
-                    () => foreignKey.SetProperties(new[] { principalProp }, key)
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(
+                        () => foreignKey.SetProperties(new[] { principalProp }, key)
+                    )
+                    .Message
             );
         }
 
@@ -129,14 +139,16 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     "{'Fk'}",
                     "R (Dictionary<string, object>)"
                 ),
-                Assert.Throws<InvalidOperationException>(
-                    () =>
-                        dependentEntityType.AddForeignKey(
-                            new[] { fk },
-                            principalKey,
-                            principalEntityType
-                        )
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(
+                        () =>
+                            dependentEntityType.AddForeignKey(
+                                new[] { fk },
+                                principalKey,
+                                principalEntityType
+                            )
+                    )
+                    .Message
             );
         }
 
@@ -160,14 +172,16 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     "{'Id'}",
                     "P (Dictionary<string, object>)"
                 ),
-                Assert.Throws<InvalidOperationException>(
-                    () =>
-                        dependentEntityType.AddForeignKey(
-                            new[] { dependentProperty1, dependentProperty2 },
-                            principalEntityType.FindPrimaryKey(),
-                            principalEntityType
-                        )
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(
+                        () =>
+                            dependentEntityType.AddForeignKey(
+                                new[] { dependentProperty1, dependentProperty2 },
+                                principalEntityType.FindPrimaryKey(),
+                                principalEntityType
+                            )
+                    )
+                    .Message
             );
         }
 
@@ -191,14 +205,16 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     "{'Id1' : int, 'Id2' : int}",
                     "P (Dictionary<string, object>)"
                 ),
-                Assert.Throws<InvalidOperationException>(
-                    () =>
-                        dependentEntityType.AddForeignKey(
-                            new[] { dependentProperty1, dependentProperty2 },
-                            principalEntityType.FindPrimaryKey(),
-                            principalEntityType
-                        )
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(
+                        () =>
+                            dependentEntityType.AddForeignKey(
+                                new[] { dependentProperty1, dependentProperty2 },
+                                principalEntityType.FindPrimaryKey(),
+                                principalEntityType
+                            )
+                    )
+                    .Message
             );
         }
 
@@ -349,9 +365,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     "{'Id'}",
                     nameof(OneToManyDependent)
                 ),
-                Assert.Throws<InvalidOperationException>(
-                    () => foreignKey.IsRequiredDependent = true
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(() => foreignKey.IsRequiredDependent = true)
+                    .Message
             );
         }
 
@@ -449,11 +465,13 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             foreignKey1.SetDependentToPrincipal(OneToManyDependent.DeceptionProperty);
 
             var newFkProp = foreignKey1.DeclaringEntityType.AddProperty("FkProp", typeof(int));
-            var foreignKey2 = foreignKey1.DeclaringEntityType.AddForeignKey(
-                new[] { newFkProp },
-                foreignKey1.PrincipalEntityType.FindPrimaryKey(),
-                foreignKey1.PrincipalEntityType
-            );
+            var foreignKey2 = foreignKey1
+                .DeclaringEntityType
+                .AddForeignKey(
+                    new[] { newFkProp },
+                    foreignKey1.PrincipalEntityType.FindPrimaryKey(),
+                    foreignKey1.PrincipalEntityType
+                );
 
             Assert.Equal(
                 CoreStrings.NavigationForWrongForeignKey(
@@ -462,9 +480,14 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     foreignKey2.Properties.Format(),
                     foreignKey1.Properties.Format()
                 ),
-                Assert.Throws<InvalidOperationException>(
-                    () => foreignKey2.SetDependentToPrincipal(OneToManyDependent.DeceptionProperty)
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(
+                        () =>
+                            foreignKey2.SetDependentToPrincipal(
+                                OneToManyDependent.DeceptionProperty
+                            )
+                    )
+                    .Message
             );
         }
 
@@ -475,11 +498,13 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             foreignKey1.SetDependentToPrincipal(OneToManyDependent.DeceptionProperty);
 
             var newFkProp = foreignKey1.DeclaringEntityType.AddProperty("FkProp", typeof(int));
-            var foreignKey2 = foreignKey1.DeclaringEntityType.AddForeignKey(
-                new[] { newFkProp },
-                foreignKey1.PrincipalEntityType.FindPrimaryKey(),
-                foreignKey1.PrincipalEntityType
-            );
+            var foreignKey2 = foreignKey1
+                .DeclaringEntityType
+                .AddForeignKey(
+                    new[] { newFkProp },
+                    foreignKey1.PrincipalEntityType.FindPrimaryKey(),
+                    foreignKey1.PrincipalEntityType
+                );
 
             Assert.Equal(
                 CoreStrings.NavigationForWrongForeignKey(
@@ -488,9 +513,14 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     foreignKey2.Properties.Format(),
                     foreignKey1.Properties.Format()
                 ),
-                Assert.Throws<InvalidOperationException>(
-                    () => foreignKey2.SetDependentToPrincipal(OneToManyDependent.DeceptionProperty)
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(
+                        () =>
+                            foreignKey2.SetDependentToPrincipal(
+                                OneToManyDependent.DeceptionProperty
+                            )
+                    )
+                    .Message
             );
         }
 
@@ -707,9 +737,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     "E (Dictionary<string, object>)",
                     "E (Dictionary<string, object>)"
                 ),
-                Assert.Throws<InvalidOperationException>(
-                    () => foreignKey.SetPrincipalToDependent((string)null)
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(
+                        () => foreignKey.SetPrincipalToDependent((string)null)
+                    )
+                    .Message
             );
         }
 
@@ -736,9 +768,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     "E (Dictionary<string, object>)",
                     "E (Dictionary<string, object>)"
                 ),
-                Assert.Throws<InvalidOperationException>(
-                    () => foreignKey.IsOwnership = true
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(() => foreignKey.IsOwnership = true)
+                    .Message
             );
         }
 
@@ -874,9 +906,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     fk.DeclaringEntityType.DisplayName(),
                     fk.PrincipalEntityType.DisplayName()
                 ),
-                Assert.Throws<InvalidOperationException>(
-                    () => fk.GetRelatedEntityType(derivedDependent)
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(
+                        () => fk.GetRelatedEntityType(derivedDependent)
+                    )
+                    .Message
             );
             Assert.Equal(
                 CoreStrings.EntityTypeNotInRelationshipStrict(
@@ -884,9 +918,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     fk.DeclaringEntityType.DisplayName(),
                     fk.PrincipalEntityType.DisplayName()
                 ),
-                Assert.Throws<InvalidOperationException>(
-                    () => fk.GetRelatedEntityType(derivedPrincipal)
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(
+                        () => fk.GetRelatedEntityType(derivedPrincipal)
+                    )
+                    .Message
             );
             Assert.Equal(
                 CoreStrings.EntityTypeNotInRelationshipStrict(
@@ -894,9 +930,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     fk.DeclaringEntityType.DisplayName(),
                     fk.PrincipalEntityType.DisplayName()
                 ),
-                Assert.Throws<InvalidOperationException>(
-                    () => fk.FindNavigationsFrom(derivedPrincipal)
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(
+                        () => fk.FindNavigationsFrom(derivedPrincipal)
+                    )
+                    .Message
             );
             Assert.Equal(
                 CoreStrings.EntityTypeNotInRelationshipStrict(
@@ -904,9 +942,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     fk.DeclaringEntityType.DisplayName(),
                     fk.PrincipalEntityType.DisplayName()
                 ),
-                Assert.Throws<InvalidOperationException>(
-                    () => fk.FindNavigationsFrom(derivedDependent)
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(
+                        () => fk.FindNavigationsFrom(derivedDependent)
+                    )
+                    .Message
             );
             Assert.Equal(
                 CoreStrings.EntityTypeNotInRelationshipStrict(
@@ -914,9 +954,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     fk.DeclaringEntityType.DisplayName(),
                     fk.PrincipalEntityType.DisplayName()
                 ),
-                Assert.Throws<InvalidOperationException>(
-                    () => fk.FindNavigationsTo(derivedPrincipal)
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(() => fk.FindNavigationsTo(derivedPrincipal))
+                    .Message
             );
             Assert.Equal(
                 CoreStrings.EntityTypeNotInRelationshipStrict(
@@ -924,9 +964,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     fk.DeclaringEntityType.DisplayName(),
                     fk.PrincipalEntityType.DisplayName()
                 ),
-                Assert.Throws<InvalidOperationException>(
-                    () => fk.FindNavigationsTo(derivedDependent)
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(() => fk.FindNavigationsTo(derivedDependent))
+                    .Message
             );
 
 #pragma warning disable CS0612 // Type or member is obsolete
@@ -1034,9 +1074,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     fk.PrincipalEntityType.DisplayName(),
                     fk.DeclaringEntityType.DisplayName()
                 ),
-                Assert.Throws<InvalidOperationException>(
-                    () => fk.ResolveEntityTypeInHierarchy(fk.DeclaringEntityType)
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(
+                        () => fk.ResolveEntityTypeInHierarchy(fk.DeclaringEntityType)
+                    )
+                    .Message
             );
             Assert.Equal(
                 CoreStrings.IntraHierarchicalAmbiguousTargetEntityType(
@@ -1045,9 +1087,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     fk.PrincipalEntityType.DisplayName(),
                     fk.DeclaringEntityType.DisplayName()
                 ),
-                Assert.Throws<InvalidOperationException>(
-                    () => fk.ResolveEntityTypeInHierarchy(fk.PrincipalEntityType)
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(
+                        () => fk.ResolveEntityTypeInHierarchy(fk.PrincipalEntityType)
+                    )
+                    .Message
             );
 
             Assert.Equal(
@@ -1057,9 +1101,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     fk.PrincipalEntityType.DisplayName(),
                     fk.DeclaringEntityType.DisplayName()
                 ),
-                Assert.Throws<InvalidOperationException>(
-                    () => fk.ResolveOtherEntityTypeInHierarchy(fk.DeclaringEntityType)
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(
+                        () => fk.ResolveOtherEntityTypeInHierarchy(fk.DeclaringEntityType)
+                    )
+                    .Message
             );
             Assert.Equal(
                 CoreStrings.IntraHierarchicalAmbiguousTargetEntityType(
@@ -1068,9 +1114,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     fk.PrincipalEntityType.DisplayName(),
                     fk.DeclaringEntityType.DisplayName()
                 ),
-                Assert.Throws<InvalidOperationException>(
-                    () => fk.ResolveOtherEntityTypeInHierarchy(fk.PrincipalEntityType)
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(
+                        () => fk.ResolveOtherEntityTypeInHierarchy(fk.PrincipalEntityType)
+                    )
+                    .Message
             );
 #pragma warning restore CS0612 // Type or member is obsolete
 
@@ -1104,9 +1152,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     fk.DeclaringEntityType.DisplayName(),
                     fk.PrincipalEntityType.DisplayName()
                 ),
-                Assert.Throws<InvalidOperationException>(
-                    () => fk.GetRelatedEntityType(unrelatedType)
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(() => fk.GetRelatedEntityType(unrelatedType))
+                    .Message
             );
             Assert.Equal(
                 CoreStrings.EntityTypeNotInRelationshipStrict(
@@ -1114,30 +1162,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     fk.DeclaringEntityType.DisplayName(),
                     fk.PrincipalEntityType.DisplayName()
                 ),
-                Assert.Throws<InvalidOperationException>(
-                    () => fk.GetRelatedEntityType(unrelatedType)
-                ).Message
-            );
-
-            Assert.Equal(
-                CoreStrings.EntityTypeNotInRelationshipStrict(
-                    unrelatedType.DisplayName(),
-                    fk.DeclaringEntityType.DisplayName(),
-                    fk.PrincipalEntityType.DisplayName()
-                ),
-                Assert.Throws<InvalidOperationException>(
-                    () => fk.FindNavigationsFrom(unrelatedType)
-                ).Message
-            );
-            Assert.Equal(
-                CoreStrings.EntityTypeNotInRelationshipStrict(
-                    unrelatedType.DisplayName(),
-                    fk.DeclaringEntityType.DisplayName(),
-                    fk.PrincipalEntityType.DisplayName()
-                ),
-                Assert.Throws<InvalidOperationException>(
-                    () => fk.FindNavigationsFrom(unrelatedType)
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(() => fk.GetRelatedEntityType(unrelatedType))
+                    .Message
             );
 
             Assert.Equal(
@@ -1146,9 +1173,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     fk.DeclaringEntityType.DisplayName(),
                     fk.PrincipalEntityType.DisplayName()
                 ),
-                Assert.Throws<InvalidOperationException>(
-                    () => fk.FindNavigationsTo(unrelatedType)
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(() => fk.FindNavigationsFrom(unrelatedType))
+                    .Message
             );
             Assert.Equal(
                 CoreStrings.EntityTypeNotInRelationshipStrict(
@@ -1156,9 +1183,30 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     fk.DeclaringEntityType.DisplayName(),
                     fk.PrincipalEntityType.DisplayName()
                 ),
-                Assert.Throws<InvalidOperationException>(
-                    () => fk.FindNavigationsTo(unrelatedType)
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(() => fk.FindNavigationsFrom(unrelatedType))
+                    .Message
+            );
+
+            Assert.Equal(
+                CoreStrings.EntityTypeNotInRelationshipStrict(
+                    unrelatedType.DisplayName(),
+                    fk.DeclaringEntityType.DisplayName(),
+                    fk.PrincipalEntityType.DisplayName()
+                ),
+                Assert
+                    .Throws<InvalidOperationException>(() => fk.FindNavigationsTo(unrelatedType))
+                    .Message
+            );
+            Assert.Equal(
+                CoreStrings.EntityTypeNotInRelationshipStrict(
+                    unrelatedType.DisplayName(),
+                    fk.DeclaringEntityType.DisplayName(),
+                    fk.PrincipalEntityType.DisplayName()
+                ),
+                Assert
+                    .Throws<InvalidOperationException>(() => fk.FindNavigationsTo(unrelatedType))
+                    .Message
             );
 
 #pragma warning disable CS0612 // Type or member is obsolete
@@ -1168,9 +1216,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     fk.DeclaringEntityType.DisplayName(),
                     fk.PrincipalEntityType.DisplayName()
                 ),
-                Assert.Throws<InvalidOperationException>(
-                    () => fk.ResolveEntityTypeInHierarchy(unrelatedType)
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(
+                        () => fk.ResolveEntityTypeInHierarchy(unrelatedType)
+                    )
+                    .Message
             );
             Assert.Equal(
                 CoreStrings.EntityTypeNotInRelationship(
@@ -1178,9 +1228,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     fk.DeclaringEntityType.DisplayName(),
                     fk.PrincipalEntityType.DisplayName()
                 ),
-                Assert.Throws<InvalidOperationException>(
-                    () => fk.ResolveEntityTypeInHierarchy(unrelatedType)
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(
+                        () => fk.ResolveEntityTypeInHierarchy(unrelatedType)
+                    )
+                    .Message
             );
 
             Assert.Equal(
@@ -1189,9 +1241,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     fk.DeclaringEntityType.DisplayName(),
                     fk.PrincipalEntityType.DisplayName()
                 ),
-                Assert.Throws<InvalidOperationException>(
-                    () => fk.ResolveOtherEntityTypeInHierarchy(unrelatedType)
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(
+                        () => fk.ResolveOtherEntityTypeInHierarchy(unrelatedType)
+                    )
+                    .Message
             );
             Assert.Equal(
                 CoreStrings.EntityTypeNotInRelationship(
@@ -1199,9 +1253,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     fk.DeclaringEntityType.DisplayName(),
                     fk.PrincipalEntityType.DisplayName()
                 ),
-                Assert.Throws<InvalidOperationException>(
-                    () => fk.ResolveOtherEntityTypeInHierarchy(unrelatedType)
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(
+                        () => fk.ResolveOtherEntityTypeInHierarchy(unrelatedType)
+                    )
+                    .Message
             );
 #pragma warning restore CS0612 // Type or member is obsolete
 
@@ -1211,9 +1267,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     fk.DeclaringEntityType.DisplayName(),
                     fk.PrincipalEntityType.DisplayName()
                 ),
-                Assert.Throws<InvalidOperationException>(
-                    () => fk.FindNavigationsFromInHierarchy(unrelatedType)
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(
+                        () => fk.FindNavigationsFromInHierarchy(unrelatedType)
+                    )
+                    .Message
             );
             Assert.Equal(
                 CoreStrings.EntityTypeNotInRelationship(
@@ -1221,9 +1279,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     fk.DeclaringEntityType.DisplayName(),
                     fk.PrincipalEntityType.DisplayName()
                 ),
-                Assert.Throws<InvalidOperationException>(
-                    () => fk.FindNavigationsFromInHierarchy(unrelatedType)
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(
+                        () => fk.FindNavigationsFromInHierarchy(unrelatedType)
+                    )
+                    .Message
             );
 
             Assert.Equal(
@@ -1232,9 +1292,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     fk.DeclaringEntityType.DisplayName(),
                     fk.PrincipalEntityType.DisplayName()
                 ),
-                Assert.Throws<InvalidOperationException>(
-                    () => fk.FindNavigationsToInHierarchy(unrelatedType)
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(
+                        () => fk.FindNavigationsToInHierarchy(unrelatedType)
+                    )
+                    .Message
             );
             Assert.Equal(
                 CoreStrings.EntityTypeNotInRelationship(
@@ -1242,9 +1304,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     fk.DeclaringEntityType.DisplayName(),
                     fk.PrincipalEntityType.DisplayName()
                 ),
-                Assert.Throws<InvalidOperationException>(
-                    () => fk.FindNavigationsToInHierarchy(unrelatedType)
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(
+                        () => fk.FindNavigationsToInHierarchy(unrelatedType)
+                    )
+                    .Message
             );
         }
 

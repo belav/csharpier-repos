@@ -137,10 +137,9 @@ internal class InternalUsageAnalyzer
     {
         if (
             symbol == null
-            || SymbolEqualityComparer.Default.Equals(
-                symbol.ContainingAssembly,
-                context.Compilation.Assembly
-            )
+            || SymbolEqualityComparer
+                .Default
+                .Equals(symbol.ContainingAssembly, context.Compilation.Assembly)
         )
         {
             // The type is being referenced within the same assembly. This is valid use of an "internal" type
@@ -184,10 +183,9 @@ internal class InternalUsageAnalyzer
     {
         if (
             symbol == null
-            || SymbolEqualityComparer.Default.Equals(
-                symbol.ContainingAssembly,
-                context.Compilation.Assembly
-            )
+            || SymbolEqualityComparer
+                .Default
+                .Equals(symbol.ContainingAssembly, context.Compilation.Assembly)
         )
         {
             // This is part of the compilation, avoid this analyzer when building from source.
@@ -199,7 +197,8 @@ internal class InternalUsageAnalyzer
             context.ReportDiagnostic(
                 Diagnostic.Create(
                     _descriptor,
-                    symbolForDiagnostic.DeclaringSyntaxReferences
+                    symbolForDiagnostic
+                        .DeclaringSyntaxReferences
                         .FirstOrDefault()
                         ?.GetSyntax()
                         .GetLocation() ?? Location.None,
@@ -215,7 +214,8 @@ internal class InternalUsageAnalyzer
             context.ReportDiagnostic(
                 Diagnostic.Create(
                     _descriptor,
-                    symbolForDiagnostic.DeclaringSyntaxReferences
+                    symbolForDiagnostic
+                        .DeclaringSyntaxReferences
                         .FirstOrDefault()
                         ?.GetSyntax()
                         .GetLocation() ?? Location.None,

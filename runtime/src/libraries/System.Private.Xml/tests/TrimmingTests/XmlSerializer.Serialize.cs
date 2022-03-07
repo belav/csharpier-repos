@@ -18,22 +18,26 @@ namespace System.Xml.Serialization.TrimmingTests
         public static int Main()
         {
             Response obj = new Response();
-            obj.DataUpdates.DataUpdateInfo.Add(
-                new DataUpdatesDataUpdateInfo()
-                {
-                    DataDate = new DateTime(2009, 4, 13),
-                    DataType = "Data",
-                    LastUpdatedDate = new DateTime(2010, 12, 12)
-                }
-            );
-            obj.DataUpdates.DataUpdateInfo.Add(
-                new DataUpdatesDataUpdateInfo()
-                {
-                    DataDate = new DateTime(2009, 4, 14),
-                    DataType = "Data",
-                    LastUpdatedDate = new DateTime(2010, 12, 12)
-                }
-            );
+            obj.DataUpdates
+                .DataUpdateInfo
+                .Add(
+                    new DataUpdatesDataUpdateInfo()
+                    {
+                        DataDate = new DateTime(2009, 4, 13),
+                        DataType = "Data",
+                        LastUpdatedDate = new DateTime(2010, 12, 12)
+                    }
+                );
+            obj.DataUpdates
+                .DataUpdateInfo
+                .Add(
+                    new DataUpdatesDataUpdateInfo()
+                    {
+                        DataDate = new DateTime(2009, 4, 14),
+                        DataType = "Data",
+                        LastUpdatedDate = new DateTime(2010, 12, 12)
+                    }
+                );
 
             using StringWriter writer = new StringWriter();
             new XmlSerializer(typeof(Response)).Serialize(writer, obj);

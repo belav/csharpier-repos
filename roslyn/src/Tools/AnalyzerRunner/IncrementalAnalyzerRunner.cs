@@ -43,36 +43,40 @@ namespace AnalyzerRunner
             var usePersistentStorage = _options.UsePersistentStorage;
 
             _workspace.TryApplyChanges(
-                _workspace.CurrentSolution.WithOptions(
-                    _workspace.Options
-                        .WithChangedOption(
-                            SolutionCrawlerOptions.BackgroundAnalysisScopeOption,
-                            LanguageNames.CSharp,
-                            _options.AnalysisScope
-                        )
-                        .WithChangedOption(
-                            SolutionCrawlerOptions.BackgroundAnalysisScopeOption,
-                            LanguageNames.VisualBasic,
-                            _options.AnalysisScope
-                        )
-                        .WithChangedOption(
-                            StorageOptions.Database,
-                            usePersistentStorage ? StorageDatabase.SQLite : StorageDatabase.None
-                        )
-                )
+                _workspace
+                    .CurrentSolution
+                    .WithOptions(
+                        _workspace
+                            .Options
+                            .WithChangedOption(
+                                SolutionCrawlerOptions.BackgroundAnalysisScopeOption,
+                                LanguageNames.CSharp,
+                                _options.AnalysisScope
+                            )
+                            .WithChangedOption(
+                                SolutionCrawlerOptions.BackgroundAnalysisScopeOption,
+                                LanguageNames.VisualBasic,
+                                _options.AnalysisScope
+                            )
+                            .WithChangedOption(
+                                StorageOptions.Database,
+                                usePersistentStorage ? StorageDatabase.SQLite : StorageDatabase.None
+                            )
+                    )
             );
 
             var exportProvider = (IMefHostExportProvider)_workspace.Services.HostServices;
 
-            var solutionCrawlerRegistrationService =
-                (SolutionCrawlerRegistrationService)_workspace.Services.GetRequiredService<ISolutionCrawlerRegistrationService>();
+            var solutionCrawlerRegistrationService = (SolutionCrawlerRegistrationService)_workspace
+                .Services
+                .GetRequiredService<ISolutionCrawlerRegistrationService>();
             solutionCrawlerRegistrationService.Register(_workspace);
 
             if (usePersistentStorage)
             {
-                var persistentStorageService = _workspace.Services.GetPersistentStorageService(
-                    _workspace.CurrentSolution.Options
-                );
+                var persistentStorageService = _workspace
+                    .Services
+                    .GetPersistentStorageService(_workspace.CurrentSolution.Options);
                 await using var persistentStorage = await persistentStorageService
                     .GetStorageAsync(
                         SolutionKey.ToSolutionKey(_workspace.CurrentSolution),
@@ -111,15 +115,17 @@ namespace AnalyzerRunner
                     .Where(x => x.Metadata.Name == incrementalAnalyzerName)
                     .SingleOrDefault(
                         provider =>
-                            provider.Metadata.WorkspaceKinds?.Contains(
-                                WorkspaceKind.RemoteWorkspace
-                            ) ?? false
+                            provider
+                                .Metadata
+                                .WorkspaceKinds
+                                ?.Contains(WorkspaceKind.RemoteWorkspace) ?? false
                     )
                     ?.Value;
                 incrementalAnalyzerProvider ??=
                     incrementalAnalyzerProviders
                         .Where(x => x.Metadata.Name == incrementalAnalyzerName)
-                        .Single(provider => provider.Metadata.WorkspaceKinds is null).Value;
+                        .Single(provider => provider.Metadata.WorkspaceKinds is null)
+                        .Value;
                 var incrementalAnalyzer = incrementalAnalyzerProvider.CreateIncrementalAnalyzer(
                     _workspace
                 );
@@ -130,8 +136,9 @@ namespace AnalyzerRunner
                 switch (incrementalAnalyzerName)
                 {
                     case nameof(SymbolTreeInfoIncrementalAnalyzerProvider):
-                        var symbolTreeInfoCacheService =
-                            _workspace.Services.GetRequiredService<ISymbolTreeInfoCacheService>();
+                        var symbolTreeInfoCacheService = _workspace
+                            .Services
+                            .GetRequiredService<ISymbolTreeInfoCacheService>();
                         var symbolTreeInfo = await symbolTreeInfoCacheService
                             .TryGetSourceSymbolTreeInfoAsync(
                                 _workspace.CurrentSolution.Projects.First(),

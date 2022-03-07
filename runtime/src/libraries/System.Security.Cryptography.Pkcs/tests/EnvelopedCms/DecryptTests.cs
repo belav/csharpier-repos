@@ -299,8 +299,9 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
                 recipientInfo.RecipientIdentifier.Type
             );
 
-            X509IssuerSerial issuerSerial =
-                (X509IssuerSerial)recipientInfo.RecipientIdentifier.Value;
+            X509IssuerSerial issuerSerial = (X509IssuerSerial)recipientInfo
+                .RecipientIdentifier
+                .Value;
             Assert.Equal(expectedSerial, issuerSerial.SerialNumber);
 
             using (X509Certificate2 cert = negativeSerial.TryGetCertificateWithPrivateKey())

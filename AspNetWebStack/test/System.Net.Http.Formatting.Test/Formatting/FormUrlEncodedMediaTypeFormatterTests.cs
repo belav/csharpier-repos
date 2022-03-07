@@ -34,10 +34,12 @@ namespace System.Net.Http.Formatting
         [Fact]
         public void TypeIsCorrect()
         {
-            Assert.Type.HasProperties(
-                typeof(FormUrlEncodedMediaTypeFormatter),
-                TypeAssert.TypeProperties.IsPublicVisibleClass
-            );
+            Assert
+                .Type
+                .HasProperties(
+                    typeof(FormUrlEncodedMediaTypeFormatter),
+                    TypeAssert.TypeProperties.IsPublicVisibleClass
+                );
         }
 
         [Fact]
@@ -48,9 +50,9 @@ namespace System.Net.Http.Formatting
 
             foreach (MediaTypeHeaderValue mediaType1 in formatter1.SupportedMediaTypes)
             {
-                MediaTypeHeaderValue mediaType2 = formatter2.SupportedMediaTypes.Single(
-                    m => m.Equals(mediaType1)
-                );
+                MediaTypeHeaderValue mediaType2 = formatter2
+                    .SupportedMediaTypes
+                    .Single(m => m.Equals(mediaType1));
                 Assert.NotSame(mediaType1, mediaType2);
             }
         }
@@ -90,31 +92,35 @@ namespace System.Net.Http.Formatting
         [Fact]
         public void ReadBufferSize_RoundTrips()
         {
-            Assert.Reflection.IntegerProperty(
-                new FormUrlEncodedMediaTypeFormatter(),
-                c => c.ReadBufferSize,
-                expectedDefaultValue: 32 * 1024,
-                minLegalValue: 256,
-                illegalLowerValue: 255,
-                maxLegalValue: null,
-                illegalUpperValue: null,
-                roundTripTestValue: 1024
-            );
+            Assert
+                .Reflection
+                .IntegerProperty(
+                    new FormUrlEncodedMediaTypeFormatter(),
+                    c => c.ReadBufferSize,
+                    expectedDefaultValue: 32 * 1024,
+                    minLegalValue: 256,
+                    illegalLowerValue: 255,
+                    maxLegalValue: null,
+                    illegalUpperValue: null,
+                    roundTripTestValue: 1024
+                );
         }
 
         [Fact]
         public void MaxDepthReturnsCorrectValue()
         {
-            Assert.Reflection.IntegerProperty(
-                new FormUrlEncodedMediaTypeFormatter(),
-                f => f.MaxDepth,
-                expectedDefaultValue: 256,
-                minLegalValue: 1,
-                illegalLowerValue: 0,
-                maxLegalValue: null,
-                illegalUpperValue: null,
-                roundTripTestValue: 10
-            );
+            Assert
+                .Reflection
+                .IntegerProperty(
+                    new FormUrlEncodedMediaTypeFormatter(),
+                    f => f.MaxDepth,
+                    expectedDefaultValue: 256,
+                    minLegalValue: 1,
+                    illegalLowerValue: 0,
+                    maxLegalValue: null,
+                    illegalUpperValue: null,
+                    roundTripTestValue: 10
+                );
         }
 
         [Fact]

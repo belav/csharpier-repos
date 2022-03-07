@@ -78,7 +78,8 @@ namespace System.CommandLine.Rendering.Tests.Views
             var renderer = new ConsoleRenderer(terminal, outputMode);
             grid.Render(renderer, new Region(0, 0, 22, 1));
 
-            terminal.Events
+            terminal
+                .Events
                 .Should()
                 .BeEquivalentSequenceTo(
                     new TestTerminal.CursorPositionChanged(new Point(0, 0)),
@@ -111,7 +112,8 @@ namespace System.CommandLine.Rendering.Tests.Views
             var renderer = new ConsoleRenderer(terminal, outputMode);
             grid.Render(renderer, new Region(0, 0, 8, 6));
 
-            terminal.Events
+            terminal
+                .Events
                 .Should()
                 .BeEquivalentSequenceTo(
                     new TestTerminal.CursorPositionChanged(new Point(0, 0)),
@@ -152,7 +154,8 @@ namespace System.CommandLine.Rendering.Tests.Views
             var renderer = new ConsoleRenderer(terminal, outputMode);
             grid.Render(renderer, new Region(0, 0, 45, 1));
 
-            terminal.Events
+            terminal
+                .Events
                 .Should()
                 .BeEquivalentSequenceTo(
                     new TestTerminal.CursorPositionChanged(new Point(0, 0)),
@@ -195,7 +198,8 @@ namespace System.CommandLine.Rendering.Tests.Views
             var renderer = new ConsoleRenderer(terminal, outputMode);
             grid.Render(renderer, new Region(0, 0, 121, 1));
 
-            terminal.Events
+            terminal
+                .Events
                 .Should()
                 .BeEquivalentSequenceTo(
                     new TestTerminal.CursorPositionChanged(new Point(0, 0)),
@@ -232,7 +236,8 @@ namespace System.CommandLine.Rendering.Tests.Views
             var renderer = new ConsoleRenderer(terminal, outputMode);
             grid.Render(renderer, new Region(0, 0, 12, 4));
 
-            terminal.Events
+            terminal
+                .Events
                 .Should()
                 .BeEquivalentSequenceTo(
                     new TestTerminal.CursorPositionChanged(new Point(0, 0)),
@@ -279,7 +284,8 @@ namespace System.CommandLine.Rendering.Tests.Views
             var renderer = new ConsoleRenderer(terminal, outputMode);
             grid.Render(renderer, new Region(0, 0, 12, 4));
 
-            terminal.Events
+            terminal
+                .Events
                 .Should()
                 .BeEquivalentSequenceTo(
                     new TestTerminal.CursorPositionChanged(new Point(0, 0)),
@@ -322,7 +328,8 @@ namespace System.CommandLine.Rendering.Tests.Views
             var renderer = new ConsoleRenderer(terminal, outputMode);
             grid.Render(renderer, new Region(0, 0, 25, 3));
 
-            terminal.Events
+            terminal
+                .Events
                 .Should()
                 .BeEquivalentSequenceTo(
                     new TestTerminal.CursorPositionChanged(new Point(0, 0)),
@@ -359,7 +366,8 @@ namespace System.CommandLine.Rendering.Tests.Views
             var renderer = new ConsoleRenderer(terminal, outputMode);
             grid.Render(renderer, new Region(0, 0, 18, 3));
 
-            terminal.Events
+            terminal
+                .Events
                 .Should()
                 .BeEquivalentSequenceTo(
                     new TestTerminal.CursorPositionChanged(new Point(0, 0)),

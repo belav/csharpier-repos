@@ -64,9 +64,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                     )
                     {
                         var name =
-                            (
-                                (VariableDeclaratorSyntax)expression.Parent.Parent
-                            ).Identifier.ValueText;
+                            ((VariableDeclaratorSyntax)expression.Parent.Parent)
+                                .Identifier
+                                .ValueText;
                         return (name != null && name.Length > 0)
                           ? MakeMethodName("Get", name, methodName.Equals(NewMethodCamelCaseStr))
                           : methodName;
@@ -226,7 +226,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                         // This is similar to FieldDeclaration case but we only want to do this
                         // if the member has an expression body.
                         scope =
-                            CSharpSelectionResult.GetContainingScopeOf<ArrowExpressionClauseSyntax>().Parent;
+                            CSharpSelectionResult
+                                .GetContainingScopeOf<ArrowExpressionClauseSyntax>()
+                                .Parent;
                     }
 
                     return scope;

@@ -83,9 +83,12 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
                 result
                     .Should()
                     .Pass()
-                    .And.HaveStdOutContaining("New instance of Server created")
-                    .And.HaveStdOutContaining($"Activation of {sharedState.ClsidString} succeeded.")
-                    .And.HaveStdErrContaining("Using environment variable DOTNET_ROOT");
+                    .And
+                    .HaveStdOutContaining("New instance of Server created")
+                    .And
+                    .HaveStdOutContaining($"Activation of {sharedState.ClsidString} succeeded.")
+                    .And
+                    .HaveStdErrContaining("Using environment variable DOTNET_ROOT");
             }
         }
 
@@ -115,7 +118,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
                 result
                     .Should()
                     .Pass()
-                    .And.HaveStdOutContaining(
+                    .And
+                    .HaveStdOutContaining(
                         $"The specified runtimeconfig.json [{missingRuntimeConfig}] does not exist"
                     );
             }
@@ -140,9 +144,12 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
                 result
                     .Should()
                     .Pass()
-                    .And.HaveStdOutContaining("Loading default type library succeeded.")
-                    .And.HaveStdOutContaining("Loading type library 1 succeeded.")
-                    .And.HaveStdOutContaining("Loading type library 2 succeeded.");
+                    .And
+                    .HaveStdOutContaining("Loading default type library succeeded.")
+                    .And
+                    .HaveStdOutContaining("Loading type library 1 succeeded.")
+                    .And
+                    .HaveStdOutContaining("Loading type library 2 succeeded.");
             }
         }
 

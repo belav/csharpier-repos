@@ -143,7 +143,9 @@ namespace System.Runtime.Tests
                     if (publicMember is MethodInfo methodInfo)
                     {
                         if (
-                            methodInfo.ReturnParameter.CustomAttributes
+                            methodInfo
+                                .ReturnParameter
+                                .CustomAttributes
                                 .GetNullableAttributes()
                                 .Any()
                         )
@@ -197,8 +199,9 @@ namespace System.Runtime.Tests
         [MemberData(nameof(NullableMetadataTypesTestData))]
         public static void NullablePublicOnlyAttributePresent(Type type)
         {
-            CustomAttributeData nullablePublicOnlyAttribute =
-                type.Module.CustomAttributes.GetNullablePublicOnlyAttribute();
+            CustomAttributeData nullablePublicOnlyAttribute = type.Module
+                .CustomAttributes
+                .GetNullablePublicOnlyAttribute();
             Assert.NotNull(nullablePublicOnlyAttribute);
 
             Assert.False((bool)nullablePublicOnlyAttribute.ConstructorArguments.First().Value);

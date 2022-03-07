@@ -791,7 +791,8 @@ return Dummy(11 is var x1, x1);
                     .DescendantNodes()
                     .OfType<IdentifierNameSyntax>()
                     .Where(id => id.Identifier.ValueText == "SpeculateHere")
-                    .Single().SpanStart,
+                    .Single()
+                    .SpanStart,
                 statement,
                 out model
             );
@@ -1104,7 +1105,8 @@ throw Dummy(11 is var x1, x1);
                     .DescendantNodes()
                     .OfType<IdentifierNameSyntax>()
                     .Where(id => id.Identifier.ValueText == "SpeculateHere")
-                    .Single().SpanStart,
+                    .Single()
+                    .SpanStart,
                 statement,
                 out model
             );
@@ -7941,7 +7943,8 @@ var (y1, dd) = ((123 is var x1), x1);
                     .DescendantNodes()
                     .OfType<IdentifierNameSyntax>()
                     .Where(id => id.Identifier.ValueText == "SpeculateHere")
-                    .Single().SpanStart,
+                    .Single()
+                    .SpanStart,
                 statement,
                 out model
             );
@@ -12290,7 +12293,8 @@ a: b: c:Dummy(11 is var x1, x1);
                     .DescendantNodes()
                     .OfType<IdentifierNameSyntax>()
                     .Where(id => id.Identifier.ValueText == "SpeculateHere")
-                    .Single().SpanStart,
+                    .Single()
+                    .SpanStart,
                 statement,
                 out model
             );

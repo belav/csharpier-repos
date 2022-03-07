@@ -101,8 +101,9 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
 
                             var t = await document.GetSyntaxTreeAsync(c).ConfigureAwait(false);
                             var r = await t.GetRootAsync(c).ConfigureAwait(false);
-                            var syntaxFacts =
-                                _project.LanguageServices.GetRequiredService<ISyntaxFactsService>();
+                            var syntaxFacts = _project
+                                .LanguageServices
+                                .GetRequiredService<ISyntaxFactsService>();
 
                             if (
                                 r.ChildNodes()

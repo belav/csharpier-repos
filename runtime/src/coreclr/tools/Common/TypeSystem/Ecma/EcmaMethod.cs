@@ -183,10 +183,9 @@ namespace Internal.TypeSystem.Ecma
                         continue;
 
                     if (
-                        metadataReader.StringComparer.Equals(
-                            namespaceHandle,
-                            "System.Runtime.CompilerServices"
-                        )
+                        metadataReader
+                            .StringComparer
+                            .Equals(namespaceHandle, "System.Runtime.CompilerServices")
                     )
                     {
                         if (metadataReader.StringComparer.Equals(nameHandle, "IntrinsicAttribute"))
@@ -195,17 +194,15 @@ namespace Internal.TypeSystem.Ecma
                         }
                     }
                     else if (
-                        metadataReader.StringComparer.Equals(
-                            namespaceHandle,
-                            "System.Runtime.InteropServices"
-                        )
+                        metadataReader
+                            .StringComparer
+                            .Equals(namespaceHandle, "System.Runtime.InteropServices")
                     )
                     {
                         if (
-                            metadataReader.StringComparer.Equals(
-                                nameHandle,
-                                "UnmanagedCallersOnlyAttribute"
-                            )
+                            metadataReader
+                                .StringComparer
+                                .Equals(nameHandle, "UnmanagedCallersOnlyAttribute")
                         )
                         {
                             flags |= MethodFlags.UnmanagedCallersOnly;
@@ -216,10 +213,9 @@ namespace Internal.TypeSystem.Ecma
                     )
                     {
                         if (
-                            metadataReader.StringComparer.Equals(
-                                nameHandle,
-                                "RuntimeExportAttribute"
-                            )
+                            metadataReader
+                                .StringComparer
+                                .Equals(nameHandle, "RuntimeExportAttribute")
                         )
                         {
                             flags |= MethodFlags.RuntimeExport;
@@ -498,11 +494,13 @@ namespace Internal.TypeSystem.Ecma
 
         public override bool HasCustomAttribute(string attributeNamespace, string attributeName)
         {
-            return !MetadataReader.GetCustomAttributeHandle(
-                MetadataReader.GetMethodDefinition(_handle).GetCustomAttributes(),
-                attributeNamespace,
-                attributeName
-            ).IsNil;
+            return !MetadataReader
+                .GetCustomAttributeHandle(
+                    MetadataReader.GetMethodDefinition(_handle).GetCustomAttributes(),
+                    attributeNamespace,
+                    attributeName
+                )
+                .IsNil;
         }
 
         public override bool IsPInvoke

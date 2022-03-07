@@ -158,11 +158,13 @@ namespace Internal.Cryptography.Pal
                         extraCerts[extraIdx] = handle.DangerousGetHandle();
                     }
 
-                    _chainContext = Interop.AndroidCrypto.X509ChainCreateContext(
-                        ((AndroidCertificatePal)cert).SafeHandle,
-                        extraCerts,
-                        extraCerts.Length
-                    );
+                    _chainContext = Interop
+                        .AndroidCrypto
+                        .X509ChainCreateContext(
+                            ((AndroidCertificatePal)cert).SafeHandle,
+                            extraCerts,
+                            extraCerts.Length
+                        );
 
                     if (useCustomRootTrust)
                     {
@@ -183,11 +185,13 @@ namespace Internal.Cryptography.Pal
                             customTrustCerts[customIdx] = handle.DangerousGetHandle();
                         }
 
-                        int res = Interop.AndroidCrypto.X509ChainSetCustomTrustStore(
-                            _chainContext,
-                            customTrustCerts,
-                            customTrustCerts.Length
-                        );
+                        int res = Interop
+                            .AndroidCrypto
+                            .X509ChainSetCustomTrustStore(
+                                _chainContext,
+                                customTrustCerts,
+                                customTrustCerts.Length
+                            );
                         if (res != 1)
                         {
                             throw new CryptographicException();
@@ -221,18 +225,18 @@ namespace Internal.Cryptography.Pal
                 long timeInMsFromUnixEpoch = new DateTimeOffset(
                     verificationTime
                 ).ToUnixTimeMilliseconds();
-                _isValid = Interop.AndroidCrypto.X509ChainBuild(
-                    _chainContext,
-                    timeInMsFromUnixEpoch
-                );
+                _isValid = Interop
+                    .AndroidCrypto
+                    .X509ChainBuild(_chainContext, timeInMsFromUnixEpoch);
                 if (!_isValid)
                 {
                     // Android always validates name, time, signature, and trusted root.
                     // There is no way bypass that validation and build a path.
                     ChainElements = Array.Empty<X509ChainElement>();
 
-                    Interop.AndroidCrypto.ValidationError[] errors =
-                        Interop.AndroidCrypto.X509ChainGetErrors(_chainContext);
+                    Interop.AndroidCrypto.ValidationError[] errors = Interop
+                        .AndroidCrypto
+                        .X509ChainGetErrors(_chainContext);
                     var chainStatus = new X509ChainStatus[errors.Length];
                     for (int i = 0; i < errors.Length; i++)
                     {
@@ -246,18 +250,20 @@ namespace Internal.Cryptography.Pal
                 }
 
                 byte checkedRevocation;
-                int res = Interop.AndroidCrypto.X509ChainValidate(
-                    _chainContext,
-                    revocationMode,
-                    revocationFlag,
-                    out checkedRevocation
-                );
+                int res = Interop
+                    .AndroidCrypto
+                    .X509ChainValidate(
+                        _chainContext,
+                        revocationMode,
+                        revocationFlag,
+                        out checkedRevocation
+                    );
                 if (res != 1)
                     throw new CryptographicException();
 
-                X509Certificate2[] certs = Interop.AndroidCrypto.X509ChainGetCertificates(
-                    _chainContext
-                );
+                X509Certificate2[] certs = Interop
+                    .AndroidCrypto
+                    .X509ChainGetCertificates(_chainContext);
                 List<X509ChainStatus> overallStatus = new List<X509ChainStatus>();
                 List<X509ChainStatus>[] statuses = new List<X509ChainStatus>[certs.Length];
 
@@ -418,8 +424,9 @@ namespace Internal.Cryptography.Pal
             )
             {
                 var statusByIndex = new Dictionary<int, List<X509ChainStatus>>();
-                Interop.AndroidCrypto.ValidationError[] errors =
-                    Interop.AndroidCrypto.X509ChainGetErrors(ctx);
+                Interop.AndroidCrypto.ValidationError[] errors = Interop
+                    .AndroidCrypto
+                    .X509ChainGetErrors(ctx);
                 for (int i = 0; i < errors.Length; i++)
                 {
                     Interop.AndroidCrypto.ValidationError error = errors[i];

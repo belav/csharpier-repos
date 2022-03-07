@@ -825,8 +825,9 @@ namespace System.Diagnostics.Eventing.Reader
                         case UnsafeNativeMethods.EvtChannelConfigPropertyId.EvtChannelConfigEnabled:
 
                             {
-                                varVal.Type =
-                                    (uint)UnsafeNativeMethods.EvtVariantType.EvtVarTypeBoolean;
+                                varVal.Type = (uint)UnsafeNativeMethods
+                                    .EvtVariantType
+                                    .EvtVarTypeBoolean;
                                 if ((bool)val == true)
                                     varVal.Bool = 1;
                                 else
@@ -836,61 +837,80 @@ namespace System.Diagnostics.Eventing.Reader
                         case UnsafeNativeMethods.EvtChannelConfigPropertyId.EvtChannelConfigAccess:
 
                             {
-                                varVal.Type =
-                                    (uint)UnsafeNativeMethods.EvtVariantType.EvtVarTypeString;
+                                varVal.Type = (uint)UnsafeNativeMethods
+                                    .EvtVariantType
+                                    .EvtVarTypeString;
                                 taskMem.SetMemory(Marshal.StringToCoTaskMemUni((string)val));
                                 varVal.StringVal = taskMem.GetMemory();
                             }
                             break;
-                        case UnsafeNativeMethods.EvtChannelConfigPropertyId.EvtChannelLoggingConfigLogFilePath:
+                        case UnsafeNativeMethods
+                            .EvtChannelConfigPropertyId
+                            .EvtChannelLoggingConfigLogFilePath:
 
                             {
-                                varVal.Type =
-                                    (uint)UnsafeNativeMethods.EvtVariantType.EvtVarTypeString;
+                                varVal.Type = (uint)UnsafeNativeMethods
+                                    .EvtVariantType
+                                    .EvtVarTypeString;
                                 taskMem.SetMemory(Marshal.StringToCoTaskMemUni((string)val));
                                 varVal.StringVal = taskMem.GetMemory();
                             }
                             break;
-                        case UnsafeNativeMethods.EvtChannelConfigPropertyId.EvtChannelLoggingConfigMaxSize:
+                        case UnsafeNativeMethods
+                            .EvtChannelConfigPropertyId
+                            .EvtChannelLoggingConfigMaxSize:
 
                             {
-                                varVal.Type =
-                                    (uint)UnsafeNativeMethods.EvtVariantType.EvtVarTypeUInt64;
+                                varVal.Type = (uint)UnsafeNativeMethods
+                                    .EvtVariantType
+                                    .EvtVarTypeUInt64;
                                 varVal.ULong = (ulong)((long)val);
                             }
                             break;
-                        case UnsafeNativeMethods.EvtChannelConfigPropertyId.EvtChannelPublishingConfigLevel:
+                        case UnsafeNativeMethods
+                            .EvtChannelConfigPropertyId
+                            .EvtChannelPublishingConfigLevel:
 
                             {
-                                varVal.Type =
-                                    (uint)UnsafeNativeMethods.EvtVariantType.EvtVarTypeUInt32;
+                                varVal.Type = (uint)UnsafeNativeMethods
+                                    .EvtVariantType
+                                    .EvtVarTypeUInt32;
                                 varVal.UInteger = (uint)((int)val);
                             }
                             break;
-                        case UnsafeNativeMethods.EvtChannelConfigPropertyId.EvtChannelPublishingConfigKeywords:
+                        case UnsafeNativeMethods
+                            .EvtChannelConfigPropertyId
+                            .EvtChannelPublishingConfigKeywords:
 
                             {
-                                varVal.Type =
-                                    (uint)UnsafeNativeMethods.EvtVariantType.EvtVarTypeUInt64;
+                                varVal.Type = (uint)UnsafeNativeMethods
+                                    .EvtVariantType
+                                    .EvtVarTypeUInt64;
                                 varVal.ULong = (ulong)((long)val);
                             }
                             break;
-                        case UnsafeNativeMethods.EvtChannelConfigPropertyId.EvtChannelLoggingConfigRetention:
+                        case UnsafeNativeMethods
+                            .EvtChannelConfigPropertyId
+                            .EvtChannelLoggingConfigRetention:
 
                             {
-                                varVal.Type =
-                                    (uint)UnsafeNativeMethods.EvtVariantType.EvtVarTypeBoolean;
+                                varVal.Type = (uint)UnsafeNativeMethods
+                                    .EvtVariantType
+                                    .EvtVarTypeBoolean;
                                 if ((bool)val == true)
                                     varVal.Bool = 1;
                                 else
                                     varVal.Bool = 0;
                             }
                             break;
-                        case UnsafeNativeMethods.EvtChannelConfigPropertyId.EvtChannelLoggingConfigAutoBackup:
+                        case UnsafeNativeMethods
+                            .EvtChannelConfigPropertyId
+                            .EvtChannelLoggingConfigAutoBackup:
 
                             {
-                                varVal.Type =
-                                    (uint)UnsafeNativeMethods.EvtVariantType.EvtVarTypeBoolean;
+                                varVal.Type = (uint)UnsafeNativeMethods
+                                    .EvtVariantType
+                                    .EvtVarTypeBoolean;
                                 if ((bool)val == true)
                                     varVal.Bool = 1;
                                 else
@@ -1165,7 +1185,9 @@ namespace System.Diagnostics.Eventing.Reader
                                 UnsafeNativeMethods.EvtVariantType.EvtVarTypeGuid
                             );
                             break;
-                        case (int)UnsafeNativeMethods.EvtSystemPropertyId.EvtSystemRelatedActivityID:
+                        case (int)UnsafeNativeMethods
+                            .EvtSystemPropertyId
+                            .EvtSystemRelatedActivityID:
                             systemProperties.RelatedActivityId = (Guid?)ConvertToObject(
                                 varVal,
                                 UnsafeNativeMethods.EvtVariantType.EvtVarTypeGuid

@@ -211,31 +211,36 @@ namespace Microsoft.EntityFrameworkCore.Query
             ChangesDate = new DateTime(2010, 1, 1);
 
             context.RemoveRange(
-                context.ChangeTracker
+                context
+                    .ChangeTracker
                     .Entries()
                     .Where(e => e.Entity is EntityThree)
                     .Select(e => e.Entity)
             );
             context.RemoveRange(
-                context.ChangeTracker
+                context
+                    .ChangeTracker
                     .Entries()
                     .Where(e => e.Entity is EntityTwo)
                     .Select(e => e.Entity)
             );
             context.RemoveRange(
-                context.ChangeTracker
+                context
+                    .ChangeTracker
                     .Entries()
                     .Where(e => e.Entity is EntityOne)
                     .Select(e => e.Entity)
             );
             context.RemoveRange(
-                context.ChangeTracker
+                context
+                    .ChangeTracker
                     .Entries()
                     .Where(e => e.Entity is EntityCompositeKey)
                     .Select(e => e.Entity)
             );
             context.RemoveRange(
-                context.ChangeTracker
+                context
+                    .ChangeTracker
                     .Entries()
                     .Where(e => e.Entity is EntityRoot)
                     .Select(e => e.Entity)
@@ -266,26 +271,34 @@ namespace Microsoft.EntityFrameworkCore.Query
 
             foreach (var tableName in tableNames)
             {
-                context.Database.ExecuteSqlRaw(
-                    $"ALTER TABLE [{tableName}] SET (SYSTEM_VERSIONING = OFF)"
-                );
-                context.Database.ExecuteSqlRaw(
-                    $"ALTER TABLE [{tableName}] DROP PERIOD FOR SYSTEM_TIME"
-                );
+                context
+                    .Database
+                    .ExecuteSqlRaw($"ALTER TABLE [{tableName}] SET (SYSTEM_VERSIONING = OFF)");
+                context
+                    .Database
+                    .ExecuteSqlRaw($"ALTER TABLE [{tableName}] DROP PERIOD FOR SYSTEM_TIME");
 
-                context.Database.ExecuteSqlRaw(
-                    $"UPDATE [{tableName + "History"}] SET PeriodStart = '2000-01-01T01:00:00.0000000Z'"
-                );
-                context.Database.ExecuteSqlRaw(
-                    $"UPDATE [{tableName + "History"}] SET PeriodEnd = '2020-07-01T07:00:00.0000000Z'"
-                );
+                context
+                    .Database
+                    .ExecuteSqlRaw(
+                        $"UPDATE [{tableName + "History"}] SET PeriodStart = '2000-01-01T01:00:00.0000000Z'"
+                    );
+                context
+                    .Database
+                    .ExecuteSqlRaw(
+                        $"UPDATE [{tableName + "History"}] SET PeriodEnd = '2020-07-01T07:00:00.0000000Z'"
+                    );
 
-                context.Database.ExecuteSqlRaw(
-                    $"ALTER TABLE [{tableName}] ADD PERIOD FOR SYSTEM_TIME ([PeriodStart], [PeriodEnd])"
-                );
-                context.Database.ExecuteSqlRaw(
-                    $"ALTER TABLE [{tableName}] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [dbo].[{tableName + "History"}]))"
-                );
+                context
+                    .Database
+                    .ExecuteSqlRaw(
+                        $"ALTER TABLE [{tableName}] ADD PERIOD FOR SYSTEM_TIME ([PeriodStart], [PeriodEnd])"
+                    );
+                context
+                    .Database
+                    .ExecuteSqlRaw(
+                        $"ALTER TABLE [{tableName}] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [dbo].[{tableName + "History"}]))"
+                    );
             }
         }
     }

@@ -272,7 +272,8 @@ public class RazorIntegrationTestBase
             var tempAssembly = CompileToAssembly(declaration, throwOnFailure);
 
             // Add the 'temp' compilation as a metadata reference
-            var references = BaseCompilation.References
+            var references = BaseCompilation
+                .References
                 .Concat(new[] { tempAssembly.Compilation.ToMetadataReference() })
                 .ToArray();
             projectEngine = CreateProjectEngine(

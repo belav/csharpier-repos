@@ -18,8 +18,10 @@ public abstract class WebHostServerFixture : ServerFixture
         RunInBackgroundThread(Host.Start);
         return Host.Services
             .GetRequiredService<IServer>()
-            .Features.Get<IServerAddressesFeature>()
-            .Addresses.Single();
+            .Features
+            .Get<IServerAddressesFeature>()
+            .Addresses
+            .Single();
     }
 
     public IHost Host { get; set; }

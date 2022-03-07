@@ -216,7 +216,8 @@ namespace Microsoft.CodeAnalysis.EncapsulateField
                 if (
                     field
                         .GetSymbolKey(cancellationToken)
-                        .Resolve(compilation, cancellationToken: cancellationToken).Symbol
+                        .Resolve(compilation, cancellationToken: cancellationToken)
+                        .Symbol
                     is not IFieldSymbol currentField
                 )
                     continue;
@@ -251,7 +252,8 @@ namespace Microsoft.CodeAnalysis.EncapsulateField
             var fieldDeclaration = field.DeclaringSyntaxReferences.First();
             var declarationAnnotation = new SyntaxAnnotation();
             document = document.WithSyntaxRoot(
-                fieldDeclaration.SyntaxTree
+                fieldDeclaration
+                    .SyntaxTree
                     .GetRoot(cancellationToken)
                     .ReplaceNode(
                         fieldDeclaration.GetSyntax(cancellationToken),
@@ -293,8 +295,8 @@ namespace Microsoft.CodeAnalysis.EncapsulateField
             field =
                 field
                     .GetSymbolKey(cancellationToken)
-                    .Resolve(compilation, cancellationToken: cancellationToken).Symbol
-                as IFieldSymbol;
+                    .Resolve(compilation, cancellationToken: cancellationToken)
+                    .Symbol as IFieldSymbol;
 
             // We couldn't resolve field after annotating its declaration. Bail
             if (field == null)
@@ -421,15 +423,16 @@ namespace Microsoft.CodeAnalysis.EncapsulateField
                         .ConfigureAwait(false);
 
                     document = solution.GetDocument(document.Id);
-                    var compilation = await document.Project
+                    var compilation = await document
+                        .Project
                         .GetCompilationAsync(cancellationToken)
                         .ConfigureAwait(false);
 
                     field =
                         field
                             .GetSymbolKey(cancellationToken)
-                            .Resolve(compilation, cancellationToken: cancellationToken).Symbol
-                        as IFieldSymbol;
+                            .Resolve(compilation, cancellationToken: cancellationToken)
+                            .Symbol as IFieldSymbol;
                     constructorLocations = GetConstructorLocations(field.ContainingType);
                 }
 
@@ -582,9 +585,9 @@ namespace Microsoft.CodeAnalysis.EncapsulateField
                 )
             );
 
-            return Simplifier.Annotation.AddAnnotationToSymbol(
-                Formatter.Annotation.AddAnnotationToSymbol(propertySymbol)
-            );
+            return Simplifier
+                .Annotation
+                .AddAnnotationToSymbol(Formatter.Annotation.AddAnnotationToSymbol(propertySymbol));
         }
 
         protected abstract (string fieldName, string propertyName) GenerateFieldAndPropertyNames(

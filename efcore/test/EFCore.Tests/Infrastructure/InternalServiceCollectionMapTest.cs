@@ -81,9 +81,9 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
 
         private static FakeService Can_patch_transient_service(ServiceCollectionMap serviceMap)
         {
-            var serviceProvider = serviceMap.ServiceCollection.BuildServiceProvider(
-                validateScopes: true
-            );
+            var serviceProvider = serviceMap
+                .ServiceCollection
+                .BuildServiceProvider(validateScopes: true);
 
             FakeService service;
 
@@ -171,9 +171,9 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
 
         private static FakeService Can_patch_scoped_service(ServiceCollectionMap serviceMap)
         {
-            var serviceProvider = serviceMap.ServiceCollection.BuildServiceProvider(
-                validateScopes: true
-            );
+            var serviceProvider = serviceMap
+                .ServiceCollection
+                .BuildServiceProvider(validateScopes: true);
 
             FakeService service;
 
@@ -297,9 +297,9 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
             ServiceCollectionMap serviceMap
         )
         {
-            var serviceProvider = serviceMap.ServiceCollection.BuildServiceProvider(
-                validateScopes: true
-            );
+            var serviceProvider = serviceMap
+                .ServiceCollection
+                .BuildServiceProvider(validateScopes: true);
 
             FakeSingletonService singletonService;
 
@@ -354,7 +354,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
             new(
                 new DbContextOptionsBuilder()
                     .UseInternalServiceProvider(serviceProvider)
-                    .UseInMemoryDatabase(Guid.NewGuid().ToString()).Options
+                    .UseInMemoryDatabase(Guid.NewGuid().ToString())
+                    .Options
             );
 
         private interface IFakeService { }

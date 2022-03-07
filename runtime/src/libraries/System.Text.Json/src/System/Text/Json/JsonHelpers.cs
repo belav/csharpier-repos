@@ -95,12 +95,14 @@ namespace System.Text.Json
         /// <returns></returns>
         public static string Utf8GetString(ReadOnlySpan<byte> bytes)
         {
-            return Encoding.UTF8.GetString(
-                bytes
+            return Encoding
+                .UTF8
+                .GetString(
+                    bytes
 #if NETSTANDARD2_0 || NETFRAMEWORK
-                .ToArray()
+                    .ToArray()
 #endif
-            );
+                );
         }
 
         /// <summary>

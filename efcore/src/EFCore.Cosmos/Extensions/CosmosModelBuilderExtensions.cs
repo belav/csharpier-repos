@@ -181,9 +181,9 @@ namespace Microsoft.EntityFrameworkCore
             bool fromDataAnnotation = false
         )
         {
-            var existingAnnotation = modelBuilder.Metadata.FindAnnotation(
-                CosmosAnnotationNames.Throughput
-            );
+            var existingAnnotation = modelBuilder
+                .Metadata
+                .FindAnnotation(CosmosAnnotationNames.Throughput);
             if (existingAnnotation == null)
             {
                 return true;

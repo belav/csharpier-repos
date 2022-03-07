@@ -83,10 +83,9 @@ public class HostFilteringMiddlewareTests
                                     c =>
                                     {
                                         Assert.False(
-                                            c.Request.Headers.TryGetValue(
-                                                HeaderNames.Host,
-                                                out var host
-                                            )
+                                            c.Request
+                                                .Headers
+                                                .TryGetValue(HeaderNames.Host, out var host)
                                         );
                                         return Task.CompletedTask;
                                     }
@@ -142,10 +141,9 @@ public class HostFilteringMiddlewareTests
                                     c =>
                                     {
                                         Assert.True(
-                                            c.Request.Headers.TryGetValue(
-                                                HeaderNames.Host,
-                                                out var host
-                                            )
+                                            c.Request
+                                                .Headers
+                                                .TryGetValue(HeaderNames.Host, out var host)
                                         );
                                         Assert.True(StringValues.Equals("", host));
                                         return Task.CompletedTask;

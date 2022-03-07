@@ -41,10 +41,9 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.ValueGeneration.Internal
         )
         {
             var sequence = property.FindHiLoSequence(
-                StoreObjectIdentifier.Create(
-                    property.DeclaringEntityType,
-                    StoreObjectType.Table
-                )!.Value
+                StoreObjectIdentifier
+                    .Create(property.DeclaringEntityType, StoreObjectType.Table)!
+                    .Value
             );
 
             Check.DebugAssert(sequence != null, "sequence is null");

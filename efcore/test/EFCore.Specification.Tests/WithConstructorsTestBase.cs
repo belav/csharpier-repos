@@ -1648,7 +1648,8 @@ namespace Microsoft.EntityFrameworkCore
 
                 var blogServiceProperty = modelBuilder
                     .Entity<LazyFieldBlog>()
-                    .Metadata.AddServiceProperty(
+                    .Metadata
+                    .AddServiceProperty(
                         typeof(LazyFieldBlog).GetRuntimeFields().Single(f => f.Name == "_loader")
                     );
 
@@ -1658,7 +1659,8 @@ namespace Microsoft.EntityFrameworkCore
 
                 var postServiceProperty = modelBuilder
                     .Entity<LazyFieldPost>()
-                    .Metadata.AddServiceProperty(
+                    .Metadata
+                    .AddServiceProperty(
                         typeof(LazyFieldPost).GetRuntimeFields().Single(f => f.Name == "_loader")
                     );
 

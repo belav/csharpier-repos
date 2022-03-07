@@ -112,20 +112,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.EventHookup
                 var document = textView.TextSnapshot.GetOpenDocumentInCurrentContextWithChanges();
                 if (
                     document != null
-                    && document.Project.Solution.Workspace.CanApplyChange(
-                        ApplyChangesKind.ChangeDocument
-                    )
+                    && document
+                        .Project
+                        .Solution
+                        .Workspace
+                        .CanApplyChange(ApplyChangesKind.ChangeDocument)
                 )
                 {
                     var position = textView.GetCaretPoint(subjectBuffer).Value.Position;
-                    _trackingPoint = textView.TextSnapshot.CreateTrackingPoint(
-                        position,
-                        PointTrackingMode.Negative
-                    );
-                    _trackingSpan = textView.TextSnapshot.CreateTrackingSpan(
-                        new Span(position, 1),
-                        SpanTrackingMode.EdgeInclusive
-                    );
+                    _trackingPoint = textView
+                        .TextSnapshot
+                        .CreateTrackingPoint(position, PointTrackingMode.Negative);
+                    _trackingSpan = textView
+                        .TextSnapshot
+                        .CreateTrackingSpan(new Span(position, 1), SpanTrackingMode.EdgeInclusive);
 
                     var asyncToken = asyncListener.BeginAsyncOperation(GetType().Name + ".Start");
 
@@ -143,16 +143,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.EventHookup
                     var continuedTask = this.GetEventNameTask.SafeContinueWithFromAsync(
                         async t =>
                         {
-                            await ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
-                                alwaysYield: true,
-                                cancellationToken
-                            );
+                            await ThreadingContext
+                                .JoinableTaskFactory
+                                .SwitchToMainThreadAsync(alwaysYield: true, cancellationToken);
 
                             if (t.Result != null)
                             {
-                                commandHandler.EventHookupSessionManager.EventHookupFoundInSession(
-                                    this
-                                );
+                                commandHandler
+                                    .EventHookupSessionManager
+                                    .EventHookupFoundInSession(this);
                             }
                         },
                         cancellationToken,
@@ -165,14 +164,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.EventHookup
                 }
                 else
                 {
-                    _trackingPoint = textView.TextSnapshot.CreateTrackingPoint(
-                        0,
-                        PointTrackingMode.Negative
-                    );
-                    _trackingSpan = textView.TextSnapshot.CreateTrackingSpan(
-                        new Span(),
-                        SpanTrackingMode.EdgeInclusive
-                    );
+                    _trackingPoint = textView
+                        .TextSnapshot
+                        .CreateTrackingPoint(0, PointTrackingMode.Negative);
+                    _trackingSpan = textView
+                        .TextSnapshot
+                        .CreateTrackingSpan(new Span(), SpanTrackingMode.EdgeInclusive);
                     this.GetEventNameTask = SpecializedTasks.Null<string>();
                     eventHookupSessionManager.CancelAndDismissExistingSessions();
                 }
@@ -308,9 +305,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.EventHookup
                     semanticModel,
                     syntaxFactsService
                 );
-                var basename = namingRule.NamingStyle.CreateName(
-                    ImmutableArray.Create(string.Format("{0}_{1}", objectPart, eventSymbol.Name))
-                );
+                var basename = namingRule
+                    .NamingStyle
+                    .CreateName(
+                        ImmutableArray.Create(
+                            string.Format("{0}_{1}", objectPart, eventSymbol.Name)
+                        )
+                    );
 
                 var reservedNames = semanticModel
                     .LookupSymbols(plusEqualsToken.SpanStart)

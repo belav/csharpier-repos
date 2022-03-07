@@ -239,8 +239,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 // Take global aliases from other compilation units into account
                                 foreach (
                                     var declaration in (
-                                        (SourceNamespaceSymbol)Compilation.SourceModule.GlobalNamespace
-                                    ).MergedDeclaration.Declarations
+                                        (SourceNamespaceSymbol)Compilation
+                                            .SourceModule
+                                            .GlobalNamespace
+                                    )
+                                        .MergedDeclaration
+                                        .Declarations
                                 )
                                 {
                                     if (
@@ -251,7 +255,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                                     {
                                         result = result.AddAliasesIfAny(
                                             (
-                                                (CompilationUnitSyntax)declaration.SyntaxReference.GetSyntax()
+                                                (CompilationUnitSyntax)declaration
+                                                    .SyntaxReference
+                                                    .GetSyntax()
                                             ).Usings,
                                             onlyGlobalAliases: true
                                         );

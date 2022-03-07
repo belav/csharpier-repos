@@ -189,9 +189,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             AddSynthesizedAttribute(
                 ref attributes,
-                moduleBuilder.Compilation.TrySynthesizeAttribute(
-                    WellKnownMember.System_Runtime_CompilerServices_CompilerGeneratedAttribute__ctor
-                )
+                moduleBuilder
+                    .Compilation
+                    .TrySynthesizeAttribute(
+                        WellKnownMember.System_Runtime_CompilerServices_CompilerGeneratedAttribute__ctor
+                    )
             );
 
             AddSynthesizedAttribute(ref attributes, moduleBuilder.SynthesizeEmbeddedAttribute());
@@ -201,11 +203,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             {
                 AddSynthesizedAttribute(
                     ref attributes,
-                    moduleBuilder.Compilation.SynthesizeAttributeUsageAttribute(
-                        usageInfo.ValidTargets,
-                        usageInfo.AllowMultiple,
-                        usageInfo.Inherited
-                    )
+                    moduleBuilder
+                        .Compilation
+                        .SynthesizeAttributeUsageAttribute(
+                            usageInfo.ValidTargets,
+                            usageInfo.AllowMultiple,
+                            usageInfo.Inherited
+                        )
                 );
             }
         }

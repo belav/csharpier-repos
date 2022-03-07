@@ -292,28 +292,32 @@ namespace System
                 return Empty;
 
 #if TARGET_WINDOWS
-            int numCharsRequired = Interop.Kernel32.MultiByteToWideChar(
-                Interop.Kernel32.CP_ACP,
-                Interop.Kernel32.MB_PRECOMPOSED,
-                pb,
-                numBytes,
-                (char*)null,
-                0
-            );
+            int numCharsRequired = Interop
+                .Kernel32
+                .MultiByteToWideChar(
+                    Interop.Kernel32.CP_ACP,
+                    Interop.Kernel32.MB_PRECOMPOSED,
+                    pb,
+                    numBytes,
+                    (char*)null,
+                    0
+                );
             if (numCharsRequired == 0)
                 throw new ArgumentException(SR.Arg_InvalidANSIString);
 
             string newString = FastAllocateString(numCharsRequired);
             fixed (char* pFirstChar = &newString._firstChar)
             {
-                numCharsRequired = Interop.Kernel32.MultiByteToWideChar(
-                    Interop.Kernel32.CP_ACP,
-                    Interop.Kernel32.MB_PRECOMPOSED,
-                    pb,
-                    numBytes,
-                    pFirstChar,
-                    numCharsRequired
-                );
+                numCharsRequired = Interop
+                    .Kernel32
+                    .MultiByteToWideChar(
+                        Interop.Kernel32.CP_ACP,
+                        Interop.Kernel32.MB_PRECOMPOSED,
+                        pb,
+                        numBytes,
+                        pFirstChar,
+                        numCharsRequired
+                    );
             }
             if (numCharsRequired == 0)
                 throw new ArgumentException(SR.Arg_InvalidANSIString);

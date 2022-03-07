@@ -30,9 +30,14 @@ namespace System.CommandLine.Invocation
                 var suggestions = GetPossibleTokens(result.CommandResult.Command, token).ToList();
                 if (suggestions.Count > 0)
                 {
-                    console.Out.WriteLine(
-                        result.CommandResult.LocalizationResources.SuggestionsTokenNotMatched(token)
-                    );
+                    console
+                        .Out
+                        .WriteLine(
+                            result
+                                .CommandResult
+                                .LocalizationResources
+                                .SuggestionsTokenNotMatched(token)
+                        );
                     foreach (string suggestion in suggestions)
                     {
                         console.Out.WriteLine(suggestion);
@@ -43,13 +48,15 @@ namespace System.CommandLine.Invocation
 
         private IEnumerable<string> GetPossibleTokens(ISymbol targetSymbol, string token)
         {
-            IEnumerable<string> possibleMatches = targetSymbol.Children
+            IEnumerable<string> possibleMatches = targetSymbol
+                .Children
                 .Where(x => !x.IsHidden)
                 .OfType<IIdentifierSymbol>()
                 .Where(x => x.Aliases.Count > 0)
                 .Select(
                     symbol =>
-                        symbol.Aliases
+                        symbol
+                            .Aliases
                             .Union(symbol.Aliases)
                             .OrderBy(x => GetDistance(token, x))
                             .ThenByDescending(x => GetStartsWithDistance(token, x))

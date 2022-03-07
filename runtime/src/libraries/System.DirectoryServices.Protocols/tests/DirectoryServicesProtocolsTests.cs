@@ -607,9 +607,9 @@ namespace System.DirectoryServices.Protocols.Tests
                 }
                 else
                 {
-                    SearchResponse response = (SearchResponse)state.Connection.EndSendRequest(
-                        asyncResult
-                    );
+                    SearchResponse response = (SearchResponse)state
+                        .Connection
+                        .EndSendRequest(asyncResult);
 
                     if (response != null)
                     {

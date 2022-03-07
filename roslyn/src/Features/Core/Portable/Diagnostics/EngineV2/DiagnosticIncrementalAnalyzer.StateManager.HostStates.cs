@@ -80,7 +80,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                     // order statesets
                     // order will be in this order
                     // BuiltIn Compiler Analyzer (C#/VB) < Regular DiagnosticAnalyzers < Document/ProjectDiagnosticAnalyzers
-                    OrderedStateSets = StateSetMap.Values
+                    OrderedStateSets = StateSetMap
+                        .Values
                         .OrderBy(PriorityComparison)
                         .ToImmutableArray();
                 }

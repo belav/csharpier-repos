@@ -1574,9 +1574,9 @@ IL_0010:  ret
                     var methodData = testData.GetMethodData("<>x.<>m0");
                     Assert.Equal(
                         SpecialType.System_Int32,
-                        (
-                            (PointerTypeSymbol)((MethodSymbol)methodData.Method).ReturnType
-                        ).PointedAtType.SpecialType
+                        ((PointerTypeSymbol)((MethodSymbol)methodData.Method).ReturnType)
+                            .PointedAtType
+                            .SpecialType
                     );
                     methodData.VerifyIL(
                         @"{
@@ -1631,9 +1631,9 @@ IL_0010:  ret
                     var methodData = testData.GetMethodData("<>x.<>m0");
                     Assert.Equal(
                         SpecialType.System_Char,
-                        (
-                            (PointerTypeSymbol)((MethodSymbol)methodData.Method).ReturnType
-                        ).PointedAtType.SpecialType
+                        ((PointerTypeSymbol)((MethodSymbol)methodData.Method).ReturnType)
+                            .PointedAtType
+                            .SpecialType
                     );
                     methodData.VerifyIL(
                         @"{

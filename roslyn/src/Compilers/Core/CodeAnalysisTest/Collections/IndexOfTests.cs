@@ -91,9 +91,9 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             Assert.Equal(2, indexOfItemIndexCount(collection1256, 5, 1, 2));
 
             // Create a list with contents: 100,101,102,103,104,100,101,102,103,104
-            var list = ImmutableSegmentedList<int>.Empty.AddRange(
-                Enumerable.Range(100, 5).Concat(Enumerable.Range(100, 5))
-            );
+            var list = ImmutableSegmentedList<int>
+                .Empty
+                .AddRange(Enumerable.Range(100, 5).Concat(Enumerable.Range(100, 5)));
             var bclList = list.ToList();
             Assert.Equal(-1, indexOfItem(factory(list), 6));
             Assert.Equal(2, indexOfItemIndexCountEQ(factory(list), 102, 0, 4, null));
@@ -223,9 +223,9 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             Assert.Equal(-1, lastIndexOfItemIndexCount(emptyCollection, 5, 0, 0));
 
             // Create a list with contents: 100,101,102,103,104,100,101,102,103,104
-            var list = ImmutableSegmentedList<int>.Empty.AddRange(
-                Enumerable.Range(100, 5).Concat(Enumerable.Range(100, 5))
-            );
+            var list = ImmutableSegmentedList<int>
+                .Empty
+                .AddRange(Enumerable.Range(100, 5).Concat(Enumerable.Range(100, 5)));
             var bclList = list.ToList();
             Assert.Equal(-1, lastIndexOfItem(factory(list), 6));
             Assert.Equal(2, lastIndexOfItemIndexCountEQ(factory(list), 102, 6, 5, null));

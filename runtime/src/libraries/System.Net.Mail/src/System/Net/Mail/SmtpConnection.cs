@@ -393,13 +393,15 @@ namespace System.Net.Mail
         private static void AuthenticateCallback(object? state)
         {
             AuthenticateCallbackContext context = (AuthenticateCallbackContext)state!;
-            context._result = context._module.Authenticate(
-                null,
-                context._credential,
-                context._thisPtr,
-                context._spn,
-                context._token
-            );
+            context._result = context
+                ._module
+                .Authenticate(
+                    null,
+                    context._credential,
+                    context._thisPtr,
+                    context._spn,
+                    context._token
+                );
         }
 
         private sealed class AuthenticateCallbackContext
@@ -600,9 +602,11 @@ namespace System.Net.Mail
                     {
                         try
                         {
-                            LineInfo info = thisPtr._connection.Reader!.CurrentReader!.EndReadLine(
-                                result
-                            );
+                            LineInfo info = thisPtr
+                                ._connection
+                                .Reader!
+                                .CurrentReader!
+                                .EndReadLine(result);
                             if (info.StatusCode != SmtpStatusCode.ServiceReady)
                             {
                                 thisPtr.InvokeCallback(
@@ -870,11 +874,9 @@ namespace System.Net.Mail
                             continue;
                         }
 
-                        NetworkCredential? credential = _connection._credentials.GetCredential(
-                            _host,
-                            _port,
-                            module.AuthenticationType
-                        );
+                        NetworkCredential? credential = _connection
+                            ._credentials
+                            .GetCredential(_host, _port, module.AuthenticationType);
                         if (credential == null)
                             continue;
                         Authorization? auth = _connection.SetContextAndTryAuthenticate(

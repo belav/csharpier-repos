@@ -176,7 +176,8 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
         {
             get
             {
-                return _documentToModifiedSpansMap.Keys
+                return _documentToModifiedSpansMap
+                    .Keys
                     .Concat(_documentToComplexifiedSpansMap.Keys)
                     .Distinct();
             }

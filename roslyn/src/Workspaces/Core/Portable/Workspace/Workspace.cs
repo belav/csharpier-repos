@@ -1542,11 +1542,13 @@ namespace Microsoft.CodeAnalysis
                 this.CheckAllowedSolutionChanges(solutionChanges);
 
                 var solutionWithLinkedFileChangesMerged =
-                    newSolution.WithMergedLinkedFileChangesAsync(
-                        oldSolution,
-                        solutionChanges,
-                        cancellationToken: CancellationToken.None
-                    ).Result;
+                    newSolution
+                        .WithMergedLinkedFileChangesAsync(
+                            oldSolution,
+                            solutionChanges,
+                            cancellationToken: CancellationToken.None
+                        )
+                        .Result;
                 solutionChanges = solutionWithLinkedFileChangesMerged.GetChanges(oldSolution);
 
                 // added projects
@@ -1580,9 +1582,9 @@ namespace Microsoft.CodeAnalysis
                 }
 
                 if (
-                    !CurrentSolution.AnalyzerReferences.SequenceEqual(
-                        newSolution.AnalyzerReferences
-                    )
+                    !CurrentSolution
+                        .AnalyzerReferences
+                        .SequenceEqual(newSolution.AnalyzerReferences)
                 )
                 {
                     foreach (
@@ -1653,8 +1655,10 @@ namespace Microsoft.CodeAnalysis
                 // if an .editorconfig was added, removed, or modified. We'll compute the options without that change, and if there's
                 // still changes then we need to verify we can apply those. The .editorconfig changes will also be represented as
                 // document edits, which the host is expected to actually apply directly.
-                var newOptionsWithoutSyntaxTreeOptionsChange =
-                    projectChanges.NewProject.CompilationOptions.WithSyntaxTreeOptionsProvider(
+                var newOptionsWithoutSyntaxTreeOptionsChange = projectChanges
+                    .NewProject
+                    .CompilationOptions
+                    .WithSyntaxTreeOptionsProvider(
                         projectChanges.OldProject.CompilationOptions.SyntaxTreeOptionsProvider
                     );
 
@@ -1724,7 +1728,8 @@ namespace Microsoft.CodeAnalysis
                     .GetChangedDocuments()
                     .Any(
                         id =>
-                            projectChanges.NewProject
+                            projectChanges
+                                .NewProject
                                 .GetDocument(id)!
                                 .HasInfoChanged(projectChanges.OldProject.GetDocument(id)!)
                     )
@@ -1938,8 +1943,10 @@ namespace Microsoft.CodeAnalysis
             // if an .editorconfig was added, removed, or modified. We'll compute the options without that change, and if there's
             // still changes then we need to verify we can apply those. The .editorconfig changes will also be represented as
             // document edits, which the host is expected to actually apply directly.
-            var newOptionsWithoutSyntaxTreeOptionsChange =
-                projectChanges.NewProject.CompilationOptions?.WithSyntaxTreeOptionsProvider(
+            var newOptionsWithoutSyntaxTreeOptionsChange = projectChanges
+                .NewProject
+                .CompilationOptions
+                ?.WithSyntaxTreeOptionsProvider(
                     projectChanges.OldProject.CompilationOptions!.SyntaxTreeOptionsProvider
                 );
             if (
@@ -2544,7 +2551,8 @@ namespace Microsoft.CodeAnalysis
             if (
                 !this.CurrentSolution
                     .GetProject(fromProjectId)!
-                    .ProjectReferences.Contains(projectReference)
+                    .ProjectReferences
+                    .Contains(projectReference)
             )
             {
                 throw new ArgumentException(
@@ -2567,7 +2575,8 @@ namespace Microsoft.CodeAnalysis
             if (
                 this.CurrentSolution
                     .GetProject(fromProjectId)!
-                    .ProjectReferences.Contains(projectReference)
+                    .ProjectReferences
+                    .Contains(projectReference)
             )
             {
                 throw new ArgumentException(
@@ -2613,7 +2622,8 @@ namespace Microsoft.CodeAnalysis
             if (
                 !this.CurrentSolution
                     .GetProject(projectId)!
-                    .MetadataReferences.Contains(metadataReference)
+                    .MetadataReferences
+                    .Contains(metadataReference)
             )
             {
                 throw new ArgumentException(WorkspacesResources.Metadata_is_not_referenced);
@@ -2631,7 +2641,8 @@ namespace Microsoft.CodeAnalysis
             if (
                 this.CurrentSolution
                     .GetProject(projectId)!
-                    .MetadataReferences.Contains(metadataReference)
+                    .MetadataReferences
+                    .Contains(metadataReference)
             )
             {
                 throw new ArgumentException(WorkspacesResources.Metadata_is_already_referenced);
@@ -2649,7 +2660,8 @@ namespace Microsoft.CodeAnalysis
             if (
                 !this.CurrentSolution
                     .GetProject(projectId)!
-                    .AnalyzerReferences.Contains(analyzerReference)
+                    .AnalyzerReferences
+                    .Contains(analyzerReference)
             )
             {
                 throw new ArgumentException(
@@ -2669,7 +2681,8 @@ namespace Microsoft.CodeAnalysis
             if (
                 this.CurrentSolution
                     .GetProject(projectId)!
-                    .AnalyzerReferences.Contains(analyzerReference)
+                    .AnalyzerReferences
+                    .Contains(analyzerReference)
             )
             {
                 throw new ArgumentException(

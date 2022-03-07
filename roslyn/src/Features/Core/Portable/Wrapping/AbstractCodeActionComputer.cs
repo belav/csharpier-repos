@@ -120,9 +120,9 @@ namespace Microsoft.CodeAnalysis.Wrapping
                     CancellationToken
                 );
 
-                var baseLine = newSourceText.Lines.GetLineFromPosition(
-                    desiredIndentation.BasePosition
-                );
+                var baseLine = newSourceText
+                    .Lines
+                    .GetLineFromPosition(desiredIndentation.BasePosition);
                 var baseOffsetInLine = desiredIndentation.BasePosition - baseLine.Start;
 
                 var indent = baseOffsetInLine + desiredIndentation.Offset;
@@ -267,7 +267,8 @@ namespace Microsoft.CodeAnalysis.Wrapping
                 var root = await OriginalDocument
                     .GetSyntaxRootAsync(CancellationToken)
                     .ConfigureAwait(false);
-                var tokens = leftTokenToTrailingTrivia.Keys
+                var tokens = leftTokenToTrailingTrivia
+                    .Keys
                     .Concat(rightTokenToLeadingTrivia.Keys)
                     .Distinct()
                     .ToImmutableArray();
@@ -291,7 +292,8 @@ namespace Microsoft.CodeAnalysis.Wrapping
                     nodes: new[] { nodeToFormat },
                     computeReplacementNode: (oldNode, newNode) =>
                         newNode.WithAdditionalAnnotations(s_toFormatAnnotation),
-                    tokens: leftTokenToTrailingTrivia.Keys
+                    tokens: leftTokenToTrailingTrivia
+                        .Keys
                         .Concat(rightTokenToLeadingTrivia.Keys)
                         .Distinct(),
                     computeReplacementToken: (oldToken, newToken) =>

@@ -3137,14 +3137,16 @@ class c1
                     .WithArguments("300", "byte")
             );
 
-            var symbol = compilation.GlobalNamespace
+            var symbol = compilation
+                .GlobalNamespace
                 .GetTypeMembers("c1")
                 .First()
                 .GetMembers("Z1")
                 .First();
             Assert.False(((FieldSymbol)symbol).HasConstantValue);
 
-            symbol = compilation.GlobalNamespace
+            symbol = compilation
+                .GlobalNamespace
                 .GetTypeMembers("c1")
                 .First()
                 .GetMembers("Z2")
@@ -3836,7 +3838,9 @@ class C
                 tree.GetRoot()
                     .DescendantNodes()
                     .OfType<VariableDeclaratorSyntax>()
-                    .Single().Initializer.Value;
+                    .Single()
+                    .Initializer
+                    .Value;
             var literalOperation = model.GetOperation(initializer);
 
             var stringTextBuilder = new StringBuilder();

@@ -22,9 +22,10 @@ public class TransformTest
         var doc = LoadDocAndRunTransform(configFile);
 
         Assert.Equal(2, doc.ChildNodes.Count);
-        var envNode = doc["configuration"]?["system.webServer"]?["runtime"]?[
-            "environmentVariables"
-        ];
+        var envNode = doc["configuration"]
+            ?["system.webServer"]
+            ?["runtime"]
+            ?["environmentVariables"];
 
         Assert.NotNull(envNode);
 
@@ -62,9 +63,10 @@ public class TransformTest
         var doc = LoadDocAndRunTransform("config_existingvalue.xml");
 
         Assert.Equal(2, doc.ChildNodes.Count);
-        var envNode = doc["configuration"]?["system.webServer"]?["runtime"]?[
-            "environmentVariables"
-        ];
+        var envNode = doc["configuration"]
+            ?["system.webServer"]
+            ?["runtime"]
+            ?["environmentVariables"];
 
         Assert.NotNull(envNode);
 

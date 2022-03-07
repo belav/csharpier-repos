@@ -25,10 +25,10 @@ namespace WebServer
             string transferEncoding = context.Request.Headers["Transfer-Encoding"];
             if (!string.IsNullOrEmpty(transferEncoding))
             {
-                context.Response.Headers.Add(
-                    "X-HttpRequest-Headers-TransferEncoding",
-                    transferEncoding
-                );
+                context
+                    .Response
+                    .Headers
+                    .Add("X-HttpRequest-Headers-TransferEncoding", transferEncoding);
             }
 
             // Get expected MD5 hash of request body.

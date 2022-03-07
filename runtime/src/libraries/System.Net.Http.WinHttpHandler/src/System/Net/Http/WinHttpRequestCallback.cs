@@ -181,15 +181,17 @@ namespace System.Net.Http
                 && state.CurrentBytesRead < state.ExpectedBytesToRead.Value
             )
             {
-                state.LifecycleAwaitable.SetException(
-                    new IOException(
-                        SR.Format(
-                            SR.net_http_io_read_incomplete,
-                            state.ExpectedBytesToRead.Value,
-                            state.CurrentBytesRead
+                state
+                    .LifecycleAwaitable
+                    .SetException(
+                        new IOException(
+                            SR.Format(
+                                SR.net_http_io_read_incomplete,
+                                state.ExpectedBytesToRead.Value,
+                                state.CurrentBytesRead
+                            )
                         )
-                    )
-                );
+                    );
             }
             else
             {
@@ -299,12 +301,14 @@ namespace System.Net.Http
                 uint certHandleSize = (uint)IntPtr.Size;
 
                 if (
-                    !Interop.WinHttp.WinHttpQueryOption(
-                        state.RequestHandle,
-                        Interop.WinHttp.WINHTTP_OPTION_SERVER_CERT_CONTEXT,
-                        ref certHandle,
-                        ref certHandleSize
-                    )
+                    !Interop
+                        .WinHttp
+                        .WinHttpQueryOption(
+                            state.RequestHandle,
+                            Interop.WinHttp.WINHTTP_OPTION_SERVER_CERT_CONTEXT,
+                            ref certHandle,
+                            ref certHandleSize
+                        )
                 )
                 {
                     int lastError = Marshal.GetLastWin32Error();
@@ -456,9 +460,9 @@ namespace System.Net.Http
                     }
                     else
                     {
-                        state.LifecycleAwaitable.SetException(
-                            new IOException(SR.net_http_io_read, innerException)
-                        );
+                        state
+                            .LifecycleAwaitable
+                            .SetException(new IOException(SR.net_http_io_read, innerException));
                     }
                     break;
 
@@ -474,9 +478,9 @@ namespace System.Net.Http
                     }
                     else
                     {
-                        state.LifecycleAwaitable.SetException(
-                            new IOException(SR.net_http_io_read, innerException)
-                        );
+                        state
+                            .LifecycleAwaitable
+                            .SetException(new IOException(SR.net_http_io_read, innerException));
                     }
                     break;
 
@@ -493,9 +497,9 @@ namespace System.Net.Http
                     }
                     else
                     {
-                        state.TcsInternalWriteDataToRequestStream.TrySetException(
-                            new IOException(SR.net_http_io_write, innerException)
-                        );
+                        state
+                            .TcsInternalWriteDataToRequestStream
+                            .TrySetException(new IOException(SR.net_http_io_write, innerException));
                     }
                     break;
 
@@ -516,12 +520,14 @@ namespace System.Net.Http
 
             // Clear auth headers.
             if (
-                !Interop.WinHttp.WinHttpAddRequestHeaders(
-                    requestHandle,
-                    AuthHeaderNameWithColon,
-                    (uint)AuthHeaderNameWithColon.Length,
-                    Interop.WinHttp.WINHTTP_ADDREQ_FLAG_REPLACE
-                )
+                !Interop
+                    .WinHttp
+                    .WinHttpAddRequestHeaders(
+                        requestHandle,
+                        AuthHeaderNameWithColon,
+                        (uint)AuthHeaderNameWithColon.Length,
+                        Interop.WinHttp.WINHTTP_ADDREQ_FLAG_REPLACE
+                    )
             )
             {
                 int lastError = Marshal.GetLastWin32Error();

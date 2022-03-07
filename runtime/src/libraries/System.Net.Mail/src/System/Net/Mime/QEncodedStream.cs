@@ -555,13 +555,15 @@ namespace System.Net.Mime
                     _written += _parent.EncodeBytes(_buffer, _offset + _written, _count - _written);
                     if (_written < _count)
                     {
-                        IAsyncResult result = _parent.BaseStream.BeginWrite(
-                            _parent.WriteState.Buffer,
-                            0,
-                            _parent.WriteState.Length,
-                            s_onWrite,
-                            this
-                        );
+                        IAsyncResult result = _parent
+                            .BaseStream
+                            .BeginWrite(
+                                _parent.WriteState.Buffer,
+                                0,
+                                _parent.WriteState.Length,
+                                s_onWrite,
+                                this
+                            );
                         if (!result.CompletedSynchronously)
                         {
                             break;

@@ -18,7 +18,8 @@ namespace System.Runtime.InteropServices.RuntimeInformationTests
 
         private static readonly bool s_isInHelix = Environment
             .GetEnvironmentVariables()
-            .Keys.Cast<string>()
+            .Keys
+            .Cast<string>()
             .Where(key => key.StartsWith("HELIX"))
             .Any();
 

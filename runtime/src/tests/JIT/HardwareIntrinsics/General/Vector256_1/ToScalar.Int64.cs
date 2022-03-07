@@ -89,12 +89,12 @@ namespace JIT.HardwareIntrinsics.General
         {
             if (result != values[0])
             {
-                TestLibrary.TestFramework.LogInformation(
-                    $"Vector256<Int64>.ToScalar(): {method} failed:"
-                );
-                TestLibrary.TestFramework.LogInformation(
-                    $"  values: ({string.Join(", ", values)})"
-                );
+                TestLibrary
+                    .TestFramework
+                    .LogInformation($"Vector256<Int64>.ToScalar(): {method} failed:");
+                TestLibrary
+                    .TestFramework
+                    .LogInformation($"  values: ({string.Join(", ", values)})");
                 TestLibrary.TestFramework.LogInformation($"  result: {result}");
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 

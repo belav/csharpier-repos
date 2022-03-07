@@ -32,8 +32,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
             using var workspace = TestWorkspace.CreateCSharp("class C { C c; }");
             var document = workspace.Documents.First();
 
-            var listenerProvider =
-                workspace.ExportProvider.GetExportedValue<IAsynchronousOperationListenerProvider>();
+            var listenerProvider = workspace
+                .ExportProvider
+                .GetExportedValue<IAsynchronousOperationListenerProvider>();
 
             var provider = new CopyPasteAndPrintingClassificationBufferTaggerProvider(
                 workspace.ExportProvider.GetExportedValue<IThreadingContext>(),

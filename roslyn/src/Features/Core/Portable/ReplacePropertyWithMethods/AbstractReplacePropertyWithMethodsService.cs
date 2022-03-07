@@ -209,9 +209,9 @@ namespace Microsoft.CodeAnalysis.ReplacePropertyWithMethods
                 parent
             ) =>
             {
-                return (TExpressionSyntax)replacer._syntaxFacts.GetRightHandSideOfAssignment(
-                    parent
-                )!;
+                return (TExpressionSyntax)replacer
+                    ._syntaxFacts
+                    .GetRightHandSideOfAssignment(parent)!;
             };
 
             private static readonly GetWriteValue getWriteValueForIncrementOrDecrement = (
@@ -227,9 +227,9 @@ namespace Microsoft.CodeAnalysis.ReplacePropertyWithMethods
                 );
                 var literalOne = replacer.Generator.LiteralExpression(1);
 
-                var writeValue = replacer._syntaxFacts.IsOperandOfIncrementExpression(
-                    replacer._expression
-                )
+                var writeValue = replacer
+                    ._syntaxFacts
+                    .IsOperandOfIncrementExpression(replacer._expression)
                   ? replacer.Generator.AddExpression(readExpression, literalOne)
                   : replacer.Generator.SubtractExpression(readExpression, literalOne);
 

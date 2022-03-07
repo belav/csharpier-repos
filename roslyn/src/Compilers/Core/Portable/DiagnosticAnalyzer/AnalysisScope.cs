@@ -263,10 +263,12 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             {
                 if (
                     FilterFileOpt.Value.AdditionalFile == null
-                    || !PathUtilities.Comparer.Equals(
-                        externalFileLocation.FilePath,
-                        FilterFileOpt.Value.AdditionalFile.Path
-                    )
+                    || !PathUtilities
+                        .Comparer
+                        .Equals(
+                            externalFileLocation.FilePath,
+                            FilterFileOpt.Value.AdditionalFile.Path
+                        )
                 )
                 {
                     return false;

@@ -635,26 +635,29 @@ internal abstract partial class Http3Stream
                 // TODO: Consider a better way to provide this notification. For perf we want to
                 // make the ConnectionClosed CTS pay-for-play, and change this event to use
                 // something that is more lightweight than a CTS.
-                _context.StreamContext.ConnectionClosed.Register(
-                    static s =>
-                    {
-                        var stream = (Http3Stream)s!;
-
-                        if (!stream.IsCompleted)
+                _context
+                    .StreamContext
+                    .ConnectionClosed
+                    .Register(
+                        static s =>
                         {
-                            // An error code value other than -1 indicates a value was set and the request didn't gracefully complete.
-                            var errorCode = stream._errorCodeFeature.Error;
-                            if (errorCode >= 0)
+                            var stream = (Http3Stream)s!;
+
+                            if (!stream.IsCompleted)
                             {
-                                stream.AbortCore(
-                                    new IOException(CoreStrings.HttpStreamResetByClient),
-                                    (Http3ErrorCode)errorCode
-                                );
+                                // An error code value other than -1 indicates a value was set and the request didn't gracefully complete.
+                                var errorCode = stream._errorCodeFeature.Error;
+                                if (errorCode >= 0)
+                                {
+                                    stream.AbortCore(
+                                        new IOException(CoreStrings.HttpStreamResetByClient),
+                                        (Http3ErrorCode)errorCode
+                                    );
+                                }
                             }
-                        }
-                    },
-                    this
-                );
+                        },
+                        this
+                    );
 
                 // Make sure application func is completed before completing writer.
                 await appCompleted;

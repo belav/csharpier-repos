@@ -111,11 +111,9 @@ namespace System.Net.Http.Headers
         public static NameValueHeaderValue Parse(string? input)
         {
             int index = 0;
-            return (NameValueHeaderValue)GenericHeaderParser.SingleValueNameValueParser.ParseValue(
-                input,
-                null,
-                ref index
-            );
+            return (NameValueHeaderValue)GenericHeaderParser
+                .SingleValueNameValueParser
+                .ParseValue(input, null, ref index);
         }
 
         public static bool TryParse(
@@ -127,12 +125,9 @@ namespace System.Net.Http.Headers
             parsedValue = null;
 
             if (
-                GenericHeaderParser.SingleValueNameValueParser.TryParseValue(
-                    input,
-                    null,
-                    ref index,
-                    out object? output
-                )
+                GenericHeaderParser
+                    .SingleValueNameValueParser
+                    .TryParseValue(input, null, ref index, out object? output)
             )
             {
                 parsedValue = (NameValueHeaderValue)output!;

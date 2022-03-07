@@ -298,7 +298,8 @@ namespace System.CommandLine.Help
             ICommand command,
             ParseResult parseResult
         ) =>
-            command.Children
+            command
+                .Children
                 .OfType<ICommand>()
                 .Where(x => !x.IsHidden)
                 .Select(x => GetTwoColumnRow(x, parseResult));
@@ -554,7 +555,8 @@ namespace System.CommandLine.Help
             }
             else
             {
-                var rawAliases = symbol.Aliases
+                var rawAliases = symbol
+                    .Aliases
                     .Select(r => r.SplitPrefix())
                     .OrderBy(r => r.Prefix, StringComparer.OrdinalIgnoreCase)
                     .ThenBy(r => r.Alias, StringComparer.OrdinalIgnoreCase)

@@ -573,7 +573,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             var annotationsByMethod = allAnnotations
                 .GroupBy(
                     annotation =>
-                        annotation.Expression
+                        annotation
+                            .Expression
                             .Ancestors()
                             .OfType<BaseMethodDeclarationSyntax>()
                             .First()
@@ -603,7 +604,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                                     annotation.IsConverted
                                         ? typeInfo.ConvertedNullability
                                         : typeInfo.Nullability
-                                ).FlowState.ToInternalFlowState()
+                                )
+                                    .FlowState
+                                    .ToInternalFlowState()
                             )
                             .ToTypeWithAnnotations(compilation);
                         return type.ToDisplayString(TypeWithAnnotations.TestDisplayFormat);

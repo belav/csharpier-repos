@@ -13,8 +13,9 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version2_X.IntegrationTests;
 
 public class CodeGenerationIntegrationTest : IntegrationTestBase
 {
-    private static readonly CSharpCompilation DefaultBaseCompilation =
-        MvcShim.BaseCompilation.WithAssemblyName("AppCode");
+    private static readonly CSharpCompilation DefaultBaseCompilation = MvcShim
+        .BaseCompilation
+        .WithAssemblyName("AppCode");
 
     public CodeGenerationIntegrationTest()
         : base(
@@ -51,7 +52,8 @@ public class CodeGenerationIntegrationTest : IntegrationTestBase
         AssertDocumentNodeMatchesBaseline(compiled.CodeDocument.GetDocumentIntermediateNode());
         AssertCSharpDocumentMatchesBaseline(compiled.CodeDocument.GetCSharpDocument());
 
-        var diagnostics = compiled.Compilation
+        var diagnostics = compiled
+            .Compilation
             .GetDiagnostics()
             .Where(d => d.Severity >= DiagnosticSeverity.Warning);
         Assert.Equal(
@@ -521,7 +523,8 @@ public class AllTagHelper : {typeof(TagHelper).FullName}
         AssertCSharpDocumentMatchesBaseline(compiled.CodeDocument.GetCSharpDocument());
         AssertSourceMappingsMatchBaseline(compiled.CodeDocument);
 
-        var diagnostics = compiled.Compilation
+        var diagnostics = compiled
+            .Compilation
             .GetDiagnostics()
             .Where(d => d.Severity >= DiagnosticSeverity.Warning);
         Assert.Equal(

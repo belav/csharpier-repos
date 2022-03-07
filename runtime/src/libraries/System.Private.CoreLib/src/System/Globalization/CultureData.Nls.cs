@@ -155,12 +155,14 @@ namespace System.Globalization
             context.regionName = regionName;
             unsafe
             {
-                Interop.Kernel32.EnumSystemLocalesEx(
-                    &EnumSystemLocalesProc,
-                    Interop.Kernel32.LOCALE_SPECIFICDATA | Interop.Kernel32.LOCALE_SUPPLEMENTAL,
-                    Unsafe.AsPointer(ref context),
-                    IntPtr.Zero
-                );
+                Interop
+                    .Kernel32
+                    .EnumSystemLocalesEx(
+                        &EnumSystemLocalesProc,
+                        Interop.Kernel32.LOCALE_SPECIFICDATA | Interop.Kernel32.LOCALE_SUPPLEMENTAL,
+                        Unsafe.AsPointer(ref context),
+                        IntPtr.Zero
+                    );
             }
 
             if (context.cultureName != null)
@@ -476,12 +478,14 @@ namespace System.Globalization
             data.strings = new List<string>();
 
             // Now call the enumeration API. Work is done by our callback function
-            Interop.Kernel32.EnumTimeFormatsEx(
-                &EnumTimeCallback,
-                localeName,
-                dwFlags,
-                Unsafe.AsPointer(ref data)
-            );
+            Interop
+                .Kernel32
+                .EnumTimeFormatsEx(
+                    &EnumTimeCallback,
+                    localeName,
+                    dwFlags,
+                    Unsafe.AsPointer(ref data)
+                );
 
             if (data.strings.Count > 0)
             {
@@ -526,10 +530,9 @@ namespace System.Globalization
         {
             Debug.Assert(!GlobalizationMode.Invariant);
 
-            return Interop.Kernel32.LocaleNameToLCID(
-                cultureName,
-                Interop.Kernel32.LOCALE_ALLOW_NEUTRAL_NAMES
-            );
+            return Interop
+                .Kernel32
+                .LocaleNameToLCID(cultureName, Interop.Kernel32.LOCALE_ALLOW_NEUTRAL_NAMES);
         }
 
         private string NlsGetThreeLetterWindowsLanguageName(string cultureName)
@@ -585,12 +588,14 @@ namespace System.Globalization
             context.strings = new List<string>();
             unsafe
             {
-                Interop.Kernel32.EnumSystemLocalesEx(
-                    &EnumAllSystemLocalesProc,
-                    flags,
-                    Unsafe.AsPointer(ref context),
-                    IntPtr.Zero
-                );
+                Interop
+                    .Kernel32
+                    .EnumSystemLocalesEx(
+                        &EnumAllSystemLocalesProc,
+                        flags,
+                        Unsafe.AsPointer(ref context),
+                        IntPtr.Zero
+                    );
             }
 
             CultureInfo[] cultures = new CultureInfo[context.strings.Count];
@@ -617,12 +622,14 @@ namespace System.Globalization
                 context.strings = new List<string>();
                 unsafe
                 {
-                    Interop.Kernel32.EnumSystemLocalesEx(
-                        &EnumAllSystemLocalesProc,
-                        Interop.Kernel32.LOCALE_REPLACEMENT,
-                        Unsafe.AsPointer(ref context),
-                        IntPtr.Zero
-                    );
+                    Interop
+                        .Kernel32
+                        .EnumSystemLocalesEx(
+                            &EnumAllSystemLocalesProc,
+                            Interop.Kernel32.LOCALE_REPLACEMENT,
+                            Unsafe.AsPointer(ref context),
+                            IntPtr.Zero
+                        );
                 }
 
                 for (int i = 0; i < context.strings.Count; i++)

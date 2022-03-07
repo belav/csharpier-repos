@@ -92,10 +92,12 @@ namespace Microsoft.CodeAnalysis.UnitTests.Diagnostics
                 (operationContext) =>
                 {
                     if (
-                        operationContext.Operation.HasErrors(
-                            operationContext.Compilation,
-                            operationContext.CancellationToken
-                        )
+                        operationContext
+                            .Operation
+                            .HasErrors(
+                                operationContext.Compilation,
+                                operationContext.CancellationToken
+                            )
                     )
                     {
                         operationContext.ReportDiagnostic(
@@ -236,8 +238,10 @@ namespace Microsoft.CodeAnalysis.UnitTests.Diagnostics
                                 {
                                     // Setup is known to be an assignment of a constant to the local used in the test.
 
-                                    int initialValue =
-                                        (int)setupAssignment.Value.ConstantValue.Value;
+                                    int initialValue = (int)setupAssignment
+                                        .Value
+                                        .ConstantValue
+                                        .Value;
 
                                     if (forLoop.AtLoopBottom.Length == 1)
                                     {
@@ -480,8 +484,9 @@ namespace Microsoft.CodeAnalysis.UnitTests.Diagnostics
                                             == SpecialType.System_Int32
                                     )
                                     {
-                                        int singleValue =
-                                            (int)singleValueExpression.ConstantValue.Value;
+                                        int singleValue = (int)singleValueExpression
+                                            .ConstantValue
+                                            .Value;
                                         caseValueCount += IncludeClause(
                                             singleValue,
                                             singleValue,
@@ -514,10 +519,12 @@ namespace Microsoft.CodeAnalysis.UnitTests.Diagnostics
                                             == SpecialType.System_Int32
                                     )
                                     {
-                                        int rangeMinValue =
-                                            (int)rangeMinExpression.ConstantValue.Value;
-                                        int rangeMaxValue =
-                                            (int)rangeMaxExpression.ConstantValue.Value;
+                                        int rangeMinValue = (int)rangeMinExpression
+                                            .ConstantValue
+                                            .Value;
+                                        int rangeMaxValue = (int)rangeMaxExpression
+                                            .ConstantValue
+                                            .Value;
                                         caseValueCount += IncludeClause(
                                             rangeMinValue,
                                             rangeMaxValue,
@@ -547,8 +554,9 @@ namespace Microsoft.CodeAnalysis.UnitTests.Diagnostics
                                     {
                                         int rangeMinValue = int.MaxValue;
                                         int rangeMaxValue = int.MinValue;
-                                        int relationalValue =
-                                            (int)relationalValueExpression.ConstantValue.Value;
+                                        int relationalValue = (int)relationalValueExpression
+                                            .ConstantValue
+                                            .Value;
                                         switch (relationalClause.Relation)
                                         {
                                             case BinaryOperatorKind.Equals:
@@ -1150,9 +1158,9 @@ namespace Microsoft.CodeAnalysis.UnitTests.Diagnostics
                     }
 
                     foreach (
-                        var decl in declarationStatement.Declarations.SelectMany(
-                            multiDecl => multiDecl.Declarators
-                        )
+                        var decl in declarationStatement
+                            .Declarations
+                            .SelectMany(multiDecl => multiDecl.Declarators)
                     )
                     {
                         var initializer = decl.GetVariableInitializer();

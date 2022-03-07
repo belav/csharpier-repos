@@ -426,18 +426,20 @@ namespace JIT.HardwareIntrinsics.General
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation(
-                    $"{nameof(Vector256)}.{nameof(Vector256.Widen)}<Int64>(Vector256<Int32>): {method} failed:"
-                );
-                TestLibrary.TestFramework.LogInformation(
-                    $"      firstOp: ({string.Join(", ", firstOp)})"
-                );
-                TestLibrary.TestFramework.LogInformation(
-                    $"  lowerResult: ({string.Join(", ", lowerResult)})"
-                );
-                TestLibrary.TestFramework.LogInformation(
-                    $"  upperResult: ({string.Join(", ", upperResult)})"
-                );
+                TestLibrary
+                    .TestFramework
+                    .LogInformation(
+                        $"{nameof(Vector256)}.{nameof(Vector256.Widen)}<Int64>(Vector256<Int32>): {method} failed:"
+                    );
+                TestLibrary
+                    .TestFramework
+                    .LogInformation($"      firstOp: ({string.Join(", ", firstOp)})");
+                TestLibrary
+                    .TestFramework
+                    .LogInformation($"  lowerResult: ({string.Join(", ", lowerResult)})");
+                TestLibrary
+                    .TestFramework
+                    .LogInformation($"  upperResult: ({string.Join(", ", upperResult)})");
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;

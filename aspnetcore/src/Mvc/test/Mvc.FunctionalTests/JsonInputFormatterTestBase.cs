@@ -153,8 +153,9 @@ public abstract class JsonInputFormatterTestBase<TStartup> : IClassFixture<MvcTe
             "http://localhost/JsonFormatter/RoundtripRecordType/",
             expected
         );
-        var actual =
-            await response.Content.ReadAsAsync<JsonFormatterController.SimpleRecordModel>();
+        var actual = await response
+            .Content
+            .ReadAsAsync<JsonFormatterController.SimpleRecordModel>();
 
         // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
@@ -223,8 +224,9 @@ public abstract class JsonInputFormatterTestBase<TStartup> : IClassFixture<MvcTe
 
         // Assert
         await response.AssertStatusCodeAsync(HttpStatusCode.OK);
-        var actual =
-            await response.Content.ReadFromJsonAsync<JsonFormatterController.SimpleModel>();
+        var actual = await response
+            .Content
+            .ReadFromJsonAsync<JsonFormatterController.SimpleModel>();
         Assert.Equal(expected.Id, actual.Id);
         Assert.Equal(expected.Name, actual.Name);
         Assert.Equal(expected.StreetName, actual.StreetName);

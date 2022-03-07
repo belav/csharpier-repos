@@ -217,7 +217,8 @@ STDOUT: {_synchronizedOutput}
             var markPrefix = '\uFFFF';
             var mark = markPrefix + Guid.NewGuid().ToString();
 
-            await remoteService!.JsonRpc
+            await remoteService!
+                .JsonRpc
                 .InvokeAsync(
                     nameof(InteractiveHost.Service.RemoteConsoleWriteAsync),
                     InteractiveHost.OutputEncoding.GetBytes(mark),
@@ -272,7 +273,8 @@ STDOUT: {_synchronizedOutput}
         {
             var remoteService = await Host.TryGetServiceAsync().ConfigureAwait(false);
             Assert.NotNull(remoteService);
-            return await remoteService!.JsonRpc
+            return await remoteService!
+                .JsonRpc
                 .InvokeAsync<string>(nameof(InteractiveHost.Service.GetRuntimeDirectoryAsync))
                 .ConfigureAwait(false);
         }

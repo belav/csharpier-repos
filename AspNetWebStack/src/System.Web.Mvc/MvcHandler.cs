@@ -96,11 +96,9 @@ namespace System.Web.Mvc
                 {
                     try
                     {
-                        return innerState.AsyncController.BeginExecute(
-                            innerState.RequestContext,
-                            asyncCallback,
-                            asyncState
-                        );
+                        return innerState
+                            .AsyncController
+                            .BeginExecute(innerState.RequestContext, asyncCallback, asyncState);
                     }
                     catch
                     {

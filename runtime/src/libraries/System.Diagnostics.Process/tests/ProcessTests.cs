@@ -2132,7 +2132,8 @@ namespace System.Diagnostics.Tests
                 SetPrivateFieldValue(
                     process,
                     "_processInfo",
-                    typeof(Process).Assembly
+                    typeof(Process)
+                        .Assembly
                         .GetType("System.Diagnostics.ProcessInfo")
                         .GetConstructor(
                             BindingFlags.NonPublic | BindingFlags.Instance,
@@ -2955,7 +2956,8 @@ namespace System.Diagnostics.Tests
                 }
             );
 
-            IEnumerable<Process> childProcesses = rootResult.Message
+            IEnumerable<Process> childProcesses = rootResult
+                .Message
                 .Split(';')
                 .Select(x => int.Parse(x))
                 .Select(pid => Process.GetProcessById(pid));

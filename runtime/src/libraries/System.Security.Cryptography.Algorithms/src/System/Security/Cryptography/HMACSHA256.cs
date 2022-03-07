@@ -152,12 +152,9 @@ namespace System.Security.Cryptography
                 return false;
             }
 
-            bytesWritten = HashProviderDispenser.OneShotHashProvider.MacData(
-                HashAlgorithmNames.SHA256,
-                key,
-                source,
-                destination
-            );
+            bytesWritten = HashProviderDispenser
+                .OneShotHashProvider
+                .MacData(HashAlgorithmNames.SHA256, key, source, destination);
             Debug.Assert(bytesWritten == HmacSizeBytes);
 
             return true;

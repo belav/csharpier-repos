@@ -1144,9 +1144,9 @@ public class DefaultApiDescriptionProviderTest
         Assert.Equal(typeof(Order), responseType.Type);
         Assert.NotNull(responseType.ModelMetadata);
         var apiResponseFormat = Assert.Single(
-            responseType.ApiResponseFormats.Where(
-                responseFormat => responseFormat.MediaType == "text/json"
-            )
+            responseType
+                .ApiResponseFormats
+                .Where(responseFormat => responseFormat.MediaType == "text/json")
         );
         Assert.Same(formatters[0], apiResponseFormat.Formatter);
     }
@@ -2174,14 +2174,16 @@ public class DefaultApiDescriptionProviderTest
                 );
                 if (bindingInfo != null)
                 {
-                    action.BoundProperties.Add(
-                        new ParameterDescriptor()
-                        {
-                            BindingInfo = bindingInfo,
-                            Name = property.Name,
-                            ParameterType = property.PropertyType,
-                        }
-                    );
+                    action
+                        .BoundProperties
+                        .Add(
+                            new ParameterDescriptor()
+                            {
+                                BindingInfo = bindingInfo,
+                                Name = property.Name,
+                                ParameterType = property.PropertyType,
+                            }
+                        );
                 }
             }
         }
@@ -2197,17 +2199,19 @@ public class DefaultApiDescriptionProviderTest
         action.Parameters = new List<ParameterDescriptor>();
         foreach (var parameter in action.MethodInfo.GetParameters())
         {
-            action.Parameters.Add(
-                new ControllerParameterDescriptor()
-                {
-                    Name = parameter.Name,
-                    ParameterType = parameter.ParameterType,
-                    BindingInfo = BindingInfo.GetBindingInfo(
-                        parameter.GetCustomAttributes().OfType<object>()
-                    ),
-                    ParameterInfo = parameter
-                }
-            );
+            action
+                .Parameters
+                .Add(
+                    new ControllerParameterDescriptor()
+                    {
+                        Name = parameter.Name,
+                        ParameterType = parameter.ParameterType,
+                        BindingInfo = BindingInfo.GetBindingInfo(
+                            parameter.GetCustomAttributes().OfType<object>()
+                        ),
+                        ParameterInfo = parameter
+                    }
+                );
         }
 
         return action;
@@ -2215,7 +2219,8 @@ public class DefaultApiDescriptionProviderTest
 
     private IEnumerable<string> GetSortedMediaTypes(ApiResponseType apiResponseType)
     {
-        return apiResponseType.ApiResponseFormats
+        return apiResponseType
+            .ApiResponseFormats
             .OrderBy(responseType => responseType.MediaType)
             .Select(responseType => responseType.MediaType);
     }

@@ -419,14 +419,16 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.GenerateType
                 // We check to see if file path of the new file matches the filepath of any other existing file or if the Folders and FileName matches any of the document then
                 // we say that the file already exists.
                 if (
-                    this.SelectedProject.Documents
+                    this.SelectedProject
+                        .Documents
                         .Where(n => n != null)
                         .Where(n => n.FilePath == FullFilePath)
                         .Any()
                     || (
                         this.Folders != null
                         && this.FileName != null
-                        && this.SelectedProject.Documents
+                        && this.SelectedProject
+                            .Documents
                             .Where(
                                 n =>
                                     n.Name != null
@@ -587,7 +589,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.GenerateType
 
                     // Populate the rest of the documents for the project
                     _previouslyPopulatedDocumentList.AddRange(
-                        _document.Project.Documents
+                        _document
+                            .Project
+                            .Documents
                             .Where(
                                 d => d != _document && !d.IsGeneratedCode(CancellationToken.None)
                             )
@@ -597,7 +601,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.GenerateType
                 else
                 {
                     _previouslyPopulatedDocumentList.AddRange(
-                        _selectedProject.Documents
+                        _selectedProject
+                            .Documents
                             .Where(d => !d.IsGeneratedCode(CancellationToken.None))
                             .Select(d => new DocumentSelectItem(d))
                     );
@@ -777,7 +782,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.GenerateType
             // Add the rest of the projects
             // Adding dependency graph to avoid cyclic dependency
             projectListing.AddRange(
-                document.Project.Solution.Projects
+                document
+                    .Project
+                    .Solution
+                    .Projects
                     .Where(
                         p =>
                             p != document.Project

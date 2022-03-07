@@ -72,7 +72,8 @@ namespace System.Reflection.Tests
                 {
                     typeof(GenericClassWithQuirkyConstraints1<,>)
                         .Project()
-                        .GetTypeInfo().GenericTypeParameters[0],
+                        .GetTypeInfo()
+                        .GenericTypeParameters[0],
                     new Type[] { typeof(IConstrained1).Project() }
                 };
 

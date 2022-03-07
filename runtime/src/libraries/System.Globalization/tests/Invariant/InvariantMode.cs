@@ -22,7 +22,8 @@ namespace System.Globalization.Tests
 
             try
             {
-                ret = (bool)typeof(object).Assembly
+                ret = (bool)typeof(object)
+                    .Assembly
                     .GetType("System.Globalization.GlobalizationMode")
                     .GetProperty(
                         "PredefinedCulturesOnly",
@@ -1405,9 +1406,10 @@ namespace System.Globalization.Tests
                 );
 
             Assert.Equal(
-                CultureInfo.InvariantCulture.DateTimeFormat.GetEra(
-                    CultureInfo.InvariantCulture.DateTimeFormat.GetEraName(1)
-                ),
+                CultureInfo
+                    .InvariantCulture
+                    .DateTimeFormat
+                    .GetEra(CultureInfo.InvariantCulture.DateTimeFormat.GetEraName(1)),
                 ci.DateTimeFormat.GetEra(ci.DateTimeFormat.GetEraName(1))
             );
 
@@ -2206,7 +2208,8 @@ namespace System.Globalization.Tests
             {
                 int res = CultureInfo
                     .GetCultureInfo(cul)
-                    .CompareInfo.Compare(source, value, options);
+                    .CompareInfo
+                    .Compare(source, value, options);
                 Assert.Equal(result, Math.Sign(res));
 
                 res = string.Compare(source, value, GetStringComparison(options));
@@ -2226,7 +2229,8 @@ namespace System.Globalization.Tests
 
                 res = CultureInfo
                     .GetCultureInfo(cul)
-                    .CompareInfo.Compare(sourceBoundedSpan, valueBoundedSpan, options);
+                    .CompareInfo
+                    .Compare(sourceBoundedSpan, valueBoundedSpan, options);
                 Assert.Equal(result, Math.Sign(res));
 
                 res = sourceBoundedSpan.CompareTo(valueBoundedSpan, GetStringComparison(options));
@@ -2244,7 +2248,8 @@ namespace System.Globalization.Tests
                     result,
                     CultureInfo
                         .GetCultureInfo(cul)
-                        .TextInfo.ToLower(upper)
+                        .TextInfo
+                        .ToLower(upper)
                         .Equals(lower, StringComparison.Ordinal)
                 );
                 Assert.Equal(result, upper.ToLower().Equals(lower, StringComparison.Ordinal));
@@ -2261,7 +2266,8 @@ namespace System.Globalization.Tests
                     result,
                     CultureInfo
                         .GetCultureInfo(cul)
-                        .TextInfo.ToUpper(lower)
+                        .TextInfo
+                        .ToUpper(lower)
                         .Equals(upper, StringComparison.Ordinal)
                 );
                 Assert.Equal(result, lower.ToUpper().Equals(upper, StringComparison.Ordinal));

@@ -8512,10 +8512,9 @@ namespace C
 
             Assert.Equal(
                 "(30,19): error CS0121: The call is ambiguous between the following methods or properties: 'A.B.X.Test(int)' and 'A.C.X.Test(int)'",
-                DiagnosticFormatter.Instance.Format(
-                    comp.GetDiagnostics()[0],
-                    EnsureEnglishUICulture.PreferredOrNull
-                )
+                DiagnosticFormatter
+                    .Instance
+                    .Format(comp.GetDiagnostics()[0], EnsureEnglishUICulture.PreferredOrNull)
             );
         }
 

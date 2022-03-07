@@ -83,8 +83,9 @@ namespace System.Web.Http.ModelBinding
             }
 
             // Create default over config
-            IEnumerable<ModelBinderProvider> providers =
-                configuration.Services.GetModelBinderProviders();
+            IEnumerable<ModelBinderProvider> providers = configuration
+                .Services
+                .GetModelBinderProviders();
 
             if (providers.Count() == 1)
             {

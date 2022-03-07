@@ -75,10 +75,14 @@ public class Program
         testAppInfo.Scenarios = createIndividualHosts.ToDictionary(
             kvp => kvp.Key,
             kvp =>
-                kvp.Value.host.Services
+                kvp.Value
+                    .host
+                    .Services
                     .GetRequiredService<IServer>()
-                    .Features.Get<IServerAddressesFeature>()
-                    .Addresses.FirstOrDefault()
+                    .Features
+                    .Get<IServerAddressesFeature>()
+                    .Addresses
+                    .FirstOrDefault()
                     .Replace("127.0.0.1", "localhost") + kvp.Value.basePath
         );
 
@@ -88,11 +92,11 @@ public class Program
     private static (IHost host, string basePath) CreateDevServerHost(string[] args)
     {
         var contentRoot =
-            typeof(Program).Assembly
+            typeof(Program)
+                .Assembly
                 .GetCustomAttributes<AssemblyMetadataAttribute>()
-                .Single(
-                    a => a.Key == "Microsoft.AspNetCore.Testing.BasicTestApp.ContentRoot"
-                ).Value;
+                .Single(a => a.Key == "Microsoft.AspNetCore.Testing.BasicTestApp.ContentRoot")
+                .Value;
 
         var finalArgs = args.Concat(
                 new[]

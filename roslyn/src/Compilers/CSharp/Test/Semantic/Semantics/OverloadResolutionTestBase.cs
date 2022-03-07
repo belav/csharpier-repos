@@ -38,7 +38,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 
             var compilation = CreateEmptyCompilation(source, references, TestOptions.ReleaseDll);
 
-            var method = (SourceMemberMethodSymbol)compilation.GlobalNamespace
+            var method = (SourceMemberMethodSymbol)compilation
+                .GlobalNamespace
                 .GetTypeMembers("C")
                 .Single()
                 .GetMembers("M")

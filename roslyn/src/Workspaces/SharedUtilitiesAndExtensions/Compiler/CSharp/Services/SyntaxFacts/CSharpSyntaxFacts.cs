@@ -305,17 +305,21 @@ namespace Microsoft.CodeAnalysis.CSharp.LanguageServices
             ((ReturnStatementSyntax)node).Expression;
 
         public bool IsThisConstructorInitializer(SyntaxToken token) =>
-            token.Parent.IsKind(
-                SyntaxKind.ThisConstructorInitializer,
-                out ConstructorInitializerSyntax? constructorInit
-            )
+            token
+                .Parent
+                .IsKind(
+                    SyntaxKind.ThisConstructorInitializer,
+                    out ConstructorInitializerSyntax? constructorInit
+                )
             && constructorInit.ThisOrBaseKeyword == token;
 
         public bool IsBaseConstructorInitializer(SyntaxToken token) =>
-            token.Parent.IsKind(
-                SyntaxKind.BaseConstructorInitializer,
-                out ConstructorInitializerSyntax? constructorInit
-            )
+            token
+                .Parent
+                .IsKind(
+                    SyntaxKind.BaseConstructorInitializer,
+                    out ConstructorInitializerSyntax? constructorInit
+                )
             && constructorInit.ThisOrBaseKeyword == token;
 
         public bool IsQueryKeyword(SyntaxToken token)
@@ -339,10 +343,9 @@ namespace Microsoft.CodeAnalysis.CSharp.LanguageServices
                 case SyntaxKind.DescendingKeyword:
                     return token.Parent is OrderingSyntax;
                 case SyntaxKind.IntoKeyword:
-                    return token.Parent.IsKind(
-                        SyntaxKind.JoinIntoClause,
-                        SyntaxKind.QueryContinuation
-                    );
+                    return token
+                        .Parent
+                        .IsKind(SyntaxKind.JoinIntoClause, SyntaxKind.QueryContinuation);
                 default:
                     return false;
             }
@@ -881,9 +884,9 @@ namespace Microsoft.CodeAnalysis.CSharp.LanguageServices
             {
                 if (memberDeclaration.Kind() == SyntaxKind.ConversionOperatorDeclaration)
                 {
-                    name = (
-                        memberDeclaration as ConversionOperatorDeclarationSyntax
-                    )?.Type.ToString();
+                    name = (memberDeclaration as ConversionOperatorDeclarationSyntax)
+                        ?.Type
+                        .ToString();
                 }
                 else
                 {
@@ -1478,9 +1481,10 @@ namespace Microsoft.CodeAnalysis.CSharp.LanguageServices
             SyntaxNode localDeclarationStatement
         )
         {
-            return (
-                (LocalDeclarationStatementSyntax)localDeclarationStatement
-            ).Declaration.Variables.Contains((VariableDeclaratorSyntax)declarator);
+            return ((LocalDeclarationStatementSyntax)localDeclarationStatement)
+                .Declaration
+                .Variables
+                .Contains((VariableDeclaratorSyntax)declarator);
         }
 
         public bool AreEquivalent(SyntaxToken token1, SyntaxToken token2) =>
@@ -1559,7 +1563,8 @@ namespace Microsoft.CodeAnalysis.CSharp.LanguageServices
                 BlockSyntax block => block.Statements,
                 SwitchSectionSyntax switchSection => switchSection.Statements,
                 CompilationUnitSyntax compilationUnit
-                  => compilationUnit.Members
+                  => compilationUnit
+                      .Members
                       .OfType<GlobalStatementSyntax>()
                       .SelectAsArray(globalStatement => globalStatement.Statement),
                 _ => throw ExceptionUtilities.UnexpectedValue(node),
@@ -1771,9 +1776,9 @@ namespace Microsoft.CodeAnalysis.CSharp.LanguageServices
 
         public bool IsVerbatimInterpolatedStringExpression(SyntaxNode node) =>
             node is InterpolatedStringExpressionSyntax interpolatedString
-            && interpolatedString.StringStartToken.IsKind(
-                SyntaxKind.InterpolatedVerbatimStringStartToken
-            );
+            && interpolatedString
+                .StringStartToken
+                .IsKind(SyntaxKind.InterpolatedVerbatimStringStartToken);
 
         #region IsXXX members
 

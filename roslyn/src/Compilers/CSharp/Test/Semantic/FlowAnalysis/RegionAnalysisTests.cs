@@ -8749,7 +8749,8 @@ class C {
                 tree.GetCompilationUnitRoot()
                     .DescendantNodesAndSelf()
                     .OfType<ForEachStatementSyntax>()
-                    .Single().Statement;
+                    .Single()
+                    .Statement;
             Assert.Equal(0, stmt.Span.Length);
 
             var dataFlowAnalysisResults = model.AnalyzeDataFlow(stmt);

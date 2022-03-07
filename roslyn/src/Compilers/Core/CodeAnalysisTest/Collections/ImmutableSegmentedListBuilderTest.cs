@@ -94,7 +94,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         [Fact]
         public void EnumerateBuilderWhileMutating()
         {
-            var builder = ImmutableSegmentedList<int>.Empty
+            var builder = ImmutableSegmentedList<int>
+                .Empty
                 .AddRange(Enumerable.Range(1, 10))
                 .ToBuilder();
             Assert.Equal(Enumerable.Range(1, 10), builder);

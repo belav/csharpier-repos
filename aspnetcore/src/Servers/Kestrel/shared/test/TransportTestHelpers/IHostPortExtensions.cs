@@ -28,8 +28,10 @@ public static class IHostPortExtensions
     {
         return host.Services
             .GetRequiredService<IServer>()
-            .Features.Get<IServerAddressesFeature>()
-            .Addresses.Select(a => new Uri(a));
+            .Features
+            .Get<IServerAddressesFeature>()
+            .Addresses
+            .Select(a => new Uri(a));
     }
 
     public static string MakeUrl(this IHost host, string scheme)

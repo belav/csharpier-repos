@@ -35,11 +35,17 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata
             );
         private readonly MetadataReference _windowsRuntimeUIXamlRef =
             MetadataReference.CreateFromImage(
-                ProprietaryTestResources.v4_0_30319_17929.System_Runtime_WindowsRuntime_UI_Xaml.AsImmutableOrNull()
+                ProprietaryTestResources
+                    .v4_0_30319_17929
+                    .System_Runtime_WindowsRuntime_UI_Xaml
+                    .AsImmutableOrNull()
             );
         private readonly MetadataReference _interopServicesWindowsRuntimeRef =
             MetadataReference.CreateFromImage(
-                TestMetadata.ResourcesNet451.SystemRuntimeInteropServicesWindowsRuntime.AsImmutableOrNull()
+                TestMetadata
+                    .ResourcesNet451
+                    .SystemRuntimeInteropServicesWindowsRuntime
+                    .AsImmutableOrNull()
             );
 
         private void AppendMembers(
@@ -149,13 +155,13 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata
                         result.Append(".property ");
 
                         PropertyAttributes propertyAttrs;
-                        (
-                            (PEModuleSymbol)container.ContainingModule
-                        ).Module.GetPropertyDefPropsOrThrow(
-                            property.Handle,
-                            out propertyName,
-                            out propertyAttrs
-                        );
+                        ((PEModuleSymbol)container.ContainingModule)
+                            .Module
+                            .GetPropertyDefPropsOrThrow(
+                                property.Handle,
+                                out propertyName,
+                                out propertyAttrs
+                            );
                         if (MetadataSignatureHelper.AppendPropertyAttributes(result, propertyAttrs))
                         {
                             result.Append(" ");
@@ -198,12 +204,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata
                         string eventName;
                         EventAttributes eventAttrs;
                         EntityHandle type;
-                        ((PEModuleSymbol)container.ContainingModule).Module.GetEventDefPropsOrThrow(
-                            evnt.Handle,
-                            out eventName,
-                            out eventAttrs,
-                            out type
-                        );
+                        ((PEModuleSymbol)container.ContainingModule)
+                            .Module
+                            .GetEventDefPropsOrThrow(
+                                evnt.Handle,
+                                out eventName,
+                                out eventAttrs,
+                                out type
+                            );
 
                         if (MetadataSignatureHelper.AppendEventAttributes(result, eventAttrs))
                         {

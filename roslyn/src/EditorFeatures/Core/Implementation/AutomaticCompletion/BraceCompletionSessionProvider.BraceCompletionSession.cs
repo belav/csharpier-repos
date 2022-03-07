@@ -66,10 +66,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.AutomaticCompletion
                 this.SubjectBuffer = subjectBuffer;
                 this.OpeningBrace = openingBrace;
                 this.ClosingBrace = closingBrace;
-                this.ClosingPoint = SubjectBuffer.CurrentSnapshot.CreateTrackingPoint(
-                    openingPoint.Position,
-                    PointTrackingMode.Positive
-                );
+                this.ClosingPoint = SubjectBuffer
+                    .CurrentSnapshot
+                    .CreateTrackingPoint(openingPoint.Position, PointTrackingMode.Positive);
                 _undoHistory = undoHistory;
                 _editorOperations = editorOperationsFactoryService.GetEditorOperations(textView);
                 _service = service;
@@ -110,10 +109,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.AutomaticCompletion
                     return false;
                 }
 
-                OpeningPoint = SubjectBuffer.CurrentSnapshot.CreateTrackingPoint(
-                    openingSnapshotPoint,
-                    PointTrackingMode.Positive
-                );
+                OpeningPoint = SubjectBuffer
+                    .CurrentSnapshot
+                    .CreateTrackingPoint(openingSnapshotPoint, PointTrackingMode.Positive);
 
                 var context = GetBraceCompletionContext();
                 if (context == null)
@@ -139,10 +137,12 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.AutomaticCompletion
                 ApplyBraceCompletionResult(braceResult.Value);
 
                 // switch the closing point from positive to negative tracking so that the closing point stays against the closing brace
-                ClosingPoint = SubjectBuffer.CurrentSnapshot.CreateTrackingPoint(
-                    ClosingPoint.GetPoint(SubjectBuffer.CurrentSnapshot),
-                    PointTrackingMode.Negative
-                );
+                ClosingPoint = SubjectBuffer
+                    .CurrentSnapshot
+                    .CreateTrackingPoint(
+                        ClosingPoint.GetPoint(SubjectBuffer.CurrentSnapshot),
+                        PointTrackingMode.Negative
+                    );
 
                 var contextAfterStart = GetBraceCompletionContext();
                 if (contextAfterStart != null)
@@ -330,7 +330,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.AutomaticCompletion
                             return;
                         }
 
-                        var documentOptions = context.Value.Document
+                        var documentOptions = context
+                            .Value
+                            .Document
                             .GetOptionsAsync()
                             .WaitAndGetResult(CancellationToken.None);
                         var changesAfterReturn = _service
@@ -437,12 +439,14 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.AutomaticCompletion
                 var closingSnapshotPoint = ClosingPoint.GetPoint(SubjectBuffer.CurrentSnapshot);
 
                 // find the position just after the closing brace in the view's text buffer
-                var afterBrace = TextView.BufferGraph.MapUpToBuffer(
-                    closingSnapshotPoint,
-                    PointTrackingMode.Negative,
-                    PositionAffinity.Predecessor,
-                    TextView.TextBuffer
-                );
+                var afterBrace = TextView
+                    .BufferGraph
+                    .MapUpToBuffer(
+                        closingSnapshotPoint,
+                        PointTrackingMode.Negative,
+                        PositionAffinity.Predecessor,
+                        TextView.TextBuffer
+                    );
 
                 Debug.Assert(afterBrace.HasValue, "Unable to move caret to closing point");
 
@@ -506,9 +510,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.AutomaticCompletion
                     return;
                 }
 
-                var caretLine = SubjectBuffer.CurrentSnapshot.GetLineFromLineNumber(
-                    result.CaretLocation.Line
-                );
+                var caretLine = SubjectBuffer
+                    .CurrentSnapshot
+                    .GetLineFromLineNumber(result.CaretLocation.Line);
                 TextView.TryMoveCaretToAndEnsureVisible(
                     new VirtualSnapshotPoint(caretLine, result.CaretLocation.Character)
                 );

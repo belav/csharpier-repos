@@ -413,9 +413,9 @@ namespace Microsoft.WebAssembly.Diagnostics
                     if (ctorHandle.Kind == HandleKind.MemberReference)
                     {
                         var container =
-                            asmMetadataReader.GetMemberReference(
-                                (MemberReferenceHandle)ctorHandle
-                            ).Parent;
+                            asmMetadataReader
+                                .GetMemberReference((MemberReferenceHandle)ctorHandle)
+                                .Parent;
                         var name = asmMetadataReader.GetString(
                             asmMetadataReader.GetTypeReference((TypeReferenceHandle)container).Name
                         );
@@ -756,11 +756,11 @@ namespace Microsoft.WebAssembly.Diagnostics
 
             if (sourceLinkDebugInfo != null)
             {
-                var sourceLinkContent = System.Text.Encoding.UTF8.GetString(
-                    sourceLinkDebugInfo,
-                    0,
-                    sourceLinkDebugInfo.Length
-                );
+                var sourceLinkContent = System
+                    .Text
+                    .Encoding
+                    .UTF8
+                    .GetString(sourceLinkDebugInfo, 0, sourceLinkDebugInfo.Length);
 
                 if (sourceLinkContent != null)
                 {

@@ -30,8 +30,9 @@ namespace System.Text.Json.Serialization.Converters
         )
         {
             Debug.Assert(jsonTypeInfo != null);
-            jsonTypeInfo.CreateObjectWithArgs =
-                options.MemberAccessorStrategy.CreateParameterizedConstructor<T>(ConstructorInfo!);
+            jsonTypeInfo.CreateObjectWithArgs = options
+                .MemberAccessorStrategy
+                .CreateParameterizedConstructor<T>(ConstructorInfo!);
         }
     }
 }

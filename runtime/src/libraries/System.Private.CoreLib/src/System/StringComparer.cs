@@ -402,11 +402,10 @@ namespace System
                 {
                     return false;
                 }
-                return System.Globalization.Ordinal.EqualsIgnoreCase(
-                    ref x.GetRawStringData(),
-                    ref y.GetRawStringData(),
-                    x.Length
-                );
+                return System
+                    .Globalization
+                    .Ordinal
+                    .EqualsIgnoreCase(ref x.GetRawStringData(), ref y.GetRawStringData(), x.Length);
             }
             return x.Equals(y);
         }
@@ -505,11 +504,10 @@ namespace System
                 return false;
             }
 
-            return System.Globalization.Ordinal.EqualsIgnoreCase(
-                ref x.GetRawStringData(),
-                ref y.GetRawStringData(),
-                x.Length
-            );
+            return System
+                .Globalization
+                .Ordinal
+                .EqualsIgnoreCase(ref x.GetRawStringData(), ref y.GetRawStringData(), x.Length);
         }
 
         public override int GetHashCode(string obj)

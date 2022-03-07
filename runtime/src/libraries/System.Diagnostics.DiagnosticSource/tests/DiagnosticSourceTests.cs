@@ -442,9 +442,9 @@ namespace System.Diagnostics.Tests
 
                 // Subscribe, which delivers catch-up event for the Default listener
                 using (
-                    var allListenerSubscription = DiagnosticListener.AllListeners.Subscribe(
-                        MakeObserver(onNewListener)
-                    )
+                    var allListenerSubscription = DiagnosticListener
+                        .AllListeners
+                        .Subscribe(MakeObserver(onNewListener))
                 )
                 {
                     Assert.Equal(listener, returnedListener);
@@ -458,9 +458,9 @@ namespace System.Diagnostics.Tests
 
                 // Resubscribe
                 using (
-                    var allListenerSubscription = DiagnosticListener.AllListeners.Subscribe(
-                        MakeObserver(onNewListener)
-                    )
+                    var allListenerSubscription = DiagnosticListener
+                        .AllListeners
+                        .Subscribe(MakeObserver(onNewListener))
                 )
                 {
                     Assert.Equal(listener, returnedListener);
@@ -484,9 +484,9 @@ namespace System.Diagnostics.Tests
 
                 // Check that we are back to just the DefaultListener.
                 using (
-                    var allListenerSubscription = DiagnosticListener.AllListeners.Subscribe(
-                        MakeObserver(onNewListener)
-                    )
+                    var allListenerSubscription = DiagnosticListener
+                        .AllListeners
+                        .Subscribe(MakeObserver(onNewListener))
                 )
                 {
                     Assert.Equal(listener, returnedListener);
@@ -637,15 +637,15 @@ namespace System.Diagnostics.Tests
             int count1 = 0,
                 count2 = 0,
                 count3 = 0;
-            IDisposable sub1 = DiagnosticListener.AllListeners.Subscribe(
-                MakeObserver<DiagnosticListener>(onCompleted: () => count1++)
-            );
-            IDisposable sub2 = DiagnosticListener.AllListeners.Subscribe(
-                MakeObserver<DiagnosticListener>(onCompleted: () => count2++)
-            );
-            IDisposable sub3 = DiagnosticListener.AllListeners.Subscribe(
-                MakeObserver<DiagnosticListener>(onCompleted: () => count3++)
-            );
+            IDisposable sub1 = DiagnosticListener
+                .AllListeners
+                .Subscribe(MakeObserver<DiagnosticListener>(onCompleted: () => count1++));
+            IDisposable sub2 = DiagnosticListener
+                .AllListeners
+                .Subscribe(MakeObserver<DiagnosticListener>(onCompleted: () => count2++));
+            IDisposable sub3 = DiagnosticListener
+                .AllListeners
+                .Subscribe(MakeObserver<DiagnosticListener>(onCompleted: () => count3++));
 
             Assert.Equal(0, count1);
             Assert.Equal(0, count2);
@@ -805,9 +805,9 @@ namespace System.Diagnostics.Tests
 
             // Subscribe, which gives you the list
             using (
-                var allListenerSubscription = DiagnosticListener.AllListeners.Subscribe(
-                    MakeObserver(onNewListener)
-                )
+                var allListenerSubscription = DiagnosticListener
+                    .AllListeners
+                    .Subscribe(MakeObserver(onNewListener))
             ) { } // Unsubscribe to remove side effects.
             return ret;
         }

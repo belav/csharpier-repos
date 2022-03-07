@@ -703,14 +703,16 @@ namespace System.Diagnostics.Tests
                         }
 
                         // Make sure that there are no Diagnostic Listeners left over.
-                        DiagnosticListener.AllListeners.Subscribe(
-                            DiagnosticSourceTest.MakeObserver(
-                                delegate(DiagnosticListener listen)
-                                {
-                                    Assert.True(!listen.Name.StartsWith("BuildTestSource"));
-                                }
-                            )
-                        );
+                        DiagnosticListener
+                            .AllListeners
+                            .Subscribe(
+                                DiagnosticSourceTest.MakeObserver(
+                                    delegate(DiagnosticListener listen)
+                                    {
+                                        Assert.True(!listen.Name.StartsWith("BuildTestSource"));
+                                    }
+                                )
+                            );
                     }
                 )
                 .Dispose();
@@ -906,14 +908,16 @@ namespace System.Diagnostics.Tests
                         }
 
                         // Make sure that there are no Diagnostic Listeners left over.
-                        DiagnosticListener.AllListeners.Subscribe(
-                            DiagnosticSourceTest.MakeObserver(
-                                delegate(DiagnosticListener listen)
-                                {
-                                    Assert.True(!listen.Name.StartsWith("BuildTestSource"));
-                                }
-                            )
-                        );
+                        DiagnosticListener
+                            .AllListeners
+                            .Subscribe(
+                                DiagnosticSourceTest.MakeObserver(
+                                    delegate(DiagnosticListener listen)
+                                    {
+                                        Assert.True(!listen.Name.StartsWith("BuildTestSource"));
+                                    }
+                                )
+                            );
                     }
                 )
                 .Dispose();
@@ -1901,9 +1905,9 @@ namespace System.Diagnostics.Tests
                                 new Thread(
                                     () =>
                                     {
-                                        DateTime end = DateTime.UtcNow.Add(
-                                            TimeSpan.FromSeconds(StressTimeSeconds)
-                                        );
+                                        DateTime end = DateTime
+                                            .UtcNow
+                                            .Add(TimeSpan.FromSeconds(StressTimeSeconds));
                                         while (DateTime.UtcNow < end)
                                         {
                                             source.Write("event1", Tuple.Create(1));
@@ -2346,9 +2350,10 @@ namespace System.Diagnostics.Tests
             }
 
             if (eventData.EventName == "EventSourceMessage" && 0 < eventData.Payload.Count)
-                System.Diagnostics.Debug.WriteLine(
-                    "EventSourceMessage: " + eventData.Payload[0].ToString()
-                );
+                System
+                    .Diagnostics
+                    .Debug
+                    .WriteLine("EventSourceMessage: " + eventData.Payload[0].ToString());
 
             var otherEventWritten = OtherEventWritten;
             if (otherEventWritten != null && !wroteEvent)

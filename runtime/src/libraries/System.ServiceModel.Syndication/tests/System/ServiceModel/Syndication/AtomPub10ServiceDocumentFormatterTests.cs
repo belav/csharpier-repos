@@ -109,22 +109,21 @@ namespace System.ServiceModel.Syndication.Tests
                 "category_scheme",
                 "category_label"
             );
-            fullSyndicationCategory.AttributeExtensions.Add(
-                new XmlQualifiedName("category_name1"),
-                null
-            );
-            fullSyndicationCategory.AttributeExtensions.Add(
-                new XmlQualifiedName("category_name2", "category_namespace"),
-                ""
-            );
-            fullSyndicationCategory.AttributeExtensions.Add(
-                new XmlQualifiedName("category_name3", "category_namespace"),
-                "category_value"
-            );
-            fullSyndicationCategory.AttributeExtensions.Add(
-                new XmlQualifiedName("category_name4", "xmlns"),
-                ""
-            );
+            fullSyndicationCategory
+                .AttributeExtensions
+                .Add(new XmlQualifiedName("category_name1"), null);
+            fullSyndicationCategory
+                .AttributeExtensions
+                .Add(new XmlQualifiedName("category_name2", "category_namespace"), "");
+            fullSyndicationCategory
+                .AttributeExtensions
+                .Add(
+                    new XmlQualifiedName("category_name3", "category_namespace"),
+                    "category_value"
+                );
+            fullSyndicationCategory
+                .AttributeExtensions
+                .Add(new XmlQualifiedName("category_name4", "xmlns"), "");
 
             fullSyndicationCategory.ElementExtensions.Add(new ExtensionObject { Value = 10 });
 
@@ -137,22 +136,24 @@ namespace System.ServiceModel.Syndication.Tests
                 IsFixed = true,
                 Scheme = "inlinecategories_scheme"
             };
-            fullInlineCategoriesDocument.AttributeExtensions.Add(
-                new XmlQualifiedName("inlinecategories_name1"),
-                null
-            );
-            fullInlineCategoriesDocument.AttributeExtensions.Add(
-                new XmlQualifiedName("inlinecategories_name2", "inlinecategories_namespace"),
-                ""
-            );
-            fullInlineCategoriesDocument.AttributeExtensions.Add(
-                new XmlQualifiedName("inlinecategories_name3", "inlinecategories_namespace"),
-                "inlinecategories_value"
-            );
-            fullInlineCategoriesDocument.AttributeExtensions.Add(
-                new XmlQualifiedName("inlinecategories_name4", "xmlns"),
-                ""
-            );
+            fullInlineCategoriesDocument
+                .AttributeExtensions
+                .Add(new XmlQualifiedName("inlinecategories_name1"), null);
+            fullInlineCategoriesDocument
+                .AttributeExtensions
+                .Add(
+                    new XmlQualifiedName("inlinecategories_name2", "inlinecategories_namespace"),
+                    ""
+                );
+            fullInlineCategoriesDocument
+                .AttributeExtensions
+                .Add(
+                    new XmlQualifiedName("inlinecategories_name3", "inlinecategories_namespace"),
+                    "inlinecategories_value"
+                );
+            fullInlineCategoriesDocument
+                .AttributeExtensions
+                .Add(new XmlQualifiedName("inlinecategories_name4", "xmlns"), "");
 
             fullInlineCategoriesDocument.ElementExtensions.Add(new ExtensionObject { Value = 10 });
 
@@ -163,53 +164,63 @@ namespace System.ServiceModel.Syndication.Tests
                 BaseUri = new Uri("http://referencecategories_url.com"),
                 Language = "referencecategories_language"
             };
-            fullReferenceCategoriesDocument.AttributeExtensions.Add(
-                new XmlQualifiedName("referencecategories_name1"),
-                null
-            );
-            fullReferenceCategoriesDocument.AttributeExtensions.Add(
-                new XmlQualifiedName("referencecategories_name2", "referencecategories_namespace"),
-                ""
-            );
-            fullReferenceCategoriesDocument.AttributeExtensions.Add(
-                new XmlQualifiedName("referencecategories_name3", "referencecategories_namespace"),
-                "referencecategories_value"
-            );
-            fullReferenceCategoriesDocument.AttributeExtensions.Add(
-                new XmlQualifiedName("referencecategories_name4", "xmlns"),
-                ""
-            );
+            fullReferenceCategoriesDocument
+                .AttributeExtensions
+                .Add(new XmlQualifiedName("referencecategories_name1"), null);
+            fullReferenceCategoriesDocument
+                .AttributeExtensions
+                .Add(
+                    new XmlQualifiedName(
+                        "referencecategories_name2",
+                        "referencecategories_namespace"
+                    ),
+                    ""
+                );
+            fullReferenceCategoriesDocument
+                .AttributeExtensions
+                .Add(
+                    new XmlQualifiedName(
+                        "referencecategories_name3",
+                        "referencecategories_namespace"
+                    ),
+                    "referencecategories_value"
+                );
+            fullReferenceCategoriesDocument
+                .AttributeExtensions
+                .Add(new XmlQualifiedName("referencecategories_name4", "xmlns"), "");
 
-            fullReferenceCategoriesDocument.ElementExtensions.Add(
-                new ExtensionObject { Value = 10 }
-            );
+            fullReferenceCategoriesDocument
+                .ElementExtensions
+                .Add(new ExtensionObject { Value = 10 });
 
             var fullResourceCollectionInfoTitle = new TextSyndicationContent(
                 "resourcecollectioninfo_title",
                 TextSyndicationContentKind.XHtml
             );
-            fullResourceCollectionInfoTitle.AttributeExtensions.Add(
-                new XmlQualifiedName("resourcecollectioninfotitle_name1"),
-                null
-            );
-            fullResourceCollectionInfoTitle.AttributeExtensions.Add(
-                new XmlQualifiedName(
-                    "resourcecollectioninfotitle_name2",
-                    "resourcecollectioninfotitle_namespace"
-                ),
-                ""
-            );
-            fullResourceCollectionInfoTitle.AttributeExtensions.Add(
-                new XmlQualifiedName(
-                    "resourcecollectioninfotitle_name3",
-                    "resourcecollectioninfotitle_namespace"
-                ),
-                "resourcecollectioninfotitle_value"
-            );
-            fullResourceCollectionInfoTitle.AttributeExtensions.Add(
-                new XmlQualifiedName("resourcecollectioninfotitle_name4", "xmlns"),
-                ""
-            );
+            fullResourceCollectionInfoTitle
+                .AttributeExtensions
+                .Add(new XmlQualifiedName("resourcecollectioninfotitle_name1"), null);
+            fullResourceCollectionInfoTitle
+                .AttributeExtensions
+                .Add(
+                    new XmlQualifiedName(
+                        "resourcecollectioninfotitle_name2",
+                        "resourcecollectioninfotitle_namespace"
+                    ),
+                    ""
+                );
+            fullResourceCollectionInfoTitle
+                .AttributeExtensions
+                .Add(
+                    new XmlQualifiedName(
+                        "resourcecollectioninfotitle_name3",
+                        "resourcecollectioninfotitle_namespace"
+                    ),
+                    "resourcecollectioninfotitle_value"
+                );
+            fullResourceCollectionInfoTitle
+                .AttributeExtensions
+                .Add(new XmlQualifiedName("resourcecollectioninfotitle_name4", "xmlns"), "");
 
             var fullResourceCollectionInfo = new ResourceCollectionInfo(
                 fullResourceCollectionInfoTitle,
@@ -226,28 +237,30 @@ namespace System.ServiceModel.Syndication.Tests
             {
                 BaseUri = new Uri("http://resourcecollectioninfo_url.com")
             };
-            fullResourceCollectionInfo.AttributeExtensions.Add(
-                new XmlQualifiedName("resourcecollectioninfo_name1"),
-                null
-            );
-            fullResourceCollectionInfo.AttributeExtensions.Add(
-                new XmlQualifiedName(
-                    "resourcecollectioninfo_name2",
-                    "resourcecollectioninfo_namespace"
-                ),
-                ""
-            );
-            fullResourceCollectionInfo.AttributeExtensions.Add(
-                new XmlQualifiedName(
-                    "resourcecollectioninfo_name3",
-                    "resourcecollectioninfo_namespace"
-                ),
-                "resourcecollectioninfo_value"
-            );
-            fullResourceCollectionInfo.AttributeExtensions.Add(
-                new XmlQualifiedName("resourcecollectioninfo_name4", "xmlns"),
-                ""
-            );
+            fullResourceCollectionInfo
+                .AttributeExtensions
+                .Add(new XmlQualifiedName("resourcecollectioninfo_name1"), null);
+            fullResourceCollectionInfo
+                .AttributeExtensions
+                .Add(
+                    new XmlQualifiedName(
+                        "resourcecollectioninfo_name2",
+                        "resourcecollectioninfo_namespace"
+                    ),
+                    ""
+                );
+            fullResourceCollectionInfo
+                .AttributeExtensions
+                .Add(
+                    new XmlQualifiedName(
+                        "resourcecollectioninfo_name3",
+                        "resourcecollectioninfo_namespace"
+                    ),
+                    "resourcecollectioninfo_value"
+                );
+            fullResourceCollectionInfo
+                .AttributeExtensions
+                .Add(new XmlQualifiedName("resourcecollectioninfo_name4", "xmlns"), "");
 
             fullResourceCollectionInfo.ElementExtensions.Add(new ExtensionObject { Value = 10 });
 
@@ -255,22 +268,21 @@ namespace System.ServiceModel.Syndication.Tests
                 "workspace_title",
                 TextSyndicationContentKind.Html
             );
-            fullWorkspaceTitle.AttributeExtensions.Add(
-                new XmlQualifiedName("workspacetitle_name1"),
-                null
-            );
-            fullWorkspaceTitle.AttributeExtensions.Add(
-                new XmlQualifiedName("workspacetitle_name2", "workspacetitle_namespace"),
-                ""
-            );
-            fullWorkspaceTitle.AttributeExtensions.Add(
-                new XmlQualifiedName("workspacetitle_name3", "workspacetitle_namespace"),
-                "workspacetitle_value"
-            );
-            fullWorkspaceTitle.AttributeExtensions.Add(
-                new XmlQualifiedName("workspacetitle_name4", "xmlns"),
-                ""
-            );
+            fullWorkspaceTitle
+                .AttributeExtensions
+                .Add(new XmlQualifiedName("workspacetitle_name1"), null);
+            fullWorkspaceTitle
+                .AttributeExtensions
+                .Add(new XmlQualifiedName("workspacetitle_name2", "workspacetitle_namespace"), "");
+            fullWorkspaceTitle
+                .AttributeExtensions
+                .Add(
+                    new XmlQualifiedName("workspacetitle_name3", "workspacetitle_namespace"),
+                    "workspacetitle_value"
+                );
+            fullWorkspaceTitle
+                .AttributeExtensions
+                .Add(new XmlQualifiedName("workspacetitle_name4", "xmlns"), "");
 
             var fullWorkspace = new Workspace(
                 fullWorkspaceTitle,
@@ -284,18 +296,18 @@ namespace System.ServiceModel.Syndication.Tests
                 BaseUri = new Uri("http://workspace_url.com"),
             };
             fullWorkspace.AttributeExtensions.Add(new XmlQualifiedName("workspace_name1"), null);
-            fullWorkspace.AttributeExtensions.Add(
-                new XmlQualifiedName("workspace_name2", "workspace_namespace"),
-                ""
-            );
-            fullWorkspace.AttributeExtensions.Add(
-                new XmlQualifiedName("workspace_name3", "workspace_namespace"),
-                "workspace_value"
-            );
-            fullWorkspace.AttributeExtensions.Add(
-                new XmlQualifiedName("workspace_name4", "xmlns"),
-                ""
-            );
+            fullWorkspace
+                .AttributeExtensions
+                .Add(new XmlQualifiedName("workspace_name2", "workspace_namespace"), "");
+            fullWorkspace
+                .AttributeExtensions
+                .Add(
+                    new XmlQualifiedName("workspace_name3", "workspace_namespace"),
+                    "workspace_value"
+                );
+            fullWorkspace
+                .AttributeExtensions
+                .Add(new XmlQualifiedName("workspace_name4", "xmlns"), "");
 
             fullWorkspace.ElementExtensions.Add(new ExtensionObject { Value = 10 });
 
@@ -307,18 +319,18 @@ namespace System.ServiceModel.Syndication.Tests
                 BaseUri = new Uri("http://document_url.com")
             };
             fullDocument.AttributeExtensions.Add(new XmlQualifiedName("document_name1"), null);
-            fullDocument.AttributeExtensions.Add(
-                new XmlQualifiedName("document_name2", "document_namespace"),
-                ""
-            );
-            fullDocument.AttributeExtensions.Add(
-                new XmlQualifiedName("document_name3", "document_namespace"),
-                "document_value"
-            );
-            fullDocument.AttributeExtensions.Add(
-                new XmlQualifiedName("document_name4", "xmlns"),
-                ""
-            );
+            fullDocument
+                .AttributeExtensions
+                .Add(new XmlQualifiedName("document_name2", "document_namespace"), "");
+            fullDocument
+                .AttributeExtensions
+                .Add(
+                    new XmlQualifiedName("document_name3", "document_namespace"),
+                    "document_value"
+                );
+            fullDocument
+                .AttributeExtensions
+                .Add(new XmlQualifiedName("document_name4", "xmlns"), "");
 
             fullDocument.ElementExtensions.Add(new ExtensionObject { Value = 10 });
 
@@ -834,9 +846,9 @@ namespace System.ServiceModel.Syndication.Tests
                     Assert.Equal(1, secondDocumentSecondCategory.ElementExtensions.Count);
                     Assert.Equal(
                         10,
-                        secondDocumentSecondCategory.ElementExtensions[
-                            0
-                        ].GetObject<ExtensionObject>().Value
+                        secondDocumentSecondCategory.ElementExtensions[0]
+                            .GetObject<ExtensionObject>()
+                            .Value
                     );
                     Assert.Equal("category_name", secondDocumentSecondCategory.Name);
                     Assert.Equal("category_scheme", secondDocumentSecondCategory.Scheme);

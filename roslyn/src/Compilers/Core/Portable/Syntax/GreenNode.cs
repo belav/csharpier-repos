@@ -586,10 +586,13 @@ namespace Microsoft.CodeAnalysis
                 SyntaxAnnotation[]? annotations;
                 if (s_annotationsTable.TryGetValue(this, out annotations))
                 {
-                    System.Diagnostics.Debug.Assert(
-                        annotations.Length != 0,
-                        "we should return nonempty annotations or NoAnnotations"
-                    );
+                    System
+                        .Diagnostics
+                        .Debug
+                        .Assert(
+                            annotations.Length != 0,
+                            "we should return nonempty annotations or NoAnnotations"
+                        );
                     return annotations;
                 }
             }

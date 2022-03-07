@@ -47,9 +47,9 @@ namespace Microsoft.VisualStudio.LanguageServices
             _classificationFormatMapService = classificationFormatMapService;
 
             // Note: We never unsubscribe from this event. This service lives for the lifetime of VS.
-            _classificationFormatMapService.GetClassificationFormatMap(
-                "text"
-            ).ClassificationFormatMappingChanged +=
+            _classificationFormatMapService
+                .GetClassificationFormatMap("text")
+                .ClassificationFormatMappingChanged +=
                 TextFormatMap_ClassificationFormatMappingChanged;
         }
 

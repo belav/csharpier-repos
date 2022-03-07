@@ -233,10 +233,12 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                                     {
                                         if (
                                             implementation != null
-                                            && SymbolEquivalenceComparer.Instance.Equals(
-                                                implementation.OriginalDefinition,
-                                                symbol.OriginalDefinition
-                                            )
+                                            && SymbolEquivalenceComparer
+                                                .Instance
+                                                .Equals(
+                                                    implementation.OriginalDefinition,
+                                                    symbol.OriginalDefinition
+                                                )
                                         )
                                         {
                                             builder.Add(bestMethod);

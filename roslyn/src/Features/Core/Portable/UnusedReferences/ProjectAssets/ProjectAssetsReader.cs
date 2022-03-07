@@ -42,13 +42,17 @@ namespace Microsoft.CodeAnalysis.UnusedReferences.ProjectAssets
 
             // We keep a list of references that were automatically added by SDKs or other sources so that we can ignore them
             // since they can't be removed even if they were unused.
-            var autoReferences = projectAssets.Project
-                ?.Frameworks?.Values.Where(framework => framework.Dependencies != null)
+            var autoReferences = projectAssets
+                .Project
+                ?.Frameworks
+                ?.Values
+                .Where(framework => framework.Dependencies != null)
                 .SelectMany(
                     framework =>
-                        framework.Dependencies!.Keys.Where(
-                            key => framework.Dependencies[key].AutoReferenced
-                        )
+                        framework
+                            .Dependencies!
+                            .Keys
+                            .Where(key => framework.Dependencies[key].AutoReferenced)
                 )
                 .Distinct()
                 .ToImmutableHashSet();
@@ -56,10 +60,12 @@ namespace Microsoft.CodeAnalysis.UnusedReferences.ProjectAssets
 
             // Targets contain a hashmap of Libraries keyed by `{LibraryName}/{LibraryVersion}` we need to split these keys
             // and create a mapping of LibraryName to the complete library key.
-            var targetLibraryKeys = projectAssets.Targets.ToImmutableDictionary(
-                t => t.Key,
-                t => t.Value.ToImmutableDictionary(l => l.Key.Split('/')[0], l => l.Key)
-            );
+            var targetLibraryKeys = projectAssets
+                .Targets
+                .ToImmutableDictionary(
+                    t => t.Key,
+                    t => t.Value.ToImmutableDictionary(l => l.Key.Split('/')[0], l => l.Key)
+                );
 
             var builtReferences = new Dictionary<string, ReferenceInfo?>();
 

@@ -119,7 +119,10 @@ namespace System.CommandLine.Tests.Invocation
             invoke
                 .Should()
                 .Throw<TargetInvocationException>()
-                .Which.InnerException.Message.Should()
+                .Which
+                .InnerException
+                .Message
+                .Should()
                 .Be("oops!");
         }
 
@@ -145,7 +148,10 @@ namespace System.CommandLine.Tests.Invocation
             invoke
                 .Should()
                 .Throw<TargetInvocationException>()
-                .Which.InnerException.Message.Should()
+                .Which
+                .InnerException
+                .Message
+                .Should()
                 .Be("oops!");
         }
 
@@ -168,7 +174,9 @@ namespace System.CommandLine.Tests.Invocation
                 .AddMiddleware(
                     async (context, next) =>
                     {
-                        var tokens = context.ParseResult.Tokens
+                        var tokens = context
+                            .ParseResult
+                            .Tokens
                             .Select(t => t.Value)
                             .Concat(new[] { "implicit-inner-command" })
                             .ToArray();

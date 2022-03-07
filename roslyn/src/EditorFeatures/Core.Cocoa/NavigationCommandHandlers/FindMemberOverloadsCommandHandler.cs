@@ -103,7 +103,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigationCommandHandlers
                             return;
 
                         foreach (
-                            var curSymbol in symbol.ContainingType
+                            var curSymbol in symbol
+                                .ContainingType
                                 .GetMembers()
                                 .Where(m => m.Kind == symbol.Kind && m.Name == symbol.Name)
                         )

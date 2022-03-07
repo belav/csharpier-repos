@@ -48,7 +48,9 @@ namespace Moq.Tests
             // `x` will be captured and represented in the expression tree as a display class field access:
             var xExpr = (
                 (snd.Expression.Body as MethodCallExpression).Arguments.Last() as NewArrayExpression
-            ).Expressions.First();
+            )
+                .Expressions
+                .First();
 
             Assert.False(xExpr is ConstantExpression);
             Assert.NotSame(fst, snd);

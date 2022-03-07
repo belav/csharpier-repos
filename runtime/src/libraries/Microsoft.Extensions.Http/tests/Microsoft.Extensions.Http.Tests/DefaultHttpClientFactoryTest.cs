@@ -42,12 +42,15 @@ namespace Microsoft.Extensions.Http
         {
             // Arrange
             var count = 0;
-            Options.CurrentValue.HttpClientActions.Add(
-                c =>
-                {
-                    count++;
-                }
-            );
+            Options
+                .CurrentValue
+                .HttpClientActions
+                .Add(
+                    c =>
+                    {
+                        count++;
+                    }
+                );
 
             var factory = new TestHttpClientFactory(
                 Services,
@@ -73,12 +76,15 @@ namespace Microsoft.Extensions.Http
         {
             // Arrange
             var count = 0;
-            Options.CurrentValue.HttpMessageHandlerBuilderActions.Add(
-                b =>
-                {
-                    count++;
-                }
-            );
+            Options
+                .CurrentValue
+                .HttpMessageHandlerBuilderActions
+                .Add(
+                    b =>
+                    {
+                        count++;
+                    }
+                );
 
             var factory = new TestHttpClientFactory(
                 Services,
@@ -107,18 +113,21 @@ namespace Microsoft.Extensions.Http
         public void Factory_DisposeClient_DoesNotDisposeHandler()
         {
             // Arrange
-            Options.CurrentValue.HttpMessageHandlerBuilderActions.Add(
-                b =>
-                {
-                    var mockHandler = new Mock<HttpMessageHandler>();
-                    mockHandler
-                        .Protected()
-                        .Setup("Dispose", ItExpr.IsAny<bool>())
-                        .Throws(new Exception("Dispose should not be called"));
+            Options
+                .CurrentValue
+                .HttpMessageHandlerBuilderActions
+                .Add(
+                    b =>
+                    {
+                        var mockHandler = new Mock<HttpMessageHandler>();
+                        mockHandler
+                            .Protected()
+                            .Setup("Dispose", ItExpr.IsAny<bool>())
+                            .Throws(new Exception("Dispose should not be called"));
 
-                    b.PrimaryHandler = mockHandler.Object;
-                }
-            );
+                        b.PrimaryHandler = mockHandler.Object;
+                    }
+                );
 
             var factory = new TestHttpClientFactory(
                 Services,
@@ -142,18 +151,21 @@ namespace Microsoft.Extensions.Http
         public void Factory_DisposeHandler_DoesNotDisposeInnerHandler()
         {
             // Arrange
-            Options.CurrentValue.HttpMessageHandlerBuilderActions.Add(
-                b =>
-                {
-                    var mockHandler = new Mock<HttpMessageHandler>();
-                    mockHandler
-                        .Protected()
-                        .Setup("Dispose", ItExpr.IsAny<bool>())
-                        .Throws(new Exception("Dispose should not be called"));
+            Options
+                .CurrentValue
+                .HttpMessageHandlerBuilderActions
+                .Add(
+                    b =>
+                    {
+                        var mockHandler = new Mock<HttpMessageHandler>();
+                        mockHandler
+                            .Protected()
+                            .Setup("Dispose", ItExpr.IsAny<bool>())
+                            .Throws(new Exception("Dispose should not be called"));
 
-                    b.PrimaryHandler = mockHandler.Object;
-                }
-            );
+                        b.PrimaryHandler = mockHandler.Object;
+                    }
+                );
 
             var factory = new TestHttpClientFactory(
                 Services,
@@ -174,12 +186,15 @@ namespace Microsoft.Extensions.Http
         {
             // Arrange
             var count = 0;
-            Options.CurrentValue.HttpClientActions.Add(
-                b =>
-                {
-                    count++;
-                }
-            );
+            Options
+                .CurrentValue
+                .HttpClientActions
+                .Add(
+                    b =>
+                    {
+                        count++;
+                    }
+                );
 
             var factory = new TestHttpClientFactory(
                 Services,
@@ -203,7 +218,8 @@ namespace Microsoft.Extensions.Http
             var count = 0;
             Options
                 .Get("github")
-                .HttpClientActions.Add(
+                .HttpClientActions
+                .Add(
                     b =>
                     {
                         count++;
@@ -247,7 +263,8 @@ namespace Microsoft.Extensions.Http
 
             Options
                 .Get("github")
-                .HttpMessageHandlerBuilderActions.Add(
+                .HttpMessageHandlerBuilderActions
+                .Add(
                     b =>
                     {
                         b.PrimaryHandler = expected[7];
@@ -436,7 +453,8 @@ namespace Microsoft.Extensions.Http
             var disposeHandler = new DisposeTrackingHandler();
             Options
                 .Get("github")
-                .HttpMessageHandlerBuilderActions.Add(
+                .HttpMessageHandlerBuilderActions
+                .Add(
                     b =>
                     {
                         b.AdditionalHandlers.Add(disposeHandler);
@@ -520,7 +538,8 @@ namespace Microsoft.Extensions.Http
             var disposeHandler = new DisposeTrackingHandler();
             Options
                 .Get("github")
-                .HttpMessageHandlerBuilderActions.Add(
+                .HttpMessageHandlerBuilderActions
+                .Add(
                     b =>
                     {
                         b.AdditionalHandlers.Add(disposeHandler);
@@ -667,18 +686,20 @@ namespace Microsoft.Extensions.Http
                         // Rather than using the actual timer on the actual entry, let's fake it with async.
                         var completionSource =
                             new TaskCompletionSource<ActiveHandlerTrackingEntry>();
-                        var expiryTask = completionSource.Task.ContinueWith(
-                            t =>
-                            {
-                                var e = t.Result;
-                                ExpiryTimer_Tick(e);
-
-                                lock (ActiveEntryState)
+                        var expiryTask = completionSource
+                            .Task
+                            .ContinueWith(
+                                t =>
                                 {
-                                    ActiveEntryState.Remove(e);
+                                    var e = t.Result;
+                                    ExpiryTimer_Tick(e);
+
+                                    lock (ActiveEntryState)
+                                    {
+                                        ActiveEntryState.Remove(e);
+                                    }
                                 }
-                            }
-                        );
+                            );
 
                         ActiveEntryState.Add(entry, (completionSource, expiryTask));
                     }

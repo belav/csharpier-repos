@@ -466,9 +466,9 @@ internal abstract partial class IISHttpContext
                 continue;
             }
 
-            var knownHeaderIndex = HttpApiTypes.HTTP_RESPONSE_HEADER_ID.IndexOfKnownHeader(
-                headerPair.Key
-            );
+            var knownHeaderIndex = HttpApiTypes
+                .HTTP_RESPONSE_HEADER_ID
+                .IndexOfKnownHeader(headerPair.Key);
             for (var i = 0; i < headerValues.Count; i++)
             {
                 var headerValue = headerValues[i];

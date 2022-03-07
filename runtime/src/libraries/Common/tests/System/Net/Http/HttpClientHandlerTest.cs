@@ -496,23 +496,28 @@ namespace System.Net.Http.Functional.Tests
                             Version = UseVersion
                         };
 
-                        request.Headers.Accept.Add(
-                            new MediaTypeWithQualityHeaderValue("text/plain")
-                        );
+                        request
+                            .Headers
+                            .Accept
+                            .Add(new MediaTypeWithQualityHeaderValue("text/plain"));
                         if (PlatformDetection.IsNotBrowser)
                         {
-                            request.Headers.AcceptCharset.Add(
-                                new StringWithQualityHeaderValue("utf-8")
-                            );
-                            request.Headers.AcceptEncoding.Add(
-                                new StringWithQualityHeaderValue("gzip")
-                            );
-                            request.Headers.AcceptEncoding.Add(
-                                new StringWithQualityHeaderValue("deflate")
-                            );
-                            request.Headers.AcceptLanguage.Add(
-                                new StringWithQualityHeaderValue("en-US")
-                            );
+                            request
+                                .Headers
+                                .AcceptCharset
+                                .Add(new StringWithQualityHeaderValue("utf-8"));
+                            request
+                                .Headers
+                                .AcceptEncoding
+                                .Add(new StringWithQualityHeaderValue("gzip"));
+                            request
+                                .Headers
+                                .AcceptEncoding
+                                .Add(new StringWithQualityHeaderValue("deflate"));
+                            request
+                                .Headers
+                                .AcceptLanguage
+                                .Add(new StringWithQualityHeaderValue("en-US"));
                         }
                         request.Headers.Add("Accept-Datetime", "Thu, 31 May 2007 20:35:00 GMT");
                         request.Headers.Add("Access-Control-Request-Method", "GET");
@@ -533,9 +538,10 @@ namespace System.Net.Http.Functional.Tests
                         {
                             request.Content.Headers.ContentMD5 = MD5.Create()
                                 .ComputeHash(contentArray);
-                            request.Headers.Expect.Add(
-                                new NameValueWithParametersHeaderValue("100-continue")
-                            );
+                            request
+                                .Headers
+                                .Expect
+                                .Add(new NameValueWithParametersHeaderValue("100-continue"));
                         }
                         request.Content.Headers.ContentType = new MediaTypeHeaderValue(
                             "application/x-www-form-urlencoded"
@@ -543,21 +549,22 @@ namespace System.Net.Http.Functional.Tests
                         request.Headers.Date = DateTimeOffset.Parse(
                             "Tue, 15 Nov 1994 08:12:31 GMT"
                         );
-                        request.Headers.Add(
-                            "Forwarded",
-                            "for=192.0.2.60;proto=http;by=203.0.113.43"
-                        );
+                        request
+                            .Headers
+                            .Add("Forwarded", "for=192.0.2.60;proto=http;by=203.0.113.43");
                         request.Headers.Add("From", "User Name <user@example.com>");
                         request.Headers.Host = "en.wikipedia.org:8080";
-                        request.Headers.IfMatch.Add(
-                            new EntityTagHeaderValue("\"37060cd8c284d8af7ad3082f209582d\"")
-                        );
+                        request
+                            .Headers
+                            .IfMatch
+                            .Add(new EntityTagHeaderValue("\"37060cd8c284d8af7ad3082f209582d\""));
                         request.Headers.IfModifiedSince = DateTimeOffset.Parse(
                             "Sat, 29 Oct 1994 19:43:31 GMT"
                         );
-                        request.Headers.IfNoneMatch.Add(
-                            new EntityTagHeaderValue("\"737060cd8c284d8af7ad3082f209582d\"")
-                        );
+                        request
+                            .Headers
+                            .IfNoneMatch
+                            .Add(new EntityTagHeaderValue("\"737060cd8c284d8af7ad3082f209582d\""));
                         request.Headers.IfRange = new RangeConditionHeaderValue(
                             DateTimeOffset.Parse("Wed, 21 Oct 2015 07:28:00 GMT")
                         );
@@ -575,31 +582,40 @@ namespace System.Net.Http.Functional.Tests
                         request.Headers.Referrer = new Uri(
                             "http://en.wikipedia.org/wiki/Main_Page"
                         );
-                        request.Headers.TE.Add(
-                            new TransferCodingWithQualityHeaderValue("trailers")
-                        );
+                        request
+                            .Headers
+                            .TE
+                            .Add(new TransferCodingWithQualityHeaderValue("trailers"));
                         request.Headers.TE.Add(new TransferCodingWithQualityHeaderValue("deflate"));
                         request.Headers.Trailer.Add("MyTrailer");
-                        request.Headers.TransferEncoding.Add(
-                            new TransferCodingHeaderValue("chunked")
-                        );
+                        request
+                            .Headers
+                            .TransferEncoding
+                            .Add(new TransferCodingHeaderValue("chunked"));
                         if (PlatformDetection.IsNotBrowser)
                         {
-                            request.Headers.UserAgent.Add(
-                                new ProductInfoHeaderValue(new ProductHeaderValue("Mozilla", "5.0"))
-                            );
+                            request
+                                .Headers
+                                .UserAgent
+                                .Add(
+                                    new ProductInfoHeaderValue(
+                                        new ProductHeaderValue("Mozilla", "5.0")
+                                    )
+                                );
                             request.Headers.Upgrade.Add(new ProductHeaderValue("HTTPS", "1.3"));
                             request.Headers.Upgrade.Add(new ProductHeaderValue("IRC", "6.9"));
                             request.Headers.Upgrade.Add(new ProductHeaderValue("RTA", "x11"));
                             request.Headers.Upgrade.Add(new ProductHeaderValue("websocket"));
                         }
                         request.Headers.Via.Add(new ViaHeaderValue("1.0", "fred"));
-                        request.Headers.Via.Add(
-                            new ViaHeaderValue("1.1", "example.com", null, "(Apache/1.1)")
-                        );
-                        request.Headers.Warning.Add(
-                            new WarningHeaderValue(199, "-", "\"Miscellaneous warning\"")
-                        );
+                        request
+                            .Headers
+                            .Via
+                            .Add(new ViaHeaderValue("1.1", "example.com", null, "(Apache/1.1)"));
+                        request
+                            .Headers
+                            .Warning
+                            .Add(new WarningHeaderValue(199, "-", "\"Miscellaneous warning\""));
                         request.Headers.Add("X-Requested-With", "XMLHttpRequest");
                         request.Headers.Add("DNT", "1 (Do Not Track Enabled)");
                         request.Headers.Add("X-Forwarded-For", "client1");
@@ -610,10 +626,12 @@ namespace System.Net.Http.Functional.Tests
                         request.Headers.Add("Front-End-Https", "https");
                         request.Headers.Add("X-Http-Method-Override", "DELETE");
                         request.Headers.Add("X-ATT-DeviceId", "GT-P7320/P7320XXLPG");
-                        request.Headers.Add(
-                            "X-Wap-Profile",
-                            "http://wap.samsungmobile.com/uaprof/SGH-I777.xml"
-                        );
+                        request
+                            .Headers
+                            .Add(
+                                "X-Wap-Profile",
+                                "http://wap.samsungmobile.com/uaprof/SGH-I777.xml"
+                            );
                         request.Headers.Add("Proxy-Connection", "keep-alive");
                         request.Headers.Add("X-UIDH", "...");
                         request.Headers.Add("X-Csrf-Token", "i8XNjC4b8KVok4uw5RftR38Wgp2BFwql");
@@ -1359,8 +1377,9 @@ namespace System.Net.Http.Functional.Tests
                                 {
                                     var buffer = new byte[8000];
                                     using (
-                                        Stream clientStream =
-                                            await response.Content.ReadAsStreamAsync(TestAsync)
+                                        Stream clientStream = await response
+                                            .Content
+                                            .ReadAsStreamAsync(TestAsync)
                                     )
                                     {
                                         int bytesRead = await clientStream.ReadAsync(
@@ -1416,12 +1435,14 @@ namespace System.Net.Http.Functional.Tests
                         if (enableWasmStreaming)
                         {
 #if !NETFRAMEWORK
-                            request.Options.Set(
-                                new HttpRequestOptionsKey<bool>(
-                                    "WebAssemblyEnableStreamingResponse"
-                                ),
-                                true
-                            );
+                            request
+                                .Options
+                                .Set(
+                                    new HttpRequestOptionsKey<bool>(
+                                        "WebAssemblyEnableStreamingResponse"
+                                    ),
+                                    true
+                                );
 #endif
                         }
                     }
@@ -1436,9 +1457,9 @@ namespace System.Net.Http.Functional.Tests
                     )
                     {
                         using (
-                            Stream responseStream = await response.Content.ReadAsStreamAsync(
-                                TestAsync
-                            )
+                            Stream responseStream = await response
+                                .Content
+                                .ReadAsStreamAsync(TestAsync)
                         )
                         {
                             Assert.Same(
@@ -1816,9 +1837,9 @@ namespace System.Net.Http.Functional.Tests
                             )
                         )
                         using (
-                            Stream responseStream = await response.Content.ReadAsStreamAsync(
-                                TestAsync
-                            )
+                            Stream responseStream = await response
+                                .Content
+                                .ReadAsStreamAsync(TestAsync)
                         )
                         {
                             // Boolean properties returning correct values

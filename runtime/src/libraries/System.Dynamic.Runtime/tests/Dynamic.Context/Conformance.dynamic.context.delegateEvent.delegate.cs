@@ -478,14 +478,48 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlg
                 string st1 = ary101[0](
                     s_so,
                     s_sd,
-                    ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlgate.dlgatedeclarelib02.dlgatedeclarelib02.DynNamespace01.DynEnum.item1
+                    ManagedTests
+                        .DynamicCSharp
+                        .Conformance
+                        .dynamic
+                        .context
+                        .dlgateEvent
+                        .dlgate
+                        .dlgatedeclarelib02
+                        .dlgatedeclarelib02
+                        .DynNamespace01
+                        .DynEnum
+                        .item1
                 );
                 if (
-                    ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlgate.dlgatedeclarelib02.dlgatedeclarelib02.DynNamespace01.DynEnum.item1.ToString()
+                    ManagedTests
+                        .DynamicCSharp
+                        .Conformance
+                        .dynamic
+                        .context
+                        .dlgateEvent
+                        .dlgate
+                        .dlgatedeclarelib02
+                        .dlgatedeclarelib02
+                        .DynNamespace01
+                        .DynEnum
+                        .item1
+                        .ToString()
                     != s_d001[0](
                         s_so,
                         d,
-                        ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlgate.dlgatedeclarelib02.dlgatedeclarelib02.DynNamespace01.DynEnum.item1
+                        ManagedTests
+                            .DynamicCSharp
+                            .Conformance
+                            .dynamic
+                            .context
+                            .dlgateEvent
+                            .dlgate
+                            .dlgatedeclarelib02
+                            .dlgatedeclarelib02
+                            .DynNamespace01
+                            .DynEnum
+                            .item1
                     )
                 )
                 {
@@ -493,8 +527,19 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlg
                 }
 
                 if (
-                    ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlgate.dlgatedeclarelib02.dlgatedeclarelib02.DynNamespace01.DynEnum.item1.ToString()
-                    != st1
+                    ManagedTests
+                        .DynamicCSharp
+                        .Conformance
+                        .dynamic
+                        .context
+                        .dlgateEvent
+                        .dlgate
+                        .dlgatedeclarelib02
+                        .dlgatedeclarelib02
+                        .DynNamespace01
+                        .DynEnum
+                        .item1
+                        .ToString() != st1
                 )
                 {
                     ret = false;
@@ -513,52 +558,140 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlg
                         foo.M04
                     );
                 st1 = d101(
-                    ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlgate.dlgatedeclarelib02.dlgatedeclarelib02.DynNamespace01.DynEnum.item2,
+                    ManagedTests
+                        .DynamicCSharp
+                        .Conformance
+                        .dynamic
+                        .context
+                        .dlgateEvent
+                        .dlgate
+                        .dlgatedeclarelib02
+                        .dlgatedeclarelib02
+                        .DynNamespace01
+                        .DynEnum
+                        .item2,
                     ref d,
                     dary
                 );
                 if (
-                    ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlgate.dlgatedeclarelib02.dlgatedeclarelib02.DynNamespace01.DynEnum.item2.ToString()
-                    != st1
+                    ManagedTests
+                        .DynamicCSharp
+                        .Conformance
+                        .dynamic
+                        .context
+                        .dlgateEvent
+                        .dlgate
+                        .dlgatedeclarelib02
+                        .dlgatedeclarelib02
+                        .DynNamespace01
+                        .DynEnum
+                        .item2
+                        .ToString() != st1
                 )
                 {
                     ret = false;
                 }
 
                 st1 = d101(
-                    ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlgate.dlgatedeclarelib02.dlgatedeclarelib02.DynNamespace01.DynEnum.item3,
+                    ManagedTests
+                        .DynamicCSharp
+                        .Conformance
+                        .dynamic
+                        .context
+                        .dlgateEvent
+                        .dlgate
+                        .dlgatedeclarelib02
+                        .dlgatedeclarelib02
+                        .DynNamespace01
+                        .DynEnum
+                        .item3,
                     ref o,
                     oary
                 );
                 if (
-                    ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlgate.dlgatedeclarelib02.dlgatedeclarelib02.DynNamespace01.DynEnum.item3.ToString()
-                    != st1
+                    ManagedTests
+                        .DynamicCSharp
+                        .Conformance
+                        .dynamic
+                        .context
+                        .dlgateEvent
+                        .dlgate
+                        .dlgatedeclarelib02
+                        .dlgatedeclarelib02
+                        .DynNamespace01
+                        .DynEnum
+                        .item3
+                        .ToString() != st1
                 )
                 {
                     ret = false;
                 }
 
                 st1 = d111(
-                    ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlgate.dlgatedeclarelib02.dlgatedeclarelib02.DynNamespace01.DynEnum.item3,
+                    ManagedTests
+                        .DynamicCSharp
+                        .Conformance
+                        .dynamic
+                        .context
+                        .dlgateEvent
+                        .dlgate
+                        .dlgatedeclarelib02
+                        .dlgatedeclarelib02
+                        .DynNamespace01
+                        .DynEnum
+                        .item3,
                     ref o,
                     oary
                 );
                 if (
-                    ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlgate.dlgatedeclarelib02.dlgatedeclarelib02.DynNamespace01.DynEnum.item3.ToString()
-                    != st1
+                    ManagedTests
+                        .DynamicCSharp
+                        .Conformance
+                        .dynamic
+                        .context
+                        .dlgateEvent
+                        .dlgate
+                        .dlgatedeclarelib02
+                        .dlgatedeclarelib02
+                        .DynNamespace01
+                        .DynEnum
+                        .item3
+                        .ToString() != st1
                 )
                 {
                     ret = false;
                 }
 
                 st1 = d111(
-                    ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlgate.dlgatedeclarelib02.dlgatedeclarelib02.DynNamespace01.DynEnum.item4,
+                    ManagedTests
+                        .DynamicCSharp
+                        .Conformance
+                        .dynamic
+                        .context
+                        .dlgateEvent
+                        .dlgate
+                        .dlgatedeclarelib02
+                        .dlgatedeclarelib02
+                        .DynNamespace01
+                        .DynEnum
+                        .item4,
                     ref s_so,
                     dary
                 );
                 if (
-                    ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlgate.dlgatedeclarelib02.dlgatedeclarelib02.DynNamespace01.DynEnum.item4.ToString()
-                    != st1
+                    ManagedTests
+                        .DynamicCSharp
+                        .Conformance
+                        .dynamic
+                        .context
+                        .dlgateEvent
+                        .dlgate
+                        .dlgatedeclarelib02
+                        .dlgatedeclarelib02
+                        .DynNamespace01
+                        .DynEnum
+                        .item4
+                        .ToString() != st1
                 )
                 {
                     ret = false;
@@ -569,13 +702,35 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlg
                         foo.M04
                     );
                 st1 = d102(
-                    ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlgate.dlgatedeclarelib02.dlgatedeclarelib02.DynNamespace01.DynEnum.item5,
+                    ManagedTests
+                        .DynamicCSharp
+                        .Conformance
+                        .dynamic
+                        .context
+                        .dlgateEvent
+                        .dlgate
+                        .dlgatedeclarelib02
+                        .dlgatedeclarelib02
+                        .DynNamespace01
+                        .DynEnum
+                        .item5,
                     ref d,
                     dary
                 );
                 if (
-                    ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlgate.dlgatedeclarelib02.dlgatedeclarelib02.DynNamespace01.DynEnum.item5.ToString()
-                    != st1
+                    ManagedTests
+                        .DynamicCSharp
+                        .Conformance
+                        .dynamic
+                        .context
+                        .dlgateEvent
+                        .dlgate
+                        .dlgatedeclarelib02
+                        .dlgatedeclarelib02
+                        .DynNamespace01
+                        .DynEnum
+                        .item5
+                        .ToString() != st1
                 )
                 {
                     ret = false;
@@ -586,13 +741,35 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlg
                         foo.M03
                     );
                 st1 = d122(
-                    ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlgate.dlgatedeclarelib02.dlgatedeclarelib02.DynNamespace01.DynEnum.item6,
+                    ManagedTests
+                        .DynamicCSharp
+                        .Conformance
+                        .dynamic
+                        .context
+                        .dlgateEvent
+                        .dlgate
+                        .dlgatedeclarelib02
+                        .dlgatedeclarelib02
+                        .DynNamespace01
+                        .DynEnum
+                        .item6,
                     ref s_so,
                     oary
                 );
                 if (
-                    ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlgate.dlgatedeclarelib02.dlgatedeclarelib02.DynNamespace01.DynEnum.item6.ToString()
-                    != st1
+                    ManagedTests
+                        .DynamicCSharp
+                        .Conformance
+                        .dynamic
+                        .context
+                        .dlgateEvent
+                        .dlgate
+                        .dlgatedeclarelib02
+                        .dlgatedeclarelib02
+                        .DynNamespace01
+                        .DynEnum
+                        .item6
+                        .ToString() != st1
                 )
                 {
                     ret = false;

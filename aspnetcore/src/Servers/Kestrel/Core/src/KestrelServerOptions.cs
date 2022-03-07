@@ -279,16 +279,16 @@ public class KestrelServerOptions
             var logger = ApplicationServices!.GetRequiredService<ILogger<KestrelServer>>();
             try
             {
-                DefaultCertificate = CertificateManager.Instance
+                DefaultCertificate = CertificateManager
+                    .Instance
                     .ListCertificates(StoreName.My, StoreLocation.CurrentUser, isValid: true)
                     .FirstOrDefault();
 
                 if (DefaultCertificate != null)
                 {
-                    var status = CertificateManager.Instance.CheckCertificateState(
-                        DefaultCertificate,
-                        interactive: false
-                    );
+                    var status = CertificateManager
+                        .Instance
+                        .CheckCertificateState(DefaultCertificate, interactive: false);
                     if (!status.Success)
                     {
                         // Display a warning indicating to the user that a prompt might appear and provide instructions on what to do in that
@@ -303,10 +303,9 @@ public class KestrelServerOptions
 
                         // Now that we've displayed a warning in the logs so that the user gets a notification that a prompt might appear, try
                         // and access the certificate key, which might trigger a prompt.
-                        status = CertificateManager.Instance.CheckCertificateState(
-                            DefaultCertificate,
-                            interactive: true
-                        );
+                        status = CertificateManager
+                            .Instance
+                            .CheckCertificateState(DefaultCertificate, interactive: true);
                         if (!status.Success)
                         {
                             logger.BadDeveloperCertificateState();

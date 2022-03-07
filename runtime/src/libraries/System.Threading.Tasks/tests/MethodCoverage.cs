@@ -164,24 +164,28 @@ namespace TaskCoverage
             );
 
             whenAllTaskResult.Add(
-                Task<int?>.Factory.StartNew(
-                    (o) =>
-                    {
-                        mre.WaitOne((int)o);
-                        return Task.CurrentId;
-                    },
-                    10
-                )
+                Task<int?>
+                    .Factory
+                    .StartNew(
+                        (o) =>
+                        {
+                            mre.WaitOne((int)o);
+                            return Task.CurrentId;
+                        },
+                        10
+                    )
             );
             whenAllTaskResult.Add(
-                Task<int?>.Factory.StartNew(
-                    (o) =>
-                    {
-                        mre.WaitOne((int)o);
-                        return Task.CurrentId;
-                    },
-                    10
-                )
+                Task<int?>
+                    .Factory
+                    .StartNew(
+                        (o) =>
+                        {
+                            mre.WaitOne((int)o);
+                            return Task.CurrentId;
+                        },
+                        10
+                    )
             );
 
             t1.Wait(5, cts.Token);
@@ -586,16 +590,18 @@ namespace TaskCoverage
                 TaskCreationOptions.None,
                 TaskScheduler.Current
             );
-            Task<int>.Factory.FromAsync(
-                emptyTask,
-                (iar) =>
-                {
-                    mre2.Set();
-                    return 1;
-                },
-                TaskCreationOptions.None,
-                TaskScheduler.Current
-            );
+            Task<int>
+                .Factory
+                .FromAsync(
+                    emptyTask,
+                    (iar) =>
+                    {
+                        mre2.Set();
+                        return 1;
+                    },
+                    TaskCreationOptions.None,
+                    TaskScheduler.Current
+                );
             emptyTask.Start();
 
             Debug.WriteLine("Wait on the scenario to finish");

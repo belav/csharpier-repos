@@ -34,9 +34,9 @@ public static class WebHostBuilderIISExtensions
         {
             var iisConfigData = NativeMethods.HttpGetApplicationProperties();
             // Trim trailing slash to be consistent with other servers
-            var contentRoot = iisConfigData.pwzFullApplicationPath.TrimEnd(
-                Path.DirectorySeparatorChar
-            );
+            var contentRoot = iisConfigData
+                .pwzFullApplicationPath
+                .TrimEnd(Path.DirectorySeparatorChar);
             hostBuilder.UseContentRoot(contentRoot);
             return hostBuilder.ConfigureServices(
                 services =>
@@ -65,10 +65,9 @@ public static class WebHostBuilderIISExtensions
                     services.Configure<IISServerOptions>(
                         options =>
                         {
-                            options.ServerAddresses = iisConfigData.pwzBindings.Split(
-                                new[] { ';' },
-                                StringSplitOptions.RemoveEmptyEntries
-                            );
+                            options.ServerAddresses = iisConfigData
+                                .pwzBindings
+                                .Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
                             options.ForwardWindowsAuthentication =
                                 iisConfigData.fWindowsAuthEnabled
                                 || iisConfigData.fBasicAuthEnabled;

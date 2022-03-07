@@ -75,8 +75,10 @@ namespace System.Globalization.Tests
         [Fact]
         public void DateSeparatorTimeSeparator_Get_ReturnsExpected()
         {
-            DateTimeFormatInfo dtfi =
-                (DateTimeFormatInfo)CultureInfo.InvariantCulture.DateTimeFormat.Clone();
+            DateTimeFormatInfo dtfi = (DateTimeFormatInfo)CultureInfo
+                .InvariantCulture
+                .DateTimeFormat
+                .Clone();
             Assert.False(dtfi.IsReadOnly, "IsReadOnly expected to be false");
 
             string dateSep = dtfi.DateSeparator;
@@ -176,9 +178,9 @@ namespace System.Globalization.Tests
                 'U',
                 'y'
             };
-            DateTimeFormatInfo dtfi = (DateTimeFormatInfo)new CultureInfo(
-                cultureName
-            ).DateTimeFormat.Clone();
+            DateTimeFormatInfo dtfi = (DateTimeFormatInfo)new CultureInfo(cultureName)
+                .DateTimeFormat
+                .Clone();
 
             var allPatterns = dtfi.GetAllDateTimePatterns();
             Dictionary<string, string> dic = new Dictionary<string, string>();

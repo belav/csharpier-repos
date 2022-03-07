@@ -44,11 +44,13 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
                         return true;
                     }
                 );
-            bindingContext.ModelBinderProviders.RegisterBinderForType(
-                typeof(int),
-                mockIntBinder.Object,
-                false /* suppressPrefixCheck */
-            );
+            bindingContext
+                .ModelBinderProviders
+                .RegisterBinderForType(
+                    typeof(int),
+                    mockIntBinder.Object,
+                    false /* suppressPrefixCheck */
+                );
 
             // Act
             bool retVal = new ArrayModelBinder<int>().BindModel(controllerContext, bindingContext);

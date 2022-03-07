@@ -24,7 +24,8 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
                         true /* inherit */
                     )
                     .Cast<ModelBinderProviderOptionsAttribute>()
-                    .Single().FrontOfList
+                    .Single()
+                    .FrontOfList
             );
         }
 

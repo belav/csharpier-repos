@@ -51,7 +51,8 @@ internal sealed class DataSourceDependentMatcher : Matcher
             if (endpoints[i] is RouteEndpoint endpoint)
             {
                 // Validate that endpoint names are unique.
-                var endpointName = endpoint.Metadata
+                var endpointName = endpoint
+                    .Metadata
                     .GetMetadata<IEndpointNameMetadata>()
                     ?.EndpointName;
                 if (endpointName is not null)

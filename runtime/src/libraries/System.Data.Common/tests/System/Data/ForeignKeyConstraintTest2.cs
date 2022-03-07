@@ -546,7 +546,9 @@ namespace System.Data.Tests
 
             //Changing parent row
 
-            ds.Tables[0].Rows.Find(1)["ParentId"] = 8;
+            ds.Tables[0]
+                .Rows
+                .Find(1)["ParentId"] = 8;
 
             ds.Tables[0].AcceptChanges();
             ds.Tables[1].AcceptChanges();
@@ -623,7 +625,9 @@ namespace System.Data.Tests
 
             //Changing parent row
 
-            ds.Tables[0].Rows.Find(1)["ParentId"] = 8;
+            ds.Tables[0]
+                .Rows
+                .Find(1)["ParentId"] = 8;
 
             ds.Tables[0].AcceptChanges();
             ds.Tables[1].AcceptChanges();
@@ -673,9 +677,9 @@ namespace System.Data.Tests
             DataColumn colParentID = dataTable.Columns.Add("ParentID", typeof(int));
 
             // table PK (ID, Culture)
-            dataTable.Constraints.Add(
-                new UniqueConstraint("MenuPK", new DataColumn[] { colID, colCulture }, true)
-            );
+            dataTable
+                .Constraints
+                .Add(new UniqueConstraint("MenuPK", new DataColumn[] { colID, colCulture }, true));
 
             // add a FK referencing the same table: (ID, Culture) <- (ParentID, Culture)
             ForeignKeyConstraint fkc = new ForeignKeyConstraint(

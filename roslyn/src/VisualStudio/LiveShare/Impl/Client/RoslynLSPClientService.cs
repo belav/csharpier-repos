@@ -56,9 +56,9 @@ namespace Microsoft.VisualStudio.LanguageServices.LiveShare.Client
 
                 // For VS, Preferentially use the language specific server when it's available, otherwise fall back to the generic roslyn server.
                 if (
-                    collaborationSession.RemoteServiceNames.Contains(
-                        languageSpecificLspServerProviderName
-                    )
+                    collaborationSession
+                        .RemoteServiceNames
+                        .Contains(languageSpecificLspServerProviderName)
                 )
                 {
                     ActiveLanguageServerClient =

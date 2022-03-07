@@ -30,12 +30,14 @@ public class HubConnectionBuilderTests
     public void CannotCreateConnectionWithNoEndPoint()
     {
         var builder = new HubConnectionBuilder();
-        builder.Services.AddSingleton<IConnectionFactory>(
-            new HttpConnectionFactory(
-                Options.Create(new HttpConnectionOptions()),
-                NullLoggerFactory.Instance
-            )
-        );
+        builder
+            .Services
+            .AddSingleton<IConnectionFactory>(
+                new HttpConnectionFactory(
+                    Options.Create(new HttpConnectionOptions()),
+                    NullLoggerFactory.Instance
+                )
+            );
 
         var ex = Assert.Throws<InvalidOperationException>(() => builder.Build());
         Assert.Equal(
@@ -49,7 +51,8 @@ public class HubConnectionBuilderTests
     {
         var serviceProvider = new HubConnectionBuilder()
             .AddNewtonsoftJsonProtocol()
-            .Services.BuildServiceProvider();
+            .Services
+            .BuildServiceProvider();
 
         var actualProtocol = Assert.IsType<NewtonsoftJsonHubProtocol>(
             serviceProvider.GetService<IHubProtocol>()
@@ -72,7 +75,8 @@ public class HubConnectionBuilderTests
                     };
                 }
             )
-            .Services.BuildServiceProvider();
+            .Services
+            .BuildServiceProvider();
 
         var actualProtocol = Assert.IsType<NewtonsoftJsonHubProtocol>(
             serviceProvider.GetService<IHubProtocol>()
@@ -84,12 +88,14 @@ public class HubConnectionBuilderTests
     public void BuildCanOnlyBeCalledOnce()
     {
         var builder = new HubConnectionBuilder();
-        builder.Services.AddSingleton<IConnectionFactory>(
-            new HttpConnectionFactory(
-                Options.Create(new HttpConnectionOptions()),
-                NullLoggerFactory.Instance
-            )
-        );
+        builder
+            .Services
+            .AddSingleton<IConnectionFactory>(
+                new HttpConnectionFactory(
+                    Options.Create(new HttpConnectionOptions()),
+                    NullLoggerFactory.Instance
+                )
+            );
         builder.WithUrl("http://example.com");
 
         Assert.NotNull(builder.Build());
@@ -106,7 +112,8 @@ public class HubConnectionBuilderTests
     {
         var serviceProvider = new HubConnectionBuilder()
             .AddMessagePackProtocol()
-            .Services.BuildServiceProvider();
+            .Services
+            .BuildServiceProvider();
 
         Assert.IsType<MessagePackHubProtocol>(serviceProvider.GetService<IHubProtocol>());
     }

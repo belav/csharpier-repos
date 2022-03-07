@@ -45,8 +45,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.Implementation.LanguageSe
                 return false;
             }
 
-            var commandService =
-                document.Project.LanguageServices.GetService<IXamlCommandService>();
+            var commandService = document
+                .Project
+                .LanguageServices
+                .GetService<IXamlCommandService>();
             if (commandService == null)
             {
                 return false;

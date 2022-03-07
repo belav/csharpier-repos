@@ -101,11 +101,13 @@ namespace System.Security.Cryptography.Asn1.Pkcs12
                 sequenceReader.ThrowIfNotEmpty();
             }
 
-            System.Security.Cryptography.Asn1.Pkcs7.ContentInfoAsn.Decode(
-                ref sequenceReader,
-                rebind,
-                out decoded.AuthSafe
-            );
+            System
+                .Security
+                .Cryptography
+                .Asn1
+                .Pkcs7
+                .ContentInfoAsn
+                .Decode(ref sequenceReader, rebind, out decoded.AuthSafe);
 
             if (
                 sequenceReader.HasData
@@ -113,11 +115,13 @@ namespace System.Security.Cryptography.Asn1.Pkcs12
             )
             {
                 System.Security.Cryptography.Asn1.Pkcs12.MacData tmpMacData;
-                System.Security.Cryptography.Asn1.Pkcs12.MacData.Decode(
-                    ref sequenceReader,
-                    rebind,
-                    out tmpMacData
-                );
+                System
+                    .Security
+                    .Cryptography
+                    .Asn1
+                    .Pkcs12
+                    .MacData
+                    .Decode(ref sequenceReader, rebind, out tmpMacData);
                 decoded.MacData = tmpMacData;
             }
 

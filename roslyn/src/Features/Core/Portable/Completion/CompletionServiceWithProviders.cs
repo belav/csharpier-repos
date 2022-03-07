@@ -222,13 +222,15 @@ namespace Microsoft.CodeAnalysis.Completion
             // Local functions
             ImmutableArray<CompletionProvider> GetProjectCompletionProvidersSlow(Project project)
             {
-                return _projectCompletionProvidersMap.GetValue(
-                    project.AnalyzerReferences,
-                    pId =>
-                        new StrongBox<ImmutableArray<CompletionProvider>>(
-                            ComputeProjectCompletionProviders(project)
-                        )
-                ).Value;
+                return _projectCompletionProvidersMap
+                    .GetValue(
+                        project.AnalyzerReferences,
+                        pId =>
+                            new StrongBox<ImmutableArray<CompletionProvider>>(
+                                ComputeProjectCompletionProviders(project)
+                            )
+                    )
+                    .Value;
             }
 
             ImmutableArray<CompletionProvider> ComputeProjectCompletionProviders(Project project)

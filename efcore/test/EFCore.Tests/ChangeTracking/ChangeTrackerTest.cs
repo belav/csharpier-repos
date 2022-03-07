@@ -38,46 +38,54 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
             using var context = new EarlyLearningCenter();
 
             var added1 =
-                context.Add(
-                    new DependentGG
-                    {
-                        Id = dependentKeyValue,
-                        PrincipalGG = new PrincipalGG { Id = principalKeyValue }
-                    }
-                ).Entity;
+                context
+                    .Add(
+                        new DependentGG
+                        {
+                            Id = dependentKeyValue,
+                            PrincipalGG = new PrincipalGG { Id = principalKeyValue }
+                        }
+                    )
+                    .Entity;
             Assert.Equal(EntityState.Added, context.Entry(added1).State);
             Assert.Equal(EntityState.Added, context.Entry(added1.PrincipalGG).State);
 
             var added2 =
-                context.Add(
-                    new DependentNG
-                    {
-                        Id = dependentKeyValue,
-                        PrincipalNG = new PrincipalNG { Id = principalKeyValue }
-                    }
-                ).Entity;
+                context
+                    .Add(
+                        new DependentNG
+                        {
+                            Id = dependentKeyValue,
+                            PrincipalNG = new PrincipalNG { Id = principalKeyValue }
+                        }
+                    )
+                    .Entity;
             Assert.Equal(EntityState.Added, context.Entry(added2).State);
             Assert.Equal(EntityState.Added, context.Entry(added2.PrincipalNG).State);
 
             var added3 =
-                context.Add(
-                    new DependentNN
-                    {
-                        Id = dependentKeyValue,
-                        PrincipalNN = new PrincipalNN { Id = principalKeyValue }
-                    }
-                ).Entity;
+                context
+                    .Add(
+                        new DependentNN
+                        {
+                            Id = dependentKeyValue,
+                            PrincipalNN = new PrincipalNN { Id = principalKeyValue }
+                        }
+                    )
+                    .Entity;
             Assert.Equal(EntityState.Added, context.Entry(added3).State);
             Assert.Equal(EntityState.Added, context.Entry(added3.PrincipalNN).State);
 
             var added4 =
-                context.Add(
-                    new DependentGN
-                    {
-                        Id = dependentKeyValue,
-                        PrincipalGN = new PrincipalGN { Id = principalKeyValue }
-                    }
-                ).Entity;
+                context
+                    .Add(
+                        new DependentGN
+                        {
+                            Id = dependentKeyValue,
+                            PrincipalGN = new PrincipalGN { Id = principalKeyValue }
+                        }
+                    )
+                    .Entity;
             Assert.Equal(EntityState.Added, context.Entry(added4).State);
             Assert.Equal(EntityState.Added, context.Entry(added4.PrincipalGN).State);
 
@@ -97,46 +105,54 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
             using var context = new EarlyLearningCenter();
 
             var added1 =
-                context.Add(
-                    new PrincipalGG
-                    {
-                        Id = principalKeyValue,
-                        DependentGG = new DependentGG { Id = dependentKeyValue }
-                    }
-                ).Entity;
+                context
+                    .Add(
+                        new PrincipalGG
+                        {
+                            Id = principalKeyValue,
+                            DependentGG = new DependentGG { Id = dependentKeyValue }
+                        }
+                    )
+                    .Entity;
             Assert.Equal(EntityState.Added, context.Entry(added1).State);
             Assert.Equal(EntityState.Added, context.Entry(added1.DependentGG).State);
 
             var added2 =
-                context.Add(
-                    new PrincipalNG
-                    {
-                        Id = principalKeyValue,
-                        DependentNG = new DependentNG { Id = dependentKeyValue }
-                    }
-                ).Entity;
+                context
+                    .Add(
+                        new PrincipalNG
+                        {
+                            Id = principalKeyValue,
+                            DependentNG = new DependentNG { Id = dependentKeyValue }
+                        }
+                    )
+                    .Entity;
             Assert.Equal(EntityState.Added, context.Entry(added2).State);
             Assert.Equal(EntityState.Added, context.Entry(added2.DependentNG).State);
 
             var added3 =
-                context.Add(
-                    new PrincipalNN
-                    {
-                        Id = principalKeyValue,
-                        DependentNN = new DependentNN { Id = dependentKeyValue }
-                    }
-                ).Entity;
+                context
+                    .Add(
+                        new PrincipalNN
+                        {
+                            Id = principalKeyValue,
+                            DependentNN = new DependentNN { Id = dependentKeyValue }
+                        }
+                    )
+                    .Entity;
             Assert.Equal(EntityState.Added, context.Entry(added3).State);
             Assert.Equal(EntityState.Added, context.Entry(added3.DependentNN).State);
 
             var added4 =
-                context.Add(
-                    new PrincipalGN
-                    {
-                        Id = principalKeyValue,
-                        DependentGN = new DependentGN { Id = dependentKeyValue }
-                    }
-                ).Entity;
+                context
+                    .Add(
+                        new PrincipalGN
+                        {
+                            Id = principalKeyValue,
+                            DependentGN = new DependentGN { Id = dependentKeyValue }
+                        }
+                    )
+                    .Entity;
             Assert.Equal(EntityState.Added, context.Entry(added4).State);
             Assert.Equal(EntityState.Added, context.Entry(added4.DependentGN).State);
 
@@ -229,46 +245,54 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
             using var context = new EarlyLearningCenter();
 
             var added1 =
-                context.Attach(
-                    new DependentGG
-                    {
-                        Id = 1,
-                        PrincipalGG = new PrincipalGG { Id = 1 }
-                    }
-                ).Entity;
+                context
+                    .Attach(
+                        new DependentGG
+                        {
+                            Id = 1,
+                            PrincipalGG = new PrincipalGG { Id = 1 }
+                        }
+                    )
+                    .Entity;
             Assert.Equal(EntityState.Unchanged, context.Entry(added1).State);
             Assert.Equal(EntityState.Unchanged, context.Entry(added1.PrincipalGG).State);
 
             var added2 =
-                context.Attach(
-                    new DependentNG
-                    {
-                        Id = 1,
-                        PrincipalNG = new PrincipalNG { Id = 1 }
-                    }
-                ).Entity;
+                context
+                    .Attach(
+                        new DependentNG
+                        {
+                            Id = 1,
+                            PrincipalNG = new PrincipalNG { Id = 1 }
+                        }
+                    )
+                    .Entity;
             Assert.Equal(EntityState.Unchanged, context.Entry(added2).State);
             Assert.Equal(EntityState.Unchanged, context.Entry(added2.PrincipalNG).State);
 
             var added3 =
-                context.Attach(
-                    new DependentNN
-                    {
-                        Id = 1,
-                        PrincipalNN = new PrincipalNN { Id = 1 }
-                    }
-                ).Entity;
+                context
+                    .Attach(
+                        new DependentNN
+                        {
+                            Id = 1,
+                            PrincipalNN = new PrincipalNN { Id = 1 }
+                        }
+                    )
+                    .Entity;
             Assert.Equal(EntityState.Unchanged, context.Entry(added3).State);
             Assert.Equal(EntityState.Unchanged, context.Entry(added3.PrincipalNN).State);
 
             var added4 =
-                context.Attach(
-                    new DependentGN
-                    {
-                        Id = 1,
-                        PrincipalGN = new PrincipalGN { Id = 1 }
-                    }
-                ).Entity;
+                context
+                    .Attach(
+                        new DependentGN
+                        {
+                            Id = 1,
+                            PrincipalGN = new PrincipalGN { Id = 1 }
+                        }
+                    )
+                    .Entity;
             Assert.Equal(EntityState.Unchanged, context.Entry(added4).State);
             Assert.Equal(EntityState.Unchanged, context.Entry(added4.PrincipalGN).State);
 
@@ -361,46 +385,54 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
             using var context = new EarlyLearningCenter();
 
             var added1 =
-                context.Attach(
-                    new PrincipalGG
-                    {
-                        Id = 1,
-                        DependentGG = new DependentGG { Id = 1 }
-                    }
-                ).Entity;
+                context
+                    .Attach(
+                        new PrincipalGG
+                        {
+                            Id = 1,
+                            DependentGG = new DependentGG { Id = 1 }
+                        }
+                    )
+                    .Entity;
             Assert.Equal(EntityState.Unchanged, context.Entry(added1).State);
             Assert.Equal(EntityState.Unchanged, context.Entry(added1.DependentGG).State);
 
             var added2 =
-                context.Attach(
-                    new PrincipalNG
-                    {
-                        Id = 1,
-                        DependentNG = new DependentNG { Id = 1 }
-                    }
-                ).Entity;
+                context
+                    .Attach(
+                        new PrincipalNG
+                        {
+                            Id = 1,
+                            DependentNG = new DependentNG { Id = 1 }
+                        }
+                    )
+                    .Entity;
             Assert.Equal(EntityState.Unchanged, context.Entry(added2).State);
             Assert.Equal(EntityState.Unchanged, context.Entry(added2.DependentNG).State);
 
             var added3 =
-                context.Attach(
-                    new PrincipalNN
-                    {
-                        Id = 1,
-                        DependentNN = new DependentNN { Id = 1 }
-                    }
-                ).Entity;
+                context
+                    .Attach(
+                        new PrincipalNN
+                        {
+                            Id = 1,
+                            DependentNN = new DependentNN { Id = 1 }
+                        }
+                    )
+                    .Entity;
             Assert.Equal(EntityState.Unchanged, context.Entry(added3).State);
             Assert.Equal(EntityState.Unchanged, context.Entry(added3.DependentNN).State);
 
             var added4 =
-                context.Attach(
-                    new PrincipalGN
-                    {
-                        Id = 1,
-                        DependentGN = new DependentGN { Id = 1 }
-                    }
-                ).Entity;
+                context
+                    .Attach(
+                        new PrincipalGN
+                        {
+                            Id = 1,
+                            DependentGN = new DependentGN { Id = 1 }
+                        }
+                    )
+                    .Entity;
             Assert.Equal(EntityState.Unchanged, context.Entry(added4).State);
             Assert.Equal(EntityState.Unchanged, context.Entry(added4.DependentGN).State);
 
@@ -588,9 +620,9 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
 
             context.SaveChanges();
 
-            var (level, _, message, _, _) = _loggerFactory.Log.Single(
-                e => e.Id.Id == CoreEventId.DetectChangesStarting.Id
-            );
+            var (level, _, message, _, _) = _loggerFactory
+                .Log
+                .Single(e => e.Id.Id == CoreEventId.DetectChangesStarting.Id);
             Assert.Equal(LogLevel.Debug, level);
             Assert.Equal(
                 CoreResources
@@ -599,9 +631,9 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
                 message
             );
 
-            (level, _, message, _, _) = _loggerFactory.Log.Single(
-                e => e.Id.Id == CoreEventId.DetectChangesCompleted.Id
-            );
+            (level, _, message, _, _) = _loggerFactory
+                .Log
+                .Single(e => e.Id.Id == CoreEventId.DetectChangesCompleted.Id);
             Assert.Equal(LogLevel.Debug, level);
             Assert.Equal(
                 CoreResources
@@ -634,9 +666,9 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
                 context.ChangeTracker.DetectChanges();
             }
 
-            var (level, _, message, _, _) = _loggerFactory.Log.Single(
-                e => e.Id.Id == CoreEventId.PropertyChangeDetected.Id
-            );
+            var (level, _, message, _, _) = _loggerFactory
+                .Log
+                .Single(e => e.Id.Id == CoreEventId.PropertyChangeDetected.Id);
             Assert.Equal(LogLevel.Debug, level);
             Assert.Equal(
                 sensitive
@@ -746,9 +778,9 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
                 context.ChangeTracker.DetectChanges();
             }
 
-            var (level, _, message, _, _) = _loggerFactory.Log.Single(
-                e => e.Id.Id == CoreEventId.ForeignKeyChangeDetected.Id
-            );
+            var (level, _, message, _, _) = _loggerFactory
+                .Log
+                .Single(e => e.Id.Id == CoreEventId.ForeignKeyChangeDetected.Id);
             Assert.Equal(LogLevel.Debug, level);
             Assert.Equal(
                 sensitive
@@ -772,9 +804,9 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
                 context.ChangeTracker.DetectChanges();
             }
 
-            (level, _, message, _, _) = _loggerFactory.Log.Single(
-                e => e.Id.Id == CoreEventId.ForeignKeyChangeDetected.Id
-            );
+            (level, _, message, _, _) = _loggerFactory
+                .Log
+                .Single(e => e.Id.Id == CoreEventId.ForeignKeyChangeDetected.Id);
             Assert.Equal(LogLevel.Debug, level);
             Assert.Equal(
                 sensitive
@@ -812,9 +844,9 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
                 context.ChangeTracker.DetectChanges();
             }
 
-            var (level, _, message, _, _) = _loggerFactory.Log.Single(
-                e => e.Id.Id == CoreEventId.CollectionChangeDetected.Id
-            );
+            var (level, _, message, _, _) = _loggerFactory
+                .Log
+                .Single(e => e.Id.Id == CoreEventId.CollectionChangeDetected.Id);
             Assert.Equal(LogLevel.Debug, level);
             Assert.Equal(
                 sensitive
@@ -838,9 +870,9 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
                 context.ChangeTracker.DetectChanges();
             }
 
-            (level, _, message, _, _) = _loggerFactory.Log.Single(
-                e => e.Id.Id == CoreEventId.CollectionChangeDetected.Id
-            );
+            (level, _, message, _, _) = _loggerFactory
+                .Log
+                .Single(e => e.Id.Id == CoreEventId.CollectionChangeDetected.Id);
             Assert.Equal(LogLevel.Debug, level);
             Assert.Equal(
                 sensitive
@@ -881,9 +913,9 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
                 context.ChangeTracker.DetectChanges();
             }
 
-            var (level, _, message, _, _) = _loggerFactory.Log.Single(
-                e => e.Id.Id == CoreEventId.SkipCollectionChangeDetected.Id
-            );
+            var (level, _, message, _, _) = _loggerFactory
+                .Log
+                .Single(e => e.Id.Id == CoreEventId.SkipCollectionChangeDetected.Id);
             Assert.Equal(LogLevel.Debug, level);
             Assert.Equal(
                 sensitive
@@ -909,9 +941,9 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
                 context.ChangeTracker.DetectChanges();
             }
 
-            (level, _, message, _, _) = _loggerFactory.Log.Single(
-                e => e.Id.Id == CoreEventId.SkipCollectionChangeDetected.Id
-            );
+            (level, _, message, _, _) = _loggerFactory
+                .Log
+                .Single(e => e.Id.Id == CoreEventId.SkipCollectionChangeDetected.Id);
             Assert.Equal(LogLevel.Debug, level);
             Assert.Equal(
                 sensitive
@@ -951,9 +983,9 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
                 context.ChangeTracker.DetectChanges();
             }
 
-            var (level, _, message, _, _) = _loggerFactory.Log.Single(
-                e => e.Id.Id == CoreEventId.ReferenceChangeDetected.Id
-            );
+            var (level, _, message, _, _) = _loggerFactory
+                .Log
+                .Single(e => e.Id.Id == CoreEventId.ReferenceChangeDetected.Id);
             Assert.Equal(LogLevel.Debug, level);
             Assert.Equal(
                 sensitive
@@ -977,9 +1009,9 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
                 context.ChangeTracker.DetectChanges();
             }
 
-            (level, _, message, _, _) = _loggerFactory.Log.Single(
-                e => e.Id.Id == CoreEventId.ReferenceChangeDetected.Id
-            );
+            (level, _, message, _, _) = _loggerFactory
+                .Log
+                .Single(e => e.Id.Id == CoreEventId.ReferenceChangeDetected.Id);
             Assert.Equal(LogLevel.Debug, level);
             Assert.Equal(
                 sensitive
@@ -1004,9 +1036,9 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
             _loggerFactory.Log.Clear();
             context.Cats.Find(1);
 
-            var (level, _, message, _, _) = _loggerFactory.Log.Single(
-                e => e.Id.Id == CoreEventId.StartedTracking.Id
-            );
+            var (level, _, message, _, _) = _loggerFactory
+                .Log
+                .Single(e => e.Id.Id == CoreEventId.StartedTracking.Id);
             Assert.Equal(LogLevel.Debug, level);
             Assert.Equal(
                 sensitive
@@ -1029,9 +1061,9 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
             _loggerFactory.Log.Clear();
             context.Attach(new Hat(88));
 
-            var (level, _, message, _, _) = _loggerFactory.Log.Single(
-                e => e.Id.Id == CoreEventId.StartedTracking.Id
-            );
+            var (level, _, message, _, _) = _loggerFactory
+                .Log
+                .Single(e => e.Id.Id == CoreEventId.StartedTracking.Id);
             Assert.Equal(LogLevel.Debug, level);
             Assert.Equal(
                 sensitive
@@ -1059,9 +1091,9 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
 
             context.Entry(cat).State = EntityState.Deleted;
 
-            var (level, _, message, _, _) = _loggerFactory.Log.Single(
-                e => e.Id.Id == CoreEventId.StateChanged.Id
-            );
+            var (level, _, message, _, _) = _loggerFactory
+                .Log
+                .Single(e => e.Id.Id == CoreEventId.StateChanged.Id);
             Assert.Equal(LogLevel.Debug, level);
             Assert.Equal(
                 sensitive
@@ -1115,9 +1147,9 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
                 await context.AddAsync(new Hat(0));
             }
 
-            var (level, _, message, _, _) = _loggerFactory.Log.Single(
-                e => e.Id.Id == CoreEventId.ValueGenerated.Id
-            );
+            var (level, _, message, _, _) = _loggerFactory
+                .Log
+                .Single(e => e.Id.Id == CoreEventId.ValueGenerated.Id);
             Assert.Equal(LogLevel.Debug, level);
 
             if (temporary)
@@ -1251,11 +1283,12 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
 
             void CaptureMessages()
             {
-                (cascadeDeleteLevel, _, cascadeDeleteMessage, _, _) =
-                    _loggerFactory.Log.FirstOrDefault(e => e.Id.Id == CoreEventId.CascadeDelete.Id);
-                (_, _, deleteOrphansMessage, _, _) = _loggerFactory.Log.FirstOrDefault(
-                    e => e.Id.Id == CoreEventId.CascadeDeleteOrphan.Id
-                );
+                (cascadeDeleteLevel, _, cascadeDeleteMessage, _, _) = _loggerFactory
+                    .Log
+                    .FirstOrDefault(e => e.Id.Id == CoreEventId.CascadeDelete.Id);
+                (_, _, deleteOrphansMessage, _, _) = _loggerFactory
+                    .Log
+                    .FirstOrDefault(e => e.Id.Id == CoreEventId.CascadeDeleteOrphan.Id);
             }
 
             void ClearMessages()
@@ -1383,13 +1416,12 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
 
             void CaptureMessages()
             {
-                (_, _, cascadeDeleteMessage, _, _) = _loggerFactory.Log.FirstOrDefault(
-                    e => e.Id.Id == CoreEventId.CascadeDelete.Id
-                );
-                (deleteOrphansLevel, _, deleteOrphansMessage, _, _) =
-                    _loggerFactory.Log.FirstOrDefault(
-                        e => e.Id.Id == CoreEventId.CascadeDeleteOrphan.Id
-                    );
+                (_, _, cascadeDeleteMessage, _, _) = _loggerFactory
+                    .Log
+                    .FirstOrDefault(e => e.Id.Id == CoreEventId.CascadeDelete.Id);
+                (deleteOrphansLevel, _, deleteOrphansMessage, _, _) = _loggerFactory
+                    .Log
+                    .FirstOrDefault(e => e.Id.Id == CoreEventId.CascadeDeleteOrphan.Id);
             }
 
             void ClearMessages()
@@ -1477,9 +1509,9 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
                 context.SaveChanges();
             }
 
-            var (level, _, message, _, _) = _loggerFactory.Log.Single(
-                e => e.Id.Id == CoreEventId.SaveChangesStarting.Id
-            );
+            var (level, _, message, _, _) = _loggerFactory
+                .Log
+                .Single(e => e.Id.Id == CoreEventId.SaveChangesStarting.Id);
             Assert.Equal(LogLevel.Debug, level);
             Assert.Equal(
                 CoreResources
@@ -1488,9 +1520,9 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
                 message
             );
 
-            (level, _, message, _, _) = _loggerFactory.Log.Single(
-                e => e.Id.Id == CoreEventId.SaveChangesCompleted.Id
-            );
+            (level, _, message, _, _) = _loggerFactory
+                .Log
+                .Single(e => e.Id.Id == CoreEventId.SaveChangesCompleted.Id);
             Assert.Equal(LogLevel.Debug, level);
             Assert.Equal(
                 CoreResources
@@ -1510,9 +1542,9 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
                 _loggerFactory.Log.Clear();
             }
 
-            var (level, _, message, _, _) = _loggerFactory.Log.Single(
-                e => e.Id.Id == CoreEventId.ContextDisposed.Id
-            );
+            var (level, _, message, _, _) = _loggerFactory
+                .Log
+                .Single(e => e.Id.Id == CoreEventId.ContextDisposed.Id);
             Assert.Equal(LogLevel.Debug, level);
             Assert.Equal(
                 CoreResources
@@ -2215,7 +2247,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
 
             Assert.Equal(
                 new object[] { product },
-                context.ChangeTracker
+                context
+                    .ChangeTracker
                     .Entries<Product>()
                     .Select(e => e.Entity)
                     .OrderBy(e => e.GetType().Name)
@@ -2223,7 +2256,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
 
             Assert.Equal(
                 new object[] { category },
-                context.ChangeTracker
+                context
+                    .ChangeTracker
                     .Entries<Category>()
                     .Select(e => e.Entity)
                     .OrderBy(e => e.GetType().Name)
@@ -2231,7 +2265,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
 
             Assert.Equal(
                 new object[] { category, product },
-                context.ChangeTracker
+                context
+                    .ChangeTracker
                     .Entries<object>()
                     .Select(e => e.Entity)
                     .OrderBy(e => e.GetType().Name)
@@ -2356,9 +2391,9 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
             {
                 Assert.Equal(
                     CoreStrings.IdentityConflict(nameof(OptionalProduct), "{'Id'}"),
-                    Assert.Throws<InvalidOperationException>(
-                        () => context.Attach(newCategory)
-                    ).Message
+                    Assert
+                        .Throws<InvalidOperationException>(() => context.Attach(newCategory))
+                        .Message
                 );
             }
             else
@@ -2593,19 +2628,23 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
             {
                 Assert.Equal(
                     CoreStrings.TrackingTypeMismatch(nameof(OfThis), "Dreams.Are#AreMade"),
-                    Assert.Throws<InvalidOperationException>(
-                        () =>
-                            context.ChangeTracker.TrackGraph(
-                                dreams,
-                                e =>
-                                {
-                                    e.Entry.State =
-                                        e.Entry.IsKeySet && !e.Entry.Metadata.IsOwned()
-                                            ? EntityState.Unchanged
-                                            : EntityState.Added;
-                                }
-                            )
-                    ).Message
+                    Assert
+                        .Throws<InvalidOperationException>(
+                            () =>
+                                context
+                                    .ChangeTracker
+                                    .TrackGraph(
+                                        dreams,
+                                        e =>
+                                        {
+                                            e.Entry.State =
+                                                e.Entry.IsKeySet && !e.Entry.Metadata.IsOwned()
+                                                    ? EntityState.Unchanged
+                                                    : EntityState.Added;
+                                        }
+                                    )
+                        )
+                        .Message
                 );
             }
         }

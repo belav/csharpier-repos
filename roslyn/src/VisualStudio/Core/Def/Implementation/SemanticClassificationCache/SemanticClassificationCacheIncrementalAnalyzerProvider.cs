@@ -73,8 +73,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SemanticClassif
                     return;
                 }
 
-                var statusService =
-                    document.Project.Solution.Workspace.Services.GetRequiredService<IWorkspaceStatusService>();
+                var statusService = document
+                    .Project
+                    .Solution
+                    .Workspace
+                    .Services
+                    .GetRequiredService<IWorkspaceStatusService>();
 
                 // If we're not fully loaded, then we don't want to cache classifications.  The classifications we have
                 // will likely not be accurate.  And, if we shutdown after that, we'll have cached incomplete classifications.

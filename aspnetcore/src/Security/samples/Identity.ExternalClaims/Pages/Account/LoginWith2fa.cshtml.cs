@@ -80,7 +80,8 @@ public class LoginWith2faModel : PageModel
             throw new ApplicationException($"Unable to load two-factor authentication user.");
         }
 
-        var authenticatorCode = Input.TwoFactorCode
+        var authenticatorCode = Input
+            .TwoFactorCode
             .Replace(" ", string.Empty)
             .Replace("-", string.Empty);
 

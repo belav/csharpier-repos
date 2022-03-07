@@ -49,8 +49,10 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
 
             var edits = new ArrayBuilder<TextEdit>();
 
-            var formattingService =
-                document.Project.LanguageServices.GetRequiredService<IFormattingInteractionService>();
+            var formattingService = document
+                .Project
+                .LanguageServices
+                .GetRequiredService<IFormattingInteractionService>();
             var position = await document
                 .GetPositionFromLinePositionAsync(
                     ProtocolConversions.PositionToLinePosition(request.Position),

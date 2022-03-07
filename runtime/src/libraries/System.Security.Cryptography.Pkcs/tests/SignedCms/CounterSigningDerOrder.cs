@@ -16,12 +16,14 @@ namespace System.Security.Cryptography.Pkcs.Tests
             SignedCms cms = new SignedCms(content);
 
             using (
-                X509Certificate2 cert1 =
-                    Certificates.RSA2048SignatureOnly.TryGetCertificateWithPrivateKey()
+                X509Certificate2 cert1 = Certificates
+                    .RSA2048SignatureOnly
+                    .TryGetCertificateWithPrivateKey()
             )
             using (
-                X509Certificate2 cert2 =
-                    Certificates.RSAKeyTransferCapi1.TryGetCertificateWithPrivateKey()
+                X509Certificate2 cert2 = Certificates
+                    .RSAKeyTransferCapi1
+                    .TryGetCertificateWithPrivateKey()
             )
             {
                 CmsSigner signer = new CmsSigner(SubjectIdentifierType.SubjectKeyIdentifier, cert1);

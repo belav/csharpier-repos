@@ -158,9 +158,9 @@ namespace System.Linq.Parallel.Tests
                 () =>
                 {
                     foreach (
-                        var i in labeled.Item.WithCancellation(
-                            new CancellationToken(canceled: true)
-                        )
+                        var i in labeled
+                            .Item
+                            .WithCancellation(new CancellationToken(canceled: true))
                     )
                     {
                         throw new ShouldNotBeInvokedException();
@@ -182,7 +182,8 @@ namespace System.Linq.Parallel.Tests
         )
         {
             _ = count;
-            ParallelQuery<int> query = labeled.Item
+            ParallelQuery<int> query = labeled
+                .Item
                 .Select<int, int>(
                     x =>
                     {

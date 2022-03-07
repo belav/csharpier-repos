@@ -123,26 +123,32 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
 
             // If there exists a type named var, return.
             var conflict =
-                semanticModel.GetSpeculativeSymbolInfo(
-                    typeName.SpanStart,
-                    candidateReplacementNode,
-                    SpeculativeBindingOption.BindAsTypeOrNamespace
-                ).Symbol;
+                semanticModel
+                    .GetSpeculativeSymbolInfo(
+                        typeName.SpanStart,
+                        candidateReplacementNode,
+                        SpeculativeBindingOption.BindAsTypeOrNamespace
+                    )
+                    .Symbol;
             if (conflict?.IsKind(SymbolKind.NamedType) == true)
             {
                 return false;
             }
 
             if (
-                typeName.Parent.IsKind(
-                    SyntaxKind.VariableDeclaration,
-                    out VariableDeclarationSyntax? variableDeclaration
-                )
-                && typeName.Parent.IsParentKind(
-                    SyntaxKind.LocalDeclarationStatement,
-                    SyntaxKind.ForStatement,
-                    SyntaxKind.UsingStatement
-                )
+                typeName
+                    .Parent
+                    .IsKind(
+                        SyntaxKind.VariableDeclaration,
+                        out VariableDeclarationSyntax? variableDeclaration
+                    )
+                && typeName
+                    .Parent
+                    .IsParentKind(
+                        SyntaxKind.LocalDeclarationStatement,
+                        SyntaxKind.ForStatement,
+                        SyntaxKind.UsingStatement
+                    )
             )
             {
                 // implicitly typed variables cannot be constants.
@@ -266,7 +272,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
             );
 
             var newTree = tree.WithRootAndOptions(newRoot, tree.Options);
-            var newSemanticModel = semanticModel.Compilation
+            var newSemanticModel = semanticModel
+                .Compilation
                 .ReplaceSyntaxTree(tree, newTree)
                 .GetSemanticModel(newTree);
 
@@ -277,10 +284,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
             var newDeclarationType =
                 newSemanticModel.GetTypeInfo(newDeclarationTypeNode, cancellationToken).Type;
 
-            return SymbolEquivalenceComparer.TupleNamesMustMatchInstance.Equals(
-                declarationType,
-                newDeclarationType
-            );
+            return SymbolEquivalenceComparer
+                .TupleNamesMustMatchInstance
+                .Equals(declarationType, newDeclarationType);
         }
 
         private static bool IsSafeToSwitchToVarWithoutNeedingSpeculation(
@@ -400,7 +406,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
                             if (
                                 semanticModel
                                     .GetSymbolInfo(n, cancellationToken)
-                                    .Symbol.IsKind(SymbolKind.Local) == true
+                                    .Symbol
+                                    .IsKind(SymbolKind.Local) == true
                             )
                             {
                                 return true;

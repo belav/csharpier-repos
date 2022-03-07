@@ -28,17 +28,19 @@ namespace System.Globalization
             // right for Invariant.
             uint linguisticCasing = IsInvariantLocale(_textInfoName) ? 0 : LCMAP_LINGUISTIC_CASING;
 
-            int ret = Interop.Kernel32.LCMapStringEx(
-                _sortHandle != IntPtr.Zero ? null : _textInfoName,
-                linguisticCasing | (toUpper ? LCMAP_UPPERCASE : LCMAP_LOWERCASE),
-                pSource,
-                pSourceLen,
-                pResult,
-                pSourceLen,
-                null,
-                null,
-                _sortHandle
-            );
+            int ret = Interop
+                .Kernel32
+                .LCMapStringEx(
+                    _sortHandle != IntPtr.Zero ? null : _textInfoName,
+                    linguisticCasing | (toUpper ? LCMAP_UPPERCASE : LCMAP_LOWERCASE),
+                    pSource,
+                    pSourceLen,
+                    pResult,
+                    pSourceLen,
+                    null,
+                    null,
+                    _sortHandle
+                );
             if (ret == 0)
             {
                 throw new InvalidOperationException(SR.InvalidOperation_ReadOnly);

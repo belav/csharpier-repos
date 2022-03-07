@@ -185,9 +185,11 @@ namespace Microsoft.EntityFrameworkCore
 
             Assert.StartsWith(
                 CoreStrings.ContextDisposed,
-                Assert.Throws<ObjectDisposedException>(
-                    () => context.Set<Dictionary<string, object>>("SharedTypeEntityTypeName")
-                ).Message
+                Assert
+                    .Throws<ObjectDisposedException>(
+                        () => context.Set<Dictionary<string, object>>("SharedTypeEntityTypeName")
+                    )
+                    .Message
             );
         }
 
@@ -209,9 +211,9 @@ namespace Microsoft.EntityFrameworkCore
                     "Dictionary<string, object>",
                     "Category"
                 ),
-                Assert.Throws<InvalidOperationException>(
-                    () => wrongDbSet.Add(new Category())
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(() => wrongDbSet.Add(new Category()))
+                    .Message
             );
             Assert.Equal(
                 CoreStrings.DbSetIncorrectGenericType(
@@ -250,9 +252,9 @@ namespace Microsoft.EntityFrameworkCore
 
             Assert.StartsWith(
                 CoreStrings.ContextDisposed,
-                Assert.Throws<ObjectDisposedException>(
-                    () => view.CopyTo(Array.Empty<Category>(), 0)
-                ).Message
+                Assert
+                    .Throws<ObjectDisposedException>(() => view.CopyTo(Array.Empty<Category>(), 0))
+                    .Message
             );
 
             Assert.StartsWith(
@@ -965,9 +967,9 @@ namespace Microsoft.EntityFrameworkCore
             using var context = new EarlyLearningCenter();
             Assert.Equal(
                 CoreStrings.DataBindingWithIListSource,
-                Assert.Throws<NotSupportedException>(
-                    () => ((IListSource)context.Gus).GetList()
-                ).Message
+                Assert
+                    .Throws<NotSupportedException>(() => ((IListSource)context.Gus).GetList())
+                    .Message
             );
         }
 
@@ -977,9 +979,11 @@ namespace Microsoft.EntityFrameworkCore
             using var context = new EarlyLearningCenter();
             Assert.Equal(
                 CoreStrings.DataBindingWithIListSource,
-                Assert.Throws<NotSupportedException>(
-                    () => ((IListSource)context.Gus.Distinct()).GetList()
-                ).Message
+                Assert
+                    .Throws<NotSupportedException>(
+                        () => ((IListSource)context.Gus.Distinct()).GetList()
+                    )
+                    .Message
             );
         }
 
@@ -989,9 +993,9 @@ namespace Microsoft.EntityFrameworkCore
             using var context = new EarlyLearningCenter();
             Assert.Equal(
                 CoreStrings.DataBindingToLocalWithIListSource,
-                Assert.Throws<NotSupportedException>(
-                    () => ((IListSource)context.Gus.Local).GetList()
-                ).Message
+                Assert
+                    .Throws<NotSupportedException>(() => ((IListSource)context.Gus.Local).GetList())
+                    .Message
             );
         }
 

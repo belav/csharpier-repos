@@ -143,13 +143,15 @@ namespace System.Net.Sockets
                 throw new InvalidOperationException(SR.net_sockets_handle_already_used);
             }
 
-            error = Interop.Sys.TryChangeSocketEventRegistration(
-                _port,
-                socketHandle,
-                Interop.Sys.SocketEvents.None,
-                Interop.Sys.SocketEvents.Read | Interop.Sys.SocketEvents.Write,
-                socketHandle
-            );
+            error = Interop
+                .Sys
+                .TryChangeSocketEventRegistration(
+                    _port,
+                    socketHandle,
+                    Interop.Sys.SocketEvents.None,
+                    Interop.Sys.SocketEvents.Read | Interop.Sys.SocketEvents.Write,
+                    socketHandle
+                );
             if (error == Interop.Error.SUCCESS)
             {
                 return true;
@@ -213,11 +215,9 @@ namespace System.Net.Sockets
                 while (true)
                 {
                     int numEvents = EventBufferCount;
-                    Interop.Error err = Interop.Sys.WaitForSocketEvents(
-                        _port,
-                        handler.Buffer,
-                        &numEvents
-                    );
+                    Interop.Error err = Interop
+                        .Sys
+                        .WaitForSocketEvents(_port, handler.Buffer, &numEvents);
                     if (err != Interop.Error.SUCCESS)
                     {
                         throw new InternalException(err);

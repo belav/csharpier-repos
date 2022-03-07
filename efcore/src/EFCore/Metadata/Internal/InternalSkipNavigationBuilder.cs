@@ -110,10 +110,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 && oldForeignKey.ReferencingSkipNavigations?.Any() != true
             )
             {
-                oldForeignKey.DeclaringEntityType.Builder.HasNoRelationship(
-                    oldForeignKey,
-                    ConfigurationSource.Convention
-                );
+                oldForeignKey
+                    .DeclaringEntityType
+                    .Builder
+                    .HasNoRelationship(oldForeignKey, ConfigurationSource.Convention);
             }
 
             return this;
@@ -260,9 +260,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     entityTypeBuilder = Metadata.DeclaringEntityType.Builder;
                 }
                 else if (
-                    Metadata.DeclaringEntityType.Model.FindEntityType(
-                        Metadata.DeclaringEntityType.Name
-                    )
+                    Metadata
+                        .DeclaringEntityType
+                        .Model
+                        .FindEntityType(Metadata.DeclaringEntityType.Name)
                     is EntityType entityType
                 )
                 {
@@ -277,9 +278,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             targetEntityType ??= Metadata.TargetEntityType;
             if (!targetEntityType.IsInModel)
             {
-                targetEntityType = Metadata.DeclaringEntityType.Model.FindEntityType(
-                    targetEntityType.Name
-                );
+                targetEntityType = Metadata
+                    .DeclaringEntityType
+                    .Model
+                    .FindEntityType(targetEntityType.Name);
                 if (targetEntityType == null)
                 {
                     return null;

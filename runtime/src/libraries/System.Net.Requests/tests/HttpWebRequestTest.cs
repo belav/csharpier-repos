@@ -2850,9 +2850,9 @@ namespace System.Net.Tests
             try
             {
                 using (
-                    HttpWebResponse response = (HttpWebResponse)state.Request.EndGetResponse(
-                        asynchronousResult
-                    )
+                    HttpWebResponse response = (HttpWebResponse)state
+                        .Request
+                        .EndGetResponse(asynchronousResult)
                 )
                 {
                     state.SavedResponseHeaders = response.Headers;

@@ -57,8 +57,9 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.Api
             IUnitTestingIncrementalAnalyzerProviderImplementation provider
         )
         {
-            var solutionCrawlerRegistrationService =
-                workspace.Services.GetService<ISolutionCrawlerRegistrationService>();
+            var solutionCrawlerRegistrationService = workspace
+                .Services
+                .GetService<ISolutionCrawlerRegistrationService>();
             if (solutionCrawlerRegistrationService == null)
             {
                 return null;

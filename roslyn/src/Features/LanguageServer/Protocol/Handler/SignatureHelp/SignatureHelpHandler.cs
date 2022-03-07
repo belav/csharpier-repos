@@ -73,7 +73,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
 
             foreach (var provider in providers)
             {
-                var items = await provider.Value
+                var items = await provider
+                    .Value
                     .GetItemsAsync(document, position, triggerInfo, options, cancellationToken)
                     .ConfigureAwait(false);
 
@@ -147,9 +148,9 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             // However, the LSP spec expects the language server to make this decision.
             // So implement the logic of picking a signature that has enough arguments here.
 
-            var matchingSignature = items.Items.FirstOrDefault(
-                sig => sig.Parameters.Length > items.ArgumentIndex
-            );
+            var matchingSignature = items
+                .Items
+                .FirstOrDefault(sig => sig.Parameters.Length > items.ArgumentIndex);
             return matchingSignature != null ? items.Items.IndexOf(matchingSignature) : 0;
         }
 

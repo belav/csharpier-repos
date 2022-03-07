@@ -212,7 +212,13 @@ namespace System.Reflection.Metadata
                     Assert.NotNull(ty);
                     MethodInfo mi = ty.GetMethod(
                         nameof(
-                            System.Reflection.Metadata.ApplyUpdate.Test.ClassWithCustomAttributeUpdates.Method1
+                            System
+                                .Reflection
+                                .Metadata
+                                .ApplyUpdate
+                                .Test
+                                .ClassWithCustomAttributeUpdates
+                                .Method1
                         ),
                         BindingFlags.Public | BindingFlags.Static
                     );
@@ -256,7 +262,13 @@ namespace System.Reflection.Metadata
 
                     MethodInfo mi1 = ty.GetMethod(
                         nameof(
-                            System.Reflection.Metadata.ApplyUpdate.Test.ClassWithCustomAttributeDelete.Method1
+                            System
+                                .Reflection
+                                .Metadata
+                                .ApplyUpdate
+                                .Test
+                                .ClassWithCustomAttributeDelete
+                                .Method1
                         ),
                         BindingFlags.Public | BindingFlags.Static
                     );
@@ -267,7 +279,13 @@ namespace System.Reflection.Metadata
 
                     MethodInfo mi2 = ty.GetMethod(
                         nameof(
-                            System.Reflection.Metadata.ApplyUpdate.Test.ClassWithCustomAttributeDelete.Method2
+                            System
+                                .Reflection
+                                .Metadata
+                                .ApplyUpdate
+                                .Test
+                                .ClassWithCustomAttributeDelete
+                                .Method2
                         ),
                         BindingFlags.Public | BindingFlags.Static
                     );
@@ -278,7 +296,13 @@ namespace System.Reflection.Metadata
 
                     MethodInfo mi3 = ty.GetMethod(
                         nameof(
-                            System.Reflection.Metadata.ApplyUpdate.Test.ClassWithCustomAttributeDelete.Method3
+                            System
+                                .Reflection
+                                .Metadata
+                                .ApplyUpdate
+                                .Test
+                                .ClassWithCustomAttributeDelete
+                                .Method3
                         ),
                         BindingFlags.Public | BindingFlags.Static
                     );
@@ -315,13 +339,21 @@ namespace System.Reflection.Metadata
 
                     MethodInfo mi = ty.GetMethod(
                         nameof(
-                            System.Reflection.Metadata.ApplyUpdate.Test.AsyncMethodChange.TestTaskMethod
+                            System
+                                .Reflection
+                                .Metadata
+                                .ApplyUpdate
+                                .Test
+                                .AsyncMethodChange
+                                .TestTaskMethod
                         ),
                         BindingFlags.Public | BindingFlags.Static
                     );
                     Assert.NotNull(mi);
 
-                    string result = ApplyUpdate.Test.AsyncMethodChange
+                    string result = ApplyUpdate
+                        .Test
+                        .AsyncMethodChange
                         .TestTaskMethod()
                         .GetAwaiter()
                         .GetResult();

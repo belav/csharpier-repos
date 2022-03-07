@@ -106,15 +106,17 @@ namespace Microsoft.Win32.SafeHandles
                 | Interop.Kernel32.SecurityOptions.SECURITY_ANONYMOUS
             );
 
-            SafeFileHandle fileHandle = Interop.Kernel32.CreateFile(
-                fullPath,
-                fAccess,
-                share,
-                &secAttrs,
-                mode,
-                flagsAndAttributes,
-                IntPtr.Zero
-            );
+            SafeFileHandle fileHandle = Interop
+                .Kernel32
+                .CreateFile(
+                    fullPath,
+                    fAccess,
+                    share,
+                    &secAttrs,
+                    mode,
+                    flagsAndAttributes,
+                    IntPtr.Zero
+                );
             if (fileHandle.IsInvalid)
             {
                 // Return a meaningful exception with the full path.
@@ -152,12 +154,14 @@ namespace Microsoft.Win32.SafeHandles
             };
 
             if (
-                !Interop.Kernel32.SetFileInformationByHandle(
-                    fileHandle,
-                    Interop.Kernel32.FileAllocationInfo,
-                    &allocationInfo,
-                    (uint)sizeof(Interop.Kernel32.FILE_ALLOCATION_INFO)
-                )
+                !Interop
+                    .Kernel32
+                    .SetFileInformationByHandle(
+                        fileHandle,
+                        Interop.Kernel32.FileAllocationInfo,
+                        &allocationInfo,
+                        (uint)sizeof(Interop.Kernel32.FILE_ALLOCATION_INFO)
+                    )
             )
             {
                 int errorCode = Marshal.GetLastPInvokeError();
@@ -242,13 +246,15 @@ namespace Microsoft.Win32.SafeHandles
             }
 
             Interop.NtDll.CreateOptions options;
-            int ntStatus = Interop.NtDll.NtQueryInformationFile(
-                FileHandle: this,
-                IoStatusBlock: out _,
-                FileInformation: &options,
-                Length: sizeof(uint),
-                FileInformationClass: Interop.NtDll.FileModeInformation
-            );
+            int ntStatus = Interop
+                .NtDll
+                .NtQueryInformationFile(
+                    FileHandle: this,
+                    IoStatusBlock: out _,
+                    FileInformation: &options,
+                    Length: sizeof(uint),
+                    FileInformationClass: Interop.NtDll.FileModeInformation
+                );
 
             if (ntStatus != Interop.StatusOptions.STATUS_SUCCESS)
             {

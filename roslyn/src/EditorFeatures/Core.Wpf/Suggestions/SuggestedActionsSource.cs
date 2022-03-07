@@ -175,11 +175,14 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
                 )
                 {
                     // This needs to run under threading context otherwise, we can deadlock on VS
-                    var statusService =
-                        state.Target.Workspace.Services.GetRequiredService<IWorkspaceStatusService>();
-                    ThreadingContext.JoinableTaskFactory.Run(
-                        () => statusService.WaitUntilFullyLoadedAsync(cancellationToken)
-                    );
+                    var statusService = state
+                        .Target
+                        .Workspace
+                        .Services
+                        .GetRequiredService<IWorkspaceStatusService>();
+                    ThreadingContext
+                        .JoinableTaskFactory
+                        .Run(() => statusService.WaitUntilFullyLoadedAsync(cancellationToken));
                 }
 
                 using (
@@ -198,8 +201,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
                     }
 
                     var workspace = document.Project.Solution.Workspace;
-                    var supportsFeatureService =
-                        workspace.Services.GetRequiredService<ITextBufferSupportsFeatureService>();
+                    var supportsFeatureService = workspace
+                        .Services
+                        .GetRequiredService<ITextBufferSupportsFeatureService>();
 
                     var selection = TryGetCodeRefactoringSelection(state, range);
 
@@ -293,9 +297,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
 
                 return new SuggestedActionSet(
                     unifiedSuggestedActionSet.CategoryName,
-                    unifiedSuggestedActionSet.Actions.SelectAsArray(
-                        set => ConvertToSuggestedAction(set)
-                    ),
+                    unifiedSuggestedActionSet
+                        .Actions
+                        .SelectAsArray(set => ConvertToSuggestedAction(set)),
                     unifiedSuggestedActionSet.Title,
                     ConvertToSuggestedActionSetPriority(unifiedSuggestedActionSet.Priority),
                     unifiedSuggestedActionSet.ApplicableToSpan?.ToSpan()
@@ -349,11 +353,17 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
                               subjectBuffer,
                               nestedAction.Provider ?? this,
                               nestedAction.OriginalCodeAction,
-                              nestedAction.NestedActionSets.SelectAsArray(
-                                  (s, arg) =>
-                                      ConvertToSuggestedActionSet(s, arg.owner, arg.subjectBuffer),
-                                  (owner, subjectBuffer)
-                              )
+                              nestedAction
+                                  .NestedActionSets
+                                  .SelectAsArray(
+                                      (s, arg) =>
+                                          ConvertToSuggestedActionSet(
+                                              s,
+                                              arg.owner,
+                                              arg.subjectBuffer
+                                          ),
+                                      (owner, subjectBuffer)
+                                  )
                           ),
                         _ => throw ExceptionUtilities.Unreachable
                     };
@@ -571,7 +581,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
                     && state.Target.SubjectBuffer.SupportsCodeFixes()
                 )
                 {
-                    var result = await state.Target.Owner._codeFixService
+                    var result = await state
+                        .Target
+                        .Owner
+                        ._codeFixService
                         .GetMostSevereFixableDiagnosticAsync(
                             document,
                             range.Span.ToTextSpan(),
@@ -623,7 +636,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
                 )
                 {
                     if (
-                        await state.Target.Owner._codeRefactoringService
+                        await state
+                            .Target
+                            .Owner
+                            ._codeRefactoringService
                             .HasRefactoringsAsync(document, selection.Value, cancellationToken)
                             .ConfigureAwait(false)
                     )
@@ -642,14 +658,22 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
             {
                 this.AssertIsForeground();
 
-                var selectedSpans = state.Target.TextView.Selection.SelectedSpans
+                var selectedSpans = state
+                    .Target
+                    .TextView
+                    .Selection
+                    .SelectedSpans
                     .SelectMany(
                         ss =>
-                            state.Target.TextView.BufferGraph.MapDownToBuffer(
-                                ss,
-                                SpanTrackingMode.EdgeExclusive,
-                                state.Target.SubjectBuffer
-                            )
+                            state
+                                .Target
+                                .TextView
+                                .BufferGraph
+                                .MapDownToBuffer(
+                                    ss,
+                                    SpanTrackingMode.EdgeExclusive,
+                                    state.Target.SubjectBuffer
+                                )
                     )
                     .Where(ss => !state.Target.TextView.IsReadOnlyOnSurfaceBuffer(ss))
                     .ToList();
@@ -688,8 +712,12 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
                 // remove existing event registration
                 if (state.Target.Workspace != null)
                 {
-                    state.Target.Workspace.Services.GetRequiredService<IWorkspaceStatusService>().StatusChanged -=
-                        OnWorkspaceStatusChanged;
+                    state
+                        .Target
+                        .Workspace
+                        .Services
+                        .GetRequiredService<IWorkspaceStatusService>()
+                        .StatusChanged -= OnWorkspaceStatusChanged;
                     state.Target.Workspace.DocumentActiveContextChanged -= OnActiveContextChanged;
                 }
 
@@ -711,8 +739,12 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
                 }
 
                 state.Target.Workspace.DocumentActiveContextChanged += OnActiveContextChanged;
-                state.Target.Workspace.Services.GetRequiredService<IWorkspaceStatusService>().StatusChanged +=
-                    OnWorkspaceStatusChanged;
+                state
+                    .Target
+                    .Workspace
+                    .Services
+                    .GetRequiredService<IWorkspaceStatusService>()
+                    .StatusChanged += OnWorkspaceStatusChanged;
             }
 
             private void OnActiveContextChanged(
@@ -745,7 +777,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
                 if (state is null)
                     return;
 
-                var document = state.Target.SubjectBuffer
+                var document = state
+                    .Target
+                    .SubjectBuffer
                     .AsTextContainer()
                     .GetOpenDocumentInCurrentContext();
                 if (document == null)
@@ -808,7 +842,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
 
                 // never show light bulb if solution is not fully loaded yet
                 if (
-                    !await workspace.Services
+                    !await workspace
+                        .Services
                         .GetRequiredService<IWorkspaceStatusService>()
                         .IsFullyLoadedAsync(cancellationToken)
                         .ConfigureAwait(false)
@@ -817,9 +852,11 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
 
                 cancellationToken.ThrowIfCancellationRequested();
 
-                using var asyncToken = state.Target.Owner.OperationListener.BeginAsyncOperation(
-                    nameof(GetSuggestedActionCategoriesAsync)
-                );
+                using var asyncToken = state
+                    .Target
+                    .Owner
+                    .OperationListener
+                    .BeginAsyncOperation(nameof(GetSuggestedActionCategoriesAsync));
                 var document = range.Snapshot.GetOpenDocumentInCurrentContextWithChanges();
                 if (document == null)
                     return null;

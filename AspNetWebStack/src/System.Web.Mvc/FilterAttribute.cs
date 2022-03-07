@@ -46,7 +46,8 @@ namespace System.Web.Mvc
                 type =>
                     type.GetCustomAttributes(typeof(AttributeUsageAttribute), true)
                         .Cast<AttributeUsageAttribute>()
-                        .First().AllowMultiple
+                        .First()
+                        .AllowMultiple
             );
         }
     }

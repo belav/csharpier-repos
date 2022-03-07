@@ -180,8 +180,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         reportModifiers &= ~DeclarationModifiers.Sealed;
                     }
 
-                    requiredVersion =
-                        MessageID.IDS_FeatureStaticAbstractMembersInInterfaces.RequiredVersion();
+                    requiredVersion = MessageID
+                        .IDS_FeatureStaticAbstractMembersInInterfaces
+                        .RequiredVersion();
                     if (availableVersion < requiredVersion)
                     {
                         ReportUnsupportedModifiersForLanguageVersion(
@@ -217,8 +218,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 }
                 else
                 {
-                    requiredVersion =
-                        MessageID.IDS_DefaultInterfaceImplementation.RequiredVersion();
+                    requiredVersion = MessageID
+                        .IDS_DefaultInterfaceImplementation
+                        .RequiredVersion();
                     if (availableVersion < requiredVersion)
                     {
                         ReportUnsupportedModifiersForLanguageVersion(
@@ -274,8 +276,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
                 LanguageVersion availableVersion =
                     ((CSharpParseOptions)location.SourceTree.Options).LanguageVersion;
-                LanguageVersion requiredVersion =
-                    MessageID.IDS_FeatureStaticAbstractMembersInInterfaces.RequiredVersion();
+                LanguageVersion requiredVersion = MessageID
+                    .IDS_FeatureStaticAbstractMembersInInterfaces
+                    .RequiredVersion();
                 if (availableVersion < requiredVersion)
                 {
                     ModifierUtils.ReportUnsupportedModifiersForLanguageVersion(
@@ -555,7 +558,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
                         if (
                             symbol.ContainingType?.IsInterface == true
-                            && !symbol.ContainingAssembly.RuntimeSupportsDefaultInterfaceImplementation
+                            && !symbol
+                                .ContainingAssembly
+                                .RuntimeSupportsDefaultInterfaceImplementation
                         )
                         {
                             return new CSDiagnosticInfo(

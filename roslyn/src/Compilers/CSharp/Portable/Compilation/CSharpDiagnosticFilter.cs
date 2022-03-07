@@ -78,9 +78,14 @@ namespace Microsoft.CodeAnalysis.CSharp
             bool hasPragmaSuppression;
             if (
                 s_alinkWarnings.Contains((ErrorCode)d.Code)
-                && specificDiagnosticOptions.Keys.Contains(
-                    CSharp.MessageProvider.Instance.GetIdForErrorCode((int)ErrorCode.WRN_ALinkWarn)
-                )
+                && specificDiagnosticOptions
+                    .Keys
+                    .Contains(
+                        CSharp
+                            .MessageProvider
+                            .Instance
+                            .GetIdForErrorCode((int)ErrorCode.WRN_ALinkWarn)
+                    )
             )
             {
                 reportAction = GetDiagnosticReport(

@@ -143,10 +143,9 @@ namespace Microsoft.EntityFrameworkCore.Migrations
                             (alterColumnOperation.Table, alterColumnOperation.Schema)
                         );
                         rebuild.OperationsToReplace.Add(alterColumnOperation);
-                        rebuild.AlterColumnsDeferred.Add(
-                            alterColumnOperation.Name,
-                            alterColumnOperation
-                        );
+                        rebuild
+                            .AlterColumnsDeferred
+                            .Add(alterColumnOperation.Name, alterColumnOperation);
 
                         operations.Add(alterColumnOperation);
 
@@ -161,10 +160,14 @@ namespace Microsoft.EntityFrameworkCore.Migrations
                                 out var rebuild
                             )
                             && (
-                                rebuild.AddColumnsDeferred.Keys
+                                rebuild
+                                    .AddColumnsDeferred
+                                    .Keys
                                     .Intersect(createIndexOperation.Columns)
                                     .Any()
-                                || rebuild.RenameColumnsDeferred.Keys
+                                || rebuild
+                                    .RenameColumnsDeferred
+                                    .Keys
                                     .Intersect(createIndexOperation.Columns)
                                     .Any()
                             )
@@ -189,9 +192,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
                                       renameIndexOperation.Table,
                                       renameIndexOperation.Schema
                                   )
-                                  ?.Indexes.FirstOrDefault(
-                                      i => i.Name == renameIndexOperation.NewName
-                                  )
+                                  ?.Indexes
+                                  .FirstOrDefault(i => i.Name == renameIndexOperation.NewName)
                                 : null;
                         if (index != null)
                         {
@@ -224,10 +226,9 @@ namespace Microsoft.EntityFrameworkCore.Migrations
                         )
                         {
                             rebuild.OperationsToReplace.Add(addColumnOperation);
-                            rebuild.AddColumnsDeferred.Add(
-                                addColumnOperation.Name,
-                                addColumnOperation
-                            );
+                            rebuild
+                                .AddColumnsDeferred
+                                .Add(addColumnOperation.Name, addColumnOperation);
                         }
                         else if (addColumnOperation.Comment != null)
                         {
@@ -254,10 +255,9 @@ namespace Microsoft.EntityFrameworkCore.Migrations
                             {
                                 rebuild.OperationsToReplace.Add(renameColumnOperation);
                                 rebuild.DropColumnsDeferred.Add(renameColumnOperation.Name);
-                                rebuild.RenameColumnsDeferred.Add(
-                                    renameColumnOperation.NewName,
-                                    renameColumnOperation
-                                );
+                                rebuild
+                                    .RenameColumnsDeferred
+                                    .Add(renameColumnOperation.NewName, renameColumnOperation);
                             }
                         }
 
@@ -357,10 +357,9 @@ namespace Microsoft.EntityFrameworkCore.Migrations
                 {
                     // TODO: Consider warning once per table--list all operation types we're warning for
                     // TODO: Consider listing which operations required a rebuild
-                    Dependencies.MigrationsLogger.TableRebuildPendingWarning(
-                        operationToWarnFor.GetType(),
-                        table.Name
-                    );
+                    Dependencies
+                        .MigrationsLogger
+                        .TableRebuildPendingWarning(operationToWarnFor.GetType(), table.Name);
                 }
 
                 foreach (var operationToReplace in rebuild.Value.OperationsToReplace)
@@ -382,7 +381,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
                 }
 
                 foreach (
-                    var column in table.Columns
+                    var column in table
+                        .Columns
                         .Where(c => c.Order.HasValue)
                         .OrderBy(c => c.Order.Value)
                         .Concat(table.Columns.Where(c => !c.Order.HasValue))
@@ -399,10 +399,11 @@ namespace Microsoft.EntityFrameworkCore.Migrations
                         ColumnType = column.StoreType,
                         IsNullable = column.IsNullable,
                         DefaultValue =
-                            rebuild.Value.AddColumnsDeferred.TryGetValue(
-                                column.Name,
-                                out var originalOperation
-                            ) && !originalOperation.IsNullable
+                            rebuild
+                                .Value
+                                .AddColumnsDeferred
+                                .TryGetValue(column.Name, out var originalOperation)
+                            && !originalOperation.IsNullable
                                 ? originalOperation.DefaultValue
                                 : defaultValue,
                         DefaultValueSql = column.DefaultValueSql,
@@ -417,25 +418,25 @@ namespace Microsoft.EntityFrameworkCore.Migrations
 
                 foreach (var foreignKey in table.ForeignKeyConstraints)
                 {
-                    createTableOperation.ForeignKeys.Add(
-                        AddForeignKeyOperation.CreateFrom(foreignKey)
-                    );
+                    createTableOperation
+                        .ForeignKeys
+                        .Add(AddForeignKeyOperation.CreateFrom(foreignKey));
                 }
 
                 foreach (
                     var uniqueConstraint in table.UniqueConstraints.Where(c => !c.GetIsPrimaryKey())
                 )
                 {
-                    createTableOperation.UniqueConstraints.Add(
-                        AddUniqueConstraintOperation.CreateFrom(uniqueConstraint)
-                    );
+                    createTableOperation
+                        .UniqueConstraints
+                        .Add(AddUniqueConstraintOperation.CreateFrom(uniqueConstraint));
                 }
 
                 foreach (var checkConstraint in table.CheckConstraints)
                 {
-                    createTableOperation.CheckConstraints.Add(
-                        AddCheckConstraintOperation.CreateFrom(checkConstraint)
-                    );
+                    createTableOperation
+                        .CheckConstraints
+                        .Add(AddCheckConstraintOperation.CreateFrom(checkConstraint));
                 }
 
                 createTableOperation.AddAnnotations(table.GetAnnotations());
@@ -483,10 +484,10 @@ namespace Microsoft.EntityFrameworkCore.Migrations
                     );
 
                     var defaultValue =
-                        rebuild.Value.AlterColumnsDeferred.TryGetValue(
-                            column.Name,
-                            out var alterColumnOperation
-                        )
+                        rebuild
+                            .Value
+                            .AlterColumnsDeferred
+                            .TryGetValue(column.Name, out var alterColumnOperation)
                         && !alterColumnOperation.IsNullable
                         && alterColumnOperation.OldColumn.IsNullable
                             ? alterColumnOperation.DefaultValue
@@ -497,14 +498,16 @@ namespace Microsoft.EntityFrameworkCore.Migrations
                     }
 
                     selectBuilder.Append(
-                        Dependencies.SqlGenerationHelper.DelimitIdentifier(
-                            rebuild.Value.RenameColumnsDeferred.TryGetValue(
-                                column.Name,
-                                out var renameColumnOperation
+                        Dependencies
+                            .SqlGenerationHelper
+                            .DelimitIdentifier(
+                                rebuild
+                                    .Value
+                                    .RenameColumnsDeferred
+                                    .TryGetValue(column.Name, out var renameColumnOperation)
+                                  ? renameColumnOperation.Name
+                                  : column.Name
                             )
-                              ? renameColumnOperation.Name
-                              : column.Name
-                        )
                     );
 
                     if (defaultValue != null)
@@ -513,10 +516,9 @@ namespace Microsoft.EntityFrameworkCore.Migrations
                             (
                                 column.StoreType == null
                                     ? null
-                                    : Dependencies.TypeMappingSource.FindMapping(
-                                          defaultValue.GetType(),
-                                          column.StoreType
-                                      )
+                                    : Dependencies
+                                      .TypeMappingSource
+                                      .FindMapping(defaultValue.GetType(), column.StoreType)
                             ) ?? Dependencies.TypeMappingSource.GetMappingForValue(defaultValue);
 
                         selectBuilder
@@ -532,9 +534,9 @@ namespace Microsoft.EntityFrameworkCore.Migrations
                         Sql = new StringBuilder()
                             .Append("INSERT INTO ")
                             .Append(
-                                Dependencies.SqlGenerationHelper.DelimitIdentifier(
-                                    createTableOperation.Name
-                                )
+                                Dependencies
+                                    .SqlGenerationHelper
+                                    .DelimitIdentifier(createTableOperation.Name)
                             )
                             .Append(" (")
                             .Append(intoBuilder)
@@ -824,9 +826,9 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             // This handles the quirks of creating integer primary keys using autoincrement, not default rowid behavior.
             if (operation.PrimaryKey?.Columns.Length == 1)
             {
-                var columnOp = operation.Columns.FirstOrDefault(
-                    o => o.Name == operation.PrimaryKey.Columns[0]
-                );
+                var columnOp = operation
+                    .Columns
+                    .FirstOrDefault(o => o.Name == operation.PrimaryKey.Columns[0]);
                 if (columnOp != null)
                 {
                     columnOp.AddAnnotation(SqliteAnnotationNames.InlinePrimaryKey, true);
@@ -845,10 +847,9 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             builder
                 .Append("CREATE TABLE ")
                 .Append(
-                    Dependencies.SqlGenerationHelper.DelimitIdentifier(
-                        operation.Name,
-                        operation.Schema
-                    )
+                    Dependencies
+                        .SqlGenerationHelper
+                        .DelimitIdentifier(operation.Name, operation.Schema)
                 )
                 .AppendLine(" (");
 

@@ -258,17 +258,19 @@ namespace Microsoft.NETCore.Platforms.BuildTasks
                 RuntimeDescription newRuntimeDescription;
 
                 if (
-                    runtimeGraph.Runtimes.TryGetValue(
-                        existingRuntimeDescription.RuntimeIdentifier,
-                        out newRuntimeDescription
-                    )
+                    runtimeGraph
+                        .Runtimes
+                        .TryGetValue(
+                            existingRuntimeDescription.RuntimeIdentifier,
+                            out newRuntimeDescription
+                        )
                 )
                 {
                     // overlapping RID, ensure that the imports match (same ordering and content)
                     if (
-                        !existingRuntimeDescription.InheritedRuntimes.SequenceEqual(
-                            newRuntimeDescription.InheritedRuntimes
-                        )
+                        !existingRuntimeDescription
+                            .InheritedRuntimes
+                            .SequenceEqual(newRuntimeDescription.InheritedRuntimes)
                     )
                     {
                         Log.LogError(

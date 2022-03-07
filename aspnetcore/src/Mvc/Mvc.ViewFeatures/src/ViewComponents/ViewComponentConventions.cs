@@ -81,10 +81,9 @@ public static class ViewComponentConventions
     {
         if (componentType.Name.EndsWith(ViewComponentSuffix, StringComparison.OrdinalIgnoreCase))
         {
-            return componentType.Name.Substring(
-                0,
-                componentType.Name.Length - ViewComponentSuffix.Length
-            );
+            return componentType
+                .Name
+                .Substring(0, componentType.Name.Length - ViewComponentSuffix.Length);
         }
         else
         {

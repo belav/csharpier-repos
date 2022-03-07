@@ -39,7 +39,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             if (EnableFilters)
             {
                 var animals = expectedData.Animals.Where(a => a.CountryId == 1).ToList();
-                var animalQueries = expectedData.AnimalQueries
+                var animalQueries = expectedData
+                    .AnimalQueries
                     .Where(a => a.CountryId == 1)
                     .ToList();
                 expectedData = new InheritanceData(

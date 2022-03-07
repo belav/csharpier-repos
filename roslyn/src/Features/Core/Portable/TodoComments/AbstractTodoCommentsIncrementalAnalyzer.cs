@@ -64,9 +64,11 @@ namespace Microsoft.CodeAnalysis.TodoComments
 
         private ImmutableArray<TodoCommentDescriptor> GetTodoCommentDescriptors(Document document)
         {
-            var optionText = document.Project.Solution.Options.GetOption<string>(
-                TodoCommentOptions.TokenList
-            );
+            var optionText = document
+                .Project
+                .Solution
+                .Options
+                .GetOption<string>(TodoCommentOptions.TokenList);
 
             lock (_gate)
             {

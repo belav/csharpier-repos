@@ -75,9 +75,9 @@ namespace System.Net.Http
         // Temporary workaround for request burst handling on connection start.
         private const int InitialMaxConcurrentStreams = 100;
 
-        private static readonly byte[] s_http2ConnectionPreface = Encoding.ASCII.GetBytes(
-            "PRI * HTTP/2.0\r\n\r\nSM\r\n\r\n"
-        );
+        private static readonly byte[] s_http2ConnectionPreface = Encoding
+            .ASCII
+            .GetBytes("PRI * HTTP/2.0\r\n\r\nSM\r\n\r\n");
 
 #if DEBUG
         // In debug builds, start with a very small buffer to induce buffer growing logic.
@@ -500,12 +500,13 @@ namespace System.Net.Http
             {
                 if (initialFrame && NetEventSource.Log.IsEnabled())
                 {
-                    string response = Encoding.ASCII.GetString(
-                        _incomingBuffer.ActiveSpan.Slice(
-                            0,
-                            Math.Min(20, _incomingBuffer.ActiveLength)
-                        )
-                    );
+                    string response = Encoding
+                        .ASCII
+                        .GetString(
+                            _incomingBuffer
+                                .ActiveSpan
+                                .Slice(0, Math.Min(20, _incomingBuffer.ActiveLength))
+                        );
                     Trace($"HTTP/2 handshake failed. Server returned {response}");
                 }
 
@@ -810,10 +811,9 @@ namespace System.Net.Http
                 Trace($"{frameHeader}");
             Debug.Assert(frameHeader.Type == FrameType.AltSvc);
 
-            ReadOnlySpan<byte> span = _incomingBuffer.ActiveSpan.Slice(
-                0,
-                frameHeader.PayloadLength
-            );
+            ReadOnlySpan<byte> span = _incomingBuffer
+                .ActiveSpan
+                .Slice(0, frameHeader.PayloadLength);
 
             if (BinaryPrimitives.TryReadUInt16BigEndian(span, out ushort originLength))
             {
@@ -913,10 +913,9 @@ namespace System.Net.Http
                 }
 
                 // Parse settings and process the ones we care about.
-                ReadOnlySpan<byte> settings = _incomingBuffer.ActiveSpan.Slice(
-                    0,
-                    frameHeader.PayloadLength
-                );
+                ReadOnlySpan<byte> settings = _incomingBuffer
+                    .ActiveSpan
+                    .Slice(0, frameHeader.PayloadLength);
                 bool maxConcurrentStreamsReceived = false;
                 while (settings.Length > 0)
                 {
@@ -1048,10 +1047,9 @@ namespace System.Net.Http
             // the incoming buffer, so we need to take a copy of the data. Read
             // it as a big-endian integer here to avoid allocating an array.
             Debug.Assert(sizeof(long) == FrameHeader.PingLength);
-            ReadOnlySpan<byte> pingContent = _incomingBuffer.ActiveSpan.Slice(
-                0,
-                FrameHeader.PingLength
-            );
+            ReadOnlySpan<byte> pingContent = _incomingBuffer
+                .ActiveSpan
+                .Slice(0, FrameHeader.PingLength);
             long pingContentLong = BinaryPrimitives.ReadInt64BigEndian(pingContent);
 
             if (NetEventSource.Log.IsEnabled())
@@ -1408,9 +1406,9 @@ namespace System.Net.Http
                 static (state, writeBuffer) =>
                 {
                     if (NetEventSource.Log.IsEnabled())
-                        state.thisRef.Trace(
-                            $"Started writing. {nameof(pingContent)}={state.pingContent}"
-                        );
+                        state
+                            .thisRef
+                            .Trace($"Started writing. {nameof(pingContent)}={state.pingContent}");
 
                     Debug.Assert(sizeof(long) == FrameHeader.PingLength);
 
@@ -1792,18 +1790,18 @@ namespace System.Net.Http
             // Determine cookies to send.
             if (_pool.Settings._useCookies)
             {
-                string cookiesFromContainer = _pool.Settings._cookieContainer!.GetCookieHeader(
-                    request.RequestUri
-                );
+                string cookiesFromContainer = _pool
+                    .Settings
+                    ._cookieContainer!
+                    .GetCookieHeader(request.RequestUri);
                 if (cookiesFromContainer != string.Empty)
                 {
                     WriteBytes(KnownHeaders.Cookie.Http2EncodedName, ref headerBuffer);
 
-                    Encoding? cookieEncoding =
-                        _pool.Settings._requestHeaderEncodingSelector?.Invoke(
-                            KnownHeaders.Cookie.Name,
-                            request
-                        );
+                    Encoding? cookieEncoding = _pool
+                        .Settings
+                        ._requestHeaderEncodingSelector
+                        ?.Invoke(KnownHeaders.Cookie.Name, request);
                     WriteLiteralHeaderValue(cookiesFromContainer, cookieEncoding, ref headerBuffer);
                 }
             }
@@ -2556,13 +2554,15 @@ namespace System.Net.Http
             string message,
             [CallerMemberName] string? memberName = null
         ) =>
-            NetEventSource.Log.HandlerMessage(
-                _pool?.GetHashCode() ?? 0, // pool ID
-                GetHashCode(), // connection ID
-                streamId, // stream ID
-                memberName, // method name
-                message
-            ); // message
+            NetEventSource
+                .Log
+                .HandlerMessage(
+                    _pool?.GetHashCode() ?? 0, // pool ID
+                    GetHashCode(), // connection ID
+                    streamId, // stream ID
+                    memberName, // method name
+                    message
+                ); // message
 
         [DoesNotReturn]
         private static void ThrowRetry(string message, Exception? innerException = null) =>

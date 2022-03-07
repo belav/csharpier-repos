@@ -82,9 +82,9 @@ namespace System.CodeDom.Tests
             property.HasGet = false;
             Assert.False(property.HasGet);
 
-            property.GetStatements.Add(
-                new CodeMethodReturnStatement(new CodePrimitiveExpression("value"))
-            );
+            property
+                .GetStatements
+                .Add(new CodeMethodReturnStatement(new CodePrimitiveExpression("value")));
 
             property.HasGet = false;
             Assert.False(property.HasGet);
@@ -132,9 +132,9 @@ namespace System.CodeDom.Tests
             property.HasSet = false;
             Assert.False(property.HasSet);
 
-            property.SetStatements.Add(
-                new CodeMethodReturnStatement(new CodePrimitiveExpression("value"))
-            );
+            property
+                .SetStatements
+                .Add(new CodeMethodReturnStatement(new CodePrimitiveExpression("value")));
             property.HasSet = false;
             Assert.False(property.HasSet);
             Assert.Empty(property.SetStatements);

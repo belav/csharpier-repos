@@ -26,10 +26,12 @@ namespace Microsoft.CodeAnalysis.ExtractInterface
 
         public override object GetOptions(CancellationToken cancellationToken)
         {
-            var containingNamespaceDisplay =
-                _typeAnalysisResult.TypeToExtractFrom.ContainingNamespace.IsGlobalNamespace
-                    ? string.Empty
-                    : _typeAnalysisResult.TypeToExtractFrom.ContainingNamespace.ToDisplayString();
+            var containingNamespaceDisplay = _typeAnalysisResult
+                .TypeToExtractFrom
+                .ContainingNamespace
+                .IsGlobalNamespace
+                ? string.Empty
+                : _typeAnalysisResult.TypeToExtractFrom.ContainingNamespace.ToDisplayString();
 
             return AbstractExtractInterfaceService
                 .GetExtractInterfaceOptionsAsync(

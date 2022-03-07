@@ -432,9 +432,9 @@ namespace Microsoft.EntityFrameworkCore.Update
                                 Entry.EntityType.FindPrimaryKey()!.Properties
                             ),
                             Entry.BuildCurrentValuesString(new[] { Property }),
-                            modification.Entry.BuildCurrentValuesString(
-                                new[] { modification.Property }
-                            ),
+                            modification
+                                .Entry
+                                .BuildCurrentValuesString(new[] { modification.Property }),
                             ColumnName
                         )
                     );
@@ -453,7 +453,8 @@ namespace Microsoft.EntityFrameworkCore.Update
 
             if (
                 UseOriginalValueParameter
-                && !modification.Property
+                && !modification
+                    .Property
                     .GetValueComparer()
                     .Equals(OriginalValue, modification.OriginalValue)
             )
@@ -478,9 +479,9 @@ namespace Microsoft.EntityFrameworkCore.Update
                                     Entry.EntityType.FindPrimaryKey()!.Properties
                                 ),
                                 Entry.BuildOriginalValuesString(new[] { Property }),
-                                modification.Entry.BuildOriginalValuesString(
-                                    new[] { modification.Property }
-                                ),
+                                modification
+                                    .Entry
+                                    .BuildOriginalValuesString(new[] { modification.Property }),
                                 ColumnName
                             )
                         );

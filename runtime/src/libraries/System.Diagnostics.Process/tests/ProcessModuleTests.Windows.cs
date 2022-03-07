@@ -51,7 +51,8 @@ namespace System.Diagnostics.Tests
             {
                 string[] modulePaths = Process
                     .GetCurrentProcess()
-                    .Modules.Cast<ProcessModule>()
+                    .Modules
+                    .Cast<ProcessModule>()
                     .Select(module => module.FileName)
                     .ToArray();
                 Assert.Contains(longNamePath, modulePaths);

@@ -350,8 +350,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             FieldSymbol? newCorrespondingDefaultFieldOpt = null;
             if ((object)_correspondingDefaultField != this)
             {
-                newCorrespondingDefaultFieldOpt =
-                    _correspondingDefaultField.OriginalDefinition.AsMember(newOwner);
+                newCorrespondingDefaultFieldOpt = _correspondingDefaultField
+                    .OriginalDefinition
+                    .AsMember(newOwner);
             }
 
             return new TupleVirtualElementFieldSymbol(

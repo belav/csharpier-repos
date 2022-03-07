@@ -47,13 +47,15 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Update.Internal
             );
             if (modificationCommands.Count == 1)
             {
-                return modificationCommands[0].ColumnModifications.All(
-                    o =>
-                        !o.IsKey
-                        || !o.IsRead
-                        || o.Property?.GetValueGenerationStrategy(table)
-                            == SqlServerValueGenerationStrategy.IdentityColumn
-                )
+                return modificationCommands[0]
+                    .ColumnModifications
+                    .All(
+                        o =>
+                            !o.IsKey
+                            || !o.IsRead
+                            || o.Property?.GetValueGenerationStrategy(table)
+                                == SqlServerValueGenerationStrategy.IdentityColumn
+                    )
                   ? AppendInsertOperation(
                         commandStringBuilder,
                         modificationCommands[0],
@@ -68,18 +70,22 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Update.Internal
                     );
             }
 
-            var readOperations = modificationCommands[0].ColumnModifications
+            var readOperations = modificationCommands[0]
+                .ColumnModifications
                 .Where(o => o.IsRead)
                 .ToList();
-            var writeOperations = modificationCommands[0].ColumnModifications
+            var writeOperations = modificationCommands[0]
+                .ColumnModifications
                 .Where(o => o.IsWrite)
                 .ToList();
-            var keyOperations = modificationCommands[0].ColumnModifications
+            var keyOperations = modificationCommands[0]
+                .ColumnModifications
                 .Where(o => o.IsKey)
                 .ToList();
 
             var defaultValuesOnly = writeOperations.Count == 0;
-            var nonIdentityOperations = modificationCommands[0].ColumnModifications
+            var nonIdentityOperations = modificationCommands[0]
+                .ColumnModifications
                 .Where(
                     o =>
                         o.Property?.GetValueGenerationStrategy(table)
@@ -129,7 +135,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Update.Internal
             }
 
             if (
-                modificationCommands[0].Entries
+                modificationCommands[0]
+                    .Entries
                     .SelectMany(e => e.EntityType.GetAllBaseTypesInclusive())
                     .Any(e => e.IsMemoryOptimized())
             )

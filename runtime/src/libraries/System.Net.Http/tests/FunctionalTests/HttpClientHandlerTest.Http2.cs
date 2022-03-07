@@ -2420,9 +2420,9 @@ namespace System.Net.Http.Functional.Tests
                     );
                     await connection.SendResponseBodyAsync(
                         streamId,
-                        Encoding.ASCII.GetBytes(
-                            $"Http2_PendingSend_SendsReset(waitForData: {waitForData})"
-                        ),
+                        Encoding
+                            .ASCII
+                            .GetBytes($"Http2_PendingSend_SendsReset(waitForData: {waitForData})"),
                         isFinal: false
                     );
                     // Wait for any lingering frames or extra reset frames.
@@ -2612,10 +2612,12 @@ namespace System.Net.Http.Functional.Tests
                         request.Version = new Version(2, 0);
                         request.Content = new StringContent(new string('*', 3000));
                         request.Headers.ExpectContinue = true;
-                        request.Headers.Add(
-                            "x-test",
-                            $"PostAsyncExpect100Continue_SendRequest_Ok({send100Continue}"
-                        );
+                        request
+                            .Headers
+                            .Add(
+                                "x-test",
+                                $"PostAsyncExpect100Continue_SendRequest_Ok({send100Continue}"
+                            );
 
                         HttpResponseMessage response = await client.SendAsync(request);
                         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
@@ -2672,10 +2674,12 @@ namespace System.Net.Http.Functional.Tests
                         request.VersionPolicy = HttpVersionPolicy.RequestVersionExact;
                         request.Content = new StringContent(new string('*', 3000));
                         request.Headers.ExpectContinue = true;
-                        request.Headers.Add(
-                            "x-test",
-                            "PostAsyncExpect100Continue_NonSuccessResponse_RequestBodyNotSent"
-                        );
+                        request
+                            .Headers
+                            .Add(
+                                "x-test",
+                                "PostAsyncExpect100Continue_NonSuccessResponse_RequestBodyNotSent"
+                            );
 
                         HttpResponseMessage response = await client.SendAsync(request);
                         Assert.Equal(HttpStatusCode.Forbidden, response.StatusCode);
@@ -4229,8 +4233,11 @@ namespace System.Net.Http.Functional.Tests
                                 );
                                 SslServerAuthenticationOptions options =
                                     new SslServerAuthenticationOptions();
-                                options.ServerCertificate =
-                                    Net.Test.Common.Configuration.Certificates.GetServerCertificate();
+                                options.ServerCertificate = Net.Test
+                                    .Common
+                                    .Configuration
+                                    .Certificates
+                                    .GetServerCertificate();
                                 options.ApplicationProtocols = new List<SslApplicationProtocol>()
                                 {
                                     SslApplicationProtocol.Http2
@@ -4244,9 +4251,9 @@ namespace System.Net.Http.Functional.Tests
 
                                 // Send back HTTP/1.1 response
                                 await sslStream.WriteAsync(
-                                    Encoding.ASCII.GetBytes(
-                                        "HTTP/1.1 400 Unrecognized request\r\n\r\n"
-                                    ),
+                                    Encoding
+                                        .ASCII
+                                        .GetBytes("HTTP/1.1 400 Unrecognized request\r\n\r\n"),
                                     CancellationToken.None
                                 );
                             }
@@ -4366,10 +4373,9 @@ namespace System.Net.Http.Functional.Tests
                     };
                     for (int i = 0; i < count; i++)
                     {
-                        message.Headers.TryAddWithoutValidation(
-                            "large-header" + i,
-                            largeHeaderValue
-                        );
+                        message
+                            .Headers
+                            .TryAddWithoutValidation("large-header" + i, largeHeaderValue);
                     }
                     var response = await client.SendAsync(TestAsync, message).ConfigureAwait(false);
                 },
@@ -4432,7 +4438,8 @@ namespace System.Net.Http.Functional.Tests
                     while (
                         requestException
                             ?.GetType()
-                            .FullName.Equals("System.Net.Http.Http2ConnectionException") == false
+                            .FullName
+                            .Equals("System.Net.Http.Http2ConnectionException") == false
                     )
                     {
                         requestException = requestException.InnerException;
@@ -4448,10 +4455,9 @@ namespace System.Net.Http.Functional.Tests
                         (Http2LoopbackConnection connection, SettingsFrame clientSettings) =
                             await server.EstablishConnectionGetSettingsAsync();
 
-                        SettingsEntry clientWindowSizeSetting =
-                            clientSettings.Entries.SingleOrDefault(
-                                x => x.SettingId == SettingId.InitialWindowSize
-                            );
+                        SettingsEntry clientWindowSizeSetting = clientSettings
+                            .Entries
+                            .SingleOrDefault(x => x.SettingId == SettingId.InitialWindowSize);
                         int clientWindowSize =
                             clientWindowSizeSetting.SettingId == SettingId.InitialWindowSize
                                 ? (int)clientWindowSizeSetting.Value
@@ -4845,10 +4851,9 @@ namespace System.Net.Http.Functional.Tests
                     using (HttpResponseMessage response = await client.GetAsync(uri))
                     {
                         Assert.True(
-                            response.Headers.TryGetValues(
-                                "new-header",
-                                out IEnumerable<string> values
-                            )
+                            response
+                                .Headers
+                                .TryGetValues("new-header", out IEnumerable<string> values)
                         );
                         Assert.Equal("baz", Assert.Single(values));
                     }
@@ -5061,10 +5066,12 @@ namespace System.Net.Http.Functional.Tests
                 var expected = headers.Select(
                     x => (name: x.Name.ToLowerInvariant(), value: x.Value.ToLowerInvariant())
                 );
-                var actual = response.Headers.SelectMany(
-                    x => x.Value,
-                    (kvp, v) => (name: kvp.Key.ToLowerInvariant(), value: v.ToLowerInvariant())
-                );
+                var actual = response
+                    .Headers
+                    .SelectMany(
+                        x => x.Value,
+                        (kvp, v) => (name: kvp.Key.ToLowerInvariant(), value: v.ToLowerInvariant())
+                    );
                 Assert.Empty(actual.Except(expected));
             }
         }

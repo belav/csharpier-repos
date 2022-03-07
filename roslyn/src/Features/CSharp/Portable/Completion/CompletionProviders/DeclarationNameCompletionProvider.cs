@@ -238,13 +238,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                     .GetMembers()
                     .OfType<IMethodSymbol>()
                     .FirstOrDefault(m => m.IsValidGetEnumerator() || m.IsValidGetAsyncEnumerator())
-                    ?.ReturnType?.GetMembers(WellKnownMemberNames.CurrentPropertyName)
+                    ?.ReturnType
+                    ?.GetMembers(WellKnownMemberNames.CurrentPropertyName)
                     .OfType<IPropertySymbol>()
                     .FirstOrDefault(p => p.GetMethod != null)
                     ?.Type;
 
                 // This can happen for an un-implemented IEnumerable or IAsyncEnumerable.
-                collectionType ??= namedType.AllInterfaces
+                collectionType ??= namedType
+                    .AllInterfaces
                     .FirstOrDefault(
                         t =>
                             t.OriginalDefinition.SpecialType

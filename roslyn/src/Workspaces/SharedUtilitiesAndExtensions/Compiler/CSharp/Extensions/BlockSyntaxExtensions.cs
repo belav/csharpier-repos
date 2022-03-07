@@ -140,9 +140,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                     expression = firstStatement
                         .GetLeadingTrivia()
                         .Any(t => t.IsDirective || t.IsSingleOrMultiLineComment())
-                      ? returnStatement.Expression.WithLeadingTrivia(
-                            returnStatement.GetLeadingTrivia()
-                        )
+                      ? returnStatement
+                        .Expression
+                        .WithLeadingTrivia(returnStatement.GetLeadingTrivia())
                       : returnStatement.Expression;
                     semicolonToken = returnStatement.SemicolonToken;
                     return true;

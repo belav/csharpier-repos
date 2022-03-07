@@ -130,10 +130,9 @@ namespace System.Text.Json.Serialization.Tests
             {
                 MemoryStream stream = new MemoryStream(data);
                 ClassWithStringProperties obj =
-                    JsonSerializer.DeserializeAsync<ClassWithStringProperties>(
-                        stream,
-                        options
-                    ).Result;
+                    JsonSerializer
+                        .DeserializeAsync<ClassWithStringProperties>(stream, options)
+                        .Result;
 
                 VerifyClassWithStringProperties(obj, stringSize);
 

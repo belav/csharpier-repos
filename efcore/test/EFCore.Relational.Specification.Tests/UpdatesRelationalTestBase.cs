@@ -76,9 +76,9 @@ namespace Microsoft.EntityFrameworkCore
 
                     Assert.Equal(
                         RelationalStrings.ReadonlyEntitySaved(nameof(ProductTableView)),
-                        Assert.Throws<InvalidOperationException>(
-                            () => context.SaveChanges()
-                        ).Message
+                        Assert
+                            .Throws<InvalidOperationException>(() => context.SaveChanges())
+                            .Message
                     );
                 }
             );

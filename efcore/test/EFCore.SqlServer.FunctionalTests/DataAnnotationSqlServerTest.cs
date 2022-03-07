@@ -146,7 +146,8 @@ namespace Microsoft.EntityFrameworkCore
 
             Assert.Equal(
                 "Unique_No",
-                modelBuilder.Model
+                modelBuilder
+                    .Model
                     .FindEntityType(typeof(One))
                     .FindProperty(nameof(One.UniqueNo))
                     .GetColumnBaseName()

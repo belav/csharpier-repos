@@ -112,14 +112,14 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                 CancellationToken cancellationToken
             )
             {
-                var stateSets = owner._stateManager
+                var stateSets = owner
+                    ._stateManager
                     .GetOrCreateStateSets(document.Project)
                     .Where(
                         s =>
-                            !owner.DiagnosticAnalyzerInfoCache.IsAnalyzerSuppressed(
-                                s.Analyzer,
-                                document.Project
-                            )
+                            !owner
+                                .DiagnosticAnalyzerInfoCache
+                                .IsAnalyzerSuppressed(s.Analyzer, document.Project)
                     );
 
                 // filter to specific diagnostic it is looking for
@@ -128,7 +128,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                     stateSets = stateSets
                         .Where(
                             s =>
-                                owner.DiagnosticAnalyzerInfoCache
+                                owner
+                                    .DiagnosticAnalyzerInfoCache
                                     .GetDiagnosticDescriptors(s.Analyzer)
                                     .Any(d => d.Id == diagnosticId)
                         )
@@ -225,8 +226,9 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                         )
                         {
                             // Check whether we want up-to-date document wide semantic diagnostics
-                            var spanBased =
-                                stateSet.Analyzer.SupportsSpanBasedSemanticDiagnosticAnalysis();
+                            var spanBased = stateSet
+                                .Analyzer
+                                .SupportsSpanBasedSemanticDiagnosticAnalysis();
                             if (!_blockForData && !spanBased)
                             {
                                 containsFullResult = false;

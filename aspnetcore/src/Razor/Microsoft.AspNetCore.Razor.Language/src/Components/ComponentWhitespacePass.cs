@@ -91,9 +91,9 @@ internal class ComponentWhitespacePass
             )
         )
         {
-            var token = (
-                (DirectiveIntermediateNode)preserveWhitespaceDirective.Node
-            ).Tokens.FirstOrDefault();
+            var token = ((DirectiveIntermediateNode)preserveWhitespaceDirective.Node)
+                .Tokens
+                .FirstOrDefault();
             var shouldPreserveWhitespaceContent = token?.Content;
             if (shouldPreserveWhitespaceContent != null)
             {

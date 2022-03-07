@@ -60,9 +60,9 @@ namespace System.Net.Http.Unit.Tests.HPack
 
         private const string _headerNameString = "new-header";
 
-        private static readonly byte[] _headerNameBytes = Encoding.ASCII.GetBytes(
-            _headerNameString
-        );
+        private static readonly byte[] _headerNameBytes = Encoding
+            .ASCII
+            .GetBytes(_headerNameString);
 
         // n     e     w       -      h     e     a     d     e     r      *
         // 10101000 10111110 00010110 10011100 10100011 10010000 10110110 01111111
@@ -80,9 +80,9 @@ namespace System.Net.Http.Unit.Tests.HPack
 
         private const string _headerValueString = "value";
 
-        private static readonly byte[] _headerValueBytes = Encoding.ASCII.GetBytes(
-            _headerValueString
-        );
+        private static readonly byte[] _headerValueBytes = Encoding
+            .ASCII
+            .GetBytes(_headerValueString);
 
         // v      a     l      u      e    *
         // 11101110 00111010 00101101 00101111

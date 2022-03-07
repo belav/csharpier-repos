@@ -81,9 +81,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Debugging
             var lineNumber = text.Lines.GetLineFromPosition(position).LineNumber;
             var accessor = memberDeclaration.GetAncestorOrThis<AccessorDeclarationSyntax>();
             var memberLine =
-                text.Lines.GetLineFromPosition(
-                    accessor?.SpanStart ?? memberDeclaration.SpanStart
-                ).LineNumber;
+                text.Lines
+                    .GetLineFromPosition(accessor?.SpanStart ?? memberDeclaration.SpanStart)
+                    .LineNumber;
             var lineOffset = lineNumber - memberLine;
 
             return new DebugLocationInfo(name, lineOffset);

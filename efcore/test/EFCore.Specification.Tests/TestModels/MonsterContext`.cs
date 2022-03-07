@@ -341,9 +341,9 @@ namespace Microsoft.EntityFrameworkCore.TestModels
                         .HasForeignKey(e => e.Username);
 
                     var entityType = b.Metadata;
-                    var activityEntityType = entityType.Model.FindEntityType(
-                        typeof(TSuspiciousActivity)
-                    );
+                    var activityEntityType = entityType
+                        .Model
+                        .FindEntityType(typeof(TSuspiciousActivity));
                     activityEntityType.AddForeignKey(
                         activityEntityType.FindProperty("Username"),
                         key.Metadata,

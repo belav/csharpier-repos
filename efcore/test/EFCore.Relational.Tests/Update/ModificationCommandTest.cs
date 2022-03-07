@@ -425,9 +425,9 @@ namespace Microsoft.EntityFrameworkCore.Update
                         "T1",
                         EntityState.Unchanged
                     ),
-                Assert.Throws<InvalidOperationException>(
-                    () => command.AddEntry(entry, true)
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(() => command.AddEntry(entry, true))
+                    .Message
             );
         }
 
@@ -457,9 +457,9 @@ namespace Microsoft.EntityFrameworkCore.Update
                         "T1",
                         EntityState.Detached
                     ),
-                Assert.Throws<InvalidOperationException>(
-                    () => command.AddEntry(entry, true)
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(() => command.AddEntry(entry, true))
+                    .Message
             );
         }
 
@@ -605,16 +605,18 @@ namespace Microsoft.EntityFrameworkCore.Update
         {
             var model = BuildModel(generateKeyValues, computeNonKeyValue);
 
-            return RelationalTestHelpers.Instance.CreateInternalEntry(
-                model,
-                entityState,
-                new T1
-                {
-                    Id = 1,
-                    Name1 = computeNonKeyValue ? null : "Test",
-                    Name2 = computeNonKeyValue ? null : "Test"
-                }
-            );
+            return RelationalTestHelpers
+                .Instance
+                .CreateInternalEntry(
+                    model,
+                    entityState,
+                    new T1
+                    {
+                        Id = 1,
+                        Name1 = computeNonKeyValue ? null : "Test",
+                        Name2 = computeNonKeyValue ? null : "Test"
+                    }
+                );
         }
 
         private static IModificationCommand CreateModificationCommand(

@@ -25,7 +25,8 @@ namespace Microsoft.CodeAnalysis.SymbolMapping
             CancellationToken cancellationToken
         )
         {
-            var compilation = await document.Project
+            var compilation = await document
+                .Project
                 .GetCompilationAsync(cancellationToken)
                 .ConfigureAwait(false);
             var symbol = symbolId.Resolve(compilation, cancellationToken: cancellationToken).Symbol;

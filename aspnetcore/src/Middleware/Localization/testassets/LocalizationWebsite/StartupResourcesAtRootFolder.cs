@@ -41,7 +41,9 @@ public class StartupResourcesAtRootFolder
         var location =
             typeof(LocalizationWebsite.StartupResourcesAtRootFolder)
                 .GetTypeInfo()
-                .Assembly.GetName().Name;
+                .Assembly
+                .GetName()
+                .Name;
         var stringLocalizer = stringLocalizerFactory.Create("Test", location: location);
 
         app.Run(

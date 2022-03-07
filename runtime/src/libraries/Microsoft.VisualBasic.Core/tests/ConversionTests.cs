@@ -156,9 +156,11 @@ namespace Microsoft.VisualBasic.Tests
         [Fact]
         public void ErrorToString()
         {
-            Microsoft.VisualBasic.CompilerServices.ProjectData.SetProjectError(
-                new System.IO.FileNotFoundException()
-            );
+            Microsoft
+                .VisualBasic
+                .CompilerServices
+                .ProjectData
+                .SetProjectError(new System.IO.FileNotFoundException());
             Assert.NotNull(Conversion.ErrorToString());
         }
 

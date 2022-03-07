@@ -41,7 +41,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessaryImports
         {
             var syntaxFacts = document.GetLanguageService<ISyntaxFactsService>();
 
-            var trimmedLeadingTrivia = token.LeadingTrivia
+            var trimmedLeadingTrivia = token
+                .LeadingTrivia
                 .SkipWhile(t => syntaxFacts.IsEndOfLineTrivia(t))
                 .ToList();
 

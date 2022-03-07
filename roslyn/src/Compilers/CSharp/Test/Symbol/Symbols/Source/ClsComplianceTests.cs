@@ -2104,7 +2104,8 @@ public class C : B
             var accessor =
                 comp.GlobalNamespace
                     .GetMember<NamedTypeSymbol>("C")
-                    .GetMember<PropertySymbol>("P").GetMethod;
+                    .GetMember<PropertySymbol>("P")
+                    .GetMethod;
             Assert.True(accessor.Name[0] == '_');
         }
 

@@ -232,7 +232,8 @@ namespace System.Collections
                         bitsExtracted2 = AdvSimd.Arm64.AddPairwise(bitsExtracted2, bitsExtracted2);
                         Vector128<short> upperPackedIsFalse = bitsExtracted2.AsInt16();
 
-                        int result = AdvSimd.Arm64
+                        int result = AdvSimd
+                            .Arm64
                             .ZipLow(lowerPackedIsFalse, upperPackedIsFalse)
                             .AsInt32()
                             .ToScalar();

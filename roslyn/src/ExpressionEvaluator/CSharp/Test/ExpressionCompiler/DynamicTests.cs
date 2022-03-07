@@ -65,7 +65,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
                     Assert.Equal(1, locals.Count);
                     var method = (MethodSymbol)testData
                         .GetExplicitlyDeclaredMethods()
-                        .Single().Value.Method;
+                        .Single()
+                        .Value
+                        .Method;
                     CheckAttribute(
                         assembly,
                         method,
@@ -131,7 +133,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
                     Assert.Equal(1, locals.Count);
                     var method = (MethodSymbol)testData
                         .GetExplicitlyDeclaredMethods()
-                        .Single().Value.Method;
+                        .Single()
+                        .Value
+                        .Method;
                     CheckAttribute(
                         assembly,
                         method,
@@ -200,7 +204,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
                     Assert.Equal(1, locals.Count);
                     var method = (MethodSymbol)testData
                         .GetExplicitlyDeclaredMethods()
-                        .Single().Value.Method;
+                        .Single()
+                        .Value
+                        .Method;
                     CheckAttribute(
                         assembly,
                         method,
@@ -269,7 +275,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
                     Assert.Equal(1, locals.Count);
                     var method = (MethodSymbol)testData
                         .GetExplicitlyDeclaredMethods()
-                        .Single().Value.Method;
+                        .Single()
+                        .Value
+                        .Method;
                     CheckAttribute(
                         assembly,
                         method,
@@ -335,7 +343,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
                     Assert.Equal(1, locals.Count);
                     var method = (MethodSymbol)testData
                         .GetExplicitlyDeclaredMethods()
-                        .Single().Value.Method;
+                        .Single()
+                        .Value
+                        .Method;
                     CheckAttribute(
                         assembly,
                         method,
@@ -410,7 +420,9 @@ class Generic<T>
                     Assert.Equal(1, locals.Count);
                     var method = (MethodSymbol)testData
                         .GetExplicitlyDeclaredMethods()
-                        .Single().Value.Method;
+                        .Single()
+                        .Value
+                        .Method;
                     CheckAttribute(
                         assembly,
                         method,
@@ -953,7 +965,9 @@ class Generic<T>
                     Assert.Equal(1, locals.Count);
                     var method = (MethodSymbol)testData
                         .GetExplicitlyDeclaredMethods()
-                        .Single().Value.Method;
+                        .Single()
+                        .Value
+                        .Method;
                     CheckAttribute(
                         assembly,
                         method,
@@ -1013,7 +1027,9 @@ class Generic<T>
                     Assert.Equal(1, locals.Count);
                     var method = (MethodSymbol)testData
                         .GetExplicitlyDeclaredMethods()
-                        .Single().Value.Method;
+                        .Single()
+                        .Value
+                        .Method;
                     CheckAttribute(
                         assembly,
                         method,
@@ -1076,7 +1092,9 @@ class Generic<T>
                     Assert.Equal(1, locals.Count);
                     var method = (MethodSymbol)testData
                         .GetExplicitlyDeclaredMethods()
-                        .Single().Value.Method;
+                        .Single()
+                        .Value
+                        .Method;
                     CheckAttribute(
                         assembly,
                         method,
@@ -1151,7 +1169,9 @@ public class Outer<T, U>
                     Assert.Equal(1, locals.Count);
                     var method = (MethodSymbol)testData
                         .GetExplicitlyDeclaredMethods()
-                        .Single().Value.Method;
+                        .Single()
+                        .Value
+                        .Method;
                     CheckAttribute(
                         assembly,
                         method,
@@ -1383,7 +1403,9 @@ public class Outer<T, U>
                     Assert.Equal(1, locals.Count);
                     var method = (MethodSymbol)testData
                         .GetExplicitlyDeclaredMethods()
-                        .Single().Value.Method;
+                        .Single()
+                        .Value
+                        .Method;
                     CheckAttribute(
                         assembly,
                         method,

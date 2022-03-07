@@ -29,11 +29,9 @@ namespace System.Web.Http.ApiExplorer
         )
         {
             HttpConfiguration config = new HttpConfiguration();
-            config.Routes.MapHttpRoute(
-                "Default",
-                "{controller}/{id}",
-                new { id = RouteParameter.Optional }
-            );
+            config
+                .Routes
+                .MapHttpRoute("Default", "{controller}/{id}", new { id = RouteParameter.Optional });
 
             DefaultHttpControllerSelector controllerSelector =
                 ApiExplorerHelper.GetStrictControllerSelector(config, controllerType);
@@ -71,11 +69,9 @@ namespace System.Web.Http.ApiExplorer
         )
         {
             HttpConfiguration config = new HttpConfiguration();
-            config.Routes.MapHttpRoute(
-                "Default",
-                "{controller}/{id}",
-                new { id = RouteParameter.Optional }
-            );
+            config
+                .Routes
+                .MapHttpRoute("Default", "{controller}/{id}", new { id = RouteParameter.Optional });
 
             DefaultHttpControllerSelector controllerSelector =
                 ApiExplorerHelper.GetStrictControllerSelector(config, controllerType);

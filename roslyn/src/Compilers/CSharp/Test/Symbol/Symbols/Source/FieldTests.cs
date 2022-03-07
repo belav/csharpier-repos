@@ -254,7 +254,8 @@ class C1
 }
 ";
             var comp = CreateCompilation(Parse(text));
-            NamedTypeSymbol c1 = (NamedTypeSymbol)comp.SourceModule.GlobalNamespace
+            NamedTypeSymbol c1 = (NamedTypeSymbol)comp.SourceModule
+                .GlobalNamespace
                 .GetMembers("C1")
                 .Single();
             FieldSymbol ein = (FieldSymbol)c1.GetMembers("in").Single();
@@ -277,7 +278,8 @@ class C
 }
 ";
             var comp = CreateCompilation(Parse(text));
-            NamedTypeSymbol type1 = (NamedTypeSymbol)comp.SourceModule.GlobalNamespace
+            NamedTypeSymbol type1 = (NamedTypeSymbol)comp.SourceModule
+                .GlobalNamespace
                 .GetMembers("C")
                 .Single();
             FieldSymbol mem = (FieldSymbol)type1.GetMembers("x").Single();

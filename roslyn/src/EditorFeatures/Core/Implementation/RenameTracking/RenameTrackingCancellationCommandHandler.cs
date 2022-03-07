@@ -39,8 +39,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.RenameTracking
 
         public bool ExecuteCommand(EscapeKeyCommandArgs args, CommandExecutionContext context)
         {
-            var document =
-                args.SubjectBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
+            var document = args.SubjectBuffer
+                .CurrentSnapshot
+                .GetOpenDocumentInCurrentContextWithChanges();
 
             return document != null
                 && RenameTrackingDismisser.DismissVisibleRenameTracking(

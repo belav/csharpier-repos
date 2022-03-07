@@ -14,9 +14,9 @@ public class WebAssemblyHotReloadTest
     public void WebAssemblyHotReload_DiscoversMetadataHandlers_FromHot()
     {
         // Arrange
-        var hotReloadManager = typeof(Renderer).Assembly.GetType(
-            "Microsoft.AspNetCore.Components.HotReload.HotReloadManager"
-        );
+        var hotReloadManager = typeof(Renderer)
+            .Assembly
+            .GetType("Microsoft.AspNetCore.Components.HotReload.HotReloadManager");
         Assert.NotNull(hotReloadManager);
 
         var handlerActions = new HotReloadAgent.UpdateHandlerActions();

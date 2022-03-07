@@ -1090,12 +1090,14 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions
             {
                 return new RegexAlternationNode(
                     topAlternation.Left,
-                    topAlternation.BarToken.AddDiagnosticIfNone(
-                        new EmbeddedDiagnostic(
-                            FeaturesResources.Too_many_bars_in_conditional_grouping,
-                            topAlternation.BarToken.GetSpan()
-                        )
-                    ),
+                    topAlternation
+                        .BarToken
+                        .AddDiagnosticIfNone(
+                            new EmbeddedDiagnostic(
+                                FeaturesResources.Too_many_bars_in_conditional_grouping,
+                                topAlternation.BarToken.GetSpan()
+                            )
+                        ),
                     topAlternation.Right
                 );
             }

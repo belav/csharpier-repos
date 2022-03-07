@@ -20,10 +20,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseConditionalExpressio
     public partial class UseConditionalExpressionForReturnTests
         : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
-        private static readonly ParseOptions CSharp8 =
-            CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp8);
-        private static readonly ParseOptions CSharp9 =
-            CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp9);
+        private static readonly ParseOptions CSharp8 = CSharpParseOptions
+            .Default
+            .WithLanguageVersion(LanguageVersion.CSharp8);
+        private static readonly ParseOptions CSharp9 = CSharpParseOptions
+            .Default
+            .WithLanguageVersion(LanguageVersion.CSharp9);
 
         public UseConditionalExpressionForReturnTests(ITestOutputHelper logger) : base(logger) { }
 
@@ -171,9 +173,9 @@ class C
     }
 }",
                 parameters: new TestParameters(
-                    parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
-                        LanguageVersion.CSharp6
-                    )
+                    parseOptions: CSharpParseOptions
+                        .Default
+                        .WithLanguageVersion(LanguageVersion.CSharp6)
                 )
             );
         }

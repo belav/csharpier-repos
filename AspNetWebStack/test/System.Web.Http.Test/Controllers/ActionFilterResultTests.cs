@@ -34,13 +34,15 @@ namespace System.Web.Http.Controllers
                 }
             );
             Func<Task<HttpResponseMessage>> innerAction = () =>
-                Task<HttpResponseMessage>.Factory.StartNew(
-                    () =>
-                    {
-                        log.Add("innerAction");
-                        return null;
-                    }
-                );
+                Task<HttpResponseMessage>
+                    .Factory
+                    .StartNew(
+                        () =>
+                        {
+                            log.Add("innerAction");
+                            return null;
+                        }
+                    );
             var filters = new IActionFilter[] { globalFilterMock.Object, actionFilterMock.Object, };
 
             // Act

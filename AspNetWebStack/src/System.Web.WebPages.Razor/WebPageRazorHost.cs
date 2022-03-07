@@ -363,9 +363,10 @@ namespace System.Web.WebPages.Razor
             base.PostProcessGeneratedCode(context);
 
             // Add additional global imports
-            context.Namespace.Imports.AddRange(
-                GetGlobalImports().Select(s => new CodeNamespaceImport(s)).ToArray()
-            );
+            context
+                .Namespace
+                .Imports
+                .AddRange(GetGlobalImports().Select(s => new CodeNamespaceImport(s)).ToArray());
 
             // Create ApplicationInstance property
             CodeMemberProperty prop = new CodeMemberProperty()

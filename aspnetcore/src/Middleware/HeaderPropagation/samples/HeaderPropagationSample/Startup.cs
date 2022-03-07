@@ -40,13 +40,15 @@ public class Startup
                 options.Headers.Add("X-BetaFeatures");
 
                 // Generate a new X-BetaFeatures if not present.
-                options.Headers.Add(
-                    "X-BetaFeatures",
-                    context =>
-                    {
-                        return GenerateBetaFeatureOptions();
-                    }
-                );
+                options
+                    .Headers
+                    .Add(
+                        "X-BetaFeatures",
+                        context =>
+                        {
+                            return GenerateBetaFeatureOptions();
+                        }
+                    );
             }
         );
 
@@ -83,9 +85,11 @@ public class Startup
                     {
                         foreach (var header in context.Request.Headers)
                         {
-                            await context.Response.WriteAsync(
-                                $"'/' Got Header '{header.Key}': {string.Join(", ", header.Value)}\r\n"
-                            );
+                            await context
+                                .Response
+                                .WriteAsync(
+                                    $"'/' Got Header '{header.Key}': {string.Join(", ", header.Value)}\r\n"
+                                );
                         }
 
                         var clientNames = new[] { "test", "another" };
@@ -104,15 +108,17 @@ public class Startup
 
                             foreach (var header in response.RequestMessage.Headers)
                             {
-                                await context.Response.WriteAsync(
-                                    $"Sent Header '{header.Key}': {string.Join(", ", header.Value)}\r\n"
-                                );
+                                await context
+                                    .Response
+                                    .WriteAsync(
+                                        $"Sent Header '{header.Key}': {string.Join(", ", header.Value)}\r\n"
+                                    );
                             }
 
                             await context.Response.WriteAsync("Got response\r\n");
-                            await context.Response.WriteAsync(
-                                await response.Content.ReadAsStringAsync()
-                            );
+                            await context
+                                .Response
+                                .WriteAsync(await response.Content.ReadAsStringAsync());
                         }
                     }
                 );
@@ -123,9 +129,11 @@ public class Startup
                     {
                         foreach (var header in context.Request.Headers)
                         {
-                            await context.Response.WriteAsync(
-                                $"'/forwarded' Got Header '{header.Key}': {string.Join(", ", header.Value)}\r\n"
-                            );
+                            await context
+                                .Response
+                                .WriteAsync(
+                                    $"'/forwarded' Got Header '{header.Key}': {string.Join(", ", header.Value)}\r\n"
+                                );
                         }
                     }
                 );

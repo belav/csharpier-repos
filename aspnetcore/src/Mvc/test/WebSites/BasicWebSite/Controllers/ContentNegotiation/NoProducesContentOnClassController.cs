@@ -14,9 +14,13 @@ public class NoProducesContentOnClassController : ProducesContentBaseController
         var result = context.Result as ObjectResult;
         if (result != null)
         {
-            result.Formatters.Add(
-                new CustomFormatter("application/custom_NoProducesContentOnClassController_Action")
-            );
+            result
+                .Formatters
+                .Add(
+                    new CustomFormatter(
+                        "application/custom_NoProducesContentOnClassController_Action"
+                    )
+                );
         }
 
         base.OnActionExecuted(context);

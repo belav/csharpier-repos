@@ -125,9 +125,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             int argumentCount =
                 (attributeSyntax.ArgumentList != null)
-                    ? attributeSyntax.ArgumentList.Arguments.Count<AttributeArgumentSyntax>(
-                          (arg) => arg.NameEquals == null
-                      )
+                    ? attributeSyntax
+                      .ArgumentList
+                      .Arguments
+                      .Count<AttributeArgumentSyntax>((arg) => arg.NameEquals == null)
                     : 0;
             return AttributeData.IsTargetEarlyAttribute(attributeType, argumentCount, description);
         }
@@ -1142,10 +1143,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             }
 
             Debug.Assert(attribute is SourceAttributeData);
-            return ((SourceAttributeData)attribute).GetAttributeArgumentSyntax(
-                parameterIndex,
-                attributeSyntaxOpt
-            ).Location;
+            return ((SourceAttributeData)attribute)
+                .GetAttributeArgumentSyntax(parameterIndex, attributeSyntaxOpt)
+                .Location;
         }
     }
 }

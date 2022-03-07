@@ -164,8 +164,10 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.MoveType
             );
             var isNestedType = IsNestedType(state.TypeNode);
 
-            var syntaxFacts =
-                state.SemanticDocument.Document.GetRequiredLanguageService<ISyntaxFactsService>();
+            var syntaxFacts = state
+                .SemanticDocument
+                .Document
+                .GetRequiredLanguageService<ISyntaxFactsService>();
             var isClassNextToGlobalStatements = manyTypes
                 ? false
                 : ClassNextToGlobalStatements(state.SemanticDocument.Root, syntaxFacts);
@@ -276,10 +278,9 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.MoveType
                     typeDeclaration =>
                     {
                         var typeName =
-                            semanticModel.GetDeclaredSymbol(
-                                typeDeclaration,
-                                cancellationToken
-                            ).Name;
+                            semanticModel
+                                .GetDeclaredSymbol(typeDeclaration, cancellationToken)
+                                .Name;
                         return TypeMatchesDocumentName(
                             typeDeclaration,
                             typeName,

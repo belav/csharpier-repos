@@ -584,7 +584,11 @@ namespace System.Reflection.Emit
                 | System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.NonPublicEvents
                 | System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.NonPublicFields
                 | System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.NonPublicMethods
-                | System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.NonPublicNestedTypes
+                | System
+                    .Diagnostics
+                    .CodeAnalysis
+                    .DynamicallyAccessedMemberTypes
+                    .NonPublicNestedTypes
                 | System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.NonPublicProperties
                 | System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicConstructors
                 | System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicEvents
@@ -607,7 +611,11 @@ namespace System.Reflection.Emit
                 | System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.NonPublicEvents
                 | System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.NonPublicFields
                 | System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.NonPublicMethods
-                | System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.NonPublicNestedTypes
+                | System
+                    .Diagnostics
+                    .CodeAnalysis
+                    .DynamicallyAccessedMemberTypes
+                    .NonPublicNestedTypes
                 | System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.NonPublicProperties
                 | System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicConstructors
                 | System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicEvents
@@ -1150,7 +1158,11 @@ namespace System.Reflection.Emit
                 | System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.NonPublicEvents
                 | System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.NonPublicFields
                 | System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.NonPublicMethods
-                | System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.NonPublicNestedTypes
+                | System
+                    .Diagnostics
+                    .CodeAnalysis
+                    .DynamicallyAccessedMemberTypes
+                    .NonPublicNestedTypes
                 | System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.NonPublicProperties
                 | System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicConstructors
                 | System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicEvents
@@ -1173,7 +1185,11 @@ namespace System.Reflection.Emit
                 | System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.NonPublicEvents
                 | System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.NonPublicFields
                 | System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.NonPublicMethods
-                | System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.NonPublicNestedTypes
+                | System
+                    .Diagnostics
+                    .CodeAnalysis
+                    .DynamicallyAccessedMemberTypes
+                    .NonPublicNestedTypes
                 | System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.NonPublicProperties
                 | System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicConstructors
                 | System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicEvents
@@ -2767,7 +2783,11 @@ namespace System.Reflection.Emit
                 | System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.NonPublicEvents
                 | System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.NonPublicFields
                 | System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.NonPublicMethods
-                | System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.NonPublicNestedTypes
+                | System
+                    .Diagnostics
+                    .CodeAnalysis
+                    .DynamicallyAccessedMemberTypes
+                    .NonPublicNestedTypes
                 | System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.NonPublicProperties
                 | System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicConstructors
                 | System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicEvents
@@ -2790,7 +2810,11 @@ namespace System.Reflection.Emit
                 | System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.NonPublicEvents
                 | System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.NonPublicFields
                 | System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.NonPublicMethods
-                | System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.NonPublicNestedTypes
+                | System
+                    .Diagnostics
+                    .CodeAnalysis
+                    .DynamicallyAccessedMemberTypes
+                    .NonPublicNestedTypes
                 | System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.NonPublicProperties
                 | System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicConstructors
                 | System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicEvents

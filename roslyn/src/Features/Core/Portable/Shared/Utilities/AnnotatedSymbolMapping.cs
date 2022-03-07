@@ -76,7 +76,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                 out var documentIdToSymbolsMap
             );
 
-            var typeNodeRoot = await typeNode.SyntaxTree
+            var typeNodeRoot = await typeNode
+                .SyntaxTree
                 .GetRootAsync(cancellationToken)
                 .ConfigureAwait(false);
             var typeNodeAnnotation = new SyntaxAnnotation();

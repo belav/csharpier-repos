@@ -332,9 +332,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                     join s in ss.Set<EntityCompositeKey>()
                         on t.TwoSkipShared
                             .OrderBy(e => e.Id)
-                            .FirstOrDefault().Id equals s.ThreeSkipFull
-                            .OrderBy(e => e.Id)
-                            .FirstOrDefault().Id
+                            .FirstOrDefault()
+                            .Id equals s.ThreeSkipFull.OrderBy(e => e.Id).FirstOrDefault().Id
                         into grouping
                     from s in grouping.DefaultIfEmpty()
                     orderby t.Key1 ,s.Key1 ,t.Key2 ,s.Key2
@@ -972,7 +971,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                                         .ThenInclude(e => e.ThreeSkipPayloadFull)
                             )
                     )
-                ).Message
+                )
+                    .Message
                     .Replace("\r", "")
                     .Replace("\n", "")
             );
@@ -1005,7 +1005,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                                         .ThenInclude(e => e.ThreeSkipPayloadFull)
                             )
                     )
-                ).Message
+                )
+                    .Message
                     .Replace("\r", "")
                     .Replace("\n", "")
             );
@@ -1190,7 +1191,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                                         .ThenInclude(e => e.Collection.Where(i => i.Id < 10))
                             )
                     )
-                ).Message
+                )
+                    .Message
                     .Replace("\r", "")
                     .Replace("\n", "")
             );

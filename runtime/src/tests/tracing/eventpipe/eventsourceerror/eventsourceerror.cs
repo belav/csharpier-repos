@@ -105,10 +105,12 @@ namespace Tracing.Tests.EventSourceError
                 if (
                     traceEvent.ProviderName == "IllegalTypesEventSource"
                     && traceEvent.EventName == "EventSourceMessage"
-                    && traceEvent.FormattedMessage.StartsWith(
-                        "ERROR: Exception in Command Processing for EventSource IllegalTypesEventSource",
-                        StringComparison.OrdinalIgnoreCase
-                    )
+                    && traceEvent
+                        .FormattedMessage
+                        .StartsWith(
+                            "ERROR: Exception in Command Processing for EventSource IllegalTypesEventSource",
+                            StringComparison.OrdinalIgnoreCase
+                        )
                 )
                 {
                     sawEvent = true;

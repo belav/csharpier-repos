@@ -72,8 +72,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.InheritanceMarg
                 _tagAggregatorFactoryService.CreateTagAggregator<InheritanceMarginTag>(textView);
             var editorFormatMap = _editorFormatMapService.GetEditorFormatMap(textView);
 
-            var document =
-                wpfTextViewHost.TextView.TextBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
+            var document = wpfTextViewHost
+                .TextView
+                .TextBuffer
+                .CurrentSnapshot
+                .GetOpenDocumentInCurrentContextWithChanges();
             if (document == null)
             {
                 return null;

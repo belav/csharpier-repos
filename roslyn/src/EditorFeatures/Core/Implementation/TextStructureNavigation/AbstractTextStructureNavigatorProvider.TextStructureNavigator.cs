@@ -281,7 +281,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.TextStructureNavigation
                     if (parent != null)
                     {
                         // Find node immediately after the current in the children collection.
-                        var nodeOrToken = parent.Value
+                        var nodeOrToken = parent
+                            .Value
                             .ChildNodesAndTokens()
                             .SkipWhile(child => child != node)
                             .Skip(1)
@@ -347,7 +348,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.TextStructureNavigation
                     if (parent != null)
                     {
                         // Find node immediately before the current in the children collection.
-                        var nodeOrToken = parent.Value
+                        var nodeOrToken = parent
+                            .Value
                             .ChildNodesAndTokens()
                             .Reverse()
                             .SkipWhile(child => child != node)

@@ -85,10 +85,9 @@ namespace System.Text.RegularExpressions.Symbolic.Unicode
                     // Create the condition from WordLetterCondition together with the characters
                     // \u200C (zero width non joiner) and \u200D (zero width joiner) that are treated
                     // as if they were word characters in the context of the anchors \b and \B
-                    BDD extra_bdd = _solver.CharSetProvider.CreateCharSetFromRange(
-                        '\u200C',
-                        '\u200D'
-                    );
+                    BDD extra_bdd = _solver
+                        .CharSetProvider
+                        .CreateCharSetFromRange('\u200C', '\u200D');
                     TPredicate extra_pred = _solver.ConvertFromCharSet(
                         _solver.CharSetProvider,
                         extra_bdd

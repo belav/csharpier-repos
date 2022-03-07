@@ -186,10 +186,12 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
             // Note that the tuple initially parses as a parenthesized expression
             if (
                 token.IsKind(SyntaxKind.OpenParenToken)
-                && token.Parent.IsKind(
-                    SyntaxKind.ParenthesizedExpression,
-                    out ParenthesizedExpressionSyntax? parenExpr
-                )
+                && token
+                    .Parent
+                    .IsKind(
+                        SyntaxKind.ParenthesizedExpression,
+                        out ParenthesizedExpressionSyntax? parenExpr
+                    )
             )
             {
                 var parenthesizedExpr = parenExpr.WalkUpParentheses();

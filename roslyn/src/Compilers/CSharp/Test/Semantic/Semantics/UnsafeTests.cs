@@ -2990,22 +2990,26 @@ struct R<T>
             Assert.False(
                 globalNamespace
                     .GetMember<NamedTypeSymbol>("C")
-                    .GetMember<NamedTypeSymbol>("E").IsManagedTypeNoUseSiteDiagnostics
+                    .GetMember<NamedTypeSymbol>("E")
+                    .IsManagedTypeNoUseSiteDiagnostics
             );
             Assert.False(
                 globalNamespace
                     .GetMember<NamedTypeSymbol>("D")
-                    .GetMember<NamedTypeSymbol>("E").IsManagedTypeNoUseSiteDiagnostics
+                    .GetMember<NamedTypeSymbol>("E")
+                    .IsManagedTypeNoUseSiteDiagnostics
             );
             Assert.False(
                 globalNamespace
                     .GetMember<NamedTypeSymbol>("S")
-                    .GetMember<NamedTypeSymbol>("E").IsManagedTypeNoUseSiteDiagnostics
+                    .GetMember<NamedTypeSymbol>("E")
+                    .IsManagedTypeNoUseSiteDiagnostics
             );
             Assert.False(
                 globalNamespace
                     .GetMember<NamedTypeSymbol>("R")
-                    .GetMember<NamedTypeSymbol>("E").IsManagedTypeNoUseSiteDiagnostics
+                    .GetMember<NamedTypeSymbol>("E")
+                    .IsManagedTypeNoUseSiteDiagnostics
             );
         }
 
@@ -3057,22 +3061,26 @@ struct R<T>
             Assert.False(
                 globalNamespace
                     .GetMember<NamedTypeSymbol>("C")
-                    .GetMember<NamedTypeSymbol>("S").IsManagedTypeNoUseSiteDiagnostics
+                    .GetMember<NamedTypeSymbol>("S")
+                    .IsManagedTypeNoUseSiteDiagnostics
             );
             Assert.False(
                 globalNamespace
                     .GetMember<NamedTypeSymbol>("D")
-                    .GetMember<NamedTypeSymbol>("S").IsManagedTypeNoUseSiteDiagnostics
+                    .GetMember<NamedTypeSymbol>("S")
+                    .IsManagedTypeNoUseSiteDiagnostics
             );
             Assert.False(
                 globalNamespace
                     .GetMember<NamedTypeSymbol>("Q")
-                    .GetMember<NamedTypeSymbol>("S").IsManagedTypeNoUseSiteDiagnostics
+                    .GetMember<NamedTypeSymbol>("S")
+                    .IsManagedTypeNoUseSiteDiagnostics
             );
             Assert.False(
                 globalNamespace
                     .GetMember<NamedTypeSymbol>("R")
-                    .GetMember<NamedTypeSymbol>("S").IsManagedTypeNoUseSiteDiagnostics
+                    .GetMember<NamedTypeSymbol>("S")
+                    .IsManagedTypeNoUseSiteDiagnostics
             );
         }
 
@@ -3504,19 +3512,19 @@ class C { }
 ";
             var compilation = CreateCompilation(text);
             Assert.False(
-                compilation.GetSpecialType(
-                    SpecialType.System_ArgIterator
-                ).IsManagedTypeNoUseSiteDiagnostics
+                compilation
+                    .GetSpecialType(SpecialType.System_ArgIterator)
+                    .IsManagedTypeNoUseSiteDiagnostics
             );
             Assert.False(
-                compilation.GetSpecialType(
-                    SpecialType.System_RuntimeArgumentHandle
-                ).IsManagedTypeNoUseSiteDiagnostics
+                compilation
+                    .GetSpecialType(SpecialType.System_RuntimeArgumentHandle)
+                    .IsManagedTypeNoUseSiteDiagnostics
             );
             Assert.False(
-                compilation.GetSpecialType(
-                    SpecialType.System_TypedReference
-                ).IsManagedTypeNoUseSiteDiagnostics
+                compilation
+                    .GetSpecialType(SpecialType.System_TypedReference)
+                    .IsManagedTypeNoUseSiteDiagnostics
             );
         }
 
@@ -5481,13 +5489,15 @@ struct S
             Assert.Null(methodGroupSummary.ConvertedType);
             Assert.Equal(ConversionKind.Identity, methodGroupSummary.ImplicitConversion.Kind);
             Assert.True(
-                methodGroupSummary.MethodGroup.SetEquals(
-                    ImmutableArray.Create<IMethodSymbol>(
-                        structMethod1.GetPublicSymbol(),
-                        structMethod2.GetPublicSymbol()
-                    ),
-                    EqualityComparer<IMethodSymbol>.Default
-                )
+                methodGroupSummary
+                    .MethodGroup
+                    .SetEquals(
+                        ImmutableArray.Create<IMethodSymbol>(
+                            structMethod1.GetPublicSymbol(),
+                            structMethod2.GetPublicSymbol()
+                        ),
+                        EqualityComparer<IMethodSymbol>.Default
+                    )
             );
 
             var callSummary = model.GetSemanticInfoSummary(callSyntax);
@@ -5564,10 +5574,12 @@ struct S
             Assert.Null(methodGroupSummary.ConvertedType);
             Assert.Equal(ConversionKind.Identity, methodGroupSummary.ImplicitConversion.Kind);
             Assert.True(
-                methodGroupSummary.MethodGroup.SetEquals(
-                    structMethods.GetPublicSymbols(),
-                    EqualityComparer<IMethodSymbol>.Default
-                )
+                methodGroupSummary
+                    .MethodGroup
+                    .SetEquals(
+                        structMethods.GetPublicSymbols(),
+                        EqualityComparer<IMethodSymbol>.Default
+                    )
             );
 
             var callSummary = model.GetSemanticInfoSummary(callSyntax);
@@ -6602,7 +6614,8 @@ unsafe class C
 
             compilation.VerifyDiagnostics();
 
-            var methodSymbol = compilation.GlobalNamespace
+            var methodSymbol = compilation
+                .GlobalNamespace
                 .GetMember<NamedTypeSymbol>("C")
                 .GetMember<MethodSymbol>("M");
             var pointerType = methodSymbol.Parameters[0].Type;
@@ -8205,7 +8218,8 @@ unsafe class C
             Assert.Equal(charPointerSymbol, summary0.Type.GetSymbol());
 
             var summary1 = initializerSummaries[1];
-            var arraySymbol = compilation.GlobalNamespace
+            var arraySymbol = compilation
+                .GlobalNamespace
                 .GetMember<TypeSymbol>("C")
                 .GetMember<FieldSymbol>("a");
             Assert.Equal(arraySymbol, summary1.Symbol.GetSymbol());
@@ -8289,7 +8303,8 @@ unsafe class C
             Assert.Equal(Conversion.PointerToVoid, summary0.ImplicitConversion);
 
             var summary1 = initializerSummaries[1];
-            var arraySymbol = compilation.GlobalNamespace
+            var arraySymbol = compilation
+                .GlobalNamespace
                 .GetMember<TypeSymbol>("C")
                 .GetMember<FieldSymbol>("a");
             Assert.Equal(arraySymbol, summary1.Symbol.GetSymbol());

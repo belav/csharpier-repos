@@ -59,7 +59,8 @@ namespace Microsoft.CodeAnalysis
                 relativePathResolver
             );
 
-            var analyzerLoader = tmpWorkspace.Services
+            var analyzerLoader = tmpWorkspace
+                .Services
                 .GetRequiredService<IAnalyzerService>()
                 .GetLoader();
             var xmlFileResolver = new XmlFileResolver(commandLineArguments.BaseDirectory);
@@ -217,7 +218,8 @@ namespace Microsoft.CodeAnalysis
                 projectName,
                 assemblyName,
                 language: language,
-                compilationOptions: commandLineArguments.CompilationOptions
+                compilationOptions: commandLineArguments
+                    .CompilationOptions
                     .WithXmlReferenceResolver(xmlFileResolver)
                     .WithAssemblyIdentityComparer(assemblyIdentityComparer)
                     .WithStrongNameProvider(strongNameProvider)

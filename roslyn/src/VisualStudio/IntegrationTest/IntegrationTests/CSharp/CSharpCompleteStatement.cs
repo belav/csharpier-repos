@@ -35,10 +35,10 @@ public class Test
             );
 
             VisualStudio.Editor.SendKeys(';');
-            VisualStudio.Editor.Verify.CurrentLineText(
-                "f.ToString();$$",
-                assertCaretPosition: true
-            );
+            VisualStudio
+                .Editor
+                .Verify
+                .CurrentLineText("f.ToString();$$", assertCaretPosition: true);
 
             VisualStudio.Editor.Undo();
             VisualStudio.Editor.Verify.CurrentLineText("f.ToString($$)", assertCaretPosition: true);
@@ -63,16 +63,16 @@ public class Test
             );
 
             VisualStudio.Editor.SendKeys(';');
-            VisualStudio.Editor.Verify.CurrentLineText(
-                "Method(condition ? whenTrue );$$",
-                assertCaretPosition: true
-            );
+            VisualStudio
+                .Editor
+                .Verify
+                .CurrentLineText("Method(condition ? whenTrue );$$", assertCaretPosition: true);
 
             VisualStudio.Editor.Undo();
-            VisualStudio.Editor.Verify.CurrentLineText(
-                "Method(condition ? whenTrue $$)",
-                assertCaretPosition: true
-            );
+            VisualStudio
+                .Editor
+                .Verify
+                .CurrentLineText("Method(condition ? whenTrue $$)", assertCaretPosition: true);
         }
 
         [WpfFact]
@@ -93,22 +93,22 @@ public class Test
             );
 
             VisualStudio.Editor.SendKeys(';');
-            VisualStudio.Editor.Verify.CurrentLineText(
-                "f.ToString();$$",
-                assertCaretPosition: true
-            );
+            VisualStudio
+                .Editor
+                .Verify
+                .CurrentLineText("f.ToString();$$", assertCaretPosition: true);
 
             VisualStudio.Editor.Undo();
-            VisualStudio.Editor.Verify.CurrentLineText(
-                "f.ToString( );$$",
-                assertCaretPosition: true
-            );
+            VisualStudio
+                .Editor
+                .Verify
+                .CurrentLineText("f.ToString( );$$", assertCaretPosition: true);
 
             VisualStudio.Editor.Undo();
-            VisualStudio.Editor.Verify.CurrentLineText(
-                "f.ToString($$ )",
-                assertCaretPosition: true
-            );
+            VisualStudio
+                .Editor
+                .Verify
+                .CurrentLineText("f.ToString($$ )", assertCaretPosition: true);
         }
     }
 }

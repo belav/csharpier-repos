@@ -62,11 +62,14 @@ namespace Microsoft.CodeAnalysis.PasteTracking
             }
 
             // Create a tracking span from the pre-paste caret position that will grow as text is inserted.
-            var trackingSpan = caretPosition.Value.Snapshot.CreateTrackingSpan(
-                caretPosition.Value.Position,
-                0,
-                SpanTrackingMode.EdgeInclusive
-            );
+            var trackingSpan = caretPosition
+                .Value
+                .Snapshot
+                .CreateTrackingSpan(
+                    caretPosition.Value.Position,
+                    0,
+                    SpanTrackingMode.EdgeInclusive
+                );
 
             // Applying the post-paste snapshot to the tracking span gives us the span of pasted text.
             var snapshotSpan = trackingSpan.GetSpan(args.SubjectBuffer.CurrentSnapshot);

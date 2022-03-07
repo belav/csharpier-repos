@@ -139,13 +139,16 @@ namespace Microsoft.CodeAnalysis.CSharp
                 }
             }
 
-            return frame.TypeMap.SubstituteType(
-                (
-                    (object)local != null
-                        ? local.TypeWithAnnotations
-                        : ((ParameterSymbol)variable).TypeWithAnnotations
-                ).Type
-            ).Type;
+            return frame
+                .TypeMap
+                .SubstituteType(
+                    (
+                        (object)local != null
+                            ? local.TypeWithAnnotations
+                            : ((ParameterSymbol)variable).TypeWithAnnotations
+                    ).Type
+                )
+                .Type;
         }
 
         internal override TypeWithAnnotations GetFieldType(ConsList<FieldSymbol> fieldsBeingBound)

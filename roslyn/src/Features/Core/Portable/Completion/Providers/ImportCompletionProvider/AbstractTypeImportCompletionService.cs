@@ -35,9 +35,9 @@ namespace Microsoft.CodeAnalysis.Completion.Providers.ImportCompletion
         protected abstract string Language { get; }
 
         internal AbstractTypeImportCompletionService(Workspace workspace) =>
-            CacheService = workspace.Services.GetRequiredService<
-                IImportCompletionCacheService<CacheEntry, CacheEntry>
-            >();
+            CacheService = workspace
+                .Services
+                .GetRequiredService<IImportCompletionCacheService<CacheEntry, CacheEntry>>();
 
         public Task WarmUpCacheAsync(Project? project, CancellationToken cancellationToken)
         {
@@ -94,16 +94,18 @@ namespace Microsoft.CodeAnalysis.Completion.Providers.ImportCompletion
 
             ImmutableArray<CompletionItem> GetItemsFromCacheResult(GetCacheResult cacheResult)
             {
-                return cacheResult.Entry.GetItemsForContext(
-                    Language,
-                    GenericTypeSuffix,
-                    currentCompilation.Assembly.IsSameAssemblyOrHasFriendAccessTo(
-                        cacheResult.Assembly
-                    ),
-                    syntaxContext.IsAttributeNameContext,
-                    IsCaseSensitive,
-                    options.HideAdvancedMembers
-                );
+                return cacheResult
+                    .Entry
+                    .GetItemsForContext(
+                        Language,
+                        GenericTypeSuffix,
+                        currentCompilation
+                            .Assembly
+                            .IsSameAssemblyOrHasFriendAccessTo(cacheResult.Assembly),
+                        syntaxContext.IsAttributeNameContext,
+                        IsCaseSensitive,
+                        options.HideAdvancedMembers
+                    );
             }
         }
 
@@ -175,7 +177,9 @@ namespace Microsoft.CodeAnalysis.Completion.Providers.ImportCompletion
             }
 
             foreach (
-                var peReference in currentProject.MetadataReferences.OfType<PortableExecutableReference>()
+                var peReference in currentProject
+                    .MetadataReferences
+                    .OfType<PortableExecutableReference>()
             )
             {
                 if (
@@ -212,9 +216,10 @@ namespace Microsoft.CodeAnalysis.Completion.Providers.ImportCompletion
                 metadataReference != null
                 && (
                     metadataReference.Properties.Aliases.IsEmpty
-                    || metadataReference.Properties.Aliases.Any(
-                        alias => alias == MetadataReferenceProperties.GlobalAlias
-                    )
+                    || metadataReference
+                        .Properties
+                        .Aliases
+                        .Any(alias => alias == MetadataReferenceProperties.GlobalAlias)
                 );
         }
 

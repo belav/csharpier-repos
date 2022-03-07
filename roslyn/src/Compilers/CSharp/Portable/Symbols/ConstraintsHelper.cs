@@ -277,8 +277,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         case TypeKind.Struct:
                             if (constraintType.IsNullableType())
                             {
-                                var underlyingType =
-                                    constraintType.Type.GetNullableUnderlyingType();
+                                var underlyingType = constraintType
+                                    .Type
+                                    .GetNullableUnderlyingType();
                                 if (underlyingType.TypeKind == TypeKind.TypeParameter)
                                 {
                                     var underlyingTypeParameter =
@@ -1342,10 +1343,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     // extension method to be applicable, but then when you try to use it the IDE tells you to upgrade your language version.
                     if (!(args.CurrentCompilation is null))
                     {
-                        var csDiagnosticInfo =
-                            MessageID.IDS_FeatureUnmanagedConstructedTypes.GetFeatureAvailabilityDiagnosticInfo(
-                                args.CurrentCompilation
-                            );
+                        var csDiagnosticInfo = MessageID
+                            .IDS_FeatureUnmanagedConstructedTypes
+                            .GetFeatureAvailabilityDiagnosticInfo(args.CurrentCompilation);
                         if (csDiagnosticInfo != null)
                         {
                             diagnosticsBuilder.Add(
@@ -1933,7 +1933,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             }
 
             foreach (
-                var baseInterface in definition.InterfacesAndTheirBaseInterfacesNoUseSiteDiagnostics.Keys
+                var baseInterface in definition
+                    .InterfacesAndTheirBaseInterfacesNoUseSiteDiagnostics
+                    .Keys
             )
             {
                 var baseDefinition = baseInterface.OriginalDefinition;

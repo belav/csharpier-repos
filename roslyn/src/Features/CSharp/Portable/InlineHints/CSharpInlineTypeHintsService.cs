@@ -61,10 +61,9 @@ namespace Microsoft.CodeAnalysis.CSharp.InlineHints
                 )
                 {
                     var type =
-                        semanticModel.GetTypeInfo(
-                            declarationExpression.Type,
-                            cancellationToken
-                        ).Type;
+                        semanticModel
+                            .GetTypeInfo(declarationExpression.Type, cancellationToken)
+                            .Type;
                     if (IsValidType(type))
                         return CreateTypeHint(
                             type,

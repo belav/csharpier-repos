@@ -642,9 +642,9 @@ namespace Microsoft.EntityFrameworkCore.Storage
                     "Guid",
                     "'int', 'long', 'short', 'byte', 'uint', 'ulong', 'ushort', 'sbyte', 'decimal', 'float', 'double'"
                 ),
-                Assert.Throws<InvalidOperationException>(
-                    () => new StringToNumberConverter<Guid>()
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(() => new StringToNumberConverter<Guid>())
+                    .Message
             );
         }
     }

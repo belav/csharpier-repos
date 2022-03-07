@@ -231,10 +231,12 @@ namespace Tests.Integration
                 Type type
             )
             {
-                IEnumerable<ExportDefinition> exports = partDefinition.ExportDefinitions
+                IEnumerable<ExportDefinition> exports = partDefinition
+                    .ExportDefinitions
                     .Select(e => this.CreateWrapped(e, type))
                     .ToArray();
-                IEnumerable<ImportDefinition> imports = partDefinition.ImportDefinitions
+                IEnumerable<ImportDefinition> imports = partDefinition
+                    .ImportDefinitions
                     .Cast<ContractBasedImportDefinition>()
                     .Select(i => this.CreateWrapped(i, type))
                     .ToArray();

@@ -453,10 +453,9 @@ namespace System.Web.Mvc.Test
         {
             // Arrange
             object model = new { foo = "fooValue", bar = "barValue" };
-            ModelMetadata originalMetadata = ModelMetadataProviders.Current.GetMetadataForType(
-                () => model,
-                model.GetType()
-            );
+            ModelMetadata originalMetadata = ModelMetadataProviders
+                .Current
+                .GetMetadataForType(() => model, model.GetType());
             ViewDataDictionary vdd = new ViewDataDictionary(model)
             {
                 ModelMetadata = originalMetadata

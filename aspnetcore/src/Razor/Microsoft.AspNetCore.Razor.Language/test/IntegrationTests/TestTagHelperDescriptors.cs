@@ -108,7 +108,9 @@ public class TestTagHelperDescriptors
                                         )
                                         .Value("~/")
                                         .ValueComparisonMode(
-                                            RequiredAttributeDescriptor.ValueComparisonMode.FullMatch
+                                            RequiredAttributeDescriptor
+                                                .ValueComparisonMode
+                                                .FullMatch
                                         )
                             ),
                     }
@@ -126,11 +128,15 @@ public class TestTagHelperDescriptors
                                         attribute
                                             .Name("href")
                                             .NameComparisonMode(
-                                                RequiredAttributeDescriptor.NameComparisonMode.FullMatch
+                                                RequiredAttributeDescriptor
+                                                    .NameComparisonMode
+                                                    .FullMatch
                                             )
                                             .Value("~/")
                                             .ValueComparisonMode(
-                                                RequiredAttributeDescriptor.ValueComparisonMode.PrefixMatch
+                                                RequiredAttributeDescriptor
+                                                    .ValueComparisonMode
+                                                    .PrefixMatch
                                             )
                                 )
                                 .RequireAttributeDescriptor(
@@ -138,11 +144,15 @@ public class TestTagHelperDescriptors
                                         attribute
                                             .Name("href")
                                             .NameComparisonMode(
-                                                RequiredAttributeDescriptor.NameComparisonMode.FullMatch
+                                                RequiredAttributeDescriptor
+                                                    .NameComparisonMode
+                                                    .FullMatch
                                             )
                                             .Value("?hello=world")
                                             .ValueComparisonMode(
-                                                RequiredAttributeDescriptor.ValueComparisonMode.SuffixMatch
+                                                RequiredAttributeDescriptor
+                                                    .ValueComparisonMode
+                                                    .SuffixMatch
                                             )
                                 ),
                     }
@@ -172,7 +182,9 @@ public class TestTagHelperDescriptors
                                         )
                                         .Value("text")
                                         .ValueComparisonMode(
-                                            RequiredAttributeDescriptor.ValueComparisonMode.FullMatch
+                                            RequiredAttributeDescriptor
+                                                .ValueComparisonMode
+                                                .FullMatch
                                         )
                             ),
                     }
@@ -198,7 +210,9 @@ public class TestTagHelperDescriptors
                                     attribute
                                         .Name("ty")
                                         .NameComparisonMode(
-                                            RequiredAttributeDescriptor.NameComparisonMode.PrefixMatch
+                                            RequiredAttributeDescriptor
+                                                .NameComparisonMode
+                                                .PrefixMatch
                                         )
                             ),
                     }
@@ -219,7 +233,9 @@ public class TestTagHelperDescriptors
                                         )
                                         .Value("~/")
                                         .ValueComparisonMode(
-                                            RequiredAttributeDescriptor.ValueComparisonMode.PrefixMatch
+                                            RequiredAttributeDescriptor
+                                                .ValueComparisonMode
+                                                .PrefixMatch
                                         )
                             ),
                     }

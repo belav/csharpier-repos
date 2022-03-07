@@ -283,11 +283,9 @@ namespace Microsoft.CodeAnalysis.Host
                         );
 
                         // we pass in encoding we got from original source text even if it is null.
-                        return _service._textFactory.CreateText(
-                            reader,
-                            _encoding,
-                            cancellationToken
-                        );
+                        return _service
+                            ._textFactory
+                            .CreateText(reader, _encoding, cancellationToken);
                     }
                 }
 

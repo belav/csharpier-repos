@@ -238,12 +238,12 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                         _scalarServerQuery = inMemoryQueryExpression._scalarServerQuery
                     };
 
-                    clonedInMemoryQueryExpression._clientProjections.AddRange(
-                        inMemoryQueryExpression._clientProjections.Select(e => Visit(e))
-                    );
-                    clonedInMemoryQueryExpression._projectionMappingExpressions.AddRange(
-                        inMemoryQueryExpression._projectionMappingExpressions
-                    );
+                    clonedInMemoryQueryExpression
+                        ._clientProjections
+                        .AddRange(inMemoryQueryExpression._clientProjections.Select(e => Visit(e)));
+                    clonedInMemoryQueryExpression
+                        ._projectionMappingExpressions
+                        .AddRange(inMemoryQueryExpression._projectionMappingExpressions);
                     foreach (var item in inMemoryQueryExpression._projectionMapping)
                     {
                         clonedInMemoryQueryExpression._projectionMapping[item.Key] = Visit(

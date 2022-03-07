@@ -375,9 +375,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                     methodInfo.DisplayName(),
                     typeof(MyNonDbContext).ShortDisplayName()
                 ),
-                Assert.Throws<ArgumentException>(
-                    () => modelBuilder.HasDbFunction(methodInfo)
-                ).Message
+                Assert
+                    .Throws<ArgumentException>(() => modelBuilder.HasDbFunction(methodInfo))
+                    .Message
             );
         }
 
@@ -396,9 +396,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                     nameof(TestMethods.MethodC),
                     typeof(void).ShortDisplayName()
                 ),
-                Assert.Throws<ArgumentException>(
-                    () => modelBuilder.HasDbFunction(methodInfo)
-                ).Message
+                Assert
+                    .Throws<ArgumentException>(() => modelBuilder.HasDbFunction(methodInfo))
+                    .Message
             );
         }
 
@@ -443,9 +443,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata
 
             Assert.Equal(
                 RelationalStrings.DbFunctionExpressionIsNotMethodCall(expression),
-                Assert.Throws<ArgumentException>(
-                    () => modelBuilder.HasDbFunction(expression)
-                ).Message
+                Assert
+                    .Throws<ArgumentException>(() => modelBuilder.HasDbFunction(expression))
+                    .Message
             );
         }
 
@@ -458,9 +458,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata
 
             Assert.Equal(
                 RelationalStrings.DbFunctionExpressionIsNotMethodCall(expression),
-                Assert.Throws<ArgumentException>(
-                    () => modelBuilder.HasDbFunction(expression)
-                ).Message
+                Assert
+                    .Throws<ArgumentException>(() => modelBuilder.HasDbFunction(expression))
+                    .Message
             );
         }
 
@@ -644,9 +644,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata
 
             Assert.Equal(
                 RelationalStrings.DbFunctionGenericMethodNotSupported(MethodHmi.DisplayName()),
-                Assert.Throws<ArgumentException>(
-                    () => modelBuilder.HasDbFunction(MethodHmi)
-                ).Message
+                Assert
+                    .Throws<ArgumentException>(() => modelBuilder.HasDbFunction(MethodHmi))
+                    .Message
             );
         }
 
@@ -695,9 +695,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata
 
             Assert.Equal(
                 expectedMessage,
-                Assert.Throws<ArgumentException>(
-                    () => modelBuilder.HasDbFunction(MethodAmi).HasName("")
-                ).Message
+                Assert
+                    .Throws<ArgumentException>(
+                        () => modelBuilder.HasDbFunction(MethodAmi).HasName("")
+                    )
+                    .Message
             );
         }
 
@@ -752,9 +754,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                 RelationalStrings.NonScalarFunctionCannotBeNullable(
                     nameof(MyDerivedContext.QueryableNoParams)
                 ),
-                Assert.Throws<InvalidOperationException>(
-                    () => modelBuilder.HasDbFunction(queryableNoParams).IsNullable()
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(
+                        () => modelBuilder.HasDbFunction(queryableNoParams).IsNullable()
+                    )
+                    .Message
             );
         }
 
@@ -776,9 +780,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                     "i",
                     nameof(MyDerivedContext.QueryableSingleParam)
                 ),
-                Assert.Throws<InvalidOperationException>(
-                    () => parameter.PropagatesNullability()
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(() => parameter.PropagatesNullability())
+                    .Message
             );
         }
 
@@ -913,40 +917,50 @@ namespace Microsoft.EntityFrameworkCore.Metadata
 
             Assert.Equal(
                 RelationalStrings.DbFunctionNonScalarCustomTranslation(methodInfo.DisplayName()),
-                Assert.Throws<InvalidOperationException>(
-                    () =>
-                        dbFunctionBuilder.HasTranslation(args => new SqlFragmentExpression("Empty"))
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(
+                        () =>
+                            dbFunctionBuilder.HasTranslation(
+                                args => new SqlFragmentExpression("Empty")
+                            )
+                    )
+                    .Message
             );
 
             var dbFunction = dbFunctionBuilder.Metadata;
 
             Assert.Equal(
                 RelationalStrings.DbFunctionNonScalarCustomTranslation(methodInfo.DisplayName()),
-                Assert.Throws<InvalidOperationException>(
-                    () =>
-                        ((IConventionDbFunction)dbFunction).SetTranslation(
-                            args => new SqlFragmentExpression("Empty")
-                        )
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(
+                        () =>
+                            ((IConventionDbFunction)dbFunction).SetTranslation(
+                                args => new SqlFragmentExpression("Empty")
+                            )
+                    )
+                    .Message
             );
 
             Assert.Equal(
                 RelationalStrings.DbFunctionNonScalarCustomTranslation(methodInfo.DisplayName()),
-                Assert.Throws<InvalidOperationException>(
-                    () =>
-                        ((IConventionDbFunction)dbFunction).SetTranslation(
-                            args => new SqlFragmentExpression("Empty"),
-                            fromDataAnnotation: true
-                        )
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(
+                        () =>
+                            ((IConventionDbFunction)dbFunction).SetTranslation(
+                                args => new SqlFragmentExpression("Empty"),
+                                fromDataAnnotation: true
+                            )
+                    )
+                    .Message
             );
 
             Assert.Equal(
                 RelationalStrings.DbFunctionNonScalarCustomTranslation(methodInfo.DisplayName()),
-                Assert.Throws<InvalidOperationException>(
-                    () => dbFunction.Translation = args => new SqlFragmentExpression("Empty")
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(
+                        () => dbFunction.Translation = args => new SqlFragmentExpression("Empty")
+                    )
+                    .Message
             );
         }
 

@@ -313,10 +313,9 @@ class C
             var oldText = await oldDocument.GetTextAsync();
             var oldSyntaxRoot = await oldDocument.GetSyntaxRootAsync();
             var documentId = oldDocument.Id;
-            var newSolution = workspace.CurrentSolution.WithDocumentText(
-                documentId,
-                SourceText.From(source2)
-            );
+            var newSolution = workspace
+                .CurrentSolution
+                .WithDocumentText(documentId, SourceText.From(source2));
             var newDocument = newSolution.GetDocument(documentId);
             var newText = await newDocument.GetTextAsync();
             var newSyntaxRoot = await newDocument.GetSyntaxRootAsync();
@@ -397,10 +396,9 @@ class C
             var oldProject = oldSolution.Projects.Single();
             var oldDocument = oldProject.Documents.Single();
             var documentId = oldDocument.Id;
-            var newSolution = workspace.CurrentSolution.WithDocumentText(
-                documentId,
-                SourceText.From(source2)
-            );
+            var newSolution = workspace
+                .CurrentSolution
+                .WithDocumentText(documentId, SourceText.From(source2));
 
             var result = await AnalyzeDocumentAsync(
                 oldProject,
@@ -468,10 +466,9 @@ class C
             var oldDocument = oldProject.Documents.Single();
             var documentId = oldDocument.Id;
 
-            var newSolution = workspace.CurrentSolution.WithDocumentText(
-                documentId,
-                SourceText.From(source2)
-            );
+            var newSolution = workspace
+                .CurrentSolution
+                .WithDocumentText(documentId, SourceText.From(source2));
 
             var result = await AnalyzeDocumentAsync(
                 oldProject,
@@ -563,10 +560,9 @@ class C
                 var oldDocument = oldProject.Documents.Single();
                 var documentId = oldDocument.Id;
 
-                var newSolution = workspace.CurrentSolution.WithDocumentText(
-                    documentId,
-                    SourceText.From(source2)
-                );
+                var newSolution = workspace
+                    .CurrentSolution
+                    .WithDocumentText(documentId, SourceText.From(source2));
 
                 var result = await AnalyzeDocumentAsync(
                     oldProject,
@@ -645,10 +641,9 @@ class C
             var oldDocument = oldProject.Documents.Single();
             var documentId = oldDocument.Id;
 
-            var newSolution = workspace.CurrentSolution.WithDocumentText(
-                documentId,
-                SourceText.From(source2)
-            );
+            var newSolution = workspace
+                .CurrentSolution
+                .WithDocumentText(documentId, SourceText.From(source2));
 
             var result = await AnalyzeDocumentAsync(
                 oldProject,
@@ -693,10 +688,9 @@ class C
             var oldDocument = oldProject.Documents.Single();
             var documentId = oldDocument.Id;
 
-            var newSolution = workspace.CurrentSolution.WithDocumentText(
-                documentId,
-                SourceText.From(source2)
-            );
+            var newSolution = workspace
+                .CurrentSolution
+                .WithDocumentText(documentId, SourceText.From(source2));
 
             var result = await AnalyzeDocumentAsync(
                 oldProject,
@@ -886,7 +880,8 @@ class D
 
             AssertEx.Equal(
                 new[] { expectedDiagnostic },
-                result.RudeEditErrors
+                result
+                    .RudeEditErrors
                     .Select(d => d.ToDiagnostic(newSyntaxTree))
                     .Select(
                         d =>
@@ -924,10 +919,9 @@ class C
             var oldSolution = workspace.CurrentSolution;
             var oldProject = oldSolution.Projects.Single();
             var documentId = oldProject.Documents.Single().Id;
-            var newSolution = workspace.CurrentSolution.WithDocumentText(
-                documentId,
-                SourceText.From(source2)
-            );
+            var newSolution = workspace
+                .CurrentSolution
+                .WithDocumentText(documentId, SourceText.From(source2));
             var newDocument = newSolution.GetDocument(documentId);
 
             var result = await AnalyzeDocumentAsync(

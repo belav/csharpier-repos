@@ -42,8 +42,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
 
             (string description, TextSpan span)? foundBlock = null;
 
-            var uiThreadOperationExecutor =
-                this.Package.ComponentModel.GetService<IUIThreadOperationExecutor>();
+            var uiThreadOperationExecutor = this.Package
+                .ComponentModel
+                .GetService<IUIThreadOperationExecutor>();
             uiThreadOperationExecutor.Execute(
                 ServicesVSResources.Current_block,
                 ServicesVSResources.Determining_current_block,

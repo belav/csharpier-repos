@@ -48,9 +48,12 @@ namespace System.Xml
                 s += " " + SR.Format(SR.XmlLineInfo, lineInfo.LineNumber, lineInfo.LinePosition);
             }
 
-            throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                new XmlException(s)
-            );
+            throw System
+                .Runtime
+                .Serialization
+                .DiagnosticUtility
+                .ExceptionUtility
+                .ThrowHelperError(new XmlException(s));
         }
 
         [DoesNotReturn]
@@ -62,9 +65,12 @@ namespace System.Xml
             {
                 s += " " + SR.Format(SR.XmlLineInfo, lineInfo.LineNumber, lineInfo.LinePosition);
             }
-            throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                new XmlException(s)
-            );
+            throw System
+                .Runtime
+                .Serialization
+                .DiagnosticUtility
+                .ExceptionUtility
+                .ThrowHelperError(new XmlException(s));
         }
 
         private static string GetName(string prefix, string localName)

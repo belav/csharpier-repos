@@ -33,10 +33,9 @@ namespace System.Security.Cryptography.X509Certificates
             {
                 if (!_decoded)
                 {
-                    X509Pal.Instance.DecodeX509EnhancedKeyUsageExtension(
-                        RawData,
-                        out _enhancedKeyUsages
-                    );
+                    X509Pal
+                        .Instance
+                        .DecodeX509EnhancedKeyUsageExtension(RawData, out _enhancedKeyUsages);
                     _decoded = true;
                 }
                 OidCollection oids = new OidCollection();

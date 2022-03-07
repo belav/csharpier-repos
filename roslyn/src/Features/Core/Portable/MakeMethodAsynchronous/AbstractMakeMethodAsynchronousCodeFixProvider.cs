@@ -43,7 +43,8 @@ namespace Microsoft.CodeAnalysis.MakeMethodAsynchronous
                 return;
             }
 
-            var semanticModel = await context.Document
+            var semanticModel = await context
+                .Document
                 .GetSemanticModelAsync(cancellationToken)
                 .ConfigureAwait(false);
             var compilation = semanticModel.Compilation;
@@ -134,7 +135,8 @@ namespace Microsoft.CodeAnalysis.MakeMethodAsynchronous
                 .ConfigureAwait(false);
             var methodSymbolOpt =
                 semanticModel.GetDeclaredSymbol(node, cancellationToken) as IMethodSymbol;
-            var compilation = await document.Project
+            var compilation = await document
+                .Project
                 .GetCompilationAsync(cancellationToken)
                 .ConfigureAwait(false);
             var knownTypes = new KnownTypes(compilation);

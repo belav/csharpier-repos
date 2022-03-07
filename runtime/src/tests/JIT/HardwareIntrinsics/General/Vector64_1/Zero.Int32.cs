@@ -86,9 +86,9 @@ namespace JIT.HardwareIntrinsics.General
             if (!succeeded)
             {
                 TestLibrary.TestFramework.LogInformation($"Vector64.Zero(Int32): {method} failed:");
-                TestLibrary.TestFramework.LogInformation(
-                    $"  result: ({string.Join(", ", resultElements)})"
-                );
+                TestLibrary
+                    .TestFramework
+                    .LogInformation($"  result: ({string.Join(", ", resultElements)})");
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;

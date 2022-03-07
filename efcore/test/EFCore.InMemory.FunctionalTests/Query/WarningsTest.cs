@@ -38,9 +38,9 @@ namespace Microsoft.EntityFrameworkCore.Query
                         .GenerateMessage(),
                     "InMemoryEventId.TransactionIgnoredWarning"
                 ),
-                Assert.Throws<InvalidOperationException>(
-                    () => context.Database.BeginTransaction()
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(() => context.Database.BeginTransaction())
+                    .Message
             );
         }
 
@@ -60,9 +60,11 @@ namespace Microsoft.EntityFrameworkCore.Query
                         .GenerateMessage(),
                     "InMemoryEventId.TransactionIgnoredWarning"
                 ),
-                Assert.Throws<InvalidOperationException>(
-                    () => context.Database.EnlistTransaction(new CommittableTransaction())
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(
+                        () => context.Database.EnlistTransaction(new CommittableTransaction())
+                    )
+                    .Message
             );
         }
 
@@ -150,13 +152,17 @@ namespace Microsoft.EntityFrameworkCore.Query
 
             Assert.Null(entity.Nav);
 
-            var log = loggerFactory.Log.Single(
-                l =>
-                    l.Message
-                    == CoreResources
-                        .LogLazyLoadOnDisposedContext(new TestLogger<InMemoryLoggingDefinitions>())
-                        .GenerateMessage("WarningAsErrorEntity", "Nav")
-            );
+            var log = loggerFactory
+                .Log
+                .Single(
+                    l =>
+                        l.Message
+                        == CoreResources
+                            .LogLazyLoadOnDisposedContext(
+                                new TestLogger<InMemoryLoggingDefinitions>()
+                            )
+                            .GenerateMessage("WarningAsErrorEntity", "Nav")
+                );
 
             Assert.Equal(LogLevel.Warning, log.Level);
         }
@@ -198,13 +204,17 @@ namespace Microsoft.EntityFrameworkCore.Query
 
             Assert.Null(entity.Nav);
 
-            var log = loggerFactory.Log.Single(
-                l =>
-                    l.Message
-                    == CoreResources
-                        .LogLazyLoadOnDisposedContext(new TestLogger<InMemoryLoggingDefinitions>())
-                        .GenerateMessage("WarningAsErrorEntity", "Nav")
-            );
+            var log = loggerFactory
+                .Log
+                .Single(
+                    l =>
+                        l.Message
+                        == CoreResources
+                            .LogLazyLoadOnDisposedContext(
+                                new TestLogger<InMemoryLoggingDefinitions>()
+                            )
+                            .GenerateMessage("WarningAsErrorEntity", "Nav")
+                );
 
             Assert.Equal(LogLevel.Debug, log.Level);
         }

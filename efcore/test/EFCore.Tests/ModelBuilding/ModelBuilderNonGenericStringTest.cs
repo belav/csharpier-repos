@@ -36,9 +36,11 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                     CoreStrings.AmbiguousSharedTypeEntityTypeName(
                         "Microsoft.EntityFrameworkCore.ModelBuilding.ModelBuilderTest+DependentEntity"
                     ),
-                    Assert.Throws<InvalidOperationException>(
-                        () => base.OwnedType_can_derive_from_Collection()
-                    ).Message
+                    Assert
+                        .Throws<InvalidOperationException>(
+                            () => base.OwnedType_can_derive_from_Collection()
+                        )
+                        .Message
                 );
             }
         }
@@ -60,9 +62,11 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                         "KeylessReferenceNavigation",
                         "Dictionary<string, object>"
                     ),
-                    Assert.Throws<EqualException>(
-                        () => base.WithMany_pointing_to_keyless_entity_throws()
-                    ).Actual
+                    Assert
+                        .Throws<EqualException>(
+                            () => base.WithMany_pointing_to_keyless_entity_throws()
+                        )
+                        .Actual
                 );
             }
         }

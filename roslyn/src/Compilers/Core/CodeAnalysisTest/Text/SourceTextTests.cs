@@ -75,17 +75,15 @@ namespace Microsoft.CodeAnalysis.UnitTests.Text
             Assert.Equal(SourceHashAlgorithm.Sha1, SourceText.From(HelloWorld).ChecksumAlgorithm);
             Assert.Equal(
                 SourceHashAlgorithm.Sha1,
-                SourceText.From(
-                    HelloWorld,
-                    checksumAlgorithm: SourceHashAlgorithm.Sha1
-                ).ChecksumAlgorithm
+                SourceText
+                    .From(HelloWorld, checksumAlgorithm: SourceHashAlgorithm.Sha1)
+                    .ChecksumAlgorithm
             );
             Assert.Equal(
                 SourceHashAlgorithm.Sha256,
-                SourceText.From(
-                    HelloWorld,
-                    checksumAlgorithm: SourceHashAlgorithm.Sha256
-                ).ChecksumAlgorithm
+                SourceText
+                    .From(HelloWorld, checksumAlgorithm: SourceHashAlgorithm.Sha256)
+                    .ChecksumAlgorithm
             );
 
             var bytes = s_unicode.GetBytes(HelloWorld);
@@ -95,36 +93,30 @@ namespace Microsoft.CodeAnalysis.UnitTests.Text
             );
             Assert.Equal(
                 SourceHashAlgorithm.Sha1,
-                SourceText.From(
-                    bytes,
-                    bytes.Length,
-                    checksumAlgorithm: SourceHashAlgorithm.Sha1
-                ).ChecksumAlgorithm
+                SourceText
+                    .From(bytes, bytes.Length, checksumAlgorithm: SourceHashAlgorithm.Sha1)
+                    .ChecksumAlgorithm
             );
             Assert.Equal(
                 SourceHashAlgorithm.Sha256,
-                SourceText.From(
-                    bytes,
-                    bytes.Length,
-                    checksumAlgorithm: SourceHashAlgorithm.Sha256
-                ).ChecksumAlgorithm
+                SourceText
+                    .From(bytes, bytes.Length, checksumAlgorithm: SourceHashAlgorithm.Sha256)
+                    .ChecksumAlgorithm
             );
 
             var stream = new MemoryStream(bytes);
             Assert.Equal(SourceHashAlgorithm.Sha1, SourceText.From(stream).ChecksumAlgorithm);
             Assert.Equal(
                 SourceHashAlgorithm.Sha1,
-                SourceText.From(
-                    stream,
-                    checksumAlgorithm: SourceHashAlgorithm.Sha1
-                ).ChecksumAlgorithm
+                SourceText
+                    .From(stream, checksumAlgorithm: SourceHashAlgorithm.Sha1)
+                    .ChecksumAlgorithm
             );
             Assert.Equal(
                 SourceHashAlgorithm.Sha256,
-                SourceText.From(
-                    stream,
-                    checksumAlgorithm: SourceHashAlgorithm.Sha256
-                ).ChecksumAlgorithm
+                SourceText
+                    .From(stream, checksumAlgorithm: SourceHashAlgorithm.Sha256)
+                    .ChecksumAlgorithm
             );
         }
 

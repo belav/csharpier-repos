@@ -77,9 +77,9 @@ namespace System.Web.Http.ModelBinding.Binders
         {
             ModelBindingHelper.ValidateBindingContext(bindingContext);
 
-            ValueProviderResult valueProviderResult = bindingContext.ValueProvider.GetValue(
-                bindingContext.ModelName
-            );
+            ValueProviderResult valueProviderResult = bindingContext
+                .ValueProvider
+                .GetValue(bindingContext.ModelName);
             if (valueProviderResult == null)
             {
                 return null; // the value doesn't exist

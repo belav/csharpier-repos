@@ -30,9 +30,9 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
 
         public override async Task RegisterCodeFixesAsync(CodeFixContext context)
         {
-            var diagnostics = context.Diagnostics.Where(
-                _suppressionFixProvider.IsFixableDiagnostic
-            );
+            var diagnostics = context
+                .Diagnostics
+                .Where(_suppressionFixProvider.IsFixableDiagnostic);
 
             var documentDiagnostics = diagnostics
                 .Where(d => d.Location.IsInSource)

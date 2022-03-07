@@ -275,9 +275,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     nameof(Order),
                     nameof(Order.Details)
                 ),
-                Assert.Throws<InvalidOperationException>(
-                    () => builder.IsRequired(true, ConfigurationSource.Explicit)
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(
+                        () => builder.IsRequired(true, ConfigurationSource.Explicit)
+                    )
+                    .Message
             );
         }
 
@@ -285,11 +287,18 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         public void Can_configure_IsRequired_on_to_principal_nonUnique()
         {
             var builder =
-                CreateInternalNavigationBuilder().Metadata.ForeignKey.Builder.HasNavigation(
-                    nameof(OrderDetails.Order),
-                    pointsToPrincipal: true,
-                    ConfigurationSource.Explicit
-                ).Metadata.DependentToPrincipal.Builder;
+                CreateInternalNavigationBuilder()
+                    .Metadata
+                    .ForeignKey
+                    .Builder
+                    .HasNavigation(
+                        nameof(OrderDetails.Order),
+                        pointsToPrincipal: true,
+                        ConfigurationSource.Explicit
+                    )
+                    .Metadata
+                    .DependentToPrincipal
+                    .Builder;
             builder.IsRequired(true, ConfigurationSource.Explicit);
 
             Assert.True(builder.Metadata.ForeignKey.IsRequired);
@@ -300,11 +309,14 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         {
             var foreignKey = CreateInternalNavigationBuilder().Metadata.ForeignKey;
             foreignKey =
-                foreignKey.Builder.HasNavigations(
-                    nameof(OrderDetails.Order),
-                    nameof(Order.SingleDetails),
-                    ConfigurationSource.Explicit
-                ).Metadata;
+                foreignKey
+                    .Builder
+                    .HasNavigations(
+                        nameof(OrderDetails.Order),
+                        nameof(Order.SingleDetails),
+                        ConfigurationSource.Explicit
+                    )
+                    .Metadata;
 
             foreignKey.PrincipalToDependent.Builder.IsRequired(true, ConfigurationSource.Explicit);
 
@@ -316,11 +328,14 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         {
             var foreignKey = CreateInternalNavigationBuilder().Metadata.ForeignKey;
             foreignKey =
-                foreignKey.Builder.HasNavigations(
-                    nameof(OrderDetails.Order),
-                    nameof(Order.SingleDetails),
-                    ConfigurationSource.Explicit
-                ).Metadata;
+                foreignKey
+                    .Builder
+                    .HasNavigations(
+                        nameof(OrderDetails.Order),
+                        nameof(Order.SingleDetails),
+                        ConfigurationSource.Explicit
+                    )
+                    .Metadata;
 
             foreignKey.PrincipalToDependent.Builder.IsRequired(true, ConfigurationSource.Explicit);
 
@@ -329,7 +344,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
         private InternalNavigationBuilder CreateInternalNavigationBuilder()
         {
-            var modelBuilder = (InternalModelBuilder)InMemoryTestHelpers.Instance
+            var modelBuilder = (InternalModelBuilder)InMemoryTestHelpers
+                .Instance
                 .CreateConventionBuilder()
                 .GetInfrastructure();
             var orderEntityBuilder = modelBuilder.Entity(

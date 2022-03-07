@@ -371,11 +371,13 @@ public class Derived2 : Derived1
             var csharpGetter1 =
                 global
                     .GetMember<NamedTypeSymbol>("Derived1")
-                    .GetMember<PropertySymbol>("P").GetMethod;
+                    .GetMember<PropertySymbol>("P")
+                    .GetMethod;
             var csharpGetter2 =
                 global
                     .GetMember<NamedTypeSymbol>("Derived2")
-                    .GetMember<PropertySymbol>("P").GetMethod;
+                    .GetMember<PropertySymbol>("P")
+                    .GetMethod;
 
             Assert.Equal(ilGetter.Name, csharpGetter1.Name);
             Assert.Equal(ilGetter.Name, csharpGetter2.Name);
@@ -414,7 +416,8 @@ public class C : I
 
             var bridge = @class
                 .GetSynthesizedExplicitImplementations(CancellationToken.None)
-                .ForwardingMethods.Single();
+                .ForwardingMethods
+                .Single();
             Assert.Same(csharpGetter, bridge.ImplementingMethod);
             Assert.Same(ilGetter, bridge.ExplicitInterfaceImplementations.Single());
 
@@ -451,9 +454,10 @@ public class C : I
             Assert.Equal("I.getter", csharpGetter.Name);
             Assert.Equal(
                 0,
-                @class.GetSynthesizedExplicitImplementations(
-                    CancellationToken.None
-                ).ForwardingMethods.Length
+                @class
+                    .GetSynthesizedExplicitImplementations(CancellationToken.None)
+                    .ForwardingMethods
+                    .Length
             ); //not needed
         }
 
@@ -1033,7 +1037,8 @@ public class G<T>
 
             var tsym = comp2
                 .GetReferencedAssemblySymbol(mtref)
-                .GlobalNamespace.GetMember<NamedTypeSymbol>("G");
+                .GlobalNamespace
+                .GetMember<NamedTypeSymbol>("G");
             Assert.NotNull(tsym);
 
             var mems = tsym.GetMembers().Where(s => s.Kind == SymbolKind.Method);
@@ -1197,9 +1202,9 @@ using System;
                 Assert.Equal(0, memberNameSyntax.Arity);
 
                 var semanticModel = compilation.GetSemanticModel(syntaxTree);
-                var classDisposable = compilation.GlobalNamespace.GetMember<INamedTypeSymbol>(
-                    "Disposable"
-                );
+                var classDisposable = compilation
+                    .GlobalNamespace
+                    .GetMember<INamedTypeSymbol>("Disposable");
                 Assert.Equal(TypeKind.Class, classDisposable.TypeKind);
                 Assert.Equal("Disposable", classDisposable.Name);
 
@@ -1208,9 +1213,9 @@ using System;
                 Assert.Equal("Disposable", localD.Type.Name);
                 Assert.Equal(classDisposable, localD.Type);
 
-                var methodDispose = (IMethodSymbol)semanticModel.GetSymbolInfo(
-                    memberAccessSyntax
-                ).Symbol;
+                var methodDispose = (IMethodSymbol)semanticModel
+                    .GetSymbolInfo(memberAccessSyntax)
+                    .Symbol;
                 Assert.Equal("Dispose", methodDispose.Name);
                 Assert.Equal(0, methodDispose.Arity);
                 Assert.Empty(methodDispose.Parameters);

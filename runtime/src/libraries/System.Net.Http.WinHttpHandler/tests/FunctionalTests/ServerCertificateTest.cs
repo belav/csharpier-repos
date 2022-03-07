@@ -76,8 +76,11 @@ namespace System.Net.Http.WinHttpHandlerFunctional.Tests
         [Fact]
         public async Task UseCallback_RedirectandValidCertificate_ExpectedValuesDuringCallback()
         {
-            Uri uri =
-                Test.Common.Configuration.Http.RemoteSecureHttp11Server.RedirectUriForDestinationUri(
+            Uri uri = Test.Common
+                .Configuration
+                .Http
+                .RemoteSecureHttp11Server
+                .RedirectUriForDestinationUri(
                     302,
                     System.Net.Test.Common.Configuration.Http.SecureRemoteEchoServer,
                     1

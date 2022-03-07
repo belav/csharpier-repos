@@ -551,9 +551,9 @@ namespace System.Net.Tests
                     new Http.Headers.AuthenticationHeaderValue(
                         Basic,
                         Convert.ToBase64String(
-                            Encoding.ASCII.GetBytes(
-                                string.Format("{0}:{1}", TestUser, TestPassword)
-                            )
+                            Encoding
+                                .ASCII
+                                .GetBytes(string.Format("{0}:{1}", TestUser, TestPassword))
                         )
                     );
 

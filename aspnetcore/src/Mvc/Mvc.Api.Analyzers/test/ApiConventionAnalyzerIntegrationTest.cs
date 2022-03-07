@@ -276,10 +276,12 @@ namespace Test
 
             // 10006 is disabled by default. Explicitly enable it so we can correctly validate no diagnostics
             // are returned scenarios.
-            var specificDiagnosticOptions = compilationOptions.SpecificDiagnosticOptions.Add(
-                ApiDiagnosticDescriptors.API1002_ActionDoesNotReturnDocumentedStatusCode.Id,
-                ReportDiagnostic.Info
-            );
+            var specificDiagnosticOptions = compilationOptions
+                .SpecificDiagnosticOptions
+                .Add(
+                    ApiDiagnosticDescriptors.API1002_ActionDoesNotReturnDocumentedStatusCode.Id,
+                    ReportDiagnostic.Info
+                );
 
             return compilationOptions.WithSpecificDiagnosticOptions(specificDiagnosticOptions);
         }

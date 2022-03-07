@@ -599,10 +599,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.LanguageClient
                 _server._documentsToPublishedUris.Keys.ToImmutableArray();
 
             internal IImmutableSet<Uri> GetFileUrisForDocument(DocumentId documentId) =>
-                _server._documentsToPublishedUris.GetValueOrDefault(
-                    documentId,
-                    ImmutableSortedSet<Uri>.Empty
-                );
+                _server
+                    ._documentsToPublishedUris
+                    .GetValueOrDefault(documentId, ImmutableSortedSet<Uri>.Empty);
 
             internal ImmutableArray<LSP.Diagnostic> GetDiagnosticsForUriAndDocument(
                 DocumentId documentId,

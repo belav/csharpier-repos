@@ -317,11 +317,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             Func<SyntaxTrivia, SyntaxTrivia, SyntaxTrivia> computeReplacementTrivia
         )
         {
-            return Syntax.SyntaxReplacer.Replace(
-                token,
-                trivia: trivia,
-                computeReplacementTrivia: computeReplacementTrivia
-            );
+            return Syntax
+                .SyntaxReplacer
+                .Replace(token, trivia: trivia, computeReplacementTrivia: computeReplacementTrivia);
         }
 
         /// <summary>
@@ -338,11 +336,13 @@ namespace Microsoft.CodeAnalysis.CSharp
             SyntaxTrivia newTrivia
         )
         {
-            return Syntax.SyntaxReplacer.Replace(
-                token,
-                trivia: new[] { oldTrivia },
-                computeReplacementTrivia: (o, r) => newTrivia
-            );
+            return Syntax
+                .SyntaxReplacer
+                .Replace(
+                    token,
+                    trivia: new[] { oldTrivia },
+                    computeReplacementTrivia: (o, r) => newTrivia
+                );
         }
 
         internal static Syntax.InternalSyntax.DirectiveStack ApplyDirectives(

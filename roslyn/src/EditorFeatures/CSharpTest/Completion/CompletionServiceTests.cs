@@ -66,7 +66,8 @@ namespace N
                 SolutionUtilities
                     .AddEmptyProject(workspace.CurrentSolution)
                     .AddAnalyzerReference(analyzerReference)
-                    .AddDocument("Document1.cs", sourceMarkup, filePath: "Document1.cs").Project;
+                    .AddDocument("Document1.cs", sourceMarkup, filePath: "Document1.cs")
+                    .Project;
 
             Assert.True(
                 workspace.SetCurrentSolution(

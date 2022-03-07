@@ -63,10 +63,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         && candidate.Parameters[0].RefKind == RefKind.None
                         && candidate.ReturnType.SpecialType == SpecialType.System_Boolean
                         && !candidate.IsStatic
-                        && candidate.Parameters[0].Type.Equals(
-                            ContainingType,
-                            TypeCompareKind.AllIgnoreOptions
-                        )
+                        && candidate.Parameters[0]
+                            .Type
+                            .Equals(ContainingType, TypeCompareKind.AllIgnoreOptions)
                     )
                     {
                         equals = candidate;

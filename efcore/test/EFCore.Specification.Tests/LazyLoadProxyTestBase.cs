@@ -260,7 +260,8 @@ namespace Microsoft.EntityFrameworkCore
                 context.ChangeTracker.LazyLoadingEnabled = false;
 
                 foreach (
-                    var child in parent.Children
+                    var child in parent
+                        .Children
                         .Cast<object>()
                         .Concat(parent.ChildrenAk)
                         .Concat(parent.ChildrenShadowFk)
@@ -979,9 +980,11 @@ namespace Microsoft.EntityFrameworkCore
             Assert.Equal(3, context.ChangeTracker.Entries().Count());
 
             var newParent =
-                context.ChangeTracker
+                context
+                    .ChangeTracker
                     .Entries<Parent>()
-                    .Single(e => e.Entity.Id != parent.Id).Entity;
+                    .Single(e => e.Entity.Id != parent.Id)
+                    .Entity;
 
             Assert.Same(child, newParent.Children.Single());
             Assert.Same(newParent, child.Parent);
@@ -2176,14 +2179,17 @@ namespace Microsoft.EntityFrameworkCore
                 Assert.IsNotType<Blog>(blog);
             }
 
-            var serialized = Newtonsoft.Json.JsonConvert.SerializeObject(
-                blogs,
-                new Newtonsoft.Json.JsonSerializerSettings
-                {
-                    ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore,
-                    Formatting = Newtonsoft.Json.Formatting.Indented
-                }
-            );
+            var serialized = Newtonsoft
+                .Json
+                .JsonConvert
+                .SerializeObject(
+                    blogs,
+                    new Newtonsoft.Json.JsonSerializerSettings
+                    {
+                        ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore,
+                        Formatting = Newtonsoft.Json.Formatting.Indented
+                    }
+                );
 
             Assert.Equal(
                 @"[

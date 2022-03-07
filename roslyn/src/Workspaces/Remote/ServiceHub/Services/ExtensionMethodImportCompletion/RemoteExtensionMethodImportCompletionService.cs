@@ -49,7 +49,8 @@ namespace Microsoft.CodeAnalysis.Remote
                     var solution = await GetSolutionAsync(solutionInfo, cancellationToken)
                         .ConfigureAwait(false);
                     var document = solution.GetDocument(documentId)!;
-                    var compilation = await document.Project
+                    var compilation = await document
+                        .Project
                         .GetRequiredCompilationAsync(cancellationToken)
                         .ConfigureAwait(false);
                     var symbol = SymbolKey

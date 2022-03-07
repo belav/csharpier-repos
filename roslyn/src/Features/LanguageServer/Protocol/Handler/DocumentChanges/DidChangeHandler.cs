@@ -41,9 +41,9 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.DocumentChanges
 
             // Per the LSP spec, each text change builds upon the previous, so we don't need to translate
             // any text positions between changes, which makes this quite easy.
-            var changes = request.ContentChanges.Select(
-                change => ProtocolConversions.ContentChangeEventToTextChange(change, text)
-            );
+            var changes = request
+                .ContentChanges
+                .Select(change => ProtocolConversions.ContentChangeEventToTextChange(change, text));
 
             text = text.WithChanges(changes);
 

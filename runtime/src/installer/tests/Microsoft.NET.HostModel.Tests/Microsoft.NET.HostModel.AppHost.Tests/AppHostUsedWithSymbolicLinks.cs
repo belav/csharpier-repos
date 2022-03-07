@@ -48,7 +48,8 @@ namespace Microsoft.NET.HostModel.Tests
                 .Execute()
                 .Should()
                 .Pass()
-                .And.HaveStdOutContaining("Hello World");
+                .And
+                .HaveStdOutContaining("Hello World");
         }
 
         [Theory]
@@ -87,7 +88,8 @@ namespace Microsoft.NET.HostModel.Tests
                 .Execute()
                 .Should()
                 .Pass()
-                .And.HaveStdOutContaining("Hello World");
+                .And
+                .HaveStdOutContaining("Hello World");
         }
 
         //[Theory]
@@ -125,7 +127,8 @@ namespace Microsoft.NET.HostModel.Tests
                 .Execute()
                 .Should()
                 .Pass()
-                .And.HaveStdOutContaining("Hello World");
+                .And
+                .HaveStdOutContaining("Hello World");
         }
 
         [Fact(
@@ -154,7 +157,8 @@ namespace Microsoft.NET.HostModel.Tests
                 .Execute()
                 .Should()
                 .Pass()
-                .And.HaveStdOutContaining("Hello World");
+                .And
+                .HaveStdOutContaining("Hello World");
         }
 
         [Fact]
@@ -182,7 +186,8 @@ namespace Microsoft.NET.HostModel.Tests
                 .Execute()
                 .Should()
                 .Pass()
-                .And.HaveStdOutContaining("Hello World");
+                .And
+                .HaveStdOutContaining("Hello World");
         }
 
         [Fact]
@@ -207,7 +212,8 @@ namespace Microsoft.NET.HostModel.Tests
                 .Execute()
                 .Should()
                 .Pass()
-                .And.HaveStdOutContaining("Hello World");
+                .And
+                .HaveStdOutContaining("Hello World");
         }
 
         [Fact]
@@ -235,7 +241,8 @@ namespace Microsoft.NET.HostModel.Tests
                 .Execute()
                 .Should()
                 .Pass()
-                .And.HaveStdOutContaining("Hello World");
+                .And
+                .HaveStdOutContaining("Hello World");
         }
 
         [Fact]
@@ -277,7 +284,8 @@ namespace Microsoft.NET.HostModel.Tests
                 .Execute()
                 .Should()
                 .Pass()
-                .And.HaveStdOutContaining("ನಮಸ್ಕಾರ! வணக்கம்! Hello!");
+                .And
+                .HaveStdOutContaining("ನಮಸ್ಕಾರ! வணக்கம்! Hello!");
         }
 
         public class SharedTestState : IDisposable

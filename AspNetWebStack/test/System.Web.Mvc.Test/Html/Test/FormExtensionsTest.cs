@@ -625,11 +625,9 @@ window.mvcClientValidationMetadata.push({""Fields"":[],""FormId"":""form_id"",""
             BeginFormHelper(
                 htmlHelper =>
                 {
-                    htmlHelper.RouteCollection.MapRoute(
-                        "MyRouteName",
-                        "any/url",
-                        new { controller = "Charlie" }
-                    );
+                    htmlHelper
+                        .RouteCollection
+                        .MapRoute("MyRouteName", "any/url", new { controller = "Charlie" });
                     return htmlHelper.BeginRouteForm("MyRouteName");
                 },
                 @"<form action=""" + MvcHelper.AppPathModifier + @"/any/url"" method=""post"">"

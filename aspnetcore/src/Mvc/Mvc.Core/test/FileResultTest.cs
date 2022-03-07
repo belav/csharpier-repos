@@ -544,8 +544,10 @@ namespace Microsoft.AspNetCore.Mvc
 
             public override Task ExecuteResultAsync(ActionContext context)
             {
-                var executor =
-                    context.HttpContext.RequestServices.GetRequiredService<EmptyFileResultExecutor>();
+                var executor = context
+                    .HttpContext
+                    .RequestServices
+                    .GetRequiredService<EmptyFileResultExecutor>();
                 return executor.ExecuteAsync(context, this);
             }
         }

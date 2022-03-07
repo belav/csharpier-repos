@@ -39,7 +39,8 @@ namespace AutoMapper.UnitTests.Projection
                             o =>
                                 o.MapFrom(
                                     source =>
-                                        source.Articles
+                                        source
+                                            .Articles
                                             .Where(
                                                 x =>
                                                     x.IsDefault

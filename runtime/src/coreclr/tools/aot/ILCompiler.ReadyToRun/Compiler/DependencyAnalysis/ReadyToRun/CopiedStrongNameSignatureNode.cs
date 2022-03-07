@@ -60,9 +60,9 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
 
             DirectoryEntry strongNameDirectory =
                 _module.PEReader.PEHeaders.CorHeader.StrongNameSignatureDirectory;
-            PEMemoryBlock block = _module.PEReader.GetSectionData(
-                strongNameDirectory.RelativeVirtualAddress
-            );
+            PEMemoryBlock block = _module
+                .PEReader
+                .GetSectionData(strongNameDirectory.RelativeVirtualAddress);
             builder.EmitBytes(block.GetReader().ReadBytes(strongNameDirectory.Size));
 
             return builder.ToObjectData();

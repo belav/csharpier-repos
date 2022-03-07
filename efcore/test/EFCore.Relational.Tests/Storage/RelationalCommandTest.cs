@@ -579,15 +579,17 @@ namespace Microsoft.EntityFrameworkCore.Storage
             {
                 Assert.Equal(
                     RelationalStrings.MissingParameterValue("FirstInvariant"),
-                    Assert.Throws<InvalidOperationException>(
-                        () =>
-                            ((CommandAction)commandDelegate)(
-                                fakeConnection,
-                                relationalCommand,
-                                null,
-                                null
-                            )
-                    ).Message
+                    Assert
+                        .Throws<InvalidOperationException>(
+                            () =>
+                                ((CommandAction)commandDelegate)(
+                                    fakeConnection,
+                                    relationalCommand,
+                                    null,
+                                    null
+                                )
+                        )
+                        .Message
                 );
             }
         }
@@ -655,15 +657,17 @@ namespace Microsoft.EntityFrameworkCore.Storage
             {
                 Assert.Equal(
                     RelationalStrings.MissingParameterValue("ThirdInvariant"),
-                    Assert.Throws<InvalidOperationException>(
-                        () =>
-                            ((CommandAction)commandDelegate)(
-                                fakeConnection,
-                                relationalCommand,
-                                parameterValues,
-                                null
-                            )
-                    ).Message
+                    Assert
+                        .Throws<InvalidOperationException>(
+                            () =>
+                                ((CommandAction)commandDelegate)(
+                                    fakeConnection,
+                                    relationalCommand,
+                                    parameterValues,
+                                    null
+                                )
+                        )
+                        .Message
                 );
             }
         }
@@ -1011,15 +1015,17 @@ namespace Microsoft.EntityFrameworkCore.Storage
             {
                 Assert.Equal(
                     RelationalStrings.MissingParameterValue("ThirdInvariant"),
-                    Assert.Throws<InvalidOperationException>(
-                        () =>
-                            ((CommandAction)commandDelegate)(
-                                fakeConnection,
-                                relationalCommand,
-                                parameterValues,
-                                null
-                            )
-                    ).Message
+                    Assert
+                        .Throws<InvalidOperationException>(
+                            () =>
+                                ((CommandAction)commandDelegate)(
+                                    fakeConnection,
+                                    relationalCommand,
+                                    parameterValues,
+                                    null
+                                )
+                        )
+                        .Message
                 );
             }
         }
@@ -1077,15 +1083,17 @@ namespace Microsoft.EntityFrameworkCore.Storage
             {
                 Assert.Equal(
                     RelationalStrings.ParameterNotObjectArray("CompositeInvariant"),
-                    Assert.Throws<InvalidOperationException>(
-                        () =>
-                            ((CommandAction)commandDelegate)(
-                                fakeConnection,
-                                relationalCommand,
-                                parameterValues,
-                                null
-                            )
-                    ).Message
+                    Assert
+                        .Throws<InvalidOperationException>(
+                            () =>
+                                ((CommandAction)commandDelegate)(
+                                    fakeConnection,
+                                    relationalCommand,
+                                    parameterValues,
+                                    null
+                                )
+                        )
+                        .Message
                 );
             }
         }
@@ -1222,7 +1230,9 @@ namespace Microsoft.EntityFrameworkCore.Storage
                     new RelationalCommandBuilderDependencies(
                         new TestRelationalTypeMappingSource(
                             TestServiceFactory.Instance.Create<TypeMappingSourceDependencies>(),
-                            TestServiceFactory.Instance.Create<RelationalTypeMappingSourceDependencies>()
+                            TestServiceFactory
+                                .Instance
+                                .Create<RelationalTypeMappingSourceDependencies>()
                         )
                     ),
                     commandText,
@@ -1763,7 +1773,9 @@ namespace Microsoft.EntityFrameworkCore.Storage
                 new RelationalCommandBuilderDependencies(
                     new TestRelationalTypeMappingSource(
                         TestServiceFactory.Instance.Create<TypeMappingSourceDependencies>(),
-                        TestServiceFactory.Instance.Create<RelationalTypeMappingSourceDependencies>()
+                        TestServiceFactory
+                            .Instance
+                            .Create<RelationalTypeMappingSourceDependencies>()
                     )
                 ),
                 commandText,

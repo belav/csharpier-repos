@@ -85,14 +85,16 @@ namespace Microsoft.CodeAnalysis
 
                 failureReason = null;
                 return new SymbolKeyResolution(
-                    reader.Compilation.CreateFunctionPointerTypeSymbol(
-                        returnTypeSymbol,
-                        returnRefKind,
-                        parameterTypes.ToImmutable(),
-                        paramRefKinds.ToImmutable(),
-                        callingConvention,
-                        callingConventionModifiers
-                    )
+                    reader
+                        .Compilation
+                        .CreateFunctionPointerTypeSymbol(
+                            returnTypeSymbol,
+                            returnRefKind,
+                            parameterTypes.ToImmutable(),
+                            paramRefKinds.ToImmutable(),
+                            callingConvention,
+                            callingConventionModifiers
+                        )
                 );
             }
         }

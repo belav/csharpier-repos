@@ -142,11 +142,9 @@ internal class SyntaxListBuilder
             case 2:
                 return InternalSyntax.SyntaxList.List(_nodes[0].Value, _nodes[1].Value);
             case 3:
-                return InternalSyntax.SyntaxList.List(
-                    _nodes[0].Value,
-                    _nodes[1].Value,
-                    _nodes[2].Value
-                );
+                return InternalSyntax
+                    .SyntaxList
+                    .List(_nodes[0].Value, _nodes[1].Value, _nodes[2].Value);
             default:
                 var tmp = new ArrayElement<GreenNode>[Count];
                 for (var i = 0; i < Count; i++)

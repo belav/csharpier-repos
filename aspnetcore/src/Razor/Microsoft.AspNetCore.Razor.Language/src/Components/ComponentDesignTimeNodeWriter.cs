@@ -343,7 +343,8 @@ internal class ComponentDesignTimeNodeWriter : ComponentNodeWriter
             throw new ArgumentNullException(nameof(key));
         }
 
-        context.CodeWriter
+        context
+            .CodeWriter
             .WriteStartMethodInvocation(
                 $"{_scopeStack.BuilderVarName}.{nameof(ComponentsApi.RenderTreeBuilder.AddAttribute)}"
             )
@@ -367,9 +368,11 @@ internal class ComponentDesignTimeNodeWriter : ComponentNodeWriter
             throw new ArgumentNullException(nameof(expression));
         }
 
-        context.CodeWriter.WriteStartMethodInvocation(
-            $"{_scopeStack.BuilderVarName}.{ComponentsApi.RenderTreeBuilder.AddAttribute}"
-        );
+        context
+            .CodeWriter
+            .WriteStartMethodInvocation(
+                $"{_scopeStack.BuilderVarName}.{ComponentsApi.RenderTreeBuilder.AddAttribute}"
+            );
         context.CodeWriter.Write("-1");
         context.CodeWriter.WriteParameterSeparator();
 
@@ -947,9 +950,11 @@ internal class ComponentDesignTimeNodeWriter : ComponentNodeWriter
         // Looks like:
         //
         // __builder.AddMultipleAttributes(2, ...);
-        context.CodeWriter.WriteStartMethodInvocation(
-            $"{_scopeStack.BuilderVarName}.{ComponentsApi.RenderTreeBuilder.AddMultipleAttributes}"
-        );
+        context
+            .CodeWriter
+            .WriteStartMethodInvocation(
+                $"{_scopeStack.BuilderVarName}.{ComponentsApi.RenderTreeBuilder.AddMultipleAttributes}"
+            );
         context.CodeWriter.Write("-1");
         context.CodeWriter.WriteParameterSeparator();
 

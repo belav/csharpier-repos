@@ -96,9 +96,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
             Assert.Equal(
                 AbstractionsStrings.CollectionArgumentIsEmpty("propertyNames"),
-                Assert.Throws<ArgumentException>(
-                    () => modelBuilder.Entity<EntityWithInvalidEmptyIndex>()
-                ).Message
+                Assert
+                    .Throws<ArgumentException>(
+                        () => modelBuilder.Entity<EntityWithInvalidEmptyIndex>()
+                    )
+                    .Message
             );
         }
 
@@ -114,9 +116,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
             Assert.Equal(
                 AbstractionsStrings.CollectionArgumentHasEmptyElements("propertyNames"),
-                Assert.Throws<ArgumentException>(
-                    () => modelBuilder.Entity(entityTypeWithInvalidIndex)
-                ).Message
+                Assert
+                    .Throws<ArgumentException>(
+                        () => modelBuilder.Entity(entityTypeWithInvalidIndex)
+                    )
+                    .Message
             );
         }
 
@@ -168,7 +172,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
             // assert that the base type is not part of the model
             Assert.Empty(
-                modelBuilder.Model
+                modelBuilder
+                    .Model
                     .GetEntityTypes()
                     .Where(e => e.ClrType == typeof(BaseUnmappedEntityWithIndex))
             );
@@ -201,9 +206,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                     "{'A', 'B'}",
                     "B"
                 ),
-                Assert.Throws<InvalidOperationException>(
-                    () => modelBuilder.Model.FinalizeModel()
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(() => modelBuilder.Model.FinalizeModel())
+                    .Message
             );
         }
 
@@ -220,9 +225,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                     "{'A', 'B'}",
                     "B"
                 ),
-                Assert.Throws<InvalidOperationException>(
-                    () => modelBuilder.Model.FinalizeModel()
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(() => modelBuilder.Model.FinalizeModel())
+                    .Message
             );
         }
 
@@ -238,9 +243,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                     "{'A', 'DoesNotExist'}",
                     "DoesNotExist"
                 ),
-                Assert.Throws<InvalidOperationException>(
-                    () => modelBuilder.Model.FinalizeModel()
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(() => modelBuilder.Model.FinalizeModel())
+                    .Message
             );
         }
 
@@ -257,9 +262,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                     "{'A', 'DoesNotExist'}",
                     "DoesNotExist"
                 ),
-                Assert.Throws<InvalidOperationException>(
-                    () => modelBuilder.Model.FinalizeModel()
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(() => modelBuilder.Model.FinalizeModel())
+                    .Message
             );
         }
 
@@ -374,7 +379,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             new(CreateDependencies());
 
         private ProviderConventionSetBuilderDependencies CreateDependencies() =>
-            InMemoryTestHelpers.Instance
+            InMemoryTestHelpers
+                .Instance
                 .CreateContextServices()
                 .GetRequiredService<ProviderConventionSetBuilderDependencies>();
 

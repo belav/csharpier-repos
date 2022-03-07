@@ -87,13 +87,15 @@ namespace Microsoft.EntityFrameworkCore
                         {
                             Assert.Same(
                                 entity,
-                                stateManager.TryGetEntry(
-                                    key,
-                                    new object[]
-                                    {
-                                        context.Entry(entity).Property(p => p.Id).CurrentValue
-                                    }
-                                ).Entity
+                                stateManager
+                                    .TryGetEntry(
+                                        key,
+                                        new object[]
+                                        {
+                                            context.Entry(entity).Property(p => p.Id).CurrentValue
+                                        }
+                                    )
+                                    .Entity
                             );
                         }
 
@@ -138,13 +140,15 @@ namespace Microsoft.EntityFrameworkCore
                         {
                             Assert.Same(
                                 entity,
-                                stateManager.TryGetEntry(
-                                    key,
-                                    new object[]
-                                    {
-                                        context.Entry(entity).Property(p => p.Id).CurrentValue
-                                    }
-                                ).Entity
+                                stateManager
+                                    .TryGetEntry(
+                                        key,
+                                        new object[]
+                                        {
+                                            context.Entry(entity).Property(p => p.Id).CurrentValue
+                                        }
+                                    )
+                                    .Entity
                             );
                         }
                     }

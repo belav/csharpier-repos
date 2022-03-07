@@ -46,8 +46,12 @@ namespace Microsoft.CodeAnalysis.CodeFixes
                 IsInternalCodeFixProvider(FixAllState.CodeFixProvider)
             );
 
-            var service =
-                FixAllState.Project.Solution.Workspace.Services.GetService<IFixAllGetFixesService>();
+            var service = FixAllState
+                .Project
+                .Solution
+                .Workspace
+                .Services
+                .GetService<IFixAllGetFixesService>();
 
             var fixAllContext = new FixAllContext(FixAllState, progressTracker, cancellationToken);
             if (progressTracker != null)
@@ -69,8 +73,12 @@ namespace Microsoft.CodeAnalysis.CodeFixes
                 IsInternalCodeFixProvider(FixAllState.CodeFixProvider)
             );
 
-            var service =
-                FixAllState.Project.Solution.Workspace.Services.GetService<IFixAllGetFixesService>();
+            var service = FixAllState
+                .Project
+                .Solution
+                .Workspace
+                .Services
+                .GetService<IFixAllGetFixesService>();
 
             var fixAllContext = new FixAllContext(FixAllState, progressTracker, cancellationToken);
             if (progressTracker != null)

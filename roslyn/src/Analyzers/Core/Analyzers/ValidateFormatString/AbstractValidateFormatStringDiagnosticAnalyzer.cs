@@ -79,9 +79,9 @@ namespace Microsoft.CodeAnalysis.ValidateFormatString
             context.RegisterCompilationStartAction(
                 startContext =>
                 {
-                    var formatProviderType = startContext.Compilation.GetTypeByMetadataName(
-                        typeof(System.IFormatProvider).FullName!
-                    );
+                    var formatProviderType = startContext
+                        .Compilation
+                        .GetTypeByMetadataName(typeof(System.IFormatProvider).FullName!);
                     if (formatProviderType == null)
                     {
                         return;
@@ -124,10 +124,9 @@ namespace Microsoft.CodeAnalysis.ValidateFormatString
             }
 
             var arguments = syntaxFacts.GetArgumentsOfInvocationExpression(context.Node);
-            var symbolInfo = context.SemanticModel.GetSymbolInfo(
-                expression,
-                context.CancellationToken
-            );
+            var symbolInfo = context
+                .SemanticModel
+                .GetSymbolInfo(expression, context.CancellationToken);
 
             var method = TryGetValidFormatMethodSymbol(symbolInfo);
             if (method == null)

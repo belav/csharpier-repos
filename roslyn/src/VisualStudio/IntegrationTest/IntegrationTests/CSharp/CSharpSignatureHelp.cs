@@ -67,34 +67,46 @@ class C
 
             VisualStudio.SendKeys.Send("var m = Method(1,");
             VisualStudio.Editor.InvokeSignatureHelp();
-            VisualStudio.Editor.Verify.CurrentSignature(
-                "C C.Method(int i, int i2)\r\nHello World 2.0!"
-            );
+            VisualStudio
+                .Editor
+                .Verify
+                .CurrentSignature("C C.Method(int i, int i2)\r\nHello World 2.0!");
             VisualStudio.Editor.Verify.CurrentParameter("i2", "an integer, anything you like.");
-            VisualStudio.Editor.Verify.Parameters(
-                ("i", "an integer, preferably 42."),
-                ("i2", "an integer, anything you like.")
-            );
+            VisualStudio
+                .Editor
+                .Verify
+                .Parameters(
+                    ("i", "an integer, preferably 42."),
+                    ("i2", "an integer, anything you like.")
+                );
 
-            VisualStudio.Editor.SendKeys(
-                new object[]
-                {
-                    VirtualKey.Home,
-                    new KeyPress(VirtualKey.End, ShiftState.Shift),
-                    VirtualKey.Delete
-                }
-            );
+            VisualStudio
+                .Editor
+                .SendKeys(
+                    new object[]
+                    {
+                        VirtualKey.Home,
+                        new KeyPress(VirtualKey.End, ShiftState.Shift),
+                        VirtualKey.Delete
+                    }
+                );
             VisualStudio.Editor.SendKeys("var op = OutAndParam(");
 
-            VisualStudio.Editor.Verify.CurrentSignature(
-                "void C.OutAndParam(ref string[][,] strings, out string[] outArr, params dynamic d)\r\nComplex Method Params"
-            );
+            VisualStudio
+                .Editor
+                .Verify
+                .CurrentSignature(
+                    "void C.OutAndParam(ref string[][,] strings, out string[] outArr, params dynamic d)\r\nComplex Method Params"
+                );
             VisualStudio.Editor.Verify.CurrentParameter("strings", "Jagged MultiDimensional Array");
-            VisualStudio.Editor.Verify.Parameters(
-                ("strings", "Jagged MultiDimensional Array"),
-                ("outArr", "Out Array"),
-                ("d", "Dynamic and Params param")
-            );
+            VisualStudio
+                .Editor
+                .Verify
+                .Parameters(
+                    ("strings", "Jagged MultiDimensional Array"),
+                    ("outArr", "Out Array"),
+                    ("d", "Dynamic and Params param")
+                );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.SignatureHelp)]
@@ -188,9 +200,10 @@ class C
             );
 
             VisualStudio.Editor.InvokeSignatureHelp();
-            VisualStudio.Editor.Verify.CurrentSignature(
-                "C C.GenericMethod<string, int>(string i, int i2)"
-            );
+            VisualStudio
+                .Editor
+                .Verify
+                .CurrentSignature("C C.GenericMethod<string, int>(string i, int i2)");
             VisualStudio.Editor.Verify.CurrentParameter("i", "");
             VisualStudio.Editor.Verify.Parameters(("i", ""), ("i2", ""));
         }

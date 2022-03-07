@@ -28,7 +28,8 @@ namespace Microsoft.Extensions.Logging.Test
             var loggerProviderConfiguration = serviceProvider.GetService<
                 ILoggerProviderConfiguration<ConsoleLoggerProvider>
             >();
-            loggerProviderConfiguration.Configuration
+            loggerProviderConfiguration
+                .Configuration
                 .GetReloadToken()
                 .RegisterChangeCallback(o => callbackCalled = true, null);
 

@@ -133,9 +133,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         private InternalEntityTypeBuilder CreateInternalEntityTypeBuilder<T>()
         {
             var conventionSet = new ConventionSet();
-            conventionSet.EntityTypeAddedConventions.Add(
-                new PropertyDiscoveryConvention(CreateDependencies())
-            );
+            conventionSet
+                .EntityTypeAddedConventions
+                .Add(new PropertyDiscoveryConvention(CreateDependencies()));
 
             var modelBuilder = new InternalModelBuilder(new Model(conventionSet));
 
@@ -143,12 +143,14 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         }
 
         private ProviderConventionSetBuilderDependencies CreateDependencies() =>
-            RelationalTestHelpers.Instance
+            RelationalTestHelpers
+                .Instance
                 .CreateContextServices()
                 .GetRequiredService<ProviderConventionSetBuilderDependencies>();
 
         private RelationalConventionSetBuilderDependencies CreateRelationalDependencies() =>
-            RelationalTestHelpers.Instance
+            RelationalTestHelpers
+                .Instance
                 .CreateContextServices()
                 .GetRequiredService<RelationalConventionSetBuilderDependencies>();
 

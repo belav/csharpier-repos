@@ -229,9 +229,11 @@ namespace System.Data
                         key = GetSrcKey(src, dst);
                         if (key.HasValue)
                         {
-                            ndxSearch = dst._primaryKey.Key.GetSortIndex(
-                                DataViewRowState.OriginalRows | DataViewRowState.Added
-                            );
+                            ndxSearch = dst._primaryKey
+                                .Key
+                                .GetSortIndex(
+                                    DataViewRowState.OriginalRows | DataViewRowState.Added
+                                );
                         }
                     }
 

@@ -48,9 +48,10 @@ public partial class RenderTreeBuilderAnalyzer : DiagnosticAnalyzer
                         var sequenceArgument = invocation.Arguments[0];
 
                         if (
-                            !sequenceArgument.Value.Syntax.IsKind(
-                                SyntaxKind.NumericLiteralExpression
-                            )
+                            !sequenceArgument
+                                .Value
+                                .Syntax
+                                .IsKind(SyntaxKind.NumericLiteralExpression)
                         )
                         {
                             operationAnalysisContext.ReportDiagnostic(
@@ -72,10 +73,9 @@ public partial class RenderTreeBuilderAnalyzer : DiagnosticAnalyzer
         WellKnownTypes wellKnownTypes,
         IMethodSymbol targetMethod
     ) =>
-        SymbolEqualityComparer.Default.Equals(
-            wellKnownTypes.RenderTreeBuilder,
-            targetMethod.ContainingType
-        )
+        SymbolEqualityComparer
+            .Default
+            .Equals(wellKnownTypes.RenderTreeBuilder, targetMethod.ContainingType)
         && targetMethod.Parameters.Length != 0
         && targetMethod.Parameters[0].Name == "sequence";
 }

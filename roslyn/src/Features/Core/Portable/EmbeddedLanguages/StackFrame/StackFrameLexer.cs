@@ -292,10 +292,12 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.StackFrame
 
             var remainingTrivia = TryScanRemainingTrivia();
 
-            return numberToken.Value.With(
-                leadingTrivia: lineTrivia.ToImmutableArray(),
-                trailingTrivia: remainingTrivia.ToImmutableArray()
-            );
+            return numberToken
+                .Value
+                .With(
+                    leadingTrivia: lineTrivia.ToImmutableArray(),
+                    trailingTrivia: remainingTrivia.ToImmutableArray()
+                );
         }
 
         public StackFrameToken? TryScanNumbers()

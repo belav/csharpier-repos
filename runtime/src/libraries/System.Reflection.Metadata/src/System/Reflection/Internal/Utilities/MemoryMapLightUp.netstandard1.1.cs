@@ -173,7 +173,8 @@ namespace System.Reflection.Internal
                     return false;
                 }
 
-                s_lazyInternalPointerOffset = s_lazyInternalViewField.FieldType
+                s_lazyInternalPointerOffset = s_lazyInternalViewField
+                    .FieldType
                     .GetTypeInfo()
                     .GetDeclaredProperty("PointerOffset");
                 if (s_lazyInternalPointerOffset == null)

@@ -103,10 +103,16 @@ internal class ComponentMarkupBlockPass : ComponentIntermediateNodePassBase, IRa
                 length--;
             }
 
-            reference.Parent.Children.Insert(
-                start,
-                new MarkupBlockIntermediateNode() { Content = rewriteVisitor.Builder.ToString(), }
-            );
+            reference
+                .Parent
+                .Children
+                .Insert(
+                    start,
+                    new MarkupBlockIntermediateNode()
+                    {
+                        Content = rewriteVisitor.Builder.ToString(),
+                    }
+                );
 
             rewriteVisitor.Builder.Clear();
         }

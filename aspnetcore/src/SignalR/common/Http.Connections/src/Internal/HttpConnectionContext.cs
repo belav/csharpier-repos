@@ -516,11 +516,13 @@ internal class HttpConnectionContext
     {
         if (Status == HttpConnectionStatus.Active)
         {
-            HttpConnectionDispatcher.Log.ConnectionAlreadyActive(
-                dispatcherLogger,
-                ConnectionId,
-                HttpContext!.TraceIdentifier
-            );
+            HttpConnectionDispatcher
+                .Log
+                .ConnectionAlreadyActive(
+                    dispatcherLogger,
+                    ConnectionId,
+                    HttpContext!.TraceIdentifier
+                );
 
             // Reject the request with a 409 conflict
             nonClonedContext.Response.StatusCode = StatusCodes.Status409Conflict;

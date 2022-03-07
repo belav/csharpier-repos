@@ -215,10 +215,9 @@ namespace System.Xml.Serialization
 
                     if (!IsSerializerVersionMatch(serializer, type, defaultNamespace))
                     {
-                        XmlSerializationEventSource.Log.XmlSerializerExpired(
-                            serializerName,
-                            type.FullName!
-                        );
+                        XmlSerializationEventSource
+                            .Log
+                            .XmlSerializerExpired(serializerName, type.FullName!);
                         return null;
                     }
                 }

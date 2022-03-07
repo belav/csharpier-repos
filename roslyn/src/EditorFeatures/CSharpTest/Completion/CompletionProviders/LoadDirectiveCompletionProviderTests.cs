@@ -113,13 +113,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
 
             using var workspace = new TestWorkspace(composition: FeaturesTestCompositions.Features);
             var provider =
-                workspace.ExportProvider
+                workspace
+                    .ExportProvider
                     .GetExports<CompletionProvider, CompletionProviderMetadata>()
                     .Single(
                         p =>
                             p.Metadata.Language == LanguageNames.CSharp
                             && p.Metadata.Name == nameof(LoadDirectiveCompletionProvider)
-                    ).Value;
+                    )
+                    .Value;
             var languageServices = workspace.Services.GetLanguageServices(LanguageNames.CSharp);
             Assert.Equal(
                 expectedResult,

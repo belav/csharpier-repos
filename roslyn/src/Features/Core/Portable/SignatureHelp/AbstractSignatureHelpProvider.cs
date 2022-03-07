@@ -20,16 +20,20 @@ namespace Microsoft.CodeAnalysis.SignatureHelp
     internal abstract partial class AbstractSignatureHelpProvider : ISignatureHelpProvider
     {
         protected static readonly SymbolDisplayFormat MinimallyQualifiedWithoutParametersFormat =
-            SymbolDisplayFormat.MinimallyQualifiedFormat.WithMemberOptions(
-                SymbolDisplayFormat.MinimallyQualifiedFormat.MemberOptions
-                    & ~SymbolDisplayMemberOptions.IncludeParameters
-            );
+            SymbolDisplayFormat
+                .MinimallyQualifiedFormat
+                .WithMemberOptions(
+                    SymbolDisplayFormat.MinimallyQualifiedFormat.MemberOptions
+                        & ~SymbolDisplayMemberOptions.IncludeParameters
+                );
 
         protected static readonly SymbolDisplayFormat MinimallyQualifiedWithoutTypeParametersFormat =
-            SymbolDisplayFormat.MinimallyQualifiedFormat.WithGenericsOptions(
-                SymbolDisplayFormat.MinimallyQualifiedFormat.GenericsOptions
-                    & ~SymbolDisplayGenericsOptions.IncludeTypeParameters
-            );
+            SymbolDisplayFormat
+                .MinimallyQualifiedFormat
+                .WithGenericsOptions(
+                    SymbolDisplayFormat.MinimallyQualifiedFormat.GenericsOptions
+                        & ~SymbolDisplayGenericsOptions.IncludeTypeParameters
+                );
 
         protected AbstractSignatureHelpProvider() { }
 
@@ -433,11 +437,9 @@ namespace Microsoft.CodeAnalysis.SignatureHelp
                 if (
                     item is not SymbolKeySignatureHelpItem symbolKeyItem
                     || symbolKeyItem.SymbolKey is not SymbolKey symbolKey
-                    || symbolKey.Resolve(
-                        compilation,
-                        ignoreAssemblyKey: true,
-                        cancellationToken
-                    ).Symbol
+                    || symbolKey
+                        .Resolve(compilation, ignoreAssemblyKey: true, cancellationToken)
+                        .Symbol
                         is not ISymbol symbol
                 )
                 {
@@ -468,11 +470,13 @@ namespace Microsoft.CodeAnalysis.SignatureHelp
                         .ReuseExistingSpeculativeModelAsync(position, cancellationToken)
                         .ConfigureAwait(false);
                     if (
-                        symbolKey.Resolve(
-                            relatedSemanticModel.Compilation,
-                            ignoreAssemblyKey: true,
-                            cancellationToken
-                        ).Symbol == null
+                        symbolKey
+                            .Resolve(
+                                relatedSemanticModel.Compilation,
+                                ignoreAssemblyKey: true,
+                                cancellationToken
+                            )
+                            .Symbol == null
                     )
                     {
                         invalidProjectsForCurrentSymbol.Add(relatedDocument.Project.Id);

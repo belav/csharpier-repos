@@ -34,7 +34,8 @@ namespace System.CommandLine.DragonFruit
             else
             {
                 foreach (
-                    var type in assembly.DefinedTypes
+                    var type in assembly
+                        .DefinedTypes
                         .Where(t => t.IsClass)
                         .Where(t => !t.IsDefined(typeof(CompilerGeneratedAttribute)))
                 )

@@ -1852,9 +1852,9 @@ namespace System.Xml.Serialization
             {
                 memberInfos[mappings[i].Name] = mappings[i].MemberInfo!;
                 if (mappings[i].ChoiceIdentifier != null)
-                    memberInfos[mappings[i].ChoiceIdentifier!.MemberName!] = mappings[
-                        i
-                    ].ChoiceIdentifier!.MemberInfo!;
+                    memberInfos[mappings[i].ChoiceIdentifier!.MemberName!] = mappings[i]
+                        .ChoiceIdentifier!
+                        .MemberInfo!;
                 if (mappings[i].CheckSpecifiedMemberInfo != null)
                     memberInfos[$"{mappings[i].Name}Specified"] = mappings[
                         i

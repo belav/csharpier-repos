@@ -189,12 +189,14 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.MoveType
                     .ConfigureAwait(false);
 
                 // add an empty document to solution, so that we'll have options from the right context.
-                var solutionWithNewDocument = projectToBeUpdated.Solution.AddDocument(
-                    newDocumentId,
-                    FileName,
-                    text: string.Empty,
-                    folders: document.Folders
-                );
+                var solutionWithNewDocument = projectToBeUpdated
+                    .Solution
+                    .AddDocument(
+                        newDocumentId,
+                        FileName,
+                        text: string.Empty,
+                        folders: document.Folders
+                    );
 
                 // update the text for the new document
                 solutionWithNewDocument = solutionWithNewDocument.WithDocumentSyntaxRoot(
@@ -341,17 +343,18 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.MoveType
                 bool removeTypeInheritance
             )
             {
-                var semanticFacts =
-                    State.SemanticDocument.Document.GetRequiredLanguageService<ISemanticFactsService>();
+                var semanticFacts = State
+                    .SemanticDocument
+                    .Document
+                    .GetRequiredLanguageService<ISemanticFactsService>();
                 var typeChain = State.TypeNode.Ancestors().OfType<TTypeDeclarationSyntax>();
 
                 foreach (var node in typeChain)
                 {
-                    var symbol =
-                        (ITypeSymbol?)State.SemanticDocument.SemanticModel.GetDeclaredSymbol(
-                            node,
-                            CancellationToken
-                        );
+                    var symbol = (ITypeSymbol?)State
+                        .SemanticDocument
+                        .SemanticModel
+                        .GetDeclaredSymbol(node, CancellationToken);
                     Contract.ThrowIfNull(symbol);
                     if (!semanticFacts.IsPartial(symbol, CancellationToken))
                     {
@@ -391,10 +394,14 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.MoveType
                 TTypeDeclarationSyntax currentTypeNode
             )
             {
-                var syntaxFacts =
-                    State.SemanticDocument.Document.GetRequiredLanguageService<ISyntaxFactsService>();
-                var bannerService =
-                    State.SemanticDocument.Document.GetRequiredLanguageService<IFileBannerFactsService>();
+                var syntaxFacts = State
+                    .SemanticDocument
+                    .Document
+                    .GetRequiredLanguageService<ISyntaxFactsService>();
+                var bannerService = State
+                    .SemanticDocument
+                    .Document
+                    .GetRequiredLanguageService<IFileBannerFactsService>();
 
                 var withoutBlankLines = bannerService.GetNodeWithoutLeadingBlankLines(
                     currentTypeNode

@@ -355,13 +355,9 @@ namespace System.IO.Pipes
             {
                 int bytesRead = 0;
                 if (
-                    Interop.Kernel32.ReadFile(
-                        _handle!,
-                        p,
-                        buffer.Length,
-                        out bytesRead,
-                        IntPtr.Zero
-                    ) != 0
+                    Interop
+                        .Kernel32
+                        .ReadFile(_handle!, p, buffer.Length, out bytesRead, IntPtr.Zero) != 0
                 )
                 {
                     _isMessageComplete = true;
@@ -405,13 +401,15 @@ namespace System.IO.Pipes
 
                 // Queue an async ReadFile operation.
                 if (
-                    Interop.Kernel32.ReadFile(
-                        _handle!,
-                        (byte*)vts._memoryHandle.Pointer,
-                        buffer.Length,
-                        IntPtr.Zero,
-                        vts._overlapped
-                    ) == 0
+                    Interop
+                        .Kernel32
+                        .ReadFile(
+                            _handle!,
+                            (byte*)vts._memoryHandle.Pointer,
+                            buffer.Length,
+                            IntPtr.Zero,
+                            vts._overlapped
+                        ) == 0
                 )
                 {
                     // The operation failed, or it's pending.
@@ -471,13 +469,9 @@ namespace System.IO.Pipes
             {
                 int bytesWritten = 0;
                 if (
-                    Interop.Kernel32.WriteFile(
-                        _handle!,
-                        p,
-                        buffer.Length,
-                        out bytesWritten,
-                        IntPtr.Zero
-                    ) == 0
+                    Interop
+                        .Kernel32
+                        .WriteFile(_handle!, p, buffer.Length, out bytesWritten, IntPtr.Zero) == 0
                 )
                 {
                     throw WinIOError(Marshal.GetLastPInvokeError());
@@ -502,13 +496,15 @@ namespace System.IO.Pipes
 
                 // Queue an async WriteFile operation.
                 if (
-                    Interop.Kernel32.WriteFile(
-                        _handle!,
-                        (byte*)vts._memoryHandle.Pointer,
-                        buffer.Length,
-                        IntPtr.Zero,
-                        vts._overlapped
-                    ) == 0
+                    Interop
+                        .Kernel32
+                        .WriteFile(
+                            _handle!,
+                            (byte*)vts._memoryHandle.Pointer,
+                            buffer.Length,
+                            IntPtr.Zero,
+                            vts._overlapped
+                        ) == 0
                 )
                 {
                     // The operation failed, or it's pending.
@@ -673,12 +669,14 @@ namespace System.IO.Pipes
                 {
                     int pipeReadType = (int)value << 1;
                     if (
-                        !Interop.Kernel32.SetNamedPipeHandleState(
-                            _handle!,
-                            &pipeReadType,
-                            IntPtr.Zero,
-                            IntPtr.Zero
-                        )
+                        !Interop
+                            .Kernel32
+                            .SetNamedPipeHandleState(
+                                _handle!,
+                                &pipeReadType,
+                                IntPtr.Zero,
+                                IntPtr.Zero
+                            )
                     )
                     {
                         throw WinIOError(Marshal.GetLastPInvokeError());
@@ -735,15 +733,9 @@ namespace System.IO.Pipes
         {
             uint flags;
             if (
-                !Interop.Kernel32.GetNamedPipeHandleStateW(
-                    SafePipeHandle,
-                    &flags,
-                    null,
-                    null,
-                    null,
-                    null,
-                    0
-                )
+                !Interop
+                    .Kernel32
+                    .GetNamedPipeHandleStateW(SafePipeHandle, &flags, null, null, null, null, 0)
             )
             {
                 throw WinIOError(Marshal.GetLastPInvokeError());

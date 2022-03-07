@@ -321,11 +321,13 @@ namespace Microsoft.CodeAnalysis.LanguageServices
             private void AddExceptions(ISymbol symbol)
             {
                 var exceptionTypes =
-                    symbol.GetDocumentationComment(
-                        GetCompilation(),
-                        expandIncludes: true,
-                        expandInheritdoc: true
-                    ).ExceptionTypes;
+                    symbol
+                        .GetDocumentationComment(
+                            GetCompilation(),
+                            expandIncludes: true,
+                            expandInheritdoc: true
+                        )
+                        .ExceptionTypes;
                 if (exceptionTypes.Any())
                 {
                     var parts = new List<SymbolDisplayPart>();
@@ -378,7 +380,8 @@ namespace Microsoft.CodeAnalysis.LanguageServices
                 }
 
                 var analysis = semanticModel.AnalyzeDataFlow(syntax);
-                var captures = analysis.CapturedInside
+                var captures = analysis
+                    .CapturedInside
                     .Except(analysis.VariablesDeclared)
                     .ToImmutableArray();
                 if (!captures.IsEmpty)
@@ -403,10 +406,10 @@ namespace Microsoft.CodeAnalysis.LanguageServices
                 }
             }
 
-            private static readonly SymbolDisplayFormat s_formatForCaptures =
-                SymbolDisplayFormat.MinimallyQualifiedFormat
-                    .RemoveLocalOptions(SymbolDisplayLocalOptions.IncludeType)
-                    .RemoveParameterOptions(SymbolDisplayParameterOptions.IncludeType);
+            private static readonly SymbolDisplayFormat s_formatForCaptures = SymbolDisplayFormat
+                .MinimallyQualifiedFormat
+                .RemoveLocalOptions(SymbolDisplayLocalOptions.IncludeType)
+                .RemoveParameterOptions(SymbolDisplayParameterOptions.IncludeType);
 
             public async Task<ImmutableArray<SymbolDisplayPart>> BuildDescriptionAsync(
                 ImmutableArray<ISymbol> symbolGroup,
@@ -628,11 +631,13 @@ namespace Microsoft.CodeAnalysis.LanguageServices
                 )
                 {
                     AddEnumUnderlyingTypeSeparator();
-                    var underlyingTypeDisplayParts = symbol.EnumUnderlyingType.ToDisplayParts(
-                        s_descriptionStyle.WithMiscellaneousOptions(
-                            SymbolDisplayMiscellaneousOptions.UseSpecialTypes
-                        )
-                    );
+                    var underlyingTypeDisplayParts = symbol
+                        .EnumUnderlyingType
+                        .ToDisplayParts(
+                            s_descriptionStyle.WithMiscellaneousOptions(
+                                SymbolDisplayMiscellaneousOptions.UseSpecialTypes
+                            )
+                        );
                     AddToGroup(SymbolDescriptionGroups.MainDescription, underlyingTypeDisplayParts);
                 }
             }

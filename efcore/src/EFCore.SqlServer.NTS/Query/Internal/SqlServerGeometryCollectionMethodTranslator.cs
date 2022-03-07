@@ -20,8 +20,9 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
     /// </summary>
     public class SqlServerGeometryCollectionMethodTranslator : IMethodCallTranslator
     {
-        private static readonly MethodInfo _item =
-            typeof(GeometryCollection).GetRequiredRuntimeProperty("Item").GetMethod!;
+        private static readonly MethodInfo _item = typeof(GeometryCollection)
+            .GetRequiredRuntimeProperty("Item")
+            .GetMethod!;
         private readonly IRelationalTypeMappingSource _typeMappingSource;
         private readonly ISqlExpressionFactory _sqlExpressionFactory;
 

@@ -471,18 +471,20 @@ namespace System.Threading
 
                 if (NativeRuntimeEventSource.Log.IsEnabled())
                 {
-                    NativeRuntimeEventSource.Log.ThreadPoolWorkerThreadAdjustmentStats(
-                        sampleDurationSeconds,
-                        throughput,
-                        threadWaveComponent.Real,
-                        throughputWaveComponent.Real,
-                        throughputErrorEstimate,
-                        _averageThroughputNoise,
-                        ratio.Real,
-                        confidence,
-                        _currentControlSetting,
-                        (ushort)newThreadWaveMagnitude
-                    );
+                    NativeRuntimeEventSource
+                        .Log
+                        .ThreadPoolWorkerThreadAdjustmentStats(
+                            sampleDurationSeconds,
+                            throughput,
+                            threadWaveComponent.Real,
+                            throughputWaveComponent.Real,
+                            throughputErrorEstimate,
+                            _averageThroughputNoise,
+                            ratio.Real,
+                            confidence,
+                            _currentControlSetting,
+                            (ushort)newThreadWaveMagnitude
+                        );
                 }
 
                 //
@@ -561,11 +563,13 @@ namespace System.Threading
 
                 if (NativeRuntimeEventSource.Log.IsEnabled())
                 {
-                    NativeRuntimeEventSource.Log.ThreadPoolWorkerThreadAdjustmentAdjustment(
-                        throughput,
-                        (uint)newThreadCount,
-                        (NativeRuntimeEventSource.ThreadAdjustmentReasonMap)stateOrTransition
-                    );
+                    NativeRuntimeEventSource
+                        .Log
+                        .ThreadPoolWorkerThreadAdjustmentAdjustment(
+                            throughput,
+                            (uint)newThreadCount,
+                            (NativeRuntimeEventSource.ThreadAdjustmentReasonMap)stateOrTransition
+                        );
                 }
             }
 

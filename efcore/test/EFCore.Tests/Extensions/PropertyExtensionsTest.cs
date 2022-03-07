@@ -86,9 +86,11 @@ namespace Microsoft.EntityFrameworkCore
                     "Property1",
                     "int"
                 ),
-                Assert.Throws<InvalidOperationException>(
-                    () => property1.SetValueConverter(new CastingConverter<long, decimal>())
-                ).Message
+                Assert
+                    .Throws<InvalidOperationException>(
+                        () => property1.SetValueConverter(new CastingConverter<long, decimal>())
+                    )
+                    .Message
             );
         }
 
@@ -217,7 +219,8 @@ namespace Microsoft.EntityFrameworkCore
                     (IProperty)model
                         .FindEntityType(typeof(ProductDetails))
                         .GetForeignKeys()
-                        .Single().Properties[0]
+                        .Single()
+                        .Properties[0]
                 ).FindGenerationProperty()
             );
 
@@ -227,7 +230,8 @@ namespace Microsoft.EntityFrameworkCore
                     (IProperty)model
                         .FindEntityType(typeof(ProductDetailsTag))
                         .GetForeignKeys()
-                        .Single().Properties[0]
+                        .Single()
+                        .Properties[0]
                 ).FindGenerationProperty()
             );
 
@@ -237,7 +241,8 @@ namespace Microsoft.EntityFrameworkCore
                     (IProperty)model
                         .FindEntityType(typeof(ProductDetailsTag))
                         .GetForeignKeys()
-                        .Single().Properties[1]
+                        .Single()
+                        .Properties[1]
                 ).FindGenerationProperty()
             );
 
@@ -247,7 +252,8 @@ namespace Microsoft.EntityFrameworkCore
                     (IProperty)model
                         .FindEntityType(typeof(ProductDetailsTagDetails))
                         .GetForeignKeys()
-                        .Single().Properties[0]
+                        .Single()
+                        .Properties[0]
                 ).FindGenerationProperty()
             );
         }
@@ -263,7 +269,8 @@ namespace Microsoft.EntityFrameworkCore
                     (IProperty)model
                         .FindEntityType(typeof(OrderDetails))
                         .GetForeignKeys()
-                        .Single(k => k.Properties.First().Name == "OrderId").Properties[0]
+                        .Single(k => k.Properties.First().Name == "OrderId")
+                        .Properties[0]
                 ).FindGenerationProperty()
             );
 
@@ -273,7 +280,8 @@ namespace Microsoft.EntityFrameworkCore
                     (IProperty)model
                         .FindEntityType(typeof(OrderDetails))
                         .GetForeignKeys()
-                        .Single(k => k.Properties.First().Name == "ProductId").Properties[0]
+                        .Single(k => k.Properties.First().Name == "ProductId")
+                        .Properties[0]
                 ).FindGenerationProperty()
             );
         }

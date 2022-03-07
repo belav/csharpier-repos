@@ -222,9 +222,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
 
                             if (
                                 !defAssignedWhenTrue
-                                && !_semanticModel.AnalyzeControlFlow(
-                                    ifStatement.Statement
-                                ).EndPointIsReachable
+                                && !_semanticModel
+                                    .AnalyzeControlFlow(ifStatement.Statement)
+                                    .EndPointIsReachable
                             )
                             {
                                 // Access before assignment here is only valid if we have a negative
@@ -408,7 +408,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
 
                 return _semanticModel
                     .AnalyzeDataFlow(statementOrExpression)
-                    .DataFlowsIn.Contains(_localSymbol);
+                    .DataFlowsIn
+                    .Contains(_localSymbol);
             }
 
             private bool LocalFlowsIn(StatementSyntax firstStatement, StatementSyntax lastStatement)
@@ -425,7 +426,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
 
                 return _semanticModel
                     .AnalyzeDataFlow(firstStatement, lastStatement)
-                    .DataFlowsIn.Contains(_localSymbol);
+                    .DataFlowsIn
+                    .Contains(_localSymbol);
             }
         }
     }

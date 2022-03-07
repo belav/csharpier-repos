@@ -5495,9 +5495,9 @@ namespace System.Runtime.CompilerServices
     {
     }
 }",
-                parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
-                    LanguageVersion.CSharp9
-                )
+                parseOptions: CSharpParseOptions
+                    .Default
+                    .WithLanguageVersion(LanguageVersion.CSharp9)
             );
         }
 
@@ -5663,9 +5663,9 @@ class MyClass
             await TestInRegularAndScriptAsync(
                 code,
                 expected,
-                parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
-                    LanguageVersion.CSharp9
-                )
+                parseOptions: CSharpParseOptions
+                    .Default
+                    .WithLanguageVersion(LanguageVersion.CSharp9)
             );
         }
     }

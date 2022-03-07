@@ -86,9 +86,9 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
             {
                 _diagnostics.Add(
                     ErrorCode.ERR_InsufficientStack,
-                    BoundTreeVisitor.CancelledByStackGuardException.GetTooLongOrComplexExpressionErrorLocation(
-                        expression
-                    )
+                    BoundTreeVisitor
+                        .CancelledByStackGuardException
+                        .GetTooLongOrComplexExpressionErrorLocation(expression)
                 );
                 throw new EmitCancelledException();
             }
@@ -1889,17 +1889,17 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
 
                 if (
                     (object)originalMethod
-                        == this._module.Compilation.GetSpecialTypeMember(
-                            SpecialMember.System_Nullable_T_GetValueOrDefault
-                        )
+                        == this._module
+                            .Compilation
+                            .GetSpecialTypeMember(SpecialMember.System_Nullable_T_GetValueOrDefault)
                     || (object)originalMethod
-                        == this._module.Compilation.GetSpecialTypeMember(
-                            SpecialMember.System_Nullable_T_get_Value
-                        )
+                        == this._module
+                            .Compilation
+                            .GetSpecialTypeMember(SpecialMember.System_Nullable_T_get_Value)
                     || (object)originalMethod
-                        == this._module.Compilation.GetSpecialTypeMember(
-                            SpecialMember.System_Nullable_T_get_HasValue
-                        )
+                        == this._module
+                            .Compilation
+                            .GetSpecialTypeMember(SpecialMember.System_Nullable_T_get_HasValue)
                 )
                 {
                     return true;
@@ -1926,9 +1926,10 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
                     return ((BoundCall)receiver).Method.RefKind != RefKind.None;
 
                 case BoundKind.FunctionPointerInvocation:
-                    return (
-                            (BoundFunctionPointerInvocation)receiver
-                        ).FunctionPointer.Signature.RefKind != RefKind.None;
+                    return ((BoundFunctionPointerInvocation)receiver)
+                            .FunctionPointer
+                            .Signature
+                            .RefKind != RefKind.None;
 
                 case BoundKind.Dup:
                     return ((BoundDup)receiver).RefKind != RefKind.None;
@@ -2416,10 +2417,10 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
 
                     // ctor can possibly see its own assignments indirectly if there are ref parameters or __arglist
                     if (
-                        System.Linq.ImmutableArrayExtensions.All(
-                            ctor.Parameters,
-                            p => p.RefKind == RefKind.None
-                        ) && !ctor.IsVararg
+                        System
+                            .Linq
+                            .ImmutableArrayExtensions
+                            .All(ctor.Parameters, p => p.RefKind == RefKind.None) && !ctor.IsVararg
                     )
                     {
                         InPlaceCtorCall(left, objCreation, used);
@@ -2999,9 +3000,10 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
 
                 case BoundKind.FunctionPointerInvocation:
                     Debug.Assert(
-                        (
-                            (BoundFunctionPointerInvocation)expression
-                        ).FunctionPointer.Signature.RefKind != RefKind.None
+                        ((BoundFunctionPointerInvocation)expression)
+                            .FunctionPointer
+                            .Signature
+                            .RefKind != RefKind.None
                     );
                     EmitIndirectStore(expression.Type, expression.Syntax);
                     break;

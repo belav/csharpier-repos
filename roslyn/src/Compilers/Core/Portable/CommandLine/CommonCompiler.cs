@@ -1060,9 +1060,9 @@ namespace Microsoft.CodeAnalysis
                 }
 
                 globalConfigOptions = analyzerConfigSet.GlobalConfigOptions;
-                sourceFileAnalyzerConfigOptions = Arguments.SourceFiles.SelectAsArray(
-                    f => analyzerConfigSet.GetOptionsForSourcePath(f.Path)
-                );
+                sourceFileAnalyzerConfigOptions = Arguments
+                    .SourceFiles
+                    .SelectAsArray(f => analyzerConfigSet.GetOptionsForSourcePath(f.Path));
 
                 foreach (var sourceFileAnalyzerConfigOption in sourceFileAnalyzerConfigOptions)
                 {
@@ -1307,7 +1307,8 @@ namespace Microsoft.CodeAnalysis
                         Arguments.GeneratedFilesOutputDirectory
                     );
 
-                    var generatedSyntaxTrees = compilation.SyntaxTrees
+                    var generatedSyntaxTrees = compilation
+                        .SyntaxTrees
                         .Skip(Arguments.SourceFiles.Length)
                         .ToList();
 
@@ -1454,7 +1455,8 @@ namespace Microsoft.CodeAnalysis
             try
             {
                 // NOTE: Unlike the PDB path, the XML doc path is not embedded in the assembly, so we don't need to pass it to emit.
-                var emitOptions = Arguments.EmitOptions
+                var emitOptions = Arguments
+                    .EmitOptions
                     .WithOutputNameOverride(outputName)
                     .WithPdbFilePath(
                         PathUtilities.NormalizePathPrefix(finalPdbFilePath, Arguments.PathMap)
@@ -1855,9 +1857,9 @@ namespace Microsoft.CodeAnalysis
                 return;
             }
 
-            var totalAnalyzerExecutionTime = analyzerDriver.AnalyzerExecutionTimes.Sum(
-                kvp => kvp.Value.TotalSeconds
-            );
+            var totalAnalyzerExecutionTime = analyzerDriver
+                .AnalyzerExecutionTimes
+                .Sum(kvp => kvp.Value.TotalSeconds);
             Func<double, string> getFormattedTime = d => d.ToString("##0.000", culture);
             consoleOutput.WriteLine();
             consoleOutput.WriteLine(
@@ -1872,7 +1874,8 @@ namespace Microsoft.CodeAnalysis
                 consoleOutput.WriteLine(CodeAnalysisResources.MultithreadedAnalyzerExecutionNote);
             }
 
-            var analyzersByAssembly = analyzerDriver.AnalyzerExecutionTimes
+            var analyzersByAssembly = analyzerDriver
+                .AnalyzerExecutionTimes
                 .GroupBy(kvp => kvp.Key.GetType().GetTypeInfo().Assembly)
                 .OrderByDescending(kvp => kvp.Sum(entry => entry.Value.Ticks));
 

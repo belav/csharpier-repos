@@ -203,16 +203,19 @@ namespace Microsoft.CodeAnalysis.UseAutoProperty
             propertyDocument = solution.GetRequiredDocument(propertyDocument.Id);
             Debug.Assert(fieldDocument.Project == propertyDocument.Project);
 
-            compilation = await fieldDocument.Project
+            compilation = await fieldDocument
+                .Project
                 .GetRequiredCompilationAsync(cancellationToken)
                 .ConfigureAwait(false);
 
             fieldSymbol = (IFieldSymbol?)fieldSymbol
                 .GetSymbolKey(cancellationToken)
-                .Resolve(compilation, cancellationToken: cancellationToken).Symbol;
+                .Resolve(compilation, cancellationToken: cancellationToken)
+                .Symbol;
             propertySymbol = (IPropertySymbol?)propertySymbol
                 .GetSymbolKey(cancellationToken)
-                .Resolve(compilation, cancellationToken: cancellationToken).Symbol;
+                .Resolve(compilation, cancellationToken: cancellationToken)
+                .Symbol;
             Contract.ThrowIfTrue(fieldSymbol == null || propertySymbol == null);
 
             declarator = (TVariableDeclarator)await fieldSymbol.DeclaringSyntaxReferences[0]
@@ -413,7 +416,8 @@ namespace Microsoft.CodeAnalysis.UseAutoProperty
             CancellationToken cancellationToken
         )
         {
-            var constructorNodes = field.ContainingType
+            var constructorNodes = field
+                .ContainingType
                 .GetMembers()
                 .Where(m => m.IsConstructor())
                 .SelectMany(c => c.DeclaringSyntaxReferences)
@@ -421,16 +425,18 @@ namespace Microsoft.CodeAnalysis.UseAutoProperty
                 .Select(n => n.FirstAncestorOrSelf<TConstructorDeclaration>())
                 .WhereNotNull()
                 .ToSet();
-            return renameLocations.Locations.Any(
-                loc =>
-                    IsWrittenToOutsideOfConstructorOrProperty(
-                        renameLocations.Solution,
-                        loc,
-                        propertyDeclaration,
-                        constructorNodes,
-                        cancellationToken
-                    )
-            );
+            return renameLocations
+                .Locations
+                .Any(
+                    loc =>
+                        IsWrittenToOutsideOfConstructorOrProperty(
+                            renameLocations.Solution,
+                            loc,
+                            propertyDeclaration,
+                            constructorNodes,
+                            cancellationToken
+                        )
+                );
         }
 
         private static bool IsWrittenToOutsideOfConstructorOrProperty(

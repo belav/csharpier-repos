@@ -48,12 +48,14 @@ namespace Internal.Cryptography.Pal
                 byte[] smallPfx = exporter.Export(X509ContentType.Pkcs12, s_passwordExportHandle)!;
 
                 SafeSecIdentityHandle identityHandle;
-                SafeSecCertificateHandle certHandle = Interop.AppleCrypto.X509ImportCertificate(
-                    smallPfx,
-                    X509ContentType.Pkcs12,
-                    s_passwordExportHandle,
-                    out identityHandle
-                );
+                SafeSecCertificateHandle certHandle = Interop
+                    .AppleCrypto
+                    .X509ImportCertificate(
+                        smallPfx,
+                        X509ContentType.Pkcs12,
+                        s_passwordExportHandle,
+                        out identityHandle
+                    );
 
                 if (identityHandle.IsInvalid)
                 {

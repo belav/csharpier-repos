@@ -458,11 +458,13 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                     (
                         diagnosticOptions.TryGetValue(diag.Id, out var severity)
                         || options.SyntaxTreeOptionsProvider is object
-                            && options.SyntaxTreeOptionsProvider.TryGetGlobalDiagnosticValue(
-                                diag.Id,
-                                analyzerExecutor.CancellationToken,
-                                out severity
-                            )
+                            && options
+                                .SyntaxTreeOptionsProvider
+                                .TryGetGlobalDiagnosticValue(
+                                    diag.Id,
+                                    analyzerExecutor.CancellationToken,
+                                    out severity
+                                )
                     )
                     && severity != ReportDiagnostic.Default
                 )

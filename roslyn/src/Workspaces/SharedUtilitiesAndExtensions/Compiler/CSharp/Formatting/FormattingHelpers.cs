@@ -350,10 +350,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
         {
             if (token.Kind() == SyntaxKind.GreaterThanToken)
             {
-                return token.Parent.IsKind(
-                    SyntaxKind.TypeParameterList,
-                    SyntaxKind.TypeArgumentList
-                );
+                return token
+                    .Parent
+                    .IsKind(SyntaxKind.TypeParameterList, SyntaxKind.TypeArgumentList);
             }
 
             return false;
@@ -424,10 +423,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
         public static bool IsFirstFromKeywordInExpression(this SyntaxToken token)
         {
             return token.Kind() == SyntaxKind.FromKeyword
-                && token.Parent.IsParentKind(
-                    SyntaxKind.QueryExpression,
-                    out QueryExpressionSyntax? queryExpression
-                )
+                && token
+                    .Parent
+                    .IsParentKind(
+                        SyntaxKind.QueryExpression,
+                        out QueryExpressionSyntax? queryExpression
+                    )
                 && queryExpression.GetFirstToken().Equals(token);
         }
 

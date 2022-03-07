@@ -44,14 +44,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.InheritanceMarg
                         // Here we want to show a classified text with loc text,
                         // e.g. 'Bar' is inherited.
                         // But the classified text are inlines, so can't directly use string.format to generate the string
-                        var inlines = member.DisplayTexts.ToInlines(
-                            _classificationFormatMap,
-                            _classificationTypeMap
-                        );
-                        var startOfThePlaceholder = ServicesVSResources._0_is_inherited.IndexOf(
-                            "{0}",
-                            StringComparison.Ordinal
-                        );
+                        var inlines = member
+                            .DisplayTexts
+                            .ToInlines(_classificationFormatMap, _classificationTypeMap);
+                        var startOfThePlaceholder = ServicesVSResources
+                            ._0_is_inherited
+                            .IndexOf("{0}", StringComparison.Ordinal);
                         var prefixString = ServicesVSResources._0_is_inherited[
                             ..startOfThePlaceholder
                         ];

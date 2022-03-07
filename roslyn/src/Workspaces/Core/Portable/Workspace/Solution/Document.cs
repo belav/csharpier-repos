@@ -344,7 +344,8 @@ namespace Microsoft.CodeAnalysis
         /// Creates a new instance of this document updated to have the text specified.
         /// </summary>
         public Document WithText(SourceText text) =>
-            this.Project.Solution
+            this.Project
+                .Solution
                 .WithDocumentText(this.Id, text, PreservationMode.PreserveIdentity)
                 .GetDocument(this.Id)!;
 
@@ -352,7 +353,8 @@ namespace Microsoft.CodeAnalysis
         /// Creates a new instance of this document updated to have a syntax tree rooted by the specified syntax node.
         /// </summary>
         public Document WithSyntaxRoot(SyntaxNode root) =>
-            this.Project.Solution
+            this.Project
+                .Solution
                 .WithDocumentSyntaxRoot(this.Id, root, PreservationMode.PreserveIdentity)
                 .GetDocument(this.Id)!;
 
@@ -474,13 +476,12 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         public ImmutableArray<DocumentId> GetLinkedDocumentIds()
         {
-            var documentIdsWithPath = this.Project.Solution.GetDocumentIdsWithFilePath(
-                this.FilePath
-            );
-            var filteredDocumentIds = this.Project.Solution.FilterDocumentIdsByLanguage(
-                documentIdsWithPath,
-                this.Project.Language
-            );
+            var documentIdsWithPath = this.Project
+                .Solution
+                .GetDocumentIdsWithFilePath(this.FilePath);
+            var filteredDocumentIds = this.Project
+                .Solution
+                .FilterDocumentIdsByLanguage(documentIdsWithPath, this.Project.Language);
             return filteredDocumentIds.Remove(this.Id);
         }
 
@@ -502,8 +503,9 @@ namespace Microsoft.CodeAnalysis
             // as partial semantics don't make sense otherwise.
             if (workspace.PartialSemanticsEnabled && this.Project.SupportsCompilation)
             {
-                var newSolution =
-                    this.Project.Solution.WithFrozenPartialCompilationIncludingSpecificDocument(
+                var newSolution = this.Project
+                    .Solution
+                    .WithFrozenPartialCompilationIncludingSpecificDocument(
                         this.Id,
                         cancellationToken
                     );
@@ -557,8 +559,11 @@ namespace Microsoft.CodeAnalysis
             var newAsyncLazy = new AsyncLazy<DocumentOptionSet>(
                 async c =>
                 {
-                    var optionsService =
-                        Project.Solution.Workspace.Services.GetRequiredService<IOptionService>();
+                    var optionsService = Project
+                        .Solution
+                        .Workspace
+                        .Services
+                        .GetRequiredService<IOptionService>();
                     var documentOptionSet = await optionsService
                         .GetUpdatedOptionSetForDocumentAsync(this, solutionOptions, c)
                         .ConfigureAwait(false);
@@ -598,10 +603,9 @@ namespace Microsoft.CodeAnalysis
 
             if (effectiveFilePath != null)
             {
-                return Project.State.GetAnalyzerOptionsForPathAsync(
-                    effectiveFilePath,
-                    cancellationToken
-                );
+                return Project
+                    .State
+                    .GetAnalyzerOptionsForPathAsync(effectiveFilePath, cancellationToken);
             }
             else
             {

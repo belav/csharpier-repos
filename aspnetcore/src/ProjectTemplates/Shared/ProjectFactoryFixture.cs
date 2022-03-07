@@ -57,8 +57,9 @@ public class ProjectFactoryFixture : IDisposable
     private static string GetTemplateFolderBasePath(Assembly assembly) =>
         (string.IsNullOrEmpty(Environment.GetEnvironmentVariable("HELIX_DIR")))
             ? assembly
-                  .GetCustomAttributes<AssemblyMetadataAttribute>()
-                  .Single(a => a.Key == "TestTemplateCreationFolder").Value
+              .GetCustomAttributes<AssemblyMetadataAttribute>()
+              .Single(a => a.Key == "TestTemplateCreationFolder")
+              .Value
             : Path.Combine(
                   Environment.GetEnvironmentVariable("HELIX_DIR"),
                   "Templates",

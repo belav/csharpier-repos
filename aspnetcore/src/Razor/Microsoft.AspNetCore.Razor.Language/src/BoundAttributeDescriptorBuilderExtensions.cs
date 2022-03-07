@@ -64,10 +64,10 @@ public static class BoundAttributeDescriptorBuilderExtensions
             throw new ArgumentNullException(nameof(builder));
         }
 
-        return builder.Metadata.TryGetValue(
-                ComponentMetadata.Common.DirectiveAttribute,
-                out var value
-            ) && string.Equals(bool.TrueString, value);
+        return builder
+                .Metadata
+                .TryGetValue(ComponentMetadata.Common.DirectiveAttribute, out var value)
+            && string.Equals(bool.TrueString, value);
     }
 
     public static void SetPropertyName(

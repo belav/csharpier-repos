@@ -26,11 +26,13 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
         {
             await base.InitializeAsync().ConfigureAwait(true);
             VisualStudio.SolutionExplorer.CreateSolution(nameof(CSharpBuild));
-            VisualStudio.SolutionExplorer.AddProject(
-                new ProjectUtils.Project("TestProj"),
-                WellKnownProjectTemplates.ConsoleApplication,
-                LanguageNames.CSharp
-            );
+            VisualStudio
+                .SolutionExplorer
+                .AddProject(
+                    new ProjectUtils.Project("TestProj"),
+                    WellKnownProjectTemplates.ConsoleApplication,
+                    LanguageNames.CSharp
+                );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.Build)]

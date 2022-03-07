@@ -31,7 +31,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
                 )
                 .Should()
                 .Fail()
-                .And.DidNotFindCompatibleFrameworkVersion();
+                .And
+                .DidNotFindCompatibleFrameworkVersion();
 
             RunTest(
                     new TestSettings().WithRuntimeConfigCustomizer(
@@ -40,7 +41,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
                 )
                 .Should()
                 .Pass()
-                .And.HaveResolvedFramework(MicrosoftNETCoreApp, "5.1.3");
+                .And
+                .HaveResolvedFramework(MicrosoftNETCoreApp, "5.1.3");
         }
 
         // Verifies that it works in all supported locations
@@ -193,7 +195,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
                                         runtimeConfig =>
                                             runtimeConfig
                                                 .WithRollForwardOnNoCandidateFx(2)
-                                                .GetFramework(MicrosoftNETCoreApp).Version = "4.0.0"
+                                                .GetFramework(MicrosoftNETCoreApp)
+                                                .Version = "4.0.0"
                                     )
                         )
                 )
@@ -227,9 +230,9 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
                                     .Framework(MiddleWare)
                                     .RuntimeConfig(
                                         runtimeConfig =>
-                                            runtimeConfig.GetFramework(
-                                                MicrosoftNETCoreApp
-                                            ).Version = "4.0.0"
+                                            runtimeConfig
+                                                .GetFramework(MicrosoftNETCoreApp)
+                                                .Version = "4.0.0"
                                     )
                         )
                 )
@@ -266,9 +269,9 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
                                     .Framework(MiddleWare)
                                     .RuntimeConfig(
                                         runtimeConfig =>
-                                            runtimeConfig.GetFramework(
-                                                MicrosoftNETCoreApp
-                                            ).Version = "5.0.0"
+                                            runtimeConfig
+                                                .GetFramework(MicrosoftNETCoreApp)
+                                                .Version = "5.0.0"
                                     )
                         )
                 )

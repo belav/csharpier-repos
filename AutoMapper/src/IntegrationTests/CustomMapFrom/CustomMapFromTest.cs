@@ -55,21 +55,23 @@ namespace AutoMapper.IntegrationTests.Net4
         {
             protected override void Seed(Context context)
             {
-                context.Customers.Add(
-                    new Customer
-                    {
-                        Id = 1,
-                        FirstName = "Bob",
-                        LastName = "Smith",
-                        Address = new Address
+                context
+                    .Customers
+                    .Add(
+                        new Customer
                         {
                             Id = 1,
-                            Street = "123 Anywhere",
-                            City = "Austin",
-                            State = "TX"
+                            FirstName = "Bob",
+                            LastName = "Smith",
+                            Address = new Address
+                            {
+                                Id = 1,
+                                Street = "123 Anywhere",
+                                City = "Austin",
+                                State = "TX"
+                            }
                         }
-                    }
-                );
+                    );
 
                 base.Seed(context);
             }
@@ -103,7 +105,8 @@ namespace AutoMapper.IntegrationTests.Net4
             {
                 using (var context = new Context())
                 {
-                    var customerVms = context.Customers
+                    var customerVms = context
+                        .Customers
                         .Select(
                             c =>
                                 new CustomerViewModel

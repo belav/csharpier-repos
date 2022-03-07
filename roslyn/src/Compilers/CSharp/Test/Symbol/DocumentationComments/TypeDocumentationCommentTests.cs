@@ -45,7 +45,8 @@ namespace Acme
 }"
             );
 
-            _acmeNamespace = (NamespaceSymbol)_compilation.GlobalNamespace
+            _acmeNamespace = (NamespaceSymbol)_compilation
+                .GlobalNamespace
                 .GetMembers("Acme")
                 .Single();
             _widgetClass = _acmeNamespace.GetTypeMembers("Widget").Single();
@@ -56,7 +57,8 @@ namespace Acme
         {
             Assert.Equal(
                 "T:Color",
-                _compilation.GlobalNamespace
+                _compilation
+                    .GlobalNamespace
                     .GetTypeMembers("Color")
                     .Single()
                     .GetDocumentationCommentId()

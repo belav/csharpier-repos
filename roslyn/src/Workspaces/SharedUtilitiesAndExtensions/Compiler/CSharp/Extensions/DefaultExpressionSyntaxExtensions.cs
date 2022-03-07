@@ -88,10 +88,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
         {
             if (
                 equalsValueClause.IsParentKind(SyntaxKind.VariableDeclarator)
-                && equalsValueClause.Parent.IsParentKind(
-                    SyntaxKind.VariableDeclaration,
-                    out VariableDeclarationSyntax declaration
-                )
+                && equalsValueClause
+                    .Parent
+                    .IsParentKind(
+                        SyntaxKind.VariableDeclaration,
+                        out VariableDeclarationSyntax declaration
+                    )
             )
             {
                 return declaration.Type;

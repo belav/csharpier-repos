@@ -490,7 +490,8 @@ namespace System.Net.Http.Json.Functional.Tests
 
         private void ValidateRequest(HttpRequestData requestData, string expectedMethod)
         {
-            HttpHeaderData contentType = requestData.Headers
+            HttpHeaderData contentType = requestData
+                .Headers
                 .Where(x => x.Name == "Content-Type")
                 .First();
             Assert.Equal("application/json; charset=utf-8", contentType.Value);

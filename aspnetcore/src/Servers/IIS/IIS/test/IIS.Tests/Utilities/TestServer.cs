@@ -140,7 +140,8 @@ public class TestServer : IDisposable
             )
             .SetAttributeValue("image", AspNetCoreModuleLocation);
 
-        var siteElement = webHostConfig.Root
+        var siteElement = webHostConfig
+            .Root
             .RequiredElement("system.applicationHost")
             .RequiredElement("sites")
             .RequiredElement("site");

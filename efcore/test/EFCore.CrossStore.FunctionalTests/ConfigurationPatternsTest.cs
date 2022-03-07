@@ -121,8 +121,9 @@ namespace Microsoft.EntityFrameworkCore
             )
             {
                 using (
-                    context1 =
-                        serviceScope.ServiceProvider.GetRequiredService<MultipleProvidersContext>()
+                    context1 = serviceScope
+                        .ServiceProvider
+                        .GetRequiredService<MultipleProvidersContext>()
                 )
                 {
                     context1.UseSqlServer = true;
@@ -131,8 +132,9 @@ namespace Microsoft.EntityFrameworkCore
                 }
 
                 using (
-                    var context1B =
-                        serviceScope.ServiceProvider.GetRequiredService<MultipleProvidersContext>()
+                    var context1B = serviceScope
+                        .ServiceProvider
+                        .GetRequiredService<MultipleProvidersContext>()
                 )
                 {
                     Assert.Same(context1, context1B);
@@ -149,8 +151,9 @@ namespace Microsoft.EntityFrameworkCore
             )
             {
                 using (
-                    context2 =
-                        serviceScope.ServiceProvider.GetRequiredService<MultipleProvidersContext>()
+                    context2 = serviceScope
+                        .ServiceProvider
+                        .GetRequiredService<MultipleProvidersContext>()
                 )
                 {
                     context2.UseSqlServer = false;
@@ -159,8 +162,9 @@ namespace Microsoft.EntityFrameworkCore
                 }
 
                 using (
-                    var context2B =
-                        serviceScope.ServiceProvider.GetRequiredService<MultipleProvidersContext>()
+                    var context2B = serviceScope
+                        .ServiceProvider
+                        .GetRequiredService<MultipleProvidersContext>()
                 )
                 {
                     Assert.Same(context2, context2B);

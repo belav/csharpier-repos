@@ -113,11 +113,13 @@ namespace Microsoft.Web.Mvc.ModelBinding
                 && (controllerContext != null)
                 && (controllerContext.HttpContext != null)
             )
-              ? controllerContext.HttpContext.GetGlobalResourceObject(
-                    resourceClassKey,
-                    resourceName,
-                    CultureInfo.CurrentUICulture
-                ) as string
+              ? controllerContext
+                    .HttpContext
+                    .GetGlobalResourceObject(
+                        resourceClassKey,
+                        resourceName,
+                        CultureInfo.CurrentUICulture
+                    ) as string
               : null;
         }
 

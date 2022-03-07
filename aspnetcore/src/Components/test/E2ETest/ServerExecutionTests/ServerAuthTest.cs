@@ -49,9 +49,9 @@ public class ServerAuthTest : AuthTest
                 Browser.Equal(
                     "You're not authorized, anonymous",
                     () =>
-                        appElement.FindElement(
-                            By.CssSelector("#authorize-role .not-authorized")
-                        ).Text
+                        appElement
+                            .FindElement(By.CssSelector("#authorize-role .not-authorized"))
+                            .Text
                 );
             }
             else

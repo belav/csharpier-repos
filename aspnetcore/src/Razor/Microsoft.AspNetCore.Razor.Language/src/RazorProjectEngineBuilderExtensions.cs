@@ -78,9 +78,9 @@ public static class RazorProjectEngineBuilderExtensions
         }
 
         var configurationFeature = GetDefaultDocumentClassifierPassFeature(builder);
-        configurationFeature.ConfigureNamespace.Add(
-            (document, @namespace) => @namespace.Content = namespaceName
-        );
+        configurationFeature
+            .ConfigureNamespace
+            .Add((document, @namespace) => @namespace.Content = namespaceName);
         return builder;
     }
 
@@ -271,7 +271,8 @@ public static class RazorProjectEngineBuilderExtensions
         RazorProjectEngineBuilder builder
     )
     {
-        var directiveFeature = builder.Features
+        var directiveFeature = builder
+            .Features
             .OfType<DefaultRazorDirectiveFeature>()
             .FirstOrDefault();
         if (directiveFeature == null)
@@ -287,7 +288,8 @@ public static class RazorProjectEngineBuilderExtensions
         RazorProjectEngineBuilder builder
     )
     {
-        var targetExtensionFeature = builder.Features
+        var targetExtensionFeature = builder
+            .Features
             .OfType<IRazorTargetExtensionFeature>()
             .FirstOrDefault();
         if (targetExtensionFeature == null)
@@ -303,7 +305,8 @@ public static class RazorProjectEngineBuilderExtensions
         RazorProjectEngineBuilder builder
     )
     {
-        var configurationFeature = builder.Features
+        var configurationFeature = builder
+            .Features
             .OfType<DefaultDocumentClassifierPassFeature>()
             .FirstOrDefault();
         if (configurationFeature == null)

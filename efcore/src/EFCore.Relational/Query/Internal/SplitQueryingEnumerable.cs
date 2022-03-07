@@ -214,11 +214,13 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                     {
                         if (_dataReader == null)
                         {
-                            _relationalQueryContext.ExecutionStrategy.Execute(
-                                this,
-                                static (_, enumerator) => InitializeReader(enumerator),
-                                null
-                            );
+                            _relationalQueryContext
+                                .ExecutionStrategy
+                                .Execute(
+                                    this,
+                                    static (_, enumerator) => InitializeReader(enumerator),
+                                    null
+                                );
                         }
 
                         var hasNext = _dataReader!.Read();
@@ -271,10 +273,9 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
             {
                 EntityFrameworkEventSource.Log.QueryExecuting();
 
-                var relationalCommand = enumerator._relationalCommand =
-                    enumerator._relationalCommandCache.RentAndPopulateRelationalCommand(
-                        enumerator._relationalQueryContext
-                    );
+                var relationalCommand = enumerator._relationalCommand = enumerator
+                    ._relationalCommandCache
+                    .RentAndPopulateRelationalCommand(enumerator._relationalQueryContext);
 
                 var dataReader = enumerator._dataReader = relationalCommand.ExecuteReader(
                     new RelationalCommandParameterObject(
@@ -291,9 +292,9 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
 
                 enumerator._resultCoordinator = new SplitQueryResultCoordinator();
 
-                enumerator._relationalQueryContext.InitializeStateManager(
-                    enumerator._standAloneStateManager
-                );
+                enumerator
+                    ._relationalQueryContext
+                    .InitializeStateManager(enumerator._standAloneStateManager);
 
                 return false;
             }
@@ -384,7 +385,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                     {
                         if (_dataReader == null)
                         {
-                            await _relationalQueryContext.ExecutionStrategy
+                            await _relationalQueryContext
+                                .ExecutionStrategy
                                 .ExecuteAsync(
                                     this,
                                     static (_, enumerator, cancellationToken) =>
@@ -451,10 +453,9 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
             {
                 EntityFrameworkEventSource.Log.QueryExecuting();
 
-                var relationalCommand = enumerator._relationalCommand =
-                    enumerator._relationalCommandCache.RentAndPopulateRelationalCommand(
-                        enumerator._relationalQueryContext
-                    );
+                var relationalCommand = enumerator._relationalCommand = enumerator
+                    ._relationalCommandCache
+                    .RentAndPopulateRelationalCommand(enumerator._relationalQueryContext);
 
                 var dataReader = enumerator._dataReader = await relationalCommand
                     .ExecuteReaderAsync(
@@ -474,9 +475,9 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
 
                 enumerator._resultCoordinator = new SplitQueryResultCoordinator();
 
-                enumerator._relationalQueryContext.InitializeStateManager(
-                    enumerator._standAloneStateManager
-                );
+                enumerator
+                    ._relationalQueryContext
+                    .InitializeStateManager(enumerator._standAloneStateManager);
 
                 return false;
             }

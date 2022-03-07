@@ -533,9 +533,9 @@ namespace ILCompiler.PEWriter
 
             if (objectData.Relocs != null && objectData.Relocs.Length != 0)
             {
-                section.PlacedObjectDataToRelocate.Add(
-                    new PlacedObjectData(alignedOffset, objectData)
-                );
+                section
+                    .PlacedObjectDataToRelocate
+                    .Add(new PlacedObjectData(alignedOffset, objectData));
             }
         }
 

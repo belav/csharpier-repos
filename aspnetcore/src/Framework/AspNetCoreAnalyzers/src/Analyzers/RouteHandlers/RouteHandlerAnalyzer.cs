@@ -106,13 +106,16 @@ public partial class RouteHandlerAnalyzer : DiagnosticAnalyzer
                             var foundMethodReferenceBody = false;
                             if (!methodReference.Method.DeclaringSyntaxReferences.IsEmpty)
                             {
-                                var syntaxReference =
-                                    methodReference.Method.DeclaringSyntaxReferences[0];
-                                var methodOperation = invocation.SemanticModel.GetOperation(
-                                    syntaxReference.GetSyntax(
-                                        operationAnalysisContext.CancellationToken
-                                    )
-                                );
+                                var syntaxReference = methodReference
+                                    .Method
+                                    .DeclaringSyntaxReferences[0];
+                                var methodOperation = invocation
+                                    .SemanticModel
+                                    .GetOperation(
+                                        syntaxReference.GetSyntax(
+                                            operationAnalysisContext.CancellationToken
+                                        )
+                                    );
                                 if (
                                     methodOperation is ILocalFunctionOperation
                                     {
@@ -169,15 +172,13 @@ public partial class RouteHandlerAnalyzer : DiagnosticAnalyzer
     )
     {
         return targetMethod.Name.StartsWith("Map", StringComparison.Ordinal)
-            && SymbolEqualityComparer.Default.Equals(
-                wellKnownTypes.EndpointRouteBuilderExtensions,
-                targetMethod.ContainingType
-            )
+            && SymbolEqualityComparer
+                .Default
+                .Equals(wellKnownTypes.EndpointRouteBuilderExtensions, targetMethod.ContainingType)
             && invocation.Arguments.Length == 3
             && targetMethod.Parameters.Length == 3
-            && SymbolEqualityComparer.Default.Equals(
-                wellKnownTypes.Delegate,
-                targetMethod.Parameters[2].Type
-            );
+            && SymbolEqualityComparer
+                .Default
+                .Equals(wellKnownTypes.Delegate, targetMethod.Parameters[2].Type);
     }
 }

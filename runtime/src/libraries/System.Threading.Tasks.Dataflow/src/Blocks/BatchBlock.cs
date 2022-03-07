@@ -83,11 +83,13 @@ namespace System.Threading.Tasks.Dataflow
                 this,
                 dataflowBlockOptions,
                 owningSource =>
-                    ((BatchBlock<T>)owningSource)._target.Complete(
-                        exception: null,
-                        dropPendingMessages: true,
-                        releaseReservedMessages: false
-                    ),
+                    ((BatchBlock<T>)owningSource)
+                        ._target
+                        .Complete(
+                            exception: null,
+                            dropPendingMessages: true,
+                            releaseReservedMessages: false
+                        ),
                 onItemsRemoved,
                 itemCountingFunc
             );
@@ -101,35 +103,39 @@ namespace System.Threading.Tasks.Dataflow
             );
 
             // When the target is done, let the source know it won't be getting any more data
-            _target.Completion.ContinueWith(
-                delegate
-                {
-                    _source.Complete();
-                },
-                CancellationToken.None,
-                Common.GetContinuationOptions(),
-                TaskScheduler.Default
-            );
+            _target
+                .Completion
+                .ContinueWith(
+                    delegate
+                    {
+                        _source.Complete();
+                    },
+                    CancellationToken.None,
+                    Common.GetContinuationOptions(),
+                    TaskScheduler.Default
+                );
 
             // It is possible that the source half may fault on its own, e.g. due to a task scheduler exception.
             // In those cases we need to fault the target half to drop its buffered messages and to release its
             // reservations. This should not create an infinite loop, because all our implementations are designed
             // to handle multiple completion requests and to carry over only one.
-            _source.Completion.ContinueWith(
-                (completed, state) =>
-                {
-                    var thisBlock = ((BatchBlock<T>)state!) as IDataflowBlock;
-                    Debug.Assert(
-                        completed.IsFaulted,
-                        "The source must be faulted in order to trigger a target completion."
-                    );
-                    thisBlock.Fault(completed.Exception!);
-                },
-                this,
-                CancellationToken.None,
-                Common.GetContinuationOptions() | TaskContinuationOptions.OnlyOnFaulted,
-                TaskScheduler.Default
-            );
+            _source
+                .Completion
+                .ContinueWith(
+                    (completed, state) =>
+                    {
+                        var thisBlock = ((BatchBlock<T>)state!) as IDataflowBlock;
+                        Debug.Assert(
+                            completed.IsFaulted,
+                            "The source must be faulted in order to trigger a target completion."
+                        );
+                        thisBlock.Fault(completed.Exception!);
+                    },
+                    this,
+                    CancellationToken.None,
+                    Common.GetContinuationOptions() | TaskContinuationOptions.OnlyOnFaulted,
+                    TaskScheduler.Default
+                );
 
             // Handle async cancellation requests by declining on the target
             Common.WireCancellationToComplete(
@@ -1423,11 +1429,9 @@ namespace System.Threading.Tasks.Dataflow
                         KeyValuePair<DataflowMessageHeader, T>
                     >); // in case of exception from ConsumeMessage
                     bool consumed;
-                    T? consumedValue = sourceAndMessage.Key.ConsumeMessage(
-                        sourceAndMessage.Value.Key,
-                        _owningBatch,
-                        out consumed
-                    );
+                    T? consumedValue = sourceAndMessage
+                        .Key
+                        .ConsumeMessage(sourceAndMessage.Value.Key, _owningBatch, out consumed);
                     if (!consumed)
                     {
                         // The protocol broke down, so throw an exception, as this is fatal.  Before doing so, though,
@@ -1514,11 +1518,9 @@ namespace System.Threading.Tasks.Dataflow
                         KeyValuePair<DataflowMessageHeader, T>
                     >); // in case of exception from ConsumeMessage
                     bool consumed;
-                    T? consumedValue = sourceAndMessage.Key.ConsumeMessage(
-                        sourceAndMessage.Value.Key,
-                        _owningBatch,
-                        out consumed
-                    );
+                    T? consumedValue = sourceAndMessage
+                        .Key
+                        .ConsumeMessage(sourceAndMessage.Value.Key, _owningBatch, out consumed);
                     if (consumed)
                     {
                         var consumedMessage = new KeyValuePair<DataflowMessageHeader, T>(

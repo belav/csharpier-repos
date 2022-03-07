@@ -42,9 +42,10 @@ namespace Microsoft.CodeAnalysis
                 {
                     if (_count == -1)
                     {
-                        _count = this.IdentifierCollection._map.Values.Sum(
-                            o => o is string ? 1 : ((ISet<string>)o).Count
-                        );
+                        _count = this.IdentifierCollection
+                            ._map
+                            .Values
+                            .Sum(o => o is string ? 1 : ((ISet<string>)o).Count);
                     }
 
                     return _count;

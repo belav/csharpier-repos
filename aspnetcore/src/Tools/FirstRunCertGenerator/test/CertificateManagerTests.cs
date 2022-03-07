@@ -289,19 +289,21 @@ public class CertificateManagerTests : IClassFixture<CertFixture>
 
         Assert.Equal(
             "plaintext",
-            Encoding.ASCII.GetString(
-                exportedCertificate
-                    .GetRSAPrivateKey()
-                    .Decrypt(
-                        exportedCertificate
-                            .GetRSAPrivateKey()
-                            .Encrypt(
-                                Encoding.ASCII.GetBytes(message),
-                                RSAEncryptionPadding.OaepSHA256
-                            ),
-                        RSAEncryptionPadding.OaepSHA256
-                    )
-            )
+            Encoding
+                .ASCII
+                .GetString(
+                    exportedCertificate
+                        .GetRSAPrivateKey()
+                        .Decrypt(
+                            exportedCertificate
+                                .GetRSAPrivateKey()
+                                .Encrypt(
+                                    Encoding.ASCII.GetBytes(message),
+                                    RSAEncryptionPadding.OaepSHA256
+                                ),
+                            RSAEncryptionPadding.OaepSHA256
+                        )
+                )
         );
         Assert.Equal(httpsCertificate.GetCertHashString(), exportedCertificate.GetCertHashString());
     }
@@ -542,19 +544,21 @@ public class CertificateManagerTests : IClassFixture<CertFixture>
 
         Assert.Equal(
             "plaintext",
-            Encoding.ASCII.GetString(
-                exportedCertificate
-                    .GetRSAPrivateKey()
-                    .Decrypt(
-                        exportedCertificate
-                            .GetRSAPrivateKey()
-                            .Encrypt(
-                                Encoding.ASCII.GetBytes(message),
-                                RSAEncryptionPadding.OaepSHA256
-                            ),
-                        RSAEncryptionPadding.OaepSHA256
-                    )
-            )
+            Encoding
+                .ASCII
+                .GetString(
+                    exportedCertificate
+                        .GetRSAPrivateKey()
+                        .Decrypt(
+                            exportedCertificate
+                                .GetRSAPrivateKey()
+                                .Encrypt(
+                                    Encoding.ASCII.GetBytes(message),
+                                    RSAEncryptionPadding.OaepSHA256
+                                ),
+                            RSAEncryptionPadding.OaepSHA256
+                        )
+                )
         );
         Assert.Equal(httpsCertificate.GetCertHashString(), exportedCertificate.GetCertHashString());
     }

@@ -62,9 +62,11 @@ namespace JIT.HardwareIntrinsics.General
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation(
-                    $"Vector128ByteToString: Vector128<Byte>.ToString() returned an unexpected result."
-                );
+                TestLibrary
+                    .TestFramework
+                    .LogInformation(
+                        $"Vector128ByteToString: Vector128<Byte>.ToString() returned an unexpected result."
+                    );
                 TestLibrary.TestFramework.LogInformation($"Expected: {expected}");
                 TestLibrary.TestFramework.LogInformation($"Actual: {actual}");
                 TestLibrary.TestFramework.LogInformation(string.Empty);

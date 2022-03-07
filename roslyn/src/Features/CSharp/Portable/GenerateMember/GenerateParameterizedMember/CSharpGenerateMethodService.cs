@@ -200,11 +200,9 @@ namespace Microsoft.CodeAnalysis.CSharp.GenerateMember.GenerateMethod
         )
         {
             if (
-                semanticModel.SyntaxTree.IsNameOfContext(
-                    expression.SpanStart,
-                    semanticModel,
-                    cancellationToken
-                )
+                semanticModel
+                    .SyntaxTree
+                    .IsNameOfContext(expression.SpanStart, semanticModel, cancellationToken)
             )
             {
                 return typeInferenceService.InferType(

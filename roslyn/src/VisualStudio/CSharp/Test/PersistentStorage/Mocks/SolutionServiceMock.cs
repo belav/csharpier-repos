@@ -124,7 +124,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.WorkspaceServices.Mocks
             public IDisposable Subscribe(IObserver<T> observer)
             {
                 var actionBlock = new ActionBlock<T>(observer.OnNext);
-                actionBlock.Completion
+                actionBlock
+                    .Completion
                     .ContinueWith(
                         static (t, s) =>
                         {

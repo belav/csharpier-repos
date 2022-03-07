@@ -164,7 +164,8 @@ class C
                 tree.GetCompilationUnitRoot()
                     .DescendantNodes()
                     .OfType<GotoStatementSyntax>()
-                    .Single().Expression;
+                    .Single()
+                    .Expression;
             var symbol = model.GetSymbolInfo(syntax).Symbol;
             Assert.Equal(SymbolKind.Label, symbol.Kind);
             Assert.Null(symbol.GetDocumentationCommentId());
@@ -291,7 +292,8 @@ class C
             var symbol = comp.GlobalNamespace
                 .GetMember<NamedTypeSymbol>("C")
                 .GetMember<MethodSymbol>("M")
-                .Parameters.Single();
+                .Parameters
+                .Single();
             Assert.Equal(SymbolKind.Parameter, symbol.Kind);
             Assert.Null(symbol.GetDocumentationCommentId());
         }

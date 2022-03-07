@@ -258,12 +258,9 @@ namespace System.Xml.Serialization
             if (fieldInfo.DeclaringType != Type)
                 return null;
 
-            TypeDesc typeDesc = ModelScope.TypeScope.GetTypeDesc(
-                fieldInfo.FieldType,
-                fieldInfo,
-                true,
-                false
-            );
+            TypeDesc typeDesc = ModelScope
+                .TypeScope
+                .GetTypeDesc(fieldInfo.FieldType, fieldInfo, true, false);
             if (
                 fieldInfo.IsInitOnly
                 && typeDesc.Kind != TypeKind.Collection
@@ -282,12 +279,9 @@ namespace System.Xml.Serialization
                 return null;
             if (CheckPropertyRead(propertyInfo))
             {
-                TypeDesc typeDesc = ModelScope.TypeScope.GetTypeDesc(
-                    propertyInfo.PropertyType,
-                    propertyInfo,
-                    true,
-                    false
-                );
+                TypeDesc typeDesc = ModelScope
+                    .TypeScope
+                    .GetTypeDesc(propertyInfo.PropertyType, propertyInfo, true, false);
                 // Fix for CSDMain 100492, please contact arssrvlt if you need to change this line
                 if (
                     !propertyInfo.CanWrite
@@ -369,15 +363,14 @@ namespace System.Xml.Serialization
             _fieldType = fieldType;
             _fieldTypeDesc = fieldTypeDesc;
             _memberInfo = memberInfo;
-            _checkShouldPersistMethodInfo = memberInfo.DeclaringType!.GetMethod(
-                $"ShouldSerialize{memberInfo.Name}",
-                Type.EmptyTypes
-            );
+            _checkShouldPersistMethodInfo = memberInfo
+                .DeclaringType!
+                .GetMethod($"ShouldSerialize{memberInfo.Name}", Type.EmptyTypes);
             _checkShouldPersist = _checkShouldPersistMethodInfo != null;
 
-            FieldInfo? specifiedField = memberInfo.DeclaringType.GetField(
-                $"{memberInfo.Name}Specified"
-            );
+            FieldInfo? specifiedField = memberInfo
+                .DeclaringType
+                .GetField($"{memberInfo.Name}Specified");
             if (specifiedField != null)
             {
                 if (specifiedField.FieldType != typeof(bool))
@@ -398,9 +391,9 @@ namespace System.Xml.Serialization
             }
             else
             {
-                PropertyInfo? specifiedProperty = memberInfo.DeclaringType.GetProperty(
-                    $"{memberInfo.Name}Specified"
-                );
+                PropertyInfo? specifiedProperty = memberInfo
+                    .DeclaringType
+                    .GetProperty($"{memberInfo.Name}Specified");
                 if (specifiedProperty != null)
                 {
                     if (StructModel.CheckPropertyRead(specifiedProperty))

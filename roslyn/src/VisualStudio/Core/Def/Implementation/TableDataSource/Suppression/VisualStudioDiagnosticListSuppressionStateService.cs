@@ -381,7 +381,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
                             );
                             var textSpan = (
                                 await tree.GetTextAsync(cancellationToken).ConfigureAwait(false)
-                            ).Lines.GetTextSpan(linePositionSpan);
+                            )
+                                .Lines
+                                .GetTextSpan(linePositionSpan);
                             location = new DiagnosticDataLocation(
                                 document.Id,
                                 textSpan,

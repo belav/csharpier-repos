@@ -46,7 +46,9 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Storage.Internal
             _rawSqlCommandBuilder = rawSqlCommandBuilder;
             _logger = logger;
 
-            var optionsExtension = dependencies.ContextOptions.Extensions
+            var optionsExtension = dependencies
+                .ContextOptions
+                .Extensions
                 .OfType<SqliteOptionsExtension>()
                 .FirstOrDefault();
             if (optionsExtension != null)

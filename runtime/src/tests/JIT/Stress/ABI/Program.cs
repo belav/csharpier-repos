@@ -479,8 +479,10 @@ namespace ABIStress
 
         public static IAbi Abi => s_abi;
 
-        private static readonly TypeEx[] s_tailCalleeCandidateArgTypes =
-            s_abi.TailCalleeCandidateArgTypes.Select(t => new TypeEx(t)).ToArray();
+        private static readonly TypeEx[] s_tailCalleeCandidateArgTypes = s_abi
+            .TailCalleeCandidateArgTypes
+            .Select(t => new TypeEx(t))
+            .ToArray();
 
         // We cannot marshal generic types so we cannot just use all types for pinvokees.
         // This can be relaxed once https://github.com/dotnet/coreclr/pull/23899 is merged.

@@ -35,9 +35,9 @@ internal unsafe partial class ResponseStreamAsyncResult : IAsyncResult, IDisposa
         var cancellationRegistration = default(CancellationTokenRegistration);
         if (cancellationToken.CanBeCanceled)
         {
-            cancellationRegistration = _responseStream.RequestContext.RegisterForCancellation(
-                cancellationToken
-            );
+            cancellationRegistration = _responseStream
+                .RequestContext
+                .RegisterForCancellation(cancellationToken);
         }
         _cancellationToken = cancellationToken;
         _cancellationRegistration = cancellationRegistration;
@@ -168,8 +168,9 @@ internal unsafe partial class ResponseStreamAsyncResult : IAsyncResult, IDisposa
                     HttpApiTypes.HTTP_DATA_CHUNK_TYPE.HttpDataChunkFromFileHandle;
                 _dataChunks[1].fromFile.offset = (ulong)offset;
                 _dataChunks[1].fromFile.count = (ulong)count;
-                _dataChunks[1].fromFile.fileHandle =
-                    _fileStream.SafeFileHandle.DangerousGetHandle();
+                _dataChunks[1].fromFile.fileHandle = _fileStream
+                    .SafeFileHandle
+                    .DangerousGetHandle();
                 // Nothing to pin for the file handle.
 
                 _dataChunks[2].DataChunkType =
@@ -183,8 +184,9 @@ internal unsafe partial class ResponseStreamAsyncResult : IAsyncResult, IDisposa
                     HttpApiTypes.HTTP_DATA_CHUNK_TYPE.HttpDataChunkFromFileHandle;
                 _dataChunks[0].fromFile.offset = (ulong)offset;
                 _dataChunks[0].fromFile.count = (ulong)count;
-                _dataChunks[0].fromFile.fileHandle =
-                    _fileStream.SafeFileHandle.DangerousGetHandle();
+                _dataChunks[0].fromFile.fileHandle = _fileStream
+                    .SafeFileHandle
+                    .DangerousGetHandle();
             }
 
             // This call will pin needed memory

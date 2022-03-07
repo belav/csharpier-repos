@@ -31,7 +31,9 @@ public class Entry
     public static void Instance()
     {
         AssemblyName name = new AssemblyName("Instance");
-        AssemblyBuilder asmbuild = System.Threading.Thread
+        AssemblyBuilder asmbuild = System
+            .Threading
+            .Thread
             .GetDomain()
             .DefineDynamicAssembly(name, AssemblyBuilderAccess.RunAndSave);
         ModuleBuilder mod = asmbuild.DefineDynamicModule("Instance.exe");

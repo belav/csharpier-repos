@@ -68,7 +68,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.LanguageClient
                 // doesn't block the UI thread.
                 await TaskScheduler.Default;
 
-                await _languageClientBroker.Value
+                await _languageClientBroker
+                    .Value
                     .LoadAsync(
                         new LanguageClientMetadata(
                             new[]
