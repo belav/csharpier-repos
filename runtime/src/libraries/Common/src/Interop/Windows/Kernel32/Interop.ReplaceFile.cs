@@ -9,22 +9,43 @@ internal static partial class Interop
 {
     internal static partial class Kernel32
     {
-        [GeneratedDllImport(Libraries.Kernel32, EntryPoint = "ReplaceFileW", CharSet = CharSet.Unicode, ExactSpelling = true, SetLastError = true)]
+        [GeneratedDllImport(
+            Libraries.Kernel32,
+            EntryPoint = "ReplaceFileW",
+            CharSet = CharSet.Unicode,
+            ExactSpelling = true,
+            SetLastError = true
+        )]
         private static partial bool ReplaceFilePrivate(
-            string replacedFileName, string replacementFileName, string? backupFileName,
-            int dwReplaceFlags, IntPtr lpExclude, IntPtr lpReserved);
+            string replacedFileName,
+            string replacementFileName,
+            string? backupFileName,
+            int dwReplaceFlags,
+            IntPtr lpExclude,
+            IntPtr lpReserved
+        );
 
         internal static bool ReplaceFile(
-            string replacedFileName, string replacementFileName, string? backupFileName,
-            int dwReplaceFlags, IntPtr lpExclude, IntPtr lpReserved)
+            string replacedFileName,
+            string replacementFileName,
+            string? backupFileName,
+            int dwReplaceFlags,
+            IntPtr lpExclude,
+            IntPtr lpReserved
+        )
         {
             replacedFileName = PathInternal.EnsureExtendedPrefixIfNeeded(replacedFileName);
             replacementFileName = PathInternal.EnsureExtendedPrefixIfNeeded(replacementFileName);
             backupFileName = PathInternal.EnsureExtendedPrefixIfNeeded(backupFileName);
 
             return ReplaceFilePrivate(
-                replacedFileName, replacementFileName, backupFileName,
-                dwReplaceFlags, lpExclude, lpReserved);
+                replacedFileName,
+                replacementFileName,
+                backupFileName,
+                dwReplaceFlags,
+                lpExclude,
+                lpReserved
+            );
         }
 
         internal const int REPLACEFILE_IGNORE_MERGE_ERRORS = 0x2;

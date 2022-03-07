@@ -16,7 +16,10 @@ namespace Microsoft.EntityFrameworkCore.Tools.Commands
         {
             command.Description = Resources.MigrationsListDescription;
 
-            _connection = command.Option("--connection <CONNECTION>", Resources.DbContextConnectionDescription);
+            _connection = command.Option(
+                "--connection <CONNECTION>",
+                Resources.DbContextConnectionDescription
+            );
             _noConnect = command.Option("--no-connect", Resources.NoConnectDescription);
             _json = Json.ConfigureOption(command);
 

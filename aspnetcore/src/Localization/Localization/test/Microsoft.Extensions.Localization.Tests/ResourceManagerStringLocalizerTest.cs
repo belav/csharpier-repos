@@ -29,18 +29,23 @@ public class ResourceManagerStringLocalizerTest
             resourceNamesCache,
             resourceManager,
             resourceAssembly.Assembly,
-            baseName);
+            baseName
+        );
         var logger = Logger;
-        var localizer1 = new ResourceManagerStringLocalizer(resourceManager,
+        var localizer1 = new ResourceManagerStringLocalizer(
+            resourceManager,
             resourceStreamManager,
             baseName,
             resourceNamesCache,
-            logger);
-        var localizer2 = new ResourceManagerStringLocalizer(resourceManager,
+            logger
+        );
+        var localizer2 = new ResourceManagerStringLocalizer(
+            resourceManager,
             resourceStreamManager,
             baseName,
             resourceNamesCache,
-            logger);
+            logger
+        );
 
         // Act
         for (var i = 0; i < 5; i++)
@@ -64,21 +69,33 @@ public class ResourceManagerStringLocalizerTest
         var resourceAssembly2 = new TestAssemblyWrapper(typeof(ResourceManagerStringLocalizer));
         var resourceManager1 = new TestResourceManager(baseName, resourceAssembly1);
         var resourceManager2 = new TestResourceManager(baseName, resourceAssembly2);
-        var resourceStreamManager1 = new TestResourceStringProvider(resourceNamesCache, resourceManager1, resourceAssembly1.Assembly, baseName);
-        var resourceStreamManager2 = new TestResourceStringProvider(resourceNamesCache, resourceManager2, resourceAssembly2.Assembly, baseName);
+        var resourceStreamManager1 = new TestResourceStringProvider(
+            resourceNamesCache,
+            resourceManager1,
+            resourceAssembly1.Assembly,
+            baseName
+        );
+        var resourceStreamManager2 = new TestResourceStringProvider(
+            resourceNamesCache,
+            resourceManager2,
+            resourceAssembly2.Assembly,
+            baseName
+        );
         var logger = Logger;
         var localizer1 = new ResourceManagerStringLocalizer(
             resourceManager1,
             resourceStreamManager1,
             baseName,
             resourceNamesCache,
-            logger);
+            logger
+        );
         var localizer2 = new ResourceManagerStringLocalizer(
             resourceManager2,
             resourceStreamManager2,
             baseName,
             resourceNamesCache,
-            logger);
+            logger
+        );
 
         // Act
         localizer1.GetAllStrings().ToList();
@@ -98,14 +115,20 @@ public class ResourceManagerStringLocalizerTest
         var resourceNamesCache = new ResourceNamesCache();
         var resourceAssembly = new TestAssemblyWrapper();
         var resourceManager = new TestResourceManager(baseName, resourceAssembly);
-        var resourceStreamManager = new TestResourceStringProvider(resourceNamesCache, resourceManager, resourceAssembly.Assembly, baseName);
+        var resourceStreamManager = new TestResourceStringProvider(
+            resourceNamesCache,
+            resourceManager,
+            resourceAssembly.Assembly,
+            baseName
+        );
         var logger = Logger;
         var localizer = new ResourceManagerStringLocalizer(
             resourceManager,
             resourceStreamManager,
             baseName,
             resourceNamesCache,
-            logger);
+            logger
+        );
 
         // Act
         var value = localizer["name"];
@@ -123,7 +146,12 @@ public class ResourceManagerStringLocalizerTest
         var resourceNamesCache = new ResourceNamesCache();
         var resourceAssembly = new TestAssemblyWrapper();
         var resourceManager = new TestResourceManager(baseName, resourceAssembly);
-        var resourceStreamManager = new TestResourceStringProvider(resourceNamesCache, resourceManager, resourceAssembly.Assembly, baseName);
+        var resourceStreamManager = new TestResourceStringProvider(
+            resourceNamesCache,
+            resourceManager,
+            resourceAssembly.Assembly,
+            baseName
+        );
         var logger = Logger;
 
         var localizer = new ResourceManagerStringLocalizer(
@@ -131,34 +159,46 @@ public class ResourceManagerStringLocalizerTest
             resourceStreamManager,
             baseName,
             resourceNamesCache,
-            logger);
+            logger
+        );
 
         // Act
         var value = localizer["a key!"];
 
         // Assert
         var write = Assert.Single(Sink.Writes);
-        Assert.Equal("ResourceManagerStringLocalizer searched for 'a key!' in 'Resources.TestResource' with culture 'en-US'.", write.State.ToString());
+        Assert.Equal(
+            "ResourceManagerStringLocalizer searched for 'a key!' in 'Resources.TestResource' with culture 'en-US'.",
+            write.State.ToString()
+        );
     }
 
     [Theory]
     [InlineData(true)]
     [InlineData(false)]
-    public void ResourceManagerStringLocalizer_GetAllStrings_ReturnsExpectedValue(bool includeParentCultures)
+    public void ResourceManagerStringLocalizer_GetAllStrings_ReturnsExpectedValue(
+        bool includeParentCultures
+    )
     {
         // Arrange
         var baseName = "test";
         var resourceNamesCache = new ResourceNamesCache();
         var resourceAssembly = new TestAssemblyWrapper();
         var resourceManager = new TestResourceManager(baseName, resourceAssembly);
-        var resourceStreamManager = new TestResourceStringProvider(resourceNamesCache, resourceManager, resourceAssembly.Assembly, baseName);
+        var resourceStreamManager = new TestResourceStringProvider(
+            resourceNamesCache,
+            resourceManager,
+            resourceAssembly.Assembly,
+            baseName
+        );
         var logger = Logger;
         var localizer = new ResourceManagerStringLocalizer(
             resourceManager,
             resourceStreamManager,
             baseName,
             resourceNamesCache,
-            logger);
+            logger
+        );
 
         // Act
         // We have to access the result so it evaluates.
@@ -174,7 +214,9 @@ public class ResourceManagerStringLocalizerTest
     [Theory]
     [InlineData(true)]
     [InlineData(false)]
-    public void ResourceManagerStringLocalizer_GetAllStrings_MissingResourceThrows(bool includeParentCultures)
+    public void ResourceManagerStringLocalizer_GetAllStrings_MissingResourceThrows(
+        bool includeParentCultures
+    )
     {
         // Arrange
         var resourceNamesCache = new ResourceNamesCache();
@@ -189,16 +231,19 @@ public class ResourceManagerStringLocalizerTest
             resourceAssembly.Assembly,
             baseName,
             resourceNamesCache,
-            logger);
+            logger
+        );
 
         // Act & Assert
-        var exception = Assert.Throws<MissingManifestResourceException>(() =>
-        {
+        var exception = Assert.Throws<MissingManifestResourceException>(
+            () =>
+            {
                 // We have to access the result so it evaluates.
 #pragma warning disable CA1304 // Specify CultureInfo
                 localizer.GetAllStrings(includeParentCultures).ToArray();
 #pragma warning restore CA1304 // Specify CultureInfo
-            });
+            }
+        );
 
         var expectedTries = includeParentCultures ? 3 : 1;
         var expected = includeParentCultures
@@ -238,10 +283,10 @@ public class ResourceManagerStringLocalizerTest
         return result;
     }
 
-
     private TestSink Sink { get; } = new TestSink();
 
-    private ILogger Logger => new TestLoggerFactory(Sink, enabled: true).CreateLogger<ResourceManagerStringLocalizer>();
+    private ILogger Logger =>
+        new TestLoggerFactory(Sink, enabled: true).CreateLogger<ResourceManagerStringLocalizer>();
 
     internal class TestResourceManager : ResourceManager
     {
@@ -255,7 +300,11 @@ public class ResourceManagerStringLocalizerTest
 
         public override string? GetString(string name, CultureInfo? culture) => null;
 
-        public override ResourceSet? GetResourceSet(CultureInfo culture, bool createIfNotExists, bool tryParents)
+        public override ResourceSet? GetResourceSet(
+            CultureInfo culture,
+            bool createIfNotExists,
+            bool tryParents
+        )
         {
             var resourceStream = _assemblyWrapper.GetManifestResourceStream(BaseName);
 
@@ -266,26 +315,18 @@ public class ResourceManagerStringLocalizerTest
     internal class TestResourceStringProvider : ResourceManagerStringProvider
     {
         public TestResourceStringProvider(
-                IResourceNamesCache resourceCache,
-                TestResourceManager resourceManager,
-                Assembly assembly,
-                string resourceBaseName)
-            : base(resourceCache, resourceManager, assembly, resourceBaseName)
-        {
-        }
+            IResourceNamesCache resourceCache,
+            TestResourceManager resourceManager,
+            Assembly assembly,
+            string resourceBaseName
+        ) : base(resourceCache, resourceManager, assembly, resourceBaseName) { }
     }
 
     internal class TestAssemblyWrapper : AssemblyWrapper
     {
-        public TestAssemblyWrapper()
-            : this(typeof(TestAssemblyWrapper))
-        {
-        }
+        public TestAssemblyWrapper() : this(typeof(TestAssemblyWrapper)) { }
 
-        public TestAssemblyWrapper(Type type)
-            : base(type.Assembly)
-        {
-        }
+        public TestAssemblyWrapper(Type type) : base(type.Assembly) { }
 
         public bool HasResources { get; set; } = true;
 

@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
@@ -17,7 +17,9 @@ public class ServerOnExistingQueueTests
     public async Task Server_200OK_Success()
     {
         using var baseServer = Utilities.CreateHttpServer(out var address);
-        using var server = Utilities.CreateServerOnExistingQueue(baseServer.Options.RequestQueueName);
+        using var server = Utilities.CreateServerOnExistingQueue(
+            baseServer.Options.RequestQueueName
+        );
 
         var responseTask = SendRequestAsync(address);
 
@@ -32,7 +34,9 @@ public class ServerOnExistingQueueTests
     public async Task Server_SendHelloWorld_Success()
     {
         using var baseServer = Utilities.CreateHttpServer(out var address);
-        using var server = Utilities.CreateServerOnExistingQueue(baseServer.Options.RequestQueueName);
+        using var server = Utilities.CreateServerOnExistingQueue(
+            baseServer.Options.RequestQueueName
+        );
 
         Task<string> responseTask = SendRequestAsync(address);
 
@@ -51,7 +55,9 @@ public class ServerOnExistingQueueTests
     public async Task Server_EchoHelloWorld_Success()
     {
         using var baseServer = Utilities.CreateHttpServer(out var address);
-        using var server = Utilities.CreateServerOnExistingQueue(baseServer.Options.RequestQueueName);
+        using var server = Utilities.CreateServerOnExistingQueue(
+            baseServer.Options.RequestQueueName
+        );
 
         var responseTask = SendRequestAsync(address, "Hello World");
 
@@ -73,7 +79,9 @@ public class ServerOnExistingQueueTests
     public async Task Server_SetQueueLimit_Success()
     {
         using var baseServer = Utilities.CreateHttpServer(out var address);
-        using var server = Utilities.CreateServerOnExistingQueue(baseServer.Options.RequestQueueName);
+        using var server = Utilities.CreateServerOnExistingQueue(
+            baseServer.Options.RequestQueueName
+        );
         server.Options.RequestQueueLimit = 1001;
         var responseTask = SendRequestAsync(address);
 
@@ -87,8 +95,14 @@ public class ServerOnExistingQueueTests
     [ConditionalFact]
     public async Task Server_PathBase_Success()
     {
-        using var baseServer = Utilities.CreateDynamicHttpServer("/PathBase", out var root, out var address);
-        using var server = Utilities.CreateServerOnExistingQueue(baseServer.Options.RequestQueueName);
+        using var baseServer = Utilities.CreateDynamicHttpServer(
+            "/PathBase",
+            out var root,
+            out var address
+        );
+        using var server = Utilities.CreateServerOnExistingQueue(
+            baseServer.Options.RequestQueueName
+        );
         server.Options.UrlPrefixes.Add(address); // Need to mirror the setting so we can parse out PathBase
 
         var responseTask = SendRequestAsync(root + "/pathBase/paTh");
@@ -105,8 +119,14 @@ public class ServerOnExistingQueueTests
     [ConditionalFact]
     public async Task Server_PathBaseMismatch_Success()
     {
-        using var baseServer = Utilities.CreateDynamicHttpServer("/PathBase", out var root, out var address);
-        using var server = Utilities.CreateServerOnExistingQueue(baseServer.Options.RequestQueueName);
+        using var baseServer = Utilities.CreateDynamicHttpServer(
+            "/PathBase",
+            out var root,
+            out var address
+        );
+        using var server = Utilities.CreateServerOnExistingQueue(
+            baseServer.Options.RequestQueueName
+        );
 
         var responseTask = SendRequestAsync(root + "/pathBase/paTh");
 
@@ -127,10 +147,21 @@ public class ServerOnExistingQueueTests
     [InlineData("/base path/", "/base%20path/sub%20path", "/base path", "/sub path")]
     [InlineData("/base葉path/", "/base%E8%91%89path/sub%E8%91%89path", "/base葉path", "/sub葉path")]
     [InlineData("/basepath/", "/basepath/sub%2Fpath", "/basepath", "/sub%2Fpath")]
-    public async Task Server_PathSplitting(string pathBase, string requestPath, string expectedPathBase, string expectedPath)
+    public async Task Server_PathSplitting(
+        string pathBase,
+        string requestPath,
+        string expectedPathBase,
+        string expectedPath
+    )
     {
-        using var baseServer = Utilities.CreateDynamicHttpServer(pathBase, out var root, out var baseAddress);
-        using var server = Utilities.CreateServerOnExistingQueue(baseServer.Options.RequestQueueName);
+        using var baseServer = Utilities.CreateDynamicHttpServer(
+            pathBase,
+            out var root,
+            out var baseAddress
+        );
+        using var server = Utilities.CreateServerOnExistingQueue(
+            baseServer.Options.RequestQueueName
+        );
         server.Options.UrlPrefixes.Add(baseAddress); // Keep them in sync
 
         var responseTask = SendRequestAsync(root + requestPath);
@@ -147,9 +178,15 @@ public class ServerOnExistingQueueTests
     [ConditionalFact]
     public async Task Server_LongestPathSplitting()
     {
-        using var baseServer = Utilities.CreateDynamicHttpServer("/basepath", out var root, out var baseAddress);
+        using var baseServer = Utilities.CreateDynamicHttpServer(
+            "/basepath",
+            out var root,
+            out var baseAddress
+        );
         baseServer.Options.UrlPrefixes.Add(baseAddress + "secondTier");
-        using var server = Utilities.CreateServerOnExistingQueue(baseServer.Options.RequestQueueName);
+        using var server = Utilities.CreateServerOnExistingQueue(
+            baseServer.Options.RequestQueueName
+        );
         server.Options.UrlPrefixes.Add(baseAddress); // Keep them in sync
         server.Options.UrlPrefixes.Add(baseAddress + "secondTier");
 
@@ -169,7 +206,9 @@ public class ServerOnExistingQueueTests
     public async Task Server_HotAddPrefix_Success()
     {
         using var baseServer = Utilities.CreateHttpServer(out var address);
-        using var server = Utilities.CreateServerOnExistingQueue(baseServer.Options.RequestQueueName);
+        using var server = Utilities.CreateServerOnExistingQueue(
+            baseServer.Options.RequestQueueName
+        );
         server.Options.UrlPrefixes.Add(address); // Keep them in sync
 
         var responseTask = SendRequestAsync(address);
@@ -202,7 +241,9 @@ public class ServerOnExistingQueueTests
     public async Task Server_HotRemovePrefix_Success()
     {
         using var baseServer = Utilities.CreateHttpServer(out var address);
-        using var server = Utilities.CreateServerOnExistingQueue(baseServer.Options.RequestQueueName);
+        using var server = Utilities.CreateServerOnExistingQueue(
+            baseServer.Options.RequestQueueName
+        );
         server.Options.UrlPrefixes.Add(address); // Keep them in sync
 
         address += "pathbase/";

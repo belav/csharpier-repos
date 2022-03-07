@@ -32,17 +32,24 @@ namespace System.CommandLine.Help
 
         private void AddValidators()
         {
-            AddValidator(result =>
-            {
-                if (result.Parent is { } parent &&
-                    parent.Children.Where(r => r.Symbol is not VersionOption)
-                          .Any(IsNotImplicit))
+            AddValidator(
+                result =>
                 {
-                    return result.LocalizationResources.VersionOptionCannotBeCombinedWithOtherArguments(result.Token?.Value ?? result.Symbol.Name);
-                }
+                    if (
+                        result.Parent is { } parent
+                        && parent.Children
+                            .Where(r => r.Symbol is not VersionOption)
+                            .Any(IsNotImplicit)
+                    )
+                    {
+                        return result.LocalizationResources.VersionOptionCannotBeCombinedWithOtherArguments(
+                            result.Token?.Value ?? result.Symbol.Name
+                        );
+                    }
 
-                return null;
-            });
+                    return null;
+                }
+            );
         }
 
         private static bool IsNotImplicit(SymbolResult symbolResult)
@@ -62,7 +69,7 @@ namespace System.CommandLine.Help
         }
 
         internal override Argument Argument => Argument.None();
-        
+
         public override bool Equals(object obj)
         {
             return obj is VersionOption;

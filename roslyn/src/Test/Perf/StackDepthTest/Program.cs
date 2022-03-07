@@ -56,28 +56,44 @@ namespace OverflowSensitivity
         {
             var builder = new StringBuilder();
             builder.AppendLine(
-    @"class C {
+                @"class C {
     C M(string x) { return this; }
     void M2() {
         new C()
-");
+"
+            );
             for (int i = 0; i < depth; i++)
             {
                 builder.AppendLine(@"            .M(""test"")");
             }
             builder.AppendLine(
-           @"            .M(""test"");
+                @"            .M(""test"");
     }
-}");
+}"
+            );
             return builder.ToString();
         }
+
         private static void CompileCode(string stringText)
         {
-            var parseOptions = new CSharpParseOptions(kind: SourceCodeKind.Regular, documentationMode: DocumentationMode.None);
-            var options = new CSharpCompilationOptions(outputKind: OutputKind.DynamicallyLinkedLibrary, concurrentBuild: false);
+            var parseOptions = new CSharpParseOptions(
+                kind: SourceCodeKind.Regular,
+                documentationMode: DocumentationMode.None
+            );
+            var options = new CSharpCompilationOptions(
+                outputKind: OutputKind.DynamicallyLinkedLibrary,
+                concurrentBuild: false
+            );
             var tree = SyntaxFactory.ParseSyntaxTree(stringText, parseOptions);
-            var reference = MetadataReference.CreateFromFile(@"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5.2\mscorlib.dll");
-            var comp = CSharpCompilation.Create("assemblyName", new SyntaxTree[] { tree }, references: new MetadataReference[] { reference }, options: options);
+            var reference = MetadataReference.CreateFromFile(
+                @"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5.2\mscorlib.dll"
+            );
+            var comp = CSharpCompilation.Create(
+                "assemblyName",
+                new SyntaxTree[] { tree },
+                references: new MetadataReference[] { reference },
+                options: options
+            );
             var diag = comp.GetDiagnostics();
             if (!diag.IsDefaultOrEmpty)
             {

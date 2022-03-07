@@ -49,7 +49,9 @@ namespace System.Collections.Concurrent
         where V : class
     {
         protected ConcurrentUnifier() { }
+
         public V GetOrAdd(K key) => _dict.GetOrAdd(key, Factory);
+
         protected abstract V Factory(K key);
         private readonly ConcurrentDictionary<K, V> _dict = new ConcurrentDictionary<K, V>();
     }

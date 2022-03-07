@@ -7,13 +7,13 @@ using System;
 
 class MainLoop
 {
-   public static int Main()
-   {
-       long result = 0;
-       for (int i = 0; i < 1_000_000; i++)
-       {
-           result += (long)i;
-       }
-       return result == 499999500000 ? 100 : -1;
-   }  
+    public static int Main()
+    {
+        long result = 0;
+        for (int i = 0; i < 1_000_000; i++)
+        {
+            result += (long)i;
+        }
+        return result == 499999500000 ? 100 : -1;
+    }
 }

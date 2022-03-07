@@ -27,9 +27,7 @@ namespace Microsoft.EntityFrameworkCore.Update.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public SharedTableEntryMap(
-            ITable table,
-            IUpdateAdapter updateAdapter)
+        public SharedTableEntryMap(ITable table, IUpdateAdapter updateAdapter)
         {
             _table = table;
             _updateAdapter = updateAdapter;
@@ -42,8 +40,7 @@ namespace Microsoft.EntityFrameworkCore.Update.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual IEnumerable<TValue> Values
-            => _entryValueMap.Values;
+        public virtual IEnumerable<TValue> Values => _entryValueMap.Values;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -51,7 +48,10 @@ namespace Microsoft.EntityFrameworkCore.Update.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual TValue GetOrAddValue(IUpdateEntry entry, SharedTableEntryValueFactory<TValue> createElement)
+        public virtual TValue GetOrAddValue(
+            IUpdateEntry entry,
+            SharedTableEntryValueFactory<TValue> createElement
+        )
         {
             var mainEntry = GetMainEntry(entry);
             if (_entryValueMap.TryGetValue(mainEntry, out var sharedCommand))
@@ -71,8 +71,8 @@ namespace Microsoft.EntityFrameworkCore.Update.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual bool IsMainEntry(IUpdateEntry entry)
-            => !_table.GetRowInternalForeignKeys(entry.EntityType).Any();
+        public virtual bool IsMainEntry(IUpdateEntry entry) =>
+            !_table.GetRowInternalForeignKeys(entry.EntityType).Any();
 
         private IUpdateEntry GetMainEntry(IUpdateEntry entry)
         {
@@ -115,7 +115,9 @@ namespace Microsoft.EntityFrameworkCore.Update.Internal
 
             foreach (var foreignKey in foreignKeys)
             {
-                var dependentEntry = _updateAdapter.GetDependents(entry, foreignKey).SingleOrDefault();
+                var dependentEntry = _updateAdapter
+                    .GetDependents(entry, foreignKey)
+                    .SingleOrDefault();
                 if (dependentEntry != null)
                 {
                     AddAllDependentsInclusive(dependentEntry, entries);
@@ -150,10 +152,10 @@ namespace Microsoft.EntityFrameworkCore.Update.Internal
                 }
 
                 return !_table.GetRowInternalForeignKeys(x.EntityType).Any()
-                    ? -1
-                    : !_table.GetRowInternalForeignKeys(y.EntityType).Any()
-                        ? 1
-                        : StringComparer.Ordinal.Compare(x.EntityType.Name, y.EntityType.Name);
+                  ? -1
+                  : !_table.GetRowInternalForeignKeys(y.EntityType).Any()
+                      ? 1
+                      : StringComparer.Ordinal.Compare(x.EntityType.Name, y.EntityType.Name);
             }
         }
     }

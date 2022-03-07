@@ -39,8 +39,11 @@ internal partial class HubServerProxyGenerator
         public string? SupportHint;
         public StreamSpec Stream;
         public string? InnerReturnTypeName;
-        public bool IsReturnTypeValueTask => FullyQualifiedReturnTypeName
-            .StartsWith("System.Threading.Tasks.ValueTask", StringComparison.Ordinal);
+        public bool IsReturnTypeValueTask =>
+            FullyQualifiedReturnTypeName.StartsWith(
+                "System.Threading.Tasks.ValueTask",
+                StringComparison.Ordinal
+            );
     }
 
     [Flags]

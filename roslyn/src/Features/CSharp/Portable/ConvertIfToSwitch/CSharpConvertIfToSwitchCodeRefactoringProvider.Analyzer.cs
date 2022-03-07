@@ -15,12 +15,10 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertIfToSwitch
         private sealed class CSharpAnalyzer : Analyzer
         {
             public CSharpAnalyzer(ISyntaxFacts syntaxFacts, Feature features)
-                : base(syntaxFacts, features)
-            {
-            }
+                : base(syntaxFacts, features) { }
 
-            public override bool HasUnreachableEndPoint(IOperation operation)
-                => !operation.SemanticModel.AnalyzeControlFlow(operation.Syntax).EndPointIsReachable;
+            public override bool HasUnreachableEndPoint(IOperation operation) =>
+                !operation.SemanticModel.AnalyzeControlFlow(operation.Syntax).EndPointIsReachable;
 
             // We do not offer a fix if the if-statement contains a break-statement, e.g.
             //
@@ -32,8 +30,10 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertIfToSwitch
             //      }
             //
             // When the 'break' moves into the switch, it will have different flow control impact.
-            public override bool CanConvert(IConditionalOperation operation)
-                => !operation.SemanticModel.AnalyzeControlFlow(operation.Syntax).ExitPoints.Any(n => n.IsKind(SyntaxKind.BreakStatement));
+            public override bool CanConvert(IConditionalOperation operation) =>
+                !operation.SemanticModel
+                    .AnalyzeControlFlow(operation.Syntax)
+                    .ExitPoints.Any(n => n.IsKind(SyntaxKind.BreakStatement));
         }
     }
 }

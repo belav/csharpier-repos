@@ -17,29 +17,24 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.OutOfProcess
             _inProc = CreateInProcComponent<GenerateTypeDialog_InProc>(visualStudioInstance);
         }
 
-        public void VerifyOpen()
-            => _inProc.VerifyOpen();
+        public void VerifyOpen() => _inProc.VerifyOpen();
 
-        public void VerifyClosed()
-            => _inProc.VerifyClosed();
+        public void VerifyClosed() => _inProc.VerifyClosed();
 
-        public bool CloseWindow()
-            => _inProc.CloseWindow();
+        public bool CloseWindow() => _inProc.CloseWindow();
 
-        public void SetAccessibility(string accessibility)
-            => _inProc.SetAccessibility(accessibility);
+        public void SetAccessibility(string accessibility) =>
+            _inProc.SetAccessibility(accessibility);
 
-        public void SetKind(string kind)
-            => _inProc.SetKind(kind);
+        public void SetKind(string kind) => _inProc.SetKind(kind);
 
-        public void SetTargetProject(string projectName)
-            => _inProc.SetTargetProject(projectName);
+        public void SetTargetProject(string projectName) => _inProc.SetTargetProject(projectName);
 
-        public void SetTargetFileToNewName(string newFileName)
-            => _inProc.SetTargetFileToNewName(newFileName);
+        public void SetTargetFileToNewName(string newFileName) =>
+            _inProc.SetTargetFileToNewName(newFileName);
 
-        public void SetTargetFileToExisting(string existingFileName)
-            => _inProc.SetTargetFileToExisting(existingFileName);
+        public void SetTargetFileToExisting(string existingFileName) =>
+            _inProc.SetTargetFileToExisting(existingFileName);
 
         /// <summary>
         /// Clicks the "OK" button and waits for the related Code Action to complete.
@@ -47,7 +42,10 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.OutOfProcess
         public void ClickOK()
         {
             _inProc.ClickOK();
-            VisualStudioInstance.Workspace.WaitForAsyncOperations(Helper.HangMitigatingTimeout, FeatureAttribute.LightBulb);
+            VisualStudioInstance.Workspace.WaitForAsyncOperations(
+                Helper.HangMitigatingTimeout,
+                FeatureAttribute.LightBulb
+            );
         }
 
         /// <summary>
@@ -56,10 +54,12 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.OutOfProcess
         public void ClickCancel()
         {
             _inProc.ClickCancel();
-            VisualStudioInstance.Workspace.WaitForAsyncOperations(Helper.HangMitigatingTimeout, FeatureAttribute.LightBulb);
+            VisualStudioInstance.Workspace.WaitForAsyncOperations(
+                Helper.HangMitigatingTimeout,
+                FeatureAttribute.LightBulb
+            );
         }
 
-        public string[] GetNewFileComboBoxItems()
-            => _inProc.GetNewFileComboBoxItems();
+        public string[] GetNewFileComboBoxItems() => _inProc.GetNewFileComboBoxItems();
     }
 }

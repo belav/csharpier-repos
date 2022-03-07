@@ -48,7 +48,9 @@ namespace Microsoft.EntityFrameworkCore.Query
         ///     the constructor at any point in this process.
         /// </remarks>
         [EntityFrameworkInternal]
-        public EvaluatableExpressionFilterDependencies(IEnumerable<IEvaluatableExpressionFilterPlugin> plugins)
+        public EvaluatableExpressionFilterDependencies(
+            IEnumerable<IEvaluatableExpressionFilterPlugin> plugins
+        )
         {
             Plugins = plugins;
         }

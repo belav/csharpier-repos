@@ -62,7 +62,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
             IExecutionStrategy executionStrategy,
             IExecutionStrategyFactory executionStrategyFactory,
             ICurrentDbContext currentContext,
-            IRelationalCommandDiagnosticsLogger commandLogger)
+            IRelationalCommandDiagnosticsLogger commandLogger
+        )
         {
 #pragma warning disable CS0618 // Type or member is obsolete
             Model = model;

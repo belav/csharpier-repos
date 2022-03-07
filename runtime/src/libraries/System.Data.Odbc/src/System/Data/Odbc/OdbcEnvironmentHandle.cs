@@ -18,7 +18,8 @@ namespace System.Data.Odbc
                 this,
                 ODBC32.SQL_ATTR.ODBC_VERSION,
                 ODBC32.SQL_OV_ODBC3,
-                ODBC32.SQL_IS.INTEGER);
+                ODBC32.SQL_IS.INTEGER
+            );
             // ignore retcode
 
             //Turn on connection pooling
@@ -30,7 +31,8 @@ namespace System.Data.Odbc
                 this,
                 ODBC32.SQL_ATTR.CONNECTION_POOLING,
                 ODBC32.SQL_CP_ONE_PER_HENV,
-                ODBC32.SQL_IS.INTEGER);
+                ODBC32.SQL_IS.INTEGER
+            );
 
             switch (retcode)
             {

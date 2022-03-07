@@ -16,8 +16,7 @@ namespace System.Threading
         /// <exception cref="NullReferenceException">The address of location is a null pointer.</exception>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         [CLSCompliant(false)]
-        public static uint Increment(ref uint location) =>
-            Add(ref location, 1);
+        public static uint Increment(ref uint location) => Add(ref location, 1);
 
         /// <summary>Increments a specified variable and stores the result, as an atomic operation.</summary>
         /// <param name="location">The variable whose value is to be incremented.</param>
@@ -25,8 +24,7 @@ namespace System.Threading
         /// <exception cref="NullReferenceException">The address of location is a null pointer.</exception>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         [CLSCompliant(false)]
-        public static ulong Increment(ref ulong location) =>
-            Add(ref location, 1);
+        public static ulong Increment(ref ulong location) => Add(ref location, 1);
         #endregion
 
         #region Decrement
@@ -79,9 +77,15 @@ namespace System.Threading
         public static IntPtr Exchange(ref IntPtr location1, IntPtr value)
         {
 #if TARGET_64BIT
-            return (IntPtr)Interlocked.Exchange(ref Unsafe.As<IntPtr, long>(ref location1), (long)value);
+            return (IntPtr)Interlocked.Exchange(
+                ref Unsafe.As<IntPtr, long>(ref location1),
+                (long)value
+            );
 #else
-            return (IntPtr)Interlocked.Exchange(ref Unsafe.As<IntPtr, int>(ref location1), (int)value);
+            return (IntPtr)Interlocked.Exchange(
+                ref Unsafe.As<IntPtr, int>(ref location1),
+                (int)value
+            );
 #endif
         }
         #endregion
@@ -96,7 +100,11 @@ namespace System.Threading
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         [CLSCompliant(false)]
         public static uint CompareExchange(ref uint location1, uint value, uint comparand) =>
-            (uint)CompareExchange(ref Unsafe.As<uint, int>(ref location1), (int)value, (int)comparand);
+            (uint)CompareExchange(
+                ref Unsafe.As<uint, int>(ref location1),
+                (int)value,
+                (int)comparand
+            );
 
         /// <summary>Compares two 64-bit unsigned integers for equality and, if they are equal, replaces the first value.</summary>
         /// <param name="location1">The destination, whose value is compared with <paramref name="comparand"/> and possibly replaced.</param>
@@ -107,7 +115,11 @@ namespace System.Threading
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         [CLSCompliant(false)]
         public static ulong CompareExchange(ref ulong location1, ulong value, ulong comparand) =>
-            (ulong)CompareExchange(ref Unsafe.As<ulong, long>(ref location1), (long)value, (long)comparand);
+            (ulong)CompareExchange(
+                ref Unsafe.As<ulong, long>(ref location1),
+                (long)value,
+                (long)comparand
+            );
 
         /// <summary>Compares two platform-specific handles or pointers for equality and, if they are equal, replaces the first one.</summary>
         /// <param name="location1">The destination <see cref="IntPtr"/>, whose value is compared with the value of <paramref name="comparand"/> and possibly replaced by <paramref name="value"/>.</param>
@@ -119,9 +131,17 @@ namespace System.Threading
         public static IntPtr CompareExchange(ref IntPtr location1, IntPtr value, IntPtr comparand)
         {
 #if TARGET_64BIT
-            return (IntPtr)Interlocked.CompareExchange(ref Unsafe.As<IntPtr, long>(ref location1), (long)value, (long)comparand);
+            return (IntPtr)Interlocked.CompareExchange(
+                ref Unsafe.As<IntPtr, long>(ref location1),
+                (long)value,
+                (long)comparand
+            );
 #else
-            return (IntPtr)Interlocked.CompareExchange(ref Unsafe.As<IntPtr, int>(ref location1), (int)value, (int)comparand);
+            return (IntPtr)Interlocked.CompareExchange(
+                ref Unsafe.As<IntPtr, int>(ref location1),
+                (int)value,
+                (int)comparand
+            );
 #endif
         }
         #endregion
@@ -154,8 +174,7 @@ namespace System.Threading
         /// <returns>The loaded value.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         [CLSCompliant(false)]
-        public static ulong Read(ref ulong location) =>
-            CompareExchange(ref location, 0, 0);
+        public static ulong Read(ref ulong location) => CompareExchange(ref location, 0, 0);
         #endregion
 
         #region And

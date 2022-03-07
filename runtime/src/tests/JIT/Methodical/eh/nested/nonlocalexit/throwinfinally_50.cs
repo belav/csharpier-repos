@@ -65,11 +65,17 @@ class Class1
         expectedOut.WriteLine("------------------------------------------------in foo try [48]");
         expectedOut.WriteLine("-------------------------------------------------in foo try [49]");
         expectedOut.WriteLine("--------------------------------------------------in foo try [50]");
-        expectedOut.WriteLine("--------------------------------------------------in foo finally [50]");
+        expectedOut.WriteLine(
+            "--------------------------------------------------in foo finally [50]"
+        );
         expectedOut.WriteLine("-------------------------------------------------in foo catch [49]");
-        expectedOut.WriteLine("-------------------------------------------------in foo finally [49]");
+        expectedOut.WriteLine(
+            "-------------------------------------------------in foo finally [49]"
+        );
         expectedOut.WriteLine("------------------------------------------------in foo catch [48]");
-        expectedOut.WriteLine("------------------------------------------------in foo finally [48]");
+        expectedOut.WriteLine(
+            "------------------------------------------------in foo finally [48]"
+        );
         expectedOut.WriteLine("-----------------------------------------------in foo catch [47]");
         expectedOut.WriteLine("-----------------------------------------------in foo finally [47]");
         expectedOut.WriteLine("----------------------------------------------in foo catch [46]");
@@ -207,521 +213,893 @@ class Class1
                                                     Console.WriteLine("-----------in foo try [11]");
                                                     try
                                                     {
-                                                        Console.WriteLine("------------in foo try [12]");
+                                                        Console.WriteLine(
+                                                            "------------in foo try [12]"
+                                                        );
                                                         try
                                                         {
-                                                            Console.WriteLine("-------------in foo try [13]");
+                                                            Console.WriteLine(
+                                                                "-------------in foo try [13]"
+                                                            );
                                                             try
                                                             {
-                                                                Console.WriteLine("--------------in foo try [14]");
+                                                                Console.WriteLine(
+                                                                    "--------------in foo try [14]"
+                                                                );
                                                                 try
                                                                 {
-                                                                    Console.WriteLine("---------------in foo try [15]");
+                                                                    Console.WriteLine(
+                                                                        "---------------in foo try [15]"
+                                                                    );
                                                                     try
                                                                     {
-                                                                        Console.WriteLine("----------------in foo try [16]");
+                                                                        Console.WriteLine(
+                                                                            "----------------in foo try [16]"
+                                                                        );
                                                                         try
                                                                         {
-                                                                            Console.WriteLine("-----------------in foo try [17]");
+                                                                            Console.WriteLine(
+                                                                                "-----------------in foo try [17]"
+                                                                            );
                                                                             try
                                                                             {
-                                                                                Console.WriteLine("------------------in foo try [18]");
+                                                                                Console.WriteLine(
+                                                                                    "------------------in foo try [18]"
+                                                                                );
                                                                                 try
                                                                                 {
-                                                                                    Console.WriteLine("-------------------in foo try [19]");
+                                                                                    Console.WriteLine(
+                                                                                        "-------------------in foo try [19]"
+                                                                                    );
                                                                                     try
                                                                                     {
-                                                                                        Console.WriteLine("--------------------in foo try [20]");
+                                                                                        Console.WriteLine(
+                                                                                            "--------------------in foo try [20]"
+                                                                                        );
                                                                                         try
                                                                                         {
-                                                                                            Console.WriteLine("---------------------in foo try [21]");
+                                                                                            Console.WriteLine(
+                                                                                                "---------------------in foo try [21]"
+                                                                                            );
                                                                                             try
                                                                                             {
-                                                                                                Console.WriteLine("----------------------in foo try [22]");
+                                                                                                Console.WriteLine(
+                                                                                                    "----------------------in foo try [22]"
+                                                                                                );
                                                                                                 try
                                                                                                 {
-                                                                                                    Console.WriteLine("-----------------------in foo try [23]");
+                                                                                                    Console.WriteLine(
+                                                                                                        "-----------------------in foo try [23]"
+                                                                                                    );
                                                                                                     try
                                                                                                     {
-                                                                                                        Console.WriteLine("------------------------in foo try [24]");
+                                                                                                        Console.WriteLine(
+                                                                                                            "------------------------in foo try [24]"
+                                                                                                        );
                                                                                                         try
                                                                                                         {
-                                                                                                            Console.WriteLine("-------------------------in foo try [25]");
+                                                                                                            Console.WriteLine(
+                                                                                                                "-------------------------in foo try [25]"
+                                                                                                            );
                                                                                                             try
                                                                                                             {
-                                                                                                                Console.WriteLine("--------------------------in foo try [26]");
+                                                                                                                Console.WriteLine(
+                                                                                                                    "--------------------------in foo try [26]"
+                                                                                                                );
                                                                                                                 try
                                                                                                                 {
-                                                                                                                    Console.WriteLine("---------------------------in foo try [27]");
+                                                                                                                    Console.WriteLine(
+                                                                                                                        "---------------------------in foo try [27]"
+                                                                                                                    );
                                                                                                                     try
                                                                                                                     {
-                                                                                                                        Console.WriteLine("----------------------------in foo try [28]");
+                                                                                                                        Console.WriteLine(
+                                                                                                                            "----------------------------in foo try [28]"
+                                                                                                                        );
                                                                                                                         try
                                                                                                                         {
-                                                                                                                            Console.WriteLine("-----------------------------in foo try [29]");
+                                                                                                                            Console.WriteLine(
+                                                                                                                                "-----------------------------in foo try [29]"
+                                                                                                                            );
                                                                                                                             try
                                                                                                                             {
-                                                                                                                                Console.WriteLine("------------------------------in foo try [30]");
+                                                                                                                                Console.WriteLine(
+                                                                                                                                    "------------------------------in foo try [30]"
+                                                                                                                                );
                                                                                                                                 try
                                                                                                                                 {
-                                                                                                                                    Console.WriteLine("-------------------------------in foo try [31]");
+                                                                                                                                    Console.WriteLine(
+                                                                                                                                        "-------------------------------in foo try [31]"
+                                                                                                                                    );
                                                                                                                                     try
                                                                                                                                     {
-                                                                                                                                        Console.WriteLine("--------------------------------in foo try [32]");
+                                                                                                                                        Console.WriteLine(
+                                                                                                                                            "--------------------------------in foo try [32]"
+                                                                                                                                        );
                                                                                                                                         try
                                                                                                                                         {
-                                                                                                                                            Console.WriteLine("---------------------------------in foo try [33]");
+                                                                                                                                            Console.WriteLine(
+                                                                                                                                                "---------------------------------in foo try [33]"
+                                                                                                                                            );
                                                                                                                                             try
                                                                                                                                             {
-                                                                                                                                                Console.WriteLine("----------------------------------in foo try [34]");
+                                                                                                                                                Console.WriteLine(
+                                                                                                                                                    "----------------------------------in foo try [34]"
+                                                                                                                                                );
                                                                                                                                                 try
                                                                                                                                                 {
-                                                                                                                                                    Console.WriteLine("-----------------------------------in foo try [35]");
+                                                                                                                                                    Console.WriteLine(
+                                                                                                                                                        "-----------------------------------in foo try [35]"
+                                                                                                                                                    );
                                                                                                                                                     try
                                                                                                                                                     {
-                                                                                                                                                        Console.WriteLine("------------------------------------in foo try [36]");
+                                                                                                                                                        Console.WriteLine(
+                                                                                                                                                            "------------------------------------in foo try [36]"
+                                                                                                                                                        );
                                                                                                                                                         try
                                                                                                                                                         {
-                                                                                                                                                            Console.WriteLine("-------------------------------------in foo try [37]");
+                                                                                                                                                            Console.WriteLine(
+                                                                                                                                                                "-------------------------------------in foo try [37]"
+                                                                                                                                                            );
                                                                                                                                                             try
                                                                                                                                                             {
-                                                                                                                                                                Console.WriteLine("--------------------------------------in foo try [38]");
+                                                                                                                                                                Console.WriteLine(
+                                                                                                                                                                    "--------------------------------------in foo try [38]"
+                                                                                                                                                                );
                                                                                                                                                                 try
                                                                                                                                                                 {
-                                                                                                                                                                    Console.WriteLine("---------------------------------------in foo try [39]");
+                                                                                                                                                                    Console.WriteLine(
+                                                                                                                                                                        "---------------------------------------in foo try [39]"
+                                                                                                                                                                    );
                                                                                                                                                                     try
                                                                                                                                                                     {
-                                                                                                                                                                        Console.WriteLine("----------------------------------------in foo try [40]");
+                                                                                                                                                                        Console.WriteLine(
+                                                                                                                                                                            "----------------------------------------in foo try [40]"
+                                                                                                                                                                        );
                                                                                                                                                                         try
                                                                                                                                                                         {
-                                                                                                                                                                            Console.WriteLine("-----------------------------------------in foo try [41]");
+                                                                                                                                                                            Console.WriteLine(
+                                                                                                                                                                                "-----------------------------------------in foo try [41]"
+                                                                                                                                                                            );
                                                                                                                                                                             try
                                                                                                                                                                             {
-                                                                                                                                                                                Console.WriteLine("------------------------------------------in foo try [42]");
+                                                                                                                                                                                Console.WriteLine(
+                                                                                                                                                                                    "------------------------------------------in foo try [42]"
+                                                                                                                                                                                );
                                                                                                                                                                                 try
                                                                                                                                                                                 {
-                                                                                                                                                                                    Console.WriteLine("-------------------------------------------in foo try [43]");
+                                                                                                                                                                                    Console.WriteLine(
+                                                                                                                                                                                        "-------------------------------------------in foo try [43]"
+                                                                                                                                                                                    );
                                                                                                                                                                                     try
                                                                                                                                                                                     {
-                                                                                                                                                                                        Console.WriteLine("--------------------------------------------in foo try [44]");
+                                                                                                                                                                                        Console.WriteLine(
+                                                                                                                                                                                            "--------------------------------------------in foo try [44]"
+                                                                                                                                                                                        );
                                                                                                                                                                                         try
                                                                                                                                                                                         {
-                                                                                                                                                                                            Console.WriteLine("---------------------------------------------in foo try [45]");
+                                                                                                                                                                                            Console.WriteLine(
+                                                                                                                                                                                                "---------------------------------------------in foo try [45]"
+                                                                                                                                                                                            );
                                                                                                                                                                                             try
                                                                                                                                                                                             {
-                                                                                                                                                                                                Console.WriteLine("----------------------------------------------in foo try [46]");
+                                                                                                                                                                                                Console.WriteLine(
+                                                                                                                                                                                                    "----------------------------------------------in foo try [46]"
+                                                                                                                                                                                                );
                                                                                                                                                                                                 try
                                                                                                                                                                                                 {
-                                                                                                                                                                                                    Console.WriteLine("-----------------------------------------------in foo try [47]");
+                                                                                                                                                                                                    Console.WriteLine(
+                                                                                                                                                                                                        "-----------------------------------------------in foo try [47]"
+                                                                                                                                                                                                    );
                                                                                                                                                                                                     try
                                                                                                                                                                                                     {
-                                                                                                                                                                                                        Console.WriteLine("------------------------------------------------in foo try [48]");
+                                                                                                                                                                                                        Console.WriteLine(
+                                                                                                                                                                                                            "------------------------------------------------in foo try [48]"
+                                                                                                                                                                                                        );
                                                                                                                                                                                                         try
                                                                                                                                                                                                         {
-                                                                                                                                                                                                            Console.WriteLine("-------------------------------------------------in foo try [49]");
+                                                                                                                                                                                                            Console.WriteLine(
+                                                                                                                                                                                                                "-------------------------------------------------in foo try [49]"
+                                                                                                                                                                                                            );
                                                                                                                                                                                                             try
                                                                                                                                                                                                             {
-                                                                                                                                                                                                                Console.WriteLine("--------------------------------------------------in foo try [50]");
-                                                                                                                                                                                                                if (i == 0) goto L1;
+                                                                                                                                                                                                                Console.WriteLine(
+                                                                                                                                                                                                                    "--------------------------------------------------in foo try [50]"
+                                                                                                                                                                                                                );
+                                                                                                                                                                                                                if (
+                                                                                                                                                                                                                    i
+                                                                                                                                                                                                                    == 0
+                                                                                                                                                                                                                )
+                                                                                                                                                                                                                    goto L1;
                                                                                                                                                                                                             }
                                                                                                                                                                                                             catch
                                                                                                                                                                                                             {
-                                                                                                                                                                                                                Console.WriteLine("--------------------------------------------------in foo catch [50]");
+                                                                                                                                                                                                                Console.WriteLine(
+                                                                                                                                                                                                                    "--------------------------------------------------in foo catch [50]"
+                                                                                                                                                                                                                );
                                                                                                                                                                                                             }
                                                                                                                                                                                                             finally
                                                                                                                                                                                                             {
-                                                                                                                                                                                                                Console.WriteLine("--------------------------------------------------in foo finally [50]");
-                                                                                                                                                                                                                if (i == 0) throw new Exception();
+                                                                                                                                                                                                                Console.WriteLine(
+                                                                                                                                                                                                                    "--------------------------------------------------in foo finally [50]"
+                                                                                                                                                                                                                );
+                                                                                                                                                                                                                if (
+                                                                                                                                                                                                                    i
+                                                                                                                                                                                                                    == 0
+                                                                                                                                                                                                                )
+                                                                                                                                                                                                                    throw new Exception();
                                                                                                                                                                                                             }
                                                                                                                                                                                                         }
                                                                                                                                                                                                         catch
                                                                                                                                                                                                         {
-                                                                                                                                                                                                            Console.WriteLine("-------------------------------------------------in foo catch [49]");
+                                                                                                                                                                                                            Console.WriteLine(
+                                                                                                                                                                                                                "-------------------------------------------------in foo catch [49]"
+                                                                                                                                                                                                            );
                                                                                                                                                                                                         }
                                                                                                                                                                                                         finally
                                                                                                                                                                                                         {
-                                                                                                                                                                                                            Console.WriteLine("-------------------------------------------------in foo finally [49]");
-                                                                                                                                                                                                            if (i == 0) throw new Exception();
+                                                                                                                                                                                                            Console.WriteLine(
+                                                                                                                                                                                                                "-------------------------------------------------in foo finally [49]"
+                                                                                                                                                                                                            );
+                                                                                                                                                                                                            if (
+                                                                                                                                                                                                                i
+                                                                                                                                                                                                                == 0
+                                                                                                                                                                                                            )
+                                                                                                                                                                                                                throw new Exception();
                                                                                                                                                                                                         }
                                                                                                                                                                                                     }
                                                                                                                                                                                                     catch
                                                                                                                                                                                                     {
-                                                                                                                                                                                                        Console.WriteLine("------------------------------------------------in foo catch [48]");
+                                                                                                                                                                                                        Console.WriteLine(
+                                                                                                                                                                                                            "------------------------------------------------in foo catch [48]"
+                                                                                                                                                                                                        );
                                                                                                                                                                                                     }
                                                                                                                                                                                                     finally
                                                                                                                                                                                                     {
-                                                                                                                                                                                                        Console.WriteLine("------------------------------------------------in foo finally [48]");
-                                                                                                                                                                                                        if (i == 0) throw new Exception();
+                                                                                                                                                                                                        Console.WriteLine(
+                                                                                                                                                                                                            "------------------------------------------------in foo finally [48]"
+                                                                                                                                                                                                        );
+                                                                                                                                                                                                        if (
+                                                                                                                                                                                                            i
+                                                                                                                                                                                                            == 0
+                                                                                                                                                                                                        )
+                                                                                                                                                                                                            throw new Exception();
                                                                                                                                                                                                     }
                                                                                                                                                                                                 }
                                                                                                                                                                                                 catch
                                                                                                                                                                                                 {
-                                                                                                                                                                                                    Console.WriteLine("-----------------------------------------------in foo catch [47]");
+                                                                                                                                                                                                    Console.WriteLine(
+                                                                                                                                                                                                        "-----------------------------------------------in foo catch [47]"
+                                                                                                                                                                                                    );
                                                                                                                                                                                                 }
                                                                                                                                                                                                 finally
                                                                                                                                                                                                 {
-                                                                                                                                                                                                    Console.WriteLine("-----------------------------------------------in foo finally [47]");
-                                                                                                                                                                                                    if (i == 0) throw new Exception();
+                                                                                                                                                                                                    Console.WriteLine(
+                                                                                                                                                                                                        "-----------------------------------------------in foo finally [47]"
+                                                                                                                                                                                                    );
+                                                                                                                                                                                                    if (
+                                                                                                                                                                                                        i
+                                                                                                                                                                                                        == 0
+                                                                                                                                                                                                    )
+                                                                                                                                                                                                        throw new Exception();
                                                                                                                                                                                                 }
                                                                                                                                                                                             }
                                                                                                                                                                                             catch
                                                                                                                                                                                             {
-                                                                                                                                                                                                Console.WriteLine("----------------------------------------------in foo catch [46]");
+                                                                                                                                                                                                Console.WriteLine(
+                                                                                                                                                                                                    "----------------------------------------------in foo catch [46]"
+                                                                                                                                                                                                );
                                                                                                                                                                                             }
                                                                                                                                                                                             finally
                                                                                                                                                                                             {
-                                                                                                                                                                                                Console.WriteLine("----------------------------------------------in foo finally [46]");
-                                                                                                                                                                                                if (i == 0) throw new Exception();
+                                                                                                                                                                                                Console.WriteLine(
+                                                                                                                                                                                                    "----------------------------------------------in foo finally [46]"
+                                                                                                                                                                                                );
+                                                                                                                                                                                                if (
+                                                                                                                                                                                                    i
+                                                                                                                                                                                                    == 0
+                                                                                                                                                                                                )
+                                                                                                                                                                                                    throw new Exception();
                                                                                                                                                                                             }
                                                                                                                                                                                         }
                                                                                                                                                                                         catch
                                                                                                                                                                                         {
-                                                                                                                                                                                            Console.WriteLine("---------------------------------------------in foo catch [45]");
+                                                                                                                                                                                            Console.WriteLine(
+                                                                                                                                                                                                "---------------------------------------------in foo catch [45]"
+                                                                                                                                                                                            );
                                                                                                                                                                                         }
                                                                                                                                                                                         finally
                                                                                                                                                                                         {
-                                                                                                                                                                                            Console.WriteLine("---------------------------------------------in foo finally [45]");
-                                                                                                                                                                                            if (i == 0) throw new Exception();
+                                                                                                                                                                                            Console.WriteLine(
+                                                                                                                                                                                                "---------------------------------------------in foo finally [45]"
+                                                                                                                                                                                            );
+                                                                                                                                                                                            if (
+                                                                                                                                                                                                i
+                                                                                                                                                                                                == 0
+                                                                                                                                                                                            )
+                                                                                                                                                                                                throw new Exception();
                                                                                                                                                                                         }
                                                                                                                                                                                     }
                                                                                                                                                                                     catch
                                                                                                                                                                                     {
-                                                                                                                                                                                        Console.WriteLine("--------------------------------------------in foo catch [44]");
+                                                                                                                                                                                        Console.WriteLine(
+                                                                                                                                                                                            "--------------------------------------------in foo catch [44]"
+                                                                                                                                                                                        );
                                                                                                                                                                                     }
                                                                                                                                                                                     finally
                                                                                                                                                                                     {
-                                                                                                                                                                                        Console.WriteLine("--------------------------------------------in foo finally [44]");
-                                                                                                                                                                                        if (i == 0) throw new Exception();
+                                                                                                                                                                                        Console.WriteLine(
+                                                                                                                                                                                            "--------------------------------------------in foo finally [44]"
+                                                                                                                                                                                        );
+                                                                                                                                                                                        if (
+                                                                                                                                                                                            i
+                                                                                                                                                                                            == 0
+                                                                                                                                                                                        )
+                                                                                                                                                                                            throw new Exception();
                                                                                                                                                                                     }
                                                                                                                                                                                 }
                                                                                                                                                                                 catch
                                                                                                                                                                                 {
-                                                                                                                                                                                    Console.WriteLine("-------------------------------------------in foo catch [43]");
+                                                                                                                                                                                    Console.WriteLine(
+                                                                                                                                                                                        "-------------------------------------------in foo catch [43]"
+                                                                                                                                                                                    );
                                                                                                                                                                                 }
                                                                                                                                                                                 finally
                                                                                                                                                                                 {
-                                                                                                                                                                                    Console.WriteLine("-------------------------------------------in foo finally [43]");
-                                                                                                                                                                                    if (i == 0) throw new Exception();
+                                                                                                                                                                                    Console.WriteLine(
+                                                                                                                                                                                        "-------------------------------------------in foo finally [43]"
+                                                                                                                                                                                    );
+                                                                                                                                                                                    if (
+                                                                                                                                                                                        i
+                                                                                                                                                                                        == 0
+                                                                                                                                                                                    )
+                                                                                                                                                                                        throw new Exception();
                                                                                                                                                                                 }
                                                                                                                                                                             }
                                                                                                                                                                             catch
                                                                                                                                                                             {
-                                                                                                                                                                                Console.WriteLine("------------------------------------------in foo catch [42]");
+                                                                                                                                                                                Console.WriteLine(
+                                                                                                                                                                                    "------------------------------------------in foo catch [42]"
+                                                                                                                                                                                );
                                                                                                                                                                             }
                                                                                                                                                                             finally
                                                                                                                                                                             {
-                                                                                                                                                                                Console.WriteLine("------------------------------------------in foo finally [42]");
-                                                                                                                                                                                if (i == 0) throw new Exception();
+                                                                                                                                                                                Console.WriteLine(
+                                                                                                                                                                                    "------------------------------------------in foo finally [42]"
+                                                                                                                                                                                );
+                                                                                                                                                                                if (
+                                                                                                                                                                                    i
+                                                                                                                                                                                    == 0
+                                                                                                                                                                                )
+                                                                                                                                                                                    throw new Exception();
                                                                                                                                                                             }
                                                                                                                                                                         }
                                                                                                                                                                         catch
                                                                                                                                                                         {
-                                                                                                                                                                            Console.WriteLine("-----------------------------------------in foo catch [41]");
+                                                                                                                                                                            Console.WriteLine(
+                                                                                                                                                                                "-----------------------------------------in foo catch [41]"
+                                                                                                                                                                            );
                                                                                                                                                                         }
                                                                                                                                                                         finally
                                                                                                                                                                         {
-                                                                                                                                                                            Console.WriteLine("-----------------------------------------in foo finally [41]");
-                                                                                                                                                                            if (i == 0) throw new Exception();
+                                                                                                                                                                            Console.WriteLine(
+                                                                                                                                                                                "-----------------------------------------in foo finally [41]"
+                                                                                                                                                                            );
+                                                                                                                                                                            if (
+                                                                                                                                                                                i
+                                                                                                                                                                                == 0
+                                                                                                                                                                            )
+                                                                                                                                                                                throw new Exception();
                                                                                                                                                                         }
                                                                                                                                                                     }
                                                                                                                                                                     catch
                                                                                                                                                                     {
-                                                                                                                                                                        Console.WriteLine("----------------------------------------in foo catch [40]");
+                                                                                                                                                                        Console.WriteLine(
+                                                                                                                                                                            "----------------------------------------in foo catch [40]"
+                                                                                                                                                                        );
                                                                                                                                                                     }
                                                                                                                                                                     finally
                                                                                                                                                                     {
-                                                                                                                                                                        Console.WriteLine("----------------------------------------in foo finally [40]");
-                                                                                                                                                                        if (i == 0) throw new Exception();
+                                                                                                                                                                        Console.WriteLine(
+                                                                                                                                                                            "----------------------------------------in foo finally [40]"
+                                                                                                                                                                        );
+                                                                                                                                                                        if (
+                                                                                                                                                                            i
+                                                                                                                                                                            == 0
+                                                                                                                                                                        )
+                                                                                                                                                                            throw new Exception();
                                                                                                                                                                     }
                                                                                                                                                                 }
                                                                                                                                                                 catch
                                                                                                                                                                 {
-                                                                                                                                                                    Console.WriteLine("---------------------------------------in foo catch [39]");
+                                                                                                                                                                    Console.WriteLine(
+                                                                                                                                                                        "---------------------------------------in foo catch [39]"
+                                                                                                                                                                    );
                                                                                                                                                                 }
                                                                                                                                                                 finally
                                                                                                                                                                 {
-                                                                                                                                                                    Console.WriteLine("---------------------------------------in foo finally [39]");
-                                                                                                                                                                    if (i == 0) throw new Exception();
+                                                                                                                                                                    Console.WriteLine(
+                                                                                                                                                                        "---------------------------------------in foo finally [39]"
+                                                                                                                                                                    );
+                                                                                                                                                                    if (
+                                                                                                                                                                        i
+                                                                                                                                                                        == 0
+                                                                                                                                                                    )
+                                                                                                                                                                        throw new Exception();
                                                                                                                                                                 }
                                                                                                                                                             }
                                                                                                                                                             catch
                                                                                                                                                             {
-                                                                                                                                                                Console.WriteLine("--------------------------------------in foo catch [38]");
+                                                                                                                                                                Console.WriteLine(
+                                                                                                                                                                    "--------------------------------------in foo catch [38]"
+                                                                                                                                                                );
                                                                                                                                                             }
                                                                                                                                                             finally
                                                                                                                                                             {
-                                                                                                                                                                Console.WriteLine("--------------------------------------in foo finally [38]");
-                                                                                                                                                                if (i == 0) throw new Exception();
+                                                                                                                                                                Console.WriteLine(
+                                                                                                                                                                    "--------------------------------------in foo finally [38]"
+                                                                                                                                                                );
+                                                                                                                                                                if (
+                                                                                                                                                                    i
+                                                                                                                                                                    == 0
+                                                                                                                                                                )
+                                                                                                                                                                    throw new Exception();
                                                                                                                                                             }
                                                                                                                                                         }
                                                                                                                                                         catch
                                                                                                                                                         {
-                                                                                                                                                            Console.WriteLine("-------------------------------------in foo catch [37]");
+                                                                                                                                                            Console.WriteLine(
+                                                                                                                                                                "-------------------------------------in foo catch [37]"
+                                                                                                                                                            );
                                                                                                                                                         }
                                                                                                                                                         finally
                                                                                                                                                         {
-                                                                                                                                                            Console.WriteLine("-------------------------------------in foo finally [37]");
-                                                                                                                                                            if (i == 0) throw new Exception();
+                                                                                                                                                            Console.WriteLine(
+                                                                                                                                                                "-------------------------------------in foo finally [37]"
+                                                                                                                                                            );
+                                                                                                                                                            if (
+                                                                                                                                                                i
+                                                                                                                                                                == 0
+                                                                                                                                                            )
+                                                                                                                                                                throw new Exception();
                                                                                                                                                         }
                                                                                                                                                     }
                                                                                                                                                     catch
                                                                                                                                                     {
-                                                                                                                                                        Console.WriteLine("------------------------------------in foo catch [36]");
+                                                                                                                                                        Console.WriteLine(
+                                                                                                                                                            "------------------------------------in foo catch [36]"
+                                                                                                                                                        );
                                                                                                                                                     }
                                                                                                                                                     finally
                                                                                                                                                     {
-                                                                                                                                                        Console.WriteLine("------------------------------------in foo finally [36]");
-                                                                                                                                                        if (i == 0) throw new Exception();
+                                                                                                                                                        Console.WriteLine(
+                                                                                                                                                            "------------------------------------in foo finally [36]"
+                                                                                                                                                        );
+                                                                                                                                                        if (
+                                                                                                                                                            i
+                                                                                                                                                            == 0
+                                                                                                                                                        )
+                                                                                                                                                            throw new Exception();
                                                                                                                                                     }
                                                                                                                                                 }
                                                                                                                                                 catch
                                                                                                                                                 {
-                                                                                                                                                    Console.WriteLine("-----------------------------------in foo catch [35]");
+                                                                                                                                                    Console.WriteLine(
+                                                                                                                                                        "-----------------------------------in foo catch [35]"
+                                                                                                                                                    );
                                                                                                                                                 }
                                                                                                                                                 finally
                                                                                                                                                 {
-                                                                                                                                                    Console.WriteLine("-----------------------------------in foo finally [35]");
-                                                                                                                                                    if (i == 0) throw new Exception();
+                                                                                                                                                    Console.WriteLine(
+                                                                                                                                                        "-----------------------------------in foo finally [35]"
+                                                                                                                                                    );
+                                                                                                                                                    if (
+                                                                                                                                                        i
+                                                                                                                                                        == 0
+                                                                                                                                                    )
+                                                                                                                                                        throw new Exception();
                                                                                                                                                 }
                                                                                                                                             }
                                                                                                                                             catch
                                                                                                                                             {
-                                                                                                                                                Console.WriteLine("----------------------------------in foo catch [34]");
+                                                                                                                                                Console.WriteLine(
+                                                                                                                                                    "----------------------------------in foo catch [34]"
+                                                                                                                                                );
                                                                                                                                             }
                                                                                                                                             finally
                                                                                                                                             {
-                                                                                                                                                Console.WriteLine("----------------------------------in foo finally [34]");
-                                                                                                                                                if (i == 0) throw new Exception();
+                                                                                                                                                Console.WriteLine(
+                                                                                                                                                    "----------------------------------in foo finally [34]"
+                                                                                                                                                );
+                                                                                                                                                if (
+                                                                                                                                                    i
+                                                                                                                                                    == 0
+                                                                                                                                                )
+                                                                                                                                                    throw new Exception();
                                                                                                                                             }
                                                                                                                                         }
                                                                                                                                         catch
                                                                                                                                         {
-                                                                                                                                            Console.WriteLine("---------------------------------in foo catch [33]");
+                                                                                                                                            Console.WriteLine(
+                                                                                                                                                "---------------------------------in foo catch [33]"
+                                                                                                                                            );
                                                                                                                                         }
                                                                                                                                         finally
                                                                                                                                         {
-                                                                                                                                            Console.WriteLine("---------------------------------in foo finally [33]");
-                                                                                                                                            if (i == 0) throw new Exception();
+                                                                                                                                            Console.WriteLine(
+                                                                                                                                                "---------------------------------in foo finally [33]"
+                                                                                                                                            );
+                                                                                                                                            if (
+                                                                                                                                                i
+                                                                                                                                                == 0
+                                                                                                                                            )
+                                                                                                                                                throw new Exception();
                                                                                                                                         }
                                                                                                                                     }
                                                                                                                                     catch
                                                                                                                                     {
-                                                                                                                                        Console.WriteLine("--------------------------------in foo catch [32]");
+                                                                                                                                        Console.WriteLine(
+                                                                                                                                            "--------------------------------in foo catch [32]"
+                                                                                                                                        );
                                                                                                                                     }
                                                                                                                                     finally
                                                                                                                                     {
-                                                                                                                                        Console.WriteLine("--------------------------------in foo finally [32]");
-                                                                                                                                        if (i == 0) throw new Exception();
+                                                                                                                                        Console.WriteLine(
+                                                                                                                                            "--------------------------------in foo finally [32]"
+                                                                                                                                        );
+                                                                                                                                        if (
+                                                                                                                                            i
+                                                                                                                                            == 0
+                                                                                                                                        )
+                                                                                                                                            throw new Exception();
                                                                                                                                     }
                                                                                                                                 }
                                                                                                                                 catch
                                                                                                                                 {
-                                                                                                                                    Console.WriteLine("-------------------------------in foo catch [31]");
+                                                                                                                                    Console.WriteLine(
+                                                                                                                                        "-------------------------------in foo catch [31]"
+                                                                                                                                    );
                                                                                                                                 }
                                                                                                                                 finally
                                                                                                                                 {
-                                                                                                                                    Console.WriteLine("-------------------------------in foo finally [31]");
-                                                                                                                                    if (i == 0) throw new Exception();
+                                                                                                                                    Console.WriteLine(
+                                                                                                                                        "-------------------------------in foo finally [31]"
+                                                                                                                                    );
+                                                                                                                                    if (
+                                                                                                                                        i
+                                                                                                                                        == 0
+                                                                                                                                    )
+                                                                                                                                        throw new Exception();
                                                                                                                                 }
                                                                                                                             }
                                                                                                                             catch
                                                                                                                             {
-                                                                                                                                Console.WriteLine("------------------------------in foo catch [30]");
+                                                                                                                                Console.WriteLine(
+                                                                                                                                    "------------------------------in foo catch [30]"
+                                                                                                                                );
                                                                                                                             }
                                                                                                                             finally
                                                                                                                             {
-                                                                                                                                Console.WriteLine("------------------------------in foo finally [30]");
-                                                                                                                                if (i == 0) throw new Exception();
+                                                                                                                                Console.WriteLine(
+                                                                                                                                    "------------------------------in foo finally [30]"
+                                                                                                                                );
+                                                                                                                                if (
+                                                                                                                                    i
+                                                                                                                                    == 0
+                                                                                                                                )
+                                                                                                                                    throw new Exception();
                                                                                                                             }
                                                                                                                         }
                                                                                                                         catch
                                                                                                                         {
-                                                                                                                            Console.WriteLine("-----------------------------in foo catch [29]");
+                                                                                                                            Console.WriteLine(
+                                                                                                                                "-----------------------------in foo catch [29]"
+                                                                                                                            );
                                                                                                                         }
                                                                                                                         finally
                                                                                                                         {
-                                                                                                                            Console.WriteLine("-----------------------------in foo finally [29]");
-                                                                                                                            if (i == 0) throw new Exception();
+                                                                                                                            Console.WriteLine(
+                                                                                                                                "-----------------------------in foo finally [29]"
+                                                                                                                            );
+                                                                                                                            if (
+                                                                                                                                i
+                                                                                                                                == 0
+                                                                                                                            )
+                                                                                                                                throw new Exception();
                                                                                                                         }
                                                                                                                     }
                                                                                                                     catch
                                                                                                                     {
-                                                                                                                        Console.WriteLine("----------------------------in foo catch [28]");
+                                                                                                                        Console.WriteLine(
+                                                                                                                            "----------------------------in foo catch [28]"
+                                                                                                                        );
                                                                                                                     }
                                                                                                                     finally
                                                                                                                     {
-                                                                                                                        Console.WriteLine("----------------------------in foo finally [28]");
-                                                                                                                        if (i == 0) throw new Exception();
+                                                                                                                        Console.WriteLine(
+                                                                                                                            "----------------------------in foo finally [28]"
+                                                                                                                        );
+                                                                                                                        if (
+                                                                                                                            i
+                                                                                                                            == 0
+                                                                                                                        )
+                                                                                                                            throw new Exception();
                                                                                                                     }
                                                                                                                 }
                                                                                                                 catch
                                                                                                                 {
-                                                                                                                    Console.WriteLine("---------------------------in foo catch [27]");
+                                                                                                                    Console.WriteLine(
+                                                                                                                        "---------------------------in foo catch [27]"
+                                                                                                                    );
                                                                                                                 }
                                                                                                                 finally
                                                                                                                 {
-                                                                                                                    Console.WriteLine("---------------------------in foo finally [27]");
-                                                                                                                    if (i == 0) throw new Exception();
+                                                                                                                    Console.WriteLine(
+                                                                                                                        "---------------------------in foo finally [27]"
+                                                                                                                    );
+                                                                                                                    if (
+                                                                                                                        i
+                                                                                                                        == 0
+                                                                                                                    )
+                                                                                                                        throw new Exception();
                                                                                                                 }
                                                                                                             }
                                                                                                             catch
                                                                                                             {
-                                                                                                                Console.WriteLine("--------------------------in foo catch [26]");
+                                                                                                                Console.WriteLine(
+                                                                                                                    "--------------------------in foo catch [26]"
+                                                                                                                );
                                                                                                             }
                                                                                                             finally
                                                                                                             {
-                                                                                                                Console.WriteLine("--------------------------in foo finally [26]");
-                                                                                                                if (i == 0) throw new Exception();
+                                                                                                                Console.WriteLine(
+                                                                                                                    "--------------------------in foo finally [26]"
+                                                                                                                );
+                                                                                                                if (
+                                                                                                                    i
+                                                                                                                    == 0
+                                                                                                                )
+                                                                                                                    throw new Exception();
                                                                                                             }
                                                                                                         }
                                                                                                         catch
                                                                                                         {
-                                                                                                            Console.WriteLine("-------------------------in foo catch [25]");
+                                                                                                            Console.WriteLine(
+                                                                                                                "-------------------------in foo catch [25]"
+                                                                                                            );
                                                                                                         }
                                                                                                         finally
                                                                                                         {
-                                                                                                            Console.WriteLine("-------------------------in foo finally [25]");
-                                                                                                            if (i == 0) throw new Exception();
+                                                                                                            Console.WriteLine(
+                                                                                                                "-------------------------in foo finally [25]"
+                                                                                                            );
+                                                                                                            if (
+                                                                                                                i
+                                                                                                                == 0
+                                                                                                            )
+                                                                                                                throw new Exception();
                                                                                                         }
                                                                                                     }
                                                                                                     catch
                                                                                                     {
-                                                                                                        Console.WriteLine("------------------------in foo catch [24]");
+                                                                                                        Console.WriteLine(
+                                                                                                            "------------------------in foo catch [24]"
+                                                                                                        );
                                                                                                     }
                                                                                                     finally
                                                                                                     {
-                                                                                                        Console.WriteLine("------------------------in foo finally [24]");
-                                                                                                        if (i == 0) throw new Exception();
+                                                                                                        Console.WriteLine(
+                                                                                                            "------------------------in foo finally [24]"
+                                                                                                        );
+                                                                                                        if (
+                                                                                                            i
+                                                                                                            == 0
+                                                                                                        )
+                                                                                                            throw new Exception();
                                                                                                     }
                                                                                                 }
                                                                                                 catch
                                                                                                 {
-                                                                                                    Console.WriteLine("-----------------------in foo catch [23]");
+                                                                                                    Console.WriteLine(
+                                                                                                        "-----------------------in foo catch [23]"
+                                                                                                    );
                                                                                                 }
                                                                                                 finally
                                                                                                 {
-                                                                                                    Console.WriteLine("-----------------------in foo finally [23]");
-                                                                                                    if (i == 0) throw new Exception();
+                                                                                                    Console.WriteLine(
+                                                                                                        "-----------------------in foo finally [23]"
+                                                                                                    );
+                                                                                                    if (
+                                                                                                        i
+                                                                                                        == 0
+                                                                                                    )
+                                                                                                        throw new Exception();
                                                                                                 }
                                                                                             }
                                                                                             catch
                                                                                             {
-                                                                                                Console.WriteLine("----------------------in foo catch [22]");
+                                                                                                Console.WriteLine(
+                                                                                                    "----------------------in foo catch [22]"
+                                                                                                );
                                                                                             }
                                                                                             finally
                                                                                             {
-                                                                                                Console.WriteLine("----------------------in foo finally [22]");
-                                                                                                if (i == 0) throw new Exception();
+                                                                                                Console.WriteLine(
+                                                                                                    "----------------------in foo finally [22]"
+                                                                                                );
+                                                                                                if (
+                                                                                                    i
+                                                                                                    == 0
+                                                                                                )
+                                                                                                    throw new Exception();
                                                                                             }
                                                                                         }
                                                                                         catch
                                                                                         {
-                                                                                            Console.WriteLine("---------------------in foo catch [21]");
+                                                                                            Console.WriteLine(
+                                                                                                "---------------------in foo catch [21]"
+                                                                                            );
                                                                                         }
                                                                                         finally
                                                                                         {
-                                                                                            Console.WriteLine("---------------------in foo finally [21]");
-                                                                                            if (i == 0) throw new Exception();
+                                                                                            Console.WriteLine(
+                                                                                                "---------------------in foo finally [21]"
+                                                                                            );
+                                                                                            if (
+                                                                                                i
+                                                                                                == 0
+                                                                                            )
+                                                                                                throw new Exception();
                                                                                         }
                                                                                     }
                                                                                     catch
                                                                                     {
-                                                                                        Console.WriteLine("--------------------in foo catch [20]");
+                                                                                        Console.WriteLine(
+                                                                                            "--------------------in foo catch [20]"
+                                                                                        );
                                                                                     }
                                                                                     finally
                                                                                     {
-                                                                                        Console.WriteLine("--------------------in foo finally [20]");
-                                                                                        if (i == 0) throw new Exception();
+                                                                                        Console.WriteLine(
+                                                                                            "--------------------in foo finally [20]"
+                                                                                        );
+                                                                                        if (i == 0)
+                                                                                            throw new Exception();
                                                                                     }
                                                                                 }
                                                                                 catch
                                                                                 {
-                                                                                    Console.WriteLine("-------------------in foo catch [19]");
+                                                                                    Console.WriteLine(
+                                                                                        "-------------------in foo catch [19]"
+                                                                                    );
                                                                                 }
                                                                                 finally
                                                                                 {
-                                                                                    Console.WriteLine("-------------------in foo finally [19]");
-                                                                                    if (i == 0) throw new Exception();
+                                                                                    Console.WriteLine(
+                                                                                        "-------------------in foo finally [19]"
+                                                                                    );
+                                                                                    if (i == 0)
+                                                                                        throw new Exception();
                                                                                 }
                                                                             }
                                                                             catch
                                                                             {
-                                                                                Console.WriteLine("------------------in foo catch [18]");
+                                                                                Console.WriteLine(
+                                                                                    "------------------in foo catch [18]"
+                                                                                );
                                                                             }
                                                                             finally
                                                                             {
-                                                                                Console.WriteLine("------------------in foo finally [18]");
-                                                                                if (i == 0) throw new Exception();
+                                                                                Console.WriteLine(
+                                                                                    "------------------in foo finally [18]"
+                                                                                );
+                                                                                if (i == 0)
+                                                                                    throw new Exception();
                                                                             }
                                                                         }
                                                                         catch
                                                                         {
-                                                                            Console.WriteLine("-----------------in foo catch [17]");
+                                                                            Console.WriteLine(
+                                                                                "-----------------in foo catch [17]"
+                                                                            );
                                                                         }
                                                                         finally
                                                                         {
-                                                                            Console.WriteLine("-----------------in foo finally [17]");
-                                                                            if (i == 0) throw new Exception();
+                                                                            Console.WriteLine(
+                                                                                "-----------------in foo finally [17]"
+                                                                            );
+                                                                            if (i == 0)
+                                                                                throw new Exception();
                                                                         }
                                                                     }
                                                                     catch
                                                                     {
-                                                                        Console.WriteLine("----------------in foo catch [16]");
+                                                                        Console.WriteLine(
+                                                                            "----------------in foo catch [16]"
+                                                                        );
                                                                     }
                                                                     finally
                                                                     {
-                                                                        Console.WriteLine("----------------in foo finally [16]");
-                                                                        if (i == 0) throw new Exception();
+                                                                        Console.WriteLine(
+                                                                            "----------------in foo finally [16]"
+                                                                        );
+                                                                        if (i == 0)
+                                                                            throw new Exception();
                                                                     }
                                                                 }
                                                                 catch
                                                                 {
-                                                                    Console.WriteLine("---------------in foo catch [15]");
+                                                                    Console.WriteLine(
+                                                                        "---------------in foo catch [15]"
+                                                                    );
                                                                 }
                                                                 finally
                                                                 {
-                                                                    Console.WriteLine("---------------in foo finally [15]");
-                                                                    if (i == 0) throw new Exception();
+                                                                    Console.WriteLine(
+                                                                        "---------------in foo finally [15]"
+                                                                    );
+                                                                    if (i == 0)
+                                                                        throw new Exception();
                                                                 }
                                                             }
                                                             catch
                                                             {
-                                                                Console.WriteLine("--------------in foo catch [14]");
+                                                                Console.WriteLine(
+                                                                    "--------------in foo catch [14]"
+                                                                );
                                                             }
                                                             finally
                                                             {
-                                                                Console.WriteLine("--------------in foo finally [14]");
-                                                                if (i == 0) throw new Exception();
+                                                                Console.WriteLine(
+                                                                    "--------------in foo finally [14]"
+                                                                );
+                                                                if (i == 0)
+                                                                    throw new Exception();
                                                             }
                                                         }
                                                         catch
                                                         {
-                                                            Console.WriteLine("-------------in foo catch [13]");
+                                                            Console.WriteLine(
+                                                                "-------------in foo catch [13]"
+                                                            );
                                                         }
                                                         finally
                                                         {
-                                                            Console.WriteLine("-------------in foo finally [13]");
-                                                            if (i == 0) throw new Exception();
+                                                            Console.WriteLine(
+                                                                "-------------in foo finally [13]"
+                                                            );
+                                                            if (i == 0)
+                                                                throw new Exception();
                                                         }
                                                     }
                                                     catch
                                                     {
-                                                        Console.WriteLine("------------in foo catch [12]");
+                                                        Console.WriteLine(
+                                                            "------------in foo catch [12]"
+                                                        );
                                                     }
                                                     finally
                                                     {
-                                                        Console.WriteLine("------------in foo finally [12]");
-                                                        if (i == 0) throw new Exception();
+                                                        Console.WriteLine(
+                                                            "------------in foo finally [12]"
+                                                        );
+                                                        if (i == 0)
+                                                            throw new Exception();
                                                     }
                                                 }
                                                 catch
                                                 {
-                                                    Console.WriteLine("-----------in foo catch [11]");
+                                                    Console.WriteLine(
+                                                        "-----------in foo catch [11]"
+                                                    );
                                                 }
                                                 finally
                                                 {
-                                                    Console.WriteLine("-----------in foo finally [11]");
-                                                    if (i == 0) throw new Exception();
+                                                    Console.WriteLine(
+                                                        "-----------in foo finally [11]"
+                                                    );
+                                                    if (i == 0)
+                                                        throw new Exception();
                                                 }
                                             }
                                             catch
@@ -731,7 +1109,8 @@ class Class1
                                             finally
                                             {
                                                 Console.WriteLine("----------in foo finally [10]");
-                                                if (i == 0) throw new Exception();
+                                                if (i == 0)
+                                                    throw new Exception();
                                             }
                                         }
                                         catch
@@ -741,7 +1120,8 @@ class Class1
                                         finally
                                         {
                                             Console.WriteLine("---------in foo finally [9]");
-                                            if (i == 0) throw new Exception();
+                                            if (i == 0)
+                                                throw new Exception();
                                         }
                                     }
                                     catch
@@ -751,7 +1131,8 @@ class Class1
                                     finally
                                     {
                                         Console.WriteLine("--------in foo finally [8]");
-                                        if (i == 0) throw new Exception();
+                                        if (i == 0)
+                                            throw new Exception();
                                     }
                                 }
                                 catch
@@ -761,7 +1142,8 @@ class Class1
                                 finally
                                 {
                                     Console.WriteLine("-------in foo finally [7]");
-                                    if (i == 0) throw new Exception();
+                                    if (i == 0)
+                                        throw new Exception();
                                 }
                             }
                             catch
@@ -771,7 +1153,8 @@ class Class1
                             finally
                             {
                                 Console.WriteLine("------in foo finally [6]");
-                                if (i == 0) throw new Exception();
+                                if (i == 0)
+                                    throw new Exception();
                             }
                         }
                         catch
@@ -781,7 +1164,8 @@ class Class1
                         finally
                         {
                             Console.WriteLine("-----in foo finally [5]");
-                            if (i == 0) throw new Exception();
+                            if (i == 0)
+                                throw new Exception();
                         }
                     }
                     catch
@@ -791,7 +1175,8 @@ class Class1
                     finally
                     {
                         Console.WriteLine("----in foo finally [4]");
-                        if (i == 0) throw new Exception();
+                        if (i == 0)
+                            throw new Exception();
                     }
                 }
                 catch
@@ -801,7 +1186,8 @@ class Class1
                 finally
                 {
                     Console.WriteLine("---in foo finally [3]");
-                    if (i == 0) throw new Exception();
+                    if (i == 0)
+                        throw new Exception();
                 }
             }
             catch
@@ -811,7 +1197,8 @@ class Class1
             finally
             {
                 Console.WriteLine("--in foo finally [2]");
-                if (i == 0) throw new Exception();
+                if (i == 0)
+                    throw new Exception();
             }
         }
         catch
@@ -821,13 +1208,13 @@ class Class1
         finally
         {
             Console.WriteLine("-in foo finally [1]");
-            if (i == 0) throw new Exception();
+            if (i == 0)
+                throw new Exception();
         }
         Console.WriteLine("after finally");
         L1:
         Console.WriteLine("foo L1");
     }
-
 
     static public int Main(string[] args)
     {

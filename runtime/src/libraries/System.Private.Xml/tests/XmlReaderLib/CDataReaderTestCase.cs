@@ -15,8 +15,7 @@ namespace System.Xml.Tests
 
         private CDataReader _rReader;
 
-        public CDataReaderTestCase()
-            : base()
+        public CDataReaderTestCase() : base()
         {
             _rReader = new CDataReader(null, 0, null);
         }
@@ -25,10 +24,12 @@ namespace System.Xml.Tests
         {
             return base.Terminate(objParam);
         }
+
         public string WRONG_EXCEPTION
         {
             get { return _WRONG_EXCEPTION; }
         }
+
         protected int BoolToLTMResult(bool bResult)
         {
             if (bResult)
@@ -77,7 +78,12 @@ namespace System.Xml.Tests
             return str;
         }
 
-        protected void CheckXmlException(string expectedCode, XmlException e, int expectedLine, int expectedPosition)
+        protected void CheckXmlException(
+            string expectedCode,
+            XmlException e,
+            int expectedLine,
+            int expectedPosition
+        )
         {
             string actualCode = expectedCode;
             CError.WriteLine("***Exception");
@@ -109,12 +115,8 @@ namespace System.Xml.Tests
             return result;
         }
 
-        public virtual void PreExecuteVariation(int index, object param)
-        {
-        }
+        public virtual void PreExecuteVariation(int index, object param) { }
 
-        public virtual void PostExecuteVariation(int index, object param)
-        {
-        }
+        public virtual void PostExecuteVariation(int index, object param) { }
     }
 }

@@ -15,11 +15,10 @@ using Microsoft.AspNetCore.Razor.Language.Intermediate;
 namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests;
 
 // Serializes single IR nodes (shallow).
-public class IntermediateNodeWriter :
-    IntermediateNodeVisitor,
-    IExtensionIntermediateNodeVisitor<SectionIntermediateNode>,
-    IExtensionIntermediateNodeVisitor<RouteAttributeExtensionNode>
-
+public class IntermediateNodeWriter
+    : IntermediateNodeVisitor,
+      IExtensionIntermediateNodeVisitor<SectionIntermediateNode>,
+      IExtensionIntermediateNodeVisitor<RouteAttributeExtensionNode>
 {
     private readonly TextWriter _writer;
 
@@ -38,12 +37,12 @@ public class IntermediateNodeWriter :
     public override void VisitClassDeclaration(ClassDeclarationIntermediateNode node)
     {
         var entries = new List<string>()
-            {
-                string.Join(" ", node.Modifiers),
-                node.ClassName,
-                node.BaseType,
-                string.Join(", ", node.Interfaces ?? Array.Empty<string>())
-            };
+        {
+            string.Join(" ", node.Modifiers),
+            node.ClassName,
+            node.BaseType,
+            string.Join(", ", node.Interfaces ?? Array.Empty<string>())
+        };
 
         // Avoid adding the type parameters to the baseline if they aren't present.
         if (node.TypeParameters != null && node.TypeParameters.Count > 0)
@@ -54,12 +53,16 @@ public class IntermediateNodeWriter :
         WriteContentNode(node, entries.ToArray());
     }
 
-    public override void VisitCSharpExpressionAttributeValue(CSharpExpressionAttributeValueIntermediateNode node)
+    public override void VisitCSharpExpressionAttributeValue(
+        CSharpExpressionAttributeValueIntermediateNode node
+    )
     {
         WriteContentNode(node, node.Prefix);
     }
 
-    public override void VisitCSharpCodeAttributeValue(CSharpCodeAttributeValueIntermediateNode node)
+    public override void VisitCSharpCodeAttributeValue(
+        CSharpCodeAttributeValueIntermediateNode node
+    )
     {
         WriteContentNode(node, node.Prefix);
     }
@@ -116,27 +119,69 @@ public class IntermediateNodeWriter :
 
     public override void VisitTagHelper(TagHelperIntermediateNode node)
     {
-        WriteContentNode(node, node.TagName, string.Format(CultureInfo.InvariantCulture, "{0}.{1}", nameof(TagMode), node.TagMode));
+        WriteContentNode(
+            node,
+            node.TagName,
+            string.Format(CultureInfo.InvariantCulture, "{0}.{1}", nameof(TagMode), node.TagMode)
+        );
     }
 
     public override void VisitTagHelperProperty(TagHelperPropertyIntermediateNode node)
     {
-        WriteContentNode(node, node.AttributeName, node.BoundAttribute.DisplayName, string.Format(CultureInfo.InvariantCulture, "HtmlAttributeValueStyle.{0}", node.AttributeStructure));
+        WriteContentNode(
+            node,
+            node.AttributeName,
+            node.BoundAttribute.DisplayName,
+            string.Format(
+                CultureInfo.InvariantCulture,
+                "HtmlAttributeValueStyle.{0}",
+                node.AttributeStructure
+            )
+        );
     }
 
     public override void VisitTagHelperHtmlAttribute(TagHelperHtmlAttributeIntermediateNode node)
     {
-        WriteContentNode(node, node.AttributeName, string.Format(CultureInfo.InvariantCulture, "HtmlAttributeValueStyle.{0}", node.AttributeStructure));
+        WriteContentNode(
+            node,
+            node.AttributeName,
+            string.Format(
+                CultureInfo.InvariantCulture,
+                "HtmlAttributeValueStyle.{0}",
+                node.AttributeStructure
+            )
+        );
     }
 
-    public override void VisitTagHelperDirectiveAttribute(TagHelperDirectiveAttributeIntermediateNode node)
+    public override void VisitTagHelperDirectiveAttribute(
+        TagHelperDirectiveAttributeIntermediateNode node
+    )
     {
-        WriteContentNode(node, node.AttributeName, node.BoundAttribute.DisplayName, string.Format(CultureInfo.InvariantCulture, "HtmlAttributeValueStyle.{0}", node.AttributeStructure));
+        WriteContentNode(
+            node,
+            node.AttributeName,
+            node.BoundAttribute.DisplayName,
+            string.Format(
+                CultureInfo.InvariantCulture,
+                "HtmlAttributeValueStyle.{0}",
+                node.AttributeStructure
+            )
+        );
     }
 
-    public override void VisitTagHelperDirectiveAttributeParameter(TagHelperDirectiveAttributeParameterIntermediateNode node)
+    public override void VisitTagHelperDirectiveAttributeParameter(
+        TagHelperDirectiveAttributeParameterIntermediateNode node
+    )
     {
-        WriteContentNode(node, node.AttributeName, string.Format(CultureInfo.InvariantCulture, "HtmlAttributeValueStyle.{0}", node.AttributeStructure));
+        WriteContentNode(
+            node,
+            node.AttributeName,
+            string.Format(
+                CultureInfo.InvariantCulture,
+                "HtmlAttributeValueStyle.{0}",
+                node.AttributeStructure
+            )
+        );
     }
 
     public override void VisitComponent(ComponentIntermediateNode node)
@@ -146,7 +191,16 @@ public class IntermediateNodeWriter :
 
     public override void VisitComponentAttribute(ComponentAttributeIntermediateNode node)
     {
-        WriteContentNode(node, node.AttributeName, node.PropertyName, string.Format(CultureInfo.InvariantCulture, "AttributeStructure.{0}", node.AttributeStructure));
+        WriteContentNode(
+            node,
+            node.AttributeName,
+            node.PropertyName,
+            string.Format(
+                CultureInfo.InvariantCulture,
+                "AttributeStructure.{0}",
+                node.AttributeStructure
+            )
+        );
     }
 
     public override void VisitComponentChildContent(ComponentChildContentIntermediateNode node)
@@ -159,7 +213,9 @@ public class IntermediateNodeWriter :
         WriteContentNode(node, node.TypeParameterName);
     }
 
-    public override void VisitComponentTypeInferenceMethod(ComponentTypeInferenceMethodIntermediateNode node)
+    public override void VisitComponentTypeInferenceMethod(
+        ComponentTypeInferenceMethodIntermediateNode node
+    )
     {
         WriteContentNode(node, node.FullTypeName, node.MethodName);
     }
@@ -184,7 +240,9 @@ public class IntermediateNodeWriter :
         WriteContentNode(node, node.KeyValueToken?.Content);
     }
 
-    void IExtensionIntermediateNodeVisitor<RouteAttributeExtensionNode>.VisitExtension(RouteAttributeExtensionNode node)
+    void IExtensionIntermediateNodeVisitor<RouteAttributeExtensionNode>.VisitExtension(
+        RouteAttributeExtensionNode node
+    )
     {
         WriteContentNode(node, node.Template.Value);
     }
@@ -197,13 +255,33 @@ public class IntermediateNodeWriter :
                 WriteContentNode(n, n.VariableName);
                 break;
             case PreallocatedTagHelperHtmlAttributeValueIntermediateNode n:
-                WriteContentNode(n, n.VariableName, n.AttributeName, n.Value, string.Format(CultureInfo.InvariantCulture, "HtmlAttributeValueStyle.{0}", n.AttributeStructure));
+                WriteContentNode(
+                    n,
+                    n.VariableName,
+                    n.AttributeName,
+                    n.Value,
+                    string.Format(
+                        CultureInfo.InvariantCulture,
+                        "HtmlAttributeValueStyle.{0}",
+                        n.AttributeStructure
+                    )
+                );
                 break;
             case PreallocatedTagHelperPropertyIntermediateNode n:
                 WriteContentNode(n, n.VariableName, n.AttributeName, n.PropertyName);
                 break;
             case PreallocatedTagHelperPropertyValueIntermediateNode n:
-                WriteContentNode(n, n.VariableName, n.AttributeName, n.Value, string.Format(CultureInfo.InvariantCulture, "HtmlAttributeValueStyle.{0}", n.AttributeStructure));
+                WriteContentNode(
+                    n,
+                    n.VariableName,
+                    n.AttributeName,
+                    n.Value,
+                    string.Format(
+                        CultureInfo.InvariantCulture,
+                        "HtmlAttributeValueStyle.{0}",
+                        n.AttributeStructure
+                    )
+                );
                 break;
             case DefaultTagHelperCreateIntermediateNode n:
                 WriteContentNode(n, n.TypeName);
@@ -212,10 +290,27 @@ public class IntermediateNodeWriter :
                 WriteBasicNode(n);
                 break;
             case DefaultTagHelperHtmlAttributeIntermediateNode n:
-                WriteContentNode(n, n.AttributeName, string.Format(CultureInfo.InvariantCulture, "HtmlAttributeValueStyle.{0}", n.AttributeStructure));
+                WriteContentNode(
+                    n,
+                    n.AttributeName,
+                    string.Format(
+                        CultureInfo.InvariantCulture,
+                        "HtmlAttributeValueStyle.{0}",
+                        n.AttributeStructure
+                    )
+                );
                 break;
             case DefaultTagHelperPropertyIntermediateNode n:
-                WriteContentNode(n, n.AttributeName, n.BoundAttribute.DisplayName, string.Format(CultureInfo.InvariantCulture, "HtmlAttributeValueStyle.{0}", n.AttributeStructure));
+                WriteContentNode(
+                    n,
+                    n.AttributeName,
+                    n.BoundAttribute.DisplayName,
+                    string.Format(
+                        CultureInfo.InvariantCulture,
+                        "HtmlAttributeValueStyle.{0}",
+                        n.AttributeStructure
+                    )
+                );
                 break;
             case DefaultTagHelperRuntimeIntermediateNode n:
                 WriteBasicNode(n);
@@ -309,7 +404,9 @@ public class IntermediateNodeWriter :
 
         if (sourceRange.FilePath != null)
         {
-            var fileName = sourceRange.FilePath.Substring(sourceRange.FilePath.LastIndexOf('/') + 1);
+            var fileName = sourceRange.FilePath.Substring(
+                sourceRange.FilePath.LastIndexOf('/') + 1
+            );
             _writer.Write(fileName);
         }
 
@@ -343,7 +440,9 @@ public class IntermediateNodeWriter :
 
                     for (var j = 0; j < messageHash.Length; j++)
                     {
-                        stringHashBuilder.Append(messageHash[j].ToString("x2", CultureInfo.InvariantCulture));
+                        stringHashBuilder.Append(
+                            messageHash[j].ToString("x2", CultureInfo.InvariantCulture)
+                        );
                     }
 
                     var stringHash = stringHashBuilder.ToString();
@@ -364,6 +463,8 @@ public class IntermediateNodeWriter :
         // We explicitly escape newlines in node content so that the IR can be compared line-by-line. The escaped
         // newline cannot be platform specific so we need to drop the windows \r.
         // Also, escape our separator so we can search for ` - `to find delimiters.
-        _writer.Write(content.Replace("\r", string.Empty).Replace("\n", "\\n").Replace(" - ", "\\-"));
+        _writer.Write(
+            content.Replace("\r", string.Empty).Replace("\n", "\\n").Replace(" - ", "\\-")
+        );
     }
 }

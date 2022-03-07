@@ -8,14 +8,12 @@ namespace Microsoft.Extensions.Logging.EventSource
     /// <summary>
     /// Represents information about exceptions that is captured by EventSourceLogger
     /// </summary>
-    [System.Diagnostics.Tracing.EventData(Name ="ExceptionInfo")]
+    [System.Diagnostics.Tracing.EventData(Name = "ExceptionInfo")]
     internal sealed class ExceptionInfo
     {
         public static ExceptionInfo Empty { get; } = new ExceptionInfo();
 
-        private ExceptionInfo()
-        {
-        }
+        private ExceptionInfo() { }
 
         public ExceptionInfo(Exception exception)
         {

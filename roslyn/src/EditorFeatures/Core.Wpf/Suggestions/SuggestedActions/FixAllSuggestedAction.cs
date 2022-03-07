@@ -23,14 +23,17 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
     /// Suggested action for fix all occurrences code fix.  Note: this is only used
     /// as a 'flavor' inside CodeFixSuggestionAction.
     /// </summary>
-    internal sealed partial class FixAllSuggestedAction : SuggestedAction, ITelemetryDiagnosticID<string>, IFixAllSuggestedAction
+    internal sealed partial class FixAllSuggestedAction
+        : SuggestedAction,
+          ITelemetryDiagnosticID<string>,
+          IFixAllSuggestedAction
     {
         public Diagnostic Diagnostic { get; }
 
         /// <summary>
         /// The original code-action that we are a fix-all for.  i.e. _originalCodeAction
         /// would be something like "use 'var' instead of 'int'", this suggestion action
-        /// and our <see cref="SuggestedAction.CodeAction"/> is the actual action that 
+        /// and our <see cref="SuggestedAction.CodeAction"/> is the actual action that
         /// will perform the fix in the appropriate document/project/solution scope.
         /// </summary>
         public CodeAction OriginalCodeAction { get; }
@@ -44,9 +47,16 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
             ITextBuffer subjectBuffer,
             FixAllState fixAllState,
             Diagnostic originalFixedDiagnostic,
-            CodeAction originalCodeAction)
-            : base(threadingContext, sourceProvider, workspace, subjectBuffer,
-                   fixAllState.FixAllProvider, new FixAllCodeAction(fixAllState))
+            CodeAction originalCodeAction
+        )
+            : base(
+                threadingContext,
+                sourceProvider,
+                workspace,
+                subjectBuffer,
+                fixAllState.FixAllProvider,
+                new FixAllCodeAction(fixAllState)
+            )
         {
             Diagnostic = originalFixedDiagnostic;
             OriginalCodeAction = originalCodeAction;
@@ -58,21 +68,33 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
             // We get the telemetry id for the original code action we are fixing,
             // not the special 'FixAllCodeAction'.  that is the .CodeAction this
             // SuggestedAction is pointing at.
-            telemetryId = OriginalCodeAction.GetType().GetTelemetryId(FixAllState.Scope.GetScopeIdForTelemetry());
+            telemetryId = OriginalCodeAction
+                .GetType()
+                .GetTelemetryId(FixAllState.Scope.GetScopeIdForTelemetry());
             return true;
         }
 
-        public string GetDiagnosticID()
-            => Diagnostic.GetTelemetryDiagnosticID();
+        public string GetDiagnosticID() => Diagnostic.GetTelemetryDiagnosticID();
 
         protected override async Task InnerInvokeAsync(
-            IProgressTracker progressTracker, CancellationToken cancellationToken)
+            IProgressTracker progressTracker,
+            CancellationToken cancellationToken
+        )
         {
-            await this.ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
+            await this.ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
+                cancellationToken
+            );
 
-            using (Logger.LogBlock(FunctionId.CodeFixes_FixAllOccurrencesSession, FixAllLogger.CreateCorrelationLogMessage(FixAllState.CorrelationId), cancellationToken))
+            using (
+                Logger.LogBlock(
+                    FunctionId.CodeFixes_FixAllOccurrencesSession,
+                    FixAllLogger.CreateCorrelationLogMessage(FixAllState.CorrelationId),
+                    cancellationToken
+                )
+            )
             {
-                await base.InnerInvokeAsync(progressTracker, cancellationToken).ConfigureAwait(false);
+                await base.InnerInvokeAsync(progressTracker, cancellationToken)
+                    .ConfigureAwait(false);
             }
         }
     }

@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Razor.Api
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public RazorDocumentOptionsProviderFactory(
-            Lazy<IRazorDocumentOptionsService> innerRazorDocumentOptionsService)
+            Lazy<IRazorDocumentOptionsService> innerRazorDocumentOptionsService
+        )
         {
             if (innerRazorDocumentOptionsService is null)
             {
@@ -31,29 +32,33 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Razor.Api
             _innerRazorDocumentOptionsService = innerRazorDocumentOptionsService;
         }
 
-        public IDocumentOptionsProvider? TryCreate(Workspace workspace)
-            => new RazorDocumentOptionsProvider(_innerRazorDocumentOptionsService);
+        public IDocumentOptionsProvider? TryCreate(Workspace workspace) =>
+            new RazorDocumentOptionsProvider(_innerRazorDocumentOptionsService);
 
         private sealed class RazorDocumentOptionsProvider : IDocumentOptionsProvider
         {
             public readonly Lazy<IRazorDocumentOptionsService> RazorDocumentOptionsService;
 
-            public RazorDocumentOptionsProvider(Lazy<IRazorDocumentOptionsService> razorDocumentOptionsService)
+            public RazorDocumentOptionsProvider(
+                Lazy<IRazorDocumentOptionsService> razorDocumentOptionsService
+            )
             {
                 RazorDocumentOptionsService = razorDocumentOptionsService;
             }
 
             public async Task<IDocumentOptions?> GetOptionsForDocumentAsync(
                 Document document,
-                CancellationToken cancellationToken)
+                CancellationToken cancellationToken
+            )
             {
                 if (!document.IsRazorDocument())
                 {
                     return null;
                 }
 
-                var options = await RazorDocumentOptionsService.Value.GetOptionsForDocumentAsync(
-                    document, cancellationToken).ConfigureAwait(false);
+                var options = await RazorDocumentOptionsService.Value
+                    .GetOptionsForDocumentAsync(document, cancellationToken)
+                    .ConfigureAwait(false);
                 return new RazorDocumentOptions(options);
             }
         }
@@ -68,8 +73,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Razor.Api
                 _razorOptions = razorOptions;
             }
 
-            public bool TryGetDocumentOption(OptionKey option, out object? value)
-                => _razorOptions.TryGetDocumentOption(option, out value);
+            public bool TryGetDocumentOption(OptionKey option, out object? value) =>
+                _razorOptions.TryGetDocumentOption(option, out value);
         }
     }
 }

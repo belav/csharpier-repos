@@ -37,9 +37,18 @@ namespace System.DirectoryServices.Protocols.Tests
         [InlineData(null, true, false, new string[0])]
         [InlineData("", false, true, new string[] { "" })]
         [InlineData("server", true, true, new string[] { "server" })]
-        public void Ctor_Server_FullQualifiedDnsHostName_Conectionless(string server, bool fullyQualifiedDnsHostName, bool connectionless, string[] expectedServers)
+        public void Ctor_Server_FullQualifiedDnsHostName_Conectionless(
+            string server,
+            bool fullyQualifiedDnsHostName,
+            bool connectionless,
+            string[] expectedServers
+        )
         {
-            var identifier = new LdapDirectoryIdentifier(server, fullyQualifiedDnsHostName, connectionless);
+            var identifier = new LdapDirectoryIdentifier(
+                server,
+                fullyQualifiedDnsHostName,
+                connectionless
+            );
             Assert.Equal(connectionless, identifier.Connectionless);
             Assert.Equal(fullyQualifiedDnsHostName, identifier.FullyQualifiedDnsHostName);
             Assert.Equal(389, identifier.PortNumber);
@@ -50,9 +59,20 @@ namespace System.DirectoryServices.Protocols.Tests
         [InlineData(null, -1, true, false, new string[0])]
         [InlineData("", 389, false, true, new string[] { "" })]
         [InlineData("server", int.MaxValue, true, true, new string[] { "server" })]
-        public void Ctor_PortNumber_Server_FullQualifiedDnsHostName_Conectionless(string server, int portNumber, bool fullyQualifiedDnsHostName, bool connectionless, string[] expectedServers)
+        public void Ctor_PortNumber_Server_FullQualifiedDnsHostName_Conectionless(
+            string server,
+            int portNumber,
+            bool fullyQualifiedDnsHostName,
+            bool connectionless,
+            string[] expectedServers
+        )
         {
-            var identifier = new LdapDirectoryIdentifier(server, portNumber, fullyQualifiedDnsHostName, connectionless);
+            var identifier = new LdapDirectoryIdentifier(
+                server,
+                portNumber,
+                fullyQualifiedDnsHostName,
+                connectionless
+            );
             Assert.Equal(connectionless, identifier.Connectionless);
             Assert.Equal(fullyQualifiedDnsHostName, identifier.FullyQualifiedDnsHostName);
             Assert.Equal(portNumber, identifier.PortNumber);
@@ -64,9 +84,17 @@ namespace System.DirectoryServices.Protocols.Tests
         [InlineData(new string[0], true, false)]
         [InlineData(new string[] { "server" }, true, true)]
         [InlineData(new string[] { "server", null }, false, false)]
-        public void Ctor_Servers_FullQualifiedDnsHostName_Conectionless(string[] servers, bool fullyQualifiedDnsHostName, bool connectionless)
+        public void Ctor_Servers_FullQualifiedDnsHostName_Conectionless(
+            string[] servers,
+            bool fullyQualifiedDnsHostName,
+            bool connectionless
+        )
         {
-            var identifier = new LdapDirectoryIdentifier(servers, fullyQualifiedDnsHostName, connectionless);
+            var identifier = new LdapDirectoryIdentifier(
+                servers,
+                fullyQualifiedDnsHostName,
+                connectionless
+            );
             Assert.Equal(connectionless, identifier.Connectionless);
             Assert.Equal(fullyQualifiedDnsHostName, identifier.FullyQualifiedDnsHostName);
             Assert.Equal(389, identifier.PortNumber);
@@ -77,12 +105,30 @@ namespace System.DirectoryServices.Protocols.Tests
         [Fact]
         public void Ctor_ServerHasSpaceInName_ThrowsArgumentException()
         {
-            AssertExtensions.Throws<ArgumentException>(null, () => new LdapDirectoryIdentifier("se rver"));
-            AssertExtensions.Throws<ArgumentException>(null, () => new LdapDirectoryIdentifier("se rver", 0));
-            AssertExtensions.Throws<ArgumentException>(null, () => new LdapDirectoryIdentifier("se rver", false, false));
-            AssertExtensions.Throws<ArgumentException>(null, () => new LdapDirectoryIdentifier("se rver", 0, false, false));
-            AssertExtensions.Throws<ArgumentException>(null, () => new LdapDirectoryIdentifier(new string[] { "se rver" }, false, false));
-            AssertExtensions.Throws<ArgumentException>(null, () => new LdapDirectoryIdentifier(new string[] { "se rver" }, 0, false, false));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => new LdapDirectoryIdentifier("se rver")
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => new LdapDirectoryIdentifier("se rver", 0)
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => new LdapDirectoryIdentifier("se rver", false, false)
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => new LdapDirectoryIdentifier("se rver", 0, false, false)
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => new LdapDirectoryIdentifier(new string[] { "se rver" }, false, false)
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => new LdapDirectoryIdentifier(new string[] { "se rver" }, 0, false, false)
+            );
         }
     }
 }

@@ -57,8 +57,8 @@ namespace Microsoft.VisualStudio.LanguageServices.ValueTracking
             IGlyphService glyphService,
             IThreadingContext threadingContext,
             Workspace workspace,
-            ImmutableArray<TreeItemViewModel> children = default)
-            : base()
+            ImmutableArray<TreeItemViewModel> children = default
+        ) : base()
         {
             FileName = fileName;
             TextSpan = textSpan;
@@ -96,7 +96,7 @@ namespace Microsoft.VisualStudio.LanguageServices.ValueTracking
             {
                 if (e.PropertyName == nameof(TreeViewModel.HighlightBrush))
                 {
-                    // If the highlight changes we need to recalculate the inlines so the 
+                    // If the highlight changes we need to recalculate the inlines so the
                     // highlighting is correct
                     NotifyPropertyChanged(nameof(Inlines));
                 }
@@ -116,7 +116,14 @@ namespace Microsoft.VisualStudio.LanguageServices.ValueTracking
                 .WithChangedOption(new OptionKey(NavigationOptions.PreferProvisionalTab), true)
                 .WithChangedOption(new OptionKey(NavigationOptions.ActivateTab), false);
 
-            navigationService.TryNavigateToLineAndOffset(Workspace, DocumentId, LineSpan.Start, 0, options, ThreadingContext.DisposalToken);
+            navigationService.TryNavigateToLineAndOffset(
+                Workspace,
+                DocumentId,
+                LineSpan.Start,
+                0,
+                options,
+                ThreadingContext.DisposalToken
+            );
         }
 
         private ImmutableArray<Inline> CalculateInlines()
@@ -127,33 +134,41 @@ namespace Microsoft.VisualStudio.LanguageServices.ValueTracking
             }
 
             var classifiedTexts = ClassifiedSpans.SelectAsArray(
-               cs =>
-               {
-                   return new ClassifiedText(cs.ClassificationType, _sourceText.ToString(cs.TextSpan));
-               });
+                cs =>
+                {
+                    return new ClassifiedText(
+                        cs.ClassificationType,
+                        _sourceText.ToString(cs.TextSpan)
+                    );
+                }
+            );
 
             var spanStartPosition = TextSpan.Start - ClassifiedSpans[0].TextSpan.Start;
             var highlightSpan = new TextSpan(spanStartPosition, TextSpan.Length);
 
-            return classifiedTexts.ToInlines(
-                TreeViewModel.ClassificationFormatMap,
-                TreeViewModel.ClassificationTypeMap,
-                (run, classifiedText, position) =>
-                {
-                    if (TreeViewModel.HighlightBrush is not null)
+            return classifiedTexts
+                .ToInlines(
+                    TreeViewModel.ClassificationFormatMap,
+                    TreeViewModel.ClassificationTypeMap,
+                    (run, classifiedText, position) =>
                     {
-                        // Check the span start first because we always want to highlight a run that 
-                        // is at the start, even if the TextSpan length is 0. If it's not the start,
-                        // highlighting should still happen if the run position is contained within
-                        // the span.
-                        if (position == highlightSpan.Start || highlightSpan.Contains(position))
+                        if (TreeViewModel.HighlightBrush is not null)
                         {
-                            run.SetValue(
-                                TextElement.BackgroundProperty,
-                                TreeViewModel.HighlightBrush);
+                            // Check the span start first because we always want to highlight a run that
+                            // is at the start, even if the TextSpan length is 0. If it's not the start,
+                            // highlighting should still happen if the run position is contained within
+                            // the span.
+                            if (position == highlightSpan.Start || highlightSpan.Contains(position))
+                            {
+                                run.SetValue(
+                                    TextElement.BackgroundProperty,
+                                    TreeViewModel.HighlightBrush
+                                );
+                            }
                         }
                     }
-                }).ToImmutableArray();
+                )
+                .ToImmutableArray();
         }
     }
 }

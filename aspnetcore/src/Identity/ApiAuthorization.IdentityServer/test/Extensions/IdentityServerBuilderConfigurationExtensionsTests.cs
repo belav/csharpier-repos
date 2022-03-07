@@ -25,12 +25,15 @@ public static class IdentityServerBuilderConfigurationExtensionsTests
     {
         // Arrange
         IConfiguration configuration = new ConfigurationBuilder()
-            .AddInMemoryCollection(new Dictionary<string, string>()
-            {
-                ["IdentityServer:Key:Type"] = "File",
-                ["IdentityServer:Key:FilePath"] = "test.pfx",
-                ["IdentityServer:Key:Password"] = "aspnetcore"
-            }).Build();
+            .AddInMemoryCollection(
+                new Dictionary<string, string>()
+                {
+                    ["IdentityServer:Key:Type"] = "File",
+                    ["IdentityServer:Key:FilePath"] = "test.pfx",
+                    ["IdentityServer:Key:Password"] = "aspnetcore"
+                }
+            )
+            .Build();
 
         IWebHostEnvironment environment = new MyWebHostEnvironment();
 
@@ -41,8 +44,7 @@ public static class IdentityServerBuilderConfigurationExtensionsTests
 
         services.AddDefaultIdentity<MyUser>();
 
-        services.AddIdentityServer()
-                .AddApiAuthorization<MyUser, MyUserContext>();
+        services.AddIdentityServer().AddApiAuthorization<MyUser, MyUserContext>();
 
         services.AddAuthentication();
 
@@ -59,8 +61,7 @@ public static class IdentityServerBuilderConfigurationExtensionsTests
     public static void IValidationKeysStore_Service_Resolution_Fails_If_No_Signing_Credential_Configured()
     {
         // Arrange
-        IConfiguration configuration = new ConfigurationBuilder()
-            .Build();
+        IConfiguration configuration = new ConfigurationBuilder().Build();
 
         IWebHostEnvironment environment = new MyWebHostEnvironment();
 
@@ -71,16 +72,19 @@ public static class IdentityServerBuilderConfigurationExtensionsTests
 
         services.AddDefaultIdentity<MyUser>();
 
-        services.AddIdentityServer()
-                .AddApiAuthorization<MyUser, MyUserContext>();
+        services.AddIdentityServer().AddApiAuthorization<MyUser, MyUserContext>();
 
         using var serviceProvider = services.BuildServiceProvider();
 
         // Act and Assert
         var exception = Assert.Throws<InvalidOperationException>(
-            () => serviceProvider.GetRequiredService<IValidationKeysStore>());
+            () => serviceProvider.GetRequiredService<IValidationKeysStore>()
+        );
 
-        Assert.Equal("No signing credential is configured by the 'IdentityServer:Key' configuration section.", exception.Message);
+        Assert.Equal(
+            "No signing credential is configured by the 'IdentityServer:Key' configuration section.",
+            exception.Message
+        );
     }
 
     private class MyWebHostEnvironment : IWebHostEnvironment
@@ -100,10 +104,7 @@ public static class IdentityServerBuilderConfigurationExtensionsTests
 
     private class MyUserContext : DbContext, IPersistedGrantDbContext
     {
-        public MyUserContext(DbContextOptions options)
-            : base(options)
-        {
-        }
+        public MyUserContext(DbContextOptions options) : base(options) { }
 
         public DbSet<PersistedGrant> PersistedGrants { get; set; }
 

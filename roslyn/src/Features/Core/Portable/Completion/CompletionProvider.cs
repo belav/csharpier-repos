@@ -19,8 +19,7 @@ namespace Microsoft.CodeAnalysis.Completion
     {
         internal string Name { get; }
 
-        protected CompletionProvider()
-            => Name = GetType().FullName!;
+        protected CompletionProvider() => Name = GetType().FullName!;
 
         /// <summary>
         /// Implement to contribute <see cref="CompletionItem"/>'s and other details to a <see cref="CompletionList"/>
@@ -34,8 +33,12 @@ namespace Microsoft.CodeAnalysis.Completion
         /// <param name="caretPosition">The position of the caret after the triggering action.</param>
         /// <param name="trigger">The triggering action.</param>
         /// <param name="options">The set of options in effect.</param>
-        public virtual bool ShouldTriggerCompletion(SourceText text, int caretPosition, CompletionTrigger trigger, OptionSet options)
-            => false;
+        public virtual bool ShouldTriggerCompletion(
+            SourceText text,
+            int caretPosition,
+            CompletionTrigger trigger,
+            OptionSet options
+        ) => false;
 
         /// <summary>
         /// Returns true if the character recently inserted or deleted in the text should trigger completion.
@@ -45,28 +48,62 @@ namespace Microsoft.CodeAnalysis.Completion
         /// <param name="caretPosition">The position of the caret after the triggering action.</param>
         /// <param name="trigger">The triggering action.</param>
         /// <param name="options">The set of options in effect.</param>
-        internal virtual bool ShouldTriggerCompletion(HostLanguageServices languageServices, SourceText text, int caretPosition, CompletionTrigger trigger, CompletionOptions options)
+        internal virtual bool ShouldTriggerCompletion(
+            HostLanguageServices languageServices,
+            SourceText text,
+            int caretPosition,
+            CompletionTrigger trigger,
+            CompletionOptions options
+        )
 #pragma warning disable RS0030 // Do not use banned APIs
-            => ShouldTriggerCompletion(text, caretPosition, trigger, options.ToSet(languageServices.Language));
+            =>
+            ShouldTriggerCompletion(
+                text,
+                caretPosition,
+                trigger,
+                options.ToSet(languageServices.Language)
+            );
 #pragma warning restore
 
         /// <summary>
         /// This allows Completion Providers that indicated they were triggered textually to use syntax to
-        /// confirm they are really triggered, or decide they are not actually triggered and should become 
+        /// confirm they are really triggered, or decide they are not actually triggered and should become
         /// an augmenting provider instead.
         /// </summary>
-        internal virtual async Task<bool> IsSyntacticTriggerCharacterAsync(Document document, int caretPosition, CompletionTrigger trigger, CompletionOptions options, CancellationToken cancellationToken)
-            => ShouldTriggerCompletion(document.Project.LanguageServices, await document.GetTextAsync(cancellationToken).ConfigureAwait(false), caretPosition, trigger, options);
+        internal virtual async Task<bool> IsSyntacticTriggerCharacterAsync(
+            Document document,
+            int caretPosition,
+            CompletionTrigger trigger,
+            CompletionOptions options,
+            CancellationToken cancellationToken
+        ) =>
+            ShouldTriggerCompletion(
+                document.Project.LanguageServices,
+                await document.GetTextAsync(cancellationToken).ConfigureAwait(false),
+                caretPosition,
+                trigger,
+                options
+            );
 
         /// <summary>
         /// Gets the description of the specified item.
         /// </summary>
-        public virtual Task<CompletionDescription?> GetDescriptionAsync(Document document, CompletionItem item, CancellationToken cancellationToken)
-            => Task.FromResult<CompletionDescription?>(CompletionDescription.Empty);
+        public virtual Task<CompletionDescription?> GetDescriptionAsync(
+            Document document,
+            CompletionItem item,
+            CancellationToken cancellationToken
+        ) => Task.FromResult<CompletionDescription?>(CompletionDescription.Empty);
 
-        internal virtual Task<CompletionDescription?> GetDescriptionAsync(Document document, CompletionItem item, CompletionOptions options, SymbolDescriptionOptions displayOptions, CancellationToken cancellationToken)
+        internal virtual Task<CompletionDescription?> GetDescriptionAsync(
+            Document document,
+            CompletionItem item,
+            CompletionOptions options,
+            SymbolDescriptionOptions displayOptions,
+            CancellationToken cancellationToken
+        )
 #pragma warning disable RS0030 // Do not used banned APIs
-            => GetDescriptionAsync(document, item, cancellationToken);
+            =>
+            GetDescriptionAsync(document, item, cancellationToken);
 #pragma warning restore
 
         /// <summary>
@@ -76,8 +113,12 @@ namespace Microsoft.CodeAnalysis.Completion
         /// <param name="item">The item to be committed.</param>
         /// <param name="commitKey">The optional key character that caused the commit.</param>
         /// <param name="cancellationToken"></param>
-        public virtual Task<CompletionChange> GetChangeAsync(Document document, CompletionItem item, char? commitKey, CancellationToken cancellationToken)
-            => Task.FromResult(CompletionChange.Create(new TextChange(item.Span, item.DisplayText)));
+        public virtual Task<CompletionChange> GetChangeAsync(
+            Document document,
+            CompletionItem item,
+            char? commitKey,
+            CancellationToken cancellationToken
+        ) => Task.FromResult(CompletionChange.Create(new TextChange(item.Span, item.DisplayText)));
 
         /// <summary>
         /// True if the provider produces snippet items.

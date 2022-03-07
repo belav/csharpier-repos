@@ -54,8 +54,20 @@ namespace System.IO.Tests
             testFile.Create().Dispose();
 
             Assert.Throws<FileNotFoundException>(() => Copy(GetTestFilePath(), testFile.FullName));
-            Assert.Throws<DirectoryNotFoundException>(() => Copy(testFile.FullName, Path.Combine(TestDirectory, GetTestFileName(), GetTestFileName())));
-            Assert.Throws<DirectoryNotFoundException>(() => Copy(Path.Combine(TestDirectory, GetTestFileName(), GetTestFileName()), testFile.FullName));
+            Assert.Throws<DirectoryNotFoundException>(
+                () =>
+                    Copy(
+                        testFile.FullName,
+                        Path.Combine(TestDirectory, GetTestFileName(), GetTestFileName())
+                    )
+            );
+            Assert.Throws<DirectoryNotFoundException>(
+                () =>
+                    Copy(
+                        Path.Combine(TestDirectory, GetTestFileName(), GetTestFileName()),
+                        testFile.FullName
+                    )
+            );
         }
 
         [Fact]
@@ -73,7 +85,11 @@ namespace System.IO.Tests
         public void ShortenLongPath()
         {
             string testFileSource = GetTestFilePath();
-            string testFileDest = Path.GetDirectoryName(testFileSource) + string.Concat(Enumerable.Repeat(Path.DirectorySeparatorChar + ".", 90).ToArray()) + Path.DirectorySeparatorChar + Path.GetFileName(testFileSource);
+            string testFileDest =
+                Path.GetDirectoryName(testFileSource)
+                + string.Concat(Enumerable.Repeat(Path.DirectorySeparatorChar + ".", 90).ToArray())
+                + Path.DirectorySeparatorChar
+                + Path.GetFileName(testFileSource);
             File.Create(testFileSource).Dispose();
             Assert.Throws<IOException>(() => Copy(testFileSource, testFileDest));
         }
@@ -101,7 +117,7 @@ namespace System.IO.Tests
                     {
                         data[i] = (char)rand.Next(0, 256);
                     }
-                    yield return new object[] { data, readOnly};
+                    yield return new object[] { data, readOnly };
                 }
             }
         }
@@ -147,10 +163,17 @@ namespace System.IO.Tests
             // overwrites LastWrite , so this check doesn't apply.
             if (PlatformDetection.IsNotBrowser)
             {
-                Assert.InRange(File.GetLastWriteTimeUtc(testFileDest), lastWriteTime.AddSeconds(-1), lastWriteTime.AddSeconds(1));
+                Assert.InRange(
+                    File.GetLastWriteTimeUtc(testFileDest),
+                    lastWriteTime.AddSeconds(-1),
+                    lastWriteTime.AddSeconds(1)
+                );
             }
 
-            Assert.Equal(readOnly, (File.GetAttributes(testFileDest) & FileAttributes.ReadOnly) != 0);
+            Assert.Equal(
+                readOnly,
+                (File.GetAttributes(testFileDest) & FileAttributes.ReadOnly) != 0
+            );
             if (readOnly)
             {
                 File.SetAttributes(testFileSource, FileAttributes.Normal);
@@ -162,9 +185,7 @@ namespace System.IO.Tests
 
         #region PlatformSpecific
 
-        [Theory,
-            InlineData("         "),
-            InlineData(" ")]
+        [Theory, InlineData("         "), InlineData(" ")]
         [PlatformSpecific(TestPlatforms.Windows)]
         public void WindowsAllSpacePath(string invalid)
         {
@@ -175,11 +196,7 @@ namespace System.IO.Tests
             Assert.Throws<ArgumentException>(() => Copy(invalid, testFile));
         }
 
-        [Theory,
-            InlineData("\n"),
-            InlineData(">"),
-            InlineData("<"),
-            InlineData("\t")]
+        [Theory, InlineData("\n"), InlineData(">"), InlineData("<"), InlineData("\t")]
         [PlatformSpecific(TestPlatforms.Windows)]
         public void WindowsInvalidCharsPath_Core(string invalid)
         {
@@ -190,13 +207,15 @@ namespace System.IO.Tests
             Assert.Throws<IOException>(() => Copy(invalid, testFile));
         }
 
-        [Theory,
+        [
+            Theory,
             InlineData("         "),
             InlineData(" "),
             InlineData("\n"),
             InlineData(">"),
             InlineData("<"),
-            InlineData("\t")]
+            InlineData("\t")
+        ]
         [PlatformSpecific(TestPlatforms.AnyUnix)]
         public void UnixInvalidWindowsPaths(string valid)
         {
@@ -209,11 +228,13 @@ namespace System.IO.Tests
             Assert.True(File.Exists(Path.Combine(TestDirectory, valid)));
         }
 
-        [Theory,
+        [
+            Theory,
             InlineData("", ":bar"),
             InlineData("", ":bar:$DATA"),
             InlineData("::$DATA", ":bar"),
-            InlineData("::$DATA", ":bar:$DATA")]
+            InlineData("::$DATA", ":bar:$DATA")
+        ]
         [PlatformSpecific(TestPlatforms.Windows)]
         public void WindowsAlternateDataStream(string defaultStream, string alternateStream)
         {
@@ -237,7 +258,9 @@ namespace System.IO.Tests
 
             // This always throws as you can't copy an alternate stream out (oddly)
             Assert.Throws<IOException>(() => Copy(testFileAlternateStream, testFile2));
-            Assert.Throws<IOException>(() => Copy(testFileAlternateStream, testFile2 + alternateStream));
+            Assert.Throws<IOException>(
+                () => Copy(testFileAlternateStream, testFile2 + alternateStream)
+            );
         }
 
         [Theory]
@@ -318,13 +341,18 @@ namespace System.IO.Tests
             }
         }
 
-        [Theory,
+        [
+            Theory,
             InlineData("", ":bar"),
             InlineData("", ":bar:$DATA"),
             InlineData("::$DATA", ":bar"),
-            InlineData("::$DATA", ":bar:$DATA")]
+            InlineData("::$DATA", ":bar:$DATA")
+        ]
         [PlatformSpecific(TestPlatforms.Windows)]
-        public void WindowsAlternateDataStreamOverwrite(string defaultStream, string alternateStream)
+        public void WindowsAlternateDataStreamOverwrite(
+            string defaultStream,
+            string alternateStream
+        )
         {
             DirectoryInfo testDirectory = Directory.CreateDirectory(GetTestFilePath());
             string testFile = Path.Combine(testDirectory.FullName, GetTestFileName());
@@ -347,8 +375,12 @@ namespace System.IO.Tests
             Assert.Equal("Bar", File.ReadAllText(testFileAlternateStream));
 
             // This always throws as you can't copy an alternate stream out (oddly)
-            Assert.Throws<IOException>(() => Copy(testFileAlternateStream, testFile2, overwrite: true));
-            Assert.Throws<IOException>(() => Copy(testFileAlternateStream, testFile2 + alternateStream, overwrite: true));
+            Assert.Throws<IOException>(
+                () => Copy(testFileAlternateStream, testFile2, overwrite: true)
+            );
+            Assert.Throws<IOException>(
+                () => Copy(testFileAlternateStream, testFile2 + alternateStream, overwrite: true)
+            );
         }
     }
 
@@ -368,7 +400,12 @@ namespace System.IO.Tests
             File.WriteAllText(file1, "foo");
             File.WriteAllText(file2, "bar");
 
-            using var stream = new FileStream(file1, FileMode.Open, FileAccess.Read, FileShare.None);
+            using var stream = new FileStream(
+                file1,
+                FileMode.Open,
+                FileAccess.Read,
+                FileShare.None
+            );
             Assert.Throws<IOException>(() => File.Copy(file2, file1, overwrite: true));
         }
     }

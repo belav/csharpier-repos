@@ -24,13 +24,16 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         public virtual void QueryFilter_containing_db_set_with_not_included_type()
         {
             var modelBuilder = new InternalModelBuilder(new Model());
-            Expression<Func<Blog, bool>> lambda = (Blog e) => new MyContext().Set<Post>().Single().Id == e.Id;
-            modelBuilder.Entity(typeof(Blog), ConfigurationSource.Explicit)
+            Expression<Func<Blog, bool>> lambda = (Blog e) =>
+                new MyContext().Set<Post>().Single().Id == e.Id;
+            modelBuilder
+                .Entity(typeof(Blog), ConfigurationSource.Explicit)
                 .HasQueryFilter(lambda, ConfigurationSource.Explicit);
 
             Assert.Equal(
                 CoreStrings.InvalidSetType(typeof(Post).ShortDisplayName()),
-                Assert.Throws<InvalidOperationException>(() => RunConvention(modelBuilder)).Message);
+                Assert.Throws<InvalidOperationException>(() => RunConvention(modelBuilder)).Message
+            );
         }
 
         [ConditionalFact]
@@ -38,13 +41,16 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         {
             var modelBuilder = new InternalModelBuilder(new Model());
             modelBuilder.SharedTypeEntity("Post1", typeof(Post), ConfigurationSource.Explicit);
-            Expression<Func<Blog, bool>> lambda = (Blog e) => new MyContext().Set<Post>().Single().Id == e.Id;
-            modelBuilder.Entity(typeof(Blog), ConfigurationSource.Explicit)
+            Expression<Func<Blog, bool>> lambda = (Blog e) =>
+                new MyContext().Set<Post>().Single().Id == e.Id;
+            modelBuilder
+                .Entity(typeof(Blog), ConfigurationSource.Explicit)
                 .HasQueryFilter(lambda, ConfigurationSource.Explicit);
 
             Assert.Equal(
                 CoreStrings.InvalidSetSharedType(typeof(Post).ShortDisplayName()),
-                Assert.Throws<InvalidOperationException>(() => RunConvention(modelBuilder)).Message);
+                Assert.Throws<InvalidOperationException>(() => RunConvention(modelBuilder)).Message
+            );
         }
 
         [ConditionalFact]
@@ -52,43 +58,63 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         {
             var modelBuilder = new InternalModelBuilder(new Model());
             modelBuilder.SharedTypeEntity("Post1", typeof(Post), ConfigurationSource.Explicit);
-            Expression<Func<Blog, bool>> lambda = (Blog e) => new MyContext().Set<Blog>("Post1").Single().Id == e.Id;
-            modelBuilder.Entity(typeof(Blog), ConfigurationSource.Explicit)
+            Expression<Func<Blog, bool>> lambda = (Blog e) =>
+                new MyContext().Set<Blog>("Post1").Single().Id == e.Id;
+            modelBuilder
+                .Entity(typeof(Blog), ConfigurationSource.Explicit)
                 .HasQueryFilter(lambda, ConfigurationSource.Explicit);
 
             Assert.Equal(
-                CoreStrings.DbSetIncorrectGenericType("Post1", typeof(Post).ShortDisplayName(), typeof(Blog).ShortDisplayName()),
-                Assert.Throws<InvalidOperationException>(() => RunConvention(modelBuilder)).Message);
+                CoreStrings.DbSetIncorrectGenericType(
+                    "Post1",
+                    typeof(Post).ShortDisplayName(),
+                    typeof(Blog).ShortDisplayName()
+                ),
+                Assert.Throws<InvalidOperationException>(() => RunConvention(modelBuilder)).Message
+            );
         }
 
         [ConditionalFact]
         public virtual void QueryFilter_containing_db_set_of_owned()
         {
             var modelBuilder = new InternalModelBuilder(new Model());
-            modelBuilder.Entity(typeof(Owner), ConfigurationSource.Explicit)
+            modelBuilder
+                .Entity(typeof(Owner), ConfigurationSource.Explicit)
                 .HasOwnership(typeof(Blog), "Blog", ConfigurationSource.Explicit);
 
-            Expression<Func<Owner, bool>> lambda = (Owner e) => new MyContext().Set<Blog>().Single().Id == e.Id;
-            modelBuilder.Entity(typeof(Owner), ConfigurationSource.Explicit)
+            Expression<Func<Owner, bool>> lambda = (Owner e) =>
+                new MyContext().Set<Blog>().Single().Id == e.Id;
+            modelBuilder
+                .Entity(typeof(Owner), ConfigurationSource.Explicit)
                 .HasQueryFilter(lambda, ConfigurationSource.Explicit);
 
             Assert.Equal(
-                CoreStrings.InvalidSetTypeOwned(typeof(Blog).ShortDisplayName(), typeof(Owner).ShortDisplayName()),
-                Assert.Throws<InvalidOperationException>(() => RunConvention(modelBuilder)).Message);
+                CoreStrings.InvalidSetTypeOwned(
+                    typeof(Blog).ShortDisplayName(),
+                    typeof(Owner).ShortDisplayName()
+                ),
+                Assert.Throws<InvalidOperationException>(() => RunConvention(modelBuilder)).Message
+            );
         }
 
         private void RunConvention(InternalModelBuilder modelBuilder)
         {
-            var context = new ConventionContext<IConventionModelBuilder>(modelBuilder.Metadata.ConventionDispatcher);
+            var context = new ConventionContext<IConventionModelBuilder>(
+                modelBuilder.Metadata.ConventionDispatcher
+            );
 
-            new QueryFilterRewritingConvention(CreateDependencies())
-                .ProcessModelFinalizing(modelBuilder, context);
+            new QueryFilterRewritingConvention(CreateDependencies()).ProcessModelFinalizing(
+                modelBuilder,
+                context
+            );
 
             Assert.False(context.ShouldStopProcessing());
         }
 
-        private ProviderConventionSetBuilderDependencies CreateDependencies()
-            => InMemoryTestHelpers.Instance.CreateContextServices().GetRequiredService<ProviderConventionSetBuilderDependencies>();
+        private ProviderConventionSetBuilderDependencies CreateDependencies() =>
+            InMemoryTestHelpers.Instance
+                .CreateContextServices()
+                .GetRequiredService<ProviderConventionSetBuilderDependencies>();
 
         protected class Blog
         {
@@ -108,9 +134,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
         protected class MyContext : DbContext
         {
-            public MyContext()
-            {
-            }
+            public MyContext() { }
         }
     }
 }

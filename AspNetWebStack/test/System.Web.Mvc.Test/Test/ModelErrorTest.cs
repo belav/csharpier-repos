@@ -12,7 +12,12 @@ namespace System.Web.Mvc.Test
         {
             // Act & Assert
             Assert.ThrowsArgumentNull(
-                delegate { new ModelError((Exception)null); }, "exception");
+                delegate
+                {
+                    new ModelError((Exception)null);
+                },
+                "exception"
+            );
         }
 
         [Fact]

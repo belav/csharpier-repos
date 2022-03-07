@@ -10,16 +10,12 @@ namespace Microsoft.CodeAnalysis.Options
     /// <summary>
     /// Marker interface for language specific options.
     /// </summary>
-    internal interface ILanguageSpecificOption : IOptionWithGroup
-    {
-    }
+    internal interface ILanguageSpecificOption : IOptionWithGroup { }
 
     /// <summary>
     /// Marker interface for language specific options.
     /// </summary>
-    internal interface ILanguageSpecificOption<T> : ILanguageSpecificOption
-    {
-    }
+    internal interface ILanguageSpecificOption<T> : ILanguageSpecificOption { }
 
     /// <summary>
     /// An global option. An instance of this class can be used to access an option value from an OptionSet.
@@ -49,31 +45,53 @@ namespace Microsoft.CodeAnalysis.Options
         public ImmutableArray<OptionStorageLocation2> StorageLocations { get; }
 
         public Option2(string feature, string name, T defaultValue)
-            : this(feature, name, defaultValue, storageLocations: ImmutableArray<OptionStorageLocation2>.Empty)
-        {
-        }
+            : this(
+                feature,
+                name,
+                defaultValue,
+                storageLocations: ImmutableArray<OptionStorageLocation2>.Empty
+            ) { }
 
-        public Option2(string feature, string name, T defaultValue, OptionStorageLocation2 storageLocation)
-            : this(feature, group: OptionGroup.Default, name, defaultValue, ImmutableArray.Create(storageLocation))
-        {
-        }
+        public Option2(
+            string feature,
+            string name,
+            T defaultValue,
+            OptionStorageLocation2 storageLocation
+        )
+            : this(
+                feature,
+                group: OptionGroup.Default,
+                name,
+                defaultValue,
+                ImmutableArray.Create(storageLocation)
+            ) { }
 
-        public Option2(string feature, string name, T defaultValue, ImmutableArray<OptionStorageLocation2> storageLocations)
-            : this(feature, group: OptionGroup.Default, name, defaultValue, storageLocations)
-        {
-        }
+        public Option2(
+            string feature,
+            string name,
+            T defaultValue,
+            ImmutableArray<OptionStorageLocation2> storageLocations
+        ) : this(feature, group: OptionGroup.Default, name, defaultValue, storageLocations) { }
 
         internal Option2(string feature, OptionGroup group, string name, T defaultValue)
             : this(feature, group, name, defaultValue, ImmutableArray<OptionStorageLocation2>.Empty)
-        {
-        }
+        { }
 
-        internal Option2(string feature, OptionGroup group, string name, T defaultValue, OptionStorageLocation2 storageLocation)
-            : this(feature, group, name, defaultValue, ImmutableArray.Create(storageLocation))
-        {
-        }
+        internal Option2(
+            string feature,
+            OptionGroup group,
+            string name,
+            T defaultValue,
+            OptionStorageLocation2 storageLocation
+        ) : this(feature, group, name, defaultValue, ImmutableArray.Create(storageLocation)) { }
 
-        internal Option2(string feature, OptionGroup group, string name, T defaultValue, ImmutableArray<OptionStorageLocation2> storageLocations)
+        internal Option2(
+            string feature,
+            OptionGroup group,
+            string name,
+            T defaultValue,
+            ImmutableArray<OptionStorageLocation2> storageLocations
+        )
         {
             if (string.IsNullOrWhiteSpace(feature))
             {
@@ -85,7 +103,14 @@ namespace Microsoft.CodeAnalysis.Options
                 throw new ArgumentException(nameof(name));
             }
 
-            OptionDefinition = new OptionDefinition(feature, group, name, defaultValue, typeof(T), isPerLanguage: false);
+            OptionDefinition = new OptionDefinition(
+                feature,
+                group,
+                name,
+                defaultValue,
+                typeof(T),
+                isPerLanguage: false
+            );
             this.StorageLocations = storageLocations;
         }
 
@@ -98,8 +123,8 @@ namespace Microsoft.CodeAnalysis.Options
 
         bool IOption.IsPerLanguage => false;
 
-        ImmutableArray<OptionStorageLocation> IOption.StorageLocations
-            => this.StorageLocations.As<OptionStorageLocation>();
+        ImmutableArray<OptionStorageLocation> IOption.StorageLocations =>
+            this.StorageLocations.As<OptionStorageLocation>();
 #endif
 
         OptionGroup IOptionWithGroup.Group => this.Group;
@@ -122,7 +147,6 @@ namespace Microsoft.CodeAnalysis.Options
             return OptionDefinition == other?.OptionDefinition;
         }
 
-        public static implicit operator OptionKey2(Option2<T> option)
-            => new(option);
+        public static implicit operator OptionKey2(Option2<T> option) => new(option);
     }
 }

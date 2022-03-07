@@ -12,10 +12,7 @@ public class FocusEventArgsReaderTest
     public void Read_Works()
     {
         // Arrange
-        var args = new FocusEventArgs
-        {
-            Type = "type1",
-        };
+        var args = new FocusEventArgs { Type = "type1", };
 
         var jsonElement = GetJsonElement(args);
 

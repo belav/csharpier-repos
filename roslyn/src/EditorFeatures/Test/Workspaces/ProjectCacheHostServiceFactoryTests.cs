@@ -25,7 +25,14 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
     [UseExportProvider]
     public class ProjectCacheHostServiceFactoryTests
     {
-        private static void Test(Action<IProjectCacheHostService, ProjectId, ICachedObjectOwner, ObjectReference<object>> action)
+        private static void Test(
+            Action<
+                IProjectCacheHostService,
+                ProjectId,
+                ICachedObjectOwner,
+                ObjectReference<object>
+            > action
+        )
         {
             // Putting cacheService.CreateStrongReference in a using statement
             // creates a temporary local that isn't collected in Debug builds
@@ -42,80 +49,111 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
         [ConditionalFact(typeof(x86))]
         public void TestCacheKeepsObjectAlive1()
         {
-            Test((cacheService, projectId, owner, instance) =>
-            {
-                using (cacheService.EnableCaching(projectId))
+            Test(
+                (cacheService, projectId, owner, instance) =>
                 {
-                    instance.UseReference(i => cacheService.CacheObjectIfCachingEnabledForKey(projectId, (object)owner, i));
+                    using (cacheService.EnableCaching(projectId))
+                    {
+                        instance.UseReference(
+                            i =>
+                                cacheService.CacheObjectIfCachingEnabledForKey(
+                                    projectId,
+                                    (object)owner,
+                                    i
+                                )
+                        );
 
-                    instance.AssertHeld();
+                        instance.AssertHeld();
+                    }
+
+                    instance.AssertReleased();
+
+                    GC.KeepAlive(owner);
                 }
-
-                instance.AssertReleased();
-
-                GC.KeepAlive(owner);
-            });
+            );
         }
 
         [WorkItem(28639, "https://github.com/dotnet/roslyn/issues/28639")]
         [ConditionalFact(typeof(x86))]
         public void TestCacheKeepsObjectAlive2()
         {
-            Test((cacheService, projectId, owner, instance) =>
-            {
-                using (cacheService.EnableCaching(projectId))
+            Test(
+                (cacheService, projectId, owner, instance) =>
                 {
-                    instance.UseReference(i => cacheService.CacheObjectIfCachingEnabledForKey(projectId, owner, i));
+                    using (cacheService.EnableCaching(projectId))
+                    {
+                        instance.UseReference(
+                            i => cacheService.CacheObjectIfCachingEnabledForKey(projectId, owner, i)
+                        );
 
-                    instance.AssertHeld();
+                        instance.AssertHeld();
+                    }
+
+                    instance.AssertReleased();
+
+                    GC.KeepAlive(owner);
                 }
-
-                instance.AssertReleased();
-
-                GC.KeepAlive(owner);
-            });
+            );
         }
 
         [WorkItem(28639, "https://github.com/dotnet/roslyn/issues/28639")]
         [ConditionalFact(typeof(x86))]
         public void TestCacheDoesNotKeepObjectsAliveAfterOwnerIsCollected1()
         {
-            Test((cacheService, projectId, owner, instance) =>
-            {
-                using (cacheService.EnableCaching(projectId))
+            Test(
+                (cacheService, projectId, owner, instance) =>
                 {
-                    cacheService.CacheObjectIfCachingEnabledForKey(projectId, (object)owner, instance);
-                    owner = null;
+                    using (cacheService.EnableCaching(projectId))
+                    {
+                        cacheService.CacheObjectIfCachingEnabledForKey(
+                            projectId,
+                            (object)owner,
+                            instance
+                        );
+                        owner = null;
 
-                    instance.AssertReleased();
+                        instance.AssertReleased();
+                    }
                 }
-            });
+            );
         }
 
         [WorkItem(28639, "https://github.com/dotnet/roslyn/issues/28639")]
         [ConditionalFact(typeof(x86))]
         public void TestCacheDoesNotKeepObjectsAliveAfterOwnerIsCollected2()
         {
-            Test((cacheService, projectId, owner, instance) =>
-            {
-                using (cacheService.EnableCaching(projectId))
+            Test(
+                (cacheService, projectId, owner, instance) =>
                 {
-                    cacheService.CacheObjectIfCachingEnabledForKey(projectId, owner, instance);
-                    owner = null;
+                    using (cacheService.EnableCaching(projectId))
+                    {
+                        cacheService.CacheObjectIfCachingEnabledForKey(projectId, owner, instance);
+                        owner = null;
 
-                    instance.AssertReleased();
+                        instance.AssertReleased();
+                    }
                 }
-            });
+            );
         }
 
         [WorkItem(28639, "https://github.com/dotnet/roslyn/issues/28639")]
         [ConditionalFact(typeof(x86))]
         public void TestImplicitCacheKeepsObjectAlive1()
         {
-            var workspace = new AdhocWorkspace(MockHostServices.Instance, workspaceKind: WorkspaceKind.Host);
+            var workspace = new AdhocWorkspace(
+                MockHostServices.Instance,
+                workspaceKind: WorkspaceKind.Host
+            );
             var cacheService = new ProjectCacheService(workspace, TimeSpan.MaxValue);
             var reference = ObjectReference.CreateFromFactory(() => new object());
-            reference.UseReference(r => cacheService.CacheObjectIfCachingEnabledForKey(ProjectId.CreateNewId(), (object)null, r));
+            reference.UseReference(
+                r =>
+                    cacheService.CacheObjectIfCachingEnabledForKey(
+                        ProjectId.CreateNewId(),
+                        (object)null,
+                        r
+                    )
+            );
             reference.AssertHeld();
 
             GC.KeepAlive(cacheService);
@@ -124,7 +162,10 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
         [Fact(Skip = "https://github.com/dotnet/roslyn/issues/14592")]
         public void TestImplicitCacheMonitoring()
         {
-            var workspace = new AdhocWorkspace(MockHostServices.Instance, workspaceKind: WorkspaceKind.Host);
+            var workspace = new AdhocWorkspace(
+                MockHostServices.Instance,
+                workspaceKind: WorkspaceKind.Host
+            );
             var cacheService = new ProjectCacheService(workspace, TimeSpan.FromMilliseconds(10));
             var weak = PutObjectInImplicitCache(cacheService);
 
@@ -133,11 +174,20 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
             GC.KeepAlive(cacheService);
         }
 
-        private static ObjectReference<object> PutObjectInImplicitCache(ProjectCacheService cacheService)
+        private static ObjectReference<object> PutObjectInImplicitCache(
+            ProjectCacheService cacheService
+        )
         {
             var reference = ObjectReference.CreateFromFactory(() => new object());
 
-            reference.UseReference(r => cacheService.CacheObjectIfCachingEnabledForKey(ProjectId.CreateNewId(), (object)null, r));
+            reference.UseReference(
+                r =>
+                    cacheService.CacheObjectIfCachingEnabledForKey(
+                        ProjectId.CreateNewId(),
+                        (object)null,
+                        r
+                    )
+            );
 
             return reference;
         }
@@ -148,9 +198,28 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
         {
             var workspace = new AdhocWorkspace();
 
-            var project1 = ProjectInfo.Create(ProjectId.CreateNewId(), VersionStamp.Default, "proj1", "proj1", LanguageNames.CSharp);
-            var project2 = ProjectInfo.Create(ProjectId.CreateNewId(), VersionStamp.Default, "proj2", "proj2", LanguageNames.CSharp, projectReferences: SpecializedCollections.SingletonEnumerable(new ProjectReference(project1.Id)));
-            var solutionInfo = SolutionInfo.Create(SolutionId.CreateNewId(), VersionStamp.Default, projects: new ProjectInfo[] { project1, project2 });
+            var project1 = ProjectInfo.Create(
+                ProjectId.CreateNewId(),
+                VersionStamp.Default,
+                "proj1",
+                "proj1",
+                LanguageNames.CSharp
+            );
+            var project2 = ProjectInfo.Create(
+                ProjectId.CreateNewId(),
+                VersionStamp.Default,
+                "proj2",
+                "proj2",
+                LanguageNames.CSharp,
+                projectReferences: SpecializedCollections.SingletonEnumerable(
+                    new ProjectReference(project1.Id)
+                )
+            );
+            var solutionInfo = SolutionInfo.Create(
+                SolutionId.CreateNewId(),
+                VersionStamp.Default,
+                projects: new ProjectInfo[] { project1, project2 }
+            );
 
             var solution = workspace.AddSolution(solutionInfo);
 
@@ -159,7 +228,10 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
             var cacheService = new ProjectCacheService(workspace, TimeSpan.MaxValue);
             using (var cache = cacheService.EnableCaching(project2.Id))
             {
-                instanceTracker.UseReference(r => cacheService.CacheObjectIfCachingEnabledForKey(project1.Id, (object)null, r));
+                instanceTracker.UseReference(
+                    r =>
+                        cacheService.CacheObjectIfCachingEnabledForKey(project1.Id, (object)null, r)
+                );
                 solution = null;
 
                 workspace.OnProjectRemoved(project1.Id);
@@ -183,11 +255,18 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
             var weakFirst = ObjectReference.Create(compilations[0]);
             var weakLast = ObjectReference.Create(compilations[compilations.Count - 1]);
 
-            var workspace = new AdhocWorkspace(MockHostServices.Instance, workspaceKind: WorkspaceKind.Host);
+            var workspace = new AdhocWorkspace(
+                MockHostServices.Instance,
+                workspaceKind: WorkspaceKind.Host
+            );
             var cache = new ProjectCacheService(workspace, TimeSpan.MaxValue);
             for (var i = 0; i < ProjectCacheService.ImplicitCacheSize + 1; i++)
             {
-                cache.CacheObjectIfCachingEnabledForKey(ProjectId.CreateNewId(), (object)null, compilations[i]);
+                cache.CacheObjectIfCachingEnabledForKey(
+                    ProjectId.CreateNewId(),
+                    (object)null,
+                    compilations[i]
+                );
             }
 
 #pragma warning disable IDE0059 // Unnecessary assignment of a value - testing weak reference to compilations
@@ -211,7 +290,10 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
             var weak3 = ObjectReference.Create(comp3);
             var weak1 = ObjectReference.Create(comp1);
 
-            var workspace = new AdhocWorkspace(MockHostServices.Instance, workspaceKind: WorkspaceKind.Host);
+            var workspace = new AdhocWorkspace(
+                MockHostServices.Instance,
+                workspaceKind: WorkspaceKind.Host
+            );
             var cache = new ProjectCacheService(workspace, TimeSpan.MaxValue);
             var key = ProjectId.CreateNewId();
             var owner = new object();
@@ -244,28 +326,34 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
 
             private MockHostServices() { }
 
-            protected internal override HostWorkspaceServices CreateWorkspaceServices(Workspace workspace)
-                => new MockHostWorkspaceServices(this, workspace);
+            protected internal override HostWorkspaceServices CreateWorkspaceServices(
+                Workspace workspace
+            ) => new MockHostWorkspaceServices(this, workspace);
         }
 
         private sealed class MockTaskSchedulerProvider : ITaskSchedulerProvider
         {
-            public TaskScheduler CurrentContextScheduler
-                => (SynchronizationContext.Current != null) ? TaskScheduler.FromCurrentSynchronizationContext() : TaskScheduler.Default;
+            public TaskScheduler CurrentContextScheduler =>
+                (SynchronizationContext.Current != null)
+                    ? TaskScheduler.FromCurrentSynchronizationContext()
+                    : TaskScheduler.Default;
         }
 
-        private sealed class MockWorkspaceAsynchronousOperationListenerProvider : IWorkspaceAsynchronousOperationListenerProvider
+        private sealed class MockWorkspaceAsynchronousOperationListenerProvider
+            : IWorkspaceAsynchronousOperationListenerProvider
         {
-            public IAsynchronousOperationListener GetListener()
-                => AsynchronousOperationListenerProvider.NullListener;
+            public IAsynchronousOperationListener GetListener() =>
+                AsynchronousOperationListenerProvider.NullListener;
         }
 
         private class MockHostWorkspaceServices : HostWorkspaceServices
         {
             private readonly HostServices _hostServices;
             private readonly Workspace _workspace;
-            private static readonly ITaskSchedulerProvider s_taskSchedulerProvider = new MockTaskSchedulerProvider();
-            private static readonly IWorkspaceAsynchronousOperationListenerProvider s_asyncListenerProvider = new MockWorkspaceAsynchronousOperationListenerProvider();
+            private static readonly ITaskSchedulerProvider s_taskSchedulerProvider =
+                new MockTaskSchedulerProvider();
+            private static readonly IWorkspaceAsynchronousOperationListenerProvider s_asyncListenerProvider =
+                new MockWorkspaceAsynchronousOperationListenerProvider();
             private readonly OptionServiceFactory.OptionService _optionService;
 
             public MockHostWorkspaceServices(HostServices hostServices, Workspace workspace)
@@ -273,7 +361,11 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
                 _hostServices = hostServices;
                 _workspace = workspace;
 
-                var globalOptionService = new GlobalOptionService(workspaceThreadingService: null, ImmutableArray<Lazy<IOptionProvider, LanguageMetadata>>.Empty, ImmutableArray<Lazy<IOptionPersisterProvider>>.Empty);
+                var globalOptionService = new GlobalOptionService(
+                    workspaceThreadingService: null,
+                    ImmutableArray<Lazy<IOptionProvider, LanguageMetadata>>.Empty,
+                    ImmutableArray<Lazy<IOptionPersisterProvider>>.Empty
+                );
                 _optionService = new OptionServiceFactory.OptionService(globalOptionService, this);
             }
 
@@ -281,8 +373,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
 
             public override Workspace Workspace => _workspace;
 
-            public override IEnumerable<TLanguageService> FindLanguageServices<TLanguageService>(MetadataFilter filter)
-                => ImmutableArray<TLanguageService>.Empty;
+            public override IEnumerable<TLanguageService> FindLanguageServices<TLanguageService>(
+                MetadataFilter filter
+            ) => ImmutableArray<TLanguageService>.Empty;
 
             public override TWorkspaceService GetService<TWorkspaceService>()
             {

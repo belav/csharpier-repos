@@ -12,17 +12,34 @@ namespace System.Text.Json.Serialization.Tests
 {
     public static partial class ContinuationTests
     {
-        private static readonly (Func<string, string>, Func<string, int>, int)[] s_payloadTweaks = new (Func<string, string>, Func<string, int>, int)[]
-        {
-            (payload => payload, payload => -1, 0),
-            (payload => payload.Replace("null", "nullX"), payload => payload.IndexOf("nullX"), "null".Length),
-            (payload => payload.Replace("true", "trueX"), payload => payload.IndexOf("trueX"), "true".Length),
-            (payload => payload.Replace("false", "falseX"), payload => payload.IndexOf("falseX"), "false".Length),
-            (payload => payload.Replace("E+17", "E+-17"), payload => payload.IndexOf("E+-17"), "E+".Length)
-        };
+        private static readonly (Func<string, string>, Func<string, int>, int)[] s_payloadTweaks =
+            new (Func<string, string>, Func<string, int>, int)[]
+            {
+                (payload => payload, payload => -1, 0),
+                (
+                    payload => payload.Replace("null", "nullX"),
+                    payload => payload.IndexOf("nullX"),
+                    "null".Length
+                ),
+                (
+                    payload => payload.Replace("true", "trueX"),
+                    payload => payload.IndexOf("trueX"),
+                    "true".Length
+                ),
+                (
+                    payload => payload.Replace("false", "falseX"),
+                    payload => payload.IndexOf("falseX"),
+                    "false".Length
+                ),
+                (
+                    payload => payload.Replace("E+17", "E+-17"),
+                    payload => payload.IndexOf("E+-17"),
+                    "E+".Length
+                )
+            };
 
-        private static IEnumerable<(ITestObject, INestedObject)> TestObjects
-            => new (ITestObject, INestedObject)[]
+        private static IEnumerable<(ITestObject, INestedObject)> TestObjects =>
+            new (ITestObject, INestedObject)[]
             {
                 (new TestClass<NestedClass>(), new NestedClass()),
                 (new TestClass<NestedValueType>(), new NestedValueType()),
@@ -32,11 +49,9 @@ namespace System.Text.Json.Serialization.Tests
                 (new DictionaryTestClass<NestedClass>(), new NestedClass()),
             };
 
-        private static IEnumerable<bool> IgnoreNullValues
-            => new[] { true, false };
+        private static IEnumerable<bool> IgnoreNullValues => new[] { true, false };
 
-        private static IEnumerable<bool> WriteIndented
-            => new[] { true, false };
+        private static IEnumerable<bool> WriteIndented => new[] { true, false };
 
         public static IEnumerable<object[]> TestData(bool enumeratePayloadTweaks)
         {
@@ -48,16 +63,31 @@ namespace System.Text.Json.Serialization.Tests
             // <-----------2^n byte buffer----------->
             // <-------------max-padding------------>[{--payload--}]  max-padding = buffer - 1
 
-            foreach ((ITestObject TestObject, INestedObject Nested) in TestObjects.Take(enumeratePayloadTweaks ? 1 : TestObjects.Count()))
+            foreach (
+                (ITestObject TestObject, INestedObject Nested) in TestObjects.Take(
+                    enumeratePayloadTweaks ? 1 : TestObjects.Count()
+                )
+            )
             {
                 Type testObjectType = TestObject.GetType();
                 TestObject.Initialize(Nested);
 
                 foreach (bool writeIndented in WriteIndented)
                 {
-                    string payload = JsonSerializer.Serialize(TestObject, testObjectType, new JsonSerializerOptions { WriteIndented = writeIndented });
+                    string payload = JsonSerializer.Serialize(
+                        TestObject,
+                        testObjectType,
+                        new JsonSerializerOptions { WriteIndented = writeIndented }
+                    );
 
-                    foreach ((Func<string, string> Tweak, Func<string, int> Position, int Offset) tweak in enumeratePayloadTweaks ? s_payloadTweaks.Skip(1) : s_payloadTweaks.Take(1))
+                    foreach (
+                        (Func<string, string> Tweak, Func<
+                            string,
+                            int
+                        > Position, int Offset) tweak in enumeratePayloadTweaks
+                            ? s_payloadTweaks.Skip(1)
+                            : s_payloadTweaks.Take(1)
+                    )
                     {
                         string tweaked = tweak.Tweak(payload);
 
@@ -65,7 +95,11 @@ namespace System.Text.Json.Serialization.Tests
                         tweaked = '[' + tweaked + ']';
                         Type arrayType = Type.GetType(testObjectType.FullName + "[]");
 
-                        (int Line, int Col) failurePosition = GetExpectedFailure(tweaked, tweak.Position(tweaked), tweak.Offset);
+                        (int Line, int Col) failurePosition = GetExpectedFailure(
+                            tweaked,
+                            tweak.Position(tweaked),
+                            tweak.Offset
+                        );
 
                         // Determine the DefaultBufferSize that is required to contain the complete json.
                         int bufferSize = 16;
@@ -76,11 +110,19 @@ namespace System.Text.Json.Serialization.Tests
                         int minPaddingLength = bufferSize - tweaked.Length + 1;
                         int maxPaddingLength = bufferSize - 1;
 
-                        foreach (int length in Enumerable.Range(minPaddingLength, maxPaddingLength - minPaddingLength + 1))
+                        foreach (
+                            int length in Enumerable.Range(
+                                minPaddingLength,
+                                maxPaddingLength - minPaddingLength + 1
+                            )
+                        )
                         {
                             (int Line, int Col) paddedFailurePosition = failurePosition;
                             if (failurePosition != default && failurePosition.Line == 0)
-                                paddedFailurePosition = (failurePosition.Line, failurePosition.Col + length);
+                                paddedFailurePosition = (
+                                    failurePosition.Line,
+                                    failurePosition.Col + length
+                                );
 
                             foreach (bool ignoreNull in IgnoreNullValues)
                             {
@@ -122,14 +164,22 @@ namespace System.Text.Json.Serialization.Tests
         }
 
         [Theory]
-        [MemberData(nameof(TestData), /* enumeratePayloadTweaks: */ false)]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/42677", platforms: TestPlatforms.Windows, runtimes: TestRuntimes.Mono)]
+        [MemberData(
+            nameof(TestData), /* enumeratePayloadTweaks: */
+            false
+        )]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/42677",
+            platforms: TestPlatforms.Windows,
+            runtimes: TestRuntimes.Mono
+        )]
         public static async Task ShouldWorkAtAnyPosition_Stream(
             string json,
             int bufferSize,
             Type type,
             bool ignoreNullValues,
-            (int Line, int Column) expectedFailure)
+            (int Line, int Column) expectedFailure
+        )
         {
             var stream = new MemoryStream(Encoding.UTF8.GetBytes(json));
             {
@@ -139,7 +189,11 @@ namespace System.Text.Json.Serialization.Tests
                     IgnoreNullValues = ignoreNullValues,
                 };
 
-                var array = (ITestObject[])await JsonSerializer.DeserializeAsync(stream, type, readOptions);
+                var array = (ITestObject[])await JsonSerializer.DeserializeAsync(
+                    stream,
+                    type,
+                    readOptions
+                );
 
                 Assert.NotNull(array);
                 Assert.Equal(1, array.Length);
@@ -149,14 +203,22 @@ namespace System.Text.Json.Serialization.Tests
         }
 
         [Theory]
-        [MemberData(nameof(TestData), /* enumeratePayloadTweaks: */ true)]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/42677", platforms: TestPlatforms.Windows, runtimes: TestRuntimes.Mono)]
+        [MemberData(
+            nameof(TestData), /* enumeratePayloadTweaks: */
+            true
+        )]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/42677",
+            platforms: TestPlatforms.Windows,
+            runtimes: TestRuntimes.Mono
+        )]
         public static async Task InvalidJsonShouldFailAtAnyPosition_Stream(
             string json,
             int bufferSize,
             Type type,
             bool ignoreNullValues,
-            (int Line, int Column) expectedFailure)
+            (int Line, int Column) expectedFailure
+        )
         {
             if (expectedFailure == default)
             {
@@ -172,27 +234,45 @@ namespace System.Text.Json.Serialization.Tests
                     IgnoreNullValues = ignoreNullValues,
                 };
 
-                JsonException ex = await Assert.ThrowsAsync<JsonException>(async () => await JsonSerializer.DeserializeAsync(stream, type, readOptions));
+                JsonException ex = await Assert.ThrowsAsync<JsonException>(
+                    async () => await JsonSerializer.DeserializeAsync(stream, type, readOptions)
+                );
                 Assert.Equal(expectedFailure.Line, ex.LineNumber);
                 Assert.Equal(expectedFailure.Column, ex.BytePositionInLine);
             }
         }
 
         [Theory]
-        [MemberData(nameof(TestData), /* enumeratePayloadTweaks: */ false)]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/42677", platforms: TestPlatforms.Windows, runtimes: TestRuntimes.Mono)]
-        [SkipOnCoreClr("https://github.com/dotnet/runtime/issues/45464", RuntimeConfiguration.Checked)]
+        [MemberData(
+            nameof(TestData), /* enumeratePayloadTweaks: */
+            false
+        )]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/42677",
+            platforms: TestPlatforms.Windows,
+            runtimes: TestRuntimes.Mono
+        )]
+        [SkipOnCoreClr(
+            "https://github.com/dotnet/runtime/issues/45464",
+            RuntimeConfiguration.Checked
+        )]
         public static void ShouldWorkAtAnyPosition_Sequence(
             string json,
             int bufferSize,
             Type type,
             bool ignoreNullValues,
-            (int Line, int Column) expectedFailure)
+            (int Line, int Column) expectedFailure
+        )
         {
             var readOptions = new JsonSerializerOptions { IgnoreNullValues = ignoreNullValues, };
 
             var chunk = new Chunk(json, bufferSize);
-            var sequence = new ReadOnlySequence<byte>(chunk, 0, chunk.Next, chunk.Next.Memory.Length);
+            var sequence = new ReadOnlySequence<byte>(
+                chunk,
+                0,
+                chunk.Next,
+                chunk.Next.Memory.Length
+            );
 
             var reader = new Utf8JsonReader(sequence);
             var array = (ITestObject[])JsonSerializer.Deserialize(ref reader, type, readOptions);
@@ -204,14 +284,22 @@ namespace System.Text.Json.Serialization.Tests
         }
 
         [Theory]
-        [MemberData(nameof(TestData), /* enumeratePayloadTweaks: */ true)]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/42677", platforms: TestPlatforms.Windows, runtimes: TestRuntimes.Mono)]
+        [MemberData(
+            nameof(TestData), /* enumeratePayloadTweaks: */
+            true
+        )]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/42677",
+            platforms: TestPlatforms.Windows,
+            runtimes: TestRuntimes.Mono
+        )]
         public static void InvalidJsonShouldFailAtAnyPosition_Sequence(
             string json,
             int bufferSize,
             Type type,
             bool ignoreNullValues,
-            (int Line, int Column) expectedFailure)
+            (int Line, int Column) expectedFailure
+        )
         {
             if (expectedFailure == default)
             {
@@ -222,13 +310,20 @@ namespace System.Text.Json.Serialization.Tests
             var readOptions = new JsonSerializerOptions { IgnoreNullValues = ignoreNullValues, };
 
             var chunk = new Chunk(json, bufferSize);
-            var sequence = new ReadOnlySequence<byte>(chunk, 0, chunk.Next, chunk.Next.Memory.Length);
+            var sequence = new ReadOnlySequence<byte>(
+                chunk,
+                0,
+                chunk.Next,
+                chunk.Next.Memory.Length
+            );
 
-            JsonException ex = Assert.Throws<JsonException>(() =>
-            {
-                var reader = new Utf8JsonReader(sequence);
-                JsonSerializer.Deserialize(ref reader, type, readOptions);
-            });
+            JsonException ex = Assert.Throws<JsonException>(
+                () =>
+                {
+                    var reader = new Utf8JsonReader(sequence);
+                    JsonSerializer.Deserialize(ref reader, type, readOptions);
+                }
+            );
             Assert.Equal(expectedFailure.Line, ex.LineNumber);
             Assert.Equal(expectedFailure.Column, ex.BytePositionInLine);
         }
@@ -247,8 +342,8 @@ namespace System.Text.Json.Serialization.Tests
                     Next = null,
                 };
             }
-            private Chunk()
-            { }
+
+            private Chunk() { }
         }
 
         private interface ITestObject
@@ -379,8 +474,7 @@ namespace System.Text.Json.Serialization.Tests
 
         private class NestedClassWithParamCtor : NestedClass
         {
-            public NestedClassWithParamCtor(string a)
-                => A = a;
+            public NestedClassWithParamCtor(string a) => A = a;
         }
 
         private class DictionaryTestClass<TNested> : ITestObject where TNested : INestedObject
@@ -396,7 +490,8 @@ namespace System.Text.Json.Serialization.Tests
             void ITestObject.Verify()
             {
                 Assert.NotNull(A);
-                Assert.Collection(A,
+                Assert.Collection(
+                    A,
                     kv =>
                     {
                         Assert.Equal("a", kv.Key);
@@ -406,7 +501,8 @@ namespace System.Text.Json.Serialization.Tests
                     {
                         Assert.Equal("b", kv.Key);
                         kv.Value.Verify();
-                    });
+                    }
+                );
             }
         }
     }

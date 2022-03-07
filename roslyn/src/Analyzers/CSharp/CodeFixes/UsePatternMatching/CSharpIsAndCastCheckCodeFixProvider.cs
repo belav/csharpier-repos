@@ -23,31 +23,43 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
 {
-    [ExportCodeFixProvider(LanguageNames.CSharp, Name = PredefinedCodeFixProviderNames.UsePatternMatchingIsAndCastCheck), Shared]
+    [
+        ExportCodeFixProvider(
+            LanguageNames.CSharp,
+            Name = PredefinedCodeFixProviderNames.UsePatternMatchingIsAndCastCheck
+        ),
+        Shared
+    ]
     internal partial class CSharpIsAndCastCheckCodeFixProvider : SyntaxEditorBasedCodeFixProvider
     {
         [ImportingConstructor]
-        [SuppressMessage("RoslynDiagnosticsReliability", "RS0033:Importing constructor should be [Obsolete]", Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814")]
-        public CSharpIsAndCastCheckCodeFixProvider()
-        {
-        }
+        [SuppressMessage(
+            "RoslynDiagnosticsReliability",
+            "RS0033:Importing constructor should be [Obsolete]",
+            Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
+        )]
+        public CSharpIsAndCastCheckCodeFixProvider() { }
 
-        public override ImmutableArray<string> FixableDiagnosticIds
-            => ImmutableArray.Create(IDEDiagnosticIds.InlineIsTypeCheckId);
+        public override ImmutableArray<string> FixableDiagnosticIds =>
+            ImmutableArray.Create(IDEDiagnosticIds.InlineIsTypeCheckId);
 
         internal sealed override CodeFixCategory CodeFixCategory => CodeFixCategory.CodeStyle;
 
         public override Task RegisterCodeFixesAsync(CodeFixContext context)
         {
-            context.RegisterCodeFix(new MyCodeAction(
-                c => FixAsync(context.Document, context.Diagnostics.First(), c)),
-                context.Diagnostics);
+            context.RegisterCodeFix(
+                new MyCodeAction(c => FixAsync(context.Document, context.Diagnostics.First(), c)),
+                context.Diagnostics
+            );
             return Task.CompletedTask;
         }
 
         protected override Task FixAllAsync(
-            Document document, ImmutableArray<Diagnostic> diagnostics,
-            SyntaxEditor editor, CancellationToken cancellationToken)
+            Document document,
+            ImmutableArray<Diagnostic> diagnostics,
+            SyntaxEditor editor,
+            CancellationToken cancellationToken
+        )
         {
             foreach (var diagnostic in diagnostics)
             {
@@ -61,48 +73,71 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
         private static void AddEdits(
             SyntaxEditor editor,
             Diagnostic diagnostic,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var ifStatementLocation = diagnostic.AdditionalLocations[0];
             var localDeclarationLocation = diagnostic.AdditionalLocations[1];
 
             var ifStatement = (IfStatementSyntax)ifStatementLocation.FindNode(cancellationToken);
-            var localDeclaration = (LocalDeclarationStatementSyntax)localDeclarationLocation.FindNode(cancellationToken);
+            var localDeclaration =
+                (LocalDeclarationStatementSyntax)localDeclarationLocation.FindNode(
+                    cancellationToken
+                );
             var isExpression = (BinaryExpressionSyntax)ifStatement.Condition;
 
             var updatedCondition = SyntaxFactory.IsPatternExpression(
-                isExpression.Left, SyntaxFactory.DeclarationPattern(
+                isExpression.Left,
+                SyntaxFactory.DeclarationPattern(
                     ((TypeSyntax)isExpression.Right).WithoutTrivia(),
                     SyntaxFactory.SingleVariableDesignation(
-                        localDeclaration.Declaration.Variables[0].Identifier.WithoutTrivia())));
+                        localDeclaration.Declaration.Variables[0].Identifier.WithoutTrivia()
+                    )
+                )
+            );
 
-            var trivia = localDeclaration.GetLeadingTrivia().Concat(localDeclaration.GetTrailingTrivia())
-                                         .Where(t => t.IsSingleOrMultiLineComment())
-                                         .SelectMany(t => ImmutableArray.Create(SyntaxFactory.Space, t, SyntaxFactory.ElasticCarriageReturnLineFeed))
-                                         .ToImmutableArray();
+            var trivia = localDeclaration
+                .GetLeadingTrivia()
+                .Concat(localDeclaration.GetTrailingTrivia())
+                .Where(t => t.IsSingleOrMultiLineComment())
+                .SelectMany(
+                    t =>
+                        ImmutableArray.Create(
+                            SyntaxFactory.Space,
+                            t,
+                            SyntaxFactory.ElasticCarriageReturnLineFeed
+                        )
+                )
+                .ToImmutableArray();
 
             editor.RemoveNode(localDeclaration);
-            editor.ReplaceNode(ifStatement,
+            editor.ReplaceNode(
+                ifStatement,
                 (i, g) =>
                 {
-                    // Because the local declaration is *inside* the 'if', we need to get the 'if' 
+                    // Because the local declaration is *inside* the 'if', we need to get the 'if'
                     // statement after it was already modified and *then* update the condition
                     // portion of it.
                     var currentIf = (IfStatementSyntax)i;
                     return GetUpdatedIfStatement(updatedCondition, trivia, ifStatement, currentIf);
-                });
+                }
+            );
         }
 
         private static IfStatementSyntax GetUpdatedIfStatement(
             IsPatternExpressionSyntax updatedCondition,
             ImmutableArray<SyntaxTrivia> trivia,
             IfStatementSyntax originalIf,
-            IfStatementSyntax currentIf)
+            IfStatementSyntax currentIf
+        )
         {
             var newIf = currentIf.ReplaceNode(currentIf.Condition, updatedCondition);
             newIf = originalIf.IsParentKind(SyntaxKind.ElseClause)
-                ? newIf.ReplaceToken(newIf.CloseParenToken, newIf.CloseParenToken.WithTrailingTrivia(trivia))
-                : newIf.WithPrependedLeadingTrivia(trivia);
+              ? newIf.ReplaceToken(
+                    newIf.CloseParenToken,
+                    newIf.CloseParenToken.WithTrailingTrivia(trivia)
+                )
+              : newIf.WithPrependedLeadingTrivia(trivia);
 
             return newIf.WithAdditionalAnnotations(Formatter.Annotation);
         }
@@ -110,9 +145,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
         private class MyCodeAction : CustomCodeActions.DocumentChangeAction
         {
             public MyCodeAction(Func<CancellationToken, Task<Document>> createChangedDocument)
-                : base(CSharpAnalyzersResources.Use_pattern_matching, createChangedDocument, nameof(CSharpIsAndCastCheckCodeFixProvider))
-            {
-            }
+                : base(
+                    CSharpAnalyzersResources.Use_pattern_matching,
+                    createChangedDocument,
+                    nameof(CSharpIsAndCastCheckCodeFixProvider)
+                ) { }
         }
     }
 }

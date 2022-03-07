@@ -30,7 +30,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             Assert.False(SyntaxFactory.AreEquivalent(tree1, tree3, topLevel));
         }
 
-        private void VerifyEquivalent(SyntaxNode node1, SyntaxNode node2, Func<SyntaxKind, bool> ignoreChildNode)
+        private void VerifyEquivalent(
+            SyntaxNode node1,
+            SyntaxNode node2,
+            Func<SyntaxKind, bool> ignoreChildNode
+        )
         {
             Assert.True(SyntaxFactory.AreEquivalent(node1, node2, ignoreChildNode));
 
@@ -117,7 +121,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void TestRenameInner()
         {
-            var tree1 = SyntaxFactory.ParseSyntaxTree("namespace N { class C { void Goo() { int z = 0; } } }");
+            var tree1 = SyntaxFactory.ParseSyntaxTree(
+                "namespace N { class C { void Goo() { int z = 0; } } }"
+            );
             var tree2 = tree1.WithReplaceFirst("z", "y");
 
             VerifyEquivalent(tree1, tree2, topLevel: true);
@@ -137,7 +143,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void TestRenameInnerToSameName()
         {
-            var tree1 = SyntaxFactory.ParseSyntaxTree("namespace N { class C { void Goo() { int z = 0; } } }");
+            var tree1 = SyntaxFactory.ParseSyntaxTree(
+                "namespace N { class C { void Goo() { int z = 0; } } }"
+            );
             var tree2 = tree1.WithReplaceFirst("z", "z");
 
             VerifyEquivalent(tree1, tree2, topLevel: true);
@@ -167,7 +175,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void TestRemovingLocal()
         {
-            var tree1 = SyntaxFactory.ParseSyntaxTree("namespace N { class C { void Goo() { int i; } } }");
+            var tree1 = SyntaxFactory.ParseSyntaxTree(
+                "namespace N { class C { void Goo() { int i; } } }"
+            );
             var tree2 = tree1.WithRemoveFirst("int i;");
 
             VerifyEquivalent(tree1, tree2, topLevel: true);
@@ -177,7 +187,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void TestRemovingField1()
         {
-            var tree1 = SyntaxFactory.ParseSyntaxTree("namespace N { class C { int i = 5; int j = 6; } }");
+            var tree1 = SyntaxFactory.ParseSyntaxTree(
+                "namespace N { class C { int i = 5; int j = 6; } }"
+            );
             var tree2 = tree1.WithRemoveFirst("int i = 5;");
 
             VerifyNotEquivalent(tree1, tree2, topLevel: true);
@@ -187,7 +199,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void TestRemovingField2()
         {
-            var tree1 = SyntaxFactory.ParseSyntaxTree("namespace N { class C { int i = 5; int j = 6; } }");
+            var tree1 = SyntaxFactory.ParseSyntaxTree(
+                "namespace N { class C { int i = 5; int j = 6; } }"
+            );
             var tree2 = tree1.WithRemoveFirst("int j = 6;");
 
             VerifyNotEquivalent(tree1, tree2, topLevel: true);
@@ -207,7 +221,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void TestChangingField2()
         {
-            var tree1 = SyntaxFactory.ParseSyntaxTree("namespace N { class C { int i = 5, j = 7; } }");
+            var tree1 = SyntaxFactory.ParseSyntaxTree(
+                "namespace N { class C { int i = 5, j = 7; } }"
+            );
             var tree2 = tree1.WithReplaceFirst("7", "8");
 
             VerifyEquivalent(tree1, tree2, topLevel: true);
@@ -221,7 +237,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void TestChangingConstField()
         {
-            var tree1 = SyntaxFactory.ParseSyntaxTree("namespace N { class C { const int i = 5; } }");
+            var tree1 = SyntaxFactory.ParseSyntaxTree(
+                "namespace N { class C { const int i = 5; } }"
+            );
             var tree2 = tree1.WithReplaceFirst("5", "6");
 
             VerifyNotEquivalent(tree1, tree2, topLevel: true);
@@ -231,7 +249,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void TestChangingConstField2()
         {
-            var tree1 = SyntaxFactory.ParseSyntaxTree("namespace N { class C { const int i = 5, j = 7; } }");
+            var tree1 = SyntaxFactory.ParseSyntaxTree(
+                "namespace N { class C { const int i = 5, j = 7; } }"
+            );
             var tree2 = tree1.WithReplaceFirst("5", "6");
 
             VerifyNotEquivalent(tree1, tree2, topLevel: true);
@@ -246,7 +266,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void TestChangingConstLocal()
         {
-            var tree1 = SyntaxFactory.ParseSyntaxTree("namespace N { class C { void Goo() { const int i = 5; } } }");
+            var tree1 = SyntaxFactory.ParseSyntaxTree(
+                "namespace N { class C { void Goo() { const int i = 5; } } }"
+            );
             var tree2 = tree1.WithReplaceFirst("5", "6");
 
             VerifyEquivalent(tree1, tree2, topLevel: true);
@@ -266,7 +288,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void TestChangingAttribute()
         {
-            var tree1 = SyntaxFactory.ParseSyntaxTree("namespace N { [Obsolete(true)]class C { const int i = 5; } }");
+            var tree1 = SyntaxFactory.ParseSyntaxTree(
+                "namespace N { [Obsolete(true)]class C { const int i = 5; } }"
+            );
             var tree2 = tree1.WithReplaceFirst("true", "false");
 
             VerifyNotEquivalent(tree1, tree2, topLevel: true);
@@ -276,7 +300,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void TestChangingMethodCall()
         {
-            var tree1 = SyntaxFactory.ParseSyntaxTree("namespace N { class C { void Goo() { Console.Write(0); } } }");
+            var tree1 = SyntaxFactory.ParseSyntaxTree(
+                "namespace N { class C { void Goo() { Console.Write(0); } } }"
+            );
             var tree2 = tree1.WithReplaceFirst("Write", "WriteLine");
 
             VerifyEquivalent(tree1, tree2, topLevel: true);
@@ -286,7 +312,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void TestChangingUsing()
         {
-            var tree1 = SyntaxFactory.ParseSyntaxTree("using System; namespace N { class C { void Goo() { Console.Write(0); } } }");
+            var tree1 = SyntaxFactory.ParseSyntaxTree(
+                "using System; namespace N { class C { void Goo() { Console.Write(0); } } }"
+            );
             var tree2 = tree1.WithReplaceFirst("System", "System.Linq");
 
             VerifyNotEquivalent(tree1, tree2, topLevel: true);
@@ -296,7 +324,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void TestChangingBaseType()
         {
-            var tree1 = SyntaxFactory.ParseSyntaxTree("class C { void Goo() { Console.Write(0); } }");
+            var tree1 = SyntaxFactory.ParseSyntaxTree(
+                "class C { void Goo() { Console.Write(0); } }"
+            );
             var tree2 = tree1.WithInsertBefore("{", ": B ");
 
             VerifyNotEquivalent(tree1, tree2, topLevel: true);
@@ -306,7 +336,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void TestChangingMethodType()
         {
-            var tree1 = SyntaxFactory.ParseSyntaxTree("class C { void Goo() { Console.Write(0); } }");
+            var tree1 = SyntaxFactory.ParseSyntaxTree(
+                "class C { void Goo() { Console.Write(0); } }"
+            );
             var tree2 = tree1.WithReplaceFirst("void", "int");
 
             VerifyNotEquivalent(tree1, tree2, topLevel: true);
@@ -316,7 +348,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void TestAddComment()
         {
-            var tree1 = SyntaxFactory.ParseSyntaxTree("class C { void Goo() { Console.Write(0); } }");
+            var tree1 = SyntaxFactory.ParseSyntaxTree(
+                "class C { void Goo() { Console.Write(0); } }"
+            );
             var tree2 = tree1.WithInsertBefore("class", "// Comment\r\n");
 
             VerifyEquivalent(tree1, tree2, topLevel: true);
@@ -326,7 +360,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void TestCommentOutCode()
         {
-            var tree1 = SyntaxFactory.ParseSyntaxTree("class C { void Goo() { Console.Write(0); } }");
+            var tree1 = SyntaxFactory.ParseSyntaxTree(
+                "class C { void Goo() { Console.Write(0); } }"
+            );
             var tree2 = tree1.WithInsertBefore("class", "// ");
 
             VerifyNotEquivalent(tree1, tree2, topLevel: true);
@@ -336,7 +372,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void TestAddDocComment()
         {
-            var tree1 = SyntaxFactory.ParseSyntaxTree("class C { void Goo() { Console.Write(0); } }");
+            var tree1 = SyntaxFactory.ParseSyntaxTree(
+                "class C { void Goo() { Console.Write(0); } }"
+            );
             var tree2 = tree1.WithInsertBefore("class", "/// Comment\r\n");
 
             VerifyEquivalent(tree1, tree2, topLevel: true);
@@ -346,7 +384,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void TestCommentOutMethodCode()
         {
-            var tree1 = SyntaxFactory.ParseSyntaxTree("class C { void Goo() { Console.Write(0); } }");
+            var tree1 = SyntaxFactory.ParseSyntaxTree(
+                "class C { void Goo() { Console.Write(0); } }"
+            );
             var tree2 = tree1.WithReplaceFirst("Console.Write(0);", "/* Console.Write(0); */");
 
             VerifyEquivalent(tree1, tree2, topLevel: true);
@@ -367,7 +407,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void TestSurroundMethodWithActivePPRegion()
         {
             var tree1 = SyntaxFactory.ParseSyntaxTree("class C { void Goo() { } }");
-            var tree2 = tree1.WithReplaceFirst("void Goo() { }", "\r\n#if true\r\n void Goo() { }\r\n#endif\r\n");
+            var tree2 = tree1.WithReplaceFirst(
+                "void Goo() { }",
+                "\r\n#if true\r\n void Goo() { }\r\n#endif\r\n"
+            );
 
             VerifyEquivalent(tree1, tree2, topLevel: true);
             VerifyEquivalent(tree1, tree2, topLevel: false);
@@ -377,7 +420,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void TestSurroundMethodWithInactivePPRegion()
         {
             var tree1 = SyntaxFactory.ParseSyntaxTree("class C { void Goo() { } }");
-            var tree2 = tree1.WithReplaceFirst("void Goo() { }", "\r\n#if false\r\n void Goo() { }\r\n#endif\r\n");
+            var tree2 = tree1.WithReplaceFirst(
+                "void Goo() { }",
+                "\r\n#if false\r\n void Goo() { }\r\n#endif\r\n"
+            );
 
             VerifyNotEquivalent(tree1, tree2, topLevel: true);
             VerifyNotEquivalent(tree1, tree2, topLevel: false);
@@ -438,7 +484,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void TestUpdateInterpolatedString()
         {
-            var tree1 = SyntaxFactory.ParseSyntaxTree("namespace N { class C { void Goo() { Console.Write($\"Hello{123:N1}\"); } } }");
+            var tree1 = SyntaxFactory.ParseSyntaxTree(
+                "namespace N { class C { void Goo() { Console.Write($\"Hello{123:N1}\"); } } }"
+            );
             var tree2 = tree1.WithReplaceFirst("N1", "N2");
 
             VerifyEquivalent(tree1, tree2, topLevel: true);
@@ -473,43 +521,62 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [InlineData("#nullable disable", "")]
         [InlineData("#nullable enable", "")]
         [InlineData("#nullable restore", "")]
-        public void TestNullableDirectives_DifferentDirectives(string firstDirective, string secondDirective)
+        public void TestNullableDirectives_DifferentDirectives(
+            string firstDirective,
+            string secondDirective
+        )
         {
-            var tree1 = SyntaxFactory.ParseSyntaxTree($@"
+            var tree1 = SyntaxFactory.ParseSyntaxTree(
+                $@"
 {firstDirective}
 class C
 {{
-}}");
-            var tree2 = SyntaxFactory.ParseSyntaxTree($@"
+}}"
+            );
+            var tree2 = SyntaxFactory.ParseSyntaxTree(
+                $@"
 {secondDirective}
 class C
 {{
-}}");
+}}"
+            );
 
             VerifyNotEquivalent(tree1, tree2, topLevel: true);
             VerifyNotEquivalent(tree1, tree2, topLevel: false);
-            VerifyEquivalent(tree1.GetRoot(), tree2.GetRoot(), ignoreChildNode: k => k == SyntaxKind.NullableDirectiveTrivia);
+            VerifyEquivalent(
+                tree1.GetRoot(),
+                tree2.GetRoot(),
+                ignoreChildNode: k => k == SyntaxKind.NullableDirectiveTrivia
+            );
 
-            var tree3 = SyntaxFactory.ParseSyntaxTree($@"
+            var tree3 = SyntaxFactory.ParseSyntaxTree(
+                $@"
 class C
 {{
     void M()
     {{
 {firstDirective}
     }}
-}}");
-            var tree4 = SyntaxFactory.ParseSyntaxTree($@"
+}}"
+            );
+            var tree4 = SyntaxFactory.ParseSyntaxTree(
+                $@"
 class C
 {{
     void M()
     {{
 {secondDirective}
     }}
-}}");
+}}"
+            );
 
             VerifyNotEquivalent(tree3, tree4, topLevel: true);
             VerifyNotEquivalent(tree3, tree4, topLevel: false);
-            VerifyEquivalent(tree3.GetRoot(), tree4.GetRoot(), ignoreChildNode: k => k == SyntaxKind.NullableDirectiveTrivia);
+            VerifyEquivalent(
+                tree3.GetRoot(),
+                tree4.GetRoot(),
+                ignoreChildNode: k => k == SyntaxKind.NullableDirectiveTrivia
+            );
         }
 
         [Theory, WorkItem(38694, "https://github.com/dotnet/roslyn/issues/38694")]
@@ -519,7 +586,8 @@ class C
         [InlineData("#nullable enable warnings")]
         public void TestNullableDirectives_TopLevelIdentical(string directive)
         {
-            var tree1 = SyntaxFactory.ParseSyntaxTree($@"
+            var tree1 = SyntaxFactory.ParseSyntaxTree(
+                $@"
 class C
 {{
     void M()
@@ -527,15 +595,18 @@ class C
 {directive}
         Console.WriteLine(1234);
     }}
-}}");
-            var tree2 = SyntaxFactory.ParseSyntaxTree($@"
+}}"
+            );
+            var tree2 = SyntaxFactory.ParseSyntaxTree(
+                $@"
 class C
 {{
     void M()
     {{
 {directive}
     }}
-}}");
+}}"
+            );
 
             VerifyEquivalent(tree1, tree2, topLevel: true);
             VerifyNotEquivalent(tree1, tree2, topLevel: false);
@@ -544,21 +615,25 @@ class C
         [Fact, WorkItem(38694, "https://github.com/dotnet/roslyn/issues/38694")]
         public void TestNullableDirectives_InvalidDirective()
         {
-            var tree1 = SyntaxFactory.ParseSyntaxTree(@"
+            var tree1 = SyntaxFactory.ParseSyntaxTree(
+                @"
 class C
 {
     void M()
     {
 #nullable invalid
     }
-}");
-            var tree2 = SyntaxFactory.ParseSyntaxTree(@"
+}"
+            );
+            var tree2 = SyntaxFactory.ParseSyntaxTree(
+                @"
 class C
 {
     void M()
     {
     }
-}");
+}"
+            );
 
             VerifyNotEquivalent(tree1, tree2, topLevel: true);
             VerifyNotEquivalent(tree1, tree2, topLevel: false);
@@ -567,16 +642,19 @@ class C
         [Fact, WorkItem(38694, "https://github.com/dotnet/roslyn/issues/38694")]
         public void TestNullableDirectives_DifferentNumberOfDirectives()
         {
-            var tree1 = SyntaxFactory.ParseSyntaxTree(@"
+            var tree1 = SyntaxFactory.ParseSyntaxTree(
+                @"
 class C
 {
     void M()
     {
 #nullable enable
     }
-}");
+}"
+            );
 
-            var tree2 = SyntaxFactory.ParseSyntaxTree(@"
+            var tree2 = SyntaxFactory.ParseSyntaxTree(
+                @"
 class C
 {
     void M()
@@ -584,7 +662,8 @@ class C
 #nullable enable
 #nullable disable
     }
-}");
+}"
+            );
 
             VerifyNotEquivalent(tree1, tree2, topLevel: true);
             VerifyNotEquivalent(tree1, tree2, topLevel: false);

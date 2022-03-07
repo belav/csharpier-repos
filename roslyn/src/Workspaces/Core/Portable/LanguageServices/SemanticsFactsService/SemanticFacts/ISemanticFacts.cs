@@ -10,6 +10,11 @@ namespace Microsoft.CodeAnalysis.LanguageServices
 {
     internal partial interface ISemanticFacts
     {
-        string GenerateNameForExpression(SemanticModel semanticModel, SyntaxNode expression, bool capitalize, CancellationToken cancellationToken);
+        string GenerateNameForExpression(
+            SemanticModel semanticModel,
+            SyntaxNode expression,
+            bool capitalize,
+            CancellationToken cancellationToken
+        );
     }
 }

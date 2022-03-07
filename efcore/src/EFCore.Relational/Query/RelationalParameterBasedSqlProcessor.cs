@@ -25,7 +25,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         /// <param name="useRelationalNulls">A bool value indicating if relational nulls should be used.</param>
         public RelationalParameterBasedSqlProcessor(
             RelationalParameterBasedSqlProcessorDependencies dependencies,
-            bool useRelationalNulls)
+            bool useRelationalNulls
+        )
         {
             Dependencies = dependencies;
             UseRelationalNulls = useRelationalNulls;
@@ -51,13 +52,22 @@ namespace Microsoft.EntityFrameworkCore.Query
         public virtual SelectExpression Optimize(
             SelectExpression selectExpression,
             IReadOnlyDictionary<string, object?> parametersValues,
-            out bool canCache)
+            out bool canCache
+        )
         {
             canCache = true;
-            selectExpression = ProcessSqlNullability(selectExpression, parametersValues, out var sqlNullablityCanCache);
+            selectExpression = ProcessSqlNullability(
+                selectExpression,
+                parametersValues,
+                out var sqlNullablityCanCache
+            );
             canCache &= sqlNullablityCanCache;
 
-            selectExpression = ExpandFromSqlParameter(selectExpression, parametersValues, out var fromSqlParameterCanCache);
+            selectExpression = ExpandFromSqlParameter(
+                selectExpression,
+                parametersValues,
+                out var fromSqlParameterCanCache
+            );
             canCache &= fromSqlParameterCanCache;
 
             return selectExpression;
@@ -74,8 +84,13 @@ namespace Microsoft.EntityFrameworkCore.Query
         protected virtual SelectExpression ProcessSqlNullability(
             SelectExpression selectExpression,
             IReadOnlyDictionary<string, object?> parametersValues,
-            out bool canCache)
-            => new SqlNullabilityProcessor(Dependencies, UseRelationalNulls).Process(selectExpression, parametersValues, out canCache);
+            out bool canCache
+        ) =>
+            new SqlNullabilityProcessor(Dependencies, UseRelationalNulls).Process(
+                selectExpression,
+                parametersValues,
+                out canCache
+            );
 
         /// <summary>
         ///     Expands the parameters to <see cref="FromSqlExpression" /> inside the <see cref="SelectExpression" /> for given parameter values.
@@ -87,7 +102,12 @@ namespace Microsoft.EntityFrameworkCore.Query
         protected virtual SelectExpression ExpandFromSqlParameter(
             SelectExpression selectExpression,
             IReadOnlyDictionary<string, object?> parametersValues,
-            out bool canCache)
-            => new FromSqlParameterExpandingExpressionVisitor(Dependencies).Expand(selectExpression, parametersValues, out canCache);
+            out bool canCache
+        ) =>
+            new FromSqlParameterExpandingExpressionVisitor(Dependencies).Expand(
+                selectExpression,
+                parametersValues,
+                out canCache
+            );
     }
 }

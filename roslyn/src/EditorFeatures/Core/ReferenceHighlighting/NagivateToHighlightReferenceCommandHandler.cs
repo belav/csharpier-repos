@@ -27,9 +27,9 @@ namespace Microsoft.CodeAnalysis.Editor.ReferenceHighlighting
     [Export(typeof(ICommandHandler))]
     [ContentType(ContentTypeNames.RoslynContentType)]
     [Name(PredefinedCommandHandlerNames.NavigateToHighlightedReference)]
-    internal partial class NavigateToHighlightReferenceCommandHandler :
-        ICommandHandler<NavigateToNextHighlightedReferenceCommandArgs>,
-        ICommandHandler<NavigateToPreviousHighlightedReferenceCommandArgs>
+    internal partial class NavigateToHighlightReferenceCommandHandler
+        : ICommandHandler<NavigateToNextHighlightedReferenceCommandArgs>,
+          ICommandHandler<NavigateToPreviousHighlightedReferenceCommandArgs>
     {
         private readonly IOutliningManagerService _outliningManagerService;
         private readonly IViewTagAggregatorFactoryService _tagAggregatorFactory;
@@ -40,35 +40,49 @@ namespace Microsoft.CodeAnalysis.Editor.ReferenceHighlighting
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public NavigateToHighlightReferenceCommandHandler(
             IOutliningManagerService outliningManagerService,
-            IViewTagAggregatorFactoryService tagAggregatorFactory)
+            IViewTagAggregatorFactoryService tagAggregatorFactory
+        )
         {
-            _outliningManagerService = outliningManagerService ?? throw new ArgumentNullException(nameof(outliningManagerService));
-            _tagAggregatorFactory = tagAggregatorFactory ?? throw new ArgumentNullException(nameof(tagAggregatorFactory));
+            _outliningManagerService =
+                outliningManagerService
+                ?? throw new ArgumentNullException(nameof(outliningManagerService));
+            _tagAggregatorFactory =
+                tagAggregatorFactory
+                ?? throw new ArgumentNullException(nameof(tagAggregatorFactory));
         }
 
-        public CommandState GetCommandState(NavigateToNextHighlightedReferenceCommandArgs args)
-            => GetCommandStateImpl(args);
+        public CommandState GetCommandState(NavigateToNextHighlightedReferenceCommandArgs args) =>
+            GetCommandStateImpl(args);
 
-        public CommandState GetCommandState(NavigateToPreviousHighlightedReferenceCommandArgs args)
-            => GetCommandStateImpl(args);
+        public CommandState GetCommandState(
+            NavigateToPreviousHighlightedReferenceCommandArgs args
+        ) => GetCommandStateImpl(args);
 
         private CommandState GetCommandStateImpl(EditorCommandArgs args)
         {
-            using var tagAggregator = _tagAggregatorFactory.CreateTagAggregator<NavigableHighlightTag>(args.TextView);
+            using var tagAggregator =
+                _tagAggregatorFactory.CreateTagAggregator<NavigableHighlightTag>(args.TextView);
 
             var tagUnderCursor = FindTagUnderCaret(tagAggregator, args.TextView);
             return tagUnderCursor == null ? CommandState.Unavailable : CommandState.Available;
         }
 
-        public bool ExecuteCommand(NavigateToNextHighlightedReferenceCommandArgs args, CommandExecutionContext context)
-            => ExecuteCommandImpl(args, navigateToNext: true);
+        public bool ExecuteCommand(
+            NavigateToNextHighlightedReferenceCommandArgs args,
+            CommandExecutionContext context
+        ) => ExecuteCommandImpl(args, navigateToNext: true);
 
-        public bool ExecuteCommand(NavigateToPreviousHighlightedReferenceCommandArgs args, CommandExecutionContext context)
-            => ExecuteCommandImpl(args, navigateToNext: false);
+        public bool ExecuteCommand(
+            NavigateToPreviousHighlightedReferenceCommandArgs args,
+            CommandExecutionContext context
+        ) => ExecuteCommandImpl(args, navigateToNext: false);
 
         private bool ExecuteCommandImpl(EditorCommandArgs args, bool navigateToNext)
         {
-            using (var tagAggregator = _tagAggregatorFactory.CreateTagAggregator<NavigableHighlightTag>(args.TextView))
+            using (
+                var tagAggregator =
+                    _tagAggregatorFactory.CreateTagAggregator<NavigableHighlightTag>(args.TextView)
+            )
             {
                 var tagUnderCursor = FindTagUnderCaret(tagAggregator, args.TextView);
 
@@ -77,13 +91,22 @@ namespace Microsoft.CodeAnalysis.Editor.ReferenceHighlighting
                     return false;
                 }
 
-                var spans = GetTags(tagAggregator, args.TextView.TextSnapshot.GetFullSpan()).ToList();
+                var spans = GetTags(tagAggregator, args.TextView.TextSnapshot.GetFullSpan())
+                    .ToList();
 
-                Contract.ThrowIfFalse(spans.Any(), "We should have at least found the tag under the cursor!");
+                Contract.ThrowIfFalse(
+                    spans.Any(),
+                    "We should have at least found the tag under the cursor!"
+                );
 
                 var destTag = GetDestinationTag(tagUnderCursor.Value, spans, navigateToNext);
 
-                if (args.TextView.TryMoveCaretToAndEnsureVisible(destTag.Start, _outliningManagerService))
+                if (
+                    args.TextView.TryMoveCaretToAndEnsureVisible(
+                        destTag.Start,
+                        _outliningManagerService
+                    )
+                )
                 {
                     args.TextView.SetSelection(destTag);
                 }
@@ -94,17 +117,20 @@ namespace Microsoft.CodeAnalysis.Editor.ReferenceHighlighting
 
         private static IEnumerable<SnapshotSpan> GetTags(
             ITagAggregator<NavigableHighlightTag> tagAggregator,
-            SnapshotSpan span)
+            SnapshotSpan span
+        )
         {
-            return tagAggregator.GetTags(span)
-                                .SelectMany(tag => tag.Span.GetSpans(span.Snapshot.TextBuffer))
-                                .OrderBy(tag => tag.Start);
+            return tagAggregator
+                .GetTags(span)
+                .SelectMany(tag => tag.Span.GetSpans(span.Snapshot.TextBuffer))
+                .OrderBy(tag => tag.Start);
         }
 
         private static SnapshotSpan GetDestinationTag(
             SnapshotSpan tagUnderCursor,
             List<SnapshotSpan> orderedTagSpans,
-            bool navigateToNext)
+            bool navigateToNext
+        )
         {
             var destIndex = orderedTagSpans.BinarySearch(tagUnderCursor, new StartComparer());
 
@@ -125,15 +151,17 @@ namespace Microsoft.CodeAnalysis.Editor.ReferenceHighlighting
 
         private static SnapshotSpan? FindTagUnderCaret(
             ITagAggregator<NavigableHighlightTag> tagAggregator,
-            ITextView textView)
+            ITextView textView
+        )
         {
             // We always want to be working with the surface buffer here, so this line is correct
             var caretPosition = textView.Caret.Position.BufferPosition.Position;
 
-            var tags = GetTags(tagAggregator, new SnapshotSpan(textView.TextSnapshot, new Span(caretPosition, 0)));
-            return tags.Any()
-                ? tags.First()
-                : (SnapshotSpan?)null;
+            var tags = GetTags(
+                tagAggregator,
+                new SnapshotSpan(textView.TextSnapshot, new Span(caretPosition, 0))
+            );
+            return tags.Any() ? tags.First() : (SnapshotSpan?)null;
         }
     }
 }

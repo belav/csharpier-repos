@@ -7,11 +7,9 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
     {
         public static new PrivateCacheSqliteTestStoreFactory Instance { get; } = new();
 
-        protected PrivateCacheSqliteTestStoreFactory()
-        {
-        }
+        protected PrivateCacheSqliteTestStoreFactory() { }
 
-        public override TestStore GetOrCreate(string storeName)
-            => SqliteTestStore.GetOrCreate(storeName, sharedCache: false);
+        public override TestStore GetOrCreate(string storeName) =>
+            SqliteTestStore.GetOrCreate(storeName, sharedCache: false);
     }
 }

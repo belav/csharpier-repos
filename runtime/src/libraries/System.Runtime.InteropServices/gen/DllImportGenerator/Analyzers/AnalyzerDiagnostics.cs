@@ -24,15 +24,19 @@ namespace Microsoft.Interop.Analyzers
             public const string NativeTypeMustHaveRequiredShape = Prefix + "007";
             public const string ValuePropertyMustHaveSetter = Prefix + "008";
             public const string ValuePropertyMustHaveGetter = Prefix + "009";
-            public const string GetPinnableReferenceShouldSupportAllocatingMarshallingFallback = Prefix + "010";
-            public const string StackallocMarshallingShouldSupportAllocatingMarshallingFallback = Prefix + "011";
-            public const string StackallocConstructorMustHaveStackBufferSizeConstant = Prefix + "012";
+            public const string GetPinnableReferenceShouldSupportAllocatingMarshallingFallback =
+                Prefix + "010";
+            public const string StackallocMarshallingShouldSupportAllocatingMarshallingFallback =
+                Prefix + "011";
+            public const string StackallocConstructorMustHaveStackBufferSizeConstant =
+                Prefix + "012";
             public const string RefValuePropertyUnsupported = Prefix + "014";
             public const string NativeGenericTypeMustBeClosedOrMatchArity = Prefix + "016";
 
             // GeneratedDllImport
             public const string GeneratedDllImportMissingRequiredModifiers = Prefix + "013";
-            public const string GeneratedDllImportContaiingTypeMissingRequiredModifiers = Prefix + "017";
+            public const string GeneratedDllImportContaiingTypeMissingRequiredModifiers =
+                Prefix + "017";
 
             // Migration from DllImport to GeneratedDllImport
             public const string ConvertToGeneratedDllImport = Prefix + "015";
@@ -40,7 +44,11 @@ namespace Microsoft.Interop.Analyzers
 
         internal static LocalizableResourceString GetResourceString(string resourceName)
         {
-            return new LocalizableResourceString(resourceName, Resources.ResourceManager, typeof(Resources));
+            return new LocalizableResourceString(
+                resourceName,
+                Resources.ResourceManager,
+                typeof(Resources)
+            );
         }
     }
 }

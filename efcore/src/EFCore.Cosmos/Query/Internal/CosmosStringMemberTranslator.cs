@@ -38,15 +38,12 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
             SqlExpression? instance,
             MemberInfo member,
             Type returnType,
-            IDiagnosticsLogger<DbLoggerCategory.Query> logger)
+            IDiagnosticsLogger<DbLoggerCategory.Query> logger
+        )
         {
-            if (member.Name == nameof(string.Length)
-                && instance?.Type == typeof(string))
+            if (member.Name == nameof(string.Length) && instance?.Type == typeof(string))
             {
-                return _sqlExpressionFactory.Function(
-                    "LENGTH",
-                    new[] { instance },
-                    returnType);
+                return _sqlExpressionFactory.Function("LENGTH", new[] { instance }, returnType);
             }
 
             return null;

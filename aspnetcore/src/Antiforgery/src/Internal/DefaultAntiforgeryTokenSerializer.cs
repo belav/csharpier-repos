@@ -19,7 +19,8 @@ internal class DefaultAntiforgeryTokenSerializer : IAntiforgeryTokenSerializer
 
     public DefaultAntiforgeryTokenSerializer(
         IDataProtectionProvider provider,
-        ObjectPool<AntiforgerySerializationContext> pool)
+        ObjectPool<AntiforgerySerializationContext> pool
+    )
     {
         if (provider == null)
         {
@@ -50,7 +51,8 @@ internal class DefaultAntiforgeryTokenSerializer : IAntiforgeryTokenSerializer
                 offset: 0,
                 buffer: chars,
                 bufferOffset: 0,
-                count: count);
+                count: count
+            );
 
             var unprotectedBytes = _cryptoSystem.Unprotect(tokenBytes);
             var stream = serializationContext.Stream;
@@ -75,7 +77,10 @@ internal class DefaultAntiforgeryTokenSerializer : IAntiforgeryTokenSerializer
         }
 
         // if we reached this point, something went wrong deserializing
-        throw new AntiforgeryValidationException(Resources.AntiforgeryToken_DeserializationFailed, innerException);
+        throw new AntiforgeryValidationException(
+            Resources.AntiforgeryToken_DeserializationFailed,
+            innerException
+        );
     }
 
     /* The serialized format of the anti-XSRF token is as follows:
@@ -101,8 +106,10 @@ internal class DefaultAntiforgeryTokenSerializer : IAntiforgeryTokenSerializer
 
         var deserializedToken = new AntiforgeryToken();
         var securityTokenBytes = reader.ReadBytes(AntiforgeryToken.SecurityTokenBitLength / 8);
-        deserializedToken.SecurityToken =
-            new BinaryBlob(AntiforgeryToken.SecurityTokenBitLength, securityTokenBytes);
+        deserializedToken.SecurityToken = new BinaryBlob(
+            AntiforgeryToken.SecurityTokenBitLength,
+            securityTokenBytes
+        );
         deserializedToken.IsCookieToken = reader.ReadBoolean();
 
         if (!deserializedToken.IsCookieToken)
@@ -111,7 +118,10 @@ internal class DefaultAntiforgeryTokenSerializer : IAntiforgeryTokenSerializer
             if (isClaimsBased)
             {
                 var claimUidBytes = reader.ReadBytes(AntiforgeryToken.ClaimUidBitLength / 8);
-                deserializedToken.ClaimUid = new BinaryBlob(AntiforgeryToken.ClaimUidBitLength, claimUidBytes);
+                deserializedToken.ClaimUid = new BinaryBlob(
+                    AntiforgeryToken.ClaimUidBitLength,
+                    claimUidBytes
+                );
             }
             else
             {
@@ -151,12 +161,16 @@ internal class DefaultAntiforgeryTokenSerializer : IAntiforgeryTokenSerializer
             {
                 if (token.ClaimUid != null)
                 {
-                    writer.Write(true /* isClaimsBased */);
+                    writer.Write(
+                        true /* isClaimsBased */
+                    );
                     writer.Write(token.ClaimUid.GetData());
                 }
                 else
                 {
-                    writer.Write(false /* isClaimsBased */);
+                    writer.Write(
+                        false /* isClaimsBased */
+                    );
                     writer.Write(token.Username!);
                 }
 
@@ -175,7 +189,8 @@ internal class DefaultAntiforgeryTokenSerializer : IAntiforgeryTokenSerializer
                 offset: 0,
                 output: chars,
                 outputOffset: 0,
-                count: count);
+                count: count
+            );
 
             return new string(chars, startIndex: 0, length: outputLength);
         }

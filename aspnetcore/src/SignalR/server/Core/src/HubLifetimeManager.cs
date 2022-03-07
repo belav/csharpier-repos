@@ -35,7 +35,11 @@ public abstract class HubLifetimeManager<THub> where THub : Hub
     /// <param name="args">The invocation arguments.</param>
     /// <param name="cancellationToken">The token to monitor for cancellation requests. The default value is <see cref="CancellationToken.None" />.</param>
     /// <returns>A <see cref="Task"/> that represents the asynchronous send.</returns>
-    public abstract Task SendAllAsync(string methodName, object?[] args, CancellationToken cancellationToken = default);
+    public abstract Task SendAllAsync(
+        string methodName,
+        object?[] args,
+        CancellationToken cancellationToken = default
+    );
 
     /// <summary>
     /// Sends an invocation message to all hub connections excluding the specified connections.
@@ -45,7 +49,12 @@ public abstract class HubLifetimeManager<THub> where THub : Hub
     /// <param name="excludedConnectionIds">A collection of connection IDs to exclude.</param>
     /// <param name="cancellationToken">The token to monitor for cancellation requests. The default value is <see cref="CancellationToken.None" />.</param>
     /// <returns>A <see cref="Task"/> that represents the asynchronous send.</returns>
-    public abstract Task SendAllExceptAsync(string methodName, object?[] args, IReadOnlyList<string> excludedConnectionIds, CancellationToken cancellationToken = default);
+    public abstract Task SendAllExceptAsync(
+        string methodName,
+        object?[] args,
+        IReadOnlyList<string> excludedConnectionIds,
+        CancellationToken cancellationToken = default
+    );
 
     /// <summary>
     /// Sends an invocation message to the specified connection.
@@ -55,7 +64,12 @@ public abstract class HubLifetimeManager<THub> where THub : Hub
     /// <param name="args">The invocation arguments.</param>
     /// <param name="cancellationToken">The token to monitor for cancellation requests. The default value is <see cref="CancellationToken.None" />.</param>
     /// <returns>A <see cref="Task"/> that represents the asynchronous send.</returns>
-    public abstract Task SendConnectionAsync(string connectionId, string methodName, object?[] args, CancellationToken cancellationToken = default);
+    public abstract Task SendConnectionAsync(
+        string connectionId,
+        string methodName,
+        object?[] args,
+        CancellationToken cancellationToken = default
+    );
 
     /// <summary>
     /// Sends an invocation message to the specified connections.
@@ -65,7 +79,12 @@ public abstract class HubLifetimeManager<THub> where THub : Hub
     /// <param name="args">The invocation arguments.</param>
     /// <param name="cancellationToken">The token to monitor for cancellation requests. The default value is <see cref="CancellationToken.None" />.</param>
     /// <returns>A <see cref="Task"/> that represents the asynchronous send.</returns>
-    public abstract Task SendConnectionsAsync(IReadOnlyList<string> connectionIds, string methodName, object?[] args, CancellationToken cancellationToken = default);
+    public abstract Task SendConnectionsAsync(
+        IReadOnlyList<string> connectionIds,
+        string methodName,
+        object?[] args,
+        CancellationToken cancellationToken = default
+    );
 
     /// <summary>
     /// Sends an invocation message to the specified group.
@@ -75,7 +94,12 @@ public abstract class HubLifetimeManager<THub> where THub : Hub
     /// <param name="args">The invocation arguments.</param>
     /// <param name="cancellationToken">The token to monitor for cancellation requests. The default value is <see cref="CancellationToken.None" />.</param>
     /// <returns>A <see cref="Task"/> that represents the asynchronous send.</returns>
-    public abstract Task SendGroupAsync(string groupName, string methodName, object?[] args, CancellationToken cancellationToken = default);
+    public abstract Task SendGroupAsync(
+        string groupName,
+        string methodName,
+        object?[] args,
+        CancellationToken cancellationToken = default
+    );
 
     /// <summary>
     /// Sends an invocation message to the specified groups.
@@ -85,7 +109,12 @@ public abstract class HubLifetimeManager<THub> where THub : Hub
     /// <param name="args">The invocation arguments.</param>
     /// <param name="cancellationToken">The token to monitor for cancellation requests. The default value is <see cref="CancellationToken.None" />.</param>
     /// <returns>A <see cref="Task"/> that represents the asynchronous send.</returns>
-    public abstract Task SendGroupsAsync(IReadOnlyList<string> groupNames, string methodName, object?[] args, CancellationToken cancellationToken = default);
+    public abstract Task SendGroupsAsync(
+        IReadOnlyList<string> groupNames,
+        string methodName,
+        object?[] args,
+        CancellationToken cancellationToken = default
+    );
 
     /// <summary>
     /// Sends an invocation message to the specified group excluding the specified connections.
@@ -96,7 +125,13 @@ public abstract class HubLifetimeManager<THub> where THub : Hub
     /// <param name="excludedConnectionIds">A collection of connection IDs to exclude.</param>
     /// <param name="cancellationToken">The token to monitor for cancellation requests. The default value is <see cref="CancellationToken.None" />.</param>
     /// <returns>A <see cref="Task"/> that represents the asynchronous send.</returns>
-    public abstract Task SendGroupExceptAsync(string groupName, string methodName, object?[] args, IReadOnlyList<string> excludedConnectionIds, CancellationToken cancellationToken = default);
+    public abstract Task SendGroupExceptAsync(
+        string groupName,
+        string methodName,
+        object?[] args,
+        IReadOnlyList<string> excludedConnectionIds,
+        CancellationToken cancellationToken = default
+    );
 
     /// <summary>
     /// Sends an invocation message to the specified user.
@@ -106,7 +141,12 @@ public abstract class HubLifetimeManager<THub> where THub : Hub
     /// <param name="args">The invocation arguments.</param>
     /// <param name="cancellationToken">The token to monitor for cancellation requests. The default value is <see cref="CancellationToken.None" />.</param>
     /// <returns>A <see cref="Task"/> that represents the asynchronous send.</returns>
-    public abstract Task SendUserAsync(string userId, string methodName, object?[] args, CancellationToken cancellationToken = default);
+    public abstract Task SendUserAsync(
+        string userId,
+        string methodName,
+        object?[] args,
+        CancellationToken cancellationToken = default
+    );
 
     /// <summary>
     /// Sends an invocation message to the specified users.
@@ -116,7 +156,12 @@ public abstract class HubLifetimeManager<THub> where THub : Hub
     /// <param name="args">The invocation arguments.</param>
     /// <param name="cancellationToken">The token to monitor for cancellation requests. The default value is <see cref="CancellationToken.None" />.</param>
     /// <returns>A <see cref="Task"/> that represents the asynchronous send.</returns>
-    public abstract Task SendUsersAsync(IReadOnlyList<string> userIds, string methodName, object?[] args, CancellationToken cancellationToken = default);
+    public abstract Task SendUsersAsync(
+        IReadOnlyList<string> userIds,
+        string methodName,
+        object?[] args,
+        CancellationToken cancellationToken = default
+    );
 
     /// <summary>
     /// Adds a connection to the specified group.
@@ -125,7 +170,11 @@ public abstract class HubLifetimeManager<THub> where THub : Hub
     /// <param name="groupName">The group name.</param>
     /// <param name="cancellationToken">The token to monitor for cancellation requests. The default value is <see cref="CancellationToken.None" />.</param>
     /// <returns>A <see cref="Task"/> that represents the asynchronous add.</returns>
-    public abstract Task AddToGroupAsync(string connectionId, string groupName, CancellationToken cancellationToken = default);
+    public abstract Task AddToGroupAsync(
+        string connectionId,
+        string groupName,
+        CancellationToken cancellationToken = default
+    );
 
     /// <summary>
     /// Removes a connection from the specified group.
@@ -134,5 +183,9 @@ public abstract class HubLifetimeManager<THub> where THub : Hub
     /// <param name="groupName">The group name.</param>
     /// <param name="cancellationToken">The token to monitor for cancellation requests. The default value is <see cref="CancellationToken.None" />.</param>
     /// <returns>A <see cref="Task"/> that represents the asynchronous remove.</returns>
-    public abstract Task RemoveFromGroupAsync(string connectionId, string groupName, CancellationToken cancellationToken = default);
+    public abstract Task RemoveFromGroupAsync(
+        string connectionId,
+        string groupName,
+        CancellationToken cancellationToken = default
+    );
 }

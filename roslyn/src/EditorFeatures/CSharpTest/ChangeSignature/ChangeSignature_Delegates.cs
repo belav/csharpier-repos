@@ -17,16 +17,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
 {
     public partial class ChangeSignatureTests : AbstractChangeSignatureTests
     {
-        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(Workspace workspace, TestParameters parameters)
-            => new ChangeSignatureCodeRefactoringProvider();
+        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(
+            Workspace workspace,
+            TestParameters parameters
+        ) => new ChangeSignatureCodeRefactoringProvider();
 
-        protected internal override string GetLanguage()
-            => LanguageNames.CSharp;
+        protected internal override string GetLanguage() => LanguageNames.CSharp;
 
         [Fact, Trait(Traits.Feature, Traits.Features.ChangeSignature)]
         public async Task ChangeSignature_Delegates_ImplicitInvokeCalls()
         {
-            var markup = @"
+            var markup =
+                @"
 delegate void MyDelegate($$int x, string y, bool z);
 
 class C
@@ -38,7 +40,8 @@ class C
     }
 }";
             var updatedSignature = new[] { 2, 1 };
-            var expectedUpdatedCode = @"
+            var expectedUpdatedCode =
+                @"
 delegate void MyDelegate(bool z, string y);
 
 class C
@@ -49,14 +52,20 @@ class C
         d1(true, ""Two"");
     }
 }";
-            await TestChangeSignatureViaCommandAsync(LanguageNames.CSharp, markup, updatedSignature: updatedSignature,
-                expectedUpdatedInvocationDocumentCode: expectedUpdatedCode, expectedSelectedIndex: 0);
+            await TestChangeSignatureViaCommandAsync(
+                LanguageNames.CSharp,
+                markup,
+                updatedSignature: updatedSignature,
+                expectedUpdatedInvocationDocumentCode: expectedUpdatedCode,
+                expectedSelectedIndex: 0
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.ChangeSignature)]
         public async Task ChangeSignature_Delegates_ExplicitInvokeCalls()
         {
-            var markup = @"
+            var markup =
+                @"
 delegate void MyDelegate(int x, string $$y, bool z);
 
 class C
@@ -68,7 +77,8 @@ class C
     }
 }";
             var updatedSignature = new[] { 2, 1 };
-            var expectedUpdatedCode = @"
+            var expectedUpdatedCode =
+                @"
 delegate void MyDelegate(bool z, string y);
 
 class C
@@ -79,14 +89,20 @@ class C
         d1.Invoke(true, ""Two"");
     }
 }";
-            await TestChangeSignatureViaCommandAsync(LanguageNames.CSharp, markup, updatedSignature: updatedSignature,
-                expectedUpdatedInvocationDocumentCode: expectedUpdatedCode, expectedSelectedIndex: 1);
+            await TestChangeSignatureViaCommandAsync(
+                LanguageNames.CSharp,
+                markup,
+                updatedSignature: updatedSignature,
+                expectedUpdatedInvocationDocumentCode: expectedUpdatedCode,
+                expectedSelectedIndex: 1
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.ChangeSignature)]
         public async Task ChangeSignature_Delegates_BeginInvokeCalls()
         {
-            var markup = @"
+            var markup =
+                @"
 delegate void MyDelegate(int x, string y, bool z$$);
 
 class C
@@ -98,7 +114,8 @@ class C
     }
 }";
             var updatedSignature = new[] { 2, 1 };
-            var expectedUpdatedCode = @"
+            var expectedUpdatedCode =
+                @"
 delegate void MyDelegate(bool z, string y);
 
 class C
@@ -109,14 +126,20 @@ class C
         d1.BeginInvoke(true, ""Two"", null, null);
     }
 }";
-            await TestChangeSignatureViaCommandAsync(LanguageNames.CSharp, markup, updatedSignature: updatedSignature,
-                expectedUpdatedInvocationDocumentCode: expectedUpdatedCode, expectedSelectedIndex: 2);
+            await TestChangeSignatureViaCommandAsync(
+                LanguageNames.CSharp,
+                markup,
+                updatedSignature: updatedSignature,
+                expectedUpdatedInvocationDocumentCode: expectedUpdatedCode,
+                expectedSelectedIndex: 2
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.ChangeSignature)]
         public async Task ChangeSignature_Delegates_AnonymousMethods()
         {
-            var markup = @"
+            var markup =
+                @"
 delegate void $$MyDelegate(int x, string y, bool z);
 
 class C
@@ -129,7 +152,8 @@ class C
     }
 }";
             var updatedSignature = new[] { 2, 1 };
-            var expectedUpdatedCode = @"
+            var expectedUpdatedCode =
+                @"
 delegate void MyDelegate(bool z, string y);
 
 class C
@@ -141,13 +165,19 @@ class C
         d1 = delegate { };
     }
 }";
-            await TestChangeSignatureViaCommandAsync(LanguageNames.CSharp, markup, updatedSignature: updatedSignature, expectedUpdatedInvocationDocumentCode: expectedUpdatedCode);
+            await TestChangeSignatureViaCommandAsync(
+                LanguageNames.CSharp,
+                markup,
+                updatedSignature: updatedSignature,
+                expectedUpdatedInvocationDocumentCode: expectedUpdatedCode
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.ChangeSignature)]
         public async Task ChangeSignature_Delegates_Lambdas()
         {
-            var markup = @"
+            var markup =
+                @"
 delegate void $$MyDelegate(int x, string y, bool z);
 
 class C
@@ -159,7 +189,8 @@ class C
     }
 }";
             var updatedSignature = new[] { 2, 1 };
-            var expectedUpdatedCode = @"
+            var expectedUpdatedCode =
+                @"
 delegate void MyDelegate(bool z, string y);
 
 class C
@@ -170,13 +201,19 @@ class C
         d1 = (t, s) => { var x = s.Length + (t ? 0 : 1); };
     }
 }";
-            await TestChangeSignatureViaCommandAsync(LanguageNames.CSharp, markup, updatedSignature: updatedSignature, expectedUpdatedInvocationDocumentCode: expectedUpdatedCode);
+            await TestChangeSignatureViaCommandAsync(
+                LanguageNames.CSharp,
+                markup,
+                updatedSignature: updatedSignature,
+                expectedUpdatedInvocationDocumentCode: expectedUpdatedCode
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.ChangeSignature)]
         public async Task ChangeSignature_Delegates_Lambdas_RemovingOnlyParameterIntroducesParentheses()
         {
-            var markup = @"
+            var markup =
+                @"
 delegate void $$MyDelegate(int x);
 
 class C
@@ -190,7 +227,8 @@ class C
     }
 }";
             var updatedSignature = Array.Empty<int>();
-            var expectedUpdatedCode = @"
+            var expectedUpdatedCode =
+                @"
 delegate void MyDelegate();
 
 class C
@@ -203,13 +241,19 @@ class C
         d1 = () => { System.Console.WriteLine(""Test""); };
     }
 }";
-            await TestChangeSignatureViaCommandAsync(LanguageNames.CSharp, markup, updatedSignature: updatedSignature, expectedUpdatedInvocationDocumentCode: expectedUpdatedCode);
+            await TestChangeSignatureViaCommandAsync(
+                LanguageNames.CSharp,
+                markup,
+                updatedSignature: updatedSignature,
+                expectedUpdatedInvocationDocumentCode: expectedUpdatedCode
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.ChangeSignature)]
         public async Task ChangeSignature_Delegates_CascadeThroughMethodGroups_AssignedToVariable()
         {
-            var markup = @"
+            var markup =
+                @"
 delegate void $$MyDelegate(int x, string y, bool z);
 
 class C
@@ -226,7 +270,8 @@ class C
     void Goo(int a, object b, bool c) { }
 }";
             var updatedSignature = new[] { 2, 1 };
-            var expectedUpdatedCode = @"
+            var expectedUpdatedCode =
+                @"
 delegate void MyDelegate(bool z, string y);
 
 class C
@@ -242,13 +287,19 @@ class C
     void Goo(bool c, string b) { }
     void Goo(int a, object b, bool c) { }
 }";
-            await TestChangeSignatureViaCommandAsync(LanguageNames.CSharp, markup, updatedSignature: updatedSignature, expectedUpdatedInvocationDocumentCode: expectedUpdatedCode);
+            await TestChangeSignatureViaCommandAsync(
+                LanguageNames.CSharp,
+                markup,
+                updatedSignature: updatedSignature,
+                expectedUpdatedInvocationDocumentCode: expectedUpdatedCode
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.ChangeSignature)]
         public async Task ChangeSignature_Delegates_CascadeThroughMethodGroups_DelegateConstructor()
         {
-            var markup = @"
+            var markup =
+                @"
 delegate void $$MyDelegate(int x, string y, bool z);
 
 class C
@@ -264,7 +315,8 @@ class C
     void Goo(int a, object b, bool c) { }
 }";
             var updatedSignature = new[] { 2, 1 };
-            var expectedUpdatedCode = @"
+            var expectedUpdatedCode =
+                @"
 delegate void MyDelegate(bool z, string y);
 
 class C
@@ -279,13 +331,19 @@ class C
     void Goo(bool c, string b) { }
     void Goo(int a, object b, bool c) { }
 }";
-            await TestChangeSignatureViaCommandAsync(LanguageNames.CSharp, markup, updatedSignature: updatedSignature, expectedUpdatedInvocationDocumentCode: expectedUpdatedCode);
+            await TestChangeSignatureViaCommandAsync(
+                LanguageNames.CSharp,
+                markup,
+                updatedSignature: updatedSignature,
+                expectedUpdatedInvocationDocumentCode: expectedUpdatedCode
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.ChangeSignature)]
         public async Task ChangeSignature_Delegates_CascadeThroughMethodGroups_PassedAsArgument()
         {
-            var markup = @"
+            var markup =
+                @"
 delegate void $$MyDelegate(int x, string y, bool z);
 
 class C
@@ -303,7 +361,8 @@ class C
     void Goo(int a, object b, bool c) { }
 }";
             var updatedSignature = new[] { 2, 1 };
-            var expectedUpdatedCode = @"
+            var expectedUpdatedCode =
+                @"
 delegate void MyDelegate(bool z, string y);
 
 class C
@@ -320,13 +379,19 @@ class C
     void Goo(bool c, string b) { }
     void Goo(int a, object b, bool c) { }
 }";
-            await TestChangeSignatureViaCommandAsync(LanguageNames.CSharp, markup, updatedSignature: updatedSignature, expectedUpdatedInvocationDocumentCode: expectedUpdatedCode);
+            await TestChangeSignatureViaCommandAsync(
+                LanguageNames.CSharp,
+                markup,
+                updatedSignature: updatedSignature,
+                expectedUpdatedInvocationDocumentCode: expectedUpdatedCode
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.ChangeSignature)]
         public async Task ChangeSignature_Delegates_CascadeThroughMethodGroups_ReturnValue()
         {
-            var markup = @"
+            var markup =
+                @"
 delegate void $$MyDelegate(int x, string y, bool z);
 
 class C
@@ -346,7 +411,8 @@ class C
     void Goo(int a, object b, bool c) { }
 }";
             var updatedSignature = new[] { 2, 1 };
-            var expectedUpdatedCode = @"
+            var expectedUpdatedCode =
+                @"
 delegate void MyDelegate(bool z, string y);
 
 class C
@@ -365,13 +431,19 @@ class C
     void Goo(bool c, string b) { }
     void Goo(int a, object b, bool c) { }
 }";
-            await TestChangeSignatureViaCommandAsync(LanguageNames.CSharp, markup, updatedSignature: updatedSignature, expectedUpdatedInvocationDocumentCode: expectedUpdatedCode);
+            await TestChangeSignatureViaCommandAsync(
+                LanguageNames.CSharp,
+                markup,
+                updatedSignature: updatedSignature,
+                expectedUpdatedInvocationDocumentCode: expectedUpdatedCode
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.ChangeSignature)]
         public async Task ChangeSignature_Delegates_CascadeThroughMethodGroups_YieldReturnValue()
         {
-            var markup = @"
+            var markup =
+                @"
 using System.Collections.Generic;
 
 delegate void $$MyDelegate(int x, string y, bool z);
@@ -392,7 +464,8 @@ class C
     void Goo(int a, object b, bool c) { }
 }";
             var updatedSignature = new[] { 2, 1 };
-            var expectedUpdatedCode = @"
+            var expectedUpdatedCode =
+                @"
 using System.Collections.Generic;
 
 delegate void MyDelegate(bool z, string y);
@@ -412,13 +485,19 @@ class C
     void Goo(bool c, string b) { }
     void Goo(int a, object b, bool c) { }
 }";
-            await TestChangeSignatureViaCommandAsync(LanguageNames.CSharp, markup, updatedSignature: updatedSignature, expectedUpdatedInvocationDocumentCode: expectedUpdatedCode);
+            await TestChangeSignatureViaCommandAsync(
+                LanguageNames.CSharp,
+                markup,
+                updatedSignature: updatedSignature,
+                expectedUpdatedInvocationDocumentCode: expectedUpdatedCode
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.ChangeSignature)]
         public async Task ChangeSignature_Delegates_ReferencingLambdas_MethodArgument()
         {
-            var markup = @"
+            var markup =
+                @"
 delegate void $$MyDelegate(int x, string y, bool z);
 
 class C
@@ -431,7 +510,8 @@ class C
     void Target(MyDelegate d) { }
 }";
             var updatedSignature = new[] { 2, 1 };
-            var expectedUpdatedCode = @"
+            var expectedUpdatedCode =
+                @"
 delegate void MyDelegate(bool z, string y);
 
 class C
@@ -443,13 +523,19 @@ class C
 
     void Target(MyDelegate d) { }
 }";
-            await TestChangeSignatureViaCommandAsync(LanguageNames.CSharp, markup, updatedSignature: updatedSignature, expectedUpdatedInvocationDocumentCode: expectedUpdatedCode);
+            await TestChangeSignatureViaCommandAsync(
+                LanguageNames.CSharp,
+                markup,
+                updatedSignature: updatedSignature,
+                expectedUpdatedInvocationDocumentCode: expectedUpdatedCode
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.ChangeSignature)]
         public async Task ChangeSignature_Delegates_ReferencingLambdas_YieldReturn()
         {
-            var markup = @"
+            var markup =
+                @"
 using System.Collections.Generic;
 
 delegate void $$MyDelegate(int x, string y, bool z);
@@ -461,7 +547,8 @@ class C
     }
 }";
             var updatedSignature = new[] { 2, 1 };
-            var expectedUpdatedCode = @"
+            var expectedUpdatedCode =
+                @"
 using System.Collections.Generic;
 
 delegate void MyDelegate(bool z, string y);
@@ -472,13 +559,19 @@ class C
         yield return (i, h) => { var x = h.Length + (i ? 0 : 1); };
     }
 }";
-            await TestChangeSignatureViaCommandAsync(LanguageNames.CSharp, markup, updatedSignature: updatedSignature, expectedUpdatedInvocationDocumentCode: expectedUpdatedCode);
+            await TestChangeSignatureViaCommandAsync(
+                LanguageNames.CSharp,
+                markup,
+                updatedSignature: updatedSignature,
+                expectedUpdatedInvocationDocumentCode: expectedUpdatedCode
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.ChangeSignature)]
         public async Task ChangeSignature_Delegates_Recursive()
         {
-            var markup = @"
+            var markup =
+                @"
 delegate RecursiveDelegate $$RecursiveDelegate(int x, string y, bool z);
 
 class C
@@ -490,7 +583,8 @@ class C
     }
 }";
             var updatedSignature = new[] { 2, 1 };
-            var expectedUpdatedCode = @"
+            var expectedUpdatedCode =
+                @"
 delegate RecursiveDelegate RecursiveDelegate(bool z, string y);
 
 class C
@@ -501,13 +595,19 @@ class C
         rd(true, ""Two"")(true, ""Two"")(true, ""Two"")(true, ""Two"")(true, ""Two"");
     }
 }";
-            await TestChangeSignatureViaCommandAsync(LanguageNames.CSharp, markup, updatedSignature: updatedSignature, expectedUpdatedInvocationDocumentCode: expectedUpdatedCode);
+            await TestChangeSignatureViaCommandAsync(
+                LanguageNames.CSharp,
+                markup,
+                updatedSignature: updatedSignature,
+                expectedUpdatedInvocationDocumentCode: expectedUpdatedCode
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.ChangeSignature)]
         public async Task ChangeSignature_Delegates_DocComments()
         {
-            var markup = @"
+            var markup =
+                @"
 /// <summary>
 /// This is <see cref=""MyDelegate""/>, which has these methods:
 ///     <see cref=""MyDelegate.MyDelegate(object, IntPtr)""/>
@@ -534,7 +634,8 @@ class C
     void Goo(int a, string b, bool c) { }
 }";
             var updatedSignature = new[] { 2, 1 };
-            var expectedUpdatedCode = @"
+            var expectedUpdatedCode =
+                @"
 /// <summary>
 /// This is <see cref=""MyDelegate""/>, which has these methods:
 ///     <see cref=""MyDelegate.MyDelegate(object, IntPtr)""/>
@@ -560,13 +661,19 @@ class C
     /// 
     void Goo(bool c, string b) { }
 }";
-            await TestChangeSignatureViaCommandAsync(LanguageNames.CSharp, markup, updatedSignature: updatedSignature, expectedUpdatedInvocationDocumentCode: expectedUpdatedCode);
+            await TestChangeSignatureViaCommandAsync(
+                LanguageNames.CSharp,
+                markup,
+                updatedSignature: updatedSignature,
+                expectedUpdatedInvocationDocumentCode: expectedUpdatedCode
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.ChangeSignature)]
         public async Task ChangeSignature_Delegates_CascadeThroughEventAdd()
         {
-            var markup = @"
+            var markup =
+                @"
 delegate void $$MyDelegate(int x, string y, bool z);
 
 class Program
@@ -580,7 +687,8 @@ class Program
     void Program_MyEvent(int a, string b, bool c) { }
 }";
             var updatedSignature = new[] { 2, 1 };
-            var expectedUpdatedCode = @"
+            var expectedUpdatedCode =
+                @"
 delegate void MyDelegate(bool z, string y);
 
 class Program
@@ -593,13 +701,19 @@ class Program
     event MyDelegate MyEvent;
     void Program_MyEvent(bool c, string b) { }
 }";
-            await TestChangeSignatureViaCommandAsync(LanguageNames.CSharp, markup, updatedSignature: updatedSignature, expectedUpdatedInvocationDocumentCode: expectedUpdatedCode);
+            await TestChangeSignatureViaCommandAsync(
+                LanguageNames.CSharp,
+                markup,
+                updatedSignature: updatedSignature,
+                expectedUpdatedInvocationDocumentCode: expectedUpdatedCode
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.ChangeSignature)]
         public async Task ChangeSignature_Delegates_Generics1()
         {
-            var markup = @"
+            var markup =
+                @"
 public class DP16a
 {
     public delegate void D<T>($$T t);
@@ -618,7 +732,8 @@ public class DP16a
     }
 }";
             var updatedSignature = Array.Empty<int>();
-            var expectedUpdatedCode = @"
+            var expectedUpdatedCode =
+                @"
 public class DP16a
 {
     public delegate void D<T>();
@@ -636,13 +751,19 @@ public class DP16a
         E2 -= new D<int>(M3);
     }
 }";
-            await TestChangeSignatureViaCommandAsync(LanguageNames.CSharp, markup, updatedSignature: updatedSignature, expectedUpdatedInvocationDocumentCode: expectedUpdatedCode);
+            await TestChangeSignatureViaCommandAsync(
+                LanguageNames.CSharp,
+                markup,
+                updatedSignature: updatedSignature,
+                expectedUpdatedInvocationDocumentCode: expectedUpdatedCode
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.ChangeSignature)]
         public async Task ChangeSignature_Delegates_Generics2()
         {
-            var markup = @"
+            var markup =
+                @"
 public class D17<T>
 {
     public delegate void $$D(T t);
@@ -653,7 +774,8 @@ public class D17Test
     internal void M17(string s) { }
 }";
             var updatedSignature = Array.Empty<int>();
-            var expectedUpdatedCode = @"
+            var expectedUpdatedCode =
+                @"
 public class D17<T>
 {
     public delegate void D();
@@ -663,13 +785,19 @@ public class D17Test
     void Test() { var x = new D17<string>.D(M17); }
     internal void M17() { }
 }";
-            await TestChangeSignatureViaCommandAsync(LanguageNames.CSharp, markup, updatedSignature: updatedSignature, expectedUpdatedInvocationDocumentCode: expectedUpdatedCode);
+            await TestChangeSignatureViaCommandAsync(
+                LanguageNames.CSharp,
+                markup,
+                updatedSignature: updatedSignature,
+                expectedUpdatedInvocationDocumentCode: expectedUpdatedCode
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.ChangeSignature)]
         public async Task ChangeSignature_Delegates_GenericParams()
         {
-            var markup = @"
+            var markup =
+                @"
 class DA
 {
     void M(params int[] i) { }
@@ -692,7 +820,8 @@ public class DP20<T>
     }
 }";
             var updatedSignature = Array.Empty<int>();
-            var expectedUpdatedCode = @"
+            var expectedUpdatedCode =
+                @"
 class DA
 {
     void M() { }
@@ -714,13 +843,19 @@ public class DP20<T>
         D d = new D(M1);
     }
 }";
-            await TestChangeSignatureViaCommandAsync(LanguageNames.CSharp, markup, updatedSignature: updatedSignature, expectedUpdatedInvocationDocumentCode: expectedUpdatedCode);
+            await TestChangeSignatureViaCommandAsync(
+                LanguageNames.CSharp,
+                markup,
+                updatedSignature: updatedSignature,
+                expectedUpdatedInvocationDocumentCode: expectedUpdatedCode
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.ChangeSignature)]
         public async Task ChangeSignature_Delegates_Generic_RemoveArgumentAtReference()
         {
-            var markup = @"public class CD<T>
+            var markup =
+                @"public class CD<T>
 {
     public delegate void D(T t);
 }
@@ -732,7 +867,8 @@ class Test
     }
 }";
             var updatedSignature = Array.Empty<int>();
-            var expectedUpdatedCode = @"public class CD<T>
+            var expectedUpdatedCode =
+                @"public class CD<T>
 {
     public delegate void D();
 }
@@ -743,14 +879,20 @@ class Test
         var dele = new CD<int>.D(() => { });
     }
 }";
-            await TestChangeSignatureViaCommandAsync(LanguageNames.CSharp, markup, updatedSignature: updatedSignature,
-                expectedUpdatedInvocationDocumentCode: expectedUpdatedCode, expectedSelectedIndex: 0);
+            await TestChangeSignatureViaCommandAsync(
+                LanguageNames.CSharp,
+                markup,
+                updatedSignature: updatedSignature,
+                expectedUpdatedInvocationDocumentCode: expectedUpdatedCode,
+                expectedSelectedIndex: 0
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.ChangeSignature)]
         public async Task ChangeSignature_Delegate_Generics_RemoveStaticArgument()
         {
-            var markup = @"
+            var markup =
+                @"
 public class C2<T>
 {
     public delegate void D(T t);
@@ -768,7 +910,8 @@ public class D2
     }
 }";
             var updatedSignature = Array.Empty<int>();
-            var expectedUpdatedCode = @"
+            var expectedUpdatedCode =
+                @"
 public class C2<T>
 {
     public delegate void D();
@@ -785,7 +928,12 @@ public class D2
         d();
     }
 }";
-            await TestChangeSignatureViaCommandAsync(LanguageNames.CSharp, markup, updatedSignature: updatedSignature, expectedUpdatedInvocationDocumentCode: expectedUpdatedCode);
+            await TestChangeSignatureViaCommandAsync(
+                LanguageNames.CSharp,
+                markup,
+                updatedSignature: updatedSignature,
+                expectedUpdatedInvocationDocumentCode: expectedUpdatedCode
+            );
         }
     }
 }

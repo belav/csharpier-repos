@@ -17,8 +17,16 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 {
     internal interface IRemoteDiagnosticAnalyzerService
     {
-        ValueTask<SerializableDiagnosticAnalysisResults> CalculateDiagnosticsAsync(PinnedSolutionInfo solutionInfo, DiagnosticArguments arguments, CancellationToken cancellationToken);
-        ValueTask ReportAnalyzerPerformanceAsync(ImmutableArray<AnalyzerPerformanceInfo> snapshot, int unitCount, CancellationToken cancellationToken);
+        ValueTask<SerializableDiagnosticAnalysisResults> CalculateDiagnosticsAsync(
+            PinnedSolutionInfo solutionInfo,
+            DiagnosticArguments arguments,
+            CancellationToken cancellationToken
+        );
+        ValueTask ReportAnalyzerPerformanceAsync(
+            ImmutableArray<AnalyzerPerformanceInfo> snapshot,
+            int unitCount,
+            CancellationToken cancellationToken
+        );
     }
 
     [DataContract]

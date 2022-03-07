@@ -32,8 +32,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             EntityEntry entityEntry,
             IProperty property,
             object? oldValue,
-            object? newValue)
-            : base(eventDefinition, messageGenerator, property)
+            object? newValue
+        ) : base(eventDefinition, messageGenerator, property)
         {
             EntityEntry = entityEntry;
             OldValue = oldValue;
@@ -48,8 +48,7 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         /// <summary>
         ///     The property.
         /// </summary>
-        public new virtual IProperty Property
-            => (IProperty)base.Property;
+        public new virtual IProperty Property => (IProperty)base.Property;
 
         /// <summary>
         ///     The old value.

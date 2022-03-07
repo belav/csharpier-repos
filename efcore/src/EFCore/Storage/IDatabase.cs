@@ -54,7 +54,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is canceled.</exception>
         Task<int> SaveChangesAsync(
             IList<IUpdateEntry> entries,
-            CancellationToken cancellationToken = default);
+            CancellationToken cancellationToken = default
+        );
 
         /// <summary>
         ///     Compiles the given query to generate a <see cref="Func{QueryContext, TResult}" />.

@@ -13,8 +13,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
 {
     public class RelationalMetadataBuilderExtensionsTest
     {
-        private InternalModelBuilder CreateBuilder()
-            => new(new Model());
+        private InternalModelBuilder CreateBuilder() => new(new Model());
 
         [ConditionalFact]
         public void Can_access_model()
@@ -116,7 +115,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata
             Assert.NotNull(propertyBuilder.HasDefaultValueSql("NULL", fromDataAnnotation: true));
             Assert.Null(propertyBuilder.HasDefaultValueSql("2"));
             Assert.Equal("NULL", propertyBuilder.Metadata.GetDefaultValueSql());
-            Assert.NotNull(propertyBuilder.HasComputedColumnSql("runthis()", fromDataAnnotation: true));
+            Assert.NotNull(
+                propertyBuilder.HasComputedColumnSql("runthis()", fromDataAnnotation: true)
+            );
             Assert.Null(propertyBuilder.HasComputedColumnSql("3"));
             Assert.Equal("runthis()", propertyBuilder.Metadata.GetComputedColumnSql());
         }
@@ -125,9 +126,20 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         public void Can_access_key()
         {
             var modelBuilder = CreateBuilder();
-            var entityTypeBuilder = modelBuilder.Entity(typeof(Splot), ConfigurationSource.Convention);
-            var idProperty = entityTypeBuilder.Property(typeof(int), "Id", ConfigurationSource.Convention).Metadata;
-            var keyBuilder = entityTypeBuilder.HasKey(new[] { idProperty.Name }, ConfigurationSource.Convention);
+            var entityTypeBuilder = modelBuilder.Entity(
+                typeof(Splot),
+                ConfigurationSource.Convention
+            );
+            var idProperty =
+                entityTypeBuilder.Property(
+                    typeof(int),
+                    "Id",
+                    ConfigurationSource.Convention
+                ).Metadata;
+            var keyBuilder = entityTypeBuilder.HasKey(
+                new[] { idProperty.Name },
+                ConfigurationSource.Convention
+            );
 
             Assert.NotNull(keyBuilder.HasName("Splew"));
             Assert.Equal("Splew", keyBuilder.Metadata.GetName());
@@ -143,9 +155,15 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         public void Can_access_index()
         {
             var modelBuilder = CreateBuilder();
-            var entityTypeBuilder = modelBuilder.Entity(typeof(Splot), ConfigurationSource.Convention);
+            var entityTypeBuilder = modelBuilder.Entity(
+                typeof(Splot),
+                ConfigurationSource.Convention
+            );
             entityTypeBuilder.Property(typeof(int), "Id", ConfigurationSource.Convention);
-            var indexBuilder = entityTypeBuilder.HasIndex(new[] { "Id" }, ConfigurationSource.Convention);
+            var indexBuilder = entityTypeBuilder.HasIndex(
+                new[] { "Id" },
+                ConfigurationSource.Convention
+            );
 
 #pragma warning disable CS0618 // Type or member is obsolete
             Assert.NotNull(indexBuilder.HasName("Splew"));
@@ -184,14 +202,23 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         public void Can_access_relationship()
         {
             var modelBuilder = CreateBuilder();
-            var entityTypeBuilder = modelBuilder.Entity(typeof(Splot), ConfigurationSource.Convention);
+            var entityTypeBuilder = modelBuilder.Entity(
+                typeof(Splot),
+                ConfigurationSource.Convention
+            );
             entityTypeBuilder.Property(typeof(int), "Id", ConfigurationSource.Convention);
-            var relationshipBuilder = entityTypeBuilder.HasRelationship("Splot", new[] { "Id" }, ConfigurationSource.Convention);
+            var relationshipBuilder = entityTypeBuilder.HasRelationship(
+                "Splot",
+                new[] { "Id" },
+                ConfigurationSource.Convention
+            );
 
             Assert.NotNull(relationshipBuilder.HasConstraintName("Splew"));
             Assert.Equal("Splew", relationshipBuilder.Metadata.GetConstraintName());
 
-            Assert.NotNull(relationshipBuilder.HasConstraintName("Splow", fromDataAnnotation: true));
+            Assert.NotNull(
+                relationshipBuilder.HasConstraintName("Splow", fromDataAnnotation: true)
+            );
             Assert.Equal("Splow", relationshipBuilder.Metadata.GetConstraintName());
 
             Assert.Null(relationshipBuilder.HasConstraintName("Splod"));
@@ -208,7 +235,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata
             Assert.Equal("Splew", entityType.GetCheckConstraints().Single().Name);
             Assert.Equal("s > p", entityType.GetCheckConstraints().Single().Sql);
 
-            Assert.NotNull(typeBuilder.HasCheckConstraint("Splew", "s < p", fromDataAnnotation: true));
+            Assert.NotNull(
+                typeBuilder.HasCheckConstraint("Splew", "s < p", fromDataAnnotation: true)
+            );
             Assert.Equal("Splew", entityType.GetCheckConstraints().Single().Name);
             Assert.Equal("s < p", entityType.GetCheckConstraints().Single().Sql);
 
@@ -235,17 +264,15 @@ namespace Microsoft.EntityFrameworkCore.Metadata
 
         private class Splot
         {
-            public static readonly PropertyInfo SplowedProperty = typeof(Splot).GetProperty("Splowed");
+            public static readonly PropertyInfo SplowedProperty = typeof(Splot).GetProperty(
+                "Splowed"
+            );
 
             public int? Splowed { get; set; }
         }
 
-        private class Splow : Splot
-        {
-        }
+        private class Splow : Splot { }
 
-        private class Splod : Splow
-        {
-        }
+        private class Splod : Splow { }
     }
 }

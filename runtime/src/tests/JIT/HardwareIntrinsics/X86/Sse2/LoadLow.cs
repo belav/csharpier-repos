@@ -21,7 +21,13 @@ namespace IntelHardwareIntrinsicTest
 
             if (Sse2.IsSupported)
             {
-                using (TestTable<double> doubleTable = new TestTable<double>(new double[2] { 1, -5 }, new double[2] { 22, -1 }, new double[2]))
+                using (
+                    TestTable<double> doubleTable = new TestTable<double>(
+                        new double[2] { 1, -5 },
+                        new double[2] { 22, -1 },
+                        new double[2]
+                    )
+                )
                 {
                     var vf1 = Unsafe.Read<Vector128<double>>(doubleTable.inArray1Ptr);
                     var vf2 = Sse2.LoadLow(vf1, (double*)(doubleTable.inArray2Ptr));
@@ -56,6 +62,7 @@ namespace IntelHardwareIntrinsicTest
             GCHandle inHandle1;
             GCHandle inHandle2;
             GCHandle outHandle;
+
             public TestTable(T[] a, T[] b, T[] c)
             {
                 this.inArray1 = a;
@@ -66,6 +73,7 @@ namespace IntelHardwareIntrinsicTest
                 inHandle2 = GCHandle.Alloc(inArray2, GCHandleType.Pinned);
                 outHandle = GCHandle.Alloc(outArray, GCHandleType.Pinned);
             }
+
             public bool CheckResult(Func<T[], T[], T[], bool> check)
             {
                 return check(inArray1, inArray2, outArray);
@@ -78,6 +86,5 @@ namespace IntelHardwareIntrinsicTest
                 outHandle.Free();
             }
         }
-
     }
 }

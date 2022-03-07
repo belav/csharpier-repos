@@ -105,9 +105,7 @@ namespace System.Text.Json.SourceGeneration.Tests
         public HighLowTempsImmutable(int high, int low) => (High, Low) = (high, low);
     }
 
-    public class EmptyPoco
-    {
-    }
+    public class EmptyPoco { }
 
     public class MyType
     {
@@ -129,6 +127,7 @@ namespace System.Text.Json.SourceGeneration.Tests
         public string MyProperty { get; set; }
 
         public void OnSerializing() => MyProperty = "Before";
+
         void IJsonOnSerialized.OnSerialized() => MyProperty = "After";
     }
 

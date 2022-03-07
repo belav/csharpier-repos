@@ -19,6 +19,7 @@ namespace Microsoft.CodeAnalysis.EncapsulateField
             DocumentId documentId,
             ImmutableArray<string> fieldSymbolKeys,
             bool updateReferences,
-            CancellationToken cancellationToken);
+            CancellationToken cancellationToken
+        );
     }
 }

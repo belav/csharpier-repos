@@ -19,8 +19,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public static IReadOnlyDictionary<string, string> GetEntityTypeErrors(this IReadOnlyModel model)
-            => (IReadOnlyDictionary<string, string>?)model[ScaffoldingAnnotationNames.EntityTypeErrors] ?? new Dictionary<string, string>();
+        public static IReadOnlyDictionary<string, string> GetEntityTypeErrors(
+            this IReadOnlyModel model
+        ) =>
+            (IReadOnlyDictionary<string, string>?)model[ScaffoldingAnnotationNames.EntityTypeErrors]
+            ?? new Dictionary<string, string>();
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -28,9 +31,13 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public static IDictionary<string, string> GetOrCreateEntityTypeErrors(this IReadOnlyModel model)
+        public static IDictionary<string, string> GetOrCreateEntityTypeErrors(
+            this IReadOnlyModel model
+        )
         {
-            var errors = (IDictionary<string, string>?)model[ScaffoldingAnnotationNames.EntityTypeErrors];
+            var errors = (IDictionary<string, string>?)model[
+                ScaffoldingAnnotationNames.EntityTypeErrors
+            ];
             if (errors == null)
             {
                 errors = new Dictionary<string, string>();
@@ -46,10 +53,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public static void SetEntityTypeErrors(this IMutableModel model, IDictionary<string, string> value)
-            => model.SetAnnotation(
-                ScaffoldingAnnotationNames.EntityTypeErrors,
-                value);
+        public static void SetEntityTypeErrors(
+            this IMutableModel model,
+            IDictionary<string, string> value
+        ) => model.SetAnnotation(ScaffoldingAnnotationNames.EntityTypeErrors, value);
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -57,8 +64,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public static string? GetDatabaseName(this IReadOnlyModel model)
-            => (string?)model[ScaffoldingAnnotationNames.DatabaseName];
+        public static string? GetDatabaseName(this IReadOnlyModel model) =>
+            (string?)model[ScaffoldingAnnotationNames.DatabaseName];
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -66,9 +73,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public static void SetDatabaseName(this IMutableModel model, string? value)
-            => model.SetAnnotation(
-                ScaffoldingAnnotationNames.DatabaseName,
-                value);
+        public static void SetDatabaseName(this IMutableModel model, string? value) =>
+            model.SetAnnotation(ScaffoldingAnnotationNames.DatabaseName, value);
     }
 }

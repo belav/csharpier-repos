@@ -37,7 +37,8 @@ internal class ILEmitTrieJumpTable : JumpTable
         int exitDestination,
         (string text, int destination)[] entries,
         bool? vectorize,
-        JumpTable fallback)
+        JumpTable fallback
+    )
     {
         _defaultDestination = defaultDestination;
         _exitDestination = exitDestination;
@@ -63,7 +64,12 @@ internal class ILEmitTrieJumpTable : JumpTable
         }
 
         // We only hit this code path if the IL delegate is still initializing.
-        LazyInitializer.EnsureInitialized(ref _task, ref _initializing, ref _lock, InitializeILDelegateAsync);
+        LazyInitializer.EnsureInitialized(
+            ref _task,
+            ref _initializing,
+            ref _lock,
+            InitializeILDelegateAsync
+        );
 
         return _fallback.GetDestination(path, segment);
     }
@@ -72,16 +78,23 @@ internal class ILEmitTrieJumpTable : JumpTable
     internal async Task InitializeILDelegateAsync()
     {
         // Offload the creation of the IL delegate to the thread pool.
-        await Task.Run(() =>
-        {
-            InitializeILDelegate();
-        });
+        await Task.Run(
+            () =>
+            {
+                InitializeILDelegate();
+            }
+        );
     }
 
     // Internal for testing
     internal void InitializeILDelegate()
     {
-        var generated = ILEmitTrieFactory.Create(_defaultDestination, _exitDestination, _entries, _vectorize);
+        var generated = ILEmitTrieFactory.Create(
+            _defaultDestination,
+            _exitDestination,
+            _entries,
+            _vectorize
+        );
         _getDestination = (string path, PathSegment segment) =>
         {
             if (segment.Length == 0)

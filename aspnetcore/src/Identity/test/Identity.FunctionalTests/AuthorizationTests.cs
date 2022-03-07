@@ -11,7 +11,8 @@ using Xunit.Abstractions;
 
 namespace Microsoft.AspNetCore.Identity.FunctionalTests;
 
-public abstract class AuthorizationTests<TStartup, TContext> : IClassFixture<ServerFactory<TStartup, TContext>>
+public abstract class AuthorizationTests<TStartup, TContext>
+    : IClassFixture<ServerFactory<TStartup, TContext>>
     where TStartup : class
     where TContext : DbContext
 {
@@ -25,19 +26,19 @@ public abstract class AuthorizationTests<TStartup, TContext> : IClassFixture<Ser
     public static TheoryData<string> AuthorizedPages =>
         new TheoryData<string>
         {
-                "/Identity/Account/Manage/ChangePassword",
-                "/Identity/Account/Manage/DeletePersonalData",
-                "/Identity/Account/Manage/Disable2fa",
-                "/Identity/Account/Manage/DownloadPersonalData",
-                "/Identity/Account/Manage/EnableAuthenticator",
-                "/Identity/Account/Manage/ExternalLogins",
-                "/Identity/Account/Manage/GenerateRecoveryCodes",
-                "/Identity/Account/Manage/Index",
-                "/Identity/Account/Manage/PersonalData",
-                "/Identity/Account/Manage/ResetAuthenticator",
-                "/Identity/Account/Manage/SetPassword",
-                "/Identity/Account/Manage/ShowRecoveryCodes",
-                "/Identity/Account/Manage/TwoFactorAuthentication",
+            "/Identity/Account/Manage/ChangePassword",
+            "/Identity/Account/Manage/DeletePersonalData",
+            "/Identity/Account/Manage/Disable2fa",
+            "/Identity/Account/Manage/DownloadPersonalData",
+            "/Identity/Account/Manage/EnableAuthenticator",
+            "/Identity/Account/Manage/ExternalLogins",
+            "/Identity/Account/Manage/GenerateRecoveryCodes",
+            "/Identity/Account/Manage/Index",
+            "/Identity/Account/Manage/PersonalData",
+            "/Identity/Account/Manage/ResetAuthenticator",
+            "/Identity/Account/Manage/SetPassword",
+            "/Identity/Account/Manage/ShowRecoveryCodes",
+            "/Identity/Account/Manage/TwoFactorAuthentication",
         };
 
     [Theory]
@@ -45,8 +46,7 @@ public abstract class AuthorizationTests<TStartup, TContext> : IClassFixture<Ser
     public async Task AnonymousUserCantAccessAuthorizedPages(string url)
     {
         // Arrange
-        var client = ServerFactory
-            .CreateClient();
+        var client = ServerFactory.CreateClient();
 
         // Act
         var response = await client.GetAsync(url);
@@ -66,15 +66,15 @@ public abstract class AuthorizationTests<TStartup, TContext> : IClassFixture<Ser
     public static TheoryData<string> RouteableAuthorizedPages =>
         new TheoryData<string>
         {
-                "/Identity/Account/Manage/ChangePassword",
-                "/Identity/Account/Manage/DeletePersonalData",
-                "/Identity/Account/Manage/EnableAuthenticator",
-                "/Identity/Account/Manage/ExternalLogins",
-                "/Identity/Account/Manage/Index",
-                "/Identity/Account/Manage/PersonalData",
-                "/Identity/Account/Manage/ResetAuthenticator",
-                "/Identity/Account/Manage/TwoFactorAuthentication",
-                "/Identity/Account/Logout",
+            "/Identity/Account/Manage/ChangePassword",
+            "/Identity/Account/Manage/DeletePersonalData",
+            "/Identity/Account/Manage/EnableAuthenticator",
+            "/Identity/Account/Manage/ExternalLogins",
+            "/Identity/Account/Manage/Index",
+            "/Identity/Account/Manage/PersonalData",
+            "/Identity/Account/Manage/ResetAuthenticator",
+            "/Identity/Account/Manage/TwoFactorAuthentication",
+            "/Identity/Account/Logout",
         };
 
     [Theory]
@@ -82,8 +82,7 @@ public abstract class AuthorizationTests<TStartup, TContext> : IClassFixture<Ser
     public async Task AuthenticatedUserCanAccessAuthorizedPages(string url)
     {
         // Arrange
-        var client = ServerFactory
-            .CreateClient();
+        var client = ServerFactory.CreateClient();
 
         await UserStories.RegisterNewUserAsync(client);
 
@@ -105,11 +104,11 @@ public abstract class AuthorizationTests<TStartup, TContext> : IClassFixture<Ser
     public static TheoryData<string> UnauthorizedPages =>
         new TheoryData<string>
         {
-                "/Identity/Account/Login",
-                "/Identity/Account/Lockout",
-                "/Identity/Account/ForgotPasswordConfirmation",
-                "/Identity/Account/ForgotPassword",
-                "/Identity/Account/AccessDenied",
+            "/Identity/Account/Login",
+            "/Identity/Account/Lockout",
+            "/Identity/Account/ForgotPasswordConfirmation",
+            "/Identity/Account/ForgotPassword",
+            "/Identity/Account/AccessDenied",
         };
 
     [Theory]
@@ -117,8 +116,7 @@ public abstract class AuthorizationTests<TStartup, TContext> : IClassFixture<Ser
     public async Task AnonymousUserCanAccessNotAuthorizedPages(string url)
     {
         // Arrange
-        var client = ServerFactory
-            .CreateClient();
+        var client = ServerFactory.CreateClient();
 
         // Act
         var response = await client.GetAsync(url);
@@ -128,14 +126,14 @@ public abstract class AuthorizationTests<TStartup, TContext> : IClassFixture<Ser
     }
 
     public static TheoryData<string> UnauthorizedPagesAllowAnonymous =>
-    new TheoryData<string>
-    {
-             "/Identity/Error",
-             "/Identity/Account/Register",
-             "/Identity/Account/Login",
-             "/Identity/Account/ForgotPassword",
-             "/Identity/Account/Logout"
-    };
+        new TheoryData<string>
+        {
+            "/Identity/Error",
+            "/Identity/Account/Register",
+            "/Identity/Account/Login",
+            "/Identity/Account/ForgotPassword",
+            "/Identity/Account/Logout"
+        };
 
     [Theory]
     [MemberData(nameof(UnauthorizedPagesAllowAnonymous))]
@@ -145,7 +143,8 @@ public abstract class AuthorizationTests<TStartup, TContext> : IClassFixture<Ser
         void TestServicesConfiguration(IServiceCollection services) =>
             services.SetupGlobalAuthorizeFilter();
 
-        var client = ServerFactory.WithWebHostBuilder(whb => whb.ConfigureServices(TestServicesConfiguration))
+        var client = ServerFactory
+            .WithWebHostBuilder(whb => whb.ConfigureServices(TestServicesConfiguration))
             .CreateClient();
 
         // Act

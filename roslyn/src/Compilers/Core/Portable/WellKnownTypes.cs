@@ -416,7 +416,6 @@ namespace Microsoft.CodeAnalysis
             "Microsoft.VisualBasic.ApplicationServices.WindowsFormsApplicationBase",
             "Microsoft.VisualBasic.Information",
             "Microsoft.VisualBasic.Interaction",
-
             "System.Func`1",
             "System.Func`2",
             "System.Func`3",
@@ -451,7 +450,6 @@ namespace Microsoft.CodeAnalysis
             "System.Action`14",
             "System.Action`15",
             "System.Action`16",
-
             "System.AttributeUsageAttribute",
             "System.ParamArrayAttribute",
             "System.NonSerializedAttribute",
@@ -474,16 +472,13 @@ namespace Microsoft.CodeAnalysis
             "System.Runtime.CompilerServices.CallSiteBinder",
             "System.Runtime.CompilerServices.CallSite",
             "System.Runtime.CompilerServices.CallSite`1",
-
             "System.Runtime.InteropServices.WindowsRuntime.EventRegistrationToken",
             "System.Runtime.InteropServices.WindowsRuntime.EventRegistrationTokenTable`1",
             "System.Runtime.InteropServices.WindowsRuntime.WindowsRuntimeMarshal",
-
             "Windows.Foundation.IAsyncAction",
             "Windows.Foundation.IAsyncActionWithProgress`1",
             "Windows.Foundation.IAsyncOperation`1",
             "Windows.Foundation.IAsyncOperationWithProgress`2",
-
             "System.Diagnostics.Debugger",
             "System.Diagnostics.DebuggerDisplayAttribute",
             "System.Diagnostics.DebuggerNonUserCodeAttribute",
@@ -493,11 +488,8 @@ namespace Microsoft.CodeAnalysis
             "System.Diagnostics.DebuggerBrowsableState",
             "System.Diagnostics.DebuggableAttribute",
             "System.Diagnostics.DebuggableAttribute+DebuggingModes",
-
             "System.ComponentModel.DesignerSerializationVisibilityAttribute",
-
             "System.IEquatable`1",
-
             "System.Collections.IList",
             "System.Collections.ICollection",
             "System.Collections.Generic.EqualityComparer`1",
@@ -510,7 +502,6 @@ namespace Microsoft.CodeAnalysis
             "System.ComponentModel.INotifyPropertyChanged",
             "System.ComponentModel.EditorBrowsableAttribute",
             "System.ComponentModel.EditorBrowsableState",
-
             "System.Linq.Enumerable",
             "System.Linq.Expressions.Expression",
             "System.Linq.Expressions.Expression`1",
@@ -520,7 +511,6 @@ namespace Microsoft.CodeAnalysis
             "System.Linq.Expressions.ExpressionType",
             "System.Linq.IQueryable",
             "System.Linq.IQueryable`1",
-
             "System.Xml.Linq.Extensions",
             "System.Xml.Linq.XAttribute",
             "System.Xml.Linq.XCData",
@@ -533,14 +523,11 @@ namespace Microsoft.CodeAnalysis
             "System.Xml.Linq.XNamespace",
             "System.Xml.Linq.XObject",
             "System.Xml.Linq.XProcessingInstruction",
-
             "System.Security.UnverifiableCodeAttribute",
             "System.Security.Permissions.SecurityAction",
             "System.Security.Permissions.SecurityAttribute",
             "System.Security.Permissions.SecurityPermissionAttribute",
-
             "System.NotSupportedException",
-
             "System.Runtime.CompilerServices.ICriticalNotifyCompletion",
             "System.Runtime.CompilerServices.IAsyncStateMachine",
             "System.Runtime.CompilerServices.AsyncVoidMethodBuilder",
@@ -548,38 +535,27 @@ namespace Microsoft.CodeAnalysis
             "System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1",
             "System.Runtime.CompilerServices.AsyncStateMachineAttribute",
             "System.Runtime.CompilerServices.IteratorStateMachineAttribute",
-
             "System.Windows.Forms.Form",
             "System.Windows.Forms.Application",
-
             "System.Environment",
-
             "System.Runtime.GCLatencyMode",
-
             "System.IFormatProvider",
-
             "System.ValueTuple",
             "System.ValueTuple`1",
             "System.ValueTuple`2",
             "System.ValueTuple`3",
-
             "", // extension marker
-
             "System.ValueTuple`4",
             "System.ValueTuple`5",
             "System.ValueTuple`6",
             "System.ValueTuple`7",
             "System.ValueTuple`8",
-
             "System.Runtime.CompilerServices.TupleElementNamesAttribute",
-
             "Microsoft.CodeAnalysis.Runtime.Instrumentation",
-
             "System.Runtime.CompilerServices.NullableAttribute",
             "System.Runtime.CompilerServices.NullableContextAttribute",
             "System.Runtime.CompilerServices.NullablePublicOnlyAttribute",
             "System.Runtime.CompilerServices.ReferenceAssemblyAttribute",
-
             "System.Runtime.CompilerServices.IsReadOnlyAttribute",
             "System.Runtime.CompilerServices.IsByRefLikeAttribute",
             "System.Runtime.InteropServices.InAttribute",
@@ -588,16 +564,13 @@ namespace Microsoft.CodeAnalysis
             "System.ReadOnlySpan`1",
             "System.Runtime.InteropServices.UnmanagedType",
             "System.Runtime.CompilerServices.IsUnmanagedAttribute",
-
             "Microsoft.VisualBasic.Conversion",
             "System.Runtime.CompilerServices.NonNullTypesAttribute",
             "System.AttributeTargets",
             "Microsoft.CodeAnalysis.EmbeddedAttribute",
             "System.Runtime.CompilerServices.ITuple",
-
             "System.Index",
             "System.Range",
-
             "System.Runtime.CompilerServices.AsyncIteratorStateMachineAttribute",
             "System.IAsyncDisposable",
             "System.Collections.Generic.IAsyncEnumerable`1",
@@ -612,20 +585,18 @@ namespace Microsoft.CodeAnalysis
             "System.Runtime.CompilerServices.AsyncIteratorMethodBuilder",
             "System.Threading.CancellationToken",
             "System.Threading.CancellationTokenSource",
-
             "System.InvalidOperationException",
             "System.Runtime.CompilerServices.SwitchExpressionException",
             "System.Collections.Generic.IEqualityComparer`1",
-
             "System.Runtime.CompilerServices.NativeIntegerAttribute",
             "System.Runtime.CompilerServices.IsExternalInit",
             "System.Runtime.InteropServices.OutAttribute",
-
             "System.Text.StringBuilder",
             "System.Runtime.CompilerServices.DefaultInterpolatedStringHandler",
         };
 
-        private static readonly Dictionary<string, WellKnownType> s_nameToTypeIdMap = new Dictionary<string, WellKnownType>((int)Count);
+        private static readonly Dictionary<string, WellKnownType> s_nameToTypeIdMap =
+            new Dictionary<string, WellKnownType>((int)Count);
 
         static WellKnownTypes()
         {
@@ -654,7 +625,8 @@ namespace Microsoft.CodeAnalysis
                         typeIdName = "System.Math";
                         break;
                     case WellKnownType.Microsoft_VisualBasic_CompilerServices_ObjectFlowControl_ForLoopControl:
-                        typeIdName = "Microsoft.VisualBasic.CompilerServices.ObjectFlowControl+ForLoopControl";
+                        typeIdName =
+                            "Microsoft.VisualBasic.CompilerServices.ObjectFlowControl+ForLoopControl";
                         break;
                     case WellKnownType.CSharp7Sentinel:
                         typeIdName = "System.IFormatProvider";
@@ -691,12 +663,15 @@ namespace Microsoft.CodeAnalysis
         public static bool IsValueTupleType(this WellKnownType typeId)
         {
             Debug.Assert(typeId != WellKnownType.ExtSentinel);
-            return typeId >= WellKnownType.System_ValueTuple && typeId <= WellKnownType.System_ValueTuple_TRest;
+            return typeId >= WellKnownType.System_ValueTuple
+                && typeId <= WellKnownType.System_ValueTuple_TRest;
         }
 
         public static bool IsValid(this WellKnownType typeId)
         {
-            return typeId >= WellKnownType.First && typeId < WellKnownType.NextAvailable && typeId != WellKnownType.ExtSentinel;
+            return typeId >= WellKnownType.First
+                && typeId < WellKnownType.NextAvailable
+                && typeId != WellKnownType.ExtSentinel;
         }
 
         public static string GetMetadataName(this WellKnownType id)
@@ -721,9 +696,11 @@ namespace Microsoft.CodeAnalysis
         internal static WellKnownType GetWellKnownFunctionDelegate(int invokeArgumentCount)
         {
             Debug.Assert(invokeArgumentCount >= 0);
-            return (invokeArgumentCount <= WellKnownType.System_Func_TMax - WellKnownType.System_Func_T) ?
-                (WellKnownType)((int)WellKnownType.System_Func_T + invokeArgumentCount) :
-                WellKnownType.Unknown;
+            return (
+                invokeArgumentCount <= WellKnownType.System_Func_TMax - WellKnownType.System_Func_T
+            )
+              ? (WellKnownType)((int)WellKnownType.System_Func_T + invokeArgumentCount)
+              : WellKnownType.Unknown;
         }
 
         // returns WellKnownType.Unknown if given arity isn't available:
@@ -731,9 +708,12 @@ namespace Microsoft.CodeAnalysis
         {
             Debug.Assert(invokeArgumentCount >= 0);
 
-            return (invokeArgumentCount <= WellKnownType.System_Action_TMax - WellKnownType.System_Action) ?
-                (WellKnownType)((int)WellKnownType.System_Action + invokeArgumentCount) :
-                WellKnownType.Unknown;
+            return (
+                invokeArgumentCount
+                <= WellKnownType.System_Action_TMax - WellKnownType.System_Action
+            )
+              ? (WellKnownType)((int)WellKnownType.System_Action + invokeArgumentCount)
+              : WellKnownType.Unknown;
         }
     }
 }

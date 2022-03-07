@@ -41,7 +41,5 @@ public class ByteArrayModelBinderProviderTest
         Assert.IsType<ByteArrayModelBinder>(result);
     }
 
-    private class TestClass
-    {
-    }
+    private class TestClass { }
 }

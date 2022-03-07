@@ -10,27 +10,30 @@ namespace Microsoft.AspNetCore.Authentication.AzureADB2C.UI;
 /// <summary>
 /// Options for configuring authentication using Azure Active Directory B2C.
 /// </summary>
-[Obsolete("This is obsolete and will be removed in a future version. Use Microsoft.Identity.Web instead. See https://aka.ms/ms-identity-web.")]
+[Obsolete(
+    "This is obsolete and will be removed in a future version. Use Microsoft.Identity.Web instead. See https://aka.ms/ms-identity-web."
+)]
 public class AzureADB2COptions
 {
     /// <summary>
     /// Gets or sets the OpenID Connect authentication scheme to use for authentication with this instance
     /// of Azure Active Directory B2C authentication.
     /// </summary>
-    public string OpenIdConnectSchemeName { get; set; } = OpenIdConnectDefaults.AuthenticationScheme;
+    public string OpenIdConnectSchemeName { get; set; } =
+        OpenIdConnectDefaults.AuthenticationScheme;
 
     /// <summary>
     /// Gets or sets the Cookie authentication scheme to use for sign in with this instance of
     /// Azure Active Directory B2C authentication.
     /// </summary>
-    public string CookieSchemeName { get; set; } = CookieAuthenticationDefaults.AuthenticationScheme;
+    public string CookieSchemeName { get; set; } =
+        CookieAuthenticationDefaults.AuthenticationScheme;
 
     /// <summary>
     /// Gets or sets the Jwt bearer authentication scheme to use for validating access tokens for this
     /// instance of Azure Active Directory B2C Bearer authentication.
     /// </summary>
     public string JwtBearerSchemeName { get; internal set; }
-
 
     /// <summary>
     /// Gets or sets the client Id.

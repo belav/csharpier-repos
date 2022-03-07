@@ -70,7 +70,10 @@ public class SimpleTypeModelBinder : IModelBinder
             if (bindingContext.ModelType == typeof(string))
             {
                 // Already have a string. No further conversion required but handle ConvertEmptyStringToNull.
-                if (bindingContext.ModelMetadata.ConvertEmptyStringToNull && string.IsNullOrWhiteSpace(value))
+                if (
+                    bindingContext.ModelMetadata.ConvertEmptyStringToNull
+                    && string.IsNullOrWhiteSpace(value)
+                )
                 {
                     model = null;
                 }
@@ -89,7 +92,8 @@ public class SimpleTypeModelBinder : IModelBinder
                 model = _typeConverter.ConvertFrom(
                     context: null,
                     culture: valueProviderResult.Culture,
-                    value: value);
+                    value: value
+                );
             }
 
             CheckModel(bindingContext, valueProviderResult, model);
@@ -110,7 +114,8 @@ public class SimpleTypeModelBinder : IModelBinder
             bindingContext.ModelState.TryAddModelError(
                 bindingContext.ModelName,
                 exception,
-                bindingContext.ModelMetadata);
+                bindingContext.ModelMetadata
+            );
 
             // Were able to find a converter for the type but conversion failed.
             return Task.CompletedTask;
@@ -121,7 +126,8 @@ public class SimpleTypeModelBinder : IModelBinder
     protected virtual void CheckModel(
         ModelBindingContext bindingContext,
         ValueProviderResult valueProviderResult,
-        object? model)
+        object? model
+    )
     {
         // When converting newModel a null value may indicate a failed conversion for an otherwise required
         // model (can't set a ValueType to null). This detects if a null model value is acceptable given the
@@ -131,7 +137,9 @@ public class SimpleTypeModelBinder : IModelBinder
             bindingContext.ModelState.TryAddModelError(
                 bindingContext.ModelName,
                 bindingContext.ModelMetadata.ModelBindingMessageProvider.ValueMustNotBeNullAccessor(
-                    valueProviderResult.ToString()));
+                    valueProviderResult.ToString()
+                )
+            );
         }
         else
         {

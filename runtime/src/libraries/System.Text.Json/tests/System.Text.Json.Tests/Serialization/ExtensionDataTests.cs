@@ -5,6 +5,7 @@ namespace System.Text.Json.Serialization.Tests
 {
     public sealed partial class ExtensionDataTestsDynamic : ExtensionDataTests
     {
-        public ExtensionDataTestsDynamic() : base(JsonSerializerWrapperForString.StringSerializer) { }
+        public ExtensionDataTestsDynamic() : base(JsonSerializerWrapperForString.StringSerializer)
+        { }
     }
 }

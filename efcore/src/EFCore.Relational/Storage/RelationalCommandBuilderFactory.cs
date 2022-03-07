@@ -37,8 +37,7 @@ namespace Microsoft.EntityFrameworkCore.Storage
         ///     </para>
         /// </summary>
         /// <param name="dependencies">Parameter object containing dependencies for this service.</param>
-        public RelationalCommandBuilderFactory(
-            RelationalCommandBuilderDependencies dependencies)
+        public RelationalCommandBuilderFactory(RelationalCommandBuilderDependencies dependencies)
         {
             Dependencies = dependencies;
         }
@@ -52,7 +51,7 @@ namespace Microsoft.EntityFrameworkCore.Storage
         ///     Creates a new <see cref="IRelationalCommandBuilder" />.
         /// </summary>
         /// <returns>The newly created builder.</returns>
-        public virtual IRelationalCommandBuilder Create()
-            => new RelationalCommandBuilder(Dependencies);
+        public virtual IRelationalCommandBuilder Create() =>
+            new RelationalCommandBuilder(Dependencies);
     }
 }

@@ -34,20 +34,26 @@ public class ILStrip : Microsoft.Build.Utilities.Task
             throw new ArgumentException($"'{nameof(Assemblies)}' is required.", nameof(Assemblies));
         }
 
-        int allowedParallelism = DisableParallelStripping ? 1 : Math.Min(Assemblies.Length, Environment.ProcessorCount);
+        int allowedParallelism = DisableParallelStripping
+            ? 1
+            : Math.Min(Assemblies.Length, Environment.ProcessorCount);
         if (BuildEngine is IBuildEngine9 be9)
             allowedParallelism = be9.RequestCores(allowedParallelism);
-        ParallelLoopResult result = Parallel.ForEach(Assemblies,
-                                                     new ParallelOptions { MaxDegreeOfParallelism = allowedParallelism },
-                                                     (assemblyItem, state) =>
-                                                     {
-                                                         if (!StripAssembly(assemblyItem))
-                                                             state.Stop();
-                                                     });
+        ParallelLoopResult result = Parallel.ForEach(
+            Assemblies,
+            new ParallelOptions { MaxDegreeOfParallelism = allowedParallelism },
+            (assemblyItem, state) =>
+            {
+                if (!StripAssembly(assemblyItem))
+                    state.Stop();
+            }
+        );
 
         if (!result.IsCompleted && !Log.HasLoggedErrors)
         {
-            Log.LogError("Unknown failure occured while IL stripping assemblies. Check logs to get more details.");
+            Log.LogError(
+                "Unknown failure occured while IL stripping assemblies. Check logs to get more details."
+            );
         }
 
         return !Log.HasLoggedErrors;
@@ -69,7 +75,7 @@ public class ILStrip : Microsoft.Build.Utilities.Task
 
         try
         {
-            AssemblyStripper.AssemblyStripper.StripAssembly (assemblyFile, outputPath);
+            AssemblyStripper.AssemblyStripper.StripAssembly(assemblyFile, outputPath);
         }
         catch (Exception ex)
         {
@@ -80,5 +86,4 @@ public class ILStrip : Microsoft.Build.Utilities.Task
 
         return true;
     }
-
 }

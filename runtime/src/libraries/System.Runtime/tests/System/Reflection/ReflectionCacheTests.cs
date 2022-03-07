@@ -12,10 +12,14 @@ namespace System.Reflection.Tests
         [Fact]
         public void GetMethod_MultipleCalls_SameObjects()
         {
-            MethodInfo mi1 = typeof(ReflectionCacheTests).GetMethod(nameof(GetMethod_MultipleCalls_SameObjects));
+            MethodInfo mi1 = typeof(ReflectionCacheTests).GetMethod(
+                nameof(GetMethod_MultipleCalls_SameObjects)
+            );
             Assert.NotNull(mi1);
 
-            MethodInfo mi2 = typeof(ReflectionCacheTests).GetMethod(nameof(GetMethod_MultipleCalls_SameObjects));
+            MethodInfo mi2 = typeof(ReflectionCacheTests).GetMethod(
+                nameof(GetMethod_MultipleCalls_SameObjects)
+            );
             Assert.NotNull(mi2);
 
             Assert.Same(mi1, mi2);
@@ -40,13 +44,17 @@ namespace System.Reflection.Tests
         {
             Action<Type[]> clearCache = GetClearCacheMethod();
 
-            MethodInfo mi1 = typeof(ReflectionCacheTests).GetMethod(nameof(GetMethod_MultipleCalls_ClearCache_DifferentObjects));
+            MethodInfo mi1 = typeof(ReflectionCacheTests).GetMethod(
+                nameof(GetMethod_MultipleCalls_ClearCache_DifferentObjects)
+            );
             Assert.NotNull(mi1);
             Assert.Equal(nameof(GetMethod_MultipleCalls_ClearCache_DifferentObjects), mi1.Name);
 
             clearCache(justSpecificType ? new[] { typeof(ReflectionCacheTests) } : null);
 
-            MethodInfo mi2 = typeof(ReflectionCacheTests).GetMethod(nameof(GetMethod_MultipleCalls_ClearCache_DifferentObjects));
+            MethodInfo mi2 = typeof(ReflectionCacheTests).GetMethod(
+                nameof(GetMethod_MultipleCalls_ClearCache_DifferentObjects)
+            );
             Assert.NotNull(mi2);
             Assert.Equal(nameof(GetMethod_MultipleCalls_ClearCache_DifferentObjects), mi2.Name);
 
@@ -55,8 +63,16 @@ namespace System.Reflection.Tests
 
         private static Action<Type[]> GetClearCacheMethod()
         {
-            Type updateHandler = typeof(Type).Assembly.GetType("System.Reflection.Metadata.RuntimeTypeMetadataUpdateHandler", throwOnError: true, ignoreCase: false);
-            MethodInfo clearCache = updateHandler.GetMethod("ClearCache", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static, new[] { typeof(Type[]) });
+            Type updateHandler = typeof(Type).Assembly.GetType(
+                "System.Reflection.Metadata.RuntimeTypeMetadataUpdateHandler",
+                throwOnError: true,
+                ignoreCase: false
+            );
+            MethodInfo clearCache = updateHandler.GetMethod(
+                "ClearCache",
+                BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static,
+                new[] { typeof(Type[]) }
+            );
             Assert.NotNull(clearCache);
             return clearCache.CreateDelegate<Action<Type[]>>();
         }

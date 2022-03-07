@@ -17,8 +17,7 @@ namespace Microsoft.EntityFrameworkCore
     {
         protected TFixture Fixture { get; }
 
-        protected DesignTimeTestBase(TFixture fixture)
-            => Fixture = fixture;
+        protected DesignTimeTestBase(TFixture fixture) => Fixture = fixture;
 
         protected abstract Assembly ProviderAssembly { get; }
 
@@ -26,16 +25,20 @@ namespace Microsoft.EntityFrameworkCore
         public void Can_get_reverse_engineering_services()
         {
             using var context = Fixture.CreateContext();
-            var serviceCollection = new ServiceCollection()
-                .AddEntityFrameworkDesignTimeServices();
-            ((IDesignTimeServices)Activator.CreateInstance(
-                ProviderAssembly.GetType(
-                    ProviderAssembly.GetCustomAttribute<DesignTimeProviderServicesAttribute>().TypeName,
-                    throwOnError: true))!)
-                .ConfigureDesignTimeServices(serviceCollection);
+            var serviceCollection = new ServiceCollection().AddEntityFrameworkDesignTimeServices();
+            (
+                (IDesignTimeServices)Activator.CreateInstance(
+                    ProviderAssembly.GetType(
+                        ProviderAssembly.GetCustomAttribute<DesignTimeProviderServicesAttribute>().TypeName,
+                        throwOnError: true
+                    )
+                )!
+            ).ConfigureDesignTimeServices(serviceCollection);
             using var services = serviceCollection.BuildServiceProvider(validateScopes: true);
 
-            var reverseEngineerScaffolder = services.CreateScope().ServiceProvider.GetService<IReverseEngineerScaffolder>();
+            var reverseEngineerScaffolder = services
+                .CreateScope()
+                .ServiceProvider.GetService<IReverseEngineerScaffolder>();
 
             Assert.NotNull(reverseEngineerScaffolder);
         }
@@ -47,22 +50,26 @@ namespace Microsoft.EntityFrameworkCore
             var serviceCollection = new ServiceCollection()
                 .AddEntityFrameworkDesignTimeServices()
                 .AddDbContextDesignTimeServices(context);
-            ((IDesignTimeServices)Activator.CreateInstance(
-                ProviderAssembly.GetType(
-                    ProviderAssembly.GetCustomAttribute<DesignTimeProviderServicesAttribute>().TypeName,
-                    throwOnError: true))!)
-                .ConfigureDesignTimeServices(serviceCollection);
+            (
+                (IDesignTimeServices)Activator.CreateInstance(
+                    ProviderAssembly.GetType(
+                        ProviderAssembly.GetCustomAttribute<DesignTimeProviderServicesAttribute>().TypeName,
+                        throwOnError: true
+                    )
+                )!
+            ).ConfigureDesignTimeServices(serviceCollection);
             using var services = serviceCollection.BuildServiceProvider(validateScopes: true);
 
-            var migrationsScaffolder = services.CreateScope().ServiceProvider.GetService<IMigrationsScaffolder>();
+            var migrationsScaffolder = services
+                .CreateScope()
+                .ServiceProvider.GetService<IMigrationsScaffolder>();
 
             Assert.NotNull(migrationsScaffolder);
         }
 
         public abstract class DesignTimeFixtureBase : SharedStoreFixtureBase<PoolableDbContext>
         {
-            protected override string StoreName
-                => "DesignTimeTest";
+            protected override string StoreName => "DesignTimeTest";
         }
     }
 }

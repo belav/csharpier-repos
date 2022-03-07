@@ -13,17 +13,17 @@ using System.Runtime.Serialization;
 namespace System
 {
     [Serializable]
-    [System.Runtime.CompilerServices.TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [System.Runtime.CompilerServices.TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public sealed class DataMisalignedException : SystemException
     {
-        public DataMisalignedException()
-            : base(SR.Arg_DataMisalignedException)
+        public DataMisalignedException() : base(SR.Arg_DataMisalignedException)
         {
             HResult = HResults.COR_E_DATAMISALIGNED;
         }
 
-        public DataMisalignedException(string? message)
-            : base(message)
+        public DataMisalignedException(string? message) : base(message)
         {
             HResult = HResults.COR_E_DATAMISALIGNED;
         }
@@ -34,8 +34,7 @@ namespace System
             HResult = HResults.COR_E_DATAMISALIGNED;
         }
 
-        private DataMisalignedException(SerializationInfo info, StreamingContext context) : base(info, context)
-        {
-        }
+        private DataMisalignedException(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
     }
 }

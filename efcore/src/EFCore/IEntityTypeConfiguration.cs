@@ -18,8 +18,7 @@ namespace Microsoft.EntityFrameworkCore
     ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships in EF Core</see> for more information.
     /// </remarks>
     /// <typeparam name="TEntity">The entity type to be configured.</typeparam>
-    public interface IEntityTypeConfiguration<TEntity>
-        where TEntity : class
+    public interface IEntityTypeConfiguration<TEntity> where TEntity : class
     {
         /// <summary>
         ///     Configures the entity of type <typeparamref name="TEntity" />.

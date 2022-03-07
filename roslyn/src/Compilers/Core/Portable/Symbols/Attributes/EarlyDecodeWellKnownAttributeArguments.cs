@@ -13,7 +13,12 @@ namespace Microsoft.CodeAnalysis
     /// <summary>
     /// Contains common arguments to Symbol.EarlyDecodeWellKnownAttribute method in both the language compilers.
     /// </summary>
-    internal struct EarlyDecodeWellKnownAttributeArguments<TEarlyBinder, TNamedTypeSymbol, TAttributeSyntax, TAttributeLocation>
+    internal struct EarlyDecodeWellKnownAttributeArguments<
+        TEarlyBinder,
+        TNamedTypeSymbol,
+        TAttributeSyntax,
+        TAttributeLocation
+    >
         where TNamedTypeSymbol : INamedTypeSymbolInternal
         where TAttributeSyntax : SyntaxNode
     {

@@ -17,7 +17,8 @@ namespace Microsoft.AspNetCore.Components.WebView
 {
     internal class StaticWebAssetsLoader
     {
-        internal const string StaticWebAssetsManifestName = "Microsoft.AspNetCore.StaticWebAssets.xml";
+        internal const string StaticWebAssetsManifestName =
+            "Microsoft.AspNetCore.StaticWebAssets.xml";
 
         internal static IFileProvider UseStaticWebAssets(IFileProvider systemProvider)
         {
@@ -56,11 +57,15 @@ namespace Microsoft.AspNetCore.Components.WebView
             }
         }
 
-        internal static IFileProvider UseStaticWebAssetsCore(IFileProvider systemProvider, Stream manifest)
+        internal static IFileProvider UseStaticWebAssetsCore(
+            IFileProvider systemProvider,
+            Stream manifest
+        )
         {
             var webRootFileProvider = systemProvider;
 
-            var additionalFiles = StaticWebAssetsReader.Parse(manifest)
+            var additionalFiles = StaticWebAssetsReader
+                .Parse(manifest)
                 .Select(cr => new StaticWebAssetsFileProvider(cr.BasePath, cr.Path))
                 .OfType<IFileProvider>() // Upcast so we can insert on the resulting list.
                 .ToList();
@@ -86,7 +91,10 @@ namespace Microsoft.AspNetCore.Components.WebView
 
             var name = Path.GetFileNameWithoutExtension(assembly.Location);
 
-            return Path.Combine(Path.GetDirectoryName(assembly.Location)!, $"{name}.StaticWebAssets.xml");
+            return Path.Combine(
+                Path.GetDirectoryName(assembly.Location)!,
+                $"{name}.StaticWebAssets.xml"
+            );
         }
 
         internal static class StaticWebAssetsReader
@@ -98,31 +106,53 @@ namespace Microsoft.AspNetCore.Components.WebView
             internal static IEnumerable<ContentRootMapping> Parse(Stream manifest)
             {
                 var document = XDocument.Load(manifest);
-                if (!string.Equals(document.Root!.Name.LocalName, ManifestRootElementName, StringComparison.OrdinalIgnoreCase))
+                if (
+                    !string.Equals(
+                        document.Root!.Name.LocalName,
+                        ManifestRootElementName,
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                )
                 {
-                    throw new InvalidOperationException($"Invalid manifest format. Manifest root must be '{ManifestRootElementName}'");
+                    throw new InvalidOperationException(
+                        $"Invalid manifest format. Manifest root must be '{ManifestRootElementName}'"
+                    );
                 }
 
                 var version = document.Root.Attribute(VersionAttributeName);
                 if (version == null)
                 {
-                    throw new InvalidOperationException($"Invalid manifest format. Manifest root element must contain a version '{VersionAttributeName}' attribute");
+                    throw new InvalidOperationException(
+                        $"Invalid manifest format. Manifest root element must contain a version '{VersionAttributeName}' attribute"
+                    );
                 }
 
                 if (version.Value != "1.0")
                 {
-                    throw new InvalidOperationException($"Unknown manifest version. Manifest version must be '1.0'");
+                    throw new InvalidOperationException(
+                        $"Unknown manifest version. Manifest version must be '1.0'"
+                    );
                 }
 
                 foreach (var element in document.Root.Elements())
                 {
-                    if (!string.Equals(element.Name.LocalName, ContentRootElementName, StringComparison.OrdinalIgnoreCase))
+                    if (
+                        !string.Equals(
+                            element.Name.LocalName,
+                            ContentRootElementName,
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                    )
                     {
-                        throw new InvalidOperationException($"Invalid manifest format. Invalid element '{element.Name.LocalName}'. All {StaticWebAssetsLoader.StaticWebAssetsManifestName} child elements must be '{ContentRootElementName}' elements.");
+                        throw new InvalidOperationException(
+                            $"Invalid manifest format. Invalid element '{element.Name.LocalName}'. All {StaticWebAssetsLoader.StaticWebAssetsManifestName} child elements must be '{ContentRootElementName}' elements."
+                        );
                     }
                     if (!element.IsEmpty)
                     {
-                        throw new InvalidOperationException($"Invalid manifest format. {ContentRootElementName} can't have content.");
+                        throw new InvalidOperationException(
+                            $"Invalid manifest format. {ContentRootElementName} can't have content."
+                        );
                     }
 
                     var basePath = ParseRequiredAttribute(element, "BasePath");
@@ -136,7 +166,9 @@ namespace Microsoft.AspNetCore.Components.WebView
                 var attribute = element.Attribute(attributeName);
                 if (attribute == null)
                 {
-                    throw new InvalidOperationException($"Invalid manifest format. Missing {attributeName} attribute in '{ContentRootElementName}' element.");
+                    throw new InvalidOperationException(
+                        $"Invalid manifest format. Missing {attributeName} attribute in '{ContentRootElementName}' element."
+                    );
                 }
                 return attribute.Value;
             }
@@ -156,9 +188,10 @@ namespace Microsoft.AspNetCore.Components.WebView
 
         internal class StaticWebAssetsFileProvider : IFileProvider
         {
-            private static readonly StringComparison FilePathComparison = OperatingSystem.IsWindows() ?
-                StringComparison.OrdinalIgnoreCase :
-                StringComparison.Ordinal;
+            private static readonly StringComparison FilePathComparison =
+                OperatingSystem.IsWindows()
+                  ? StringComparison.OrdinalIgnoreCase
+                  : StringComparison.Ordinal;
 
             public StaticWebAssetsFileProvider(string pathPrefix, string contentRoot)
             {
@@ -188,7 +221,9 @@ namespace Microsoft.AspNetCore.Components.WebView
                 {
                     return new StaticWebAssetsDirectoryRoot(BasePath);
                 }
-                else if (BasePath.StartsWithSegments(modifiedSub, FilePathComparison, out var remaining))
+                else if (
+                    BasePath.StartsWithSegments(modifiedSub, FilePathComparison, out var remaining)
+                )
                 {
                     return new StaticWebAssetsDirectoryRoot(remaining);
                 }
@@ -230,7 +265,11 @@ namespace Microsoft.AspNetCore.Components.WebView
 
             private bool StartsWithBasePath(string subpath, out PathString rest)
             {
-                return new PathString(subpath).StartsWithSegments(BasePath, FilePathComparison, out rest);
+                return new PathString(subpath).StartsWithSegments(
+                    BasePath,
+                    FilePathComparison,
+                    out rest
+                );
             }
 
             private class StaticWebAssetsDirectoryRoot : IDirectoryContents
@@ -240,7 +279,10 @@ namespace Microsoft.AspNetCore.Components.WebView
                 public StaticWebAssetsDirectoryRoot(PathString remainingPath)
                 {
                     // We MUST use the Value property here because it is unescaped.
-                    _nextSegment = remainingPath.Value?.Split("/", StringSplitOptions.RemoveEmptyEntries).FirstOrDefault() ?? string.Empty;
+                    _nextSegment =
+                        remainingPath.Value
+                            ?.Split("/", StringSplitOptions.RemoveEmptyEntries)
+                            .FirstOrDefault() ?? string.Empty;
                 }
 
                 public bool Exists => true;
@@ -258,7 +300,8 @@ namespace Microsoft.AspNetCore.Components.WebView
                 private IEnumerator<IFileInfo> GenerateEnum()
                 {
                     return new[] { new StaticWebAssetsFileInfo(_nextSegment) }
-                        .Cast<IFileInfo>().GetEnumerator();
+                        .Cast<IFileInfo>()
+                        .GetEnumerator();
                 }
 
                 private class StaticWebAssetsFileInfo : IFileInfo

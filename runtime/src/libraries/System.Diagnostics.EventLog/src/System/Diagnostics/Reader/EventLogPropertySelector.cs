@@ -33,7 +33,11 @@ namespace System.Diagnostics.Eventing.Reader
                 paths = queries.ToArray();
             }
 
-            Handle = NativeWrapper.EvtCreateRenderContext(paths.Length, paths, UnsafeNativeMethods.EvtRenderContextFlags.EvtRenderContextValues);
+            Handle = NativeWrapper.EvtCreateRenderContext(
+                paths.Length,
+                paths,
+                UnsafeNativeMethods.EvtRenderContextFlags.EvtRenderContextValues
+            );
         }
 
         internal EventLogHandle Handle { get; }

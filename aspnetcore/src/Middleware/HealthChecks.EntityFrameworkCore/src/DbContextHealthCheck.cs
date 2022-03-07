@@ -11,7 +11,10 @@ namespace Microsoft.Extensions.Diagnostics.HealthChecks;
 
 internal sealed class DbContextHealthCheck<TContext> : IHealthCheck where TContext : DbContext
 {
-    private static readonly Func<TContext, CancellationToken, Task<bool>> DefaultTestQuery = (dbContext, cancellationToken) =>
+    private static readonly Func<TContext, CancellationToken, Task<bool>> DefaultTestQuery = (
+        dbContext,
+        cancellationToken
+    ) =>
     {
         return dbContext.Database.CanConnectAsync(cancellationToken);
     };
@@ -19,7 +22,10 @@ internal sealed class DbContextHealthCheck<TContext> : IHealthCheck where TConte
     private readonly TContext _dbContext;
     private readonly IOptionsMonitor<DbContextHealthCheckOptions<TContext>> _options;
 
-    public DbContextHealthCheck(TContext dbContext, IOptionsMonitor<DbContextHealthCheckOptions<TContext>> options)
+    public DbContextHealthCheck(
+        TContext dbContext,
+        IOptionsMonitor<DbContextHealthCheckOptions<TContext>> options
+    )
     {
         if (dbContext == null)
         {
@@ -35,7 +41,10 @@ internal sealed class DbContextHealthCheck<TContext> : IHealthCheck where TConte
         _options = options;
     }
 
-    public async Task<HealthCheckResult> CheckHealthAsync(HealthCheckContext context, CancellationToken cancellationToken = default)
+    public async Task<HealthCheckResult> CheckHealthAsync(
+        HealthCheckContext context,
+        CancellationToken cancellationToken = default
+    )
     {
         if (context == null)
         {

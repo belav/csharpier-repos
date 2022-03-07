@@ -12,7 +12,12 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
     {
         private class ImportTable : ArrayOfEmbeddedDataNode<Import>
         {
-            public ImportTable(string startSymbol, string endSymbol) : base(startSymbol, endSymbol, nodeSorter: new EmbeddedObjectNodeComparer(new CompilerComparer())) {}
+            public ImportTable(string startSymbol, string endSymbol)
+                : base(
+                    startSymbol,
+                    endSymbol,
+                    nodeSorter: new EmbeddedObjectNodeComparer(new CompilerComparer())
+                ) { }
 
             public override bool ShouldSkipEmittingObjectNode(NodeFactory factory) => false;
 
@@ -20,8 +25,10 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
         }
 
         private readonly ImportTable _imports;
+
         // TODO: annoying - today there's no way to put signature RVA's into R/O data section
         private readonly ArrayOfEmbeddedPointersNode<Signature> _signatures;
+
         // TODO: annoying - cannot enumerate the ArrayOfEmbeddedPointersNode so we must keep a copy.
         private readonly List<Signature> _signatureList;
         private readonly GCRefMapNode _gcRefMap;
@@ -35,7 +42,14 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
 
         private bool _materializedSignature;
 
-        public ImportSectionNode(string name, CorCompileImportType importType, CorCompileImportFlags flags, byte entrySize, bool emitPrecode, bool emitGCRefMap)
+        public ImportSectionNode(
+            string name,
+            CorCompileImportType importType,
+            CorCompileImportFlags flags,
+            byte entrySize,
+            bool emitPrecode,
+            bool emitGCRefMap
+        )
         {
             _name = name;
             _type = importType;
@@ -45,7 +59,11 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             _emitGCRefMap = emitGCRefMap;
 
             _imports = new ImportTable(_name + "_ImportBegin", _name + "_ImportEnd");
-            _signatures = new ArrayOfEmbeddedPointersNode<Signature>(_name + "_SigBegin", _name + "_SigEnd", new EmbeddedObjectNodeComparer(new CompilerComparer()));
+            _signatures = new ArrayOfEmbeddedPointersNode<Signature>(
+                _name + "_SigBegin",
+                _name + "_SigEnd",
+                new EmbeddedObjectNodeComparer(new CompilerComparer())
+            );
             _signatureList = new List<Signature>();
             _gcRefMap = _emitGCRefMap ? new GCRefMapNode(this) : null;
         }
@@ -95,7 +113,11 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
 
         public override int ClassCode => (int)ObjectNodeOrder.ImportSectionNode;
 
-        public override void EncodeData(ref ObjectDataBuilder dataBuilder, NodeFactory factory, bool relocsOnly)
+        public override void EncodeData(
+            ref ObjectDataBuilder dataBuilder,
+            NodeFactory factory,
+            bool relocsOnly
+        )
         {
             if (!_imports.ShouldSkipEmittingObjectNode(factory))
             {
@@ -116,7 +138,11 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
 
             if (!_signatures.ShouldSkipEmittingObjectNode(factory))
             {
-                dataBuilder.EmitReloc(_signatures.StartSymbol, RelocType.IMAGE_REL_BASED_ADDR32NB, 0);
+                dataBuilder.EmitReloc(
+                    _signatures.StartSymbol,
+                    RelocType.IMAGE_REL_BASED_ADDR32NB,
+                    0
+                );
             }
             else
             {

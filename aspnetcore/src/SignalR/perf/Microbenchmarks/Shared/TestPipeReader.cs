@@ -18,13 +18,9 @@ public class TestPipeReader : PipeReader
         ReadResults = new List<ValueTask<ReadResult>>();
     }
 
-    public override void AdvanceTo(SequencePosition consumed)
-    {
-    }
+    public override void AdvanceTo(SequencePosition consumed) { }
 
-    public override void AdvanceTo(SequencePosition consumed, SequencePosition examined)
-    {
-    }
+    public override void AdvanceTo(SequencePosition consumed, SequencePosition examined) { }
 
     public override void CancelPendingRead()
     {
@@ -36,7 +32,9 @@ public class TestPipeReader : PipeReader
         throw new NotImplementedException();
     }
 
-    public override ValueTask<ReadResult> ReadAsync(CancellationToken cancellationToken = new CancellationToken())
+    public override ValueTask<ReadResult> ReadAsync(
+        CancellationToken cancellationToken = new CancellationToken()
+    )
     {
         if (ReadResults.Count == 0)
         {

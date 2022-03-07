@@ -23,12 +23,14 @@ namespace AppHost.Bundle.Tests
 
         [Theory]
         [ActiveIssue("https://github.com/dotnet/runtime/issues/38013")]
-        [InlineData(true)]  // Test renaming the single-exe when contents are extracted
-        [InlineData(false)] // Test renaming the single-exe when contents are not extracted 
+        [InlineData(true)] // Test renaming the single-exe when contents are extracted
+        [InlineData(false)] // Test renaming the single-exe when contents are not extracted
         private void Bundle_can_be_renamed_while_running(bool testExtraction)
         {
             var fixture = sharedTestState.TestFixture.Copy();
-            BundleOptions options = testExtraction ? BundleOptions.BundleAllContent : BundleOptions.None;
+            BundleOptions options = testExtraction
+                ? BundleOptions.BundleAllContent
+                : BundleOptions.None;
             string singleFile = BundleSelfContainedApp(fixture, options);
             string outputDir = Path.GetDirectoryName(singleFile);
             string renameFile = Path.Combine(outputDir, Path.GetRandomFileName());
@@ -36,12 +38,15 @@ namespace AppHost.Bundle.Tests
             string resumeFile = Path.Combine(outputDir, "resume");
 
             // Once the App starts running, it creates the waitFile, and waits until resumeFile file is created.
-            var singleExe = Command.Create(singleFile, waitFile, resumeFile)
+            var singleExe = Command
+                .Create(singleFile, waitFile, resumeFile)
                 .CaptureStdErr()
                 .CaptureStdOut()
                 .Start();
 
-            const int twoMitutes = 120000 /*milliseconds*/;
+            const int twoMitutes =
+                120000 /*milliseconds*/
+            ;
             int waitTime = 0;
             while (!File.Exists(waitFile) && !singleExe.Process.HasExited && waitTime < twoMitutes)
             {
@@ -56,11 +61,7 @@ namespace AppHost.Bundle.Tests
 
             var result = singleExe.WaitForExit(fExpectedToFail: false, twoMitutes);
 
-            result
-                .Should()
-                .Pass()
-                .And
-                .HaveStdOutContaining("Hello World!");
+            result.Should().Pass().And.HaveStdOutContaining("Hello World!");
         }
 
         public class SharedTestState : SharedTestStateBase, IDisposable

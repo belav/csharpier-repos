@@ -70,7 +70,11 @@ namespace Internal.TypeSystem
         public abstract void AppendName(StringBuilder sb, SignatureMethodVariable type);
         public abstract void AppendName(StringBuilder sb, SignatureTypeVariable type);
 
-        protected abstract void AppendNameForNestedType(StringBuilder sb, DefType nestedType, DefType containingType);
+        protected abstract void AppendNameForNestedType(
+            StringBuilder sb,
+            DefType nestedType,
+            DefType containingType
+        );
         protected abstract void AppendNameForNamespaceType(StringBuilder sb, DefType type);
         protected abstract void AppendNameForInstantiatedType(StringBuilder sb, DefType type);
 
@@ -93,8 +97,10 @@ namespace Internal.TypeSystem
                 ArrayType arrayType => AppendName(sb, arrayType, options),
                 ByRefType byRefType => AppendName(sb, byRefType, options),
                 PointerType pointerType => AppendName(sb, pointerType, options),
-                FunctionPointerType functionPointerType => AppendName(sb, functionPointerType, options),
-                GenericParameterDesc genericPointerType => AppendName(sb, genericPointerType, options),
+                FunctionPointerType functionPointerType
+                  => AppendName(sb, functionPointerType, options),
+                GenericParameterDesc genericPointerType
+                  => AppendName(sb, genericPointerType, options),
                 SignatureTypeVariable sigTypeVar => AppendName(sb, sigTypeVar, options),
                 SignatureMethodVariable sigMethodVar => AppendName(sb, sigMethodVar, options),
                 _ => AppendName(sb, (DefType)type, options)
@@ -121,14 +127,43 @@ namespace Internal.TypeSystem
         public abstract TState AppendName(StringBuilder sb, ArrayType type, TOptions options);
         public abstract TState AppendName(StringBuilder sb, ByRefType type, TOptions options);
         public abstract TState AppendName(StringBuilder sb, PointerType type, TOptions options);
-        public abstract TState AppendName(StringBuilder sb, FunctionPointerType type, TOptions options);
-        public abstract TState AppendName(StringBuilder sb, GenericParameterDesc type, TOptions options);
-        public abstract TState AppendName(StringBuilder sb, SignatureMethodVariable type, TOptions options);
-        public abstract TState AppendName(StringBuilder sb, SignatureTypeVariable type, TOptions options);
+        public abstract TState AppendName(
+            StringBuilder sb,
+            FunctionPointerType type,
+            TOptions options
+        );
+        public abstract TState AppendName(
+            StringBuilder sb,
+            GenericParameterDesc type,
+            TOptions options
+        );
+        public abstract TState AppendName(
+            StringBuilder sb,
+            SignatureMethodVariable type,
+            TOptions options
+        );
+        public abstract TState AppendName(
+            StringBuilder sb,
+            SignatureTypeVariable type,
+            TOptions options
+        );
 
-        protected abstract TState AppendNameForNestedType(StringBuilder sb, DefType nestedType, DefType containingType, TOptions options);
-        protected abstract TState AppendNameForNamespaceType(StringBuilder sb, DefType type, TOptions options);
-        protected abstract TState AppendNameForInstantiatedType(StringBuilder sb, DefType type, TOptions options);
+        protected abstract TState AppendNameForNestedType(
+            StringBuilder sb,
+            DefType nestedType,
+            DefType containingType,
+            TOptions options
+        );
+        protected abstract TState AppendNameForNamespaceType(
+            StringBuilder sb,
+            DefType type,
+            TOptions options
+        );
+        protected abstract TState AppendNameForInstantiatedType(
+            StringBuilder sb,
+            DefType type,
+            TOptions options
+        );
 
         protected virtual DefType GetContainingType(DefType possibleInnerType, TOptions options)
         {

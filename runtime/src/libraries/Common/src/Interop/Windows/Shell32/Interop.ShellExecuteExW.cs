@@ -24,6 +24,7 @@ internal static partial class Interop
             public IntPtr lpClass;
             public IntPtr hkeyClass;
             public uint dwHotKey;
+
             // This is a union of hIcon and hMonitor
             public IntPtr hIconMonitor;
             public IntPtr hProcess;
@@ -50,8 +51,12 @@ internal static partial class Interop
         internal const uint SEE_MASK_NOCLOSEPROCESS = 0x00000040;
         internal const uint SEE_MASK_FLAG_NO_UI = 0x00000400;
 
-        [GeneratedDllImport(Libraries.Shell32, CharSet = CharSet.Unicode, ExactSpelling = true, SetLastError = true)]
-        internal static unsafe partial bool ShellExecuteExW(
-            SHELLEXECUTEINFO* pExecInfo);
+        [GeneratedDllImport(
+            Libraries.Shell32,
+            CharSet = CharSet.Unicode,
+            ExactSpelling = true,
+            SetLastError = true
+        )]
+        internal static unsafe partial bool ShellExecuteExW(SHELLEXECUTEINFO* pExecInfo);
     }
 }

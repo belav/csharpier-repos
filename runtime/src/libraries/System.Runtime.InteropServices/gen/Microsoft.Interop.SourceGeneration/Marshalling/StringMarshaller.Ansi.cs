@@ -14,7 +14,9 @@ namespace Microsoft.Interop
 {
     public sealed class AnsiStringMarshaller : ConditionalStackallocMarshallingGenerator
     {
-        private static readonly TypeSyntax s_nativeType = PointerType(PredefinedType(Token(SyntaxKind.ByteKeyword)));
+        private static readonly TypeSyntax s_nativeType = PointerType(
+            PredefinedType(Token(SyntaxKind.ByteKeyword))
+        );
 
         private readonly Utf8StringMarshaller _utf8StringMarshaller;
 
@@ -32,7 +34,9 @@ namespace Microsoft.Interop
                 return Argument(
                     PrefixUnaryExpression(
                         SyntaxKind.AddressOfExpression,
-                        IdentifierName(identifier)));
+                        IdentifierName(identifier)
+                    )
+                );
             }
 
             // <nativeIdentifier>
@@ -50,20 +54,26 @@ namespace Microsoft.Interop
             // byte**
             // or
             // byte*
-            TypeSyntax type = info.IsByRef
-                ? PointerType(AsNativeType(info))
-                : AsNativeType(info);
-            return Parameter(Identifier(info.InstanceIdentifier))
-                .WithType(type);
+            TypeSyntax type = info.IsByRef ? PointerType(AsNativeType(info)) : AsNativeType(info);
+            return Parameter(Identifier(info.InstanceIdentifier)).WithType(type);
         }
 
-        public override IEnumerable<StatementSyntax> Generate(TypePositionInfo info, StubCodeContext context)
+        public override IEnumerable<StatementSyntax> Generate(
+            TypePositionInfo info,
+            StubCodeContext context
+        )
         {
             (string managedIdentifier, string nativeIdentifier) = context.GetIdentifiers(info);
             switch (context.CurrentStage)
             {
                 case StubCodeContext.Stage.Setup:
-                    if (TryGenerateSetupSyntax(info, context, out StatementSyntax conditionalAllocSetup))
+                    if (
+                        TryGenerateSetupSyntax(
+                            info,
+                            context,
+                            out StatementSyntax conditionalAllocSetup
+                        )
+                    )
                         yield return conditionalAllocSetup;
 
                     break;
@@ -78,7 +88,14 @@ namespace Microsoft.Interop
                                     IdentifierName(nativeIdentifier),
                                     CastExpression(
                                         AsNativeType(info),
-                                        StringMarshaller.AllocationExpression(CharEncoding.Ansi, managedIdentifier)))));
+                                        StringMarshaller.AllocationExpression(
+                                            CharEncoding.Ansi,
+                                            managedIdentifier
+                                        )
+                                    )
+                                )
+                            )
+                        );
 
                         // Set the allocation marker to true if it is being used
                         if (UsesConditionalStackAlloc(info, context))
@@ -88,8 +105,13 @@ namespace Microsoft.Interop
                                 ExpressionStatement(
                                     AssignmentExpression(
                                         SyntaxKind.SimpleAssignmentExpression,
-                                        IdentifierName(GetAllocationMarkerIdentifier(info, context)),
-                                        LiteralExpression(SyntaxKind.TrueLiteralExpression))));
+                                        IdentifierName(
+                                            GetAllocationMarkerIdentifier(info, context)
+                                        ),
+                                        LiteralExpression(SyntaxKind.TrueLiteralExpression)
+                                    )
+                                )
+                            );
                         }
 
                         // [Compat] The generated source for ANSI string marshalling does not optimize for
@@ -102,14 +124,17 @@ namespace Microsoft.Interop
                         // {
                         //     << marshal as UTF-8 >>
                         // }
-                        yield return IfStatement(IsWindows,
+                        yield return IfStatement(
+                            IsWindows,
                             windowsBlock,
-                            ElseClause(
-                                Block(_utf8StringMarshaller.Generate(info, context))));
+                            ElseClause(Block(_utf8StringMarshaller.Generate(info, context)))
+                        );
                     }
                     break;
                 case StubCodeContext.Stage.Unmarshal:
-                    if (info.IsManagedReturnPosition || (info.IsByRef && info.RefKind != RefKind.In))
+                    if (
+                        info.IsManagedReturnPosition || (info.IsByRef && info.RefKind != RefKind.In)
+                    )
                     {
                         // if (OperatingSystem.IsWindows())
                         // {
@@ -119,7 +144,8 @@ namespace Microsoft.Interop
                         // {
                         //     << unmarshal as UTF-8 >>
                         // }
-                        yield return IfStatement(IsWindows,
+                        yield return IfStatement(
+                            IsWindows,
                             Block(
                                 ExpressionStatement(
                                     AssignmentExpression(
@@ -129,18 +155,37 @@ namespace Microsoft.Interop
                                             BinaryExpression(
                                                 SyntaxKind.EqualsExpression,
                                                 IdentifierName(nativeIdentifier),
-                                                LiteralExpression(SyntaxKind.DefaultLiteralExpression)),
+                                                LiteralExpression(
+                                                    SyntaxKind.DefaultLiteralExpression
+                                                )
+                                            ),
                                             LiteralExpression(SyntaxKind.NullLiteralExpression),
                                             ObjectCreationExpression(
                                                 PredefinedType(Token(SyntaxKind.StringKeyword)),
-                                                ArgumentList(SingletonSeparatedList(
-                                                    Argument(
-                                                        CastExpression(
-                                                            PointerType(PredefinedType(Token(SyntaxKind.SByteKeyword))),
-                                                            IdentifierName(nativeIdentifier))))),
-                                                initializer: null))))),
-                            ElseClause(
-                                Block(_utf8StringMarshaller.Generate(info, context))));
+                                                ArgumentList(
+                                                    SingletonSeparatedList(
+                                                        Argument(
+                                                            CastExpression(
+                                                                PointerType(
+                                                                    PredefinedType(
+                                                                        Token(
+                                                                            SyntaxKind.SByteKeyword
+                                                                        )
+                                                                    )
+                                                                ),
+                                                                IdentifierName(nativeIdentifier)
+                                                            )
+                                                        )
+                                                    )
+                                                ),
+                                                initializer: null
+                                            )
+                                        )
+                                    )
+                                )
+                            ),
+                            ElseClause(Block(_utf8StringMarshaller.Generate(info, context)))
+                        );
                     }
                     break;
                 case StubCodeContext.Stage.Cleanup:
@@ -149,17 +194,39 @@ namespace Microsoft.Interop
             }
         }
 
-        public override bool UsesNativeIdentifier(TypePositionInfo info, StubCodeContext context) => true;
+        public override bool UsesNativeIdentifier(TypePositionInfo info, StubCodeContext context) =>
+            true;
 
-        public override bool SupportsByValueMarshalKind(ByValueContentsMarshalKind marshalKind, StubCodeContext context) => false;
+        public override bool SupportsByValueMarshalKind(
+            ByValueContentsMarshalKind marshalKind,
+            StubCodeContext context
+        ) => false;
 
         // This marshaller only uses the conditional allocaction base for setup and cleanup.
         // It always allocates for ANSI (Windows) and relies on the UTF-8 (non-Windows) string marshaller for allocation/marshalling.
-        protected override ExpressionSyntax GenerateAllocationExpression(TypePositionInfo info, StubCodeContext context, SyntaxToken byteLengthIdentifier, out bool allocationRequiresByteLength) => throw new NotImplementedException();
-        protected override ExpressionSyntax GenerateByteLengthCalculationExpression(TypePositionInfo info, StubCodeContext context) => throw new NotImplementedException();
-        protected override StatementSyntax GenerateStackallocOnlyValueMarshalling(TypePositionInfo info, StubCodeContext context, SyntaxToken byteLengthIdentifier, SyntaxToken stackAllocPtrIdentifier) => throw new NotImplementedException();
+        protected override ExpressionSyntax GenerateAllocationExpression(
+            TypePositionInfo info,
+            StubCodeContext context,
+            SyntaxToken byteLengthIdentifier,
+            out bool allocationRequiresByteLength
+        ) => throw new NotImplementedException();
 
-        protected override ExpressionSyntax GenerateFreeExpression(TypePositionInfo info, StubCodeContext context)
+        protected override ExpressionSyntax GenerateByteLengthCalculationExpression(
+            TypePositionInfo info,
+            StubCodeContext context
+        ) => throw new NotImplementedException();
+
+        protected override StatementSyntax GenerateStackallocOnlyValueMarshalling(
+            TypePositionInfo info,
+            StubCodeContext context,
+            SyntaxToken byteLengthIdentifier,
+            SyntaxToken stackAllocPtrIdentifier
+        ) => throw new NotImplementedException();
+
+        protected override ExpressionSyntax GenerateFreeExpression(
+            TypePositionInfo info,
+            StubCodeContext context
+        )
         {
             return StringMarshaller.FreeExpression(context.GetIdentifiers(info).native);
         }

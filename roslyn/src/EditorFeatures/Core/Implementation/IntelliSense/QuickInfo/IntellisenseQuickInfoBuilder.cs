@@ -25,9 +25,11 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.QuickInfo
 {
     internal static class IntellisenseQuickInfoBuilder
     {
-        private static async Task<ContainerElement> BuildInteractiveContentAsync(CodeAnalysisQuickInfoItem quickInfoItem,
+        private static async Task<ContainerElement> BuildInteractiveContentAsync(
+            CodeAnalysisQuickInfoItem quickInfoItem,
             IntellisenseQuickInfoBuilderContext? context,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             // Build the first line of QuickInfo item, the images and the Description section should be on the first line with Wrapped style
             var glyphs = quickInfoItem.Tags.GetGlyphs();
@@ -45,11 +47,18 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.QuickInfo
             }
 
             var elements = new List<object>();
-            var descSection = quickInfoItem.Sections.FirstOrDefault(s => s.Kind == QuickInfoSectionKinds.Description);
+            var descSection = quickInfoItem.Sections.FirstOrDefault(
+                s => s.Kind == QuickInfoSectionKinds.Description
+            );
             if (descSection != null)
             {
                 var isFirstElement = true;
-                foreach (var element in Helpers.BuildInteractiveTextElements(descSection.TaggedParts, context))
+                foreach (
+                    var element in Helpers.BuildInteractiveTextElements(
+                        descSection.TaggedParts,
+                        context
+                    )
+                )
                 {
                     if (isFirstElement)
                     {
@@ -65,13 +74,23 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.QuickInfo
                 }
             }
 
-            elements.Insert(0, new ContainerElement(ContainerElementStyle.Wrapped, firstLineElements));
+            elements.Insert(
+                0,
+                new ContainerElement(ContainerElementStyle.Wrapped, firstLineElements)
+            );
 
-            var documentationCommentSection = quickInfoItem.Sections.FirstOrDefault(s => s.Kind == QuickInfoSectionKinds.DocumentationComments);
+            var documentationCommentSection = quickInfoItem.Sections.FirstOrDefault(
+                s => s.Kind == QuickInfoSectionKinds.DocumentationComments
+            );
             if (documentationCommentSection != null)
             {
                 var isFirstElement = true;
-                foreach (var element in Helpers.BuildInteractiveTextElements(documentationCommentSection.TaggedParts, context))
+                foreach (
+                    var element in Helpers.BuildInteractiveTextElements(
+                        documentationCommentSection.TaggedParts,
+                        context
+                    )
+                )
                 {
                     if (isFirstElement)
                     {
@@ -83,7 +102,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.QuickInfo
                         elements[elements.Count - 1] = new ContainerElement(
                             ContainerElementStyle.Stacked,
                             lastElement,
-                            element);
+                            element
+                        );
                     }
                     else
                     {
@@ -94,8 +114,15 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.QuickInfo
 
             // Add the remaining sections as Stacked style
             elements.AddRange(
-                quickInfoItem.Sections.Where(s => s.Kind is not QuickInfoSectionKinds.Description and not QuickInfoSectionKinds.DocumentationComments)
-                                      .SelectMany(s => Helpers.BuildInteractiveTextElements(s.TaggedParts, context)));
+                quickInfoItem.Sections
+                    .Where(
+                        s =>
+                            s.Kind
+                                is not QuickInfoSectionKinds.Description
+                                    and not QuickInfoSectionKinds.DocumentationComments
+                    )
+                    .SelectMany(s => Helpers.BuildInteractiveTextElements(s.TaggedParts, context))
+            );
 
             // build text for RelatedSpan
             if (quickInfoItem.RelatedSpans.Any() && context?.Document is Document document)
@@ -104,17 +131,41 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.QuickInfo
                 var spanSeparatorNeededBefore = false;
                 foreach (var span in quickInfoItem.RelatedSpans)
                 {
-                    var classifiedSpans = await ClassifierHelper.GetClassifiedSpansAsync(document, span, cancellationToken).ConfigureAwait(false);
+                    var classifiedSpans = await ClassifierHelper
+                        .GetClassifiedSpansAsync(document, span, cancellationToken)
+                        .ConfigureAwait(false);
 
-                    var tabSize = document.Project.Solution.Options.GetOption(FormattingOptions.TabSize, document.Project.Language);
+                    var tabSize = document.Project.Solution.Options.GetOption(
+                        FormattingOptions.TabSize,
+                        document.Project.Language
+                    );
                     var text = await document.GetTextAsync(cancellationToken).ConfigureAwait(false);
-                    var spans = IndentationHelper.GetSpansWithAlignedIndentation(text, classifiedSpans.ToImmutableArray(), tabSize);
-                    var textRunsOfSpan = spans.Select(s => new ClassifiedTextRun(s.ClassificationType, text.GetSubText(s.TextSpan).ToString(), ClassifiedTextRunStyle.UseClassificationFont)).ToList();
+                    var spans = IndentationHelper.GetSpansWithAlignedIndentation(
+                        text,
+                        classifiedSpans.ToImmutableArray(),
+                        tabSize
+                    );
+                    var textRunsOfSpan = spans
+                        .Select(
+                            s =>
+                                new ClassifiedTextRun(
+                                    s.ClassificationType,
+                                    text.GetSubText(s.TextSpan).ToString(),
+                                    ClassifiedTextRunStyle.UseClassificationFont
+                                )
+                        )
+                        .ToList();
                     if (textRunsOfSpan.Count > 0)
                     {
                         if (spanSeparatorNeededBefore)
                         {
-                            textRuns.Add(new ClassifiedTextRun(ClassificationTypeNames.WhiteSpace, "\r\n", ClassifiedTextRunStyle.UseClassificationFont));
+                            textRuns.Add(
+                                new ClassifiedTextRun(
+                                    ClassificationTypeNames.WhiteSpace,
+                                    "\r\n",
+                                    ClassifiedTextRunStyle.UseClassificationFont
+                                )
+                            );
                         }
 
                         textRuns.AddRange(textRunsOfSpan);
@@ -129,8 +180,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.QuickInfo
             }
 
             return new ContainerElement(
-                                ContainerElementStyle.Stacked | ContainerElementStyle.VerticalPadding,
-                                elements);
+                ContainerElementStyle.Stacked | ContainerElementStyle.VerticalPadding,
+                elements
+            );
         }
 
         internal static async Task<IntellisenseQuickInfoItem> BuildItemAsync(
@@ -141,10 +193,22 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.QuickInfo
             IUIThreadOperationExecutor operationExecutor,
             IAsynchronousOperationListener asyncListener,
             Lazy<IStreamingFindUsagesPresenter> streamingPresenter,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            var context = new IntellisenseQuickInfoBuilderContext(document, threadingContext, operationExecutor, asyncListener, streamingPresenter);
-            var content = await BuildInteractiveContentAsync(quickInfoItem, context, cancellationToken).ConfigureAwait(false);
+            var context = new IntellisenseQuickInfoBuilderContext(
+                document,
+                threadingContext,
+                operationExecutor,
+                asyncListener,
+                streamingPresenter
+            );
+            var content = await BuildInteractiveContentAsync(
+                    quickInfoItem,
+                    context,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
             return new IntellisenseQuickInfoItem(trackingSpan, content);
         }
@@ -158,7 +222,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.QuickInfo
         internal static Task<ContainerElement> BuildContentWithoutNavigationActionsAsync(
             CodeAnalysisQuickInfoItem quickInfoItem,
             IntellisenseQuickInfoBuilderContext? context,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             return BuildInteractiveContentAsync(quickInfoItem, context, cancellationToken);
         }

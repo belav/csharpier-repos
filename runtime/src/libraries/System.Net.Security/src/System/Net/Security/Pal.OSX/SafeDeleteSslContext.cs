@@ -28,10 +28,15 @@ namespace System.Net
 
         public SafeSslHandle SslContext => _sslContext;
 
-        public SafeDeleteSslContext(SafeFreeSslCredentials credential, SslAuthenticationOptions sslAuthenticationOptions)
-            : base(credential)
+        public SafeDeleteSslContext(
+            SafeFreeSslCredentials credential,
+            SslAuthenticationOptions sslAuthenticationOptions
+        ) : base(credential)
         {
-            Debug.Assert((null != credential) && !credential.IsInvalid, "Invalid credential used in SafeDeleteSslContext");
+            Debug.Assert(
+                (null != credential) && !credential.IsInvalid,
+                "Invalid credential used in SafeDeleteSslContext"
+            );
 
             try
             {
@@ -42,13 +47,13 @@ namespace System.Net
                 // Make sure the class instance is associated to the session and is provided
                 // in the Read/Write callback connection parameter
                 SslSetConnection(_sslContext);
-
                 unsafe
                 {
                     osStatus = Interop.AppleCrypto.SslSetIoCallbacks(
                         _sslContext,
                         &ReadFromConnection,
-                        &WriteToConnection);
+                        &WriteToConnection
+                    );
                 }
 
                 if (osStatus != 0)
@@ -58,8 +63,8 @@ namespace System.Net
 
                 if (sslAuthenticationOptions.CipherSuitesPolicy != null)
                 {
-                    uint[] tlsCipherSuites = sslAuthenticationOptions.CipherSuitesPolicy.Pal.TlsCipherSuites;
-
+                    uint[] tlsCipherSuites =
+                        sslAuthenticationOptions.CipherSuitesPolicy.Pal.TlsCipherSuites;
                     unsafe
                     {
                         fixed (uint* cipherSuites = tlsCipherSuites)
@@ -67,7 +72,8 @@ namespace System.Net
                             osStatus = Interop.AppleCrypto.SslSetEnabledCipherSuites(
                                 _sslContext,
                                 cipherSuites,
-                                tlsCipherSuites.Length);
+                                tlsCipherSuites.Length
+                            );
 
                             if (osStatus != 0)
                             {
@@ -77,12 +83,18 @@ namespace System.Net
                     }
                 }
 
-                if (sslAuthenticationOptions.ApplicationProtocols != null && sslAuthenticationOptions.ApplicationProtocols.Count != 0)
+                if (
+                    sslAuthenticationOptions.ApplicationProtocols != null
+                    && sslAuthenticationOptions.ApplicationProtocols.Count != 0
+                )
                 {
                     // On OSX coretls supports only client side. For server, we will silently ignore the option.
                     if (!sslAuthenticationOptions.IsServer)
                     {
-                        Interop.AppleCrypto.SslCtxSetAlpnProtos(_sslContext, sslAuthenticationOptions.ApplicationProtocols);
+                        Interop.AppleCrypto.SslCtxSetAlpnProtos(
+                            _sslContext,
+                            sslAuthenticationOptions.ApplicationProtocols
+                        );
                     }
                 }
             }
@@ -94,7 +106,10 @@ namespace System.Net
             }
         }
 
-        private static SafeSslHandle CreateSslContext(SafeFreeSslCredentials credential, bool isServer)
+        private static SafeSslHandle CreateSslContext(
+            SafeFreeSslCredentials credential,
+            bool isServer
+        )
         {
             switch (credential.Policy)
             {
@@ -105,7 +120,9 @@ namespace System.Net
                     // let it pass.
                     break;
                 default:
-                    throw new PlatformNotSupportedException(SR.Format(SR.net_encryptionpolicy_notsupported, credential.Policy));
+                    throw new PlatformNotSupportedException(
+                        SR.Format(SR.net_encryptionpolicy_notsupported, credential.Policy)
+                    );
             }
 
             SafeSslHandle sslContext = Interop.AppleCrypto.SslCreateContext(isServer ? 1 : 0);
@@ -168,9 +185,15 @@ namespace System.Net
         }
 
         [UnmanagedCallersOnly]
-        private static unsafe int WriteToConnection(IntPtr connection, byte* data, void** dataLength)
+        private static unsafe int WriteToConnection(
+            IntPtr connection,
+            byte* data,
+            void** dataLength
+        )
         {
-            SafeDeleteSslContext? context = (SafeDeleteSslContext?)GCHandle.FromIntPtr(connection).Target;
+            SafeDeleteSslContext? context = (SafeDeleteSslContext?)GCHandle.FromIntPtr(
+                connection
+            ).Target;
             Debug.Assert(context != null);
 
             // We don't pool these buffers and we can't because there's a race between their us in the native
@@ -200,9 +223,15 @@ namespace System.Net
         }
 
         [UnmanagedCallersOnly]
-        private static unsafe int ReadFromConnection(IntPtr connection, byte* data, void** dataLength)
+        private static unsafe int ReadFromConnection(
+            IntPtr connection,
+            byte* data,
+            void** dataLength
+        )
         {
-            SafeDeleteSslContext? context = (SafeDeleteSslContext?)GCHandle.FromIntPtr(connection).Target;
+            SafeDeleteSslContext? context = (SafeDeleteSslContext?)GCHandle.FromIntPtr(
+                connection
+            ).Target;
             Debug.Assert(context != null);
 
             try
@@ -298,10 +327,12 @@ namespace System.Net
             Interop.AppleCrypto.SslSetMaxProtocolVersion(sslContext, maxProtocolId);
         }
 
-        private static void SetCertificate(SafeSslHandle sslContext, SslStreamCertificateContext context)
+        private static void SetCertificate(
+            SafeSslHandle sslContext,
+            SslStreamCertificateContext context
+        )
         {
             Debug.Assert(sslContext != null, "sslContext != null");
-
 
             IntPtr[] ptrs = new IntPtr[context!.IntermediateCertificates!.Length + 1];
 

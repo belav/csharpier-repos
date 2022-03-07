@@ -10,8 +10,14 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Options
     {
         public int AddImport_SuggestForTypesInReferenceAssemblies
         {
-            get { return GetBooleanOption(SymbolSearchOptions.SuggestForTypesInReferenceAssemblies); }
-            set { SetBooleanOption(SymbolSearchOptions.SuggestForTypesInReferenceAssemblies, value); }
+            get
+            {
+                return GetBooleanOption(SymbolSearchOptions.SuggestForTypesInReferenceAssemblies);
+            }
+            set
+            {
+                SetBooleanOption(SymbolSearchOptions.SuggestForTypesInReferenceAssemblies, value);
+            }
         }
 
         public int AddImport_SuggestForTypesInNuGetPackages

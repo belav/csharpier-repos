@@ -19,21 +19,33 @@ namespace System.ServiceModel.Syndication
         private Collection<SyndicationLink> _links;
         private DateTimeOffset _publishDate;
 
-        public SyndicationItem() : this(null, null, null)
-        {
-        }
+        public SyndicationItem() : this(null, null, null) { }
 
         public SyndicationItem(string title, string content, Uri itemAlternateLink)
-            : this(title, content, itemAlternateLink, null, DateTimeOffset.MinValue)
-        {
-        }
+            : this(title, content, itemAlternateLink, null, DateTimeOffset.MinValue) { }
 
-        public SyndicationItem(string title, string content, Uri itemAlternateLink, string id, DateTimeOffset lastUpdatedTime)
-            : this(title, (content != null) ? new TextSyndicationContent(content) : null, itemAlternateLink, id, lastUpdatedTime)
-        {
-        }
+        public SyndicationItem(
+            string title,
+            string content,
+            Uri itemAlternateLink,
+            string id,
+            DateTimeOffset lastUpdatedTime
+        )
+            : this(
+                title,
+                (content != null) ? new TextSyndicationContent(content) : null,
+                itemAlternateLink,
+                id,
+                lastUpdatedTime
+            ) { }
 
-        public SyndicationItem(string title, SyndicationContent content, Uri itemAlternateLink, string id, DateTimeOffset lastUpdatedTime)
+        public SyndicationItem(
+            string title,
+            SyndicationContent content,
+            Uri itemAlternateLink,
+            string id,
+            DateTimeOffset lastUpdatedTime
+        )
         {
             if (title != null)
             {
@@ -75,7 +87,8 @@ namespace System.ServiceModel.Syndication
             Title = FeedUtils.CloneTextContent(source.Title);
         }
 
-        public Dictionary<XmlQualifiedName, string> AttributeExtensions => _extensions.AttributeExtensions;
+        public Dictionary<XmlQualifiedName, string> AttributeExtensions =>
+            _extensions.AttributeExtensions;
 
         public Collection<SyndicationPerson> Authors
         {
@@ -86,19 +99,23 @@ namespace System.ServiceModel.Syndication
 
         public Collection<SyndicationCategory> Categories
         {
-            get => _categories ?? (_categories = new NullNotAllowedCollection<SyndicationCategory>());
+            get =>
+                _categories ?? (_categories = new NullNotAllowedCollection<SyndicationCategory>());
         }
 
         public SyndicationContent Content { get; set; }
 
         public Collection<SyndicationPerson> Contributors
         {
-            get => _contributors ?? (_contributors = new NullNotAllowedCollection<SyndicationPerson>());
+            get =>
+                _contributors
+                ?? (_contributors = new NullNotAllowedCollection<SyndicationPerson>());
         }
 
         public TextSyndicationContent Copyright { get; set; }
 
-        public SyndicationElementExtensionCollection ElementExtensions => _extensions.ElementExtensions;
+        public SyndicationElementExtensionCollection ElementExtensions =>
+            _extensions.ElementExtensions;
 
         public string Id { get; set; }
 
@@ -155,29 +172,33 @@ namespace System.ServiceModel.Syndication
 
         public static SyndicationItem Load(XmlReader reader) => Load<SyndicationItem>(reader);
 
-        public static TSyndicationItem Load<TSyndicationItem>(XmlReader reader) where TSyndicationItem : SyndicationItem, new()
+        public static TSyndicationItem Load<TSyndicationItem>(XmlReader reader)
+            where TSyndicationItem : SyndicationItem, new()
         {
             if (reader == null)
             {
                 throw new ArgumentNullException(nameof(reader));
             }
 
-            Atom10ItemFormatter<TSyndicationItem> atomSerializer = new Atom10ItemFormatter<TSyndicationItem>();
+            Atom10ItemFormatter<TSyndicationItem> atomSerializer =
+                new Atom10ItemFormatter<TSyndicationItem>();
             if (atomSerializer.CanRead(reader))
             {
                 atomSerializer.ReadFrom(reader);
                 return atomSerializer.Item as TSyndicationItem;
             }
-            Rss20ItemFormatter<TSyndicationItem> rssSerializer = new Rss20ItemFormatter<TSyndicationItem>();
+            Rss20ItemFormatter<TSyndicationItem> rssSerializer =
+                new Rss20ItemFormatter<TSyndicationItem>();
             if (rssSerializer.CanRead(reader))
             {
                 rssSerializer.ReadFrom(reader);
                 return rssSerializer.Item as TSyndicationItem;
             }
 
-            throw new XmlException(SR.Format(SR.UnknownItemXml, reader.LocalName, reader.NamespaceURI));
+            throw new XmlException(
+                SR.Format(SR.UnknownItemXml, reader.LocalName, reader.NamespaceURI)
+            );
         }
-
 
         public void AddPermalink(Uri permalink)
         {
@@ -226,12 +247,22 @@ namespace System.ServiceModel.Syndication
             return new SyndicationPerson();
         }
 
-        protected internal virtual bool TryParseAttribute(string name, string ns, string value, string version)
+        protected internal virtual bool TryParseAttribute(
+            string name,
+            string ns,
+            string value,
+            string version
+        )
         {
             return false;
         }
 
-        protected internal virtual bool TryParseContent(XmlReader reader, string contentType, string version, out SyndicationContent content)
+        protected internal virtual bool TryParseContent(
+            XmlReader reader,
+            string contentType,
+            string version,
+            out SyndicationContent content
+        )
         {
             content = null;
             return false;
@@ -252,7 +283,10 @@ namespace System.ServiceModel.Syndication
             _extensions.WriteElementExtensions(writer);
         }
 
-        internal void LoadElementExtensions(XmlReader readerOverUnparsedExtensions, int maxExtensionSize)
+        internal void LoadElementExtensions(
+            XmlReader readerOverUnparsedExtensions,
+            int maxExtensionSize
+        )
         {
             _extensions.LoadElementExtensions(readerOverUnparsedExtensions, maxExtensionSize);
         }

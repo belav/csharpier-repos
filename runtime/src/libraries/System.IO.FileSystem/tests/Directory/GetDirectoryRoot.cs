@@ -30,30 +30,41 @@ namespace System.IO.Tests
         [Fact]
         public void NestedDirectories()
         {
-            string root = Directory.GetDirectoryRoot(Path.Combine("a", "a", "a", "b") + Path.DirectorySeparatorChar);
+            string root = Directory.GetDirectoryRoot(
+                Path.Combine("a", "a", "a", "b") + Path.DirectorySeparatorChar
+            );
             Assert.Equal(Path.GetPathRoot(Directory.GetCurrentDirectory()), root);
         }
 
         [Fact]
         public void DotPaths()
         {
-            string root = Directory.GetDirectoryRoot(Path.Combine("Test1", ".", "test2", "..", "test3"));
+            string root = Directory.GetDirectoryRoot(
+                Path.Combine("Test1", ".", "test2", "..", "test3")
+            );
             Assert.Equal(Path.GetPathRoot(Directory.GetCurrentDirectory()), root);
         }
 
         [Fact]
         public void WhitespacePaths()
         {
-            string root = Directory.GetDirectoryRoot(Path.Combine("T es t1", "te s  t2", "t  est 3"));
+            string root = Directory.GetDirectoryRoot(
+                Path.Combine("T es t1", "te s  t2", "t  est 3")
+            );
             Assert.Equal(Path.GetPathRoot(Directory.GetCurrentDirectory()), root);
         }
 
         [Fact]
-        [PlatformSpecific(TestPlatforms.Windows)]  // UNC shares
+        [PlatformSpecific(TestPlatforms.Windows)] // UNC shares
         public void UNCShares()
         {
-            string root = Directory.GetDirectoryRoot(new string(Path.DirectorySeparatorChar, 2) + Path.Combine("Test1", "test2", "test3"));
-            Assert.Equal(new string(Path.DirectorySeparatorChar, 2) + Path.Combine("Test1", "test2"), root);
+            string root = Directory.GetDirectoryRoot(
+                new string(Path.DirectorySeparatorChar, 2) + Path.Combine("Test1", "test2", "test3")
+            );
+            Assert.Equal(
+                new string(Path.DirectorySeparatorChar, 2) + Path.Combine("Test1", "test2"),
+                root
+            );
         }
     }
 }

@@ -33,15 +33,7 @@ public class CookieHeaderValueTest
 
     public static TheoryData<string> InvalidCookieHeaderDataSet
     {
-        get
-        {
-            return new TheoryData<string>
-                {
-                    "=value",
-                    "name=value;",
-                    "name=value,",
-                };
-        }
+        get { return new TheoryData<string> { "=value", "name=value;", "name=value,", }; }
     }
 
     public static TheoryData<string> InvalidCookieNames
@@ -49,16 +41,16 @@ public class CookieHeaderValueTest
         get
         {
             return new TheoryData<string>
-                {
-                    "<acb>",
-                    "{acb}",
-                    "[acb]",
-                    "\"acb\"",
-                    "a,b",
-                    "a;b",
-                    "a\\b",
-                    "a b",
-                };
+            {
+                "<acb>",
+                "{acb}",
+                "[acb]",
+                "\"acb\"",
+                "a,b",
+                "a;b",
+                "a\\b",
+                "a b",
+            };
         }
     }
 
@@ -67,16 +59,16 @@ public class CookieHeaderValueTest
         get
         {
             return new TheoryData<string>
-                {
-                    { "\"" },
-                    { "a,b" },
-                    { "a;b" },
-                    { "a\\b" },
-                    { "\"abc" },
-                    { "a\"bc" },
-                    { "abc\"" },
-                    { "a b" },
-                };
+            {
+                { "\"" },
+                { "a,b" },
+                { "a;b" },
+                { "a\\b" },
+                { "\"abc" },
+                { "a\"bc" },
+                { "abc\"" },
+                { "a b" },
+            };
         }
     }
 
@@ -99,20 +91,35 @@ public class CookieHeaderValueTest
 
             dataset.Add(new[] { header1 }.ToList(), new[] { string1 });
             dataset.Add(new[] { header1, header1 }.ToList(), new[] { string1, string1 });
-            dataset.Add(new[] { header1, header1 }.ToList(), new[] { string1, null, "", " ", ";", " , ", string1 });
+            dataset.Add(
+                new[] { header1, header1 }.ToList(),
+                new[] { string1, null, "", " ", ";", " , ", string1 }
+            );
             dataset.Add(new[] { header2 }.ToList(), new[] { string2 });
             dataset.Add(new[] { header1, header2 }.ToList(), new[] { string1, string2 });
             dataset.Add(new[] { header1, header2 }.ToList(), new[] { string1 + ", " + string2 });
             dataset.Add(new[] { header2, header1 }.ToList(), new[] { string2 + "; " + string1 });
-            dataset.Add(new[] { header1, header2, header3, header4 }.ToList(), new[] { string1, string2, string3, string4 });
-            dataset.Add(new[] { header1, header2, header3, header4 }.ToList(), new[] { string.Join(",", string1, string2, string3, string4) });
-            dataset.Add(new[] { header1, header2, header3, header4 }.ToList(), new[] { string.Join(";", string1, string2, string3, string4) });
+            dataset.Add(
+                new[] { header1, header2, header3, header4 }.ToList(),
+                new[] { string1, string2, string3, string4 }
+            );
+            dataset.Add(
+                new[] { header1, header2, header3, header4 }.ToList(),
+                new[] { string.Join(",", string1, string2, string3, string4) }
+            );
+            dataset.Add(
+                new[] { header1, header2, header3, header4 }.ToList(),
+                new[] { string.Join(";", string1, string2, string3, string4) }
+            );
 
             return dataset;
         }
     }
 
-    public static TheoryData<IList<CookieHeaderValue>?, string?[]> ListWithInvalidCookieHeaderDataSet
+    public static TheoryData<
+        IList<CookieHeaderValue>?,
+        string?[]
+    > ListWithInvalidCookieHeaderDataSet
     {
         get
         {
@@ -126,28 +133,71 @@ public class CookieHeaderValueTest
             var header3 = new CookieHeaderValue("name3", "value3");
             var validString3 = "name3=value3";
 
-            var invalidString1 = "ipt={\"v\":{\"L\":3},\"pt\":{\"d\":3},ct\":{},\"_t\":44,\"_v\":\"2\"}";
+            var invalidString1 =
+                "ipt={\"v\":{\"L\":3},\"pt\":{\"d\":3},ct\":{},\"_t\":44,\"_v\":\"2\"}";
 
             dataset.Add(null, new[] { invalidString1 });
             dataset.Add(new[] { header1 }.ToList(), new[] { validString1, invalidString1 });
-            dataset.Add(new[] { header1 }.ToList(), new[] { validString1, null, "", " ", ";", " , ", invalidString1 });
-            dataset.Add(new[] { header1 }.ToList(), new[] { invalidString1, null, "", " ", ";", " , ", validString1 });
+            dataset.Add(
+                new[] { header1 }.ToList(),
+                new[] { validString1, null, "", " ", ";", " , ", invalidString1 }
+            );
+            dataset.Add(
+                new[] { header1 }.ToList(),
+                new[] { invalidString1, null, "", " ", ";", " , ", validString1 }
+            );
             dataset.Add(new[] { header1 }.ToList(), new[] { validString1 + ", " + invalidString1 });
             dataset.Add(new[] { header2 }.ToList(), new[] { invalidString1 + ", " + validString2 });
             dataset.Add(new[] { header1 }.ToList(), new[] { invalidString1 + "; " + validString1 });
             dataset.Add(new[] { header2 }.ToList(), new[] { validString2 + "; " + invalidString1 });
-            dataset.Add(new[] { header1, header2, header3 }.ToList(), new[] { invalidString1, validString1, validString2, validString3 });
-            dataset.Add(new[] { header1, header2, header3 }.ToList(), new[] { validString1, invalidString1, validString2, validString3 });
-            dataset.Add(new[] { header1, header2, header3 }.ToList(), new[] { validString1, validString2, invalidString1, validString3 });
-            dataset.Add(new[] { header1, header2, header3 }.ToList(), new[] { validString1, validString2, validString3, invalidString1 });
-            dataset.Add(new[] { header1, header2, header3 }.ToList(), new[] { string.Join(",", invalidString1, validString1, validString2, validString3) });
-            dataset.Add(new[] { header1, header2, header3 }.ToList(), new[] { string.Join(",", validString1, invalidString1, validString2, validString3) });
-            dataset.Add(new[] { header1, header2, header3 }.ToList(), new[] { string.Join(",", validString1, validString2, invalidString1, validString3) });
-            dataset.Add(new[] { header1, header2, header3 }.ToList(), new[] { string.Join(",", validString1, validString2, validString3, invalidString1) });
-            dataset.Add(new[] { header1, header2, header3 }.ToList(), new[] { string.Join(";", invalidString1, validString1, validString2, validString3) });
-            dataset.Add(new[] { header1, header2, header3 }.ToList(), new[] { string.Join(";", validString1, invalidString1, validString2, validString3) });
-            dataset.Add(new[] { header1, header2, header3 }.ToList(), new[] { string.Join(";", validString1, validString2, invalidString1, validString3) });
-            dataset.Add(new[] { header1, header2, header3 }.ToList(), new[] { string.Join(";", validString1, validString2, validString3, invalidString1) });
+            dataset.Add(
+                new[] { header1, header2, header3 }.ToList(),
+                new[] { invalidString1, validString1, validString2, validString3 }
+            );
+            dataset.Add(
+                new[] { header1, header2, header3 }.ToList(),
+                new[] { validString1, invalidString1, validString2, validString3 }
+            );
+            dataset.Add(
+                new[] { header1, header2, header3 }.ToList(),
+                new[] { validString1, validString2, invalidString1, validString3 }
+            );
+            dataset.Add(
+                new[] { header1, header2, header3 }.ToList(),
+                new[] { validString1, validString2, validString3, invalidString1 }
+            );
+            dataset.Add(
+                new[] { header1, header2, header3 }.ToList(),
+                new[] { string.Join(",", invalidString1, validString1, validString2, validString3) }
+            );
+            dataset.Add(
+                new[] { header1, header2, header3 }.ToList(),
+                new[] { string.Join(",", validString1, invalidString1, validString2, validString3) }
+            );
+            dataset.Add(
+                new[] { header1, header2, header3 }.ToList(),
+                new[] { string.Join(",", validString1, validString2, invalidString1, validString3) }
+            );
+            dataset.Add(
+                new[] { header1, header2, header3 }.ToList(),
+                new[] { string.Join(",", validString1, validString2, validString3, invalidString1) }
+            );
+            dataset.Add(
+                new[] { header1, header2, header3 }.ToList(),
+                new[] { string.Join(";", invalidString1, validString1, validString2, validString3) }
+            );
+            dataset.Add(
+                new[] { header1, header2, header3 }.ToList(),
+                new[] { string.Join(";", validString1, invalidString1, validString2, validString3) }
+            );
+            dataset.Add(
+                new[] { header1, header2, header3 }.ToList(),
+                new[] { string.Join(";", validString1, validString2, invalidString1, validString3) }
+            );
+            dataset.Add(
+                new[] { header1, header2, header3 }.ToList(),
+                new[] { string.Join(";", validString1, validString2, validString3, invalidString1) }
+            );
 
             return dataset;
         }
@@ -211,7 +261,10 @@ public class CookieHeaderValueTest
 
     [Theory]
     [MemberData(nameof(CookieHeaderDataSet))]
-    public void CookieHeaderValue_Parse_AcceptsValidValues(CookieHeaderValue cookie, string expectedValue)
+    public void CookieHeaderValue_Parse_AcceptsValidValues(
+        CookieHeaderValue cookie,
+        string expectedValue
+    )
     {
         var header = CookieHeaderValue.Parse(expectedValue);
 
@@ -221,7 +274,10 @@ public class CookieHeaderValueTest
 
     [Theory]
     [MemberData(nameof(CookieHeaderDataSet))]
-    public void CookieHeaderValue_TryParse_AcceptsValidValues(CookieHeaderValue cookie, string expectedValue)
+    public void CookieHeaderValue_TryParse_AcceptsValidValues(
+        CookieHeaderValue cookie,
+        string expectedValue
+    )
     {
         Assert.True(CookieHeaderValue.TryParse(expectedValue, out var header));
 
@@ -245,7 +301,10 @@ public class CookieHeaderValueTest
 
     [Theory]
     [MemberData(nameof(ListOfCookieHeaderDataSet))]
-    public void CookieHeaderValue_ParseList_AcceptsValidValues(IList<CookieHeaderValue> cookies, string[] input)
+    public void CookieHeaderValue_ParseList_AcceptsValidValues(
+        IList<CookieHeaderValue> cookies,
+        string[] input
+    )
     {
         var results = CookieHeaderValue.ParseList(input);
 
@@ -254,7 +313,10 @@ public class CookieHeaderValueTest
 
     [Theory]
     [MemberData(nameof(ListOfCookieHeaderDataSet))]
-    public void CookieHeaderValue_ParseStrictList_AcceptsValidValues(IList<CookieHeaderValue> cookies, string[] input)
+    public void CookieHeaderValue_ParseStrictList_AcceptsValidValues(
+        IList<CookieHeaderValue> cookies,
+        string[] input
+    )
     {
         var results = CookieHeaderValue.ParseStrictList(input);
 
@@ -263,7 +325,10 @@ public class CookieHeaderValueTest
 
     [Theory]
     [MemberData(nameof(ListOfCookieHeaderDataSet))]
-    public void CookieHeaderValue_TryParseList_AcceptsValidValues(IList<CookieHeaderValue> cookies, string[] input)
+    public void CookieHeaderValue_TryParseList_AcceptsValidValues(
+        IList<CookieHeaderValue> cookies,
+        string[] input
+    )
     {
         var result = CookieHeaderValue.TryParseList(input, out var results);
         Assert.True(result);
@@ -273,7 +338,10 @@ public class CookieHeaderValueTest
 
     [Theory]
     [MemberData(nameof(ListOfCookieHeaderDataSet))]
-    public void CookieHeaderValue_TryParseStrictList_AcceptsValidValues(IList<CookieHeaderValue> cookies, string[] input)
+    public void CookieHeaderValue_TryParseStrictList_AcceptsValidValues(
+        IList<CookieHeaderValue> cookies,
+        string[] input
+    )
     {
         var result = CookieHeaderValue.TryParseStrictList(input, out var results);
         Assert.True(result);
@@ -283,7 +351,10 @@ public class CookieHeaderValueTest
 
     [Theory]
     [MemberData(nameof(ListWithInvalidCookieHeaderDataSet))]
-    public void CookieHeaderValue_ParseList_ExcludesInvalidValues(IList<CookieHeaderValue> cookies, string[] input)
+    public void CookieHeaderValue_ParseList_ExcludesInvalidValues(
+        IList<CookieHeaderValue> cookies,
+        string[] input
+    )
     {
         var results = CookieHeaderValue.ParseList(input);
         // ParseList always returns a list, even if empty. TryParseList may return null (via out).
@@ -292,7 +363,10 @@ public class CookieHeaderValueTest
 
     [Theory]
     [MemberData(nameof(ListWithInvalidCookieHeaderDataSet))]
-    public void CookieHeaderValue_TryParseList_ExcludesInvalidValues(IList<CookieHeaderValue> cookies, string[] input)
+    public void CookieHeaderValue_TryParseList_ExcludesInvalidValues(
+        IList<CookieHeaderValue> cookies,
+        string[] input
+    )
     {
         var result = CookieHeaderValue.TryParseList(input, out var results);
         Assert.Equal(cookies, results);
@@ -303,9 +377,10 @@ public class CookieHeaderValueTest
     [MemberData(nameof(ListWithInvalidCookieHeaderDataSet))]
     public void CookieHeaderValue_ParseStrictList_ThrowsForAnyInvalidValues(
 #pragma warning disable xUnit1026 // Theory methods should use all of their parameters
-            IList<CookieHeaderValue> cookies,
+        IList<CookieHeaderValue> cookies,
 #pragma warning restore xUnit1026 // Theory methods should use all of their parameters
-            string[] input)
+        string[] input
+    )
     {
         Assert.Throws<FormatException>(() => CookieHeaderValue.ParseStrictList(input));
     }
@@ -314,9 +389,10 @@ public class CookieHeaderValueTest
     [MemberData(nameof(ListWithInvalidCookieHeaderDataSet))]
     public void CookieHeaderValue_TryParseStrictList_FailsForAnyInvalidValues(
 #pragma warning disable xUnit1026 // Theory methods should use all of their parameters
-            IList<CookieHeaderValue> cookies,
+        IList<CookieHeaderValue> cookies,
 #pragma warning restore xUnit1026 // Theory methods should use all of their parameters
-            string[] input)
+        string[] input
+    )
     {
         var result = CookieHeaderValue.TryParseStrictList(input, out var results);
         Assert.Null(results);

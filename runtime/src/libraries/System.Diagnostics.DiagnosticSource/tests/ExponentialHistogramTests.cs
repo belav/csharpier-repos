@@ -19,7 +19,9 @@ namespace System.Diagnostics.Metrics.Tests
         public void HappyPath()
         {
             QuantileAggregation quantiles = new QuantileAggregation(0.5, 0.95);
-            ExponentialHistogramAggregator aggregator = new ExponentialHistogramAggregator(quantiles);
+            ExponentialHistogramAggregator aggregator = new ExponentialHistogramAggregator(
+                quantiles
+            );
             aggregator.Update(1);
             aggregator.Update(2);
             aggregator.Update(3);
@@ -37,7 +39,9 @@ namespace System.Diagnostics.Metrics.Tests
         public void MinMax()
         {
             QuantileAggregation quantiles = new QuantileAggregation(0.0, 1.0);
-            ExponentialHistogramAggregator aggregator = new ExponentialHistogramAggregator(quantiles);
+            ExponentialHistogramAggregator aggregator = new ExponentialHistogramAggregator(
+                quantiles
+            );
             aggregator.Update(1);
             aggregator.Update(2);
             aggregator.Update(3);
@@ -55,7 +59,9 @@ namespace System.Diagnostics.Metrics.Tests
         public void NoQuantiles()
         {
             QuantileAggregation quantiles = new QuantileAggregation();
-            ExponentialHistogramAggregator aggregator = new ExponentialHistogramAggregator(quantiles);
+            ExponentialHistogramAggregator aggregator = new ExponentialHistogramAggregator(
+                quantiles
+            );
             aggregator.Update(1);
             aggregator.Update(2);
             aggregator.Update(3);
@@ -69,7 +75,9 @@ namespace System.Diagnostics.Metrics.Tests
         public void OutOfBoundsQuantiles()
         {
             QuantileAggregation quantiles = new QuantileAggregation(-3, 100);
-            ExponentialHistogramAggregator aggregator = new ExponentialHistogramAggregator(quantiles);
+            ExponentialHistogramAggregator aggregator = new ExponentialHistogramAggregator(
+                quantiles
+            );
             aggregator.Update(1);
             aggregator.Update(2);
             aggregator.Update(3);
@@ -87,7 +95,9 @@ namespace System.Diagnostics.Metrics.Tests
         public void UnorderedQuantiles()
         {
             QuantileAggregation quantiles = new QuantileAggregation(0.9, 0.1);
-            ExponentialHistogramAggregator aggregator = new ExponentialHistogramAggregator(quantiles);
+            ExponentialHistogramAggregator aggregator = new ExponentialHistogramAggregator(
+                quantiles
+            );
             aggregator.Update(1);
             aggregator.Update(2);
             aggregator.Update(3);
@@ -105,7 +115,9 @@ namespace System.Diagnostics.Metrics.Tests
         public void DifferencesLessThanErrorBound()
         {
             QuantileAggregation quantiles = new QuantileAggregation(0.5);
-            ExponentialHistogramAggregator aggregator = new ExponentialHistogramAggregator(quantiles);
+            ExponentialHistogramAggregator aggregator = new ExponentialHistogramAggregator(
+                quantiles
+            );
             aggregator.Update(90.01);
             aggregator.Update(90.01);
             aggregator.Update(90.02);
@@ -120,7 +132,9 @@ namespace System.Diagnostics.Metrics.Tests
 
             Assert.Equal(0.5, stats.Quantiles[0].Quantile);
             Assert.Equal(100, stats.Quantiles[0].Value);
-            Assert.True(Math.Abs(100.01 - stats.Quantiles[0].Value) <= 100.01 * quantiles.MaxRelativeError);
+            Assert.True(
+                Math.Abs(100.01 - stats.Quantiles[0].Value) <= 100.01 * quantiles.MaxRelativeError
+            );
         }
 
         [Fact]
@@ -128,7 +142,9 @@ namespace System.Diagnostics.Metrics.Tests
         {
             QuantileAggregation quantiles = new QuantileAggregation(0.5);
             quantiles.MaxRelativeError = 0.0001;
-            ExponentialHistogramAggregator aggregator = new ExponentialHistogramAggregator(quantiles);
+            ExponentialHistogramAggregator aggregator = new ExponentialHistogramAggregator(
+                quantiles
+            );
             aggregator.Update(90.01);
             aggregator.Update(90.01);
             aggregator.Update(90.02);
@@ -145,14 +161,18 @@ namespace System.Diagnostics.Metrics.Tests
 
             //At default error of 0.001 result of 100 would be acceptable, but with higher precision it is not
             Assert.True(100 < stats.Quantiles[0].Value);
-            Assert.True(Math.Abs(100.01 - stats.Quantiles[0].Value) <= 100.01 * quantiles.MaxRelativeError);
+            Assert.True(
+                Math.Abs(100.01 - stats.Quantiles[0].Value) <= 100.01 * quantiles.MaxRelativeError
+            );
         }
 
         [Fact]
         public void NoUpdates()
         {
             QuantileAggregation quantiles = new QuantileAggregation(0.5);
-            ExponentialHistogramAggregator aggregator = new ExponentialHistogramAggregator(quantiles);
+            ExponentialHistogramAggregator aggregator = new ExponentialHistogramAggregator(
+                quantiles
+            );
             var stats = (HistogramStatistics)aggregator.Collect();
 
             Assert.NotNull(stats);
@@ -163,7 +183,9 @@ namespace System.Diagnostics.Metrics.Tests
         public void OneUpdate()
         {
             QuantileAggregation quantiles = new QuantileAggregation(0.5);
-            ExponentialHistogramAggregator aggregator = new ExponentialHistogramAggregator(quantiles);
+            ExponentialHistogramAggregator aggregator = new ExponentialHistogramAggregator(
+                quantiles
+            );
             aggregator.Update(99);
             var stats = (HistogramStatistics)aggregator.Collect();
 
@@ -177,7 +199,9 @@ namespace System.Diagnostics.Metrics.Tests
         public void NoUpdatesInSomeIntervals()
         {
             QuantileAggregation quantiles = new QuantileAggregation(0.5);
-            ExponentialHistogramAggregator aggregator = new ExponentialHistogramAggregator(quantiles);
+            ExponentialHistogramAggregator aggregator = new ExponentialHistogramAggregator(
+                quantiles
+            );
             aggregator.Update(1);
             aggregator.Update(2);
             aggregator.Update(3);
@@ -194,7 +218,9 @@ namespace System.Diagnostics.Metrics.Tests
         public void UpdatesAfterNoUpdates()
         {
             QuantileAggregation quantiles = new QuantileAggregation(0.5);
-            ExponentialHistogramAggregator aggregator = new ExponentialHistogramAggregator(quantiles);
+            ExponentialHistogramAggregator aggregator = new ExponentialHistogramAggregator(
+                quantiles
+            );
             var stats = (HistogramStatistics)aggregator.Collect();
             Assert.NotNull(stats);
             Assert.Equal(0, stats.Quantiles.Length);
@@ -216,7 +242,9 @@ namespace System.Diagnostics.Metrics.Tests
         public void IterateCollect()
         {
             QuantileAggregation quantiles = new QuantileAggregation(0.5);
-            ExponentialHistogramAggregator aggregator = new ExponentialHistogramAggregator(quantiles);
+            ExponentialHistogramAggregator aggregator = new ExponentialHistogramAggregator(
+                quantiles
+            );
 
             aggregator.Update(1);
             aggregator.Update(2);
@@ -246,7 +274,9 @@ namespace System.Diagnostics.Metrics.Tests
         public void NegativeValues()
         {
             QuantileAggregation quantiles = new QuantileAggregation(0.5);
-            ExponentialHistogramAggregator aggregator = new ExponentialHistogramAggregator(quantiles);
+            ExponentialHistogramAggregator aggregator = new ExponentialHistogramAggregator(
+                quantiles
+            );
 
             aggregator.Update(-1);
             aggregator.Update(-2);
@@ -265,7 +295,9 @@ namespace System.Diagnostics.Metrics.Tests
         public void ZeroValues()
         {
             QuantileAggregation quantiles = new QuantileAggregation(0.5);
-            ExponentialHistogramAggregator aggregator = new ExponentialHistogramAggregator(quantiles);
+            ExponentialHistogramAggregator aggregator = new ExponentialHistogramAggregator(
+                quantiles
+            );
 
             aggregator.Update(0);
             aggregator.Update(0);
@@ -284,7 +316,9 @@ namespace System.Diagnostics.Metrics.Tests
         public void MixedValues()
         {
             QuantileAggregation quantiles = new QuantileAggregation(0.5);
-            ExponentialHistogramAggregator aggregator = new ExponentialHistogramAggregator(quantiles);
+            ExponentialHistogramAggregator aggregator = new ExponentialHistogramAggregator(
+                quantiles
+            );
 
             aggregator.Update(19);
             aggregator.Update(-4);
@@ -302,8 +336,10 @@ namespace System.Diagnostics.Metrics.Tests
         [Fact]
         public void FilterNaNAndInfinities()
         {
-            QuantileAggregation quantiles = new QuantileAggregation(0,1);
-            ExponentialHistogramAggregator aggregator = new ExponentialHistogramAggregator(quantiles);
+            QuantileAggregation quantiles = new QuantileAggregation(0, 1);
+            ExponentialHistogramAggregator aggregator = new ExponentialHistogramAggregator(
+                quantiles
+            );
 
             aggregator.Update(double.NaN);
             aggregator.Update(-double.NaN);

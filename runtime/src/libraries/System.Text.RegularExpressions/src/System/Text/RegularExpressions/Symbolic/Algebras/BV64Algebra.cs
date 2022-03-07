@@ -35,8 +35,12 @@ namespace System.Text.RegularExpressions.Symbolic
             return size;
         }
 
-        public BV64Algebra(CharSetSolver solver, BDD[] minterms) :
-            base(new MintermClassifier(solver, minterms), solver.ComputeDomainSizes(minterms), minterms)
+        public BV64Algebra(CharSetSolver solver, BDD[] minterms)
+            : base(
+                new MintermClassifier(solver, minterms),
+                solver.ComputeDomainSizes(minterms),
+                minterms
+            )
         {
             Debug.Assert(minterms.Length <= 64);
             _mintermGenerator = new MintermGenerator<ulong>(this);
@@ -55,7 +59,8 @@ namespace System.Text.RegularExpressions.Symbolic
 
         public bool AreEquivalent(ulong predicate1, ulong predicate2) => predicate1 == predicate2;
 
-        public List<ulong> GenerateMinterms(IEnumerable<ulong> constraints) => _mintermGenerator.GenerateMinterms(constraints);
+        public List<ulong> GenerateMinterms(IEnumerable<ulong> constraints) =>
+            _mintermGenerator.GenerateMinterms(constraints);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool IsSatisfiable(ulong predicate) => predicate != _false;
@@ -88,7 +93,12 @@ namespace System.Text.RegularExpressions.Symbolic
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public ulong Or(ulong predicate1, ulong predicate2) => predicate1 | predicate2;
 
-        public ulong RangeConstraint(char lower, char upper, bool caseInsensitive = false, string? culture = null) => throw new NotSupportedException();
+        public ulong RangeConstraint(
+            char lower,
+            char upper,
+            bool caseInsensitive = false,
+            string? culture = null
+        ) => throw new NotSupportedException();
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public ulong CharConstraint(char c, bool caseInsensitive = false, string? culture = null)
@@ -157,7 +167,8 @@ namespace System.Text.RegularExpressions.Symbolic
             return minterms;
         }
 
-        public IEnumerable<char> GenerateAllCharacters(ulong set) => throw new NotSupportedException();
+        public IEnumerable<char> GenerateAllCharacters(ulong set) =>
+            throw new NotSupportedException();
 
         /// <summary>Pretty print the bitvector bv as the character set it represents.</summary>
         public string PrettyPrint(ulong bv)

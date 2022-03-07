@@ -3,6 +3,7 @@
 
 // static field
 using System;
+
 namespace Precise
 {
     class Driver
@@ -11,7 +12,9 @@ namespace Precise
         {
             try
             {
-                Console.WriteLine("Testing .cctor() invocation by accessing static field across assembly");
+                Console.WriteLine(
+                    "Testing .cctor() invocation by accessing static field across assembly"
+                );
                 Console.WriteLine();
                 Console.WriteLine("Before calling static field");
                 // .cctor should not run yet

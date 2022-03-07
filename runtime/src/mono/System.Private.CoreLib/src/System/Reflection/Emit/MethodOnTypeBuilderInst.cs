@@ -72,8 +72,11 @@ namespace System.Reflection.Emit
                 this.generic_method_definition = method;
         }
 
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode",
-            Justification = "Reflection.Emit is not subject to trimming")]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:RequiresUnreferencedCode",
+            Justification = "Reflection.Emit is not subject to trimming"
+        )]
         private static MethodInfo ExtractBaseMethod(MethodInfo info)
         {
             if (info is MethodBuilder)
@@ -100,9 +103,12 @@ namespace System.Reflection.Emit
         }
 
         // Called from the runtime to return the corresponding finished MethodInfo object
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2060:MakeGenericMethod",
-            Justification = "MethodOnTypeBuilderInst is Reflection.Emit's underlying implementation of MakeGenericMethod. " +
-                "Callers of the outer calls to MakeGenericMethod will be warned as appropriate.")]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2060:MakeGenericMethod",
+            Justification = "MethodOnTypeBuilderInst is Reflection.Emit's underlying implementation of MakeGenericMethod. "
+                + "Callers of the outer calls to MakeGenericMethod will be warned as appropriate."
+        )]
         internal MethodInfo RuntimeResolve()
         {
             Type type = instantiation.InternalResolve();
@@ -123,42 +129,27 @@ namespace System.Reflection.Emit
 
         public override Type DeclaringType
         {
-            get
-            {
-                return instantiation;
-            }
+            get { return instantiation; }
         }
 
         public override string Name
         {
-            get
-            {
-                return base_method.Name;
-            }
+            get { return base_method.Name; }
         }
 
         public override Type ReflectedType
         {
-            get
-            {
-                return instantiation;
-            }
+            get { return instantiation; }
         }
 
         public override Type ReturnType
         {
-            get
-            {
-                return base_method.ReturnType;
-            }
+            get { return base_method.ReturnType; }
         }
 
         public override Module Module
         {
-            get
-            {
-                return base_method.Module;
-            }
+            get { return base_method.Module; }
         }
 
         public override bool IsDefined(Type attributeType, bool inherit)
@@ -186,6 +177,7 @@ namespace System.Reflection.Emit
             sb.Append(')');
             return sb.ToString();
         }
+
         //
         // MethodBase members
         //
@@ -207,10 +199,7 @@ namespace System.Reflection.Emit
 
         public override int MetadataToken
         {
-            get
-            {
-                return base.MetadataToken;
-            }
+            get { return base.MetadataToken; }
         }
 
         internal override int GetParametersCount()
@@ -218,36 +207,35 @@ namespace System.Reflection.Emit
             return base_method.GetParametersCount();
         }
 
-        public override object? Invoke(object? obj, BindingFlags invokeAttr, Binder? binder, object?[]? parameters, CultureInfo? culture)
+        public override object? Invoke(
+            object? obj,
+            BindingFlags invokeAttr,
+            Binder? binder,
+            object?[]? parameters,
+            CultureInfo? culture
+        )
         {
             throw new NotSupportedException();
         }
 
         public override RuntimeMethodHandle MethodHandle
         {
-            get
-            {
-                throw new NotSupportedException();
-            }
+            get { throw new NotSupportedException(); }
         }
 
         public override MethodAttributes Attributes
         {
-            get
-            {
-                return base_method.Attributes;
-            }
+            get { return base_method.Attributes; }
         }
 
         public override CallingConventions CallingConvention
         {
-            get
-            {
-                return base_method.CallingConvention;
-            }
+            get { return base_method.CallingConvention; }
         }
 
-        [RequiresUnreferencedCode("If some of the generic arguments are annotated (either with DynamicallyAccessedMembersAttribute, or generic constraints), trimming can't validate that the requirements of those annotations are met.")]
+        [RequiresUnreferencedCode(
+            "If some of the generic arguments are annotated (either with DynamicallyAccessedMembersAttribute, or generic constraints), trimming can't validate that the requirements of those annotations are met."
+        )]
         public override MethodInfo MakeGenericMethod(params Type[] methodInstantiation)
         {
             if (!base_method.IsGenericMethodDefinition || (method_arguments != null))
@@ -304,18 +292,12 @@ namespace System.Reflection.Emit
 
         public override bool IsGenericMethodDefinition
         {
-            get
-            {
-                return base_method.IsGenericMethodDefinition && method_arguments == null;
-            }
+            get { return base_method.IsGenericMethodDefinition && method_arguments == null; }
         }
 
         public override bool IsGenericMethod
         {
-            get
-            {
-                return base_method.IsGenericMethodDefinition;
-            }
+            get { return base_method.IsGenericMethodDefinition; }
         }
 
         //
@@ -329,18 +311,12 @@ namespace System.Reflection.Emit
 
         public override ParameterInfo ReturnParameter
         {
-            get
-            {
-                throw new NotSupportedException();
-            }
+            get { throw new NotSupportedException(); }
         }
 
         public override ICustomAttributeProvider ReturnTypeCustomAttributes
         {
-            get
-            {
-                throw new NotSupportedException();
-            }
+            get { throw new NotSupportedException(); }
         }
     }
 }

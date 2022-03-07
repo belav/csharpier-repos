@@ -28,25 +28,45 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         public virtual void Throws_when_added_property_is_not_of_primitive_type()
         {
             var modelBuilder = CreateConventionlessInternalModelBuilder();
-            var entityTypeBuilder = modelBuilder.Entity(typeof(NonPrimitiveAsPropertyEntity), ConfigurationSource.Convention);
+            var entityTypeBuilder = modelBuilder.Entity(
+                typeof(NonPrimitiveAsPropertyEntity),
+                ConfigurationSource.Convention
+            );
             entityTypeBuilder.Property(
-                typeof(NavigationAsProperty), nameof(NonPrimitiveAsPropertyEntity.Property), ConfigurationSource.Convention);
+                typeof(NavigationAsProperty),
+                nameof(NonPrimitiveAsPropertyEntity.Property),
+                ConfigurationSource.Convention
+            );
 
             Assert.Equal(
                 CoreStrings.PropertyNotMapped(
                     typeof(NonPrimitiveAsPropertyEntity).ShortDisplayName(),
                     nameof(NonPrimitiveAsPropertyEntity.Property),
-                    typeof(NavigationAsProperty).ShortDisplayName()),
-                Assert.Throws<InvalidOperationException>(() => CreatePropertyMappingValidator()(modelBuilder.Metadata)).Message);
+                    typeof(NavigationAsProperty).ShortDisplayName()
+                ),
+                Assert.Throws<InvalidOperationException>(
+                    () => CreatePropertyMappingValidator()(modelBuilder.Metadata)
+                ).Message
+            );
         }
 
         [ConditionalFact]
         public virtual void Does_not_throw_when_added_shadow_property_by_convention_is_not_of_primitive_type()
         {
             var modelBuilder = CreateConventionlessInternalModelBuilder();
-            var entityTypeBuilder = modelBuilder.Entity(typeof(NonPrimitiveAsPropertyEntity), ConfigurationSource.Convention);
-            entityTypeBuilder.Property(typeof(NavigationAsProperty), "ShadowProperty", ConfigurationSource.Convention);
-            entityTypeBuilder.Ignore(nameof(NonPrimitiveAsPropertyEntity.Property), ConfigurationSource.Explicit);
+            var entityTypeBuilder = modelBuilder.Entity(
+                typeof(NonPrimitiveAsPropertyEntity),
+                ConfigurationSource.Convention
+            );
+            entityTypeBuilder.Property(
+                typeof(NavigationAsProperty),
+                "ShadowProperty",
+                ConfigurationSource.Convention
+            );
+            entityTypeBuilder.Ignore(
+                nameof(NonPrimitiveAsPropertyEntity.Property),
+                ConfigurationSource.Explicit
+            );
 
             CreatePropertyMappingValidator()(modelBuilder.Metadata);
         }
@@ -59,41 +79,66 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
             Assert.Equal(
                 CoreStrings.PropertyNotAdded(
-                    typeof(PrimitivePropertyEntity).ShortDisplayName(), "Property", typeof(int).DisplayName()),
-                Assert.Throws<InvalidOperationException>(() => CreatePropertyMappingValidator()(modelBuilder.Metadata)).Message);
+                    typeof(PrimitivePropertyEntity).ShortDisplayName(),
+                    "Property",
+                    typeof(int).DisplayName()
+                ),
+                Assert.Throws<InvalidOperationException>(
+                    () => CreatePropertyMappingValidator()(modelBuilder.Metadata)
+                ).Message
+            );
         }
 
         [ConditionalFact]
         public virtual void Throws_when_nonprimitive_value_type_property_is_not_added_or_ignored()
         {
             var modelBuilder = CreateConventionlessInternalModelBuilder();
-            modelBuilder.Entity(typeof(NonPrimitiveValueTypePropertyEntity), ConfigurationSource.Convention);
+            modelBuilder.Entity(
+                typeof(NonPrimitiveValueTypePropertyEntity),
+                ConfigurationSource.Convention
+            );
 
             Assert.Equal(
                 CoreStrings.PropertyNotAdded(
-                    typeof(NonPrimitiveValueTypePropertyEntity).ShortDisplayName(), "Property", typeof(CancellationToken).Name),
-                Assert.Throws<InvalidOperationException>(() => CreatePropertyMappingValidator()(modelBuilder.Metadata)).Message);
+                    typeof(NonPrimitiveValueTypePropertyEntity).ShortDisplayName(),
+                    "Property",
+                    typeof(CancellationToken).Name
+                ),
+                Assert.Throws<InvalidOperationException>(
+                    () => CreatePropertyMappingValidator()(modelBuilder.Metadata)
+                ).Message
+            );
         }
 
         [ConditionalFact]
         public virtual void Throws_when_keyless_type_property_is_not_added_or_ignored()
         {
             var modelBuilder = CreateConventionlessInternalModelBuilder();
-            modelBuilder.Entity(typeof(NonPrimitiveReferenceTypePropertyEntity), ConfigurationSource.Convention);
+            modelBuilder.Entity(
+                typeof(NonPrimitiveReferenceTypePropertyEntity),
+                ConfigurationSource.Convention
+            );
 
             Assert.Equal(
                 CoreStrings.PropertyNotAdded(
                     typeof(NonPrimitiveReferenceTypePropertyEntity).ShortDisplayName(),
                     nameof(NonPrimitiveReferenceTypePropertyEntity.Property),
-                    typeof(ICollection<Uri>).ShortDisplayName()),
-                Assert.Throws<InvalidOperationException>(() => CreatePropertyMappingValidator()(modelBuilder.Metadata)).Message);
+                    typeof(ICollection<Uri>).ShortDisplayName()
+                ),
+                Assert.Throws<InvalidOperationException>(
+                    () => CreatePropertyMappingValidator()(modelBuilder.Metadata)
+                ).Message
+            );
         }
 
         [ConditionalFact]
         public virtual void Does_not_throw_when_primitive_type_property_is_added()
         {
             var modelBuilder = CreateConventionlessInternalModelBuilder();
-            var entityTypeBuilder = modelBuilder.Entity(typeof(PrimitivePropertyEntity), ConfigurationSource.Convention);
+            var entityTypeBuilder = modelBuilder.Entity(
+                typeof(PrimitivePropertyEntity),
+                ConfigurationSource.Convention
+            );
             entityTypeBuilder.Property(typeof(int), "Property", ConfigurationSource.Convention);
 
             CreatePropertyMappingValidator()(modelBuilder.Metadata);
@@ -103,7 +148,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         public virtual void Does_not_throw_when_primitive_type_property_is_ignored()
         {
             var modelBuilder = CreateConventionlessInternalModelBuilder();
-            var entityTypeBuilder = modelBuilder.Entity(typeof(PrimitivePropertyEntity), ConfigurationSource.Convention);
+            var entityTypeBuilder = modelBuilder.Entity(
+                typeof(PrimitivePropertyEntity),
+                ConfigurationSource.Convention
+            );
             entityTypeBuilder.Ignore("Property", ConfigurationSource.DataAnnotation);
 
             CreatePropertyMappingValidator()(modelBuilder.Metadata);
@@ -118,18 +166,35 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
             Assert.Equal(
                 CoreStrings.NavigationNotAdded(
-                    typeof(NavigationEntity).ShortDisplayName(), "Navigation", typeof(PrimitivePropertyEntity).Name),
-                Assert.Throws<InvalidOperationException>(() => CreatePropertyMappingValidator()(modelBuilder.Metadata)).Message);
+                    typeof(NavigationEntity).ShortDisplayName(),
+                    "Navigation",
+                    typeof(PrimitivePropertyEntity).Name
+                ),
+                Assert.Throws<InvalidOperationException>(
+                    () => CreatePropertyMappingValidator()(modelBuilder.Metadata)
+                ).Message
+            );
         }
 
         [ConditionalFact]
         public virtual void Does_not_throw_when_navigation_is_added()
         {
             var modelBuilder = CreateConventionlessInternalModelBuilder();
-            var entityTypeBuilder = modelBuilder.Entity(typeof(NavigationEntity), ConfigurationSource.Convention);
-            var referencedEntityTypeBuilder = modelBuilder.Entity(typeof(PrimitivePropertyEntity), ConfigurationSource.Convention);
+            var entityTypeBuilder = modelBuilder.Entity(
+                typeof(NavigationEntity),
+                ConfigurationSource.Convention
+            );
+            var referencedEntityTypeBuilder = modelBuilder.Entity(
+                typeof(PrimitivePropertyEntity),
+                ConfigurationSource.Convention
+            );
             referencedEntityTypeBuilder.Ignore("Property", ConfigurationSource.DataAnnotation);
-            entityTypeBuilder.HasRelationship(referencedEntityTypeBuilder.Metadata, "Navigation", null, ConfigurationSource.Convention);
+            entityTypeBuilder.HasRelationship(
+                referencedEntityTypeBuilder.Metadata,
+                "Navigation",
+                null,
+                ConfigurationSource.Convention
+            );
 
             CreatePropertyMappingValidator()(modelBuilder.Metadata);
         }
@@ -138,7 +203,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         public virtual void Does_not_throw_when_navigation_is_ignored()
         {
             var modelBuilder = CreateConventionlessInternalModelBuilder();
-            var entityTypeBuilder = modelBuilder.Entity(typeof(NavigationEntity), ConfigurationSource.Convention);
+            var entityTypeBuilder = modelBuilder.Entity(
+                typeof(NavigationEntity),
+                ConfigurationSource.Convention
+            );
             entityTypeBuilder.Ignore("Navigation", ConfigurationSource.DataAnnotation);
 
             CreatePropertyMappingValidator()(modelBuilder.Metadata);
@@ -158,11 +226,21 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         public virtual void Does_not_throw_when_explicit_navigation_is_not_added()
         {
             var modelBuilder = CreateConventionlessInternalModelBuilder();
-            var entityTypeBuilder = modelBuilder.Entity(typeof(ExplicitNavigationEntity), ConfigurationSource.Convention);
-            var referencedEntityTypeBuilder = modelBuilder.Entity(typeof(PrimitivePropertyEntity), ConfigurationSource.Convention);
+            var entityTypeBuilder = modelBuilder.Entity(
+                typeof(ExplicitNavigationEntity),
+                ConfigurationSource.Convention
+            );
+            var referencedEntityTypeBuilder = modelBuilder.Entity(
+                typeof(PrimitivePropertyEntity),
+                ConfigurationSource.Convention
+            );
             referencedEntityTypeBuilder.Ignore("Property", ConfigurationSource.DataAnnotation);
             entityTypeBuilder.HasRelationship(
-                referencedEntityTypeBuilder.Metadata, "Navigation", null, ConfigurationSource.Convention);
+                referencedEntityTypeBuilder.Metadata,
+                "Navigation",
+                null,
+                ConfigurationSource.Convention
+            );
 
             CreatePropertyMappingValidator()(modelBuilder.Metadata);
         }
@@ -177,8 +255,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 CoreStrings.InterfacePropertyNotAdded(
                     typeof(InterfaceNavigationEntity).ShortDisplayName(),
                     "Navigation",
-                    typeof(IList<INavigationEntity>).ShortDisplayName()),
-                Assert.Throws<InvalidOperationException>(() => CreatePropertyMappingValidator()(modelBuilder.Metadata)).Message);
+                    typeof(IList<INavigationEntity>).ShortDisplayName()
+                ),
+                Assert.Throws<InvalidOperationException>(
+                    () => CreatePropertyMappingValidator()(modelBuilder.Metadata)
+                ).Message
+            );
         }
 
         [ConditionalFact]
@@ -193,20 +275,28 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         protected virtual Action<Model> CreatePropertyMappingValidator()
         {
             var validator = CreateModelValidator();
-            var logger = new TestLogger<DbLoggerCategory.Model.Validation, TestLoggingDefinitions>();
+            var logger =
+                new TestLogger<DbLoggerCategory.Model.Validation, TestLoggingDefinitions>();
 
-            var validatePropertyMappingMethod = typeof(ModelValidator).GetRuntimeMethods().Single(e => e.Name == "ValidatePropertyMapping");
+            var validatePropertyMappingMethod = typeof(ModelValidator)
+                .GetRuntimeMethods()
+                .Single(e => e.Name == "ValidatePropertyMapping");
 
-            var modelRuntimeInitializer = TestHelpers.CreateContextServices().GetRequiredService<IModelRuntimeInitializer>();
+            var modelRuntimeInitializer = TestHelpers
+                .CreateContextServices()
+                .GetRequiredService<IModelRuntimeInitializer>();
 
             return m =>
             {
                 try
                 {
                     m.FinalizeModel();
-                    modelRuntimeInitializer.Initialize(m, designTime: false, validationLogger: null);
-                    validatePropertyMappingMethod.Invoke(
-                        validator, new object[] { m, logger });
+                    modelRuntimeInitializer.Initialize(
+                        m,
+                        designTime: false,
+                        validationLogger: null
+                    );
+                    validatePropertyMappingMethod.Invoke(validator, new object[] { m, logger });
                 }
                 catch (TargetInvocationException exception)
                 {
@@ -218,28 +308,28 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         protected virtual IModelValidator CreateModelValidator()
         {
             var typeMappingSource = new InMemoryTypeMappingSource(
-                TestServiceFactory.Instance.Create<TypeMappingSourceDependencies>());
+                TestServiceFactory.Instance.Create<TypeMappingSourceDependencies>()
+            );
 
             return new ModelValidator(
                 new ModelValidatorDependencies(
                     typeMappingSource,
                     new MemberClassifier(
                         typeMappingSource,
-                        TestServiceFactory.Instance.Create<IParameterBindingFactories>())));
+                        TestServiceFactory.Instance.Create<IParameterBindingFactories>()
+                    )
+                )
+            );
         }
 
-        protected class NonPrimitiveNonNavigationAsPropertyEntity
-        {
-        }
+        protected class NonPrimitiveNonNavigationAsPropertyEntity { }
 
         protected class NonPrimitiveAsPropertyEntity
         {
             public NavigationAsProperty Property { get; set; }
         }
 
-        protected class NavigationAsProperty
-        {
-        }
+        protected class NavigationAsProperty { }
 
         protected class PrimitivePropertyEntity
         {

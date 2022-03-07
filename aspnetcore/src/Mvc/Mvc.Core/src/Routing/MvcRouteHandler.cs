@@ -23,7 +23,8 @@ internal class MvcRouteHandler : IRouter
         IActionInvokerFactory actionInvokerFactory,
         IActionSelector actionSelector,
         DiagnosticListener diagnosticListener,
-        ILoggerFactory loggerFactory)
+        ILoggerFactory loggerFactory
+    )
     {
         _actionInvokerFactory = actionInvokerFactory;
         _actionSelector = actionSelector;
@@ -73,7 +74,9 @@ internal class MvcRouteHandler : IRouter
             {
                 throw new InvalidOperationException(
                     Resources.FormatActionInvokerFactory_CouldNotCreateInvoker(
-                        actionDescriptor.DisplayName));
+                        actionDescriptor.DisplayName
+                    )
+                );
             }
 
             return invoker.InvokeAsync();

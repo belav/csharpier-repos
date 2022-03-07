@@ -33,46 +33,58 @@ using Xunit;
 
 #if SOCKETS
 namespace Microsoft.AspNetCore.Server.Kestrel.Sockets.FunctionalTests;
+
 #else
 namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests;
+
 #endif
 
 public class ResponseTests : TestApplicationErrorLoggerLoggedTest
 {
-    public static TheoryData<ListenOptions> ConnectionMiddlewareData => new TheoryData<ListenOptions>
-    {
-        new ListenOptions(new IPEndPoint(IPAddress.Loopback, 0)),
-        new ListenOptions(new IPEndPoint(IPAddress.Loopback, 0)).UsePassThrough()
-    };
+    public static TheoryData<ListenOptions> ConnectionMiddlewareData =>
+        new TheoryData<ListenOptions>
+        {
+            new ListenOptions(new IPEndPoint(IPAddress.Loopback, 0)),
+            new ListenOptions(new IPEndPoint(IPAddress.Loopback, 0)).UsePassThrough()
+        };
 
     [Fact]
     public async Task LargeDownload()
     {
-        var hostBuilder = TransportSelector.GetHostBuilder()
-            .ConfigureWebHost(webHostBuilder =>
-            {
-                webHostBuilder
-                    .UseKestrel()
-                    .UseUrls("http://127.0.0.1:0/")
-                    .Configure(app =>
-                    {
-                        app.Run(async context =>
-                        {
-                            var bytes = new byte[1024];
-                            for (int i = 0; i < bytes.Length; i++)
+        var hostBuilder = TransportSelector
+            .GetHostBuilder()
+            .ConfigureWebHost(
+                webHostBuilder =>
+                {
+                    webHostBuilder
+                        .UseKestrel()
+                        .UseUrls("http://127.0.0.1:0/")
+                        .Configure(
+                            app =>
                             {
-                                bytes[i] = (byte)i;
-                            }
+                                app.Run(
+                                    async context =>
+                                    {
+                                        var bytes = new byte[1024];
+                                        for (int i = 0; i < bytes.Length; i++)
+                                        {
+                                            bytes[i] = (byte)i;
+                                        }
 
-                            context.Response.ContentLength = bytes.Length * 1024;
+                                        context.Response.ContentLength = bytes.Length * 1024;
 
-                            for (int i = 0; i < 1024; i++)
-                            {
-                                await context.Response.BodyWriter.WriteAsync(new Memory<byte>(bytes, 0, bytes.Length));
+                                        for (int i = 0; i < 1024; i++)
+                                        {
+                                            await context.Response.BodyWriter.WriteAsync(
+                                                new Memory<byte>(bytes, 0, bytes.Length)
+                                            );
+                                        }
+                                    }
+                                );
                             }
-                        });
-                    });
-            })
+                        );
+                }
+            )
             .ConfigureServices(AddTestLogging);
 
         using (var host = hostBuilder.Build())
@@ -104,24 +116,35 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
     }
 
     [Theory, MemberData(nameof(NullHeaderData))]
-    public async Task IgnoreNullHeaderValues(string headerName, StringValues headerValue, string expectedValue)
+    public async Task IgnoreNullHeaderValues(
+        string headerName,
+        StringValues headerValue,
+        string expectedValue
+    )
     {
-        var hostBuilder = TransportSelector.GetHostBuilder()
-            .ConfigureWebHost(webHostBuilder =>
-            {
-                webHostBuilder
-                    .UseKestrel()
-                    .UseUrls("http://127.0.0.1:0/")
-                    .Configure(app =>
-                    {
-                        app.Run(async context =>
-                        {
-                            context.Response.Headers.Add(headerName, headerValue);
+        var hostBuilder = TransportSelector
+            .GetHostBuilder()
+            .ConfigureWebHost(
+                webHostBuilder =>
+                {
+                    webHostBuilder
+                        .UseKestrel()
+                        .UseUrls("http://127.0.0.1:0/")
+                        .Configure(
+                            app =>
+                            {
+                                app.Run(
+                                    async context =>
+                                    {
+                                        context.Response.Headers.Add(headerName, headerValue);
 
-                            await context.Response.WriteAsync("");
-                        });
-                    });
-            })
+                                        await context.Response.WriteAsync("");
+                                    }
+                                );
+                            }
+                        );
+                }
+            )
             .ConfigureServices(AddTestLogging);
 
         using (var host = hostBuilder.Build())
@@ -153,33 +176,41 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
     [MemberData(nameof(ConnectionMiddlewareData))]
     public async Task WriteAfterConnectionCloseNoops(ListenOptions listenOptions)
     {
-        var connectionClosed = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
-        var requestStarted = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
-        var appCompleted = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var connectionClosed = new TaskCompletionSource(
+            TaskCreationOptions.RunContinuationsAsynchronously
+        );
+        var requestStarted = new TaskCompletionSource(
+            TaskCreationOptions.RunContinuationsAsynchronously
+        );
+        var appCompleted = new TaskCompletionSource(
+            TaskCreationOptions.RunContinuationsAsynchronously
+        );
 
-        await using (var server = new TestServer(async httpContext =>
-        {
-            try
-            {
-                requestStarted.SetResult();
-                await connectionClosed.Task.DefaultTimeout();
-                httpContext.Response.ContentLength = 12;
-                await httpContext.Response.WriteAsync("hello, world");
-                appCompleted.TrySetResult();
-            }
-            catch (Exception ex)
-            {
-                appCompleted.TrySetException(ex);
-            }
-        }, new TestServiceContext(LoggerFactory), listenOptions))
+        await using (
+            var server = new TestServer(
+                async httpContext =>
+                {
+                    try
+                    {
+                        requestStarted.SetResult();
+                        await connectionClosed.Task.DefaultTimeout();
+                        httpContext.Response.ContentLength = 12;
+                        await httpContext.Response.WriteAsync("hello, world");
+                        appCompleted.TrySetResult();
+                    }
+                    catch (Exception ex)
+                    {
+                        appCompleted.TrySetException(ex);
+                    }
+                },
+                new TestServiceContext(LoggerFactory),
+                listenOptions
+            )
+        )
         {
             using (var connection = server.CreateConnection())
             {
-                await connection.Send(
-                    "GET / HTTP/1.1",
-                    "Host:",
-                    "",
-                    "");
+                await connection.Send("GET / HTTP/1.1", "Host:", "", "");
 
                 await requestStarted.Task.DefaultTimeout();
                 connection.ShutdownSend();
@@ -194,7 +225,9 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
 
     [Theory]
     [MemberData(nameof(ConnectionMiddlewareData))]
-    public async Task ThrowsOnWriteWithRequestAbortedTokenAfterRequestIsAborted(ListenOptions listenOptions)
+    public async Task ThrowsOnWriteWithRequestAbortedTokenAfterRequestIsAborted(
+        ListenOptions listenOptions
+    )
     {
         // This should match _maxBytesPreCompleted in SocketOutput
         var maxBytesPreCompleted = 65536;
@@ -203,52 +236,62 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
         var largeString = new string('a', maxBytesPreCompleted + 1);
 
         var writeTcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
-        var requestAbortedWh = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
-        var requestStartWh = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var requestAbortedWh = new TaskCompletionSource(
+            TaskCreationOptions.RunContinuationsAsynchronously
+        );
+        var requestStartWh = new TaskCompletionSource(
+            TaskCreationOptions.RunContinuationsAsynchronously
+        );
 
-        await using (var server = new TestServer(async httpContext =>
-        {
-            requestStartWh.SetResult();
+        await using (
+            var server = new TestServer(
+                async httpContext =>
+                {
+                    requestStartWh.SetResult();
 
-            var response = httpContext.Response;
-            var request = httpContext.Request;
-            var lifetime = httpContext.Features.Get<IHttpRequestLifetimeFeature>();
+                    var response = httpContext.Response;
+                    var request = httpContext.Request;
+                    var lifetime = httpContext.Features.Get<IHttpRequestLifetimeFeature>();
 
-            lifetime.RequestAborted.Register(() => requestAbortedWh.SetResult());
-            await requestAbortedWh.Task.DefaultTimeout();
+                    lifetime.RequestAborted.Register(() => requestAbortedWh.SetResult());
+                    await requestAbortedWh.Task.DefaultTimeout();
 
-            try
-            {
-                await response.WriteAsync(largeString, cancellationToken: lifetime.RequestAborted);
-            }
-            catch (Exception ex)
-            {
-                writeTcs.SetException(ex);
-                throw;
-            }
-            finally
-            {
-                await requestAbortedWh.Task.DefaultTimeout();
-            }
+                    try
+                    {
+                        await response.WriteAsync(
+                            largeString,
+                            cancellationToken: lifetime.RequestAborted
+                        );
+                    }
+                    catch (Exception ex)
+                    {
+                        writeTcs.SetException(ex);
+                        throw;
+                    }
+                    finally
+                    {
+                        await requestAbortedWh.Task.DefaultTimeout();
+                    }
 
-            writeTcs.SetException(new Exception("This shouldn't be reached."));
-        }, new TestServiceContext(LoggerFactory), listenOptions))
+                    writeTcs.SetException(new Exception("This shouldn't be reached."));
+                },
+                new TestServiceContext(LoggerFactory),
+                listenOptions
+            )
+        )
         {
             using (var connection = server.CreateConnection())
             {
-                await connection.Send(
-                    "POST / HTTP/1.1",
-                    "Host:",
-                    "Content-Length: 0",
-                    "",
-                    "");
+                await connection.Send("POST / HTTP/1.1", "Host:", "Content-Length: 0", "", "");
 
                 await requestStartWh.Task.DefaultTimeout();
             }
 
             // Write failed - can throw TaskCanceledException or OperationCanceledException,
             // depending on how far the canceled write goes.
-            await Assert.ThrowsAnyAsync<OperationCanceledException>(async () => await writeTcs.Task).DefaultTimeout();
+            await Assert
+                .ThrowsAnyAsync<OperationCanceledException>(async () => await writeTcs.Task)
+                .DefaultTimeout();
 
             // RequestAborted tripped
             await requestAbortedWh.Task.DefaultTimeout();
@@ -257,14 +300,22 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
 
     [Theory]
     [MemberData(nameof(ConnectionMiddlewareData))]
-    public async Task WritingToConnectionAfterUnobservedCloseTriggersRequestAbortedToken(ListenOptions listenOptions)
+    public async Task WritingToConnectionAfterUnobservedCloseTriggersRequestAbortedToken(
+        ListenOptions listenOptions
+    )
     {
         const int connectionPausedEventId = 4;
         const int maxRequestBufferSize = 4096;
 
-        var requestAborted = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
-        var readCallbackUnwired = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
-        var clientClosedConnection = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var requestAborted = new TaskCompletionSource(
+            TaskCreationOptions.RunContinuationsAsynchronously
+        );
+        var readCallbackUnwired = new TaskCompletionSource(
+            TaskCreationOptions.RunContinuationsAsynchronously
+        );
+        var clientClosedConnection = new TaskCompletionSource(
+            TaskCreationOptions.RunContinuationsAsynchronously
+        );
         var writeTcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
 
         TestSink.MessageLogged += context =>
@@ -295,32 +346,41 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
 
         var scratchBuffer = new byte[maxRequestBufferSize * 8];
 
-        await using (var server = new TestServer(async context =>
-        {
-            context.RequestAborted.Register(() => requestAborted.SetResult());
-
-            await clientClosedConnection.Task;
-
-            try
-            {
-                for (var i = 0; i < 1000; i++)
+        await using (
+            var server = new TestServer(
+                async context =>
                 {
-                    await context.Response.BodyWriter.WriteAsync(new Memory<byte>(scratchBuffer, 0, scratchBuffer.Length), context.RequestAborted);
-                    await Task.Delay(10);
-                }
-            }
-            catch (Exception ex)
-            {
-                writeTcs.SetException(ex);
-                throw;
-            }
-            finally
-            {
-                await requestAborted.Task.DefaultTimeout();
-            }
+                    context.RequestAborted.Register(() => requestAborted.SetResult());
 
-            writeTcs.SetException(new Exception("This shouldn't be reached."));
-        }, testContext, listenOptions))
+                    await clientClosedConnection.Task;
+
+                    try
+                    {
+                        for (var i = 0; i < 1000; i++)
+                        {
+                            await context.Response.BodyWriter.WriteAsync(
+                                new Memory<byte>(scratchBuffer, 0, scratchBuffer.Length),
+                                context.RequestAborted
+                            );
+                            await Task.Delay(10);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        writeTcs.SetException(ex);
+                        throw;
+                    }
+                    finally
+                    {
+                        await requestAborted.Task.DefaultTimeout();
+                    }
+
+                    writeTcs.SetException(new Exception("This shouldn't be reached."));
+                },
+                testContext,
+                listenOptions
+            )
+        )
         {
             using (var connection = server.CreateConnection())
             {
@@ -329,7 +389,8 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
                     "Host:",
                     $"Content-Length: {scratchBuffer.Length}",
                     "",
-                    "");
+                    ""
+                );
 
                 var ignore = connection.Stream.WriteAsync(scratchBuffer, 0, scratchBuffer.Length);
 
@@ -339,7 +400,9 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
 
             clientClosedConnection.SetResult();
 
-            await Assert.ThrowsAnyAsync<OperationCanceledException>(() => writeTcs.Task).DefaultTimeout();
+            await Assert
+                .ThrowsAnyAsync<OperationCanceledException>(() => writeTcs.Task)
+                .DefaultTimeout();
         }
 
         Assert.Equal(1, TestSink.Writes.Count(w => w.EventId.Name == "ConnectionStop"));
@@ -357,32 +420,42 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
         const int responseBodySegmentSize = 65536;
         const int responseBodySegmentCount = 100;
 
-        var requestAborted = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
-        var appCompletedTcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var requestAborted = new TaskCompletionSource(
+            TaskCreationOptions.RunContinuationsAsynchronously
+        );
+        var appCompletedTcs = new TaskCompletionSource(
+            TaskCreationOptions.RunContinuationsAsynchronously
+        );
 
         var scratchBuffer = new byte[responseBodySegmentSize];
 
-        await using (var server = new TestServer(async context =>
-        {
-            context.RequestAborted.Register(() => requestAborted.SetResult());
+        await using (
+            var server = new TestServer(
+                async context =>
+                {
+                    context.RequestAborted.Register(() => requestAborted.SetResult());
 
-            for (var i = 0; i < responseBodySegmentCount; i++)
-            {
-                await context.Response.Body.WriteAsync(scratchBuffer, 0, scratchBuffer.Length);
-                await Task.Delay(10);
-            }
+                    for (var i = 0; i < responseBodySegmentCount; i++)
+                    {
+                        await context.Response.Body.WriteAsync(
+                            scratchBuffer,
+                            0,
+                            scratchBuffer.Length
+                        );
+                        await Task.Delay(10);
+                    }
 
-            await requestAborted.Task.DefaultTimeout();
-            appCompletedTcs.SetResult();
-        }, new TestServiceContext(LoggerFactory), listenOptions))
+                    await requestAborted.Task.DefaultTimeout();
+                    appCompletedTcs.SetResult();
+                },
+                new TestServiceContext(LoggerFactory),
+                listenOptions
+            )
+        )
         {
             using (var connection = server.CreateConnection())
             {
-                await connection.Send(
-                    "GET / HTTP/1.1",
-                    "Host:",
-                    "",
-                    "");
+                await connection.Send("GET / HTTP/1.1", "Host:", "", "");
 
                 // Read just part of the response and close the connection.
                 // https://github.com/aspnet/KestrelHttpServer/issues/2554
@@ -396,10 +469,13 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
             // After the RequestAborted token is tripped, the connection reset should be logged.
             // On Linux and macOS, the connection close is still sometimes observed as a FIN despite the LingerState.
             var presShutdownTransportLogs = TestSink.Writes.Where(
-                w => w.LoggerName == "Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets");
+                w => w.LoggerName == "Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets"
+            );
             var connectionResetLogs = presShutdownTransportLogs.Where(
-                w => w.EventId == connectionResetEventId ||
-                        (!TestPlatformHelper.IsWindows && w.EventId == connectionFinEventId));
+                w =>
+                    w.EventId == connectionResetEventId
+                    || (!TestPlatformHelper.IsWindows && w.EventId == connectionFinEventId)
+            );
 
             Assert.NotEmpty(connectionResetLogs);
 
@@ -407,18 +483,25 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
             await appCompletedTcs.Task.DefaultTimeout();
         }
 
-        var coreLogs = TestSink.Writes.Where(w => w.LoggerName == "Microsoft.AspNetCore.Server.Kestrel.Connections");
+        var coreLogs = TestSink.Writes.Where(
+            w => w.LoggerName == "Microsoft.AspNetCore.Server.Kestrel.Connections"
+        );
         Assert.Single(coreLogs.Where(w => w.EventId == connectionStopEventId));
 
-        var transportLogs = TestSink.Writes.Where(w => w.LoggerName == "Microsoft.AspNetCore.Server.Kestrel" ||
-                                                        w.LoggerName == "Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets");
+        var transportLogs = TestSink.Writes.Where(
+            w =>
+                w.LoggerName == "Microsoft.AspNetCore.Server.Kestrel"
+                || w.LoggerName == "Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets"
+        );
 
         Assert.Empty(transportLogs.Where(w => w.LogLevel > LogLevel.Debug));
     }
 
     [Theory]
     [MemberData(nameof(ConnectionMiddlewareData))]
-    public async Task ClientAbortingConnectionImmediatelyIsNotLoggedHigherThanDebug(ListenOptions listenOptions)
+    public async Task ClientAbortingConnectionImmediatelyIsNotLoggedHigherThanDebug(
+        ListenOptions listenOptions
+    )
     {
         // Attempt multiple connections to be extra sure the resets are consistently logged appropriately.
         const int numConnections = 10;
@@ -426,28 +509,34 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
         // There's not guarantee that the app even gets invoked in this test. The connection reset can be observed
         // as early as accept.
         var testServiceContext = new TestServiceContext(LoggerFactory);
-        await using (var server = new TestServer(context => Task.CompletedTask, testServiceContext, listenOptions))
+        await using (
+            var server = new TestServer(
+                context => Task.CompletedTask,
+                testServiceContext,
+                listenOptions
+            )
+        )
         {
             for (var i = 0; i < numConnections; i++)
             {
                 using (var connection = server.CreateConnection())
                 {
-                    await connection.Send(
-                        "GET / HTTP/1.1",
-                        "Host:",
-                        "",
-                        "");
+                    await connection.Send("GET / HTTP/1.1", "Host:", "", "");
 
                     connection.Reset();
                 }
             }
         }
 
-        var transportLogs = TestSink.Writes.Where(w => w.LoggerName == "Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets");
+        var transportLogs = TestSink.Writes.Where(
+            w => w.LoggerName == "Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets"
+        );
 
         // The "Microsoft.AspNetCore.Server.Kestrel" logger may contain info level logs because resetting the connection can cause
         // partial headers to be read leading to a bad request.
-        var coreLogs = TestSink.Writes.Where(w => w.LoggerName == "Microsoft.AspNetCore.Server.Kestrel");
+        var coreLogs = TestSink.Writes.Where(
+            w => w.LoggerName == "Microsoft.AspNetCore.Server.Kestrel"
+        );
 
         Assert.Empty(transportLogs.Where(w => w.LogLevel > LogLevel.Debug));
         Assert.Empty(coreLogs.Where(w => w.LogLevel > LogLevel.Information));
@@ -456,16 +545,26 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
     [Fact]
     public async Task ConnectionClosedWhenResponseDoesNotSatisfyMinimumDataRate()
     {
-        var logger = LoggerFactory.CreateLogger($"{ typeof(ResponseTests).FullName}.{ nameof(ConnectionClosedWhenResponseDoesNotSatisfyMinimumDataRate)}");
+        var logger = LoggerFactory.CreateLogger(
+            $"{typeof(ResponseTests).FullName}.{nameof(ConnectionClosedWhenResponseDoesNotSatisfyMinimumDataRate)}"
+        );
         const int chunkSize = 1024;
         const int chunks = 256 * 1024;
         var responseSize = chunks * chunkSize;
         var chunkData = new byte[chunkSize];
 
-        var responseRateTimeoutMessageLogged = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
-        var connectionStopMessageLogged = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
-        var requestAborted = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
-        var appFuncCompleted = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var responseRateTimeoutMessageLogged = new TaskCompletionSource(
+            TaskCreationOptions.RunContinuationsAsynchronously
+        );
+        var connectionStopMessageLogged = new TaskCompletionSource(
+            TaskCreationOptions.RunContinuationsAsynchronously
+        );
+        var requestAborted = new TaskCompletionSource(
+            TaskCreationOptions.RunContinuationsAsynchronously
+        );
+        var appFuncCompleted = new TaskCompletionSource(
+            TaskCreationOptions.RunContinuationsAsynchronously
+        );
 
         TestSink.MessageLogged += context =>
         {
@@ -485,7 +584,10 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
             {
                 Limits =
                 {
-                    MinResponseDataRate = new MinDataRate(bytesPerSecond: 1024 * 1024, gracePeriod: TimeSpan.FromSeconds(2))
+                    MinResponseDataRate = new MinDataRate(
+                        bytesPerSecond: 1024 * 1024,
+                        gracePeriod: TimeSpan.FromSeconds(2)
+                    )
                 }
             }
         };
@@ -506,7 +608,10 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
             {
                 for (; i < chunks; i++)
                 {
-                    await context.Response.BodyWriter.WriteAsync(new Memory<byte>(chunkData, 0, chunkData.Length), context.RequestAborted);
+                    await context.Response.BodyWriter.WriteAsync(
+                        new Memory<byte>(chunkData, 0, chunkData.Length),
+                        context.RequestAborted
+                    );
                     await Task.Yield();
                 }
 
@@ -533,11 +638,7 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
             using (var connection = server.CreateConnection())
             {
                 logger.LogInformation("Sending request");
-                await connection.Send(
-                    "GET / HTTP/1.1",
-                    "Host:",
-                    "",
-                    "");
+                await connection.Send("GET / HTTP/1.1", "Host:", "", "");
 
                 logger.LogInformation("Sent request");
 
@@ -552,7 +653,10 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
                 await AssertStreamAborted(connection.Stream, chunkSize * chunks);
 
                 sw.Stop();
-                logger.LogInformation("Connection was aborted after {totalMilliseconds}ms.", sw.ElapsedMilliseconds);
+                logger.LogInformation(
+                    "Connection was aborted after {totalMilliseconds}ms.",
+                    sw.ElapsedMilliseconds
+                );
             }
         }
     }
@@ -566,10 +670,16 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
 
         var certificate = TestResources.GetTestCertificate();
 
-        var responseRateTimeoutMessageLogged = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
-        var connectionStopMessageLogged = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var responseRateTimeoutMessageLogged = new TaskCompletionSource(
+            TaskCreationOptions.RunContinuationsAsynchronously
+        );
+        var connectionStopMessageLogged = new TaskCompletionSource(
+            TaskCreationOptions.RunContinuationsAsynchronously
+        );
         var aborted = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
-        var appFuncCompleted = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var appFuncCompleted = new TaskCompletionSource(
+            TaskCreationOptions.RunContinuationsAsynchronously
+        );
 
         TestSink.MessageLogged += context =>
         {
@@ -589,7 +699,10 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
             {
                 Limits =
                 {
-                    MinResponseDataRate = new MinDataRate(bytesPerSecond: 1024 * 1024, gracePeriod: TimeSpan.FromSeconds(2))
+                    MinResponseDataRate = new MinDataRate(
+                        bytesPerSecond: 1024 * 1024,
+                        gracePeriod: TimeSpan.FromSeconds(2)
+                    )
                 }
             }
         };
@@ -598,41 +711,66 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
 
         void ConfigureListenOptions(ListenOptions listenOptions)
         {
-            listenOptions.UseHttps(new HttpsConnectionAdapterOptions { ServerCertificate = certificate });
+            listenOptions.UseHttps(
+                new HttpsConnectionAdapterOptions { ServerCertificate = certificate }
+            );
         }
 
-        await using (var server = new TestServer(async context =>
-        {
-            context.RequestAborted.Register(() =>
-            {
-                aborted.SetResult();
-            });
-
-            context.Response.ContentLength = chunks * chunkSize;
-
-            try
-            {
-                for (var i = 0; i < chunks; i++)
+        await using (
+            var server = new TestServer(
+                async context =>
                 {
-                    await context.Response.BodyWriter.WriteAsync(new Memory<byte>(chunkData, 0, chunkData.Length), context.RequestAborted);
-                }
-            }
-            catch (OperationCanceledException)
-            {
-                appFuncCompleted.SetResult();
-                throw;
-            }
-            finally
-            {
-                await aborted.Task.DefaultTimeout();
-            }
-        }, testContext, ConfigureListenOptions))
+                    context.RequestAborted.Register(
+                        () =>
+                        {
+                            aborted.SetResult();
+                        }
+                    );
+
+                    context.Response.ContentLength = chunks * chunkSize;
+
+                    try
+                    {
+                        for (var i = 0; i < chunks; i++)
+                        {
+                            await context.Response.BodyWriter.WriteAsync(
+                                new Memory<byte>(chunkData, 0, chunkData.Length),
+                                context.RequestAborted
+                            );
+                        }
+                    }
+                    catch (OperationCanceledException)
+                    {
+                        appFuncCompleted.SetResult();
+                        throw;
+                    }
+                    finally
+                    {
+                        await aborted.Task.DefaultTimeout();
+                    }
+                },
+                testContext,
+                ConfigureListenOptions
+            )
+        )
         {
             using (var connection = server.CreateConnection())
             {
-                using (var sslStream = new SslStream(connection.Stream, false, (sender, cert, chain, errors) => true, null))
+                using (
+                    var sslStream = new SslStream(
+                        connection.Stream,
+                        false,
+                        (sender, cert, chain, errors) => true,
+                        null
+                    )
+                )
                 {
-                    await sslStream.AuthenticateAsClientAsync("localhost", new X509CertificateCollection(), SslProtocols.None, false);
+                    await sslStream.AuthenticateAsClientAsync(
+                        "localhost",
+                        new X509CertificateCollection(),
+                        SslProtocols.None,
+                        false
+                    );
 
                     var request = Encoding.ASCII.GetBytes("GET / HTTP/1.1\r\nHost:\r\n\r\n");
                     await sslStream.WriteAsync(request, 0, request.Length);
@@ -657,10 +795,18 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
         var responseSize = bufferCount * bufferSize;
         var buffer = new byte[bufferSize];
 
-        var responseRateTimeoutMessageLogged = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
-        var connectionStopMessageLogged = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
-        var requestAborted = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
-        var copyToAsyncCts = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var responseRateTimeoutMessageLogged = new TaskCompletionSource(
+            TaskCreationOptions.RunContinuationsAsynchronously
+        );
+        var connectionStopMessageLogged = new TaskCompletionSource(
+            TaskCreationOptions.RunContinuationsAsynchronously
+        );
+        var requestAborted = new TaskCompletionSource(
+            TaskCreationOptions.RunContinuationsAsynchronously
+        );
+        var copyToAsyncCts = new TaskCompletionSource(
+            TaskCreationOptions.RunContinuationsAsynchronously
+        );
 
         TestSink.MessageLogged += context =>
         {
@@ -680,7 +826,10 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
             {
                 Limits =
                 {
-                    MinResponseDataRate = new MinDataRate(bytesPerSecond: 1024 * 1024, gracePeriod: TimeSpan.FromSeconds(2)),
+                    MinResponseDataRate = new MinDataRate(
+                        bytesPerSecond: 1024 * 1024,
+                        gracePeriod: TimeSpan.FromSeconds(2)
+                    ),
                     MaxRequestBodySize = responseSize
                 }
             }
@@ -692,10 +841,12 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
 
         async Task App(HttpContext context)
         {
-            context.RequestAborted.Register(() =>
-            {
-                requestAborted.SetResult();
-            });
+            context.RequestAborted.Register(
+                () =>
+                {
+                    requestAborted.SetResult();
+                }
+            );
 
             try
             {
@@ -724,16 +875,19 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
                     "Host:",
                     $"Content-Length: {responseSize}",
                     "",
-                    "");
+                    ""
+                );
 
-                var sendTask = Task.Run(async () =>
-                {
-                    for (var i = 0; i < bufferCount; i++)
+                var sendTask = Task.Run(
+                    async () =>
                     {
-                        await connection.Stream.WriteAsync(buffer, 0, buffer.Length);
-                        await Task.Delay(10);
+                        for (var i = 0; i < bufferCount; i++)
+                        {
+                            await connection.Stream.WriteAsync(buffer, 0, buffer.Length);
+                            await Task.Delay(10);
+                        }
                     }
-                });
+                );
 
                 // Don't use the 5 second timeout for debug builds. This can actually take a while.
                 await requestAborted.Task.DefaultTimeout(TimeSpan.FromSeconds(30));
@@ -741,7 +895,9 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
                 await connectionStopMessageLogged.Task.DefaultTimeout();
 
                 // Expect OperationCanceledException instead of IOException because the server initiated the abort due to a response rate timeout.
-                await Assert.ThrowsAnyAsync<OperationCanceledException>(() => copyToAsyncCts.Task).DefaultTimeout();
+                await Assert
+                    .ThrowsAnyAsync<OperationCanceledException>(() => copyToAsyncCts.Task)
+                    .DefaultTimeout();
                 await AssertStreamAborted(connection.Stream, responseSize);
             }
         }
@@ -755,7 +911,9 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
         var chunkData = new byte[chunkSize];
 
         var requestAborted = false;
-        var appFuncCompleted = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var appFuncCompleted = new TaskCompletionSource(
+            TaskCreationOptions.RunContinuationsAsynchronously
+        );
 
         var testContext = new TestServiceContext(LoggerFactory)
         {
@@ -763,7 +921,10 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
             {
                 Limits =
                 {
-                    MinResponseDataRate = new MinDataRate(bytesPerSecond: 240, gracePeriod: TimeSpan.FromSeconds(2))
+                    MinResponseDataRate = new MinDataRate(
+                        bytesPerSecond: 240,
+                        gracePeriod: TimeSpan.FromSeconds(2)
+                    )
                 }
             }
         };
@@ -777,14 +938,19 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
 
         async Task App(HttpContext context)
         {
-            context.RequestAborted.Register(() =>
-            {
-                requestAborted = true;
-            });
+            context.RequestAborted.Register(
+                () =>
+                {
+                    requestAborted = true;
+                }
+            );
 
             for (var i = 0; i < chunkCount; i++)
             {
-                await context.Response.BodyWriter.WriteAsync(new Memory<byte>(chunkData, 0, chunkData.Length), context.RequestAborted);
+                await context.Response.BodyWriter.WriteAsync(
+                    new Memory<byte>(chunkData, 0, chunkData.Length),
+                    context.RequestAborted
+                );
             }
 
             appFuncCompleted.SetResult();
@@ -795,22 +961,23 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
             using (var connection = server.CreateConnection())
             {
                 // Close the connection with the last request so AssertStreamCompleted actually completes.
-                await connection.Send(
-                    "GET / HTTP/1.1",
-                    "Host:",
-                    "",
-                    "");
+                await connection.Send("GET / HTTP/1.1", "Host:", "", "");
 
                 await connection.Receive(
                     "HTTP/1.1 200 OK",
-                    $"Date: {dateHeaderValueManager.GetDateHeaderValues().String}");
+                    $"Date: {dateHeaderValueManager.GetDateHeaderValues().String}"
+                );
 
                 // Make sure consuming a single chunk exceeds the 2 second timeout.
                 var targetBytesPerSecond = chunkSize / 4;
 
                 // expectedBytes was determined by manual testing. A constant Date header is used, so this shouldn't change unless
                 // the response header writing logic or response body chunking logic itself changes.
-                await AssertBytesReceivedAtTargetRate(connection.Stream, expectedBytes: 33_553_537, targetBytesPerSecond);
+                await AssertBytesReceivedAtTargetRate(
+                    connection.Stream,
+                    expectedBytes: 33_553_537,
+                    targetBytesPerSecond
+                );
                 await appFuncCompleted.Task.DefaultTimeout();
 
                 connection.ShutdownSend();
@@ -818,7 +985,10 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
             }
         }
 
-        Assert.Equal(0, TestSink.Writes.Count(w => w.EventId.Name == "ResponseMinimumDataRateNotSatisfied"));
+        Assert.Equal(
+            0,
+            TestSink.Writes.Count(w => w.EventId.Name == "ResponseMinimumDataRateNotSatisfied")
+        );
         Assert.Equal(1, TestSink.Writes.Count(w => w.EventId.Name == "ConnectionStop"));
         Assert.False(requestAborted);
     }
@@ -830,7 +1000,9 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
         var headerCount = 64; // 64 MB of headers per response
         var requestCount = 4; // Minimum of 256 MB of total response headers
         var headerValue = new string('a', headerSize);
-        var headerStringValues = new StringValues(Enumerable.Repeat(headerValue, headerCount).ToArray());
+        var headerStringValues = new StringValues(
+            Enumerable.Repeat(headerValue, headerCount).ToArray()
+        );
 
         var requestAborted = false;
 
@@ -840,7 +1012,10 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
             {
                 Limits =
                 {
-                    MinResponseDataRate = new MinDataRate(bytesPerSecond: 240, gracePeriod: TimeSpan.FromSeconds(2))
+                    MinResponseDataRate = new MinDataRate(
+                        bytesPerSecond: 240,
+                        gracePeriod: TimeSpan.FromSeconds(2)
+                    )
                 }
             }
         };
@@ -854,10 +1029,12 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
 
         async Task App(HttpContext context)
         {
-            context.RequestAborted.Register(() =>
-            {
-                requestAborted = true;
-            });
+            context.RequestAborted.Register(
+                () =>
+                {
+                    requestAborted = true;
+                }
+            );
 
             context.Response.Headers[$"X-Custom-Header"] = headerStringValues;
             context.Response.ContentLength = 0;
@@ -871,23 +1048,16 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
             {
                 for (var i = 0; i < requestCount - 1; i++)
                 {
-                    await connection.Send(
-                        "GET / HTTP/1.1",
-                        "Host:",
-                        "",
-                        "");
+                    await connection.Send("GET / HTTP/1.1", "Host:", "", "");
                 }
 
-                await connection.Send(
-                    "GET / HTTP/1.1",
-                    "Host:",
-                    "",
-                    "");
+                await connection.Send("GET / HTTP/1.1", "Host:", "", "");
 
                 await connection.Receive(
                     "HTTP/1.1 200 OK",
                     "Content-Length: 0",
-                    $"Date: {dateHeaderValueManager.GetDateHeaderValues().String}");
+                    $"Date: {dateHeaderValueManager.GetDateHeaderValues().String}"
+                );
 
                 var minResponseSize = headerSize * headerCount;
                 var minTotalOutputSize = requestCount * minResponseSize;
@@ -897,13 +1067,20 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
 
                 // expectedBytes was determined by manual testing. A constant Date header is used, so this shouldn't change unless
                 // the response header writing logic itself changes.
-                await AssertBytesReceivedAtTargetRate(connection.Stream, expectedBytes: 268_439_596, targetBytesPerSecond);
+                await AssertBytesReceivedAtTargetRate(
+                    connection.Stream,
+                    expectedBytes: 268_439_596,
+                    targetBytesPerSecond
+                );
                 connection.ShutdownSend();
                 await connection.WaitForConnectionClose();
             }
         }
 
-        Assert.Equal(0, TestSink.Writes.Count(w => w.EventId.Name == "ResponseMinimumDataRateNotSatisfied"));
+        Assert.Equal(
+            0,
+            TestSink.Writes.Count(w => w.EventId.Name == "ResponseMinimumDataRateNotSatisfied")
+        );
         Assert.Equal(1, TestSink.Writes.Count(w => w.EventId.Name == "ConnectionStop"));
         Assert.False(requestAborted);
     }
@@ -916,7 +1093,9 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
         var chunkData = new byte[chunkSize];
 
         var requestAborted = false;
-        var appFuncCompleted = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var appFuncCompleted = new TaskCompletionSource(
+            TaskCreationOptions.RunContinuationsAsynchronously
+        );
 
         var testContext = new TestServiceContext(LoggerFactory)
         {
@@ -924,7 +1103,10 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
             {
                 Limits =
                 {
-                    MinResponseDataRate = new MinDataRate(bytesPerSecond: 240, gracePeriod: TimeSpan.FromSeconds(2))
+                    MinResponseDataRate = new MinDataRate(
+                        bytesPerSecond: 240,
+                        gracePeriod: TimeSpan.FromSeconds(2)
+                    )
                 }
             }
         };
@@ -938,14 +1120,19 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
 
         async Task App(HttpContext context)
         {
-            context.RequestAborted.Register(() =>
-            {
-                requestAborted = true;
-            });
+            context.RequestAborted.Register(
+                () =>
+                {
+                    requestAborted = true;
+                }
+            );
 
             for (var i = 0; i < chunkCount; i++)
             {
-                await context.Response.BodyWriter.WriteAsync(new Memory<byte>(chunkData, 0, chunkData.Length), context.RequestAborted);
+                await context.Response.BodyWriter.WriteAsync(
+                    new Memory<byte>(chunkData, 0, chunkData.Length),
+                    context.RequestAborted
+                );
             }
 
             appFuncCompleted.SetResult();
@@ -956,29 +1143,32 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
             using (var connection = server.CreateConnection())
             {
                 // Close the connection with the last request so AssertStreamCompleted actually completes.
-                await connection.Send(
-                    "GET / HTTP/1.1",
-                    "Host:",
-                    "Connection: close",
-                    "",
-                    "");
+                await connection.Send("GET / HTTP/1.1", "Host:", "Connection: close", "", "");
 
                 await connection.Receive(
                     "HTTP/1.1 200 OK",
                     "Connection: close",
-                    $"Date: {dateHeaderValueManager.GetDateHeaderValues().String}");
+                    $"Date: {dateHeaderValueManager.GetDateHeaderValues().String}"
+                );
 
                 // Make sure consuming a single chunk exceeds the 2 second timeout.
                 var targetBytesPerSecond = chunkSize / 4;
 
                 // expectedBytes was determined by manual testing. A constant Date header is used, so this shouldn't change unless
                 // the response header writing logic or response body chunking logic itself changes.
-                await AssertStreamCompletedAtTargetRate(connection.Stream, expectedBytes: 33_553_556, targetBytesPerSecond);
+                await AssertStreamCompletedAtTargetRate(
+                    connection.Stream,
+                    expectedBytes: 33_553_556,
+                    targetBytesPerSecond
+                );
                 await appFuncCompleted.Task.DefaultTimeout();
             }
         }
 
-        Assert.Equal(0, TestSink.Writes.Count(w => w.EventId.Name == "ResponseMinimumDataRateNotSatisfied"));
+        Assert.Equal(
+            0,
+            TestSink.Writes.Count(w => w.EventId.Name == "ResponseMinimumDataRateNotSatisfied")
+        );
         Assert.Equal(1, TestSink.Writes.Count(w => w.EventId.Name == "ConnectionStop"));
         Assert.False(requestAborted);
     }
@@ -992,7 +1182,9 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
         {
             while (totalReceived < totalBytes)
             {
-                var bytes = await stream.ReadAsync(receiveBuffer, 0, receiveBuffer.Length).DefaultTimeout();
+                var bytes = await stream
+                    .ReadAsync(receiveBuffer, 0, receiveBuffer.Length)
+                    .DefaultTimeout();
 
                 if (bytes == 0)
                 {
@@ -1007,10 +1199,17 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
             // This is expected given an abort.
         }
 
-        Assert.True(totalReceived < totalBytes, $"{nameof(AssertStreamAborted)} Stream completed successfully.");
+        Assert.True(
+            totalReceived < totalBytes,
+            $"{nameof(AssertStreamAborted)} Stream completed successfully."
+        );
     }
 
-    private async Task AssertBytesReceivedAtTargetRate(Stream stream, int expectedBytes, int targetBytesPerSecond)
+    private async Task AssertBytesReceivedAtTargetRate(
+        Stream stream,
+        int expectedBytes,
+        int targetBytesPerSecond
+    )
     {
         var receiveBuffer = new byte[64 * 1024];
         var totalReceived = 0;
@@ -1018,7 +1217,11 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
 
         do
         {
-            var received = await stream.ReadAsync(receiveBuffer, 0, Math.Min(receiveBuffer.Length, expectedBytes - totalReceived));
+            var received = await stream.ReadAsync(
+                receiveBuffer,
+                0,
+                Math.Min(receiveBuffer.Length, expectedBytes - totalReceived)
+            );
 
             Assert.NotEqual(0, received);
 
@@ -1033,7 +1236,11 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
         } while (totalReceived < expectedBytes);
     }
 
-    private async Task AssertStreamCompletedAtTargetRate(Stream stream, long expectedBytes, int targetBytesPerSecond)
+    private async Task AssertStreamCompletedAtTargetRate(
+        Stream stream,
+        long expectedBytes,
+        int targetBytesPerSecond
+    )
     {
         var receiveBuffer = new byte[64 * 1024];
         var received = 0;

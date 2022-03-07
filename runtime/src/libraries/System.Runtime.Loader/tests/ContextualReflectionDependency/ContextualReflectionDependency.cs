@@ -37,22 +37,55 @@ namespace System.Runtime.Loader.Tests
 
         Type TypeGetType(string typeName, bool throwOnError, bool ignoreCase);
 
-        Type TypeGetType(string typeName, Func<AssemblyName,Assembly> assemblyResolver, Func<Assembly, string, Boolean, Type> typeResolver);
+        Type TypeGetType(
+            string typeName,
+            Func<AssemblyName, Assembly> assemblyResolver,
+            Func<Assembly, string, Boolean, Type> typeResolver
+        );
 
-        Type TypeGetType(string typeName, Func<AssemblyName,Assembly> assemblyResolver, Func<Assembly, string, Boolean, Type> typeResolver, bool throwOnError);
+        Type TypeGetType(
+            string typeName,
+            Func<AssemblyName, Assembly> assemblyResolver,
+            Func<Assembly, string, Boolean, Type> typeResolver,
+            bool throwOnError
+        );
 
-        Type TypeGetType(string typeName, Func<AssemblyName,Assembly> assemblyResolver, Func<Assembly, string, Boolean, Type> typeResolver, bool throwOnError, bool ignoreCase);
+        Type TypeGetType(
+            string typeName,
+            Func<AssemblyName, Assembly> assemblyResolver,
+            Func<Assembly, string, Boolean, Type> typeResolver,
+            bool throwOnError,
+            bool ignoreCase
+        );
 
         Type AssemblyGetType(Assembly assembly, string typeName);
 
         Type AssemblyGetType(Assembly assembly, string typeName, bool throwOnError);
 
-        Type AssemblyGetType(Assembly assembly, string typeName, bool throwOnError, bool ignoreCase);
+        Type AssemblyGetType(
+            Assembly assembly,
+            string typeName,
+            bool throwOnError,
+            bool ignoreCase
+        );
 
         ObjectHandle ActivatorCreateInstance(string assemblyName, string typeName);
 
-        ObjectHandle ActivatorCreateInstance(string assemblyName, string typeName, object[] activationAttributes);
+        ObjectHandle ActivatorCreateInstance(
+            string assemblyName,
+            string typeName,
+            object[] activationAttributes
+        );
 
-        ObjectHandle ActivatorCreateInstance(string assemblyName, string typeName, bool ignoreCase, System.Reflection.BindingFlags bindingAttr, System.Reflection.Binder binder, object[] args, System.Globalization.CultureInfo culture, object[] activationAttributes);
+        ObjectHandle ActivatorCreateInstance(
+            string assemblyName,
+            string typeName,
+            bool ignoreCase,
+            System.Reflection.BindingFlags bindingAttr,
+            System.Reflection.Binder binder,
+            object[] args,
+            System.Globalization.CultureInfo culture,
+            object[] activationAttributes
+        );
     }
 }

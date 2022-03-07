@@ -18,7 +18,10 @@ namespace System.Net.Http.Handlers
             EventArgs = eventArgs;
         }
 
-        public static ProgressMessageHandler CreateProgressMessageHandler(out MockProgressEventHandler progressEventHandler, bool sendProgress)
+        public static ProgressMessageHandler CreateProgressMessageHandler(
+            out MockProgressEventHandler progressEventHandler,
+            bool sendProgress
+        )
         {
             ProgressMessageHandler progressHandler = new ProgressMessageHandler();
             progressEventHandler = new MockProgressEventHandler();

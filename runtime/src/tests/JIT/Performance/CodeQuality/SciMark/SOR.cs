@@ -3,9 +3,9 @@
 /// <license>
 /// This is a port of the SciMark2a Java Benchmark to C# by
 /// Chris Re (cmr28@cornell.edu) and Werner Vogels (vogels@cs.cornell.edu)
-/// 
+///
 /// For details on the original authors see http://math.nist.gov/scimark2
-/// 
+///
 /// This software is likely to burn your processor, bitflip your memory chips
 /// anihilate your screen and corrupt all your disks, so you it at your
 /// own risk.
@@ -47,7 +47,9 @@ namespace SciMark2
                     double[] Gim1 = G[i - 1];
                     double[] Gip1 = G[i + 1];
                     for (int j = 1; j < Nm1; j++)
-                        Gi[j] = omega_over_four * (Gim1[j] + Gip1[j] + Gi[j - 1] + Gi[j + 1]) + one_minus_omega * Gi[j];
+                        Gi[j] =
+                            omega_over_four * (Gim1[j] + Gip1[j] + Gi[j - 1] + Gi[j + 1])
+                            + one_minus_omega * Gi[j];
                 }
             }
         }

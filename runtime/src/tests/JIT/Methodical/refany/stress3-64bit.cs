@@ -19,8 +19,7 @@ namespace JitTest
             {
                 TypedReference _ref = __makeref(refee);
                 PackRef(ref refee, iterCount);
-                if (__reftype(_ref) != typeof(String) ||
-                    __refvalue(_ref, String) != "Hello")
+                if (__reftype(_ref) != typeof(String) || __refvalue(_ref, String) != "Hello")
                     throw new Exception();
             }
         }

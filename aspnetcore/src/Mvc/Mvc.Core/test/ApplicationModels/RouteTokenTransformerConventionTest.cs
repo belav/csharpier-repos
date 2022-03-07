@@ -18,10 +18,9 @@ public class RouteTokenTransformerConventionTest
         var convention = new RouteTokenTransformerConvention(transformer);
 
         var model = new ActionModel(GetMethodInfo(), Array.Empty<object>());
-        model.Selectors.Add(new SelectorModel()
-        {
-            AttributeRouteModel = new AttributeRouteModel()
-        });
+        model.Selectors.Add(
+            new SelectorModel() { AttributeRouteModel = new AttributeRouteModel() }
+        );
 
         // Act
         convention.Apply(model);
@@ -38,10 +37,9 @@ public class RouteTokenTransformerConventionTest
         var convention = new CustomRouteTokenTransformerConvention(transformer);
 
         var model = new ActionModel(GetMethodInfo(), Array.Empty<object>());
-        model.Selectors.Add(new SelectorModel()
-        {
-            AttributeRouteModel = new AttributeRouteModel()
-        });
+        model.Selectors.Add(
+            new SelectorModel() { AttributeRouteModel = new AttributeRouteModel() }
+        );
 
         // Act
         convention.Apply(model);
@@ -52,7 +50,10 @@ public class RouteTokenTransformerConventionTest
 
     private MethodInfo GetMethodInfo()
     {
-        return typeof(RouteTokenTransformerConventionTest).GetMethod(nameof(GetMethodInfo), BindingFlags.NonPublic | BindingFlags.Instance);
+        return typeof(RouteTokenTransformerConventionTest).GetMethod(
+            nameof(GetMethodInfo),
+            BindingFlags.NonPublic | BindingFlags.Instance
+        );
     }
 
     private class TestParameterTransformer : IOutboundParameterTransformer
@@ -65,9 +66,9 @@ public class RouteTokenTransformerConventionTest
 
     private class CustomRouteTokenTransformerConvention : RouteTokenTransformerConvention
     {
-        public CustomRouteTokenTransformerConvention(IOutboundParameterTransformer parameterTransformer) : base(parameterTransformer)
-        {
-        }
+        public CustomRouteTokenTransformerConvention(
+            IOutboundParameterTransformer parameterTransformer
+        ) : base(parameterTransformer) { }
 
         protected override bool ShouldApply(ActionModel action)
         {

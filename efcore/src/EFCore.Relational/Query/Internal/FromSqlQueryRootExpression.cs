@@ -26,8 +26,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
             IAsyncQueryProvider queryProvider,
             IEntityType entityType,
             string sql,
-            Expression argument)
-            : base(queryProvider, entityType)
+            Expression argument
+        ) : base(queryProvider, entityType)
         {
             Sql = sql;
             Argument = argument;
@@ -39,10 +39,7 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public FromSqlQueryRootExpression(
-            IEntityType entityType,
-            string sql,
-            Expression argument)
+        public FromSqlQueryRootExpression(IEntityType entityType, string sql, Expression argument)
             : base(entityType)
         {
             Sql = sql;
@@ -71,8 +68,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public override Expression DetachQueryProvider()
-            => new FromSqlQueryRootExpression(EntityType, Sql, Argument);
+        public override Expression DetachQueryProvider() =>
+            new FromSqlQueryRootExpression(EntityType, Sql, Argument);
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -80,11 +77,12 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public override QueryRootExpression UpdateEntityType(IEntityType entityType)
-            => entityType.ClrType != EntityType.ClrType
-                || entityType.Name != EntityType.Name
-                    ? throw new InvalidOperationException(CoreStrings.QueryRootDifferentEntityType(entityType.DisplayName()))
-                    : new FromSqlQueryRootExpression(entityType, Sql, Argument);
+        public override QueryRootExpression UpdateEntityType(IEntityType entityType) =>
+            entityType.ClrType != EntityType.ClrType || entityType.Name != EntityType.Name
+                ? throw new InvalidOperationException(
+                      CoreStrings.QueryRootDifferentEntityType(entityType.DisplayName())
+                  )
+                : new FromSqlQueryRootExpression(entityType, Sql, Argument);
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -97,8 +95,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
             var argument = visitor.Visit(Argument);
 
             return argument != Argument
-                ? new FromSqlQueryRootExpression(EntityType, Sql, argument)
-                : this;
+              ? new FromSqlQueryRootExpression(EntityType, Sql, argument)
+              : this;
         }
 
         /// <summary>
@@ -121,16 +119,18 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public override bool Equals(object? obj)
-            => obj != null
-                && (ReferenceEquals(this, obj)
-                    || obj is FromSqlQueryRootExpression queryRootExpression
-                    && Equals(queryRootExpression));
+        public override bool Equals(object? obj) =>
+            obj != null
+            && (
+                ReferenceEquals(this, obj)
+                || obj is FromSqlQueryRootExpression queryRootExpression
+                    && Equals(queryRootExpression)
+            );
 
-        private bool Equals(FromSqlQueryRootExpression queryRootExpression)
-            => base.Equals(queryRootExpression)
-                && Sql == queryRootExpression.Sql
-                && ExpressionEqualityComparer.Instance.Equals(Argument, queryRootExpression.Argument);
+        private bool Equals(FromSqlQueryRootExpression queryRootExpression) =>
+            base.Equals(queryRootExpression)
+            && Sql == queryRootExpression.Sql
+            && ExpressionEqualityComparer.Instance.Equals(Argument, queryRootExpression.Argument);
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -138,7 +138,11 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public override int GetHashCode()
-            => HashCode.Combine(base.GetHashCode(), Sql, ExpressionEqualityComparer.Instance.GetHashCode(Argument));
+        public override int GetHashCode() =>
+            HashCode.Combine(
+                base.GetHashCode(),
+                Sql,
+                ExpressionEqualityComparer.Instance.GetHashCode(Argument)
+            );
     }
 }

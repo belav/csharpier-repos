@@ -11,15 +11,44 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript.Api
 {
     internal abstract class VSTypeScriptCompletionProvider : CompletionProvider
     {
-        public sealed override bool ShouldTriggerCompletion(SourceText text, int caretPosition, CompletionTrigger trigger, OptionSet options)
+        public sealed override bool ShouldTriggerCompletion(
+            SourceText text,
+            int caretPosition,
+            CompletionTrigger trigger,
+            OptionSet options
+        )
         {
-            var triggerOnTypingLetters = options.GetOption(CompletionOptions.Metadata.TriggerOnTypingLetters, InternalLanguageNames.TypeScript);
-            return ShouldTriggerCompletionImpl(text, caretPosition, trigger, triggerOnTypingLetters);
+            var triggerOnTypingLetters = options.GetOption(
+                CompletionOptions.Metadata.TriggerOnTypingLetters,
+                InternalLanguageNames.TypeScript
+            );
+            return ShouldTriggerCompletionImpl(
+                text,
+                caretPosition,
+                trigger,
+                triggerOnTypingLetters
+            );
         }
 
-        internal sealed override bool ShouldTriggerCompletion(HostLanguageServices languageServices, SourceText text, int caretPosition, CompletionTrigger trigger, CompletionOptions options)
-            => ShouldTriggerCompletionImpl(text, caretPosition, trigger, options.TriggerOnTypingLetters);
+        internal sealed override bool ShouldTriggerCompletion(
+            HostLanguageServices languageServices,
+            SourceText text,
+            int caretPosition,
+            CompletionTrigger trigger,
+            CompletionOptions options
+        ) =>
+            ShouldTriggerCompletionImpl(
+                text,
+                caretPosition,
+                trigger,
+                options.TriggerOnTypingLetters
+            );
 
-        protected abstract bool ShouldTriggerCompletionImpl(SourceText text, int caretPosition, CompletionTrigger trigger, bool triggerOnTypingLetters);
+        protected abstract bool ShouldTriggerCompletionImpl(
+            SourceText text,
+            int caretPosition,
+            CompletionTrigger trigger,
+            bool triggerOnTypingLetters
+        );
     }
 }

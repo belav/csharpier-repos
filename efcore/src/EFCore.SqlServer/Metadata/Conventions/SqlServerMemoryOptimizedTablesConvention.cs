@@ -17,10 +17,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
     ///     <see href="https://aka.ms/efcore-docs-sqlserver">Accessing SQL Server and SQL Azure databases with EF Core</see>
     ///     for more information.
     /// </remarks>
-    public class SqlServerMemoryOptimizedTablesConvention :
-        IEntityTypeAnnotationChangedConvention,
-        IKeyAddedConvention,
-        IIndexAddedConvention
+    public class SqlServerMemoryOptimizedTablesConvention
+        : IEntityTypeAnnotationChangedConvention,
+          IKeyAddedConvention,
+          IIndexAddedConvention
     {
         /// <summary>
         ///     Creates a new instance of <see cref="SqlServerMemoryOptimizedTablesConvention" />.
@@ -29,7 +29,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         /// <param name="relationalDependencies"> Parameter object containing relational dependencies for this convention.</param>
         public SqlServerMemoryOptimizedTablesConvention(
             ProviderConventionSetBuilderDependencies dependencies,
-            RelationalConventionSetBuilderDependencies relationalDependencies)
+            RelationalConventionSetBuilderDependencies relationalDependencies
+        )
         {
             Dependencies = dependencies;
             RelationalDependencies = relationalDependencies;
@@ -58,7 +59,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             string name,
             IConventionAnnotation? annotation,
             IConventionAnnotation? oldAnnotation,
-            IConventionContext<IConventionAnnotation> context)
+            IConventionContext<IConventionAnnotation> context
+        )
         {
             if (name == SqlServerAnnotationNames.MemoryOptimized)
             {
@@ -68,8 +70,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                     key.Builder.IsClustered(memoryOptimized ? false : null);
                 }
 
-                foreach (var index in
-                    entityTypeBuilder.Metadata.GetDerivedTypesInclusive().SelectMany(et => et.GetDeclaredIndexes()))
+                foreach (
+                    var index in entityTypeBuilder.Metadata
+                        .GetDerivedTypesInclusive()
+                        .SelectMany(et => et.GetDeclaredIndexes())
+                )
                 {
                     index.Builder.IsClustered(memoryOptimized ? false : null);
                 }
@@ -81,7 +86,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         /// </summary>
         /// <param name="keyBuilder">The builder for the key.</param>
         /// <param name="context">Additional information associated with convention execution.</param>
-        public virtual void ProcessKeyAdded(IConventionKeyBuilder keyBuilder, IConventionContext<IConventionKeyBuilder> context)
+        public virtual void ProcessKeyAdded(
+            IConventionKeyBuilder keyBuilder,
+            IConventionContext<IConventionKeyBuilder> context
+        )
         {
             if (keyBuilder.Metadata.DeclaringEntityType.IsMemoryOptimized())
             {
@@ -94,9 +102,16 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         /// </summary>
         /// <param name="indexBuilder">The builder for the index.</param>
         /// <param name="context">Additional information associated with convention execution.</param>
-        public virtual void ProcessIndexAdded(IConventionIndexBuilder indexBuilder, IConventionContext<IConventionIndexBuilder> context)
+        public virtual void ProcessIndexAdded(
+            IConventionIndexBuilder indexBuilder,
+            IConventionContext<IConventionIndexBuilder> context
+        )
         {
-            if (indexBuilder.Metadata.DeclaringEntityType.GetAllBaseTypesInclusive().Any(et => et.IsMemoryOptimized()))
+            if (
+                indexBuilder.Metadata.DeclaringEntityType
+                    .GetAllBaseTypesInclusive()
+                    .Any(et => et.IsMemoryOptimized())
+            )
             {
                 indexBuilder.IsClustered(false);
             }

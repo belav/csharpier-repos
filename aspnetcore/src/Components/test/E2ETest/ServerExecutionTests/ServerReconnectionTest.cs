@@ -20,10 +20,8 @@ public class ServerReconnectionTest : ServerTestBase<BasicTestAppServerSiteFixtu
     public ServerReconnectionTest(
         BrowserFixture browserFixture,
         BasicTestAppServerSiteFixture<ServerStartup> serverFixture,
-        ITestOutputHelper output)
-        : base(browserFixture, serverFixture, output)
-    {
-    }
+        ITestOutputHelper output
+    ) : base(browserFixture, serverFixture, output) { }
 
     protected override void InitializeAsyncCore()
     {
@@ -41,10 +39,16 @@ public class ServerReconnectionTest : ServerTestBase<BasicTestAppServerSiteFixtu
         javascript.ExecuteScript("Blazor._internal.forceCloseConnection()");
 
         // We should see the 'reconnecting' UI appear
-        Browser.Equal("block", () => Browser.Exists(By.Id("components-reconnect-modal")).GetCssValue("display"));
+        Browser.Equal(
+            "block",
+            () => Browser.Exists(By.Id("components-reconnect-modal")).GetCssValue("display")
+        );
 
         // Then it should disappear
-        Browser.Equal("none", () => Browser.Exists(By.Id("components-reconnect-modal")).GetCssValue("display"));
+        Browser.Equal(
+            "none",
+            () => Browser.Exists(By.Id("components-reconnect-modal")).GetCssValue("display")
+        );
 
         Browser.Exists(By.Id("increment")).Click();
 
@@ -64,10 +68,16 @@ public class ServerReconnectionTest : ServerTestBase<BasicTestAppServerSiteFixtu
         javascript.ExecuteScript("Blazor._internal.forceCloseConnection()");
 
         // We should see the 'reconnecting' UI appear
-        Browser.Equal("block", () => Browser.Exists(By.Id("components-reconnect-modal")).GetCssValue("display"));
+        Browser.Equal(
+            "block",
+            () => Browser.Exists(By.Id("components-reconnect-modal")).GetCssValue("display")
+        );
 
         // Then it should disappear
-        Browser.Equal("none", () => Browser.Exists(By.Id("components-reconnect-modal")).GetCssValue("display"));
+        Browser.Equal(
+            "none",
+            () => Browser.Exists(By.Id("components-reconnect-modal")).GetCssValue("display")
+        );
 
         // We should receive a render that occurred while disconnected
         var currentValue = Browser.Exists(selector).Text;
@@ -82,7 +92,16 @@ public class ServerReconnectionTest : ServerTestBase<BasicTestAppServerSiteFixtu
     public void ErrorsStopTheRenderingProcess()
     {
         Browser.Exists(By.Id("cause-error")).Click();
-        Browser.True(() => Browser.Manage().Logs.GetLog(LogType.Browser)
-            .Any(l => l.Level == LogLevel.Info && l.Message.Contains("Connection disconnected.")));
+        Browser.True(
+            () =>
+                Browser
+                    .Manage()
+                    .Logs.GetLog(LogType.Browser)
+                    .Any(
+                        l =>
+                            l.Level == LogLevel.Info
+                            && l.Message.Contains("Connection disconnected.")
+                    )
+        );
     }
 }

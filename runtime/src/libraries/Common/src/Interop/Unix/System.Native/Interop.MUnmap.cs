@@ -8,7 +8,11 @@ internal static partial class Interop
 {
     internal static partial class Sys
     {
-        [GeneratedDllImport(Libraries.SystemNative, EntryPoint = "SystemNative_MUnmap", SetLastError = true)]
+        [GeneratedDllImport(
+            Libraries.SystemNative,
+            EntryPoint = "SystemNative_MUnmap",
+            SetLastError = true
+        )]
         internal static partial int MUnmap(IntPtr addr, ulong len);
     }
 }

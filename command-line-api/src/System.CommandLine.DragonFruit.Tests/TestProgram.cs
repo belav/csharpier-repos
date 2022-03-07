@@ -7,9 +7,12 @@ namespace System.CommandLine.DragonFruit.Tests
 {
     public class TestProgram
     {
-        public static readonly MethodInfo TestMainMethodInfo = typeof(TestProgram).GetMethod(nameof(TestMain));
+        public static readonly MethodInfo TestMainMethodInfo = typeof(TestProgram).GetMethod(
+            nameof(TestMain)
+        );
 
-        public static readonly MethodInfo TestMainMethodInfoWithDefault = typeof(TestProgram).GetMethod(nameof(TestMainWithDefault));
+        public static readonly MethodInfo TestMainMethodInfoWithDefault =
+            typeof(TestProgram).GetMethod(nameof(TestMainWithDefault));
 
         /// <summary>
         /// Help for the test program
@@ -22,7 +25,7 @@ namespace System.CommandLine.DragonFruit.Tests
             console.Out.Write(name);
             if (args != null && args.Length > 0)
             {
-                console.Out.Write($"args: { string.Join(",", args) }");
+                console.Out.Write($"args: {string.Join(",", args)}");
             }
         }
 

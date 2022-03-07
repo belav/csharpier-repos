@@ -14,7 +14,12 @@ internal static partial class Interop
     {
         // Note: RegCreateKeyEx won't set the last error on failure - it returns
         // an error code if it fails.
-        [GeneratedDllImport(Libraries.Advapi32, EntryPoint = "RegCreateKeyExW", CharSet = CharSet.Unicode, ExactSpelling = true)]
+        [GeneratedDllImport(
+            Libraries.Advapi32,
+            EntryPoint = "RegCreateKeyExW",
+            CharSet = CharSet.Unicode,
+            ExactSpelling = true
+        )]
         internal static partial int RegCreateKeyEx(
             SafeRegistryHandle hKey,
             string lpSubKey,
@@ -24,6 +29,7 @@ internal static partial class Interop
             int samDesired,
             ref Interop.Kernel32.SECURITY_ATTRIBUTES secAttrs,
             out SafeRegistryHandle hkResult,
-            out int lpdwDisposition);
+            out int lpdwDisposition
+        );
     }
 }

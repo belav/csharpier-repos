@@ -18,7 +18,10 @@ namespace System.Text.RegularExpressions.Symbolic
         private readonly Dictionary<(bool, string), BDD> _createConditionFromSet_Cache = new();
 
         /// <summary>Constructs a regex to symbolic finite automata converter</summary>
-        public RegexNodeToSymbolicConverter(Unicode.UnicodeCategoryTheory<BDD> categorizer, CultureInfo culture)
+        public RegexNodeToSymbolicConverter(
+            Unicode.UnicodeCategoryTheory<BDD> categorizer,
+            CultureInfo culture
+        )
         {
             _categorizer = categorizer;
             _culture = culture;
@@ -105,7 +108,8 @@ namespace System.Text.RegularExpressions.Symbolic
                         // C1 | C2 | ... | Cn
                         BDD catCondDisj = MapCategoryCodeSetToCondition(catCodes);
 
-                        BDD catGroupCond = negate ^ negGroup ? Solver.Not(catCondDisj) : catCondDisj;
+                        BDD catGroupCond =
+                            negate ^ negGroup ? Solver.Not(catCondDisj) : catCondDisj;
                         conditions.Add(catGroupCond);
                     }
                 }
@@ -125,9 +129,10 @@ namespace System.Text.RegularExpressions.Symbolic
                 // If there are no ranges and no groups then there are no conditions.
                 // This situation arises for SingleLine regegex option and .
                 // and means that all characters are accepted.
-                BDD moveCond = conditions.Count == 0 ?
-                    (negate ? Solver.False : Solver.True) :
-                    (negate ? Solver.And(conditions) : Solver.Or(conditions));
+                BDD moveCond =
+                    conditions.Count == 0
+                        ? (negate ? Solver.False : Solver.True)
+                        : (negate ? Solver.And(conditions) : Solver.Or(conditions));
 
                 // Subtlety of regex sematics:
                 // The subtractor is not within the scope of the negation (if there is a negation).
@@ -152,9 +157,7 @@ namespace System.Text.RegularExpressions.Symbolic
                         char first = set[i];
                         i++;
 
-                        char last = i < end ?
-                            (char)(set[i] - 1) :
-                            RegexCharClass.LastChar;
+                        char last = i < end ? (char)(set[i] - 1) : RegexCharClass.LastChar;
                         i++;
 
                         ranges.Add((first, last));
@@ -171,8 +174,15 @@ namespace System.Text.RegularExpressions.Symbolic
                     // rather than a disjunction of the component category predicates
                     // the word character class \w covers categories 0,1,2,3,4,8,18
                     BDD? catCond = null;
-                    if (catCodes.Contains(0) && catCodes.Contains(1) && catCodes.Contains(2) && catCodes.Contains(3) &&
-                        catCodes.Contains(4) && catCodes.Contains(8) && catCodes.Contains(18))
+                    if (
+                        catCodes.Contains(0)
+                        && catCodes.Contains(1)
+                        && catCodes.Contains(2)
+                        && catCodes.Contains(3)
+                        && catCodes.Contains(4)
+                        && catCodes.Contains(8)
+                        && catCodes.Contains(18)
+                    )
                     {
                         catCodes.Remove(0);
                         catCodes.Remove(1);
@@ -198,7 +208,12 @@ namespace System.Text.RegularExpressions.Symbolic
                     code switch
                     {
                         99 => _categorizer.WhiteSpaceCondition, // whitespace has special code 99
-                        < 0 or > 29 => throw new ArgumentOutOfRangeException(nameof(code), "Must be in the range 0..29 or equal to 99"), // TODO-NONBACKTRACKING: Remove message or put it into the .resx
+                        < 0
+                        or > 29
+                          => throw new ArgumentOutOfRangeException(
+                              nameof(code),
+                              "Must be in the range 0..29 or equal to 99"
+                          ), // TODO-NONBACKTRACKING: Remove message or put it into the .resx
                         _ => _categorizer.CategoryCondition(code)
                     };
             }
@@ -215,14 +230,14 @@ namespace System.Text.RegularExpressions.Symbolic
             switch (node.Type)
             {
                 case RegexNode.Alternate:
+                {
+                    var nested = new SymbolicRegexNode<BDD>[node.ChildCount()];
+                    for (int i = 0; i < nested.Length; i++)
                     {
-                        var nested = new SymbolicRegexNode<BDD>[node.ChildCount()];
-                        for (int i = 0; i < nested.Length; i++)
-                        {
-                            nested[i] = Convert(node.Child(i), topLevel);
-                        }
-                        return _builder.MkOr(nested);
+                        nested[i] = Convert(node.Child(i), topLevel);
                     }
+                    return _builder.MkOr(nested);
+                }
 
                 case RegexNode.Beginning:
                     return _builder._startAnchor;
@@ -235,21 +250,21 @@ namespace System.Text.RegularExpressions.Symbolic
                     return Convert(node.Child(0), topLevel); // treat as non-capturing group (...)
 
                 case RegexNode.Concatenate:
+                {
+                    List<RegexNode> nested = FlattenNestedConcatenations(node);
+                    var converted = new SymbolicRegexNode<BDD>[nested.Count];
+                    for (int i = 0; i < converted.Length; i++)
                     {
-                        List<RegexNode> nested = FlattenNestedConcatenations(node);
-                        var converted = new SymbolicRegexNode<BDD>[nested.Count];
-                        for (int i = 0; i < converted.Length; i++)
-                        {
-                            converted[i] = Convert(nested[i], topLevel: false);
-                        }
-                        return _builder.MkConcat(converted, topLevel);
+                        converted[i] = Convert(nested[i], topLevel: false);
                     }
+                    return _builder.MkConcat(converted, topLevel);
+                }
 
                 case RegexNode.Empty:
                 case RegexNode.UpdateBumpalong: // optional directive that behaves the same as Empty
                     return _builder._epsilon;
 
-                case RegexNode.End:  // \z anchor
+                case RegexNode.End: // \z anchor
                     return _builder._endAnchor;
 
                 case RegexNode.EndZ: // \Z anchor
@@ -261,23 +276,47 @@ namespace System.Text.RegularExpressions.Symbolic
                     return _builder._eolAnchor;
 
                 case RegexNode.Loop:
-                    return _builder.MkLoop(Convert(node.Child(0), topLevel: false), isLazy: false, node.M, node.N);
+                    return _builder.MkLoop(
+                        Convert(node.Child(0), topLevel: false),
+                        isLazy: false,
+                        node.M,
+                        node.N
+                    );
 
                 case RegexNode.Lazyloop:
-                    return _builder.MkLoop(Convert(node.Child(0), topLevel: false), isLazy: true, node.M, node.N);
+                    return _builder.MkLoop(
+                        Convert(node.Child(0), topLevel: false),
+                        isLazy: true,
+                        node.M,
+                        node.N
+                    );
 
                 case RegexNode.Multi:
                     return ConvertMulti(node, topLevel);
 
                 case RegexNode.Notone:
-                    return _builder.MkSingleton(Solver.Not(Solver.CharConstraint(node.Ch, (node.Options & RegexOptions.IgnoreCase) != 0, _culture.Name)));
+                    return _builder.MkSingleton(
+                        Solver.Not(
+                            Solver.CharConstraint(
+                                node.Ch,
+                                (node.Options & RegexOptions.IgnoreCase) != 0,
+                                _culture.Name
+                            )
+                        )
+                    );
 
                 case RegexNode.Notoneloop:
                 case RegexNode.Notonelazy:
                     return ConvertNotoneloop(node, node.Type == RegexNode.Notonelazy);
 
                 case RegexNode.One:
-                    return _builder.MkSingleton(Solver.CharConstraint(node.Ch, (node.Options & RegexOptions.IgnoreCase) != 0, _culture.Name));
+                    return _builder.MkSingleton(
+                        Solver.CharConstraint(
+                            node.Ch,
+                            (node.Options & RegexOptions.IgnoreCase) != 0,
+                            _culture.Name
+                        )
+                    );
 
                 case RegexNode.Oneloop:
                 case RegexNode.Onelazy:
@@ -327,27 +366,34 @@ namespace System.Text.RegularExpressions.Symbolic
 #endif
 
                 default:
-                    throw new NotSupportedException(SR.Format(SR.NotSupported_NonBacktrackingConflictingExpression, node.Type switch
-                    {
-                        RegexNode.Capture => SR.ExpressionDescription_BalancingGroup,
-                        RegexNode.Testgroup => SR.ExpressionDescription_IfThenElse,
-                        RegexNode.Ref => SR.ExpressionDescription_Backreference,
-                        RegexNode.Testref => SR.ExpressionDescription_Conditional,
-                        RegexNode.Require => SR.ExpressionDescription_PositiveLookaround,
-                        RegexNode.Prevent => SR.ExpressionDescription_NegativeLookaround,
-                        RegexNode.Start => SR.ExpressionDescription_ContiguousMatches,
-                        RegexNode.Atomic or
-                        RegexNode.Setloopatomic or
-                        RegexNode.Oneloopatomic or
-                        RegexNode.Notoneloopatomic => SR.ExpressionDescription_AtomicSubexpressions,
-                        _ => UnexpectedNodeType(node)
-                    }));
+                    throw new NotSupportedException(
+                        SR.Format(
+                            SR.NotSupported_NonBacktrackingConflictingExpression,
+                            node.Type switch
+                            {
+                                RegexNode.Capture => SR.ExpressionDescription_BalancingGroup,
+                                RegexNode.Testgroup => SR.ExpressionDescription_IfThenElse,
+                                RegexNode.Ref => SR.ExpressionDescription_Backreference,
+                                RegexNode.Testref => SR.ExpressionDescription_Conditional,
+                                RegexNode.Require => SR.ExpressionDescription_PositiveLookaround,
+                                RegexNode.Prevent => SR.ExpressionDescription_NegativeLookaround,
+                                RegexNode.Start => SR.ExpressionDescription_ContiguousMatches,
+                                RegexNode.Atomic
+                                or RegexNode.Setloopatomic
+                                or RegexNode.Oneloopatomic
+                                or RegexNode.Notoneloopatomic
+                                  => SR.ExpressionDescription_AtomicSubexpressions,
+                                _ => UnexpectedNodeType(node)
+                            }
+                        )
+                    );
 
                     static string UnexpectedNodeType(RegexNode node)
                     {
                         // The default should never arise, since other node types are either supported
                         // or have been removed (e.g. Group) from the final parse tree.
-                        string description = $"Unexpected node type ({nameof(RegexNode)}:{node.Type})";
+                        string description =
+                            $"Unexpected node type ({nameof(RegexNode)}:{node.Type})";
                         Debug.Fail(description);
                         return description;
                     }
@@ -368,7 +414,8 @@ namespace System.Text.RegularExpressions.Symbolic
                 if (_builder._wordLetterPredicateForAnchors.Equals(_builder._solver.False))
                 {
                     // Use the predicate including joiner and non joiner
-                    _builder._wordLetterPredicateForAnchors = _categorizer.WordLetterConditionForAnchors;
+                    _builder._wordLetterPredicateForAnchors =
+                        _categorizer.WordLetterConditionForAnchors;
                 }
             }
 
@@ -399,7 +446,12 @@ namespace System.Text.RegularExpressions.Symbolic
                         else
                         {
                             // Balancing groups are not supported
-                            throw new NotSupportedException(SR.Format(SR.NotSupported_NonBacktrackingConflictingExpression, SR.ExpressionDescription_BalancingGroup));
+                            throw new NotSupportedException(
+                                SR.Format(
+                                    SR.NotSupported_NonBacktrackingConflictingExpression,
+                                    SR.ExpressionDescription_BalancingGroup
+                                )
+                            );
                         }
                     }
                     else
@@ -460,7 +512,10 @@ namespace System.Text.RegularExpressions.Symbolic
                 string? set = node.Str;
                 Debug.Assert(set is not null);
 
-                BDD moveCond = CreateConditionFromSet((node.Options & RegexOptions.IgnoreCase) != 0, set);
+                BDD moveCond = CreateConditionFromSet(
+                    (node.Options & RegexOptions.IgnoreCase) != 0,
+                    set
+                );
 
                 return _builder.MkSingleton(moveCond);
             }
@@ -472,7 +527,10 @@ namespace System.Text.RegularExpressions.Symbolic
                 string? set = node.Str;
                 Debug.Assert(set is not null);
 
-                BDD moveCond = CreateConditionFromSet((node.Options & RegexOptions.IgnoreCase) != 0, set);
+                BDD moveCond = CreateConditionFromSet(
+                    (node.Options & RegexOptions.IgnoreCase) != 0,
+                    set
+                );
 
                 SymbolicRegexNode<BDD> body = _builder.MkSingleton(moveCond);
                 return _builder.MkLoop(body, isLazy, node.M, node.N);
@@ -480,13 +538,22 @@ namespace System.Text.RegularExpressions.Symbolic
 
 #if DEBUG
             // TODO-NONBACKTRACKING: recognizing strictly only [] (RegexNode.Nothing), for example [0-[0]] would not be recognized
-            bool IsNothing(RegexNode node) => node.Type == RegexNode.Nothing || (node.Type == RegexNode.Set && ConvertSet(node).IsNothing);
+            bool IsNothing(RegexNode node) =>
+                node.Type == RegexNode.Nothing
+                || (node.Type == RegexNode.Set && ConvertSet(node).IsNothing);
 
-            bool IsDotStar(RegexNode node) => node.Type == RegexNode.Setloop && Convert(node, topLevel: false).IsAnyStar;
+            bool IsDotStar(RegexNode node) =>
+                node.Type == RegexNode.Setloop && Convert(node, topLevel: false).IsAnyStar;
 
-            bool IsIntersect(RegexNode node) => node.Type == RegexNode.Testgroup && node.ChildCount() > 2 && IsNothing(node.Child(2));
+            bool IsIntersect(RegexNode node) =>
+                node.Type == RegexNode.Testgroup
+                && node.ChildCount() > 2
+                && IsNothing(node.Child(2));
 
-            bool TryGetIntersection(RegexNode node, [Diagnostics.CodeAnalysis.NotNullWhen(true)] out List<RegexNode>? conjuncts)
+            bool TryGetIntersection(
+                RegexNode node,
+                [Diagnostics.CodeAnalysis.NotNullWhen(true)] out List<RegexNode>? conjuncts
+            )
             {
                 if (!IsIntersect(node))
                 {
@@ -507,7 +574,8 @@ namespace System.Text.RegularExpressions.Symbolic
                 return true;
             }
 
-            bool IsComplementedNode(RegexNode node) => IsNothing(node.Child(1)) && IsDotStar(node.Child(2));
+            bool IsComplementedNode(RegexNode node) =>
+                IsNothing(node.Child(1)) && IsDotStar(node.Child(2));
 #endif
         }
     }

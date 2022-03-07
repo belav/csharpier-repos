@@ -34,7 +34,8 @@ namespace Internal.Cryptography
             ReadOnlySpan<byte> iv,
             bool encrypting,
             int feedbackSizeInBytes,
-            int paddingSizeInBytes)
+            int paddingSizeInBytes
+        )
         {
             int ret;
             int ccStatus;
@@ -44,8 +45,8 @@ namespace Internal.Cryptography
             {
                 ret = Interop.AppleCrypto.CryptorCreate(
                     encrypting
-                        ? Interop.AppleCrypto.PAL_SymmetricOperation.Encrypt
-                        : Interop.AppleCrypto.PAL_SymmetricOperation.Decrypt,
+                      ? Interop.AppleCrypto.PAL_SymmetricOperation.Encrypt
+                      : Interop.AppleCrypto.PAL_SymmetricOperation.Decrypt,
                     algorithm,
                     GetPalChainMode(algorithm, cipherMode, feedbackSizeInBytes),
                     Interop.AppleCrypto.PAL_PaddingMode.None,
@@ -54,7 +55,8 @@ namespace Internal.Cryptography
                     pbIv,
                     Interop.AppleCrypto.PAL_SymmetricOptions.None,
                     out _cryptor,
-                    out ccStatus);
+                    out ccStatus
+                );
             }
 
             ProcessInteropError(ret, ccStatus);
@@ -164,7 +166,8 @@ namespace Internal.Cryptography
                     pOutput,
                     output.Length,
                     out bytesWritten,
-                    out ccStatus);
+                    out ccStatus
+                );
             }
 
             ProcessInteropError(ret, ccStatus);
@@ -172,7 +175,11 @@ namespace Internal.Cryptography
             return bytesWritten;
         }
 
-        private PAL_ChainingMode GetPalChainMode(PAL_SymmetricAlgorithm algorithm, CipherMode cipherMode, int feedbackSizeInBytes)
+        private PAL_ChainingMode GetPalChainMode(
+            PAL_SymmetricAlgorithm algorithm,
+            CipherMode cipherMode,
+            int feedbackSizeInBytes
+        )
         {
             return cipherMode switch
             {
@@ -180,7 +187,10 @@ namespace Internal.Cryptography
                 CipherMode.ECB => PAL_ChainingMode.ECB,
                 CipherMode.CFB when feedbackSizeInBytes == 1 => PAL_ChainingMode.CFB8,
                 CipherMode.CFB => PAL_ChainingMode.CFB,
-                _ => throw new PlatformNotSupportedException(SR.Format(SR.Cryptography_CipherModeNotSupported, cipherMode)),
+                _
+                  => throw new PlatformNotSupportedException(
+                      SR.Format(SR.Cryptography_CipherModeNotSupported, cipherMode)
+                  ),
             };
         }
 
@@ -207,7 +217,8 @@ namespace Internal.Cryptography
                     outputCurrent,
                     output.Length - outputBytes,
                     out bytesWritten,
-                    out errorCode);
+                    out errorCode
+                );
 
                 outputBytes += bytesWritten;
             }
@@ -228,10 +239,14 @@ namespace Internal.Cryptography
             // Platform error
             if (functionReturnCode == 0)
             {
-                Debug.Assert(ccStatus != 0, "Interop function returned 0 but a system code of success");
+                Debug.Assert(
+                    ccStatus != 0,
+                    "Interop function returned 0 but a system code of success"
+                );
                 throw Interop.AppleCrypto.CreateExceptionForCCError(
                     ccStatus,
-                    Interop.AppleCrypto.CCCryptorStatus);
+                    Interop.AppleCrypto.CCCryptorStatus
+                );
             }
 
             // Usually this will be -1, a general indication of bad inputs.

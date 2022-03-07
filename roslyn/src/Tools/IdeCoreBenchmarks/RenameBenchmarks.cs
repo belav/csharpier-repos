@@ -16,7 +16,6 @@ namespace IdeCoreBenchmarks
     [MemoryDiagnoser]
     public class RenameBenchmarks
     {
-
         private Solution _solution;
         private ISymbol _symbol;
         private string _csFilePath;
@@ -24,8 +23,13 @@ namespace IdeCoreBenchmarks
         [GlobalSetup]
         public void GlobalSetup()
         {
-            var roslynRoot = Environment.GetEnvironmentVariable(Program.RoslynRootPathEnvVariableName);
-            _csFilePath = Path.Combine(roslynRoot, @"src\Compilers\CSharp\Portable\Generated\BoundNodes.xml.Generated.cs");
+            var roslynRoot = Environment.GetEnvironmentVariable(
+                Program.RoslynRootPathEnvVariableName
+            );
+            _csFilePath = Path.Combine(
+                roslynRoot,
+                @"src\Compilers\CSharp\Portable\Generated\BoundNodes.xml.Generated.cs"
+            );
 
             if (!File.Exists(_csFilePath))
             {
@@ -51,7 +55,12 @@ namespace IdeCoreBenchmarks
         [Benchmark]
         public void RenameNodes()
         {
-            _ = Microsoft.CodeAnalysis.Rename.Renamer.RenameSymbolAsync(_solution, _symbol, "NewName", optionSet: null);
+            _ = Microsoft.CodeAnalysis.Rename.Renamer.RenameSymbolAsync(
+                _solution,
+                _symbol,
+                "NewName",
+                optionSet: null
+            );
         }
 
         [IterationCleanup]

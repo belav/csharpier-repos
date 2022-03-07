@@ -17,17 +17,14 @@ namespace Microsoft.EntityFrameworkCore
     /// <remarks>
     ///     See <see href="https://aka.ms/efcore-docs-dbcontext-options">Using DbContextOptions</see> for more information.
     /// </remarks>
-    public class DbContextOptions<TContext> : DbContextOptions
-        where TContext : DbContext
+    public class DbContextOptions<TContext> : DbContextOptions where TContext : DbContext
     {
         /// <summary>
         ///     Initializes a new instance of the <see cref="DbContextOptions{TContext}" /> class. You normally override
         ///     <see cref="DbContext.OnConfiguring(DbContextOptionsBuilder)" /> or use a <see cref="DbContextOptionsBuilder{TContext}" />
         ///     to create instances of this class and it is not designed to be directly constructed in your application code.
         /// </summary>
-        public DbContextOptions()
-        {
-        }
+        public DbContextOptions() { }
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="DbContextOptions{TContext}" /> class. You normally override
@@ -35,17 +32,15 @@ namespace Microsoft.EntityFrameworkCore
         ///     to create instances of this class and it is not designed to be directly constructed in your application code.
         /// </summary>
         /// <param name="extensions">The extensions that store the configured options.</param>
-        public DbContextOptions(
-            IReadOnlyDictionary<Type, IDbContextOptionsExtension> extensions)
-            : base(extensions)
-        {
-        }
+        public DbContextOptions(IReadOnlyDictionary<Type, IDbContextOptionsExtension> extensions)
+            : base(extensions) { }
 
         private DbContextOptions(
-            ImmutableSortedDictionary<Type, (IDbContextOptionsExtension Extension, int Ordinal)> extensions)
-            : base(extensions)
-        {
-        }
+            ImmutableSortedDictionary<
+                Type,
+                (IDbContextOptionsExtension Extension, int Ordinal)
+            > extensions
+        ) : base(extensions) { }
 
         /// <inheritdoc />
         public override DbContextOptions WithExtension<TExtension>(TExtension extension)
@@ -57,13 +52,14 @@ namespace Microsoft.EntityFrameworkCore
                 ordinal = existingValue.Ordinal;
             }
 
-            return new DbContextOptions<TContext>(ExtensionsMap.SetItem(type, (extension, ordinal)));
+            return new DbContextOptions<TContext>(
+                ExtensionsMap.SetItem(type, (extension, ordinal))
+            );
         }
 
         /// <summary>
         ///     The type of context that these options are for (<typeparamref name="TContext" />).
         /// </summary>
-        public override Type ContextType
-            => typeof(TContext);
+        public override Type ContextType => typeof(TContext);
     }
 }

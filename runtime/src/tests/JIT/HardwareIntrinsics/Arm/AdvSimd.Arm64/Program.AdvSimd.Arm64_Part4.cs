@@ -10,33 +10,60 @@ namespace JIT.HardwareIntrinsics.Arm
     {
         static Program()
         {
-            TestList = new Dictionary<string, Action>() {
-                ["ShiftLogicalSaturateScalar.Vector64.UInt16"] = ShiftLogicalSaturateScalar_Vector64_UInt16,
-                ["ShiftLogicalSaturateScalar.Vector64.UInt32"] = ShiftLogicalSaturateScalar_Vector64_UInt32,
-                ["ShiftRightArithmeticNarrowingSaturateScalar.Vector64.Int16.16"] = ShiftRightArithmeticNarrowingSaturateScalar_Vector64_Int16_16,
-                ["ShiftRightArithmeticNarrowingSaturateScalar.Vector64.Int32.32"] = ShiftRightArithmeticNarrowingSaturateScalar_Vector64_Int32_32,
-                ["ShiftRightArithmeticNarrowingSaturateScalar.Vector64.SByte.8"] = ShiftRightArithmeticNarrowingSaturateScalar_Vector64_SByte_8,
-                ["ShiftRightArithmeticNarrowingSaturateUnsignedScalar.Vector64.Byte.3"] = ShiftRightArithmeticNarrowingSaturateUnsignedScalar_Vector64_Byte_3,
-                ["ShiftRightArithmeticNarrowingSaturateUnsignedScalar.Vector64.UInt16.5"] = ShiftRightArithmeticNarrowingSaturateUnsignedScalar_Vector64_UInt16_5,
-                ["ShiftRightArithmeticNarrowingSaturateUnsignedScalar.Vector64.UInt32.7"] = ShiftRightArithmeticNarrowingSaturateUnsignedScalar_Vector64_UInt32_7,
-                ["ShiftRightArithmeticRoundedNarrowingSaturateScalar.Vector64.Int16.32"] = ShiftRightArithmeticRoundedNarrowingSaturateScalar_Vector64_Int16_32,
-                ["ShiftRightArithmeticRoundedNarrowingSaturateScalar.Vector64.Int32.64"] = ShiftRightArithmeticRoundedNarrowingSaturateScalar_Vector64_Int32_64,
-                ["ShiftRightArithmeticRoundedNarrowingSaturateScalar.Vector64.SByte.16"] = ShiftRightArithmeticRoundedNarrowingSaturateScalar_Vector64_SByte_16,
-                ["ShiftRightArithmeticRoundedNarrowingSaturateUnsignedScalar.Vector64.Byte.1"] = ShiftRightArithmeticRoundedNarrowingSaturateUnsignedScalar_Vector64_Byte_1,
-                ["ShiftRightArithmeticRoundedNarrowingSaturateUnsignedScalar.Vector64.UInt16.1"] = ShiftRightArithmeticRoundedNarrowingSaturateUnsignedScalar_Vector64_UInt16_1,
-                ["ShiftRightArithmeticRoundedNarrowingSaturateUnsignedScalar.Vector64.UInt32.1"] = ShiftRightArithmeticRoundedNarrowingSaturateUnsignedScalar_Vector64_UInt32_1,
-                ["ShiftRightLogicalNarrowingSaturateScalar.Vector64.Byte.5"] = ShiftRightLogicalNarrowingSaturateScalar_Vector64_Byte_5,
-                ["ShiftRightLogicalNarrowingSaturateScalar.Vector64.Int16.7"] = ShiftRightLogicalNarrowingSaturateScalar_Vector64_Int16_7,
-                ["ShiftRightLogicalNarrowingSaturateScalar.Vector64.Int32.11"] = ShiftRightLogicalNarrowingSaturateScalar_Vector64_Int32_11,
-                ["ShiftRightLogicalNarrowingSaturateScalar.Vector64.SByte.3"] = ShiftRightLogicalNarrowingSaturateScalar_Vector64_SByte_3,
-                ["ShiftRightLogicalNarrowingSaturateScalar.Vector64.UInt16.5"] = ShiftRightLogicalNarrowingSaturateScalar_Vector64_UInt16_5,
-                ["ShiftRightLogicalNarrowingSaturateScalar.Vector64.UInt32.7"] = ShiftRightLogicalNarrowingSaturateScalar_Vector64_UInt32_7,
-                ["ShiftRightLogicalRoundedNarrowingSaturateScalar.Vector64.Byte.1"] = ShiftRightLogicalRoundedNarrowingSaturateScalar_Vector64_Byte_1,
-                ["ShiftRightLogicalRoundedNarrowingSaturateScalar.Vector64.Int16.1"] = ShiftRightLogicalRoundedNarrowingSaturateScalar_Vector64_Int16_1,
-                ["ShiftRightLogicalRoundedNarrowingSaturateScalar.Vector64.Int32.1"] = ShiftRightLogicalRoundedNarrowingSaturateScalar_Vector64_Int32_1,
-                ["ShiftRightLogicalRoundedNarrowingSaturateScalar.Vector64.SByte.1"] = ShiftRightLogicalRoundedNarrowingSaturateScalar_Vector64_SByte_1,
-                ["ShiftRightLogicalRoundedNarrowingSaturateScalar.Vector64.UInt16.1"] = ShiftRightLogicalRoundedNarrowingSaturateScalar_Vector64_UInt16_1,
-                ["ShiftRightLogicalRoundedNarrowingSaturateScalar.Vector64.UInt32.1"] = ShiftRightLogicalRoundedNarrowingSaturateScalar_Vector64_UInt32_1,
+            TestList = new Dictionary<string, Action>()
+            {
+                ["ShiftLogicalSaturateScalar.Vector64.UInt16"] =
+                    ShiftLogicalSaturateScalar_Vector64_UInt16,
+                ["ShiftLogicalSaturateScalar.Vector64.UInt32"] =
+                    ShiftLogicalSaturateScalar_Vector64_UInt32,
+                ["ShiftRightArithmeticNarrowingSaturateScalar.Vector64.Int16.16"] =
+                    ShiftRightArithmeticNarrowingSaturateScalar_Vector64_Int16_16,
+                ["ShiftRightArithmeticNarrowingSaturateScalar.Vector64.Int32.32"] =
+                    ShiftRightArithmeticNarrowingSaturateScalar_Vector64_Int32_32,
+                ["ShiftRightArithmeticNarrowingSaturateScalar.Vector64.SByte.8"] =
+                    ShiftRightArithmeticNarrowingSaturateScalar_Vector64_SByte_8,
+                ["ShiftRightArithmeticNarrowingSaturateUnsignedScalar.Vector64.Byte.3"] =
+                    ShiftRightArithmeticNarrowingSaturateUnsignedScalar_Vector64_Byte_3,
+                ["ShiftRightArithmeticNarrowingSaturateUnsignedScalar.Vector64.UInt16.5"] =
+                    ShiftRightArithmeticNarrowingSaturateUnsignedScalar_Vector64_UInt16_5,
+                ["ShiftRightArithmeticNarrowingSaturateUnsignedScalar.Vector64.UInt32.7"] =
+                    ShiftRightArithmeticNarrowingSaturateUnsignedScalar_Vector64_UInt32_7,
+                ["ShiftRightArithmeticRoundedNarrowingSaturateScalar.Vector64.Int16.32"] =
+                    ShiftRightArithmeticRoundedNarrowingSaturateScalar_Vector64_Int16_32,
+                ["ShiftRightArithmeticRoundedNarrowingSaturateScalar.Vector64.Int32.64"] =
+                    ShiftRightArithmeticRoundedNarrowingSaturateScalar_Vector64_Int32_64,
+                ["ShiftRightArithmeticRoundedNarrowingSaturateScalar.Vector64.SByte.16"] =
+                    ShiftRightArithmeticRoundedNarrowingSaturateScalar_Vector64_SByte_16,
+                ["ShiftRightArithmeticRoundedNarrowingSaturateUnsignedScalar.Vector64.Byte.1"] =
+                    ShiftRightArithmeticRoundedNarrowingSaturateUnsignedScalar_Vector64_Byte_1,
+                ["ShiftRightArithmeticRoundedNarrowingSaturateUnsignedScalar.Vector64.UInt16.1"] =
+                    ShiftRightArithmeticRoundedNarrowingSaturateUnsignedScalar_Vector64_UInt16_1,
+                ["ShiftRightArithmeticRoundedNarrowingSaturateUnsignedScalar.Vector64.UInt32.1"] =
+                    ShiftRightArithmeticRoundedNarrowingSaturateUnsignedScalar_Vector64_UInt32_1,
+                ["ShiftRightLogicalNarrowingSaturateScalar.Vector64.Byte.5"] =
+                    ShiftRightLogicalNarrowingSaturateScalar_Vector64_Byte_5,
+                ["ShiftRightLogicalNarrowingSaturateScalar.Vector64.Int16.7"] =
+                    ShiftRightLogicalNarrowingSaturateScalar_Vector64_Int16_7,
+                ["ShiftRightLogicalNarrowingSaturateScalar.Vector64.Int32.11"] =
+                    ShiftRightLogicalNarrowingSaturateScalar_Vector64_Int32_11,
+                ["ShiftRightLogicalNarrowingSaturateScalar.Vector64.SByte.3"] =
+                    ShiftRightLogicalNarrowingSaturateScalar_Vector64_SByte_3,
+                ["ShiftRightLogicalNarrowingSaturateScalar.Vector64.UInt16.5"] =
+                    ShiftRightLogicalNarrowingSaturateScalar_Vector64_UInt16_5,
+                ["ShiftRightLogicalNarrowingSaturateScalar.Vector64.UInt32.7"] =
+                    ShiftRightLogicalNarrowingSaturateScalar_Vector64_UInt32_7,
+                ["ShiftRightLogicalRoundedNarrowingSaturateScalar.Vector64.Byte.1"] =
+                    ShiftRightLogicalRoundedNarrowingSaturateScalar_Vector64_Byte_1,
+                ["ShiftRightLogicalRoundedNarrowingSaturateScalar.Vector64.Int16.1"] =
+                    ShiftRightLogicalRoundedNarrowingSaturateScalar_Vector64_Int16_1,
+                ["ShiftRightLogicalRoundedNarrowingSaturateScalar.Vector64.Int32.1"] =
+                    ShiftRightLogicalRoundedNarrowingSaturateScalar_Vector64_Int32_1,
+                ["ShiftRightLogicalRoundedNarrowingSaturateScalar.Vector64.SByte.1"] =
+                    ShiftRightLogicalRoundedNarrowingSaturateScalar_Vector64_SByte_1,
+                ["ShiftRightLogicalRoundedNarrowingSaturateScalar.Vector64.UInt16.1"] =
+                    ShiftRightLogicalRoundedNarrowingSaturateScalar_Vector64_UInt16_1,
+                ["ShiftRightLogicalRoundedNarrowingSaturateScalar.Vector64.UInt32.1"] =
+                    ShiftRightLogicalRoundedNarrowingSaturateScalar_Vector64_UInt32_1,
                 ["Sqrt.Vector64.Single"] = Sqrt_Vector64_Single,
                 ["Sqrt.Vector128.Double"] = Sqrt_Vector128_Double,
                 ["Sqrt.Vector128.Single"] = Sqrt_Vector128_Single,
@@ -63,9 +90,12 @@ namespace JIT.HardwareIntrinsics.Arm
                 ["StorePairScalar.Vector64.Int32"] = StorePairScalar_Vector64_Int32,
                 ["StorePairScalar.Vector64.Single"] = StorePairScalar_Vector64_Single,
                 ["StorePairScalar.Vector64.UInt32"] = StorePairScalar_Vector64_UInt32,
-                ["StorePairScalarNonTemporal.Vector64.Int32"] = StorePairScalarNonTemporal_Vector64_Int32,
-                ["StorePairScalarNonTemporal.Vector64.Single"] = StorePairScalarNonTemporal_Vector64_Single,
-                ["StorePairScalarNonTemporal.Vector64.UInt32"] = StorePairScalarNonTemporal_Vector64_UInt32,
+                ["StorePairScalarNonTemporal.Vector64.Int32"] =
+                    StorePairScalarNonTemporal_Vector64_Int32,
+                ["StorePairScalarNonTemporal.Vector64.Single"] =
+                    StorePairScalarNonTemporal_Vector64_Single,
+                ["StorePairScalarNonTemporal.Vector64.UInt32"] =
+                    StorePairScalarNonTemporal_Vector64_UInt32,
                 ["StorePairNonTemporal.Vector64.Byte"] = StorePairNonTemporal_Vector64_Byte,
                 ["StorePairNonTemporal.Vector64.Double"] = StorePairNonTemporal_Vector64_Double,
                 ["StorePairNonTemporal.Vector64.Int16"] = StorePairNonTemporal_Vector64_Int16,

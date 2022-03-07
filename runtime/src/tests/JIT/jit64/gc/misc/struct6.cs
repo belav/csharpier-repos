@@ -18,7 +18,11 @@ class Test_struct6
 
     public static int Main()
     {
-        S sM1, sM2, sM3, sM4, sM5;
+        S sM1,
+            sM2,
+            sM3,
+            sM4,
+            sM5;
 
         sM1.str = "test";
         sM2.str = "test2";

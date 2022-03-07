@@ -17,17 +17,33 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
     {
         public static ImmutableArray<string> GetImportedNamespaces(
             SyntaxNode location,
-            SemanticModel semanticModel)
-            => semanticModel.GetUsingNamespacesInScope(location)
-                .SelectAsArray(namespaceSymbol => namespaceSymbol.ToDisplayString(SymbolDisplayFormats.NameFormat));
+            SemanticModel semanticModel
+        ) =>
+            semanticModel
+                .GetUsingNamespacesInScope(location)
+                .SelectAsArray(
+                    namespaceSymbol =>
+                        namespaceSymbol.ToDisplayString(SymbolDisplayFormats.NameFormat)
+                );
 
-        public static async Task<SyntaxContext> CreateContextAsync(Document document, int position, CancellationToken cancellationToken)
+        public static async Task<SyntaxContext> CreateContextAsync(
+            Document document,
+            int position,
+            CancellationToken cancellationToken
+        )
         {
-            // Need regular semantic model because we will use it to get imported namespace symbols. Otherwise we will try to 
+            // Need regular semantic model because we will use it to get imported namespace symbols. Otherwise we will try to
             // reach outside of the span and ended up with "node not within syntax tree" error from the speculative model.
-            var semanticModel = await document.GetRequiredSemanticModelAsync(cancellationToken).ConfigureAwait(false);
+            var semanticModel = await document
+                .GetRequiredSemanticModelAsync(cancellationToken)
+                .ConfigureAwait(false);
             Contract.ThrowIfNull(semanticModel);
-            return CSharpSyntaxContext.CreateContext(document, semanticModel, position, cancellationToken);
+            return CSharpSyntaxContext.CreateContext(
+                document,
+                semanticModel,
+                position,
+                cancellationToken
+            );
         }
     }
 }

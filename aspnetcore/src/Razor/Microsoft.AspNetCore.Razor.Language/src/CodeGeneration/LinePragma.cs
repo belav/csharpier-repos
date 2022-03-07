@@ -10,11 +10,23 @@ namespace Microsoft.AspNetCore.Razor.Language.CodeGeneration;
 public readonly struct LinePragma : IEquatable<LinePragma>
 {
     public LinePragma(int startLineIndex, int lineCount, string filePath)
-        : this(startLineIndex: startLineIndex, lineCount: lineCount, filePath: filePath, startCharacterIndex: null, endCharacterIndex: null, characterOffset: null)
-    {
-    }
+        : this(
+            startLineIndex: startLineIndex,
+            lineCount: lineCount,
+            filePath: filePath,
+            startCharacterIndex: null,
+            endCharacterIndex: null,
+            characterOffset: null
+        ) { }
 
-    public LinePragma(int startLineIndex, int lineCount, string filePath, int? startCharacterIndex, int? endCharacterIndex, int? characterOffset)
+    public LinePragma(
+        int startLineIndex,
+        int lineCount,
+        string filePath,
+        int? startCharacterIndex,
+        int? endCharacterIndex,
+        int? characterOffset
+    )
     {
         if (startLineIndex < 0)
         {
@@ -55,9 +67,9 @@ public readonly struct LinePragma : IEquatable<LinePragma>
 
     public bool Equals(LinePragma other)
     {
-        return StartLineIndex == other.StartLineIndex &&
-            LineCount == other.LineCount &&
-            string.Equals(FilePath, other.FilePath, StringComparison.Ordinal);
+        return StartLineIndex == other.StartLineIndex
+            && LineCount == other.LineCount
+            && string.Equals(FilePath, other.FilePath, StringComparison.Ordinal);
     }
 
     public override int GetHashCode()
@@ -71,6 +83,12 @@ public readonly struct LinePragma : IEquatable<LinePragma>
 
     public override string ToString()
     {
-        return string.Format(CultureInfo.CurrentCulture, "Line index {0}, Count {1} - {2}", StartLineIndex, LineCount, FilePath);
+        return string.Format(
+            CultureInfo.CurrentCulture,
+            "Line index {0}, Count {1} - {2}",
+            StartLineIndex,
+            LineCount,
+            FilePath
+        );
     }
 }

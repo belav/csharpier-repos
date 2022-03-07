@@ -24,7 +24,10 @@ public class Transaction
         {
             if (SetCookie != null && SetCookie.Count > 0)
             {
-                var authCookie = SetCookie.SingleOrDefault(c => c.Contains(".AspNetCore." + TestExtensions.CookieAuthenticationScheme + "="));
+                var authCookie = SetCookie.SingleOrDefault(
+                    c =>
+                        c.Contains(".AspNetCore." + TestExtensions.CookieAuthenticationScheme + "=")
+                );
                 if (authCookie != null)
                 {
                     return authCookie.Substring(0, authCookie.IndexOf(';'));
@@ -37,9 +40,13 @@ public class Transaction
 
     public string FindClaimValue(string claimType, string issuer = null)
     {
-        var claim = ResponseElement.Elements("claim")
-            .SingleOrDefault(elt => elt.Attribute("type").Value == claimType &&
-                (issuer == null || elt.Attribute("issuer").Value == issuer));
+        var claim = ResponseElement
+            .Elements("claim")
+            .SingleOrDefault(
+                elt =>
+                    elt.Attribute("type").Value == claimType
+                    && (issuer == null || elt.Attribute("issuer").Value == issuer)
+            );
         if (claim == null)
         {
             return null;
@@ -49,7 +56,8 @@ public class Transaction
 
     public string FindTokenValue(string name)
     {
-        var claim = ResponseElement.Elements("token")
+        var claim = ResponseElement
+            .Elements("token")
             .SingleOrDefault(elt => elt.Attribute("name").Value == name);
         if (claim == null)
         {
@@ -57,5 +65,4 @@ public class Transaction
         }
         return claim.Attribute("value").Value;
     }
-
 }

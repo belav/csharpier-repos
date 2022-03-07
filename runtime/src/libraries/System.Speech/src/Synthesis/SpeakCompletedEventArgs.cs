@@ -6,9 +6,7 @@ namespace System.Speech.Synthesis
     public class SpeakCompletedEventArgs : PromptEventArgs
     {
         #region Constructors
-        internal SpeakCompletedEventArgs(Prompt prompt) : base(prompt)
-        {
-        }
+        internal SpeakCompletedEventArgs(Prompt prompt) : base(prompt) { }
 
         #endregion
     }

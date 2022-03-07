@@ -3,6 +3,7 @@
 
 // instance method
 using System;
+
 namespace Precise
 {
     class Driver
@@ -11,7 +12,9 @@ namespace Precise
         {
             try
             {
-                Console.WriteLine("Testing .cctor() invocation by calling instance method across assembly");
+                Console.WriteLine(
+                    "Testing .cctor() invocation by calling instance method across assembly"
+                );
                 Console.WriteLine();
                 Console.WriteLine("Before calling instance method");
                 // .cctor should not run yet
@@ -41,5 +44,4 @@ namespace Precise
             return 100;
         }
     }
-
 }

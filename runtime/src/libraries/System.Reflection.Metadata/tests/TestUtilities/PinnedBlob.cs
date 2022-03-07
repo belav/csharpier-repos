@@ -13,9 +13,7 @@ namespace System.Reflection.Metadata.Tests
         private readonly byte[] _blob;
 
         public PinnedBlob(ImmutableArray<byte> blob)
-            : this(ImmutableByteArrayInterop.DangerousGetUnderlyingArray(blob))
-        {
-        }
+            : this(ImmutableByteArrayInterop.DangerousGetUnderlyingArray(blob)) { }
 
         public unsafe PinnedBlob(byte[] blob)
         {

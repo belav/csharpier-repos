@@ -21,7 +21,10 @@ namespace System.Web.WebPages.Test.Mvc
             var attributes = new Dictionary<string, object>();
 
             // Act
-            UnobtrusiveValidationAttributesGenerator.GetValidationAttributes(clientRules, attributes);
+            UnobtrusiveValidationAttributesGenerator.GetValidationAttributes(
+                clientRules,
+                attributes
+            );
 
             // Assert
             Assert.Equal(5, attributes.Count);
@@ -44,7 +47,10 @@ namespace System.Web.WebPages.Test.Mvc
             var attributes = new Dictionary<string, object>();
 
             // Act
-            UnobtrusiveValidationAttributesGenerator.GetValidationAttributes(clientRules, attributes);
+            UnobtrusiveValidationAttributesGenerator.GetValidationAttributes(
+                clientRules,
+                attributes
+            );
 
             // Assert
             Assert.Equal(6, attributes.Count);

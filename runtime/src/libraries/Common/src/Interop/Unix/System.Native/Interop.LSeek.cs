@@ -15,7 +15,11 @@ internal static partial class Interop
             SEEK_END = 2
         }
 
-        [GeneratedDllImport(Libraries.SystemNative, EntryPoint = "SystemNative_LSeek", SetLastError = true)]
+        [GeneratedDllImport(
+            Libraries.SystemNative,
+            EntryPoint = "SystemNative_LSeek",
+            SetLastError = true
+        )]
         internal static partial long LSeek(SafeFileHandle fd, long offset, SeekWhence whence);
     }
 }

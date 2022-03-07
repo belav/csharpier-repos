@@ -21,8 +21,8 @@ public static class IdentityCookieAuthenticationBuilderExtensions
     /// </summary>
     /// <param name="builder">The current <see cref="AuthenticationBuilder"/> instance.</param>
     /// <returns>The <see cref="IdentityCookiesBuilder"/> which can be used to configure the identity cookies.</returns>
-    public static IdentityCookiesBuilder AddIdentityCookies(this AuthenticationBuilder builder)
-        => builder.AddIdentityCookies(o => { });
+    public static IdentityCookiesBuilder AddIdentityCookies(this AuthenticationBuilder builder) =>
+        builder.AddIdentityCookies(o => { });
 
     /// <summary>
     /// Adds the cookie authentication needed for sign in manager.
@@ -30,7 +30,10 @@ public static class IdentityCookieAuthenticationBuilderExtensions
     /// <param name="builder">The current <see cref="AuthenticationBuilder"/> instance.</param>
     /// <param name="configureCookies">Action used to configure the cookies.</param>
     /// <returns>The <see cref="IdentityCookiesBuilder"/> which can be used to configure the identity cookies.</returns>
-    public static IdentityCookiesBuilder AddIdentityCookies(this AuthenticationBuilder builder, Action<IdentityCookiesBuilder> configureCookies)
+    public static IdentityCookiesBuilder AddIdentityCookies(
+        this AuthenticationBuilder builder,
+        Action<IdentityCookiesBuilder> configureCookies
+    )
     {
         var cookieBuilder = new IdentityCookiesBuilder();
         cookieBuilder.ApplicationCookie = builder.AddApplicationCookie();
@@ -46,17 +49,25 @@ public static class IdentityCookieAuthenticationBuilderExtensions
     /// </summary>
     /// <param name="builder">The current <see cref="AuthenticationBuilder"/> instance.</param>
     /// <returns>The <see cref="OptionsBuilder{TOptions}"/> which can be used to configure the cookie authentication.</returns>
-    public static OptionsBuilder<CookieAuthenticationOptions> AddApplicationCookie(this AuthenticationBuilder builder)
+    public static OptionsBuilder<CookieAuthenticationOptions> AddApplicationCookie(
+        this AuthenticationBuilder builder
+    )
     {
-        builder.AddCookie(IdentityConstants.ApplicationScheme, o =>
-        {
-            o.LoginPath = new PathString("/Account/Login");
-            o.Events = new CookieAuthenticationEvents
+        builder.AddCookie(
+            IdentityConstants.ApplicationScheme,
+            o =>
             {
-                OnValidatePrincipal = SecurityStampValidator.ValidatePrincipalAsync
-            };
-        });
-        return new OptionsBuilder<CookieAuthenticationOptions>(builder.Services, IdentityConstants.ApplicationScheme);
+                o.LoginPath = new PathString("/Account/Login");
+                o.Events = new CookieAuthenticationEvents
+                {
+                    OnValidatePrincipal = SecurityStampValidator.ValidatePrincipalAsync
+                };
+            }
+        );
+        return new OptionsBuilder<CookieAuthenticationOptions>(
+            builder.Services,
+            IdentityConstants.ApplicationScheme
+        );
     }
 
     /// <summary>
@@ -64,14 +75,22 @@ public static class IdentityCookieAuthenticationBuilderExtensions
     /// </summary>
     /// <param name="builder">The current <see cref="AuthenticationBuilder"/> instance.</param>
     /// <returns>The <see cref="OptionsBuilder{TOptions}"/> which can be used to configure the cookie authentication.</returns>
-    public static OptionsBuilder<CookieAuthenticationOptions> AddExternalCookie(this AuthenticationBuilder builder)
+    public static OptionsBuilder<CookieAuthenticationOptions> AddExternalCookie(
+        this AuthenticationBuilder builder
+    )
     {
-        builder.AddCookie(IdentityConstants.ExternalScheme, o =>
-        {
-            o.Cookie.Name = IdentityConstants.ExternalScheme;
-            o.ExpireTimeSpan = TimeSpan.FromMinutes(5);
-        });
-        return new OptionsBuilder<CookieAuthenticationOptions>(builder.Services, IdentityConstants.ExternalScheme);
+        builder.AddCookie(
+            IdentityConstants.ExternalScheme,
+            o =>
+            {
+                o.Cookie.Name = IdentityConstants.ExternalScheme;
+                o.ExpireTimeSpan = TimeSpan.FromMinutes(5);
+            }
+        );
+        return new OptionsBuilder<CookieAuthenticationOptions>(
+            builder.Services,
+            IdentityConstants.ExternalScheme
+        );
     }
 
     /// <summary>
@@ -79,17 +98,26 @@ public static class IdentityCookieAuthenticationBuilderExtensions
     /// </summary>
     /// <param name="builder">The current <see cref="AuthenticationBuilder"/> instance.</param>
     /// <returns>The <see cref="OptionsBuilder{TOptions}"/> which can be used to configure the cookie authentication.</returns>
-    public static OptionsBuilder<CookieAuthenticationOptions> AddTwoFactorRememberMeCookie(this AuthenticationBuilder builder)
+    public static OptionsBuilder<CookieAuthenticationOptions> AddTwoFactorRememberMeCookie(
+        this AuthenticationBuilder builder
+    )
     {
-        builder.AddCookie(IdentityConstants.TwoFactorRememberMeScheme, o =>
-        {
-            o.Cookie.Name = IdentityConstants.TwoFactorRememberMeScheme;
-            o.Events = new CookieAuthenticationEvents
+        builder.AddCookie(
+            IdentityConstants.TwoFactorRememberMeScheme,
+            o =>
             {
-                OnValidatePrincipal = SecurityStampValidator.ValidateAsync<ITwoFactorSecurityStampValidator>
-            };
-        });
-        return new OptionsBuilder<CookieAuthenticationOptions>(builder.Services, IdentityConstants.TwoFactorRememberMeScheme);
+                o.Cookie.Name = IdentityConstants.TwoFactorRememberMeScheme;
+                o.Events = new CookieAuthenticationEvents
+                {
+                    OnValidatePrincipal =
+                        SecurityStampValidator.ValidateAsync<ITwoFactorSecurityStampValidator>
+                };
+            }
+        );
+        return new OptionsBuilder<CookieAuthenticationOptions>(
+            builder.Services,
+            IdentityConstants.TwoFactorRememberMeScheme
+        );
     }
 
     /// <summary>
@@ -97,13 +125,21 @@ public static class IdentityCookieAuthenticationBuilderExtensions
     /// </summary>
     /// <param name="builder">The current <see cref="AuthenticationBuilder"/> instance.</param>
     /// <returns>The <see cref="OptionsBuilder{TOptions}"/> which can be used to configure the cookie authentication.</returns>
-    public static OptionsBuilder<CookieAuthenticationOptions> AddTwoFactorUserIdCookie(this AuthenticationBuilder builder)
+    public static OptionsBuilder<CookieAuthenticationOptions> AddTwoFactorUserIdCookie(
+        this AuthenticationBuilder builder
+    )
     {
-        builder.AddCookie(IdentityConstants.TwoFactorUserIdScheme, o =>
-        {
-            o.Cookie.Name = IdentityConstants.TwoFactorUserIdScheme;
-            o.ExpireTimeSpan = TimeSpan.FromMinutes(5);
-        });
-        return new OptionsBuilder<CookieAuthenticationOptions>(builder.Services, IdentityConstants.TwoFactorUserIdScheme);
+        builder.AddCookie(
+            IdentityConstants.TwoFactorUserIdScheme,
+            o =>
+            {
+                o.Cookie.Name = IdentityConstants.TwoFactorUserIdScheme;
+                o.ExpireTimeSpan = TimeSpan.FromMinutes(5);
+            }
+        );
+        return new OptionsBuilder<CookieAuthenticationOptions>(
+            builder.Services,
+            IdentityConstants.TwoFactorUserIdScheme
+        );
     }
 }

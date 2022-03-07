@@ -16,9 +16,6 @@ internal static partial class Interop
         }
 
         [DllImport(Libraries.Kernel32, SetLastError = true, CharSet = CharSet.Auto)]
-        internal static extern bool SetCommMask(
-            SafeFileHandle hFile,
-            int dwEvtMask
-        );
+        internal static extern bool SetCommMask(SafeFileHandle hFile, int dwEvtMask);
     }
 }

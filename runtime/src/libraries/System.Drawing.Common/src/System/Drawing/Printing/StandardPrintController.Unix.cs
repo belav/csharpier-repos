@@ -41,9 +41,7 @@ namespace System.Drawing.Printing
 {
     public class StandardPrintController : PrintController
     {
-        public StandardPrintController()
-        {
-        }
+        public StandardPrintController() { }
 
         public override void OnEndPage(PrintDocument document, PrintPageEventArgs e)
         {
@@ -52,7 +50,10 @@ namespace System.Drawing.Printing
 
         public override void OnStartPrint(PrintDocument document, PrintEventArgs e)
         {
-            IntPtr dc = PrintingServices.CreateGraphicsContext(document.PrinterSettings, document.DefaultPageSettings);
+            IntPtr dc = PrintingServices.CreateGraphicsContext(
+                document.PrinterSettings,
+                document.DefaultPageSettings
+            );
             e.GraphicsContext = new GraphicsPrinter(null, dc);
             PrintingServices.StartDoc(e.GraphicsContext, document.DocumentName, string.Empty);
         }

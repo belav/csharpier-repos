@@ -82,9 +82,7 @@ public class GenerateFileFromTemplate : Task
         for (var i = 0; i < template.Length; i++)
         {
             var ch = template[i];
-            var nextCh = i + 1 >= template.Length
-                    ? '\0'
-                    : template[i + 1];
+            var nextCh = i + 1 >= template.Length ? '\0' : template[i + 1];
 
             // count lines in the template file
             if (ch == '\n')
@@ -126,9 +124,17 @@ public class GenerateFileFromTemplate : Task
                     }
                     else
                     {
-                        Log.LogWarning(null, null, null, TemplateFile,
-                            line, 0, 0, 0,
-                            message: $"No property value is available for '{varName}'");
+                        Log.LogWarning(
+                            null,
+                            null,
+                            null,
+                            TemplateFile,
+                            line,
+                            0,
+                            0,
+                            0,
+                            message: $"No property value is available for '{varName}'"
+                        );
                     }
 
                     varNameSb.Clear();
@@ -138,9 +144,17 @@ public class GenerateFileFromTemplate : Task
 
             if (varNameSb.Length > 0)
             {
-                Log.LogWarning(null, null, null, TemplateFile,
-                            line, 0, 0, 0,
-                            message: "Expected closing bracket for variable placeholder. No substitution will be made.");
+                Log.LogWarning(
+                    null,
+                    null,
+                    null,
+                    TemplateFile,
+                    line,
+                    0,
+                    0,
+                    0,
+                    message: "Expected closing bracket for variable placeholder. No substitution will be made."
+                );
                 sb.Append("${").Append(varNameSb);
             }
         }

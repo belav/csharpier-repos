@@ -33,7 +33,8 @@ class Class1
             try
             {
                 Console.WriteLine("--in foo try [2]");
-                if (i == 0) goto L1;
+                if (i == 0)
+                    goto L1;
             }
             catch
             {
@@ -42,7 +43,8 @@ class Class1
             finally
             {
                 Console.WriteLine("--in foo finally [2]");
-                if (i == 0) throw new Exception();
+                if (i == 0)
+                    throw new Exception();
             }
         }
         catch
@@ -52,13 +54,13 @@ class Class1
         finally
         {
             Console.WriteLine("-in foo finally [1]");
-            if (i == 0) throw new Exception();
+            if (i == 0)
+                throw new Exception();
         }
         Console.WriteLine("after finally");
         L1:
         Console.WriteLine("foo L1");
     }
-
 
     static public int Main(string[] args)
     {

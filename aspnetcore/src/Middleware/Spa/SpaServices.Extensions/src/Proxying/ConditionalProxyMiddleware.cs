@@ -28,7 +28,8 @@ internal class ConditionalProxyMiddleware
         string pathPrefix,
         TimeSpan requestTimeout,
         Task<Uri> baseUriTask,
-        IHostApplicationLifetime applicationLifetime)
+        IHostApplicationLifetime applicationLifetime
+    )
     {
         if (!pathPrefix.StartsWith('/'))
         {
@@ -55,7 +56,12 @@ internal class ConditionalProxyMiddleware
     private async Task InvokeCore(HttpContext context)
     {
         var didProxyRequest = await SpaProxy.PerformProxyRequest(
-            context, _httpClient, _baseUriTask, _applicationStoppingToken, proxy404s: false);
+            context,
+            _httpClient,
+            _baseUriTask,
+            _applicationStoppingToken,
+            proxy404s: false
+        );
         if (didProxyRequest)
         {
             return;

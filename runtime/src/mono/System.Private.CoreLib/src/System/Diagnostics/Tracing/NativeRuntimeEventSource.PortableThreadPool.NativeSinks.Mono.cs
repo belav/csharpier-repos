@@ -15,23 +15,43 @@ namespace System.Diagnostics.Tracing
     {
         [NonEvent]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        internal static extern void LogThreadPoolWorkerThreadStart(uint ActiveWorkerThreadCount, uint RetiredWorkerThreadCount, ushort ClrInstanceID);
+        internal static extern void LogThreadPoolWorkerThreadStart(
+            uint ActiveWorkerThreadCount,
+            uint RetiredWorkerThreadCount,
+            ushort ClrInstanceID
+        );
 
         [NonEvent]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        internal static extern void LogThreadPoolWorkerThreadStop(uint ActiveWorkerThreadCount, uint RetiredWorkerThreadCount, ushort ClrInstanceID);
+        internal static extern void LogThreadPoolWorkerThreadStop(
+            uint ActiveWorkerThreadCount,
+            uint RetiredWorkerThreadCount,
+            ushort ClrInstanceID
+        );
 
         [NonEvent]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        internal static extern void LogThreadPoolWorkerThreadWait(uint ActiveWorkerThreadCount, uint RetiredWorkerThreadCount, ushort ClrInstanceID);
+        internal static extern void LogThreadPoolWorkerThreadWait(
+            uint ActiveWorkerThreadCount,
+            uint RetiredWorkerThreadCount,
+            ushort ClrInstanceID
+        );
 
         [NonEvent]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        internal static extern void LogThreadPoolWorkerThreadAdjustmentSample(double Throughput, ushort ClrInstanceID);
+        internal static extern void LogThreadPoolWorkerThreadAdjustmentSample(
+            double Throughput,
+            ushort ClrInstanceID
+        );
 
         [NonEvent]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        internal static extern void LogThreadPoolWorkerThreadAdjustmentAdjustment(double AverageThroughput, uint NewWorkerThreadCount, NativeRuntimeEventSource.ThreadAdjustmentReasonMap Reason, ushort ClrInstanceID);
+        internal static extern void LogThreadPoolWorkerThreadAdjustmentAdjustment(
+            double AverageThroughput,
+            uint NewWorkerThreadCount,
+            NativeRuntimeEventSource.ThreadAdjustmentReasonMap Reason,
+            ushort ClrInstanceID
+        );
 
         [NonEvent]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
@@ -46,7 +66,8 @@ namespace System.Diagnostics.Tracing
             double Confidence,
             double NewControlSetting,
             ushort NewThreadWaveMagnitude,
-            ushort ClrInstanceID);
+            ushort ClrInstanceID
+        );
 
         [NonEvent]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
@@ -54,14 +75,16 @@ namespace System.Diagnostics.Tracing
             IntPtr NativeOverlapped,
             IntPtr Overlapped,
             bool MultiDequeues,
-            ushort ClrInstanceID);
+            ushort ClrInstanceID
+        );
 
         [NonEvent]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         internal static extern void LogThreadPoolIODequeue(
             IntPtr NativeOverlapped,
             IntPtr Overlapped,
-            ushort ClrInstanceID);
+            ushort ClrInstanceID
+        );
 
         [NonEvent]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]

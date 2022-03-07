@@ -11,7 +11,7 @@ using System.Diagnostics;
 namespace Microsoft.CodeAnalysis.BuildTasks
 {
     /// <summary>
-    /// Create an RCW for the current context/apartment. 
+    /// Create an RCW for the current context/apartment.
     /// This improves performance of cross apartment calls as the CLR will only
     /// cache marshalled pointers for an RCW created in the current context.
     /// </summary>
@@ -34,8 +34,8 @@ namespace Microsoft.CodeAnalysis.BuildTasks
         /// <param name="rcw">The RCW created in the original context.</param>
         public RCWForCurrentContext(T rcw)
         {
-            // To improve performance we create a new RCW for the current context so we get 
-            // the caching behavior of the marshaled pointer. 
+            // To improve performance we create a new RCW for the current context so we get
+            // the caching behavior of the marshaled pointer.
             // See RCW::GetComIPForMethodTableFromCache in ndp\clr\src\VM\RuntimeCallableWrapper.cpp
             IntPtr iunknownPtr = Marshal.GetIUnknownForObject(rcw);
             Object? objInCurrentCtx = null;
@@ -49,7 +49,10 @@ namespace Microsoft.CodeAnalysis.BuildTasks
                 Marshal.Release(iunknownPtr);
             }
 
-            Debug.Assert(objInCurrentCtx != null, "Unable to marshal COM Object to the current context (apartment). This will hurt performance.");
+            Debug.Assert(
+                objInCurrentCtx != null,
+                "Unable to marshal COM Object to the current context (apartment). This will hurt performance."
+            );
 
             // If we failed to create the new RCW we default to returning the original RCW.
             if (objInCurrentCtx == null)
@@ -111,9 +114,11 @@ namespace Microsoft.CodeAnalysis.BuildTasks
         {
             try
             {
-                if (null != _rcwForCurrentCtx &&
-                    _shouldReleaseRCW &&
-                    Marshal.IsComObject(_rcwForCurrentCtx))
+                if (
+                    null != _rcwForCurrentCtx
+                    && _shouldReleaseRCW
+                    && Marshal.IsComObject(_rcwForCurrentCtx)
+                )
                 {
                     Marshal.ReleaseComObject(_rcwForCurrentCtx);
                 }

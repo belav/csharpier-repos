@@ -14,10 +14,7 @@ public class ChangeEventArgsReaderTest
     public void Read_WithBoolValue(bool changeValue)
     {
         // Arrange
-        var args = new ChangeEventArgs
-        {
-            Value = changeValue,
-        };
+        var args = new ChangeEventArgs { Value = changeValue, };
         var jsonElement = GetJsonElement(args);
 
         // Act
@@ -31,10 +28,7 @@ public class ChangeEventArgsReaderTest
     public void Read_WithNullValue()
     {
         // Arrange
-        var args = new ChangeEventArgs
-        {
-            Value = null,
-        };
+        var args = new ChangeEventArgs { Value = null, };
         var jsonElement = GetJsonElement(args);
 
         // Act
@@ -48,10 +42,7 @@ public class ChangeEventArgsReaderTest
     public void Read_WithStringValue()
     {
         // Arrange
-        var args = new ChangeEventArgs
-        {
-            Value = "Hello world",
-        };
+        var args = new ChangeEventArgs { Value = "Hello world", };
         var jsonElement = GetJsonElement(args);
 
         // Act

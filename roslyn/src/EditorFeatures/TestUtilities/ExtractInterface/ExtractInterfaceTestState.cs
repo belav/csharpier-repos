@@ -20,8 +20,10 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.ExtractInterface
 {
     internal class ExtractInterfaceTestState : IDisposable
     {
-        public static readonly TestComposition Composition = EditorTestCompositions.EditorFeatures.AddParts(
-            typeof(TestExtractInterfaceOptionsService));
+        public static readonly TestComposition Composition =
+            EditorTestCompositions.EditorFeatures.AddParts(
+                typeof(TestExtractInterfaceOptionsService)
+            );
 
         private readonly TestHostDocument _testDocument;
         public TestWorkspace Workspace { get; }
@@ -36,11 +38,23 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.ExtractInterface
             string languageName,
             CompilationOptions compilationOptions = null,
             ParseOptions parseOptions = null,
-            OptionsCollection options = null)
+            OptionsCollection options = null
+        )
         {
-            var workspace = languageName == LanguageNames.CSharp
-                ? TestWorkspace.CreateCSharp(markup, composition: Composition, compilationOptions: compilationOptions, parseOptions: parseOptions)
-                : TestWorkspace.CreateVisualBasic(markup, composition: Composition, compilationOptions: compilationOptions, parseOptions: parseOptions);
+            var workspace =
+                languageName == LanguageNames.CSharp
+                    ? TestWorkspace.CreateCSharp(
+                          markup,
+                          composition: Composition,
+                          compilationOptions: compilationOptions,
+                          parseOptions: parseOptions
+                      )
+                    : TestWorkspace.CreateVisualBasic(
+                          markup,
+                          composition: Composition,
+                          compilationOptions: compilationOptions,
+                          parseOptions: parseOptions
+                      );
 
             if (options != null)
             {
@@ -60,11 +74,15 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.ExtractInterface
 
             if (_testDocument == null)
             {
-                throw new ArgumentException("markup does not contain a cursor position", nameof(workspace));
+                throw new ArgumentException(
+                    "markup does not contain a cursor position",
+                    nameof(workspace)
+                );
             }
 
             ExtractFromDocument = Workspace.CurrentSolution.GetDocument(_testDocument.Id);
-            ExtractInterfaceService = ExtractFromDocument.GetLanguageService<AbstractExtractInterfaceService>();
+            ExtractInterfaceService =
+                ExtractFromDocument.GetLanguageService<AbstractExtractInterfaceService>();
         }
 
         public TestExtractInterfaceOptionsService TestExtractInterfaceOptionsService
@@ -75,13 +93,16 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.ExtractInterface
             }
         }
 
-        public Task<ExtractInterfaceTypeAnalysisResult> GetTypeAnalysisResultAsync(TypeDiscoveryRule typeDiscoveryRule)
+        public Task<ExtractInterfaceTypeAnalysisResult> GetTypeAnalysisResultAsync(
+            TypeDiscoveryRule typeDiscoveryRule
+        )
         {
             return ExtractInterfaceService.AnalyzeTypeAtPositionAsync(
                 ExtractFromDocument,
                 _testDocument.CursorPosition.Value,
                 typeDiscoveryRule,
-                CancellationToken.None);
+                CancellationToken.None
+            );
         }
 
         public Task<ExtractInterfaceResult> ExtractViaCommandAsync()
@@ -94,7 +115,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.ExtractInterface
                     this.ErrorMessage = errorMessage;
                     this.ErrorSeverity = severity;
                 },
-                CancellationToken.None);
+                CancellationToken.None
+            );
         }
 
         public async Task<Solution> ExtractViaCodeAction()
@@ -102,7 +124,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.ExtractInterface
             var actions = await ExtractInterfaceService.GetExtractInterfaceCodeActionAsync(
                 ExtractFromDocument,
                 new TextSpan(_testDocument.CursorPosition.Value, 1),
-                CancellationToken.None);
+                CancellationToken.None
+            );
             var action = actions.Single();
 
             var options = (ExtractInterfaceOptionsResult)action.GetOptions(CancellationToken.None);
@@ -111,9 +134,13 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.ExtractInterface
                 options.IncludedMembers,
                 options.InterfaceName,
                 options.FileName,
-                ExtractInterfaceOptionsResult.ExtractLocation.SameFile);
+                ExtractInterfaceOptionsResult.ExtractLocation.SameFile
+            );
 
-            var operations = await action.GetOperationsAsync(changedOptions, CancellationToken.None);
+            var operations = await action.GetOperationsAsync(
+                changedOptions,
+                CancellationToken.None
+            );
             foreach (var operation in operations)
             {
                 operation.Apply(Workspace, CancellationToken.None);

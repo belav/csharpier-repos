@@ -7,7 +7,8 @@ internal static class Module
 {
     private static int Main()
     {
-        int Var1, Temp;
+        int Var1,
+            Temp;
         try
         {
             for (Temp = int.MaxValue - 3; Temp <= int.MaxValue - 1; Temp++)

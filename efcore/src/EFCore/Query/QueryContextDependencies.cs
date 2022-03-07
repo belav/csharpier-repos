@@ -59,7 +59,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             IExecutionStrategy executionStrategy,
             IConcurrencyDetector concurrencyDetector,
             IDiagnosticsLogger<DbLoggerCategory.Database.Command> commandLogger,
-            IDiagnosticsLogger<DbLoggerCategory.Query> queryLogger)
+            IDiagnosticsLogger<DbLoggerCategory.Query> queryLogger
+        )
         {
             CurrentContext = currentContext;
             ExecutionStrategy = executionStrategy;
@@ -80,8 +81,7 @@ namespace Microsoft.EntityFrameworkCore.Query
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
         [EntityFrameworkInternal]
-        public IStateManager StateManager
-            => CurrentContext.GetDependencies().StateManager;
+        public IStateManager StateManager => CurrentContext.GetDependencies().StateManager;
 
         /// <summary>
         ///     The execution strategy.

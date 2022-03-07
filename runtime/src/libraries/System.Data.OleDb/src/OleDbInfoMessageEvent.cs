@@ -17,34 +17,22 @@ namespace System.Data.OleDb
 
         public int ErrorCode
         {
-            get
-            {
-                return this.exception.ErrorCode;
-            }
+            get { return this.exception.ErrorCode; }
         }
 
         public OleDbErrorCollection Errors
         {
-            get
-            {
-                return this.exception.Errors;
-            }
+            get { return this.exception.Errors; }
         }
 
         public string Message
         {
-            get
-            {
-                return this.exception.Message;
-            }
+            get { return this.exception.Message; }
         }
 
         public string? Source
         {
-            get
-            {
-                return this.exception.Source;
-            }
+            get { return this.exception.Source; }
         }
 
         public override string ToString()

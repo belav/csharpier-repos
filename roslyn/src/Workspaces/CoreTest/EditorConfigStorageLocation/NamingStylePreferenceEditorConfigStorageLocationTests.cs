@@ -17,45 +17,70 @@ namespace Microsoft.CodeAnalysis.UnitTests.EditorConfig.StorageLocation
         [Fact]
         public static void TestEmptyDictionaryReturnNoNamingStylePreferencesObjectReturnsFalse()
         {
-            var editorConfigStorageLocation = new NamingStylePreferenceEditorConfigStorageLocation();
-            var result = editorConfigStorageLocation.TryGetOption(new Dictionary<string, string>(), typeof(NamingStylePreferences), out _);
-            Assert.False(result, "Expected TryParseReadonlyDictionary to return 'false' for empty dictionary");
+            var editorConfigStorageLocation =
+                new NamingStylePreferenceEditorConfigStorageLocation();
+            var result = editorConfigStorageLocation.TryGetOption(
+                new Dictionary<string, string>(),
+                typeof(NamingStylePreferences),
+                out _
+            );
+            Assert.False(
+                result,
+                "Expected TryParseReadonlyDictionary to return 'false' for empty dictionary"
+            );
         }
 
         [Fact]
         public static void TestEmptyDictionaryDefaultNamingStylePreferencesObjectReturnsFalse()
         {
-            var editorConfigStorageLocation = new NamingStylePreferenceEditorConfigStorageLocation();
+            var editorConfigStorageLocation =
+                new NamingStylePreferenceEditorConfigStorageLocation();
             var result = editorConfigStorageLocation.TryGetOption(
                 new Dictionary<string, string>(),
                 typeof(NamingStylePreferences),
-                out _);
+                out _
+            );
 
-            Assert.False(result, "Expected TryParseReadonlyDictionary to return 'false' for empty dictionary");
+            Assert.False(
+                result,
+                "Expected TryParseReadonlyDictionary to return 'false' for empty dictionary"
+            );
         }
 
         [Fact]
         public static void TestNonEmptyDictionaryReturnsTrue()
         {
-            var editorConfigStorageLocation = new NamingStylePreferenceEditorConfigStorageLocation();
+            var editorConfigStorageLocation =
+                new NamingStylePreferenceEditorConfigStorageLocation();
             var newDictionary = new Dictionary<string, string>()
             {
-                ["dotnet_naming_rule.methods_and_properties_must_be_pascal_case.severity"] = "error",
-                ["dotnet_naming_rule.methods_and_properties_must_be_pascal_case.symbols"] = "method_and_property_symbols",
-                ["dotnet_naming_rule.methods_and_properties_must_be_pascal_case.style"] = "pascal_case_style",
-                ["dotnet_naming_symbols.method_and_property_symbols.applicable_kinds"] = "method,property",
-                ["dotnet_naming_symbols.method_and_property_symbols.applicable_accessibilities"] = "*",
+                ["dotnet_naming_rule.methods_and_properties_must_be_pascal_case.severity"] =
+                    "error",
+                ["dotnet_naming_rule.methods_and_properties_must_be_pascal_case.symbols"] =
+                    "method_and_property_symbols",
+                ["dotnet_naming_rule.methods_and_properties_must_be_pascal_case.style"] =
+                    "pascal_case_style",
+                ["dotnet_naming_symbols.method_and_property_symbols.applicable_kinds"] =
+                    "method,property",
+                ["dotnet_naming_symbols.method_and_property_symbols.applicable_accessibilities"] =
+                    "*",
                 ["dotnet_naming_style.pascal_case_style.capitalization"] = "pascal_case"
             };
 
             var result = editorConfigStorageLocation.TryGetOption(
                 newDictionary,
                 typeof(NamingStylePreferences),
-                out var combinedNamingStyles);
+                out var combinedNamingStyles
+            );
 
             Assert.True(result, "Expected non-empty dictionary to return true");
-            var namingStylePreferences = Assert.IsAssignableFrom<NamingStylePreferences>(combinedNamingStyles);
-            Assert.Equal(ReportDiagnostic.Error, namingStylePreferences.Rules.NamingRules[0].EnforcementLevel);
+            var namingStylePreferences = Assert.IsAssignableFrom<NamingStylePreferences>(
+                combinedNamingStyles
+            );
+            Assert.Equal(
+                ReportDiagnostic.Error,
+                namingStylePreferences.Rules.NamingRules[0].EnforcementLevel
+            );
         }
 
         [Theory]
@@ -71,35 +96,54 @@ namespace Microsoft.CodeAnalysis.UnitTests.EditorConfig.StorageLocation
         [InlineData("B", "a", "a", "*", "*")]
         [InlineData("A", "B", "A", "*", "*")]
         [InlineData("B", "A", "A", "*", "*")]
-        public static void TestOrderedByAccessibilityBeforeName(string firstName, string secondName, string firstNameAfterOrdering, string firstAccessibility, string secondAccessibility)
+        public static void TestOrderedByAccessibilityBeforeName(
+            string firstName,
+            string secondName,
+            string firstNameAfterOrdering,
+            string firstAccessibility,
+            string secondAccessibility
+        )
         {
-            var editorConfigStorageLocation = new NamingStylePreferenceEditorConfigStorageLocation();
+            var editorConfigStorageLocation =
+                new NamingStylePreferenceEditorConfigStorageLocation();
             var newDictionary = new Dictionary<string, string>()
             {
                 [$"dotnet_naming_rule.{firstName}.severity"] = "error",
                 [$"dotnet_naming_rule.{firstName}.symbols"] = "first_symbols",
                 [$"dotnet_naming_rule.{firstName}.style"] = $"{firstName}_style",
                 ["dotnet_naming_symbols.first_symbols.applicable_kinds"] = "method,property",
-                ["dotnet_naming_symbols.first_symbols.applicable_accessibilities"] = firstAccessibility,
+                ["dotnet_naming_symbols.first_symbols.applicable_accessibilities"] =
+                    firstAccessibility,
                 [$"dotnet_naming_style.{firstName}_style.capitalization"] = "pascal_case",
                 [$"dotnet_naming_style.{secondName}_style.capitalization"] = "camel_case",
                 [$"dotnet_naming_rule.{secondName}.severity"] = "error",
                 [$"dotnet_naming_rule.{secondName}.symbols"] = "second_symbols",
                 [$"dotnet_naming_rule.{secondName}.style"] = $"{secondName}_style",
                 ["dotnet_naming_symbols.second_symbols.applicable_kinds"] = "method,property",
-                ["dotnet_naming_symbols.second_symbols.applicable_accessibilities"] = secondAccessibility,
+                ["dotnet_naming_symbols.second_symbols.applicable_accessibilities"] =
+                    secondAccessibility,
             };
 
             var result = editorConfigStorageLocation.TryGetOption(
                 newDictionary,
                 typeof(NamingStylePreferences),
-                out var combinedNamingStyles);
+                out var combinedNamingStyles
+            );
 
-            var secondNameAfterOrdering = firstNameAfterOrdering == firstName ? secondName : firstName;
+            var secondNameAfterOrdering =
+                firstNameAfterOrdering == firstName ? secondName : firstName;
             Assert.True(result, "Expected non-empty dictionary to return true");
-            var namingStylePreferences = Assert.IsAssignableFrom<NamingStylePreferences>(combinedNamingStyles);
-            Assert.Equal($"{firstNameAfterOrdering}_style", namingStylePreferences.Rules.NamingRules[0].NamingStyle.Name);
-            Assert.Equal($"{secondNameAfterOrdering}_style", namingStylePreferences.Rules.NamingRules[1].NamingStyle.Name);
+            var namingStylePreferences = Assert.IsAssignableFrom<NamingStylePreferences>(
+                combinedNamingStyles
+            );
+            Assert.Equal(
+                $"{firstNameAfterOrdering}_style",
+                namingStylePreferences.Rules.NamingRules[0].NamingStyle.Name
+            );
+            Assert.Equal(
+                $"{secondNameAfterOrdering}_style",
+                namingStylePreferences.Rules.NamingRules[1].NamingStyle.Name
+            );
         }
 
         [Theory]
@@ -115,9 +159,16 @@ namespace Microsoft.CodeAnalysis.UnitTests.EditorConfig.StorageLocation
         [InlineData("B", "a", "a", "", "")]
         [InlineData("A", "B", "A", "", "")]
         [InlineData("B", "A", "A", "", "")]
-        public static void TestOrderedByModifiersBeforeName(string firstName, string secondName, string firstNameAfterOrdering, string firstModifiers, string secondModifiers)
+        public static void TestOrderedByModifiersBeforeName(
+            string firstName,
+            string secondName,
+            string firstNameAfterOrdering,
+            string firstModifiers,
+            string secondModifiers
+        )
         {
-            var editorConfigStorageLocation = new NamingStylePreferenceEditorConfigStorageLocation();
+            var editorConfigStorageLocation =
+                new NamingStylePreferenceEditorConfigStorageLocation();
             var newDictionary = new Dictionary<string, string>()
             {
                 [$"dotnet_naming_rule.{firstName}.severity"] = "error",
@@ -137,13 +188,23 @@ namespace Microsoft.CodeAnalysis.UnitTests.EditorConfig.StorageLocation
             var result = editorConfigStorageLocation.TryGetOption(
                 newDictionary,
                 typeof(NamingStylePreferences),
-                out var combinedNamingStyles);
+                out var combinedNamingStyles
+            );
 
-            var secondNameAfterOrdering = firstNameAfterOrdering == firstName ? secondName : firstName;
+            var secondNameAfterOrdering =
+                firstNameAfterOrdering == firstName ? secondName : firstName;
             Assert.True(result, "Expected non-empty dictionary to return true");
-            var namingStylePreferences = Assert.IsAssignableFrom<NamingStylePreferences>(combinedNamingStyles);
-            Assert.Equal($"{firstNameAfterOrdering}_style", namingStylePreferences.Rules.NamingRules[0].NamingStyle.Name);
-            Assert.Equal($"{secondNameAfterOrdering}_style", namingStylePreferences.Rules.NamingRules[1].NamingStyle.Name);
+            var namingStylePreferences = Assert.IsAssignableFrom<NamingStylePreferences>(
+                combinedNamingStyles
+            );
+            Assert.Equal(
+                $"{firstNameAfterOrdering}_style",
+                namingStylePreferences.Rules.NamingRules[0].NamingStyle.Name
+            );
+            Assert.Equal(
+                $"{secondNameAfterOrdering}_style",
+                namingStylePreferences.Rules.NamingRules[1].NamingStyle.Name
+            );
         }
 
         [Theory]
@@ -159,9 +220,16 @@ namespace Microsoft.CodeAnalysis.UnitTests.EditorConfig.StorageLocation
         [InlineData("B", "a", "a", "*", "*")]
         [InlineData("A", "B", "A", "*", "*")]
         [InlineData("B", "A", "A", "*", "*")]
-        public static void TestOrderedBySymbolsBeforeName(string firstName, string secondName, string firstNameAfterOrdering, string firstSymbols, string secondSymbols)
+        public static void TestOrderedBySymbolsBeforeName(
+            string firstName,
+            string secondName,
+            string firstNameAfterOrdering,
+            string firstSymbols,
+            string secondSymbols
+        )
         {
-            var editorConfigStorageLocation = new NamingStylePreferenceEditorConfigStorageLocation();
+            var editorConfigStorageLocation =
+                new NamingStylePreferenceEditorConfigStorageLocation();
             var newDictionary = new Dictionary<string, string>()
             {
                 [$"dotnet_naming_rule.{firstName}.severity"] = "error",
@@ -179,23 +247,40 @@ namespace Microsoft.CodeAnalysis.UnitTests.EditorConfig.StorageLocation
             var result = editorConfigStorageLocation.TryGetOption(
                 newDictionary,
                 typeof(NamingStylePreferences),
-                out var combinedNamingStyles);
+                out var combinedNamingStyles
+            );
 
-            var secondNameAfterOrdering = firstNameAfterOrdering == firstName ? secondName : firstName;
+            var secondNameAfterOrdering =
+                firstNameAfterOrdering == firstName ? secondName : firstName;
             Assert.True(result, "Expected non-empty dictionary to return true");
-            var namingStylePreferences = Assert.IsAssignableFrom<NamingStylePreferences>(combinedNamingStyles);
-            Assert.Equal($"{firstNameAfterOrdering}_style", namingStylePreferences.Rules.NamingRules[0].NamingStyle.Name);
-            Assert.Equal($"{secondNameAfterOrdering}_style", namingStylePreferences.Rules.NamingRules[1].NamingStyle.Name);
+            var namingStylePreferences = Assert.IsAssignableFrom<NamingStylePreferences>(
+                combinedNamingStyles
+            );
+            Assert.Equal(
+                $"{firstNameAfterOrdering}_style",
+                namingStylePreferences.Rules.NamingRules[0].NamingStyle.Name
+            );
+            Assert.Equal(
+                $"{secondNameAfterOrdering}_style",
+                namingStylePreferences.Rules.NamingRules[1].NamingStyle.Name
+            );
         }
 
         [Fact]
         public static void TestObjectTypeThrowsInvalidOperationException()
         {
-            var editorConfigStorageLocation = new NamingStylePreferenceEditorConfigStorageLocation();
-            Assert.Throws<InvalidOperationException>(() =>
-            {
-                editorConfigStorageLocation.TryGetOption(new Dictionary<string, string>(), typeof(object), out var @object);
-            });
+            var editorConfigStorageLocation =
+                new NamingStylePreferenceEditorConfigStorageLocation();
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                {
+                    editorConfigStorageLocation.TryGetOption(
+                        new Dictionary<string, string>(),
+                        typeof(object),
+                        out var @object
+                    );
+                }
+            );
         }
     }
 }

@@ -107,7 +107,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             return ToAttributeLocation(token.ValueText);
         }
 
-        internal static AttributeLocation ToAttributeLocation(this Syntax.InternalSyntax.SyntaxToken token)
+        internal static AttributeLocation ToAttributeLocation(
+            this Syntax.InternalSyntax.SyntaxToken token
+        )
         {
             // NOTE: to match dev10, we're using the value text, rather
             // than the actual text.  For example, "@return" is equivalent

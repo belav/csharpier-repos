@@ -15,16 +15,19 @@ namespace Microsoft.CodeAnalysis
 {
     internal static partial class OperationExtensions
     {
-        public static bool IsTargetOfObjectMemberInitializer(this IOperation operation)
-            => operation.Parent is IAssignmentOperation assignmentOperation &&
-               assignmentOperation.Target == operation &&
-               assignmentOperation.Parent?.Kind == OperationKind.ObjectOrCollectionInitializer;
+        public static bool IsTargetOfObjectMemberInitializer(this IOperation operation) =>
+            operation.Parent is IAssignmentOperation assignmentOperation
+            && assignmentOperation.Target == operation
+            && assignmentOperation.Parent?.Kind == OperationKind.ObjectOrCollectionInitializer;
 
         /// <summary>
         /// Returns the <see cref="ValueUsageInfo"/> for the given operation.
         /// This extension can be removed once https://github.com/dotnet/roslyn/issues/25057 is implemented.
         /// </summary>
-        public static ValueUsageInfo GetValueUsageInfo(this IOperation operation, ISymbol containingSymbol)
+        public static ValueUsageInfo GetValueUsageInfo(
+            this IOperation operation,
+            ISymbol containingSymbol
+        )
         {
             /*
             |    code                  | Read | Write | ReadableRef | WritableRef | NonReadWriteRef |
@@ -46,18 +49,23 @@ namespace Microsoft.CodeAnalysis
             | ref readonly var x =     |      |       |     ✔️      |             |                 |
 
             */
-            if (operation is ILocalReferenceOperation localReference &&
-                localReference.IsDeclaration &&
-                !localReference.IsImplicit) // Workaround for https://github.com/dotnet/roslyn/issues/30753
+            if (
+                operation is ILocalReferenceOperation localReference
+                && localReference.IsDeclaration
+                && !localReference.IsImplicit
+            ) // Workaround for https://github.com/dotnet/roslyn/issues/30753
             {
                 // Declaration expression is a definition (write) for the declared local.
                 return ValueUsageInfo.Write;
             }
             else if (operation is IDeclarationPatternOperation)
             {
-                while (operation.Parent is IBinaryPatternOperation or
-                       INegatedPatternOperation or
-                       IRelationalPatternOperation)
+                while (
+                    operation.Parent
+                        is IBinaryPatternOperation
+                            or INegatedPatternOperation
+                            or IRelationalPatternOperation
+                )
                 {
                     operation = operation.Parent;
                 }
@@ -119,12 +127,14 @@ namespace Microsoft.CodeAnalysis
                 }
             }
 
-            if (operation.Parent is IAssignmentOperation assignmentOperation &&
-                assignmentOperation.Target == operation)
+            if (
+                operation.Parent is IAssignmentOperation assignmentOperation
+                && assignmentOperation.Target == operation
+            )
             {
                 return operation.Parent.IsAnyCompoundAssignment()
-                    ? ValueUsageInfo.ReadWrite
-                    : ValueUsageInfo.Write;
+                  ? ValueUsageInfo.ReadWrite
+                  : ValueUsageInfo.Write;
             }
             else if (operation.Parent is IIncrementOrDecrementOperation)
             {
@@ -135,12 +145,10 @@ namespace Microsoft.CodeAnalysis
                 // Note: IParenthesizedOperation is specific to VB, where the parens cause a copy, so this cannot be classified as a write.
                 Debug.Assert(parenthesizedOperation.Language == LanguageNames.VisualBasic);
 
-                return parenthesizedOperation.GetValueUsageInfo(containingSymbol) &
-                    ~(ValueUsageInfo.Write | ValueUsageInfo.Reference);
+                return parenthesizedOperation.GetValueUsageInfo(containingSymbol)
+                    & ~(ValueUsageInfo.Write | ValueUsageInfo.Reference);
             }
-            else if (operation.Parent is INameOfOperation or
-                     ITypeOfOperation or
-                     ISizeOfOperation)
+            else if (operation.Parent is INameOfOperation or ITypeOfOperation or ISizeOfOperation)
             {
                 return ValueUsageInfo.Name;
             }
@@ -172,8 +180,10 @@ namespace Microsoft.CodeAnalysis
             }
             else if (operation.Parent is IConditionalOperation conditionalOperation)
             {
-                if (operation == conditionalOperation.WhenTrue
-                    || operation == conditionalOperation.WhenFalse)
+                if (
+                    operation == conditionalOperation.WhenTrue
+                    || operation == conditionalOperation.WhenFalse
+                )
                 {
                     return GetValueUsageInfo(conditionalOperation, containingSymbol);
                 }
@@ -182,12 +192,14 @@ namespace Microsoft.CodeAnalysis
                     return ValueUsageInfo.Read;
                 }
             }
-            else if (operation.Parent is IReDimClauseOperation reDimClauseOperation &&
-                reDimClauseOperation.Operand == operation)
+            else if (
+                operation.Parent is IReDimClauseOperation reDimClauseOperation
+                && reDimClauseOperation.Operand == operation
+            )
             {
                 return (reDimClauseOperation.Parent as IReDimOperation)?.Preserve == true
-                    ? ValueUsageInfo.ReadWrite
-                    : ValueUsageInfo.Write;
+                  ? ValueUsageInfo.ReadWrite
+                  : ValueUsageInfo.Write;
             }
             else if (operation.Parent is IDeclarationExpressionOperation declarationExpression)
             {
@@ -199,7 +211,10 @@ namespace Microsoft.CodeAnalysis
             }
             else if (operation.Parent is IVariableInitializerOperation variableInitializerOperation)
             {
-                if (variableInitializerOperation.Parent is IVariableDeclaratorOperation variableDeclaratorOperation)
+                if (
+                    variableInitializerOperation.Parent
+                    is IVariableDeclaratorOperation variableDeclaratorOperation
+                )
                 {
                     switch (variableDeclaratorOperation.Symbol.RefKind)
                     {
@@ -217,11 +232,15 @@ namespace Microsoft.CodeAnalysis
 
         public static RefKind GetRefKind(this IReturnOperation? operation, ISymbol containingSymbol)
         {
-            var containingMethod = TryGetContainingAnonymousFunctionOrLocalFunction(operation) ?? (containingSymbol as IMethodSymbol);
+            var containingMethod =
+                TryGetContainingAnonymousFunctionOrLocalFunction(operation)
+                ?? (containingSymbol as IMethodSymbol);
             return containingMethod?.RefKind ?? RefKind.None;
         }
 
-        public static IMethodSymbol? TryGetContainingAnonymousFunctionOrLocalFunction(this IOperation? operation)
+        public static IMethodSymbol? TryGetContainingAnonymousFunctionOrLocalFunction(
+            this IOperation? operation
+        )
         {
             operation = operation?.Parent;
             while (operation != null)
@@ -241,7 +260,10 @@ namespace Microsoft.CodeAnalysis
             return null;
         }
 
-        public static bool IsInLeftOfDeconstructionAssignment(this IOperation operation, [NotNullWhen(true)] out IDeconstructionAssignmentOperation? deconstructionAssignment)
+        public static bool IsInLeftOfDeconstructionAssignment(
+            this IOperation operation,
+            [NotNullWhen(true)] out IDeconstructionAssignmentOperation? deconstructionAssignment
+        )
         {
             deconstructionAssignment = null;
 
@@ -323,7 +345,10 @@ namespace Microsoft.CodeAnalysis
             return false;
         }
 
-        public static bool HasAnyOperationDescendant(this ImmutableArray<IOperation> operationBlocks, Func<IOperation, bool> predicate)
+        public static bool HasAnyOperationDescendant(
+            this ImmutableArray<IOperation> operationBlocks,
+            Func<IOperation, bool> predicate
+        )
         {
             foreach (var operationBlock in operationBlocks)
             {
@@ -336,10 +361,16 @@ namespace Microsoft.CodeAnalysis
             return false;
         }
 
-        public static bool HasAnyOperationDescendant(this IOperation operationBlock, Func<IOperation, bool> predicate)
-            => operationBlock.HasAnyOperationDescendant(predicate, out _);
+        public static bool HasAnyOperationDescendant(
+            this IOperation operationBlock,
+            Func<IOperation, bool> predicate
+        ) => operationBlock.HasAnyOperationDescendant(predicate, out _);
 
-        public static bool HasAnyOperationDescendant(this IOperation operationBlock, Func<IOperation, bool> predicate, [NotNullWhen(true)] out IOperation? foundOperation)
+        public static bool HasAnyOperationDescendant(
+            this IOperation operationBlock,
+            Func<IOperation, bool> predicate,
+            [NotNullWhen(true)] out IOperation? foundOperation
+        )
         {
             RoslynDebug.AssertNotNull(operationBlock);
             RoslynDebug.AssertNotNull(predicate);
@@ -356,13 +387,18 @@ namespace Microsoft.CodeAnalysis
             return false;
         }
 
-        public static bool HasAnyOperationDescendant(this ImmutableArray<IOperation> operationBlocks, OperationKind kind)
-            => operationBlocks.HasAnyOperationDescendant(predicate: operation => operation.Kind == kind);
+        public static bool HasAnyOperationDescendant(
+            this ImmutableArray<IOperation> operationBlocks,
+            OperationKind kind
+        ) =>
+            operationBlocks.HasAnyOperationDescendant(
+                predicate: operation => operation.Kind == kind
+            );
 
-        public static bool IsNumericLiteral(this IOperation operation)
-            => operation.Kind == OperationKind.Literal && operation.Type.IsNumericType();
+        public static bool IsNumericLiteral(this IOperation operation) =>
+            operation.Kind == OperationKind.Literal && operation.Type.IsNumericType();
 
-        public static bool IsNullLiteral(this IOperation operand)
-            => operand is ILiteralOperation { ConstantValue: { HasValue: true, Value: null } };
+        public static bool IsNullLiteral(this IOperation operand) =>
+            operand is ILiteralOperation { ConstantValue: { HasValue: true, Value: null } };
     }
 }

@@ -26,11 +26,18 @@ namespace System.Net.Security.Tests
         {
             int validationCount = 0;
 
-            var validationCallback = new RemoteCertificateValidationCallback((object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors) =>
-            {
-                validationCount++;
-                return true;
-            });
+            var validationCallback = new RemoteCertificateValidationCallback(
+                (
+                    object sender,
+                    X509Certificate certificate,
+                    X509Chain chain,
+                    SslPolicyErrors sslPolicyErrors
+                ) =>
+                {
+                    validationCount++;
+                    return true;
+                }
+            );
 
             Socket s = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             await s.ConnectAsync(Configuration.Security.TlsRenegotiationServer, 443);
@@ -55,7 +62,9 @@ namespace System.Net.Security.Tests
                 Assert.True(ssl.IsEncrypted);
 
                 // Issue request that triggers renegotiation from server.
-                byte[] message = Encoding.UTF8.GetBytes("GET /EchoClientCertificate.ashx HTTP/1.1\r\nHost: corefx-net-tls.azurewebsites.net\r\n\r\n");
+                byte[] message = Encoding.UTF8.GetBytes(
+                    "GET /EchoClientCertificate.ashx HTTP/1.1\r\nHost: corefx-net-tls.azurewebsites.net\r\n\r\n"
+                );
                 await ssl.WriteAsync(message, 0, message.Length);
 
                 // Initiate Read operation, that results in starting renegotiation as per server response to the above request.
@@ -94,12 +103,16 @@ namespace System.Net.Security.Tests
                 Assert.True(ssl.IsEncrypted);
 
                 // Issue request that triggers regotiation from server.
-                byte[] message = Encoding.UTF8.GetBytes("GET /EchoClientCertificate.ashx HTTP/1.1\r\nHost: corefx-net-tls.azurewebsites.net\r\n\r\n");
+                byte[] message = Encoding.UTF8.GetBytes(
+                    "GET /EchoClientCertificate.ashx HTTP/1.1\r\nHost: corefx-net-tls.azurewebsites.net\r\n\r\n"
+                );
                 await ssl.WriteAsync(message, 0, message.Length);
 
                 // Initiate Read operation, that results in starting renegotiation as per server response to the above request.
                 // This will throw IOException, since renegotiation is disabled on client side.
-                await Assert.ThrowsAsync<IOException>(() => ssl.ReadAsync(message, 0, message.Length));
+                await Assert.ThrowsAsync<IOException>(
+                    () => ssl.ReadAsync(message, 0, message.Length)
+                );
             }
         }
     }
@@ -109,7 +122,8 @@ namespace System.Net.Security.Tests
         protected override bool TestAuthenticateAsync => false;
     }
 
-    public sealed class SslStreamAllowRenegotiationTests_Async : SslStreamAllowRenegotiationTestsBase
+    public sealed class SslStreamAllowRenegotiationTests_Async
+        : SslStreamAllowRenegotiationTestsBase
     {
         protected override bool TestAuthenticateAsync => true;
     }

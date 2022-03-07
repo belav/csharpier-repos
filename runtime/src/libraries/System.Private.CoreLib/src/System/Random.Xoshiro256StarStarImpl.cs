@@ -29,7 +29,10 @@ namespace System
             //
             //     See <http://creativecommons.org/publicdomain/zero/1.0/>.
 
-            private ulong _s0, _s1, _s2, _s3;
+            private ulong _s0,
+                _s1,
+                _s2,
+                _s3;
 
             public unsafe XoshiroImpl()
             {
@@ -41,8 +44,7 @@ namespace System
                     _s1 = ptr[1];
                     _s2 = ptr[2];
                     _s3 = ptr[3];
-                }
-                while ((_s0 | _s1 | _s2 | _s3) == 0); // at least one value must be non-zero
+                } while ((_s0 | _s1 | _s2 | _s3) == 0); // at least one value must be non-zero
             }
 
             /// <summary>Produces a value in the range [0, uint.MaxValue].</summary>
@@ -53,7 +55,10 @@ namespace System
             [MethodImpl(MethodImplOptions.AggressiveInlining)] // small-ish hot path used by a handful of "next" methods
             internal ulong NextUInt64()
             {
-                ulong s0 = _s0, s1 = _s1, s2 = _s2, s3 = _s3;
+                ulong s0 = _s0,
+                    s1 = _s1,
+                    s2 = _s2,
+                    s3 = _s3;
 
                 ulong result = BitOperations.RotateLeft(s1 * 5, 7) * 9;
                 ulong t = s1 << 17;
@@ -196,13 +201,17 @@ namespace System
 
             public override unsafe void NextBytes(Span<byte> buffer)
             {
-                ulong s0 = _s0, s1 = _s1, s2 = _s2, s3 = _s3;
+                ulong s0 = _s0,
+                    s1 = _s1,
+                    s2 = _s2,
+                    s3 = _s3;
 
                 while (buffer.Length >= sizeof(ulong))
                 {
                     Unsafe.WriteUnaligned(
                         ref MemoryMarshal.GetReference(buffer),
-                        BitOperations.RotateLeft(s1 * 5, 7) * 9);
+                        BitOperations.RotateLeft(s1 * 5, 7) * 9
+                    );
 
                     // Update PRNG state.
                     ulong t = s1 << 17;

@@ -17,17 +17,13 @@ public class HttpGetAttribute : HttpMethodAttribute
     /// <summary>
     /// Creates a new <see cref="HttpGetAttribute"/>.
     /// </summary>
-    public HttpGetAttribute()
-        : base(_supportedMethods)
-    {
-    }
+    public HttpGetAttribute() : base(_supportedMethods) { }
 
     /// <summary>
     /// Creates a new <see cref="HttpGetAttribute"/> with the given route template.
     /// </summary>
     /// <param name="template">The route template. May not be null.</param>
-    public HttpGetAttribute(string template)
-        : base(_supportedMethods, template)
+    public HttpGetAttribute(string template) : base(_supportedMethods, template)
     {
         if (template == null)
         {

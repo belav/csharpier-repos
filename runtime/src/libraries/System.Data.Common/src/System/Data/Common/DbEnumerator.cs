@@ -37,15 +37,10 @@ namespace System.Data.Common
             _closeReader = closeReader;
         }
 
-        public DbEnumerator(DbDataReader reader)
-            : this((IDataReader)reader)
-        {
-        }
+        public DbEnumerator(DbDataReader reader) : this((IDataReader)reader) { }
 
         public DbEnumerator(DbDataReader reader, bool closeReader)
-            : this((IDataReader)reader, closeReader)
-        {
-        }
+            : this((IDataReader)reader, closeReader) { }
 
         // TODO: this should throw InvalidOperationException if null
         public object Current => _current!;
@@ -57,7 +52,10 @@ namespace System.Data.Common
                 BuildSchemaInfo();
             }
 
-            Debug.Assert(null != _schemaInfo && null != _descriptors, "unable to build schema information!");
+            Debug.Assert(
+                null != _schemaInfo && null != _descriptors,
+                "unable to build schema information!"
+            );
             _current = null;
 
             if (_reader.Read())
@@ -65,7 +63,12 @@ namespace System.Data.Common
                 // setup our current record
                 object[] values = new object[_schemaInfo.Length];
                 _reader.GetValues(values); // this.GetValues()
-                _current = new DataRecordInternal(_schemaInfo, values, _descriptors, _fieldNameLookup!);
+                _current = new DataRecordInternal(
+                    _schemaInfo,
+                    values,
+                    _descriptors,
+                    _fieldNameLookup!
+                );
                 return true;
             }
             if (_closeReader)
@@ -113,8 +116,7 @@ namespace System.Data.Common
             private readonly int _ordinal;
             private readonly Type _type;
 
-            internal DbColumnDescriptor(int ordinal, string name, Type type)
-                : base(name, null)
+            internal DbColumnDescriptor(int ordinal, string name, Type type) : base(name, null)
             {
                 _ordinal = ordinal;
                 _type = type;
@@ -128,7 +130,8 @@ namespace System.Data.Common
 
             public override bool CanResetValue(object component) => false;
 
-            public override object? GetValue(object? component) => ((IDataRecord)component!)[_ordinal];
+            public override object? GetValue(object? component) =>
+                ((IDataRecord)component!)[_ordinal];
 
             public override void ResetValue(object component)
             {

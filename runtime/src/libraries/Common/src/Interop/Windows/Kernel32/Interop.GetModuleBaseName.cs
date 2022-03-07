@@ -9,7 +9,17 @@ internal static partial class Interop
 {
     internal static partial class Kernel32
     {
-        [GeneratedDllImport(Libraries.Kernel32, EntryPoint = "K32GetModuleBaseNameW", CharSet = CharSet.Unicode, SetLastError = true)]
-        internal static partial int GetModuleBaseName(SafeProcessHandle processHandle, IntPtr moduleHandle, [Out] char[] baseName, int size);
+        [GeneratedDllImport(
+            Libraries.Kernel32,
+            EntryPoint = "K32GetModuleBaseNameW",
+            CharSet = CharSet.Unicode,
+            SetLastError = true
+        )]
+        internal static partial int GetModuleBaseName(
+            SafeProcessHandle processHandle,
+            IntPtr moduleHandle,
+            [Out] char[] baseName,
+            int size
+        );
     }
 }

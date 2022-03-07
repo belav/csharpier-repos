@@ -30,12 +30,15 @@ namespace System.Configuration
         /// </summary>
         public object GetValue(string key, Type type)
         {
-            if (key == null) throw new ArgumentNullException(nameof(key));
-            if (type == null) throw new ArgumentNullException(nameof(type));
+            if (key == null)
+                throw new ArgumentNullException(nameof(key));
+            if (type == null)
+                throw new ArgumentNullException(nameof(type));
 
             string val = _map[key];
 
-            if (val == null) throw new InvalidOperationException(SR.Format(SR.AppSettingsReaderNoKey, key));
+            if (val == null)
+                throw new InvalidOperationException(SR.Format(SR.AppSettingsReaderNoKey, key));
 
             if (type == s_stringType)
             {
@@ -68,8 +71,11 @@ namespace System.Configuration
                 }
                 catch (Exception)
                 {
-                    string displayString = (val.Length == 0) ? SR.AppSettingsReaderEmptyString : val;
-                    throw new InvalidOperationException(SR.Format(SR.AppSettingsReaderCantParse, displayString, key, type));
+                    string displayString =
+                        (val.Length == 0) ? SR.AppSettingsReaderEmptyString : val;
+                    throw new InvalidOperationException(
+                        SR.Format(SR.AppSettingsReaderCantParse, displayString, key, type)
+                    );
                 }
             }
         }
@@ -84,7 +90,17 @@ namespace System.Configuration
                 {
                     count++;
                 }
-                if (count > 0 && string.Compare(NullString, 0, val, count, len - 2 * count, StringComparison.Ordinal) != 0)
+                if (
+                    count > 0
+                    && string.Compare(
+                        NullString,
+                        0,
+                        val,
+                        count,
+                        len - 2 * count,
+                        StringComparison.Ordinal
+                    ) != 0
+                )
                 {
                     // the stuff between the parens is not "None"
                     count = 0;

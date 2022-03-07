@@ -24,7 +24,10 @@ namespace System.Text.Json
         /// for <typeparamref name="TValue"/> or its serializable members.
         /// </exception>
         [RequiresUnreferencedCode(SerializationUnreferencedCodeMessage)]
-        public static TValue? Deserialize<TValue>(this JsonElement element, JsonSerializerOptions? options = null)
+        public static TValue? Deserialize<TValue>(
+            this JsonElement element,
+            JsonSerializerOptions? options = null
+        )
         {
             JsonTypeInfo jsonTypeInfo = GetTypeInfo(options, typeof(TValue));
             return ReadUsingMetadata<TValue>(element, jsonTypeInfo);
@@ -48,7 +51,11 @@ namespace System.Text.Json
         /// for <paramref name="returnType"/> or its serializable members.
         /// </exception>
         [RequiresUnreferencedCode(SerializationUnreferencedCodeMessage)]
-        public static object? Deserialize(this JsonElement element, Type returnType, JsonSerializerOptions? options = null)
+        public static object? Deserialize(
+            this JsonElement element,
+            Type returnType,
+            JsonSerializerOptions? options = null
+        )
         {
             if (returnType == null)
             {
@@ -76,7 +83,10 @@ namespace System.Text.Json
         /// There is no compatible <see cref="System.Text.Json.Serialization.JsonConverter"/>
         /// for <typeparamref name="TValue"/> or its serializable members.
         /// </exception>
-        public static TValue? Deserialize<TValue>(this JsonElement element, JsonTypeInfo<TValue> jsonTypeInfo)
+        public static TValue? Deserialize<TValue>(
+            this JsonElement element,
+            JsonTypeInfo<TValue> jsonTypeInfo
+        )
         {
             if (jsonTypeInfo == null)
             {
@@ -118,7 +128,11 @@ namespace System.Text.Json
         /// The <see cref="JsonSerializerContext.GetTypeInfo(Type)"/> method of the provided
         /// <paramref name="context"/> returns <see langword="null"/> for the type to convert.
         /// </exception>
-        public static object? Deserialize(this JsonElement element, Type returnType, JsonSerializerContext context)
+        public static object? Deserialize(
+            this JsonElement element,
+            Type returnType,
+            JsonSerializerContext context
+        )
         {
             if (returnType == null)
             {
@@ -134,7 +148,10 @@ namespace System.Text.Json
             return ReadUsingMetadata<object?>(element, jsonTypeInfo);
         }
 
-        private static TValue? ReadUsingMetadata<TValue>(JsonElement element, JsonTypeInfo jsonTypeInfo)
+        private static TValue? ReadUsingMetadata<TValue>(
+            JsonElement element,
+            JsonTypeInfo jsonTypeInfo
+        )
         {
             ReadOnlySpan<byte> utf8Json = element.GetRawValue().Span;
             return ReadFromSpan<TValue>(utf8Json, jsonTypeInfo);

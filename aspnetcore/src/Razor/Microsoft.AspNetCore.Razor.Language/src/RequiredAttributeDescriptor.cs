@@ -29,7 +29,9 @@ public abstract class RequiredAttributeDescriptor : IEquatable<RequiredAttribute
     {
         get
         {
-            var errors = Diagnostics.Any(diagnostic => diagnostic.Severity == RazorDiagnosticSeverity.Error);
+            var errors = Diagnostics.Any(
+                diagnostic => diagnostic.Severity == RazorDiagnosticSeverity.Error
+            );
 
             return errors;
         }

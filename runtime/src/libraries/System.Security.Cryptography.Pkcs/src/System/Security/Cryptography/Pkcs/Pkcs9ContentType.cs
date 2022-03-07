@@ -14,10 +14,7 @@ namespace System.Security.Cryptography.Pkcs
         // Constructors.
         //
 
-        public Pkcs9ContentType()
-            : base(Oids.ContentTypeOid.CopyOid())
-        {
-        }
+        public Pkcs9ContentType() : base(Oids.ContentTypeOid.CopyOid()) { }
 
         //
         // Public properties.
@@ -25,10 +22,7 @@ namespace System.Security.Cryptography.Pkcs
 
         public Oid ContentType
         {
-            get
-            {
-                return _lazyContentType ?? (_lazyContentType = Decode(RawData));
-            }
+            get { return _lazyContentType ?? (_lazyContentType = Decode(RawData)); }
         }
 
         public override void CopyFrom(AsnEncodedData asnEncodedData)

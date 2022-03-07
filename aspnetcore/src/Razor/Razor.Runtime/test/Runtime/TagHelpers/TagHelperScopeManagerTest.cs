@@ -213,13 +213,16 @@ public class TagHelperScopeManagerTest
             "Must call '{2}.{1}' before calling '{2}.{0}'.",
             nameof(TagHelperScopeManager.End),
             nameof(TagHelperScopeManager.Begin),
-            nameof(TagHelperScopeManager));
+            nameof(TagHelperScopeManager)
+        );
 
         // Act & Assert
-        var ex = Assert.Throws<InvalidOperationException>(() =>
-        {
-            scopeManager.End();
-        });
+        var ex = Assert.Throws<InvalidOperationException>(
+            () =>
+            {
+                scopeManager.End();
+            }
+        );
 
         Assert.Equal(expectedError, ex.Message);
     }
@@ -228,18 +231,21 @@ public class TagHelperScopeManagerTest
     {
         return new TagHelperScopeManager(
             startTagHelperWritingScope: _ => { },
-            endTagHelperWritingScope: () => new DefaultTagHelperContent());
+            endTagHelperWritingScope: () => new DefaultTagHelperContent()
+        );
     }
 
     private static TagHelperExecutionContext BeginDefaultScope(
         TagHelperScopeManager scopeManager,
         string tagName,
-        TagMode tagMode = TagMode.StartTagAndEndTag)
+        TagMode tagMode = TagMode.StartTagAndEndTag
+    )
     {
         return scopeManager.Begin(
             tagName,
             tagMode,
             uniqueId: string.Empty,
-            executeChildContentAsync: async () => await Task.FromResult(result: true));
+            executeChildContentAsync: async () => await Task.FromResult(result: true)
+        );
     }
 }

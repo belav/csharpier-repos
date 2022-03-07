@@ -18,7 +18,11 @@ namespace System.Net.Http.Tests
             static void RunTest(string defaultValueStr)
             {
                 bool expected = bool.Parse(defaultValueStr);
-                bool actual = RuntimeSettingParser.QueryRuntimeSettingSwitch("Foo.Bar", "FOO_BAR", expected);
+                bool actual = RuntimeSettingParser.QueryRuntimeSettingSwitch(
+                    "Foo.Bar",
+                    "FOO_BAR",
+                    expected
+                );
                 Assert.Equal(expected, actual);
             }
 
@@ -31,12 +35,16 @@ namespace System.Net.Http.Tests
             static void RunTest()
             {
                 AppContext.SetSwitch("Foo.Bar", false);
-                bool actual = RuntimeSettingParser.QueryRuntimeSettingSwitch("Foo.Bar", "FOO_BAR", true);
+                bool actual = RuntimeSettingParser.QueryRuntimeSettingSwitch(
+                    "Foo.Bar",
+                    "FOO_BAR",
+                    true
+                );
                 Assert.False(actual);
             }
             RemoteInvokeOptions options = new RemoteInvokeOptions();
             options.StartInfo.EnvironmentVariables["FOO_BAR"] = "true";
-            
+
             RemoteExecutor.Invoke(RunTest, options).Dispose();
         }
 
@@ -45,7 +53,11 @@ namespace System.Net.Http.Tests
         {
             static void RunTest()
             {
-                bool actual = RuntimeSettingParser.QueryRuntimeSettingSwitch("Foo.Bar", "FOO_BAR", true);
+                bool actual = RuntimeSettingParser.QueryRuntimeSettingSwitch(
+                    "Foo.Bar",
+                    "FOO_BAR",
+                    true
+                );
                 Assert.False(actual);
             }
             RemoteInvokeOptions options = new RemoteInvokeOptions();
@@ -59,7 +71,11 @@ namespace System.Net.Http.Tests
         {
             static void RunTest()
             {
-                bool actual = RuntimeSettingParser.QueryRuntimeSettingSwitch("Foo.Bar", "FOO_BAR", true);
+                bool actual = RuntimeSettingParser.QueryRuntimeSettingSwitch(
+                    "Foo.Bar",
+                    "FOO_BAR",
+                    true
+                );
                 Assert.True(actual);
             }
             RemoteInvokeOptions options = new RemoteInvokeOptions();
@@ -73,7 +89,10 @@ namespace System.Net.Http.Tests
         {
             static void RunTest()
             {
-                int actual = RuntimeSettingParser.ParseInt32EnvironmentVariableValue("FOO_BAR", -42);
+                int actual = RuntimeSettingParser.ParseInt32EnvironmentVariableValue(
+                    "FOO_BAR",
+                    -42
+                );
                 Assert.Equal(-42, actual);
             }
             RemoteExecutor.Invoke(RunTest).Dispose();
@@ -84,7 +103,10 @@ namespace System.Net.Http.Tests
         {
             static void RunTest()
             {
-                int actual = RuntimeSettingParser.ParseInt32EnvironmentVariableValue("FOO_BAR", -42);
+                int actual = RuntimeSettingParser.ParseInt32EnvironmentVariableValue(
+                    "FOO_BAR",
+                    -42
+                );
                 Assert.Equal(84, actual);
             }
 
@@ -99,7 +121,10 @@ namespace System.Net.Http.Tests
         {
             static void RunTest()
             {
-                int actual = RuntimeSettingParser.ParseInt32EnvironmentVariableValue("FOO_BAR", -42);
+                int actual = RuntimeSettingParser.ParseInt32EnvironmentVariableValue(
+                    "FOO_BAR",
+                    -42
+                );
                 Assert.Equal(-42, actual);
             }
 
@@ -114,7 +139,10 @@ namespace System.Net.Http.Tests
         {
             static void RunTest()
             {
-                double actual = RuntimeSettingParser.ParseDoubleEnvironmentVariableValue("FOO_BAR", -0.42);
+                double actual = RuntimeSettingParser.ParseDoubleEnvironmentVariableValue(
+                    "FOO_BAR",
+                    -0.42
+                );
                 Assert.Equal(-0.42, actual);
             }
             RemoteExecutor.Invoke(RunTest).Dispose();
@@ -125,7 +153,10 @@ namespace System.Net.Http.Tests
         {
             static void RunTest()
             {
-                double actual = RuntimeSettingParser.ParseDoubleEnvironmentVariableValue("FOO_BAR", -0.42);
+                double actual = RuntimeSettingParser.ParseDoubleEnvironmentVariableValue(
+                    "FOO_BAR",
+                    -0.42
+                );
                 Assert.Equal(0.84, actual);
             }
 
@@ -140,7 +171,10 @@ namespace System.Net.Http.Tests
         {
             static void RunTest()
             {
-                double actual = RuntimeSettingParser.ParseDoubleEnvironmentVariableValue("FOO_BAR", -0.42);
+                double actual = RuntimeSettingParser.ParseDoubleEnvironmentVariableValue(
+                    "FOO_BAR",
+                    -0.42
+                );
                 Assert.Equal(-0.42, actual);
             }
 

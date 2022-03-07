@@ -23,22 +23,25 @@ namespace Microsoft.CodeAnalysis.Options
             }
             else
             {
-                var substituteLanguageName = languageName == LanguageNames.CSharp ? "CSharp" :
-                                                languageName == LanguageNames.VisualBasic ? "VisualBasic" :
-                                                languageName;
+                var substituteLanguageName =
+                    languageName == LanguageNames.CSharp
+                        ? "CSharp"
+                        : languageName == LanguageNames.VisualBasic
+                            ? "VisualBasic"
+                            : languageName;
 
                 return unsubstitutedKeyName.Replace("%LANGUAGE%", substituteLanguageName);
             }
         }
 
-        public RoamingProfileStorageLocation(string keyName)
-            => _keyNameFromLanguageName = _ => keyName;
+        public RoamingProfileStorageLocation(string keyName) =>
+            _keyNameFromLanguageName = _ => keyName;
 
         /// <summary>
         /// Creates a <see cref="RoamingProfileStorageLocation"/> that has different key names for different languages.
         /// </summary>
         /// <param name="keyNameFromLanguageName">A function that maps from a <see cref="LanguageNames"/> value to the key name.</param>
-        public RoamingProfileStorageLocation(Func<string?, string> keyNameFromLanguageName)
-            => _keyNameFromLanguageName = keyNameFromLanguageName;
+        public RoamingProfileStorageLocation(Func<string?, string> keyNameFromLanguageName) =>
+            _keyNameFromLanguageName = keyNameFromLanguageName;
     }
 }

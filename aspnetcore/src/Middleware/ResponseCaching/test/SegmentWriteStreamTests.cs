@@ -12,7 +12,21 @@ public class SegmentWriteStreamTests
 {
     private static readonly byte[] WriteData = new byte[]
     {
-            0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14
     };
 
     [Theory]
@@ -83,7 +97,6 @@ public class SegmentWriteStreamTests
     {
         var segmentSize = 5;
         var stream = new SegmentWriteStream(segmentSize);
-
 
         for (var i = 0; i < WriteData.Length; i += writeSize)
         {

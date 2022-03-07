@@ -17,7 +17,10 @@ namespace System.Globalization.Tests
 
         [Theory]
         [MemberData(nameof(CurrencyPositivePattern_TestData))]
-        public void CurrencyPositivePattern_Get_ReturnsExpected(NumberFormatInfo format, int expected)
+        public void CurrencyPositivePattern_Get_ReturnsExpected(
+            NumberFormatInfo format,
+            int expected
+        )
         {
             Assert.Equal(expected, format.CurrencyPositivePattern);
         }
@@ -39,13 +42,19 @@ namespace System.Globalization.Tests
         public void CurrencyPositivePattern_SetInvalid_ThrowsArgumentOutOfRangeException(int value)
         {
             var format = new NumberFormatInfo();
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("value", "CurrencyPositivePattern", () => format.CurrencyPositivePattern = value);
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "value",
+                "CurrencyPositivePattern",
+                () => format.CurrencyPositivePattern = value
+            );
         }
 
         [Fact]
         public void CurrencyPositivePattern_SetReadOnly_ThrowsInvalidOperationException()
         {
-            Assert.Throws<InvalidOperationException>(() => NumberFormatInfo.InvariantInfo.CurrencyPositivePattern = 1);
+            Assert.Throws<InvalidOperationException>(
+                () => NumberFormatInfo.InvariantInfo.CurrencyPositivePattern = 1
+            );
         }
     }
 }

@@ -17,7 +17,7 @@ namespace Profiler.Tests
         }
 
         [DllImport("Profiler")]
-        public static extern void DoPInvoke(delegate* unmanaged<int,int> callback, int i);
+        public static extern void DoPInvoke(delegate* unmanaged<int, int> callback, int i);
 
         public static int RunTest(String[] args)
         {
@@ -33,9 +33,11 @@ namespace Profiler.Tests
                 return RunTest(args);
             }
 
-            return ProfilerTestRunner.Run(profileePath: System.Reflection.Assembly.GetExecutingAssembly().Location,
-                                          testName: "Transitions",
-                                          profilerClsid: TransitionsGuid);
+            return ProfilerTestRunner.Run(
+                profileePath: System.Reflection.Assembly.GetExecutingAssembly().Location,
+                testName: "Transitions",
+                profilerClsid: TransitionsGuid
+            );
         }
     }
 }

@@ -18,14 +18,20 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions
                 nameof(RegularExpressionsOptions),
                 nameof(ReportInvalidRegexPatterns),
                 defaultValue: true,
-                storageLocation: new RoamingProfileStorageLocation("TextEditor.%LANGUAGE%.Specific.ReportInvalidRegexPatterns"));
+                storageLocation: new RoamingProfileStorageLocation(
+                    "TextEditor.%LANGUAGE%.Specific.ReportInvalidRegexPatterns"
+                )
+            );
 
         public static PerLanguageOption2<bool> HighlightRelatedRegexComponentsUnderCursor =
             new(
                 nameof(RegularExpressionsOptions),
                 nameof(HighlightRelatedRegexComponentsUnderCursor),
                 defaultValue: true,
-                storageLocation: new RoamingProfileStorageLocation("TextEditor.%LANGUAGE%.Specific.HighlightRelatedRegexComponentsUnderCursor"));
+                storageLocation: new RoamingProfileStorageLocation(
+                    "TextEditor.%LANGUAGE%.Specific.HighlightRelatedRegexComponentsUnderCursor"
+                )
+            );
     }
 
     [ExportSolutionOptionProvider, Shared]
@@ -33,12 +39,12 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public RegularExpressionsOptionsProvider()
-        {
-        }
+        public RegularExpressionsOptionsProvider() { }
 
-        public ImmutableArray<IOption> Options { get; } = ImmutableArray.Create<IOption>(
-            RegularExpressionsOptions.ReportInvalidRegexPatterns,
-            RegularExpressionsOptions.HighlightRelatedRegexComponentsUnderCursor);
+        public ImmutableArray<IOption> Options { get; } =
+            ImmutableArray.Create<IOption>(
+                RegularExpressionsOptions.ReportInvalidRegexPatterns,
+                RegularExpressionsOptions.HighlightRelatedRegexComponentsUnderCursor
+            );
     }
 }

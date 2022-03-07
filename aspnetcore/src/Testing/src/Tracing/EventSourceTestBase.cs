@@ -13,7 +13,8 @@ namespace Microsoft.AspNetCore.Testing.Tracing;
 [Collection(CollectionName)]
 public abstract class EventSourceTestBase : IDisposable
 {
-    public const string CollectionName = "Microsoft.AspNetCore.Testing.Tracing.EventSourceTestCollection";
+    public const string CollectionName =
+        "Microsoft.AspNetCore.Testing.Tracing.EventSourceTestCollection";
 
     private readonly CollectingEventListener _listener;
 

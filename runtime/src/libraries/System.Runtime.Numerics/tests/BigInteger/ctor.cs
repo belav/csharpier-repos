@@ -269,7 +269,9 @@ namespace System.Numerics.Tests
             // ctor(Single): Random Negative
             for (int i = 0; i < s_samples; i++)
             {
-                VerifyCtorSingle(((float)(float.MaxValue * s_random.NextDouble())) - float.MaxValue);
+                VerifyCtorSingle(
+                    ((float)(float.MaxValue * s_random.NextDouble())) - float.MaxValue
+                );
             }
 
             // ctor(Single): Small Random Positive with fractional part
@@ -287,13 +289,21 @@ namespace System.Numerics.Tests
             // ctor(Single): Large Random Positive with fractional part
             for (int i = 0; i < s_samples; i++)
             {
-                VerifyCtorSingle((float)((float.MaxValue * s_random.NextDouble()) + s_random.NextDouble()));
+                VerifyCtorSingle(
+                    (float)((float.MaxValue * s_random.NextDouble()) + s_random.NextDouble())
+                );
             }
 
             // ctor(Single): Large Random Negative with fractional part
             for (int i = 0; i < s_samples; i++)
             {
-                VerifyCtorSingle(((float)((-(float.MaxValue - 1) * s_random.NextDouble()) - s_random.NextDouble())));
+                VerifyCtorSingle(
+                    (
+                        (float)(
+                            (-(float.MaxValue - 1) * s_random.NextDouble()) - s_random.NextDouble()
+                        )
+                    )
+                );
             }
 
             // ctor(Single): Single.Epsilon
@@ -303,22 +313,28 @@ namespace System.Numerics.Tests
             Assert.Throws<OverflowException>(() => new BigInteger(float.NegativeInfinity));
 
             // ctor(Single): Single.PositiveInfinity
-            Assert.Throws<OverflowException>(() =>
-            {
-                BigInteger temp = new BigInteger(float.PositiveInfinity);
-            });
+            Assert.Throws<OverflowException>(
+                () =>
+                {
+                    BigInteger temp = new BigInteger(float.PositiveInfinity);
+                }
+            );
 
             // ctor(Single): Single.NaN
-            Assert.Throws<OverflowException>(() =>
-            {
-                BigInteger temp = new BigInteger(float.NaN);
-            });
+            Assert.Throws<OverflowException>(
+                () =>
+                {
+                    BigInteger temp = new BigInteger(float.NaN);
+                }
+            );
 
             // ctor(Single): Single.NaN 2
-            Assert.Throws<OverflowException>(() =>
-            {
-                BigInteger temp = new BigInteger(ConvertInt32ToSingle(0x7FC00000));
-            });
+            Assert.Throws<OverflowException>(
+                () =>
+                {
+                    BigInteger temp = new BigInteger(ConvertInt32ToSingle(0x7FC00000));
+                }
+            );
 
             // ctor(Single): Smallest Exponent
             VerifyCtorSingle((float)Math.Pow(2, -126));
@@ -368,7 +384,12 @@ namespace System.Numerics.Tests
             // ToString starts to become inaccurate at this point.
             if (expectedValue < 16777216 && -16777216 < expectedValue)
             {
-                Assert.True(expectedValue.ToString("G9").Equals(bigInteger.ToString(), StringComparison.OrdinalIgnoreCase), "Single.ToString() and BigInteger.ToString() not equal");
+                Assert.True(
+                    expectedValue
+                        .ToString("G9")
+                        .Equals(bigInteger.ToString(), StringComparison.OrdinalIgnoreCase),
+                    "Single.ToString() and BigInteger.ToString() not equal"
+                );
             }
 
             VerifyBigIntegerUsingIdentities(bigInteger, 0 == expectedValue);
@@ -461,41 +482,57 @@ namespace System.Numerics.Tests
             // ctor(Double): Large Random Positive with fractional part
             for (int i = 0; i < s_samples; i++)
             {
-                VerifyCtorDouble((double)((long.MaxValue / 100 * s_random.NextDouble()) + s_random.NextDouble()));
+                VerifyCtorDouble(
+                    (double)((long.MaxValue / 100 * s_random.NextDouble()) + s_random.NextDouble())
+                );
             }
 
             // ctor(Double): Large Random Negative with fractional part
             for (int i = 0; i < s_samples; i++)
             {
-                VerifyCtorDouble(((double)((-(long.MaxValue / 100) * s_random.NextDouble()) - s_random.NextDouble())));
+                VerifyCtorDouble(
+                    (
+                        (double)(
+                            (-(long.MaxValue / 100) * s_random.NextDouble()) - s_random.NextDouble()
+                        )
+                    )
+                );
             }
 
             // ctor(Double): Double.Epsilon
             VerifyCtorDouble(double.Epsilon);
 
             // ctor(Double): Double.NegativeInfinity
-            Assert.Throws<OverflowException>(() =>
-            {
-                BigInteger temp = new BigInteger(double.NegativeInfinity);
-            });
+            Assert.Throws<OverflowException>(
+                () =>
+                {
+                    BigInteger temp = new BigInteger(double.NegativeInfinity);
+                }
+            );
 
             // ctor(Double): Double.PositiveInfinity
-            Assert.Throws<OverflowException>(() =>
-            {
-                BigInteger temp = new BigInteger(double.PositiveInfinity);
-            });
+            Assert.Throws<OverflowException>(
+                () =>
+                {
+                    BigInteger temp = new BigInteger(double.PositiveInfinity);
+                }
+            );
 
             // ctor(Double): Double.NaN
-            Assert.Throws<OverflowException>(() =>
-            {
-                BigInteger temp = new BigInteger(double.NaN);
-            });
+            Assert.Throws<OverflowException>(
+                () =>
+                {
+                    BigInteger temp = new BigInteger(double.NaN);
+                }
+            );
 
             // ctor(Double): Double.NaN 2
-            Assert.Throws<OverflowException>(() =>
-            {
-                BigInteger temp = new BigInteger(ConvertInt64ToDouble(0x7FF8000000000000));
-            });
+            Assert.Throws<OverflowException>(
+                () =>
+                {
+                    BigInteger temp = new BigInteger(ConvertInt64ToDouble(0x7FF8000000000000));
+                }
+            );
 
             // ctor(Double): Smallest Exponent
             VerifyCtorDouble((double)Math.Pow(2, -1022));
@@ -545,7 +582,12 @@ namespace System.Numerics.Tests
             // ToString starts to become inaccurate at this point.
             if (expectedValue < 9007199254740992 && -9007199254740992 < expectedValue)
             {
-                Assert.True(expectedValue.ToString("G17").Equals(bigInteger.ToString(), StringComparison.OrdinalIgnoreCase), "Double.ToString() and BigInteger.ToString() not equal");
+                Assert.True(
+                    expectedValue
+                        .ToString("G17")
+                        .Equals(bigInteger.ToString(), StringComparison.OrdinalIgnoreCase),
+                    "Double.ToString() and BigInteger.ToString() not equal"
+                );
             }
 
             VerifyBigIntegerUsingIdentities(bigInteger, 0 == expectedValue);
@@ -579,7 +621,8 @@ namespace System.Numerics.Tests
                     s_random.Next(int.MinValue, int.MaxValue),
                     s_random.Next(int.MinValue, int.MaxValue),
                     false,
-                    (byte)s_random.Next(0, 29));
+                    (byte)s_random.Next(0, 29)
+                );
                 VerifyCtorDecimal(value);
             }
 
@@ -591,24 +634,22 @@ namespace System.Numerics.Tests
                     s_random.Next(int.MinValue, int.MaxValue),
                     s_random.Next(int.MinValue, int.MaxValue),
                     true,
-                    (byte)s_random.Next(0, 29));
+                    (byte)s_random.Next(0, 29)
+                );
                 VerifyCtorDecimal(value);
             }
-
             // ctor(Decimal): Smallest Exponent
             unchecked
             {
                 value = new decimal(1, 0, 0, false, 0);
             }
             VerifyCtorDecimal(value);
-
             // ctor(Decimal): Largest Exponent and zero integer
             unchecked
             {
                 value = new decimal(0, 0, 0, false, 28);
             }
             VerifyCtorDecimal(value);
-
             // ctor(Decimal): Largest Exponent and non zero integer
             unchecked
             {
@@ -643,7 +684,12 @@ namespace System.Numerics.Tests
                 expectedValue = Math.Floor(value);
             }
 
-            Assert.True(expectedValue.ToString().Equals(bigInteger.ToString(), StringComparison.OrdinalIgnoreCase), "Decimal.ToString() and BigInteger.ToString()");
+            Assert.True(
+                expectedValue
+                    .ToString()
+                    .Equals(bigInteger.ToString(), StringComparison.OrdinalIgnoreCase),
+                "Decimal.ToString() and BigInteger.ToString()"
+            );
             Assert.Equal(expectedValue, (decimal)bigInteger);
 
             if (expectedValue != Math.Floor(decimal.MaxValue))
@@ -667,10 +713,12 @@ namespace System.Numerics.Tests
             byte[] tempByteArray;
 
             // ctor(byte[]): array is null
-            Assert.Throws<ArgumentNullException>(() =>
-            {
-                BigInteger bigInteger = new BigInteger((byte[])null);
-            });
+            Assert.Throws<ArgumentNullException>(
+                () =>
+                {
+                    BigInteger bigInteger = new BigInteger((byte[])null);
+                }
+            );
 
             // ctor(byte[]): array is empty
             VerifyCtorByteArray(new byte[0], 0);
@@ -697,27 +745,64 @@ namespace System.Numerics.Tests
 
             // ctor(byte[]): Large array with all zeros
             VerifyCtorByteArray(
-               new byte[] {
-                    0, 0, 0, 0,
-                    0, 0, 0, 0,
-                    0, 0, 0, 0,
-                    0, 0, 0, 0,
-                    0, 0, 0, 0,
-                    0, 0, 0, 0
-                });
+                new byte[]
+                {
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                }
+            );
 
             // ctor(byte[]): Small array with all ones
             VerifyCtorByteArray(new byte[] { 0xFF, 0xFF, 0xFF, 0xFF });
 
             // ctor(byte[]): Large array with all ones
             VerifyCtorByteArray(
-                new byte[] {
-                    0xFF, 0xFF, 0xFF, 0xFF,
-                    0xFF, 0xFF, 0xFF, 0xFF,
-                    0xFF, 0xFF, 0xFF, 0xFF,
-                    0xFF, 0xFF, 0xFF, 0xFF,
-                    0xFF, 0xFF, 0xFF, 0xFF
-                });
+                new byte[]
+                {
+                    0xFF,
+                    0xFF,
+                    0xFF,
+                    0xFF,
+                    0xFF,
+                    0xFF,
+                    0xFF,
+                    0xFF,
+                    0xFF,
+                    0xFF,
+                    0xFF,
+                    0xFF,
+                    0xFF,
+                    0xFF,
+                    0xFF,
+                    0xFF,
+                    0xFF,
+                    0xFF,
+                    0xFF,
+                    0xFF
+                }
+            );
 
             // ctor(byte[]): array with a lot of leading zeros
             for (int i = 0; i < s_samples; i++)
@@ -730,19 +815,39 @@ namespace System.Numerics.Tests
                 }
 
                 VerifyCtorByteArray(
-                    new byte[] {
+                    new byte[]
+                    {
                         tempByteArray[0],
                         tempByteArray[1],
                         tempByteArray[2],
                         tempByteArray[3],
-                        0, 0, 0, 0,
-                        0, 0, 0, 0,
-                        0, 0, 0, 0,
-                        0, 0, 0, 0,
-                        0, 0, 0, 0,
-                        0, 0, 0, 0
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0
                     },
-                    tempUInt64);
+                    tempUInt64
+                );
             }
 
             // ctor(byte[]): array 4 bytes
@@ -758,32 +863,38 @@ namespace System.Numerics.Tests
                 if (tempUInt64 > int.MaxValue)
                 {
                     VerifyCtorByteArray(
-                        new byte[] {
+                        new byte[]
+                        {
                             tempByteArray[0],
                             tempByteArray[1],
                             tempByteArray[2],
                             tempByteArray[3]
-                        });
+                        }
+                    );
                     VerifyCtorByteArray(
-                       new byte[] {
+                        new byte[]
+                        {
                             tempByteArray[0],
                             tempByteArray[1],
                             tempByteArray[2],
                             tempByteArray[3],
                             0
-                       },
-                       tempUInt64);
+                        },
+                        tempUInt64
+                    );
                 }
                 else
                 {
                     VerifyCtorByteArray(
-                        new byte[] {
+                        new byte[]
+                        {
                             tempByteArray[0],
                             tempByteArray[1],
                             tempByteArray[2],
                             tempByteArray[3]
                         },
-                        tempUInt64);
+                        tempUInt64
+                    );
                 }
             }
 
@@ -802,34 +913,42 @@ namespace System.Numerics.Tests
                 if (tempUInt64 >= (ulong)0x00080000)
                 {
                     VerifyCtorByteArray(
-                        new byte[] {
+                        new byte[]
+                        {
                             tempByteArray[0],
                             tempByteArray[1],
                             tempByteArray[2],
                             tempByteArray[3],
                             tempByteArray[4]
-                        });
+                        }
+                    );
 
                     VerifyCtorByteArray(
-                        new byte[] {
+                        new byte[]
+                        {
                             tempByteArray[0],
                             tempByteArray[1],
                             tempByteArray[2],
                             tempByteArray[3],
                             tempByteArray[4],
                             0
-                        }, tempUInt64);
+                        },
+                        tempUInt64
+                    );
                 }
                 else
                 {
                     VerifyCtorByteArray(
-                        new byte[] {
+                        new byte[]
+                        {
                             tempByteArray[0],
                             tempByteArray[1],
                             tempByteArray[2],
                             tempByteArray[3],
                             tempByteArray[4]
-                        }, tempUInt64);
+                        },
+                        tempUInt64
+                    );
                 }
             }
 
@@ -848,7 +967,8 @@ namespace System.Numerics.Tests
                 if (tempUInt64 > long.MaxValue)
                 {
                     VerifyCtorByteArray(
-                        new byte[] {
+                        new byte[]
+                        {
                             tempByteArray[0],
                             tempByteArray[1],
                             tempByteArray[2],
@@ -857,9 +977,11 @@ namespace System.Numerics.Tests
                             tempByteArray[5],
                             tempByteArray[6],
                             tempByteArray[7]
-                        });
+                        }
+                    );
                     VerifyCtorByteArray(
-                        new byte[] {
+                        new byte[]
+                        {
                             tempByteArray[0],
                             tempByteArray[1],
                             tempByteArray[2],
@@ -869,12 +991,15 @@ namespace System.Numerics.Tests
                             tempByteArray[6],
                             tempByteArray[7],
                             0
-                        }, tempUInt64);
+                        },
+                        tempUInt64
+                    );
                 }
                 else
                 {
                     VerifyCtorByteArray(
-                        new byte[] {
+                        new byte[]
+                        {
                             tempByteArray[0],
                             tempByteArray[1],
                             tempByteArray[2],
@@ -884,7 +1009,8 @@ namespace System.Numerics.Tests
                             tempByteArray[6],
                             tempByteArray[7]
                         },
-                        tempUInt64);
+                        tempUInt64
+                    );
                 }
             }
 
@@ -892,7 +1018,8 @@ namespace System.Numerics.Tests
             for (int i = 0; i < s_samples; i++)
             {
                 VerifyCtorByteArray(
-                    new byte[] {
+                    new byte[]
+                    {
                         (byte)s_random.Next(0, 256),
                         (byte)s_random.Next(0, 256),
                         (byte)s_random.Next(0, 256),
@@ -902,7 +1029,8 @@ namespace System.Numerics.Tests
                         (byte)s_random.Next(0, 256),
                         (byte)s_random.Next(0, 256),
                         (byte)s_random.Next(0, 256)
-                    });
+                    }
+                );
             }
 
             // ctor(byte[]): array is UInt32.MaxValue
@@ -912,27 +1040,23 @@ namespace System.Numerics.Tests
             VerifyCtorByteArray(new byte[] { 0, 0, 0, 0, 1 }, (ulong)uint.MaxValue + 1);
 
             // ctor(byte[]): array is Int32.MinValue with overlong representation.
-            VerifyCtorByteArray(new byte[] {0, 0, 0, 0x80, 0xFF});
-            Assert.Equal(new BigInteger(new byte[] { 0, 0, 0, 0x80, 0xFF, 0xFF, 0xFF }), int.MinValue);
+            VerifyCtorByteArray(new byte[] { 0, 0, 0, 0x80, 0xFF });
+            Assert.Equal(
+                new BigInteger(new byte[] { 0, 0, 0, 0x80, 0xFF, 0xFF, 0xFF }),
+                int.MinValue
+            );
 
             // ctor(byte[]): array is UInt64.MaxValue
-            VerifyCtorByteArray(new byte[] { 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0 }, ulong.MaxValue);
+            VerifyCtorByteArray(
+                new byte[] { 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0 },
+                ulong.MaxValue
+            );
 
             // ctor(byte[]): UInt64.MaxValue + 1
-            VerifyCtorByteArray(
-                new byte[] {
-                    0, 0, 0, 0,
-                    0, 0, 0, 0,
-                    1
-                });
+            VerifyCtorByteArray(new byte[] { 0, 0, 0, 0, 0, 0, 0, 0, 1 });
 
             // ctor(byte[]): UInt64.MaxValue + 2^64
-            VerifyCtorByteArray(
-                new byte[] {
-                    0xFF, 0xFF, 0xFF, 0xFF,
-                    0xFF, 0xFF, 0xFF, 0xFF,
-                    1
-                });
+            VerifyCtorByteArray(new byte[] { 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 1 });
 
             // ctor(byte[]): array is random > UInt64
             for (int i = 0; i < s_samples; i++)
@@ -962,7 +1086,12 @@ namespace System.Numerics.Tests
             BigInteger bigInteger = new BigInteger(value);
 
             Assert.Equal(expectedValue, bigInteger);
-            Assert.True(expectedValue.ToString().Equals(bigInteger.ToString(), StringComparison.OrdinalIgnoreCase), "UInt64.ToString() and BigInteger.ToString()");
+            Assert.True(
+                expectedValue
+                    .ToString()
+                    .Equals(bigInteger.ToString(), StringComparison.OrdinalIgnoreCase),
+                "UInt64.ToString() and BigInteger.ToString()"
+            );
             Assert.Equal(expectedValue, (ulong)bigInteger);
 
             if (expectedValue != ulong.MaxValue)
@@ -994,23 +1123,50 @@ namespace System.Numerics.Tests
 
             for (int i = Math.Min(value.Length, roundTrippedByteArray.Length) - 1; 0 <= i; --i)
             {
-                Assert.True(value[i] == roundTrippedByteArray[i], string.Format("Round Tripped ByteArray at {0}", i));
+                Assert.True(
+                    value[i] == roundTrippedByteArray[i],
+                    string.Format("Round Tripped ByteArray at {0}", i)
+                );
             }
             if (value.Length < roundTrippedByteArray.Length)
             {
                 for (int i = value.Length; i < roundTrippedByteArray.Length; ++i)
                 {
-                    Assert.True(0 == roundTrippedByteArray[i],
-                        string.Format("Round Tripped ByteArray is larger than the original array and byte is non zero at {0}", i));
+                    Assert.True(
+                        0 == roundTrippedByteArray[i],
+                        string.Format(
+                            "Round Tripped ByteArray is larger than the original array and byte is non zero at {0}",
+                            i
+                        )
+                    );
                 }
             }
             else if (value.Length > roundTrippedByteArray.Length)
             {
                 for (int i = roundTrippedByteArray.Length; i < value.Length; ++i)
                 {
-                    Assert.False((((0 != value[i]) && ((roundTrippedByteArray[roundTrippedByteArray.Length - 1] & 0x80) == 0)) ||
-                        ((0xFF != value[i]) && ((roundTrippedByteArray[roundTrippedByteArray.Length - 1] & 0x80) != 0))),
-                        string.Format("Round Tripped ByteArray is smaller than the original array and byte is non zero at {0}", i));
+                    Assert.False(
+                        (
+                            (
+                                (0 != value[i])
+                                && (
+                                    (roundTrippedByteArray[roundTrippedByteArray.Length - 1] & 0x80)
+                                    == 0
+                                )
+                            )
+                            || (
+                                (0xFF != value[i])
+                                && (
+                                    (roundTrippedByteArray[roundTrippedByteArray.Length - 1] & 0x80)
+                                    != 0
+                                )
+                            )
+                        ),
+                        string.Format(
+                            "Round Tripped ByteArray is smaller than the original array and byte is non zero at {0}",
+                            i
+                        )
+                    );
                 }
             }
 
@@ -1087,11 +1243,14 @@ namespace System.Numerics.Tests
                 if (!(((tempByteArray[7] & 0x80) == 0) ^ isNeg))
                 {
                     tempByteArray[7] ^= 0x80;
-                    tempBigInteger = tempBigInteger + (new BigInteger(new byte[] { 0, 0, 0, 0, 0, 0, 0, 0x80 }));
+                    tempBigInteger =
+                        tempBigInteger + (new BigInteger(new byte[] { 0, 0, 0, 0, 0, 0, 0, 0x80 }));
                 }
                 if (isNeg & (tempBigInteger > 0))
                 {
-                    tempBigInteger = tempBigInteger + (new BigInteger(new byte[] { 0, 0, 0, 0, 0, 0, 0, 0, 0xFF }));
+                    tempBigInteger =
+                        tempBigInteger
+                        + (new BigInteger(new byte[] { 0, 0, 0, 0, 0, 0, 0, 0, 0xFF }));
                 }
 
                 if (!BitConverter.IsLittleEndian)
@@ -1131,11 +1290,15 @@ namespace System.Numerics.Tests
                     tempByteArray[7] &= 0x7f;
                     if (tempBigInteger < 0)
                     {
-                        tempBigInteger = tempBigInteger - (new BigInteger(new byte[] { 0, 0, 0, 0, 0, 0, 0, 0x80 }));
+                        tempBigInteger =
+                            tempBigInteger
+                            - (new BigInteger(new byte[] { 0, 0, 0, 0, 0, 0, 0, 0x80 }));
                     }
                     else
                     {
-                        tempBigInteger = tempBigInteger + (new BigInteger(new byte[] { 0, 0, 0, 0, 0, 0, 0, 0x80 }));
+                        tempBigInteger =
+                            tempBigInteger
+                            + (new BigInteger(new byte[] { 0, 0, 0, 0, 0, 0, 0, 0x80 }));
                     }
                 }
 

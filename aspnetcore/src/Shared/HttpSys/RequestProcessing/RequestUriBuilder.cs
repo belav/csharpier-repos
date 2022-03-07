@@ -16,7 +16,8 @@ internal static class RequestUriBuilder
 {
     private static readonly Encoding UTF8 = new UTF8Encoding(
         encoderShouldEmitUTF8Identifier: false,
-        throwOnInvalidBytes: true);
+        throwOnInvalidBytes: true
+    );
 
     public static string DecodeAndUnescapePath(Span<byte> rawUrlBytes)
     {
@@ -122,7 +123,9 @@ internal static class RequestUriBuilder
             return true;
         }
 
-        int byte2 = 0, byte3 = 0, byte4 = 0;
+        int byte2 = 0,
+            byte3 = 0,
+            byte4 = 0;
 
         // anticipate more bytes
         var currentDecodeBits = 0;
@@ -311,9 +314,11 @@ internal static class RequestUriBuilder
         }
 
         var value = buffer[scan++];
-        var isHead = (((value >= '0') && (value <= '9')) ||
-                      ((value >= 'A') && (value <= 'F')) ||
-                      ((value >= 'a') && (value <= 'f')));
+        var isHead = (
+            ((value >= '0') && (value <= '9'))
+            || ((value >= 'A') && (value <= 'F'))
+            || ((value >= 'a') && (value <= 'f'))
+        );
 
         if (!isHead)
         {

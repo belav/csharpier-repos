@@ -30,7 +30,8 @@ public static class Program
     public static async Task Main(string[] args)
 #endif
     {
-        unsafe {
+        unsafe
+        {
             // Register a managed callback (will be called by UIButton, see main.m)
             delegate* unmanaged<void> unmanagedPtr = &OnButtonClick;
             ios_register_button_click(unmanagedPtr);
@@ -49,6 +50,6 @@ public static class Program
         return 42;
 #else
         await Task.Delay(-1);
-#endif 
+#endif
     }
 }

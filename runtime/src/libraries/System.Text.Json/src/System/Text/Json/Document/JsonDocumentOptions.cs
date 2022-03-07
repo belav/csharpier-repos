@@ -31,7 +31,10 @@ namespace System.Text.Json
             {
                 Debug.Assert(value >= 0);
                 if (value > JsonCommentHandling.Skip)
-                    throw new ArgumentOutOfRangeException(nameof(value), SR.JsonDocumentDoesNotSupportComments);
+                    throw new ArgumentOutOfRangeException(
+                        nameof(value),
+                        SR.JsonDocumentDoesNotSupportComments
+                    );
 
                 _commentHandling = value;
             }
@@ -52,7 +55,9 @@ namespace System.Text.Json
             set
             {
                 if (value < 0)
-                    throw ThrowHelper.GetArgumentOutOfRangeException_MaxDepthMustBePositive(nameof(value));
+                    throw ThrowHelper.GetArgumentOutOfRangeException_MaxDepthMustBePositive(
+                        nameof(value)
+                    );
 
                 _maxDepth = value;
             }

@@ -17,11 +17,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Features.EmbeddedLanguages
             // things that completion could insert.  In this case, the only regex character
             // that is relevant is the \ character, and it's only relevant if we insert into
             // a normal string and not a verbatim string.  There are no other regex characters
-            // that completion will produce that need any escaping. 
+            // that completion will produce that need any escaping.
             Debug.Assert(token.Kind() == SyntaxKind.StringLiteralToken);
-            return token.IsVerbatimStringLiteral()
-                ? text
-                : text.Replace(@"\", @"\\");
+            return token.IsVerbatimStringLiteral() ? text : text.Replace(@"\", @"\\");
         }
     }
 }

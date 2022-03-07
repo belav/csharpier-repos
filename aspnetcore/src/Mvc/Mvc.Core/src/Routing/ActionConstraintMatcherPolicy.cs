@@ -46,7 +46,11 @@ internal class ActionConstraintMatcherPolicy : MatcherPolicy, IEndpointSelectorP
         {
             var endpoint = endpoints[i];
             var action = endpoint.Metadata.GetMetadata<ActionDescriptor>();
-            if (action?.ActionConstraints is IList<IActionConstraintMetadata> { Count: > 0 } constraints && HasSignificantActionConstraint(constraints))
+            if (
+                action?.ActionConstraints
+                    is IList<IActionConstraintMetadata> { Count: > 0 } constraints
+                && HasSignificantActionConstraint(constraints)
+            )
             {
                 // We need to check for some specific action constraint implementations.
                 // We've implemented consumes, and HTTP method support inside endpoint routing, so
@@ -108,7 +112,8 @@ internal class ActionConstraintMatcherPolicy : MatcherPolicy, IEndpointSelectorP
     // values.
     private IReadOnlyList<(int index, ActionSelectorCandidate candidate)>? EvaluateActionConstraints(
         HttpContext httpContext,
-        CandidateSet candidateSet)
+        CandidateSet candidateSet
+    )
     {
         var items = new List<(int index, ActionSelectorCandidate candidate)>();
 
@@ -124,7 +129,12 @@ internal class ActionConstraintMatcherPolicy : MatcherPolicy, IEndpointSelectorP
                 if (score != null && score != candidate.Score)
                 {
                     // This is the end of a group.
-                    var matches = EvaluateActionConstraintsCore(httpContext, candidateSet, items, startingOrder: null);
+                    var matches = EvaluateActionConstraintsCore(
+                        httpContext,
+                        candidateSet,
+                        items,
+                        startingOrder: null
+                    );
                     if (matches?.Count > 0)
                     {
                         return matches;
@@ -146,11 +156,16 @@ internal class ActionConstraintMatcherPolicy : MatcherPolicy, IEndpointSelectorP
                 IReadOnlyList<IActionConstraint>? constraints = Array.Empty<IActionConstraint>();
                 if (actionDescriptor != null)
                 {
-                    constraints = _actionConstraintCache.GetActionConstraints(httpContext, actionDescriptor);
+                    constraints = _actionConstraintCache.GetActionConstraints(
+                        httpContext,
+                        actionDescriptor
+                    );
                 }
 
                 // Capture the index. We need this later to look up the endpoint/route values.
-                items.Add((i, new ActionSelectorCandidate(actionDescriptor ?? NonAction, constraints)));
+                items.Add(
+                    (i, new ActionSelectorCandidate(actionDescriptor ?? NonAction, constraints))
+                );
             }
         }
 
@@ -162,7 +177,8 @@ internal class ActionConstraintMatcherPolicy : MatcherPolicy, IEndpointSelectorP
         HttpContext httpContext,
         CandidateSet candidateSet,
         IReadOnlyList<(int index, ActionSelectorCandidate candidate)> items,
-        int? startingOrder)
+        int? startingOrder
+    )
     {
         // Find the next group of constraints to process. This will be the lowest value of
         // order that is higher than startingOrder.
@@ -178,8 +194,10 @@ internal class ActionConstraintMatcherPolicy : MatcherPolicy, IEndpointSelectorP
                 for (var j = 0; j < constraints.Count; j++)
                 {
                     var constraint = constraints[j];
-                    if ((startingOrder == null || constraint.Order > startingOrder) &&
-                        (order == null || constraint.Order < order))
+                    if (
+                        (startingOrder == null || constraint.Order > startingOrder)
+                        && (order == null || constraint.Order < order)
+                    )
                     {
                         order = constraint.Order;
                     }
@@ -225,12 +243,18 @@ internal class ActionConstraintMatcherPolicy : MatcherPolicy, IEndpointSelectorP
 
                         var routeData = new RouteData(candidate.Values!);
 
-                        var dataTokens = candidate.Endpoint.Metadata.GetMetadata<IDataTokensMetadata>()?.DataTokens;
+                        var dataTokens = candidate.Endpoint.Metadata
+                            .GetMetadata<IDataTokensMetadata>()
+                            ?.DataTokens;
 
                         if (dataTokens != null)
                         {
                             // Set the data tokens if there are any for this candidate
-                            routeData.PushState(router: null, values: null, dataTokens: new RouteValueDictionary(dataTokens));
+                            routeData.PushState(
+                                router: null,
+                                values: null,
+                                dataTokens: new RouteValueDictionary(dataTokens)
+                            );
                         }
 
                         // Before we run the constraint, we need to initialize the route values.
@@ -261,7 +285,12 @@ internal class ActionConstraintMatcherPolicy : MatcherPolicy, IEndpointSelectorP
         // If we have matches with constraints, those are better so try to keep processing those
         if (endpointsWithConstraint.Count > 0)
         {
-            var matches = EvaluateActionConstraintsCore(httpContext, candidateSet, endpointsWithConstraint, order);
+            var matches = EvaluateActionConstraintsCore(
+                httpContext,
+                candidateSet,
+                endpointsWithConstraint,
+                order
+            );
             if (matches?.Count > 0)
             {
                 return matches;
@@ -275,7 +304,12 @@ internal class ActionConstraintMatcherPolicy : MatcherPolicy, IEndpointSelectorP
         }
         else
         {
-            return EvaluateActionConstraintsCore(httpContext, candidateSet, endpointsWithoutConstraint, order);
+            return EvaluateActionConstraintsCore(
+                httpContext,
+                candidateSet,
+                endpointsWithoutConstraint,
+                order
+            );
         }
     }
 }

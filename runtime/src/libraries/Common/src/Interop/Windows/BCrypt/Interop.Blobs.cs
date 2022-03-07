@@ -48,7 +48,6 @@ internal static partial class Interop
         {
             Debug.Assert(blob != null);
             Debug.Assert(offset >= 0);
-
             unchecked
             {
                 blob[offset++] = ((byte)(value >> 24));
@@ -216,13 +215,13 @@ internal static partial class Interop
         internal struct BCRYPT_ECCFULLKEY_BLOB
         {
             internal KeyBlobMagicNumber Magic;
-            internal int Version;              //Version of the structure
-            internal ECC_CURVE_TYPE_ENUM CurveType;            //Supported curve types.
+            internal int Version; //Version of the structure
+            internal ECC_CURVE_TYPE_ENUM CurveType; //Supported curve types.
             internal ECC_CURVE_ALG_ID_ENUM CurveGenerationAlgId; //For X.592 verification purposes, if we include Seed we will need to include the algorithm ID.
-            internal int cbFieldLength;          //Byte length of the fields P, A, B, X, Y.
-            internal int cbSubgroupOrder;        //Byte length of the subgroup.
-            internal int cbCofactor;             //Byte length of cofactor of G in E.
-            internal int cbSeed;                 //Byte length of the seed used to generate the curve.
+            internal int cbFieldLength; //Byte length of the fields P, A, B, X, Y.
+            internal int cbSubgroupOrder; //Byte length of the subgroup.
+            internal int cbCofactor; //Byte length of cofactor of G in E.
+            internal int cbSeed; //Byte length of the seed used to generate the curve.
             // The rest of the buffer contains the domain parameters
         }
 
@@ -257,9 +256,9 @@ internal static partial class Interop
         [StructLayout(LayoutKind.Sequential)]
         internal struct BCryptBuffer
         {
-            internal int cbBuffer;             // Length of buffer, in bytes
+            internal int cbBuffer; // Length of buffer, in bytes
             internal CngBufferDescriptors BufferType; // Buffer type
-            internal IntPtr pvBuffer;          // Pointer to buffer
+            internal IntPtr pvBuffer; // Pointer to buffer
         }
 
         /// <summary>
@@ -273,9 +272,9 @@ internal static partial class Interop
         [StructLayout(LayoutKind.Sequential)]
         internal struct BCryptBufferDesc
         {
-            internal int ulVersion;            // Version number
-            internal int cBuffers;             // Number of buffers
-            internal IntPtr pBuffers;          // Pointer to array of BCryptBuffers
+            internal int ulVersion; // Version number
+            internal int cBuffers; // Number of buffers
+            internal IntPtr pBuffers; // Pointer to array of BCryptBuffers
         }
 
         /// <summary>
@@ -289,13 +288,13 @@ internal static partial class Interop
         [StructLayout(LayoutKind.Sequential)]
         internal struct BCRYPT_ECC_PARAMETER_HEADER
         {
-            internal int Version;              //Version of the structure
-            internal ECC_CURVE_TYPE_ENUM CurveType;            //Supported curve types.
+            internal int Version; //Version of the structure
+            internal ECC_CURVE_TYPE_ENUM CurveType; //Supported curve types.
             internal ECC_CURVE_ALG_ID_ENUM CurveGenerationAlgId; //For X.592 verification purposes, if we include Seed we will need to include the algorithm ID.
-            internal int cbFieldLength;          //Byte length of the fields P, A, B, X, Y.
-            internal int cbSubgroupOrder;        //Byte length of the subgroup.
-            internal int cbCofactor;             //Byte length of cofactor of G in E.
-            internal int cbSeed;                 //Byte length of the seed used to generate the curve.
+            internal int cbFieldLength; //Byte length of the fields P, A, B, X, Y.
+            internal int cbSubgroupOrder; //Byte length of the subgroup.
+            internal int cbCofactor; //Byte length of cofactor of G in E.
+            internal int cbSeed; //Byte length of the seed used to generate the curve.
             // The rest of the buffer contains the domain parameters
         }
 

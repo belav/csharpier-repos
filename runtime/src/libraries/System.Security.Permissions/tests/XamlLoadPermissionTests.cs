@@ -17,7 +17,9 @@ namespace System.Xaml.Permissions.Tests
         [Fact]
         public static void XamlLoadPermissionCallMethods()
         {
-            XamlAccessLevel accessLevel = XamlAccessLevel.AssemblyAccessTo(Assembly.GetExecutingAssembly().GetName());
+            XamlAccessLevel accessLevel = XamlAccessLevel.AssemblyAccessTo(
+                Assembly.GetExecutingAssembly().GetName()
+            );
             XamlLoadPermission xp = new XamlLoadPermission(accessLevel);
             XamlLoadPermission xp2 = new XamlLoadPermission(PermissionState.Unrestricted);
             XamlLoadPermission xp3 = new XamlLoadPermission(Array.Empty<XamlAccessLevel>());

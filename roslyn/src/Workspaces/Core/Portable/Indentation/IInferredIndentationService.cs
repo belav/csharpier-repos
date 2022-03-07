@@ -15,6 +15,10 @@ namespace Microsoft.CodeAnalysis.Indentation
     /// </summary>
     internal interface IInferredIndentationService : IWorkspaceService
     {
-        Task<DocumentOptionSet> GetDocumentOptionsWithInferredIndentationAsync(Document document, bool explicitFormat, CancellationToken cancellationToken);
+        Task<DocumentOptionSet> GetDocumentOptionsWithInferredIndentationAsync(
+            Document document,
+            bool explicitFormat,
+            CancellationToken cancellationToken
+        );
     }
 }

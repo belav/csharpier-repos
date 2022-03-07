@@ -25,10 +25,16 @@ namespace System
                     // Query the leap second cache first, which avoids expensive calls to GetFileTimeAsSystemTime.
 
                     LeapSecondCache cacheValue = s_leapSecondCache;
-                    ulong ticksSinceStartOfCacheValidityWindow = fileTime - cacheValue.OSFileTimeTicksAtStartOfValidityWindow;
-                    if (ticksSinceStartOfCacheValidityWindow < LeapSecondCache.ValidityPeriodInTicks)
+                    ulong ticksSinceStartOfCacheValidityWindow =
+                        fileTime - cacheValue.OSFileTimeTicksAtStartOfValidityWindow;
+                    if (
+                        ticksSinceStartOfCacheValidityWindow < LeapSecondCache.ValidityPeriodInTicks
+                    )
                     {
-                        return new DateTime(dateData: cacheValue.DotnetDateDataAtStartOfValidityWindow + ticksSinceStartOfCacheValidityWindow);
+                        return new DateTime(
+                            dateData: cacheValue.DotnetDateDataAtStartOfValidityWindow
+                                + ticksSinceStartOfCacheValidityWindow
+                        );
                     }
 
                     return UpdateLeapSecondCacheAndReturnUtcNow(); // couldn't use the cache, go down the slow path
@@ -41,7 +47,14 @@ namespace System
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        internal static unsafe bool IsValidTimeWithLeapSeconds(int year, int month, int day, int hour, int minute, DateTimeKind kind)
+        internal static unsafe bool IsValidTimeWithLeapSeconds(
+            int year,
+            int month,
+            int day,
+            int hour,
+            int minute,
+            DateTimeKind kind
+        )
         {
             Interop.Kernel32.SYSTEMTIME time;
             time.Year = (ushort)year;
@@ -56,7 +69,10 @@ namespace System
             if (kind != DateTimeKind.Utc)
             {
                 Interop.Kernel32.SYSTEMTIME st;
-                if (Interop.Kernel32.TzSpecificLocalTimeToSystemTime(IntPtr.Zero, &time, &st) != Interop.BOOL.FALSE)
+                if (
+                    Interop.Kernel32.TzSpecificLocalTimeToSystemTime(IntPtr.Zero, &time, &st)
+                    != Interop.BOOL.FALSE
+                )
                     return true;
             }
 
@@ -75,7 +91,10 @@ namespace System
             Interop.Kernel32.SYSTEMTIME time;
             if (Interop.Kernel32.FileTimeToSystemTime(&fileTime, &time) == Interop.BOOL.FALSE)
             {
-                throw new ArgumentOutOfRangeException(nameof(fileTime), SR.ArgumentOutOfRange_DateTimeBadTicks);
+                throw new ArgumentOutOfRangeException(
+                    nameof(fileTime),
+                    SR.ArgumentOutOfRange_DateTimeBadTicks
+                );
             }
             return CreateDateTimeFromSystemTime(in time, fileTime % TicksPerMillisecond);
         }
@@ -106,7 +125,10 @@ namespace System
             return fileTime + (uint)tick;
         }
 
-        private static DateTime CreateDateTimeFromSystemTime(in Interop.Kernel32.SYSTEMTIME time, ulong hundredNanoSecond)
+        private static DateTime CreateDateTimeFromSystemTime(
+            in Interop.Kernel32.SYSTEMTIME time,
+            ulong hundredNanoSecond
+        )
         {
             uint year = time.Year;
             uint[] days = IsLeapYear((int)year) ? s_daysToMonth366 : s_daysToMonth365;
@@ -119,7 +141,10 @@ namespace System
             uint second = time.Second;
             if (second <= 59)
             {
-                ulong tmp = second * (uint)TicksPerSecond + time.Milliseconds * (uint)TicksPerMillisecond + hundredNanoSecond;
+                ulong tmp =
+                    second * (uint)TicksPerSecond
+                    + time.Milliseconds * (uint)TicksPerMillisecond
+                    + hundredNanoSecond;
                 return new DateTime(ticks + tmp | KindUtc);
             }
 
@@ -129,16 +154,33 @@ namespace System
             return new DateTime(ticks);
         }
 
-        private static unsafe readonly delegate* unmanaged[SuppressGCTransition]<ulong*, void> s_pfnGetSystemTimeAsFileTime = GetGetSystemTimeAsFileTimeFnPtr();
+        private static unsafe readonly delegate* unmanaged[SuppressGCTransition]<
+            ulong*,
+            void> s_pfnGetSystemTimeAsFileTime = GetGetSystemTimeAsFileTimeFnPtr();
 
-        private static unsafe delegate* unmanaged[SuppressGCTransition]<ulong*, void> GetGetSystemTimeAsFileTimeFnPtr()
+        private static unsafe delegate* unmanaged[SuppressGCTransition]<
+            ulong*,
+            void> GetGetSystemTimeAsFileTimeFnPtr()
         {
-            IntPtr kernel32Lib = Interop.Kernel32.LoadLibraryEx(Interop.Libraries.Kernel32, IntPtr.Zero, Interop.Kernel32.LOAD_LIBRARY_SEARCH_SYSTEM32);
+            IntPtr kernel32Lib = Interop.Kernel32.LoadLibraryEx(
+                Interop.Libraries.Kernel32,
+                IntPtr.Zero,
+                Interop.Kernel32.LOAD_LIBRARY_SEARCH_SYSTEM32
+            );
             Debug.Assert(kernel32Lib != IntPtr.Zero);
 
-            IntPtr pfnGetSystemTime = NativeLibrary.GetExport(kernel32Lib, "GetSystemTimeAsFileTime");
+            IntPtr pfnGetSystemTime = NativeLibrary.GetExport(
+                kernel32Lib,
+                "GetSystemTimeAsFileTime"
+            );
 
-            if (NativeLibrary.TryGetExport(kernel32Lib, "GetSystemTimePreciseAsFileTime", out IntPtr pfnGetSystemTimePrecise))
+            if (
+                NativeLibrary.TryGetExport(
+                    kernel32Lib,
+                    "GetSystemTimePreciseAsFileTime",
+                    out IntPtr pfnGetSystemTimePrecise
+                )
+            )
             {
                 // GetSystemTimePreciseAsFileTime exists and we'd like to use it.  However, on
                 // misconfigured systems, it's possible for the "precise" time to be inaccurate:
@@ -153,11 +195,21 @@ namespace System
                 // at wrong time.
                 for (int i = 0; i < 10; i++)
                 {
-                    long systemTimeResult, preciseSystemTimeResult;
-                    ((delegate* unmanaged[SuppressGCTransition]<long*, void>)pfnGetSystemTime)(&systemTimeResult);
-                    ((delegate* unmanaged[SuppressGCTransition]<long*, void>)pfnGetSystemTimePrecise)(&preciseSystemTimeResult);
+                    long systemTimeResult,
+                        preciseSystemTimeResult;
+                    ((delegate* unmanaged[SuppressGCTransition]<long*, void>)pfnGetSystemTime)(
+                        &systemTimeResult
+                    );
+                    (
+                        (delegate* unmanaged[SuppressGCTransition]<
+                            long*,
+                            void>)pfnGetSystemTimePrecise
+                    )(&preciseSystemTimeResult);
 
-                    if (Math.Abs(preciseSystemTimeResult - systemTimeResult) <= 100 * TicksPerMillisecond)
+                    if (
+                        Math.Abs(preciseSystemTimeResult - systemTimeResult)
+                        <= 100 * TicksPerMillisecond
+                    )
                     {
                         pfnGetSystemTime = pfnGetSystemTimePrecise; // use the precise version
                         break;
@@ -185,7 +237,10 @@ namespace System
             // cache will return incorrect values.
 
             Debug.Assert(s_systemSupportsLeapSeconds);
-            Debug.Assert(LeapSecondCache.ValidityPeriodInTicks < TicksPerDay - TicksPerSecond, "Leap second cache validity window should be less than 23:59:59.");
+            Debug.Assert(
+                LeapSecondCache.ValidityPeriodInTicks < TicksPerDay - TicksPerSecond,
+                "Leap second cache validity window should be less than 23:59:59."
+            );
 
             ulong fileTimeNow;
             s_pfnGetSystemTimeAsFileTime(&fileTimeNow);
@@ -198,7 +253,10 @@ namespace System
 
             // We need the FILETIME and the SYSTEMTIME to reflect each other's values.
             // If FileTimeToSystemTime fails, call GetSystemTime and try again until it succeeds.
-            if (Interop.Kernel32.FileTimeToSystemTime(&fileTimeNow, &systemTimeNow) == Interop.BOOL.FALSE)
+            if (
+                Interop.Kernel32.FileTimeToSystemTime(&fileTimeNow, &systemTimeNow)
+                == Interop.BOOL.FALSE
+            )
             {
                 return LowGranularityNonCachedFallback();
             }
@@ -215,9 +273,15 @@ namespace System
             // Our cache will be valid for some amount of time (the "validity window").
             // Check if a leap second will occur within this window.
 
-            ulong fileTimeAtEndOfValidityPeriod = fileTimeNow + LeapSecondCache.ValidityPeriodInTicks;
+            ulong fileTimeAtEndOfValidityPeriod =
+                fileTimeNow + LeapSecondCache.ValidityPeriodInTicks;
             Interop.Kernel32.SYSTEMTIME systemTimeAtEndOfValidityPeriod;
-            if (Interop.Kernel32.FileTimeToSystemTime(&fileTimeAtEndOfValidityPeriod, &systemTimeAtEndOfValidityPeriod) == Interop.BOOL.FALSE)
+            if (
+                Interop.Kernel32.FileTimeToSystemTime(
+                    &fileTimeAtEndOfValidityPeriod,
+                    &systemTimeAtEndOfValidityPeriod
+                ) == Interop.BOOL.FALSE
+            )
             {
                 return LowGranularityNonCachedFallback();
             }
@@ -235,7 +299,8 @@ namespace System
                 // We can cache the validity window starting at UtcNow.
 
                 fileTimeAtStartOfValidityWindow = fileTimeNow;
-                dotnetDateDataAtStartOfValidityWindow = CreateDateTimeFromSystemTime(systemTimeNow, hundredNanoSecondNow)._dateData;
+                dotnetDateDataAtStartOfValidityWindow =
+                    CreateDateTimeFromSystemTime(systemTimeNow, hundredNanoSecondNow)._dateData;
             }
             else
             {
@@ -252,14 +317,25 @@ namespace System
                 systemTimeAtBeginningOfDay.Milliseconds = 0;
 
                 ulong fileTimeAtBeginningOfDay;
-                if (Interop.Kernel32.SystemTimeToFileTime(&systemTimeAtBeginningOfDay, &fileTimeAtBeginningOfDay) == Interop.BOOL.FALSE)
+                if (
+                    Interop.Kernel32.SystemTimeToFileTime(
+                        &systemTimeAtBeginningOfDay,
+                        &fileTimeAtBeginningOfDay
+                    ) == Interop.BOOL.FALSE
+                )
                 {
                     return LowGranularityNonCachedFallback();
                 }
 
                 // StartOfValidityWindow = MidnightUtc + 23:59:59 - ValidityPeriod
-                fileTimeAtStartOfValidityWindow = fileTimeAtBeginningOfDay + (TicksPerDay - TicksPerSecond) - LeapSecondCache.ValidityPeriodInTicks;
-                if (fileTimeNow - fileTimeAtStartOfValidityWindow >= LeapSecondCache.ValidityPeriodInTicks)
+                fileTimeAtStartOfValidityWindow =
+                    fileTimeAtBeginningOfDay
+                    + (TicksPerDay - TicksPerSecond)
+                    - LeapSecondCache.ValidityPeriodInTicks;
+                if (
+                    fileTimeNow - fileTimeAtStartOfValidityWindow
+                    >= LeapSecondCache.ValidityPeriodInTicks
+                )
                 {
                     // If we're inside this block, then we slid the validity window back so far that the current time is no
                     // longer within the window. This can only occur if the current time is 23:59:59.xxx and the next second is a
@@ -282,23 +358,41 @@ namespace System
                     // In this scenario, we'll skip the caching logic entirely, relying solely on the OS-provided SYSTEMTIME
                     // struct to tell us how to interpret the time information.
 
-                    Debug.Assert(systemTimeNow.Hour == 23 && systemTimeNow.Minute == 59 && systemTimeNow.Second == 59);
+                    Debug.Assert(
+                        systemTimeNow.Hour == 23
+                            && systemTimeNow.Minute == 59
+                            && systemTimeNow.Second == 59
+                    );
                     return CreateDateTimeFromSystemTime(systemTimeNow, hundredNanoSecondNow);
                 }
 
-                dotnetDateDataAtStartOfValidityWindow = CreateDateTimeFromSystemTime(systemTimeAtBeginningOfDay, 0)._dateData + (TicksPerDay - TicksPerSecond) - LeapSecondCache.ValidityPeriodInTicks;
+                dotnetDateDataAtStartOfValidityWindow =
+                    CreateDateTimeFromSystemTime(systemTimeAtBeginningOfDay, 0)._dateData
+                    + (TicksPerDay - TicksPerSecond)
+                    - LeapSecondCache.ValidityPeriodInTicks;
             }
 
             // Finally, update the cache and return UtcNow.
 
-            Debug.Assert(fileTimeNow - fileTimeAtStartOfValidityWindow < LeapSecondCache.ValidityPeriodInTicks, "We should be within the validity window.");
-            Volatile.Write(ref s_leapSecondCache, new LeapSecondCache()
-            {
-                OSFileTimeTicksAtStartOfValidityWindow = fileTimeAtStartOfValidityWindow,
-                DotnetDateDataAtStartOfValidityWindow = dotnetDateDataAtStartOfValidityWindow
-            });
+            Debug.Assert(
+                fileTimeNow - fileTimeAtStartOfValidityWindow
+                    < LeapSecondCache.ValidityPeriodInTicks,
+                "We should be within the validity window."
+            );
+            Volatile.Write(
+                ref s_leapSecondCache,
+                new LeapSecondCache()
+                {
+                    OSFileTimeTicksAtStartOfValidityWindow = fileTimeAtStartOfValidityWindow,
+                    DotnetDateDataAtStartOfValidityWindow = dotnetDateDataAtStartOfValidityWindow
+                }
+            );
 
-            return new DateTime(dateData: dotnetDateDataAtStartOfValidityWindow + fileTimeNow - fileTimeAtStartOfValidityWindow);
+            return new DateTime(
+                dateData: dotnetDateDataAtStartOfValidityWindow
+                    + fileTimeNow
+                    - fileTimeAtStartOfValidityWindow
+            );
 
             [MethodImpl(MethodImplOptions.NoInlining)]
             static DateTime LowGranularityNonCachedFallback()

@@ -25,6 +25,7 @@ namespace Microsoft.Extensions.Logging
             }
             return new Logger<T>(factory);
         }
+
         /// <summary>
         /// Creates a new <see cref="ILogger"/> instance using the full name of the given <paramref name="type"/>.
         /// </summary>
@@ -43,7 +44,13 @@ namespace Microsoft.Extensions.Logging
                 throw new ArgumentNullException(nameof(type));
             }
 
-            return factory.CreateLogger(TypeNameHelper.GetTypeDisplayName(type, includeGenericParameters: false, nestedTypeDelimiter: '.'));
+            return factory.CreateLogger(
+                TypeNameHelper.GetTypeDisplayName(
+                    type,
+                    includeGenericParameters: false,
+                    nestedTypeDelimiter: '.'
+                )
+            );
         }
     }
 }

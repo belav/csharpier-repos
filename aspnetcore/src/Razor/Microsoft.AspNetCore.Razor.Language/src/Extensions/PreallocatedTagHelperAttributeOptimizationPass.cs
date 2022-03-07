@@ -8,12 +8,17 @@ using Microsoft.AspNetCore.Razor.Language.Intermediate;
 
 namespace Microsoft.AspNetCore.Razor.Language.Extensions;
 
-internal class PreallocatedTagHelperAttributeOptimizationPass : IntermediateNodePassBase, IRazorOptimizationPass
+internal class PreallocatedTagHelperAttributeOptimizationPass
+    : IntermediateNodePassBase,
+      IRazorOptimizationPass
 {
     // We want to run after the passes that 'lower' tag helpers. We also want this to run after DefaultTagHelperOptimizationPass.
     public override int Order => DefaultFeatureOrder + 1010;
 
-    protected override void ExecuteCore(RazorCodeDocument codeDocument, DocumentIntermediateNode documentNode)
+    protected override void ExecuteCore(
+        RazorCodeDocument codeDocument,
+        DocumentIntermediateNode documentNode
+    )
     {
         // There's no value in executing this pass at design time, it just prevents some allocations.
         if (documentNode.Options.DesignTime)
@@ -25,10 +30,10 @@ internal class PreallocatedTagHelperAttributeOptimizationPass : IntermediateNode
         walker.VisitDocument(documentNode);
     }
 
-    internal class PreallocatedTagHelperWalker :
-        IntermediateNodeWalker,
-        IExtensionIntermediateNodeVisitor<DefaultTagHelperHtmlAttributeIntermediateNode>,
-        IExtensionIntermediateNodeVisitor<DefaultTagHelperPropertyIntermediateNode>
+    internal class PreallocatedTagHelperWalker
+        : IntermediateNodeWalker,
+          IExtensionIntermediateNodeVisitor<DefaultTagHelperHtmlAttributeIntermediateNode>,
+          IExtensionIntermediateNodeVisitor<DefaultTagHelperPropertyIntermediateNode>
     {
         private const string PreAllocatedAttributeVariablePrefix = "__tagHelperAttribute_";
 
@@ -60,11 +65,24 @@ internal class PreallocatedTagHelperAttributeOptimizationPass : IntermediateNode
             {
                 var current = _classDeclaration.Children[i];
 
-                if (current is PreallocatedTagHelperHtmlAttributeValueIntermediateNode existingDeclaration)
+                if (
+                    current
+                    is PreallocatedTagHelperHtmlAttributeValueIntermediateNode existingDeclaration
+                )
                 {
-                    if (string.Equals(existingDeclaration.AttributeName, node.AttributeName, StringComparison.Ordinal) &&
-                        string.Equals(existingDeclaration.Value, plainTextValue, StringComparison.Ordinal) &&
-                        existingDeclaration.AttributeStructure == node.AttributeStructure)
+                    if (
+                        string.Equals(
+                            existingDeclaration.AttributeName,
+                            node.AttributeName,
+                            StringComparison.Ordinal
+                        )
+                        && string.Equals(
+                            existingDeclaration.Value,
+                            plainTextValue,
+                            StringComparison.Ordinal
+                        )
+                        && existingDeclaration.AttributeStructure == node.AttributeStructure
+                    )
                     {
                         declaration = existingDeclaration;
                         break;
@@ -75,7 +93,8 @@ internal class PreallocatedTagHelperAttributeOptimizationPass : IntermediateNode
             if (declaration == null)
             {
                 var variableCount = _classDeclaration.Children.Count - _variableCountOffset;
-                var preAllocatedAttributeVariableName = PreAllocatedAttributeVariablePrefix + variableCount;
+                var preAllocatedAttributeVariableName =
+                    PreAllocatedAttributeVariablePrefix + variableCount;
                 declaration = new PreallocatedTagHelperHtmlAttributeValueIntermediateNode
                 {
                     VariableName = preAllocatedAttributeVariableName,
@@ -97,9 +116,14 @@ internal class PreallocatedTagHelperAttributeOptimizationPass : IntermediateNode
 
         public void VisitExtension(DefaultTagHelperPropertyIntermediateNode node)
         {
-            if (!(node.BoundAttribute.IsStringProperty || (node.IsIndexerNameMatch && node.BoundAttribute.IsIndexerStringProperty)) ||
-                node.Children.Count != 1 ||
-                !(node.Children.First() is HtmlContentIntermediateNode))
+            if (
+                !(
+                    node.BoundAttribute.IsStringProperty
+                    || (node.IsIndexerNameMatch && node.BoundAttribute.IsIndexerStringProperty)
+                )
+                || node.Children.Count != 1
+                || !(node.Children.First() is HtmlContentIntermediateNode)
+            )
             {
                 return;
             }
@@ -113,11 +137,24 @@ internal class PreallocatedTagHelperAttributeOptimizationPass : IntermediateNode
             {
                 var current = _classDeclaration.Children[i];
 
-                if (current is PreallocatedTagHelperPropertyValueIntermediateNode existingDeclaration)
+                if (
+                    current
+                    is PreallocatedTagHelperPropertyValueIntermediateNode existingDeclaration
+                )
                 {
-                    if (string.Equals(existingDeclaration.AttributeName, node.AttributeName, StringComparison.Ordinal) &&
-                        string.Equals(existingDeclaration.Value, plainTextValue, StringComparison.Ordinal) &&
-                        existingDeclaration.AttributeStructure == node.AttributeStructure)
+                    if (
+                        string.Equals(
+                            existingDeclaration.AttributeName,
+                            node.AttributeName,
+                            StringComparison.Ordinal
+                        )
+                        && string.Equals(
+                            existingDeclaration.Value,
+                            plainTextValue,
+                            StringComparison.Ordinal
+                        )
+                        && existingDeclaration.AttributeStructure == node.AttributeStructure
+                    )
                     {
                         declaration = existingDeclaration;
                         break;
@@ -128,7 +165,8 @@ internal class PreallocatedTagHelperAttributeOptimizationPass : IntermediateNode
             if (declaration == null)
             {
                 var variableCount = _classDeclaration.Children.Count - _variableCountOffset;
-                var preAllocatedAttributeVariableName = PreAllocatedAttributeVariablePrefix + variableCount;
+                var preAllocatedAttributeVariableName =
+                    PreAllocatedAttributeVariablePrefix + variableCount;
                 declaration = new PreallocatedTagHelperPropertyValueIntermediateNode()
                 {
                     VariableName = preAllocatedAttributeVariableName,

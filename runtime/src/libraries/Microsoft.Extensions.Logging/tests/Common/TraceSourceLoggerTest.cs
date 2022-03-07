@@ -15,7 +15,10 @@ namespace Microsoft.Extensions.Logging.Test
         public static void IsEnabledReturnsCorrectValue()
         {
             // Arrange
-            var testSwitch = new SourceSwitch("TestSwitch", "Level will be set to warning for this test");
+            var testSwitch = new SourceSwitch(
+                "TestSwitch",
+                "Level will be set to warning for this test"
+            );
             testSwitch.Level = SourceLevels.Warning;
 
             var factory = TestLoggerBuilder.Create(builder => builder.AddTraceSource(testSwitch));
@@ -38,7 +41,11 @@ namespace Microsoft.Extensions.Logging.Test
         [InlineData(SourceLevels.Information, SourceLevels.Information, true)]
         [InlineData(SourceLevels.Information, SourceLevels.Warning, true)]
         [InlineData(SourceLevels.Warning, SourceLevels.Warning, false)]
-        public static void MultipleLoggers_IsEnabledReturnsCorrectValue(SourceLevels first, SourceLevels second, bool expected)
+        public static void MultipleLoggers_IsEnabledReturnsCorrectValue(
+            SourceLevels first,
+            SourceLevels second,
+            bool expected
+        )
         {
             // Arrange
             var firstSwitch = new SourceSwitch("FirstSwitch", "First Test Switch");
@@ -48,9 +55,9 @@ namespace Microsoft.Extensions.Logging.Test
             secondSwitch.Level = second;
 
             // Act
-            var factory = TestLoggerBuilder.Create(builder => builder
-                .AddTraceSource(firstSwitch)
-                .AddTraceSource(secondSwitch));
+            var factory = TestLoggerBuilder.Create(
+                builder => builder.AddTraceSource(firstSwitch).AddTraceSource(secondSwitch)
+            );
 
             var logger = factory.CreateLogger("Test");
 
@@ -58,23 +65,32 @@ namespace Microsoft.Extensions.Logging.Test
             Assert.Equal(expected, logger.IsEnabled(LogLevel.Information));
         }
 
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsReflectionEmitSupported))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsReflectionEmitSupported)
+        )]
         [InlineData(true)]
         [InlineData(false)]
-        public static void Log_Shoud_Add_Exception_To_Message_Whether_Formatter_Is_Null_Or_Not(bool shouldFormatterBeNull)
+        public static void Log_Shoud_Add_Exception_To_Message_Whether_Formatter_Is_Null_Or_Not(
+            bool shouldFormatterBeNull
+        )
         {
             // Arrange
             Mock<TraceListener> traceListener = new Mock<TraceListener>();
-            SourceSwitch sourceSwitch = new SourceSwitch("TestSwitch") {Level = SourceLevels.All};
+            SourceSwitch sourceSwitch = new SourceSwitch("TestSwitch") { Level = SourceLevels.All };
 
-            ILoggerFactory factory = TestLoggerBuilder.Create(builder => builder.AddTraceSource(sourceSwitch, traceListener.Object));
+            ILoggerFactory factory = TestLoggerBuilder.Create(
+                builder => builder.AddTraceSource(sourceSwitch, traceListener.Object)
+            );
             ILogger logger = factory.CreateLogger("Test");
 
             const LogLevel logLevel = LogLevel.Information;
             EventId eventId = new EventId(1);
             const string message = "some log message";
             Exception exception = new Exception("Some error occurred");
-            Func<string, Exception, string> formatter = shouldFormatterBeNull ? (Func<string, Exception, string>)null : (value, passedException) => value;
+            Func<string, Exception, string> formatter = shouldFormatterBeNull
+                ? (Func<string, Exception, string>)null
+                : (value, passedException) => value;
 
             string expectedMessage = $"{message} {exception}";
 
@@ -82,8 +98,17 @@ namespace Microsoft.Extensions.Logging.Test
             logger.Log(logLevel, eventId, message, exception, formatter);
 
             // Assert
-            traceListener.Verify(listener => listener.TraceEvent(It.IsAny<TraceEventCache>(), It.IsAny<string>(), It.IsAny<TraceEventType>(), It.IsAny<int>(), expectedMessage), Times.Once);
+            traceListener.Verify(
+                listener =>
+                    listener.TraceEvent(
+                        It.IsAny<TraceEventCache>(),
+                        It.IsAny<string>(),
+                        It.IsAny<TraceEventType>(),
+                        It.IsAny<int>(),
+                        expectedMessage
+                    ),
+                Times.Once
+            );
         }
     }
 }
-

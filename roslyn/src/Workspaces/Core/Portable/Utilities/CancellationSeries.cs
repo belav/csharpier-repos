@@ -51,7 +51,8 @@ namespace Roslyn.Utilities
         {
             Contract.ThrowIfFalse(
                 Environment.HasShutdownStarted || _cts == null,
-                $"Instance of CancellationSeries not disposed before being finalized{Environment.NewLine}Stack at construction:{Environment.NewLine}{_ctorStack}");
+                $"Instance of CancellationSeries not disposed before being finalized{Environment.NewLine}Stack at construction:{Environment.NewLine}{_ctorStack}"
+            );
         }
 #endif
 

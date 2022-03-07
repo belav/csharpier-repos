@@ -11,22 +11,38 @@ using Microsoft.CodeAnalysis.IntroduceVariable;
 
 namespace Microsoft.CodeAnalysis.CSharp.IntroduceVariable
 {
-    [ExportCodeRefactoringProvider(LanguageNames.CSharp, Name = PredefinedCodeRefactoringProviderNames.IntroduceParameter), Shared]
-    internal partial class CSharpIntroduceParameterCodeRefactoringProvider : AbstractIntroduceParameterService<
-        ExpressionSyntax,
-        InvocationExpressionSyntax,
-        ObjectCreationExpressionSyntax,
-        IdentifierNameSyntax>
+    [
+        ExportCodeRefactoringProvider(
+            LanguageNames.CSharp,
+            Name = PredefinedCodeRefactoringProviderNames.IntroduceParameter
+        ),
+        Shared
+    ]
+    internal partial class CSharpIntroduceParameterCodeRefactoringProvider
+        : AbstractIntroduceParameterService<
+              ExpressionSyntax,
+              InvocationExpressionSyntax,
+              ObjectCreationExpressionSyntax,
+              IdentifierNameSyntax
+          >
     {
         [ImportingConstructor]
-        [SuppressMessage("RoslynDiagnosticsReliability", "RS0033:Importing constructor should be [Obsolete]", Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814")]
-        public CSharpIntroduceParameterCodeRefactoringProvider()
-        {
-        }
+        [SuppressMessage(
+            "RoslynDiagnosticsReliability",
+            "RS0033:Importing constructor should be [Obsolete]",
+            Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
+        )]
+        public CSharpIntroduceParameterCodeRefactoringProvider() { }
 
-        protected override SyntaxNode GenerateExpressionFromOptionalParameter(IParameterSymbol parameterSymbol)
+        protected override SyntaxNode GenerateExpressionFromOptionalParameter(
+            IParameterSymbol parameterSymbol
+        )
         {
-            return ExpressionGenerator.GenerateExpression(parameterSymbol.Type, parameterSymbol.ExplicitDefaultValue, canUseFieldReference: true);
+            return ExpressionGenerator.GenerateExpression(
+                parameterSymbol.Type,
+                parameterSymbol.ExplicitDefaultValue,
+                canUseFieldReference: true
+            );
         }
 
         protected override SyntaxNode? GetLocalDeclarationFromDeclarator(SyntaxNode variableDecl)
@@ -39,7 +55,9 @@ namespace Microsoft.CodeAnalysis.CSharp.IntroduceVariable
             return false;
         }
 
-        protected override SyntaxNode UpdateArgumentListSyntax(SyntaxNode argumentList, SeparatedSyntaxList<SyntaxNode> arguments)
-            => ((ArgumentListSyntax)argumentList).WithArguments(arguments);
+        protected override SyntaxNode UpdateArgumentListSyntax(
+            SyntaxNode argumentList,
+            SeparatedSyntaxList<SyntaxNode> arguments
+        ) => ((ArgumentListSyntax)argumentList).WithArguments(arguments);
     }
 }

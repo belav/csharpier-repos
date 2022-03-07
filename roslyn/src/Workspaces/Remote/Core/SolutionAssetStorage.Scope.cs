@@ -22,7 +22,9 @@ namespace Microsoft.CodeAnalysis.Remote
 
             public void Dispose()
             {
-                Contract.ThrowIfFalse(_storages._solutionStates.TryRemove(SolutionInfo.ScopeId, out var entry));
+                Contract.ThrowIfFalse(
+                    _storages._solutionStates.TryRemove(SolutionInfo.ScopeId, out var entry)
+                );
                 entry.ReplicationContext.Dispose();
             }
         }

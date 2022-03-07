@@ -15,11 +15,11 @@ public class ValueProviderFactoryExtensionsTest
     {
         // Arrange
         var list = new List<IValueProviderFactory>
-            {
-                new FooValueProviderFactory(),
-                new BarValueProviderFactory(),
-                new FooValueProviderFactory()
-            };
+        {
+            new FooValueProviderFactory(),
+            new BarValueProviderFactory(),
+            new FooValueProviderFactory()
+        };
 
         // Act
         list.RemoveType(typeof(FooValueProviderFactory));
@@ -34,11 +34,11 @@ public class ValueProviderFactoryExtensionsTest
     {
         // Arrange
         var list = new List<IValueProviderFactory>
-            {
-                new FooValueProviderFactory(),
-                new BarValueProviderFactory(),
-                new FooValueProviderFactory()
-            };
+        {
+            new FooValueProviderFactory(),
+            new BarValueProviderFactory(),
+            new FooValueProviderFactory()
+        };
 
         // Act
         list.RemoveType<FooValueProviderFactory>();
